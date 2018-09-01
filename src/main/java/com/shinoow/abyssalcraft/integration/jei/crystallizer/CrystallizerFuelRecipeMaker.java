@@ -52,26 +52,23 @@ public class CrystallizerFuelRecipeMaker {
 						continue;
 					int burnTime = getBurnTime(oreDictFuelsSet.get(0));
 
-					CrystallizerFuelRecipe recipe = new CrystallizerFuelRecipe(guiHelper, oreDictFuelsSet, burnTime);
-					if(isRecipeValid(recipe))
-						fuelRecipes.add(recipe);
+					if(burnTime > 0)
+						fuelRecipes.add(new CrystallizerFuelRecipe(guiHelper, oreDictFuelsSet, burnTime));
 				}
 			else {
-				List<ItemStack> fuels = stackHelper.getSubtypes(fuelStack);
-				removeNoBurnTime(fuels);
+				List<ItemStack> subtypes = stackHelper.getSubtypes(fuelStack);
+				List<ItemStack> fuels = new ArrayList<>();
+				for (ItemStack subtype : subtypes)
+					if (TileEntityCrystallizer.getCrystallizationTime(subtype) > 0)
+						fuels.add(subtype);
 				if (fuels.isEmpty())
 					continue;
 				int burnTime = getBurnTime(fuels.get(0));
-				CrystallizerFuelRecipe recipe = new CrystallizerFuelRecipe(guiHelper, fuels, burnTime);
-				if(isRecipeValid(recipe))
-					fuelRecipes.add(recipe);
+				if(burnTime > 0)
+					fuelRecipes.add(new CrystallizerFuelRecipe(guiHelper, fuels, burnTime));
 			}
 		}
 		return fuelRecipes;
-	}
-
-	private static boolean isRecipeValid(@Nonnull CrystallizerFuelRecipe recipe) {
-		return recipe.getInputs().size() > 0;
 	}
 
 	private static void removeNoBurnTime(Collection<ItemStack> itemStacks) {

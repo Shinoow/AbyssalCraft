@@ -87,41 +87,6 @@ public class AbyssalCraftEventHooks {
 
 	//	@SubscribeEvent
 	//	public void onItemPickup(EntityItemPickupEvent event) {
-	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssalnite_ore))
-	//			event.getEntityPlayer().addStat(ACAchievements.mine_abyssalnite, 1);
-	//		if(event.getItem().getItem().getItem() == ACItems.coralium_gem ||
-	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_2 ||
-	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_3 ||
-	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_4 ||
-	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_5 ||
-	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_6 ||
-	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_7 ||
-	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_8 ||
-	//				event.getItem().getItem().getItem() == ACItems.coralium_gem_cluster_9 ||
-	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.coralium_ore))
-	//			event.getEntityPlayer().addStat(ACAchievements.mine_coralium, 1);
-	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.liquified_coralium_ore) ||
-	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.pearlescent_coralium_ore) ||
-	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_coralium_ore))
-	//			event.getEntityPlayer().addStat(ACAchievements.mine_abyssal_coralium, 1);
-	//		if(event.getItem().getItem().getItem() == ACItems.shadow_gem)
-	//			event.getEntityPlayer().addStat(ACAchievements.shadow_gems, 1);
-	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_copper_ore) ||
-	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_iron_ore) ||
-	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_gold_ore) ||
-	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_nitre_ore) ||
-	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_diamond_ore) ||
-	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.abyssal_tin_ore))
-	//			event.getEntityPlayer().addStat(ACAchievements.mine_abyssal_ores, 1);
-	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.dreadlands_abyssalnite_ore) ||
-	//				event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.dreaded_abyssalnite_ore))
-	//			event.getEntityPlayer().addStat(ACAchievements.mine_dreadlands_ores, 1);
-	//		if(event.getItem().getItem().getItem() == ACItems.dreadium_ingot)
-	//			event.getEntityPlayer().addStat(ACAchievements.dreadium, 1);
-	//		if(event.getItem().getItem().getItem() == ACItems.ethaxium_ingot)
-	//			event.getEntityPlayer().addStat(ACAchievements.ethaxium, 1);
-	//		if(event.getItem().getItem().getItem() == ACItems.necronomicon)
-	//			event.getEntityPlayer().addStat(ACAchievements.necronomicon, 1);
 	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.depths_ghoul_head))
 	//			event.getEntityPlayer().addStat(ACAchievements.depths_ghoul_head, 1);
 	//		if(event.getItem().getItem().getItem() == Item.getItemFromBlock(ACBlocks.pete_head))
@@ -331,11 +296,11 @@ public class AbyssalCraftEventHooks {
 				event.setReplacement(ACBlocks.darklands_oak_planks.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.OAK_STAIRS){
+			if(event.getOriginal().getBlock() == Blocks.OAK_STAIRS && ACConfig.darklands_oak_stairs){
 				event.setReplacement(ACBlocks.darklands_oak_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.STONE_STAIRS){
+			if(event.getOriginal().getBlock() == Blocks.STONE_STAIRS && ACConfig.darkstone_cobblestone_stairs){
 				event.setReplacement(ACBlocks.darkstone_cobblestone_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));;
 				event.setResult(Result.DENY);
 			}
@@ -343,11 +308,11 @@ public class AbyssalCraftEventHooks {
 				event.setReplacement(ACBlocks.darklands_oak_fence.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.STONE_SLAB){
+			if(event.getOriginal().getBlock() == Blocks.STONE_SLAB && ACConfig.darkstone_slab){
 				event.setReplacement(ACBlocks.darkstone_slab.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.DOUBLE_STONE_SLAB){
+			if(event.getOriginal().getBlock() == Blocks.DOUBLE_STONE_SLAB && ACConfig.darkstone_slab){
 				event.setReplacement(BlockHandler.Darkstoneslab2.getDefaultState());
 				event.setResult(Result.DENY);
 			}

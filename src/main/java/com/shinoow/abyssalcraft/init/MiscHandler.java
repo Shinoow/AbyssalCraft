@@ -48,6 +48,7 @@ import com.shinoow.abyssalcraft.common.potion.PotionCplague;
 import com.shinoow.abyssalcraft.common.potion.PotionDplague;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 
@@ -235,17 +236,6 @@ public class MiscHandler implements ILifeCycleHandler {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		//Achievements
-		//		ACAchievements.necronomicon = new Achievement("achievement.necro", "necro", 0, 0, ACItems.necronomicon, AchievementList.OPEN_INVENTORY).registerStat();
-		//		//Materials Achievements
-		//		ACAchievements.mine_abyssalnite = new Achievement("achievement.mineAby", "mineAby", 2, 0, ACBlocks.abyssalnite_ore, ACAchievements.necronomicon).registerStat();
-		//		ACAchievements.mine_coralium = new Achievement("achievement.mineCorgem", "mineCorgem", 4, 0, ACItems.coralium_gem, ACAchievements.mine_abyssalnite).registerStat();
-		//		ACAchievements.shadow_gems = new Achievement("achievement.shadowGems", "shadowGems", 6, 0, ACItems.shadow_gem, ACAchievements.mine_coralium).registerStat();
-		//		//coraliumpearl
-		//		ACAchievements.mine_abyssal_coralium = new Achievement("achievement.mineCor", "mineCor", 8, 0, ACBlocks.liquified_coralium_ore, ACAchievements.shadow_gems).registerStat();
-		//		ACAchievements.mine_abyssal_ores = new Achievement("achievement.mineAbyOres", "mineAbyOres", 10, 0, ACBlocks.abyssal_diamond_ore, ACAchievements.mine_abyssal_coralium).registerStat();
-		//		ACAchievements.mine_dreadlands_ores = new Achievement("achievement.mineDread", "mineDread", 12, 0, ACBlocks.dreaded_abyssalnite_ore, ACAchievements.mine_abyssal_ores).registerStat();
-		//		ACAchievements.dreadium = new Achievement("achievement.dreadium", "dreadium", 14, 0, ACItems.dreadium_ingot, ACAchievements.mine_dreadlands_ores).registerStat();
-		//		ACAchievements.ethaxium = new Achievement("achievement.ethaxium", "ethaxium", 16, 0, ACItems.ethaxium_ingot, ACAchievements.dreadium).setSpecial().registerStat();
 		//		//Depths Ghoul Achievements
 		//		ACAchievements.kill_depths_ghoul = new Achievement("achievement.killghoul", "killghoul", -2, 0, ACItems.coralium_plagued_flesh_on_a_bone, ACAchievements.necronomicon).registerStat();
 		//		ACAchievements.depths_ghoul_head = new Achievement("achievement.ghoulhead", "ghoulhead", -4, 0, ACBlocks.depths_ghoul_head, ACAchievements.kill_depths_ghoul).registerStat();
@@ -414,7 +404,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("logWood", ACBlocks.dreadlands_log);
 		OreDictionary.registerOre("plankWood", ACBlocks.darklands_oak_planks);
 		OreDictionary.registerOre("plankWood", ACBlocks.dreadlands_planks);
-		OreDictionary.registerOre("stairWood", ACBlocks.darklands_oak_stairs);
+		if(ACConfig.darklands_oak_stairs)
+			OreDictionary.registerOre("stairWood", ACBlocks.darklands_oak_stairs);
 		OreDictionary.registerOre("treeSapling", ACBlocks.darklands_oak_sapling);
 		OreDictionary.registerOre("treeSapling", ACBlocks.dreadlands_sapling);
 		OreDictionary.registerOre("treeLeaves", ACBlocks.darklands_oak_leaves);
@@ -617,43 +608,50 @@ public class MiscHandler implements ILifeCycleHandler {
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.darkstone_brick, 1, 0), ACBlocks.darkstone_brick_slab, ACBlocks.darkstone_brick_stairs, ACBlocks.darkstone_brick_fence);
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 0), ACBlocks.darkstone_cobblestone_slab, ACBlocks.darkstone_cobblestone_stairs, ACBlocks.darkstone_cobblestone_wall);
 		addStoneStuffRecipes(reg, new ItemStack(ACBlocks.stone, 1, 0), ACBlocks.darkstone_slab, ACBlocks.darkstone_button, ACBlocks.darkstone_pressure_plate);
-		addShapedRecipe(reg, rl("darkstone_bricks_1"), null, new ItemStack(ACBlocks.darkstone_brick, 1, 1), new Object[] {"#", "#", '#', new ItemStack(ACBlocks.darkstone_brick_slab)});
+		if(ACConfig.darkstone_brick_slab)
+			addShapedRecipe(reg, rl("darkstone_bricks_1"), null, new ItemStack(ACBlocks.darkstone_brick, 1, 1), new Object[] {"#", "#", '#', new ItemStack(ACBlocks.darkstone_brick_slab)});
 		addShapedRecipe(reg, rl("glowing_darkstone_bricks"), null, new ItemStack(ACBlocks.glowing_darkstone_bricks, 4), new Object[] {"#$#", "&%&", "#&#", '#', new ItemStack(ACBlocks.darkstone_brick, 1, 0), '$', Items.DIAMOND,'&', Blocks.OBSIDIAN, '%', Blocks.GLOWSTONE });
 
 		addShapedRecipe(reg, rl("darklands_oak_planks"), null, new ItemStack(ACBlocks.darklands_oak_planks, 4), new Object[] {"A", 'A', ACBlocks.darklands_oak_wood });
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.darklands_oak_planks), ACBlocks.darklands_oak_slab, ACBlocks.darklands_oak_stairs, ACBlocks.darklands_oak_fence);
+		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.darklands_oak_planks), ACBlocks.darklands_oak_slab, ACBlocks.darklands_oak_stairs, null);
 		addStoneStuffRecipes(reg, new ItemStack(ACBlocks.darklands_oak_planks), null, ACBlocks.darklands_oak_button, ACBlocks.darklands_oak_pressure_plate);
+		addShapedOreRecipe(reg, ACBlocks.darklands_oak_fence.getRegistryName(), null, new ItemStack(ACBlocks.darklands_oak_fence, 3), new Object[] {"#%#", "#%#", '#', ACBlocks.darklands_oak_planks, '%', "stickWood"});
 
 		addShapedRecipe(reg, rl("abyssal_stone_bricks_0"), null, new ItemStack(ACBlocks.abyssal_stone_brick, 4, 0), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.stone, 1, 1)});
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), ACBlocks.abyssal_stone_brick_slab, ACBlocks.abyssal_stone_brick_stairs, ACBlocks.abyssal_stone_brick_fence);
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 1), ACBlocks.abyssal_cobblestone_slab, ACBlocks.abyssal_cobblestone_stairs, ACBlocks.abyssal_cobblestone_wall);
 		addStoneStuffRecipes(reg, new ItemStack(ACBlocks.stone, 1, 1), null, ACBlocks.abyssal_stone_button, ACBlocks.abyssal_stone_pressure_plate);
-		addShapedRecipe(reg, rl("abyssal_stone_bricks_1"), null, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 1), new Object[] {"#", "#", '#', new ItemStack(ACBlocks.abyssal_stone_brick_slab)});
+		if(ACConfig.abyssal_stone_brick_slab)
+			addShapedRecipe(reg, rl("abyssal_stone_bricks_1"), null, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 1), new Object[] {"#", "#", '#', new ItemStack(ACBlocks.abyssal_stone_brick_slab)});
 
 		addShapedRecipe(reg, rl("dreadstone_bricks_0"), null, new ItemStack(ACBlocks.dreadstone_brick, 4, 0), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.stone, 1, 2)});
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.dreadstone_brick, 1, 0), ACBlocks.dreadstone_brick_slab, ACBlocks.dreadstone_brick_stairs, ACBlocks.dreadstone_brick_fence);
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 2), ACBlocks.dreadstone_cobblestone_slab, ACBlocks.dreadstone_cobblestone_stairs, ACBlocks.dreadstone_cobblestone_wall);
 		//stone recipe (if added)
-		addShapedRecipe(reg, rl("dreadstone_bricks_1"), null, new ItemStack(ACBlocks.dreadstone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.dreadstone_brick_slab});
+		if(ACConfig.dreadstone_brick_slab)
+			addShapedRecipe(reg, rl("dreadstone_bricks_1"), null, new ItemStack(ACBlocks.dreadstone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.dreadstone_brick_slab});
 
 		addShapedRecipe(reg, rl("abyssalnite_stone_bricks_0"), null, new ItemStack(ACBlocks.abyssalnite_stone_brick, 4, 0), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.stone, 1, 3)});
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0), ACBlocks.abyssalnite_stone_brick_slab, ACBlocks.abyssalnite_stone_brick_stairs, ACBlocks.abyssalnite_stone_brick_fence);
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 3), ACBlocks.abyssalnite_cobblestone_slab, ACBlocks.abyssalnite_cobblestone_stairs, ACBlocks.abyssalnite_cobblestone_wall);
 		//stone recipes (if added)
-		addShapedRecipe(reg, rl("abyssalnite_stone_bricks_1"), null, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.abyssalnite_stone_brick_slab});
+		if(ACConfig.abyssalnite_stone_brick_slab)
+			addShapedRecipe(reg, rl("abyssalnite_stone_bricks_1"), null, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.abyssalnite_stone_brick_slab});
 
 		addShapedRecipe(reg, rl("dreadlands_planks"), null, new ItemStack(ACBlocks.dreadlands_planks, 4), new Object[] {"%", '%', ACBlocks.dreadlands_log});
-		addShapedRecipe(reg, ACBlocks.dreadlands_wood_fence.getRegistryName(), null, new ItemStack(ACBlocks.dreadlands_wood_fence, 4), new Object[] {"###", "###", '#', ACBlocks.dreadlands_planks});
+		addShapedOreRecipe(reg, ACBlocks.dreadlands_wood_fence.getRegistryName(), null, new ItemStack(ACBlocks.dreadlands_wood_fence, 3), new Object[] {"#%#", "#%#", '#', ACBlocks.dreadlands_planks, '%', "stickWood"});
 
 		addShapedRecipe(reg, rl("coralium_stone_bricks_0"), null, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new Object[] {"##", "##", '#', ACItems.coralium_brick});
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), ACBlocks.coralium_stone_brick_slab, ACBlocks.coralium_stone_brick_stairs, ACBlocks.coralium_stone_brick_fence);
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 4), ACBlocks.coralium_cobblestone_slab, ACBlocks.coralium_cobblestone_stairs, ACBlocks.coralium_cobblestone_wall);
 		addStoneStuffRecipes(reg, new ItemStack(ACBlocks.stone, 1, 4), null, ACBlocks.coralium_stone_button, ACBlocks.coralium_stone_pressure_plate);
-		addShapedRecipe(reg, rl("coralium_stone_bricks_1"), null, new ItemStack(ACBlocks.coralium_stone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.coralium_stone_brick_slab});
+		if(ACConfig.coralium_stone_brick_slab)
+			addShapedRecipe(reg, rl("coralium_stone_bricks_1"), null, new ItemStack(ACBlocks.coralium_stone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.coralium_stone_brick_slab});
 
 		addShapedRecipe(reg, rl("ethaxium_bricks_0"), null, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new Object [] {"##", "##", '#', ACItems.ethaxium_brick});
 		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACBlocks.ethaxium_brick_slab, ACBlocks.ethaxium_brick_stairs, ACBlocks.ethaxium_brick_fence);
-		addShapedRecipe(reg, rl("ethaxium_bricks_1"), null, new ItemStack(ACBlocks.ethaxium_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.ethaxium_brick_slab});
+		if(ACConfig.ethaxium_brick_slab)
+			addShapedRecipe(reg, rl("ethaxium_bricks_1"), null, new ItemStack(ACBlocks.ethaxium_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.ethaxium_brick_slab});
 		addShapedRecipe(reg, rl("ethaxium_pillar"), null, new ItemStack(ACBlocks.ethaxium_pillar, 2), new Object[] {"#%", "#%", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0), '%', new ItemStack(ACBlocks.stone, 1, 5)});
 
 		addShapedRecipe(reg, rl("dark_ethaxium_bricks_0"), null, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), new Object[] {"#%", "#%", '#', new ItemStack(ACBlocks.stone, 1, 6), '%', new ItemStack(ACBlocks.stone, 1, 5)});
@@ -1029,24 +1027,42 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityManaElemental|"+ String.valueOf(ACLib.dreadlands_id));
 		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityManaElemental|"+ String.valueOf(ACLib.omothol_id));
 		FMLInterModComms.sendMessage("arsmagica2", "dbs", "am2.entities.EntityManaElemental|"+ String.valueOf(ACLib.dark_realm_id));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssal_stone_brick_slab));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(abyslab2));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_slab));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(Darkstoneslab2));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_cobblestone_slab));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(Darkcobbleslab2));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_brick_slab));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(Darkbrickslab2));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darklands_oak_slab));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(DLTslab2));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssalnite_stone_brick_slab));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(abydreadbrickslab2));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreadstone_brick_slab));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(dreadbrickslab2));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.coralium_stone_brick_slab));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(cstonebrickslab2));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ethaxium_brick_slab));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ethaxiumslab2));
+		if(ACConfig.abyssal_stone_brick_slab) {
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssal_stone_brick_slab));
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(abyslab2));
+		}
+		if(ACConfig.darkstone_slab) {
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_slab));
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(Darkstoneslab2));
+		}
+		if(ACConfig.darkstone_cobblestone_slab) {
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_cobblestone_slab));
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(Darkcobbleslab2));
+		}
+		if(ACConfig.darkstone_brick_slab) {
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_brick_slab));
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(Darkbrickslab2));
+		}
+		if(ACConfig.darklands_oak_slab) {
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darklands_oak_slab));
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(DLTslab2));
+		}
+		if(ACConfig.abyssalnite_stone_brick_slab) {
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssalnite_stone_brick_slab));
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(abydreadbrickslab2));
+		}
+		if(ACConfig.dreadstone_brick_slab) {
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreadstone_brick_slab));
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(dreadbrickslab2));
+		}
+		if(ACConfig.coralium_stone_brick_slab) {
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.coralium_stone_brick_slab));
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(cstonebrickslab2));
+		}
+		if(ACConfig.ethaxium_brick_slab) {
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ethaxium_brick_slab));
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ethaxiumslab2));
+		}
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssal_gateway));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreaded_gateway));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.omothol_gateway));
@@ -1059,7 +1075,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.oblivion_deathbomb));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.odb_core));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_brick_fence));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_cobblestone_wall));
+		if(ACConfig.darkstone_cobblestone_wall)
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_cobblestone_wall));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssal_stone_brick_fence));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darklands_oak_fence));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssalnite_stone_brick_fence));
@@ -1067,14 +1084,22 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.coralium_stone_brick_fence));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ethaxium_brick_fence));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreadlands_wood_fence));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssal_stone_brick_stairs));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_brick_stairs));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_cobblestone_stairs));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darklands_oak_stairs));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssalnite_stone_brick_stairs));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreadstone_brick_stairs));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.coralium_stone_brick_stairs));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ethaxium_brick_stairs));
+		if(ACConfig.abyssal_stone_brick_stairs)
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssal_stone_brick_stairs));
+		if(ACConfig.darkstone_brick_stairs)
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_brick_stairs));
+		if(ACConfig.darkstone_cobblestone_stairs)
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_cobblestone_stairs));
+		if(ACConfig.darklands_oak_stairs)
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darklands_oak_stairs));
+		if(ACConfig.abyssalnite_stone_brick_stairs)
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssalnite_stone_brick_stairs));
+		if(ACConfig.dreadstone_brick_stairs)
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreadstone_brick_stairs));
+		if(ACConfig.coralium_stone_brick_stairs)
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.coralium_stone_brick_stairs));
+		if(ACConfig.ethaxium_brick_stairs)
+			FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ethaxium_brick_stairs));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssal_stone_button));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_button));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darklands_oak_button));

@@ -15,6 +15,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -625,7 +626,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 14, j + 4, k - 29), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 14, j + 4, k - 28), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 14, j + 4, k - 27), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 14, j + 4, k - 26), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 14, j + 4, k - 26), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 14, j + 4, k - 25), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 14, j + 4, k - 24), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 14, j + 4, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -1324,7 +1326,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 7, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 1, k - 31), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 1, k - 30), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 7, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 7, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 7, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 1, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 1, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -1332,7 +1335,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 7, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 2, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 2, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 7, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 7, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 7, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 2, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 2, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -1361,7 +1365,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 7, j + 3, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 3, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 3, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 7, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 7, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 7, j + 3, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 3, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 3, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -1671,7 +1676,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 6, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 1, k - 31), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 1, k - 30), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 6, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 6, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 6, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 1, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 1, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -1679,7 +1685,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 6, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 2, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 2, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 6, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 6, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 6, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 2, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 2, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -1709,7 +1716,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 6, j + 3, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 3, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 3, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 6, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 6, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 6, j + 3, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 3, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 3, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -1746,15 +1754,19 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 6, j + 5, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 59), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 56), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 6, j + 6, k - 55), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i - 6, j + 6, k - 54), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i - 6, j + 6, k - 53), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i - 6, j + 6, k - 52), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab) {
+			world.setBlockState(new BlockPos(i - 6, j + 6, k - 55), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i - 6, j + 6, k - 54), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i - 6, j + 6, k - 53), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i - 6, j + 6, k - 52), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		}
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 51), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 6, j + 6, k - 50), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i - 6, j + 6, k - 49), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i - 6, j + 6, k - 48), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i - 6, j + 6, k - 47), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab) {
+			world.setBlockState(new BlockPos(i - 6, j + 6, k - 50), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i - 6, j + 6, k - 49), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i - 6, j + 6, k - 48), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i - 6, j + 6, k - 47), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		}
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 46), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 43), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 41), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -1974,7 +1986,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 5, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 1, k - 31), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 1, k - 30), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 5, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 5, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 5, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 1, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 1, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -1982,7 +1995,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 5, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 2, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 2, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 5, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 5, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 5, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 2, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 2, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -2012,7 +2026,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 5, j + 3, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 3, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 3, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 5, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 5, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 5, j + 3, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 3, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 3, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -2271,7 +2286,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 4, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 1, k - 31), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 1, k - 30), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 4, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 4, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 4, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 1, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 1, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -2289,7 +2305,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 4, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 2, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 2, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 4, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 4, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 4, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 2, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 2, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -2329,7 +2346,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 4, j + 3, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 3, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 3, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 4, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 4, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 4, j + 3, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 3, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 3, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -2682,7 +2700,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 3, j + 1, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 1, k - 31), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 3, j + 1, k - 30), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 3, j + 1, k - 30), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 3, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 1, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 1, k - 15), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -2712,7 +2731,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 3, j + 2, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 2, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 3, j + 2, k - 32), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 3, j + 2, k - 32), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 3, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 2, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 2, k - 15), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -2767,7 +2787,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 3, j + 3, k - 37), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 3, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 3, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 3, j + 3, k - 34), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 3, j + 3, k - 34), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 3, j + 3, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 3, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 3, k - 15), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3135,23 +3156,27 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 2, j - 4, k - 75), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i - 2, j - 3, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j - 3, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j - 3, k - 76), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 2, j - 3, k - 76), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 2, j - 3, k - 75), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j - 3, k - 74), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j - 2, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j - 2, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j - 2, k - 74), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 2, j - 2, k - 74), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 2, j - 2, k - 73), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j - 2, k - 72), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j - 1, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j - 1, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j - 1, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j - 1, k - 72), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 2, j - 1, k - 72), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 2, j - 1, k - 71), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j - 1, k - 70), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 0, k - 70), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 2, j + 0, k - 70), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 69), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 68), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 67), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3195,7 +3220,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 2, j + 0, k + 2), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 0, k + 3), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 1, k - 68), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 2, j + 1, k - 68), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 67), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 66), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 65), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3203,7 +3229,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 1, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 2, j + 1, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 22), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3215,13 +3242,15 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 2, j + 1, k + 3), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 2, k - 66), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 2, j + 2, k - 66), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 65), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 64), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 63), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 2, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 2, j + 2, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 22), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3232,7 +3261,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 2, j + 2, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 2, k + 3), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 3, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 3, k - 64), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 2, j + 3, k - 64), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 2, j + 3, k - 63), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 3, k - 62), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 3, k - 61), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3424,7 +3454,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 1, j - 15, k - 43), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 15, k - 42), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 14, k - 73), ACBlocks.stone.getStateFromMeta(2), 2);
-		world.setBlockState(new BlockPos(i - 1, j - 14, k - 45), ACBlocks.abyssalnite_stone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.abyssalnite_stone_brick_slab)
+			world.setBlockState(new BlockPos(i - 1, j - 14, k - 45), ACBlocks.abyssalnite_stone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 1, j - 14, k - 44), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 14, k - 43), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 14, k - 42), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
@@ -3459,7 +3490,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 1, j - 9, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 9, k - 81), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 9, k - 80), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j - 9, k - 79), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 1, j - 9, k - 79), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 1, j - 9, k - 55), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 8, k - 83), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 8, k - 55), ACBlocks.stone.getStateFromMeta(2), 2);
@@ -3495,23 +3527,27 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 1, j - 4, k - 75), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 3, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 3, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j - 3, k - 76), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 1, j - 3, k - 76), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 1, j - 3, k - 75), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 3, k - 74), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 2, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 2, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j - 2, k - 74), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 1, j - 2, k - 74), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 1, j - 2, k - 73), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 2, k - 72), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 1, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 1, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j - 1, k - 72), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 1, j - 1, k - 72), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 1, j - 1, k - 71), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j - 1, k - 70), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j + 0, k - 70), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 1, j + 0, k - 70), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 69), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 68), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 67), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3556,7 +3592,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 1, j + 0, k + 3), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 1, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 1, k - 83), ACBlocks.ingot_block.getStateFromMeta(2), 2);
-		world.setBlockState(new BlockPos(i - 1, j + 1, k - 68), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 1, j + 1, k - 68), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 1, j + 1, k - 67), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 1, k - 66), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 1, k - 65), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3565,7 +3602,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 1, j + 2, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 2, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 2, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j + 2, k - 66), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 1, j + 2, k - 66), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 1, j + 2, k - 65), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 2, k - 64), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 2, k - 63), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3574,7 +3612,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i - 1, j + 3, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 3, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 3, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j + 3, k - 64), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i - 1, j + 3, k - 64), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i - 1, j + 3, k - 63), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 3, k - 62), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 3, k - 61), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3748,7 +3787,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 0, j - 14, k - 73), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 14, k - 69), ACBlocks.dreadguard_spawner.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 14, k - 60), ACBlocks.chagaroth_spawner.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j - 14, k - 45), ACBlocks.abyssalnite_stone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.abyssalnite_stone_brick_slab)
+			world.setBlockState(new BlockPos(i + 0, j - 14, k - 45), ACBlocks.abyssalnite_stone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 0, j - 14, k - 44), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 14, k - 43), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 14, k - 42), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
@@ -3818,7 +3858,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 0, j - 9, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 9, k - 81), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 9, k - 80), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j - 9, k - 79), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 0, j - 9, k - 79), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 0, j - 9, k - 55), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 8, k - 83), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 8, k - 55), ACBlocks.stone.getStateFromMeta(2), 2);
@@ -3854,24 +3895,28 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 0, j - 4, k - 75), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 3, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 3, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j - 3, k - 76), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 0, j - 3, k - 76), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 0, j - 3, k - 75), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 3, k - 74), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 2, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 2, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j - 2, k - 74), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 0, j - 2, k - 74), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 0, j - 2, k - 73), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 2, k - 72), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 1, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 1, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 1, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j - 1, k - 72), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 0, j - 1, k - 72), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 0, j - 1, k - 71), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j - 1, k - 70), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j + 0, k - 70), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 0, j + 0, k - 70), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 69), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 68), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 67), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3917,7 +3962,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j + 1, k - 68), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 0, j + 1, k - 68), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 67), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 66), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 65), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3928,7 +3974,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 0, j + 2, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 2, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 2, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j + 2, k - 66), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 0, j + 2, k - 66), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 0, j + 2, k - 65), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 2, k - 64), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 2, k - 63), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -3936,7 +3983,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 0, j + 2, k + 3), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 3, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 3, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j + 3, k - 64), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 0, j + 3, k - 64), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 0, j + 3, k - 63), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 3, k - 62), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 3, k - 61), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -4108,7 +4156,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 1, j - 15, k - 43), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 15, k - 42), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 14, k - 73), ACBlocks.stone.getStateFromMeta(2), 2);
-		world.setBlockState(new BlockPos(i + 1, j - 14, k - 45), ACBlocks.abyssalnite_stone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.abyssalnite_stone_brick_slab)
+			world.setBlockState(new BlockPos(i + 1, j - 14, k - 45), ACBlocks.abyssalnite_stone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 1, j - 14, k - 44), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 14, k - 43), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 14, k - 42), ACBlocks.abyssalnite_stone_brick.getDefaultState(), 2);
@@ -4143,7 +4192,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 1, j - 9, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 9, k - 81), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 9, k - 80), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j - 9, k - 79), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 1, j - 9, k - 79), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 1, j - 9, k - 55), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 8, k - 83), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 8, k - 55), ACBlocks.stone.getStateFromMeta(2), 2);
@@ -4179,23 +4229,27 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 1, j - 4, k - 75), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 3, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 3, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j - 3, k - 76), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 1, j - 3, k - 76), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 1, j - 3, k - 75), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 3, k - 74), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 2, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 2, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j - 2, k - 74), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 1, j - 2, k - 74), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 1, j - 2, k - 73), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 2, k - 72), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 1, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 1, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j - 1, k - 72), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 1, j - 1, k - 72), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 1, j - 1, k - 71), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j - 1, k - 70), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j + 0, k - 70), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 1, j + 0, k - 70), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 69), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 68), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 67), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -4240,7 +4294,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 1, j + 0, k + 3), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 1, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 1, k - 83), ACBlocks.ingot_block.getStateFromMeta(2), 2);
-		world.setBlockState(new BlockPos(i + 1, j + 1, k - 68), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 1, j + 1, k - 68), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 1, j + 1, k - 67), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 1, k - 66), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 1, k - 65), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -4249,7 +4304,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 1, j + 2, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 2, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 2, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j + 2, k - 66), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 1, j + 2, k - 66), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 1, j + 2, k - 65), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 2, k - 64), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 2, k - 63), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -4258,7 +4314,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 1, j + 3, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 3, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 3, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j + 3, k - 64), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 1, j + 3, k - 64), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 1, j + 3, k - 63), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 3, k - 62), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 3, k - 61), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -4529,23 +4586,27 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 2, j - 4, k - 75), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 2, j - 3, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j - 3, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j - 3, k - 76), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 2, j - 3, k - 76), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 2, j - 3, k - 75), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j - 3, k - 74), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j - 2, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j - 2, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j - 2, k - 74), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 2, j - 2, k - 74), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 2, j - 2, k - 73), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j - 2, k - 72), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j - 1, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j - 1, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j - 1, k - 82), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j - 1, k - 72), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 2, j - 1, k - 72), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 2, j - 1, k - 71), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j - 1, k - 70), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 0, k - 70), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 2, j + 0, k - 70), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 69), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 68), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 67), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -4589,7 +4650,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 2, j + 0, k + 2), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 0, k + 3), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 1, k - 68), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 2, j + 1, k - 68), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 67), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 66), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 65), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -4603,7 +4665,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 1, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 2, j + 1, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 22), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -4615,13 +4678,15 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 2, j + 1, k + 3), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 83), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 2, k - 66), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 2, j + 2, k - 66), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 65), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 64), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 63), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 2, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 2, j + 2, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 22), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -4632,7 +4697,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 2, j + 2, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 2, k + 3), ACBlocks.stone.getStateFromMeta(2), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 3, k - 84), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 3, k - 64), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 2, j + 3, k - 64), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 2, j + 3, k - 63), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 3, k - 62), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 3, k - 61), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -5017,7 +5083,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 3, j + 1, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 1, k - 31), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 3, j + 1, k - 30), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 3, j + 1, k - 30), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 3, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 1, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 1, k - 15), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -5047,7 +5114,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 3, j + 2, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 2, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 3, j + 2, k - 32), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 3, j + 2, k - 32), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 3, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 2, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 2, k - 15), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -5102,7 +5170,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 3, j + 3, k - 37), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 3, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 3, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 3, j + 3, k - 34), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 3, j + 3, k - 34), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 3, j + 3, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 3, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 3, k - 15), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -5477,7 +5546,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 4, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 1, k - 31), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 1, k - 30), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 4, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 4, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 4, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 1, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 1, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -5495,7 +5565,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 4, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 2, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 2, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 4, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 4, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 4, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 2, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 2, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -5535,7 +5606,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 4, j + 3, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 3, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 3, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 4, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 4, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 4, j + 3, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 3, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 3, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -5750,7 +5822,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 5, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 1, k - 31), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 1, k - 30), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 5, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 5, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 5, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 1, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 1, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -5758,7 +5831,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 5, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 2, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 2, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 5, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 5, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 5, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 2, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 2, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -5788,7 +5862,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 5, j + 3, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 3, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 3, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 5, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 5, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 5, j + 3, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 3, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 3, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -6008,7 +6083,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 6, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 1, k - 31), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 1, k - 30), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 6, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 6, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 6, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 1, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 1, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -6016,7 +6092,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 6, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 2, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 2, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 6, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 6, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 6, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 2, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 2, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -6046,7 +6123,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 6, j + 3, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 3, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 3, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 6, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 6, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 6, j + 3, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 3, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 3, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -6083,15 +6161,17 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 6, j + 5, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 59), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 56), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 6, j + 6, k - 55), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 6, j + 6, k - 54), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 6, j + 6, k - 53), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 6, j + 6, k - 52), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab) {
+			world.setBlockState(new BlockPos(i + 6, j + 6, k - 55), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 6, j + 6, k - 54), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 6, j + 6, k - 53), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 6, j + 6, k - 52), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 6, j + 6, k - 50), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 6, j + 6, k - 49), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 6, j + 6, k - 48), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 6, j + 6, k - 47), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		}
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 51), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 6, j + 6, k - 50), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 6, j + 6, k - 49), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 6, j + 6, k - 48), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 6, j + 6, k - 47), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 46), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 43), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 41), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -6276,7 +6356,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 7, j + 1, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 1, k - 31), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 1, k - 30), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 7, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 7, j + 1, k - 29), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 7, j + 1, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 1, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 1, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -6284,7 +6365,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 7, j + 2, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 2, k - 33), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 2, k - 32), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 7, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 7, j + 2, k - 31), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 7, j + 2, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 2, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 2, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -6313,7 +6395,8 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 7, j + 3, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 3, k - 35), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 3, k - 34), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 7, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 7, j + 3, k - 33), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 7, j + 3, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 3, k - 17), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 3, k - 3), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -7042,8 +7125,10 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 13, j + 7, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 13, j + 7, k - 29), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 13, j + 7, k - 28), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 13, j + 7, k - 27), ACBlocks.dreadstone_brick_slab.getStateFromMeta(13), 2); //TODO: 13
-		world.setBlockState(new BlockPos(i + 13, j + 7, k - 23), ACBlocks.dreadstone_brick_slab.getStateFromMeta(13), 2); //TODO: 13
+		if(ACConfig.dreadstone_brick_slab) {
+			world.setBlockState(new BlockPos(i + 13, j + 7, k - 27), ACBlocks.dreadstone_brick_slab.getStateFromMeta(13), 2); //TODO: 13
+			world.setBlockState(new BlockPos(i + 13, j + 7, k - 23), ACBlocks.dreadstone_brick_slab.getStateFromMeta(13), 2); //TODO: 13
+		}
 		world.setBlockState(new BlockPos(i + 13, j + 7, k - 22), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 13, j + 7, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 13, j + 8, k - 41), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -7093,20 +7178,24 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 14, j + 4, k - 39), ACBlocks.dreadguard_spawner.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 4, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 4, k - 29), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 14, j + 4, k - 28), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 14, j + 4, k - 28), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 14, j + 4, k - 27), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 4, k - 26), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 4, k - 25), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 4, k - 24), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 4, k - 23), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 14, j + 4, k - 22), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab)
+			world.setBlockState(new BlockPos(i + 14, j + 4, k - 22), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
 		world.setBlockState(new BlockPos(i + 14, j + 4, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 5, k - 41), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 5, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 5, k - 29), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 14, j + 5, k - 26), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 14, j + 5, k - 25), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 14, j + 5, k - 24), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab) {
+			world.setBlockState(new BlockPos(i + 14, j + 5, k - 26), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 14, j + 5, k - 25), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 14, j + 5, k - 24), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		}
 		world.setBlockState(new BlockPos(i + 14, j + 5, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 6, k - 41), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 14, j + 6, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -7163,11 +7252,13 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 15, j + 4, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 15, j + 4, k - 29), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 15, j + 4, k - 28), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 15, j + 4, k - 27), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 15, j + 4, k - 26), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 15, j + 4, k - 25), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 15, j + 4, k - 24), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 15, j + 4, k - 23), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab) {
+			world.setBlockState(new BlockPos(i + 15, j + 4, k - 27), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 15, j + 4, k - 26), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 15, j + 4, k - 25), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 15, j + 4, k - 24), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 15, j + 4, k - 23), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		}
 		world.setBlockState(new BlockPos(i + 15, j + 4, k - 22), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 15, j + 4, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 15, j + 5, k - 41), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -7251,8 +7342,10 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 16, j + 5, k - 41), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 16, j + 5, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 16, j + 5, k - 29), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 16, j + 5, k - 28), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 16, j + 5, k - 22), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab) {
+			world.setBlockState(new BlockPos(i + 16, j + 5, k - 28), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 16, j + 5, k - 22), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		}
 		world.setBlockState(new BlockPos(i + 16, j + 5, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 16, j + 6, k - 41), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 16, j + 6, k - 36), ACBlocks.dreadstone_brick.getDefaultState(), 2);
@@ -7689,11 +7782,13 @@ public class chagarothlair extends WorldGenerator {
 		world.setBlockState(new BlockPos(i + 23, j + 5, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 23, j + 6, k - 29), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 23, j + 6, k - 28), ACBlocks.dreadstone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 23, j + 6, k - 27), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 23, j + 6, k - 26), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 23, j + 6, k - 25), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 23, j + 6, k - 24), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
-		world.setBlockState(new BlockPos(i + 23, j + 6, k - 23), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		if(ACConfig.dreadstone_brick_slab) {
+			world.setBlockState(new BlockPos(i + 23, j + 6, k - 27), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 23, j + 6, k - 26), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 23, j + 6, k - 25), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 23, j + 6, k - 24), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+			world.setBlockState(new BlockPos(i + 23, j + 6, k - 23), ACBlocks.dreadstone_brick_slab.getDefaultState(), 2); //TODO: 5
+		}
 		world.setBlockState(new BlockPos(i + 23, j + 6, k - 22), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 23, j + 6, k - 21), ACBlocks.dreadstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 23, j + 7, k - 29), ACBlocks.dreadstone_brick.getDefaultState(), 2);

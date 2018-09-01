@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -62,6 +64,8 @@ public class BlockCLiquid extends BlockFluidClassic {
 
 	@Override
 	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
+		if(BiomeDictionary.hasType(world.getBiome(pos), Type.OCEAN) && !ACConfig.destroyOcean && world.getBlockState(pos).getBlock() == Blocks.COBBLESTONE)
+			return false;
 		if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 			return true;
 		if(world.getBlockState(pos).getBlock() == Blocks.LAVA)
@@ -83,19 +87,12 @@ public class BlockCLiquid extends BlockFluidClassic {
 				if(ACConfig.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
 						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
-			} else {
-				if(BiomeDictionary.hasType(world.getBiome(pos), Type.OCEAN) && world.getBlockState(pos).getBlock() == this)
-					if(ACConfig.destroyOcean)
-						world.setBlockState(pos, getDefaultState());
-					else world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
-
-				if(ACConfig.shouldSpread){
-					if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
-						world.setBlockState(pos, getDefaultState());
-					if(ACConfig.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
-							&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
-						world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
-				}
+			} else if(ACConfig.shouldSpread){
+				if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
+					world.setBlockState(pos, getDefaultState());
+				if(ACConfig.breakLogic == true && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial().isLiquid()
+						&& world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != this && world.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getBlock() != ACBlocks.liquid_antimatter)
+					world.setBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ()), getDefaultState());
 			}
 			if(dusts.contains(world.getBlockState(pos)) && world.getBlockState(pos) != ACBlocks.abyssal_nitre_ore.getDefaultState() &&
 					world.getBlockState(pos) != ACBlocks.abyssal_coralium_ore)
@@ -121,12 +118,20 @@ public class BlockCLiquid extends BlockFluidClassic {
 			else if(bricks.contains(world.getBlockState(pos)))
 				world.setBlockState(pos, ACBlocks.abyssal_stone_brick.getDefaultState());
 			else if(cobble.contains(world.getBlockState(pos)))
-				if(BiomeDictionary.hasType(world.getBiome(pos), Type.OCEAN)){
+				if(BiomeDictionary.hasType(world.getBiome(pos), Type.OCEAN) && !ACConfig.destroyOcean){
 					if(world.getBlockState(pos).getBlock() != Blocks.COBBLESTONE)
 						world.setBlockState(pos, ACBlocks.cobblestone.getStateFromMeta(1));
 				}else world.setBlockState(pos, ACBlocks.cobblestone.getStateFromMeta(1));
 		}
 		return super.displaceIfPossible(world, pos);
+	}
+
+	@Override
+	public void onBlockAdded(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state)
+	{
+		if(BiomeDictionary.hasType(world.getBiome(pos), Type.OCEAN) && !ACConfig.destroyOcean)
+			world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
+		super.onBlockAdded(world, pos, state);
 	}
 
 	@Override

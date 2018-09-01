@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.ritual;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
+
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -98,7 +100,7 @@ public class NecronomiconCreationRitual extends NecronomiconRitual {
 		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
 		ItemStack stack = new ItemStack(nbtItem);
 
-		if(stack.isEmpty() || !stack.isItemEqual(item)){
+		if(!APIUtils.areStacksEqual(stack, item, true)){
 			item.writeToNBT(newItem);
 			compound.setTag("Item", newItem);
 		}

@@ -35,6 +35,7 @@ import com.shinoow.abyssalcraft.common.network.server.FireMessage;
 import com.shinoow.abyssalcraft.common.network.server.StaffModeMessage;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.*;
@@ -305,30 +306,48 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_leaves, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.oblivion_deathbomb, new StateMap.Builder().ignore(new IProperty[] {BlockTNT.EXPLODE}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.odb_core, new StateMap.Builder().ignore(new IProperty[] {BlockTNT.EXPLODE}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.abyssal_stone_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_stone_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.coralium_stone_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.ethaxium_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.darkstone_brick_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.darkstone_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.darkstone_cobblestone_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.darkstone_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.abyssal_stone_brick_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.abyssal_stone_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.darkstone_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.darkstone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.darklands_oak_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.dreadstone_brick_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.abyssalnite_stone_brick_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_stone_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.coralium_stone_brick_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.coralium_stone_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.ethaxium_brick_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.ethaxium_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dark_ethaxium_brick_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_sapling, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_sapling, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.mimic_fire, new StateMap.Builder().ignore(new IProperty[] {BlockFire.AGE}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
+		if(ACConfig.darkstone_cobblestone_wall)
+			ModelLoader.setCustomStateMapper(ACBlocks.darkstone_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.crystal_cluster, new StateMap.Builder().ignore(new IProperty[]{BlockCrystalCluster.TYPE}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.crystal_cluster2, new StateMap.Builder().ignore(new IProperty[]{BlockCrystalCluster2.TYPE}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.abyssal_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.abyssal_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.abyssal_cobbblestone_wall)
+			ModelLoader.setCustomStateMapper(ACBlocks.abyssal_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
+		if(ACConfig.dreadstone_cobblestone_wall)
+			ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
+		if(ACConfig.abyssalnite_cobblestone_wall)
+			ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
+		if(ACConfig.coralium_cobblestone_wall)
+			ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_wall, new StateMap.Builder().ignore(new IProperty[] {BlockWall.VARIANT}).build());
+		if(ACConfig.abyssal_cobblestone_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.abyssal_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.dreadstone_cobblestone_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.abyssalnite_cobblestone_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
+		if(ACConfig.coralium_cobblestone_slab)
+			ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.statue, new StateMapperBase(){
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
@@ -643,25 +662,35 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.darkstone_brick, 1, "darkstone_brick_1");
 		registerItemRender(ACBlocks.darkstone_brick, 2, "darkstone_brick_2");
 		registerItemRender(ACBlocks.glowing_darkstone_bricks, 0);
-		registerItemRender(ACBlocks.darkstone_brick_slab, 0);
-		registerItemRender(BlockHandler.Darkbrickslab2, 0);
-		registerItemRender(ACBlocks.darkstone_cobblestone_slab, 0);
-		registerItemRender(BlockHandler.Darkcobbleslab2, 0);
-		registerItemRender(ACBlocks.darkstone_brick_stairs, 0);
-		registerItemRender(ACBlocks.darkstone_cobblestone_stairs, 0);
+		if(ACConfig.darkstone_brick_slab) {
+			registerItemRender(ACBlocks.darkstone_brick_slab, 0);
+			registerItemRender(BlockHandler.Darkbrickslab2, 0);
+		}
+		if(ACConfig.darkstone_cobblestone_slab) {
+			registerItemRender(ACBlocks.darkstone_cobblestone_slab, 0);
+			registerItemRender(BlockHandler.Darkcobbleslab2, 0);
+		}
+		if(ACConfig.darkstone_brick_stairs)
+			registerItemRender(ACBlocks.darkstone_brick_stairs, 0);
+		if(ACConfig.darkstone_cobblestone_stairs)
+			registerItemRender(ACBlocks.darkstone_cobblestone_stairs, 0);
 		registerItemRender(ACBlocks.darklands_oak_leaves, 0);
 		registerItemRender(ACBlocks.darklands_oak_wood, 0);
 		registerItemRender(ACBlocks.darklands_oak_sapling, 0);
 		registerItemRender(ACBlocks.abyssal_stone_brick, 0, "abybrick_0");
 		registerItemRender(ACBlocks.abyssal_stone_brick, 1, "abybrick_1");
 		registerItemRender(ACBlocks.abyssal_stone_brick, 2, "abybrick_2");
-		registerItemRender(ACBlocks.abyssal_stone_brick_slab, 0);
-		registerItemRender(BlockHandler.abyslab2, 0);
-		registerItemRender(ACBlocks.abyssal_stone_brick_stairs, 0);
+		if(ACConfig.abyssal_stone_brick_slab) {
+			registerItemRender(ACBlocks.abyssal_stone_brick_slab, 0);
+			registerItemRender(BlockHandler.abyslab2, 0);
+		}
+		if(ACConfig.abyssal_stone_brick_stairs)
+			registerItemRender(ACBlocks.abyssal_stone_brick_stairs, 0);
 		registerItemRender(ACBlocks.coralium_ore, 0);
 		registerItemRender(ACBlocks.abyssalnite_ore, 0);
 		registerItemRender(ACBlocks.abyssal_stone_brick_fence, 0);
-		registerItemRender(ACBlocks.darkstone_cobblestone_wall, 0);
+		if(ACConfig.darkstone_cobblestone_wall)
+			registerItemRender(ACBlocks.darkstone_cobblestone_wall, 0);
 		registerItemRender(ACBlocks.ingot_block, 0, "abyblock");
 		registerItemRender(ACBlocks.ingot_block, 1, "corblock");
 		registerItemRender(ACBlocks.ingot_block, 2, "dreadiumblock");
@@ -670,17 +699,22 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.odb_core, 0);
 		registerItemRender(ACBlocks.wooden_crate, 0);
 		registerItemRender(ACBlocks.abyssal_gateway, 0);
-		registerItemRender(ACBlocks.darkstone_slab, 0);
-		registerItemRender(BlockHandler.Darkstoneslab2, 0);
+		if(ACConfig.darkstone_slab) {
+			registerItemRender(ACBlocks.darkstone_slab, 0);
+			registerItemRender(BlockHandler.Darkstoneslab2, 0);
+		}
 		registerItemRender(ACBlocks.coralium_fire, 0);
 		registerItemRender(ACBlocks.darkstone_button, 0);
 		registerItemRender(ACBlocks.darkstone_pressure_plate, 0);
 		registerItemRender(ACBlocks.darklands_oak_planks, 0);
 		registerItemRender(ACBlocks.darklands_oak_button, 0);
 		registerItemRender(ACBlocks.darklands_oak_pressure_plate, 0);
-		registerItemRender(ACBlocks.darklands_oak_stairs, 0);
-		registerItemRender(ACBlocks.darklands_oak_slab, 0);
-		registerItemRender(BlockHandler.DLTslab2, 0);
+		if(ACConfig.darklands_oak_stairs)
+			registerItemRender(ACBlocks.darklands_oak_stairs, 0);
+		if(ACConfig.darklands_oak_slab) {
+			registerItemRender(ACBlocks.darklands_oak_slab, 0);
+			registerItemRender(BlockHandler.DLTslab2, 0);
+		}
 		registerItemRender(ACBlocks.dreadlands_infused_powerstone, 0);
 		registerItemRender(ACBlocks.abyssal_coralium_ore, 0);
 		registerItemRender(BlockHandler.Altar, 0);
@@ -707,21 +741,30 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.pete_head, 0);
 		registerItemRender(ACBlocks.mr_wilson_head, 0);
 		registerItemRender(ACBlocks.dr_orange_head, 0);
-		registerItemRender(ACBlocks.dreadstone_brick_stairs, 0);
+		if(ACConfig.dreadstone_brick_stairs)
+			registerItemRender(ACBlocks.dreadstone_brick_stairs, 0);
 		registerItemRender(ACBlocks.dreadstone_brick_fence, 0);
-		registerItemRender(ACBlocks.dreadstone_brick_slab, 0);
-		registerItemRender(BlockHandler.dreadbrickslab2, 0);
-		registerItemRender(ACBlocks.abyssalnite_stone_brick_stairs, 0);
+		if(ACConfig.dreadstone_brick_slab) {
+			registerItemRender(ACBlocks.dreadstone_brick_slab, 0);
+			registerItemRender(BlockHandler.dreadbrickslab2, 0);
+		}
+		if(ACConfig.abyssalnite_stone_brick_stairs)
+			registerItemRender(ACBlocks.abyssalnite_stone_brick_stairs, 0);
 		registerItemRender(ACBlocks.abyssalnite_stone_brick_fence, 0);
-		registerItemRender(ACBlocks.abyssalnite_stone_brick_slab, 0);
-		registerItemRender(BlockHandler.abydreadbrickslab2, 0);
+		if(ACConfig.abyssalnite_stone_brick_slab) {
+			registerItemRender(ACBlocks.abyssalnite_stone_brick_slab, 0);
+			registerItemRender(BlockHandler.abydreadbrickslab2, 0);
+		}
 		registerItemRender(ACBlocks.coralium_stone_brick, 0, "cstonebrick_0");
 		registerItemRender(ACBlocks.coralium_stone_brick, 1, "cstonebrick_1");
 		registerItemRender(ACBlocks.coralium_stone_brick, 2, "cstonebrick_2");
 		registerItemRender(ACBlocks.coralium_stone_brick_fence, 0);
-		registerItemRender(ACBlocks.coralium_stone_brick_slab, 0);
-		registerItemRender(BlockHandler.cstonebrickslab2, 0);
-		registerItemRender(ACBlocks.coralium_stone_brick_stairs, 0);
+		if(ACConfig.coralium_stone_brick_slab) {
+			registerItemRender(ACBlocks.coralium_stone_brick_slab, 0);
+			registerItemRender(BlockHandler.cstonebrickslab2, 0);
+		}
+		if(ACConfig.coralium_stone_brick_stairs)
+			registerItemRender(ACBlocks.coralium_stone_brick_stairs, 0);
 		registerItemRender(ACBlocks.coralium_stone_button, 0);
 		registerItemRender(ACBlocks.coralium_stone_pressure_plate, 0);
 		registerItemRender(ACBlocks.crystallizer_idle, 0);
@@ -746,9 +789,12 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.ethaxium_brick, 1, "ethaxiumbrick_1");
 		registerItemRender(ACBlocks.ethaxium_brick, 2, "ethaxiumbrick_2");
 		registerItemRender(ACBlocks.ethaxium_pillar, 0);
-		registerItemRender(ACBlocks.ethaxium_brick_stairs, 0);
-		registerItemRender(ACBlocks.ethaxium_brick_slab, 0);
-		registerItemRender(BlockHandler.ethaxiumslab2, 0);
+		if(ACConfig.ethaxium_brick_stairs)
+			registerItemRender(ACBlocks.ethaxium_brick_stairs, 0);
+		if(ACConfig.ethaxium_brick_slab) {
+			registerItemRender(ACBlocks.ethaxium_brick_slab, 0);
+			registerItemRender(BlockHandler.ethaxiumslab2, 0);
+		}
 		registerItemRender(ACBlocks.ethaxium_brick_fence, 0);
 		registerItemRender(ACBlocks.omothol_gateway, 0);
 		registerItemRender(ACBlocks.omothol_fire, 0);
@@ -814,22 +860,38 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.fused_abyssal_sand, 0);
 		registerItemRender(ACBlocks.abyssal_sand_glass, 0);
 		registerItemRender(ACBlocks.dreadlands_dirt, 0);
-		registerItemRender(ACBlocks.abyssal_cobblestone_stairs, 0);
-		registerItemRender(ACBlocks.abyssal_cobblestone_slab, 0);
-		registerItemRender(BlockHandler.abycobbleslab2, 0);
-		registerItemRender(ACBlocks.abyssal_cobblestone_wall, 0);
-		registerItemRender(ACBlocks.dreadstone_cobblestone_stairs, 0);
-		registerItemRender(ACBlocks.dreadstone_cobblestone_slab, 0);
-		registerItemRender(BlockHandler.dreadcobbleslab2, 0);
-		registerItemRender(ACBlocks.dreadstone_cobblestone_wall, 0);
-		registerItemRender(ACBlocks.abyssalnite_cobblestone_stairs, 0);
-		registerItemRender(ACBlocks.abyssalnite_cobblestone_slab, 0);
-		registerItemRender(BlockHandler.abydreadcobbleslab2, 0);
-		registerItemRender(ACBlocks.abyssalnite_cobblestone_wall, 0);
-		registerItemRender(ACBlocks.coralium_cobblestone_stairs, 0);
-		registerItemRender(ACBlocks.coralium_cobblestone_slab, 0);
-		registerItemRender(BlockHandler.cstonecobbleslab2, 0);
-		registerItemRender(ACBlocks.coralium_cobblestone_wall, 0);
+		if(ACConfig.abyssal_cobblestone_stairs)
+			registerItemRender(ACBlocks.abyssal_cobblestone_stairs, 0);
+		if(ACConfig.abyssal_cobblestone_slab) {
+			registerItemRender(ACBlocks.abyssal_cobblestone_slab, 0);
+			registerItemRender(BlockHandler.abycobbleslab2, 0);
+		}
+		if(ACConfig.abyssal_cobbblestone_wall)
+			registerItemRender(ACBlocks.abyssal_cobblestone_wall, 0);
+		if(ACConfig.dreadstone_cobblestone_stairs)
+			registerItemRender(ACBlocks.dreadstone_cobblestone_stairs, 0);
+		if(ACConfig.dreadstone_cobblestone_slab) {
+			registerItemRender(ACBlocks.dreadstone_cobblestone_slab, 0);
+			registerItemRender(BlockHandler.dreadcobbleslab2, 0);
+		}
+		if(ACConfig.dreadstone_cobblestone_wall)
+			registerItemRender(ACBlocks.dreadstone_cobblestone_wall, 0);
+		if(ACConfig.abyssalnite_cobblestone_stairs)
+			registerItemRender(ACBlocks.abyssalnite_cobblestone_stairs, 0);
+		if(ACConfig.abyssalnite_cobblestone_slab) {
+			registerItemRender(ACBlocks.abyssalnite_cobblestone_slab, 0);
+			registerItemRender(BlockHandler.abydreadcobbleslab2, 0);
+		}
+		if(ACConfig.abyssalnite_cobblestone_wall)
+			registerItemRender(ACBlocks.abyssalnite_cobblestone_wall, 0);
+		if(ACConfig.coralium_cobblestone_stairs)
+			registerItemRender(ACBlocks.coralium_cobblestone_stairs, 0);
+		if(ACConfig.coralium_cobblestone_slab) {
+			registerItemRender(ACBlocks.coralium_cobblestone_slab, 0);
+			registerItemRender(BlockHandler.cstonecobbleslab2, 0);
+		}
+		if(ACConfig.coralium_cobblestone_wall)
+			registerItemRender(ACBlocks.coralium_cobblestone_wall, 0);
 		registerItemRender(ACBlocks.luminous_thistle, 0);
 		registerItemRender(ACBlocks.wastelands_thorn, 0);
 		registerItemRender(ACBlocks.rending_pedestal, 0);

@@ -52,27 +52,26 @@ public class TransmutatorFuelRecipeMaker {
 						continue;
 					int burnTime = getBurnTime(oreDictFuelsSet.get(0));
 
-					TransmutatorFuelRecipe recipe = new TransmutatorFuelRecipe(guiHelper, oreDictFuelsSet, burnTime);
-					if(isRecipeValid(recipe))
-						fuelRecipes.add(recipe);
+					if(burnTime > 0)
+						fuelRecipes.add(new TransmutatorFuelRecipe(guiHelper, oreDictFuelsSet, burnTime));
 				}
 			else {
-				List<ItemStack> fuels = stackHelper.getSubtypes(fuelStack);
-				removeNoBurnTime(fuels);
+				List<ItemStack> subtypes = stackHelper.getSubtypes(fuelStack);
+				List<ItemStack> fuels = new ArrayList<>();
+				for (ItemStack subtype : subtypes)
+					if (TileEntityTransmutator.getItemBurnTime(subtype) > 0)
+						fuels.add(subtype);
+
 				if (fuels.isEmpty())
 					continue;
 				int burnTime = getBurnTime(fuels.get(0));
-				TransmutatorFuelRecipe recipe = new TransmutatorFuelRecipe(guiHelper, fuels, burnTime);
-				if(isRecipeValid(recipe))
-					fuelRecipes.add(recipe);
+				if(burnTime > 0)
+					fuelRecipes.add(new TransmutatorFuelRecipe(guiHelper, fuels, burnTime));
 			}
 		}
 		return fuelRecipes;
 	}
 
-	private static boolean isRecipeValid(@Nonnull TransmutatorFuelRecipe recipe) {
-		return recipe.getInputs().size() > 0;
-	}
 
 	private static void removeNoBurnTime(Collection<ItemStack> itemStacks) {
 		itemStacks.removeIf(stack -> getBurnTime(stack) == 0);

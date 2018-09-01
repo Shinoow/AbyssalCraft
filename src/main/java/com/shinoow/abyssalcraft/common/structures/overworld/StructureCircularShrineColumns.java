@@ -15,6 +15,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -27,7 +28,7 @@ public class StructureCircularShrineColumns extends StructureDarklandsBase {
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
 		IBlockState chiseled_brick = ACBlocks.darkstone_brick.getStateFromMeta(1);
-		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
+		IBlockState brick_slab = ACConfig.darkstone_brick_slab ? ACBlocks.darkstone_brick_slab.getDefaultState() : Blocks.AIR.getDefaultState();
 
 		for(int i = -3; i < 4; i++)
 			for(int j = -5; j < 6; j++){

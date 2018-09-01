@@ -223,7 +223,6 @@ container.abyssalcraft.upgrade.nei=升级套件
 #JEI整合
 gui.acjei.category.fuel.transmutator=嬗变器燃料
 gui.acjei.category.fuel.crystallizer=结晶器燃料
-gui.jei.category.fuel.burnTime=燃烧时间：%d ticks
 
 #死灵之书标签
 necronomicon.index=索引

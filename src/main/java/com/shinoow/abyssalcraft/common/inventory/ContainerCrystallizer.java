@@ -135,16 +135,16 @@ public class ContainerCrystallizer extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 == 2)
+			if (par2 == 2 || par2 == 3)
 			{
-				if (!mergeItemStack(itemstack1, 3, 39, true))
+				if (!mergeItemStack(itemstack1, 3, 40, true))
 					return ItemStack.EMPTY;
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
 			else if (par2 != 1 && par2 != 0)
 			{
-				if (CrystallizerRecipes.instance().getCrystallizationResult(itemstack1) != null)
+				if (!CrystallizerRecipes.instance().getCrystallizationResult(itemstack1)[0].isEmpty())
 				{
 					if (!mergeItemStack(itemstack1, 0, 1, false))
 						return ItemStack.EMPTY;
@@ -154,15 +154,15 @@ public class ContainerCrystallizer extends Container {
 					if (!mergeItemStack(itemstack1, 1, 2, false))
 						return ItemStack.EMPTY;
 				}
-				else if (par2 >= 3 && par2 < 30)
+				else if (par2 >= 4 && par2 < 31)
 				{
-					if (!mergeItemStack(itemstack1, 30, 39, false))
+					if (!mergeItemStack(itemstack1, 31, 40, false))
 						return ItemStack.EMPTY;
 				}
-				else if (par2 >= 30 && par2 < 39 && !mergeItemStack(itemstack1, 3, 30, false))
+				else if (par2 >= 31 && par2 < 40 && !mergeItemStack(itemstack1, 4, 31, false))
 					return ItemStack.EMPTY;
 			}
-			else if (!mergeItemStack(itemstack1, 3, 39, false))
+			else if (!mergeItemStack(itemstack1, 4, 40, false))
 				return ItemStack.EMPTY;
 
 			if (itemstack1.isEmpty())

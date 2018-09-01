@@ -1,0 +1,26 @@
+{
+"display": {
+    "icon": {
+      "item": "abyssalcraft:ethaxiumingot"
+    },
+    "title": {
+      "translate": "advancements.abyssalcraft.ethaxium.title"
+    },
+    "description": {
+      "translate": "advancements.abyssalcraft.ethaxium.description"
+    }
+  },
+  "parent": "abyssalcraft:dreadium",
+  "criteria": {
+    "abyssalnite": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:ethaxiumingot"
+		  }
+		]
+	  }
+	}
+  }
+}

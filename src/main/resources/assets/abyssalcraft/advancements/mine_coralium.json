@@ -1,0 +1,117 @@
+{
+"display": {
+    "icon": {
+      "item": "abyssalcraft:coralium"
+    },
+    "title": {
+      "translate": "advancements.abyssalcraft.minecorgem.title"
+    },
+    "description": {
+      "translate": "advancements.abyssalcraft.minecorgem.description"
+    }
+  },
+  "parent": "abyssalcraft:mine_abyssalnite",
+  "criteria": {
+    "gem": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:coralium"
+		  }
+		]
+	  }
+	},
+	"ore": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:coraliumore"
+		  }
+		]
+	  }
+	},
+	"cc2": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:ccluster2"
+		  }
+		]
+	  }
+	},
+	"cc3": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:ccluster3"
+		  }
+		]
+	  }
+	},
+	"cc4": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:ccluster4"
+		  }
+		]
+	  }
+	},
+	"cc5": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:ccluster5"
+		  }
+		]
+	  }
+	},
+	"cc6": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:ccluster6"
+		  }
+		]
+	  }
+	},
+	"cc7": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:ccluster7"
+		  }
+		]
+	  }
+	},
+	"cc8": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:ccluster8"
+		  }
+		]
+	  }
+	},
+	"cc9": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:ccluster9"
+		  }
+		]
+	  }
+	}
+  },
+  "requirements": [["gem", "ore", "cc2", "cc3", "cc4", "cc5", "cc6", "cc7", "cc8", "cc9"]]
+}

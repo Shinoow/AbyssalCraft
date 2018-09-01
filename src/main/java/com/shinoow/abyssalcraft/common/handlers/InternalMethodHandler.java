@@ -19,10 +19,12 @@ import com.shinoow.abyssalcraft.api.internal.DummyMethodHandler;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.DisruptionMessage;
 import com.shinoow.abyssalcraft.common.network.client.PEStreamMessage;
+import com.shinoow.abyssalcraft.common.network.client.RitualMessage;
 import com.shinoow.abyssalcraft.common.world.DarklandsStructureGenerator;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -56,5 +58,10 @@ public class InternalMethodHandler extends DummyMethodHandler {
 	@Override
 	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, IBlockState spawnBlock, IBlockState... extra) {
 		DarklandsStructureGenerator.generate(type, world, random, pos, spawnBlock, extra);
+	}
+
+	@Override
+	public void completeRitualClient(BlockPos pos, EntityPlayer player, String ritual) {
+		PacketDispatcher.sendToAllAround(new RitualMessage(ritual, pos), player, 5);
 	}
 }

@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.structures;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -170,29 +171,31 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 9, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 9, j + 5, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 9, j + 5, k - 1), ACBlocks.ethaxium_pillar.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 22), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 21), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 20), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 19), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 18), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 17), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 16), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 15), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 14), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 13), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 12), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 11), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 10), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 9), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 8), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 7), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 6), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 5), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 3), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
-		world.setBlockState(new BlockPos(i - 9, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs) {
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 22), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 21), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 20), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 19), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 18), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 17), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 16), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 15), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 14), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 13), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 12), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 11), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 10), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 9), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 8), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 7), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 6), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 5), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 3), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(i - 9, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		}
 		world.setBlockState(new BlockPos(i - 8, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 8, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 8, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -320,7 +323,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 8, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 8, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 8, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 8, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 8, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i - 8, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 8, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 8, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -342,7 +346,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 8, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 8, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 8, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 8, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 8, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i - 7, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -431,7 +436,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 7, j + 5, k - 6), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 7, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 7, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i - 7, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -453,7 +459,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 7, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 7, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 7, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 7, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i - 6, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -540,7 +547,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 6, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 6, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 6, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -562,7 +570,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 6, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 6, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 6, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i - 5, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -660,7 +669,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 5, j + 5, k - 6), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 5, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 5, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i - 5, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -682,7 +692,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 5, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 5, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 5, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 5, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i - 4, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -768,7 +779,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 4, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 4, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 4, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i - 4, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -790,7 +802,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 4, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 4, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 4, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 4, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i - 3, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -902,7 +915,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 3, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 5, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 5, k - 1), ACBlocks.ethaxium_pillar.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 3, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 3, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i - 3, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -924,7 +938,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 3, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 3, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 3, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 3, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -947,7 +962,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 0, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 0, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 2, j + 0, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 1, k - 21), ACBlocks.stone.getDefaultState(), 2);
@@ -1015,8 +1031,10 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 2, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 5, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
-		world.setBlockState(new BlockPos(i - 2, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs) {
+			world.setBlockState(new BlockPos(i - 2, j + 5, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+			world.setBlockState(new BlockPos(i - 2, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		}
 		world.setBlockState(new BlockPos(i - 2, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1035,7 +1053,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 2, j + 6, k - 7), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 6, k - 6), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j + 6, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 2, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1058,7 +1077,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 0, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j + 0, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 1, j + 0, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i - 1, j + 1, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 1, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 1, k - 21), ACBlocks.stone.getDefaultState(), 2);
@@ -1121,8 +1141,10 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 1, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j + 5, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
-		world.setBlockState(new BlockPos(i - 1, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs) {
+			world.setBlockState(new BlockPos(i - 1, j + 5, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+			world.setBlockState(new BlockPos(i - 1, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		}
 		world.setBlockState(new BlockPos(i - 1, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1141,7 +1163,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 1, j + 6, k - 7), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 6, k - 6), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 6, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i - 1, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1164,7 +1187,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 0, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j + 0, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 0, j + 0, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 0, j + 0, k + 0), Blocks.AIR.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1184,7 +1208,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 8), ACBlocks.cobblestone.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 7), ACBlocks.cobblestone.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 1, k - 6), ACBlocks.cobblestone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j + 1, k - 5), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 0, j + 1, k - 5), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 0, j + 2, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 2, k - 22), ACBlocks.darkstone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 2, k - 11), ACBlocks.darkstone_brick.getDefaultState(), 2);
@@ -1219,8 +1244,10 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 0, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j + 5, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
-		world.setBlockState(new BlockPos(i + 0, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs) {
+			world.setBlockState(new BlockPos(i + 0, j + 5, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+			world.setBlockState(new BlockPos(i + 0, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		}
 		world.setBlockState(new BlockPos(i + 0, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1239,7 +1266,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 0, j + 6, k - 7), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 6, k - 6), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 0, j + 6, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 0, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 0, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1262,7 +1290,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 0, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j + 0, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 1, j + 0, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 1, j + 1, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 1, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 1, k - 21), ACBlocks.stone.getDefaultState(), 2);
@@ -1325,8 +1354,10 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 1, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j + 5, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
-		world.setBlockState(new BlockPos(i + 1, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs) {
+			world.setBlockState(new BlockPos(i + 1, j + 5, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+			world.setBlockState(new BlockPos(i + 1, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		}
 		world.setBlockState(new BlockPos(i + 1, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1345,7 +1376,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 1, j + 6, k - 7), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 6, k - 6), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 6, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 1, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1368,7 +1400,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 0, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 0, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 2, j + 0, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 1, k - 21), ACBlocks.stone.getDefaultState(), 2);
@@ -1436,8 +1469,10 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 2, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 5, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
-		world.setBlockState(new BlockPos(i + 2, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs) {
+			world.setBlockState(new BlockPos(i + 2, j + 5, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+			world.setBlockState(new BlockPos(i + 2, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		}
 		world.setBlockState(new BlockPos(i + 2, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1456,7 +1491,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 2, j + 6, k - 7), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 6, k - 6), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j + 6, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 2, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 3, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1574,7 +1610,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 3, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 5, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 5, k - 1), ACBlocks.ethaxium_pillar.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 3, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 3, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i + 3, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1596,7 +1633,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 3, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 3, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 3, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 3, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 4, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1682,7 +1720,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 4, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 4, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 4, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i + 4, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1704,7 +1743,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 4, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 4, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 4, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 4, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 5, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1802,7 +1842,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 5, j + 5, k - 6), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 5, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 5, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i + 5, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1824,7 +1865,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 5, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 5, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 5, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 5, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 6, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1911,7 +1953,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 6, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 6, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 6, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -1933,7 +1976,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 6, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 6, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 7, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -2018,7 +2062,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 7, j + 5, k - 6), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 7, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 7, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i + 7, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -2040,7 +2085,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 7, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 7, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 7, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 7, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 8, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 8, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 8, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -2168,7 +2214,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 8, j + 5, k - 5), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 8, j + 5, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 8, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 8, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 8, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(2), 2); //TODO: 2
 		world.setBlockState(new BlockPos(i + 8, j + 6, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 8, j + 6, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 8, j + 6, k - 20), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -2190,7 +2237,8 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 8, j + 6, k - 4), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 8, j + 6, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 8, j + 6, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 8, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs)
+			world.setBlockState(new BlockPos(i + 8, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
 		world.setBlockState(new BlockPos(i + 9, j + 0, k - 23), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 9, j + 0, k - 22), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 9, j + 0, k - 21), ACBlocks.ethaxium_brick.getDefaultState(), 2);
@@ -2329,29 +2377,31 @@ public class StructureHouse extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 9, j + 5, k - 3), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 9, j + 5, k - 2), ACBlocks.ethaxium_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 9, j + 5, k - 1), ACBlocks.ethaxium_pillar.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 22), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 21), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 20), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 19), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 18), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 17), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 16), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 15), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 14), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 13), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 12), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 11), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 10), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 9), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 8), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 7), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 6), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 5), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 3), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
-		world.setBlockState(new BlockPos(i + 9, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		if(ACConfig.ethaxium_brick_stairs) {
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 23), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 22), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 21), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 20), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 19), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 18), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 17), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 16), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 15), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 14), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 13), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 12), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 11), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 10), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 9), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 8), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 7), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 6), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 5), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 4), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 3), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 2), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(1), 2); //TODO: 1
+			world.setBlockState(new BlockPos(i + 9, j + 6, k - 1), ACBlocks.ethaxium_brick_stairs.getStateFromMeta(3), 2); //TODO: 3
+		}
 		world.setBlockState(new BlockPos(i - 8, j + 0, k - 1), Blocks.AIR.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 8, j + 1, k - 2), Blocks.AIR.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 8, j + 1, k - 1), Blocks.AIR.getDefaultState(), 2);

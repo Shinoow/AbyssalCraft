@@ -125,16 +125,6 @@ public class InitHandler implements ILifeCycleHandler {
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
 
-		cfg.setCategoryComment("dimensions", "Dimension configuration (ID configuration and dimension unloading). Any changes take effect after a Minecraft restart.");
-		cfg.setCategoryComment("biome_generation", "Biome generation configuration (whether a biome should generate). Any changes take effect after a Minecraft restart.");
-		cfg.setCategoryComment("biome_spawning", "Biome spawning configuration (if players have a chance of spawning in the biomes). Any changes take effect after a Minecraft restart.");
-		cfg.setCategoryComment(Configuration.CATEGORY_GENERAL, "General configuration (misc things). Only the spawn weights require a Minecraft restart for changes to take effect.");
-		cfg.setCategoryComment("biome_weight", "Biome weight configuration (the chance n out of 100 that a biome is picked to generate). Any changes take effect after a Minecraft restart.");
-		cfg.setCategoryComment("shoggoth", "Shoggoth Ooze configuration (blacklist materials from turning into ooze). Any changes take effect immediately.");
-		cfg.setCategoryComment("worldgen", "World generation configuration (things that generate in the world). Any changes take effect immediately.");
-		cfg.setCategoryComment("item_blacklist", "Entity Item Blacklist (allows you to blacklist items/blocks for entities that can pick up things). Any changes take effect after a Minecraft restart.");
-		cfg.setCategoryComment("silly_settings", "These settings are generally out of place, and don't contribute to the mod experience. They exist because 'what if X did this?'");
-
 		if(hardcoreMode){
 			AbyssalCraftAPI.coralium.setDamageIsAbsolute();
 			AbyssalCraftAPI.dread.setDamageIsAbsolute();
@@ -291,6 +281,17 @@ public class InitHandler implements ILifeCycleHandler {
 
 	private static void syncConfig(){
 
+		cfg.setCategoryComment("dimensions", "Dimension configuration (ID configuration and dimension unloading). Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("biome_generation", "Biome generation configuration (whether a biome should generate). Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("biome_spawning", "Biome spawning configuration (if players have a chance of spawning in the biomes). Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment(Configuration.CATEGORY_GENERAL, "General configuration (misc things). Only the spawn weights require a Minecraft restart for changes to take effect.");
+		cfg.setCategoryComment("biome_weight", "Biome weight configuration (the chance n out of 100 that a biome is picked to generate). Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("shoggoth", "Shoggoth Ooze configuration (blacklist materials from turning into ooze). Any changes take effect immediately.");
+		cfg.setCategoryComment("worldgen", "World generation configuration (things that generate in the world). Any changes take effect immediately.");
+		cfg.setCategoryComment("item_blacklist", "Entity Item Blacklist (allows you to blacklist items/blocks for entities that can pick up things). Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("silly_settings", "These settings are generally out of place, and don't contribute to the mod experience. They exist because 'what if X did this?'");
+		cfg.setCategoryComment("blocks", "These settings allow you to disable specific blocks in the mod, mainly slabs, stairs and walls. Any changes take effect after a Minecraft restart.");
+
 		ACLib.abyssal_wasteland_id = cfg.get("dimensions", "The Abyssal Wasteland", 50, "The first dimension, full of undead monsters.").getInt();
 		ACLib.dreadlands_id = cfg.get("dimensions", "The Dreadlands", 51, "The second dimension, infested with mutated monsters.").getInt();
 		ACLib.omothol_id = cfg.get("dimensions", "Omothol", 52, "The third dimension, also known as \u00A7oThe Realm of J'zahar\u00A7r.").getInt();
@@ -339,6 +340,7 @@ public class InitHandler implements ILifeCycleHandler {
 		mimicFire = cfg.get(Configuration.CATEGORY_GENERAL, "Mimic Fire", true, "Toggles whether or not Demon Animals will spread Mimic Fire instead of regular Fire (regular Fire can affect performance)").getBoolean();
 		armorPotionEffects = cfg.get(Configuration.CATEGORY_GENERAL, "Armor Potion Effects", true, "Toggles any interactions where armor sets either give certain Potion Effects, or dispell others. Useful if you have another mod installed that provides similar customization to any armor set.").getBoolean();
 		syncDataOnBookOpening = cfg.get(Configuration.CATEGORY_GENERAL, "Necronomicon Data Syncing", true, "Toggles whether or not the Necronomicon knowledge will sync from the server to the client each time a player opens their Necronomicon.").getBoolean();
+		dreadGrassSpread = cfg.get(Configuration.CATEGORY_GENERAL, "Dreadlands Grass Spread", true, "Toggles whether or not Dreadlands Grass can spread onto normal grass and dirt, slowly turning them into their Dreadlands counterparts.").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -387,6 +389,37 @@ public class InitHandler implements ILifeCycleHandler {
 
 		breakLogic = cfg.get("silly_settings", "Liquid Coralium Physics", false, "Set true to allow the Liquid Coralium to break the laws of physics in terms of movement").getBoolean();
 		nuclearAntimatterExplosions = cfg.get("silly_settings", "Nuclear Antimatter Explosions", false, "Take a wild guess what this does... Done guessing? Yeah, makes the antimatter explosions more genuine by making them go all nuclear. Recommended to not enable unless you want chaos and destruction.").getBoolean();
+
+		darkstone_brick_slab = cfg.get("blocks", "Darkstone Brick Slab", true).getBoolean();
+		darkstone_cobblestone_slab = cfg.get("blocks", "Darkstone Cobblestone Slab", true).getBoolean();
+		darkstone_brick_stairs = cfg.get("blocks", "Darkstone Brick Stairs", true).getBoolean();
+		darkstone_cobblestone_stairs = cfg.get("blocks", "Darkstone Cobblestone Stairs", true).getBoolean();
+		darkstone_slab = cfg.get("blocks", "Darkstone Slab", true).getBoolean();
+		darklands_oak_slab = cfg.get("blocks", "Darklands Oak Slab", true).getBoolean();
+		darklands_oak_stairs = cfg.get("blocks", "Darklands Oak Stairs", true).getBoolean();
+		abyssal_stone_brick_slab = cfg.get("blocks", "Abyssal Stone Brick Slab", true).getBoolean();
+		abyssal_stone_brick_stairs = cfg.get("blocks", "Abyssal Stone Brick Stairs", true).getBoolean();
+		coralium_stone_brick_slab = cfg.get("blocks", "Coralium Stone Brick Slab", true).getBoolean();
+		coralium_stone_brick_stairs = cfg.get("blocks", "Coralium Stone Brick Stairs", true).getBoolean();
+		dreadstone_brick_slab = cfg.get("blocks", "Dreadstone Brick Slab", true).getBoolean();
+		dreadstone_brick_stairs = cfg.get("blocks", "Dreadstone Brick Stairs", true).getBoolean();
+		abyssalnite_stone_brick_slab = cfg.get("blocks", "Abyssalnite Stone Brick Slab", true).getBoolean();
+		abyssalnite_stone_brick_stairs = cfg.get("blocks", "Abyssalnite Stone Brick Stairs", true).getBoolean();
+		ethaxium_brick_slab = cfg.get("blocks", "Ethaxium Brick Slab", true).getBoolean();
+		ethaxium_brick_stairs = cfg.get("blocks", "Ethaxium Brick Stairs", true).getBoolean();
+		abyssal_cobblestone_slab = cfg.get("blocks", "Abyssal Cobblestone Slab", true).getBoolean();
+		abyssal_cobblestone_stairs = cfg.get("blocks", "Abyssal Cobblestone Stairs", true).getBoolean();
+		coralium_cobblestone_slab = cfg.get("blocks", "Coralium Cobblestone Slab", true).getBoolean();
+		coralium_cobblestone_stairs = cfg.get("blocks", "Coralium Cobblestone Stairs", true).getBoolean();
+		dreadstone_cobblestone_slab = cfg.get("blocks", "Dreadstone Cobblestone Slab", true).getBoolean();
+		dreadstone_cobblestone_stairs = cfg.get("blocks", "Dreadstone Cobblestone Stairs", true).getBoolean();
+		abyssalnite_cobblestone_slab = cfg.get("blocks", "Abyssalnite Cobblestone Slab", true).getBoolean();
+		abyssalnite_cobblestone_stairs = cfg.get("blocks", "Abyssalnite Cobblestone Stairs", true).getBoolean();
+		darkstone_cobblestone_wall = cfg.get("blocks", "Darkstone Cobblestone Wall", true).getBoolean();
+		abyssal_cobbblestone_wall = cfg.get("blocks", "Abyssal Cobblestone Wall", true).getBoolean();
+		coralium_cobblestone_wall = cfg.get("blocks", "Coralium Cobblestone Wall", true).getBoolean();
+		dreadstone_cobblestone_wall = cfg.get("blocks", "Dreadstone Cobblestone Wall", true).getBoolean();
+		abyssalnite_cobblestone_wall = cfg.get("blocks", "Abyssalnite Cobblestone Wall", true).getBoolean();
 
 		String[] transformations = cfg.getStringList("Demon Animal Transformations", Configuration.CATEGORY_GENERAL, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
 				+ "\nFormat: entityid;demonanimal;chance \nwhere entityid is the String used in the /summon command\n demonanimal is a Integer representing the Demon Animal to spawn (0 = Demon Pig, 1 = Demon Cow, 2 = Demon Chicken, 3 = Demon Sheep)"

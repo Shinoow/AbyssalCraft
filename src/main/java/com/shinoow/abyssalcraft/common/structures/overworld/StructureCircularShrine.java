@@ -15,6 +15,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -28,9 +29,9 @@ public class StructureCircularShrine extends StructureDarklandsBase {
 
 		IBlockState brick = ACBlocks.darkstone_brick.getDefaultState();
 		IBlockState chiseled_brick = ACBlocks.darkstone_brick.getStateFromMeta(1);
-		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
+		IBlockState brick_slab = ACConfig.darkstone_brick_slab ? ACBlocks.darkstone_brick_slab.getDefaultState() : Blocks.AIR.getDefaultState();
 		IBlockState cobble = ACBlocks.cobblestone.getDefaultState();
-		IBlockState cobble_slab = ACBlocks.darkstone_cobblestone_slab.getDefaultState();
+		IBlockState cobble_slab = ACConfig.darkstone_cobblestone_slab ? ACBlocks.darkstone_cobblestone_slab.getDefaultState() : Blocks.AIR.getDefaultState();
 		IBlockState ooze = ACBlocks.shoggoth_ooze.getDefaultState().withProperty(BlockShoggothOoze.LAYERS, 8);
 		IBlockState air = Blocks.AIR.getDefaultState();
 

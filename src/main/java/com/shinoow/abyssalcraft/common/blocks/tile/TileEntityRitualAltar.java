@@ -11,14 +11,21 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import java.util.List;
+
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
+import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.event.ACEvents.DisruptionEvent;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.RitualMessage;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
@@ -115,49 +122,24 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 			if(ritual != null){
 				if(sacrifice != null && sacrifice.isEntityAlive())
 					world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, sacrifice.posX, sacrifice.posY + sacrifice.getEyeHeight(), sacrifice.posZ, 0, 0, 0);
-				if(user != null){
-					for(ItemStack item : user.inventory.mainInventory)
-						if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
-						((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) &&
-						(item.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)item.getItem()).isOwner(user, item) || !(item.getItem() instanceof ItemNecronomicon))){
-							consumedEnergy += ((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
-							break;
-						}
-				} else user = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, true);
+				if(!world.isRemote)
+					if(user != null)
+						collectPEFromPlayer();
+					else user = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, true);
 				if(ritualTimer == 200)
-					if(user != null){
+					if(user != null && !world.isRemote){
 						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, world, pos))){
-							if(!world.isRemote)
-								for(ItemStack item : user.inventory.mainInventory)
-									if(item != null && item.getItem() instanceof IEnergyTransporterItem &&
-									((IEnergyTransporterItem) item.getItem()).canTransferPEExternally(item) &&
-									(item.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)item.getItem()).isOwner(user, item) || !(item.getItem() instanceof ItemNecronomicon))){
-										consumedEnergy += ((IEnergyTransporterItem) item.getItem()).consumeEnergy(item, ritual.getReqEnergy()/200);
-										break;
-									}
+							collectPEFromPlayer();
 							if(consumedEnergy == ritual.getReqEnergy() && (sacrifice == null || !sacrifice.isEntityAlive()))
 								ritual.completeRitual(world, pos, user);
-							else if(!world.isRemote){
-								world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), true));
-								DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16)));
-							}
-							ritualTimer = 0;
-							user = null;
-							ritual = null;
-							consumedEnergy = 0;
-							isDirty = true;
-							sacrifice = null;
+							else
+								triggerDisruption();
+							reset();
 						}
 					} else {
-						if(!world.isRemote){
-							world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), true));
-							DisruptionHandler.instance().generateDisruption(DeityType.values()[world.rand.nextInt(DeityType.values().length)], world, pos, world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16)));
-						}
-						ritualTimer = 0;
-						ritual = null;
-						consumedEnergy = 0;
-						isDirty = true;
-						sacrifice = null;
+						if(!world.isRemote)
+							triggerDisruption();
+						reset();
 					}
 			} else ritualTimer = 0;
 
@@ -193,6 +175,41 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
 		world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
 		world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
+	}
+
+	private void reset() {
+		ritualTimer = 0;
+		user = null;
+		ritual = null;
+		consumedEnergy = 0;
+		isDirty = true;
+		sacrifice = null;
+	}
+
+	private void collectPEFromPlayer() {
+		for(ItemStack stack : user.inventory.mainInventory)
+			if(!stack.isEmpty() && stack.getItem() instanceof IEnergyTransporterItem &&
+					((IEnergyTransporterItem) stack.getItem()).canTransferPEExternally(stack) &&
+					(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(user, stack) || !(stack.getItem() instanceof ItemNecronomicon))){
+				consumedEnergy += ((IEnergyTransporterItem) stack.getItem()).consumeEnergy(stack, ritual.getReqEnergy()/200);
+				break;
+			}
+	}
+
+	private void triggerDisruption() {
+		world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), true));
+		DeityType deity = DeityType.values()[world.rand.nextInt(DeityType.values().length)];
+		List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16));
+		if(user != null) {
+			RitualEvent.Failed event = new RitualEvent.Failed(user, ritual, DisruptionHandler.instance().getRandomDisruption(deity, world), world, pos);
+			if(!MinecraftForge.EVENT_BUS.post(event)) {
+				DisruptionEntry disruption = event.getDisruption();
+				PacketDispatcher.sendToAllAround(new RitualMessage(ritual.getUnlocalizedName().substring("ac.ritual.".length()), pos, true, disruption.getUnlocalizedName()), user, 5);
+				if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, world, pos, players, disruption)))
+					disruption.disrupt(world, pos, players);
+				AbyssalCraftAPI.getInternalMethodHandler().sendDisruption(deity, disruption.getUnlocalizedName().substring("ac.disruption.".length()), pos, world.provider.getDimension());
+			} else DisruptionHandler.instance().generateDisruption(deity, world, pos, players);
+		} else DisruptionHandler.instance().generateDisruption(deity, world, pos, players);
 	}
 
 	@Override

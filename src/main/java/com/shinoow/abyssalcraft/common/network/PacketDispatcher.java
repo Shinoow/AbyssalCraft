@@ -73,6 +73,7 @@ public class PacketDispatcher
 		registerMessage(LifeDrainMessage.class);
 		registerMessage(TransferStackMessage.class);
 		registerMessage(KnowledgeUnlockMessage.class);
+		registerMessage(RitualMessage.class);
 	}
 
 	/**

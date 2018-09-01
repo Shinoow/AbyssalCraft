@@ -22,7 +22,7 @@ public class ACConfig {
 
 	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, particleBlock,
 	particleEntity, hardcoreMode, evilAnimalCreatureType, antiItemDisintegration, smeltingRecipes, purgeMobSpawns,
-	overworldShoggoths, mimicFire, armorPotionEffects, nuclearAntimatterExplosions, syncDataOnBookOpening;
+	overworldShoggoths, mimicFire, armorPotionEffects, nuclearAntimatterExplosions, syncDataOnBookOpening, dreadGrassSpread;
 	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate, acidSpitFrequency;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid;
@@ -33,6 +33,13 @@ public class ACConfig {
 	generateDreadlandsAbyssalniteOre, generateDreadedAbyssalniteOre, generateAbyssalIronOre, generateAbyssalGoldOre,
 	generateAbyssalDiamondOre, generateAbyssalNitreOre, generateAbyssalTinOre, generateAbyssalCopperOre,
 	generatePearlescentCoraliumOre, generateLiquifiedCoraliumOre;
+
+	public static boolean darkstone_brick_slab, darkstone_cobblestone_slab, darkstone_brick_stairs, darkstone_cobblestone_stairs, darkstone_slab,
+	darklands_oak_slab, darklands_oak_stairs, abyssal_stone_brick_slab, abyssal_stone_brick_stairs, coralium_stone_brick_slab, coralium_stone_brick_stairs,
+	dreadstone_brick_slab, dreadstone_brick_stairs, abyssalnite_stone_brick_slab, abyssalnite_stone_brick_stairs, ethaxium_brick_slab, ethaxium_brick_stairs,
+	abyssal_cobblestone_slab, abyssal_cobblestone_stairs, coralium_cobblestone_slab, coralium_cobblestone_stairs, dreadstone_cobblestone_slab,
+	dreadstone_cobblestone_stairs, abyssalnite_cobblestone_slab, abyssalnite_cobblestone_stairs, darkstone_cobblestone_wall, abyssal_cobbblestone_wall,
+	coralium_cobblestone_wall, dreadstone_cobblestone_wall, abyssalnite_cobblestone_wall;
 
 	@Deprecated
 	public static int endAbyssalZombieSpawnWeight;

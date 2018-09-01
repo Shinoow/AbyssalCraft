@@ -1,0 +1,26 @@
+{
+"display": {
+    "icon": {
+      "item": "abyssalcraft:necronomicon"
+    },
+    "title": {
+      "translate": "advancements.abyssalcraft.necro.title"
+    },
+    "description": {
+      "translate": "advancements.abyssalcraft.necro.description"
+    },
+    "background": "abyssalcraft:textures/blocks/ds.png"
+  },
+  "criteria": {
+    "necronomicon": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:necronomicon"
+		  }
+		]
+	  }
+	}
+  }
+}

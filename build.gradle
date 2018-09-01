@@ -13,7 +13,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-		classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.0.9"
+		classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.1.0"
 		classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7"
     }
 }
@@ -51,7 +51,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.4.2705"
+    version = "1.12.2-14.23.4.2747"
     runDir = "run"
     
 	useDepAts = true
@@ -72,7 +72,7 @@ minecraft {
 
 dependencies {
 	
-	deobfCompile "mezz.jei:jei_1.12.2:4.11.0.202"
+	deobfCompile "mezz.jei:jei_1.12.2:4.11.0.206"
 }
 
 version = "${props.mc_version}-${props.ac_version}"
@@ -136,7 +136,7 @@ curseforge {
 		changelog = new File('changelog.html') //must have at least an empty string
 		addArtifact apiJar
 		relations {
-			optionalLibrary 'jei'
+			optionalDependency 'jei'
 		}
 	}
 }

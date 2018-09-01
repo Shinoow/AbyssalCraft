@@ -1,146 +1,146 @@
 #Start of localization file
 
-#Achievements
-achievement.necro=Bienvenido a AbyssalCraft!
-achievement.necro.desc=Has crafteado el Necronomicon, y ahora qué?
+#Advancements
+advancements.abyssalcraft.necro.title=Bienvenido a AbyssalCraft!
+advancements.abyssalcraft.necro.description=Has crafteado el Necronomicon, y ahora qué?
 
-achievement.mineAby=Mejor que los diamantes!
-achievement.mineAby.desc=Has picado algo de Abyssalnite.
+advancements.abyssalcraft.mineaby.title=Mejor que los diamantes!
+advancements.abyssalcraft.mineaby.description=Has picado algo de Abyssalnite.
 
-achievement.mineCorgem=Gemas del oceano
-achievement.mineCorgem.desc=Has Picado algunas gemas de coralium.
+advancements.abyssalcraft.minecorgem.title=Gemas del oceano
+advancements.abyssalcraft.minecorgem.description=Has Picado algunas gemas de coralium.
 
-achievement.shadowGems=Gemas de pura oscuridad
-achievement.shadowGems.desc=Obtuviste una gema oscura.
+advancements.abyssalcraft.shadowgems.title=Gemas de pura oscuridad
+advancements.abyssalcraft.shadowgems.description=Obtuviste una gema oscura.
 
-achievement.mineCor=Cosa verde
-achievement.mineCor.desc=Has picado Abyssal Coralium.
+advancements.abyssalcraft.minecor.title=Cosa verde
+advancements.abyssalcraft.minecor.description=Has picado Abyssal Coralium.
 
-achievement.mineAbyOres=No veo esto en el  overworld?
-achievement.mineAbyOres.desc=Has picado algunos minerales Abyssales.
+advancements.abyssalcraft.mineabyores.title=No veo esto en el  overworld?
+advancements.abyssalcraft.mineabyores.description=Has picado algunos minerales Abyssales.
 
-achievement.mineDread=Minerales del Dreadlands
-achievement.mineDread.desc=Has picado algunos minerales del Dreadlands 
+advancements.abyssalcraft.minedread.title=Minerales del Dreadlands
+advancements.abyssalcraft.minedread.description=Has picado algunos minerales del Dreadlands 
 
-achievement.dreadium=Lingotes libres de peste
-achievement.dreadium.desc=Has transmutado algunos Dreadium
+advancements.abyssalcraft.dreadium.title=Lingotes libres de peste
+advancements.abyssalcraft.dreadium.description=Has transmutado algunos Dreadium
 
-achievement.ethaxium=Que las almas estan hechas de...
-achievement.ethaxium.desc=Has crafteado un lingote de Ethaxium 
+advancements.abyssalcraft.ethaxium.title=Que las almas estan hechas de...
+advancements.abyssalcraft.ethaxium.description=Has crafteado un lingote de Ethaxium 
 
-achievement.killghoul=Has matado un necrófago de las profundidades
-achievement.killghoul.desc=Yay... por que esto es un logro?
+advancements.abyssalcraft.killghoul.title=Has matado un necrófago de las profundidades
+advancements.abyssalcraft.killghoul.description=Yay... por que esto es un logro?
 
-achievement.ghoulhead=La cacería comienza 
-achievement.ghoulhead.desc=Esa es una cabeza grande...
+advancements.abyssalcraft.ghoulhead.title=La cacería comienza 
+advancements.abyssalcraft.ghoulhead.description=Esa es una cabeza grande...
 
-achievement.petehead=Esa cabeza...
-achievement.petehead.desc=Yay, podemos ser amigos por siempre :D
+advancements.abyssalcraft.petehead.title=Esa cabeza...
+advancements.abyssalcraft.petehead.description=Yay, podemos ser amigos por siempre :D
 
-achievement.wilsonhead=El jefe de mal humor
-achievement.wilsonhead.desc=Donde esta mi cuerpo?
+advancements.abyssalcraft.wilsonhead.title=El jefe de mal humor
+advancements.abyssalcraft.wilsonhead.description=Donde esta mi cuerpo?
 
-achievement.orangehead=La cabéza medica
-achievement.orangehead.desc=Su diagnóstico ha vuelto a aparecer, usted tiene Squaids.
+advancements.abyssalcraft.orangehead.title=La cabéza medica
+advancements.abyssalcraft.orangehead.description=Su diagnóstico ha vuelto a aparecer, usted tiene Squaids.
 
-achievement.necrou1=Conocimiento de Wasteland
-achievement.necrou1.desc=Ha elaborado el Necronomicon del Abyssal Wasteland.
+advancements.abyssalcraft.necrou1.title=Conocimiento de Wasteland
+advancements.abyssalcraft.necrou1.description=Ha elaborado el Necronomicon del Abyssal Wasteland.
 
-achievement.necrou2=Conocimiento de lo corrupto
-achievement.necrou2.desc=Ha elaborado el Necronomicon del Dreadlands.
+advancements.abyssalcraft.necrou2.title=Conocimiento de lo corrupto
+advancements.abyssalcraft.necrou2.description=Ha elaborado el Necronomicon del Dreadlands.
 
-achievement.necrou3=Conocimiento de lo desconocido
-achievement.necrou3.desc=Ha elaborado el Necronomicon de Omothol.
+advancements.abyssalcraft.necrou3.title=Conocimiento de lo desconocido
+advancements.abyssalcraft.necrou3.description=Ha elaborado el Necronomicon de Omothol.
 
-achievement.abyssaln=Todo a lo que no estaba destinado a saber
-achievement.abyssaln.desc=Ha elaborado el Abyssalnomicon.J'zahar esta un tanto orgulloso de ti.
+advancements.abyssalcraft.abyssaln.title=Todo a lo que no estaba destinado a saber
+advancements.abyssalcraft.abyssaln.description=Ha elaborado el Abyssalnomicon.J'zahar esta un tanto orgulloso de ti.
 
-achievement.ritual=Las artes oscuras
-achievement.ritual.desc=No tienes idea en lo que te estas metiendo, ¿verdad?
+advancements.abyssalcraft.ritual.title=Las artes oscuras
+advancements.abyssalcraft.ritual.description=No tienes idea en lo que te estas metiendo, ¿verdad?
 
-achievement.ritualSummon=He aquí la ira del Necronomicon!
-achievement.ritualSummon.desc=Realiza un ritual de invocación.
+advancements.abyssalcraft.ritualsummon.title=He aquí la ira del Necronomicon!
+advancements.abyssalcraft.ritualsummon.description=Realiza un ritual de invocación.
 
-achievement.ritualCreate=No hay necesidad de una mesa de trabajo
-achievement.ritualCreate.desc=Realiza un ritual de creación.
+advancements.abyssalcraft.ritualcreate.title=No hay necesidad de una mesa de trabajo
+advancements.abyssalcraft.ritualcreate.description=Realiza un ritual de creación.
 
-achievement.ritualBreed=La reproducción a través de la magia
-achievement.ritualBreed.desc=Realiza un ritual para criadores.
+advancements.abyssalcraft.ritualbreed.title=La reproducción a través de la magia
+advancements.abyssalcraft.ritualbBreed.description=Realiza un ritual para criadores.
 
-achievement.ritualPotion=Alquimia oculta
-achievement.ritualPotion.desc=Realiza un ritual de la poción.
+advancements.abyssalcraft.ritualpotion.title=Alquimia oculta
+advancements.abyssalcraft.ritualpotion.description=Realiza un ritual de la poción.
 
-achievement.ritualPotionAoE=Beacon temporal
-achievement.ritualPotionAoE.desc=Realiza un ritual de una pocion de area con efecto.
+advancements.abyssalcraft.ritualpotionaoe.title=Beacon temporal
+advancements.abyssalcraft.ritualpotionaoe.description=Realiza un ritual de una pocion de area con efecto.
 
-achievement.ritualInfusion=Fusión de energía
-achievement.ritualInfusion.desc=Realiza un ritual de infusión.
+advancements.abyssalcraft.ritualinfusion.title=Fusión de energía
+advancements.abyssalcraft.ritualinfusion.description=Realiza un ritual de infusión.
 
-achievement.enterabyss=Bienvenido a wasteland
-achievement.enterabyss.desc=Entraste a la primera dimensión.
+advancements.abyssalcraft.enterabyss.title=Bienvenido a wasteland
+advancements.abyssalcraft.enterabyss.description=Entraste a la primera dimensión.
 
-achievement.killdragon=Undead undead redead
-achievement.killdragon.desc=Has matado un dragón espectral.
+advancements.abyssalcraft.killdragon.title=Undead undead redead
+advancements.abyssalcraft.killdragon.description=Has matado un dragón espectral.
 
-achievement.summonAsorah=La caída ha regresado!
-achievement.summonAsorah.desc=Has invocado a Asorah, CORRE!!
+advancements.abyssalcraft.summonasorah.title=La caída ha regresado!
+advancements.abyssalcraft.summonasorah.description=Has invocado a Asorah, CORRE!!
 
-achievement.killAsorah=Uno menos, faltan 2
-achievement.killAsorah.desc=Has matado a Asorah... Oblivionaire te odia ahora.
+advancements.abyssalcraft.killasorah.title=Uno menos, faltan 2
+advancements.abyssalcraft.killasorah.description=Has matado a Asorah... Oblivionaire te odia ahora.
 
-achievement.enterdreadlands=Bienvenido al infierno... errm el Dreadlands
-achievement.enterdreadlands.desc=Has entrado a la segunda dimensión.
+advancements.abyssalcraft.enterdreadlands.title=Bienvenido al infierno... errm el Dreadlands
+advancements.abyssalcraft.enterdreadlands.desc=Has entrado a la segunda dimensión.
 
-achievement.killdreadguard=Herir la plaga
-achievement.killdreadguard.desc=Has matado un Dreadguard.
+advancements.abyssalcraft.killdreadguard.title=Herir la plaga
+advancements.abyssalcraft.killdreadguard.description=Has matado un Dreadguard.
 
-achievement.summonChagaroth=La guarida de la Dreadbeast
-achievement.summonChagaroth.desc=Entraste en la guarida de Cha'garoth.
+advancements.abyssalcraft.summonchagaroth.title=La guarida de la Dreadbeast
+advancements.abyssalcraft.summonchagaroth.description=Entraste en la guarida de Cha'garoth.
 
-achievement.killChagaroth=Caída de la Dreadbeast
-achievement.killChagaroth.desc=Has matado a Cha'garoth... buen trabajo.
+advancements.abyssalcraft.killchagaroth.title=Caída de la Dreadbeast
+advancements.abyssalcraft.killchagaroth.description=Has matado a Cha'garoth... buen trabajo.
 
-achievement.enterOmothol=Bienvenido a su fin, enserio.
-achievement.enterOmothol.desc=Has encontrado el Omothol, El Reino de J'zahar.
+advancements.abyssalcraft.enteromothol.title=Bienvenido a su fin, enserio.
+advancements.abyssalcraft.enteromothol.description=Has encontrado el Omothol, El Reino de J'zahar.
 
-achievement.darkRealm=El fondo del pozo.
-achievement.darkRealm.desc=Sólo había que caer, ¿verdad?
+advancements.abyssalcraft.darkrealm.title=El fondo del pozo.
+advancements.abyssalcraft.darkrealm.description=Sólo había que caer, ¿verdad?
 
-achievement.killOmotholelite=Esa cosa era muy fuerte
-achievement.killOmotholelite.desc=Has matado a un ser poderoso del Omothol.
+advancements.abyssalcraft.killomotholelite.title=Esa cosa era muy fuerte
+advancements.abyssalcraft.killomotholelite.description=Has matado a un ser poderoso del Omothol.
 
-achievement.locateJzahar=Aparece J'zahar salvaje
-achievement.locateJzahar.desc=Espero que hayas traído pociones, o algo.
+advancements.abyssalcraft.locatejzahar.title=Aparece J'zahar salvaje
+advancements.abyssalcraft.locatejzahar.description=Espero que hayas traído pociones, o algo.
 
-achievement.killJzahar=Para matar a un dios... si los dioses eran marionetas...
-achievement.killJzahar.desc=¿De verdad cree que puede matar a un Gran Antiguo?
+advancements.abyssalcraft.killjzahar.title=Para matar a un dios... si los dioses eran marionetas...
+advancements.abyssalcraft.killjzahar.description=¿De verdad cree que puede matar a un Gran Antiguo?
 
-achievement.GK1=La llave de los no muertos
-achievement.GK1.desc=Has crafteado una llave de la puerta.
+advancements.abyssalcraft.gk1.title=La llave de los no muertos
+advancements.abyssalcraft.gk1.description=Has crafteado una llave de la puerta.
 
-achievement.findPSDL=Ahora que es una roca extraña
-achievement.findPSDL.desc=Encontrada una infusión de PowerStone del Dreadlands.
+advancements.abyssalcraft.findpsdl.title=Ahora que es una roca extraña
+advancements.abyssalcraft.findpsdl.description=Encontrada una infusión de PowerStone del Dreadlands.
 
-achievement.GK2=La llave del temido
-achievement.GK2.desc=Has crafteado la llave Dreaded de la puerta de Asorah's.
+advancements.abyssalcraft.gk2.title=La llave del temido
+advancements.abyssalcraft.gk2.description=Has crafteado la llave Dreaded de la puerta de Asorah's.
 
-achievement.GK3=La llave antigua
-achievement.GK3.desc=Transmutada la llave de la puerta de Cha'garoth's R'lyehian.
+advancements.abyssalcraft.gk3.title=La llave antigua
+advancements.abyssalcraft.gk3.description=Transmutada la llave de la puerta de Cha'garoth's R'lyehian.
 
-achievement.makeTransmutator=Rompe todas las leyes de la física!
-achievement.makeTransmutator.desc=Has crafteado un Transmutador.
+advancements.abyssalcraft.maketransmutator.title=Rompe todas las leyes de la física!
+advancements.abyssalcraft.maketransmutator.description=Has crafteado un Transmutador.
 
-achievement.makeCrystallizer=cristalizalo todo
-achievement.makeCrystallizer.desc= Has crafteado un Cristalizador.
+advancements.abyssalcraft.makecrystallizer.title=cristalizalo todo
+advancements.abyssalcraft.makecrystallizer.description= Has crafteado un Cristalizador.
 
-achievement.makeMaterializer=Crea tus propios materiales
-achievement.makeMaterializer.desc=Has crafteado un Materializador.
+advancements.abyssalcraft.makematerializer.title=Crea tus propios materiales
+advancements.abyssalcraft.makematerializer.description=Has crafteado un Materializador.
 
-achievement.makeCrystalBag=Almacena todos tus cristales aquí!
-achievement.makeCrystalBag.desc=Has crafteado una bolsa de cristal.Se pueden actualizar.
+advancements.abyssalcraft.makecrystalbag.title=Almacena todos tus cristales aquí!
+advancements.abyssalcraft.makecrystalbag.description=Has crafteado una bolsa de cristal.Se pueden actualizar.
 
-achievement.makeEngraver=Monedas falsas infinitas!
-achievement.makeEngraver.desc=Craftea un Grabador.
+advancements.abyssalcraft.makeengraver.title=Monedas falsas infinitas!
+advancements.abyssalcraft.makeengraver.description=Craftea un Grabador.
 
 #Text
 ac.text.none=Nada
@@ -797,6 +797,8 @@ ac_itemblacklist=Entity Item Blacklist
 ac_itemblacklist.tooltip=Entity Item Blacklist configuration
 ac_silly_settings=Silly Settings
 ac_silly_settings.tooltip=Silly Settings Configuration
+ac_blocks=Blocks
+ac_blocks.tooltip=Block Configuration
 
 #Keybinds
 key.abyssalcraft.category=AbyssalCraft
@@ -1356,14 +1358,17 @@ potion.Cplague=Plaga de Coralium
 potion.effect.Cplague=Poción de Plaga de Coralium
 splash_potion.effect.Cplague=Poción arrojadisa de Plaga de Coralium
 lingering_potion.effect.Cplague=Poción Persistente de la Plaga de Coralium
+tipped_arrow.effect.Cplague=Arrow of Coralium Plague
 potion.Dplague=Plaga de Dread
 potion.effect.Dplague=Poción de Plaga de Dread
 splash_potion.effect.Dplague=Poción arrojadisa de Plaga de Dreadium
 lingering_potion.effect.Dplague=Poción Persistente de Plaga de Dread
+tipped_arrow.effect.Dplague=Arrow of Dread Plague
 potion.Antimatter=Antimateria
 potion.effect.Antimatter=Poción de aniquilación
 splash_potion.effect.Antimatter=Poción arrojadisa de Aniquilación
 lingering_potion.effect.Antimatter=Poción persistente de Aniquilación
+tipped_arrow.effect.Antimatter=Arrow of Annihilation
 
 #Enchantments
 enchantment.abyssalcraft.coralium=Coralium

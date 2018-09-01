@@ -14,13 +14,12 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -34,17 +33,18 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockDreadGrass extends Block implements IGrowable {
-
-	public static final PropertyBool SNOWY = PropertyBool.create("snowy");
+public class BlockDreadGrass extends BlockGrass {
 
 	public BlockDreadGrass() {
-		super(Material.GRASS, MapColor.RED);
-		setDefaultState(blockState.getBaseState().withProperty(SNOWY, Boolean.valueOf(false)));
-		setTickRandomly(true);
 		setCreativeTab(ACTabs.tabBlock);
 		setSoundType(SoundType.PLANT);
 		setHarvestLevel("shovel", 0);
+	}
+
+	@Override
+	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	{
+		return MapColor.RED;
 	}
 
 	@Override
@@ -57,19 +57,23 @@ public class BlockDreadGrass extends Block implements IGrowable {
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (!worldIn.isRemote)
+		if (!worldIn.isRemote) {
+			if (!worldIn.isAreaLoaded(pos, 3)) return;
 			if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getBlock().getLightOpacity(worldIn.getBlockState(pos.up()), worldIn, pos.up()) > 2)
 				worldIn.setBlockState(pos, ACBlocks.dreadlands_dirt.getDefaultState());
-			else if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
+			else
 				for (int i = 0; i < 4; ++i)
 				{
 					BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 					Block block = worldIn.getBlockState(blockpos.up()).getBlock();
 					IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-					if (iblockstate.getBlock() == Blocks.DIRT && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && block.getLightOpacity(worldIn.getBlockState(blockpos.up()), worldIn, blockpos.up()) <= 2)
+					if ((iblockstate.getBlock() == Blocks.GRASS && ACConfig.dreadGrassSpread || iblockstate.getBlock() == ACBlocks.dreadlands_dirt || iblockstate.getBlock() == Blocks.DIRT && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && ACConfig.dreadGrassSpread) && block.getLightOpacity(worldIn.getBlockState(blockpos.up()), worldIn, blockpos.up()) <= 2)
 						worldIn.setBlockState(blockpos, ACBlocks.dreadlands_grass.getDefaultState());
+					else if(ACConfig.dreadGrassSpread && iblockstate.getBlock() == Blocks.DIRT && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.isSideSolid(blockpos, EnumFacing.UP) && !worldIn.getBlockState(blockpos.up()).getMaterial().isLiquid())
+						worldIn.setBlockState(blockpos, ACBlocks.dreadlands_dirt.getDefaultState());
 				}
+		}
 	}
 
 	@Override
@@ -86,19 +90,7 @@ public class BlockDreadGrass extends Block implements IGrowable {
 	@Override
 	public Item getItemDropped(IBlockState state, Random par2Random, int par3)
 	{
-		return Blocks.DIRT.getItemDropped(state, par2Random, par3);
-	}
-
-	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state,
-			boolean isClient) {
-		return true;
-	}
-
-	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos,
-			IBlockState state) {
-		return true;
+		return ACBlocks.dreadlands_dirt.getItemDropped(state, par2Random, par3);
 	}
 
 	@Override
@@ -117,14 +109,7 @@ public class BlockDreadGrass extends Block implements IGrowable {
 				{
 					if (worldIn.isAirBlock(blockpos1))
 						if (rand.nextInt(8) == 0)
-						{
-							BlockFlower.EnumFlowerType blockflower$enumflowertype = worldIn.getBiome(blockpos1).pickRandomFlower(rand, blockpos1);
-							BlockFlower blockflower = blockflower$enumflowertype.getBlockType().getBlock();
-							IBlockState iblockstate = blockflower.getDefaultState().withProperty(blockflower.getTypeProperty(), blockflower$enumflowertype);
-
-							if (blockflower.canBlockStay(worldIn, blockpos1, iblockstate))
-								worldIn.setBlockState(blockpos1, iblockstate, 3);
-						}
+							worldIn.getBiome(blockpos1).plantFlower(worldIn, rand, blockpos1);
 						else
 						{
 							IBlockState iblockstate1 = Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS);
@@ -160,11 +145,5 @@ public class BlockDreadGrass extends Block implements IGrowable {
 	public int getMetaFromState(IBlockState state)
 	{
 		return 0;
-	}
-
-	@Override
-	protected BlockStateContainer createBlockState()
-	{
-		return new BlockStateContainer.Builder(this).add(SNOWY).build();
 	}
 }

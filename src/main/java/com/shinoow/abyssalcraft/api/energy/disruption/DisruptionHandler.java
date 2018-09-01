@@ -93,7 +93,24 @@ public class DisruptionHandler {
 	 * @since 1.5
 	 */
 	public void generateDisruption(DeityType deity, World world, BlockPos pos, List<EntityPlayer> players){
-		if(world.isRemote) return;
+
+		DisruptionEntry disruption = getRandomDisruption(deity, world);
+
+		if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, world, pos, players, disruption)))
+			disruption.disrupt(world, pos, players);
+		AbyssalCraftAPI.getInternalMethodHandler().sendDisruption(deity, disruption.getUnlocalizedName().substring("ac.disruption.".length()), pos, world.provider.getDimension());
+	}
+
+	/**
+	 * Fetches a random Disruption
+	 * @param deity Deity Type
+	 * @param world Current World
+	 * @return A random Disruption, or null if called client-side
+	 *
+	 * @since 1.17.0
+	 */
+	public DisruptionEntry getRandomDisruption(DeityType deity, World world) {
+		if(world.isRemote) return null;
 		List<DisruptionEntry> dis = Lists.newArrayList();
 
 		if(deity == null){
@@ -105,10 +122,6 @@ public class DisruptionHandler {
 				if(entry.getDeity() == deity || entry.getDeity() == null)
 					dis.add(entry);
 
-		DisruptionEntry disruption = dis.get(world.rand.nextInt(dis.size()));
-
-		if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, world, pos, players, disruption)))
-			disruption.disrupt(world, pos, players);
-		AbyssalCraftAPI.getInternalMethodHandler().sendDisruption(deity, disruption.getUnlocalizedName().substring("ac.disruption.".length()), pos, world.provider.getDimension());
+		return dis.get(world.rand.nextInt(dis.size()));
 	}
 }

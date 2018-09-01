@@ -1,20 +1,19 @@
 <ul>
-	<li>The purging ritual now only converts biomes that are Dreadlands biomes</li>
-	<li>Added loot tables to all bosses (empty), Coralium Infested Squid and all Remnant types</li>
-	<li>Statues now have their Deity Type assigned to them again, instead of null</li>
-	<li>Lesser Shoggoths now have an AI for monolith construction, which makes the construction happen more frequently</li>
-	<li>The biome transformation of the Dread Plague only happens to those inflicted with Dread Plague II</li>
-	<li>If two mobs/players/whatevers close to each other both have Dread Plague I, they can infect each other with Dread Plague II</li>
-	<li>If the Hardcode Mode config option is enabled biome transformation will happen regardless of Dread Plague amplifier</li>
-	<li>The purging ritual now checks the surrounding area instead of the position of the altar for nearby Dreadlands biomes when checking if the ritual can be performed</li>
-	<li>The cleansing and corruptions rituals now both do the same thing as the purging when checking if the ritual can be performed</li>
-	<li>Reduced the luminosity of the foliage color in the Coralium Infested Swamp, making it blend better with adjacent biomes</li>
-	<li>Lesser Shoggoths now swim faster (and can move against flowing water)</li>
-	<li>Increased the range of the Corruption, Cleansing and Purging rituals to 8x8 chunks (previously 3x3)</li>
-	<li>Eyes (and other luminous bits) now glow on Lesser Shoggoths</li>
-	<li>The crafting recipe for the Transmutator now works with used Transmutation Gems again</li>
-	<li>Any NBT checks for crafting recipes and/or rituals are now a lot less strict (the placed item needs to contain the recipe item NBT tags)</li>
-	<li>Remapped the Tile Entities to use the proper prefix (stops log warnings on startup)</li>
-	<li>Now runs on Forge 14.23.4.2705</li>
-	<li>Bump to JEI 4.11.0.202</li>
+	<li>Dreadlands Grass can now convert Grass and Dirt into itself (no biome spread, only block transformation, can be disabled in the config)</li>
+	<li>The JEI plugin now loads properly again (tested with 4.11.0.206)</li>
+	<li>If Liquid Coralium flows into the ocean while "Oceanic Coralium Pollution" is disabled, infinite blocks of Cobblestone no longer drops in the water</li>
+	<li>Optimized the Transmutator and Crystallizer (probably barely noticable, but its processing is handled more efficiently internally)</li>
+	<li>Shift-clicking the first output slot of the Crystallizer no longer moves the ouput to the second output slot</li>
+	<li>Added Advancements (a few, more will come in the next update or so) based on the Achievements in previous MC versions</li>
+	<li>Configuration category comments are now properly applied again</li>
+	<li>Added a config category (and a plethora of options) for disabling blocks</li>
+	<li>Creation Ritual now does a proper ItemStack comparison check when replacing the possibly existing Item placed on the ritual altar with the product Item</li>
+	<li>Rituals are now handled server-side (with the exception of particles), and the client is updated on completion</li>
+	<li>Added a event that fires off when a Ritual is failed (allows you to change the Disruption triggered, or do stuff, cancelling defaults back to random Disruption)</li>
+	<li>Fixed numerous instances of sentences using the wrong indefinite article in the en_us lang file (courtesy of mcBegins2Snow)</li>
+	<li>Crafting recipes for Darklands Oak Fence and Dreadlands Fence are no longer overriden by vanilla (Darklands Oak Button and Pressure Plates are still, however)</li>
+	<li>Updated the tooltip for Transmutator and Crystallizer fuel recipes in JEI</li>
+	<li>Added Russian translation (courtesy of AlekseiVoronin)</li>
+	<li>Chinese translations have been updated (courtesy of mcBegins2Snow)</li>
+	<li>Now runs on Forge 14.23.4.2747</li>
 </ul>

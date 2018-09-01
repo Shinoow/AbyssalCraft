@@ -15,7 +15,6 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
-import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -157,6 +156,7 @@ public class ACEvents {
 	 * RitualEvent is fired when Necronomicon Rituals are performed. <br>
 	 * {@link RitualEvent.Pre} is fired before the Ritual is performed.<br>
 	 * {@link RitualEvent.Post} is fired before the Ritual is completed. <br>
+	 * {@link RitualEvent.Failed}} is fired when a Ritual is failed (allows you to change the disruption)<br>
 	 * <br>
 	 * {@link #ritual} contains the ritual being performed. <br>
 	 * {@link #world} contains the world at which this event is occurring. <br>
@@ -211,6 +211,27 @@ public class ACEvents {
 
 			public Post(EntityPlayer player, NecronomiconRitual ritual, World world, BlockPos pos) {
 				super(player, ritual, world, pos);
+			}
+		}
+
+		public static class Failed extends RitualEvent {
+
+			private DisruptionEntry disruption;
+			public Failed(EntityPlayer player, NecronomiconRitual ritual, DisruptionEntry disruption, World world, BlockPos pos) {
+				super(player, ritual, world, pos);
+				this.disruption = disruption;
+			}
+
+			public DisruptionEntry getDisruption() {
+				return disruption;
+			}
+
+			/**
+			 * Change the Disruption triggered when the ritual fails (has no effect if done client-side)
+			 * @param disruption Disruption to trigger
+			 */
+			public void setDisruption(DisruptionEntry disruption) {
+				this.disruption = disruption;
 			}
 		}
 	}

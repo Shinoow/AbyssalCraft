@@ -1,0 +1,37 @@
+{
+"display": {
+    "icon": {
+      "item": "abyssalcraft:dreadore"
+    },
+    "title": {
+      "translate": "advancements.abyssalcraft.minedread.title"
+    },
+    "description": {
+      "translate": "advancements.abyssalcraft.minedread.description"
+    }
+  },
+  "parent": "abyssalcraft:mine_abyssal_ores",
+  "criteria": {
+    "abyssalnite": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:abydreadore"
+		  }
+		]
+	  }
+	},
+	"dreaded_abyssalnite": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:dreadore"
+		  }
+		]
+	  }
+	}
+  },
+  "requirements": [["abyssalnite", "dreaded_abyssalnite"]]
+}

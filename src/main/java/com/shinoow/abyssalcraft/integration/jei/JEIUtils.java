@@ -52,7 +52,7 @@ public class JEIUtils {
 		List<ItemStack> fuelsTMutable = new ArrayList<>();
 		List<ItemStack> fuelsCMutable = new ArrayList<>();
 
-		for(ItemStack stack : registry.getIngredients(ItemStack.class)){
+		for(ItemStack stack : registry.getAllIngredients(ItemStack.class)){
 			addItemStack(stack, FuelType.TRANSMUTATOR, fuelsTMutable);
 			addItemStack(stack, FuelType.CRYSTALLIZER, fuelsCMutable);
 		}

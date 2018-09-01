@@ -42,6 +42,7 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement(I18n.format("ac_worldgen"), "ac_worldgen", WorldGenEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_itemblacklist"), "ac_itemblacklist", ItemBlacklistEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_silly_settings"), "ac_silly_settings", SillySettingsEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_blocks"), "ac_blocks", BlocksEntry.class));
 		return list;
 	}
 
@@ -147,6 +148,18 @@ public class ACConfigGUI extends GuiConfig {
 		@Override
 		protected GuiScreen buildChildScreen(){
 			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("silly_settings")).getChildElements(), "abyssalcraft", "silly_settings", false, false, I18n.format("ac_silly_settings"));
+
+		}
+	}
+	public static class BlocksEntry extends CategoryEntry{
+
+		public BlocksEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("blocks")).getChildElements(), "abyssalcraft", "blocks", false, false, I18n.format("ac_blocks"));
 
 		}
 	}

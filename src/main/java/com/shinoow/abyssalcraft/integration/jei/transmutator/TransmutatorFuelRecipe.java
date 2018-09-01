@@ -12,47 +12,52 @@
 package com.shinoow.abyssalcraft.integration.jei.transmutator;
 
 import java.awt.Color;
+import java.text.NumberFormat;
 import java.util.*;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.base.Preconditions;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 
 public class TransmutatorFuelRecipe implements IRecipeWrapper {
 	@Nonnull
 	private final List<List<ItemStack>> inputs;
 	@Nonnull
-	private final String burnTimeString;
+	private final String smeltCountString;
 	@Nonnull
 	private final IDrawableAnimated flame;
 
 	public TransmutatorFuelRecipe(@Nonnull IGuiHelper guiHelper, @Nonnull Collection<ItemStack> input, int burnTime) {
+		Preconditions.checkArgument(burnTime > 0, "burn time must be greater than 0");
 		List<ItemStack> inputList = new ArrayList<>(input);
 		inputs = Collections.singletonList(inputList);
-		burnTimeString = I18n.translateToLocalFormatted("gui.jei.category.fuel.burnTime", burnTime);
 
+		if (burnTime == 200)
+			smeltCountString = I18n.format("gui.jei.category.fuel.smeltCount.single");
+		else {
+			NumberFormat numberInstance = NumberFormat.getNumberInstance();
+			numberInstance.setMaximumFractionDigits(2);
+			String smeltCount = numberInstance.format(burnTime / 200f);
+			smeltCountString = I18n.format("gui.jei.category.fuel.smeltCount", smeltCount);
+		}
 		ResourceLocation furnaceBackgroundLocation = new ResourceLocation("abyssalcraft", "textures/gui/container/transmutator_NEI.png");
-		IDrawableStatic flameDrawable = guiHelper.createDrawable(furnaceBackgroundLocation, 176, 0, 14, 14);
-		flame = guiHelper.createAnimatedDrawable(flameDrawable, burnTime, IDrawableAnimated.StartDirection.TOP, true);
-	}
-
-	@Nonnull
-	public List<List<ItemStack>> getInputs() {
-		return inputs;
+		flame = guiHelper.drawableBuilder(furnaceBackgroundLocation, 176, 0, 14, 14)
+				.buildAnimated(burnTime, IDrawableAnimated.StartDirection.TOP, true);
 	}
 
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		flame.draw(minecraft, 2, 0);
-		minecraft.fontRenderer.drawString(burnTimeString, 24, 12, Color.gray.getRGB());
+		flame.draw(minecraft, 1, -1);
+		minecraft.fontRenderer.drawString(smeltCountString, 24, 13, Color.gray.getRGB());
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -104,4 +105,15 @@ public interface IInternalMethodHandler {
 	 * @param extra (OPTIONAL) Additional BlockStates the structure can generate on
 	 */
 	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, IBlockState spawnBlock, IBlockState...extra);
+
+	/**
+	 * Fires a message to the client on the completion of a ritual<br>
+	 * <b><i>You should probably NEVER ever call this method at all, ever.<br>
+	 * Seriously, this method is called in NecronomiconRitual to send<br>
+	 * a the ritual to the client while completing it server-side.</i></b>
+	 * @param pos Current position
+	 * @param player Player who completed the ritual
+	 * @param ritual Ritual name
+	 */
+	public void completeRitualClient(BlockPos pos, EntityPlayer player, String ritual);
 }

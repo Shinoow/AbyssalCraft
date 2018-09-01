@@ -52,6 +52,8 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	/** The number of ticks that the current item has been cooking for */
 	public int crystallizerFormTime;
 	private String containerName;
+	private ItemStack[] processingStacks = {ItemStack.EMPTY, ItemStack.EMPTY};
+	private boolean recheck;
 
 	/**
 	 * Returns the number of slots in the inventory.
@@ -78,6 +80,16 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	@Override
 	public ItemStack decrStackSize(int par1, int par2)
 	{
+		if(par1 == 2 || par1 == 3)
+			recheck = true;
+		if(par1 == 0) {
+			ItemStack stack = ItemStackHelper.getAndSplit(crystallizerItemStacks, par1, par2);
+			if(crystallizerItemStacks.get(0).isEmpty()) {
+				processingStacks = new ItemStack[] {ItemStack.EMPTY, ItemStack.EMPTY};
+				recheck = true;
+			}
+			return stack;
+		}
 		return ItemStackHelper.getAndSplit(crystallizerItemStacks, par1, par2);
 	}
 
@@ -98,6 +110,11 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
 	{
 		crystallizerItemStacks.set(par1, par2ItemStack);
+		if(par1 == 0 && processingStacks[0].isEmpty() && !par2ItemStack.isEmpty()) {
+			processingStacks = CrystallizerRecipes.instance().getCrystallizationResult(par2ItemStack);
+			recheck = true;
+		}
+		if(par1 == 2 || par1 == 3) recheck = true;
 
 		if (!par2ItemStack.isEmpty() && par2ItemStack.getCount() > getInventoryStackLimit())
 			par2ItemStack.setCount(getInventoryStackLimit());
@@ -135,6 +152,12 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		crystallizerShapeTime = par1.getShort("ShapeTime");
 		crystallizerFormTime = par1.getShort("FormTime");
 		currentItemShapingTime = getCrystallizationTime(crystallizerItemStacks.get(1));
+		NBTTagCompound nbtItem = par1.getCompoundTag("ProcessingStack");
+		NBTTagCompound nbtItem1 = par1.getCompoundTag("ProcessingStack1");
+		processingStacks = new ItemStack[] {ItemStack.EMPTY, ItemStack.EMPTY};
+		processingStacks[0] = new ItemStack(nbtItem);
+		processingStacks[1] = new ItemStack(nbtItem1);
+		recheck = true;
 
 		if (par1.hasKey("CustomName", 8))
 			containerName = par1.getString("CustomName");
@@ -147,6 +170,14 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		par1.setShort("ShapeTime", (short)crystallizerShapeTime);
 		par1.setShort("FormTime", (short)crystallizerFormTime);
 		ItemStackHelper.saveAllItems(par1, crystallizerItemStacks);
+		NBTTagCompound nbtItem = new NBTTagCompound();
+		if(!processingStacks[0].isEmpty())
+			processingStacks[0].writeToNBT(nbtItem);
+		par1.setTag("ProcessingStack", nbtItem);
+		NBTTagCompound nbtItem1 = new NBTTagCompound();
+		if(!processingStacks[1].isEmpty())
+			processingStacks[1].writeToNBT(nbtItem1);
+		par1.setTag("ProcessingStack1", nbtItem1);
 
 		if (hasCustomName())
 			par1.setString("CustomName", containerName);
@@ -207,19 +238,20 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		{
 			if (crystallizerShapeTime == 0 && canCrystallize())
 			{
-				currentItemShapingTime = crystallizerShapeTime = getCrystallizationTime(crystallizerItemStacks.get(1));
+				ItemStack stack = crystallizerItemStacks.get(1);
+				currentItemShapingTime = crystallizerShapeTime = getCrystallizationTime(stack);
 
 				if (crystallizerShapeTime > 0)
 				{
 					flag1 = true;
 
-					if (!crystallizerItemStacks.get(1).isEmpty())
+					if (!stack.isEmpty())
 					{
-						Item item = crystallizerItemStacks.get(1).getItem();
-						crystallizerItemStacks.get(1).shrink(1);
+						Item item = stack.getItem();
+						stack.shrink(1);
 
-						if (crystallizerItemStacks.get(1).isEmpty())
-							crystallizerItemStacks.set(1, item.getContainerItem(crystallizerItemStacks.get(1)));
+						if (stack.isEmpty())
+							crystallizerItemStacks.set(1, item.getContainerItem(stack));
 					}
 				}
 			}
@@ -253,31 +285,46 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	 */
 	private boolean canCrystallize()
 	{
-		if (crystallizerItemStacks.get(0).isEmpty() || CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks.get(0)) == null)
+		if (processingStacks[0].isEmpty())
 			return false;
 		else
 		{
-			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks.get(0));
+			if(recheck) {
+				ItemStack stack = crystallizerItemStacks.get(2), stack1 = crystallizerItemStacks.get(3);
 
-			ItemStack stack = crystallizerItemStacks.get(2), stack1 = crystallizerItemStacks.get(3);
-
-			if(itemstack[0].isEmpty() && itemstack[1].isEmpty() || itemstack[0].isEmpty()) return false;
-			if(stack.isEmpty() && stack1.isEmpty()) return true;
-			if(itemstack[1].isEmpty()){
-				if(stack.isEmpty()) return true;
-				if(!stack.isItemEqual(itemstack[0])) return false;
-
-				int result = stack.getCount() + itemstack[0].getCount();
-				return result <= getInventoryStackLimit() && result <= stack.getMaxStackSize();
-			} else {
+				if(processingStacks[0].isEmpty() && processingStacks[1].isEmpty() || processingStacks[0].isEmpty()) return false;
 				if(stack.isEmpty() && stack1.isEmpty()) return true;
-				if(!stack.isEmpty() && !stack.isItemEqual(itemstack[0])) return false;
-				if(!stack1.isEmpty() && !stack1.isItemEqual(itemstack[1])) return false;
+				if(processingStacks[1].isEmpty()){
+					if(stack.isEmpty()) {
+						recheck = false;
+						return true;
+					}
+					if(!stack.isItemEqual(processingStacks[0])) return false;
 
-				int result = stack.getCount() + itemstack[0].getCount();
-				int result2 = stack1.getCount() + itemstack[1].getCount();
-				return result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && result <= stack.getMaxStackSize() && result2 <= stack1.getMaxStackSize();
+					int result = stack.getCount() + processingStacks[0].getCount();
+					if(result <= getInventoryStackLimit() && result <= stack.getMaxStackSize()) {
+						recheck = false;
+						return true;
+					}
+					return false;
+				} else {
+					if(stack.isEmpty() && stack1.isEmpty()) {
+						recheck = false;
+						return true;
+					}
+					if(!stack.isEmpty() && !stack.isItemEqual(processingStacks[0])) return false;
+					if(!stack1.isEmpty() && !stack1.isItemEqual(processingStacks[1])) return false;
+
+					int result = stack.getCount() + processingStacks[0].getCount();
+					int result2 = stack1.getCount() + processingStacks[1].getCount();
+					if(result > stack.getMaxStackSize() || result2 > stack1.getMaxStackSize()) return false;
+					if(result <= getInventoryStackLimit() && result2 <= getInventoryStackLimit() && result <= stack.getMaxStackSize() && result2 <= stack1.getMaxStackSize()) {
+						recheck = false;
+						return true;
+					}
+				}
 			}
+			return true;
 		}
 	}
 
@@ -288,22 +335,29 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	{
 		if (canCrystallize())
 		{
-			ItemStack[] itemstack = CrystallizerRecipes.instance().getCrystallizationResult(crystallizerItemStacks.get(0));
+			recheck = true;
+			ItemStack[] itemstack = processingStacks;
+			ItemStack stack = crystallizerItemStacks.get(2);
+			ItemStack stack1 = crystallizerItemStacks.get(3);
+			ItemStack stack2 = crystallizerItemStacks.get(0);
 
-			if (crystallizerItemStacks.get(2).isEmpty())
+			if (stack.isEmpty())
 				crystallizerItemStacks.set(2, itemstack[0].copy());
-			else if (crystallizerItemStacks.get(2).getItem() == itemstack[0].getItem())
-				crystallizerItemStacks.get(2).grow(itemstack[0].getCount());
+			else if (stack.getItem() == itemstack[0].getItem())
+				stack.grow(itemstack[0].getCount());
 			if(!itemstack[1].isEmpty())
-				if (crystallizerItemStacks.get(3).isEmpty())
+				if (stack1.isEmpty())
 					crystallizerItemStacks.set(3, itemstack[1].copy());
-				else if (crystallizerItemStacks.get(3).getItem() == itemstack[1].getItem())
-					crystallizerItemStacks.get(3).grow(itemstack[1].getCount());
+				else if (stack1.getItem() == itemstack[1].getItem())
+					stack1.grow(itemstack[1].getCount());
 
-			crystallizerItemStacks.get(0).shrink(1);
+			stack2.shrink(1);
 
-			if (crystallizerItemStacks.get(0).getCount() <= 0)
+			if (stack2.getCount() <= 0) {
 				crystallizerItemStacks.set(0, ItemStack.EMPTY);
+				processingStacks = new ItemStack[] {ItemStack.EMPTY, ItemStack.EMPTY};
+			}
+
 		}
 	}
 

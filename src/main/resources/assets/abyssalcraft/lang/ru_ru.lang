@@ -1,147 +1,147 @@
 #ru_ru.lang file [AbyssalCraft-1.12.2-1.9.4.11]. Translated by AlekseiVoronin
 #Start of localization file
 
-#Achievements
-achievement.necro=Добро пожаловать в AbyssalCraft!
-achievement.necro.desc=Изготовлен Некрономикон, и что теперь?
+#Advancements
+advancements.abyssalcraft.necro.title=Добро пожаловать в AbyssalCraft!
+advancements.abyssalcraft.necro.description=Изготовлен Некрономикон, и что теперь?
 
-achievement.mineAby=Получше, чем алмазы!
-achievement.mineAby.desc=Добыто несколько Абиссальнитов.
+advancements.abyssalcraft.mineaby.title=Получше, чем алмазы!
+advancements.abyssalcraft.mineaby.description=Добыто несколько Абиссальнитов.
 
-achievement.mineCorgem=Жемчужины океана
-achievement.mineCorgem.desc=Добыто несколько Коралловых жемчужин.
+advancements.abyssalcraft.minecorgem.title=Жемчужины океана
+advancements.abyssalcraft.minecorgem.description=Добыто несколько Коралловых жемчужин.
 
-achievement.shadowGems=Жемчужины чистой тьмы
-achievement.shadowGems.desc=Получить Тёмную жемчужину.
+advancements.abyssalcraft.shadowgems.title=Жемчужины чистой тьмы
+advancements.abyssalcraft.shadowgems.description=Получить Тёмную жемчужину.
 
-achievement.mineCor=Зелёный посох
-achievement.mineCor.desc=Добыто несколько Бездного коралла.
+advancements.abyssalcraft.minecor.title=Зелёный посох
+advancements.abyssalcraft.minecor.description=Добыто несколько Бездного коралла.
 
-achievement.mineAbyOres=Не их ли я видел в загробном мире?
-achievement.mineAbyOres.desc=Добыто несколько Бездных руд.
+advancements.abyssalcraft.mineabyores.title=Не их ли я видел в загробном мире?
+advancements.abyssalcraft.mineabyores.description=Добыто несколько Бездных руд.
 
-achievement.mineDread=Минералы из Ужасных земель
-achievement.mineDread.desc=Добыто несколько Руд из Ужасных земель.
+advancements.abyssalcraft.minedread.title=Минералы из Ужасных земель
+advancements.abyssalcraft.minedread.description=Добыто несколько Руд из Ужасных земель.
 
-achievement.dreadium=Чумо-бесплатные слитки
-achievement.dreadium.desc=Превратить несколько Страхолитов.
+advancements.abyssalcraft.dreadium.title=Чумо-бесплатные слитки
+advancements.abyssalcraft.dreadium.description=Превратить несколько Страхолитов.
 
-achievement.ethaxium=Какие души сделаны из...
-achievement.ethaxium.desc=Изготовлен Слиток этаксия.
+advancements.abyssalcraft.ethaxium.title=Какие души сделаны из...
+advancements.abyssalcraft.ethaxium.description=Изготовлен Слиток этаксия.
 
-achievement.killghoul=Убить глубинного гуля
-achievement.killghoul.desc=Ура... почему это достижение?
+advancements.abyssalcraft.killghoul.title=Убить глубинного гуля
+advancements.abyssalcraft.killghoul.description=Ура... почему это достижение?
 
-achievement.ghoulhead=Начнётся охота
-achievement.ghoulhead.desc=Эта одна большая голова...
+advancements.abyssalcraft.ghoulhead.title=Начнётся охота
+advancements.abyssalcraft.ghoulhead.description=Эта одна большая голова...
 
-achievement.petehead=Эта голова...
-achievement.petehead.desc=Ура, мы можем быть друзьями навсегда :D
+advancements.abyssalcraft.petehead.title=Эта голова...
+advancements.abyssalcraft.petehead.description=Ура, мы можем быть друзьями навсегда :D
 
-achievement.wilsonhead=Сердитая голова
-achievement.wilsonhead.desc=Где моё тело?
+advancements.abyssalcraft.wilsonhead.title=Сердитая голова
+advancements.abyssalcraft.wilsonhead.description=Где моё тело?
 
-achievement.orangehead=Медицинская голова
-achievement.orangehead.desc=Твой диагнос вернулся, у тебя есть отделение.
+advancements.abyssalcraft.orangehead.title=Медицинская голова
+advancements.abyssalcraft.orangehead.description=Твой диагнос вернулся, у тебя есть отделение.
 
-achievement.necrou1=Знания пустоши
-achievement.necrou1.desc=Изготовлен Некрономикон из Абиссальномикона.
+advancements.abyssalcraft.necrou1.title=Знания пустоши
+advancements.abyssalcraft.necrou1.description=Изготовлен Некрономикон из Абиссальномикона.
 
-achievement.necrou2=Знания испорченного
-achievement.necrou2.desc=Изготовлен Некрономикон из Ужасных земель.
+advancements.abyssalcraft.necrou2.title=Знания испорченного
+advancements.abyssalcraft.necrou2.description=Изготовлен Некрономикон из Ужасных земель.
 
-achievement.necrou3=Знания неизвестного
-achievement.necrou3.desc=Изготовлен Некрономикон из Омотула
+advancements.abyssalcraft.necrou3.title=Знания неизвестного
+advancements.abyssalcraft.necrou3.description=Изготовлен Некрономикон из Омотула
 
-achievement.abyssaln=Всё, что тебе не суждено было знать
-achievement.abyssaln.desc=Изготовлен Абиссальномикон. Джа'зар немного гордится тобой.
+advancements.abyssalcraft.abyssaln.title=Всё, что тебе не суждено было знать
+advancements.abyssalcraft.abyssaln.description=Изготовлен Абиссальномикон. Джа'зар немного гордится тобой.
 
-achievement.ritual=Тёмные силы
-achievement.ritual.desc=Ты даже не представляешь во что ввязываешься, не так ли?
+advancements.abyssalcraft.ritual.title=Тёмные силы
+advancements.abyssalcraft.ritual.description=Ты даже не представляешь во что ввязываешься, не так ли?
 
-achievement.ritualSummon=Узри ярость Некрономикона!
-achievement.ritualSummon.desc=Провести Рутиал призыва.
+advancements.abyssalcraft.ritualsummon.title=Узри ярость Некрономикона!
+advancements.abyssalcraft.ritualsummon.description=Провести Рутиал призыва.
 
-achievement.ritualCreate=Верстак не обязателен
-achievement.ritualCreate.desc=Провести Ритуал создания.
+advancements.abyssalcraft.ritualcreate.title=Верстак не обязателен
+advancements.abyssalcraft.ritualcreate.description=Провести Ритуал создания.
 
-achievement.ritualBreed=Воспроизведение с помощью магии
-achievement.ritualBreed.desc=Провести Ритуал племени.
+advancements.abyssalcraft.ritualbreed.title=Воспроизведение с помощью магии
+advancements.abyssalcraft.ritualbreed.description=Провести Ритуал племени.
 
-achievement.ritualPotion=Оккультная алхимия
-achievement.ritualPotion.desc=Провести Ритуал зелья.
+advancements.abyssalcraft.ritualpotion.title=Оккультная алхимия
+advancements.abyssalcraft.ritualpotion.description=Провести Ритуал зелья.
 
-achievement.ritualPotionAoE=Временный маяк
-achievement.ritualPotionAoE.desc=Провести Ритуал зелья в зоне действия.
+advancements.abyssalcraft.ritualpotionaoe.title=Временный маяк
+advancements.abyssalcraft.ritualpotionaoe.description=Провести Ритуал зелья в зоне действия.
 
-achievement.ritualInfusion=Объединение силы
-achievement.ritualInfusion.desc=Провести Ритуал наполнения.
+advancements.abyssalcraft.ritualinfusion.title=Объединение силы
+advancements.abyssalcraft.ritualinfusion.description=Провести Ритуал наполнения.
 
-achievement.enterabyss=Добро пожаловать в Пустошь 
-achievement.enterabyss.desc=Войти в 1-ое измерение.
+advancements.abyssalcraft.enterabyss.title=Добро пожаловать в Пустошь 
+advancements.abyssalcraft.enterabyss.description=Войти в 1-ое измерение.
 
-achievement.killdragon=Неживой, мёртвый, восставший
-achievement.killdragon.desc=Ты убил Призрачного дракона.
+advancements.abyssalcraft.killdragon.title=Неживой, мёртвый, восставший
+advancements.abyssalcraft.killdragon.description=Ты убил Призрачного дракона.
 
-achievement.summonAsorah=Падшие вернулись!
-achievement.summonAsorah.desc=Ты призвал Асору, Беги!!
+advancements.abyssalcraft.summonasorah.title=Падшие вернулись!
+advancements.abyssalcraft.summonasorah.description=Ты призвал Асору, Беги!!
 
-achievement.killAsorah=Минус один, осталось ещё 2
-achievement.killAsorah.desc=Ты убил Асору... Забвенец теперь тебя ненавидит.
+advancements.abyssalcraft.killasorah.title=Минус один, осталось ещё 2
+advancements.abyssalcraft.killasorah.description=Ты убил Асору... Забвенец теперь тебя ненавидит.
 
-achievement.enterdreadlands=Добро пожаловать в Ад... эмм в Ужасные земли
-achievement.enterdreadlands.desc=Войти во 2-ое измерение.
+advancements.abyssalcraft.enterdreadlands.title=Добро пожаловать в Ад... эмм в Ужасные земли
+advancements.abyssalcraft.enterdreadlands.description=Войти во 2-ое измерение.
 
-achievement.killdreadguard=Покарать чуму
-achievement.killdreadguard.desc=Ты убил Ужасного стража.
+advancements.abyssalcraft.killdreadguard.title=Покарать чуму
+advancements.abyssalcraft.killdreadguard.description=Ты убил Ужасного стража.
 
-achievement.summonChagaroth=Логово ужасного зверя
-achievement.summonChagaroth.desc=Войти в логово Ча'гарота.
+advancements.abyssalcraft.summonchagaroth.title=Логово ужасного зверя
+advancements.abyssalcraft.summonchagaroth.description=Войти в логово Ча'гарота.
 
-achievement.killChagaroth=Падение ужасного зверя
-achievement.killChagaroth.desc=Ты убил Ча'гарота... прелестная работа.
+advancements.abyssalcraft.killchagaroth.title=Падение ужасного зверя
+advancements.abyssalcraft.killchagaroth.description=Ты убил Ча'гарота... прелестная работа.
 
-achievement.enterOmothol=Добро пожаловать в свой конец, серьёзно.
-achievement.enterOmothol.desc=Ты достиг Омотула, царство Джа'зара.
+advancements.abyssalcraft.enteromothol.title=Добро пожаловать в свой конец, серьёзно.
+advancements.abyssalcraft.enteromothol.description=Ты достиг Омотула, царство Джа'зара.
 
-achievement.darkRealm=Дно ямы
-achievement.darkRealm.desc=Тебе нужно было просто упасть, не так ли?
+advancements.abyssalcraft.darkrealm.title=Дно ямы
+advancements.abyssalcraft.darkrealm.description=Тебе нужно было просто упасть, не так ли?
 
-achievement.killOmotholelite=Эта штука была чертовски сильна
-achievement.killOmotholelite.desc=Ты убил могущественное существо из Омотула.
+advancements.abyssalcraft.killomotholelite.title=Эта штука была чертовски сильна
+advancements.abyssalcraft.killomotholelite.description=Ты убил могущественное существо из Омотула.
 
-achievement.locateJzahar=Появляется дикий Джа'зар
-achievement.locateJzahar.desc=Я надеюсь, ты принёс зелья или ещё кое-что.
+advancements.abyssalcraft.locatejzahar.title=Появляется дикий Джа'зар
+advancements.abyssalcraft.locatejzahar.description=Я надеюсь, ты принёс зелья или ещё кое-что.
 
-achievement.killJzahar=Чтобы убить Бога... если боги были марионетками...
-achievement.killJzahar.desc=Неужели ты думал, что сможешь убить Великого древнего?
+advancements.abyssalcraft.killjzahar.title=Чтобы убить Бога... если боги были марионетками...
+advancements.abyssalcraft.killjzahar.description=Неужели ты думал, что сможешь убить Великого древнего?
 
-achievement.GK1=Ключ нежити
-achievement.GK1.desc=Изготовлен Портальный ключ.
+advancements.abyssalcraft.gk1.title=Ключ нежити
+advancements.abyssalcraft.gk1.description=Изготовлен Портальный ключ.
 
-achievement.findPSDL=Теперь, это единственный Странный камень
-achievement.findPSDL.desc=Обнаружить в Ужасных землях, Наполненный камень силы.
+advancements.abyssalcraft.findpsdl.title=Теперь, это единственный Странный камень
+advancements.abyssalcraft.findpsdl.description=Обнаружить в Ужасных землях, Наполненный камень силы.
 
-achievement.GK2=Ужасный ключ
-achievement.GK2.desc=Изготовлен Ужасный портальный ключ Кору.
+advancements.abyssalcraft.gk2.title=Ужасный ключ
+advancements.abyssalcraft.gk2.description=Изготовлен Ужасный портальный ключ Кору.
 
-achievement.GK3=Древний ключ
-achievement.GK3.desc=Превратить неизвестный Портальный ключ.
+advancements.abyssalcraft.gk3.title=Древний ключ
+advancements.abyssalcraft.gk3.description=Превратить неизвестный Портальный ключ.
 
-achievement.makeTransmutator=Нарушить все законы физики!
-achievement.makeTransmutator.desc=Изготовлен преобразователь.
+advancements.abyssalcraft.maketransmutator.title=Нарушить все законы физики!
+advancements.abyssalcraft.maketransmutator.description=Изготовлен преобразователь.
 
-achievement.makeCrystallizer=Кристаллизовать всё
-achievement.makeCrystallizer.desc=Изготовлен кристаллизатор.
+advancements.abyssalcraft.makecrystallizer.title=Кристаллизовать всё
+advancements.abyssalcraft.makecrystallizer.description=Изготовлен кристаллизатор.
 
-achievement.makeMaterializer=Создавай собственные материалы
-achievement.makeMaterializer.desc=Изготовлен материализатор.
+advancements.abyssalcraft.makematerializer.title=Создавай собственные материалы
+advancements.abyssalcraft.makematerializer.description=Изготовлен материализатор.
 
-achievement.makeCrystalBag=Сохрани все свои кристаллы
-achievement.makeCrystalBag.desc=Изготовлен хрустальный мешок. Они могут быть улучшены.
+advancements.abyssalcraft.makecrystalbag.title=Сохрани все свои кристаллы
+advancements.abyssalcraft.makecrystalbag.description=Изготовлен хрустальный мешок. Они могут быть улучшены.
 
-achievement.makeEngraver=Бесконечные поддельные монеты!
-achievement.makeEngraver.desc=Изготовлен гравировщик.
+advancements.abyssalcraft.makeengraver.title=Бесконечные поддельные монеты!
+advancements.abyssalcraft.makeengraver.description=Изготовлен гравировщик.
 
 #Text
 ac.text.none=Нет
@@ -798,6 +798,8 @@ ac_itemblacklist=Чёрный список предметов существ
 ac_itemblacklist.tooltip=Настройки чёрного списка предметов существ
 ac_silly_settings=Нелепые настройки
 ac_silly_settings.tooltip=Настройки нелепых настроек
+ac_blocks=Blocks
+ac_blocks.tooltip=Block Configuration
 
 #Keybinds
 key.abyssalcraft.category=AbyssalCraft
@@ -1357,14 +1359,17 @@ potion.Cplague=Коралловая чума
 potion.effect.Cplague=Зелье коралловой чумы
 splash_potion.effect.Cplague=Взрывное зелье от коралловой чумы
 lingering_potion.effect.Cplague=Затяжное зелье от коралловой чумы
+tipped_arrow.effect.Cplague=Arrow of Coralium Plague
 potion.Dplague=Ужасная чума
 potion.effect.Dplague=Зелье ужасной чумы
 splash_potion.effect.Dplague=Взрывное зелье от ужасной чумы
 lingering_potion.effect.Dplague=Затяжное зелье от ужасной чумы
+tipped_arrow.effect.Dplague=Arrow of Dread Plague
 potion.Antimatter=Антивещ-во
 potion.effect.Antimatter=Зелье уничтожения
 splash_potion.effect.Antimatter=Взрывное зелье уничтожения
 lingering_potion.effect.Antimatter=Затяжное зелье уничтожения
+tipped_arrow.effect.Antimatter=Arrow of Annihilation
 
 #Enchantments
 enchantment.abyssalcraft.coralium=Коралл

@@ -1,0 +1,47 @@
+{
+"display": {
+    "icon": {
+      "item": "abyssalcraft:abycorore"
+    },
+    "title": {
+      "translate": "advancements.abyssalcraft.minecor.title"
+    },
+    "description": {
+      "translate": "advancements.abyssalcraft.minecor.description"
+    }
+  },
+  "parent": "abyssalcraft:shadow_gems",
+  "criteria": {
+    "normal": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:abycorore"
+		  }
+		]
+	  }
+	},
+	"pearlescent": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:abypcorore"
+		  }
+		]
+	  }
+	},
+	"liquified": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:abylcorore"
+		  }
+		]
+	  }
+	}
+  },
+  "requirements": [["normal", "pearlescent", "liquified"]]
+}

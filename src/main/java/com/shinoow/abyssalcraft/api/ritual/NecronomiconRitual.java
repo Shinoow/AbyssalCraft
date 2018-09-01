@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.ritual;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
@@ -218,7 +220,10 @@ public abstract class NecronomiconRitual {
 	 * @param player Player who performed the ritual
 	 */
 	public void completeRitual(World world, BlockPos pos, EntityPlayer player){
-		if(!world.isRemote) completeRitualServer(world, pos, player);
+		if(!world.isRemote) {
+			completeRitualServer(world, pos, player);
+			AbyssalCraftAPI.getInternalMethodHandler().completeRitualClient(pos, player, unlocalizedName);
+		}
 		if(world.isRemote) completeRitualClient(world, pos, player);
 	}
 

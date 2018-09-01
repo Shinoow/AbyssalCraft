@@ -1,0 +1,26 @@
+{
+"display": {
+    "icon": {
+      "item": "abyssalcraft:abyore"
+    },
+    "title": {
+      "translate": "advancements.abyssalcraft.mineaby.title"
+    },
+    "description": {
+      "translate": "advancements.abyssalcraft.mineaby.description"
+    }
+  },
+  "parent": "abyssalcraft:root",
+  "criteria": {
+    "necronomicon": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:abyore"
+		  }
+		]
+	  }
+	}
+  }
+}

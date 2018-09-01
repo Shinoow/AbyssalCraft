@@ -1,0 +1,26 @@
+{
+"display": {
+    "icon": {
+      "item": "abyssalcraft:dreadiumingot"
+    },
+    "title": {
+      "translate": "advancements.abyssalcraft.dreadium.title"
+    },
+    "description": {
+      "translate": "advancements.abyssalcraft.dreadium.description"
+    }
+  },
+  "parent": "abyssalcraft:mine_dreadlands_ores",
+  "criteria": {
+    "abyssalnite": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+	    "items": [
+		  {
+		    "item": "abyssalcraft:dreadiumingot"
+		  }
+		]
+	  }
+	}
+  }
+}
