@@ -798,6 +798,8 @@ ac_itemblacklist=物品实体黑名单
 ac_itemblacklist.tooltip=物品实体黑名单设置
 ac_silly_settings=杂项
 ac_silly_settings.tooltip=杂项设置
+ac_blocks=方块
+ac_blocks.tooltip=方块设置
 
 #键位
 key.abyssalcraft.category=深渊国度
