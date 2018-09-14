@@ -84,8 +84,10 @@ public class KnowledgeEventHandler {
 
 	@SubscribeEvent
 	public void onEntityJoin(EntityJoinWorldEvent event){
-		if(event.getEntity() instanceof EntityPlayerMP)
+		if(event.getEntity() instanceof EntityPlayerMP) {
+			NecroDataCapability.getCap((EntityPlayer)event.getEntity()).setLastSyncTime(System.currentTimeMillis());
 			PacketDispatcher.sendTo(new NecroDataCapMessage((EntityPlayer)event.getEntity()), (EntityPlayerMP) event.getEntity());
+		}
 	}
 
 	@SubscribeEvent

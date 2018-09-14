@@ -50,5 +50,6 @@ public class NecroDataCapMessage extends AbstractClientMessage<NecroDataCapMessa
 		INecroDataCapability cap = NecroDataCapability.getCap(player);
 
 		NecroDataCapabilityStorage.instance.readNBT(NecroDataCapabilityProvider.NECRO_DATA_CAP, cap, null, properties);
+		cap.setLastSyncTime(System.currentTimeMillis());
 	}
 }

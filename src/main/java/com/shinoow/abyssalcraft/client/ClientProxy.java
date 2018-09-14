@@ -64,7 +64,7 @@ public class ClientProxy extends CommonProxy {
 
 	private static final ModelDreadiumSamuraiArmor chestPlate = new ModelDreadiumSamuraiArmor(1.0f);
 	private static final ModelDreadiumSamuraiArmor leggings = new ModelDreadiumSamuraiArmor(0.5f);
-	public static KeyBinding staff_mode;
+	public static KeyBinding staff_mode, use_cage;
 
 	@Override
 	public void preInit() {
@@ -129,8 +129,10 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new AbyssalCraftClientEventHooks());
 
 		staff_mode = new KeyBinding("key.staff_mode.desc", Keyboard.KEY_M, "key.abyssalcraft.category");
+		use_cage = new KeyBinding("key.use_cage.desc", Keyboard.KEY_N, "key.abyssalcraft.category");
 
 		ClientRegistry.registerKeyBinding(staff_mode);
+		ClientRegistry.registerKeyBinding(use_cage);
 	}
 
 	@Override

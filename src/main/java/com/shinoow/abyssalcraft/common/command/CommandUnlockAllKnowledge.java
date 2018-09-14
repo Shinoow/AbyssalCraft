@@ -51,6 +51,7 @@ public class CommandUnlockAllKnowledge extends CommandBase {
 				sender.sendMessage(new TextComponentString("All knowledge has been re-locked... kinda!"));
 			}
 
+			cap.setLastSyncTime(System.currentTimeMillis());
 			PacketDispatcher.sendTo(new NecroDataCapMessage((EntityPlayer) sender), (EntityPlayerMP)sender);
 		}
 	}

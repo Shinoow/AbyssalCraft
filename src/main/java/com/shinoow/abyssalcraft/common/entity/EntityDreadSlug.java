@@ -47,7 +47,7 @@ public class EntityDreadSlug extends EntityThrowable {
 			for (Entity entity : getPassengers()){
 				entity.copyLocationAndAnglesFrom(this);
 				entity.motionX += rand.nextGaussian();
-				entity.motionY += 0.5D;
+				entity.motionY += 0.7D;
 				entity.motionZ += rand.nextGaussian();
 			}
 			setDead();

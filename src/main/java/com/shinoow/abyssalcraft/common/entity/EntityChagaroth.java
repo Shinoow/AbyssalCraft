@@ -530,7 +530,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 
 		if(!world.isRemote && isEntityAlive())
 		{
-			if(ticksExisted % 800 == 0)
+			if(ticksExisted % 600 == 0)
 				if(rand.nextBoolean()) {
 					EntityDreadSpawn mob = new EntityDreadSpawn(world);
 					mob.copyLocationAndAnglesFrom(this);
@@ -543,7 +543,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 					spawn.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 				}
 
-			if(ticksExisted % 1600 == 0)
+			if(ticksExisted % 1200 == 0)
 			{
 				EntityChagarothFist fist = new EntityChagarothFist(world);
 				fist.copyLocationAndAnglesFrom(this);

@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.NecroDataCapMessage;
+import com.shinoow.abyssalcraft.common.network.client.ShouldSyncMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -72,7 +72,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 			par1ItemStack.getTagCompound().setString("owner", par3EntityPlayer.getName());
 			if(!par3EntityPlayer.isSneaking()){
 				if(!par2World.isRemote && ACConfig.syncDataOnBookOpening)
-					PacketDispatcher.sendTo(new NecroDataCapMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
+					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
 				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
 				return new ActionResult(EnumActionResult.SUCCESS, par1ItemStack);
 			}
@@ -80,7 +80,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		if(par1ItemStack.getTagCompound().getString("owner").equals(par3EntityPlayer.getName())){
 			if(!par3EntityPlayer.isSneaking()){
 				if(!par2World.isRemote && ACConfig.syncDataOnBookOpening)
-					PacketDispatcher.sendTo(new NecroDataCapMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
+					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
 				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
 				return new ActionResult(EnumActionResult.SUCCESS, par1ItemStack);
 			}

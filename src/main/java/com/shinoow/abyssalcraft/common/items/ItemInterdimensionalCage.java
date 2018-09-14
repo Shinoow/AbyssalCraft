@@ -15,6 +15,7 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
+import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.InterdimensionalCageMessage;
@@ -30,6 +31,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -129,6 +131,7 @@ public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyCont
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("EntityName"))
 			l.add("Captured Entity: "+is.getTagCompound().getString("EntityName"));
+		l.add("Press "+TextFormatting.GOLD+ClientProxy.use_cage.getDisplayName()+TextFormatting.GRAY+" to capture a mob");
 	}
 
 	@Override

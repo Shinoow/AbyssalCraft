@@ -31,6 +31,8 @@ public class NecroDataCapability implements INecroDataCapability {
 
 	boolean hasAllKnowledge;
 
+	long lastSyncTime = 0;
+
 	public static INecroDataCapability getCap(EntityPlayer player){
 		return player.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null);
 	}
@@ -90,6 +92,11 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
+	public void setLastSyncTime(long time) {
+		lastSyncTime = time;
+	}
+
+	@Override
 	public List<String> getBiomeTriggers() {
 
 		return biome_triggers;
@@ -137,6 +144,12 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
+	public long getLastSyncTime() {
+
+		return lastSyncTime;
+	}
+
+	@Override
 	public void copy(INecroDataCapability cap) {
 
 		biome_triggers = cap.getBiomeTriggers();
@@ -147,5 +160,6 @@ public class NecroDataCapability implements INecroDataCapability {
 		whisper_triggers = cap.getWhisperTriggers();
 		misc_triggers = cap.getMiscTriggers();
 		hasAllKnowledge = cap.hasUnlockedAllKnowledge();
+		lastSyncTime = cap.getLastSyncTime();
 	}
 }

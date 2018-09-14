@@ -24,6 +24,7 @@ public class LayerStarSpawnTentacles implements LayerRenderer<EntityPlayer> {
 
 	private ModelStarSpawnPlayer model = new ModelStarSpawnPlayer();
 	private final RenderPlayer render;
+	private final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/tentacles.png");
 
 	public LayerStarSpawnTentacles(RenderPlayer render){
 		this.render = render;
@@ -33,7 +34,7 @@ public class LayerStarSpawnTentacles implements LayerRenderer<EntityPlayer> {
 	public void doRenderLayer(EntityPlayer player, float f, float f1, float partialTicks, float f2, float f3, float f4, float scale){
 		if(EntityUtil.isPlayerCoralium(player) && !player.isInvisible()){
 
-			render.bindTexture(new ResourceLocation("abyssalcraft:textures/model/tentacles.png"));
+			render.bindTexture(texture);
 
 			for (int j = 0; j < 1; ++j) {
 				float f10 = player.prevRotationYawHead + (player.rotationYawHead - player.prevRotationYawHead) * partialTicks - (player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset) * partialTicks);

@@ -99,13 +99,13 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 	protected float getDrainQuanta(){
 		switch(getBlockMetadata()){
 		case 0:
-			return 10;
-		case 1:
 			return 15;
-		case 2:
-			return 20;
-		case 3:
+		case 1:
 			return 25;
+		case 2:
+			return 35;
+		case 3:
+			return 45;
 		default:
 			return 0;
 		}
@@ -114,13 +114,13 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 	protected float getTransferQuanta(){
 		switch(getBlockMetadata()){
 		case 0:
-			return 15;
-		case 1:
 			return 20;
-		case 2:
-			return 25;
-		case 3:
+		case 1:
 			return 30;
+		case 2:
+			return 40;
+		case 3:
+			return 50;
 		default:
 			return 0;
 		}

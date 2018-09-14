@@ -32,6 +32,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalTy
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.FireMessage;
+import com.shinoow.abyssalcraft.common.network.server.InterdimensionalCageMessage;
 import com.shinoow.abyssalcraft.common.network.server.StaffModeMessage;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
@@ -234,6 +235,27 @@ public class AbyssalCraftClientEventHooks {
 
 			if(mode1 > -1 || mode2 > -1)
 				PacketDispatcher.sendToServer(new StaffModeMessage());
+		}
+		if(ClientProxy.use_cage.isPressed()) {
+			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
+
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.interdimensional_cage && !mainStack.getTagCompound().hasKey("Entity")) {
+				RayTraceResult mov = getMouseOverExtended(3);
+
+				if (mov != null)
+					if (mov.entityHit != null && !mov.entityHit.isDead)
+						if (mov.entityHit != Minecraft.getMinecraft().player )
+							PacketDispatcher.sendToServer(new InterdimensionalCageMessage(mov.entityHit.getEntityId(), EnumHand.MAIN_HAND));
+			}
+			if (!offStack.isEmpty() && offStack.getItem() == ACItems.interdimensional_cage && !offStack.getTagCompound().hasKey("Entity")) {
+				RayTraceResult mov = getMouseOverExtended(3);
+
+				if (mov != null)
+					if (mov.entityHit != null && !mov.entityHit.isDead)
+						if (mov.entityHit != Minecraft.getMinecraft().player )
+							PacketDispatcher.sendToServer(new InterdimensionalCageMessage(mov.entityHit.getEntityId(), EnumHand.OFF_HAND));
+			}
 		}
 	}
 

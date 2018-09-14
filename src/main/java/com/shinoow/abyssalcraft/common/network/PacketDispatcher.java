@@ -74,6 +74,8 @@ public class PacketDispatcher
 		registerMessage(TransferStackMessage.class);
 		registerMessage(KnowledgeUnlockMessage.class);
 		registerMessage(RitualMessage.class);
+		registerMessage(ShouldSyncMessage.class);
+		registerMessage(PrepareSyncMessage.class);
 	}
 
 	/**
