@@ -804,7 +804,7 @@ ac_blocks.tooltip=Конфигурация блока
 #Keybinds
 key.abyssalcraft.category=AbyssalCraft
 key.staff_mode.desc=Изменить режим Посоха сторожа
-key.use_cage.desc=Capture mob with Interdimensional Cage
+key.use_cage.desc=Улавливает монстров в Межпространственную Клетку
 
 #Damagesources
 death.attack.coralium=%1$s умер от Коралловой чумы
