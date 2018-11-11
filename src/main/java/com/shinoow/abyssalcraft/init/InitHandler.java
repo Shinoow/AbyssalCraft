@@ -19,10 +19,12 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -52,13 +54,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.*;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.*;
@@ -79,6 +80,8 @@ public class InitHandler implements ILifeCycleHandler {
 	omotholGhoulBlacklist, interdimensionalCageBlacklist;
 
 	public static int[] coraliumOreGeneration;
+	private static int[] blackHoleBlacklist;
+	private int[] blackHoleDimlist;
 
 	public static boolean dark1, dark2, dark3, dark4, dark5, coralium1;
 	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1;
@@ -159,6 +162,10 @@ public class InitHandler implements ILifeCycleHandler {
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
 		constructBlacklists();
+		DimensionType[] dims = DimensionManager.getRegisteredDimensions().keySet().toArray(new DimensionType[0]);
+		blackHoleDimlist = new int[dims.length];
+		for(int i = 0; i < dims.length; i++)
+			blackHoleDimlist[i] = dims[i].getId();
 	}
 
 	@Override
@@ -341,6 +348,8 @@ public class InitHandler implements ILifeCycleHandler {
 		armorPotionEffects = cfg.get(Configuration.CATEGORY_GENERAL, "Armor Potion Effects", true, "Toggles any interactions where armor sets either give certain Potion Effects, or dispell others. Useful if you have another mod installed that provides similar customization to any armor set.").getBoolean();
 		syncDataOnBookOpening = cfg.get(Configuration.CATEGORY_GENERAL, "Necronomicon Data Syncing", true, "Toggles whether or not the Necronomicon knowledge will sync from the server to the client each time a player opens their Necronomicon.").getBoolean();
 		dreadGrassSpread = cfg.get(Configuration.CATEGORY_GENERAL, "Dreadlands Grass Spread", true, "Toggles whether or not Dreadlands Grass can spread onto normal grass and dirt, slowly turning them into their Dreadlands counterparts.").getBoolean();
+		APIUtils.display_names = cfg.get(Configuration.CATEGORY_GENERAL, "Display Item Names", false, "Toggles whether or not to override the name locking and display item names regardless of the knowledge being obtained or not.").getBoolean();
+		blackHoleBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Reality Maelstrom Blacklist", new int[0], "Dimension IDs added to this list won't be used as potential destinations for black holes created by J'zahar.").getIntList();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -550,6 +559,29 @@ public class InitHandler implements ILifeCycleHandler {
 		String id = EntityList.getEntityString(entity);
 		for(String str : interdimensionalCageBlacklist)
 			if(str.equals(id))
+				return true;
+		return false;
+	}
+
+	/**
+	 * Selects a random dimension to transfer the Entity to
+	 * @param currentdim The current dimension
+	 * @param rand RNG
+	 * @return The ID of a dimension that isn't the current one
+	 */
+	public int getRandomDimension(int currentdim, Random rand) {
+		int id = 0;
+
+		do
+			id = blackHoleDimlist[rand.nextInt(blackHoleDimlist.length)];
+		while(id == currentdim || isDimBlacklisted(id));
+
+		return id;
+	}
+
+	private boolean isDimBlacklisted(int id) {
+		for(int check : blackHoleBlacklist)
+			if(check == id)
 				return true;
 		return false;
 	}

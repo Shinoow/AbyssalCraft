@@ -40,6 +40,8 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class APIUtils {
 
+	public static boolean display_names;
+
 	/**
 	 * Checks if the ItemStack is a Crystal
 	 * @param item ItemStack to check
@@ -202,7 +204,7 @@ public class APIUtils {
 	 */
 	@SideOnly(Side.CLIENT)
 	public static FontRenderer getFontRenderer(ItemStack stack){
-		if(!(stack.getItem() instanceof IUnlockableItem)) return null;
+		if(!(stack.getItem() instanceof IUnlockableItem) || display_names) return null;
 		INecroDataCapability cap = NecroDataCapability.getCap(Minecraft.getMinecraft().player);
 
 		return cap.isUnlocked(((IUnlockableItem) stack.getItem()).getUnlockCondition(stack), Minecraft.getMinecraft().player) ? null : AbyssalCraftAPI.getAkloFont();

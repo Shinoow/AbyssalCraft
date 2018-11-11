@@ -972,7 +972,7 @@ public class ModelChagaroth extends ModelBase {
 			middlehead.rotateAngleY = f3 / (180F / (float)Math.PI);
 			middlehead.rotateAngleX = f4 / (180F / (float)Math.PI);
 			middlehead.rotateAngleZ = 0;
-
+			middlejaw.rotateAngleX = 0.3346075F;
 			righthead.rotateAngleZ = 0;
 
 			walltentacle1.isHidden = false;
@@ -986,6 +986,12 @@ public class ModelChagaroth extends ModelBase {
 
 			leftwall.isHidden = false;
 			rightwall.isHidden = false;
+
+			if (((EntityChagaroth)entity).isMouthOpen())
+			{
+				middlehead.rotateAngleX -= 0.75F + MathHelper.cos(f2 * 2.0F) * 0.125F;
+				middlejaw.rotateAngleX += 0.75F;
+			}
 		}
 	}
 

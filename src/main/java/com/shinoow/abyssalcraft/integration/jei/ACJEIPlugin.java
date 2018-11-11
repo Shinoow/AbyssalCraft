@@ -44,7 +44,7 @@ import net.minecraftforge.fml.common.Loader;
 @JEIPlugin
 public class ACJEIPlugin implements IModPlugin {
 
-	IGuiHelper guiHelper;
+	private IGuiHelper guiHelper;
 
 	@Override
 	public void register(IModRegistry registry) {
@@ -95,8 +95,8 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(UpgradeRecipeMaker.getUpgrades(), AbyssalCraftRecipeCategoryUid.UPGRADE);
 		registry.addRecipes(MaterializerRecipes.instance().getMaterializationList(), AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
 
-		registry.handleRecipes(NecronomiconCreationRitual.class, recipe -> new RitualRecipeWrapper(recipe), AbyssalCraftRecipeCategoryUid.RITUAL);
-		registry.handleRecipes(Materialization.class, recipe -> new MaterializationRecipeWrapper(recipe), AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
+		registry.handleRecipes(NecronomiconCreationRitual.class, RitualRecipeWrapper::new, AbyssalCraftRecipeCategoryUid.RITUAL);
+		registry.handleRecipes(Materialization.class, MaterializationRecipeWrapper::new, AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
 
 		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(ItemHandler.devsword));
 		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(ACBlocks.crystallizer_active));

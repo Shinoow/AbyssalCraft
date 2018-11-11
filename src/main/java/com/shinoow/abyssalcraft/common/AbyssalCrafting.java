@@ -238,7 +238,7 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.crystal_shard, 1, 22), new ItemStack(ACItems.crystal_shard, 2, 20), new ItemStack(ACItems.crystal_shard, 3, 4), 0.1F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.crystal, 1, 23), new ItemStack(ACItems.crystal, 1, 19), new ItemStack(ACItems.crystal, 1, 4), 0.1F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.crystal_shard, 1, 23), new ItemStack(ACItems.crystal_shard, 1, 19), new ItemStack(ACItems.crystal_shard, 1, 4), 0.1F);
-		AbyssalCraftAPI.addCrystallization("ingotBronze", "crystalShardCopper", 4, "crystalShardTin", 12, 0.4F);
+		AbyssalCraftAPI.addCrystallization("ingotBronze", "crystalShardCopper", 3, "crystalShardTin", 1, 0.4F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.crystal, 1, 10), new ItemStack(ACItems.crystal, 1, 3), new ItemStack(ACItems.crystal, 4, 5), 0.1F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.crystal_shard, 1, 10), new ItemStack(ACItems.crystal_shard, 1, 3), new ItemStack(ACItems.crystal_shard, 4, 5), 0.1F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.crystal, 1, 9), new ItemStack(ACItems.crystal, 1, 6), new ItemStack(ACItems.crystal, 3, 4), 0.1F);
@@ -263,8 +263,8 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addSingleCrystallization("nuggetCopper", "crystalShardCopper", 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization("nuggetTin", "crystalShardTin", 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization("nuggetAluminium", "crystalShardAluminium", 0.1F);
-		AbyssalCraftAPI.addCrystallization("nuggetBronze", "crystalShardCopper", 1, "crystalShardTin", 3, 0.1F);
-		AbyssalCraftAPI.addCrystallization("nuggetBrass", "crystalShardCopper", 3, "crystalShardTin", 2, 0.1F);
+		AbyssalCraftAPI.addCrystallization("nuggetBronze", "crystalShardCopper", 3, "crystalShardTin", 1, 0.1F);
+		AbyssalCraftAPI.addCrystallization("nuggetBrass", "crystalShardCopper", 3, "crystalShardZinc", 2, 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization(ACItems.coralium_gem, new ItemStack(ACItems.crystal_shard, 1, 13), 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization("nuggetZinc", "crystalShardZinc", 0.1F);
 		AbyssalCraftAPI.addSingleCrystallization("nuggetMagnesium", "crystalShardMagnesium", 0.1F);

@@ -13,41 +13,46 @@ package com.shinoow.abyssalcraft.common.network.client;
 
 import java.io.IOException;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.PrepareSyncMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class ShouldSyncMessage extends AbstractClientMessage<ShouldSyncMessage> {
+public class WindowPropertyMessage extends AbstractClientMessage<WindowPropertyMessage>{
 
-	private long time;
+	private int windowId;
+	private int property;
+	private int value;
 
-	public ShouldSyncMessage() {}
+	public WindowPropertyMessage() {}
 
-	public ShouldSyncMessage(EntityPlayer player) {
-		time = NecroDataCapability.getCap(player).getLastSyncTime();
+	public WindowPropertyMessage(int windowIdIn, int propertyIn, int valueIn)
+	{
+		windowId = windowIdIn;
+		property = propertyIn;
+		value = valueIn;
 	}
 
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
-		time = buffer.readLong();
+		windowId = ByteBufUtils.readVarInt(buffer, 5);
+		property = ByteBufUtils.readVarInt(buffer, 5);
+		value = ByteBufUtils.readVarInt(buffer, 5);
 	}
 
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
-		buffer.writeLong(time);
+		ByteBufUtils.writeVarInt(buffer, windowId, 5);
+		ByteBufUtils.writeVarInt(buffer, property, 5);
+		ByteBufUtils.writeVarInt(buffer, value, 5);
 	}
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		INecroDataCapability cap = NecroDataCapability.getCap(player);
-		if(cap.getLastSyncTime() < time)
-			PacketDispatcher.sendToServer(new PrepareSyncMessage(player.getUniqueID()));
+		if (player.openContainer != null && player.openContainer.windowId == windowId)
+			player.openContainer.updateProgressBar(property, value);
 	}
 
 }

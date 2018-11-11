@@ -58,4 +58,9 @@ public class ACSounds {
 	public static SoundEvent abyssal_zombie_death;
 	public static SoundEvent antiplayer_hurt;
 	public static SoundEvent dreadguard_barf;
+	public static SoundEvent jzahar_blast;
+	public static SoundEvent jzahar_shout;
+	public static SoundEvent jzahar_earthquake;
+	public static SoundEvent jzahar_implosion;
+	public static SoundEvent jzahar_black_hole;
 }

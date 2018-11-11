@@ -35,6 +35,9 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -47,8 +50,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 5.0D, 0);
-
-	private int flameShootTimer;
+	private static final DataParameter<Integer> BARF_TIMER = EntityDataManager.createKey(EntityDreadguard.class, DataSerializers.VARINT);
 
 	public EntityDreadguard(World par1World) {
 		super(par1World);
@@ -83,6 +85,25 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	public boolean canBreatheUnderwater()
 	{
 		return true;
+	}
+
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		dataManager.register(BARF_TIMER, 0);
+	}
+
+	public int getBarfTimer() {
+		return dataManager.get(BARF_TIMER);
+	}
+
+	public void setBarfTimer(int time) {
+		dataManager.set(BARF_TIMER, time);
+	}
+
+	public void decrementBarfTimer() {
+		setBarfTimer(getBarfTimer() - 1);
 	}
 
 	//	@Override
@@ -166,15 +187,16 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	public void onLivingUpdate()
 	{
 
-		if (getAttackTarget() != null && getDistanceSq(getAttackTarget()) <= 64D && flameShootTimer <= -200) flameShootTimer = 60;
+		int timer = getBarfTimer();
+		if (getAttackTarget() != null && getDistanceSq(getAttackTarget()) <= 64D && timer <= -200) setBarfTimer(60);
 
-		if (flameShootTimer > 0)
+		if (timer > 0)
 		{
 			motionX *= 0.0D;
 			motionZ *= 0.0D;
 			setAIMoveSpeed(0F);
 			world.setEntityState(this, (byte)23);
-			if (ticksExisted % 5 == 0 && flameShootTimer > 30)
+			if (ticksExisted % 5 == 0 && timer > 30)
 				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
 			Entity target = getHeadLookTarget();
 			if (target != null) {
@@ -189,7 +211,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 			}
 		}
 
-		--flameShootTimer;
+		decrementBarfTimer();
 
 		super.onLivingUpdate();
 	}
@@ -284,7 +306,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
 
-		par1NBTTagCompound.setInteger("BarfTimer", flameShootTimer);
+		par1NBTTagCompound.setInteger("BarfTimer", getBarfTimer());
 	}
 
 	@Override
@@ -292,7 +314,7 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity {
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
 
-		flameShootTimer = par1NBTTagCompound.getInteger("BarfTimer");
+		setBarfTimer(par1NBTTagCompound.getInteger("BarfTimer"));
 	}
 
 	@Override

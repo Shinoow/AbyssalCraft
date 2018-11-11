@@ -352,5 +352,40 @@
 			"abyssalcraft:dreadguard/barf"
 		],
 		"subtitle": "subtitle.abyssalcraft.dreadguard.barf"
+	},
+	"jzahar.blast": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:jzahar/blast"
+		],
+		"subtitle": "subtitle.abyssalcraft.jzahar.blast"
+	},
+	"jzahar.shout": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:jzahar/shout"
+		],
+		"subtitle": "subtitle.abyssalcraft.jzahar.shout"
+	},
+	"jzahar.earthquake": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:jzahar/earthquake"
+		],
+		"subtitle": "subtitle.abyssalcraft.jzahar.earthquake"
+	},
+	"jzahar.implosion": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:jzahar/implosion"
+		],
+		"subtitle": "subtitle.abyssalcraft.jzahar.implosion"
+	},
+	"jzahar.black_hole": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:jzahar/black_hole"
+		],
+		"subtitle": "subtitle.abyssalcraft.jzahar.black_hole"
 	}
 }

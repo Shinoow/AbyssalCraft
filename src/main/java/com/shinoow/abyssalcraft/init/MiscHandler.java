@@ -192,6 +192,11 @@ public class MiscHandler implements ILifeCycleHandler {
 		abyssal_zombie_death = registerSoundEvent("abyssalzombie.death");
 		antiplayer_hurt = registerSoundEvent("antiplayer.hurt");
 		dreadguard_barf = registerSoundEvent("dreadguard.barf");
+		jzahar_blast = registerSoundEvent("jzahar.blast");
+		jzahar_shout = registerSoundEvent("jzahar.shout");
+		jzahar_earthquake = registerSoundEvent("jzahar.earthquake");
+		jzahar_implosion = registerSoundEvent("jzahar.implosion");
+		jzahar_black_hole = registerSoundEvent("jzahar.black_hole");
 
 		CapabilityManager.INSTANCE.register(INecroDataCapability.class, NecroDataCapabilityStorage.instance, NecroDataCapability::new);
 		CapabilityManager.INSTANCE.register(INecromancyCapability.class, NecromancyCapabilityStorage.instance, NecromancyCapability::new);

@@ -16,7 +16,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
 import com.shinoow.abyssalcraft.common.world.TeleporterAC;
@@ -96,7 +96,7 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 
 			if (i > 0 && !worldIn.getBlockState(blockpos.up()).isNormalCube())
 			{
-				Entity entity = ItemMonsterPlacer.spawnCreature(worldIn, EntityList.getKey(EntityDreadSpawn.class), blockpos.getX() + 0.5D, blockpos.getY() + 1.1D, blockpos.getZ() + 0.5D);
+				Entity entity = ItemMonsterPlacer.spawnCreature(worldIn, EntityList.getKey(EntityDreadling.class), blockpos.getX() + 0.5D, blockpos.getY() + 1.1D, blockpos.getZ() + 0.5D);
 
 				if (entity != null)
 					entity.timeUntilPortal = entity.getPortalCooldown();

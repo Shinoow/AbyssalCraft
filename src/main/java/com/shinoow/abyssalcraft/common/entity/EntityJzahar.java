@@ -35,6 +35,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -45,6 +48,8 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraftforge.fml.common.Optional.Interface;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
 public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
@@ -53,8 +58,15 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
 	public int deathTicks;
 	private int talkTimer;
+	private static final DataParameter<Integer> EARTHQUAKETIMER = EntityDataManager.createKey(EntityJzahar.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> BLACKHOLETIMER = EntityDataManager.createKey(EntityJzahar.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> IMPLOSIONTIMER = EntityDataManager.createKey(EntityJzahar.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> SHOUTTIMER = EntityDataManager.createKey(EntityJzahar.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> COOLDOWNTIMER = EntityDataManager.createKey(EntityJzahar.class, DataSerializers.VARINT);
 	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
 	private boolean that = false;
+	private boolean doShout;
+	private int shoutTicks;
 
 	private EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 0.35D, true);
 	private EntityAIAttackRanged aiArrowAttack = new EntityAIAttackRanged(this, 0.4D, 40, 20.0F);
@@ -82,13 +94,64 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		if(ACConfig.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1000.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(100.0D);
-		} else {
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(50.0D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 1000.0D : 500.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 60.0D : 30.0D);
+
+	}
+
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		dataManager.register(EARTHQUAKETIMER, 0);
+		dataManager.register(BLACKHOLETIMER, 0);
+		dataManager.register(IMPLOSIONTIMER, 0);
+		dataManager.register(SHOUTTIMER, 0);
+		dataManager.register(COOLDOWNTIMER, 0);
+	}
+
+	public int getTimer(int timer){
+		switch(timer){
+		case 0:
+			return dataManager.get(EARTHQUAKETIMER);
+		case 1:
+			return dataManager.get(BLACKHOLETIMER);
+		case 2:
+			return dataManager.get(IMPLOSIONTIMER);
+		case 3:
+			return dataManager.get(SHOUTTIMER);
+		case 4:
+			return dataManager.get(COOLDOWNTIMER);
+		default:
+			return 0;
 		}
+	}
+
+	public void setTimer(int timer, int value){
+		switch(timer){
+		case 0:
+			dataManager.set(EARTHQUAKETIMER, value);
+			break;
+		case 1:
+			dataManager.set(BLACKHOLETIMER, value);
+			break;
+		case 2:
+			dataManager.set(IMPLOSIONTIMER, value);
+			break;
+		case 3:
+			dataManager.set(SHOUTTIMER, value);
+			break;
+		case 4:
+			dataManager.set(COOLDOWNTIMER, value);
+			break;
+		default:
+			break;
+		}
+	}
+
+	public void decrementTimer(int timer){
+		setTimer(timer, getTimer(timer)-1);
 	}
 
 	@Override
@@ -144,7 +207,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	{
 		super.updateAITasks();
 
-		if (isEntityAlive() && getAttackTarget() != null && getAttackTarget().isEntityAlive() && getDistanceSq(getAttackTarget()) < width * width + getAttackTarget().width * getAttackTarget().width + 36D && (ticksExisted + getEntityId()) % 10 == 0)
+		if (isEntityAlive() && getAttackTarget() != null && getAttackTarget().isEntityAlive() && getDistanceSq(getAttackTarget()) < width * width + getAttackTarget().width * getAttackTarget().width + 36D && (ticksExisted + getEntityId()) % 20 == 0)
 			attackEntityAsMob(getAttackTarget());
 
 		bossInfo.setPercent(getHealth() / getMaxHealth());
@@ -204,6 +267,18 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 		if (par1DamageSource.isMagicDamage())
 			return false;
 
+		if(!getEntityWorld().isRemote) {
+			int health = (int)(getHealth() / getMaxHealth()) * 100;
+			if(health < 10)
+				health = 10;
+
+			if(par1DamageSource.getTrueSource() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getTrueSource()).capabilities.isCreativeMode && getRNG().nextInt(health) == 0) {
+				((EntityPlayer)par1DamageSource.getTrueSource()).setGameType(GameType.SURVIVAL);
+				par1DamageSource.getTrueSource().attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), Integer.MAX_VALUE);
+				SpecialTextUtil.JzaharGroup(getEntityWorld(), "Whoops, I slipped!");
+			}
+		}
+
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
@@ -221,7 +296,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 		super.onDeath(par1DamageSource);
 	}
 
-	private double func_82214_u(int par1) {
+	private double getHeadX(int par1) {
 		if (par1 <= 0)
 			return posX;
 		else {
@@ -231,11 +306,11 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 		}
 	}
 
-	private double func_82208_v(int par1) {
+	private double getHeadY(int par1) {
 		return par1 <= 0 ? posY + 3.0D : posY + 2.2D;
 	}
 
-	private double func_82213_w(int par1) {
+	private double getHeadZ(int par1) {
 		if (par1 <= 0)
 			return posZ;
 		else {
@@ -258,7 +333,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			talkTimer--;
 
 		if(getAttackTarget() != null)
-			if(getDistanceSq(getAttackTarget()) > 20D || getAttackTarget() instanceof EntityFlying || getAttackTarget().posY > posY + 4D)
+			if(getDistanceSq(getAttackTarget()) > 28D || getAttackTarget() instanceof EntityFlying || getAttackTarget().posY > posY + 4D)
 			{
 				tasks.addTask(2, aiArrowAttack);
 				tasks.removeTask(aiAttackOnCollide);
@@ -326,27 +401,206 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 							SpecialTextUtil.JzaharText(I18n.translateToLocal("message.jzahar.creative.2"));
 						}
 				}
+
+		if (motionY > 0.42D)
+			motionY = 0.42D;
+
+		if(deathTicks == 0) {
+			decrementTimer(0);
+			decrementTimer(1);
+			decrementTimer(2);
+			decrementTimer(3);
+			decrementTimer(4);
+
+			if (getTimer(0) > 600)
+				for(Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(64D)))
+					if (entity.onGround && entity instanceof EntityLivingBase && !(entity instanceof IOmotholEntity))
+					{
+						entity.motionX += (float)(Math.random() * 0.1D - 0.05D);
+						entity.motionY += (float)(Math.random() * 0.1D - 0.05D);
+						entity.motionZ += (float)(Math.random() * 0.1D - 0.05D);
+						((EntityLivingBase)entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20, 3));
+						if (rand.nextInt(5) == 0)
+							((EntityLivingBase)entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 20, 3));
+
+						entity.rotationPitch += (float)(Math.random() * 4.0D - 2.0D);
+						entity.rotationYaw += (float)(Math.random() * 4.0D - 2.0D);
+						if (rand.nextInt(5) == 0)
+						{
+							entity.motionY = 0.5D;
+							entity.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
+						}
+					}
+
+			if(getTimer(3) < 0 && rand.nextInt(20) == 0 && getAttackTarget() != null && this.getDistanceSq(getAttackTarget()) <= 9216D && !doShout && getTimer(4) < 0) {
+				playSound(ACSounds.jzahar_shout, 5F, 1F);
+				if (!world.isRemote)
+					SpecialTextUtil.JzaharGroup(world, "Uftoin...");
+				shoutTicks = getTimer(3) - 30;
+				doShout = true;
+				setTimer(4, 100);
+			}
+
+			if (getTimer(3) < shoutTicks && doShout)
+			{
+				doShout = false;
+				world.setEntityState(this, (byte)23);
+				setTimer(3, 400);
+				playSound(ACSounds.jzahar_blast, 5F, 1F);
+				if (!world.isRemote)
+					SpecialTextUtil.JzaharGroup(world, "...mglagln!");
+				if(isEntityAlive())
+				{
+					double size = 64D;
+					Vec3d vector = getLookVec();
+					for(Entity entity : world.getEntitiesWithinAABB(Entity.class, getEntityBoundingBox().grow(size).offset(vector.x * 32D, vector.y * 32D, vector.z * 32D)))
+						if (!(entity instanceof EntityLivingBase) || !(entity instanceof IOmotholEntity))
+						{
+							double dx = vector.x;
+							double dy = vector.z;
+							double dz = vector.z;
+
+							double spread = 10D;
+							double velocity = 2D + getRNG().nextDouble() * 8D;
+
+							dx += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+							dy += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+							dz += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+							dx *= velocity;
+							dy *= velocity * 0.25D;
+							dz *= velocity;
+							entity.addVelocity(dx, dy, dz);
+							entity.attackEntityFrom(DamageSource.FLY_INTO_WALL, 2F * (float)velocity);
+						}
+				}
+			}
+
+			if (getTimer(0) < 0 && rand.nextInt(400) == 0 && getAttackTarget() != null && getAttackTarget().onGround && getTimer(4) < 0)
+			{
+				swingArm(EnumHand.MAIN_HAND);
+				setTimer(0, 1000);
+				//			playSound(ACSounds.jzahar_blast, 10F, 1F);
+				playSound(ACSounds.jzahar_earthquake, 5F, 1F);
+				if (!world.isRemote)
+					SpecialTextUtil.JzaharGroup(world, "Shugnah throd!");
+				setTimer(4, 100);
+			}
+
+			if (getTimer(2) < 0 && getAttackTarget() != null && getTimer(4) < 0)
+			{
+				swingArm(EnumHand.MAIN_HAND);
+				setTimer(2, 1200);
+				//			playSound(ACSounds.jzahar_blast, 10F, 1F);
+				playSound(ACSounds.jzahar_implosion, 5F, 1F);
+				if (!world.isRemote)
+					SpecialTextUtil.JzaharGroup(world, "Nilgh'ri mtli!");
+				EntityImplosion entitywitherskull = new EntityImplosion(world, this);
+
+				BlockPos targetpos = getAttackTarget().getPosition();
+
+				entitywitherskull.setPosition(targetpos.getX() + rand.nextInt(10) * (rand.nextBoolean() ? 1 : -1), targetpos.getY() + 2, targetpos.getZ() + rand.nextInt(10) * (rand.nextBoolean() ? 1 : -1));
+
+				world.playEvent(3000, entitywitherskull.getPosition(), 0);
+				if (!world.isRemote)
+					world.spawnEntity(entitywitherskull);
+				setTimer(4, 100);
+			}
+
+			if (getTimer(1) < 0 && rand.nextInt(800) == 0 && getAttackTarget() != null && getTimer(4) < 0)
+			{
+				swingArm(EnumHand.MAIN_HAND);
+				setTimer(1, 1600);
+				//			playSound(ACSounds.jzahar_blast, 10F, 1F);
+				playSound(ACSounds.jzahar_black_hole, 5F, 1F);
+				if (!world.isRemote)
+					SpecialTextUtil.JzaharGroup(world, "Ph'nilgh'ri n'ghft!");
+				EntityBlackHole entitywitherskull = new EntityBlackHole(world, this);
+				entitywitherskull.copyLocationAndAnglesFrom(getAttackTarget());
+				BlockPos targetpos = getAttackTarget().getPosition();
+
+				entitywitherskull.setPosition(targetpos.getX() + (5 + rand.nextInt(10)) * (rand.nextBoolean() ? 1 : -1), targetpos.getY() + 2, targetpos.getZ() + (5 + rand.nextInt(10)) * (rand.nextBoolean() ? 1 : -1));
+
+				world.playEvent(3000, entitywitherskull.getPosition(), 0);
+				if (!world.isRemote)
+					world.spawnEntity(entitywitherskull);
+				setTimer(4, 100);
+			}
+		}
+
 		super.onLivingUpdate();
 	}
 
-	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	private void addShoutParticles()
 	{
-		super.writeEntityToNBT(par1NBTTagCompound);
+		if (world.isRemote)
+		{
+			Vec3d vector = getLookVec();
+
+			double px = posX + vector.x * 5D;
+			double py = posY + getEyeHeight() + vector.y * 5D;
+			double pz = posZ + vector.z * 5D;
+
+
+			for (int i = 0; i < 1000; i++)
+			{
+				double dx = vector.x;
+				double dy = vector.y;
+				double dz = vector.z;
+
+				double spread = 10D;
+				double velocity = 2D + getRNG().nextDouble() * 18D;
+
+				dx += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dy += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dz += getRNG().nextGaussian() * 0.007499999832361937D * spread;
+				dx *= velocity;
+				dy *= velocity;
+				dz *= velocity;
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, px + getRNG().nextDouble() - 0.5D, py + getRNG().nextDouble() - 0.5D, pz + getRNG().nextDouble() - 0.5D, dx, dy, dz);
+			}
+		} else
+			world.setEntityState(this, (byte)23);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void handleStatusUpdate(byte id)
+	{
+		if (id == 23)
+			addShoutParticles();
+		else
+			super.handleStatusUpdate(id);
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbttag)
+	{
+		super.writeEntityToNBT(nbttag);
 
 		if(deathTicks > 0)
-			par1NBTTagCompound.setInteger("DeathTicks", deathTicks);
+			nbttag.setInteger("DeathTicks", deathTicks);
+
+		nbttag.setInteger("EarthquakeTime", getTimer(0));
+		nbttag.setInteger("BlackHoleTime", getTimer(1));
+		nbttag.setInteger("ImplosionTime", getTimer(2));
+		nbttag.setInteger("ShoutTime", getTimer(3));
+		nbttag.setInteger("CooldownTime", getTimer(4));
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readEntityFromNBT(NBTTagCompound nbttag)
 	{
-		super.readEntityFromNBT(par1NBTTagCompound);
+		super.readEntityFromNBT(nbttag);
 
-		deathTicks = par1NBTTagCompound.getInteger("DeathTicks");
+		deathTicks = nbttag.getInteger("DeathTicks");
+		setTimer(0, nbttag.getInteger("EarthquakeTime"));
+		setTimer(1, nbttag.getInteger("BlackHoleTime"));
+		setTimer(2, nbttag.getInteger("ImplosionTime"));
+		setTimer(3, nbttag.getInteger("ShoutTime"));
+		setTimer(4, nbttag.getInteger("CooldownTime"));
 	}
 
-	double speed = 0.05D;
+	private double speed = 0.05D;
 
 	@Override
 	protected void onDeathUpdate()
@@ -487,15 +741,15 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 		}
 	}
 
-	private void func_82216_a(int par1, EntityLivingBase par2EntityLivingBase) {
-		func_82209_a(par1, par2EntityLivingBase.posX, par2EntityLivingBase.posY + par2EntityLivingBase.getEyeHeight() * 0.35D, par2EntityLivingBase.posZ, par1 == 0 && rand.nextFloat() < 0.001F);
+	private void launchWitherSkullToEntity(int par1, EntityLivingBase par2EntityLivingBase) {
+		launchWitherSkullToCoords(par1, par2EntityLivingBase.posX, par2EntityLivingBase.posY + par2EntityLivingBase.getEyeHeight() * 0.35D, par2EntityLivingBase.posZ, par1 == 0 && rand.nextFloat() < 0.001F);
 	}
 
-	private void func_82209_a(int par1, double par2, double par4, double par6, boolean par8) {
+	private void launchWitherSkullToCoords(int par1, double par2, double par4, double par6, boolean par8) {
 		world.playEvent((EntityPlayer)null, 1014, new BlockPos(posX, posY, posZ), 0);
-		double d3 = func_82214_u(par1);
-		double d4 = func_82208_v(par1);
-		double d5 = func_82213_w(par1);
+		double d3 = getHeadX(par1);
+		double d4 = getHeadY(par1);
+		double d5 = getHeadZ(par1);
 		double d6 = par2 - d3;
 		double d7 = par4 - d4;
 		double d8 = par6 - d5;
@@ -510,7 +764,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2) {
-		func_82216_a(0, par1EntityLivingBase);
+		launchWitherSkullToEntity(0, par1EntityLivingBase);
 	}
 
 	@Override

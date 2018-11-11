@@ -64,12 +64,13 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8D, 0);
-	public int deathTicks, flameShootTimer;
+	public int deathTicks;
 	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
 	private static final DataParameter<Integer> FIRST_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityChagaroth.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> SECOND_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityChagaroth.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> THIRD_HEAD_TARGET = EntityDataManager.<Integer>createKey(EntityChagaroth.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer>[] HEAD_TARGETS = new DataParameter[] {FIRST_HEAD_TARGET, SECOND_HEAD_TARGET, THIRD_HEAD_TARGET};
+	private static final DataParameter<Integer> BARF_TIMER = EntityDataManager.createKey(EntityChagaroth.class, DataSerializers.VARINT);
 	private final float[] xRotationHeads = new float[2];
 	private final float[] yRotationHeads = new float[2];
 	private final float[] xRotOHeads = new float[2];
@@ -105,9 +106,10 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(FIRST_HEAD_TARGET, Integer.valueOf(0));
-		dataManager.register(SECOND_HEAD_TARGET, Integer.valueOf(0));
-		dataManager.register(THIRD_HEAD_TARGET, Integer.valueOf(0));
+		dataManager.register(FIRST_HEAD_TARGET, 0);
+		dataManager.register(SECOND_HEAD_TARGET, 0);
+		dataManager.register(THIRD_HEAD_TARGET, 0);
+		dataManager.register(BARF_TIMER, 0);
 	}
 
 	public int getWatchedTargetId(int head)
@@ -121,6 +123,22 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 	public void updateWatchedTargetId(int targetOffset, int newId)
 	{
 		dataManager.set(HEAD_TARGETS[targetOffset], Integer.valueOf(newId));
+	}
+
+	public int getBarfTimer() {
+		return dataManager.get(BARF_TIMER);
+	}
+
+	public void setBarfTimer(int time) {
+		dataManager.set(BARF_TIMER, time);
+	}
+
+	public void decrementBarfTimer() {
+		setBarfTimer(getBarfTimer() - 1);
+	}
+
+	public boolean isMouthOpen() {
+		return getBarfTimer() > 0;
 	}
 
 	@Override
@@ -144,13 +162,9 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 
-		if(ACConfig.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2000.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(30.0D);
-		} else {
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1000.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(15.0D);
-		}
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 2000.0D : 1000.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 30.0D : 15.0D);
+
 	}
 
 	@Override
@@ -502,12 +516,13 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 			}
 		}
 
-		if (getAttackTarget() != null && getDistanceSq(getAttackTarget()) <= 256D && flameShootTimer <= -200) flameShootTimer = 150;
+		int timer = getBarfTimer();
+		if (getAttackTarget() != null && getDistanceSq(getAttackTarget()) <= 256D && timer <= -200) setBarfTimer(150);
 
-		if (flameShootTimer > 0)
+		if (timer > 0)
 		{
 			world.setEntityState(this, (byte)23);
-			if (ticksExisted % 5 == 0 && flameShootTimer > 30)
+			if (ticksExisted % 5 == 0 && timer > 30)
 			{
 				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.6F + 0.2F);
 				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), ACSounds.dreadguard_barf, getSoundCategory(), 0.7F + getRNG().nextFloat(), getRNG().nextFloat() * 0.5F + 0.2F);
@@ -526,7 +541,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 			}
 		}
 
-		--flameShootTimer;
+		decrementBarfTimer();
 
 		if(!world.isRemote && isEntityAlive())
 		{
@@ -704,7 +719,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 
 		if(deathTicks > 0)
 			par1NBTTagCompound.setInteger("DeathTicks", deathTicks);
-		par1NBTTagCompound.setInteger("BarfTimer", flameShootTimer);
+		par1NBTTagCompound.setInteger("BarfTimer", getBarfTimer());
 	}
 
 	@Override
@@ -713,7 +728,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 		super.readEntityFromNBT(par1NBTTagCompound);
 
 		deathTicks = par1NBTTagCompound.getInteger("DeathTicks");
-		flameShootTimer = par1NBTTagCompound.getInteger("BarfTimer");
+		setBarfTimer(par1NBTTagCompound.getInteger("BarfTimer"));
 	}
 
 	@Override

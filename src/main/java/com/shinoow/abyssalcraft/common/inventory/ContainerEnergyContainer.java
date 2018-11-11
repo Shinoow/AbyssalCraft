@@ -13,8 +13,11 @@ package com.shinoow.abyssalcraft.common.inventory;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyContainer;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.WindowPropertyMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -46,7 +49,8 @@ public class ContainerEnergyContainer extends Container {
 	public void addListener(IContainerListener listener)
 	{
 		super.addListener(listener);
-		listener.sendWindowProperty(this, 0, tileEnergyContainer.getField(0));
+		if(listener instanceof EntityPlayerMP)
+			PacketDispatcher.sendTo(new WindowPropertyMessage(windowId, 0, tileEnergyContainer.getField(0)), (EntityPlayerMP) listener);
 	}
 
 	@Override
@@ -60,8 +64,8 @@ public class ContainerEnergyContainer extends Container {
 		{
 			IContainerListener icrafting = listeners.get(i);
 
-			if (lastPE != pe)
-				icrafting.sendWindowProperty(this, 0, pe);
+			if (lastPE != pe && icrafting instanceof EntityPlayerMP)
+				PacketDispatcher.sendTo(new WindowPropertyMessage(windowId, 0, pe), (EntityPlayerMP) icrafting);
 		}
 
 		lastPE = pe;
