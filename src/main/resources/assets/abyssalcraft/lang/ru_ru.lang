@@ -208,7 +208,7 @@ container.abyssalcraft.rendingpedestal=Расщепляющий пьедеста
 container.abyssalcraft.statetransformer=Трансформатор состояния
 container.abyssalcraft.energydepositioner=Энергоотправитель
 
-#Кнопки Gui
+#Кнопки GUI
 gui.abyssalcraft.statetransformer.insert=Вставить
 gui.abyssalcraft.statetransformer.extract=Извлечь
 
@@ -1071,7 +1071,7 @@ tile.statetransformer.name=Трансформатор состояния
 tile.energydepositioner.name=Энергоотправитель
 tile.calcifiedstone.name=Кальцинированный камень
 
-#До/ПослеИсправления
+#До/После Исправления
 decorativestatue.prefix=Декоративная %s
 crystalcluster.postfix=%s Скопление
 crystalshard.postfix=%s Осколок
@@ -1355,7 +1355,7 @@ entity.abyssalcraft.evilsheep.name=Овца
 entity.abyssalcraft.demonsheep.name=Демоническая овца
 entity.abyssalcraft.coraliumsquid.name=Коралловый заражённый спрут
 
-#Алхимия
+#Зелья
 potion.Cplague=Коралловая чума
 potion.effect.Cplague=Зелье коралловой чумы
 splash_potion.effect.Cplague=Взрывное зелье от коралловой чумы
@@ -1382,7 +1382,7 @@ enchantment.abyssalcraft.iron_wall.desc=Уменьшает кол-во удар�
 enchantment.abyssalcraft.light_pierce=Лёгкое пронзание
 enchantment.abyssalcraft.light_pierce.desc=Увеличивает урон против Тёмных монстров
 
-#субтитры
+#Субтитры
 subtitle.abyssalcraft.dreadguard.death=Ужасный страж умирает
 subtitle.abyssalcraft.dreadguard.idle=Ужасный страж зловеще бормочет
 subtitle.abyssalcraft.dreadguard.hit=Ужасный страж ранен
