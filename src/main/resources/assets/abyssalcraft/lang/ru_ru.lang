@@ -1,7 +1,7 @@
 #ru_ru.lang file [AbyssalCraft-1.12.2-1.9.4.11]. Translated by AlekseiVoronin
-#Start of localization file
+#Начало локализации файла
 
-#Advancements
+#Достижения
 advancements.abyssalcraft.necro.title=AbyssalCraft
 advancements.abyssalcraft.necro.description=Создан Некрономикон, и что теперь?
 
@@ -143,17 +143,17 @@ advancements.abyssalcraft.makecrystalbag.description=Создан хрустал
 advancements.abyssalcraft.makeengraver.title=Бесконечные поддельные монеты!
 advancements.abyssalcraft.makeengraver.description=Создан гравировщик.
 
-#Text
+#Текст
 ac.text.none=Нет
 ac.text.amplifier=Усиленный
 ac.text.deity=Божественный
 
-#Amplifier Types
+#Типы Усилителей
 ac.amplifier.range=Дальность
 ac.amplifier.duration=Продолжительность
 ac.amplifier.power=Мощность
 
-#Messages
+#Сообщения
 message.asorah.spawn=Хаха, глупый человек, Я ПРОБУДИЛСЯ!
 message.asorah.death.1=Асора? ... Асора?!
 message.asorah.death.2=ТЫ, ты заплатишь за этого смертного!
@@ -196,7 +196,7 @@ message.remnant.insult.1=Ты ничего не знаешь, %s.
 message.remnant.insult.2=Ты бесполезен без Некрономикона, %s.
 message.jzahar.respawn=Я чувствую, что время повернулось вспять. Тебе не удалось победить меня, %s?
 
-#Container Inventories
+#Инвентари Контейнеров
 container.abyssalcraft.crate=Ящик
 container.abyssalcraft.crystallizer=Кристаллизатор
 container.abyssalcraft.transmutator=Преобразователь
@@ -208,11 +208,11 @@ container.abyssalcraft.rendingpedestal=Расщепляющий пьедеста
 container.abyssalcraft.statetransformer=Трансформатор состояния
 container.abyssalcraft.energydepositioner=Энергоотправитель
 
-#Gui Buttons
+#Кнопки Gui
 gui.abyssalcraft.statetransformer.insert=Вставить
 gui.abyssalcraft.statetransformer.extract=Извлечь
 
-#NEI Integration
+#Интеграция NEI
 container.abyssalcraft.crystallizer.nei=Кристаллизация
 container.abyssalcraft.transmutator.nei=Преобразование
 container.abyssalcraft.engraver.nei=Гравирование монеты
@@ -221,11 +221,11 @@ container.abyssalcraft.rituals.nei=Ритуалы некрономикона
 container.abyssalcraft.rending.nei=Посох расщепления
 container.abyssalcraft.upgrade.nei=Улучшающий комплект
 
-#JEI Integration
+#Интеграция JEI
 gui.acjei.category.fuel.transmutator=Топливо для Преобразователя
 gui.acjei.category.fuel.crystallizer=Топливо для Кристаллизатора
 
-#Necronomicon Labels
+#Бирки Некрономикона
 necronomicon.index=Индекс
 necronomicon.information=Запретное знание
 necronomicon.spells=Книга заклинаний
@@ -270,7 +270,7 @@ necronomicon.information.knowledge=Получение знаний
 necronomicon.information.coraliumplague=Коралловая чума
 necronomicon.information.dreadplague=Ужасная чума
 
-#Necronomicon Text
+#Текст Некрономикона
 #Примечание: максимальное кол-во букв в строке 368
 #Следующий текстовый пример имеет ограничения по буквам:
 #Всем привет и это автор мода и не я написал этот текст, а мой друг, который знает второй язык и это Латынский! Он передаёт привет всем игрокам которые играют в этот замечательный мод как AbyssalCraft, он очень огромен и сказочно-интересен, я думаю вы сможете пройти его полностью, и насладиться замечательным прохождением мода! Удачи!!!
@@ -576,7 +576,7 @@ necronomicon.text.dreadplague.2=Противоядие от Ужасной чу�
 
 necronomicon.text.wip=Этот раздел пока ещё незавершён.
 
-#Rituals
+#Ритуалы
 ac.ritual.oblivionCatalyst=Катализатор забывчивости
 ac.ritual.oblivionCatalyst.desc=Катализатор забывчивости изготавливается с помощью наполнения Око эндера с Осколками забывчивости и Красной пыли.
 ac.ritual.transmutationGem=Жемчужина преобразования
@@ -766,18 +766,18 @@ ac.ritual.resurrection.desc=Предоставив кристаллизован�
 ac.ritual.purging=Ритуал промывания
 ac.ritual.purging.desc=Предоставив 4 Кристаллизованных скоплений кальция и большое кол-во энергии, ты очищаешь каждый след Ужасной чумы (и Ужасные земли) из области, положить этому конец (также убивает близлежащих монстров). Хотя это делает область непригодной для жизни, никакая чума не сможет распространяться здесь. Не работают на Ужасных землях.
 
-#Spells
+#Чары
 ac.spell.lifedrain=Вампиризм
 ac.spell.entropy=Энтропия
 ac.spell.mining=Добыча
 
-#Rending
+#Чтение
 ac.rending.shadowgem=Теневые жемчужины изготавливаются из сбора Тёмной энергии из Живых теней.
 ac.rending.essence_aw=Эссенция из Бездной пустоши изготавливается из сбора энергии Бездной пустоши из Коралловых существ.
 ac.rending.essence_dl=Эссенция из Ужасных земель изготавливается из сбора энергии Ужасных земель из Ужасных существ.
 ac.rending.essence_omt=Эссенция из Омотула изготавливается из сбора энергии Омотула из существ Омотула.
 
-#Configuration
+#Конфигурация
 ac_dimensions=Измерение
 ac_dimensions.tooltip=Настройка ID измерения
 ac_biomes=Биомы
@@ -801,12 +801,12 @@ ac_silly_settings.tooltip=Настройки нелепых настроек
 ac_blocks=Блоки
 ac_blocks.tooltip=Конфигурация блока
 
-#Keybinds
+#Клавишные бинды
 key.abyssalcraft.category=AbyssalCraft
 key.staff_mode.desc=Изменить режим Посоха сторожа
 key.use_cage.desc=Улавливает монстров в Межпространственную Клетку
 
-#Damagesources
+#Источники повреждений
 death.attack.coralium=%1$s умер от Коралловой чумы
 death.attack.coralium.player=%1$s скончался от Коралловой чумы, при попытке к бегству %2$s
 death.attack.dread=%1$s умер от Ужасной чумы
@@ -818,7 +818,7 @@ death.attack.shadow.player=%1$s был поглощён тьмой, при по�
 death.attack.shoggoth_acid=%1$s был растворён в кислоте Шоггота
 death.attack.shoggoth_acid.player=%1$s был растворён в кислоте Шоггота, при попытке к бегству %2$s
 
-#Tooltips
+#Подсказки
 tooltip.portalplacer.1=Щёлкни пкм по земле, чтобы
 tooltip.portalplacer.2=создать портал. Бесконечное использование.
 tooltip.portalplacer.3=Щёлкни пкм, чтобы создать альтернативный Портал.
@@ -851,7 +851,7 @@ tooltip.staff.mode.2=Нажми %s чтобы изменить режим
 tooltip.stonetablet.cursed=Проклятая
 tooltip.stonetablet.contents=%d стэк
 
-#Creative Tabs
+#Творческие вкладки
 itemGroup.acblocks=AbyssalCraft блоки
 itemGroup.acitems=AbyssalCraft предметы
 itemGroup.actools=AbyssalCraft инструменты
@@ -861,11 +861,11 @@ itemGroup.acdblocks=AbyssalCraft декоративные блоки
 itemGroup.accrystals=AbyssalCraft кристаллизированные кристаллы
 itemGroup.accoins=Abyssalcraft монеты
 
-#Fluids
+#Жидкости
 fluid.liquidcoralium=Жидкий Коралл
 fluid.liquidantimatter=Жидкое Антивещ-во
 
-#Blocks
+#Блоки
 tile.stone.0.name=Тёмный камень
 tile.stone.1.name=Бездный камень
 tile.stone.2.name=Ужасный камень
@@ -1071,13 +1071,13 @@ tile.statetransformer.name=Трансформатор состояния
 tile.energydepositioner.name=Энергоотправитель
 tile.calcifiedstone.name=Кальцинированный камень
 
-#Pre/Postfixes
+#До/ПослеИсправления
 decorativestatue.prefix=Декоративная %s
 crystalcluster.postfix=%s Скопление
 crystalshard.postfix=%s Осколок
 crystalfragment.postfix=%s Фрагмент
 
-#Items
+#Предметы
 item.devsword.name=Лезвие дэва
 item.oc.name=Катализатор забывчивости
 item.staff.name=Посох сторожа
@@ -1305,8 +1305,8 @@ item.unique_scroll.oblivion.name=Свиток забывчивости
 item.antidote.coralium.name=Противоядие от Коралловой чумы
 item.antidote.dread.name=Противоядие от Ужасной чумы
 
-#Entities
-entity.abyssalcraft.depthsghoul.name=Глубинный гуль
+#Существа
+entity.abyssalcraft.depthsghoul.name=Бездный гуль
 entity.abyssalcraft.evilpig.name=Свинья
 entity.abyssalcraft.abyssalzombie.name=Бездный зомби
 entity.abyssalcraft.Primed ODB.name=Заряженное ОДБ
@@ -1355,7 +1355,7 @@ entity.abyssalcraft.evilsheep.name=Овца
 entity.abyssalcraft.demonsheep.name=Демоническая овца
 entity.abyssalcraft.coraliumsquid.name=Коралловый заражённый спрут
 
-#Potions
+#Алхимия
 potion.Cplague=Коралловая чума
 potion.effect.Cplague=Зелье коралловой чумы
 splash_potion.effect.Cplague=Взрывное зелье от коралловой чумы
@@ -1372,7 +1372,7 @@ splash_potion.effect.Antimatter=Взрывное зелье уничтожени
 lingering_potion.effect.Antimatter=Затяжное зелье уничтожения
 tipped_arrow.effect.Antimatter=Стрела уничтожения
 
-#Enchantments
+#Зачарования
 enchantment.abyssalcraft.coralium=Коралл
 enchantment.abyssalcraft.coralium.desc=Причиняет коралловую чуму при ударе
 enchantment.abyssalcraft.dread=Ужас
@@ -1382,7 +1382,7 @@ enchantment.abyssalcraft.iron_wall.desc=Уменьшает кол-во удар�
 enchantment.abyssalcraft.light_pierce=Лёгкое пронзание
 enchantment.abyssalcraft.light_pierce.desc=Увеличивает урон против Тёмных монстров
 
-#Subtitles
+#субтитры
 subtitle.abyssalcraft.dreadguard.death=Ужасный страж умирает
 subtitle.abyssalcraft.dreadguard.idle=Ужасный страж зловеще бормочет
 subtitle.abyssalcraft.dreadguard.hit=Ужасный страж ранен
@@ -1419,10 +1419,10 @@ subtitle.abyssalcraft.abyssalzombie.hit=Бездный зомби ранен
 subtitle.abyssalcraft.abyssalzombie.death=Бездный зомби умирает
 subtitle.abyssalcraft.antiplayer.hurt=Анти-игрок ранен
 subtitle.abyssalcraft.dreadguard.barf=Ужасный страж блюёт
-subtitle.abyssalcraft.jzahar.blast=BOOM
-subtitle.abyssalcraft.jzahar.shouts=J'zahar tries to Fus Ro Dah
-subtitle.abyssalcraft.jzahar.earthquake=J'zahar tries to rearrange the tectonic plates
-subtitle.abyssalcraft.jzahar.implosion=J'zahar tries to replace gravity with his own version
-subtitle.abyssalcraft.jzahar.black_hole=J'zahar tries to do a cover of a Soundgarden song
+subtitle.abyssalcraft.jzahar.blast=БУМ
+subtitle.abyssalcraft.jzahar.shouts=Джа'зар пытается Раскидать врагов как кегли в боулинге. 
+subtitle.abyssalcraft.jzahar.earthquake=Джа'зар пытается передвинуть тектонические плиты
+subtitle.abyssalcraft.jzahar.implosion=Джа'зар пытается заменить гравитацию собственной версией.
+subtitle.abyssalcraft.jzahar.black_hole=Джа'зар пытается сделать охват песни Soundgarden
 
-#Localization done, Shin out.
+#Локализация завершена, дерьмо.
