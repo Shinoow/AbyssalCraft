@@ -22,6 +22,7 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEntitySpawner;
 
 /**
  * A Spawning Disruption Entry
@@ -57,9 +58,48 @@ public class DisruptionSpawn extends DisruptionEntry {
 				e.printStackTrace();
 			}
 			if(entityliving != null){
-				entityliving.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), entityliving.rotationYaw, entityliving.rotationPitch);
-				((EntityLiving) entityliving).onInitialSpawn(world.getDifficultyForLocation(pos.up()), (IEntityLivingData)null);
-				world.spawnEntity(entityliving);
+				int i = pos.getX() + world.rand.nextInt(16);
+				int j = pos.getY() + world.rand.nextInt(16);
+				int k = pos.getZ() + world.rand.nextInt(16);
+				int l = i;
+				int m = j;
+				int i1 = k;
+
+				boolean flag = false;
+
+				for (int k1 = 0; !flag && k1 < 10; ++k1)
+				{
+					BlockPos blockpos = new BlockPos(i, j, k);
+					if(world.canBlockSeeSky(blockpos))
+						blockpos = world.getTopSolidOrLiquidBlock(blockpos);
+
+					if (WorldEntitySpawner.canCreatureTypeSpawnAtLocation(EntityLiving.SpawnPlacementType.ON_GROUND, world, blockpos))
+					{
+
+						entityliving.setLocationAndAngles(i + 0.5F, j + 0.5F, k + 0.5F, world.rand.nextFloat() * 360.0F, 0.0F);
+						((EntityLiving) entityliving).onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entityliving)), (IEntityLivingData)null);
+						world.spawnEntity(entityliving);
+						flag = true;
+					}
+
+					i += world.rand.nextInt(5) - world.rand.nextInt(5);
+
+					for (k += world.rand.nextInt(5) - world.rand.nextInt(5); i < pos.getX() - 16 || i >= pos.getX() + 16 || k < pos.getZ() - 16 || k >= pos.getZ() + 16 || j < pos.getY() - 16 || j >= pos.getY() + 16; k = i1 + world.rand.nextInt(5) - world.rand.nextInt(16))
+					{
+						i = l + world.rand.nextInt(5) - world.rand.nextInt(16);
+						j = m + world.rand.nextInt(5) - world.rand.nextInt(16);
+					}
+				}
+
+				if(!flag) {
+					double d0 = pos.getX() + (world.rand.nextDouble() - world.rand.nextDouble()) * 4 + 0.5D;
+					double d1 = pos.getY() + world.rand.nextInt(3) - 1;
+					double d2 = pos.getZ() + (world.rand.nextDouble() - world.rand.nextDouble()) * 4 + 0.5D;
+
+					entityliving.setLocationAndAngles(d0, d1, d2, world.rand.nextFloat() * 360.0F, 0.0F);
+					((EntityLiving) entityliving).onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entityliving)), (IEntityLivingData)null);
+					world.spawnEntity(entityliving);
+				}
 			}
 		}
 	}

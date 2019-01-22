@@ -27,6 +27,8 @@ import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.NecronomiconCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
@@ -60,15 +62,8 @@ public class GuiNecronomicon extends GuiScreen {
 	private int bookTotalTurnups = 2;
 	/** Current turn-up, use to switch text between multiple pages */
 	protected int currTurnup;
-	private ButtonNextPage buttonNextPage;
-	private ButtonNextPage buttonPreviousPage;
-	private ButtonCategory buttonCat1;
-	private ButtonCategory buttonCat2;
-	private ButtonCategory buttonCat3;
-	private ButtonCategory buttonCat4;
-	private ButtonCategory buttonCat5;
-	private ButtonCategory buttonCat6;
-	private ButtonCategory buttonCat7;
+	private ButtonNextPage buttonNextPage, buttonPreviousPage;
+	private ButtonCategory buttonCat1, buttonCat2, buttonCat3, buttonCat4, buttonCat5, buttonCat6, buttonCat7;
 	private GuiButton buttonDone;
 	private int bookType;
 	/** Used to check if we're at a text entry (true), or a index (false) */
@@ -79,10 +74,15 @@ public class GuiNecronomicon extends GuiScreen {
 	public static final Map<String, DynamicTexture> successcache = Maps.newHashMap();
 	public static final List<String> failcache = Lists.newArrayList();
 	private static Chapter patreon;
+	private INecroDataCapability cap;
 
-	public GuiNecronomicon(){}
+	public GuiNecronomicon(){
+		if(Minecraft.getMinecraft().player != null)
+			cap = NecroDataCapability.getCap(Minecraft.getMinecraft().player);
+	}
 
 	public GuiNecronomicon(int par1){
+		this();
 		withBookType(par1);
 	}
 
@@ -476,6 +476,12 @@ public class GuiNecronomicon extends GuiScreen {
 
 	protected String localize(String str){
 		return I18n.format(str, new Object[0]);
+	}
+
+	protected boolean isUnlocked(IUnlockCondition cnd){
+		if(cnd instanceof NecronomiconCondition)
+			return getBookType() >= (int)cnd.getConditionObject();
+			else return cap.isUnlocked(cnd, mc.player);
 	}
 
 	private class RitualGuiInstance extends GuiInstance {

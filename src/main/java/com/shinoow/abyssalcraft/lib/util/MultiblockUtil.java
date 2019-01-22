@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.lib.util;
 
 import com.shinoow.abyssalcraft.api.energy.structure.IPlaceOfPower;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +24,8 @@ public class MultiblockUtil {
 	public static boolean tryFormMultiblock(World world, BlockPos pos, int booktype, EntityPlayer player) {
 
 		for(IPlaceOfPower place : StructureHandler.instance().getStructures())
-			if(booktype >= place.getBookType() && place.canConstruct(world, pos, player)) {
+			if(NecroDataCapability.getCap(player).isUnlocked(place.getUnlockCondition(), player) &&
+					booktype >= place.getBookType() && place.canConstruct(world, pos, player)) {
 				if(!world.isRemote)
 					place.construct(world, pos);
 				return true;

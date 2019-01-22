@@ -22,6 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 
@@ -34,15 +35,53 @@ public class DisruptionRandomSpawn extends DisruptionEntry {
 	@Override
 	public void disrupt(World world, BlockPos pos, List<EntityPlayer> players) {
 		if(world.isRemote) return;
-		List<SpawnListEntry> l = world.getBiome(pos).getSpawnableList(EnumCreatureType.MONSTER);
-		if(!l.isEmpty())
+		List<SpawnListEntry> list = world.getBiome(pos).getSpawnableList(EnumCreatureType.MONSTER);
+		if(!list.isEmpty())
 			try {
-				Biome.SpawnListEntry entry = WeightedRandom.getRandomItem(world.rand, l);
+				Biome.SpawnListEntry entry = WeightedRandom.getRandomItem(world.rand, list);
 				EntityLiving entity = entry.newInstance(world);
-				BlockPos pos1 = pos.up();
-				entity.setLocationAndAngles(pos1.getX(), pos1.getY(), pos1.getZ(), entity.rotationYaw, entity.rotationPitch);
-				entity.onInitialSpawn(world.getDifficultyForLocation(pos1), (IEntityLivingData)null);
-				world.spawnEntity(entity);
+
+				int i = pos.getX() + world.rand.nextInt(16);
+				int j = pos.getY() + world.rand.nextInt(16);
+				int k = pos.getZ() + world.rand.nextInt(16);
+				int l = i;
+				int m = j;
+				int i1 = k;
+
+				boolean flag = false;
+
+				for (int k1 = 0; !flag && k1 < 10; ++k1)
+				{
+					BlockPos blockpos = new BlockPos(i, j, k);
+					if(world.canBlockSeeSky(blockpos))
+						blockpos = world.getTopSolidOrLiquidBlock(blockpos);
+
+					if (WorldEntitySpawner.canCreatureTypeSpawnAtLocation(EntityLiving.SpawnPlacementType.ON_GROUND, world, blockpos))
+					{
+
+						entity.setLocationAndAngles(i + 0.5F, j + 0.5F, k + 0.5F, world.rand.nextFloat() * 360.0F, 0.0F);
+						entity.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entity)), (IEntityLivingData)null);
+						world.spawnEntity(entity);
+						flag = true;
+					}
+
+					i += world.rand.nextInt(5) - world.rand.nextInt(5);
+
+					for (k += world.rand.nextInt(5) - world.rand.nextInt(5); i < pos.getX() - 16 || i >= pos.getX() + 16 || k < pos.getZ() - 16 || k >= pos.getZ() + 16 || j < pos.getY() - 16 || j >= pos.getY() + 16; k = i1 + world.rand.nextInt(5) - world.rand.nextInt(16))
+					{
+						i = l + world.rand.nextInt(5) - world.rand.nextInt(16);
+						j = m + world.rand.nextInt(5) - world.rand.nextInt(16);
+					}
+				}
+
+				if(!flag) {
+					double d0 = pos.getX() + (world.rand.nextDouble() - world.rand.nextDouble()) * 4 + 0.5D;
+					double d1 = pos.getY() + world.rand.nextInt(3) - 1;
+					double d2 = pos.getZ() + (world.rand.nextDouble() - world.rand.nextDouble()) * 4 + 0.5D;
+					entity.setLocationAndAngles(d0, d1, d2, world.rand.nextFloat() * 360.0F, 0.0F);
+					entity.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entity)), (IEntityLivingData)null);
+					world.spawnEntity(entity);
+				}
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

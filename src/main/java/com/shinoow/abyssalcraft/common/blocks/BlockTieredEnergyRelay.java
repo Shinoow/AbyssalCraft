@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimT
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyRelay;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredEnergyRelay;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -57,7 +58,8 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		EnumFacing enumfacing = state.getValue(FACING);
+		IBlockState realstate = getActualState(state, source, pos);
+		EnumFacing enumfacing = realstate.getValue(FACING);
 		switch (enumfacing)
 		{
 		case EAST:
@@ -160,7 +162,7 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	{
 		EnumFacing facing = EnumFacing.NORTH;
 
-		TileEntity tile = worldIn.getTileEntity(pos);
+		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
 		if(tile instanceof TileEntityTieredEnergyRelay)
 			facing = EnumFacing.getFront(((TileEntityTieredEnergyRelay) tile).getFacing());
 

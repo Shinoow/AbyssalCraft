@@ -22,10 +22,6 @@ import org.lwjgl.input.Keyboard;
 import com.shinoow.abyssalcraft.api.necronomicon.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.NecronomiconCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
@@ -61,14 +57,12 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private GuiNecronomicon parent;
 	private Item icon;
 	private int currentData;
-	private INecroDataCapability cap;
 
 	public GuiNecronomiconEntry(int bookType, NecroData nd, GuiNecronomicon gui){
 		super(bookType);
 		data = nd;
 		parent = gui;
 		icon = getItem(nd.getDisplayIcon());
-		cap = NecroDataCapability.getCap(Minecraft.getMinecraft().player);
 		buttons = new ButtonCategory[data.getContainedData().size()];
 	}
 
@@ -202,12 +196,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		updateButtons();
 	}
 
-	private boolean isUnlocked(IUnlockCondition cnd){
-		if(cnd instanceof NecronomiconCondition)
-			return getBookType() >= (int)cnd.getConditionObject();
-			else return cap.isUnlocked(cnd, Minecraft.getMinecraft().player);
-	}
-
 	private void drawChapterOrPage(INecroData data, int x, int y){
 		if(data instanceof Chapter)
 			drawChapter((Chapter)data, x, y);
@@ -303,7 +291,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				} else if(failcache.contains(icon1)){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				} else if(successcache.get(icon1) != null){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -320,7 +308,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					if(t != null)
 						GlStateManager.bindTexture(t.getGlTextureId());
-					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					else mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 				}
 		}
@@ -376,7 +364,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 				} else if(failcache.contains(icon2)){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-					mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 				} else if(successcache.get(icon2) != null){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -393,7 +381,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					if(t != null)
 						GlStateManager.bindTexture(t.getGlTextureId());
-					else mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"));
+					else mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
 				}
 		}

@@ -76,11 +76,12 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		ItemStack stack = player.getHeldItem(hand);
 		TileEntity tile = world.getTileEntity(pos);
-		if(tile instanceof IEnergyManipulator && !((IEnergyManipulator) tile).isActive()){
-			((IEnergyManipulator) tile).setActive(getAmplifier(stack), getDeity(stack));
-			if(!world.isRemote)
+		if(tile instanceof IEnergyManipulator){
+			if(!((IEnergyManipulator) tile).isActive() && !world.isRemote) {
+				((IEnergyManipulator) tile).setActive(getAmplifier(stack), getDeity(stack));
 				stack.shrink(1);
-			world.playSound(player, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+				world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+			}
 			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.PASS;

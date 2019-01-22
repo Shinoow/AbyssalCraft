@@ -16,6 +16,7 @@ import static com.shinoow.abyssalcraft.common.blocks.BlockStatue.TYPE;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDecorativeStatue;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -58,7 +59,7 @@ public class BlockDecorativeStatue extends BlockContainer {
 	{
 		EnumFacing facing = EnumFacing.NORTH;
 
-		TileEntity tile = worldIn.getTileEntity(pos);
+		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
 		if(tile instanceof TileEntityDecorativeStatue)
 			facing = EnumFacing.getFront(((TileEntityDecorativeStatue) tile).getFacing());
 

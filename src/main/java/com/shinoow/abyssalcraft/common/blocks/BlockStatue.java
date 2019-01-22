@@ -17,6 +17,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -64,7 +65,7 @@ public class BlockStatue extends BlockContainer {
 	{
 		EnumFacing facing = EnumFacing.NORTH;
 
-		TileEntity tile = worldIn.getTileEntity(pos);
+		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
 		if(tile instanceof TileEntityStatue)
 			facing = EnumFacing.getFront(((TileEntityStatue) tile).getFacing());
 

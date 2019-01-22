@@ -52,7 +52,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.eye_of_the_abyss = new ItemEoA().setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 		ACItems.dreaded_gateway_key = new ItemPortalPlacer(1, "gatewaykeydl").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 		ACItems.coralium_brick = new ItemACBasic("cbrick").setUnlockCondition(new MultiBiomeCondition(ACBiomes.abyssal_wastelands, ACBiomes.coralium_infested_swamp));
-		ACItems.cudgel = new ItemCudgel().setUnlockCondition(new EntityCondition("abyssalcraft:skeletongoliath"));
+		ACItems.cudgel = new ItemCudgel().setUnlockCondition(new EntityCondition("abyssalcraft:gskeleton"));
 		ACItems.carbon_cluster = new ItemACBasic("carboncluster").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 		ACItems.dense_carbon_cluster = new ItemACBasic("densecarboncluster").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 		ACItems.methane = new ItemACBasic("methane");

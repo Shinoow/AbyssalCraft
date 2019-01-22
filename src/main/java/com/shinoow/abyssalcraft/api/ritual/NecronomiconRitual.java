@@ -12,6 +12,8 @@
 package com.shinoow.abyssalcraft.api.ritual;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -28,14 +30,12 @@ import net.minecraft.world.World;
 public abstract class NecronomiconRitual {
 
 	private Object[] offerings = new Object[8];
-	private boolean requiresSacrifice;
-	private int bookType;
-	private int dimension;
-	private String unlocalizedName;
-	private float requiredEnergy;
 	protected Object sacrifice;
-	private boolean nbtSensitive;
-	private boolean nbtSensitiveSacrifice;
+	private String unlocalizedName;
+	private int bookType, dimension;
+	private float requiredEnergy;
+	private boolean requiresSacrifice, nbtSensitive, nbtSensitiveSacrifice;
+	private IUnlockCondition condition = new DefaultCondition();
 
 	/**
 	 * A Necronomicon Ritual
@@ -96,6 +96,14 @@ public abstract class NecronomiconRitual {
 	 */
 	public NecronomiconRitual setNBTSensitiveSacrifice(){
 		nbtSensitiveSacrifice = true;
+		return this;
+	}
+
+	/**
+	 * Sets the Unlock Condition required in order to perform this ritual
+	 */
+	public NecronomiconRitual setUnlockCondition(IUnlockCondition condition) {
+		this.condition = condition;
 		return this;
 	}
 
@@ -188,6 +196,13 @@ public abstract class NecronomiconRitual {
 	 */
 	public boolean isSacrificeNBTSensitive(){
 		return nbtSensitiveSacrifice;
+	}
+
+	/**
+	 * Returns the assigned Unlock Condition required in order to perform this ritual
+	 */
+	public IUnlockCondition getUnlockCondition() {
+		return condition;
 	}
 
 	/**

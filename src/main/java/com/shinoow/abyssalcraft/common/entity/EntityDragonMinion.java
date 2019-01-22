@@ -17,7 +17,6 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
@@ -29,7 +28,6 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -124,13 +122,6 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		adouble[1] = d0 + d1 * par2;
 		adouble[2] = ringBuffer[j][2] + (ringBuffer[k][2] - ringBuffer[j][2]) * par2;
 		return adouble;
-	}
-
-	@Override
-	protected Item getDropItem()
-	{
-		return ACItems.coralium_plagued_flesh;
-
 	}
 
 	@Override

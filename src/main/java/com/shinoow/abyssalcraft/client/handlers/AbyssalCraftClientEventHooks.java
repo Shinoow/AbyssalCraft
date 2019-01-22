@@ -43,6 +43,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -70,10 +71,15 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AbyssalCraftClientEventHooks {
+
+	public static float partialTicks = 0;
 
 	@SubscribeEvent
 	public void onUpdateFOV(FOVUpdateEvent event) {
@@ -277,6 +283,21 @@ public class AbyssalCraftClientEventHooks {
 				event.getToolTip().add("Required PE per cast: "+(int)spell.getReqEnergy());
 				event.getToolTip().add("Cast type: "+TextFormatting.GOLD+(spell.requiresCharging() ? "Charge" : "Instant"));
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void renderTick(RenderTickEvent event) {
+		if(event.phase == Phase.START)
+			partialTicks = event.renderTickTime;
+	}
+
+	@SubscribeEvent
+	public static void clientTickEnd(ClientTickEvent event) {
+		if(event.phase == Phase.END) {
+			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
+			if(gui == null || !gui.doesGuiPauseGame())
+				partialTicks = 0;
 		}
 	}
 

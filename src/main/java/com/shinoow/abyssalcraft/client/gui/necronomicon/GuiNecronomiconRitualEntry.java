@@ -30,7 +30,6 @@ import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.lib.util.IHiddenRitual;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -190,7 +189,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 
 		if(tooltipStack != null)
 		{
-			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, TooltipFlags.NORMAL);
+			List<String> tooltipData = tooltipStack.getTooltip(mc.player, TooltipFlags.NORMAL);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 
@@ -227,7 +226,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		if(stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			stack.setItemDamage(0);
 
-		RenderItem render = Minecraft.getMinecraft().getRenderItem();
+		RenderItem render = mc.getRenderItem();
 		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
 			tooltipStack = stack;
 
@@ -238,7 +237,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.enableDepth();
 		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
+		render.renderItemOverlayIntoGUI(mc.fontRenderer, stack, xPos, yPos, null);
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.popMatrix();
 
@@ -250,7 +249,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		dimToString.putAll(RitualRegistry.instance().getDimensionNameMappings());
 
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
-			if(ritual.getBookType() == ritualnum && !(ritual instanceof IHiddenRitual))
+			if(ritual.getBookType() == ritualnum && isUnlocked(ritual.getUnlockCondition()) && !(ritual instanceof IHiddenRitual))
 				rituals.add(ritual);
 		setTurnupLimit(rituals.size());
 	}

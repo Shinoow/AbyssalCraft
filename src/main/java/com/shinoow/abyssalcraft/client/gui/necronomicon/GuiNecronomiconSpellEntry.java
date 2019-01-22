@@ -18,14 +18,13 @@ import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
+import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -36,7 +35,6 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag.TooltipFlags;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -137,7 +135,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		writeText(1, "PE per cast: " + spell.getReqEnergy() + " PE", 125);
 		writeText(1, "Spell Type: "+ (spell.requiresCharging() ? "Charging" : "Instant"), 135);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/spell.png"));
+		mc.renderEngine.bindTexture(NecronomiconResources.SPELL);
 		drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 
 		tooltipStack = null;
@@ -158,7 +156,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 
 		if(tooltipStack != null)
 		{
-			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, TooltipFlags.NORMAL);
+			List<String> tooltipData = tooltipStack.getTooltip(mc.player, TooltipFlags.NORMAL);
 			List<String> parsedTooltip = new ArrayList();
 			boolean first = true;
 
@@ -189,7 +187,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		if(stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 			stack.setItemDamage(0);
 
-		RenderItem render = Minecraft.getMinecraft().getRenderItem();
+		RenderItem render = mc.getRenderItem();
 		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
 			tooltipStack = stack;
 
@@ -200,7 +198,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.enableDepth();
 		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
+		render.renderItemOverlayIntoGUI(mc.fontRenderer, stack, xPos, yPos, null);
 		RenderHelper.disableStandardItemLighting();
 		GlStateManager.popMatrix();
 
@@ -209,8 +207,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 
 	private void initStuff(){
 		for(Spell spell : SpellRegistry.instance().getSpells())
-			if(NecroDataCapability.getCap(Minecraft.getMinecraft().player).isUnlocked(spell.getUnlockCondition(), Minecraft.getMinecraft().player)
-					&& spell.getBookType() <= getBookType())
+			if(isUnlocked(spell.getUnlockCondition()) && spell.getBookType() <= getBookType())
 				spells.add(spell);
 		setTurnupLimit(spells.size());
 	}

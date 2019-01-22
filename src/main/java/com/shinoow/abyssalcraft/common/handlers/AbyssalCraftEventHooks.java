@@ -149,26 +149,31 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void damageStuff(LivingAttackEvent event){
-		if(event.getEntityLiving() instanceof IDreadEntity && (event.getSource().getTrueSource() instanceof IDreadEntity
-				|| event.getSource() == AbyssalCraftAPI.dread))
-			event.setCanceled(true);
-		if(event.getEntityLiving() instanceof ICoraliumEntity && (event.getSource().getTrueSource() instanceof ICoraliumEntity
-				|| event.getSource() == AbyssalCraftAPI.coralium))
-			event.setCanceled(true);
-		if(event.getEntityLiving() instanceof IAntiEntity && (event.getSource().getTrueSource() instanceof IAntiEntity
-				|| event.getSource() == AbyssalCraftAPI.antimatter))
-			event.setCanceled(true);
-		if(event.getEntityLiving().getCreatureAttribute() == AbyssalCraftAPI.SHADOW && (event.getSource().getTrueSource() instanceof EntityLivingBase
-				&& ((EntityLivingBase) event.getSource().getTrueSource()).getCreatureAttribute() == AbyssalCraftAPI.SHADOW
-				|| event.getSource() == AbyssalCraftAPI.shadow))
-			event.setCanceled(true);
-		if(event.getEntityLiving() instanceof IOmotholEntity && (event.getSource().getTrueSource() instanceof IOmotholEntity
-				|| event.getSource() == AbyssalCraftAPI.dread || event.getSource() == AbyssalCraftAPI.coralium
-				|| event.getSource() == AbyssalCraftAPI.antimatter || event.getSource() == AbyssalCraftAPI.acid))
-			event.setCanceled(true);
-		if(event.getEntityLiving() instanceof EntityPlayer && EntityUtil.isEntityCoralium(event.getEntityLiving()) &&
-				event.getSource() == AbyssalCraftAPI.coralium)
-			event.setCanceled(true);
+		EntityLivingBase entity = event.getEntityLiving();
+		if(EntityUtil.isEntityCoralium(entity) || entity instanceof IDreadEntity || entity instanceof IAntiEntity ||
+				entity.getCreatureAttribute() == AbyssalCraftAPI.SHADOW) {
+			DamageSource source = event.getSource();
+			if(entity instanceof IDreadEntity && (source.getTrueSource() instanceof IDreadEntity
+					|| source == AbyssalCraftAPI.dread))
+				event.setCanceled(true);
+			if(entity instanceof ICoraliumEntity && (source.getTrueSource() instanceof ICoraliumEntity
+					|| source == AbyssalCraftAPI.coralium))
+				event.setCanceled(true);
+			if(entity instanceof IAntiEntity && (source.getTrueSource() instanceof IAntiEntity
+					|| source == AbyssalCraftAPI.antimatter))
+				event.setCanceled(true);
+			if(entity.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && (source.getTrueSource() instanceof EntityLivingBase
+					&& ((EntityLivingBase) source.getTrueSource()).getCreatureAttribute() == AbyssalCraftAPI.SHADOW
+					|| source == AbyssalCraftAPI.shadow))
+				event.setCanceled(true);
+			if(entity instanceof IOmotholEntity && (source.getTrueSource() instanceof IOmotholEntity
+					|| source == AbyssalCraftAPI.dread || source == AbyssalCraftAPI.coralium
+					|| source == AbyssalCraftAPI.antimatter || source == AbyssalCraftAPI.acid))
+				event.setCanceled(true);
+			if(entity instanceof EntityPlayer && EntityUtil.isEntityCoralium(entity) &&
+					source == AbyssalCraftAPI.coralium)
+				event.setCanceled(true);
+		}
 	}
 
 	@SubscribeEvent

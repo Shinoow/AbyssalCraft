@@ -15,6 +15,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStateTransformer;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -61,7 +62,7 @@ public class BlockStateTransformer extends BlockACBasic {
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		boolean b = false;
-		TileEntity tile = worldIn.getTileEntity(pos);
+		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
 		if(tile instanceof TileEntityStateTransformer)
 			b = !((TileEntityStateTransformer)tile).getStackInSlot(0).isEmpty();
 

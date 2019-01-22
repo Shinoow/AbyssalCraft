@@ -16,15 +16,23 @@ import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.structure.IPlaceOfPower;
 import com.shinoow.abyssalcraft.api.energy.structure.IStructureBase;
 import com.shinoow.abyssalcraft.api.energy.structure.IStructureComponent;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
+import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TestStructure implements IPlaceOfPower {
+
+	private IBlockState monolith_stone = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE);
+	private IBlockState monolith_pillar = ACBlocks.monolith_pillar.getDefaultState();
+	private IBlockState statue = ACBlocks.statue.getDefaultState();
 
 	@Override
 	public String getIdentifier() {
@@ -36,6 +44,12 @@ public class TestStructure implements IPlaceOfPower {
 	public int getBookType() {
 
 		return 0;
+	}
+
+	@Override
+	public IUnlockCondition getUnlockCondition() {
+
+		return new DefaultCondition();
 	}
 
 	@Override
@@ -146,5 +160,25 @@ public class TestStructure implements IPlaceOfPower {
 
 	private static boolean isMonolithStone(IBlockState state) {
 		return state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) == EnumStoneType.MONOLITH_STONE;
+	}
+
+	@Override
+	public IBlockState[][][] getRenderData() {
+
+		IBlockState[][] one = {new IBlockState[]{monolith_stone, monolith_stone, monolith_stone}, new IBlockState[]{monolith_stone, monolith_stone, monolith_stone},
+				new IBlockState[]{monolith_stone, monolith_stone, monolith_stone}};
+		IBlockState[][] two = {new IBlockState[]{monolith_pillar, monolith_stone, monolith_pillar}, new IBlockState[]{monolith_stone, monolith_stone, monolith_stone},
+				new IBlockState[]{monolith_pillar, monolith_stone, monolith_pillar}};
+		IBlockState[][] three = {new IBlockState[]{null, statue.withProperty(BlockStatue.FACING, EnumFacing.WEST), null},
+				new IBlockState[]{statue, monolith_stone, statue.withProperty(BlockStatue.FACING, EnumFacing.SOUTH)},
+				new IBlockState[]{null, statue.withProperty(BlockStatue.FACING, EnumFacing.EAST), null}};
+
+		return new IBlockState[][][] {one, two, three};
+	}
+
+	@Override
+	public BlockPos getActivationPointForRender() {
+
+		return new BlockPos(1, 2, 1);
 	}
 }

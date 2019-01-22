@@ -12,7 +12,9 @@
 package com.shinoow.abyssalcraft.api.energy.structure;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -39,6 +41,11 @@ public interface IPlaceOfPower {
 	public int getBookType();
 
 	/**
+	 * Returns the Unlock Condition required in order to form this Place of Power
+	 */
+	public IUnlockCondition getUnlockCondition();
+
+	/**
 	 * If the Place of Power amplifies any stats of statues used in it, handle that here
 	 * @param type Amplifier Type to amplify
 	 * @return A value to increase the selected stat with, or 0
@@ -60,11 +67,21 @@ public interface IPlaceOfPower {
 	public void validate(World world, BlockPos pos);
 
 	/**
-	 * Checks whether or not the structure can be constructed (the Book Type is checked prior to this)
+	 * Checks whether or not the structure can be constructed (the Book Type and Unlock Condition are checked prior to this)
 	 * @param world Current World
 	 * @param pos Current Position (where the Player constructing this right-clicked)
 	 * @param player Player attempting to construct this
 	 * @return True if the structure can be constructed, otherwise false
 	 */
 	public boolean canConstruct(World world, BlockPos pos, EntityPlayer player);
+
+	/**
+	 * Returns a multidimensional array of Block States depicting how the structure looks when assembled
+	 */
+	public IBlockState[][][] getRenderData();
+
+	/**
+	 * Returns the position of the block that forms the structure when activated
+	 */
+	public BlockPos getActivationPointForRender();
 }

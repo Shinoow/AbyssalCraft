@@ -61,7 +61,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
-public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
+public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, IEntityMultiPart, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityLesserShoggoth.class, DataSerializers.BYTE);
 	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.BYTE);
@@ -74,6 +74,9 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, c
 	private float shoggothWidth = -1.0F;
 	private float shoggothHeight;
 	public boolean isBuilding, isAssisting;
+	public MultiPartEntityPart[] shoggothParts;
+
+	public MultiPartEntityPart shoggothHead, shoggothBody;
 
 	public EntityLesserShoggoth(World par1World) {
 		super(par1World);
@@ -104,6 +107,8 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, c
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 20, true, false, entity -> EntityUtil.isShoggothFood((EntityLivingBase) entity)));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 10, true, false, null));
 		setSize(1.8F, 2.6F);
+
+		shoggothParts = new MultiPartEntityPart[] {shoggothHead = new MultiPartEntityPart(this, "head", 1.0F, 1.0F), shoggothBody = new MultiPartEntityPart(this, "body", 1.0F, 1.0F)};
 	}
 
 	@Override
@@ -309,6 +314,40 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, c
 
 		for (int i = 0; i < 2 * getBrightness() && getShoggothType() == 4 && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
 			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+
+		double a = Math.toRadians(rotationYaw);
+		double offsetx = -Math.sin(a);
+		double offsetz = Math.cos(a);
+
+		if(!isChild()) {
+			//sizes
+			shoggothBody.height = 2.2F;
+			shoggothBody.width = 1.8F;
+
+			shoggothHead.width = 1.6F;
+			shoggothHead.height = 1.2F;
+
+			//rotations
+			shoggothBody.onUpdate();
+			shoggothBody.setLocationAndAngles(posX - offsetx * 0.1F, posY, posZ - offsetz * 0.1F, 0.0F, 0.0F);
+
+			shoggothHead.onUpdate();
+			shoggothHead.setLocationAndAngles(posX - offsetx * -0.5d, posY + 1.5f, posZ - offsetz * -0.5d, 0.0F, 0.0F);
+		} else {
+			//sizes
+			shoggothBody.height = 1.1F;
+			shoggothBody.width = 0.9F;
+
+			shoggothHead.width = 0.8F;
+			shoggothHead.height = 0.6F;
+
+			//rotations
+			shoggothBody.onUpdate();
+			shoggothBody.setLocationAndAngles(posX - offsetx * 0.1F, posY, posZ - offsetz * 0.1F, 0.0F, 0.0F);
+
+			shoggothHead.onUpdate();
+			shoggothHead.setLocationAndAngles(posX - offsetx * -0.25d, posY + 0.75f, posZ - offsetz * -0.25d, 0.0F, 0.0F);
+		}
 	}
 
 	/**
@@ -388,17 +427,11 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, c
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par1DamageSource.isProjectile()){
-			playSound(SoundEvents.ENTITY_SMALL_SLIME_JUMP, getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
-			return false;
-		}
 		if(par1DamageSource == DamageSource.IN_WALL)
 			if(world.getBlockState(getPosition())  != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE) && world.getGameRules().getBoolean("mobGriefing"))
 				sprayAcid(true);
-			else return false;
-		if(par1DamageSource == DamageSource.CACTUS) return false;
 
-		return super.attackEntityFrom(par1DamageSource, par2);
+		return false;
 	}
 
 	@Override
@@ -636,6 +669,29 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, c
 	protected final void multiplySize(float p_146069_1_)
 	{
 		super.setSize(shoggothWidth * p_146069_1_, shoggothHeight * p_146069_1_);
+	}
+
+	@Override
+	public World getWorld() {
+
+		return world;
+	}
+
+	@Override
+	public boolean attackEntityFromPart(MultiPartEntityPart part, DamageSource source, float damage) {
+		if(source.isProjectile()){
+			playSound(SoundEvents.ENTITY_SLIME_JUMP, getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
+			return false;
+		}
+
+		if(source == DamageSource.CACTUS) return false;
+		return super.attackEntityFrom(source, damage);
+	}
+
+	@Override
+	public Entity[] getParts()
+	{
+		return shoggothParts;
 	}
 
 	class GroupData implements IEntityLivingData

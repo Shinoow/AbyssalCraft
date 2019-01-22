@@ -35,6 +35,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.WorldServer;
 
 public class TileEntityStatue extends TileEntity implements IEnergyManipulator, ITickable, IStructureComponent {
 
@@ -217,7 +218,8 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 
 		if(isActive()){
 			activationTimer--;
-			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0);
+			((WorldServer)world).spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0, 0, 1.0);
+			//			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0);
 		} else PEUtils.clearManipulatorData(this);
 
 		int range = (int) (7 + PEUtils.getRangeAmplifiers(world, pos, this)*4 + getAmplifier(AmplifierType.RANGE));

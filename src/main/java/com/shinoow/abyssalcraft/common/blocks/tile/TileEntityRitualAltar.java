@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.event.ACEvents.DisruptionEvent;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
@@ -300,7 +301,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 				if(RitualRegistry.instance().canPerformAction(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType()))
 					if(canPerform()){
 						ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
-						if(ritual != null)
+						if(ritual != null && NecroDataCapability.getCap(player).isUnlocked(ritual.getUnlockCondition(), player))
 							if(ritual.requiresSacrifice()){
 								if(!world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)).isEmpty())
 									for(EntityLiving mob : world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)))

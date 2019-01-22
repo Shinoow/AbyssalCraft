@@ -23,6 +23,7 @@ import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.MultiPartEntityPart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -84,6 +85,29 @@ public class StaffOfRendingMessage extends AbstractServerMessage<StaffOfRendingM
 							staff.increaseEnergy(stack, "Dread");
 				} else if(player.world.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
 						target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && target.isNonBoss())
+					if(!target.isDead)
+						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
+							staff.increaseEnergy(stack, "Omothol");
+			} else if(e instanceof MultiPartEntityPart && ((MultiPartEntityPart) e).parent instanceof EntityLiving) {
+				IStaffOfRending staff = (IStaffOfRending)stack.getItem();
+				MultiPartEntityPart target = (MultiPartEntityPart)e;
+				EntityLiving parent = (EntityLiving) target.parent;
+				if(parent.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && parent.isNonBoss()){
+					if(!target.isDead)
+						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
+							staff.increaseEnergy(stack, "Shadow");
+				} else if(player.world.provider.getDimension() == ACLib.abyssal_wasteland_id && parent instanceof ICoraliumEntity &&
+						parent.isNonBoss()){
+					if(!target.isDead)
+						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
+							staff.increaseEnergy(stack, "Abyssal");
+				} else if(player.world.provider.getDimension() == ACLib.dreadlands_id && parent instanceof IDreadEntity &&
+						parent.isNonBoss()){
+					if(!target.isDead)
+						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
+							staff.increaseEnergy(stack, "Dread");
+				} else if(player.world.provider.getDimension() == ACLib.omothol_id && parent instanceof IOmotholEntity &&
+						parent.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && parent.isNonBoss())
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
 							staff.increaseEnergy(stack, "Omothol");
