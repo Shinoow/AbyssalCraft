@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -22,7 +22,9 @@ import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MultiPartEntityPart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -151,6 +153,35 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 									consumeEnergy(target.getMaxHealth()/2);
 									increaseEnergy(3, staff.getDrainAmount(stack));
 								}
+					for(MultiPartEntityPart target : world.getEntitiesWithinAABB(MultiPartEntityPart.class, new AxisAlignedBB(pos).grow(15, 3, 15)))
+						if(target.parent instanceof EntityLiving)
+							if(((EntityLiving) target.parent).getCreatureAttribute() == AbyssalCraftAPI.SHADOW && target.isNonBoss()){
+								if(!target.isDead && getContainedEnergy() >= ((EntityLiving) target.parent).getMaxHealth()/2)
+									if(target.attackEntityFrom(DamageSource.MAGIC, staff.getDrainAmount(stack))){
+										consumeEnergy(((EntityLiving) target.parent).getMaxHealth()/2);
+										increaseEnergy(0, staff.getDrainAmount(stack));
+									}
+							} else if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && target.parent instanceof ICoraliumEntity &&
+									target.isNonBoss()){
+								if(!target.isDead && getContainedEnergy() >= ((EntityLiving) target.parent).getMaxHealth()/2)
+									if(target.attackEntityFrom(DamageSource.MAGIC, staff.getDrainAmount(stack))){
+										consumeEnergy(((EntityLiving) target.parent).getMaxHealth()/2);
+										increaseEnergy(1, staff.getDrainAmount(stack));
+									}
+							} else if(world.provider.getDimension() == ACLib.dreadlands_id && target.parent instanceof IDreadEntity &&
+									target.isNonBoss()){
+								if(!target.isDead && getContainedEnergy() >= ((EntityLiving) target.parent).getMaxHealth()/2)
+									if(target.attackEntityFrom(DamageSource.MAGIC, staff.getDrainAmount(stack))){
+										consumeEnergy(((EntityLiving) target.parent).getMaxHealth()/2);
+										increaseEnergy(2, staff.getDrainAmount(stack));
+									}
+							} else if(world.provider.getDimension() == ACLib.omothol_id && target.parent instanceof IOmotholEntity &&
+									((EntityLiving) target.parent).getCreatureAttribute() != AbyssalCraftAPI.SHADOW && target.isNonBoss())
+								if(!target.isDead && getContainedEnergy() >= ((EntityLiving) target.parent).getMaxHealth()/2)
+									if(target.attackEntityFrom(DamageSource.MAGIC, staff.getDrainAmount(stack))){
+										consumeEnergy(((EntityLiving) target.parent).getMaxHealth()/2);
+										increaseEnergy(3, staff.getDrainAmount(stack));
+									}
 				}
 
 		if(getEnergy(0) >= 200){

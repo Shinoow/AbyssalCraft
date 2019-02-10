@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -184,5 +184,7 @@ public class ACBlocks {
 	public static Block state_transformer;
 	public static Block energy_depositioner;
 	public static Block calcified_stone;
+	public static Block darklands_oak_door;
+	public static Block dreadlands_door;
 	public static Block multi_block;
 }

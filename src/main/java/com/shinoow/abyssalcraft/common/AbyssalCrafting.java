@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -24,9 +24,7 @@ import com.shinoow.abyssalcraft.common.disruptions.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilSheep;
 import com.shinoow.abyssalcraft.common.ritual.*;
-import com.shinoow.abyssalcraft.common.spells.EntropySpell;
-import com.shinoow.abyssalcraft.common.spells.LifeDrainSpell;
-import com.shinoow.abyssalcraft.common.spells.MiningSpell;
+import com.shinoow.abyssalcraft.common.spells.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
@@ -644,6 +642,14 @@ public class AbyssalCrafting {
 		SpellRegistry.instance().registerSpell(new EntropySpell());
 		SpellRegistry.instance().registerSpell(new LifeDrainSpell());
 		SpellRegistry.instance().registerSpell(new MiningSpell());
+		SpellRegistry.instance().registerSpell(new GraspofCthulhuSpell());
+		SpellRegistry.instance().registerSpell(new InvisibilitySpell());
+		SpellRegistry.instance().registerSpell(new DetachmentSpell());
+		SpellRegistry.instance().registerSpell(new StealVigorSpell());
+		SpellRegistry.instance().registerSpell(new SirensSongSpell());
+		SpellRegistry.instance().registerSpell(new UndeathtoDustSpell());
+		SpellRegistry.instance().registerSpell(new OozeRemovalSpell());
+		SpellRegistry.instance().registerSpell(new TeleportHostilesSpell());
 	}
 
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,8 +12,6 @@
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -25,26 +23,19 @@ import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
-import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag.TooltipFlags;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiNecronomiconEntry extends GuiNecronomicon {
 
@@ -278,9 +269,9 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					renderItem(k + 93, b0 + 52,((CraftingStack)icon1).getOutput(), x, y);
 					fontRenderer.setUnicodeFlag(unicode);
 					for(int i = 0; i <= 2; i++){
-						renderItem(k + 24 +i*21, b0 + 31,((CraftingStack)icon1).getFirstArray()[i], x, y);
-						renderItem(k + 24 +i*21, b0 + 52,((CraftingStack)icon1).getSecondArray()[i], x, y);
-						renderItem(k + 24 +i*21, b0 + 73,((CraftingStack)icon1).getThirdArray()[i], x, y);
+						renderObject(k + 24 +i*21, b0 + 31,((CraftingStack)icon1).getRecipe()[i], x, y);
+						renderObject(k + 24 +i*21, b0 + 52,((CraftingStack)icon1).getRecipe()[3+i], x, y);
+						renderObject(k + 24 +i*21, b0 + 73,((CraftingStack)icon1).getRecipe()[6+i], x, y);
 					}
 				}
 			}
@@ -351,9 +342,9 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					renderItem(k + 93 + n, b0 + 52,((CraftingStack)icon2).getOutput(), x, y);
 					fontRenderer.setUnicodeFlag(unicode);
 					for(int i = 0; i <= 2; i++){
-						renderItem(k + 24 + n +i*21, b0 + 31,((CraftingStack)icon2).getFirstArray()[i], x, y);
-						renderItem(k + 24 + n +i*21, b0 + 52,((CraftingStack)icon2).getSecondArray()[i], x, y);
-						renderItem(k + 24 + n +i*21, b0 + 73,((CraftingStack)icon2).getThirdArray()[i], x, y);
+						renderObject(k + 24 + n +i*21, b0 + 31,((CraftingStack)icon2).getRecipe()[i], x, y);
+						renderObject(k + 24 + n +i*21, b0 + 52,((CraftingStack)icon2).getRecipe()[3+i], x, y);
+						renderObject(k + 24 + n +i*21, b0 + 73,((CraftingStack)icon2).getRecipe()[6+i], x, y);
 					}
 				}
 			}
@@ -386,22 +377,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				}
 		}
 
-		if(tooltipStack != null)
-		{
-			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, TooltipFlags.NORMAL);
-			List<String> parsedTooltip = new ArrayList();
-			boolean first = true;
-
-			for(String s : tooltipData)
-			{
-				String s_ = s;
-				if(!first)
-					s_ = TextFormatting.GRAY + s;
-				parsedTooltip.add(s_);
-				first = false;
-			}
-			GuiRenderHelper.renderTooltip(x, y, parsedTooltip);
-		}
+		renderTooltip(x, y);
 	}
 
 	private void writeTexts(Object icon1, Object icon2, String text1, String text2, boolean locked1, boolean locked2){
@@ -433,31 +409,5 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		boolean b = !isUnlocked(data.getCondition());
 		getFontRenderer(b).drawSplitString(b ? NecronomiconText.LABEL_TEST : stuff, k + 20, b0 + 16, 116, 0xC40000);
 		if(data.hasText()) writeText(2, b ? NecronomiconText.TEST : data.getText(), b);
-	}
-
-	private ItemStack tooltipStack;
-	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
-	{
-		if(stack == null || stack.isEmpty()) return;
-
-		if(stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
-			stack.setItemDamage(0);
-
-		RenderItem render = Minecraft.getMinecraft().getRenderItem();
-		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
-			tooltipStack = stack;
-
-		GlStateManager.pushMatrix();
-		GlStateManager.enableBlend();
-		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
-		RenderHelper.enableGUIStandardItemLighting();
-		GlStateManager.enableRescaleNormal();
-		GlStateManager.enableDepth();
-		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
-		RenderHelper.disableStandardItemLighting();
-		GlStateManager.popMatrix();
-
-		GlStateManager.disableLighting();
 	}
 }

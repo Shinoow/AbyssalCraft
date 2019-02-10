@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -250,6 +250,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.state_transformer = new BlockStateTransformer();
 		ACBlocks.energy_depositioner = new BlockEnergyDepositioner();
 		ACBlocks.calcified_stone = new BlockCalcifiedStone();
+		ACBlocks.darklands_oak_door = new BlockACDoor(Material.WOOD, 3.0F, 15.0F, SoundType.WOOD, MapColor.BROWN).setUnlocalizedName("door_dlt");
+		ACBlocks.dreadlands_door = new BlockACDoor(Material.WOOD, 3.0F, 15.0F, SoundType.WOOD, MapColor.RED).setUnlocalizedName("door_drt");
 		ACBlocks.multi_block = new BlockMultiblock();
 
 		((BlockRitualAltar)ACBlocks.ritual_altar).setBlocks();
@@ -286,7 +288,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityRendingPedestal.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityRendingPedestal"));
 		GameRegistry.registerTileEntity(TileEntityStateTransformer.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityStateTransformer"));
 		GameRegistry.registerTileEntity(TileEntityEnergyDepositioner.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityEnergyDepositioner"));
-		//		GameRegistry.registerTileEntity(TileEntityMultiblock.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityMultiblock"));
+		GameRegistry.registerTileEntity(TileEntityMultiblock.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityMultiblock"));
 
 		registerBlock(ACBlocks.stone, new ItemMetadataBlock(ACBlocks.stone), "stone");
 		registerBlock(ACBlocks.cobblestone, new ItemMetadataBlock(ACBlocks.cobblestone), "cobblestone");
@@ -492,7 +494,9 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.state_transformer, "statetransformer");
 		registerBlock(ACBlocks.energy_depositioner, "energydepositioner");
 		registerBlock(ACBlocks.calcified_stone, "calcifiedstone");
-		//		registerBlock(ACBlocks.multi_block, "multiblock");
+		registerBlock(ACBlocks.darklands_oak_door, null, "door_dlt");
+		registerBlock(ACBlocks.dreadlands_door, null, "door_drt");
+		registerBlock(ACBlocks.multi_block, "multiblock");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);
@@ -609,7 +613,8 @@ public class BlockHandler implements ILifeCycleHandler {
 	public void loadComplete(FMLLoadCompleteEvent event) {}
 
 	private static void registerItem(Item item, String name){
-		InitHandler.INSTANCE.ITEMS.add(item.setRegistryName(new ResourceLocation(AbyssalCraft.modid, name)));
+		if(item != null)
+			InitHandler.INSTANCE.ITEMS.add(item.setRegistryName(new ResourceLocation(AbyssalCraft.modid, name)));
 	}
 
 	private static void registerBlock(Block block, String name){

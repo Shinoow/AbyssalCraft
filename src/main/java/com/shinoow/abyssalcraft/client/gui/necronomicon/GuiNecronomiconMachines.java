@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,23 +23,14 @@ import com.shinoow.abyssalcraft.api.recipe.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
-import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.GlStateManager.DestFactor;
-import net.minecraft.client.renderer.GlStateManager.SourceFactor;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag.TooltipFlags;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiNecronomiconMachines extends GuiNecronomicon {
 
@@ -290,22 +280,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			}
 		}
 
-		if(tooltipStack != null)
-		{
-			List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, TooltipFlags.NORMAL);
-			List<String> parsedTooltip = new ArrayList();
-			boolean first = true;
-
-			for(String s : tooltipData)
-			{
-				String s_ = s;
-				if(!first)
-					s_ = TextFormatting.GRAY + s;
-				parsedTooltip.add(s_);
-				first = false;
-			}
-			GuiRenderHelper.renderTooltip(x, y, parsedTooltip);
-		}
+		renderTooltip(x, y);
 	}
 
 	private void drawTItems(Entry<ItemStack, ItemStack> entry, int num, int low, int mid, int high, int x, int y){
@@ -359,31 +334,5 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		renderItem(k + 166 + 44, b0 + 28 + (num-low)*20 + num-low, mat.output.copy(), x, y);
 
 		fontRenderer.setUnicodeFlag(unicode);
-	}
-
-	private ItemStack tooltipStack;
-	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
-	{
-		if(stack == null || stack.isEmpty()) return;
-
-		if(stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
-			stack.setItemDamage(0);
-
-		RenderItem render = Minecraft.getMinecraft().getRenderItem();
-		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
-			tooltipStack = stack;
-
-		GlStateManager.pushMatrix();
-		GlStateManager.enableBlend();
-		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
-		RenderHelper.enableGUIStandardItemLighting();
-		GlStateManager.enableRescaleNormal();
-		GlStateManager.enableBlend();
-		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-		render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
-		RenderHelper.disableStandardItemLighting();
-		GlStateManager.popMatrix();
-
-		GlStateManager.disableLighting();
 	}
 }

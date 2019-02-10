@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.disruptions;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
@@ -40,6 +41,15 @@ public class DisruptionRandomSwarm extends DisruptionEntry {
 			for(int i2 = 0; i2 < 4; i2++)
 				try {
 					Biome.SpawnListEntry entry = WeightedRandom.getRandomItem(world.rand, list);
+					if(entry.entityClass == EntityLesserDreadbeast.class) {
+						int num = 0;
+						while(entry.entityClass == EntityLesserDreadbeast.class && num < 10) {
+							num++;
+							entry = WeightedRandom.getRandomItem(world.rand, list);
+						}
+						if(num == 10 && entry.entityClass == EntityLesserDreadbeast.class)
+							continue;
+					}
 					EntityLiving entity = entry.newInstance(world);
 
 					int i = pos.getX() + world.rand.nextInt(16);

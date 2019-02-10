@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -18,7 +18,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -31,7 +30,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 public class CraftingStack {
 
 	private ItemStack output;
-	private ItemStack[] recipe = new ItemStack[9];
+	private Object[] recipe = new Object[9];
 
 	/**
 	 * Simple collection of Objects used to display a recipe
@@ -43,8 +42,7 @@ public class CraftingStack {
 			if(recipe != null){
 				if(recipe.length == 9){
 					this.output = APIUtils.convertToStack(output);
-					for(int i = 0; i < 9; i++)
-						this.recipe[i] = APIUtils.convertToStack(recipe[i]);
+					this.recipe = recipe;
 				} else throw new ArrayIndexOutOfBoundsException("The array must contain preciesly 9 elements, not "+recipe.length+"!");
 			} else throw new NullPointerException("This array can't be empty!");
 		} else throw new NullPointerException("Output can't be null!");
@@ -88,13 +86,8 @@ public class CraftingStack {
 					}
 					this.output.setCount(recipe.getRecipeOutput().getCount());
 				}
-			for(int i = 0; i < 9; i++)
-				recipe[i] = APIUtils.convertToStack(stuff[i]);
+			recipe = stuff;
 		}
-
-		for(ItemStack stack : recipe)
-			if(stack != null && stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
-				stack.setItemDamage(0);
 	}
 
 	/**
@@ -108,40 +101,58 @@ public class CraftingStack {
 	/**
 	 * Getter for the ItemStack array containing the recipe
 	 * @return An array of ItemStacks representing the crafting recipe
+	 * @deprecated Use the version that returns an Object array instead
 	 */
+	@Deprecated
 	public ItemStack[] getCraftingRecipe(){
-		return recipe;
+		return new ItemStack[0];
 	}
 
 	/**
 	 * Getter for the first 3 positioned ItemStacks in the crafting grid
 	 * @return An ItemStack array with 3 ItemStacks
+	 * @deprecated Use the version that returns an Object array instead
 	 */
+	@Deprecated
 	public ItemStack[] getFirstArray(){
-		return new ItemStack[]{recipe[0], recipe[1], recipe[2]};
+		return new ItemStack[0];
 	}
 
 	/**
 	 * Getter for the second 3 positioned ItemStacks in the crafting grid
 	 * @return An ItemStack array with 3 ItemStacks
+	 * @deprecated Use the version that returns an Object array instead
 	 */
+	@Deprecated
 	public ItemStack[] getSecondArray(){
-		return new ItemStack[]{recipe[3], recipe[4], recipe[5]};
+		return new ItemStack[0];
 	}
 
 	/**
 	 * Getter for the third 3 positioned ItemStacks in the crafting grid
 	 * @return An ItemStack array with 3 ItemStacks
+	 * @deprecated Use the version that returns an Object array instead
 	 */
+	@Deprecated
 	public ItemStack[] getThirdArray(){
-		return new ItemStack[]{recipe[6], recipe[7], recipe[8]};
+		return new ItemStack[0];
+	}
+
+	/**
+	 * Getter for the Object array containing the recipe
+	 * @return An array of Objects representing the crafting recipe
+	 */
+	public Object[] getRecipe(){
+		return recipe;
 	}
 
 	/**
 	 * Easier way to make CraftingStack arrays
 	 * @param stacks A bunch of CraftingStacks
 	 * @return An Array with the CraftingStacks
+	 * @deprecated The usefulness of this was superseded in the page/chapter NecroData structure
 	 */
+	@Deprecated
 	public static CraftingStack[] arrayFrom(CraftingStack...stacks){
 		return stacks;
 	}

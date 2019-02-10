@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,6 +15,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -30,6 +31,7 @@ import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -83,6 +85,8 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.scroll = new ItemScroll("scroll", "basic", "lesser", "moderate", "greater");
 		ACItems.unique_scroll = new ItemScroll("unique_scroll", "antimatter", "oblivion");
 		ACItems.antidote = new ItemAntidote();
+		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setUnlocalizedName("door_dlt");
+		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setUnlocalizedName("door_drt");
 
 		//Coins
 		ACItems.coin = new ItemCoin("coin").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
@@ -448,6 +452,8 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.scroll, "scroll");
 		registerItem(ACItems.unique_scroll, "unique_scroll");
 		registerItem(ACItems.antidote, "antidote");
+		registerItem(ACItems.darklands_oak_door, "door_dlt");
+		registerItem(ACItems.dreadlands_door, "door_drt");
 		//		registerItem(shadowPlate, "shadowplate");
 
 	}

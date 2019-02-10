@@ -1,8 +1,7 @@
 {
 	"forge_marker": 1,
 	"defaults": {
-		"textures" : { "wall": "abyssalcraft:blocks/coraliumcobblestone" },
-		"model": "wall_post"
+		"textures" : { "wall": "abyssalcraft:blocks/coraliumcobblestone" }
 	},
 	"variants": {
 		"up": {

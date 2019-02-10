@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -79,8 +79,11 @@ public class BlockAbyssPortal extends BlockBreakable {
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		super.updateTick(worldIn, pos, state, rand);
+		boolean playerNearby = ACConfig.portalSpawnsNearPlayer ? worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32, false) != null : true;
+		boolean nearbyMobs = worldIn.getEntitiesWithinAABB(EntityAbyssalZombie.class, new AxisAlignedBB(pos).grow(16)).size() < 10;
 
-		if (worldIn.provider.getDimension() != ACLib.abyssal_wasteland_id && worldIn.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < worldIn.getDifficulty().getDifficultyId())
+		if (worldIn.provider.getDimension() != ACLib.abyssal_wasteland_id && worldIn.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < worldIn.getDifficulty().getDifficultyId()
+				&& playerNearby && nearbyMobs)
 		{
 			int i = pos.getY();
 			BlockPos blockpos;
@@ -239,7 +242,7 @@ public class BlockAbyssPortal extends BlockBreakable {
 						server.getPlayerList().transferEntityToWorld(par5Entity, ACLib.abyssal_wasteland_id, server.getWorld(ACLib.abyssal_wasteland_id), server.getWorld(0), new TeleporterAC(server.getWorld(0), this, ACBlocks.stone.getStateFromMeta(1)));
 					}
 				}
-			} else par5Entity.timeUntilPortal = par5Entity.getPortalCooldown();
+			} else par5Entity.timeUntilPortal = par5Entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  par5Entity.getPortalCooldown();
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -52,7 +52,8 @@ public class BiomeGenAbywasteland extends Biome {
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySkeletonGoliath.class, 15, 1, 1));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDragonMinion.class, 1, 0, 1));
+		if(!ACConfig.no_spectral_dragons)
+			spawnableMonsterList.add(new SpawnListEntry(EntityDragonMinion.class, 1, 0, 1));
 	}
 
 	@Override

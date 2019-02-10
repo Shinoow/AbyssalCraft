@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -546,12 +546,12 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 		if(!world.isRemote && isEntityAlive())
 		{
 			if(ticksExisted % 600 == 0)
-				if(rand.nextBoolean()) {
+				if(rand.nextBoolean() && world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 20) {
 					EntityDreadSpawn mob = new EntityDreadSpawn(world);
 					mob.copyLocationAndAnglesFrom(this);
 					world.spawnEntity(mob);
 					mob.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
-				} else {
+				} else if(world.getEntitiesWithinAABB(EntityChagarothSpawn.class, getEntityBoundingBox().grow(32)).size() < 20) {
 					EntityChagarothSpawn spawn = new EntityChagarothSpawn(world);
 					spawn.copyLocationAndAnglesFrom(this);
 					world.spawnEntity(spawn);
@@ -575,7 +575,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 				dreadGuard.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 
-			if(ticksExisted % 4800 == 0)
+			if(ticksExisted % 4800 == 0 && world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 10)
 			{
 				EntityGreaterDreadSpawn dreadGuard = new EntityGreaterDreadSpawn(world);
 				dreadGuard.copyLocationAndAnglesFrom(this);
@@ -797,14 +797,17 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 				}
 			}
 
-		if(deathTicks == 20 && !world.isRemote)
-			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.1"));
-		if(deathTicks == 80 && !world.isRemote)
-			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.2"));
-		if(deathTicks == 140 && !world.isRemote)
-			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.3"));
-		if(deathTicks == 200 && !world.isRemote){
-			SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.4"));
+		if(ACConfig.showBossDialogs) {
+			if(deathTicks == 20 && !world.isRemote)
+				SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.1"));
+			if(deathTicks == 80 && !world.isRemote)
+				SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.2"));
+			if(deathTicks == 140 && !world.isRemote)
+				SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.3"));
+			if(deathTicks == 200 && !world.isRemote)
+				SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.4"));
+		}
+		if(deathTicks == 200 && !world.isRemote) {
 			setDead();
 			world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ACItems.dread_plagued_gateway_key)));
 		}

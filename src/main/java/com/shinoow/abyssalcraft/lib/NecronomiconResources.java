@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -117,6 +117,9 @@ public class NecronomiconResources {
 
 	//Spell grid
 	public static final ResourceLocation SPELL = res("spell");
+
+	//Place of Power frame
+	public static final ResourceLocation PLACE_OF_POWER = res("placeofpower");
 
 	//Blank image
 	public static final ResourceLocation BLANK = res("blank");

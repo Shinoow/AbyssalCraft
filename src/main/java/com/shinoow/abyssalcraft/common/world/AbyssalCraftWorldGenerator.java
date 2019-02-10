@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -43,7 +43,8 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	public void generateSurface(World world, Random random, int chunkX, int chunkZ) {
 
-		if(ACConfig.generateDarklandsStructures && world.getBiome(new BlockPos(chunkX, 0, chunkZ)) instanceof IDarklandsBiome){
+		boolean blacklisted = InitHandler.INSTANCE.isDimBlacklistedFromStructureGen(world.provider.getDimension());
+		if(ACConfig.generateDarklandsStructures && !blacklisted && world.getBiome(new BlockPos(chunkX, 0, chunkZ)) instanceof IDarklandsBiome){
 
 			int x = chunkX + random.nextInt(16) + 8;
 			int z = chunkZ + random.nextInt(16) + 8;
@@ -67,40 +68,42 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			DarklandsStructureGenerator.generate(0, world, random, world.getHeight(new BlockPos(x, 0, z)));
 		}
 
-		if(ACConfig.generateCoraliumOre){
-			for(int rarity = 0; rarity < InitHandler.coraliumOreGeneration[0]/2; rarity++) {
-				int veinSize = InitHandler.coraliumOreGeneration[1];
-				int x = chunkX + random.nextInt(16);
-				int y = random.nextInt(InitHandler.coraliumOreGeneration[2]);
-				int z = chunkZ + random.nextInt(16);
-				if(BiomeDictionary.hasType(world.getBiome(new BlockPos(x, 0, z)), Type.SWAMP))
-					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
+		if(!InitHandler.INSTANCE.isDimBlacklistedFromOreGen(world.provider.getDimension())) {
+			if(ACConfig.generateCoraliumOre){
+				for(int rarity = 0; rarity < InitHandler.coraliumOreGeneration[0]/2; rarity++) {
+					int veinSize = InitHandler.coraliumOreGeneration[1];
+					int x = chunkX + random.nextInt(16);
+					int y = random.nextInt(InitHandler.coraliumOreGeneration[2]);
+					int z = chunkZ + random.nextInt(16);
+					if(BiomeDictionary.hasType(world.getBiome(new BlockPos(x, 0, z)), Type.SWAMP))
+						new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
+				}
+
+				for(int rarity = 0; rarity < InitHandler.coraliumOreGeneration[0]; rarity++) {
+					int veinSize = InitHandler.coraliumOreGeneration[1];
+					int x = chunkX + random.nextInt(16);
+					int y = random.nextInt(InitHandler.coraliumOreGeneration[2]);
+					int z = chunkZ + random.nextInt(16);
+					if(BiomeDictionary.hasType(world.getBiome(new BlockPos(x, 0, z)), Type.OCEAN) &&
+							world.getBiome(new BlockPos(x, 0, z))!=Biomes.DEEP_OCEAN)
+						new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
+					if(world.getBiome(new BlockPos(x, 0, z))==Biomes.DEEP_OCEAN)
+						new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y-20, z));
+				}
 			}
 
-			for(int rarity = 0; rarity < InitHandler.coraliumOreGeneration[0]; rarity++) {
-				int veinSize = InitHandler.coraliumOreGeneration[1];
-				int x = chunkX + random.nextInt(16);
-				int y = random.nextInt(InitHandler.coraliumOreGeneration[2]);
-				int z = chunkZ + random.nextInt(16);
-				if(BiomeDictionary.hasType(world.getBiome(new BlockPos(x, 0, z)), Type.OCEAN) &&
-						world.getBiome(new BlockPos(x, 0, z))!=Biomes.DEEP_OCEAN)
-					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
-				if(world.getBiome(new BlockPos(x, 0, z))==Biomes.DEEP_OCEAN)
-					new WorldGenMinable(ACBlocks.coralium_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y-20, z));
-			}
+			if(ACConfig.generateNitreOre)
+				for(int rarity = 0; rarity < 3; rarity++) {
+					int veinSize = 4 + random.nextInt(2);
+					int x = chunkX + random.nextInt(16);
+					int y = random.nextInt(30);
+					int z = chunkZ + random.nextInt(16);
+
+					new WorldGenMinable(ACBlocks.nitre_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
+				}
 		}
 
-		if(ACConfig.generateNitreOre)
-			for(int rarity = 0; rarity < 3; rarity++) {
-				int veinSize = 4 + random.nextInt(2);
-				int x = chunkX + random.nextInt(16);
-				int y = random.nextInt(30);
-				int z = chunkZ + random.nextInt(16);
-
-				new WorldGenMinable(ACBlocks.nitre_ore.getDefaultState(), veinSize).generate(world, random, new BlockPos(x, y, z));
-			}
-
-		if(ACConfig.generateShoggothLairs)
+		if(ACConfig.generateShoggothLairs && !blacklisted)
 			for(int i = 0; i < 1; i++){
 				int x = chunkX + random.nextInt(16) + 8;
 				int z = chunkZ + random.nextInt(2) + 28;

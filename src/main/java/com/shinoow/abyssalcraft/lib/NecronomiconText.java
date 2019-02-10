@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -341,6 +341,11 @@ public class NecronomiconText {
 	public static String DREAD_PLAGUE_INFO_1 = "necronomicon.text.dreadplague.1";
 	public static String DREAD_PLAGUE_INFO_2 = "necronomicon.text.dreadplague.2";
 
+	public static String PLACES_OF_POWER_INFO = "necronomicon.text.placesofpower.info";//will switch to using this in the near future
+
+	public static String PLACES_OF_OWER_INFO_1 = "necronomicon.text.placesofpower.1";
+	public static String PLACES_OF_OWER_INFO_2 = "necronomicon.text.placesofpower.2";
+
 	public static String WIP = "necronomicon.text.wip";
 
 	/** Text limit */
@@ -393,6 +398,8 @@ public class NecronomiconText {
 	public static String LABEL_KNOWLEDGE = "necronomicon.information.knowledge";
 	public static String LABEL_CORALIUM_PLAGUE = "necronomicon.information.coraliumplague";
 	public static String LABEL_DREAD_PLAGUE = "necronomicon.information.dreadplague";
+	public static String LABEL_PLACES_OF_POWER = "necronomicon.information.placesofpower";
+	public static String LABEL_STRUCTURES = "necronomicon.information.structures";
 
 	/**
 	 * The best way to drown an array of strings with nonsense

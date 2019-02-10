@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -80,8 +80,11 @@ public class BlockOmotholPortal extends BlockBreakable {
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		super.updateTick(worldIn, pos, state, rand);
+		boolean playerNearby = ACConfig.portalSpawnsNearPlayer ? worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32, false) != null : true;
+		boolean nearbyMobs = worldIn.getEntitiesWithinAABB(EntityGatekeeperMinion.class, new AxisAlignedBB(pos).grow(16)).size() < 10;
 
-		if (worldIn.provider.getDimension() != ACLib.omothol_id && worldIn.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < worldIn.getDifficulty().getDifficultyId())
+		if (worldIn.provider.getDimension() != ACLib.omothol_id && worldIn.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < worldIn.getDifficulty().getDifficultyId()
+				&& playerNearby && nearbyMobs)
 		{
 			int i = pos.getY();
 			BlockPos blockpos;
@@ -240,7 +243,7 @@ public class BlockOmotholPortal extends BlockBreakable {
 						server.getPlayerList().transferEntityToWorld(par5Entity, ACLib.omothol_id, server.getWorld(ACLib.omothol_id), server.getWorld(ACLib.dreadlands_id), new TeleporterAC(server.getWorld(ACLib.dreadlands_id), this, ACBlocks.stone.getStateFromMeta(6)));
 					}
 				}
-			} else par5Entity.timeUntilPortal = par5Entity.getPortalCooldown();
+			} else par5Entity.timeUntilPortal = par5Entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  par5Entity.getPortalCooldown();
 	}
 
 	@Override

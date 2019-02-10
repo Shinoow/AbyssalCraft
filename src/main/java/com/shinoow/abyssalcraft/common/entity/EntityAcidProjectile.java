@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -98,19 +98,20 @@ public class EntityAcidProjectile extends EntityThrowable {
 
 							double d = Math.sqrt(pos1.distanceSq(pos));
 
-							if(world.getGameRules().getBoolean("mobGriefing"))
-								for(int i = 0; i < d * pos.getDistance(pos1.getX(), pos1.getY(), pos1.getZ()); i++){
-									double i1 = i / pos.getDistance(pos1.getX(), pos1.getY(), pos1.getZ());
-									double xp = pos.getX() + vec.x * i1 + .5;
-									double yp = pos.getY() + vec.y * i1 + .5;
-									double zp = pos.getZ() + vec.z * i1 + .5;
-									BlockPos pos2 = new BlockPos(xp, yp, zp);
-									if(!world.isAirBlock(pos2) && world.getBlockState(pos2).getBlockHardness(world, pos2) < ACConfig.acidResistanceHardness && world.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_ooze
-											&& world.getBlockState(pos2) != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)
-											&& world.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos2).getBlock().hasTileEntity(world.getBlockState(pos2))
-											&& world.getBlockState(pos2).getBlockHardness(world, pos2) != -1 && world.getBlockState(pos2).getBlock().canEntityDestroy(world.getBlockState(pos2), world, pos2, getThrower()))
-										world.destroyBlock(pos2, false);
-								}
+							if(!ACConfig.no_acid_breaking_blocks)
+								if(world.getGameRules().getBoolean("mobGriefing"))
+									for(int i = 0; i < d * pos.getDistance(pos1.getX(), pos1.getY(), pos1.getZ()); i++){
+										double i1 = i / pos.getDistance(pos1.getX(), pos1.getY(), pos1.getZ());
+										double xp = pos.getX() + vec.x * i1 + .5;
+										double yp = pos.getY() + vec.y * i1 + .5;
+										double zp = pos.getZ() + vec.z * i1 + .5;
+										BlockPos pos2 = new BlockPos(xp, yp, zp);
+										if(!world.isAirBlock(pos2) && world.getBlockState(pos2).getBlockHardness(world, pos2) < ACConfig.acidResistanceHardness && world.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_ooze
+												&& world.getBlockState(pos2) != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)
+												&& world.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos2).getBlock().hasTileEntity(world.getBlockState(pos2))
+												&& world.getBlockState(pos2).getBlockHardness(world, pos2) != -1 && world.getBlockState(pos2).getBlock().canEntityDestroy(world.getBlockState(pos2), world, pos2, getThrower()))
+											world.destroyBlock(pos2, false);
+									}
 						}
 					} else if(EntityUtil.damageShield(entity, damage*2))
 						entity.attackEntityFrom(AbyssalCraftAPI.acid, 1);

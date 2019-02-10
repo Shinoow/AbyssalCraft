@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -190,7 +190,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	private void collectPEFromPlayer() {
 		for(ItemStack stack : user.inventory.mainInventory)
 			if(!stack.isEmpty() && stack.getItem() instanceof IEnergyTransporterItem &&
-					((IEnergyTransporterItem) stack.getItem()).canTransferPEExternally(stack) &&
+					((IEnergyTransporterItem) stack.getItem()).canTransferPEExternally(stack) && ((IEnergyTransporterItem) stack.getItem()).getContainedEnergy(stack) > 0 &&
 					(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(user, stack) || !(stack.getItem() instanceof ItemNecronomicon))){
 				consumedEnergy += ((IEnergyTransporterItem) stack.getItem()).consumeEnergy(stack, ritual.getReqEnergy()/200);
 				break;

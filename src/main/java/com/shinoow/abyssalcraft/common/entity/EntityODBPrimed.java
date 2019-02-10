@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -126,7 +126,8 @@ public class EntityODBPrimed extends Entity {
 			sacthoth.setPosition(posX, posY + 1, posZ);
 			sacthoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY + 1, posZ)), null);
 			world.spawnEntity(sacthoth);
-			SpecialTextUtil.SacthothGroup(world, I18n.translateToLocal("message.sacthoth.spawn.1"));
+			if(ACConfig.showBossDialogs)
+				SpecialTextUtil.SacthothGroup(world, I18n.translateToLocal("message.sacthoth.spawn.1"));
 		}
 	}
 

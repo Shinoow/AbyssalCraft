@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -44,6 +44,11 @@ public interface IPlaceOfPower {
 	 * Returns the Unlock Condition required in order to form this Place of Power
 	 */
 	public IUnlockCondition getUnlockCondition();
+
+	/**
+	 * Returns a unlocalized string representing the description of the structure when viewed in the Necronomicon
+	 */
+	public String getDescription();
 
 	/**
 	 * If the Place of Power amplifies any stats of statues used in it, handle that here

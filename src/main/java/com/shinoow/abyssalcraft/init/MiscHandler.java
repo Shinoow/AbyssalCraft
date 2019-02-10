@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -25,6 +25,7 @@ import com.google.gson.JsonObject;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.ConditionProcessorRegistry;
@@ -46,6 +47,7 @@ import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.potion.PotionAntimatter;
 import com.shinoow.abyssalcraft.common.potion.PotionCplague;
 import com.shinoow.abyssalcraft.common.potion.PotionDplague;
+import com.shinoow.abyssalcraft.common.structures.pe.BasicStructure;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -309,7 +311,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.plated_coralium_helmet, ACItems.plated_coralium_chestplate, ACItems.plated_coralium_leggings, ACItems.plated_coralium_boots, "abyssalcraft:textures/armor/ghoul/coraliump_1.png", "abyssalcraft:textures/armor/ghoul/coraliump_2.png");
 		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.dreadium_samurai_helmet, ACItems.dreadium_samurai_chestplate, ACItems.dreadium_samurai_leggings, ACItems.dreadium_samurai_boots, "abyssalcraft:textures/armor/ghoul/dreadiums_1.png", "abyssalcraft:textures/armor/ghoul/dreadiums_2.png");
 		AbyssalCraftAPI.getInternalNDHandler().registerInternalPages();
-		//		StructureHandler.instance().registerStructure(new TestStructure());
+		StructureHandler.instance().registerStructure(new BasicStructure());
 		FMLCommonHandler.instance().getDataFixer().init(modid, 1).registerFix(FixTypes.BLOCK_ENTITY, new IFixableData() {
 
 			@Override
@@ -409,8 +411,14 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("logWood", ACBlocks.dreadlands_log);
 		OreDictionary.registerOre("plankWood", ACBlocks.darklands_oak_planks);
 		OreDictionary.registerOre("plankWood", ACBlocks.dreadlands_planks);
+		if(ACConfig.darklands_oak_slab)
+			OreDictionary.registerOre("slabWood", ACBlocks.darklands_oak_slab);
+		OreDictionary.registerOre("fenceWood", ACBlocks.darklands_oak_fence);
+		OreDictionary.registerOre("fenceWood", ACBlocks.dreadlands_wood_fence);
 		if(ACConfig.darklands_oak_stairs)
 			OreDictionary.registerOre("stairWood", ACBlocks.darklands_oak_stairs);
+		OreDictionary.registerOre("doorWood", ACItems.darklands_oak_door);
+		OreDictionary.registerOre("doorWood", ACItems.dreadlands_door);
 		OreDictionary.registerOre("treeSapling", ACBlocks.darklands_oak_sapling);
 		OreDictionary.registerOre("treeSapling", ACBlocks.dreadlands_sapling);
 		OreDictionary.registerOre("treeLeaves", ACBlocks.darklands_oak_leaves);
@@ -718,6 +726,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		addShapedRecipe(reg, rl("rending_pedestal"), null, new ItemStack(ACBlocks.rending_pedestal), new Object[] {"#%#", "#&#", "###", '#', new ItemStack(ACBlocks.stone, 1, 7), '%', ACItems.shard_of_oblivion, '&', ACItems.shadow_gem});
 		addShapedOreRecipe(reg, rl("state_transformer"), null, new ItemStack(ACBlocks.state_transformer), "###", "#&#", "#@#", '#', new ItemStack(ACBlocks.stone, 1, 7), '&', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '@', "chestWood");
 		addShapedRecipe(reg, rl("energy_depositioner"), null, new ItemStack(ACBlocks.energy_depositioner), "###", "%&%", "#@#", '#', new ItemStack(ACBlocks.stone, 1, 7), '%', ACItems.shadow_gem, '&', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '@', ACBlocks.energy_relay);
+		addShapedRecipe(reg, rl("door_dlt"), null, new ItemStack(ACItems.darklands_oak_door), "## ", "## ", "## ", '#', ACBlocks.darklands_oak_planks);
+		addShapedRecipe(reg, rl("door_drt"), null, new ItemStack(ACItems.dreadlands_door), "## ", "## ", "## ", '#', ACBlocks.dreadlands_planks);
 
 		addShapedOreRecipe(reg, rl("darkstone_pickaxe"), null, new ItemStack(ACItems.darkstone_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', new ItemStack(ACBlocks.cobblestone, 1, 0), '%', "stickWood"});
 		addShapedOreRecipe(reg, rl("darkstone_axe"), null, new ItemStack(ACItems.darkstone_axe, 1), new Object[] {"##", "#%", " %", '#', new ItemStack(ACBlocks.cobblestone, 1, 0), '%', "stickWood"});
@@ -1132,6 +1142,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.energy_pedestal));
+		FMLInterModComms.sendMessage( "chiselsandbits", "ignoreblocklogic", ACBlocks.stone.getRegistryName());
+		FMLInterModComms.sendMessage( "chiselsandbits", "ignoreblocklogic", ACBlocks.abyssal_sand.getRegistryName());
+		FMLInterModComms.sendMessage( "chiselsandbits", "ignoreblocklogic", ACBlocks.abyssal_sand_glass.getRegistryName());
 	}
 
 	private static void registerPotion(ResourceLocation res, Potion pot){

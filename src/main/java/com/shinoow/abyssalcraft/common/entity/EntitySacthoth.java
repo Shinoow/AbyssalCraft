@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -280,12 +280,12 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 			return false;
 		}
 		else if(par1DamageSource.isExplosion()){
-			if(world.isRemote)
+			if(world.isRemote && ACConfig.showBossDialogs)
 				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.explosion"));
 			return false;
 		}
 		else if(par1DamageSource.isProjectile()){
-			if(world.isRemote)
+			if(world.isRemote && ACConfig.showBossDialogs)
 				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.projectile"));
 			return false;
 		}

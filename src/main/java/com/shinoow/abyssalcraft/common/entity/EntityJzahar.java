@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -57,7 +57,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
 	public int deathTicks;
-	private int talkTimer;
+	private int talkTimer, shoutTicks, iframes;
 	private static final DataParameter<Integer> EARTHQUAKETIMER = EntityDataManager.createKey(EntityJzahar.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> BLACKHOLETIMER = EntityDataManager.createKey(EntityJzahar.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> IMPLOSIONTIMER = EntityDataManager.createKey(EntityJzahar.class, DataSerializers.VARINT);
@@ -66,7 +66,6 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
 	private boolean that = false;
 	private boolean doShout;
-	private int shoutTicks;
 
 	private EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 0.35D, true);
 	private EntityAIAttackRanged aiArrowAttack = new EntityAIAttackRanged(this, 0.4D, 40, 20.0F);
@@ -256,7 +255,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par2 > 30) par2 = 10 + world.rand.nextInt(10);
+		if(par2 >= 20) par2 = 5 + world.rand.nextInt(5);
 
 		if (par1DamageSource.isFireDamage())
 			return false;
@@ -275,16 +274,17 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			if(par1DamageSource.getTrueSource() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getTrueSource()).capabilities.isCreativeMode && getRNG().nextInt(health) == 0) {
 				((EntityPlayer)par1DamageSource.getTrueSource()).setGameType(GameType.SURVIVAL);
 				par1DamageSource.getTrueSource().attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), Integer.MAX_VALUE);
-				SpecialTextUtil.JzaharGroup(getEntityWorld(), "Whoops, I slipped!");
+				if(ACConfig.showBossDialogs)
+					SpecialTextUtil.JzaharGroup(getEntityWorld(), "Whoops, I slipped!");
 			}
 		}
 
-		return super.attackEntityFrom(par1DamageSource, par2);
-	}
+		if (iframes > 10)
+			return false;
+		else
+			iframes = 30;
 
-	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
-		return EnumCreatureAttribute.UNDEAD;
+		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
 	@Override
@@ -331,6 +331,8 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	{
 		if(talkTimer > 0)
 			talkTimer--;
+		if(iframes > 0)
+			--iframes;
 
 		if(getAttackTarget() != null)
 			if(getDistanceSq(getAttackTarget()) > 28D || getAttackTarget() instanceof EntityFlying || getAttackTarget().posY > posY + 4D)
@@ -352,7 +354,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			if(entity instanceof EntityDragon || entity instanceof EntityWither){
 				if(!world.isRemote){
 					world.removeEntity(entity);
-					if(entity.isDead)
+					if(entity.isDead && ACConfig.showBossDialogs)
 						SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.vanilla"));
 				} else if(ACConfig.particleEntity)
 					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
@@ -360,7 +362,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			else if(entity instanceof EntityDragonBoss || entity instanceof EntitySacthoth || entity instanceof EntityChagaroth){
 				if(!world.isRemote){
 					world.removeEntity(entity);
-					if(entity.isDead)
+					if(entity.isDead && ACConfig.showBossDialogs)
 						SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.ac"));
 				} else if(ACConfig.particleEntity)
 					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
@@ -375,7 +377,8 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 						world.spawnEntity(newgatekeeper);
 					if(!that){
 						that = true;
-						SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.jzh"));
+						if(ACConfig.showBossDialogs)
+							SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.jzh"));
 					}
 				} else if(ACConfig.particleEntity){
 					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
@@ -385,7 +388,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			else if(!entity.isNonBoss()){
 				if(!world.isRemote){
 					world.removeEntity(entity);
-					if(entity.isDead)
+					if(entity.isDead && ACConfig.showBossDialogs)
 						SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.other"));
 				} else if(ACConfig.particleEntity)
 					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
@@ -393,7 +396,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			else if(entity instanceof EntityPlayer)
 				if(((EntityPlayer)entity).capabilities.isCreativeMode && talkTimer == 0 && getDistance(entity) <= 5){
 					talkTimer = 1200;
-					if(world.isRemote)
+					if(world.isRemote && ACConfig.showBossDialogs)
 						if(EntityUtil.isPlayerCoralium((EntityPlayer)entity))
 							SpecialTextUtil.JzaharText("<insert generic text here>");
 						else {
@@ -717,28 +720,30 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 				world.spawnEntity(new EntityGatekeeperEssence(world, posX, posY, posZ));
 		}
 
-		if(deathTicks == 20 && !world.isRemote)
-			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.1"));
-		if(deathTicks == 100 && !world.isRemote)
-			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.2"));
-		if(deathTicks == 180 && !world.isRemote)
-			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.3"));
-		if(deathTicks == 260 && !world.isRemote)
-			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.4"));
-		if(deathTicks == 340 && !world.isRemote)
-			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.5"));
-		if(deathTicks == 420 && !world.isRemote)
-			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.6"));
-		if(deathTicks == 500 && !world.isRemote)
-			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.7"));
-		if(deathTicks == 580 && !world.isRemote)
-			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.8"));
-		if(deathTicks == 660 && !world.isRemote)
-			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.9"));
-		if(deathTicks == 800 && !world.isRemote){
-			SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.10"));
-			setDead();
+		if(ACConfig.showBossDialogs) {
+			if(deathTicks == 20 && !world.isRemote)
+				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.1"));
+			if(deathTicks == 100 && !world.isRemote)
+				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.2"));
+			if(deathTicks == 180 && !world.isRemote)
+				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.3"));
+			if(deathTicks == 260 && !world.isRemote)
+				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.4"));
+			if(deathTicks == 340 && !world.isRemote)
+				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.5"));
+			if(deathTicks == 420 && !world.isRemote)
+				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.6"));
+			if(deathTicks == 500 && !world.isRemote)
+				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.7"));
+			if(deathTicks == 580 && !world.isRemote)
+				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.8"));
+			if(deathTicks == 660 && !world.isRemote)
+				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.9"));
+			if(deathTicks == 800 && !world.isRemote)
+				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.10"));
 		}
+		if(deathTicks == 800 && !world.isRemote)
+			setDead();
 	}
 
 	private void launchWitherSkullToEntity(int par1, EntityLivingBase par2EntityLivingBase) {

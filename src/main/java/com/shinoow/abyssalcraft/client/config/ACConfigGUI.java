@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -43,6 +43,8 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement(I18n.format("ac_itemblacklist"), "ac_itemblacklist", ItemBlacklistEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_silly_settings"), "ac_silly_settings", SillySettingsEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_blocks"), "ac_blocks", BlocksEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_mod_compat"), "ac_mod_compat", CompatEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_wet_noodle"), "ac_wet_noodle", WetNoodleEntry.class));
 		return list;
 	}
 
@@ -159,7 +161,31 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("blocks")).getChildElements(), "abyssalcraft", "blocks", false, false, I18n.format("ac_blocks"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("blocks")).getChildElements(), "abyssalcraft", "blocks", true, true, I18n.format("ac_blocks"));
+
+		}
+	}
+	public static class CompatEntry extends CategoryEntry{
+
+		public CompatEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("mod_compat")).getChildElements(), "abyssalcraft", "mod_compat", false, false, I18n.format("ac_mod_compat"));
+
+		}
+	}
+	public static class WetNoodleEntry extends CategoryEntry{
+
+		public WetNoodleEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("wet_noodle")).getChildElements(), "abyssalcraft", "wet_noodle", false, false, I18n.format("ac_wet_noodle"));
 
 		}
 	}

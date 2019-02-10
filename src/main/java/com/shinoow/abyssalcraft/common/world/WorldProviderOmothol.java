@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.world;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.util.ResourceLocation;
@@ -25,6 +26,7 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -46,11 +48,15 @@ public class WorldProviderOmothol extends WorldProvider {
 
 	@Override
 	protected void generateLightBrightnessTable() {
-		float f = 0.25F;
+		if(ACConfig.hcdarkness_omt && Loader.isModLoaded("hardcoredarkness"))
+			super.generateLightBrightnessTable();
+		else {
+			float f = 0.25F;
 
-		for (int i = 0; i <= 15; ++i) {
-			float f1 = 1.0F - i / 15.0F;
-			lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+			for (int i = 0; i <= 15; ++i) {
+				float f1 = 1.0F - i / 15.0F;
+				lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+			}
 		}
 	}
 

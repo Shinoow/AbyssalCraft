@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -105,7 +105,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 		tasks.addTask(9, new EntityAIWorship(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 20, true, false, entity -> EntityUtil.isShoggothFood((EntityLivingBase) entity)));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 10, true, false, null));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true, false));
 		setSize(1.8F, 2.6F);
 
 		shoggothParts = new MultiPartEntityPart[] {shoggothHead = new MultiPartEntityPart(this, "head", 1.0F, 1.0F), shoggothBody = new MultiPartEntityPart(this, "body", 1.0F, 1.0F)};
@@ -329,7 +329,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 
 			//rotations
 			shoggothBody.onUpdate();
-			shoggothBody.setLocationAndAngles(posX - offsetx * 0.1F, posY, posZ - offsetz * 0.1F, 0.0F, 0.0F);
+			shoggothBody.setLocationAndAngles(posX - offsetx * 0.5F, posY, posZ - offsetz * 0.5F, 0.0F, 0.0F);
 
 			shoggothHead.onUpdate();
 			shoggothHead.setLocationAndAngles(posX - offsetx * -0.5d, posY + 1.5f, posZ - offsetz * -0.5d, 0.0F, 0.0F);
@@ -343,7 +343,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 
 			//rotations
 			shoggothBody.onUpdate();
-			shoggothBody.setLocationAndAngles(posX - offsetx * 0.1F, posY, posZ - offsetz * 0.1F, 0.0F, 0.0F);
+			shoggothBody.setLocationAndAngles(posX - offsetx * 0.25F, posY, posZ - offsetz * 0.25F, 0.0F, 0.0F);
 
 			shoggothHead.onUpdate();
 			shoggothHead.setLocationAndAngles(posX - offsetx * -0.25d, posY + 0.75f, posZ - offsetz * -0.25d, 0.0F, 0.0F);
@@ -427,11 +427,17 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
+		if(par1DamageSource.isProjectile()){
+			playSound(SoundEvents.ENTITY_SLIME_JUMP, getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
+			return false;
+		}
 		if(par1DamageSource == DamageSource.IN_WALL)
 			if(world.getBlockState(getPosition())  != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE) && world.getGameRules().getBoolean("mobGriefing"))
 				sprayAcid(true);
+			else return false;
+		if(par1DamageSource == DamageSource.CACTUS) return false;
 
-		return false;
+		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
 	@Override
@@ -498,7 +504,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
-		return getShoggothType() == 4 ? AbyssalCraftAPI.SHADOW : EnumCreatureAttribute.UNDEAD;
+		return getShoggothType() == 4 ? AbyssalCraftAPI.SHADOW : EnumCreatureAttribute.UNDEFINED;
 	}
 
 	public void sprayAcidAt(Entity target) {
@@ -679,13 +685,8 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 
 	@Override
 	public boolean attackEntityFromPart(MultiPartEntityPart part, DamageSource source, float damage) {
-		if(source.isProjectile()){
-			playSound(SoundEvents.ENTITY_SLIME_JUMP, getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
-			return false;
-		}
 
-		if(source == DamageSource.CACTUS) return false;
-		return super.attackEntityFrom(source, damage);
+		return attackEntityFrom(source, damage);
 	}
 
 	@Override

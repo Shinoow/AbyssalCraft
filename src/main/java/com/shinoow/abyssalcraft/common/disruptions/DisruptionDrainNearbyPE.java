@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -61,7 +61,7 @@ public class DisruptionDrainNearbyPE extends DisruptionEntry {
 			int yp = pos.getY();
 			int zp = pos.getZ();
 			for(int x = -1*(3+range); x <= 3+range; x++)
-				for(int y = 0; y <= PEUtils.getRangeAmplifiers(world, pos, (IEnergyManipulator)tile); y++)
+				for(int y = 0; y <= 2; y++)
 					for(int z = -1*(3+range); z <= 3+range; z++)
 						if(PEUtils.isCollector(world.getTileEntity(new BlockPos(xp + x, yp - y, zp + z)))){
 							BlockPos pos1 = new BlockPos(xp + x, yp - y, zp + z);

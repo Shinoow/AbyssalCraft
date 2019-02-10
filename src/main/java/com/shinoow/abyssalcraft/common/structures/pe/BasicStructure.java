@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -28,16 +28,29 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TestStructure implements IPlaceOfPower {
+public class BasicStructure implements IPlaceOfPower {
 
 	private IBlockState monolith_stone = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE);
 	private IBlockState monolith_pillar = ACBlocks.monolith_pillar.getDefaultState();
 	private IBlockState statue = ACBlocks.statue.getDefaultState();
+	private IBlockState[][][] data;
+
+	public BasicStructure() {
+		IBlockState[][] one = {new IBlockState[]{monolith_stone, monolith_stone, monolith_stone}, new IBlockState[]{monolith_stone, monolith_stone, monolith_stone},
+				new IBlockState[]{monolith_stone, monolith_stone, monolith_stone}};
+		IBlockState[][] two = {new IBlockState[]{monolith_pillar, monolith_stone, monolith_pillar}, new IBlockState[]{monolith_stone, monolith_stone, monolith_stone},
+				new IBlockState[]{monolith_pillar, monolith_stone, monolith_pillar}};
+		IBlockState[][] three = {new IBlockState[]{null, statue.withProperty(BlockStatue.FACING, EnumFacing.WEST), null},
+				new IBlockState[]{statue, monolith_stone, statue.withProperty(BlockStatue.FACING, EnumFacing.SOUTH)},
+				new IBlockState[]{null, statue.withProperty(BlockStatue.FACING, EnumFacing.EAST), null}};
+
+		data = new IBlockState[][][] {one, two, three};
+	}
 
 	@Override
 	public String getIdentifier() {
 
-		return "test";
+		return "basic";
 	}
 
 	@Override
@@ -50,6 +63,12 @@ public class TestStructure implements IPlaceOfPower {
 	public IUnlockCondition getUnlockCondition() {
 
 		return new DefaultCondition();
+	}
+
+	@Override
+	public String getDescription() {
+
+		return "ac.structure.basic.description";
 	}
 
 	@Override
@@ -165,15 +184,7 @@ public class TestStructure implements IPlaceOfPower {
 	@Override
 	public IBlockState[][][] getRenderData() {
 
-		IBlockState[][] one = {new IBlockState[]{monolith_stone, monolith_stone, monolith_stone}, new IBlockState[]{monolith_stone, monolith_stone, monolith_stone},
-				new IBlockState[]{monolith_stone, monolith_stone, monolith_stone}};
-		IBlockState[][] two = {new IBlockState[]{monolith_pillar, monolith_stone, monolith_pillar}, new IBlockState[]{monolith_stone, monolith_stone, monolith_stone},
-				new IBlockState[]{monolith_pillar, monolith_stone, monolith_pillar}};
-		IBlockState[][] three = {new IBlockState[]{null, statue.withProperty(BlockStatue.FACING, EnumFacing.WEST), null},
-				new IBlockState[]{statue, monolith_stone, statue.withProperty(BlockStatue.FACING, EnumFacing.SOUTH)},
-				new IBlockState[]{null, statue.withProperty(BlockStatue.FACING, EnumFacing.EAST), null}};
-
-		return new IBlockState[][][] {one, two, three};
+		return data;
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.GuiInstance;
@@ -31,6 +33,7 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapabi
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
+import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
@@ -39,15 +42,25 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag.TooltipFlags;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 @SideOnly(Side.CLIENT)
 public class GuiNecronomicon extends GuiScreen {
@@ -66,6 +79,8 @@ public class GuiNecronomicon extends GuiScreen {
 	private ButtonCategory buttonCat1, buttonCat2, buttonCat3, buttonCat4, buttonCat5, buttonCat6, buttonCat7;
 	private GuiButton buttonDone;
 	private int bookType;
+	private static final int cycleTime = 1000;
+	private long startTime, drawTime;
 	/** Used to check if we're at a text entry (true), or a index (false) */
 	protected boolean isInfo;
 	private boolean isNecroInfo, isKnowledgeInfo;
@@ -79,6 +94,9 @@ public class GuiNecronomicon extends GuiScreen {
 	public GuiNecronomicon(){
 		if(Minecraft.getMinecraft().player != null)
 			cap = NecroDataCapability.getCap(Minecraft.getMinecraft().player);
+		long time = System.currentTimeMillis();
+		startTime = time - cycleTime;
+		drawTime = time;
 	}
 
 	public GuiNecronomicon(int par1){
@@ -115,6 +133,7 @@ public class GuiNecronomicon extends GuiScreen {
 	@Override
 	public void updateScreen()
 	{
+		drawTime = System.currentTimeMillis();
 		super.updateScreen();
 	}
 
@@ -482,6 +501,96 @@ public class GuiNecronomicon extends GuiScreen {
 		if(cnd instanceof NecronomiconCondition)
 			return getBookType() >= (int)cnd.getConditionObject();
 			else return cap.isUnlocked(cnd, mc.player);
+	}
+
+	protected ItemStack tooltipStack;
+
+	private boolean list(Object obj){
+		return obj == null ? false : obj instanceof ItemStack[] || obj instanceof String || obj instanceof List || obj instanceof Ingredient ||
+				obj instanceof ItemStack && ((ItemStack)obj).getHasSubtypes() &&  ((ItemStack)obj).getMetadata() == OreDictionary.WILDCARD_VALUE;
+	}
+
+	private List<ItemStack> getList(Object obj){
+		List<ItemStack> l = Lists.newArrayList();
+
+		if(obj instanceof ItemStack[]) {
+			for(ItemStack stack : (ItemStack[])obj)
+				if(!stack.isEmpty())
+					l.add(stack.copy());
+		} else if(obj instanceof String) {
+			for(ItemStack stack : OreDictionary.getOres((String)obj))
+				if(!stack.isEmpty())
+					l.add(stack.copy());
+		} else if(obj instanceof List) {
+			for(ItemStack stack : (List<ItemStack>) obj)
+				if(!stack.isEmpty())
+					l.add(stack.copy());
+		} else if(obj instanceof Ingredient) {
+			for(ItemStack stack : ((Ingredient) obj).getMatchingStacks())
+				if(!stack.isEmpty())
+					l.add(stack.copy());
+		} else if(obj instanceof ItemStack) {
+			NonNullList<ItemStack> list = NonNullList.create();
+			((ItemStack)obj).getItem().getSubItems(((ItemStack)obj).getItem().getCreativeTab(), list);
+			for(ItemStack stack : list)
+				if(!stack.isEmpty())
+					l.add(stack.copy());
+		}
+		return l;
+	}
+
+	public void renderObject(int xPos, int yPos, Object obj, int mx, int my) {
+		if(list(obj)) {
+			List<ItemStack> list = getList(obj);
+
+			int index = (int)((drawTime - startTime) / cycleTime) % list.size();
+			renderItem(xPos, yPos, list.get(index), mx, my);
+		} else
+			renderItem(xPos, yPos, APIUtils.convertToStack(obj), mx, my);
+	}
+
+	public void renderItem(int xPos, int yPos, ItemStack stack, int mx, int my)
+	{
+		if(stack == null || stack.isEmpty()) return;
+
+		if(stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
+			stack.setItemDamage(0);
+
+		RenderItem render = mc.getRenderItem();
+		if(mx > xPos && mx < xPos+16 && my > yPos && my < yPos+16)
+			tooltipStack = stack;
+
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+		RenderHelper.enableGUIStandardItemLighting();
+		GlStateManager.enableRescaleNormal();
+		GlStateManager.enableDepth();
+		render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
+		render.renderItemOverlayIntoGUI(mc.fontRenderer, stack, xPos, yPos, null);
+		RenderHelper.disableStandardItemLighting();
+		GlStateManager.popMatrix();
+
+		GlStateManager.disableLighting();
+	}
+
+	public void renderTooltip(int x, int y) {
+		if(tooltipStack != null)
+		{
+			List<String> tooltipData = tooltipStack.getTooltip(mc.player, TooltipFlags.NORMAL);
+			List<String> parsedTooltip = new ArrayList();
+			boolean first = true;
+
+			for(String s : tooltipData)
+			{
+				String s_ = s;
+				if(!first)
+					s_ = TextFormatting.GRAY + s;
+				parsedTooltip.add(s_);
+				first = false;
+			}
+			GuiRenderHelper.renderTooltip(x, y, parsedTooltip);
+		}
 	}
 
 	private class RitualGuiInstance extends GuiInstance {

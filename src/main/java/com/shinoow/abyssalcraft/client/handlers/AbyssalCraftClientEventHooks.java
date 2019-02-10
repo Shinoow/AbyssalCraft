@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -279,9 +279,9 @@ public class AbyssalCraftClientEventHooks {
 		if(stack.getItem() instanceof IScroll) {
 			Spell spell = SpellUtils.getSpell(stack);
 			if(spell != null){
-				event.getToolTip().add("Spell: "+TextFormatting.AQUA+spell.getLocalizedName());
-				event.getToolTip().add("Required PE per cast: "+(int)spell.getReqEnergy());
-				event.getToolTip().add("Cast type: "+TextFormatting.GOLD+(spell.requiresCharging() ? "Charge" : "Instant"));
+				event.getToolTip().add(1, "Spell: "+TextFormatting.AQUA+spell.getLocalizedName());
+				event.getToolTip().add(2, "Required PE per cast: "+(int)spell.getReqEnergy());
+				event.getToolTip().add(3, "Cast type: "+TextFormatting.GOLD+(spell.requiresCharging() ? "Charge" : "Instant"));
 			}
 		}
 	}
@@ -455,6 +455,8 @@ public class AbyssalCraftClientEventHooks {
 				map.remove(BlockACStone.TYPE);
 				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
+		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_door, new StateMap.Builder().ignore(new IProperty[]{BlockDoor.POWERED}).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_door, new StateMap.Builder().ignore(new IProperty[]{BlockDoor.POWERED}).build());
 
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
@@ -687,6 +689,8 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.unique_scroll, 1, "scroll_unique_oblivion");
 		registerItemRender(ACItems.antidote, 0, "coralium_antidote");
 		registerItemRender(ACItems.antidote, 1, "dread_antidote");
+		registerItemRender(ACItems.darklands_oak_door, 0);
+		registerItemRender(ACItems.dreadlands_door, 0);
 
 		registerItemRender(ACBlocks.stone, 0, "darkstone");
 		registerItemRender(ACBlocks.stone, 1, "abystone");
@@ -941,6 +945,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.state_transformer, 0);
 		registerItemRender(ACBlocks.energy_depositioner, 0);
 		registerItemRender(ACBlocks.calcified_stone, 0);
+		registerItemRender(ACBlocks.multi_block, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

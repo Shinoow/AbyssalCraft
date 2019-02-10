@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -22,7 +22,9 @@ import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -107,6 +109,12 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	}
 
 	@Override
+	public boolean getCanSpawnHere()
+	{
+		return world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 4 ? super.getCanSpawnHere() : false;
+	}
+
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
@@ -185,19 +193,13 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
-		return EnumCreatureAttribute.UNDEAD;
-	}
-
-	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
 
 		List<EntityDreadSpawn> dreadspawns = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(2D, 2D, 2D));
 
-		if(!world.isRemote)
+		if(!world.isRemote && world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 10)
 			if(!dreadspawns.isEmpty())
 				if(dreadspawns.size() >= 5 && !hasMerged){
 					hasMerged = true;

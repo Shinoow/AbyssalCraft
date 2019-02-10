@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -25,6 +25,7 @@ import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.common.caps.NecromancyCapability;
 import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityProvider;
+import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
@@ -38,14 +39,13 @@ import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -63,6 +63,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.Clone;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
@@ -330,27 +331,17 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void onRitualPerformed(RitualEvent.Post event){
-		if(event.getRitual() instanceof NecronomiconSummonRitual){
+		if(event.getRitual() instanceof NecronomiconSummonRitual)
 			//			event.getEntityPlayer().addStat(ACAchievements.summoning_ritual, 1);
-			if(event.getRitual().getUnlocalizedName().substring(10).equals("summonSacthoth"))
-				if(!event.getWorld().isRemote)
-					SpecialTextUtil.SacthothGroup(event.getWorld(), I18n.translateToLocal("message.sacthoth.spawn.1"));
-			if(event.getRitual().getUnlocalizedName().substring(10).equals("summonAsorah"))
-				if(!event.getWorld().isRemote)
-					SpecialTextUtil.AsorahGroup(event.getWorld(), I18n.translateToLocal("message.asorah.spawn"));
-			//				event.getEntityPlayer().addStat(ACAchievements.summon_asorah, 1);
-		}
-		//		if(event.getRitual() instanceof NecronomiconCreationRitual)
-		//			event.getEntityPlayer().addStat(ACAchievements.creation_ritual, 1);
-		//		if(event.getRitual() instanceof NecronomiconBreedingRitual
-		//				|| event.getRitual() instanceof NecronomiconDreadSpawnRitual)
-		//			event.getEntityPlayer().addStat(ACAchievements.breeding_ritual, 1);
-		//		if(event.getRitual() instanceof NecronomiconPotionRitual)
-		//			event.getEntityPlayer().addStat(ACAchievements.potion_ritual, 1);
-		//		if(event.getRitual() instanceof NecronomiconPotionAoERitual)
-		//			event.getEntityPlayer().addStat(ACAchievements.aoe_potion_ritual, 1);
-		//		if(event.getRitual() instanceof NecronomiconInfusionRitual)
-		//			event.getEntityPlayer().addStat(ACAchievements.infusion_ritual, 1);
+			if(ACConfig.showBossDialogs) {
+				if(event.getRitual().getUnlocalizedName().substring(10).equals("summonSacthoth"))
+					if(!event.getWorld().isRemote)
+						SpecialTextUtil.SacthothGroup(event.getWorld(), I18n.translateToLocal("message.sacthoth.spawn.1"));
+				if(event.getRitual().getUnlocalizedName().substring(10).equals("summonAsorah"))
+					if(!event.getWorld().isRemote)
+						SpecialTextUtil.AsorahGroup(event.getWorld(), I18n.translateToLocal("message.asorah.spawn"));
+			}
+		//				event.getEntityPlayer().addStat(ACAchievements.summon_asorah, 1);
 	}
 
 	@SubscribeEvent
@@ -369,7 +360,8 @@ public class AbyssalCraftEventHooks {
 			AbstractHorse h = (AbstractHorse)event.getEntityLiving();
 			if(h.isTame() && h.hasCustomName()){
 				EntityPlayer p = h.world.getPlayerEntityByUUID(h.getOwnerUniqueId());
-				NecromancyCapability.getCap(p).storeData(h.getName(), h.serializeNBT(), calculateSize(h.height));
+				if(p != null)
+					NecromancyCapability.getCap(p).storeData(h.getName(), h.serializeNBT(), calculateSize(h.height));
 			}
 		} else if(EntityList.getKey(event.getEntityLiving()) != null){
 			EntityLivingBase e = event.getEntityLiving();
@@ -414,7 +406,15 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void upgradeKits(AnvilUpdateEvent event){
-		if(!(event.getRight().getItem() instanceof ItemUpgradeKit)) return;
+		if(!(event.getRight().getItem() instanceof ItemUpgradeKit)) {
+			if(event.getRight().getItem() == Items.ENCHANTED_BOOK)
+				for(Enchantment ench : EnchantmentHelper.getEnchantments(event.getRight()).keySet())
+					if(ench instanceof EnchantmentWeaponInfusion) {
+						event.setCanceled(true);
+						return;
+					}
+			return;
+		}
 
 		int cost = 0;
 
@@ -479,6 +479,33 @@ public class AbyssalCraftEventHooks {
 			if(!event.getWorld().isRemote)
 				event.getWorld().setBlockState(event.getPos(), Blocks.FARMLAND.getDefaultState());
 			event.setResult(Result.ALLOW);
+		}
+	}
+
+	@SubscribeEvent
+	public void nameTags(EntityInteract event) {
+		ItemStack stack = event.getEntityPlayer().getHeldItem(event.getHand());
+		if(stack.getItem() == Items.NAME_TAG && stack.hasDisplayName() && event.getTarget() instanceof IAntiEntity) {
+			EntityLiving target = (EntityLiving)event.getTarget();
+			String newname = "";
+
+			String name = stack.getDisplayName();
+			int length = name.length();
+			boolean[] cases = new boolean[length];
+			for(int j = 0; j < length; j++)
+				cases[j] = Character.isUpperCase(name.charAt(j));
+			for(int i = length - 1; i >= 0; i--) {
+				char c = name.charAt(i);
+				int k = length - 1 - i;
+				newname += cases[k] ? Character.toUpperCase(c) : Character.toLowerCase(c);
+			}
+
+			target.setCustomNameTag(newname);
+			target.enablePersistence();
+			if(!event.getEntityPlayer().capabilities.isCreativeMode)
+				stack.shrink(1);
+			event.setCanceled(true);
+
 		}
 	}
 

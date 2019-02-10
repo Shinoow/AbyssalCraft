@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -79,7 +79,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 				cooldown = world.rand.nextInt(10);
 				resetNearbyBiomass(true);
 				if(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32, false) != null)
-					if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).grow(16, 16, 16)).size() <= 6){
+					if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).grow(32)).size() <= 6){
 						EntityLesserShoggoth mob = new EntityLesserShoggoth(world);
 						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
 						mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);
@@ -154,6 +154,10 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 	}
 
 	private void setPosition(EntityLiving entity, int x, int y, int z){
+		if(world.isAirBlock(pos.up()) && world.isAirBlock(pos.up(2))){
+			entity.setLocationAndAngles(x, y + 1, z, entity.rotationYaw, entity.rotationPitch);
+			return;
+		}
 		for(int i = -1; i < 2; i++)
 			for(int j = -1; j < 2; j++)
 				if(!world.getBlockState(new BlockPos(x + i, y + 1, z + j)).getMaterial().isSolid()) {

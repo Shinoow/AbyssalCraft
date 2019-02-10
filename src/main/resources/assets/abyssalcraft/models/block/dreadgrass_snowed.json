@@ -1,0 +1,9 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "particle": "abyssalcraft:blocks/dreadlandsdirt",
+        "bottom": "abyssalcraft:blocks/dreadlandsdirt",
+        "top": "abyssalcraft:blocks/drgtop",
+        "side": "abyssalcraft:blocks/drgsides_snowed"
+    }
+}

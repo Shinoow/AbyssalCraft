@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -114,8 +114,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-		if(ACConfig.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(800.0D);
-		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 800.0D : 400.0D);
 	}
 
 	@Override
@@ -613,12 +612,14 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		move(MoverType.SELF, 0.0D, 0.10000000149011612D, 0.0D);
 		renderYawOffset = rotationYaw += 20.0F;
 
-		if(deathTicks == 20 && !world.isRemote)
-			SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.1"));
-		if(deathTicks == 80 && !world.isRemote)
-			SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.2"));
-		if(deathTicks == 140 && !world.isRemote)
-			SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.3"));
+		if(ACConfig.showBossDialogs) {
+			if(deathTicks == 20 && !world.isRemote)
+				SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.1"));
+			if(deathTicks == 80 && !world.isRemote)
+				SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.2"));
+			if(deathTicks == 140 && !world.isRemote)
+				SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.3"));
+		}
 		if (deathTicks == 200 && !world.isRemote){
 			setDead();
 			world.spawnEntity(new EntityItem(world, posX, posY, posZ, new ItemStack(ACItems.eye_of_the_abyss)));

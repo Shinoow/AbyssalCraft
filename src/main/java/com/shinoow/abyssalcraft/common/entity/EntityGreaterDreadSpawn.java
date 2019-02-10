@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -113,6 +113,12 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	}
 
 	@Override
+	public boolean getCanSpawnHere()
+	{
+		return world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 4 ? super.getCanSpawnHere() : false;
+	}
+
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
@@ -197,12 +203,6 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
-		return EnumCreatureAttribute.UNDEAD;
-	}
-
-	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
@@ -218,7 +218,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 
 		List<EntityGreaterDreadSpawn> greaterspawns = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(5D, 5D, 5D));
 
-		if(!world.isRemote)
+		if(!world.isRemote && world.getEntitiesWithinAABB(EntityLesserDreadbeast.class, getEntityBoundingBox().grow(32)).size() < 4)
 			if(!greaterspawns.isEmpty())
 				if(greaterspawns.size() >= 5 && !hasMerged){
 					hasMerged = true;
@@ -232,7 +232,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 				}
 
 		if(ticksExisted % 2000 == 0)
-			if(!world.isRemote){
+			if(!world.isRemote && world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 20){
 				EntityDreadSpawn spawn = new EntityDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
 				world.spawnEntity(spawn);

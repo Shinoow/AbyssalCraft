@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -149,12 +149,6 @@ public class EntityGatekeeperMinion extends EntityMob implements IOmotholEntity 
 	@Override
 	protected ResourceLocation getLootTable(){
 		return ACLoot.ENTITY_MINION_OF_THE_GATEKEEPER;
-	}
-
-	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
-		return EnumCreatureAttribute.UNDEAD;
 	}
 
 	@Override

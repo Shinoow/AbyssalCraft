@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2018 Shinoow.
+ * Copyright (c) 2012 - 2019 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -21,12 +21,15 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.structure.IPlaceOfPower;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.client.lib.MultiblockRenderData;
+import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.block.Block;
@@ -39,11 +42,9 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -57,6 +58,7 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 	private GuiNecronomicon parent;
 	private List<IPlaceOfPower> places = Lists.newArrayList();
 	private int ticksInBook;
+	private boolean showMultiblock = false;
 	private MultiblockRenderData multiblockObj = new MultiblockRenderData();
 
 	public GuiNecronomiconPlacesOfPower(int bookType, GuiNecronomicon gui){
@@ -143,25 +145,29 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 	{
 		if(!isShiftKeyDown())
 			ticksInBook++;
+		if(ticksInBook % 40 == 0)
+			showMultiblock = showMultiblock ? false : true;
 		super.updateScreen();
 	}
 
 	private void drawPage(IPlaceOfPower place, int x, int y){
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
-		String title = localize(NecronomiconText.LABEL_INDEX);
+		String title = localize(NecronomiconText.LABEL_STRUCTURES);
 		fontRenderer.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
 
-		//		writeText(1, "PE per cast: " + spell.getReqEnergy() + " PE", 125);
-		//		writeText(1, "Spell Type: "+ (spell.requiresCharging() ? "Charging" : "Instant"), 135);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/placeofpower.png"));
+		mc.renderEngine.bindTexture(NecronomiconResources.PLACE_OF_POWER);
 		drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 
 		multiblockObj.calculateData(place.getRenderData());
-		writeText(1, "Height: "+multiblockObj.sizeY+" blocks", 125);
-		writeText(1, "Width: "+multiblockObj.sizeX+" blocks", 135);
-		writeText(1, "Depth: "+multiblockObj.sizeZ+" blocks", 145);
+		writeText(1, "Height: "+multiblockObj.sizeY+" blocks", 127);
+		writeText(1, "Width: "+multiblockObj.sizeX+" blocks", 137);
+		writeText(1, "Depth: "+multiblockObj.sizeZ+" blocks", 147);
+		writeText(2, "Range amplifier: "+place.getAmplifier(AmplifierType.RANGE));
+		writeText(2, "Duration amplifier: "+place.getAmplifier(AmplifierType.DURATION), 38);
+		writeText(2, "Power amplifier: "+place.getAmplifier(AmplifierType.POWER), 48);
+		writeText(2, place.getDescription(), 64);
 
 		float maxX = 90;
 		float maxY = 90;
@@ -251,7 +257,7 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 			Block block = bs.getBlock();
 			if(pos.equals(activationPoint)) {
 				if (block.canRenderInLayer(bs, layer))
-					renderBlock(ticksInBook % 40 == 0 ? Blocks.AIR.getDefaultState() : bs, pos, mb, Tessellator.getInstance().getBuffer());
+					renderBlock(showMultiblock ? ACBlocks.multi_block.getDefaultState() : bs, pos, mb, Tessellator.getInstance().getBuffer());
 			} else if (block.canRenderInLayer(bs, layer))
 				renderBlock(bs, pos, mb, Tessellator.getInstance().getBuffer());
 		}
