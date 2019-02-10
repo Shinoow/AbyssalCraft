@@ -1128,8 +1128,8 @@ public class StructureAbyStrongholdPieces
 				setBlockState(par1World, ACBlocks.abyssal_stone_brick.getDefaultState(), par5 + 2, par6 + 2, par7, par3StructureBoundingBox);
 				setBlockState(par1World, ACBlocks.abyssal_stone_brick.getDefaultState(), par5 + 2, par6 + 1, par7, par3StructureBoundingBox);
 				setBlockState(par1World, ACBlocks.abyssal_stone_brick.getDefaultState(), par5 + 2, par6, par7, par3StructureBoundingBox);
-				setBlockState(par1World, Blocks.OAK_DOOR.getDefaultState(), par5 + 1, par6, par7, par3StructureBoundingBox);
-				setBlockState(par1World, Blocks.OAK_DOOR.getStateFromMeta(8), par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
+				setBlockState(par1World, ACBlocks.darklands_oak_door.getDefaultState(), par5 + 1, par6, par7, par3StructureBoundingBox);
+				setBlockState(par1World, ACBlocks.darklands_oak_door.getStateFromMeta(8), par5 + 1, par6 + 1, par7, par3StructureBoundingBox);
 				break;
 			case 3:
 				setBlockState(par1World, Blocks.AIR.getDefaultState(), par5 + 1, par6, par7, par3StructureBoundingBox);

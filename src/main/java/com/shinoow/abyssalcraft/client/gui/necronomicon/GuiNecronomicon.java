@@ -542,9 +542,12 @@ public class GuiNecronomicon extends GuiScreen {
 	public void renderObject(int xPos, int yPos, Object obj, int mx, int my) {
 		if(list(obj)) {
 			List<ItemStack> list = getList(obj);
-
-			int index = (int)((drawTime - startTime) / cycleTime) % list.size();
-			renderItem(xPos, yPos, list.get(index), mx, my);
+			if(!list.isEmpty()) {
+				int index = (int)((drawTime - startTime) / cycleTime) % list.size();
+				renderItem(xPos, yPos, list.get(index), mx, my);
+			} else if(obj instanceof ItemStack) {
+				renderItem(xPos, yPos, APIUtils.convertToStack(obj), mx, my);
+			}
 		} else
 			renderItem(xPos, yPos, APIUtils.convertToStack(obj), mx, my);
 	}

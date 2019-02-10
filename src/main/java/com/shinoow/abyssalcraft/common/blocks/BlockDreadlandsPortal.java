@@ -106,7 +106,7 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 			}
 		}
 
-		if(worldIn.getBiome(pos) != ACBiomes.purged)
+		if(worldIn.getBiome(pos) != ACBiomes.purged && !ACConfig.no_dreadlands_spread)
 			if(worldIn.provider.getDimension() != ACLib.dreadlands_id && worldIn.provider.getDimension() != ACLib.omothol_id && !worldIn.isRemote && rand.nextInt(10) < worldIn.getDifficulty().getDifficultyId()) {
 				int distance = 5, num = 0;
 				for(int x = pos.getX() - distance; x <= pos.getX() + distance; x++)
