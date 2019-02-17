@@ -269,8 +269,8 @@ necronomicon.information.decorativestatues=Декоративные статуи
 necronomicon.information.knowledge=Получение знаний
 necronomicon.information.coraliumplague=Коралловая чума
 necronomicon.information.dreadplague=Ужасная чума
-necronomicon.information.placesofpower=Места силы
-necronomicon.information.structures=Структуры
+necronomicon.information.placesofpower=Places of Power
+necronomicon.information.structures=Structures
 
 #Necronomicon Text
 #Примечание: максимальное кол-во букв в строке 368
@@ -772,31 +772,31 @@ ac.ritual.purging=Ритуал промывания
 ac.ritual.purging.desc=Предоставив 4 Кристаллизованных скоплений кальция и большое кол-во энергии, ты очищаешь каждый след Ужасной чумы (и Ужасные земли) из области, положить этому конец (также убивает близлежащих монстров). Хотя это делает область непригодной для жизни, никакая чума не сможет распространяться здесь. Не работают на Ужасных землях.
 
 #Spells
-ac.spell.lifedrain=Угасание жизни
+ac.spell.lifedrain=Life Drain
 ac.spell.lifedrain.desc=Siphon the lifeforce of your enemy to heal your wounds.
-ac.spell.entropy=Энтропия
+ac.spell.entropy=Entropy
 ac.spell.entropy.desc=Draw energy straight from the ground as it crumbles to dust.
-ac.spell.mining=Добыча
+ac.spell.mining=Mining
 ac.spell.mining.desc=Superheat the ground in a straight line, melting any stone and leaving all ores intact.
-ac.spell.graspofcthulhu=Понимание ктулху
+ac.spell.graspofcthulhu=Grasp of Cthulhu
 ac.spell.graspofcthulhu.desc=Damages the target over time while holding them in place. The damage can never reduce the target to 0HP or less
-ac.spell.invisibility=Скрываться от глаз
+ac.spell.invisibility=Hide from the Eye
 ac.spell.invisibility.desc=Caster or target goes Invisible for 5 minutes.
-ac.spell.detachment=Подразделение
+ac.spell.detachment=Detachment
 ac.spell.detachment.desc=Removes one piece of equipment from the target causing it to fall on the ground. Equipped item is chosen randomly from among its equipped/held items.
-ac.spell.stealvigor=Кража бодрости
+ac.spell.stealvigor=Steal Vigor
 ac.spell.stealvigor.desc=The target is temporarily weakened while the caster claims their strength.
-ac.spell.sirenssong=Песня сирены
+ac.spell.sirenssong=Siren's Song
 ac.spell.sirenssong.desc=By singing to a creature's very soul you encourage it to join your team. (Useless on Players.)
-ac.spell.undeathtodust=Нежить в пыль
+ac.spell.undeathtodust=Undeath to Dust
 ac.spell.undeathtodust.desc=Instantly disintegrate one undead creature, leaving nothing behind.
-ac.spell.oozeremoval=Устранение слизи
+ac.spell.oozeremoval=Ooze Removal
 ac.spell.oozeremoval.desc=Disperses any Shoggoth Ooze in the vicinity of the caster.
-ac.spell.teleporthostiles=Жертвенный перехват
+ac.spell.teleporthostiles=Sacrificial Interdiction
 ac.spell.teleporthostiles.desc=By sacrificing the life of an innocent child, the dark ones are pushed away. Cast the spell while targeting an animal baby, and all mobs within 50 blocks will be teleported away from you.
 
 #Places of Power
-ac.structure.basic.description=Небольшой и простой Храм. Предоставляет ряд ускорений, затронув статуи.
+ac.structure.basic.description=A small and simple shrine. Provides a range boost to affected statues.
 
 #Rending
 ac.rending.shadowgem=Теневые жемчужины изготавливаются из сбора Тёмной энергии из Живых теней.
@@ -827,15 +827,15 @@ ac_silly_settings=Нелепые настройки
 ac_silly_settings.tooltip=Настройки нелепых настроек
 ac_blocks=Блоки
 ac_blocks.tooltip=Конфигурация блока
-ac_mod_compat=Совместимость мода
-ac_mod_compat.tooltip=Конфигурация совместимости мода
-ac_wet_noodle=Сырые макароны
-ac_wet_noodle.tooltip=Конфигурация "Сырые макароны"
+ac_mod_compat=Mod Compatibility
+ac_mod_compat.tooltip=Mod Compatibility Configuration
+ac_wet_noodle=Wet Noodle
+ac_wet_noodle.tooltip=Wet Noodle Configuration
 
 #Keybinds
 key.abyssalcraft.category=AbyssalCraft
 key.staff_mode.desc=Изменить режим Посоха сторожа
-key.use_cage.desc=Улавливает монстров в Межпространственную клетку
+key.use_cage.desc=Улавливает монстров в Межпространственную Клетку
 
 #Damagesources
 death.attack.coralium=%1$s умер от Коралловой чумы
@@ -1101,9 +1101,9 @@ tile.rendingpedestal.name=Расщепляющий пьедестал
 tile.statetransformer.name=Трансформатор состояния
 tile.energydepositioner.name=Энергоотправитель
 tile.calcifiedstone.name=Кальцинированный камень
-tile.door_dlt.name=Дубовая деревянная дверь из Мёртвых земель
-tile.door_drt.name=Деревянная дверь из Мёртвых земель
-tile.multi_block.name=Мультиблок
+tile.door_dlt.name=Darklands Oak Wood Door
+tile.door_drt.name=Dreadlands Wood Door
+tile.multi_block.name=Multiblock
 
 #Pre/Postfixes
 decorativestatue.prefix=Декоративная %s
@@ -1338,8 +1338,8 @@ item.unique_scroll.antimatter.name=Свиток антивещ-ва
 item.unique_scroll.oblivion.name=Свиток забывчивости
 item.antidote.coralium.name=Противоядие от Коралловой чумы
 item.antidote.dread.name=Противоядие от Ужасной чумы
-item.door_dlt.name=Дубовая деревянная дверь из Мёртвых земель
-item.door_drt.name=Деревянная дверь из Мёртвых земель
+item.door_dlt.name=Darklands Oak Wood Door
+item.door_drt.name=Dreadlands Wood Door
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Глубинный гуль

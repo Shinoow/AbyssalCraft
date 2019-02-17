@@ -17,6 +17,7 @@ import java.util.Map;
 import org.lwjgl.input.Mouse;
 
 import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -272,10 +273,11 @@ public class AbyssalCraftClientEventHooks {
 		if(stack.getItem() instanceof IEnergyContainerItem)
 			event.getToolTip().add(1, String.format("%d/%d PE", (int)((IEnergyContainerItem)stack.getItem()).getContainedEnergy(stack), ((IEnergyContainerItem)stack.getItem()).getMaxEnergy(stack)));
 
-		if(stack.getItem() instanceof IUnlockableItem && event.getEntityPlayer() != null && !NecroDataCapability.getCap(event.getEntityPlayer()).isUnlocked(((IUnlockableItem)stack.getItem()).getUnlockCondition(stack), event.getEntityPlayer())){
-			event.getToolTip().remove(0);
-			event.getToolTip().add(0, "Lorem ipsum");
-		}
+		if(!APIUtils.display_names)
+			if(stack.getItem() instanceof IUnlockableItem && event.getEntityPlayer() != null && !NecroDataCapability.getCap(event.getEntityPlayer()).isUnlocked(((IUnlockableItem)stack.getItem()).getUnlockCondition(stack), event.getEntityPlayer())){
+				event.getToolTip().remove(0);
+				event.getToolTip().add(0, "Lorem ipsum");
+			}
 		if(stack.getItem() instanceof IScroll) {
 			Spell spell = SpellUtils.getSpell(stack);
 			if(spell != null){

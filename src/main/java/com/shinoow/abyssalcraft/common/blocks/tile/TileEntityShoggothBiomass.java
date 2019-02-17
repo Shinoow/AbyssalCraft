@@ -73,7 +73,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 
 	@Override
 	public void update() {
-		if(world.getDifficulty() != EnumDifficulty.PEACEFUL){
+		if(world.getDifficulty() != EnumDifficulty.PEACEFUL && world.getGameRules().getBoolean("doMobSpawning")){
 			cooldown++;
 			if (cooldown >= 400) {
 				cooldown = world.rand.nextInt(10);

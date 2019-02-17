@@ -71,14 +71,14 @@ public class NecronomiconPurgingRitual extends NecronomiconRitual {
 					if(world.isAirBlock(pos1.up(y))) continue;
 					IBlockState state = world.getBlockState(pos1.up(y));
 					if(state.getBlock().hasTileEntity(state)) continue;
+					if(state.getBlockHardness(world, pos1.up(y)) == -1) continue;
 					if(state.getBlock() instanceof IPlantable)
 						world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
 					else if(state.getMaterial().isLiquid())
 						world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
 					else if(!state.isFullCube())
 						world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
-					else if(state.getBlock() != Blocks.BEDROCK)
-						world.setBlockState(pos1.up(y), ACBlocks.calcified_stone.getDefaultState(), 2);
+					else world.setBlockState(pos1.up(y), ACBlocks.calcified_stone.getDefaultState(), 2);
 				}
 
 				Chunk c = world.getChunkFromBlockCoords(pos1);
