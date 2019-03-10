@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "#\u0026#",
+    "#%#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "#DUSTSALTPETER"
+    },
+    "%": {
+      "item": "minecraft:coal",
+      "data": 1
+    },
+    "\u0026": {
+      "item": "#DUSTSULFUR"
+    }
+  },
+  "result": {
+    "item": "minecraft:gunpowder",
+    "count": 4
+  }
+}

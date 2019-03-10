@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "%\u0026%",
+    "#@#"
+  ],
+  "key": {
+    "@": {
+      "item": "abyssalcraft:energyrelay"
+    },
+    "#": {
+      "item": "abyssalcraft:stone",
+      "data": 7
+    },
+    "%": {
+      "item": "abyssalcraft:shadowgem"
+    },
+    "\u0026": {
+      "item": "abyssalcraft:transmutationgem",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:energydepositioner"
+  }
+}

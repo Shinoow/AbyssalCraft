@@ -15,15 +15,16 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.structure.MapGenStructure;
-import net.minecraft.world.gen.structure.StructureComponent;
-import net.minecraft.world.gen.structure.StructureStart;
+import net.minecraft.world.gen.structure.*;
+import net.minecraft.world.storage.WorldSavedData;
 
 public class MapGenAbyStronghold extends MapGenStructure
 {
@@ -81,7 +82,14 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 		for (ChunkPos chunkcoordintpair : structureCoords)
 		{
+			if(bool) {
+				StructureStart structure = structureMap.get(ChunkPos.asLong(chunkcoordintpair.x, chunkcoordintpair.z));
+				if(structure instanceof Start)
+					if(((Start) structure).isExplored())
+						continue;
+			}
 			blockpos$mutableblockpos.setPos((chunkcoordintpair.x << 4) + 8, 32, (chunkcoordintpair.z << 4) + 8);
+
 			double d1 = blockpos$mutableblockpos.distanceSq(pos);
 
 			if (blockpos == null)
@@ -97,6 +105,19 @@ public class MapGenAbyStronghold extends MapGenStructure
 		}
 
 		return blockpos;
+	}
+
+	public void markStructureExplored(World world, BlockPos pos) {
+		StructureStart structure = getStructureAt(pos);
+		if(structure instanceof Start) {
+			ACLogger.info("%b", ((Start) structure).isExplored());
+			((Start) structure).setExplored(true);
+			WorldSavedData data = world.getPerWorldStorage().getOrLoadData(MapGenStructureData.class, getStructureName());
+			if(data instanceof MapGenStructureData) {
+				((MapGenStructureData) data).writeInstance(structure.writeStructureComponentsToNBT(structure.getChunkPosX(), structure.getChunkPosZ()), structure.getChunkPosX(), structure.getChunkPosZ());
+				data.markDirty();
+			}
+		}
 	}
 
 	@Override
@@ -206,6 +227,8 @@ public class MapGenAbyStronghold extends MapGenStructure
 	public static class Start extends StructureStart
 	{
 
+		private boolean isExplored;
+
 		public Start() {}
 
 		public Start(World par1World, Random par2Random, int par3, int par4)
@@ -226,6 +249,27 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 			updateBoundingBox();
 			markAvailableHeight(par1World, par2Random, 10);
+		}
+
+		@Override
+		public void writeToNBT(NBTTagCompound tagCompound)
+		{
+			tagCompound.setBoolean("explored", isExplored);
+		}
+
+		@Override
+		public void readFromNBT(NBTTagCompound tagCompound)
+		{
+			if(tagCompound.hasKey("explored"))
+				setExplored(tagCompound.getBoolean("explored"));
+		}
+
+		public void setExplored(boolean explored) {
+			isExplored = explored;
+		}
+
+		public boolean isExplored() {
+			return isExplored;
 		}
 	}
 }

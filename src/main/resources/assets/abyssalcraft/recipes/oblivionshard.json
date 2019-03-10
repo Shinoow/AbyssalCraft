@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#%#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:shadowgem"
+    },
+    "%": {
+      "item": "abyssalcraft:transmutationgem",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:oblivionshard"
+  }
+}

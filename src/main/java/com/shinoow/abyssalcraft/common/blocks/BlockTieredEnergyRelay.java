@@ -31,6 +31,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -155,6 +156,25 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
 	{
 		return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING, facing).withProperty(DIMENSION, EnumDimType.byMetadata(meta));
+	}
+
+	@Override
+	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, EnumFacing side, float par7, float par8, float par9) {
+		if(!par1World.isRemote) {
+			TileEntity tileentity = par1World.getTileEntity(pos);
+			EnumFacing facing = state.getValue(FACING);
+			if(tileentity instanceof TileEntityTieredEnergyRelay) {
+				facing = EnumFacing.getFront(((TileEntityTieredEnergyRelay) tileentity).getFacing());
+				facing = EnumFacing.getFront(facing.ordinal() + 1);
+				((TileEntityTieredEnergyRelay) tileentity).setFacing(facing.getIndex());
+			}
+			par1World.setBlockState(pos, state.withProperty(FACING, facing), 3);
+			if(tileentity != null) {
+				tileentity.validate();
+				par1World.setTileEntity(pos, tileentity);
+			}
+		}
+		return true;
 	}
 
 	@Override

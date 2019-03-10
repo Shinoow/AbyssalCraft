@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:dreadbrick",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:dreadbrickfence",
+    "count": 6
+  }
+}

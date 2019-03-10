@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "\u0026#\u0026",
+    "#@#",
+    "%%%"
+  ],
+  "key": {
+    "@": {
+      "item": "abyssalcraft:corhelmet"
+    },
+    "#": {
+      "item": "abyssalcraft:platec"
+    },
+    "%": {
+      "item": "abyssalcraft:cingot"
+    },
+    "\u0026": {
+      "item": "abyssalcraft:cpearl"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:corhelmetp"
+  }
+}

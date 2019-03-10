@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:cingot"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:ingotblock",
+    "data": 1
+  }
+}

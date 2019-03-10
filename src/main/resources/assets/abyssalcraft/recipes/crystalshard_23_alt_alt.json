@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:crystalfragment",
+      "data": 23
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:crystalshard",
+    "data": 23
+  }
+}

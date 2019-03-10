@@ -32,6 +32,7 @@ public class NecroDataCapability implements INecroDataCapability {
 	boolean hasAllKnowledge;
 
 	long lastSyncTime = 0;
+	int syncTimer = 0;
 
 	public static INecroDataCapability getCap(EntityPlayer player){
 		return player.getCapability(NecroDataCapabilityProvider.NECRO_DATA_CAP, null);
@@ -147,6 +148,22 @@ public class NecroDataCapability implements INecroDataCapability {
 	public long getLastSyncTime() {
 
 		return lastSyncTime;
+	}
+
+	@Override
+	public void incrementSyncTimer() {
+		syncTimer++;
+	}
+
+	@Override
+	public void resetSyncTimer() {
+		syncTimer = 0;
+	}
+
+	@Override
+	public int getSyncTimer() {
+
+		return syncTimer;
 	}
 
 	@Override

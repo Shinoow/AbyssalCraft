@@ -58,7 +58,8 @@ public class ItemCorb extends ItemACBasic {
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		l.add(I18n.format("tooltip.corb"));
-		l.add(String.format("%d/%d", getMaxDamage(is) - getDamage(is), getMaxDamage(is)));
+		if(!B.isAdvanced())
+			l.add(String.format("%d/%d", getMaxDamage(is) - getDamage(is), getMaxDamage(is)));
 	}
 
 	@Override

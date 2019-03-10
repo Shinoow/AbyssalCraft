@@ -11,8 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
@@ -123,14 +126,15 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 			if(ritual != null){
 				if(sacrifice != null && sacrifice.isEntityAlive())
 					world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, sacrifice.posX, sacrifice.posY + sacrifice.getEyeHeight(), sacrifice.posZ, 0, 0, 0);
-				if(!world.isRemote)
+				if(!world.isRemote && ritualTimer % 20 == 0)
 					if(user != null)
 						collectPEFromPlayer();
 					else user = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, true);
 				if(ritualTimer == 200)
 					if(user != null && !world.isRemote){
 						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, world, pos))){
-							collectPEFromPlayer();
+							//Fixes any rounding errors from uneven numbers, but likely breaks rituals with decimal numbers for required energy. I can live with that.
+							consumedEnergy = BigDecimal.valueOf(consumedEnergy).setScale(1,BigDecimal.ROUND_HALF_UP).floatValue();
 							if(consumedEnergy == ritual.getReqEnergy() && (sacrifice == null || !sacrifice.isEntityAlive()))
 								ritual.completeRitual(world, pos, user);
 							else
@@ -192,7 +196,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 			if(!stack.isEmpty() && stack.getItem() instanceof IEnergyTransporterItem &&
 					((IEnergyTransporterItem) stack.getItem()).canTransferPEExternally(stack) && ((IEnergyTransporterItem) stack.getItem()).getContainedEnergy(stack) > 0 &&
 					(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(user, stack) || !(stack.getItem() instanceof ItemNecronomicon))){
-				consumedEnergy += ((IEnergyTransporterItem) stack.getItem()).consumeEnergy(stack, ritual.getReqEnergy()/200);
+				consumedEnergy += ((IEnergyTransporterItem) stack.getItem()).consumeEnergy(stack, ritual.getReqEnergy()/10);
 				break;
 			}
 	}
@@ -216,74 +220,53 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	@Override
 	public boolean canPerform(){
 
-		if(checkSurroundings(world, pos)) return true;
-		return false;
+		return checkSurroundings(world, pos);
 	}
 
 	@Override
 	public boolean checkSurroundings(World world, BlockPos pos){
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-		TileEntity ped1 = world.getTileEntity(new BlockPos(x - 3, y, z));
-		TileEntity ped2 = world.getTileEntity(new BlockPos(x, y, z - 3));
-		TileEntity ped3 = world.getTileEntity(new BlockPos(x + 3, y, z));
-		TileEntity ped4 = world.getTileEntity(new BlockPos(x, y, z + 3));
-		TileEntity ped5 = world.getTileEntity(new BlockPos(x - 2, y, z + 2));
-		TileEntity ped6 = world.getTileEntity(new BlockPos(x - 2, y, z - 2));
-		TileEntity ped7 = world.getTileEntity(new BlockPos(x + 2, y, z + 2));
-		TileEntity ped8 = world.getTileEntity(new BlockPos(x + 2, y, z - 2));
-		if(ped1 instanceof IRitualPedestal && ped2 instanceof IRitualPedestal && ped3 instanceof IRitualPedestal
-				&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
-				&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
-			offers[0] = ((IRitualPedestal)ped1).getItem();
-			offers[1] = ((IRitualPedestal)ped2).getItem();
-			offers[2] = ((IRitualPedestal)ped3).getItem();
-			offers[3] = ((IRitualPedestal)ped4).getItem();
-			offers[4] = ((IRitualPedestal)ped5).getItem();
-			offers[5] = ((IRitualPedestal)ped6).getItem();
-			offers[6] = ((IRitualPedestal)ped7).getItem();
-			offers[7] = ((IRitualPedestal)ped8).getItem();
+
+		List<IRitualPedestal> l = getPedestals(world, pos);
+		if(!l.isEmpty()) {
+			boolean hasAnyOffer = false;
 			for(int i = 0; i < 8; i++) {
-				ItemStack stack = offers[i];
+				ItemStack stack = l.get(i).getItem();
+				offers[i] = stack;
 				if(!stack.isEmpty()) {
 					offerData[i] = new int[]{Item.getIdFromItem(stack.getItem()), stack.getMetadata()};
 					hasOffer[i] = true;
+					hasAnyOffer = true;
 				}
 			}
-			if(offers[0].isEmpty() && offers[1].isEmpty() && offers[2].isEmpty() && offers[3].isEmpty() && offers[4].isEmpty() &&
-					offers[5].isEmpty() && offers[6].isEmpty() && offers[7].isEmpty()) return false;
-			else return true;
+			return hasAnyOffer;
 		}
 		return false;
 	}
 
 	@Override
 	public void resetPedestals(World world, BlockPos pos){
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
 
-		TileEntity ped1 = world.getTileEntity(new BlockPos(x-3, y, z));
-		TileEntity ped2 = world.getTileEntity(new BlockPos(x, y, z - 3));
-		TileEntity ped3 = world.getTileEntity(new BlockPos(x + 3, y, z));
-		TileEntity ped4 = world.getTileEntity(new BlockPos(x, y, z + 3));
-		TileEntity ped5 = world.getTileEntity(new BlockPos(x - 2, y, z + 2));
-		TileEntity ped6 = world.getTileEntity(new BlockPos(x - 2, y, z - 2));
-		TileEntity ped7 = world.getTileEntity(new BlockPos(x + 2, y, z + 2));
-		TileEntity ped8 = world.getTileEntity(new BlockPos(x + 2, y, z - 2));
+		for(IRitualPedestal ped : getPedestals(world, pos))
+			ped.setItem(getStack(ped.getItem()));
+	}
+
+	private List<IRitualPedestal> getPedestals(World world, BlockPos pos){
+
+		TileEntity ped1 = world.getTileEntity(pos.west(3));
+		TileEntity ped2 = world.getTileEntity(pos.north(3));
+		TileEntity ped3 = world.getTileEntity(pos.east(3));
+		TileEntity ped4 = world.getTileEntity(pos.south(3));
+		TileEntity ped5 = world.getTileEntity(pos.west(2).south(2));
+		TileEntity ped6 = world.getTileEntity(pos.west(2).north(2));
+		TileEntity ped7 = world.getTileEntity(pos.east(2).south(2));
+		TileEntity ped8 = world.getTileEntity(pos.east(2).north(2));
 		if(ped1 instanceof IRitualPedestal && ped2 instanceof IRitualPedestal && ped3 instanceof IRitualPedestal
 				&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
-				&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
-			((IRitualPedestal)ped1).setItem(getStack(((IRitualPedestal)ped1).getItem()));
-			((IRitualPedestal)ped2).setItem(getStack(((IRitualPedestal)ped2).getItem()));
-			((IRitualPedestal)ped3).setItem(getStack(((IRitualPedestal)ped3).getItem()));
-			((IRitualPedestal)ped4).setItem(getStack(((IRitualPedestal)ped4).getItem()));
-			((IRitualPedestal)ped5).setItem(getStack(((IRitualPedestal)ped5).getItem()));
-			((IRitualPedestal)ped6).setItem(getStack(((IRitualPedestal)ped6).getItem()));
-			((IRitualPedestal)ped7).setItem(getStack(((IRitualPedestal)ped7).getItem()));
-			((IRitualPedestal)ped8).setItem(getStack(((IRitualPedestal)ped8).getItem()));
-		}
+				&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal)
+			return ImmutableList.of((IRitualPedestal)ped1, (IRitualPedestal)ped2, (IRitualPedestal)ped3, (IRitualPedestal)ped4,
+					(IRitualPedestal)ped5, (IRitualPedestal)ped6, (IRitualPedestal)ped7, (IRitualPedestal)ped8);
+
+		return new ArrayList();
 	}
 
 	private ItemStack getStack(ItemStack stack){

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "abyssalcraft:ccluster2"
+    },
+    {
+      "item": "abyssalcraft:coralium"
+    }
+  ],
+  "result": {
+    "item": "abyssalcraft:ccluster3"
+  }
+}

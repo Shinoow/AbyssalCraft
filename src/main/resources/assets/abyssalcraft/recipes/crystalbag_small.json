@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#%#",
+    "%\u0026%",
+    "%%%"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:string"
+    },
+    "%": {
+      "item": "minecraft:leather"
+    },
+    "\u0026": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:crystalbag_small"
+  }
+}

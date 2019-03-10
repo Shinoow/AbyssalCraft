@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#%#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:skin",
+      "data": 2
+    },
+    "%": {
+      "item": "abyssalcraft:crystalbag_large"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:crystalbag_huge"
+  }
+}

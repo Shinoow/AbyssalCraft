@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "%\u0026%"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:cingot"
+    },
+    "%": {
+      "item": "abyssalcraft:platec"
+    },
+    "\u0026": {
+      "item": "abyssalcraft:corboots"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:corbootsp"
+  }
+}

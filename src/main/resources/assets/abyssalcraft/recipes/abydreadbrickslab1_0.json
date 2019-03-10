@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "abyssalcraft:abydreadbrick",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:abydreadbrickslab1",
+    "data": 0,
+    "count": 6
+  }
+}

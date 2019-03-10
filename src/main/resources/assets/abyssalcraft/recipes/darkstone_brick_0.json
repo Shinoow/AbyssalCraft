@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AA",
+    "AA"
+  ],
+  "key": {
+    "A": {
+      "item": "abyssalcraft:stone",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:darkstone_brick",
+    "data": 0,
+    "count": 4
+  }
+}

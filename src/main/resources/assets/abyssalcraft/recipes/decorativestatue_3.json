@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "abyssalcraft:stone",
+      "data": 7
+    },
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 5
+    }
+  ],
+  "result": {
+    "item": "abyssalcraft:decorativestatue",
+    "data": 3
+  }
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "abyssalcraft:item/coralium_antidote",
+	"textures": {
+		"layer0": "abyssalcraft:items/coralium_antidote_3"
+	}
+}

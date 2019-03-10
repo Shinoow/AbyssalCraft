@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "#%#",
+    "#%#"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:dreadplanks"
+    },
+    "%": {
+      "item": "#STICKWOOD"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:drtfence",
+    "count": 3
+  }
+}

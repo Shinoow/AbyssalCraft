@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:cobblestone",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:abyssalcobblestonewall",
+    "count": 6
+  }
+}

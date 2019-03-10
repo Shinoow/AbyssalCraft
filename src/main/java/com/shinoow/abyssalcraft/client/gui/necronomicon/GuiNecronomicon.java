@@ -545,9 +545,8 @@ public class GuiNecronomicon extends GuiScreen {
 			if(!list.isEmpty()) {
 				int index = (int)((drawTime - startTime) / cycleTime) % list.size();
 				renderItem(xPos, yPos, list.get(index), mx, my);
-			} else if(obj instanceof ItemStack) {
+			} else if(obj instanceof ItemStack)
 				renderItem(xPos, yPos, APIUtils.convertToStack(obj), mx, my);
-			}
 		} else
 			renderItem(xPos, yPos, APIUtils.convertToStack(obj), mx, my);
 	}

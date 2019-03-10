@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#%#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:ccluster9"
+    },
+    "%": {
+      "item": "abyssalcraft:stone",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:cchunk"
+  }
+}

@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabil
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.KnowledgeUnlockMessage;
 import com.shinoow.abyssalcraft.common.network.client.NecroDataCapMessage;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -44,15 +45,23 @@ public class KnowledgeEventHandler {
 
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent event){
-		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().world.isRemote){
-			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
+		if(event.getEntityLiving() instanceof EntityPlayerMP){
+			EntityPlayerMP player = (EntityPlayerMP)event.getEntityLiving();
+			INecroDataCapability cap = NecroDataCapability.getCap(player);
+			if(cap.getSyncTimer() < ACConfig.knowledgeSyncDelay)
+				cap.incrementSyncTimer();
+			else if(cap.getSyncTimer() == ACConfig.knowledgeSyncDelay) {
+				cap.incrementSyncTimer();
+				NecroDataCapability.getCap(player).setLastSyncTime(System.currentTimeMillis());
+				PacketDispatcher.sendTo(new NecroDataCapMessage(player), player);
+			}
+
 			Biome b = player.world.getBiome(player.getPosition());
 			if(player.ticksExisted % 200 == 0 && ForgeRegistries.BIOMES.getKey(b) != null) {
 				String name = ForgeRegistries.BIOMES.getKey(b).toString();
-				INecroDataCapability cap = NecroDataCapability.getCap(player);
 				if(!cap.getBiomeTriggers().contains(name)) {
 					cap.triggerBiomeUnlock(ForgeRegistries.BIOMES.getKey(b).toString());
-					PacketDispatcher.sendTo(new KnowledgeUnlockMessage(0, name), (EntityPlayerMP) player);
+					PacketDispatcher.sendTo(new KnowledgeUnlockMessage(0, name), player);
 				}
 			}
 		}
@@ -84,10 +93,8 @@ public class KnowledgeEventHandler {
 
 	@SubscribeEvent
 	public void onEntityJoin(EntityJoinWorldEvent event){
-		if(event.getEntity() instanceof EntityPlayerMP) {
-			NecroDataCapability.getCap((EntityPlayer)event.getEntity()).setLastSyncTime(System.currentTimeMillis());
-			PacketDispatcher.sendTo(new NecroDataCapMessage((EntityPlayer)event.getEntity()), (EntityPlayerMP) event.getEntity());
-		}
+		if(event.getEntity() instanceof EntityPlayerMP)
+			NecroDataCapability.getCap((EntityPlayer)event.getEntity()).resetSyncTimer();
 	}
 
 	@SubscribeEvent

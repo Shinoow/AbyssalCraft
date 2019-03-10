@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "abyssalcraft:shoggothflesh",
+      "data": 0
+    },
+    {
+      "item": "abyssalcraft:engraving_elder"
+    },
+    {
+      "item": "abyssalcraft:shoggothflesh",
+      "data": 1
+    },
+    {
+      "item": "abyssalcraft:shoggothflesh",
+      "data": 2
+    },
+    {
+      "item": "abyssalcraft:shoggothflesh",
+      "data": 3
+    },
+    {
+      "item": "abyssalcraft:shoggothflesh",
+      "data": 4
+    }
+  ],
+  "result": {
+    "item": "abyssalcraft:engraving_azathoth"
+  }
+}

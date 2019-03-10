@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "abyssalcraft:ccluster4"
+    },
+    {
+      "item": "abyssalcraft:ccluster4"
+    }
+  ],
+  "result": {
+    "item": "abyssalcraft:ccluster8"
+  }
+}

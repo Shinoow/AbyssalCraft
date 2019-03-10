@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "abyssalcraft:crystal",
+      "data": 3
+    },
+    {
+      "item": "abyssalcraft:crystal",
+      "data": 5
+    },
+    {
+      "item": "abyssalcraft:crystal",
+      "data": 6
+    },
+    {
+      "item": "abyssalcraft:crystal",
+      "data": 4
+    },
+    {
+      "item": "abyssalcraft:crystal",
+      "data": 7
+    },
+    {
+      "item": "abyssalcraft:crystal",
+      "data": 2
+    }
+  ],
+  "result": {
+    "item": "abyssalcraft:lifecrystal"
+  }
+}

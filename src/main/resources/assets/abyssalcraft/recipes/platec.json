@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#%#",
+    "#%#",
+    "#%#"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:cingot"
+    },
+    "%": {
+      "item": "abyssalcraft:cpearl"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:platec"
+  }
+}

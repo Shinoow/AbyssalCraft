@@ -1,0 +1,6 @@
+{
+	"parent": "abyssalcraft:item/dread_antidote",
+	"textures": {
+		"layer0": "abyssalcraft:items/dread_antidote_2"
+	}
+}

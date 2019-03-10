@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:abydreadbrick",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:abydreadbrickstairs",
+    "count": 4
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#%#",
+    "%\u0026%",
+    "#%#"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:dreadfragment"
+    },
+    "%": {
+      "item": "minecraft:string"
+    },
+    "\u0026": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:dreadcloth"
+  }
+}

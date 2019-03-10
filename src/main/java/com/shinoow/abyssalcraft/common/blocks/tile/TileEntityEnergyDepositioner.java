@@ -501,13 +501,13 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
 
-		return side == EnumFacing.DOWN ? new int[]{1} : new int[0];
+		return side == EnumFacing.DOWN ? new int[]{1} : side == EnumFacing.UP ? new int[]{0} : new int[0];
 	}
 
 	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
 
-		return false;
+		return direction == EnumFacing.UP && index == 0;
 	}
 
 	@Override
@@ -516,6 +516,7 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 		return direction == EnumFacing.DOWN && index == 1;
 	}
 
+	net.minecraftforge.items.IItemHandler handlerTop = new net.minecraftforge.items.wrapper.SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);
 	net.minecraftforge.items.IItemHandler handlerBottom = new net.minecraftforge.items.wrapper.SidedInvWrapper(this, net.minecraft.util.EnumFacing.DOWN);
 
 	@Override
@@ -524,6 +525,8 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 		if (facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			if (facing == EnumFacing.DOWN)
 				return (T) handlerBottom;
+			else if(facing == EnumFacing.UP)
+				return (T) handlerTop;
 		return super.getCapability(capability, facing);
 	}
 }

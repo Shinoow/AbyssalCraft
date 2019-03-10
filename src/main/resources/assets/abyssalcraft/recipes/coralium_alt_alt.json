@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:ccluster4"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:coralium",
+    "count": 4
+  }
+}

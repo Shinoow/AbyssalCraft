@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##%",
+    "#\u0026#",
+    "##%"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "%": {
+      "item": "minecraft:iron_ingot"
+    },
+    "\u0026": {
+      "item": "minecraft:book"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:necronomicon"
+  }
+}

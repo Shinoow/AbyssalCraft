@@ -400,6 +400,7 @@ public class NecronomiconText {
 	public static String LABEL_DREAD_PLAGUE = "necronomicon.information.dreadplague";
 	public static String LABEL_PLACES_OF_POWER = "necronomicon.information.placesofpower";
 	public static String LABEL_STRUCTURES = "necronomicon.information.structures";
+	public static String LABEL_PANTHEON = "necronomicon.information.pantheon";
 
 	/**
 	 * The best way to drown an array of strings with nonsense

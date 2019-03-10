@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:abyslab1",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:abybrick",
+    "data": 1
+  }
+}

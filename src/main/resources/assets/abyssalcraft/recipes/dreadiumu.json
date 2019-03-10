@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "abyssalcraft:cingot"
+    },
+    {
+      "item": "abyssalcraft:dreadiumingot"
+    },
+    {
+      "item": "abyssalcraft:dreadiumingot"
+    },
+    {
+      "item": "abyssalcraft:coraliumu"
+    }
+  ],
+  "result": {
+    "item": "abyssalcraft:dreadiumu"
+  }
+}

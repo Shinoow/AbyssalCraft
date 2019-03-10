@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#%#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:dreadfragment"
+    },
+    "%": {
+      "item": "abyssalcraft:essence",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:skin",
+    "data": 1
+  }
+}

@@ -348,6 +348,7 @@ public class InitHandler implements ILifeCycleHandler {
 		blackHoleBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Reality Maelstrom Blacklist", new int[0], "Dimension IDs added to this list won't be used as potential destinations for black holes created by J'zahar.").getIntList();
 		portalSpawnsNearPlayer = cfg.get(Configuration.CATEGORY_GENERAL, "Portal Mob Spawning Near Players", true, "Toggles whether or not portals require a player to be nearby in order for it to rarely spawn mobs. If this option is disabled they follow the same principle as Nether portals.").getBoolean();
 		showBossDialogs = cfg.get(Configuration.CATEGORY_GENERAL, "Show Boss Dialogs", true, "Toggles whether or not boss dialogs are displayed at any point during their fights (when they spawn, when they die,  etc)").getBoolean();
+		knowledgeSyncDelay = cfg.get(Configuration.CATEGORY_GENERAL, "Knowledge Sync Delay", 60, "Delay in ticks until Knowledge is synced to the client upon changing dimensions. Higher numbers mean you might see item names re-locked for a few seconds when changing dimension, but might reduce load time for the dimension by a little (useful in larger modpacks).\\n[range: 20 ~ 400, default: 60]", 20, 400).getInt();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -460,6 +461,7 @@ public class InitHandler implements ILifeCycleHandler {
 			coraliumOreGeneration = new int[] {12, 8, 40};
 		acidResistanceHardness = MathHelper.clamp(acidResistanceHardness, 2.1D, 51.0D);
 		acidSpitFrequency = MathHelper.clamp(acidSpitFrequency, 0, 300);
+		knowledgeSyncDelay = MathHelper.clamp(knowledgeSyncDelay, 20, 400);
 
 		demon_transformations.clear();
 

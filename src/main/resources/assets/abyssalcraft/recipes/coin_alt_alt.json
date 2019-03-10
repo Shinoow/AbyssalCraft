@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " # ",
+    "#%#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "#INGOTTIN"
+    },
+    "%": {
+      "item": "minecraft:flint"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:coin"
+  }
+}

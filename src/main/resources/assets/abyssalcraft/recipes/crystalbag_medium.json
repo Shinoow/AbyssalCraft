@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#%#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:skin",
+      "data": 0
+    },
+    "%": {
+      "item": "abyssalcraft:crystalbag_small"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:crystalbag_medium"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#%#",
+    "\u0026\u0026\u0026"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:dreadplate"
+    },
+    "%": {
+      "item": "abyssalcraft:dreadiumlegs",
+      "data": 32767
+    },
+    "\u0026": {
+      "item": "abyssalcraft:dreadcloth"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:dreadiumsamurailegs"
+  }
+}

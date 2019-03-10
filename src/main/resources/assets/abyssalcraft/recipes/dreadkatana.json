@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# ",
+    "% "
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:dreadblade"
+    },
+    "%": {
+      "item": "abyssalcraft:dreadhilt"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:dreadkatana"
+  }
+}

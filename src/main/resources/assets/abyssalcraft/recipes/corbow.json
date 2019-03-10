@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " #%",
+    "\u0026$%",
+    " #%"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:cingot"
+    },
+    "$": {
+      "item": "minecraft:bow",
+      "data": 32767
+    },
+    "%": {
+      "item": "minecraft:string"
+    },
+    "\u0026": {
+      "item": "abyssalcraft:cpearl"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:corbow"
+  }
+}

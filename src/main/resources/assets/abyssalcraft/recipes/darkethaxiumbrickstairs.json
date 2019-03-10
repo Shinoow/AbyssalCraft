@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:darkethaxiumbrick",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:darkethaxiumbrickstairs",
+    "count": 4
+  }
+}

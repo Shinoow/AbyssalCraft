@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#%#",
+    "%\u0026%",
+    "#%#"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:shadowshard"
+    },
+    "%": {
+      "item": "abyssalcraft:stone",
+      "data": 7
+    },
+    "\u0026": {
+      "item": "abyssalcraft:shadowgem"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:stonetablet"
+  }
+}

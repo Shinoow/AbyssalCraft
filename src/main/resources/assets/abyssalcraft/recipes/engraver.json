@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#% ",
+    "#%\u0026",
+    "@% "
+  ],
+  "key": {
+    "@": {
+      "item": "minecraft:anvil",
+      "data": 0
+    },
+    "#": {
+      "item": "abyssalcraft:engraving_blank"
+    },
+    "%": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "\u0026": {
+      "item": "minecraft:lever"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:engraver"
+  }
+}

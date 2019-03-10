@@ -11,25 +11,29 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
+import java.util.List;
+
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.MiscCondition;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 public class ItemAntidote extends ItemMetadata {
 
 	public ItemAntidote() {
 		super("antidote", "coralium", "dread");
+		setMaxStackSize(1);
 
+		addPropertyOverride(new ResourceLocation("content"), (stack, worldIn, entityIn) -> stack.hasTagCompound() && stack.getTagCompound().getInteger("content") > 0 ? getContentToFloat(stack.getTagCompound().getInteger("content")) : 0);
 	}
 
 	@Override
@@ -44,24 +48,48 @@ public class ItemAntidote extends ItemMetadata {
 		return 40;
 	}
 
+	private float getContentToFloat(int content) {
+		if(content < 9 && content > 6)
+			return 0.2f;
+		if(content < 7 && content > 4)
+			return 0.4f;
+		if(content < 5 && content > 2)
+			return 0.6f;
+		if(content < 3 && content > 0)
+			return 0.8f;
+		return 0;
+	}
+
+	private void drink(ItemStack stack) {
+		if(!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+		if(stack.getTagCompound().hasKey("content"))
+			stack.getTagCompound().setInteger("content", stack.getTagCompound().getInteger("content") - 1);
+		else
+			stack.getTagCompound().setInteger("content", 9);
+
+	}
+
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
 	{
 		if (!worldIn.isRemote) entityLiving.curePotionEffects(stack);
 		EntityPlayer entityplayer = entityLiving instanceof EntityPlayer ? (EntityPlayer)entityLiving : null;
 		if (entityplayer == null || !entityplayer.capabilities.isCreativeMode)
-			stack.shrink(1);
+			drink(stack);
 
 		if (entityplayer == null || !entityplayer.capabilities.isCreativeMode)
-		{
-			if (stack.isEmpty())
+			if (stack.getTagCompound().getInteger("content") == 0)
 				return new ItemStack(Items.GLASS_BOTTLE);
 
-			if (entityplayer != null)
-				entityplayer.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
-		}
-
 		return stack;
+	}
+
+	@Override
+	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
+		if(is.hasTagCompound() && is.getTagCompound().hasKey("content"))
+			l.add(is.getTagCompound().getInteger("content")+" uses left");
+		else l.add("10 uses left");
 	}
 
 	@Override

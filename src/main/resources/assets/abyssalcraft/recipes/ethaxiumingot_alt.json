@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#%#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:ethbrick"
+    },
+    "%": {
+      "item": "abyssalcraft:oc"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:ethaxiumingot"
+  }
+}

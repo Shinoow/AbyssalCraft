@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#%#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:stone",
+      "data": 7
+    },
+    "%": {
+      "item": "abyssalcraft:shadowgem"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:energycollector"
+  }
+}

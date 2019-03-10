@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:cobblestone",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:dcstairs",
+    "count": 4
+  }
+}

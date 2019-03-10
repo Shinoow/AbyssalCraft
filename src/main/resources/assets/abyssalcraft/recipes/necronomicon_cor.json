@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#%#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:skin",
+      "data": 0
+    },
+    "%": {
+      "item": "abyssalcraft:necronomicon"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:necronomicon_cor"
+  }
+}

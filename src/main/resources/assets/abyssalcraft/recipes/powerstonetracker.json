@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#%#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:coralium"
+    },
+    "%": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:powerstonetracker",
+    "count": 4
+  }
+}

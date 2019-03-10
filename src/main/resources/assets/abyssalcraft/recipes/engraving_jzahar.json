@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "%#%",
+    "%%%"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:engraving_elder"
+    },
+    "%": {
+      "item": "abyssalcraft:eldritchscale"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:engraving_jzahar"
+  }
+}

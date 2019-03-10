@@ -19,6 +19,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -32,6 +33,7 @@ import net.minecraft.world.World;
 public class NecronomiconSummonRitual extends NecronomiconRitual {
 
 	private Class<? extends EntityLivingBase> entity;
+	private NBTTagCompound customNBT;
 
 	/**
 	 * A Necronomicon Ritual
@@ -81,6 +83,15 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 		return entity;
 	}
 
+	/**
+	 * Sets custom NBT data that will be attached to the summoned entity
+	 * <br>(all child tags of this tag compound will be added to the summoned entity)
+	 */
+	public NecronomiconSummonRitual setCustomNBT(NBTTagCompound customNBT) {
+		this.customNBT = customNBT;
+		return this;
+	}
+
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
 
@@ -103,6 +114,12 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 			((EntityLiving) entityliving).onInitialSpawn(world.getDifficultyForLocation(pos.up()), (IEntityLivingData)null);
 			for (EntityPlayerMP entityplayermp : world.getEntitiesWithinAABB(EntityPlayerMP.class, entityliving.getEntityBoundingBox().grow(5)))
 				CriteriaTriggers.SUMMONED_ENTITY.trigger(entityplayermp, entityliving);
+			if(customNBT != null) {
+				NBTTagCompound internal = new NBTTagCompound();
+				entityliving.writeEntityToNBT(internal);
+				internal.merge(customNBT);
+				entityliving.readEntityFromNBT(internal);
+			}
 			world.spawnEntity(entityliving);
 			entityliving.timeUntilPortal = entityliving.getPortalCooldown();
 		}

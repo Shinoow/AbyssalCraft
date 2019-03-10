@@ -98,15 +98,13 @@ public class BlockDreadAltarTop extends Block {
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, EnumFacing side, float par7, float par8, float par9) {
 		if(par1World.provider.getDimension() == ACLib.dreadlands_id){
 			if(par1World.getBiome(pos) == ACBiomes.dreadlands_mountains){
-				if(par1World.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom && pos.getY() == 41)
+				if(par1World.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom)
 					if(!par1World.isRemote){
 						SpecialTextUtil.ChagarothGroup(par1World, I18n.translateToLocal("message.dreadaltartop.spawn"));
 						//						par5EntityPlayer.addStat(ACAchievements.summon_chagaroth, 1);
 						chagarothlair lair = new chagarothlair();
-						lair.generate(par1World, rand, pos.down(2));
+						lair.generate(par1World, par1World.rand, pos);
 						par1World.getChunkFromBlockCoords(pos).markDirty();
-						par1World.setBlockToAir(pos.down());
-						par1World.setBlockToAir(pos);
 					}
 			} else if(par1World.isRemote)
 				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.2"));

@@ -2,5 +2,31 @@
 	"parent": "item/generated",
 	"textures": {
 		"layer0": "abyssalcraft:items/dread_antidote"
-	}
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "content": 0.2
+            },
+            "model": "abyssalcraft:item/dread_antidote_1"
+		},
+		{
+            "predicate": {
+                "content": 0.4
+            },
+            "model": "abyssalcraft:item/dread_antidote_2"
+		},
+		{
+            "predicate": {
+                "content": 0.6
+            },
+            "model": "abyssalcraft:item/dread_antidote_3"
+        },
+		{
+            "predicate": {
+                "content": 0.8
+            },
+            "model": "abyssalcraft:item/dread_antidote_4"
+        }
+    ]
 }

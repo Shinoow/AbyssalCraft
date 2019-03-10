@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "abyssalcraft:cobblestone",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:abyssalcobblestoneslab1",
+    "data": 0,
+    "count": 6
+  }
+}

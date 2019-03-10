@@ -39,6 +39,10 @@ public interface INecroDataCapability {
 
 	public void setLastSyncTime(long time);
 
+	public void incrementSyncTimer();
+
+	public void resetSyncTimer();
+
 	public List<String> getBiomeTriggers();
 
 	public List<String> getEntityTriggers();
@@ -56,6 +60,8 @@ public interface INecroDataCapability {
 	public boolean hasUnlockedAllKnowledge();
 
 	public long getLastSyncTime();
+
+	public int getSyncTimer();
 
 	public void copy(INecroDataCapability cap);
 }

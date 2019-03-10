@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:dreadbrickslab1",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:dreadbrick",
+    "data": 1
+  }
+}

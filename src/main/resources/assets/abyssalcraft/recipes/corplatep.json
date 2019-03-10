@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "%@%",
+    "%#%"
+  ],
+  "key": {
+    "@": {
+      "item": "abyssalcraft:corplate"
+    },
+    "#": {
+      "item": "abyssalcraft:platec"
+    },
+    "%": {
+      "item": "abyssalcraft:cingot"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:corplatep"
+  }
+}

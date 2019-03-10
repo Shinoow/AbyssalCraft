@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "%\u0026%"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:dreadiumingot"
+    },
+    "%": {
+      "item": "abyssalcraft:dreadplate"
+    },
+    "\u0026": {
+      "item": "abyssalcraft:dreadiumhelmet",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:dreadiumsamuraihelmet"
+  }
+}

@@ -419,4 +419,9 @@ public class ChunkProviderAbyss implements IChunkGenerator
 
 		return "AbyStronghold".equals(par2String) && strongholdGenerator != null ? strongholdGenerator.isInsideStructure(pos) : false;
 	}
+
+	public void markStructureExplored(World world, String string, BlockPos pos) {
+		if("AbyStronghold".equals(string))
+			strongholdGenerator.markStructureExplored(world, pos);
+	}
 }

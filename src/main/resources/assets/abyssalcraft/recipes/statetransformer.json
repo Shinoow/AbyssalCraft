@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "###",
+    "#\u0026#",
+    "#@#"
+  ],
+  "key": {
+    "@": {
+      "item": "#CHESTWOOD"
+    },
+    "#": {
+      "item": "abyssalcraft:stone",
+      "data": 7
+    },
+    "\u0026": {
+      "item": "abyssalcraft:transmutationgem",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:statetransformer"
+  }
+}

@@ -16,6 +16,8 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
@@ -38,6 +40,13 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 		nbttagcompound.setInteger("Facing", facing);
 
 		return nbttagcompound;
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
+	{
+		getWorld().markBlockRangeForRenderUpdate(getPos(), getPos());
+		super.onDataPacket(net, packet);
 	}
 
 	@Override

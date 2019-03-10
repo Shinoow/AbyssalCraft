@@ -33,8 +33,6 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapabi
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabilityStorage;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.caps.INecromancyCapability;
 import com.shinoow.abyssalcraft.common.caps.NecromancyCapability;
 import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityStorage;
@@ -54,7 +52,6 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -63,10 +60,9 @@ import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.*;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.FixTypes;
@@ -90,8 +86,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class MiscHandler implements ILifeCycleHandler {
@@ -544,7 +538,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		if(event.getName().equals(LootTableList.CHESTS_VILLAGE_BLACKSMITH)){
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
-				main.addEntry(new LootEntryItem(ACItems.oblivion_catalyst, 1, 0 , new LootFunction[0], new LootCondition[0], modid + ":oblivion_catalyst"));
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
@@ -617,407 +610,20 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		IForgeRegistry<IRecipe> reg = event.getRegistry();
 
-		addShapedRecipe(reg, rl("darkstone_bricks_0"), null, new ItemStack(ACBlocks.darkstone_brick, 4, 0), new Object[] {"AA", "AA", 'A', new ItemStack(ACBlocks.stone, 1, 0) });
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.darkstone_brick, 1, 0), ACBlocks.darkstone_brick_slab, ACBlocks.darkstone_brick_stairs, ACBlocks.darkstone_brick_fence);
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 0), ACBlocks.darkstone_cobblestone_slab, ACBlocks.darkstone_cobblestone_stairs, ACBlocks.darkstone_cobblestone_wall);
-		addStoneStuffRecipes(reg, new ItemStack(ACBlocks.stone, 1, 0), ACBlocks.darkstone_slab, ACBlocks.darkstone_button, ACBlocks.darkstone_pressure_plate);
-		if(ACConfig.darkstone_brick_slab)
-			addShapedRecipe(reg, rl("darkstone_bricks_1"), null, new ItemStack(ACBlocks.darkstone_brick, 1, 1), new Object[] {"#", "#", '#', new ItemStack(ACBlocks.darkstone_brick_slab)});
-		addShapedRecipe(reg, rl("glowing_darkstone_bricks"), null, new ItemStack(ACBlocks.glowing_darkstone_bricks, 4), new Object[] {"#$#", "&%&", "#&#", '#', new ItemStack(ACBlocks.darkstone_brick, 1, 0), '$', Items.DIAMOND,'&', Blocks.OBSIDIAN, '%', Blocks.GLOWSTONE });
-
-		addShapedRecipe(reg, rl("darklands_oak_planks"), null, new ItemStack(ACBlocks.darklands_oak_planks, 4), new Object[] {"A", 'A', ACBlocks.darklands_oak_wood });
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.darklands_oak_planks), ACBlocks.darklands_oak_slab, ACBlocks.darklands_oak_stairs, null);
-		addStoneStuffRecipes(reg, new ItemStack(ACBlocks.darklands_oak_planks), null, ACBlocks.darklands_oak_button, ACBlocks.darklands_oak_pressure_plate);
-		addShapedOreRecipe(reg, ACBlocks.darklands_oak_fence.getRegistryName(), null, new ItemStack(ACBlocks.darklands_oak_fence, 3), new Object[] {"#%#", "#%#", '#', ACBlocks.darklands_oak_planks, '%', "stickWood"});
-
-		addShapedRecipe(reg, rl("abyssal_stone_bricks_0"), null, new ItemStack(ACBlocks.abyssal_stone_brick, 4, 0), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.stone, 1, 1)});
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), ACBlocks.abyssal_stone_brick_slab, ACBlocks.abyssal_stone_brick_stairs, ACBlocks.abyssal_stone_brick_fence);
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 1), ACBlocks.abyssal_cobblestone_slab, ACBlocks.abyssal_cobblestone_stairs, ACBlocks.abyssal_cobblestone_wall);
-		addStoneStuffRecipes(reg, new ItemStack(ACBlocks.stone, 1, 1), null, ACBlocks.abyssal_stone_button, ACBlocks.abyssal_stone_pressure_plate);
-		if(ACConfig.abyssal_stone_brick_slab)
-			addShapedRecipe(reg, rl("abyssal_stone_bricks_1"), null, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 1), new Object[] {"#", "#", '#', new ItemStack(ACBlocks.abyssal_stone_brick_slab)});
-
-		addShapedRecipe(reg, rl("dreadstone_bricks_0"), null, new ItemStack(ACBlocks.dreadstone_brick, 4, 0), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.stone, 1, 2)});
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.dreadstone_brick, 1, 0), ACBlocks.dreadstone_brick_slab, ACBlocks.dreadstone_brick_stairs, ACBlocks.dreadstone_brick_fence);
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 2), ACBlocks.dreadstone_cobblestone_slab, ACBlocks.dreadstone_cobblestone_stairs, ACBlocks.dreadstone_cobblestone_wall);
-		//stone recipe (if added)
-		if(ACConfig.dreadstone_brick_slab)
-			addShapedRecipe(reg, rl("dreadstone_bricks_1"), null, new ItemStack(ACBlocks.dreadstone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.dreadstone_brick_slab});
-
-		addShapedRecipe(reg, rl("abyssalnite_stone_bricks_0"), null, new ItemStack(ACBlocks.abyssalnite_stone_brick, 4, 0), new Object[] {"##", "##", '#', new ItemStack(ACBlocks.stone, 1, 3)});
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0), ACBlocks.abyssalnite_stone_brick_slab, ACBlocks.abyssalnite_stone_brick_stairs, ACBlocks.abyssalnite_stone_brick_fence);
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 3), ACBlocks.abyssalnite_cobblestone_slab, ACBlocks.abyssalnite_cobblestone_stairs, ACBlocks.abyssalnite_cobblestone_wall);
-		//stone recipes (if added)
-		if(ACConfig.abyssalnite_stone_brick_slab)
-			addShapedRecipe(reg, rl("abyssalnite_stone_bricks_1"), null, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.abyssalnite_stone_brick_slab});
-
-		addShapedRecipe(reg, rl("dreadlands_planks"), null, new ItemStack(ACBlocks.dreadlands_planks, 4), new Object[] {"%", '%', ACBlocks.dreadlands_log});
-		addShapedOreRecipe(reg, ACBlocks.dreadlands_wood_fence.getRegistryName(), null, new ItemStack(ACBlocks.dreadlands_wood_fence, 3), new Object[] {"#%#", "#%#", '#', ACBlocks.dreadlands_planks, '%', "stickWood"});
-
-		addShapedRecipe(reg, rl("coralium_stone_bricks_0"), null, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new Object[] {"##", "##", '#', ACItems.coralium_brick});
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), ACBlocks.coralium_stone_brick_slab, ACBlocks.coralium_stone_brick_stairs, ACBlocks.coralium_stone_brick_fence);
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.cobblestone, 1, 4), ACBlocks.coralium_cobblestone_slab, ACBlocks.coralium_cobblestone_stairs, ACBlocks.coralium_cobblestone_wall);
-		addStoneStuffRecipes(reg, new ItemStack(ACBlocks.stone, 1, 4), null, ACBlocks.coralium_stone_button, ACBlocks.coralium_stone_pressure_plate);
-		if(ACConfig.coralium_stone_brick_slab)
-			addShapedRecipe(reg, rl("coralium_stone_bricks_1"), null, new ItemStack(ACBlocks.coralium_stone_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.coralium_stone_brick_slab});
-
-		addShapedRecipe(reg, rl("ethaxium_bricks_0"), null, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new Object [] {"##", "##", '#', ACItems.ethaxium_brick});
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACBlocks.ethaxium_brick_slab, ACBlocks.ethaxium_brick_stairs, ACBlocks.ethaxium_brick_fence);
-		if(ACConfig.ethaxium_brick_slab)
-			addShapedRecipe(reg, rl("ethaxium_bricks_1"), null, new ItemStack(ACBlocks.ethaxium_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.ethaxium_brick_slab});
-		addShapedRecipe(reg, rl("ethaxium_pillar"), null, new ItemStack(ACBlocks.ethaxium_pillar, 2), new Object[] {"#%", "#%", '#', new ItemStack(ACBlocks.ethaxium_brick, 1, 0), '%', new ItemStack(ACBlocks.stone, 1, 5)});
-
-		addShapedRecipe(reg, rl("dark_ethaxium_bricks_0"), null, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), new Object[] {"#%", "#%", '#', new ItemStack(ACBlocks.stone, 1, 6), '%', new ItemStack(ACBlocks.stone, 1, 5)});
-		addBlockStuffRecipes(reg, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), ACBlocks.dark_ethaxium_brick_slab, ACBlocks.dark_ethaxium_brick_stairs, ACBlocks.dark_ethaxium_brick_fence);
-		addShapedRecipe(reg, rl("dark_ethaxium_bricks_1"), null, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 1), new Object[] {"#", "#", '#', ACBlocks.dark_ethaxium_brick_slab});
-		addShapedRecipe(reg, rl("dark_ethaxium_pillar"), null, new ItemStack(ACBlocks.dark_ethaxium_pillar, 2), new Object[] {"#%", "#%", '#', new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), '%', new ItemStack(ACBlocks.stone, 1, 6)});
-
 		addShapedNBTRecipe(reg, rl("oblivion_deathbomb_0"), null, new ItemStack(ACBlocks.oblivion_deathbomb), "#%%", "&$%", "£%%", '#', ACItems.liquid_antimatter_bucket_stack, '£', ACItems.liquid_coralium_bucket_stack, '%', Blocks.OBSIDIAN, '&', ACItems.oblivion_catalyst, '$', ACBlocks.odb_core);
 		addShapedNBTRecipe(reg, rl("oblivion_deathbomb_1"), null, new ItemStack(ACBlocks.oblivion_deathbomb), "#%%", "&$%", "£%%", '#', ACItems.liquid_coralium_bucket_stack, '£', ACItems.liquid_antimatter_bucket_stack, '%', Blocks.OBSIDIAN, '&', ACItems.oblivion_catalyst, '$', ACBlocks.odb_core);
-		addShapedRecipe(reg, rl("block_of_abyssalnite"), null, new ItemStack(ACBlocks.ingot_block, 1, 0), new Object[] {"AAA", "AAA", "AAA", 'A', ACItems.abyssalnite_ingot });
-		addShapedRecipe(reg, rl("odb_core"), null, new ItemStack(ACBlocks.odb_core, 1), new Object[] {"#&#", "$@$", "#&#", '#', ACItems.abyssalnite_ingot, '&', Blocks.IRON_BLOCK, '$', Items.IRON_INGOT,'@', ACItems.coralium_pearl});
-		addShapedRecipe(reg, rl("coralium_infused_stone_0"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&&&", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_3});
-		addShapedRecipe(reg, rl("coralium_infused_stone_1"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_2, '$', ACItems.coralium_gem_cluster_3, '%', ACItems.coralium_gem_cluster_4});
-		addShapedRecipe(reg, rl("coralium_infused_stone_2"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_3, '$', ACItems.coralium_gem_cluster_2, '%', ACItems.coralium_gem_cluster_4});
-		addShapedRecipe(reg, rl("coralium_infused_stone_3"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_4, '$', ACItems.coralium_gem_cluster_3, '%', ACItems.coralium_gem_cluster_2});
-		addShapedRecipe(reg, rl("coralium_infused_stone_4"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_3, '$', ACItems.coralium_gem_cluster_4, '%', ACItems.coralium_gem_cluster_2});
-		addShapedRecipe(reg, rl("coralium_infused_stone_5"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_2, '$', ACItems.coralium_gem_cluster_4, '%', ACItems.coralium_gem_cluster_3});
-		addShapedRecipe(reg, rl("coralium_infused_stone_6"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_4, '$', ACItems.coralium_gem_cluster_2, '%', ACItems.coralium_gem_cluster_3});
-		addShapedRecipe(reg, rl("coralium_infused_stone_7"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&&&", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_3});
-		addShapedRecipe(reg, rl("coralium_infused_stone_8"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem, '$', ACItems.coralium_gem_cluster_3, '%', ACItems.coralium_gem_cluster_5});
-		addShapedRecipe(reg, rl("coralium_infused_stone_9"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_3, '$', ACItems.coralium_gem, '%', ACItems.coralium_gem_cluster_5});
-		addShapedRecipe(reg, rl("coralium_infused_stone_10"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_3, '$', ACItems.coralium_gem_cluster_5, '%', ACItems.coralium_gem});
-		addShapedRecipe(reg, rl("coralium_infused_stone_11"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_5, '$', ACItems.coralium_gem_cluster_3, '%', ACItems.coralium_gem});
-		addShapedRecipe(reg, rl("coralium_infused_stone_12"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem, '$', ACItems.coralium_gem_cluster_5, '%', ACItems.coralium_gem_cluster_3});
-		addShapedRecipe(reg, rl("coralium_infused_stone_13"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_5, '$', ACItems.coralium_gem, '%', ACItems.coralium_gem_cluster_3});
-		addShapedRecipe(reg, rl("coralium_infused_stone_14"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem, '$', ACItems.coralium_gem_cluster_7, '%', ACItems.coralium_gem});
-		addShapedRecipe(reg, rl("coralium_infused_stone_15"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_7, '$', ACItems.coralium_gem, '%', ACItems.coralium_gem});
-		addShapedRecipe(reg, rl("coralium_infused_stone_16"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem, '$', ACItems.coralium_gem, '%', ACItems.coralium_gem_cluster_7});
-		addShapedRecipe(reg, rl("coralium_infused_stone_17"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_5, '$', ACItems.coralium_gem_cluster_2, '%', ACItems.coralium_gem_cluster_2});
-		addShapedRecipe(reg, rl("coralium_infused_stone_18"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_2, '$', ACItems.coralium_gem_cluster_5, '%', ACItems.coralium_gem_cluster_2});
-		addShapedRecipe(reg, rl("coralium_infused_stone_19"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_2, '$', ACItems.coralium_gem_cluster_2, '%', ACItems.coralium_gem_cluster_5});
-		addShapedRecipe(reg, rl("coralium_infused_stone_20"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_2, '$', ACItems.coralium_gem, '%', ACItems.coralium_gem_cluster_6});
-		addShapedRecipe(reg, rl("coralium_infused_stone_21"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem, '$', ACItems.coralium_gem_cluster_2, '%', ACItems.coralium_gem_cluster_6});
-		addShapedRecipe(reg, rl("coralium_infused_stone_22"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_5, '$', ACItems.coralium_gem, '%', ACItems.coralium_gem_cluster_2});
-		addShapedRecipe(reg, rl("coralium_infused_stone_23"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem, '$', ACItems.coralium_gem_cluster_5, '%', ACItems.coralium_gem_cluster_2});
-		addShapedRecipe(reg, rl("coralium_infused_stone_24"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_2, '$', ACItems.coralium_gem_cluster_5, '%', ACItems.coralium_gem});
-		addShapedRecipe(reg, rl("coralium_infused_stone_25"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "&$%", "###", '#', Blocks.STONE, '&', ACItems.coralium_gem_cluster_5, '$', ACItems.coralium_gem_cluster_2, '%', ACItems.coralium_gem});
-		addShapedRecipe(reg, rl("coralium_infused_stone_26"), null, new ItemStack(ACBlocks.coralium_infused_stone, 1), new Object[] {"###", "#%#", "###", '#', Blocks.STONE, '%', ACItems.coralium_gem_cluster_9});
-		addShapedOreRecipe(reg, rl("wooden_crate"), null, new ItemStack(ACBlocks.wooden_crate, 2), new Object[] {"#&#", "&%&", "#&#", '#', "stickWood", '&', "plankWood", '%', "chestWood"});
-		addShapedRecipe(reg, rl("block_of_coralium"), null, new ItemStack(ACBlocks.ingot_block, 1, 1), new Object[] {"###", "###", "###", '#', ACItems.refined_coralium_ingot});
-		addShapedRecipe(reg, rl("block_of_dreadium"), null, new ItemStack(ACBlocks.ingot_block, 1, 2), new Object[] {"###", "###", "###", '#', ACItems.dreadium_ingot});
 		addShapedNBTRecipe(reg, rl("transmutator"), null, new ItemStack(ACBlocks.transmutator_idle, 1), "###", "#%#", "&$&", '#', ACItems.coralium_brick, '%', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(ACBlocks.ingot_block, 1, 1), '$', ACItems.liquid_coralium_bucket_stack);
-		addShapedRecipe(reg, rl("crystallizer"), null, new ItemStack(ACBlocks.crystallizer_idle, 1), new Object[] {"###", "&%&", "###", '#', new ItemStack(ACBlocks.dreadstone_brick, 1, 0), '&', new ItemStack(ACBlocks.ingot_block, 1, 2), '%', Blocks.FURNACE});
-		addShapedRecipe(reg, rl("block_of_ethaxium"), null, new ItemStack(ACBlocks.ingot_block, 1, 3), new Object[] {"###", "###", "###", '#', ACItems.ethaxium_ingot});
-		addShapedRecipe(reg, rl("engraver"), null, new ItemStack(ACBlocks.engraver, 1), new Object[] {"#% ", "#%&", "@% ", '#', ACItems.blank_engraving, '%', Blocks.STONE, '&', Blocks.LEVER, '@', Blocks.ANVIL});
 		addShapedNBTRecipe(reg, rl("materializer"), null, new ItemStack(ACBlocks.materializer), "###", "#%#", "&$&", '#', ACItems.ethaxium_brick, '%', Blocks.OBSIDIAN, '&', new ItemStack(ACBlocks.ingot_block, 1, 3), '$', ACItems.liquid_antimatter_bucket_stack);
-		addShapedRecipe(reg, rl("energy_pedestal"), null, new ItemStack(ACBlocks.energy_pedestal), new Object[]{"#%#", "#&#", "###", '#', new ItemStack(ACBlocks.stone, 1, 7), '%', ACItems.coralium_pearl, '&', ACItems.shadow_gem});
-		addShapedRecipe(reg, rl("monolith_stone_pillar"), null, new ItemStack(ACBlocks.monolith_pillar), new Object[]{"##", "##", '#', new ItemStack(ACBlocks.stone, 1, 7)});
-		addShapedRecipe(reg, rl("sacrificial_altar"), null, new ItemStack(ACBlocks.sacrificial_altar), new Object[]{"#%#", "&$&", "&&&", '#', ACItems.shadow_fragment, '%', ACItems.coralium_pearl, '$', ACItems.shadow_gem, '&', new ItemStack(ACBlocks.stone, 1, 7)});
-		addShapelessRecipe(reg, rl("decorative_cthulhu_statue"), null, new ItemStack(ACBlocks.decorative_statue, 1, 0), new ItemStack(ACBlocks.stone, 1, 7), Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 6));
-		addShapelessRecipe(reg, rl("decorative_hastur_statue"), null, new ItemStack(ACBlocks.decorative_statue, 1, 1), new ItemStack(ACBlocks.stone, 1, 7), Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 11));
-		addShapelessRecipe(reg, rl("decorative_jzahar_statue"), null, new ItemStack(ACBlocks.decorative_statue, 1, 2), new ItemStack(ACBlocks.stone, 1, 7), Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 8));
-		addShapelessRecipe(reg, rl("decorative_azathoth_statue"), null, new ItemStack(ACBlocks.decorative_statue, 1, 3), new ItemStack(ACBlocks.stone, 1, 7), Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 5));
-		addShapelessRecipe(reg, rl("decorative_nyarlathotep_statue"), null, new ItemStack(ACBlocks.decorative_statue, 1, 4), new ItemStack(ACBlocks.stone, 1, 7), Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 4));
-		addShapelessRecipe(reg, rl("decorative_yog_sothoth_statue"), null, new ItemStack(ACBlocks.decorative_statue, 1, 5), new ItemStack(ACBlocks.stone, 1, 7), Items.CLAY_BALL, Items.GLOWSTONE_DUST);
-		addShapelessRecipe(reg, rl("decorative_shub_niggurath_statue"), null, new ItemStack(ACBlocks.decorative_statue, 1, 6), new ItemStack(ACBlocks.stone, 1, 7), Items.CLAY_BALL, new ItemStack(Items.DYE, 1, 0));
-		addShapedRecipe(reg, rl("energy_collector"), null, new ItemStack(ACBlocks.energy_collector), new Object[] {"###", "#%#", "###", '#', new ItemStack(ACBlocks.stone, 1, 7), '%', ACItems.shadow_gem});
-		addShapedRecipe(reg, rl("energy_relay"), null, new ItemStack(ACBlocks.energy_relay), new Object[] {"##%", "#&#", "##%", '#', new ItemStack(ACBlocks.stone, 1, 7), '%', ACItems.shadow_shard, '&', ACItems.shadow_gem});
-		addShapedRecipe(reg, rl("rending_pedestal"), null, new ItemStack(ACBlocks.rending_pedestal), new Object[] {"#%#", "#&#", "###", '#', new ItemStack(ACBlocks.stone, 1, 7), '%', ACItems.shard_of_oblivion, '&', ACItems.shadow_gem});
-		addShapedOreRecipe(reg, rl("state_transformer"), null, new ItemStack(ACBlocks.state_transformer), "###", "#&#", "#@#", '#', new ItemStack(ACBlocks.stone, 1, 7), '&', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '@', "chestWood");
-		addShapedRecipe(reg, rl("energy_depositioner"), null, new ItemStack(ACBlocks.energy_depositioner), "###", "%&%", "#@#", '#', new ItemStack(ACBlocks.stone, 1, 7), '%', ACItems.shadow_gem, '&', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '@', ACBlocks.energy_relay);
-		addShapedRecipe(reg, rl("door_dlt"), null, new ItemStack(ACItems.darklands_oak_door), "## ", "## ", "## ", '#', ACBlocks.darklands_oak_planks);
-		addShapedRecipe(reg, rl("door_drt"), null, new ItemStack(ACItems.dreadlands_door), "## ", "## ", "## ", '#', ACBlocks.dreadlands_planks);
-
-		addShapedOreRecipe(reg, rl("darkstone_pickaxe"), null, new ItemStack(ACItems.darkstone_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', new ItemStack(ACBlocks.cobblestone, 1, 0), '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("darkstone_axe"), null, new ItemStack(ACItems.darkstone_axe, 1), new Object[] {"##", "#%", " %", '#', new ItemStack(ACBlocks.cobblestone, 1, 0), '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("darkstone_shovel"), null, new ItemStack(ACItems.darkstone_shovel, 1), new Object[] {"#", "%", "%", '#', new ItemStack(ACBlocks.cobblestone, 1, 0), '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("darkstone_sword"), null, new ItemStack(ACItems.darkstone_sword, 1), new Object[] {"#", "#", "%", '#', new ItemStack(ACBlocks.cobblestone, 1, 0), '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("darkstone_hoe"), null, new ItemStack(ACItems.darkstone_hoe, 1), new Object[] {"##", " %", " %", '#', new ItemStack(ACBlocks.cobblestone, 1, 0), '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("abyssalnite_pickaxe"), null, new ItemStack(ACItems.abyssalnite_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.abyssalnite_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("abyssalnite_axe"), null, new ItemStack(ACItems.abyssalnite_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.abyssalnite_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("abyssalnite_shovel"), null, new ItemStack(ACItems.abyssalnite_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.abyssalnite_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("abyssalnite_sword"), null, new ItemStack(ACItems.abyssalnite_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.abyssalnite_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("abyssalnite_hoe"), null, new ItemStack(ACItems.abyssalnite_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.abyssalnite_ingot, '%', "stickWood"});
-		addShapedRecipe(reg, rl("gateway_key"), null, new ItemStack(ACItems.gateway_key, 1), new Object[] {" #%", " &#", "&  ", '#', ACItems.coralium_pearl, '%', ACItems.oblivion_catalyst, '&', Items.BLAZE_ROD});
-		addShapedRecipe(reg, rl("abyssalnite_ingot"), null, new ItemStack(ACItems.abyssalnite_ingot, 9), new Object[] {"#", '#', new ItemStack(ACBlocks.ingot_block, 1, 0)});
-		addShapedRecipe(reg, rl("coralium_plate"), null, new ItemStack(ACItems.coralium_plate, 1), new Object[] {"#%#", "#%#", "#%#", '#', ACItems.refined_coralium_ingot, '%', ACItems.coralium_pearl});
-		addShapedRecipe(reg, rl("chunk_of_coralium"), null, new ItemStack(ACItems.chunk_of_coralium, 1), new Object[] {"###", "#%#", "###", '#', ACItems.coralium_gem_cluster_9, '%', new ItemStack(ACBlocks.stone, 1, 1)});
-		addShapedRecipe(reg, rl("powerstone_tracker"), null, new ItemStack(ACItems.powerstone_tracker, 4), new Object[] {"###", "#%#", "###", '#', ACItems.coralium_gem, '%', Items.ENDER_EYE});
-		addShapedRecipe(reg, rl("refined_coralium_ingot"), null, new ItemStack(ACItems.refined_coralium_ingot, 9), new Object[] {"#", '#', new ItemStack(ACBlocks.ingot_block, 1, 1)});
-		addShapedOreRecipe(reg, rl("refined_coralium_pickaxe"), null, new ItemStack(ACItems.refined_coralium_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.refined_coralium_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("refined_coralium_axe"), null, new ItemStack(ACItems.refined_coralium_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.refined_coralium_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("refined_coralium_shovel"), null, new ItemStack(ACItems.refined_coralium_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.refined_coralium_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("refined_coralium_sword"), null, new ItemStack(ACItems.refined_coralium_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.refined_coralium_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("refined_coralium_hoe"), null, new ItemStack(ACItems.refined_coralium_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.refined_coralium_ingot, '%', "stickWood"});
-		addShapedRecipe(reg, rl("shadow_shard"), null, new ItemStack(ACItems.shadow_shard, 1), new Object[] {"###", "###", "###", '#', ACItems.shadow_fragment});
-		addShapedRecipe(reg, rl("shadow_gem"), null, new ItemStack(ACItems.shadow_gem, 1), new Object[] {"###", "###", "###", '#', ACItems.shadow_shard});
-		addShapedRecipe(reg, rl("shard_of_oblivion"), null, new ItemStack(ACItems.shard_of_oblivion, 1), new Object[] {" # ", "#%#", " # ", '#', ACItems.shadow_gem, '%', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE)});
-		addShapedRecipe(reg, rl("coralium_longbow"), null, new ItemStack(ACItems.coralium_longbow, 1), new Object[] {" #%", "&$%", " #%", '#', ACItems.refined_coralium_ingot, '%', Items.STRING, '&', ACItems.coralium_pearl, '$', new ItemStack(Items.BOW, 1, OreDictionary.WILDCARD_VALUE)});
-		addShapedRecipe(reg, rl("dreadium_ingot"), null, new ItemStack(ACItems.dreadium_ingot, 9), new Object[] {"#", '#', new ItemStack(ACBlocks.ingot_block, 1, 2)});
-		addShapedOreRecipe(reg, rl("dreadium_pickaxe"), null, new ItemStack(ACItems.dreadium_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.dreadium_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("dreadium_axe"), null, new ItemStack(ACItems.dreadium_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.dreadium_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("dreadium_shovel"), null, new ItemStack(ACItems.dreadium_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.dreadium_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("dreadium_sword"), null, new ItemStack(ACItems.dreadium_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.dreadium_ingot, '%', "stickWood"});
-		addShapedOreRecipe(reg, rl("dreadium_hoe"), null, new ItemStack(ACItems.dreadium_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.dreadium_ingot, '%', "stickWood"});
-		addShapedRecipe(reg, rl("carbon_cluster"), null, new ItemStack(ACItems.carbon_cluster, 1), new Object[] {"###", "# #", "###", '#', new ItemStack(ACItems.crystal, 1, 3)});
-		addShapedRecipe(reg, rl("dense_carbon_cluster"), null, new ItemStack(ACItems.dense_carbon_cluster, 1), new Object[] {"###", "#%#", "###", '#', ACItems.carbon_cluster, '%', Blocks.OBSIDIAN});
-		addShapedRecipe(reg, rl("dread_cloth_0"), null, new ItemStack(ACItems.dread_cloth, 1), new Object[] {"#%#", "%&%", "#%#", '#', Items.STRING, '%', ACItems.dread_fragment, '&', Items.LEATHER});
-		addShapedRecipe(reg, rl("dread_cloth_1"), null, new ItemStack(ACItems.dread_cloth, 1), new Object[] {"#%#", "%&%", "#%#", '%', Items.STRING, '#', ACItems.dread_fragment, '&', Items.LEATHER});
-		addShapedRecipe(reg, rl("dreadium_plate"), null, new ItemStack(ACItems.dreadium_plate, 1), new Object[] {"###", "#%#", "###", '#', ACItems.dreadium_ingot, '%', ACItems.dread_cloth});
-		addShapedRecipe(reg, rl("dreadium_katana_blade"), null, new ItemStack(ACItems.dreadium_katana_blade, 1), new Object[] {"## ", "## ", "## ", '#', new ItemStack(ACItems.crystal, 1, 14)});
-		addShapedRecipe(reg, rl("dreadium_katana_hilt"), null, new ItemStack(ACItems.dreadium_katana_hilt, 1), new Object[] {"###", "%&%", "%&%", '#', ACItems.dreadium_ingot, '%', ACItems.dread_cloth, '&', ACBlocks.dreadlands_planks});
-		addShapedRecipe(reg, rl("dreadium_katana"), null, new ItemStack(ACItems.dreadium_katana, 1), new Object[] {"# ", "% ", '#', ACItems.dreadium_katana_blade, '%', ACItems.dreadium_katana_hilt});
-		addShapedOreRecipe(reg, rl("gunpowder"), null, new ItemStack(Items.GUNPOWDER, 4), true, new Object[] {"#&#", "#%#", "###", '#', "dustSaltpeter", '%', new ItemStack(Items.COAL, 1, 1), '&', "dustSulfur"});
-		addShapedRecipe(reg, rl("crystallized_methane"), null, new ItemStack(ACItems.crystal, 1, 10), new Object[] {" # ", "#%#", " # ", '#', new ItemStack(ACItems.crystal, 1, 5), '%', new ItemStack(ACItems.crystal, 1, 3)});
-		addShapedRecipe(reg, rl("crystallized_nitrate"), null, new ItemStack(ACItems.crystal, 1, 9), new Object[] {" # ", "%%%", '#', new ItemStack(ACItems.crystal, 1, 6), '%', new ItemStack(ACItems.crystal, 1, 4)});
-		addShapedRecipe(reg, rl("crystallized_alumina"), null, new ItemStack(ACItems.crystal, 1, 22), new Object[] {" # ", "%%%", " # ", '#', new ItemStack(ACItems.crystal, 1, 20), '%', new ItemStack(ACItems.crystal, 1, 4)});
-		addShapedRecipe(reg, rl("crystallized_silica"), null, new ItemStack(ACItems.crystal, 1, 21), new Object[] {"#%#", '#', new ItemStack(ACItems.crystal, 1, 4), '%', new ItemStack(ACItems.crystal, 1, 18)});
-		addShapedRecipe(reg, rl("crystallized_magnesia"), null, new ItemStack(ACItems.crystal, 1, 23), new Object[] {"#%", '#', new ItemStack(ACItems.crystal, 1, 19), '%', new ItemStack(ACItems.crystal, 1, 4)});
-		addShapedRecipe(reg, rl("crystallized_methane_shard"), null, new ItemStack(ACItems.crystal_shard, 1, 10), new Object[] {" # ", "#%#", " # ", '#', new ItemStack(ACItems.crystal_shard, 1, 5), '%', new ItemStack(ACItems.crystal_shard, 1, 3)});
-		addShapedRecipe(reg, rl("crystallized_nitrate_shard"), null, new ItemStack(ACItems.crystal_shard, 1, 9), new Object[] {" # ", "%%%", '#', new ItemStack(ACItems.crystal_shard, 1, 6), '%', new ItemStack(ACItems.crystal_shard, 1, 4)});
-		addShapedRecipe(reg, rl("crystallized_alumina_shard"), null, new ItemStack(ACItems.crystal_shard, 1, 22), new Object[] {" # ", "%%%", " # ", '#', new ItemStack(ACItems.crystal_shard, 1, 20), '%', new ItemStack(ACItems.crystal_shard, 1, 4)});
-		addShapedRecipe(reg, rl("crystallized_silica_shard"), null, new ItemStack(ACItems.crystal_shard, 1, 21), new Object[] {"#%#", '#', new ItemStack(ACItems.crystal_shard, 1, 4), '%', new ItemStack(ACItems.crystal_shard, 1, 18)});
-		addShapedRecipe(reg, rl("crystallized_magnesia_shard"), null, new ItemStack(ACItems.crystal_shard, 1, 23), new Object[] {"#%", '#', new ItemStack(ACItems.crystal_shard, 1, 19), '%', new ItemStack(ACItems.crystal_shard, 1, 4)});
-		addShapedRecipe(reg, rl("crystallized_methane_fragment"), null, new ItemStack(ACItems.crystal_fragment, 1, 10), new Object[] {" # ", "#%#", " # ", '#', new ItemStack(ACItems.crystal_fragment, 1, 5), '%', new ItemStack(ACItems.crystal_fragment, 1, 3)});
-		addShapedRecipe(reg, rl("crystallized_nitrate_fragment"), null, new ItemStack(ACItems.crystal_fragment, 1, 9), new Object[] {" # ", "%%%", '#', new ItemStack(ACItems.crystal_fragment, 1, 6), '%', new ItemStack(ACItems.crystal_fragment, 1, 4)});
-		addShapedRecipe(reg, rl("crystallized_alumina_shard"), null, new ItemStack(ACItems.crystal_fragment, 1, 22), new Object[] {" # ", "%%%", " # ", '#', new ItemStack(ACItems.crystal_fragment, 1, 20), '%', new ItemStack(ACItems.crystal_fragment, 1, 4)});
-		addShapedRecipe(reg, rl("crystallized_silica_shard"), null, new ItemStack(ACItems.crystal_fragment, 1, 21), new Object[] {"#%#", '#', new ItemStack(ACItems.crystal_fragment, 1, 4), '%', new ItemStack(ACItems.crystal_fragment, 1, 18)});
-		addShapedRecipe(reg, rl("crystallized_magnesia_shard"), null, new ItemStack(ACItems.crystal_fragment, 1, 23), new Object[] {"#%", '#', new ItemStack(ACItems.crystal_fragment, 1, 19), '%', new ItemStack(ACItems.crystal_fragment, 1, 4)});
-		addShapedRecipe(reg, rl("ethaxium_ingot_0"), null, new ItemStack(ACItems.ethaxium_ingot), new Object[] {"###", "#%#", "###", '#', ACItems.ethaxium_brick, '%', ACItems.life_crystal});
-		addShapedRecipe(reg, rl("ethaxium_ingot_1"), null, new ItemStack(ACItems.ethaxium_ingot), new Object[] {" # ", "#%#", " # ", '#', ACItems.ethaxium_brick, '%', ACItems.oblivion_catalyst});
-		ItemStack egg = new ItemStack(Items.SPAWN_EGG);
-		NBTTagCompound tag = egg.hasTagCompound() ? egg.getTagCompound() : new NBTTagCompound();
-		NBTTagCompound tag1 = new NBTTagCompound();
-		tag1.setString("id", "abyssalcraft.shadowboss");
-		tag.setTag("EntityTag", tag1);
-		egg.setTagCompound(tag);
-		addShapedRecipe(reg, rl("spawn_egg"), null, egg, new Object[] {"#", '#', ACBlocks.oblivion_deathbomb});
-		addShapedRecipe(reg, rl("ethaxium_ingot"), null, new ItemStack(ACItems.ethaxium_ingot, 9), new Object[] {"#", '#', new ItemStack(ACBlocks.ingot_block, 1, 3)});
-		addShapedRecipe(reg, rl("ethaxium_pickaxe"), null, new ItemStack(ACItems.ethaxium_pickaxe, 1), new Object[] {"###", " % ", " % ", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
-		addShapedRecipe(reg, rl("ethaxium_axe"), null, new ItemStack(ACItems.ethaxium_axe, 1), new Object[] {"##", "#%", " %", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
-		addShapedRecipe(reg, rl("ethaxium_shovel"), null, new ItemStack(ACItems.ethaxium_shovel, 1), new Object[] {"#", "%", "%", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
-		addShapedRecipe(reg, rl("ethaxium_sword"), null, new ItemStack(ACItems.ethaxium_sword, 1), new Object[] {"#", "#", "%", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
-		addShapedRecipe(reg, rl("ethaxium_hoe"), null, new ItemStack(ACItems.ethaxium_hoe, 1), new Object[] {"##", " %", " %", '#', ACItems.ethaxium_ingot, '%', ACItems.ethaxium_brick});
-		addShapedOreRecipe(reg, rl("coin_0"), null, new ItemStack(ACItems.coin, 1), true, new Object[] {" # ", "#%#", " # ", '#', "ingotCopper", '%', Items.FLINT});
-		addShapedOreRecipe(reg, rl("coin_1"), null, new ItemStack(ACItems.coin, 1), true, new Object[] {" # ", "#%#", " # ", '#', "ingotIron", '%', Items.FLINT});
-		addShapedOreRecipe(reg, rl("coin_2"), null, new ItemStack(ACItems.coin, 1), true, new Object[] {" # ", "#%#", " # ", '#', "ingotTin", '%', Items.FLINT});
-		addShapedRecipe(reg, rl("blank_engraving"), null, new ItemStack(ACItems.blank_engraving, 1), new Object[] {"###", "#%#", "###", '#', new ItemStack(Blocks.STONE_SLAB, 1, 0), '%', Items.IRON_INGOT});
-		addShapedRecipe(reg, rl("elder_engraving"), null, new ItemStack(ACItems.elder_engraving, 1), new Object[] {"#", "%", '#', ACItems.blank_engraving, '%', ACItems.ethaxium_ingot});
-		addShapedRecipe(reg, rl("cthulhu_engraving"), null, new ItemStack(ACItems.cthulhu_engraving, 1), new Object[] {"%#%", "%%%", '#', ACItems.elder_engraving, '%', new ItemStack(ACItems.shoggoth_flesh, 1, 0)});
-		addShapedRecipe(reg, rl("hastur_engraving"), null, new ItemStack(ACItems.hastur_engraving, 1), new Object[] {"%#%", "%%%", '#', ACItems.elder_engraving, '%', new ItemStack(ACItems.shoggoth_flesh, 1, 1)});
-		addShapedRecipe(reg, rl("jzahar_engraving"), null, new ItemStack(ACItems.jzahar_engraving, 1), new Object[] {"%#%", "%%%", '#', ACItems.elder_engraving, '%', ACItems.eldritch_scale});
-		addShapelessRecipe(reg, rl("azathoth_engraving"), null, new ItemStack(ACItems.azathoth_engraving, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 0), ACItems.elder_engraving, new ItemStack(ACItems.shoggoth_flesh, 1, 1),
-				new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.shoggoth_flesh, 1, 4));
-		addShapedRecipe(reg, rl("nyarlathotep_engraving"), null, new ItemStack(ACItems.nyarlathotep_engraving, 1), new Object[] {"%#%", "%%%", '#', ACItems.elder_engraving, '%', new ItemStack(ACItems.shoggoth_flesh, 1, 2)});
-		addShapedRecipe(reg, rl("yog_sothoth_engraving"), null, new ItemStack(ACItems.yog_sothoth_engraving, 1), new Object[] {"%#%", "%%%", '#', ACItems.elder_engraving, '%', new ItemStack(ACItems.shoggoth_flesh, 1, 3)});
-		addShapedRecipe(reg, rl("shub_niggurath_engraving"), null, new ItemStack(ACItems.shub_niggurath_engraving, 1), new Object[] {"%#%", "%%%", '#', ACItems.elder_engraving, '%', new ItemStack(ACItems.shoggoth_flesh, 1, 4)});
-		addShapedRecipe(reg, rl("necronomicon"), null, new ItemStack(ACItems.necronomicon, 1), new Object[] {"##%", "#&#", "##%", '#', Items.ROTTEN_FLESH, '%', Items.IRON_INGOT, '&', Items.BOOK});
-		addShapedRecipe(reg, rl("abyssal_wasteland_necronomicon"), null, new ItemStack(ACItems.abyssal_wasteland_necronomicon, 1), new Object[] {"###", "#%#", "###", '#', new ItemStack(ACItems.skin, 1, 0), '%', ACItems.necronomicon});
-		addShapedRecipe(reg, rl("dreadlands_necronomicon"), null, new ItemStack(ACItems.dreadlands_necronomicon, 1), new Object[] {"###", "#%#", "###", '#', new ItemStack(ACItems.skin, 1, 1), '%', ACItems.abyssal_wasteland_necronomicon});
-		addShapedRecipe(reg, rl("omothol_necronomicon"), null, new ItemStack(ACItems.omothol_necronomicon, 1), new Object[] {"###", "#%#", "###", '#', new ItemStack(ACItems.skin, 1, 2), '%', ACItems.dreadlands_necronomicon});
-		addShapedRecipe(reg, rl("abyssalnomicon"), null, new ItemStack(ACItems.abyssalnomicon, 1), new Object[] {"#$#", "%&%", "#%#", '#', ACItems.ethaxium_ingot, '%', ACItems.eldritch_scale, '&', ACItems.omothol_necronomicon, '$', ACItems.essence_of_the_gatekeeper});
-		addShapedRecipe(reg, rl("small_crystal_bag"), null, new ItemStack(ACItems.small_crystal_bag, 1), new Object[] {"#%#", "%&%", "%%%", '#', Items.STRING, '%', Items.LEATHER, '&', Items.GOLD_INGOT});
-		addShapedRecipe(reg, rl("medium_crystal_bag"), null, new ItemStack(ACItems.medium_crystal_bag, 1), new Object[] {"###", "#%#", "###", '#', new ItemStack(ACItems.skin, 1, 0), '%', ACItems.small_crystal_bag});
-		addShapedRecipe(reg, rl("large_crystal_bag"), null, new ItemStack(ACItems.large_crystal_bag, 1), new Object[] {"###", "#%#", "###", '#', new ItemStack(ACItems.skin, 1, 1), '%', ACItems.medium_crystal_bag});
-		addShapedRecipe(reg, rl("huge_crystal_bag"), null, new ItemStack(ACItems.huge_crystal_bag, 1), new Object[] {"###", "#%#", "###", '#', new ItemStack(ACItems.skin, 1, 2), '%', ACItems.large_crystal_bag});
-		addShapedRecipe(reg, rl("abyssalnite_nugget"), null, new ItemStack(ACItems.ingot_nugget, 9, 0), new Object[] {"#", '#', ACItems.abyssalnite_ingot});
-		addShapedRecipe(reg, rl("refined_coralium_nugget"), null, new ItemStack(ACItems.ingot_nugget, 9, 1), new Object[] {"#", '#', ACItems.refined_coralium_ingot});
-		addShapedRecipe(reg, rl("dreadium_nugget"), null, new ItemStack(ACItems.ingot_nugget, 9, 2), new Object[] {"#", '#', ACItems.dreadium_ingot});
-		addShapedRecipe(reg, rl("ethaxium_ingot"), null, new ItemStack(ACItems.ingot_nugget, 9, 3), new Object[] {"#", '#', ACItems.ethaxium_ingot});
-		addShapedRecipe(reg, rl("abyssalnite_ingot_nugget"), null, new ItemStack(ACItems.abyssalnite_ingot), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.ingot_nugget, 1, 0)});
-		addShapedRecipe(reg, rl("refined_coralium_ingot_nugget"), null, new ItemStack(ACItems.refined_coralium_ingot), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.ingot_nugget, 1, 1)});
-		addShapedRecipe(reg, rl("dreadium_ingot_nugget"), null, new ItemStack(ACItems.dreadium_ingot), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.ingot_nugget, 1, 2)});
-		addShapedRecipe(reg, rl("ethaxium_ingot_nugget"), null, new ItemStack(ACItems.ethaxium_ingot), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.ingot_nugget, 1, 3)});
-		for(int i = 0; i < EnumCrystalType.values().length; i++){
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType.byMetadata(i) + "_cluster"), null, new ItemStack(ACBlocks.crystal_cluster, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal, 1, i)});
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType.byMetadata(i) + "_0"), null, new ItemStack(ACItems.crystal, 9, i), new Object[] {"#", '#', new ItemStack(ACBlocks.crystal_cluster, 1, i)});
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType.byMetadata(i) + "_1"), null, new ItemStack(ACItems.crystal, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, i)});
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType.byMetadata(i) + "_shard_0"), null, new ItemStack(ACItems.crystal_shard, 9, i), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, i)});
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType.byMetadata(i) + "_shard_1"), null, new ItemStack(ACItems.crystal_shard, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_fragment, 1, i)});
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType.byMetadata(i) + "_fragment_0"), null, new ItemStack(ACItems.crystal_fragment, 9, i), new Object[] {"#", '#', new ItemStack(ACItems.crystal_shard, 1, i)});
-		}
-		for(int i = 0; i < EnumCrystalType2.values().length; i++){
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType2.byMetadata(i) + "_cluster"), null, new ItemStack(ACBlocks.crystal_cluster2, 1, i), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal, 1, i+16)});
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType2.byMetadata(i) + "_0"), null, new ItemStack(ACItems.crystal, 9, i+16), new Object[] {"#", '#', new ItemStack(ACBlocks.crystal_cluster2, 1, i)});
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType2.byMetadata(i) + "_1"), null, new ItemStack(ACItems.crystal, 1, i+16), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_shard, 1, i+16)});
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType2.byMetadata(i) + "_shard_0"), null, new ItemStack(ACItems.crystal_shard, 9, i+16), new Object[] {"#", '#', new ItemStack(ACItems.crystal, 1, i+16)});
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType2.byMetadata(i) + "_shard_1"), null, new ItemStack(ACItems.crystal_shard, 1, i+16), new Object[] {"###", "###", "###", '#', new ItemStack(ACItems.crystal_fragment, 1, i+16)});
-			addShapedRecipe(reg, rl("crystallized_"+ EnumCrystalType2.byMetadata(i) + "_fragment_0"), null, new ItemStack(ACItems.crystal_fragment, 9, i+16), new Object[] {"#", '#', new ItemStack(ACItems.crystal_shard, 1, i+16)});
-		}
-		addShapedRecipe(reg, rl("skin_of_the_abyssal_wasteland"), null, new ItemStack(ACItems.skin, 1, 0), new Object[] {"###", "#%#", "###", '#', ACItems.coralium_plagued_flesh, '%', new ItemStack(ACItems.essence, 1, 0)});
-		addShapedRecipe(reg, rl("skin_of_the_dreadlands"), null, new ItemStack(ACItems.skin, 1, 1), new Object[] {"###", "#%#", "###", '#', ACItems.dread_fragment, '%', new ItemStack(ACItems.essence, 1, 1)});
-		addShapedRecipe(reg, rl("skin_of_omothol"), null, new ItemStack(ACItems.skin, 1, 2), new Object[] {"###", "#%#", "###", '#', ACItems.omothol_flesh, '%', new ItemStack(ACItems.essence, 1, 2)});
-		addShapedRecipe(reg, rl("staff_of_rending"), null, new ItemStack(ACItems.staff_of_rending, 1, 0), new Object[] {" #%", " ##", "#  ", '#', ACItems.shadow_shard, '%', ACItems.shard_of_oblivion});
-		addShapedRecipe(reg, rl("shadow_shard_0"), null, new ItemStack(ACItems.shadow_shard, 9), new Object[] {"#", '#', ACItems.shadow_gem});
-		addShapedRecipe(reg, rl("shadow_fragment_0"), null, new ItemStack(ACItems.shadow_fragment, 9), new Object[] {"#", '#', ACItems.shadow_shard});
-		addShapedRecipe(reg, rl("ritual_charm"), null, new ItemStack(ACItems.ritual_charm, 1, 0), new Object[] {"###", "#%#", "###", '#', Items.GOLD_INGOT, '%', Items.DIAMOND});
-		addShapedRecipe(reg, rl("stone_tablet"), null, new ItemStack(ACItems.stone_tablet), "#%#", "%&%", "#%#", '#', ACItems.shadow_shard, '%', new ItemStack(ACBlocks.stone, 1, 7), '&', ACItems.shadow_gem);
-
-		addShapelessRecipe(reg, rl("life_crystal"), null, new ItemStack(ACItems.life_crystal), new ItemStack(ACItems.crystal, 1, 3), new ItemStack(ACItems.crystal, 1, 5), new ItemStack(ACItems.crystal, 1, 6),
-				new ItemStack(ACItems.crystal, 1, 4), new ItemStack(ACItems.crystal, 1, 7), new ItemStack(ACItems.crystal, 1, 2));
-
-		//Coralium Gem Cluster Recipes
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_0"), null, new ItemStack(ACItems.coralium_gem_cluster_2, 1),ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_1"), null, new ItemStack(ACItems.coralium_gem_cluster_3, 1),ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_2"), null, new ItemStack(ACItems.coralium_gem_cluster_4, 1),ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_3"), null, new ItemStack(ACItems.coralium_gem_cluster_5, 1),ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_4"), null, new ItemStack(ACItems.coralium_gem_cluster_6, 1),ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_5"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_6"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_7"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_8"), null, new ItemStack(ACItems.coralium_gem_cluster_3, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_9"), null, new ItemStack(ACItems.coralium_gem_cluster_4, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_10"), null, new ItemStack(ACItems.coralium_gem_cluster_5, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_11"), null, new ItemStack(ACItems.coralium_gem_cluster_6, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_12"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_13"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_14"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_15"), null, new ItemStack(ACItems.coralium_gem_cluster_4, 1),ACItems.coralium_gem_cluster_3, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_16"), null, new ItemStack(ACItems.coralium_gem_cluster_5, 1),ACItems.coralium_gem_cluster_3, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_17"), null, new ItemStack(ACItems.coralium_gem_cluster_6, 1),ACItems.coralium_gem_cluster_3, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_18"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem_cluster_3, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_19"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_3, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_20"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_3, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_21"), null, new ItemStack(ACItems.coralium_gem_cluster_5, 1),ACItems.coralium_gem_cluster_4, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_22"), null, new ItemStack(ACItems.coralium_gem_cluster_6, 1),ACItems.coralium_gem_cluster_4, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_23"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem_cluster_4, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_24"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_4, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_25"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_4, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_26"), null, new ItemStack(ACItems.coralium_gem_cluster_6, 1),ACItems.coralium_gem_cluster_5, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_27"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem_cluster_5, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_28"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_5, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_29"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_5, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_30"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem_cluster_6, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_31"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_6, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_32"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_6, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_33"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_7, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_34"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_7, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_35"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_8, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_36"), null, new ItemStack(ACItems.coralium_gem_cluster_5, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_37"), null, new ItemStack(ACItems.coralium_gem_cluster_6, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_38"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_39"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_40"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_41"), null, new ItemStack(ACItems.coralium_gem_cluster_6, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_42"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_43"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_44"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_2, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_45"), null, new ItemStack(ACItems.coralium_gem_cluster_5, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_3);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_46"), null, new ItemStack(ACItems.coralium_gem_cluster_6, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_3, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_47"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_3, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_48"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_3, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_49"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_3, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_50"), null, new ItemStack(ACItems.coralium_gem_cluster_6, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_4);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_51"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_4, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_52"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_4, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_53"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_4, ACItems.coralium_gem, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_54"), null, new ItemStack(ACItems.coralium_gem_cluster_7, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_5);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_55"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_5, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_56"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_5, ACItems.coralium_gem, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_57"), null, new ItemStack(ACItems.coralium_gem_cluster_8, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_6);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_58"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_6, ACItems.coralium_gem);
-		addShapelessRecipe(reg, rl("coralium_gem_cluster_59"), null, new ItemStack(ACItems.coralium_gem_cluster_9, 1),ACItems.coralium_gem_cluster_2, ACItems.coralium_gem_cluster_7);
-		addShapedRecipe(reg, rl("coralium_gem_0"), null, new ItemStack(ACItems.coralium_gem, 2), new Object[] {"#", '#', ACItems.coralium_gem_cluster_2});
-		addShapedRecipe(reg, rl("coralium_gem_1"), null, new ItemStack(ACItems.coralium_gem, 3), new Object[] {"#", '#', ACItems.coralium_gem_cluster_3});
-		addShapedRecipe(reg, rl("coralium_gem_2"), null, new ItemStack(ACItems.coralium_gem, 4), new Object[] {"#", '#', ACItems.coralium_gem_cluster_4});
-		addShapedRecipe(reg, rl("coralium_gem_3"), null, new ItemStack(ACItems.coralium_gem, 5), new Object[] {"#", '#', ACItems.coralium_gem_cluster_5});
-		addShapedRecipe(reg, rl("coralium_gem_4"), null, new ItemStack(ACItems.coralium_gem, 6), new Object[] {"#", '#', ACItems.coralium_gem_cluster_6});
-		addShapedRecipe(reg, rl("coralium_gem_5"), null, new ItemStack(ACItems.coralium_gem, 7), new Object[] {"#", '#', ACItems.coralium_gem_cluster_7});
-		addShapedRecipe(reg, rl("coralium_gem_6"), null, new ItemStack(ACItems.coralium_gem, 8), new Object[] {"#", '#', ACItems.coralium_gem_cluster_8});
-		addShapedRecipe(reg, rl("coralium_gem_7"), null, new ItemStack(ACItems.coralium_gem, 9), new Object[] {"#", '#', ACItems.coralium_gem_cluster_9});
-
-		addArmor(ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots, ACItems.abyssalnite_ingot, new ItemStack(ACItems.ingot_nugget, 1, 0), ACItems.abyssalnite_upgrade_kit, Items.DIAMOND_HELMET, Items.DIAMOND_CHESTPLATE, Items.DIAMOND_LEGGINGS, Items.DIAMOND_BOOTS);
-		addArmor(ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots, ACItems.refined_coralium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 1), ACItems.coralium_upgrade_kit, ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots);
-		addShapedRecipe(reg, rl("plated_coralium_boots"), null, new ItemStack(ACItems.plated_coralium_boots, 1), new Object[] {"# #", "%&%", '#', ACItems.refined_coralium_ingot, '%', ACItems.coralium_plate, '&', ACItems.refined_coralium_boots});
-		addShapedRecipe(reg, rl("plated_coralium_helmet"), null, new ItemStack(ACItems.plated_coralium_helmet, 1), new Object[] {"&#&", "#@#", "%%%", '#', ACItems.coralium_plate, '&', ACItems.coralium_pearl, '@', ACItems.refined_coralium_helmet, '%', ACItems.refined_coralium_ingot});
-		addShapedRecipe(reg, rl("plated_coralium_chestplate"), null, new ItemStack(ACItems.plated_coralium_chestplate, 1), new Object[] {"# #", "%@%", "%#%",'#', ACItems.coralium_plate, '%', ACItems.refined_coralium_ingot, '@', ACItems.refined_coralium_chestplate});
-		addShapedRecipe(reg, rl("plated_coralium_leggings"), null, new ItemStack(ACItems.plated_coralium_leggings, 1), new Object[] {"%&%", "# #", "# #",'#', ACItems.refined_coralium_ingot, '%', ACItems.coralium_plate, '&', ACItems.refined_coralium_leggings});
-		addArmor(ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots, ACItems.dreadium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 2), ACItems.dreadium_upgrade_kit, ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots);
-		addShapedRecipe(reg, rl("dreadium_samurai_boots"), null, new ItemStack(ACItems.dreadium_samurai_boots, 1), new Object[] {"#%#", "&&&", '#', ACItems.dread_cloth, '%', new ItemStack(ACItems.dreadium_boots, 1, OreDictionary.WILDCARD_VALUE), '&', ACBlocks.dreadlands_planks});
-		addShapedRecipe(reg, rl("dreadium_samurai_helmet"), null, new ItemStack(ACItems.dreadium_samurai_helmet, 1), new Object[] {" # ", "%&%", '#', ACItems.dreadium_ingot, '%', ACItems.dreadium_plate, '&', new ItemStack(ACItems.dreadium_helmet, 1, OreDictionary.WILDCARD_VALUE)});
-		addShapedRecipe(reg, rl("dreadium_samurai_chestplate"), null, new ItemStack(ACItems.dreadium_samurai_chestplate, 1), new Object[] {"#%#", "#&#", "@@@", '#', ACItems.dreadium_plate, '%', ACItems.dreadium_ingot, '&', new ItemStack(ACItems.dreadium_chestplate, 1, OreDictionary.WILDCARD_VALUE), '@', ACItems.dread_cloth});
-		addShapedRecipe(reg, rl("dreadium_samurai_leggings"), null, new ItemStack(ACItems.dreadium_samurai_leggings, 1), new Object[] {"#%#", "&&&", '#', ACItems.dreadium_plate, '%', new ItemStack(ACItems.dreadium_leggings, 1, OreDictionary.WILDCARD_VALUE), '&', ACItems.dread_cloth});
-		addArmor(ACItems.ethaxium_helmet, ACItems.ethaxium_chestplate, ACItems.ethaxium_leggings, ACItems.ethaxium_boots, ACItems.ethaxium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 3), ACItems.ethaxium_upgrade_kit, ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots);
-
-		addShapedRecipe(reg, rl("iron_plate"), null, new ItemStack(ACItems.iron_plate, 2), new Object[] {"#", "#", '#', Items.IRON_INGOT});
-		addShapedRecipe(reg, rl("washcloth"), null, new ItemStack(ACItems.washcloth, 1), new Object[] {"###", "#%#", "###", '#', Blocks.WEB, '%', Blocks.WOOL});
-
-		addShapelessRecipe(reg, rl("mre"), null, new ItemStack(ACItems.mre, 1), ACItems.iron_plate, Items.CARROT, Items.POTATO, Items.COOKED_BEEF);
-		addShapelessRecipe(reg, rl("chicken_on_a_plate"), null, new ItemStack(ACItems.chicken_on_a_plate, 1), ACItems.iron_plate, Items.COOKED_CHICKEN);
-		addShapelessRecipe(reg, rl("pork_on_a_plate"), null, new ItemStack(ACItems.pork_on_a_plate, 1), ACItems.iron_plate, Items.COOKED_PORKCHOP);
-		addShapelessRecipe(reg, rl("beef_on_a_plate"), null, new ItemStack(ACItems.beef_on_a_plate, 1), ACItems.iron_plate, Items.COOKED_BEEF);
-		addShapelessRecipe(reg, rl("fish_on_a_plate"), null, new ItemStack(ACItems.fish_on_a_plate, 1), ACItems.iron_plate, Items.COOKED_FISH);
-		addShapelessRecipe(reg, rl("fried_egg_on_a_plate"), null, new ItemStack(ACItems.fried_egg_on_a_plate, 1), ACItems.iron_plate, ACItems.fried_egg);
-		addShapelessRecipe(reg, rl("iron_plate_0"), null, new ItemStack(ACItems.iron_plate, 1, 0), ACItems.dirty_plate, new ItemStack(ACItems.washcloth,1, OreDictionary.WILDCARD_VALUE));
-
-		reg.register(new ShapelessOreRecipe(null, new ItemStack(ACItems.cobblestone_upgrade_kit, 4), "plankWood", Blocks.COBBLESTONE, Blocks.COBBLESTONE, Items.STRING, Items.FLINT).setRegistryName(rl("cobblestone_upgrade_kit")));
-		addShapelessRecipe(reg, rl("iron_upgrade_kit"), null, new ItemStack(ACItems.iron_upgrade_kit, 1), Blocks.COBBLESTONE, Items.IRON_INGOT, Items.IRON_INGOT, ACItems.cobblestone_upgrade_kit);
-		addShapelessRecipe(reg, rl("gold_upgrade_kit"), null, new ItemStack(ACItems.gold_upgrade_kit, 1), Items.IRON_INGOT, Items.GOLD_INGOT, Items.GOLD_INGOT, ACItems.iron_upgrade_kit);
-		addShapelessRecipe(reg, rl("diamond_upgrade_kit"), null, new ItemStack(ACItems.diamond_upgrade_kit, 1), Items.GOLD_INGOT, Items.DIAMOND, Items.DIAMOND, ACItems.gold_upgrade_kit);
-		addShapelessRecipe(reg, rl("abyssalnite_upgrade_kit"), null, new ItemStack(ACItems.abyssalnite_upgrade_kit, 1), Items.DIAMOND, ACItems.abyssalnite_ingot, ACItems.abyssalnite_ingot, ACItems.diamond_upgrade_kit);
-		addShapelessRecipe(reg, rl("coralium_upgrade_kit"), null, new ItemStack(ACItems.coralium_upgrade_kit, 1), ACItems.abyssalnite_ingot, ACItems.refined_coralium_ingot, ACItems.refined_coralium_ingot, ACItems.abyssalnite_upgrade_kit);
-		addShapelessRecipe(reg, rl("dreadium_upgrade_kit"), null, new ItemStack(ACItems.dreadium_upgrade_kit, 1), ACItems.refined_coralium_ingot, ACItems.dreadium_ingot, ACItems.dreadium_ingot, ACItems.coralium_upgrade_kit);
-		addShapelessRecipe(reg, rl("ethaxium_upgrade_kit"), null, new ItemStack(ACItems.ethaxium_upgrade_kit, 1), ACItems.dreadium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.dreadium_upgrade_kit);
-
-		addShapelessRecipe(reg, rl("coralium_plague_antidote"), null, new ItemStack(ACItems.antidote, 1, 0), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACBlocks.wastelands_thorn, ACItems.anti_plagued_flesh, new ItemStack(ACItems.shoggoth_flesh, 1, 1));
-		addShapelessRecipe(reg, rl("dread_plague_antidote"), null, new ItemStack(ACItems.antidote, 1, 1), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), ACBlocks.dreadlands_sapling, ACItems.dread_fragment, new ItemStack(ACItems.shoggoth_flesh, 1, 2));
 	}
-
-
-
-	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
-		GameRegistry.addShapedRecipe(helmet.getRegistryName(), null, new ItemStack(helmet), new Object[] {"###", "# #", '#', material});
-		GameRegistry.addShapedRecipe(chestplate.getRegistryName(), null, new ItemStack(chestplate), new Object[] {"# #", "###", "###", '#', material});
-		GameRegistry.addShapedRecipe(pants.getRegistryName(), null, new ItemStack(pants), new Object[] {"###", "# #", "# #", '#', material});
-		GameRegistry.addShapedRecipe(boots.getRegistryName(), null, new ItemStack(boots), new Object[] {"# #", "# #", '#', material});
-	}
-
-	private void addStoneStuffRecipes(IForgeRegistry<IRecipe> reg, ItemStack stone, Block slab, Block button, Block pplate){
-		if(slab != null) addSlabRecipe(reg, stone, slab);
-		if(button != null) addButtonRecipe(reg, stone, button);
-		if(pplate != null) addPPlateRecipe(reg, stone, pplate);
-	}
-
-	private void addBlockStuffRecipes(IForgeRegistry<IRecipe> reg, ItemStack block, Block slab, Block stairs, Block fence){
-		if(slab != null) addSlabRecipe(reg, block, slab);
-		if(stairs != null) addStairsRecipe(reg, block, stairs);
-		if(fence != null) addFenceRecipe(reg, block, fence);
-	}
-
-	private void addSlabRecipe(IForgeRegistry<IRecipe> reg, ItemStack input, Block slab){ addShapedRecipe(reg, slab.getRegistryName(), null, new ItemStack(slab, 6), new Object[] {"AAA", 'A', input }); }
-	private void addStairsRecipe(IForgeRegistry<IRecipe> reg, ItemStack input, Block stairs){ addShapedRecipe(reg, stairs.getRegistryName(), null, new ItemStack(stairs, 4), new Object[] {"#  ", "## ", "###", '#', input}); }
-	private void addFenceRecipe(IForgeRegistry<IRecipe> reg, ItemStack input, Block fence){ addShapedRecipe(reg, fence.getRegistryName(), null, new ItemStack(fence, 6), new Object[] {"###", "###", '#', input}); }
-	private void addButtonRecipe(IForgeRegistry<IRecipe> reg, ItemStack input, Block button){ addShapedRecipe(reg, button.getRegistryName(), null, new ItemStack(button, 1), new Object[] {"#", '#', input}); }
-	private void addPPlateRecipe(IForgeRegistry<IRecipe> reg, ItemStack input, Block pplate){ addShapedRecipe(reg, pplate.getRegistryName(), null, new ItemStack(pplate, 1), new Object[] {"##", '#', input}); }
 
 	private ResourceLocation rl(String name){
 		return new ResourceLocation("abyssalcraft", name);
-	}
-
-	private void addShapedRecipe(IForgeRegistry<IRecipe> reg, ResourceLocation name, ResourceLocation group, @Nonnull ItemStack output, Object... params)
-	{
-		ShapedPrimer primer = CraftingHelper.parseShaped(params);
-		reg.register(new ShapedRecipes(group == null ? "" : group.toString(), primer.width, primer.height, primer.input, output).setRegistryName(name));
 	}
 
 	private void addShapedNBTRecipe(IForgeRegistry<IRecipe> reg, ResourceLocation name, ResourceLocation group, @Nonnull ItemStack output, Object... params)
 	{
 		ShapedPrimer primer = CraftingHelper.parseShaped(params);
 		reg.register(new ShapedNBTRecipe(group == null ? "" : group.toString(), primer.width, primer.height, primer.input, output).setRegistryName(name));
-	}
-
-	private void addShapedOreRecipe(IForgeRegistry<IRecipe> reg, ResourceLocation name, ResourceLocation group, @Nonnull ItemStack output, Object... params)
-	{
-		reg.register(new ShapedOreRecipe(group, output, params).setRegistryName(name));
-	}
-
-	private void addShapelessRecipe(IForgeRegistry<IRecipe> reg, ResourceLocation name, ResourceLocation group, @Nonnull ItemStack output, Object... params)
-	{
-		NonNullList<Ingredient> lst = NonNullList.create();
-		for (Object i : params)
-			lst.add(CraftingHelper.getIngredient(i));
-		reg.register(new ShapelessRecipes(group == null ? "" : group.toString(), output, lst).setRegistryName(name));
 	}
 
 	private void addDungeonHooks(){

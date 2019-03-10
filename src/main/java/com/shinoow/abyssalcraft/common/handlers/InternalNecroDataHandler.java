@@ -58,8 +58,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 	public InternalNecroDataHandler(){
 		Chapter outergods = new Chapter("outergods", NecronomiconText.LABEL_OUTER_GODS, 0);
-		Chapter greatoldones = new Chapter("greatoldones", NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0);
-		internalNecroData.add(new NecroData("greatoldones", NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconText.INFORMATION_GREAT_OLD_ONES,
+		Chapter greatoldones = new Chapter("greatoldones", NecronomiconText.LABEL_PANTHEON, 0);
+		internalNecroData.add(new NecroData("greatoldones", NecronomiconText.LABEL_PANTHEON, 0, NecronomiconText.INFORMATION_GREAT_OLD_ONES,
 				outergods, greatoldones));
 		Chapter overworldmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
 		Chapter overworldprogression = new Chapter("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0);

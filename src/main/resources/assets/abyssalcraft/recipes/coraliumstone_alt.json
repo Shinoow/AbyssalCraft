@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#%#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "%": {
+      "item": "abyssalcraft:ccluster9"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:coraliumstone"
+  }
+}

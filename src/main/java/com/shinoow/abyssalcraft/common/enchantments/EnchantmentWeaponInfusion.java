@@ -18,6 +18,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -51,15 +52,18 @@ public class EnchantmentWeaponInfusion extends Enchantment {
 	@Override
 	public void onEntityDamaged(EntityLivingBase user, Entity target, int level)
 	{
-		if(target instanceof EntityLivingBase){
-			EntityLivingBase entity = (EntityLivingBase) target;
-			if(this == AbyssalCraftAPI.coralium_enchantment)
-				if(!EntityUtil.isEntityCoralium(entity))
-					entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
-			if(this == AbyssalCraftAPI.dread_enchantment)
-				if(!EntityUtil.isEntityDread(entity))
-					entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
-		}
+		if(!user.world.isRemote)
+			if(target instanceof EntityLivingBase){
+				EntityLivingBase entity = (EntityLivingBase) target;
+				if(user instanceof EntityPlayer && target instanceof EntityPlayer && !((EntityPlayer) user).canAttackPlayer((EntityPlayer)target))
+					return;
+				if(this == AbyssalCraftAPI.coralium_enchantment)
+					if(!EntityUtil.isEntityCoralium(entity))
+						entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
+				if(this == AbyssalCraftAPI.dread_enchantment)
+					if(!EntityUtil.isEntityDread(entity))
+						entity.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
+			}
 	}
 
 	@Override
