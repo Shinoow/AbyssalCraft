@@ -1,17 +1,4 @@
 <ul>
-	<li>The plague antidotes can now be used 10 times before they run out (and the texture indicates how many uses are left)</li>
-	<li>The plague enchantments no longer infect other players if you hit them while PVP is disabled</li>
-	<li>Rituals now drain energy every second, instead of every tick (fixes rounding errors for energy amounts below 100)</li>
-	<li>Knowledge syncing when changing dimensions now has a configurable delay (sending the data later should reduce initial lag when loading the dimension)</li>
-	<li>Revamped the Lair of Cha'garoth a bit (Dreadstone Cobblestone floor, 30% of the Dreadstone Bricks are cracked)</li>
-	<li>You can now automatically insert items into the Energy Depositioner</li>
-	<li>The rotation of a Energy Relay can be changed by right-clicking it (which cycles through the possible directions)</li>
-	<li>Powerstone Trackers now move towards the nearest unexplored stronghold (a stronghold is considered explored if the Dreadlands Infused Powerstone has been mined)</li>
-	<li>Removed Oblivion Catalysts from the village blacksmith chest loot table (not sure why I added it there in the first place, nor why I didn't remove it earlier)</li>
-	<li>Lowered the chance of finding a Transmutation Gem in the Abyssal Stronghold and Dreadlands Mineshaft loot tables (made more sense back when they were single-use items, they're also damaged when you find them)</li>
-	<li>Transmutation Gems no longer display their durability tooltip if advanced tooltips (F3 + H) are shown</li>
-	<li>Changed the "The Great Old Ones" Necronomicon section name to "Pantheon" (as opposed to having the former appear twice)</li>
-	<li>All crafting recipes (except the NBT-sensitive ones) are now JSON files</li>
-	<li>Heavily reduced the amount of crafting recipes for the Coralium Infused Stone and the various Coralium Gem Clusters (60 of those recipes were probably never used)</li>
-	<li>Added a hook that allows you do add custom NBT data to a mob summoned through a summoning ritual</li>
+	<li>Custom NBT added through a summoning ritual will now work for all properties that can be changed through NBT (instead of only mob-specific properties)</li>
+	<li>Fuzzy NBT checking is now handled properly (if Item Stack A has no NBT, but Item Stack B does, they will be equal as B "contains" A)</li>
 </ul>

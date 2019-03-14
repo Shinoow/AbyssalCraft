@@ -172,8 +172,8 @@ public class APIUtils {
 
 	/**
 	 * Compares two ItemStacks
-	 * @param stack1 First ItemStack to compare
-	 * @param stack2 Second ItemStack to compare
+	 * @param stack1 First ItemStack to compare (the input Item Stack)
+	 * @param stack2 Second ItemStack to compare (the recipe Item Stack)
 	 * @param nbt If ItemStack NBT should be compared as well
 	 * @return True if both stacks are equal, otherwise false
 	 */
@@ -185,8 +185,8 @@ public class APIUtils {
 
 	/**
 	 * Compares two ItemStacks
-	 * @param stack1 First ItemStack to compare
-	 * @param stack2 Second ItemStack to compare
+	 * @param stack1 First ItemStack to compare (the input Item Stack)
+	 * @param stack2 Second ItemStack to compare (the recipe Item Stack)
 	 * @return True if both stacks are equal, otherwise false
 	 */
 	public static boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
@@ -212,11 +212,11 @@ public class APIUtils {
 
 	/**
 	 * Checks if two ItemStacks have the same NBT tags ({@link ItemStack#areItemStackTagsEqual(ItemStack, ItemStack)} without comparing capabilities)
-	 * @param stackA First Item Stack
-	 * @param stackB Second Item Stack
+	 * @param stackA First Item Stack (the recipe Item Stack)
+	 * @param stackB Second Item Stack (the input Item Stack)
 	 * @param strictness How strictly the Tags are compared,
 	 * <ul>
-	 * <li>0 = checks if stackAs tag contains stackBs</li>
+	 * <li>0 = checks if stackBs tag contains stackAs</li>
 	 * <li>1 = checks if stackAs tag equals stackBs</li>
 	 * <li>2 = checks if stackAs tag and capabilities equals stackBs</li>
 	 * </ul>
@@ -230,15 +230,11 @@ public class APIUtils {
 				return true;
 			else if (!stackA.isEmpty() && !stackB.isEmpty())
 			{
-				if (stackA.getTagCompound() == null && stackB.getTagCompound() != null)
+				if(stackA.getTagCompound() == null)
+					return true;
+				else if(stackB.getTagCompound() == null)
 					return false;
-				else {
-					if(stackA.getTagCompound() == null)
-						return true;
-					else if(stackB.getTagCompound() == null)
-						return false;
-					return compoundContainsCompound(stackA.getTagCompound().copy(), stackB.getTagCompound().copy());
-				}
+				return compoundContainsCompound(stackA.getTagCompound().copy(), stackB.getTagCompound().copy());
 			} else
 				return false;
 		case 1:

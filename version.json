@@ -1,8 +1,8 @@
 {
   "homepage": "https://shinoow.github.io/AbyssalCraft/",
   "promos": {
-	"1.12.2-latest": "1.9.5.3",
-	"1.12.2-recommended": "1.9.5.3",
+	"1.12.2-latest": "1.9.5.4",
+	"1.12.2-recommended": "1.9.5.4",
 	"1.12-latest": "1.9.4-pre-4",
 	"1.12-recommended": "1.9.4-pre-4",
 	"1.11.2-latest": "1.9.4.11-FINAL",
@@ -21,6 +21,7 @@
   "1.8.9-recommended": "1.9.3.10-FINAL"
   },
   "1.12.2": {
+	"1.9.5.4": "- Custom NBT added through a summoning ritual will now work for all properties that can be changed through NBT (instead of only mob-specific properties)\n- Fuzzy NBT checking is now handled properly (if Item Stack A has no NBT, but Item Stack B does, they will be equal as B \"contains\" A)",
   "1.9.5.3": "- The plague antidotes can now be used 10 times before they run out (and the texture indicates how many uses are left)\n- The plague enchantments no longer infect other players if you hit them while PVP is disabled\n- Rituals now drain energy every second, instead of every tick (fixes rounding errors for energy amounts below 100)\n- Knowledge syncing when changing dimensions now has a configurable delay (sending the data later should reduce initial lag when loading the dimension)\n- Revamped the Lair of Cha'garoth a bit (Dreadstone Cobblestone floor, 30% of the Dreadstone Bricks are cracked)\n- You can now automatically insert items into the Energy Depositioner\n- The rotation of a Energy Relay can be changed by right-clicking it (which cycles through the possible directions)\n- Powerstone Trackers now move towards the nearest unexplored stronghold (a stronghold is considered explored if the Dreadlands Infused Powerstone has been mined)\n- Removed Oblivion Catalysts from the village blacksmith chest loot table (not sure why I added it there in the first place, nor why I didn't remove it earlier)\n- Lowered the chance of finding a Transmutation Gem in the Abyssal Stronghold and Dreadlands Mineshaft loot tables (made more sense back when they were single-use items, they're also damaged when you find them)\n- Transmutation Gems no longer display their durability tooltip if advanced tooltips (F3 + H) are shown\n- Changed the \"The Great Old Ones\" Necronomicon section name to \"Pantheon\" (as opposed to having the former appear twice)\n- All crafting recipes (except the NBT-sensitive ones) are now JSON files\n- Heavily reduced the amount of crafting recipes for the Coralium Infused Stone and the various Coralium Gem Clusters (60 of those recipes were probably never used)\n- Added a hook that allows you do add custom NBT data to a mob summoned through a summoning ritual",
 	"1.9.5.2": "- When \"Display Item Names\" is enabled, you actually see the Item names, instead of \"Lorem ipsum\"\n- The Purging ritual now ignores unbreakable blocks (so modded bedrock blocks won't get replaced)\n- Shoggoth Biomass no longer spawn anything if the doMobSpawning gamerule is set to false\n- Changed the default value for Portal Cooldown to 100 ticks (previously 10)",
 	"1.9.5.1": "- The Necronomicon GUI will no longer try to divide by zero when drawing ItemStacks\n- Darklands Oak Doors now generate in Abyssal Strongholds, instead of vanilla oak ones\n- Darklands Oak and Dreadlands Doors are now randomly picked for the buildings in Omothol that have doors",

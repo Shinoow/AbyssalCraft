@@ -116,9 +116,9 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 				CriteriaTriggers.SUMMONED_ENTITY.trigger(entityplayermp, entityliving);
 			if(customNBT != null) {
 				NBTTagCompound internal = new NBTTagCompound();
-				entityliving.writeEntityToNBT(internal);
+				entityliving.writeToNBT(internal);
 				internal.merge(customNBT);
-				entityliving.readEntityFromNBT(internal);
+				entityliving.readFromNBT(internal);
 			}
 			world.spawnEntity(entityliving);
 			entityliving.timeUntilPortal = entityliving.getPortalCooldown();
