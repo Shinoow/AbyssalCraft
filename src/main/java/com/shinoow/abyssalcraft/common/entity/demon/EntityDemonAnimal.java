@@ -69,7 +69,8 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	@Override
 	public void setFire(int seconds)
 	{
-		if(!canBurn) canBurn = true;
+		if(ACConfig.demonAnimalFire || ACConfig.hardcoreMode)
+			if(!canBurn) canBurn = true;
 		super.setFire(seconds);
 	}
 
@@ -78,18 +79,19 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	{
 		ItemStack stack = par1EntityPlayer.getHeldItem(hand);
 
-		if (!stack.isEmpty() && stack.getItem() == Items.FLINT_AND_STEEL && !canBurn)
-		{
-			world.playSound(par1EntityPlayer, posX, posY, posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
-			par1EntityPlayer.swingArm(hand);
-			canBurn = true;
-
-			if (!world.isRemote)
+		if(ACConfig.demonAnimalFire || ACConfig.hardcoreMode)
+			if (!stack.isEmpty() && stack.getItem() == Items.FLINT_AND_STEEL && !canBurn)
 			{
-				stack.damageItem(1, par1EntityPlayer);
-				return true;
+				world.playSound(par1EntityPlayer, posX, posY, posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+				par1EntityPlayer.swingArm(hand);
+				canBurn = true;
+
+				if (!world.isRemote)
+				{
+					stack.damageItem(1, par1EntityPlayer);
+					return true;
+				}
 			}
-		}
 
 		return super.processInteract(par1EntityPlayer, hand);
 	}
@@ -99,8 +101,12 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	{
 		super.onLivingUpdate();
 
-		if(!canBurn && world.isFlammableWithin(getEntityBoundingBox()))
-			canBurn = true;
+		if(ACConfig.demonAnimalFire || ACConfig.hardcoreMode)
+			if(!canBurn && world.isFlammableWithin(getEntityBoundingBox()))
+				canBurn = true;
+
+		if(canBurn && isWet())
+			canBurn = false;
 
 		if(!world.isRemote && canBurn){
 			int i = MathHelper.floor(posX);
@@ -142,7 +148,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 	{
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		if(world.provider.getDimension() == 0 && ACConfig.demonAnimalFire == true && rand.nextInt(3) == 0
+		if(world.provider.getDimension() == 0 && ACConfig.demonAnimalFire && rand.nextInt(3) == 0
 				|| world.provider.getDimension() == -1 && rand.nextBoolean())
 			canBurn = true;
 
