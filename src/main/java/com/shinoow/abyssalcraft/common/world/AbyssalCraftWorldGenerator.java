@@ -112,8 +112,8 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				if(BiomeDictionary.hasType(world.getBiome(pos1), Type.SWAMP) ||
 						BiomeDictionary.hasType(world.getBiome(pos1), Type.RIVER) &&
 						!BiomeDictionary.hasType(world.getBiome(pos1), Type.OCEAN))
-					if(random.nextInt(ACConfig.shoggothLairSpawnRate) == 0 && !world.isAirBlock(pos1.north(13)) &&
-					!world.isAirBlock(pos1.north(20)) && !world.isAirBlock(pos1.north(27)))
+					if(random.nextInt(BiomeDictionary.hasType(world.getBiome(pos1), Type.SWAMP) ? ACConfig.shoggothLairSpawnRate : ACConfig.shoggothLairSpawnRateRivers) == 0 &&
+					!world.isAirBlock(pos1.north(13)) && !world.isAirBlock(pos1.north(20)) && !world.isAirBlock(pos1.north(27)))
 						new StructureShoggothPit().generate(world, random, pos1);
 			}
 	}
