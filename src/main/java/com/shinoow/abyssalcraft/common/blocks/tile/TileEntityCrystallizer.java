@@ -351,10 +351,11 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 				else if (stack1.getItem() == itemstack[1].getItem())
 					stack1.grow(itemstack[1].getCount());
 
+			Item item = stack2.getItem();
 			stack2.shrink(1);
 
 			if (stack2.getCount() <= 0) {
-				crystallizerItemStacks.set(0, ItemStack.EMPTY);
+				crystallizerItemStacks.set(0, item.getContainerItem(stack2));
 				processingStacks = new ItemStack[] {ItemStack.EMPTY, ItemStack.EMPTY};
 			}
 
