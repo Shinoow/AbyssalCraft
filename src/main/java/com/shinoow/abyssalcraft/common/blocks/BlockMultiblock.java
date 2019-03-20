@@ -30,6 +30,8 @@ public class BlockMultiblock extends Block {
 	public BlockMultiblock() {
 		super(Material.ROCK);
 		setUnlocalizedName("multi_block");
+		setHardness(6.0F);
+		setResistance(24.0F);
 	}
 
 	@Override
