@@ -46,7 +46,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.biome.Biome;
 
 public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyManipulator, ITickable, ISidedInventory {
 
@@ -303,11 +302,6 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 			if(world.rand.nextInt(289) > n) continue;
 			n++;
 
-			int x = pos1.getX();
-			int z = pos1.getZ();
-
-			Biome b = ACBiomes.darklands;
-
 			for(int y = 0; y < 256; y++){
 				IBlockState state = world.getBlockState(pos1.up(y));
 				if(state.getBlock() == Blocks.STONE)
@@ -357,8 +351,8 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 				else if(state.getBlock() == Blocks.OAK_FENCE)
 					world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_fence.getDefaultState());
 			}
-			
-			BiomeUtil.updateBiome(world, pos1, b);
+
+			BiomeUtil.updateBiome(world, pos1, ACBiomes.darklands);
 		}
 
 		if(canProcess()){

@@ -52,7 +52,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -464,10 +463,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 				for(int z = getPosition().getZ() - 3; z <= getPosition().getZ() + 3; z++)
 					if(!(world.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome)
 							&& world.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
-					{
-						Biome b = ACBiomes.dreadlands;
-						BiomeUtil.updateBiome(world, new BlockPos(x, 0, z), b);
-					}
+						BiomeUtil.updateBiome(world, new BlockPos(x, 0, z), ACBiomes.dreadlands);
 
 		setSprinting(false);
 		motionX = 0.0D;

@@ -42,7 +42,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -117,8 +116,7 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 
 							if(i == 0 || rand.nextInt(i) == 0) {
 								num++;
-								Biome b = ACBiomes.dreadlands;
-								BiomeUtil.updateBiome(worldIn, new BlockPos(x, 0, z), b);
+								BiomeUtil.updateBiome(worldIn, new BlockPos(x, 0, z), ACBiomes.dreadlands);
 							}
 						}
 				if(num == 0) {
@@ -130,10 +128,8 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 								int i = (int)pos.distanceSq(x, pos.getY(), z);
 								i /= 5;
 
-								if(i == 0 || rand.nextInt(i) == 0) {
-									Biome b = ACBiomes.dreadlands;
-									BiomeUtil.updateBiome(worldIn, new BlockPos(x, 0, z), b);
-								}
+								if(i == 0 || rand.nextInt(i) == 0)
+									BiomeUtil.updateBiome(worldIn, new BlockPos(x, 0, z), ACBiomes.dreadlands);
 							}
 				}
 			}

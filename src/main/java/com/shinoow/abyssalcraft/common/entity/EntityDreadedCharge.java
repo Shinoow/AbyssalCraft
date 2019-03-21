@@ -16,8 +16,8 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
-
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
+
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +31,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -97,10 +96,7 @@ public class EntityDreadedCharge extends EntityFireball
 					for(int z = getPosition().getZ() - 4; z < getPosition().getZ() + 4; z++)
 						if(!(world.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome)
 								&& world.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
-						{
-							Biome b = ACBiomes.dreadlands;
-							BiomeUtil.updateBiome(world, new BlockPos(x, 0, z), b);
-						}
+							BiomeUtil.updateBiome(world, new BlockPos(x, 0, z), ACBiomes.dreadlands);
 
 			if (movingObject.entityHit != null)
 			{

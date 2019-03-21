@@ -121,7 +121,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 					else if(state.getBlock() == ACBlocks.darklands_oak_fence)
 						world.setBlockState(pos1.up(y), Blocks.OAK_FENCE.getDefaultState(), 2);
 				}
-				
+
 				BiomeUtil.updateBiome(world, pos1, b, true);
 			}
 	}

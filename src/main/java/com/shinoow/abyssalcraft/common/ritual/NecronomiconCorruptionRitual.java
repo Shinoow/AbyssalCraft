@@ -119,7 +119,7 @@ public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 					else if(state.getBlock() == Blocks.OAK_FENCE)
 						world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_fence.getDefaultState(), 2);
 				}
-				
+
 				BiomeUtil.updateBiome(world, pos1, b, true);
 			}
 	}

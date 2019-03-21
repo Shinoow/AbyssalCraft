@@ -40,7 +40,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -80,10 +79,7 @@ public class PotionDplague extends Potion{
 							for(int z = par1EntityLivingBase.getPosition().getZ() - 1; z <= par1EntityLivingBase.getPosition().getZ() + 1; z++)
 								if(!(par1EntityLivingBase.world.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome)
 										&& par1EntityLivingBase.world.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
-								{
-									Biome b = ACBiomes.dreadlands;
-									BiomeUtil.updateBiome(par1EntityLivingBase.world, new BlockPos(x, 0, z), b);
-								}
+									BiomeUtil.updateBiome(par1EntityLivingBase.world, new BlockPos(x, 0, z), ACBiomes.dreadlands);
 
 		if(par1EntityLivingBase instanceof EntityPlayer && par1EntityLivingBase.ticksExisted % 200 == 0)
 			NecroDataCapability.getCap((EntityPlayer) par1EntityLivingBase).triggerMiscUnlock("dread_plague");
