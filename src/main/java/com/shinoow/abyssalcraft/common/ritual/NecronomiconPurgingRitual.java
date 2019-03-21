@@ -15,8 +15,7 @@ import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
+import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +28,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.IPlantable;
 
 public class NecronomiconPurgingRitual extends NecronomiconRitual {
@@ -80,11 +78,9 @@ public class NecronomiconPurgingRitual extends NecronomiconRitual {
 						world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
 					else world.setBlockState(pos1.up(y), ACBlocks.calcified_stone.getDefaultState(), 2);
 				}
-
-				Chunk c = world.getChunkFromBlockCoords(pos1);
-				c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(ACBiomes.purged);
-				c.setModified(true);
-				PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(ACBiomes.purged), true), world.provider.getDimension());
+				
+				Biome b = ACBiomes.purged;
+				BiomeUtil.updateBiome(world, pos1, b, true);
 			}
 	}
 }

@@ -17,8 +17,7 @@ import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
+import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.common.world.TeleporterAC;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -44,7 +43,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -120,10 +118,7 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 							if(i == 0 || rand.nextInt(i) == 0) {
 								num++;
 								Biome b = ACBiomes.dreadlands;
-								Chunk c = worldIn.getChunkFromBlockCoords(pos);
-								c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-								c.setModified(true);
-								PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldIn.provider.getDimension());
+								BiomeUtil.updateBiome(worldIn, new BlockPos(x, 0, z), b);
 							}
 						}
 				if(num == 0) {
@@ -137,10 +132,7 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 
 								if(i == 0 || rand.nextInt(i) == 0) {
 									Biome b = ACBiomes.dreadlands;
-									Chunk c = worldIn.getChunkFromBlockCoords(pos);
-									c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-									c.setModified(true);
-									PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), worldIn.provider.getDimension());
+									BiomeUtil.updateBiome(worldIn, new BlockPos(x, 0, z), b);
 								}
 							}
 				}

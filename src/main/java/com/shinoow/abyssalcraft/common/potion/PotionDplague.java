@@ -24,8 +24,7 @@ import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.handlers.PlagueEventHandler;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
+import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -42,7 +41,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -84,10 +82,7 @@ public class PotionDplague extends Potion{
 										&& par1EntityLivingBase.world.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
 								{
 									Biome b = ACBiomes.dreadlands;
-									Chunk c = par1EntityLivingBase.world.getChunkFromBlockCoords(par1EntityLivingBase.getPosition());
-									c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-									c.setModified(true);
-									PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), par1EntityLivingBase.world.provider.getDimension());
+									BiomeUtil.updateBiome(par1EntityLivingBase.world, new BlockPos(x, 0, z), b);
 								}
 
 		if(par1EntityLivingBase instanceof EntityPlayer && par1EntityLivingBase.ticksExisted % 200 == 0)

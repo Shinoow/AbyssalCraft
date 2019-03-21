@@ -16,9 +16,8 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
 
+import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +32,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -101,10 +99,7 @@ public class EntityDreadedCharge extends EntityFireball
 								&& world.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
 						{
 							Biome b = ACBiomes.dreadlands;
-							Chunk c = world.getChunkFromBlockCoords(getPosition());
-							c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-							c.setModified(true);
-							PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
+							BiomeUtil.updateBiome(world, new BlockPos(x, 0, z), b);
 						}
 
 			if (movingObject.entityHit != null)

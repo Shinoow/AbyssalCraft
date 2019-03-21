@@ -23,8 +23,7 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIChagarothAttackMelee;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
+import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -54,7 +53,6 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -468,10 +466,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 							&& world.getBiome(new BlockPos(x, 0, z)) != ACBiomes.purged)
 					{
 						Biome b = ACBiomes.dreadlands;
-						Chunk c = world.getChunkFromBlockCoords(getPosition());
-						c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-						c.setModified(true);
-						PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
+						BiomeUtil.updateBiome(world, new BlockPos(x, 0, z), b);
 					}
 
 		setSprinting(false);
