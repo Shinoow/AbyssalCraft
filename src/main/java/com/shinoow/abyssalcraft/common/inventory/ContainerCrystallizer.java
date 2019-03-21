@@ -137,7 +137,7 @@ public class ContainerCrystallizer extends Container {
 
 			if (par2 == 2 || par2 == 3)
 			{
-				if (!mergeItemStack(itemstack1, 3, 40, true))
+				if (!mergeItemStack(itemstack1, 4, 39, true))
 					return ItemStack.EMPTY;
 
 				slot.onSlotChange(itemstack1, itemstack);
@@ -156,13 +156,13 @@ public class ContainerCrystallizer extends Container {
 				}
 				else if (par2 >= 4 && par2 < 31)
 				{
-					if (!mergeItemStack(itemstack1, 31, 40, false))
+					if (!mergeItemStack(itemstack1, 31, 39, false))
 						return ItemStack.EMPTY;
 				}
-				else if (par2 >= 31 && par2 < 40 && !mergeItemStack(itemstack1, 4, 31, false))
+				else if (par2 >= 31 && par2 < 40 && !mergeItemStack(itemstack1, 4, 30, false))
 					return ItemStack.EMPTY;
 			}
-			else if (!mergeItemStack(itemstack1, 4, 40, false))
+			else if (!mergeItemStack(itemstack1, 4, 39, false))
 				return ItemStack.EMPTY;
 
 			if (itemstack1.isEmpty())

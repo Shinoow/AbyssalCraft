@@ -115,7 +115,7 @@ public class ContainerTransmutator extends Container {
 
 			if (par2 == 2)
 			{
-				if (!mergeItemStack(itemstack1, 3, 39, true))
+				if (!mergeItemStack(itemstack1, 3, 38, true))
 					return ItemStack.EMPTY;
 
 				slot.onSlotChange(itemstack1, itemstack);
@@ -134,13 +134,13 @@ public class ContainerTransmutator extends Container {
 				}
 				else if (par2 >= 3 && par2 < 30)
 				{
-					if (!mergeItemStack(itemstack1, 30, 39, false))
+					if (!mergeItemStack(itemstack1, 30, 38, false))
 						return ItemStack.EMPTY;
 				}
-				else if (par2 >= 30 && par2 < 39 && !mergeItemStack(itemstack1, 3, 30, false))
+				else if (par2 >= 30 && par2 < 39 && !mergeItemStack(itemstack1, 3, 29, false))
 					return ItemStack.EMPTY;
 			}
-			else if (!mergeItemStack(itemstack1, 3, 39, false))
+			else if (!mergeItemStack(itemstack1, 3, 38, false))
 				return ItemStack.EMPTY;
 
 			if (itemstack1.isEmpty())
