@@ -17,8 +17,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
+import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
@@ -32,7 +31,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class NecronomiconCleansingRitual extends NecronomiconRitual {
@@ -123,11 +121,8 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 					else if(state.getBlock() == ACBlocks.darklands_oak_fence)
 						world.setBlockState(pos1.up(y), Blocks.OAK_FENCE.getDefaultState(), 2);
 				}
-
-				Chunk c = world.getChunkFromBlockCoords(pos1);
-				c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-				c.setModified(true);
-				PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b), true), world.provider.getDimension());
+				
+				BiomeUtil.updateBiome(world, pos1, b, true);
 			}
 	}
 

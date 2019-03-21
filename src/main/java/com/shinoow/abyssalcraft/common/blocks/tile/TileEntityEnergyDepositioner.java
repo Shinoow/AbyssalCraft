@@ -25,8 +25,7 @@ import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.items.ItemStoneTablet;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
+import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
@@ -48,7 +47,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
 
 public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyManipulator, ITickable, ISidedInventory {
 
@@ -359,11 +357,8 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 				else if(state.getBlock() == Blocks.OAK_FENCE)
 					world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_fence.getDefaultState());
 			}
-
-			Chunk c = world.getChunkFromBlockCoords(pos1);
-			c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-			c.setModified(true);
-			PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
+			
+			BiomeUtil.updateBiome(world, pos1, b);
 		}
 
 		if(canProcess()){

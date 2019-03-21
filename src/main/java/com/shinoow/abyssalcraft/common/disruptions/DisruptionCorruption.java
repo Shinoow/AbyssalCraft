@@ -19,8 +19,7 @@ import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionSpawn;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.client.CleansingRitualMessage;
+import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 
 import net.minecraft.block.*;
@@ -31,7 +30,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
 
 public class DisruptionCorruption extends DisruptionSpawn {
 
@@ -107,11 +105,8 @@ public class DisruptionCorruption extends DisruptionSpawn {
 					else if(state.getBlock() == Blocks.OAK_FENCE)
 						world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_fence.getDefaultState());
 				}
-
-				Chunk c = world.getChunkFromBlockCoords(pos1);
-				c.getBiomeArray()[(z & 0xF) << 4 | x & 0xF] = (byte)Biome.getIdForBiome(b);
-				c.setModified(true);
-				PacketDispatcher.sendToDimension(new CleansingRitualMessage(x, z, Biome.getIdForBiome(b)), world.provider.getDimension());
+				
+				BiomeUtil.updateBiome(world, pos1, b);
 			}
 	}
 
