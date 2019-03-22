@@ -110,9 +110,29 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
 	{
 		crystallizerItemStacks.set(par1, par2ItemStack);
-		if(par1 == 0 && processingStacks[0].isEmpty() && !par2ItemStack.isEmpty()) {
-			processingStacks = CrystallizerRecipes.instance().getCrystallizationResult(par2ItemStack);
-			recheck = true;
+		if(par1 == 0) {
+			if(processingStacks[0].isEmpty() && !par2ItemStack.isEmpty()) {
+				processingStacks = CrystallizerRecipes.instance().getCrystallizationResult(par2ItemStack);
+				recheck = true;
+			} else if(!processingStacks[0].isEmpty()){
+				ItemStack[] stacks = CrystallizerRecipes.instance().getCrystallizationResult(par2ItemStack);
+				if(!stacks[0].isItemEqual(processingStacks[0]) || ((!processingStacks[1].isEmpty() || !stacks[1].isEmpty())
+						&& !stacks[1].isItemEqual(processingStacks[1]))) {
+					ItemStack stack = crystallizerItemStacks.get(2), stack1 = crystallizerItemStacks.get(3);
+					if(stack.isEmpty() || stacks[0].isItemEqual(stack)) {
+						if((stack1.isEmpty() || stacks[1].isEmpty()) || stacks[1].isItemEqual(stack1)) {
+							processingStacks = stacks;
+						} else {
+							processingStacks = new ItemStack[]{ItemStack.EMPTY, ItemStack.EMPTY};
+						}
+					} else {
+						processingStacks = new ItemStack[]{ItemStack.EMPTY, ItemStack.EMPTY};
+					}
+					recheck = true;
+				} else {//adjusts output ItemStack stack size, in case it changed
+					processingStacks = stacks;
+				}
+			}
 		}
 		if(par1 == 2 || par1 == 3) recheck = true;
 
