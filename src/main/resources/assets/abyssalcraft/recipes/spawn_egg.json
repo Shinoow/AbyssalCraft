@@ -11,6 +11,6 @@
   "result": {
     "type": "minecraft:item_nbt",
     "item": "minecraft:spawn_egg",
-    "nbt": "{EntityTag:{id:\"abyssalcraft.shadowboss\"}}"
+    "nbt": "{EntityTag:{id:\"abyssalcraft:shadowboss\"}}"
   }
 }
