@@ -115,6 +115,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityAcidProjectile.class, manager -> new RenderSnowball(manager, Items.SLIME_BALL, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackHole.class, manager -> new RenderBlackHole(manager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityImplosion.class, manager -> new RenderImplosion(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityShubOffspring.class, manager -> new RenderShubOffspring(manager));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, manager -> new RenderAntiAbyssalZombie(manager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, manager -> new RenderAntiBat(manager));

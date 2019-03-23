@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.spells;
 
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -28,6 +29,7 @@ public class DetachmentSpell extends Spell {
 
 	public DetachmentSpell() {
 		super("detachment", 100, Items.IRON_INGOT);
+		setParchment(new ItemStack(ACItems.scroll, 1, 2));
 		setRequiresCharging();
 		setColor(0x463faa);
 	}

@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.spells;
 
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -20,6 +21,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -28,6 +30,7 @@ public class UndeathtoDustSpell extends Spell {
 
 	public UndeathtoDustSpell() {
 		super("undeathtodust", 1000F, Items.BONE);
+		setParchment(new ItemStack(ACItems.scroll, 1, 2));
 		setRequiresCharging();
 		setColor(0x1a1b1c);
 	}

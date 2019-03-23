@@ -476,11 +476,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addItemTrade(list, Items.PAPER, rand, adjustProbability(0.8F));
 				addItemTrade(list, Items.BOOK, rand, adjustProbability(0.8F));
 				addItemTrade(list, Items.WRITTEN_BOOK, rand, adjustProbability(0.3F));
-				addItemTrade(list, Items.ROTTEN_FLESH, rand, adjustProbability(0.7F));
-				addItemTrade(list, ACItems.coralium_plagued_flesh, rand, adjustProbability(0.7F));
-				addItemTrade(list, ACItems.dread_fragment, rand, adjustProbability(0.7F));
-				addItemTrade(list, ACItems.omothol_flesh, rand, adjustProbability(0.7F));
-				addItemTrade(list, ACItems.rotten_anti_flesh, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Item.getItemFromBlock(Blocks.BOOKSHELF), rand, adjustProbability(0.8F));
 				addCoinTrade(list, Item.getItemFromBlock(Blocks.GLASS), rand, adjustProbability(0.2F));
 				addCoinTrade(list, Items.COMPASS, rand, adjustProbability(0.2F));
@@ -488,6 +483,18 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, ACItems.necronomicon, rand, adjustProbability(0.3F));
 				addCoinTrade(list, ACItems.abyssal_wasteland_necronomicon, rand, adjustProbability(0.2F));
 				addCoinTrade(list, ACItems.dreadlands_necronomicon, rand, adjustProbability(0.1F));
+				if(rand.nextFloat() < adjustProbability(0.1F)) {
+					k = 3 * (rand.nextInt(10) + 1) + 1;
+					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.elder_engraved_coin, k), new ItemStack(ACItems.scroll, 1, 0)));
+				}
+				if(rand.nextFloat() < adjustProbability(0.1F)) {
+					k = 3 * (rand.nextInt(10) + 1) + 1;
+					list.add(new MerchantRecipe(new ItemStack(ACItems.scroll, 1, 0), new ItemStack(ACItems.elder_engraved_coin, k), new ItemStack(ACItems.scroll, 1, 1)));
+				}
+				if(rand.nextFloat() < adjustProbability(0.1F)) {
+					k = 3 * (rand.nextInt(10) + 1) + 1;
+					list.add(new MerchantRecipe(new ItemStack(ACItems.scroll, 1, 1), new ItemStack(ACItems.elder_engraved_coin, k), new ItemStack(ACItems.scroll, 1, 2)));
+				}
 
 				if (rand.nextFloat() < adjustProbability(0.07F))
 				{
@@ -504,6 +511,11 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, Items.EXPERIENCE_BOTTLE, rand, adjustProbability(0.2F));
 				addCoinTrade(list, Items.REDSTONE, rand, adjustProbability(0.4F));
 				addCoinTrade(list, Item.getItemFromBlock(Blocks.GLOWSTONE), rand, adjustProbability(0.3F));
+				addItemTrade(list, Items.ROTTEN_FLESH, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.coralium_plagued_flesh, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.dread_fragment, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.omothol_flesh, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.rotten_anti_flesh, rand, adjustProbability(0.3F));
 				addCoinTrade(list, ACItems.ritual_charm, rand, adjustProbability(0.4F));
 				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.cthulhu_charm, 1);
 				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.hastur_charm, 1);
@@ -513,6 +525,10 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.yog_sothoth_charm, 1);
 				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.shub_niggurath_charm, 1);
 				addCoinTrade(list, ACItems.staff_of_rending, rand, adjustProbability(0.1F));
+				if(rand.nextFloat() < adjustProbability(0.1F))
+					list.add(new MerchantRecipe(new ItemStack(ACItems.scroll, 1, 3), ACItems.liquid_antimatter_bucket_stack, new ItemStack(ACItems.unique_scroll, 1, 0)));
+				if(rand.nextFloat() < adjustProbability(0.1F))
+					list.add(new MerchantRecipe(new ItemStack(ACItems.scroll, 1, 3), new ItemStack(ACItems.oblivion_catalyst), new ItemStack(ACItems.unique_scroll, 1, 1)));
 				Item[] aitem = new Item[] {ACItems.ethaxium_sword, ACItems.ethaxium_chestplate, ACItems.ethaxium_axe, ACItems.ethaxium_pickaxe, ACItems.ethaxium_shovel};
 				Item[] aitem1 = aitem;
 				int j = aitem.length;
@@ -721,21 +737,28 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 	public static void addCoinTrade(MerchantRecipeList list, Item item, Random rand, float probability)
 	{
+		addCoinTrade(list, new ItemStack(item), rand, probability);
+	}
+	
+	public static void addCoinTrade(MerchantRecipeList list, ItemStack stack, Random rand, float probability)
+	{
 		if (rand.nextFloat() < probability)
 		{
-			int i = getRarity(item, rand);
+			int i = getRarity(stack.getItem(), rand);
 			ItemStack itemstack;
 			ItemStack itemstack1;
 
 			if (i < 0)
 			{
 				itemstack = new ItemStack(ACItems.elder_engraved_coin, 1, 0);
-				itemstack1 = new ItemStack(item, -i, 0);
+				itemstack1 = stack;
+				itemstack1.setCount(i);
 			}
 			else
 			{
 				itemstack = new ItemStack(ACItems.elder_engraved_coin, i, 0);
-				itemstack1 = new ItemStack(item, 1, 0);
+				itemstack1 = stack;
+				itemstack1.setCount(1);
 			}
 
 			list.add(new MerchantRecipe(itemstack, itemstack1));

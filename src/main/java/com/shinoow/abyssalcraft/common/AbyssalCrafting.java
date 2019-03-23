@@ -611,6 +611,12 @@ public class AbyssalCrafting {
 				new ItemStack(ACBlocks.stone, 1, 6), ACItems.omothol_flesh, new ItemStack(ACBlocks.stone, 1, 6)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorOMTupgrade", 3, ACLib.omothol_id, 3000F, new ItemStack(ACItems.staff_of_rending, 1, 3), new ItemStack(ACItems.staff_of_rending, 1, 2), soromtofferings).setTags(tags));
 		RitualRegistry.instance().registerRitual(new NecronomiconHouseRitual());
+		Object[] basicscrollofferings = {Items.BOOK, null, Items.BOOK, null, Items.BOOK, null, Items.BOOK};
+		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("basicScroll", 0, 100.0F, new ItemStack(ACItems.scroll, 1, 0), basicscrollofferings));
+		Object[] lesserscrollofferings = {Items.BOOK, null, ACBlocks.wastelands_thorn, null, Items.BOOK, null, ACBlocks.luminous_thistle};
+		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("lesserScroll", 1, 1000F, new ItemStack(ACItems.scroll, 1, 1), lesserscrollofferings));
+		Object[] moderatescrollofferings = {Items.BOOK, null, ACItems.dread_fragment, null, Items.BOOK, null, ACItems.dreaded_shard_of_abyssalnite};
+		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("moderateScroll", 2, 2000F, new ItemStack(ACItems.scroll, 1, 2), moderatescrollofferings));
 	}
 
 	private static void addDisruptions(){

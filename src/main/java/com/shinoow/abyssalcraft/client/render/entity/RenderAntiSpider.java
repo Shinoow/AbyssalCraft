@@ -24,7 +24,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderAntiSpider extends RenderLiving<EntityAntiSpider>
 {
-	private static final ResourceLocation spiderEyesTextures = new ResourceLocation("abyssalcraft:textures/model/anti/spider_eyes.png");
 	private static final ResourceLocation spiderTextures = new ResourceLocation("abyssalcraft:textures/model/anti/spider.png");
 
 	public RenderAntiSpider(RenderManager manager)

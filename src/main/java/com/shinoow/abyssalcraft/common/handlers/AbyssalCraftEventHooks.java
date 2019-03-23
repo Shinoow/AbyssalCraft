@@ -26,7 +26,7 @@ import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.common.caps.NecromancyCapability;
 import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityProvider;
 import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
-import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
+import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
@@ -42,6 +42,7 @@ import net.minecraft.block.BlockStairs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -509,6 +510,15 @@ public class AbyssalCraftEventHooks {
 		}
 	}
 
+	@SubscribeEvent
+	public void livingDrops(LivingDropsEvent event) {
+		if(event.getEntityLiving() instanceof EntityDragonBoss || event.getEntityLiving() instanceof EntityChagaroth ||
+				event.getEntityLiving() instanceof EntityJzahar || event.getEntityLiving() instanceof EntitySacthoth) {
+			EntityLivingBase entity = event.getEntityLiving();
+			event.getDrops().add(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, new ItemStack(ACItems.scroll, 1, 3)));
+		}
+	}
+	
 	@SubscribeEvent
 	public void attachCapability(AttachCapabilitiesEvent<Entity> event){
 		if(event.getObject() instanceof EntityPlayer)
