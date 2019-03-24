@@ -3,14 +3,9 @@ package com.shinoow.abyssalcraft.client.render.entity;
 import com.shinoow.abyssalcraft.client.model.entity.ModelShubOffspring;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerShubOffspringEyes;
 import com.shinoow.abyssalcraft.common.entity.EntityShubOffspring;
-import com.shinoow.abyssalcraft.lib.ACLib;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.GlStateManager.DestFactor;
-import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

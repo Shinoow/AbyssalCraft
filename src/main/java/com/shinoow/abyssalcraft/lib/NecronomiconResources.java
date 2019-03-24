@@ -28,6 +28,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation ANTI_ENTITIES = res("anti-entities");
 	public static final ResourceLocation EVIL_ANIMALS = res("evil-animals");
 	public static final ResourceLocation LESSER_SHOGGOTH = res("lesser-shoggoth");
+	public static final ResourceLocation SHUB_OFFSPRING = res("shub-offspring");
 
 	//Abyssal Wasteland entities (making entries for vanilla mobs is lethally hipster)
 	public static final ResourceLocation ABYSSAL_ZOMBIE = res("abyssal-zombie");

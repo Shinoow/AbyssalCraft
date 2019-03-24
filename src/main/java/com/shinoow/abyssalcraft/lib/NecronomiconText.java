@@ -292,6 +292,8 @@ public class NecronomiconText {
 	public static String ENTITY_SACTHOTH_2 = "necronomicon.text.entity.sacthoth.2";
 	public static String ENTITY_CORALIUM_INFESTED_SQUID_1 = "necronomicon.text.entity.coraliumsquid.1";
 	public static String ENTITY_CORALIUM_INFESTED_SQUID_2 = "necronomicon.text.entity.coraliumsquid.2";
+	public static String ENTITY_SHUB_OFFSPRING_1 = "necronomicon.text.entity.shuboffspring.1";
+	public static String ENTITY_SHUB_OFFSPRING_2 = "necronomicon.text.entity.shuboffspring.2";
 
 	public static String RITUAL_INFO = "necronomicon.text.rituals.info";
 

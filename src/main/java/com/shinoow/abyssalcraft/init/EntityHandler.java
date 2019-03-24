@@ -28,6 +28,8 @@ import com.shinoow.abyssalcraft.common.entity.demon.*;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityWaterMob;
@@ -171,7 +173,7 @@ public class EntityHandler implements ILifeCycleHandler {
 		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "implosion"), EntityImplosion.class, "implosion", 79, instance, 64, 10, true);
 
 		registerEntityWithEgg(EntityShubOffspring.class, "shuboffspring", 80, 80, 3, true, 0x2b2929, 0x211f1d);
-		
+
 		EntityUtil.addShoggothFood(EntityAnimal.class);
 		EntityUtil.addShoggothFood(EntityAmbientCreature.class);
 		EntityUtil.addShoggothFood(EntityWaterMob.class);
@@ -180,6 +182,8 @@ public class EntityHandler implements ILifeCycleHandler {
 		EntityUtil.addShoggothFood(EntityEvilChicken.class);
 		EntityUtil.addShoggothFood(EntityDemonAnimal.class);
 		EntityUtil.addShoggothFood(EntityEvilSheep.class);
+		EntityUtil.addShoggothFood(EntitySpider.class);
+		EntityUtil.addShoggothFood(EntityCaveSpider.class);
 
 		EntitySpawnPlacementRegistry.setPlacementType(EntityCoraliumSquid.class, EntityLiving.SpawnPlacementType.IN_WATER);
 	}
@@ -238,6 +242,14 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		if(demonAnimalSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityDemonSheep.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.NETHER).toArray(new Biome[0]));
+
+		EntityRegistry.addSpawn(EntityShubOffspring.class, 5, 1, 3, EnumCreatureType.MONSTER,
+				Biomes.FOREST, Biomes.REDWOOD_TAIGA, Biomes.REDWOOD_TAIGA_HILLS, Biomes.FOREST_HILLS,
+				Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS, Biomes.MUTATED_FOREST,
+				Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.MUTATED_BIRCH_FOREST,
+				Biomes.MUTATED_BIRCH_FOREST_HILLS);
+		EntityRegistry.addSpawn(EntityShubOffspring.class, 10, 1, 3, EnumCreatureType.MONSTER,
+				ACBiomes.darklands_forest, Biomes.ROOFED_FOREST, Biomes.MUTATED_ROOFED_FOREST);
 	}
 
 	@Override

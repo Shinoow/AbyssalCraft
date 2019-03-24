@@ -1,6 +1,5 @@
 package com.shinoow.abyssalcraft.client.render.entity.layers;
 
-import com.shinoow.abyssalcraft.client.render.entity.RenderAntiSpider;
 import com.shinoow.abyssalcraft.client.render.entity.RenderShubOffspring;
 import com.shinoow.abyssalcraft.common.entity.EntityShubOffspring;
 
@@ -27,7 +26,7 @@ public class LayerShubOffspringEyes implements LayerRenderer<EntityShubOffspring
 	{
 		shubOffspringRenderer.bindTexture(OFFSPRING_EYES);
 		GlStateManager.enableBlend();
-//		GlStateManager.disableAlpha();
+		//		GlStateManager.disableAlpha();
 		GlStateManager.blendFunc(1, 1);
 
 		if (entitylivingbaseIn.isInvisible())
@@ -47,7 +46,7 @@ public class LayerShubOffspringEyes implements LayerRenderer<EntityShubOffspring
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 		shubOffspringRenderer.setLightmap(entitylivingbaseIn);
 		GlStateManager.disableBlend();
-//		GlStateManager.enableAlpha();
+		//		GlStateManager.enableAlpha();
 	}
 
 	@Override

@@ -739,7 +739,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	{
 		addCoinTrade(list, new ItemStack(item), rand, probability);
 	}
-	
+
 	public static void addCoinTrade(MerchantRecipeList list, ItemStack stack, Random rand, float probability)
 	{
 		if (rand.nextFloat() < probability)

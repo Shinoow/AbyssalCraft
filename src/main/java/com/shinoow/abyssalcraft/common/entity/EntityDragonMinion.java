@@ -129,6 +129,12 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 		return ACLoot.ENTITY_SPECTRAL_DRAGON;
 	}
 
+	@Override
+	public int getMaxSpawnedInChunk()
+	{
+		return 1;
+	}
+
 	//	@Override
 	//	public void onDeath(DamageSource par1DamageSource)
 	//	{

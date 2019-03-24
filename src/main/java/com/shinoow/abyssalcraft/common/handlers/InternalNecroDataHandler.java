@@ -243,8 +243,10 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(12, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_ANTI_2, new EntityPredicateCondition(input -> IAntiEntity.class.isAssignableFrom(input))),
 				new Page(13, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.EVIL_ANIMALS, NecronomiconText.ENTITY_EVIL_ANIMALS_1, new MultiEntityCondition(EntityEvilChicken.class, EntityEvilCow.class, EntityEvilpig.class, EntityEvilSheep.class)),
 				new Page(14, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_EVIL_ANIMALS_2, new MultiEntityCondition(EntityEvilChicken.class, EntityEvilCow.class, EntityEvilpig.class, EntityEvilSheep.class)),
-				new Page(15, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.LESSER_SHOGGOTH, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, new EntityCondition(EntityLesserShoggoth.class)),
-				new Page(16, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, new EntityCondition(EntityLesserShoggoth.class)));
+				new Page(15, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.SHUB_OFFSPRING, NecronomiconText.ENTITY_SHUB_OFFSPRING_1, new EntityCondition(EntityShubOffspring.class)),
+				new Page(16, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_SHUB_OFFSPRING_2, new EntityCondition(EntityShubOffspring.class)),
+				new Page(17, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.LESSER_SHOGGOTH, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, new EntityCondition(EntityLesserShoggoth.class)),
+				new Page(18, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, new EntityCondition(EntityLesserShoggoth.class)));
 		addPages("overworld", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACBlocks.coralium_infused_stone, Blocks.STONE, Blocks.STONE, Blocks.STONE, ACItems.coralium_gem_cluster_3,
 				ACItems.coralium_gem_cluster_3, ACItems.coralium_gem_cluster_3, Blocks.STONE, Blocks.STONE, Blocks.STONE),
 				NecronomiconText.CRAFTING_CORALIUM_INFUSED_STONE_1),

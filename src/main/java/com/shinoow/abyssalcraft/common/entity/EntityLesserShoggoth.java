@@ -106,6 +106,8 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 20, true, false, entity -> EntityUtil.isShoggothFood((EntityLivingBase) entity)));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, true, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, true, false));
 		setSize(1.8F, 2.6F);
 
 		shoggothParts = new MultiPartEntityPart[] {shoggothHead = new MultiPartEntityPart(this, "head", 1.0F, 1.0F), shoggothBody = new MultiPartEntityPart(this, "body", 1.0F, 1.0F)};

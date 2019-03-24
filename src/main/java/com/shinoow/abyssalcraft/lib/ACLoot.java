@@ -84,5 +84,6 @@ public class ACLoot {
 	public static final ResourceLocation ENTITY_REMNANT_LIBRARIAN = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_librarian"));
 	public static final ResourceLocation ENTITY_REMNANT_MASTER_BLACKSMITH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_master_blacksmith"));
 	public static final ResourceLocation ENTITY_REMNANT_PRIEST = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_priest"));
+	public static final ResourceLocation ENTITY_SHUB_OFFSPRING = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/shub_offspring"));
 
 }

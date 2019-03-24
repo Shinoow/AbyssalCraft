@@ -518,7 +518,7 @@ public class AbyssalCraftEventHooks {
 			event.getDrops().add(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, new ItemStack(ACItems.scroll, 1, 3)));
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void attachCapability(AttachCapabilitiesEvent<Entity> event){
 		if(event.getObject() instanceof EntityPlayer)

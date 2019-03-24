@@ -642,6 +642,7 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(new DisruptionOoze());
 		DisruptionHandler.instance().registerDisruption(new DisruptionRandomSwarm());
 		DisruptionHandler.instance().registerDisruption(new DisruptionRandomSpawn());
+		DisruptionHandler.instance().registerDisruption(new DisruptionSpawn("spawnShubOffspring", DeityType.SHUBNIGGURATH, EntityShubOffspring.class));
 	}
 
 	private static void addSpells(){
