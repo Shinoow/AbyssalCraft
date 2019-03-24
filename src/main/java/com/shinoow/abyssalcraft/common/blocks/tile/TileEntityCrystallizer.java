@@ -376,6 +376,8 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 
 			if (stack2.getCount() <= 0) {
 				crystallizerItemStacks.set(0, item.getContainerItem(stack2));
+				if(item == Items.POTIONITEM)
+					crystallizerItemStacks.set(0, new ItemStack(Items.GLASS_BOTTLE));
 				processingStacks = new ItemStack[] {ItemStack.EMPTY, ItemStack.EMPTY};
 			}
 
