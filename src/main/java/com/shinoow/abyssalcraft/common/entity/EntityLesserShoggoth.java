@@ -36,9 +36,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
@@ -106,7 +104,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 20, true, false, entity -> EntityUtil.isShoggothFood((EntityLivingBase) entity)));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, true, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, 10, true, false, entity -> !(entity instanceof EntityZombieVillager)));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, true, false));
 		setSize(1.8F, 2.6F);
 
