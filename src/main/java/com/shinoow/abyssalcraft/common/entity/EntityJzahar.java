@@ -34,6 +34,8 @@ import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -274,6 +276,10 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			if(par1DamageSource.getTrueSource() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getTrueSource()).capabilities.isCreativeMode && getRNG().nextInt(health) == 0) {
 				((EntityPlayer)par1DamageSource.getTrueSource()).setGameType(GameType.SURVIVAL);
 				par1DamageSource.getTrueSource().attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), Integer.MAX_VALUE);
+				if(par1DamageSource.getTrueSource().isEntityAlive()) {
+					((EntityPlayer)par1DamageSource.getTrueSource()).setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
+					par1DamageSource.getTrueSource().attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), Integer.MAX_VALUE);
+				}
 				if(ACConfig.showBossDialogs)
 					SpecialTextUtil.JzaharGroup(getEntityWorld(), "Whoops, I slipped!");
 			}

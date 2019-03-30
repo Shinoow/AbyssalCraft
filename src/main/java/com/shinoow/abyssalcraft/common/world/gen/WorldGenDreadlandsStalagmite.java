@@ -28,7 +28,7 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 	public boolean generate(World world, Random rand, BlockPos pos) {
 
 		Chunk chunk = world.getChunkFromBlockCoords(pos);
-		
+
 		while(chunk.getBlockState(pos).getBlock().isAir(chunk.getBlockState(pos), world, pos))
 			pos = pos.down();
 
@@ -71,7 +71,7 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 
 		return true;
 	}
-	
+
 	private Chunk getChunk(World world, BlockPos pos, Chunk chunk) {
 		if(pos.getX() >> 4 == chunk.x && pos.getZ() >> 4 == chunk.z)
 			return chunk;
