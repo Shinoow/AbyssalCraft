@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenDreadlandsStalagmite extends WorldGenerator {
@@ -26,11 +27,13 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
 
-		while(world.isAirBlock(pos))
+		Chunk chunk = world.getChunkFromBlockCoords(pos);
+		
+		while(chunk.getBlockState(pos).getBlock().isAir(chunk.getBlockState(pos), world, pos))
 			pos = pos.down();
 
-		if(world.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(3) &&
-				world.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(2))
+		if(chunk.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(3) &&
+				chunk.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(2))
 			return false;
 
 		IBlockState state;
@@ -38,29 +41,40 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 			state = ACBlocks.stone.getStateFromMeta(3);
 		else state = ACBlocks.stone.getStateFromMeta(2);
 
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
+		Chunk chunk1 = getChunk(world, pos.east(), chunk);
+		Chunk chunk2 = getChunk(world, pos.west(), chunk);
+		Chunk chunk3 = getChunk(world, pos.south(), chunk);
+		Chunk chunk4 = getChunk(world, pos.north(), chunk);
+		Chunk chunk5 = getChunk(world, pos.south().east(), chunk);
+		Chunk chunk6 = getChunk(world, pos.north().west(), chunk);
+		Chunk chunk7 = getChunk(world, pos.south().west(), chunk);
+		Chunk chunk8 = getChunk(world, pos.north().east(), chunk);
 
 		for(int i = 0; i < 7 + rand.nextInt(5); i++)
-			world.setBlockState(new BlockPos(x, y + i, z), state, 2);
+			chunk.setBlockState(pos.up(i), state);
 		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			world.setBlockState(new BlockPos(x + 1, y + i, z), state, 2);
+			chunk1.setBlockState(pos.east().up(i), state);
 		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			world.setBlockState(new BlockPos(x - 1, y + i, z), state, 2);
+			chunk2.setBlockState(pos.west().up(i), state);
 		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			world.setBlockState(new BlockPos(x, y + i, z + 1), state, 2);
+			chunk3.setBlockState(pos.south().up(i), state);
 		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			world.setBlockState(new BlockPos(x, y + i, z - 1), state, 2);
+			chunk4.setBlockState(pos.north().up(i), state);
 		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			world.setBlockState(new BlockPos(x + 1, y + i, z + 1), state, 2);
+			chunk5.setBlockState(pos.south().east().up(i), state);
 		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			world.setBlockState(new BlockPos(x - 1, y + i, z - 1), state, 2);
+			chunk6.setBlockState(pos.north().west().up(i), state);
 		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			world.setBlockState(new BlockPos(x - 1, y + i, z + 1), state, 2);
+			chunk7.setBlockState(pos.south().west().up(i), state);
 		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			world.setBlockState(new BlockPos(x + 1, y + i, z - 1), state, 2);
+			chunk8.setBlockState(pos.north().east().up(i), state);
 
 		return true;
+	}
+	
+	private Chunk getChunk(World world, BlockPos pos, Chunk chunk) {
+		if(pos.getX() >> 4 == chunk.x && pos.getZ() >> 4 == chunk.z)
+			return chunk;
+		return world.getChunkFromBlockCoords(pos);
 	}
 }
