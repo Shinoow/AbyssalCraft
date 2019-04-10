@@ -108,13 +108,14 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 				int x = chunkX + random.nextInt(16) + 8;
 				int z = chunkZ + random.nextInt(2) + 28;
 				BlockPos pos1 = world.getHeight(new BlockPos(x, 0, z));
+				boolean swamp = BiomeDictionary.hasType(world.getBiome(pos1), Type.SWAMP);
 				if(world.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
-				if(BiomeDictionary.hasType(world.getBiome(pos1), Type.SWAMP) ||
-						BiomeDictionary.hasType(world.getBiome(pos1), Type.RIVER) &&
+				if(swamp || BiomeDictionary.hasType(world.getBiome(pos1), Type.RIVER) &&
 						!BiomeDictionary.hasType(world.getBiome(pos1), Type.OCEAN))
-					if(random.nextInt(BiomeDictionary.hasType(world.getBiome(pos1), Type.SWAMP) ? ACConfig.shoggothLairSpawnRate : ACConfig.shoggothLairSpawnRateRivers) == 0 &&
-					!world.isAirBlock(pos1.north(13)) && !world.isAirBlock(pos1.north(20)) && !world.isAirBlock(pos1.north(27)))
-						new StructureShoggothPit().generate(world, random, pos1);
+					if(swamp ? ACConfig.shoggothLairSpawnRate > 0 && random.nextInt(ACConfig.shoggothLairSpawnRate) == 0 :
+						ACConfig.shoggothLairSpawnRateRivers > 0 && random.nextInt(ACConfig.shoggothLairSpawnRateRivers) == 0)
+						if(!world.isAirBlock(pos1.north(13)) && !world.isAirBlock(pos1.north(20)) && !world.isAirBlock(pos1.north(27)))
+							new StructureShoggothPit().generate(world, random, pos1);
 			}
 	}
 }
