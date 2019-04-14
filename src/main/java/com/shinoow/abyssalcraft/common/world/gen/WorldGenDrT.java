@@ -55,8 +55,8 @@ public class WorldGenDrT extends WorldGenTrees {
 		else setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), ACBlocks.dreadlands_dirt.getDefaultState());
 
 		for (int i = 0; i < height; i++)
-			world.setBlockState(new BlockPos(x, y + i, z), ACBlocks.dreadlands_log.getDefaultState());
-		world.setBlockState(new BlockPos(x, y + height, z), ACBlocks.dreadlands_leaves.getDefaultState());
+			setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z), ACBlocks.dreadlands_log.getDefaultState());
+		setBlockAndNotifyAdequately(world, new BlockPos(x, y + height, z), ACBlocks.dreadlands_leaves.getDefaultState());
 		createTrunk(world, rand, x, y, z);
 
 		int dir = rand.nextInt((int) (360f / branches));
@@ -71,9 +71,9 @@ public class WorldGenDrT extends WorldGenTrees {
 			while (c < branchLenght) {
 				c++;
 				hd += 0.5f;
-				world.setBlockState(new BlockPos(x + (int) (c * xd), y + (int) hd, z + (int) (c * yd)), ACBlocks.dreadlands_log.getStateFromMeta(12));
+				setBlockAndNotifyAdequately(world, new BlockPos(x + (int) (c * xd), y + (int) hd, z + (int) (c * yd)), ACBlocks.dreadlands_log.getStateFromMeta(12));
 				if(world.isAirBlock(new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd))))
-					world.setBlockState(new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd)), ACBlocks.dreadlands_leaves.getDefaultState());
+					setBlockAndNotifyAdequately(world, new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd)), ACBlocks.dreadlands_leaves.getDefaultState());
 			}
 		}
 
@@ -87,7 +87,7 @@ public class WorldGenDrT extends WorldGenTrees {
 			sh = rand.nextInt(3) + y;
 			int i = sh;
 			while (sh > y - 1) {
-				world.setBlockState(new BlockPos(x + pos[t * 2], sh, z + pos[t * 2 + 1]), i == sh ? ACBlocks.dreadlands_log.getStateFromMeta(12) : ACBlocks.dreadlands_log.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x + pos[t * 2], sh, z + pos[t * 2 + 1]), i == sh ? ACBlocks.dreadlands_log.getStateFromMeta(12) : ACBlocks.dreadlands_log.getDefaultState());
 				sh--;
 			}
 		}
