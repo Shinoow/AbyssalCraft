@@ -168,6 +168,15 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 						((Chapter)d).removePage(pageNum);
 	}
 
+	@Override
+	public void insertPage(Page page, String necroidentifier, String chapteridentifier) {
+		for(NecroData data : internalNecroData)
+			if(data.getIdentifier().equals(necroidentifier))
+				for(INecroData d : data.getContainedData())
+					if(d instanceof Chapter && d.getIdentifier().equals(chapteridentifier))
+						((Chapter)d).insertPage(page);
+	}
+
 	private void addPages(String necroidentifier, String chapteridentifier, Page...pages){
 		for(Page page : pages)
 			addPage(page, necroidentifier, chapteridentifier);

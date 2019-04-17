@@ -33,6 +33,9 @@ public class DummyNecroDataHandler implements IInternalNecroDataHandler {
 	public void removePage(int pageNum, String necroidentifier, String chapteridentifier) {}
 
 	@Override
+	public void insertPage(Page page, String necroidentifier, String chapteridentifier) {}
+
+	@Override
 	public void verifyImageURL(String url) {}
 
 	@Override

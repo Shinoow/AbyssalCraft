@@ -117,11 +117,12 @@ public class NecroData implements INecroData {
 	}
 
 	public void addData(INecroData data){
-		for(INecroData t : containedData)
-			if(t.getIdentifier().equals(data.getIdentifier())){
-				t = data;
+		for(int i = 0; i < containedData.size(); i++) {
+			if(containedData.get(i).getIdentifier().equals(data.getIdentifier())){
+				containedData.set(i, data);
 				return;
 			}
+		}
 
 		if(hasText() ? containedData.size() < 7 : containedData.size() < 14)
 			containedData.add(data);
@@ -162,11 +163,7 @@ public class NecroData implements INecroData {
 	 */
 	public static class Chapter implements INecroData {
 		private NavigableMap<Integer, Page> pages = Maps.newTreeMap((o1, o2) -> {
-			if(o1 > o2)
-				return 1;
-			if(o1 < o2)
-				return -1;
-			return 0;
+			return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
 		});
 		private String identifier;
 		private String title;
@@ -270,6 +267,7 @@ public class NecroData implements INecroData {
 
 		/**
 		 * Adds a page to the Chapter
+		 * <br>(use {@link #insertPage(Page)} if you don't wish to override any existing page at the given page number)
 		 * @param page Page to add
 		 */
 		public void addPage(Page page){
@@ -282,6 +280,19 @@ public class NecroData implements INecroData {
 		 */
 		public void removePage(int pageNum){
 			pages.remove(pageNum);
+			NavigableMap<Integer, Page> newPages = Maps.newTreeMap((o1, o2) -> {
+				return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
+			});
+			for(Entry<Integer, Page> e : pages.entrySet()) {
+				if(e.getKey() < pageNum) {
+					newPages.put(e.getKey(), e.getValue());
+				} else {
+					Page page = e.getValue();
+					page.pageNum -= 1;
+					newPages.put(page.pageNum, page);
+				}
+			}
+			pages = newPages;
 		}
 
 		/**
@@ -298,6 +309,29 @@ public class NecroData implements INecroData {
 		 */
 		public boolean hasPage(int pageNum){
 			return pages.containsKey(pageNum);
+		}
+
+		/**
+		 * Inserts a Page at its assigned page number, offsetting any existing page at the number
+		 * @param page Page to insert
+		 */
+		public void insertPage(Page page) {
+			if(hasPage(page.pageNum)) {
+				NavigableMap<Integer, Page> newPages = Maps.newTreeMap((o1, o2) -> {
+					return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
+				});
+				for(Entry<Integer, Page> e : pages.entrySet()) {
+					if(e.getKey() < page.pageNum) {
+						newPages.put(e.getKey(), e.getValue());
+					} else {
+						Page page1 = e.getValue();
+						page1.pageNum += 1;
+						newPages.put(page1.pageNum, page1);
+					}
+				}
+				pages = newPages;
+			}
+			addPage(page);
 		}
 
 		@Override
