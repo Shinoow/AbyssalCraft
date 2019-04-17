@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.items;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
@@ -66,5 +67,11 @@ public class ItemACBasic extends Item implements IUnlockableItem {
 			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 
 		return super.getItemStackDisplayName(par1ItemStack);
+	}
+
+	@Override
+	public int getItemBurnTime(ItemStack itemStack)
+	{
+		return itemStack.getItem() == ACItems.methane ? 10000 : -1;
 	}
 }

@@ -13,12 +13,14 @@ package com.shinoow.abyssalcraft.common.handlers;
 
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.*;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
+import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
@@ -48,6 +50,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -517,6 +520,22 @@ public class AbyssalCraftEventHooks {
 			EntityLivingBase entity = event.getEntityLiving();
 			event.getDrops().add(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, new ItemStack(ACItems.scroll, 1, 3)));
 		}
+	}
+
+	@SubscribeEvent
+	public void fuelBurnTime(FuelBurnTimeEvent event) {
+		ItemStack fuel = event.getItemStack();
+		if(fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster) ||
+				fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster2))
+			event.setBurnTime(12150);
+		if(fuel.getItem() == ACItems.crystal)
+			event.setBurnTime(1350);
+		if(fuel.getItem() == ACItems.crystal_shard)
+			event.setBurnTime(150);
+		if(fuel.getItem() == ACItems.crystal_fragment)
+			event.setBurnTime(17);
+		if(APIUtils.isCrystal(fuel))
+			event.setBurnTime(1000);
 	}
 
 	@SubscribeEvent

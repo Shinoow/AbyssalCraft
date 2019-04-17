@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Level;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.internal.*;
 import com.shinoow.abyssalcraft.api.item.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
@@ -37,10 +38,11 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -62,9 +64,6 @@ public class AbyssalCraftAPI {
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
 	public static Potion coralium_plague, dread_plague, antimatter_potion;
-
-	private static final List<IFuelHandler> crystallizerFuelHandlers = Lists.newArrayList();
-	private static final List<IFuelHandler> transmutatorFuelHandlers = Lists.newArrayList();
 
 	public static final DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static final DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
@@ -515,19 +514,11 @@ public class AbyssalCraftAPI {
 	 * @param type The fuel type
 	 *
 	 * @since 1.0
+	 * 
+	 * @deprecated use {@link FuelBurnTimeEvent} instead
 	 */
-	public static void registerFuelHandler(IFuelHandler handler, FuelType type){
-		switch(type){
-		case CRYSTALLIZER:
-			crystallizerFuelHandlers.add(handler);
-			break;
-		case TRANSMUTATOR:
-			transmutatorFuelHandlers.add(handler);
-			break;
-		case FURNACE:
-			GameRegistry.registerFuelHandler(handler);
-		}
-	}
+	@Deprecated
+	public static void registerFuelHandler(IFuelHandler handler, FuelType type){}
 
 	/**
 	 * Gets the fuel value from an ItemStack, depending on the fuel type
@@ -538,20 +529,14 @@ public class AbyssalCraftAPI {
 	 * @since 1.0
 	 */
 	public static int getFuelValue(ItemStack itemStack, FuelType type){
-		int fuelValue = 0;
-		switch(type){
-		case CRYSTALLIZER:
-			for (IFuelHandler handler : crystallizerFuelHandlers)
-				fuelValue = Math.max(fuelValue, handler.getBurnTime(itemStack));
-			break;
-		case TRANSMUTATOR:
-			for (IFuelHandler handler : transmutatorFuelHandlers)
-				fuelValue = Math.max(fuelValue, handler.getBurnTime(itemStack));
-			break;
-		case FURNACE:
-			GameRegistry.getFuelValue(itemStack);
+		if(type == FuelType.FURNACE) {
+			return ForgeEventFactory.getItemBurnTime(itemStack);
+		} else {
+			FuelBurnTimeEvent event = new FuelBurnTimeEvent(itemStack, type);
+			MinecraftForge.EVENT_BUS.post(event);
+
+			return event.getBurnTime() < 0 ? 0 : event.getBurnTime();
 		}
-		return fuelValue;
 	}
 
 	/**

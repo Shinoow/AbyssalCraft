@@ -23,7 +23,6 @@ import javax.annotation.Nonnull;
 import com.google.common.base.Predicate;
 import com.google.gson.JsonObject;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -39,8 +38,6 @@ import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityStorage;
 import com.shinoow.abyssalcraft.common.enchantments.EnchantmentIronWall;
 import com.shinoow.abyssalcraft.common.enchantments.EnchantmentLightPierce;
 import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
-import com.shinoow.abyssalcraft.common.handlers.CrystalFuelHandler;
-import com.shinoow.abyssalcraft.common.handlers.FurnaceFuelHandler;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.potion.PotionAntimatter;
 import com.shinoow.abyssalcraft.common.potion.PotionCplague;
@@ -84,7 +81,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -287,9 +283,6 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		//		RecipeSorter.register("abyssalcraft:shapednbt", ShapedNBTRecipe.class, Category.SHAPED, "after:minecraft:shaped");
 
-		GameRegistry.registerFuelHandler(new FurnaceFuelHandler());
-		AbyssalCraftAPI.registerFuelHandler(new CrystalFuelHandler(), FuelType.CRYSTALLIZER);
-		AbyssalCraftAPI.registerFuelHandler(new CrystalFuelHandler(), FuelType.TRANSMUTATOR);
 		AbyssalCrafting.addRecipes();
 		AbyssalCraftAPI.addGhoulArmorTextures(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS, "abyssalcraft:textures/armor/ghoul/leather_1.png", "abyssalcraft:textures/armor/ghoul/leather_2.png");
 		AbyssalCraftAPI.addGhoulArmorTextures(Items.CHAINMAIL_HELMET, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS, "abyssalcraft:textures/armor/ghoul/chainmail_1.png", "abyssalcraft:textures/armor/ghoul/chainmail_2.png");
