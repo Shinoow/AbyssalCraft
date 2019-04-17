@@ -467,8 +467,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(3, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 1)), NecronomiconText.CRAFTING_DECORATIVE_HASTUR_STATUE),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 2)), NecronomiconText.CRAFTING_DECORATIVE_JZAHAR_STATUE),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 4)), NecronomiconText.CRAFTING_DECORATIVE_NYARLATHOTEP_STATUE),
-				new Page(6, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 5)), NecronomiconText.CRAFTING_DECORATIVE_SHUB_NIGGURATH_STATUE),
-				new Page(7, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 6)), NecronomiconText.CRAFTING_DECORATIVE_YOG_SOTHOTH_STATUE));
+				new Page(6, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 5)), NecronomiconText.CRAFTING_DECORATIVE_YOG_SOTHOTH_STATUE),
+				new Page(7, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 6)), NecronomiconText.CRAFTING_DECORATIVE_SHUB_NIGGURATH_STATUE));
 		setupPatreonData();
 	}
 

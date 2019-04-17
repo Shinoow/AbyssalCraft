@@ -136,7 +136,7 @@ public class ACBlocks {
 	public static Block ritual_altar;
 	public static Block ritual_pedestal;
 	public static Block shoggoth_ooze;
-	/** Metadata block, 0 = Cthulhu, 1 = Hastur, 2 = J'zahar, 4 = Azathoth, 5 = Nyarlathotep, 6 = Yog-Sothoth, 7 = Shub-Niggurath*/
+	/** Metadata block, 0 = Cthulhu, 1 = Hastur, 2 = J'zahar, 3 = Azathoth, 4 = Nyarlathotep, 5 = Yog-Sothoth, 6 = Shub-Niggurath*/
 	public static Block statue;
 	public static Block shoggoth_biomass;
 	public static Block energy_pedestal;
@@ -149,7 +149,7 @@ public class ACBlocks {
 	public static Block jzahar_spawner;
 	public static Block minion_of_the_gatekeeper_spawner;
 	public static Block mimic_fire;
-	/** Metadata block, 0 = Cthulhu, 1 = Hastur, 2 = J'zahar, 4 = Azathoth, 5 = Nyarlathotep, 6 = Yog-Sothoth, 7 = Shub-Niggurath*/
+	/** Metadata block, 0 = Cthulhu, 1 = Hastur, 2 = J'zahar, 3 = Azathoth, 4 = Nyarlathotep, 5 = Yog-Sothoth, 6 = Shub-Niggurath*/
 	public static Block decorative_statue;
 	public static Block crystal_cluster;
 	public static Block crystal_cluster2;
