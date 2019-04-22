@@ -228,8 +228,8 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		int yp = pos.getY();
 		int zp = pos.getZ();
 
-		if(world.canBlockSeeSky(pos))
-			if(PEUtils.checkForAdjacentManipulators(world, pos)){
+		if(world.canBlockSeeSky(pos) || isMultiblock)
+			if(PEUtils.checkForAdjacentManipulators(world, pos) || isMultiblock){
 				if(world.getClosestPlayer(xp, yp, zp, range, false) != null &&
 						EntityUtil.hasNecronomicon(world.getClosestPlayer(xp, yp, zp, range, false))){
 					ItemStack item = world.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.MAIN_HAND);

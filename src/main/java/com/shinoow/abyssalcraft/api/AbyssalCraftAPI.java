@@ -514,7 +514,7 @@ public class AbyssalCraftAPI {
 	 * @param type The fuel type
 	 *
 	 * @since 1.0
-	 * 
+	 *
 	 * @deprecated use {@link FuelBurnTimeEvent} instead
 	 */
 	@Deprecated
@@ -529,9 +529,9 @@ public class AbyssalCraftAPI {
 	 * @since 1.0
 	 */
 	public static int getFuelValue(ItemStack itemStack, FuelType type){
-		if(type == FuelType.FURNACE) {
+		if(type == FuelType.FURNACE)
 			return ForgeEventFactory.getItemBurnTime(itemStack);
-		} else {
+		else {
 			FuelBurnTimeEvent event = new FuelBurnTimeEvent(itemStack, type);
 			MinecraftForge.EVENT_BUS.post(event);
 

@@ -102,7 +102,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapter ritualspecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0);
 		Chapter ritualpotentialenergy = new Chapter("potentialenergy", NecronomiconText.LABEL_POTENTIAL_ENERGY, 0);
 		Chapter placesOfPowerInfo = new Chapter("information", NecronomiconText.LABEL_INFO, 0);
-		GuiInstance structures = new GuiInstance(0, NecronomiconText.LABEL_STRUCTURES, "structures") {{}
+		GuiInstance structures = new GuiInstance(0, NecronomiconText.LABEL_STRUCTURES, "structures") {
 
 		@Override
 		public IUnlockCondition getCondition() {
@@ -124,6 +124,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapter miscstatues = new Chapter("decorativestatues", NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0);
 		internalNecroData.add(new NecroData("miscinfo", NecronomiconText.LABEL_MISC_INFORMATION, 0, NecronomiconText.MISC_INFORMATION, miscspecialmaterials,
 				miscenchantments, miscstatues));
+		internalNecroData.add(new NecroData("spells", NecronomiconText.LABEL_INFO, 0, ritualgettingstarted));
 	}
 
 	@Override

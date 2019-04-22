@@ -105,15 +105,14 @@ public class EntityShubOffspring extends EntityMob {
 	{
 		playSound(SoundEvents.ENTITY_SHEEP_STEP, 0.15F, 1.0F);
 	}
-	
+
 	@Override
 	public boolean getCanSpawnHere()
-    {
-		if(!world.isDaytime() && posY >= world.getSeaLevel()) {
+	{
+		if(!world.isDaytime() && posY >= world.getSeaLevel())
 			if(world.getCurrentMoonPhaseFactor() == 0 || rand.nextFloat() + 0.01f > world.getCurrentMoonPhaseFactor())
 				return super.getCanSpawnHere();
-		}
-		
+
 		return false;
-    }
+	}
 }

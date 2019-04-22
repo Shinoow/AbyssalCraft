@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import org.lwjgl.input.Keyboard;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
@@ -28,7 +29,7 @@ import net.minecraft.item.ItemStack;
 public class GuiNecronomiconSpells extends GuiNecronomicon {
 
 	private ButtonNextPage buttonNextPage, buttonPreviousPage;
-	private ButtonCategory buttonCat1, buttonCat2;
+	private ButtonCategory buttonCat1, buttonCat2, buttonCat3;
 	private GuiButton buttonDone;
 	private ItemStack book;
 
@@ -52,6 +53,7 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false, false));
 		buttonList.add(buttonCat1 = new ButtonCategory(3, i + 14, b0 + 24, this, "Create/modify spells", false, ACItems.necronomicon));
 		buttonList.add(buttonCat2 = new ButtonCategory(4, i + 14, b0 + 41, this, "Open Compendium", false, hasSpells() ? ACItems.necronomicon : ACItems.oblivion_catalyst));
+		buttonList.add(buttonCat3 = new ButtonCategory(5, i + 14, b0 + 58, this, NecronomiconText.LABEL_INFO, false, ACItems.necronomicon));
 		//		buttonList.add(buttonCat3 = new ButtonCategory(5, i + 10, b0 + 80, this, 0, "necronomicon.index.rituals", AbyssalCraft.necronomicon));
 		//		if(bookType == 4)
 		//			buttonList.add(buttonCat4 = new ButtonCategory(6, i + 10, b0 + 105, this, 0, "necronomicon.index.huh", AbyssalCraft.abyssalnomicon));
@@ -66,6 +68,7 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 		buttonDone.visible = true;
 		buttonCat1.visible = true;
 		buttonCat2.visible = hasSpells();
+		buttonCat3.visible = true;
 		//		buttonCat3.visible = true;
 		//		buttonCat4.visible = true;
 
@@ -90,6 +93,8 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 				PacketDispatcher.sendToServer(new OpenSpellbookMessage());
 			else if (button.id == 4)
 				mc.displayGuiScreen(new GuiNecronomiconSpellEntry(getBookType(), this));
+			else if(button.id == 5)
+				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("spells"), this));
 			updateButtons();
 		}
 	}

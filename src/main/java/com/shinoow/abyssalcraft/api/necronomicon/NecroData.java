@@ -117,12 +117,11 @@ public class NecroData implements INecroData {
 	}
 
 	public void addData(INecroData data){
-		for(int i = 0; i < containedData.size(); i++) {
+		for(int i = 0; i < containedData.size(); i++)
 			if(containedData.get(i).getIdentifier().equals(data.getIdentifier())){
 				containedData.set(i, data);
 				return;
 			}
-		}
 
 		if(hasText() ? containedData.size() < 7 : containedData.size() < 14)
 			containedData.add(data);
@@ -283,15 +282,14 @@ public class NecroData implements INecroData {
 			NavigableMap<Integer, Page> newPages = Maps.newTreeMap((o1, o2) -> {
 				return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
 			});
-			for(Entry<Integer, Page> e : pages.entrySet()) {
-				if(e.getKey() < pageNum) {
+			for(Entry<Integer, Page> e : pages.entrySet())
+				if(e.getKey() < pageNum)
 					newPages.put(e.getKey(), e.getValue());
-				} else {
+				else {
 					Page page = e.getValue();
 					page.pageNum -= 1;
 					newPages.put(page.pageNum, page);
 				}
-			}
 			pages = newPages;
 		}
 
@@ -320,15 +318,14 @@ public class NecroData implements INecroData {
 				NavigableMap<Integer, Page> newPages = Maps.newTreeMap((o1, o2) -> {
 					return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
 				});
-				for(Entry<Integer, Page> e : pages.entrySet()) {
-					if(e.getKey() < page.pageNum) {
+				for(Entry<Integer, Page> e : pages.entrySet())
+					if(e.getKey() < page.pageNum)
 						newPages.put(e.getKey(), e.getValue());
-					} else {
+					else {
 						Page page1 = e.getValue();
 						page1.pageNum += 1;
 						newPages.put(page1.pageNum, page1);
 					}
-				}
 				pages = newPages;
 			}
 			addPage(page);

@@ -43,6 +43,7 @@ import com.shinoow.abyssalcraft.common.potion.PotionAntimatter;
 import com.shinoow.abyssalcraft.common.potion.PotionCplague;
 import com.shinoow.abyssalcraft.common.potion.PotionDplague;
 import com.shinoow.abyssalcraft.common.structures.pe.BasicStructure;
+import com.shinoow.abyssalcraft.common.structures.pe.TotemPoleStructure;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -299,6 +300,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.dreadium_samurai_helmet, ACItems.dreadium_samurai_chestplate, ACItems.dreadium_samurai_leggings, ACItems.dreadium_samurai_boots, "abyssalcraft:textures/armor/ghoul/dreadiums_1.png", "abyssalcraft:textures/armor/ghoul/dreadiums_2.png");
 		AbyssalCraftAPI.getInternalNDHandler().registerInternalPages();
 		StructureHandler.instance().registerStructure(new BasicStructure());
+		StructureHandler.instance().registerStructure(new TotemPoleStructure());
 		FMLCommonHandler.instance().getDataFixer().init(modid, 1).registerFix(FixTypes.BLOCK_ENTITY, new IFixableData() {
 
 			@Override

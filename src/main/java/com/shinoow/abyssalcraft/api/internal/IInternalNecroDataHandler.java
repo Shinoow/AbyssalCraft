@@ -39,7 +39,7 @@ public interface IInternalNecroDataHandler {
 
 	/**
 	 * Adds a Page to a Chapter of an internal NecroData
-		 * <br>(use {@link #insertPage(Page, String, String)} if you don't wish to override any existing page at the given page number)
+	 * <br>(use {@link #insertPage(Page, String, String)} if you don't wish to override any existing page at the given page number)
 	 * @param page Page object
 	 * @param necroidentifier String representing the NecroData
 	 * @param chapteridentifier String representing the Chapter
@@ -61,7 +61,7 @@ public interface IInternalNecroDataHandler {
 	 * @param chapteridentifier String representing the Chapter
 	 */
 	public void insertPage(Page page, String necroidentifier, String chapteridentifier);
-	
+
 	/**
 	 * Utility for verifying an image fetched from a URL.<br>
 	 * Used to cache any URL-based images.

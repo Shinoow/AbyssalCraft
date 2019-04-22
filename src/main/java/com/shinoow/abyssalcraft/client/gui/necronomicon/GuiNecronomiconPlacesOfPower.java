@@ -178,7 +178,7 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 		float scale = -Math.min(scaleX, scaleY);
 
 		int xPos = k + 65;
-		int yPos = 73;
+		int yPos = (int) (73 - ((height - 3) * 10));
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(xPos, yPos, 100);
 		GlStateManager.scale(scale, scale, scale);
