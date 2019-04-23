@@ -42,6 +42,7 @@ import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.potion.PotionAntimatter;
 import com.shinoow.abyssalcraft.common.potion.PotionCplague;
 import com.shinoow.abyssalcraft.common.potion.PotionDplague;
+import com.shinoow.abyssalcraft.common.structures.pe.ArchwayStructure;
 import com.shinoow.abyssalcraft.common.structures.pe.BasicStructure;
 import com.shinoow.abyssalcraft.common.structures.pe.TotemPoleStructure;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
@@ -301,6 +302,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		AbyssalCraftAPI.getInternalNDHandler().registerInternalPages();
 		StructureHandler.instance().registerStructure(new BasicStructure());
 		StructureHandler.instance().registerStructure(new TotemPoleStructure());
+		StructureHandler.instance().registerStructure(new ArchwayStructure());
 		FMLCommonHandler.instance().getDataFixer().init(modid, 1).registerFix(FixTypes.BLOCK_ENTITY, new IFixableData() {
 
 			@Override
