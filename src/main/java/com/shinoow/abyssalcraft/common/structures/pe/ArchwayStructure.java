@@ -11,9 +11,10 @@ import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 
 import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockStairs.EnumHalf;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
@@ -23,9 +24,9 @@ import net.minecraft.world.World;
 public class ArchwayStructure implements IPlaceOfPower {
 
 	private IBlockState[][][] data;
-	
+
 	public ArchwayStructure() {
-		
+
 		data = new IBlockState[][][] {
 			new IBlockState[][] {new IBlockState[] {ACBlocks.darkstone_cobblestone_wall.getDefaultState()}, new IBlockState[] {null}, new IBlockState[] {ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)},
 				new IBlockState[] {null}, new IBlockState[] {ACBlocks.darkstone_cobblestone_wall.getDefaultState()}},
@@ -42,7 +43,7 @@ public class ArchwayStructure implements IPlaceOfPower {
 								new IBlockState[] {ACBlocks.darkstone_cobblestone_slab.getDefaultState()}, new IBlockState[] {ACBlocks.darkstone_cobblestone_slab.getDefaultState()},
 								new IBlockState[] {ACBlocks.darkstone_cobblestone_slab.getDefaultState()}}};
 	}
-	
+
 	@Override
 	public String getIdentifier() {
 
@@ -70,6 +71,8 @@ public class ArchwayStructure implements IPlaceOfPower {
 	@Override
 	public float getAmplifier(AmplifierType type) {
 
+		if(type == AmplifierType.RANGE)
+			return 1;
 		return 0;
 	}
 
@@ -85,11 +88,74 @@ public class ArchwayStructure implements IPlaceOfPower {
 
 	@Override
 	public void validate(World world, BlockPos pos) {
-		
+		boolean valid = true;
+		if(world.getBlockState(pos).getBlock() == ACBlocks.multi_block && world.getBlockState(pos.up()).getBlock() == ACBlocks.statue) {
+			for(int i = 0; i < 3; i++) {
+				if(!(world.getBlockState(pos.east(2).up(i)).getBlock() instanceof BlockWall)
+						&& !(world.getBlockState(pos.west(2).up(i)).getBlock() instanceof BlockWall) &&
+						!(world.getBlockState(pos.north(2).up(i)).getBlock() instanceof BlockWall)
+						&& !(world.getBlockState(pos.south(2).up(i)).getBlock() instanceof BlockWall)) {
+					valid = false;
+
+				}
+			}
+			if(!(world.getBlockState(pos.up(3).north(2)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).north(1)).getBlock() instanceof BlockStairs)
+					&& !(world.getBlockState(pos.up(3)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(3).south(1)).getBlock() instanceof BlockStairs)
+					&& !(world.getBlockState(pos.up(3).south(2)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).east(2)).getBlock() instanceof BlockStairs)
+					&& !(world.getBlockState(pos.up(3).east(1)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).west(1)).getBlock() instanceof BlockStairs)
+					&& !(world.getBlockState(pos.up(3).west(2)).getBlock() instanceof BlockStairs)) {
+				valid = false;
+			} else if(!(world.getBlockState(pos.up(4).north(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).north(1)).getBlock() instanceof BlockSlab)
+					&& !(world.getBlockState(pos.up(4)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).south(1)).getBlock() instanceof BlockSlab)
+					&& !(world.getBlockState(pos.up(4).south(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).east(2)).getBlock() instanceof BlockSlab)
+					&& !(world.getBlockState(pos.up(4).east(1)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).west(1)).getBlock() instanceof BlockSlab)
+					&& !(world.getBlockState(pos.up(4).west(2)).getBlock() instanceof BlockSlab)){
+				valid = false;
+			}
+		} else {
+			valid = false;
+		}
+		if(world.getTileEntity(pos.up()) instanceof IStructureComponent) {
+			((IStructureComponent) world.getTileEntity(pos.up())).setInMultiblock(valid);
+			((IStructureComponent) world.getTileEntity(pos.up())).setBasePosition(valid ? pos : null);
+		}
 	}
 
 	@Override
 	public boolean canConstruct(World world, BlockPos pos, EntityPlayer player) {
+
+		IBlockState state = world.getBlockState(pos);
+		if(state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) == EnumStoneType.MONOLITH_STONE
+				&& world.getBlockState(pos.up()).getBlock() == ACBlocks.statue) {
+			boolean temp = true;
+			for(int i = 0; i < 3; i++) {
+				if(!(world.getBlockState(pos.east(2).up(i)).getBlock() instanceof BlockWall)
+						&& !(world.getBlockState(pos.west(2).up(i)).getBlock() instanceof BlockWall) &&
+						!(world.getBlockState(pos.north(2).up(i)).getBlock() instanceof BlockWall)
+						&& !(world.getBlockState(pos.south(2).up(i)).getBlock() instanceof BlockWall)) {
+					temp = false;
+
+				}
+			}
+			if(temp) {
+				
+			}
+			if(!(world.getBlockState(pos.up(3).north(2)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).north(1)).getBlock() instanceof BlockStairs)
+					&& !(world.getBlockState(pos.up(3)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(3).south(1)).getBlock() instanceof BlockStairs)
+					&& !(world.getBlockState(pos.up(3).south(2)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).east(2)).getBlock() instanceof BlockStairs)
+					&& !(world.getBlockState(pos.up(3).east(1)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).west(1)).getBlock() instanceof BlockStairs)
+					&& !(world.getBlockState(pos.up(3).west(2)).getBlock() instanceof BlockStairs)) {
+				temp = false;
+			} else if(!(world.getBlockState(pos.up(4).north(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).north(1)).getBlock() instanceof BlockSlab)
+					&& !(world.getBlockState(pos.up(4)) instanceof BlockSlab) && !(world.getBlockState(pos.up(4).south(1)).getBlock() instanceof BlockSlab)
+					&& !(world.getBlockState(pos.up(4).south(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).east(2)).getBlock() instanceof BlockSlab)
+					&& !(world.getBlockState(pos.up(4).east(1)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).west(1)).getBlock() instanceof BlockSlab)
+					&& !(world.getBlockState(pos.up(4).west(2)).getBlock() instanceof BlockSlab)){
+				temp = false;
+			}
+
+			return temp;
+		}
 
 		return false;
 	}

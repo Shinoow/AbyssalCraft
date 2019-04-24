@@ -99,6 +99,7 @@ public class TotemPoleStructure implements IPlaceOfPower {
 					&& world.getBlockState(pos.up(2)).getBlock() == ACBlocks.statue
 					&& world.getBlockState(pos.up(3)).getBlock() == ACBlocks.statue;
 		}
+
 		return false;
 	}
 
