@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2019 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.pe;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -29,7 +40,7 @@ public class TotemPoleStructure implements IPlaceOfPower {
 			new IBlockState[][] {new IBlockState[] {ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.AZATHOTH)}},
 			new IBlockState[][] {new IBlockState[] {ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.NYARLATHOTEP)}}};
 	}
-	
+
 	@Override
 	public String getIdentifier() {
 
@@ -67,10 +78,10 @@ public class TotemPoleStructure implements IPlaceOfPower {
 		world.setBlockState(pos, ACBlocks.multi_block.getDefaultState());
 		((IStructureBase) world.getTileEntity(pos)).setMultiblock(this);
 		for(int i = 1; i < 4; i++)
-		if(world.getTileEntity(pos.up(i)) instanceof IStructureComponent) {
-			((IStructureComponent) world.getTileEntity(pos.up(i))).setInMultiblock(true);
-			((IStructureComponent) world.getTileEntity(pos.up(i))).setBasePosition(pos);
-		}
+			if(world.getTileEntity(pos.up(i)) instanceof IStructureComponent) {
+				((IStructureComponent) world.getTileEntity(pos.up(i))).setInMultiblock(true);
+				((IStructureComponent) world.getTileEntity(pos.up(i))).setBasePosition(pos);
+			}
 	}
 
 	@Override
@@ -80,9 +91,8 @@ public class TotemPoleStructure implements IPlaceOfPower {
 		if(world.getBlockState(pos).getBlock() == ACBlocks.multi_block)
 			if(world.getBlockState(pos.up()).getBlock() == ACBlocks.statue
 			&& world.getBlockState(pos.up(2)).getBlock() == ACBlocks.statue
-			&& world.getBlockState(pos.up(3)).getBlock() == ACBlocks.statue) {
+			&& world.getBlockState(pos.up(3)).getBlock() == ACBlocks.statue)
 				valid = true;
-			}
 		for(int i = 1; i < 4; i++)
 			if(world.getTileEntity(pos.up(i)) instanceof IStructureComponent) {
 				((IStructureComponent) world.getTileEntity(pos.up(i))).setInMultiblock(valid);
@@ -92,13 +102,12 @@ public class TotemPoleStructure implements IPlaceOfPower {
 
 	@Override
 	public boolean canConstruct(World world, BlockPos pos, EntityPlayer player) {
-		
+
 		IBlockState state = world.getBlockState(pos);
-		if(state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) == EnumStoneType.MONOLITH_STONE) {
+		if(state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) == EnumStoneType.MONOLITH_STONE)
 			return world.getBlockState(pos.up()).getBlock() == ACBlocks.statue
-					&& world.getBlockState(pos.up(2)).getBlock() == ACBlocks.statue
-					&& world.getBlockState(pos.up(3)).getBlock() == ACBlocks.statue;
-		}
+			&& world.getBlockState(pos.up(2)).getBlock() == ACBlocks.statue
+			&& world.getBlockState(pos.up(3)).getBlock() == ACBlocks.statue;
 
 		return false;
 	}

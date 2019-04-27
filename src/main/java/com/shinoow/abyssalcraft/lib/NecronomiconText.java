@@ -343,10 +343,16 @@ public class NecronomiconText {
 	public static String DREAD_PLAGUE_INFO_1 = "necronomicon.text.dreadplague.1";
 	public static String DREAD_PLAGUE_INFO_2 = "necronomicon.text.dreadplague.2";
 
-	public static String PLACES_OF_POWER_INFO = "necronomicon.text.placesofpower.info";//will switch to using this in the near future
+	public static String PLACES_OF_POWER_INFO = "necronomicon.text.placesofpower.info";
 
-	public static String PLACES_OF_OWER_INFO_1 = "necronomicon.text.placesofpower.1";
-	public static String PLACES_OF_OWER_INFO_2 = "necronomicon.text.placesofpower.2";
+	public static String PLACES_OF_POWER_INFO_1 = "necronomicon.text.placesofpower.1";
+	public static String PLACES_OF_POWER_INFO_2 = "necronomicon.text.placesofpower.2";
+
+	public static String SPELL_INFO = "necronomicon.text.spells.info";
+
+	public static String SPELL_TUT_1 = "necronomicon.text.spells.1";
+	public static String SPELL_TUT_2 = "necronomicon.text.spells.2";
+	public static String SPELL_TUT_3 = "necronomicon.text.spells.3";
 
 	public static String WIP = "necronomicon.text.wip";
 
@@ -403,6 +409,7 @@ public class NecronomiconText {
 	public static String LABEL_PLACES_OF_POWER = "necronomicon.information.placesofpower";
 	public static String LABEL_STRUCTURES = "necronomicon.information.structures";
 	public static String LABEL_PANTHEON = "necronomicon.information.pantheon";
+	public static String LABEL_CASTING = "necronomicon.information.casting";
 
 	/**
 	 * The best way to drown an array of strings with nonsense

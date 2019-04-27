@@ -58,7 +58,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 	public InternalNecroDataHandler(){
 		Chapter outergods = new Chapter("outergods", NecronomiconText.LABEL_OUTER_GODS, 0);
-		Chapter greatoldones = new Chapter("greatoldones", NecronomiconText.LABEL_PANTHEON, 0);
+		Chapter greatoldones = new Chapter("greatoldones", NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0);
 		internalNecroData.add(new NecroData("greatoldones", NecronomiconText.LABEL_PANTHEON, 0, NecronomiconText.INFORMATION_GREAT_OLD_ONES,
 				outergods, greatoldones));
 		Chapter overworldmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
@@ -104,19 +104,20 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapter placesOfPowerInfo = new Chapter("information", NecronomiconText.LABEL_INFO, 0);
 		GuiInstance structures = new GuiInstance(0, NecronomiconText.LABEL_STRUCTURES, "structures") {
 
-		@Override
-		public IUnlockCondition getCondition() {
+			@Override
+			public IUnlockCondition getCondition() {
 
-			return new DefaultCondition();
-		}
+				return new DefaultCondition();
+			}
 
-		@Override
-		@SideOnly(Side.CLIENT)
-		public GuiScreen getOpenGui(int bookType, GuiScreen parent) {
+			@Override
+			@SideOnly(Side.CLIENT)
+			public GuiScreen getOpenGui(int bookType, GuiScreen parent) {
 
-			return new GuiNecronomiconPlacesOfPower(bookType, (GuiNecronomicon) parent);
-		}};
-		NecroData placesOfPower = new NecroData("placesofpower", NecronomiconText.LABEL_PLACES_OF_POWER, 0, NecronomiconText.WIP, placesOfPowerInfo, structures);
+				return new GuiNecronomiconPlacesOfPower(bookType, (GuiNecronomicon) parent);
+			}
+		};
+		NecroData placesOfPower = new NecroData("placesofpower", NecronomiconText.LABEL_PLACES_OF_POWER, 0, NecronomiconText.PLACES_OF_POWER_INFO, placesOfPowerInfo, structures);
 		internalNecroData.add(new NecroData("rituals", NecronomiconText.LABEL_INFO, 0, ritualgettingstarted, ritualmaterials,
 				ritualspecialmaterials, ritualpotentialenergy, placesOfPower));
 		Chapter miscspecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0);
@@ -124,7 +125,10 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapter miscstatues = new Chapter("decorativestatues", NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0);
 		internalNecroData.add(new NecroData("miscinfo", NecronomiconText.LABEL_MISC_INFORMATION, 0, NecronomiconText.MISC_INFORMATION, miscspecialmaterials,
 				miscenchantments, miscstatues));
-		internalNecroData.add(new NecroData("spells", NecronomiconText.LABEL_INFO, 0, ritualgettingstarted));
+		Chapter spellgettingstarted = new Chapter("gettingstarted", NecronomiconText.LABEL_GETTING_STARTED, 0);
+		Chapter spellcasting = new Chapter("casting", NecronomiconText.LABEL_CASTING, 0);
+		Chapter spellmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
+		internalNecroData.add(new NecroData("spells", NecronomiconText.LABEL_INFO, 0, spellgettingstarted, spellcasting, spellmaterials));
 	}
 
 	@Override
@@ -456,7 +460,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(18, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_14, NecronomiconText.PE_TUT_18),
 				new Page(19, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_15, NecronomiconText.PE_TUT_19),
 				new Page(20, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconText.PE_TUT_20));
-		addInternalPages("rituals", "placesofpower", "information", new Page(1, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_OWER_INFO_1), new Page(2, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_OWER_INFO_2));
+		addInternalPages("rituals", "placesofpower", "information", new Page(1, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_POWER_INFO_1), new Page(2, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_POWER_INFO_2));
 		addPages("miscinfo", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.cobblestone_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.iron_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(new ItemStack(ACItems.iron_plate, 2), null, null, null, null, Items.IRON_INGOT, null, null, Items.IRON_INGOT, null), NecronomiconText.CRAFTING_IRON_PLATE),
@@ -479,6 +483,15 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(5, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 4)), NecronomiconText.CRAFTING_DECORATIVE_NYARLATHOTEP_STATUE),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 5)), NecronomiconText.CRAFTING_DECORATIVE_YOG_SOTHOTH_STATUE),
 				new Page(7, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 6)), NecronomiconText.CRAFTING_DECORATIVE_SHUB_NIGGURATH_STATUE));
+		addPages("spells", "gettingstarted", new Page(1, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconText.SPELL_TUT_1),
+				new Page(2, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconText.SPELL_TUT_2));
+		addPages("spells", "casting", new Page(1, NecronomiconText.LABEL_CASTING, 0, NecronomiconText.SPELL_TUT_3));
+		addPages("spells", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.scroll, 1, 0), NecronomiconText.WIP),
+				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.scroll, 1, 1), NecronomiconText.WIP),
+				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.scroll, 1, 2), NecronomiconText.WIP),
+				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.scroll, 1, 3), NecronomiconText.WIP),
+				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.unique_scroll, 1, 0), NecronomiconText.WIP),
+				new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.unique_scroll, 1, 1), NecronomiconText.WIP));
 		setupPatreonData();
 	}
 

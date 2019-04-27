@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2019 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.pe;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -90,31 +101,26 @@ public class ArchwayStructure implements IPlaceOfPower {
 	public void validate(World world, BlockPos pos) {
 		boolean valid = true;
 		if(world.getBlockState(pos).getBlock() == ACBlocks.multi_block && world.getBlockState(pos.up()).getBlock() == ACBlocks.statue) {
-			for(int i = 0; i < 3; i++) {
+			for(int i = 0; i < 3; i++)
 				if(!(world.getBlockState(pos.east(2).up(i)).getBlock() instanceof BlockWall)
 						&& !(world.getBlockState(pos.west(2).up(i)).getBlock() instanceof BlockWall) &&
 						!(world.getBlockState(pos.north(2).up(i)).getBlock() instanceof BlockWall)
-						&& !(world.getBlockState(pos.south(2).up(i)).getBlock() instanceof BlockWall)) {
+						&& !(world.getBlockState(pos.south(2).up(i)).getBlock() instanceof BlockWall))
 					valid = false;
-
-				}
-			}
 			if(!(world.getBlockState(pos.up(3).north(2)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).north(1)).getBlock() instanceof BlockStairs)
 					&& !(world.getBlockState(pos.up(3)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(3).south(1)).getBlock() instanceof BlockStairs)
 					&& !(world.getBlockState(pos.up(3).south(2)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).east(2)).getBlock() instanceof BlockStairs)
 					&& !(world.getBlockState(pos.up(3).east(1)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).west(1)).getBlock() instanceof BlockStairs)
-					&& !(world.getBlockState(pos.up(3).west(2)).getBlock() instanceof BlockStairs)) {
+					&& !(world.getBlockState(pos.up(3).west(2)).getBlock() instanceof BlockStairs))
 				valid = false;
-			} else if(!(world.getBlockState(pos.up(4).north(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).north(1)).getBlock() instanceof BlockSlab)
+			else if(!(world.getBlockState(pos.up(4).north(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).north(1)).getBlock() instanceof BlockSlab)
 					&& !(world.getBlockState(pos.up(4)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).south(1)).getBlock() instanceof BlockSlab)
 					&& !(world.getBlockState(pos.up(4).south(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).east(2)).getBlock() instanceof BlockSlab)
 					&& !(world.getBlockState(pos.up(4).east(1)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).west(1)).getBlock() instanceof BlockSlab)
-					&& !(world.getBlockState(pos.up(4).west(2)).getBlock() instanceof BlockSlab)){
+					&& !(world.getBlockState(pos.up(4).west(2)).getBlock() instanceof BlockSlab))
 				valid = false;
-			}
-		} else {
+		} else
 			valid = false;
-		}
 		if(world.getTileEntity(pos.up()) instanceof IStructureComponent) {
 			((IStructureComponent) world.getTileEntity(pos.up())).setInMultiblock(valid);
 			((IStructureComponent) world.getTileEntity(pos.up())).setBasePosition(valid ? pos : null);
@@ -128,31 +134,27 @@ public class ArchwayStructure implements IPlaceOfPower {
 		if(state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) == EnumStoneType.MONOLITH_STONE
 				&& world.getBlockState(pos.up()).getBlock() == ACBlocks.statue) {
 			boolean temp = true;
-			for(int i = 0; i < 3; i++) {
+			for(int i = 0; i < 3; i++)
 				if(!(world.getBlockState(pos.east(2).up(i)).getBlock() instanceof BlockWall)
 						&& !(world.getBlockState(pos.west(2).up(i)).getBlock() instanceof BlockWall) &&
 						!(world.getBlockState(pos.north(2).up(i)).getBlock() instanceof BlockWall)
-						&& !(world.getBlockState(pos.south(2).up(i)).getBlock() instanceof BlockWall)) {
+						&& !(world.getBlockState(pos.south(2).up(i)).getBlock() instanceof BlockWall))
 					temp = false;
-
-				}
-			}
 			if(temp) {
-				
+
 			}
 			if(!(world.getBlockState(pos.up(3).north(2)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).north(1)).getBlock() instanceof BlockStairs)
 					&& !(world.getBlockState(pos.up(3)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(3).south(1)).getBlock() instanceof BlockStairs)
 					&& !(world.getBlockState(pos.up(3).south(2)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).east(2)).getBlock() instanceof BlockStairs)
 					&& !(world.getBlockState(pos.up(3).east(1)).getBlock() instanceof BlockStairs) && !(world.getBlockState(pos.up(3).west(1)).getBlock() instanceof BlockStairs)
-					&& !(world.getBlockState(pos.up(3).west(2)).getBlock() instanceof BlockStairs)) {
+					&& !(world.getBlockState(pos.up(3).west(2)).getBlock() instanceof BlockStairs))
 				temp = false;
-			} else if(!(world.getBlockState(pos.up(4).north(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).north(1)).getBlock() instanceof BlockSlab)
+			else if(!(world.getBlockState(pos.up(4).north(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).north(1)).getBlock() instanceof BlockSlab)
 					&& !(world.getBlockState(pos.up(4)) instanceof BlockSlab) && !(world.getBlockState(pos.up(4).south(1)).getBlock() instanceof BlockSlab)
 					&& !(world.getBlockState(pos.up(4).south(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).east(2)).getBlock() instanceof BlockSlab)
 					&& !(world.getBlockState(pos.up(4).east(1)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).west(1)).getBlock() instanceof BlockSlab)
-					&& !(world.getBlockState(pos.up(4).west(2)).getBlock() instanceof BlockSlab)){
+					&& !(world.getBlockState(pos.up(4).west(2)).getBlock() instanceof BlockSlab))
 				temp = false;
-			}
 
 			return temp;
 		}
