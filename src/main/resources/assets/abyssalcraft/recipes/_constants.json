@@ -54,5 +54,54 @@
       "ore": "stickWood"
     },
     "name": "STICKWOOD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyeCyan"
+    },
+    "name": "DYECYAN"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyeYellow"
+    },
+    "name": "DYEYELLOW"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyeGray"
+    },
+    "name": "DYEGRAY"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyePurple"
+    },
+    "name": "DYEPURPLE"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyeBlue"
+    },
+    "name": "DYEBLUE"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyeOrange"
+    },
+    "name": "DYEORANGE"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyeBlack"
+    },
+    "name": "DYEBLACK"
   }
 ]

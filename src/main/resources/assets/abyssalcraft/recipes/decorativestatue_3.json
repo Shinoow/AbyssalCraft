@@ -9,8 +9,7 @@
       "item": "minecraft:clay_ball"
     },
     {
-      "item": "minecraft:dye",
-      "data": 5
+      "item": "#DYEPURPLE"
     }
   ],
   "result": {

@@ -437,6 +437,8 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("altarOfChagarothBottom", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_bottom), dreadaltarbofferings));
 		Object[] dreadaltartofferings = new Object[]{Items.BUCKET, "stickWood", ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, "stickWood"};
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("altarOfChagarothTop", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_top), dreadaltartofferings));
+		Object[] cageofferings = new Object[]{Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("interdimensionalcage", 2, 1000F, new ItemStack(ACItems.interdimensional_cage), ACItems.shard_of_oblivion, cageofferings));
 
 		//Omothol progression
 		RitualRegistry.instance().registerRitual(new NecronomiconRespawnJzaharRitual());
@@ -586,8 +588,6 @@ public class AbyssalCrafting {
 		Object[] containerofferings = new Object[]{ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector,
 				ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("energyContainer", 0, 100F, new ItemStack(ACBlocks.energy_container), ACBlocks.energy_pedestal, containerofferings).setTags("PotEnergy"));
-		Object[] cageofferings = new Object[]{Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("interdimensionalcage", 0, 1000F, new ItemStack(ACItems.interdimensional_cage), ACItems.shard_of_oblivion, cageofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolOWupgrade", 0, 400F, new ItemStack(ACBlocks.tiered_energy_collector, 1, 0), ACBlocks.energy_collector, owoffers).setTags("PotEnergy"));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolAWupgrade", 1, 800F, new ItemStack(ACBlocks.tiered_energy_collector, 1, 1), new ItemStack(ACBlocks.tiered_energy_collector, 1, 0), awoffers).setTags("PotEnergy"));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolDLupgrade", 2, 1200F, new ItemStack(ACBlocks.tiered_energy_collector, 1, 2), new ItemStack(ACBlocks.tiered_energy_collector, 1, 1), dloffers).setTags("PotEnergy"));

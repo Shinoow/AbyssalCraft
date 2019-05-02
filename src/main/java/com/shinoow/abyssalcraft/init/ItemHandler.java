@@ -80,7 +80,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.essence = new ItemMetadataMisc("essence", "abyssalwasteland", "dreadlands", "omothol");
 		ACItems.skin = new ItemMetadataMisc("skin", "abyssalwasteland", "dreadlands", "omothol");
 		ACItems.essence_of_the_gatekeeper = new ItemGatekeeperEssence().setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.interdimensional_cage = new ItemInterdimensionalCage();
+		ACItems.interdimensional_cage = new ItemInterdimensionalCage().setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 		ACItems.stone_tablet = new ItemStoneTablet();
 		ACItems.scroll = new ItemScroll("scroll", "basic", "lesser", "moderate", "greater");
 		ACItems.unique_scroll = new ItemScroll("unique_scroll", "antimatter", "oblivion");
