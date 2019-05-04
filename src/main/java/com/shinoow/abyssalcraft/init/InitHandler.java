@@ -583,13 +583,14 @@ public class InitHandler implements ILifeCycleHandler {
 	 * @return The ID of a dimension that isn't the current one
 	 */
 	public int getRandomDimension(int currentdim, Random rand) {
-		int id = 0;
+		int id = 0, tries = 0;
 
-		do
+		do {
+			tries++;
 			id = blackHoleDimlist[rand.nextInt(blackHoleDimlist.length)];
-		while(id == currentdim || isDimBlacklisted(id));
+		} while((id == currentdim || isDimBlacklisted(id)) && tries < 20);
 
-		return id;
+		return tries == 20 ? ACLib.dark_realm_id : id;
 	}
 
 	private boolean isDimBlacklisted(int id) {
