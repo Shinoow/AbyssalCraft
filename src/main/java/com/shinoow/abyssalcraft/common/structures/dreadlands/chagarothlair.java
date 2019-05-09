@@ -23,6 +23,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -59,13 +60,14 @@ public class chagarothlair extends WorldGenerator {
 
 		template.addBlocksToWorld(world, pos.add(-8, -17, -54), processor, placeSettings, 2);
 
-		Map<BlockPos, String> map = template.getDataBlocks(pos, placeSettings);
+		Map<BlockPos, String> map = template.getDataBlocks(pos.add(-8, -17, -54), placeSettings);
 
 		for (Entry<BlockPos, String> entry : map.entrySet())
 			if("chest".equals(entry.getValue())) {
-				TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(entry.getKey().down());
+				TileEntity te = world.getTileEntity(entry.getKey().down());
 				world.setBlockToAir(entry.getKey());
-				if(tileentitychest != null){
+				if(te instanceof TileEntityChest){
+					TileEntityChest tileentitychest = (TileEntityChest)te;
 
 					tileentitychest.setInventorySlotContents(13, new ItemStack(Blocks.DIRT, 1).setStackDisplayName(TextFormatting.GOLD +"The Legendary Treasure of The Dreadlands"));
 					if(world.rand.nextInt(10) == 0){
