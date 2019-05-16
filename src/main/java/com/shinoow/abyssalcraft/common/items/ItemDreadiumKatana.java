@@ -26,16 +26,4 @@ public class ItemDreadiumKatana extends ItemACSword {
 	public ItemDreadiumKatana(String par1Str, ToolMaterial mat){
 		super(mat, par1Str);
 	}
-
-	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected){
-		if(stack.isItemEnchanted())
-			stack.getTagCompound().removeTag("ench");
-	}
-
-	@Override
-	public boolean isBookEnchantable(ItemStack stack, ItemStack book)
-	{
-		return false;
-	}
 }
