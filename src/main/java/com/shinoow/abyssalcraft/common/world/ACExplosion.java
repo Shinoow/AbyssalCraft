@@ -13,9 +13,13 @@ package com.shinoow.abyssalcraft.common.world;
 
 import java.util.*;
 
+import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityODBPrimed;
 import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
+import com.shinoow.abyssalcraft.common.util.ScheduledProcess;
+import com.shinoow.abyssalcraft.common.util.Scheduler;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -214,25 +218,62 @@ public class ACExplosion extends Explosion
 		else
 			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, explosionX, explosionY, explosionZ, 1.0D, 0.0D, 0.0D);
 
+		int num = 1;
 		if (isSmoking){
-			for(BlockPos pos : innerBlocks)
-				worldObj.getChunkFromBlockCoords(pos).setBlockState(pos, Blocks.AIR.getDefaultState());
+			List<List<BlockPos>> innerLists = Lists.partition(innerBlocks, 8000);
+			for(List<BlockPos> innerList : innerLists) {
+				Scheduler.schedule(new ScheduledProcess(num * 5) {
 
-			for(BlockPos pos : outerBlocks)
-				if(par1)
-					worldObj.getBlockState(pos).getBlock().onBlockExploded(worldObj, pos, this);
-				else worldObj.setBlockToAir(pos);
+					@Override
+					public void execute() {
+						for(BlockPos pos : innerList)
+							worldObj.getChunkFromBlockCoords(pos).setBlockState(pos, Blocks.AIR.getDefaultState());
+					}
+					
+				});
+				num++;
+			}
+
+			List<List<BlockPos>> outerLists = Lists.partition(outerBlocks, 4000);
+			for(List<BlockPos> outerList : outerLists) {
+				ACExplosion explosion = this;
+				Scheduler.schedule(new ScheduledProcess(num * 5) {
+
+					@Override
+					public void execute() {
+						for(BlockPos pos : outerList)
+							if(par1)
+								worldObj.getBlockState(pos).getBlock().onBlockExploded(worldObj, pos, explosion);
+							else worldObj.setBlockToAir(pos);
+					}
+					
+				});
+				num++;
+			}
 		}
 
-		if (isAntimatter)
-			for(BlockPos pos1 : explosionSize <= 32 ? affectedBlockPositions : outerBlocks)
-			{
-				IBlockState block = worldObj.getBlockState(pos1);
-				IBlockState block1 = worldObj.getBlockState(pos1.down());
+		if (isAntimatter) {
+			List<List<BlockPos>> extraLists = Lists.partition(explosionSize <= 32 ? affectedBlockPositions : outerBlocks, 4000);
+			for(List<BlockPos> extraList : extraLists) {
+				ACExplosion explosion = this;
+				Scheduler.schedule(new ScheduledProcess(num * 10) {
 
-				if (block.getMaterial() == Material.AIR && block1.isFullBlock() && explosionRNG.nextInt(3) == 0)
-					worldObj.setBlockState(pos1, ACBlocks.liquid_antimatter.getDefaultState());
+					@Override
+					public void execute() {
+						for(BlockPos pos1 : extraList)
+						{
+							IBlockState block = worldObj.getBlockState(pos1);
+							IBlockState block1 = worldObj.getBlockState(pos1.down());
+
+							if (block.getMaterial() == Material.AIR && block1.isFullBlock() && explosionRNG.nextInt(3) == 0)
+								worldObj.setBlockState(pos1, ACBlocks.liquid_antimatter.getDefaultState());
+						}
+					}
+					
+				});
+				num++;
 			}
+		}
 	}
 
 	@Override

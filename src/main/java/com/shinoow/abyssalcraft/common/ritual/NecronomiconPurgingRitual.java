@@ -16,6 +16,8 @@ import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
+import com.shinoow.abyssalcraft.common.util.ScheduledProcess;
+import com.shinoow.abyssalcraft.common.util.Scheduler;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.state.IBlockState;
@@ -53,32 +55,43 @@ public class NecronomiconPurgingRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
-		for(int x = pos.getX() - 64; x < pos.getX() + 65; x++)
-			for(int z = pos.getZ() - 64; z < pos.getZ() + 65; z++){
+		int num = 1, num2 = 0;
+		for(int x = pos.getX() - 256; x < pos.getX() + 257; x++)
+			for(int z = pos.getZ() - 256; z < pos.getZ() + 257; z++){
 
 				BlockPos pos1 = new BlockPos(x, 0, z);
 
 				if(!(world.getBiome(pos1) instanceof IDreadlandsBiome)) continue;
+				
+				Scheduler.schedule(new ScheduledProcess(num * 2) {
 
-				for(EntityLivingBase e : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos1).grow(0, 128, 0), EntitySelectors.IS_ALIVE))
-					if(!(e instanceof EntityPlayer))
-						world.removeEntity(e);
+					@Override
+					public void execute() {
+						for(EntityLivingBase e : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos1).grow(0, 128, 0), EntitySelectors.IS_ALIVE))
+							if(!(e instanceof EntityPlayer))
+								world.removeEntity(e);
 
-				for(int y = 255; y > -1; y--){
-					if(world.isAirBlock(pos1.up(y))) continue;
-					IBlockState state = world.getBlockState(pos1.up(y));
-					if(state.getBlock().hasTileEntity(state)) continue;
-					if(state.getBlockHardness(world, pos1.up(y)) == -1) continue;
-					if(state.getBlock() instanceof IPlantable)
-						world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
-					else if(state.getMaterial().isLiquid())
-						world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
-					else if(!state.isFullCube())
-						world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
-					else world.setBlockState(pos1.up(y), ACBlocks.calcified_stone.getDefaultState(), 2);
-				}
+						for(int y = 255; y > -1; y--){
+							if(world.isAirBlock(pos1.up(y))) continue;
+							IBlockState state = world.getBlockState(pos1.up(y));
+							if(state.getBlock().hasTileEntity(state)) continue;
+							if(state.getBlockHardness(world, pos1.up(y)) == -1) continue;
+							if(state.getBlock() instanceof IPlantable)
+								world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
+							else if(state.getMaterial().isLiquid())
+								world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
+							else if(!state.isFullCube())
+								world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
+							else world.setBlockState(pos1.up(y), ACBlocks.calcified_stone.getDefaultState(), 2);
+						}
 
-				BiomeUtil.updateBiome(world, pos1, ACBiomes.purged, true);
+						BiomeUtil.updateBiome(world, pos1, ACBiomes.purged, true);
+					}
+					
+				});
+				num2++;
+				if(num2 % 256 == 0)
+					num++;
 			}
 	}
 }

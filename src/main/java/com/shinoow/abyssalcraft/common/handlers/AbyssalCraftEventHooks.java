@@ -32,6 +32,7 @@ import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.common.util.Scheduler;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -74,6 +75,10 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class AbyssalCraftEventHooks {
 
@@ -538,6 +543,12 @@ public class AbyssalCraftEventHooks {
 			event.setBurnTime(1000);
 	}
 
+	@SubscribeEvent
+	public void onTick(ServerTickEvent event) {
+		if(event.side == Side.SERVER && event.type == Type.SERVER && event.phase == Phase.START)
+			Scheduler.tick();
+	}
+	
 	@SubscribeEvent
 	public void attachCapability(AttachCapabilitiesEvent<Entity> event){
 		if(event.getObject() instanceof EntityPlayer)
