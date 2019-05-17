@@ -11,12 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.util;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.common.world.ACExplosion;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketExplosion;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -30,10 +35,15 @@ public class ExplosionUtil {
 		explosion.doExplosionA();
 		explosion.doExplosionB(strength <= 32);
 
-		if(world instanceof WorldServer)
+		if(world instanceof WorldServer) {
+			List<List<BlockPos>> positionsLists = Lists.partition(explosion.getAffectedBlockPositions(), 4000);
 			for (EntityPlayer entityplayer : ((WorldServer)world).playerEntities)
-				if (entityplayer.getDistanceSq(x, y, z) < 4096.0D)
-					((EntityPlayerMP)entityplayer).connection.sendPacket(new SPacketExplosion(x, y, z , strength, explosion.getAffectedBlockPositions(), explosion.getPlayerKnockbackMap().get(entityplayer)));
+				if (entityplayer.getDistanceSq(x, y, z) < 4096.0D) {
+					Vec3d explosionVec = explosion.getPlayerKnockbackMap().get(entityplayer);
+					for(List<BlockPos> positions : positionsLists)
+						((EntityPlayerMP)entityplayer).connection.sendPacket(new SPacketExplosion(x, y, z , strength, positions, explosionVec));
+				}
+		}
 
 		return explosion;
 	}
