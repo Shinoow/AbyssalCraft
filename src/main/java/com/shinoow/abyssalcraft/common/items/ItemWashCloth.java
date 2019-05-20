@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class ItemWashCloth extends ItemACBasic {
 
 	public ItemWashCloth() {
-		super("cloth");
+		super("washcloth");
 		setMaxDamage(20);
 		setMaxStackSize(1);
 	}

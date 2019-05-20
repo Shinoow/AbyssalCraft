@@ -89,7 +89,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setUnlocalizedName("door_drt");
 
 		//Coins
-		ACItems.coin = new ItemCoin("coin").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
+		ACItems.coin = new ItemCoin("blankcoin").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.cthulhu_engraved_coin = new ItemCoin("cthulhucoin").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.elder_engraved_coin = new ItemCoin("eldercoin").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.jzahar_engraved_coin = new ItemCoin("jzaharcoin").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));

@@ -1,4 +1,4 @@
-#Start of localization file
+﻿#Start of localization file
 
 #Advancements
 advancements.abyssalcraft.necro.title=AbyssalCraft
@@ -184,7 +184,7 @@ message.jzahar.creative.1=%s, you do realize I could simply switch your Gamemode
 message.jzahar.creative.2=But yeah... that would technically be cheating, so I'll just stick to the "rules" and do nothing.
 message.sacthoth.spawn.1=I am unleashed! Feel the wrath of The Dark Realm, mortal.
 message.sacthoth.spawn.2=But first, watch the explosion.
-message.sacthoth.damage.explosion=I'm not saying you \u00A7ocan't\u00A7r blow me up, it just won't work.
+message.sacthoth.damage.explosion=I'm not saying you §ocan't§r blow me up, it just won't work.
 message.sacthoth.damage.projectile=Ha, your projectiles can't harm me.
 message.portalplacer.error.1=You feel a presence of denial, J'zahar does not approve.
 message.portalplacer.error.2=Nothing happened...
@@ -268,6 +268,10 @@ necronomicon.information.decorativestatues=Decorative Statues
 necronomicon.information.knowledge=Obtaining Knowledge
 necronomicon.information.coraliumplague=The Coralium Plague
 necronomicon.information.dreadplague=The Dread Plague
+necronomicon.information.placesofpower=Places of Power
+necronomicon.information.structures=Structures
+necronomicon.information.pantheon=Pantheon
+necronomicon.information.casting=Casting
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -358,7 +362,7 @@ necronomicon.text.crafting.shadowgem.2=Shadow Fragments are dropped by Shadow Cr
 necronomicon.text.crafting.oblivionshard=A Shard of Oblivion is crafted with Shadow Gems and a Transmutation Gem.
 necronomicon.text.crafting.gk1=The Gateway Key is crafted with Blaze Rods, Coralium Pearls and an Oblivion Catalyst.
 necronomicon.text.crafting.necro_c=An Abyssal Wasteland Necronomicon is crafted with Skin of The Abyssal Wasteland and a Necronomicon. It contains more knowledge.
-necronomicon.text.crafting.psdltracker=A Powerstone Tracker is crafted with Coralium Gems and a Eye of Ender.
+necronomicon.text.crafting.psdltracker=A Powerstone Tracker is crafted with Coralium Gems and an Eye of Ender.
 necronomicon.text.crafting.necro_d=A Dreadlands Necronomicon is crafted with Skin of The Dreadlands and an Abyssal Wasteland Necronomicon.
 necronomicon.text.crafting.transmutator.1=A Transmutator is crafted with Coralium Bricks, Blocks of Refined Coralium, a Transutation Gem and a Liquid Coralium Bucket.
 necronomicon.text.crafting.transmutator.2=To obtain Coralium Bricks, you must pour Liquid Antimatter on Liquid Coralium, then harvest the stone formed from the Liquid Coralium. Then you must smelt the Coralium Stone for Coralium Bricks.
@@ -414,16 +418,16 @@ necronomicon.text.crafting.rendingpedestal=A Rending Pedestal is crafted with Mo
 necronomicon.text.crafting.stonetablet=A Stone Tablet is crafted with Monolith Stone, Shadow Gem Shards and a Shadow Gem. Can be used in the State Transformer and Energy Depositioner in order to generate PE.
 necronomicon.text.crafting.statetransformer.1=A State Transformer is crafted with Monolith Stone, a Transmutation Gem and a Chest. It allows you to store input objects as PE in a Stone Tablet.
 necronomicon.text.crafting.statetransformer.2=Fill the input slots with stacks of items, then place an empty Stone Tablet in the leftmost slot to fill it. Press the button to switch modes, allowing you to reverse the process, returning items previously stored in a Stone Tablet. The amount of PE per input item is 1 * (64/max stack size) PE/item. Input/output can be automated.
-necronomicon.text.crafting.energydepositioner.1=A Energy Depositioner is crafted with Monolith Stone, Shadow Gems, a Transmutation Gem and an Energy Relay. This is a PE manipulator, working like statues.
+necronomicon.text.crafting.energydepositioner.1=An Energy Depositioner is crafted with Monolith Stone, Shadow Gems, a Transmutation Gem and an Energy Relay. This is a PE manipulator, working like statues.
 necronomicon.text.crafting.energydepositioner.2=By placing a charged Stone Tablet in the input slot, the Depositioner will siphon out any PE stored in it, returning either an empty Stone Tablet or a cursed one. This operation will corrupt the surrounding area (17x17 blocks), converting it into Darklands (more Darklands increases the chance of cursed Stone Tablets). Output can be automated.
 necronomicon.text.crafting.ethaxiumpillar=Ethaxium Pillars are crafted with Ethaxium Bricks and Ethaxium blocks
 necronomicon.text.crafting.darkethaxiumpillar=Dark Ethaxium Pillars are crafted with Dark Ethaxium Bricks and Omothol Stone
 
 necronomicon.text.crafting.upgradekit.1=An Upgrade Kit is crafted with Wooden Planks, Cobblestone, String and Flint. Upgrade kits can upgrade tools and armor through an anvil.
 necronomicon.text.crafting.upgradekit.2=To upgrade a kit, you need 2 units of the next material and 1 of the current. Materials are Wood -> Cobblestone -> Iron -> Gold -> Diamond -> Abyssalnite -> Refined Coralium -> Dreadium -> Ethaxium.
-necronomicon.text.crafting.ironplate=A Iron Plate is crafted with 2 Iron Ingots. Iron Plates can enhance the saturation of certain food.
+necronomicon.text.crafting.ironplate=An Iron Plate is crafted with 2 Iron Ingots. Iron Plates can enhance the saturation of certain food.
 necronomicon.text.crafting.washcloth=A Washcloth is crafted with Wool and Cobweb. It's used to clean Dirty Plates (given when eating plate food).
-necronomicon.text.crafting.mre=A MRE (Meal, Ready to Eat) is crafted with an Iron Plate, a Carrot, a Potato and a Steak. It fills the entire food bar when eaten.
+necronomicon.text.crafting.mre=An MRE (Meal, Ready to Eat) is crafted with an Iron Plate, a Carrot, a Potato and a Steak. It fills the entire food bar when eaten.
 necronomicon.text.crafting.platefood=Any Vanilla foodstuffs (and Fried Eggs) combined with an Iron Plate will create plate food (which has twice the saturation of the normal). Returns a Dirty Plate when eaten.
 necronomicon.text.crafting.odbcore=An ODB Core is crafted with Abyssalnite Ingots, Iron Ingots, Iron Blocks and a Coralium Pearl. Can be used as an explosive.
 necronomicon.text.crafting.odb=An Oblivion Deathbomb is crafted with Obsidian, An ODB Core, An Oblivion Catalyst, a Liquid Coralium Bucket and a Liquid Antimatter Bucket. Heavy explosive.
@@ -524,6 +528,8 @@ necronomicon.text.entity.sacthoth.1=Sacthoth, Harbinger of Doom is found in The 
 necronomicon.text.entity.sacthoth.2=Sacthoth is the strongest being in The Dark Realm, and the ruler of living shadows. The only way for him to leave The Dark Realm is through the explosion of an Oblivion Deathbomb. He carries a powerful sword capable of tearing out the souls of the living.
 necronomicon.text.entity.coraliumsquid.1=Coralium Infested Squids are found in pools of Liquid Coralium inside the Abyssal Wasteland.
 necronomicon.text.entity.coraliumsquid.2=These Squids have been transformed by the Coralium Plague, enabling them to transfer it to victims touched by them, or the ink they squirt on their targets.
+necronomicon.text.entity.shuboffspring.1=Dark Offspring are vile beasts resembling a goat mixed with a dead tree, and are the offspring of Shub-Niggurath.
+necronomicon.text.entity.shuboffspring.2=These beasts can rarely be found in forests (most common in Roofed Forests and Darklands Forests). You know you're getting close to one if you start hearing sheep out of nowhere. You're most likely to encounter one at night during a new moon.
 
 necronomicon.text.rituals.info=Check the information section for information regarding rituals, or the other sections for information about available rituals. "Location" specifies where the ritual can be performed.
 
@@ -573,6 +579,17 @@ necronomicon.text.coraliumplague.2=An antidote for the Coralium Plague can be ma
 necronomicon.text.dreadplague.1=The Dread Plague is a disease originating from the Dreadlands. It's a very infectious disease, swiftly travelling between hosts, but also transforming the ground around those afflicted by it, thus allowing the plague to grow stronger. The only place known to be completely immune to the Dread Plague is Omothol.
 necronomicon.text.dreadplague.2=An antidote for the Dread Plague can be made with a Water Bottle, a Dreadlands Sapling, a Dread Fragment and a piece of Dreaded Shoggoth Flesh.
 
+necronomicon.text.placesofpower.info=Structures of devotion appeasing the Great Old Ones, allowing for safe PE generation.
+
+necronomicon.text.placesofpower.1=Places of Power are shrine-like structures built to show devotion to the Great Old Ones. These sites of worship spread the word of the Great Old Ones, while also enabling harvesting of PE without disruptions. Along with the safe retrieval of energy, these structures can also boost various stats of the statues contained in them.
+necronomicon.text.placesofpower.2=In the structures section you can view the structures you've gained knowledge on how to build, their dimensions and what stats they amplify (if any). The point where you form the structure (by sneak right-clicking it with your Necronomicon) will change block in the preview to indicate where it is.
+
+necronomicon.text.spells.info=Check the information section for information regarding spells, or the compendium for available spells.
+
+necronomicon.text.spells.1=In order to get started with spells you need to obtain some scrolls to inscribe the spells onto. Most of the available scrolls (except the greater) can be created through rituals or bought from Remnants. Spells in the compendium show which scroll they require (if the center slot is empty you can use any scroll).
+necronomicon.text.spells.2=Currently the quality of the scroll used has no impact on the inscribed spell, but in a future update some aspects of a spell will improve depending on which scroll you use. The unique scrolls will likely do something beyond that.
+necronomicon.text.spells.3=Spellcasting is done by right-clicking while holding an inscribed scroll (you also need an item that holds PE in your inventory for the casting to tap into). If the spell type is "Charging", you need to hold down the mouse button for 3 seconds, otherwise it's instant. Depending on the spell, you might need to target something specific while casting.
+
 necronomicon.text.wip=This section is incomplete.
 
 #Rituals
@@ -589,17 +606,17 @@ ac.ritual.summonSacthoth.desc=Summons Sacthoth, Harbinger of Doom, from the Dark
 ac.ritual.breeding=Ritual of Fertility
 ac.ritual.breeding.desc=Breeds nearby animals. Might also kill all of them, if unlucky enough.
 ac.ritual.depthsHelmet=Helmet of The Depths
-ac.ritual.depthsHelmet.desc=A Helmet of The Depths is created by infusing a Refined Coralium Helmet with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsHelmet.desc=A Helmet of The Depths is created by infusing a Refined Coralium Helmet with 2 Coralium Gem Cluster (9 gems), Coralium-plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 ac.ritual.depthsChestplate=Chestplate of The Depths
-ac.ritual.depthsChestplate.desc=A Chestplate of The Depths is created by infusing a Refined Coralium Chestplate with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsChestplate.desc=A Chestplate of The Depths is created by infusing a Refined Coralium Chestplate with 2 Coralium Gem Cluster (9 gems), Coralium-plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 ac.ritual.depthsLeggings=Leggings of The Depths
-ac.ritual.depthsLeggings.desc=Leggings of The Depths are created by infusing a Refined Coralium Leggings with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsLeggings.desc=Leggings of The Depths are created by infusing a Refined Coralium Leggings with 2 Coralium Gem Cluster (9 gems), Coralium-plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 ac.ritual.depthsBoots=Boots of The Depths
-ac.ritual.depthsBoots.desc=Boots of The Depths are created by infusing a Refined Coralium Boots with 2 Coralium Gem Cluster (9 gems), Coralium Plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
+ac.ritual.depthsBoots.desc=Boots of The Depths are created by infusing a Refined Coralium Boots with 2 Coralium Gem Cluster (9 gems), Coralium-plagued Flesh, a Transmutation Gem, a Lily Pad, a Vine and a Liquid Coralium Bucket.
 ac.ritual.dreadSpawn=Ritual of Evolving
 ac.ritual.dreadSpawn.desc=All nearby Dread Spawns (regardless of evolution stage) is cloned to produce a double. Offer a Dread Fragment, a Dreadstone, an Abyssalnite Stone, a Chunk of Abyssalnite, a Dreaded Chunk of Abyssalnite, a piece of Rotten Flesh, a Dreaded Shard of Abyssalnite and an Abyssalnite Ingot.
 ac.ritual.corPotionAoE=Coralium Plague Infection
-ac.ritual.corPotionAoE.desc=Spreads the Coralium Plague to nearby entities. Offer 4 Coralium Plagued Flesh, 3 Water Bottles and a piece of Gunpowder.
+ac.ritual.corPotionAoE.desc=Spreads the Coralium Plague to nearby entities. Offer 4 Coralium-plagued Flesh, 3 Water Bottles and a piece of Gunpowder.
 ac.ritual.drePotionAoE=Dread Plague Infection
 ac.ritual.drePotionAoE.desc=Spreads the Dread Plague to nearby entities. Offer 4 Dread Fragments, 3 Water Bottles and a piece of Gunpowder.
 ac.ritual.antiPotionAoE=Antimatter Eradication
@@ -703,7 +720,7 @@ ac.ritual.epOMTupgrade.desc=An Omothol Energy Pedestal is created by infusing a 
 ac.ritual.saOWupgrade=Overworld Sacrificial Altar
 ac.ritual.saOWupgrade.desc=An Overworld Sacrificial Altar is created by infusing a Sacrificial Altar with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
 ac.ritual.saAWupgrade=Abyssal Wasteland Sacrificial Altar
-ac.ritual.saAWupgrade.desc=An Abyssal Wasteland Sacrificial Altar is created by infusing a Overworld Sacrificial Altar with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
+ac.ritual.saAWupgrade.desc=An Abyssal Wasteland Sacrificial Altar is created by infusing an Overworld Sacrificial Altar with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.saDLupgrade=Dreadlands Sacrificial Altar
 ac.ritual.saDLupgrade.desc=A Dreadlands Sacrificial Altar is created by infusing an Abyssal Wasteland Sacrificial Altar with Dreadstone Bricks, Abyssalnite Stone Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.saOMTupgrade=Omothol Sacrificial Altar
@@ -735,7 +752,7 @@ ac.ritual.ecolDLupgrade.desc=A Dreadlands Energy Collector is created by infusin
 ac.ritual.ecolOMTupgrade=Omothol Energy Collector
 ac.ritual.ecolOMTupgrade.desc=An Omothol Energy Collector is created by infusing a Dreadlands Energy Collector with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.erOWupgrade=Overworld Energy Relay
-ac.ritual.erOWupgrade.desc=An Overworld Energy Relay is created by infusing a Energy Relay with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
+ac.ritual.erOWupgrade.desc=An Overworld Energy Relay is created by infusing an Energy Relay with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
 ac.ritual.erAWupgrade=Abyssal Wasteland Energy Relay
 ac.ritual.erAWupgrade.desc=An Abyssal Wasteland Energy Relay is created by infusing an Overworld Energy Relay with Abyssal Stone Bricks, Coralium Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.erDLupgrade=Dreadlands Energy Relay
@@ -751,7 +768,7 @@ ac.ritual.econDLupgrade.desc=A Dreadlands Energy Container is created by infusin
 ac.ritual.econOMTupgrade=Omothol Energy Container
 ac.ritual.econOMTupgrade.desc=An Omothol Energy Container is created by infusing a Dreadlands Energy Container with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.sorAWupgrade=Abyssal Wasteland Staff of Rending
-ac.ritual.sorAWupgrade.desc=An Abyssal Wasteland Staff of Rending is created by infusing a Staff of Rending with Abyssal Stone, Coralium Plagued Flesh and and a Shadow Gem.
+ac.ritual.sorAWupgrade.desc=An Abyssal Wasteland Staff of Rending is created by infusing a Staff of Rending with Abyssal Stone, Coralium-plagued Flesh and and a Shadow Gem.
 ac.ritual.sorDLupgrade=Dreadlands Staff of Rending
 ac.ritual.sorDLupgrade.desc=A Dreadlands Staff of Rending is created by infusing an Abyssal Wasteland Staff of Rending with Dreadstone, Dread Fragment and and a Shadow Gem.
 ac.ritual.sorOMTupgrade=Omothol Staff of Rending
@@ -764,11 +781,41 @@ ac.ritual.resurrection=Dark Resurrection
 ac.ritual.resurrection.desc=By presenting crystallized compounds resembling the elements of life, a living sacrifice and a Name Tag with the name of a fallen companion, you resurrect it. The Crystal size scale with the companion (Shards for something the size of a Chicken, Clusters for a Horse, normal for anything inbetween). Life has limits, however.
 ac.ritual.purging=Ritual of Purging
 ac.ritual.purging.desc=By presenting 4 Crystallized Calcium Clusters and a large amount of energy, you purge every trace of the Dread Plague (and the Dreadlands) from the area, putting a stop to it here (also kills nearby mobs). While it renders the area uninhabitable, no plagues will be able to spread here. Doesn't work in the Dreadlands.
+ac.ritual.basicScroll=Basic Scroll
+ac.ritual.basicScroll.desc=A Basic Scroll is created with 4 Books
+ac.ritual.lesserScroll=Lesser Scroll
+ac.ritual.lesserScroll.desc=A Lesser Scroll is created with 2 Books, a Wasteland's Thorn and a Luminous Thistle
+ac.ritual.moderateScroll=Moderate Scroll
+ac.ritual.moderateScroll.desc=A Moderate Scroll is created with 2 Books, a Dread Fragment and a Dreaded Shard of Abyssalnite
 
 #Spells
 ac.spell.lifedrain=Life Drain
+ac.spell.lifedrain.desc=Siphon the lifeforce of your enemy to heal your wounds.
 ac.spell.entropy=Entropy
+ac.spell.entropy.desc=Draw energy straight from the ground as it crumbles to dust.
 ac.spell.mining=Mining
+ac.spell.mining.desc=Superheat the ground in a straight line, melting any stone and leaving all ores intact.
+ac.spell.graspofcthulhu=Grasp of Cthulhu
+ac.spell.graspofcthulhu.desc=Damages the target over time while holding them in place. The damage can never reduce the target to 0HP or less
+ac.spell.invisibility=Hide from the Eye
+ac.spell.invisibility.desc=Caster or target goes Invisible for 5 minutes.
+ac.spell.detachment=Detachment
+ac.spell.detachment.desc=Removes one piece of equipment from the target causing it to fall on the ground. Equipped item is chosen randomly from among its equipped/held items.
+ac.spell.stealvigor=Steal Vigor
+ac.spell.stealvigor.desc=The target is temporarily weakened while the caster claims their strength.
+ac.spell.sirenssong=Siren's Song
+ac.spell.sirenssong.desc=By singing to a creature's very soul you encourage it to join your team. (Useless on Players.)
+ac.spell.undeathtodust=Undeath to Dust
+ac.spell.undeathtodust.desc=Instantly disintegrate one undead creature, leaving nothing behind.
+ac.spell.oozeremoval=Ooze Removal
+ac.spell.oozeremoval.desc=Disperses any Shoggoth Ooze in the vicinity of the caster.
+ac.spell.teleporthostiles=Sacrificial Interdiction
+ac.spell.teleporthostiles.desc=By sacrificing the life of an innocent child, the dark ones are pushed away. Cast the spell while targeting an animal baby, and all mobs within 50 blocks will be teleported away from you.
+
+#Places of Power
+ac.structure.basic.description=A small and simple shrine. Provides a range boost to affected statues.
+ac.structure.totempole.description=Now you just need a campfire, some instruments and a jingle dress!
+ac.structure.archway.description=A small piece that can be used in a decorative manner. Any stair, slab and wall blocks can be used to form it.
 
 #Rending
 ac.rending.shadowgem=Shadow Gems are made from harvesting Shadow Energy from living shadows.
@@ -799,10 +846,15 @@ ac_silly_settings=Silly Settings
 ac_silly_settings.tooltip=Silly Settings Configuration
 ac_blocks=Blocks
 ac_blocks.tooltip=Block Configuration
+ac_mod_compat=Mod Compatibility
+ac_mod_compat.tooltip=Mod Compatibility Configuration
+ac_wet_noodle=Wet Noodle
+ac_wet_noodle.tooltip=Wet Noodle Configuration
 
 #Keybinds
 key.abyssalcraft.category=AbyssalCraft
 key.staff_mode.desc=Change Staff of The Gatekeeper Mode
+key.use_cage.desc=Capture mob with Interdimensional Cage
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -907,7 +959,7 @@ tile.ingotblock.2.name=Block of Dreadium
 tile.ingotblock.3.name=Block of Ethaxium
 tile.coraliumstone.name=Coralium Infused Stone
 tile.odbcore.name=ODB Core
-tile.crate.name=Wooden Crate
+tile.woodencrate.name=Wooden Crate
 tile.abyportal.name=Abyssal Gateway
 tile.darkstoneslab1.name=Darkstone Slab
 tile.darkstoneslab2.name=Darkstone Doubleslab
@@ -957,8 +1009,8 @@ tile.abydreadbrickslab1.name=Abyssalnite Stone Brick Slab
 tile.abydreadbrickslab2.name=Abyssalnite Stone Brick Doubleslab
 tile.antiwater.name=Liquid Antimatter
 tile.cstonebrick.0.name=Coralium Bricks
-tile.cstonebrick.1.name=Chiseled Coralium Brick
-tile.cstonebrick.2.name=Cracked Coralium Brick
+tile.cstonebrick.1.name=Chiseled Coralium Bricks
+tile.cstonebrick.2.name=Cracked Coralium Bricks
 tile.cstonebrickfence.name=Coralium Brick Fence
 tile.cstonebrickslab1.name=Coralium Brick Slab
 tile.cstonebrickslab2.name=Coralium Brick Doubleslab
@@ -983,8 +1035,8 @@ tile.abypcorore.name=Pearlescent Coralium Ore
 tile.abylcorore.name=Liquified Coralium Ore
 tile.solidlava.name=Solid lava
 tile.ethaxiumbrick.0.name=Ethaxium Bricks
-tile.ethaxiumbrick.1.name=Chiseled Ethaxium Brick
-tile.ethaxiumbrick.2.name=Cracked Ethaxium Brick
+tile.ethaxiumbrick.1.name=Chiseled Ethaxium Bricks
+tile.ethaxiumbrick.2.name=Cracked Ethaxium Bricks
 tile.ethaxiumpillar.name=Ethaxium Pillar
 tile.ethaxiumbrickstairs.name=Ethaxium Brick Stairs
 tile.ethaxiumbrickslab1.name=Ethaxium Brick Slab
@@ -995,9 +1047,9 @@ tile.omotholfire.name=Omothol Fire
 tile.engraver.name=Engraver
 tile.engraver_on.name=A House
 tile.materializer.name=Materializer
-tile.darkethaxiumbrick.0.name=Dark Ethaxium Brick
-tile.darkethaxiumbrick.1.name=Chiseled Dark Ethaxium Brick
-tile.darkethaxiumbrick.2.name=Cracked Dark Ethaxium Brick
+tile.darkethaxiumbrick.0.name=Dark Ethaxium Bricks
+tile.darkethaxiumbrick.1.name=Chiseled Dark Ethaxium Bricks
+tile.darkethaxiumbrick.2.name=Cracked Dark Ethaxium Bricks
 tile.darkethaxiumpillar.name=Dark Ethaxium Pillar
 tile.darkethaxiumbrickstairs.name=Dark Ethaxium Brick Stairs
 tile.darkethaxiumbrickslab1.name=Dark Ethaxium Brick Slab
@@ -1068,6 +1120,9 @@ tile.rendingpedestal.name=Rending Pedestal
 tile.statetransformer.name=State Transformer
 tile.energydepositioner.name=Energy Depositioner
 tile.calcifiedstone.name=Calcified Stone
+tile.door_dlt.name=Darklands Oak Wood Door
+tile.door_drt.name=Dreadlands Wood Door
+tile.multi_block.name=Multiblock
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorative %s
@@ -1078,7 +1133,7 @@ crystalfragment.postfix=%s Fragment
 #Items
 item.devsword.name=The Dev Blade
 item.oc.name=Oblivion Catalyst
-item.staff.name=Staff of The Gatekeeper
+item.gatekeeperstaff.name=Staff of The Gatekeeper
 item.gatewaykey.name=Gateway Key
 item.powerstonetracker.name=Powerstone Tracker
 item.eoa.name=Eye of The Abyss
@@ -1094,8 +1149,8 @@ item.cingot.name=Refined Coralium Ingot
 item.platec.name=Coralium Plate
 item.coralium.name=Coralium Gem
 item.transmutationgem.name=Transmutation Gem
-item.corflesh.name=Coralium plagued flesh
-item.corbone.name=Coralium plagued flesh on a bone
+item.corflesh.name=Coralium-plagued Flesh
+item.corbone.name=Coralium-plagued Flesh on a Bone
 item.dpick.name=Darkstone Pickaxe
 item.daxe.name=Darkstone Axe
 item.dshovel.name=Darkstone Shovel
@@ -1146,7 +1201,7 @@ item.fishp.name=Fish on A Plate
 item.dirtyplate.name=Dirty Plate
 item.friedegg.name=Fried Egg
 item.eggp.name=Fried Egg on A Plate
-item.cloth.name=Washcloth
+item.washcloth.name=Washcloth
 item.shadowfragment.name=Shadow Fragment
 item.shadowshard.name=Shadow Gem Shard
 item.shadowgem.name=Shadow Gem
@@ -1232,7 +1287,7 @@ item.ethaxiumplate.name=Ethaxium Chestplate
 item.ethaxiumlegs.name=Ethaxium Leggings
 item.ethaxiumboots.name=Ethaxium Boots
 item.ethaxiumu.name=Ethaxium Upgrade Kit
-item.coin.name=Coin
+item.blankcoin.name=Coin
 item.cthulhucoin.name=Cthulhu Engraved Coin
 item.eldercoin.name=Elder Engraved Coin
 item.jzaharcoin.name=J'zahar Engraved Coin
@@ -1302,6 +1357,8 @@ item.unique_scroll.antimatter.name=Antimatter Scroll
 item.unique_scroll.oblivion.name=Oblivion Scroll
 item.antidote.coralium.name=Coralium Plague Antidote
 item.antidote.dread.name=Dread Plague Antidote
+item.door_dlt.name=Darklands Oak Wood Door
+item.door_drt.name=Dreadlands Wood Door
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul
@@ -1352,6 +1409,7 @@ entity.abyssalcraft.demonchicken.name=Demon Chicken
 entity.abyssalcraft.evilsheep.name=Sheep
 entity.abyssalcraft.demonsheep.name=Demon Sheep
 entity.abyssalcraft.coraliumsquid.name=Coralium Infested Squid
+entity.abyssalcraft.shuboffspring.name=Dark Offspring
 
 #Potions
 potion.Cplague=Coralium Plague
@@ -1417,5 +1475,10 @@ subtitle.abyssalcraft.abyssalzombie.hit=Abyssal Zombie hurts
 subtitle.abyssalcraft.abyssalzombie.death=Abyssal Zombie dies
 subtitle.abyssalcraft.antiplayer.hurt=Anti-Player hurts
 subtitle.abyssalcraft.dreadguard.barf=Dreadguard barfs
+subtitle.abyssalcraft.jzahar.blast=BOOM
+subtitle.abyssalcraft.jzahar.shouts=J'zahar tries to Fus Ro Dah
+subtitle.abyssalcraft.jzahar.earthquake=J'zahar tries to rearrange the tectonic plates
+subtitle.abyssalcraft.jzahar.implosion=J'zahar tries to replace gravity with his own version
+subtitle.abyssalcraft.jzahar.black_hole=J'zahar tries to do a cover of a Soundgarden song
 
 #Localization done, Shin out.

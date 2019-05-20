@@ -34,7 +34,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemStaff extends ItemACBasic implements IStaffOfRending{
 
 	public ItemStaff() {
-		super("staff");
+		super("gatekeeperstaff");
 		setCreativeTab(ACTabs.tabTools);
 		setFull3D();
 		setMaxStackSize(1);
