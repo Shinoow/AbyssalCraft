@@ -236,7 +236,7 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 
 			for (int i = 0; i < 2; ++i)
 				if(ACConfig.particleEntity)
-					AbyssalCraft.proxy.spawnParticle("CorBlood", world, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
+					AbyssalCraft.proxy.spawnParticle("CorBlood", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
 
 			if (world.isRemote)
 			{

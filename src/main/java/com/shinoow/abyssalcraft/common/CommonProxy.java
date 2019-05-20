@@ -162,5 +162,5 @@ public class CommonProxy implements IGuiHandler {
 		return ctx.getServerHandler().player.getServer();
 	}
 
-	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ) {}
+	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ) {}
 }

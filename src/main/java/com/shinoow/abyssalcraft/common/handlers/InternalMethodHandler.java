@@ -37,7 +37,7 @@ public class InternalMethodHandler extends DummyMethodHandler {
 
 	@Override
 	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ) {
-		AbyssalCraft.proxy.spawnParticle(particleName, world, posX, posY, posZ, velX, velY, velZ);
+		AbyssalCraft.proxy.spawnParticle(particleName, posX, posY, posZ, velX, velY, velZ);
 	}
 
 	@Override

@@ -256,7 +256,7 @@ public class ACExplosion extends Explosion
 			List<List<BlockPos>> extraLists = Lists.partition(explosionSize <= 32 ? affectedBlockPositions : outerBlocks, 4000);
 			for(List<BlockPos> extraList : extraLists) {
 				ACExplosion explosion = this;
-				Scheduler.schedule(new ScheduledProcess(num * 10) {
+				Scheduler.schedule(new ScheduledProcess(num * 5) {
 
 					@Override
 					public void execute() {

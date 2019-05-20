@@ -198,13 +198,14 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ)
+	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ)
 	{
 		if(particleName.equals("CorBlood")){
 			spawnParticleLegacy(particleName, posX, posY, posZ, velX, velY, velZ);
 			return;
 		}
-		if(particleName.equals("PEStream"))
+		if(particleName.equals("PEStream")) {
+			World world = Minecraft.getMinecraft().world;
 			switch(world.rand.nextInt(3)){
 			case 0:
 				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 65, 63, 170));
@@ -219,6 +220,7 @@ public class ClientProxy extends CommonProxy {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 3, 122, 120));
 				break;
 			}
+		}
 	}
 
 	public void spawnParticleLegacy(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ){
