@@ -28,7 +28,7 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockCrystalCluster2 extends BlockACBasic {
 
-	public static final PropertyEnum TYPE = PropertyEnum.create("type", EnumCrystalType2.class);
+	public static final PropertyEnum<EnumCrystalType2> TYPE = PropertyEnum.create("type", EnumCrystalType2.class);
 
 	public BlockCrystalCluster2() {
 		super(Material.ROCK, 4.0F, 8.0F, SoundType.GLASS);
@@ -68,7 +68,7 @@ public class BlockCrystalCluster2 extends BlockACBasic {
 
 	@Override
 	public int damageDropped (IBlockState state) {
-		return ((EnumCrystalType2)state.getValue(TYPE)).getMetadata();
+		return state.getValue(TYPE).getMetadata();
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class BlockCrystalCluster2 extends BlockACBasic {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumCrystalType2)state.getValue(TYPE)).getMetadata();
+		return state.getValue(TYPE).getMetadata();
 	}
 
 	@Override

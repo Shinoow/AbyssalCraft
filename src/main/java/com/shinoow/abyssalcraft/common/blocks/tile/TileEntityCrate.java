@@ -142,12 +142,6 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 	}
 
 	@Override
-	public void updateContainingBlockInfo()
-	{
-		super.updateContainingBlockInfo();
-	}
-
-	@Override
 	public void update()
 	{
 		++ticksSinceSync;

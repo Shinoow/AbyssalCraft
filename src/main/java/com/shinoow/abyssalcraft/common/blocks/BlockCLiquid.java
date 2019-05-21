@@ -25,7 +25,6 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -42,8 +41,6 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockCLiquid extends BlockFluidClassic {
-
-	public static final MaterialLiquid Cwater = new MaterialLiquid(MapColor.LIGHT_BLUE);
 
 	List<IBlockState> dusts = Lists.newArrayList();
 	List<IBlockState> metalloids = Lists.newArrayList();

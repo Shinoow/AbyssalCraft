@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -111,9 +111,8 @@ public class BlockDreadFire extends Block {
 	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
-		if(par5Entity instanceof EntityLivingBase)
-			if((EntityLivingBase)par5Entity instanceof IDreadEntity){}
-			else ((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
+		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase)par5Entity))
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 	}
 
 	@Override

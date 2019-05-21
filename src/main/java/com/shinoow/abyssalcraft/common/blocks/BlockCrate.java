@@ -34,9 +34,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockCrate extends BlockContainer
-{
-	private final Random random = new Random();
+public class BlockCrate extends BlockContainer {
 
 	public BlockCrate(){
 		super(Material.WOOD);
@@ -52,25 +50,13 @@ public class BlockCrate extends BlockContainer
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5, BlockPos pos2)
-	{
-		super.neighborChanged(state, par1World, pos, par5, pos2);
-		TileEntityCrate TileEntityCrate = (TileEntityCrate)par1World.getTileEntity(pos);
-
-		if (TileEntityCrate != null)
-			TileEntityCrate.updateContainingBlockInfo();
-	}
-
-	@Override
 	public void breakBlock(World par1World, BlockPos pos, IBlockState state)
 	{
-		TileEntityCrate TileEntityCrate = (TileEntityCrate)par1World.getTileEntity(pos);
+		TileEntity tileEntity = par1World.getTileEntity(pos);
 
-		if (TileEntityCrate != null)
+		if (tileEntity instanceof TileEntityCrate)
 		{
-
-			InventoryHelper.dropInventoryItems(par1World, pos, TileEntityCrate);
-
+			InventoryHelper.dropInventoryItems(par1World, pos, (TileEntityCrate)tileEntity);
 			par1World.updateComparatorOutputLevel(pos, this);
 		}
 
@@ -86,26 +72,20 @@ public class BlockCrate extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, EnumFacing side, float par7, float par8, float par9)
 	{
-		if (par1World.isRemote)
-			return true;
-		else
-		{
-			IInventory iinventory = func_149951_m(par1World, pos);
+		if (!par1World.isRemote) {
+			IInventory iinventory = getInventory(par1World, pos);
 
 			if (iinventory != null)
 				par5EntityPlayer.displayGUIChest(iinventory);
-
-			return true;
 		}
+		return true;
 	}
 
-	public IInventory func_149951_m(World par1World, BlockPos pos)
+	public IInventory getInventory(World par1World, BlockPos pos)
 	{
 		TileEntity tile = par1World.getTileEntity(pos);
 
-		if(!(tile instanceof IInventory))
-			return null;
-		else return (IInventory)tile;
+		return tile instanceof IInventory ? (IInventory)tile : null;
 	}
 
 	@Override
@@ -117,7 +97,7 @@ public class BlockCrate extends BlockContainer
 	@Override
 	public int getComparatorInputOverride(IBlockState state, World par1World, BlockPos pos)
 	{
-		return Container.calcRedstoneFromInventory(func_149951_m(par1World, pos));
+		return Container.calcRedstoneFromInventory(getInventory(par1World, pos));
 	}
 
 	@Override

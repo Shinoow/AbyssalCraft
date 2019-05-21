@@ -16,7 +16,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.chagarothlair;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
@@ -28,6 +28,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -39,7 +40,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.FMLClientHandler;
 
 public class BlockDreadAltarTop extends Block {
 
@@ -76,22 +76,23 @@ public class BlockDreadAltarTop extends Block {
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand){
-		if(world.isRemote)
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	{
+		if(placer != null && world.isRemote) {
 			if(world.provider.getDimension() == ACLib.dreadlands_id){
 				if(world.getBiome(pos) == ACBiomes.dreadlands_mountains){
 					if(world.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom)
 						if(pos.getY() == 41)
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltartop.enter"));
+							placer.sendMessage(new TextComponentTranslation("message.dreadaltartop.enter"));
 						else if(pos.getY() < 41)
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentString("You need to place the altar "+ (41 - pos.getY()) +" blocks higher."));
+							placer.sendMessage(new TextComponentString("You need to place the altar "+ (41 - pos.getY()) +" blocks higher."));
 						else if(pos.getY() > 41)
-							FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentString("You need to place the altar "+ (pos.getY() - 41) +" blocks lower."));
+							placer.sendMessage(new TextComponentString("You need to place the altar "+ (pos.getY() - 41) +" blocks lower."));
 				} else
-					FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
+					placer.sendMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
 			} else
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.1"));
-		return getStateFromMeta(meta);
+				placer.sendMessage(new TextComponentTranslation("message.dreadaltar.error.1"));
+		}
 	}
 
 	@Override
@@ -107,9 +108,9 @@ public class BlockDreadAltarTop extends Block {
 						par1World.getChunkFromBlockCoords(pos).markDirty();
 					}
 			} else if(par1World.isRemote)
-				FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
+				par5EntityPlayer.sendMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
 		} else if(par1World.isRemote)
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.dreadaltar.error.3"));
+			par5EntityPlayer.sendMessage(new TextComponentTranslation("message.dreadaltar.error.3"));
 		return false;
 	}
 
@@ -117,8 +118,7 @@ public class BlockDreadAltarTop extends Block {
 	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
-		if(par5Entity instanceof IDreadEntity){}
-		else if(par5Entity instanceof EntityLivingBase)
+		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase)par5Entity))
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));
 	}
 }

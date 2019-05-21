@@ -111,9 +111,8 @@ public class BlockCoraliumfire extends Block {
 	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
 
-		if(par5Entity instanceof EntityLivingBase)
-			if(EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity)) {}
-			else ((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
+		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity))
+			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
 	}
 
 	@Override

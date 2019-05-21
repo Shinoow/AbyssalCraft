@@ -23,15 +23,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockDreadGrass extends BlockGrass {
 
@@ -45,13 +42,6 @@ public class BlockDreadGrass extends BlockGrass {
 	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		return MapColor.RED;
-	}
-
-	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-	{
-		Block block = worldIn.getBlockState(pos.up()).getBlock();
-		return state.withProperty(SNOWY, Boolean.valueOf(block == Blocks.SNOW || block == Blocks.SNOW_LAYER));
 	}
 
 	@Override
@@ -129,21 +119,5 @@ public class BlockDreadGrass extends BlockGrass {
 				++j;
 			}
 		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
-	{
-		return BlockRenderLayer.CUTOUT_MIPPED;
-	}
-
-	/**
-	 * Convert the BlockState into the correct metadata value
-	 */
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		return 0;
 	}
 }

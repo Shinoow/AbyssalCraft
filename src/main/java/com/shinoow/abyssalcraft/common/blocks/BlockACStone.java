@@ -28,6 +28,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -95,8 +97,7 @@ public class BlockACStone extends Block {
 		if(entity instanceof EntityDragon)
 			return state.getValue(TYPE) != EnumStoneType.OMOTHOL_STONE &&
 			state.getValue(TYPE) != EnumStoneType.ETHAXIUM;
-		else if (entity instanceof net.minecraft.entity.boss.EntityWither ||
-				entity instanceof net.minecraft.entity.projectile.EntityWitherSkull)
+		else if (entity instanceof EntityWither || entity instanceof EntityWitherSkull)
 			return state.getValue(TYPE) != EnumStoneType.ETHAXIUM;
 		return super.canEntityDestroy(state, world, pos, entity);
 	}

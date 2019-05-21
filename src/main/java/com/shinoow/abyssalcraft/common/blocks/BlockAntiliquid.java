@@ -18,7 +18,6 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,9 +31,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 public class BlockAntiliquid extends BlockFluidClassic {
-
-	public static final MaterialLiquid antimatter = new MaterialLiquid(MapColor.SILVER);
-
 
 	public BlockAntiliquid() {
 		super(AbyssalCraftAPI.liquid_antimatter_fluid, Material.WATER);

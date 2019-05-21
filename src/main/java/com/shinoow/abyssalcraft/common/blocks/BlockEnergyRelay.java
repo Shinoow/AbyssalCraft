@@ -12,10 +12,10 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.List;
-import java.util.Random;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyRelay;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -24,10 +24,8 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -101,25 +99,7 @@ public class BlockEnergyRelay extends BlockContainer {
 	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
-		Random rand = new Random();
-		TileEntityEnergyRelay relay = (TileEntityEnergyRelay) world.getTileEntity(pos);
-
-		if(relay != null){
-			ItemStack stack = new ItemStack(getItemDropped(state, rand, 1), 1, damageDropped(state));
-			if(!stack.hasTagCompound())
-				stack.setTagCompound(new NBTTagCompound());
-			stack.getTagCompound().setFloat("PotEnergy", relay.getContainedEnergy());
-			float f = rand.nextFloat() * 0.8F + 0.1F;
-			float f1 = rand.nextFloat() * 0.8F + 0.1F;
-			float f2 = rand.nextFloat() * 0.8F + 0.1F;
-
-			EntityItem item = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, stack);
-			float f3 = 0.05F;
-			item.motionX = (float)rand.nextGaussian() * f3;
-			item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
-			item.motionZ = (float)rand.nextGaussian() * f3;
-			world.spawnEntity(item);
-		}
+		BlockUtil.dropTileEntityAsItemWithExtra(world, pos, state, this);
 
 		super.breakBlock(world, pos, state);
 	}

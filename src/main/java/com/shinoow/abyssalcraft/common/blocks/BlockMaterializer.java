@@ -45,7 +45,6 @@ public class BlockMaterializer extends BlockContainer {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-	private final Random rand = new Random();
 	private static boolean keepInventory;
 
 	public BlockMaterializer() {
@@ -121,6 +120,7 @@ public class BlockMaterializer extends BlockContainer {
 
 	@Override
 	public void breakBlock(World par1World, BlockPos pos, IBlockState state) {
+		Random rand = new Random();
 		if (!keepInventory){
 			TileEntityMaterializer tileentitymaterializer = (TileEntityMaterializer)par1World.getTileEntity(pos);
 
@@ -182,16 +182,6 @@ public class BlockMaterializer extends BlockContainer {
 	{
 		return EnumBlockRenderType.MODEL;
 	}
-
-	//	/**
-	//	 * Possibly modify the given BlockState before rendering it on an Entity (Minecarts, Endermen, ...)
-	//	 */
-	//	@Override
-	//	@SideOnly(Side.CLIENT)
-	//	public IBlockState getStateForEntityRender(IBlockState state)
-	//	{
-	//		return getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
-	//	}
 
 	/**
 	 * Convert the given metadata into a BlockState for this Block

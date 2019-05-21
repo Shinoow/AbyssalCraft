@@ -43,8 +43,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockCrystallizer extends BlockContainer
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-
-	private final Random rand = new Random();
 	private final boolean isLit;
 	private static boolean keepInventory;
 
@@ -150,13 +148,11 @@ public class BlockCrystallizer extends BlockContainer
 	{
 		if (!keepInventory)
 		{
-			TileEntityCrystallizer tileentitycrystallizer = (TileEntityCrystallizer)par1World.getTileEntity(pos);
+			TileEntity tileentitycrystallizer = par1World.getTileEntity(pos);
 
-			if (tileentitycrystallizer != null)
+			if (tileentitycrystallizer instanceof TileEntityCrystallizer)
 			{
-
-				InventoryHelper.dropInventoryItems(par1World, pos, tileentitycrystallizer);
-
+				InventoryHelper.dropInventoryItems(par1World, pos, (TileEntityCrystallizer)tileentitycrystallizer);
 				par1World.updateComparatorOutputLevel(pos, this);;
 			}
 		}

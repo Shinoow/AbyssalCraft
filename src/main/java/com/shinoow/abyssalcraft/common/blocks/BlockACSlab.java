@@ -141,8 +141,7 @@ public abstract class BlockACSlab extends BlockSlab {
 
 	@Override
 	public final IBlockState getStateFromMeta(final int meta) {
-		IBlockState blockState = getDefaultState();
-		blockState = blockState.withProperty(VARIANT_PROPERTY, false);
+		IBlockState blockState = getDefaultState().withProperty(VARIANT_PROPERTY, false);
 		if (!isDouble()) {
 			EnumBlockHalf value = EnumBlockHalf.BOTTOM;
 			if ((meta & HALF_META_BIT) != 0)
@@ -156,13 +155,7 @@ public abstract class BlockACSlab extends BlockSlab {
 
 	@Override
 	public final int getMetaFromState(final IBlockState state) {
-		if (isDouble())
-			return 0;
-
-		if (state.getValue(HALF) == EnumBlockHalf.TOP)
-			return HALF_META_BIT;
-		else
-			return 0;
+		return !isDouble() && state.getValue(HALF) == EnumBlockHalf.TOP ? HALF_META_BIT : 0;
 	}
 
 	@Override

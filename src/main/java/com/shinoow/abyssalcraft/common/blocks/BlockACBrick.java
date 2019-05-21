@@ -32,7 +32,7 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockACBrick extends BlockACBasic {
 
-	public static final PropertyEnum TYPE = PropertyEnum.create("type", BlockACBrick.EnumBrickType.class);
+	public static final PropertyEnum<EnumBrickType> TYPE = PropertyEnum.create("type", BlockACBrick.EnumBrickType.class);
 
 	public BlockACBrick(int harvestlevel, float hardness, float resistance) {
 		super(Material.ROCK, "pickaxe", harvestlevel, hardness, resistance, SoundType.STONE);
@@ -64,7 +64,7 @@ public class BlockACBrick extends BlockACBasic {
 
 	@Override
 	public int damageDropped (IBlockState state) {
-		return ((EnumBrickType)state.getValue(TYPE)).getMeta();
+		return state.getValue(TYPE).getMeta();
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class BlockACBrick extends BlockACBasic {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumBrickType)state.getValue(TYPE)).getMeta();
+		return state.getValue(TYPE).getMeta();
 	}
 
 	@Override

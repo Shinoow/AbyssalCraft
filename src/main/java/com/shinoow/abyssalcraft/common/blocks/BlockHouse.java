@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import java.util.Random;
-
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.structures.StructureHouse;
 
@@ -31,8 +29,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockHouse extends Block {
-
-	Random rand;
 
 	public BlockHouse() {
 		super(Material.WOOD);
@@ -62,7 +58,7 @@ public class BlockHouse extends Block {
 		if(EntityUtil.isPlayerCoralium(par5EntityPlayer)){
 			if(!par1World.isRemote){
 				StructureHouse house = new StructureHouse();
-				house.generate(par1World, rand, pos);
+				house.generate(par1World, par1World.rand, pos);
 				par1World.getChunkFromBlockCoords(pos).markDirty();
 				return true;
 			}

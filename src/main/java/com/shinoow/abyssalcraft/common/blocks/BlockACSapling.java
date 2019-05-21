@@ -25,6 +25,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class BlockACSapling extends BlockSapling {
 
@@ -38,7 +39,7 @@ public class BlockACSapling extends BlockSapling {
 
 	public void growTree(World world, BlockPos pos, IBlockState state, Random random)
 	{
-		if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, random, pos)) return;
+		if (!TerrainGen.saplingGrowTree(world, random, pos)) return;
 
 		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 1);
 		if(!tree.generate(world, random, pos))

@@ -84,24 +84,13 @@ public class BlockACOre extends BlockACBasic {
 	{
 		if (getItemDropped(null, rand, par3) != Item.getItemFromBlock(this))
 		{
-			int j1 = 0;
-
-			if (this == ACBlocks.coralium_ore)
-				j1 = MathHelper.getInt(rand, 0, 2);
-			else if (this == ACBlocks.nitre_ore)
-				j1 = MathHelper.getInt(rand, 0, 2);
-			else if (this == ACBlocks.coralium_infused_stone)
-				j1 = MathHelper.getInt(rand, 2, 5);
-			else if (this == ACBlocks.abyssal_coralium_ore)
-				j1 = MathHelper.getInt(rand, 0, 2);
+			if (this == ACBlocks.coralium_ore || this == ACBlocks.nitre_ore ||
+					this == ACBlocks.abyssal_coralium_ore || this == ACBlocks.abyssal_nitre_ore)
+				return MathHelper.getInt(rand, 0, 2);
+			else if (this == ACBlocks.coralium_infused_stone || this == ACBlocks.pearlescent_coralium_ore)
+				return MathHelper.getInt(rand, 2, 5);
 			else if (this == ACBlocks.abyssal_diamond_ore)
-				j1 = MathHelper.getInt(rand, 3, 7);
-			else if (this == ACBlocks.abyssal_nitre_ore)
-				j1 = MathHelper.getInt(rand, 0, 2);
-			else if (this == ACBlocks.pearlescent_coralium_ore)
-				j1 = MathHelper.getInt(rand, 2, 5);
-
-			return j1;
+				return MathHelper.getInt(rand, 3, 7);
 		}
 		return 0;
 	}
