@@ -40,7 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockTieredEnergyCollector extends BlockContainer {
 
-	public static final PropertyEnum DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
+	public static final PropertyEnum<EnumDimType> DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
 
 	public BlockTieredEnergyCollector() {
 		super(Material.ROCK);
@@ -86,7 +86,7 @@ public class BlockTieredEnergyCollector extends BlockContainer {
 
 	@Override
 	public int damageDropped (IBlockState state) {
-		return ((EnumDimType)state.getValue(DIMENSION)).getMeta();
+		return state.getValue(DIMENSION).getMeta();
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class BlockTieredEnergyCollector extends BlockContainer {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumDimType)state.getValue(DIMENSION)).getMeta();
+		return state.getValue(DIMENSION).getMeta();
 	}
 
 	@Override

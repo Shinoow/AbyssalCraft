@@ -78,7 +78,7 @@ public class BlockDreadAltarTop extends Block {
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		if(placer != null && world.isRemote) {
+		if(placer != null && world.isRemote)
 			if(world.provider.getDimension() == ACLib.dreadlands_id){
 				if(world.getBiome(pos) == ACBiomes.dreadlands_mountains){
 					if(world.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom)
@@ -92,7 +92,6 @@ public class BlockDreadAltarTop extends Block {
 					placer.sendMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
 			} else
 				placer.sendMessage(new TextComponentTranslation("message.dreadaltar.error.1"));
-		}
 	}
 
 	@Override

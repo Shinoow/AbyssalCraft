@@ -122,28 +122,29 @@ public class BlockMaterializer extends BlockContainer {
 	public void breakBlock(World par1World, BlockPos pos, IBlockState state) {
 		Random rand = new Random();
 		if (!keepInventory){
-			TileEntityMaterializer tileentitymaterializer = (TileEntityMaterializer)par1World.getTileEntity(pos);
+			TileEntity tileEntity = par1World.getTileEntity(pos);
 
-			if (tileentitymaterializer != null){
+			if (tileEntity instanceof TileEntityMaterializer){
+				TileEntityMaterializer materializer = (TileEntityMaterializer)tileEntity;
 
-				if(!tileentitymaterializer.getStackInSlot(0).isEmpty()){
+				if(!materializer.getStackInSlot(0).isEmpty()){
 					float f = rand.nextFloat() * 0.8F + 0.1F;
 					float f1 = rand.nextFloat() * 0.8F + 0.1F;
 					float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
-					EntityItem item = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, tileentitymaterializer.getStackInSlot(0));
+					EntityItem item = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, materializer.getStackInSlot(0));
 					float f3 = 0.05F;
 					item.motionX = (float)rand.nextGaussian() * f3;
 					item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 					item.motionZ = (float)rand.nextGaussian() * f3;
 					par1World.spawnEntity(item);
 				}
-				if(!tileentitymaterializer.getStackInSlot(1).isEmpty()){
+				if(!materializer.getStackInSlot(1).isEmpty()){
 					float f = rand.nextFloat() * 0.8F + 0.1F;
 					float f1 = rand.nextFloat() * 0.8F + 0.1F;
 					float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
-					EntityItem item = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, tileentitymaterializer.getStackInSlot(1));
+					EntityItem item = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, materializer.getStackInSlot(1));
 					float f3 = 0.05F;
 					item.motionX = (float)rand.nextGaussian() * f3;
 					item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;

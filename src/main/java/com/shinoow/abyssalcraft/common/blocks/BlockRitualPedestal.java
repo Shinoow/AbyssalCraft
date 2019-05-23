@@ -45,7 +45,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockRitualPedestal extends BlockContainer {
 
 	private static HashMap<Integer, IBlockState> blockMeta = Maps.newHashMap();
-	public static final PropertyEnum MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
+	public static final PropertyEnum<EnumRitualMatType> MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 
 	public BlockRitualPedestal() {
 		super(Material.ROCK);
@@ -99,12 +99,12 @@ public class BlockRitualPedestal extends BlockContainer {
 	@Override
 	public Item getItemDropped(IBlockState state, Random random, int j)
 	{
-		return Item.getItemFromBlock(blockMeta.get(((EnumRitualMatType)state.getValue(MATERIAL)).getMeta()).getBlock());
+		return Item.getItemFromBlock(blockMeta.get(state.getValue(MATERIAL).getMeta()).getBlock());
 	}
 
 	@Override
 	public int damageDropped(IBlockState state){
-		IBlockState s = blockMeta.get(((EnumRitualMatType)state.getValue(MATERIAL)).getMeta());
+		IBlockState s = blockMeta.get(state.getValue(MATERIAL).getMeta());
 		return s.getBlock().getMetaFromState(s);
 	}
 
@@ -147,7 +147,7 @@ public class BlockRitualPedestal extends BlockContainer {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumRitualMatType)state.getValue(MATERIAL)).getMeta();
+		return state.getValue(MATERIAL).getMeta();
 	}
 
 	@Override

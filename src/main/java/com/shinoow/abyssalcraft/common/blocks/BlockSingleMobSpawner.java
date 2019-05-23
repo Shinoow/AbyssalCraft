@@ -15,13 +15,15 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityGatekeeperMinionSpawner;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.tile.*;
 
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -29,9 +31,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockGatekeeperMinionSpawner extends BlockContainer {
+public class BlockSingleMobSpawner extends Block {
 
-	public BlockGatekeeperMinionSpawner() {
+	public BlockSingleMobSpawner() {
 		super(Material.ROCK);
 	}
 
@@ -68,7 +70,28 @@ public class BlockGatekeeperMinionSpawner extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new TileEntityGatekeeperMinionSpawner();
+	public EnumBlockRenderType getRenderType(IBlockState state)
+	{
+		return EnumBlockRenderType.INVISIBLE;
+	}
+
+	@Override
+	public boolean hasTileEntity(IBlockState state)
+	{
+		return true;
+	}
+
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state)
+	{
+		if(state.getBlock() == ACBlocks.chagaroth_spawner)
+			return new TileEntityChagarothSpawner();
+		else if(state.getBlock() == ACBlocks.dreadguard_spawner)
+			return new TileEntityDreadguardSpawner();
+		else if(state.getBlock() == ACBlocks.minion_of_the_gatekeeper_spawner)
+			return new TileEntityGatekeeperMinionSpawner();
+		else if(state.getBlock() == ACBlocks.jzahar_spawner)
+			return new TileEntityJzaharSpawner();
+		return null;
 	}
 }

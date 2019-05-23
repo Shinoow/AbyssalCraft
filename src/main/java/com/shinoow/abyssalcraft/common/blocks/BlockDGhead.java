@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.tileentity.TEDirectional;
 
@@ -20,6 +22,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -28,7 +31,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 //@Interface(modid = "Thaumcraft", iface = "thaumcraft.api.crafting.IInfusionStabiliser", striprefs = true)
-public abstract class BlockDGhead extends BlockContainer /*implements IInfusionStabiliser*/ {
+public class BlockDGhead extends BlockContainer /*implements IInfusionStabiliser*/ {
 
 
 	public BlockDGhead() {
@@ -70,6 +73,19 @@ public abstract class BlockDGhead extends BlockContainer /*implements IInfusionS
 
 		TEDirectional tile = (TEDirectional) par1World.getTileEntity(pos);
 		tile.direction = MathHelper.floor(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		if(this == ACBlocks.depths_ghoul_head)
+			return new TileEntityDGhead();
+		else if (this == ACBlocks.pete_head)
+			return new TileEntityPhead();
+		else if(this == ACBlocks.mr_wilson_head)
+			return new TileEntityWhead();
+		else if(this == ACBlocks.dr_orange_head)
+			return new TileEntityOhead();
+		return null;
 	}
 
 	//	@Override

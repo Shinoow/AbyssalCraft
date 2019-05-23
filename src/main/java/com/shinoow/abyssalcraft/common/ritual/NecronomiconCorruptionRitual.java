@@ -68,7 +68,7 @@ public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 				BlockPos pos1 = new BlockPos(x, 0, z);
 
 				if(!isApplicable(world, pos1)) continue;
-				
+
 				Scheduler.schedule(new ScheduledProcess(num * 2) {
 
 					@Override
@@ -128,7 +128,7 @@ public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 
 						BiomeUtil.updateBiome(world, pos1, b, true);
 					}
-					
+
 				});
 				num2++;
 				if(num2 % 256 == 0)

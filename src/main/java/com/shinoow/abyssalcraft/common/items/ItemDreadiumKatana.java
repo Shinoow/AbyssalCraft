@@ -13,9 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemDreadiumKatana extends ItemACSword {

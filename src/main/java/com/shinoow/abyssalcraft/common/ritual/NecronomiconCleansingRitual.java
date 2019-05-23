@@ -64,7 +64,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 		int num = 1, num2 = 0;
 		for(int x = pos.getX() - 256; x < pos.getX() + 257; x++)
 			for(int z = pos.getZ() - 256; z < pos.getZ() + 257; z++){
-				
+
 				BlockPos pos1 = new BlockPos(x, 0, z);
 
 				if(!(world.getBiome(pos1) instanceof IDarklandsBiome)) continue;
@@ -89,7 +89,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 							else if(state == ACBlocks.cobblestone.getDefaultState())
 								world.setBlockState(pos1.up(y), Blocks.COBBLESTONE.getDefaultState(), 2);
 							else if(state.getBlock() == ACBlocks.darkstone_brick)
-								switch((BlockACBrick.EnumBrickType)state.getValue(BlockACBrick.TYPE)){
+								switch(state.getValue(BlockACBrick.TYPE)){
 								case CHISELED:
 									world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CHISELED), 2);
 									break;

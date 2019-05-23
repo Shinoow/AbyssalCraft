@@ -17,7 +17,6 @@ import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityODBPrimed;
 import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ScheduledProcess;
 import com.shinoow.abyssalcraft.common.util.Scheduler;
 
@@ -229,7 +228,7 @@ public class ACExplosion extends Explosion
 						for(BlockPos pos : innerList)
 							worldObj.getChunkFromBlockCoords(pos).setBlockState(pos, Blocks.AIR.getDefaultState());
 					}
-					
+
 				});
 				num++;
 			}
@@ -246,7 +245,7 @@ public class ACExplosion extends Explosion
 								worldObj.getBlockState(pos).getBlock().onBlockExploded(worldObj, pos, explosion);
 							else worldObj.setBlockToAir(pos);
 					}
-					
+
 				});
 				num++;
 			}
@@ -255,7 +254,6 @@ public class ACExplosion extends Explosion
 		if (isAntimatter) {
 			List<List<BlockPos>> extraLists = Lists.partition(explosionSize <= 32 ? affectedBlockPositions : outerBlocks, 4000);
 			for(List<BlockPos> extraList : extraLists) {
-				ACExplosion explosion = this;
 				Scheduler.schedule(new ScheduledProcess(num * 5) {
 
 					@Override
@@ -269,7 +267,7 @@ public class ACExplosion extends Explosion
 								worldObj.setBlockState(pos1, ACBlocks.liquid_antimatter.getDefaultState());
 						}
 					}
-					
+
 				});
 				num++;
 			}

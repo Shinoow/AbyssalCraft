@@ -30,7 +30,6 @@ import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
-import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.FireMessage;
 import com.shinoow.abyssalcraft.common.network.server.InterdimensionalCageMessage;
@@ -429,7 +428,7 @@ public class AbyssalCraftClientEventHooks {
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 				String stuff = "abyssalcraft:";
-				switch((EnumDimType)state.getValue(BlockTieredEnergyPedestal.DIMENSION)){
+				switch(state.getValue(BlockTieredEnergyPedestal.DIMENSION)){
 				case ABYSSAL_WASTELAND:
 					stuff+="awenergyrelay";
 					break;

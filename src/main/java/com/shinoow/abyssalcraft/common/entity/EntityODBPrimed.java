@@ -132,7 +132,7 @@ public class EntityODBPrimed extends Entity {
 					if(ACConfig.showBossDialogs)
 						SpecialTextUtil.SacthothGroup(world, I18n.translateToLocal("message.sacthoth.spawn.1"));
 				}
-				
+
 			});
 		}
 	}

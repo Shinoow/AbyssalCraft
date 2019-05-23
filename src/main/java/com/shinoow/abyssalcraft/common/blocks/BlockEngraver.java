@@ -55,7 +55,6 @@ public class BlockEngraver extends BlockContainer {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
 	private ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[] {FACING}, new IUnlistedProperty[]{OBJModel.OBJProperty.INSTANCE});
 
-	private final Random rand = new Random();
 	private static boolean keepInventory;
 
 	public BlockEngraver() {
@@ -118,24 +117,17 @@ public class BlockEngraver extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 
-		if (par5EntityLivingBase == null)
-			return;
-
-		TileEntityEngraver tile = (TileEntityEngraver) par1World.getTileEntity(pos);
-
 		if (par6ItemStack.hasDisplayName())
-			tile.func_145951_a(par6ItemStack.getDisplayName());
+			((TileEntityEngraver) par1World.getTileEntity(pos)).func_145951_a(par6ItemStack.getDisplayName());
 	}
 
 	@Override
 	public void breakBlock(World par1World, BlockPos pos, IBlockState state) {
 		if (!keepInventory){
-			TileEntityEngraver tileentityengraver = (TileEntityEngraver)par1World.getTileEntity(pos);
+			TileEntity tileEntity = par1World.getTileEntity(pos);
 
-			if (tileentityengraver != null){
-
-				InventoryHelper.dropInventoryItems(par1World, pos, tileentityengraver);
-
+			if (tileEntity instanceof TileEntityEngraver){
+				InventoryHelper.dropInventoryItems(par1World, pos, (TileEntityEngraver)tileEntity);
 				par1World.updateComparatorOutputLevel(pos, this);
 			}
 		}

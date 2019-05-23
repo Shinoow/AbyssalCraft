@@ -548,7 +548,7 @@ public class AbyssalCraftEventHooks {
 		if(event.side == Side.SERVER && event.type == Type.SERVER && event.phase == Phase.START)
 			Scheduler.tick();
 	}
-	
+
 	@SubscribeEvent
 	public void attachCapability(AttachCapabilitiesEvent<Entity> event){
 		if(event.getObject() instanceof EntityPlayer)

@@ -11,12 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import java.util.Random;
-
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrate;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

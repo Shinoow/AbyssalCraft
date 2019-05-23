@@ -44,7 +44,6 @@ public class BlockTransmutator extends BlockContainer {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-	private final Random rand = new Random();
 	private final boolean isLit;
 	private static boolean keepInventory;
 
@@ -141,12 +140,10 @@ public class BlockTransmutator extends BlockContainer {
 	@Override
 	public void breakBlock(World par1World, BlockPos pos, IBlockState state) {
 		if (!keepInventory){
-			TileEntityTransmutator tileentitytransmutator = (TileEntityTransmutator)par1World.getTileEntity(pos);
+			TileEntity tileEntity = par1World.getTileEntity(pos);
 
-			if (tileentitytransmutator != null){
-
-				InventoryHelper.dropInventoryItems(par1World, pos, tileentitytransmutator);
-
+			if (tileEntity instanceof TileEntityTransmutator){
+				InventoryHelper.dropInventoryItems(par1World, pos, (TileEntityTransmutator)tileEntity);
 				par1World.updateComparatorOutputLevel(pos, this);
 			}
 		}

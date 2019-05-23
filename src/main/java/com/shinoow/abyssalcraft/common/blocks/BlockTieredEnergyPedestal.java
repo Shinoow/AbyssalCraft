@@ -40,7 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockTieredEnergyPedestal extends BlockContainer {
 
-	public static final PropertyEnum DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
+	public static final PropertyEnum<EnumDimType> DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
 
 	public BlockTieredEnergyPedestal() {
 		super(Material.ROCK);
@@ -86,7 +86,7 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 
 	@Override
 	public int damageDropped (IBlockState state) {
-		return ((EnumDimType)state.getValue(DIMENSION)).getMeta();
+		return state.getValue(DIMENSION).getMeta();
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumDimType)state.getValue(DIMENSION)).getMeta();
+		return state.getValue(DIMENSION).getMeta();
 	}
 
 	@Override

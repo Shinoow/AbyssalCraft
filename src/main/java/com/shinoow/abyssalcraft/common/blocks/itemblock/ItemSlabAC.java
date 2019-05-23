@@ -20,9 +20,9 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -30,13 +30,25 @@ public class ItemSlabAC extends ItemSlab implements IUnlockableItem {
 
 	private IUnlockCondition condition = new DefaultCondition();
 
-	public ItemSlabAC(Block block, BlockSlab singleSlab, BlockSlab doubleSlab) {
-		super(block, singleSlab, doubleSlab);
-
+	public ItemSlabAC(Block block, Block singleSlab, Block doubleSlab) {
+		super(block, (BlockSlab)singleSlab, (BlockSlab)doubleSlab);
+		setMaxDamage(0);
+		setHasSubtypes(true);
 	}
 
 	@Override
-	public Item setUnlockCondition(IUnlockCondition condition) {
+	public String getItemStackDisplayName(ItemStack stack) {
+		if(getUnlocalizedName().contains("abyslab"))
+			return TextFormatting.BLUE + super.getItemStackDisplayName(stack);
+		else if(getUnlocalizedName().contains("ethaxiumbrickslab"))
+			return TextFormatting.AQUA + super.getItemStackDisplayName(stack);
+		else if(getUnlocalizedName().contains("darkethaxiumbrickslab"))
+			return TextFormatting.DARK_RED + super.getItemStackDisplayName(stack);
+		return super.getItemStackDisplayName(stack);
+	}
+
+	@Override
+	public ItemSlab setUnlockCondition(IUnlockCondition condition) {
 		this.condition = condition;
 		return this;
 	}

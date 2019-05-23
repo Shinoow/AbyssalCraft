@@ -89,9 +89,8 @@ public class BlockUtil {
 			if(data.hasKey("PotEnergy")) {
 				stack.getTagCompound().setInteger("Tolerance", data.getInteger("Tolerance"));
 				stack.getTagCompound().setFloat("PotEnergy", data.getFloat("PotEnergy"));
-			} else {
+			} else
 				stack.getTagCompound().setInteger("Tolerance", data.getInteger("Tolerance") + 10);
-			}
 			PEUtils.writeManipulatorNBT((IEnergyManipulator)tile, stack.getTagCompound());
 			float f = rand.nextFloat() * 0.8F + 0.1F;
 			float f1 = rand.nextFloat() * 0.8F + 0.1F;
