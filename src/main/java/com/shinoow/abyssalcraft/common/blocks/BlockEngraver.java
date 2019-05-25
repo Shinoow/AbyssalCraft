@@ -118,7 +118,7 @@ public class BlockEngraver extends BlockContainer {
 	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 
 		if (par6ItemStack.hasDisplayName())
-			((TileEntityEngraver) par1World.getTileEntity(pos)).func_145951_a(par6ItemStack.getDisplayName());
+			((TileEntityEngraver) par1World.getTileEntity(pos)).setCustomName(par6ItemStack.getDisplayName());
 	}
 
 	@Override

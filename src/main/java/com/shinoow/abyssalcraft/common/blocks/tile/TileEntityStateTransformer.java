@@ -179,7 +179,7 @@ public class TileEntityStateTransformer extends TileEntity implements ITickable,
 
 	@Override
 	public void clear() {
-
+		containerItemStacks.clear();
 	}
 
 	@Override

@@ -13,8 +13,6 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.common.entity.EntityChagaroth;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
@@ -28,13 +26,6 @@ public class TileEntityChagarothSpawner extends TileEntity implements ITickable 
 	{
 		if(world.isRemote)
 			world.tickableTileEntities.remove(this);
-	}
-
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		writeToNBT(nbtTag);
-		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
 	}
 
 	public boolean isActivated() {

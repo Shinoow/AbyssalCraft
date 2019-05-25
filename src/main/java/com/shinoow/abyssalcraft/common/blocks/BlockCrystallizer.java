@@ -140,7 +140,7 @@ public class BlockCrystallizer extends BlockContainer
 		par1World.setBlockState(pos, state.withProperty(FACING, par5EntityLivingBase.getHorizontalFacing().getOpposite()), 2);
 
 		if (par6ItemStack.hasDisplayName())
-			((TileEntityCrystallizer)par1World.getTileEntity(pos)).func_145951_a(par6ItemStack.getDisplayName());
+			((TileEntityCrystallizer)par1World.getTileEntity(pos)).setCustomName(par6ItemStack.getDisplayName());
 	}
 
 	@Override

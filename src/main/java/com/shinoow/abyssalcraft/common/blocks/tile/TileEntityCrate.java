@@ -11,39 +11,22 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import com.shinoow.abyssalcraft.common.blocks.BlockCrate;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IInteractionObject;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityCrate extends TileEntity implements IInventory, ITickable, IInteractionObject
+public class TileEntityCrate extends TileEntity implements IInventory, IInteractionObject
 {
 	private NonNullList<ItemStack> crateContents = NonNullList.withSize(36, ItemStack.EMPTY);
-	public int numUsingPlayers;
-	private int ticksSinceSync;
-	private int cachedCrateType;
 	private String customName;
-
-	public TileEntityCrate(){
-		cachedCrateType = -1;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public TileEntityCrate(int par1){
-		cachedCrateType = par1;
-	}
 
 	@Override
 	public int getSizeInventory()
@@ -97,7 +80,7 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 		return customName != null && customName.length() > 0;
 	}
 
-	public void func_94043_a(String par1Str)
+	public void setCustomName(String par1Str)
 	{
 		customName = par1Str;
 	}
@@ -106,11 +89,9 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readFromNBT(par1NBTTagCompound);
-		crateContents = NonNullList.<ItemStack>withSize(getSizeInventory(), ItemStack.EMPTY);
-
+		crateContents = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
 
 		ItemStackHelper.loadAllItems(par1NBTTagCompound, crateContents);
-
 
 		if (par1NBTTagCompound.hasKey("CustomName", 8))
 			customName = par1NBTTagCompound.getString("CustomName");
@@ -142,66 +123,15 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 	}
 
 	@Override
-	public void update()
-	{
-		++ticksSinceSync;
-		if (!world.isRemote && numUsingPlayers != 0 && (ticksSinceSync + pos.getX() + pos.getY() + pos.getZ()) % 200 == 0)
-			numUsingPlayers = 0;
-	}
+	public void openInventory(EntityPlayer player) {}
 
 	@Override
-	public boolean receiveClientEvent(int par1, int par2)
-	{
-		if (par1 == 1)
-		{
-			numUsingPlayers = par2;
-			return true;
-		} else
-			return super.receiveClientEvent(par1, par2);
-	}
-
-	@Override
-	public void openInventory(EntityPlayer player)
-	{
-		if (numUsingPlayers < 0)
-			numUsingPlayers = 0;
-
-		++numUsingPlayers;
-		world.addBlockEvent(pos, getBlockType(), 1, numUsingPlayers);
-		world.notifyNeighborsOfStateChange(pos, getBlockType(), false);
-	}
-
-	@Override
-	public void closeInventory(EntityPlayer player)
-	{
-		if (getBlockType() != null && getBlockType() instanceof BlockCrate)
-		{
-			--numUsingPlayers;
-			world.addBlockEvent(pos, getBlockType(), 1, numUsingPlayers);
-			world.notifyNeighborsOfStateChange(pos, getBlockType(), false);
-		}
-	}
-
-	@Override
-	public void invalidate()
-	{
-		super.invalidate();
-		updateContainingBlockInfo();
-	}
+	public void closeInventory(EntityPlayer player) {}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 
 		return true;
-	}
-
-	public int func_98041_l()
-	{
-		if (cachedCrateType == -1)
-			if (world == null || !(getBlockType() instanceof BlockCrate))
-				return 0;
-
-		return cachedCrateType;
 	}
 
 	@Override
@@ -228,12 +158,10 @@ public class TileEntityCrate extends TileEntity implements IInventory, ITickable
 	@Override
 	public void clear() {
 		crateContents.clear();
-
 	}
 
 	@Override
-	public Container createContainer(InventoryPlayer playerInventory,
-			EntityPlayer playerIn) {
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
 
 		return new ContainerChest(playerInventory, this, playerIn);
 	}

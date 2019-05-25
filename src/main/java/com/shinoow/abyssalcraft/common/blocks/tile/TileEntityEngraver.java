@@ -91,7 +91,7 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 		return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName(), new Object[0]);
 	}
 
-	public void func_145951_a(String par1)
+	public void setCustomName(String par1)
 	{
 		containerName = par1;
 	}
@@ -265,7 +265,9 @@ public class TileEntityEngraver extends TileEntity implements ISidedInventory, I
 	}
 
 	@Override
-	public void clear() {}
+	public void clear() {
+		engraverItemStacks.clear();
+	}
 
 	@Override
 	public boolean isEmpty()

@@ -16,23 +16,19 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class TileEntityMaterializer extends TileEntity implements ISidedInventory, ITickable {
+public class TileEntityMaterializer extends TileEntity implements IInventory, ITickable {
 
-	private static final int[] slotsTop = new int[] {0};
-	private static final int[] slotsBottom = new int[] {2, 1};
-	private static final int[] slotsSides = new int[] {1};
 	/**
 	 * The ItemStacks that hold the items currently being used in the materializer
 	 */
@@ -273,51 +269,20 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 		return false;
 	}
 
-	/**
-	 * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
-	 * block.
-	 */
-	@Override
-	public int[] getSlotsForFace(EnumFacing face)
-	{
-		return face == EnumFacing.DOWN ? slotsBottom : face == EnumFacing.UP ? slotsTop : slotsSides;
-	}
-
-	/**
-	 * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
-	 * side
-	 */
-	@Override
-	public boolean canInsertItem(int par1, ItemStack par2ItemStack, EnumFacing facing)
-	{
-		return false;
-	}
-
-	/**
-	 * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
-	 * side
-	 */
-	@Override
-	public boolean canExtractItem(int par1, ItemStack par2ItemStack, EnumFacing facing)
-	{
-		return false;
-	}
-
 	@Override
 	public int getField(int id) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public int getFieldCount() {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 

@@ -147,7 +147,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 		return containerName != null && containerName.length() > 0;
 	}
 
-	public void func_145951_a(String par1)
+	public void setCustomName(String par1)
 	{
 		containerName = par1;
 	}
@@ -462,7 +462,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 
 	@Override
 	public void clear() {
-
+		transmutatorItemStacks.clear();
 	}
 
 	@Override

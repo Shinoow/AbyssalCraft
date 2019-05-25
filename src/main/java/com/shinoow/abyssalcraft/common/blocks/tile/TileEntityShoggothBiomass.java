@@ -18,8 +18,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
@@ -56,19 +54,6 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 	{
 		if(world.isRemote)
 			world.tickableTileEntities.remove(this);
-	}
-
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		writeToNBT(nbtTag);
-		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.getNbtCompound());
 	}
 
 	@Override

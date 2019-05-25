@@ -43,7 +43,7 @@ public class BlockCrate extends BlockContainer {
 	public void onBlockPlacedBy(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack)
 	{
 		if (par6ItemStack.hasDisplayName())
-			((TileEntityCrate)par1World.getTileEntity(pos)).func_94043_a(par6ItemStack.getDisplayName());
+			((TileEntityCrate)par1World.getTileEntity(pos)).setCustomName(par6ItemStack.getDisplayName());
 	}
 
 	@Override
