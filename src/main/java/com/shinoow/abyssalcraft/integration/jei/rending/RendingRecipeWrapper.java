@@ -11,9 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.rending;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Nonnull;
 
@@ -34,7 +32,7 @@ public class RendingRecipeWrapper implements IRecipeWrapper {
 	private final int dimension;
 	private final String description;
 	private final RendingEntry entry;
-	private Map<Integer, String> dimToString = Maps.newHashMap();
+	private Map<Integer, String> dimToString = new HashMap<>();
 
 	public RendingRecipeWrapper(@Nonnull RendingEntry entry){
 		output = entry.output;

@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.biome;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 import net.minecraft.entity.EnumCreatureType;
@@ -40,7 +40,7 @@ public class BiomePurged extends Biome {
 	@Override
 	public List<Biome.SpawnListEntry> getSpawnableList(EnumCreatureType creatureType)
 	{
-		return Lists.newArrayList();
+		return new ArrayList<>();
 	}
 
 	@Override

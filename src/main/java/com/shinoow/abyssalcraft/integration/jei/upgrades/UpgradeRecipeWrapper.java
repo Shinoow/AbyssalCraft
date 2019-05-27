@@ -11,12 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.upgrades;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -56,7 +56,7 @@ public class UpgradeRecipeWrapper implements IRecipeWrapper {
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 
-		List<List<ItemStack>> input = Lists.newArrayList();
+		List<List<ItemStack>> input = new ArrayList<>();
 
 		input.add(Collections.singletonList(this.input));
 		input.add(Collections.singletonList(kit));

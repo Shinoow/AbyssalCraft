@@ -11,11 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
@@ -36,7 +36,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 	private GuiButton buttonDone;
 	private ButtonHome buttonHome;
 	private GuiNecronomicon parent;
-	private List<Spell> spells = Lists.newArrayList();
+	private List<Spell> spells = new ArrayList<>();
 
 	public GuiNecronomiconSpellEntry(int bookType, GuiNecronomicon gui){
 		super(bookType);

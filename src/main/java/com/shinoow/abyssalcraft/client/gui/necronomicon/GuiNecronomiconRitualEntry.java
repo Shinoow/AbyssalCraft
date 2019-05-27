@@ -11,13 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.lwjgl.input.Keyboard;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
@@ -40,10 +37,10 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	private GuiButton buttonDone;
 	private ButtonHome buttonHome;
 	private GuiNecronomicon parent;
-	private Map<Integer, String> dimToString = Maps.newHashMap();
+	private Map<Integer, String> dimToString = new HashMap<>();
 	/** Used to separate which rituals this entry should display */
 	private int ritualnum;
-	private List<NecronomiconRitual> rituals = Lists.newArrayList();
+	private List<NecronomiconRitual> rituals = new ArrayList<>();
 
 
 	public GuiNecronomiconRitualEntry(int bookType, GuiNecronomicon gui, int ritualnum){

@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon.condition.caps;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.ConditionProcessorRegistry;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
@@ -21,13 +21,13 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class NecroDataCapability implements INecroDataCapability {
 
-	List<String> biome_triggers = Lists.newArrayList();
-	List<String> entity_triggers = Lists.newArrayList();
-	List<Integer> dimension_triggers = Lists.newArrayList();
-	List<String> artifact_triggers = Lists.newArrayList();
-	List<String> page_triggers = Lists.newArrayList();
-	List<String> whisper_triggers = Lists.newArrayList();
-	List<String> misc_triggers = Lists.newArrayList();
+	List<String> biome_triggers = new ArrayList<>();
+	List<String> entity_triggers = new ArrayList<>();
+	List<Integer> dimension_triggers = new ArrayList<>();
+	List<String> artifact_triggers = new ArrayList<>();
+	List<String> page_triggers = new ArrayList<>();
+	List<String> whisper_triggers = new ArrayList<>();
+	List<String> misc_triggers = new ArrayList<>();
 
 	boolean hasAllKnowledge;
 

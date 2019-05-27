@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 
@@ -27,14 +26,14 @@ public class UpgradeKitRecipes {
 	private static final UpgradeKitRecipes instance = new UpgradeKitRecipes();
 
 	private final Map<ItemUpgradeKit, Map<ItemStack, ItemStack>> upgrades = new HashMap<ItemUpgradeKit, Map<ItemStack, ItemStack>>(){{
-		put((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, Maps.newHashMap());
-		put((ItemUpgradeKit)ACItems.iron_upgrade_kit, Maps.newHashMap());
-		put((ItemUpgradeKit)ACItems.gold_upgrade_kit, Maps.newHashMap());
-		put((ItemUpgradeKit)ACItems.diamond_upgrade_kit, Maps.newHashMap());
-		put((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, Maps.newHashMap());
-		put((ItemUpgradeKit)ACItems.coralium_upgrade_kit, Maps.newHashMap());
-		put((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, Maps.newHashMap());
-		put((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, Maps.newHashMap());
+		put((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new HashMap<>());
+		put((ItemUpgradeKit)ACItems.iron_upgrade_kit, new HashMap<>());
+		put((ItemUpgradeKit)ACItems.gold_upgrade_kit, new HashMap<>());
+		put((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new HashMap<>());
+		put((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new HashMap<>());
+		put((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new HashMap<>());
+		put((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new HashMap<>());
+		put((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new HashMap<>());
 	}};
 
 	public static UpgradeKitRecipes instance(){
@@ -42,7 +41,7 @@ public class UpgradeKitRecipes {
 	}
 
 	public void addUpgradeKit(ItemUpgradeKit kit){
-		upgrades.put(kit, Maps.newHashMap());
+		upgrades.put(kit, new HashMap<>());
 	}
 
 	public void addUpgrade(ItemUpgradeKit kit, ItemStack input, ItemStack output){

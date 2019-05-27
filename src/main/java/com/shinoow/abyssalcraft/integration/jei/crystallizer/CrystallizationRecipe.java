@@ -39,7 +39,7 @@ public class CrystallizationRecipe implements IRecipeWrapper {
 	public CrystallizationRecipe(@Nonnull List<ItemStack> input, @Nonnull ItemStack output, ItemStack output2, float experience) {
 		this.input = Collections.singletonList(input);
 
-		outputs = new ArrayList();
+		outputs = new ArrayList<>();
 		Collections.addAll(outputs, output, output2);
 
 		if (experience > 0.0)

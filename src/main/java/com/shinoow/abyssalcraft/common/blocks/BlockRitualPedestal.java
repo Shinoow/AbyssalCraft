@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.HashMap;
 import java.util.Random;
 
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar.EnumRitualMatType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualPedestal;
@@ -44,7 +43,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockRitualPedestal extends BlockContainer {
 
-	private static HashMap<Integer, IBlockState> blockMeta = Maps.newHashMap();
+	private static HashMap<Integer, IBlockState> blockMeta = new HashMap<>();
 	public static final PropertyEnum<EnumRitualMatType> MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 
 	public BlockRitualPedestal() {

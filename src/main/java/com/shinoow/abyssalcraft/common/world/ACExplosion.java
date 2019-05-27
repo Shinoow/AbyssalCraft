@@ -49,10 +49,10 @@ public class ACExplosion extends Explosion
 	public Entity exploder;
 	public float explosionSize;
 	/** A list of BlockPos of blocks affected by this explosion */
-	public List<BlockPos> affectedBlockPositions = new ArrayList<BlockPos>();
-	private List<BlockPos> innerBlocks = new ArrayList<BlockPos>();
-	private List<BlockPos> outerBlocks = new ArrayList<BlockPos>();
-	private Map<EntityPlayer, Vec3d> field_77288_k = new HashMap<EntityPlayer, Vec3d>();
+	public List<BlockPos> affectedBlockPositions = new ArrayList<>();
+	private List<BlockPos> innerBlocks = new ArrayList<>();
+	private List<BlockPos> outerBlocks = new ArrayList<>();
+	private Map<EntityPlayer, Vec3d> playerKnockbackMap = new HashMap<>();
 
 	public ACExplosion(World world, Entity entity, double x, double y, double z, float strength, boolean antimatter, boolean smoke)
 	{
@@ -195,7 +195,7 @@ public class ACExplosion extends Explosion
 								EntityPlayer entityplayer = (EntityPlayer)entity;
 
 								if (!entityplayer.isSpectator() && (!entityplayer.isCreative() || !entityplayer.capabilities.isFlying))
-									field_77288_k.put(entityplayer, new Vec3d(d5 * d10, d7 * d10, d9 * d10));
+									playerKnockbackMap.put(entityplayer, new Vec3d(d5 * d10, d7 * d10, d9 * d10));
 							}
 						}
 					}
@@ -277,7 +277,7 @@ public class ACExplosion extends Explosion
 	@Override
 	public Map<EntityPlayer, Vec3d> getPlayerKnockbackMap()
 	{
-		return field_77288_k;
+		return playerKnockbackMap;
 	}
 
 	@Override

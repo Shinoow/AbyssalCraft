@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.energy;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
@@ -120,7 +120,7 @@ public class PEUtils {
 		int yp = pos.getY();
 		int zp = pos.getZ();
 
-		List<TileEntity> collectors = Lists.newArrayList();
+		List<TileEntity> collectors = new ArrayList<>();
 
 		for(int x = -1*(3+boost); x <= 3+boost; x++)
 			for(int y = 0; y <= getRangeAmplifiers(world, pos, manipulator); y++)

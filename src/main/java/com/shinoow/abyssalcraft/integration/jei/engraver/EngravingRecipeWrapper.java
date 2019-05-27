@@ -12,13 +12,12 @@
 package com.shinoow.abyssalcraft.integration.jei.engraver;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import com.google.common.collect.Lists;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -74,7 +73,7 @@ public class EngravingRecipeWrapper implements IRecipeWrapper {
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {
-		List<List<ItemStack>> inputs = Lists.newArrayList(input);
+		List<List<ItemStack>> inputs = new ArrayList<>(input);
 		inputs.add(Collections.singletonList(engraving));
 		ingredients.setInputLists(ItemStack.class, inputs);
 		ingredients.setOutputs(ItemStack.class, output);

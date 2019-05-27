@@ -11,12 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.materializer;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.recipe.Materialization;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -44,7 +44,7 @@ public class MaterializationRecipeWrapper implements IRecipeWrapper {
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {
-		List<List<ItemStack>> inputs = Lists.newArrayList();
+		List<List<ItemStack>> inputs = new ArrayList<>();
 
 		for(ItemStack stack : input)
 			inputs.add(Collections.singletonList(stack));

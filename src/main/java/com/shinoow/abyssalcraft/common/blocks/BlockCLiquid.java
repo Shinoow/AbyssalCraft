@@ -11,11 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
@@ -42,13 +42,13 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockCLiquid extends BlockFluidClassic {
 
-	List<IBlockState> dusts = Lists.newArrayList();
-	List<IBlockState> metalloids = Lists.newArrayList();
-	List<IBlockState> gems = Lists.newArrayList();
-	List<IBlockState> stones = Lists.newArrayList();
-	List<IBlockState> bricks = Lists.newArrayList();
-	List<IBlockState> metals = Lists.newArrayList();
-	List<IBlockState> cobble = Lists.newArrayList();
+	private List<IBlockState> dusts = new ArrayList<>();
+	private List<IBlockState> metalloids = new ArrayList<>();
+	private List<IBlockState> gems = new ArrayList<>();
+	private List<IBlockState> stones = new ArrayList<>();
+	private List<IBlockState> bricks = new ArrayList<>();
+	private List<IBlockState> metals = new ArrayList<>();
+	private List<IBlockState> cobble = new ArrayList<>();
 
 	public BlockCLiquid() {
 		super(AbyssalCraftAPI.liquid_coralium_fluid, Material.WATER);
@@ -140,7 +140,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 	}
 
 	private List<IBlockState> oresToBlocks(List<ItemStack> list){
-		List<IBlockState> blocks = Lists.newArrayList();
+		List<IBlockState> blocks = new ArrayList<>();
 		for(ItemStack stack : list){
 			Block block = Block.getBlockFromItem(stack.getItem());
 			if(block != null && block != Blocks.AIR)

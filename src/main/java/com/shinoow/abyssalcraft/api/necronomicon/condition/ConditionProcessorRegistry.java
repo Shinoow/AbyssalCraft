@@ -11,11 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon.condition;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.Level;
-
-import com.google.common.collect.Maps;
 
 import net.minecraftforge.fml.common.FMLLog;
 
@@ -28,13 +27,15 @@ import net.minecraftforge.fml.common.FMLLog;
  */
 public class ConditionProcessorRegistry {
 
-	private final Map<Integer, IConditionProcessor> processors = Maps.newHashMap();
+	private final Map<Integer, IConditionProcessor> processors = new HashMap<>();
 
 	private static final ConditionProcessorRegistry INSTANCE = new ConditionProcessorRegistry();
 
 	public static ConditionProcessorRegistry instance() {
 		return INSTANCE;
 	}
+
+	private ConditionProcessorRegistry(){}
 
 	/**
 	 * Registers a Condition Processor

@@ -11,11 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.omothol;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -62,7 +59,7 @@ public class StructureOmotholPieces
 
 	public static List<StructureOmotholPieces.PieceWeight> getStructureVillageWeightedPieceList(Random random, int p_75084_1_)
 	{
-		List<StructureOmotholPieces.PieceWeight> list = Lists.<StructureOmotholPieces.PieceWeight>newArrayList();
+		List<StructureOmotholPieces.PieceWeight> list = new ArrayList<>();
 		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.House4Garden.class, 4, MathHelper.getInt(random, 2 + p_75084_1_, 4 + p_75084_1_ * 2)));
 		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.Church.class, 20, MathHelper.getInt(random, 0 + p_75084_1_, 1 + p_75084_1_)));
 		list.add(new StructureOmotholPieces.PieceWeight(StructureOmotholPieces.House1.class, 20, MathHelper.getInt(random, 0 + p_75084_1_, 2 + p_75084_1_)));
@@ -1621,8 +1618,8 @@ public class StructureOmotholPieces
 		public int terrainType;
 		public StructureOmotholPieces.PieceWeight structVillagePieceWeight;
 		public List<StructureOmotholPieces.PieceWeight> structureVillageWeightedPieceList;
-		public List<StructureComponent> field_74932_i = Lists.<StructureComponent>newArrayList();
-		public List<StructureComponent> field_74930_j = Lists.<StructureComponent>newArrayList();
+		public List<StructureComponent> field_74932_i = new ArrayList<>();
+		public List<StructureComponent> field_74930_j = new ArrayList<>();
 		public Biome biome;
 
 		public Start()

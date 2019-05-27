@@ -12,9 +12,9 @@
 package com.shinoow.abyssalcraft.common.network.server;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
 
 import net.minecraft.block.state.IBlockState;
@@ -107,7 +107,7 @@ public class MobSpellMessage extends AbstractServerMessage<MobSpellMessage> {
 				target.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 6000, 0, false, false));
 				break;
 			case 3:
-				List<EntityEquipmentSlot> slots = Lists.newArrayList();
+				List<EntityEquipmentSlot> slots = new ArrayList<>();
 				for(EntityEquipmentSlot slot : EntityEquipmentSlot.values())
 					if(target.hasItemInSlot(slot))
 						slots.add(slot);

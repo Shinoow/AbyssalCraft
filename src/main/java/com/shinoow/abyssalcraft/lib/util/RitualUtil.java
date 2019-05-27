@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.util;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
@@ -32,8 +32,8 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
  */
 public class RitualUtil {
 
-	private static Map<IBlockState, Integer> ritualBlocks = Maps.newHashMap();
-	private static Map<IBlockState, Integer> altarMeta = Maps.newHashMap();
+	private static Map<IBlockState, Integer> ritualBlocks = new HashMap<>();
+	private static Map<IBlockState, Integer> altarMeta = new HashMap<>();
 
 	public static void addBlocks(){
 		ritualBlocks.put(Blocks.COBBLESTONE.getDefaultState(), 0);

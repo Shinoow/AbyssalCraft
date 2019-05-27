@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
@@ -109,7 +109,7 @@ public class APIUtils {
 	public static boolean areItemStackArraysEqual(Object[] array1, ItemStack[] array2, boolean nbt){
 
 		List<Object> compareList = nonNullList(array1);
-		List<ItemStack> itemList = Lists.newArrayList();
+		List<ItemStack> itemList = new ArrayList<>();
 
 		for(ItemStack item : array2)
 			if(!item.isEmpty())
@@ -132,7 +132,7 @@ public class APIUtils {
 	 * for visual alignment in a GUI (like, say, the Necronomicon).
 	 */
 	private static List<Object> nonNullList(Object[] array){
-		List<Object> l = Lists.newArrayList();
+		List<Object> l = new ArrayList<>();
 
 		for(Object o : array)
 			if(o != null)

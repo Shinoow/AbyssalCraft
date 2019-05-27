@@ -13,11 +13,11 @@ package com.shinoow.abyssalcraft.common.handlers;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import com.google.common.collect.Lists;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -54,7 +54,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
-	private final List<NecroData> internalNecroData = Lists.newArrayList();
+	private final List<NecroData> internalNecroData = new ArrayList<>();
 
 	public InternalNecroDataHandler(){
 		Chapter outergods = new Chapter("outergods", NecronomiconText.LABEL_OUTER_GODS, 0);

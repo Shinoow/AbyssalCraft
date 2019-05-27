@@ -11,13 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.ritual;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Nonnull;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -118,7 +115,7 @@ public class RitualRecipeWrapper implements IRecipeWrapper {
 
 	private List<ItemStack> getList(Object obj){
 		if(obj instanceof ItemStack[])
-			return Lists.newArrayList((ItemStack[])obj);
+			return Arrays.asList((ItemStack[])obj);
 		if(obj instanceof String)
 			return OreDictionary.getOres((String)obj);
 		if(obj instanceof List)
@@ -129,7 +126,7 @@ public class RitualRecipeWrapper implements IRecipeWrapper {
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 
-		List<List<ItemStack>> input = Lists.newArrayList();
+		List<List<ItemStack>> input = new ArrayList<>();
 
 		for(Object obj : offerings)
 			input.add(list(obj) ? getList(obj) : Collections.singletonList(APIUtils.convertToStack(obj)));

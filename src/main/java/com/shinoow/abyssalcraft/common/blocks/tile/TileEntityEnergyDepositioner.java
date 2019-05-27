@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -282,7 +282,7 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	private void processItem(){
 
 		float n = 0;
-		List<BlockPos> positions = Lists.newArrayList();
+		List<BlockPos> positions = new ArrayList<>();
 
 		for(int x = pos.getX() -8; x < pos.getX() + 9; x++)
 			for(int z = pos.getZ() - 8; z < pos.getZ() + 9; z++){

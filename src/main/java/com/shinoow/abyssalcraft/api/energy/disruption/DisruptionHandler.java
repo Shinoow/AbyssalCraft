@@ -11,11 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.energy.disruption;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.event.ACEvents.DisruptionEvent;
@@ -34,13 +34,15 @@ import net.minecraftforge.fml.common.FMLLog;
  */
 public class DisruptionHandler {
 
-	private final List<DisruptionEntry> disruptions = Lists.newArrayList();
+	private final List<DisruptionEntry> disruptions = new ArrayList<>();
 
 	private static final DisruptionHandler instance = new DisruptionHandler();
 
 	public static DisruptionHandler instance(){
 		return instance;
 	}
+
+	private DisruptionHandler(){}
 
 	/**
 	 * Registers a Disruption Entry
@@ -111,7 +113,7 @@ public class DisruptionHandler {
 	 */
 	public DisruptionEntry getRandomDisruption(DeityType deity, World world) {
 		if(world.isRemote) return null;
-		List<DisruptionEntry> dis = Lists.newArrayList();
+		List<DisruptionEntry> dis = new ArrayList<>();
 
 		if(deity == null){
 			for(DisruptionEntry entry : disruptions)

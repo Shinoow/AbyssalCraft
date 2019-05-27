@@ -12,14 +12,10 @@
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.lwjgl.input.Keyboard;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -86,8 +82,8 @@ public class GuiNecronomicon extends GuiScreen {
 	private boolean isNecroInfo, isKnowledgeInfo;
 	/** Used to invalidate the current Necronomicon Gui (like if a lower Necronomicon tries to read information for a higher one) */
 	protected boolean isInvalid;
-	public static final Map<String, DynamicTexture> successcache = Maps.newHashMap();
-	public static final List<String> failcache = Lists.newArrayList();
+	public static final Map<String, DynamicTexture> successcache = new HashMap<>();
+	public static final List<String> failcache = new ArrayList<>();
 	private static Chapter patreon;
 	private INecroDataCapability cap;
 
@@ -511,7 +507,7 @@ public class GuiNecronomicon extends GuiScreen {
 	}
 
 	private List<ItemStack> getList(Object obj){
-		List<ItemStack> l = Lists.newArrayList();
+		List<ItemStack> l = new ArrayList<>();
 
 		if(obj instanceof ItemStack[]) {
 			for(ItemStack stack : (ItemStack[])obj)
@@ -580,7 +576,7 @@ public class GuiNecronomicon extends GuiScreen {
 		if(tooltipStack != null)
 		{
 			List<String> tooltipData = tooltipStack.getTooltip(mc.player, TooltipFlags.NORMAL);
-			List<String> parsedTooltip = new ArrayList();
+			List<String> parsedTooltip = new ArrayList<>();
 			boolean first = true;
 
 			for(String s : tooltipData)

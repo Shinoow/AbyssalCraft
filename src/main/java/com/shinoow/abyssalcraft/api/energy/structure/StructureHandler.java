@@ -11,11 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.energy.structure;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
-
-import com.google.common.collect.Lists;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -32,7 +31,7 @@ import net.minecraftforge.fml.common.FMLLog;
  */
 public class StructureHandler {
 
-	private final List<IPlaceOfPower> structures = Lists.newArrayList();
+	private final List<IPlaceOfPower> structures = new ArrayList<>();
 
 	private static final StructureHandler instance = new StructureHandler();
 

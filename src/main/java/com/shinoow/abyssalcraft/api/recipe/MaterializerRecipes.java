@@ -11,10 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.recipe;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.APIUtils;
 
 import net.minecraft.item.ItemStack;
@@ -26,17 +24,14 @@ public class MaterializerRecipes {
 
 	private static final MaterializerRecipes materializerBase = new MaterializerRecipes();
 	/** The list of materialization results. */
-	private final List<Materialization> materializationList = Lists.newArrayList();
+	private final List<Materialization> materializationList = new ArrayList<>();
 
 	public static MaterializerRecipes instance()
 	{
 		return materializerBase;
 	}
 
-	private MaterializerRecipes()
-	{
-
-	}
+	private MaterializerRecipes(){}
 
 	public void materialize(ItemStack[] input, ItemStack output){
 
@@ -58,7 +53,7 @@ public class MaterializerRecipes {
 
 		if(inventory == null) return Collections.emptyList();
 
-		List<ItemStack> displayList = Lists.newArrayList();
+		List<ItemStack> displayList = new ArrayList<>();
 
 		for(Materialization mat : materializationList)
 			if(arrayContainsOtherArray(inventory, mat.input))
@@ -208,7 +203,7 @@ public class MaterializerRecipes {
 	 * @return True if the first array contains the contents of the second, otherwise false
 	 */
 	private boolean arrayContainsOtherArray(ItemStack[] array1, ItemStack[] array2){
-		List<ItemStack> inventory = Lists.newArrayList(array1);
+		List<ItemStack> inventory = Arrays.asList(array1);
 		List<ItemStack> recipe = makeNonWriteThroughList(array2);
 
 		if(inventory.size() >= recipe.size())
@@ -234,7 +229,7 @@ public class MaterializerRecipes {
 		for(int i = 0; i < array.length; i++)
 			inputTmp[i] = array[i].copy();
 
-		return Lists.newArrayList(inputTmp);
+		return Arrays.asList(inputTmp);
 	}
 
 	public List<Materialization> getMaterializationList()

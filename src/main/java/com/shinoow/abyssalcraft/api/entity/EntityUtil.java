@@ -11,10 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 
@@ -39,7 +39,7 @@ public final class EntityUtil {
 
 	private EntityUtil(){}
 
-	private static final List<Class<? extends EntityLivingBase>> shoggothFood = Lists.newArrayList();
+	private static final List<Class<? extends EntityLivingBase>> shoggothFood = new ArrayList<>();
 
 	/**
 	 * Checks if the Entity is immune to the Coralium Plague

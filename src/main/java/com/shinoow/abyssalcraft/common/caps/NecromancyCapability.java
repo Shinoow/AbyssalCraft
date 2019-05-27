@@ -11,11 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.caps;
 
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import java.util.*;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,8 +19,8 @@ import net.minecraft.util.Tuple;
 
 public class NecromancyCapability implements INecromancyCapability {
 
-	List<Tuple<String, NBTTagCompound>> data = Lists.newArrayList();
-	Map<String, Integer> sizes = Maps.newHashMap();
+	List<Tuple<String, NBTTagCompound>> data = new ArrayList<>();
+	Map<String, Integer> sizes = new HashMap<>();
 
 	public static INecromancyCapability getCap(EntityPlayer player){
 		return player.getCapability(NecromancyCapabilityProvider.NECROMANCY_CAP, null);

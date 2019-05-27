@@ -11,12 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.handlers;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.lwjgl.input.Mouse;
 
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
@@ -396,7 +396,7 @@ public class AbyssalCraftClientEventHooks {
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 				String stuff = "abyssalcraft:"+state.getValue(BlockStatue.TYPE).getName()+"statue";
-				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
+				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
 				map.remove(BlockStatue.TYPE);
 				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
@@ -404,7 +404,7 @@ public class AbyssalCraftClientEventHooks {
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 				String stuff = "abyssalcraft:"+state.getValue(BlockStatue.TYPE).getName()+"statue";
-				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
+				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
 				map.remove(BlockStatue.TYPE);
 				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
@@ -412,7 +412,7 @@ public class AbyssalCraftClientEventHooks {
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 				String stuff = "abyssalcraft:"+state.getValue(BlockACCobblestone.TYPE).getState();
-				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
+				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
 				map.remove(BlockACCobblestone.TYPE);
 				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
@@ -420,7 +420,7 @@ public class AbyssalCraftClientEventHooks {
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 				String stuff = "abyssalcraft:"+state.getValue(IngotBlock.TYPE).getState();
-				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
+				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
 				map.remove(IngotBlock.TYPE);
 				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
@@ -444,7 +444,7 @@ public class AbyssalCraftClientEventHooks {
 				default:
 					break;
 				}
-				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
+				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
 				map.remove(BlockTieredEnergyPedestal.DIMENSION);
 				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
@@ -452,7 +452,7 @@ public class AbyssalCraftClientEventHooks {
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 				String stuff = "abyssalcraft:"+state.getValue(BlockACStone.TYPE).getState();
-				Map<IProperty<?>, Comparable<?>> map = Maps.newLinkedHashMap(state.getProperties());
+				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
 				map.remove(BlockACStone.TYPE);
 				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});

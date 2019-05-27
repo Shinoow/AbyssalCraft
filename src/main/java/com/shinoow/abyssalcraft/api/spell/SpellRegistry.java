@@ -11,11 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.spell;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.APIUtils;
 
 import net.minecraft.item.ItemStack;
@@ -31,13 +31,15 @@ import net.minecraftforge.fml.common.FMLLog;
  */
 public class SpellRegistry {
 
-	private final List<Spell> spells = Lists.newArrayList();
+	private final List<Spell> spells = new ArrayList<>();
 
 	private static final SpellRegistry instance = new SpellRegistry();
 
 	public static SpellRegistry instance(){
 		return instance;
 	}
+
+	private SpellRegistry(){}
 
 	/**
 	 * Registes a Necronomicon Spell

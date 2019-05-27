@@ -17,12 +17,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -91,21 +87,21 @@ public class InitHandler implements ILifeCycleHandler {
 	public static final Fluid LIQUID_ANTIMATTER = new Fluid("liquidantimatter", new ResourceLocation("abyssalcraft", "blocks/anti_still"),
 			new ResourceLocation("abyssalcraft", "blocks/anti_flow")).setDensity(4000).setViscosity(1500).setTemperature(100);
 
-	private static final List<ItemStack> abyssal_zombie_blacklist = Lists.newArrayList();
-	private static final List<ItemStack> depths_ghoul_blacklist = Lists.newArrayList();
-	private static final List<ItemStack> anti_abyssal_zombie_blacklist = Lists.newArrayList();
-	private static final List<ItemStack> anti_ghoul_blacklist = Lists.newArrayList();
-	private static final List<ItemStack> omothol_ghoul_blacklist = Lists.newArrayList();
+	private static final List<ItemStack> abyssal_zombie_blacklist = new ArrayList<>();
+	private static final List<ItemStack> depths_ghoul_blacklist = new ArrayList<>();
+	private static final List<ItemStack> anti_abyssal_zombie_blacklist = new ArrayList<>();
+	private static final List<ItemStack> anti_ghoul_blacklist = new ArrayList<>();
+	private static final List<ItemStack> omothol_ghoul_blacklist = new ArrayList<>();
 
-	public static final Map<ResourceLocation, Tuple<Integer, Float>> demon_transformations = Maps.newHashMap();
+	public static final Map<ResourceLocation, Tuple<Integer, Float>> demon_transformations = new HashMap<>();
 
-	final List<Block> BLOCKS = Lists.newArrayList();
-	final List<Item> ITEMS = Lists.newArrayList();
-	final List<Biome> BIOMES = Lists.newArrayList();
-	final List<Enchantment> ENCHANTMENTS = Lists.newArrayList();
-	final List<Potion> POTIONS = Lists.newArrayList();
-	final List<PotionType> POTION_TYPES = Lists.newArrayList();
-	final List<SoundEvent> SOUND_EVENTS = Lists.newArrayList();
+	final List<Block> BLOCKS = new ArrayList<>();
+	final List<Item> ITEMS = new ArrayList<>();
+	final List<Biome> BIOMES = new ArrayList<>();
+	final List<Enchantment> ENCHANTMENTS = new ArrayList<>();
+	final List<Potion> POTIONS = new ArrayList<>();
+	final List<PotionType> POTION_TYPES = new ArrayList<>();
+	final List<SoundEvent> SOUND_EVENTS = new ArrayList<>();
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {

@@ -24,18 +24,15 @@ public class CrystallizerRecipes {
 
 	private static final CrystallizerRecipes crystallizationBase = new CrystallizerRecipes();
 	/** The list of crystallization results. */
-	private final Map<ItemStack, ItemStack[]> crystallizationList = new HashMap<ItemStack, ItemStack[]>();
-	private final Map<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
+	private final Map<ItemStack, ItemStack[]> crystallizationList = new HashMap<>();
+	private final Map<ItemStack, Float> experienceList = new HashMap<>();
 
 	public static CrystallizerRecipes instance()
 	{
 		return crystallizationBase;
 	}
 
-	private CrystallizerRecipes()
-	{
-
-	}
+	private CrystallizerRecipes(){}
 
 	public void crystallize(Block input, ItemStack output1, ItemStack output2, float xp)
 	{

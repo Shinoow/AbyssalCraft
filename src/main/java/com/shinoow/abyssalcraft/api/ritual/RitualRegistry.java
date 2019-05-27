@@ -11,13 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.ritual;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.logging.log4j.Level;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
 
 import net.minecraft.item.ItemStack;
@@ -31,16 +28,18 @@ import net.minecraftforge.fml.common.FMLLog;
  */
 public class RitualRegistry {
 
-	private final Map<Integer, Integer> dimToBookType = Maps.newHashMap();
-	private final Map<Integer, String> dimToName = Maps.newHashMap();
-	private final Map<NecronomiconRitual, Integer> ritualToBookType = Maps.newHashMap();
-	private final List<NecronomiconRitual> rituals = Lists.newArrayList();
+	private final Map<Integer, Integer> dimToBookType = new HashMap<>();
+	private final Map<Integer, String> dimToName = new HashMap<>();
+	private final Map<NecronomiconRitual, Integer> ritualToBookType = new HashMap<>();
+	private final List<NecronomiconRitual> rituals = new ArrayList<>();
 
 	private static final RitualRegistry instance = new RitualRegistry();
 
 	public static RitualRegistry instance(){
 		return instance;
 	}
+
+	private RitualRegistry(){}
 
 	/**
 	 * Maps a dimension to a book type, in order to specify dimensions where a ritual of that book type can be performed

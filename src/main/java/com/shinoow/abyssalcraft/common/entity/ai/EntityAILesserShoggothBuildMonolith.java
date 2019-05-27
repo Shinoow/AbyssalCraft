@@ -11,12 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.ai;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
@@ -41,7 +41,7 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 	public EntityAILesserShoggothBuildMonolith(EntityLesserShoggoth shoggoth) {
 		this.shoggoth = shoggoth;
 		world = shoggoth.world;
-		shoggoths = Lists.newArrayList();
+		shoggoths = new ArrayList<>();
 		setMutexBits(3);
 	}
 

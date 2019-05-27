@@ -11,10 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity.layers;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.authlib.properties.Property;
@@ -39,7 +39,7 @@ public class LayerEvilSheepWool implements LayerRenderer<EntityEvilSheep>
 	private static final ResourceLocation TEXTURE = new ResourceLocation("textures/entity/sheep/sheep_fur.png");
 	private final RenderEvilSheep sheepRenderer;
 	private final ModelEvilSheep1 sheepModel = new ModelEvilSheep1();
-	private final Map<GameProfile, GameProfile> checkedProfiles = Maps.newHashMap();
+	private final Map<GameProfile, GameProfile> checkedProfiles = new HashMap<>();
 
 	public LayerEvilSheepWool(RenderEvilSheep sheepRendererIn)
 	{

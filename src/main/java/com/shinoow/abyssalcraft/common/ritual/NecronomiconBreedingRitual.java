@@ -11,10 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.ritual;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 
@@ -45,14 +45,14 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player){
 
-		List<EntityCow> cows = Lists.newArrayList();
-		List<EntityChicken> chickens = Lists.newArrayList();
-		List<EntityPig> pigs = Lists.newArrayList();
-		List<EntitySheep> sheeps = Lists.newArrayList();
-		List<EntityHorse> horses = Lists.newArrayList();
-		List<EntityOcelot> ocelots = Lists.newArrayList();
-		List<EntityWolf> wolves = Lists.newArrayList();
-		List<EntityRabbit> rabbits = Lists.newArrayList();
+		List<EntityCow> cows = new ArrayList<>();
+		List<EntityChicken> chickens = new ArrayList<>();
+		List<EntityPig> pigs = new ArrayList<>();
+		List<EntitySheep> sheeps = new ArrayList<>();
+		List<EntityHorse> horses = new ArrayList<>();
+		List<EntityOcelot> ocelots = new ArrayList<>();
+		List<EntityWolf> wolves = new ArrayList<>();
+		List<EntityRabbit> rabbits = new ArrayList<>();
 
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).grow(16, 3, 16));
 		for(Entity entity : entities){

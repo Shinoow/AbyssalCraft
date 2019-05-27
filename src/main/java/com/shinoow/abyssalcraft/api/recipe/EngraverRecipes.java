@@ -11,12 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.recipe;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 
@@ -28,10 +25,10 @@ public class EngraverRecipes {
 
 	private static final EngraverRecipes engravingBase = new EngraverRecipes();
 
-	private final List<ItemStack> coins = Lists.newArrayList();
-	private final Map<ItemEngraving, ItemStack> engravings = Maps.newHashMap();
-	private final Map<ItemStack, ItemStack> engravingList = Maps.newHashMap();
-	private final Map<ItemStack, Float> experienceList = Maps.newHashMap();
+	private final List<ItemStack> coins = new ArrayList<>();
+	private final Map<ItemEngraving, ItemStack> engravings = new HashMap<>();
+	private final Map<ItemStack, ItemStack> engravingList = new HashMap<>();
+	private final Map<ItemStack, Float> experienceList = new HashMap<>();
 
 	public static EngraverRecipes instance()
 	{

@@ -19,8 +19,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
@@ -43,7 +41,7 @@ public class NecroData implements INecroData {
 	private String identifier;
 	private String title;
 	private String information;
-	private List<INecroData> containedData = Lists.newArrayList();
+	private List<INecroData> containedData = new ArrayList<>();
 	private IUnlockCondition condition;
 	private int displayIcon;
 
@@ -161,7 +159,7 @@ public class NecroData implements INecroData {
 	 * @since 1.6
 	 */
 	public static class Chapter implements INecroData {
-		private NavigableMap<Integer, Page> pages = Maps.newTreeMap((o1, o2) -> {
+		private NavigableMap<Integer, Page> pages = new TreeMap<>((o1, o2) -> {
 			return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
 		});
 		private String identifier;
@@ -279,7 +277,7 @@ public class NecroData implements INecroData {
 		 */
 		public void removePage(int pageNum){
 			pages.remove(pageNum);
-			NavigableMap<Integer, Page> newPages = Maps.newTreeMap((o1, o2) -> {
+			NavigableMap<Integer, Page> newPages = new TreeMap<>((o1, o2) -> {
 				return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
 			});
 			for(Entry<Integer, Page> e : pages.entrySet())
@@ -315,7 +313,7 @@ public class NecroData implements INecroData {
 		 */
 		public void insertPage(Page page) {
 			if(hasPage(page.pageNum)) {
-				NavigableMap<Integer, Page> newPages = Maps.newTreeMap((o1, o2) -> {
+				NavigableMap<Integer, Page> newPages = new TreeMap<>((o1, o2) -> {
 					return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
 				});
 				for(Entry<Integer, Page> e : pages.entrySet())

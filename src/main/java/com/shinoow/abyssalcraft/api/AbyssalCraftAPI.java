@@ -11,13 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.logging.log4j.Level;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.internal.*;
@@ -71,16 +68,16 @@ public class AbyssalCraftAPI {
 	public static final DamageSource shadow = new DamageSource("shadow").setDamageBypassesArmor().setDamageIsAbsolute();
 	public static final DamageSource acid = new DamageSource("shoggoth_acid").setDamageBypassesArmor().setDamageIsAbsolute();
 
-	private static final List<ItemStack> crystals = Lists.newArrayList();
+	private static final List<ItemStack> crystals = new ArrayList<>();
 
-	private static final Map<NecroData, Integer> necroData = Maps.newHashMap();
+	private static final Map<NecroData, Integer> necroData = new HashMap<>();
 
-	private static final Map<Item, ResourceLocation> ghoul_helmet = Maps.newHashMap();
-	private static final Map<Item, ResourceLocation> ghoul_chestplate = Maps.newHashMap();
-	private static final Map<Item, ResourceLocation> ghoul_leggings = Maps.newHashMap();
-	private static final Map<Item, ResourceLocation> ghoul_boots = Maps.newHashMap();
+	private static final Map<Item, ResourceLocation> ghoul_helmet = new HashMap<>();
+	private static final Map<Item, ResourceLocation> ghoul_chestplate = new HashMap<>();
+	private static final Map<Item, ResourceLocation> ghoul_leggings = new HashMap<>();
+	private static final Map<Item, ResourceLocation> ghoul_boots = new HashMap<>();
 
-	private static final Map<Integer, Integer> gateway_key_overrides = Maps.newHashMap();
+	private static final Map<Integer, Integer> gateway_key_overrides = new HashMap<>();
 
 	/**
 	 *  {@link EnumCreatureAttribute} used for the Shadow mobs

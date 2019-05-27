@@ -20,7 +20,6 @@ import javax.vecmath.Vector4f;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.structure.IPlaceOfPower;
@@ -56,7 +55,7 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 	private GuiButton buttonDone;
 	private ButtonHome buttonHome;
 	private GuiNecronomicon parent;
-	private List<IPlaceOfPower> places = Lists.newArrayList();
+	private List<IPlaceOfPower> places = new ArrayList<>();
 	private int ticksInBook;
 	private boolean showMultiblock = false;
 	private MultiblockRenderData multiblockObj = new MultiblockRenderData();

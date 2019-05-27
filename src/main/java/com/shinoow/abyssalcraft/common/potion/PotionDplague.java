@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.potion;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
@@ -174,7 +174,7 @@ public class PotionDplague extends Potion{
 	@Override
 	public List<ItemStack> getCurativeItems()
 	{
-		List<ItemStack> list = Lists.newArrayList();
+		List<ItemStack> list = new ArrayList<>();
 		list.add(new ItemStack(ACItems.antidote, 1, 1));
 		return list;
 	}

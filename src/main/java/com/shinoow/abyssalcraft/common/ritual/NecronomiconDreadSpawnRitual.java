@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.ritual;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
@@ -46,9 +46,9 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
-		List<EntityDreadSpawn> dreadSpawns = Lists.newArrayList();
-		List<EntityGreaterDreadSpawn> greaterDreadSpawns = Lists.newArrayList();
-		List<EntityLesserDreadbeast> lesserDreadBeasts = Lists.newArrayList();
+		List<EntityDreadSpawn> dreadSpawns = new ArrayList<>();
+		List<EntityGreaterDreadSpawn> greaterDreadSpawns = new ArrayList<>();
+		List<EntityLesserDreadbeast> lesserDreadBeasts = new ArrayList<>();
 
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).grow(16, 3, 16));
 		for(Entity entity : entities){
