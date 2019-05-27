@@ -29,9 +29,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional.Interface;
+import net.minecraftforge.fml.common.Optional.Method;
+import thaumcraft.api.crafting.IInfusionStabiliser;
 
-//@Interface(modid = "Thaumcraft", iface = "thaumcraft.api.crafting.IInfusionStabiliser", striprefs = true)
-public class BlockDGhead extends BlockContainer /*implements IInfusionStabiliser*/ {
+@Interface(modid = "thaumcraft", iface = "thaumcraft.api.crafting.IInfusionStabiliser", striprefs = true)
+public class BlockDGhead extends BlockContainer implements IInfusionStabiliser {
 
 
 	public BlockDGhead() {
@@ -88,10 +91,10 @@ public class BlockDGhead extends BlockContainer /*implements IInfusionStabiliser
 		return null;
 	}
 
-	//	@Override
-	//	@Method(modid = "Thaumcraft")
-	//	public boolean canStabaliseInfusion(World world, BlockPos pos) {
-	//
-	//		return true;
-	//	}
+	@Override
+	@Method(modid = "thaumcraft")
+	public boolean canStabaliseInfusion(World world, BlockPos pos) {
+
+		return true;
+	}
 }
