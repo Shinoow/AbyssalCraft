@@ -28,6 +28,7 @@ import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,7 +37,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -65,29 +65,29 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
 	{
-		ItemStack par1ItemStack = par3EntityPlayer.getHeldItem(hand);
-		if(!par1ItemStack.hasTagCompound())
-			par1ItemStack.setTagCompound(new NBTTagCompound());
-		if(!par1ItemStack.getTagCompound().hasKey("owner")){
-			par1ItemStack.getTagCompound().setString("owner", par3EntityPlayer.getName());
+		ItemStack stack = par3EntityPlayer.getHeldItem(hand);
+		if(!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+		if(!stack.getTagCompound().hasKey("owner")){
+			stack.getTagCompound().setString("owner", par3EntityPlayer.getName());
 			if(!par3EntityPlayer.isSneaking()){
 				if(!par2World.isRemote && ACConfig.syncDataOnBookOpening)
 					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
 				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
-				return new ActionResult(EnumActionResult.SUCCESS, par1ItemStack);
+				return new ActionResult(EnumActionResult.SUCCESS, stack);
 			}
 		}
-		if(par1ItemStack.getTagCompound().getString("owner").equals(par3EntityPlayer.getName())){
+		if(stack.getTagCompound().getString("owner").equals(par3EntityPlayer.getName())){
 			if(!par3EntityPlayer.isSneaking()){
 				if(!par2World.isRemote && ACConfig.syncDataOnBookOpening)
 					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
 				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
-				return new ActionResult(EnumActionResult.SUCCESS, par1ItemStack);
+				return new ActionResult(EnumActionResult.SUCCESS, stack);
 			}
 		}
 		else if(par2World.isRemote)
-			SpecialTextUtil.JzaharText(I18n.translateToLocal("message.necronomicon.nope"));
-		return new ActionResult(EnumActionResult.PASS, par1ItemStack);
+			SpecialTextUtil.JzaharText(I18n.format("message.necronomicon.nope"));
+		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 
 	@Override

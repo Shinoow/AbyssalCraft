@@ -23,6 +23,7 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,7 +36,6 @@ import net.minecraft.item.*;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
@@ -100,8 +100,8 @@ public class ItemCoraliumBow extends ItemBow implements IUnlockableItem {
 
 	@Override
 	public void addInformation(ItemStack par1ItemStack, World entityplayer, List list, ITooltipFlag is){
-		list.add(I18n.translateToLocal("tooltip.corbow.1"));
-		list.add(I18n.translateToLocal("tooltip.corbow.2"));
+		list.add(I18n.format("tooltip.corbow.1"));
+		list.add(I18n.format("tooltip.corbow.2"));
 	}
 
 	private ItemStack findAmmo(EntityPlayer player)

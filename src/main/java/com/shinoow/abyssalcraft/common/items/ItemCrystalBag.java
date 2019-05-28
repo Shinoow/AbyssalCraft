@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,7 +25,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class ItemCrystalBag extends ItemACBasic {
@@ -51,7 +51,7 @@ public class ItemCrystalBag extends ItemACBasic {
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B)
 	{
-		l.add(I18n.translateToLocal("tooltip.crystalbag"));
+		l.add(I18n.format("tooltip.crystalbag"));
 	}
 
 	public void setInventorySize(ItemStack stack){

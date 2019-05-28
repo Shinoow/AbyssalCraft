@@ -13,10 +13,10 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class ItemEoA extends ItemACBasic {
@@ -34,6 +34,6 @@ public class ItemEoA extends ItemACBasic {
 
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
-		l.add(I18n.translateToLocal("tooltip.eoa"));
+		l.add(I18n.format("tooltip.eoa"));
 	}
 }

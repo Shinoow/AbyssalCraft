@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -29,7 +30,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
@@ -125,9 +125,9 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 		int dread = getEnergy(is, "Dread");
 		int omothol = getEnergy(is, "Omothol");
 		int shadow = getEnergy(is, "Shadow");
-		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.1")+": " + abyssal + "/100");
-		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.2")+": " + dread + "/100");
-		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.3")+": " + omothol + "/100");
-		l.add(I18n.translateToLocal("tooltip.drainstaff.energy.4")+": " + shadow + "/200");
+		l.add(I18n.format("tooltip.drainstaff.energy.1")+": " + abyssal + "/100");
+		l.add(I18n.format("tooltip.drainstaff.energy.2")+": " + dread + "/100");
+		l.add(I18n.format("tooltip.drainstaff.energy.3")+": " + omothol + "/100");
+		l.add(I18n.format("tooltip.drainstaff.energy.4")+": " + shadow + "/200");
 	}
 }

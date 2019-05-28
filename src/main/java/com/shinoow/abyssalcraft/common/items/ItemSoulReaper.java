@@ -15,13 +15,13 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -110,6 +110,6 @@ public class ItemSoulReaper extends ItemACSword {
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		int souls = getSouls(is);
-		l.add(I18n.translateToLocal("tooltip.soulreaper") + ": " + souls + "/1024");
+		l.add(I18n.format("tooltip.soulreaper") + ": " + souls + "/1024");
 	}
 }

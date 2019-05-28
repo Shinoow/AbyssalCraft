@@ -15,7 +15,6 @@ import java.util.*;
 
 import javax.annotation.Nonnull;
 
-import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 

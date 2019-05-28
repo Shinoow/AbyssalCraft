@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items.armor;
 
+import java.util.List;
+
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -23,7 +25,10 @@ import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -32,12 +37,18 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Optional.Interface;
+import net.minecraftforge.fml.common.Optional.InterfaceList;
+import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import thaumcraft.api.items.IRevealer;
+import thaumcraft.api.items.IVisDiscountGear;
 
-//@InterfaceList(value = { @Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "Thaumcraft"),
-//		@Interface(iface = "thaumcraft.api.items.IRevealer", modid = "Thaumcraft")})
-public class ItemDepthsArmor extends ItemACArmor /* implements IVisDiscountGear, IRevealer */ {
+@InterfaceList(value = { @Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "thaumcraft"),
+		@Interface(iface = "thaumcraft.api.items.IRevealer", modid = "thaumcraft")})
+public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear, IRevealer {
 	public ItemDepthsArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4, name);
 	}
@@ -110,33 +121,31 @@ public class ItemDepthsArmor extends ItemACArmor /* implements IVisDiscountGear,
 		}
 	}
 
-	//	@Override
-	//	@Method(modid = "Thaumcraft")
-	//	public int getVisDiscount(ItemStack stack, EntityPlayer player,
-	//			Aspect aspect) {
-	//		return stack.getItem() == ACItems.depths_helmet ? 5 : stack.getItem() == ACItems.depths_chestplate ? 2 :
-	//			stack.getItem() == ACItems.depths_leggings ? 2 : stack.getItem() == ACItems.depths_boots ? 1 : 0;
-	//	}
+	@Override
+	@Method(modid = "thaumcraft")
+	public int getVisDiscount(ItemStack stack, EntityPlayer player) {
+		return stack.getItem() == ACItems.depths_helmet ? 5 : stack.getItem() == ACItems.depths_chestplate ? 2 :
+			stack.getItem() == ACItems.depths_leggings ? 2 : stack.getItem() == ACItems.depths_boots ? 1 : 0;
+	}
 
-	//	@SuppressWarnings({ "unchecked", "rawtypes" })
-	//	@Override
-	//	public void addInformation(ItemStack is, EntityPlayer player, List l, boolean B){
-	//		if(Loader.isModLoaded("Thaumcraft")){
-	//			if(is.getItem() == ACItems.depths_helmet)
-	//				l.add("\u00A75"+I18n.translateToLocal("tc.visdiscount")+": 5%");
-	//			if(is.getItem() == ACItems.depths_chestplate)
-	//				l.add("\u00A75"+I18n.translateToLocal("tc.visdiscount")+": 2%");
-	//			if(is.getItem() == ACItems.depths_leggings)
-	//				l.add("\u00A75"+I18n.translateToLocal("tc.visdiscount")+": 2%");
-	//			if(is.getItem() == ACItems.depths_boots)
-	//				l.add("\u00A75"+I18n.translateToLocal("tc.visdiscount")+": 1%");
-	//		}
-	//	}
+	@Override
+	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
+		if(Loader.isModLoaded("thaumcraft")){
+			if(is.getItem() == ACItems.depths_helmet)
+				l.add("\u00A75"+I18n.format("tc.visdiscount")+": 5%");
+			if(is.getItem() == ACItems.depths_chestplate)
+				l.add("\u00A75"+I18n.format("tc.visdiscount")+": 2%");
+			if(is.getItem() == ACItems.depths_leggings)
+				l.add("\u00A75"+I18n.format("tc.visdiscount")+": 2%");
+			if(is.getItem() == ACItems.depths_boots)
+				l.add("\u00A75"+I18n.format("tc.visdiscount")+": 1%");
+		}
+	}
 
-	//	@Override
-	//	@Method(modid = "Thaumcraft")
-	//	public boolean showNodes(ItemStack itemstack, EntityLivingBase player) {
-	//
-	//		return itemstack.getItem() == ACItems.depths_helmet;
-	//	}
+	@Override
+	@Method(modid = "thaumcraft")
+	public boolean showNodes(ItemStack itemstack, EntityLivingBase player) {
+
+		return itemstack.getItem() == ACItems.depths_helmet;
+	}
 }

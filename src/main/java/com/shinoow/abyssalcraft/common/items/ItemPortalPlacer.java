@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -30,7 +31,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
@@ -66,13 +66,13 @@ public class ItemPortalPlacer extends ItemACBasic {
 
 	@Override
 	public void addInformation(ItemStack par1ItemStack, World entityplayer, List list, ITooltipFlag is){
-		list.add(I18n.translateToLocal("tooltip.portalplacer.1"));
-		list.add(I18n.translateToLocal("tooltip.portalplacer.2"));
+		list.add(I18n.format("tooltip.portalplacer.1"));
+		list.add(I18n.format("tooltip.portalplacer.2"));
 		if(key > 0)
-			list.add(I18n.translateToLocal("tooltip.portalplacer.3"));
+			list.add(I18n.format("tooltip.portalplacer.3"));
 		if(Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null)
 			if(!isCorrectDim(Minecraft.getMinecraft().world.provider.getDimension()))
-				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.translateToLocal("tooltip.portalplacer.4"));
+				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.format("tooltip.portalplacer.4"));
 	}
 
 	private boolean isCorrectDim(int dim){
