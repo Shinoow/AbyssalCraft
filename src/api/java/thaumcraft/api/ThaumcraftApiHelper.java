@@ -2,13 +2,14 @@ package thaumcraft.api;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -18,10 +19,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IEssentiaTransport;
+import thaumcraft.api.crafting.IngredientNBTTC;
 import thaumcraft.api.items.ItemGenericEssentiaContainer;
 import thaumcraft.api.items.ItemsTC;
 
@@ -29,75 +33,37 @@ public class ThaumcraftApiHelper {
 	
 	public static final IAttribute CHAMPION_MOD = (new RangedAttribute((IAttribute)null, "tc.mobmod", -2D, -2D, 100D)).setDescription("Champion modifier").setShouldWatch(true);
 	
+	/**
+	 * @deprecated Use {@link ThaumcraftInvHelper#areItemsEqual(ItemStack,ItemStack)} instead
+	 */
 	public static boolean areItemsEqual(ItemStack s1,ItemStack s2)
-    {
-		if (s1.isItemStackDamageable() && s2.isItemStackDamageable())
-		{
-			return s1.getItem() == s2.getItem();
-		} else
-			return s1.getItem() == s2.getItem() && s1.getItemDamage() == s2.getItemDamage();
-    }
+	{
+		return ThaumcraftInvHelper.areItemsEqual(s1, s2);
+	}
 		
+	/**
+	 * @deprecated Use {@link InventoryHelper#containsMatch(boolean,ItemStack[],List<ItemStack>)} instead
+	 */
 	public static boolean containsMatch(boolean strict, ItemStack[] inputs, List<ItemStack> targets)
-    {
-        for (ItemStack input : inputs)
-        {
-            for (ItemStack target : targets)
-            {
-                if (OreDictionary.itemMatches(target, input, strict) && ItemStack.areItemStackTagsEqual(target, input))
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+	{
+		return ThaumcraftInvHelper.containsMatch(strict, inputs, targets);
+	}
 	
+	/**
+	 * @deprecated Use {@link ThaumcraftInvHelper#areItemStacksEqualForCrafting(ItemStack,Object)} instead
+	 */
 	public static boolean areItemStacksEqualForCrafting(ItemStack stack0, Object in)
-    {
-		if (stack0==null && in!=null) return false;
-		if (stack0!=null && in==null) return false;
-		if (stack0==null && in==null) return true;
-		
-		if (in instanceof Object[]) return true;
-		
-		if (in instanceof String) {
-			List<ItemStack> l = OreDictionary.getOres((String) in,false);
-			return containsMatch(false, new ItemStack[]{stack0}, l);
-		}
-		
-		if (in instanceof ItemStack) {
-			//nbt
-			boolean t1= !stack0.hasTagCompound() || areItemStackTagsEqualForCrafting(stack0, (ItemStack) in);		
-			if (!t1) return false;	
-	        return OreDictionary.itemMatches((ItemStack) in, stack0, false);
-		}
-		
-		return false;
-    }
+	{
+		return ThaumcraftInvHelper.areItemStacksEqualForCrafting(stack0, in);
+	}
 	
+	/**
+	 * @deprecated Use {@link ThaumcraftInvHelper#areItemStackTagsEqualForCrafting(ItemStack,ItemStack)} instead
+	 */
 	public static boolean areItemStackTagsEqualForCrafting(ItemStack slotItem,ItemStack recipeItem)
-    {
-    	if (recipeItem == null || slotItem == null) return false;
-    	if (recipeItem.getTagCompound()!=null && slotItem.getTagCompound()==null ) return false;
-    	if (recipeItem.getTagCompound()==null ) return true;
-    	
-    	Iterator iterator = recipeItem.getTagCompound().getKeySet().iterator();
-        while (iterator.hasNext())
-        {
-            String s = (String)iterator.next();
-            if (slotItem.getTagCompound().hasKey(s)) {
-            	if (!slotItem.getTagCompound().getTag(s).toString().equals(
-            			recipeItem.getTagCompound().getTag(s).toString())) {
-            		return false;
-            	}
-            } else {
-        		return false;
-            }
-            
-        }
-        return true;
-    }
+	{
+		return ThaumcraftInvHelper.areItemStackTagsEqualForCrafting(slotItem, recipeItem);
+	}
    
     
     public static TileEntity getConnectableTile(World world, BlockPos pos, EnumFacing face) {
@@ -377,6 +343,41 @@ public class ThaumcraftApiHelper {
 	}
 
 	
+	public static Ingredient getIngredient(Object obj)
+    {
+		if (obj instanceof Ingredient) return (Ingredient) obj;
+        if (obj!=null && obj instanceof ItemStack && ((ItemStack)obj).hasTagCompound())
+            return new IngredientNBTTC((ItemStack)obj);
+        else 
+        	return CraftingHelper.getIngredient(obj);
+    }
 
+	/**
+	 * @deprecated Use {@link ThaumcraftInvHelper#getItemHandlerAt(World,BlockPos,EnumFacing)} instead
+	 */
+	public static IItemHandler getItemHandlerAt(World world, BlockPos pos, EnumFacing side) {
+		return ThaumcraftInvHelper.getItemHandlerAt(world, pos, side);
+	}
+
+	/**
+	 * @deprecated Use {@link ThaumcraftInvHelper#wrapInventory(IInventory,EnumFacing)} instead
+	 */
+	public static IItemHandler wrapInventory(IInventory inventory, EnumFacing side) {
+		return ThaumcraftInvHelper.wrapInventory(inventory, side);
+	}
+
+	/**
+	 * @deprecated Use {@link ThaumcraftInvHelper#areItemStackTagsEqualRelaxed(ItemStack,ItemStack)} instead
+	 */	
+	public static boolean areItemStackTagsEqualRelaxed(ItemStack prime, ItemStack other) {
+		return ThaumcraftInvHelper.areItemStackTagsEqualRelaxed(prime, other);
+	}
 	
+	/**
+	 * @deprecated Use {@link ThaumcraftInvHelper#compareTagsRelaxed(NBTTagCompound,NBTTagCompound)} instead
+	 */
+	public static boolean compareTagsRelaxed(NBTTagCompound prime, NBTTagCompound other) {
+		return ThaumcraftInvHelper.compareTagsRelaxed(prime, other);
+	}
+		
 }

@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
@@ -89,11 +89,13 @@ public class FocusPackage implements IFocusElement {
 	
 	public EntityLivingBase getCaster() {
 		try {
-			if (caster==null) caster = world.getPlayerEntityByUUID(getCasterUUID());
 			if (caster==null) {
-				for (Entity e : world.getLoadedEntityList()) {
-					if (e instanceof EntityLivingBase && getCasterUUID().equals(e.getUniqueID())) {
-						caster = (EntityLivingBase) e;
+				caster = world.getPlayerEntityByUUID(getCasterUUID());
+			}
+			if (caster==null) {
+				for (EntityLivingBase e : world.getEntities(EntityLivingBase.class, EntitySelectors.IS_ALIVE)) {
+					if (getCasterUUID().equals(e.getUniqueID())) {
+						caster = e;
 						break;
 					}
 				}
@@ -179,6 +181,7 @@ public class FocusPackage implements IFocusElement {
 		NBTTagList nodelist = new NBTTagList();
 		synchronized (nodes) {
 			for (IFocusElement node:nodes) {
+				if (node==null || node.getType()==null) continue;
 				NBTTagCompound nodenbt = new NBTTagCompound();
 				nodenbt.setString("type", node.getType().name());
 				nodenbt.setString("key", node.getKey());
@@ -218,6 +221,7 @@ public class FocusPackage implements IFocusElement {
 	}
 	
 	public void initialize(EntityLivingBase caster) {
+		world=caster.getEntityWorld();
 		IFocusElement node = nodes.get(0);
 		if (node instanceof FocusMediumRoot && ((FocusMediumRoot)node).supplyTargets()==null) {
 			((FocusMediumRoot)node).setupFromCaster(caster);
@@ -228,7 +232,11 @@ public class FocusPackage implements IFocusElement {
 		String s="";
 		for (IFocusElement k:this.nodes) {
 			s+=k.getKey();
-		}
+			if (k instanceof FocusNode && ((FocusNode)k).getSettingList()!=null)
+				for (String ns : ((FocusNode)k).getSettingList()) {
+					s += ""+((FocusNode)k).getSettingValue(ns);
+				}
+		}		
 		return s.hashCode();
 	}
 

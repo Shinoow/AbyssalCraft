@@ -28,7 +28,6 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -39,16 +38,13 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional.Interface;
-import net.minecraftforge.fml.common.Optional.InterfaceList;
 import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import thaumcraft.api.items.IRevealer;
 import thaumcraft.api.items.IVisDiscountGear;
 
-@InterfaceList(value = { @Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "thaumcraft"),
-		@Interface(iface = "thaumcraft.api.items.IRevealer", modid = "thaumcraft")})
-public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear, IRevealer {
+@Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "thaumcraft")
+public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear {
 	public ItemDepthsArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4, name);
 	}
@@ -140,12 +136,5 @@ public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear, IR
 			if(is.getItem() == ACItems.depths_boots)
 				l.add("\u00A75"+I18n.format("tc.visdiscount")+": 1%");
 		}
-	}
-
-	@Override
-	@Method(modid = "thaumcraft")
-	public boolean showNodes(ItemStack itemstack, EntityLivingBase player) {
-
-		return itemstack.getItem() == ACItems.depths_helmet;
 	}
 }

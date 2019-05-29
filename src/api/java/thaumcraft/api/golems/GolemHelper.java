@@ -41,7 +41,8 @@ public class GolemHelper {
 		ThaumcraftApi.internalMethods.addGolemTask(dim, task);
 	}
 	
-	public static HashMap<Integer,ArrayList<ProvisionRequest>> provisionRequests = new HashMap<Integer,ArrayList<ProvisionRequest>>();
+	public static HashMap<Integer,ArrayList<ProvisionRequest>> provisionRequests = new HashMap<>();
+	final static int LISTLIMIT = 1000;
 	
 	/**
 	 * 
@@ -54,22 +55,28 @@ public class GolemHelper {
 			provisionRequests.put(world.provider.getDimension(), new ArrayList<ProvisionRequest>());
 		ArrayList<ProvisionRequest> list = provisionRequests.get(world.provider.getDimension());
 		ProvisionRequest pr = new ProvisionRequest(seal,stack.copy());
-		if (!list.contains(pr)) list.add(pr);
+		if (!list.contains(pr)) {
+			list.add(pr);
+		}
+		if (list.size()>LISTLIMIT) list.remove(0);
 	}
 	
 	/**
 	 * 
 	 * @param world
 	 * @param pos
-	 * @param stack
+	 * @param side
+	 * @param stack the stack requested. Can accept wildcard values.
 	 */
 	public static void requestProvisioning(World world, BlockPos pos, EnumFacing side, ItemStack stack) {
 		if (!provisionRequests.containsKey(world.provider.getDimension()))
 			provisionRequests.put(world.provider.getDimension(), new ArrayList<ProvisionRequest>());
 		ArrayList<ProvisionRequest> list = provisionRequests.get(world.provider.getDimension());
-		ProvisionRequest pr = new ProvisionRequest(pos, side,stack.copy());
-		pr.setId(pr.getId() + world.rand.nextInt());
-		if (!list.contains(pr)) list.add(pr);
+		ProvisionRequest pr = new ProvisionRequest(pos, side, stack.copy());
+		if (!list.contains(pr)) {
+			list.add(pr);
+		}
+		if (list.size()>LISTLIMIT) list.remove(0);
 	}
 	
 	/**
@@ -82,9 +89,50 @@ public class GolemHelper {
 		if (!provisionRequests.containsKey(world.provider.getDimension()))
 			provisionRequests.put(world.provider.getDimension(), new ArrayList<ProvisionRequest>());
 		ArrayList<ProvisionRequest> list = provisionRequests.get(world.provider.getDimension());
-		ProvisionRequest pr = new ProvisionRequest(entity,stack.copy());
-		pr.setId(pr.getId() + world.rand.nextInt());
-		if (!list.contains(pr)) list.add(pr);
+		ProvisionRequest pr = new ProvisionRequest(entity, stack.copy());
+		if (!list.contains(pr)) {
+			list.add(pr);
+		}
+		if (list.size()>LISTLIMIT) list.remove(0);
+	}
+	
+	/**
+	 * 
+	 * @param world
+	 * @param pos
+	 * @param side
+	 * @param stack the stack requested. Can accept wildcard values.
+	 * @param ui a unique number to make the request slightly more unique in case you want to add multiple similar requests
+	 */
+	public static void requestProvisioning(World world, BlockPos pos, EnumFacing side, ItemStack stack, int ui) {
+		if (!provisionRequests.containsKey(world.provider.getDimension()))
+			provisionRequests.put(world.provider.getDimension(), new ArrayList<ProvisionRequest>());
+		ArrayList<ProvisionRequest> list = provisionRequests.get(world.provider.getDimension());
+		ProvisionRequest pr = new ProvisionRequest(pos, side, stack.copy());
+		pr.setUI(ui);
+		if (!list.contains(pr)) {
+			list.add(pr);
+		}
+		if (list.size()>LISTLIMIT) list.remove(0);
+	}
+	
+	/**
+	 * 
+	 * @param world
+	 * @param entity
+	 * @param stack the stack requested. Can accept wildcard values.
+	 * @param ui a unique number to make the request slightly more unique in case you want to add multiple similar requests
+	 */
+	public static void requestProvisioning(World world, Entity entity, ItemStack stack, int ui) {
+		if (!provisionRequests.containsKey(world.provider.getDimension()))
+			provisionRequests.put(world.provider.getDimension(), new ArrayList<ProvisionRequest>());
+		ArrayList<ProvisionRequest> list = provisionRequests.get(world.provider.getDimension());
+		ProvisionRequest pr = new ProvisionRequest(entity, stack.copy());
+		pr.setUI(ui);
+		if (!list.contains(pr)) {
+			list.add(pr);
+		}
+		if (list.size()>LISTLIMIT) list.remove(0);
 	}
 	
 	/**
