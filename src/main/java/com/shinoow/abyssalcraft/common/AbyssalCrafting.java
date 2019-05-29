@@ -27,7 +27,6 @@ import com.shinoow.abyssalcraft.common.ritual.*;
 import com.shinoow.abyssalcraft.common.spells.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.passive.EntitySheep;
@@ -35,7 +34,6 @@ import net.minecraft.init.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtils;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -411,12 +409,6 @@ public class AbyssalCrafting {
 	}
 
 	private static void addRitualRecipes(){
-		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, I18n.translateToLocal(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE));
-		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, I18n.translateToLocal(NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE));
-		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, I18n.translateToLocal(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE));
-		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.omothol_id, 3, I18n.translateToLocal(NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE));
-		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 3, I18n.translateToLocal(NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE));
-
 		//Overworld progression
 		Object[] tgofferings = new Object[]{new ItemStack(Items.DIAMOND), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.ENDER_PEARL), new ItemStack(Items.BLAZE_POWDER),
 				new ItemStack(Items.DIAMOND), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.ENDER_PEARL), new ItemStack(Items.BLAZE_POWDER)};

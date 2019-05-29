@@ -27,8 +27,8 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 
 public class MaterializationRecipeCategory implements IRecipeCategory {
 
@@ -49,7 +49,7 @@ public class MaterializationRecipeCategory implements IRecipeCategory {
 	public MaterializationRecipeCategory(IGuiHelper guiHelper){
 		ResourceLocation location = new ResourceLocation("abyssalcraft", "textures/gui/container/materializer_NEI.png");
 		background = guiHelper.createDrawable(location, 32, 47, 116, 72);
-		localizedName = I18n.translateToLocal("container.abyssalcraft.materializer.nei");
+		localizedName = I18n.format("container.abyssalcraft.materializer.nei");
 
 		slotDrawable = guiHelper.getSlotDrawable();
 	}

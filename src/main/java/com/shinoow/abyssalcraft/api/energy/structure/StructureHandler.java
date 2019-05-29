@@ -15,11 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * Handler for Places of Power (the "proper" way of generating PE through energy manipulators)
@@ -32,6 +33,8 @@ import net.minecraftforge.fml.common.FMLLog;
 public class StructureHandler {
 
 	private final List<IPlaceOfPower> structures = new ArrayList<>();
+
+	private final Logger logger = LogManager.getLogger("StructureHandler");
 
 	private static final StructureHandler instance = new StructureHandler();
 
@@ -46,7 +49,7 @@ public class StructureHandler {
 	public void registerStructure(IPlaceOfPower place){
 		for(IPlaceOfPower entry : structures)
 			if(place.getIdentifier().equals(entry.getIdentifier())){
-				FMLLog.log("StructureHandler", Level.ERROR, "Place of Power already registered: %s", place.getIdentifier());
+				logger.log(Level.ERROR, "Place of Power already registered: %s", place.getIdentifier());
 				return;
 			}
 		structures.add(place);

@@ -29,26 +29,6 @@ public class IMCHelper {
 	 * FMLInterModComms.sendMessage("abyssalcraft", "shoggothFood", "com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul");
 	 */
 
-	//TRANSMUTATOR FUEL HANDLER ///////////////////////////////////////////////////////////////
-	/**
-	 * This is a IMC version of AbyssalCraftAPI#registerFuelHandler made for registering Transmutator fuel handlers
-	 * You can use the IMC message "registerTransmutatorFuel" to register a fuel handler
-	 * The format for the message should be the string path to the handler class
-	 *
-	 * Example of how it would look like if I added my Furnace fuel handler as a Transmutator fuel handler:
-	 * FMLInterModComms.sendMessage("abyssalcraft", "registerTransmutatorFuel", "com.shinoow.abyssalcraft.common.handlers.FurnaceFuelHandler");
-	 */
-
-	//CRYSTALLIZER FUEL HANDLER ///////////////////////////////////////////////////////////////
-	/**
-	 * This is a IMC version of AbyssalCraftAPI#registerFuelHandler made for registering Crystallizer fuel handlers
-	 * You can use the IMC message "registerCrystallizerFuel" to register a fuel handler
-	 * The format for the message should be the string path to the handler class
-	 *
-	 * Example of how it would look like if I added my Furnace fuel handler as a Crystallizer fuel handler:
-	 * FMLInterModComms.sendMessage("abyssalcraft", "registerCrystallizerFuel", "com.shinoow.abyssalcraft.common.handlers.FurnaceFuelHandler");
-	 */
-
 	//CRYSTALS /////////////////////////////////////////////////////////////////////////////////
 
 	/**

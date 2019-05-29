@@ -22,8 +22,8 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
 
 public class TransmutationRecipe implements IRecipeWrapper {
 	@Nonnull
@@ -39,7 +39,7 @@ public class TransmutationRecipe implements IRecipeWrapper {
 		outputs = Collections.singletonList(output);
 
 		if (experience > 0.0)
-			experienceString = I18n.translateToLocalFormatted("gui.jei.category.smelting.experience", experience);
+			experienceString = I18n.format("gui.jei.category.smelting.experience", experience);
 		else
 			experienceString = null;
 	}

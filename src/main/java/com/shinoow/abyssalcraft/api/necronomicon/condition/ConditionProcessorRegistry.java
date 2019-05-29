@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.Level;
-
-import net.minecraftforge.fml.common.FMLLog;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Registry class for Condition Processors<br>
@@ -28,6 +28,8 @@ import net.minecraftforge.fml.common.FMLLog;
 public class ConditionProcessorRegistry {
 
 	private final Map<Integer, IConditionProcessor> processors = new HashMap<>();
+
+	private final Logger logger = LogManager.getLogger("StructureHandler");
 
 	private static final ConditionProcessorRegistry INSTANCE = new ConditionProcessorRegistry();
 
@@ -46,8 +48,8 @@ public class ConditionProcessorRegistry {
 		if(type > -1) {
 			if(!processors.containsKey(type))
 				processors.put(type, processor);
-			else FMLLog.log("ConditionProcessorRegistry", Level.ERROR, "Processor already registed for type %d", type);
-		} else FMLLog.log("ConditionProcessorRegistry", Level.ERROR, "Invalid type: %d", type);
+			else logger.log(Level.ERROR, "Processor already registed for type %d", type);
+		} else logger.log(Level.ERROR, "Invalid type: %d", type);
 	}
 
 	/**

@@ -14,6 +14,8 @@ package com.shinoow.abyssalcraft.common.structures.overworld;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 
@@ -34,7 +36,7 @@ public abstract class StructureDarklandsBase extends WorldGenerator {
 
 	protected IBlockState getBrick(Random rand){
 		IBlockState brick = ACBlocks.darkstone_brick.getDefaultState();
-		IBlockState cracked_brick = ACBlocks.darkstone_brick.getStateFromMeta(2);
+		IBlockState cracked_brick = ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CRACKED);
 		return rand.nextFloat() < 0.2 ? cracked_brick : brick;
 	}
 

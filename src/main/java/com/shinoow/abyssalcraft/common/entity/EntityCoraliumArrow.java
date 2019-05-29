@@ -83,10 +83,10 @@ public class EntityCoraliumArrow extends EntityArrow {
 		IBlockState iblockstate = world.getBlockState(blockpos);
 		Block block = iblockstate.getBlock();
 
-		if (block.getMaterial(iblockstate) != Material.AIR)
+		if (iblockstate.getMaterial() != Material.AIR)
 		{
 			//			block.setBlockBoundsBasedOnState(worldObj, blockpos);
-			AxisAlignedBB axisalignedbb = block.getBoundingBox(iblockstate, world, blockpos);
+			AxisAlignedBB axisalignedbb = iblockstate.getBoundingBox(world, blockpos);
 
 			if (axisalignedbb != null && axisalignedbb.offset(blockpos).contains(new Vec3d(posX, posY, posZ)))
 				inGround = true;
@@ -268,7 +268,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 					arrowShake = 7;
 					setIsCritical(false);
 
-					if (inTile.getMaterial(iblockstate1) != Material.AIR)
+					if (iblockstate1.getMaterial() != Material.AIR)
 						inTile.onEntityCollidedWithBlock(world, blockpos1, iblockstate1, this);
 				}
 

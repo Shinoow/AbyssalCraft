@@ -27,8 +27,8 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 
 public class UpgradeRecipeCategory implements IRecipeCategory {
 
@@ -46,7 +46,7 @@ public class UpgradeRecipeCategory implements IRecipeCategory {
 		ResourceLocation location = new ResourceLocation("textures/gui/container/anvil.png");
 		background = guiHelper.createDrawable(location,  15, 46, 146, 26);
 
-		localizedName = I18n.translateToLocal("container.abyssalcraft.upgrade.nei");
+		localizedName = I18n.format("container.abyssalcraft.upgrade.nei");
 
 		slotDrawable = guiHelper.getSlotDrawable();
 	}

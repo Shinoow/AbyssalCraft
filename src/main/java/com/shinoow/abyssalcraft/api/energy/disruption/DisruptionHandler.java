@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
@@ -24,7 +26,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * Handler for disruptions (when something bad happens during Potential Energy manipulation)
@@ -35,6 +36,8 @@ import net.minecraftforge.fml.common.FMLLog;
 public class DisruptionHandler {
 
 	private final List<DisruptionEntry> disruptions = new ArrayList<>();
+
+	private final Logger logger = LogManager.getLogger("DisruptionHandler");
 
 	private static final DisruptionHandler instance = new DisruptionHandler();
 
@@ -53,7 +56,7 @@ public class DisruptionHandler {
 	public void registerDisruption(DisruptionEntry disruption){
 		for(DisruptionEntry entry : disruptions)
 			if(disruption.getUnlocalizedName().equals(entry.getUnlocalizedName())){
-				FMLLog.log("DisruptionHandler", Level.ERROR, "Disruption Entry already registered: %s", disruption.getUnlocalizedName());
+				logger.log(Level.ERROR, "Disruption Entry already registered: %s", disruption.getUnlocalizedName());
 				return;
 			}
 		disruptions.add(disruption);

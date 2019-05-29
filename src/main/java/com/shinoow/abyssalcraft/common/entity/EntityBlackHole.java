@@ -17,7 +17,6 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -163,12 +162,11 @@ public class EntityBlackHole extends Entity
 					int l = j1 + i2;
 					BlockPos pos = new BlockPos(j2, k, l);
 					IBlockState state = world.getBlockState(pos);
-					Block block = state.getBlock();
-					if (!block.isAir(state, world, pos) && rand.nextInt(10) == 0 && !world.isRemote && world.isAreaLoaded(getPosition().add(-32, -32, -32), getPosition().add(32, 32, 32)) && block.getBlockHardness(state, world, new BlockPos(j2, k, l)) != -1)
+					if (!state.getBlock().isAir(state, world, pos) && rand.nextInt(10) == 0 && !world.isRemote && world.isAreaLoaded(getPosition().add(-32, -32, -32), getPosition().add(32, 32, 32)) && state.getBlockHardness(world, pos) != -1)
 						if (state.getMaterial().isLiquid())
 							world.setBlockToAir(new BlockPos(j2, k, l));
 						else
-							world.spawnEntity(new EntityFallingBlock(world, j2, k + 0.5D, l, block.getDefaultState()));
+							world.spawnEntity(new EntityFallingBlock(world, j2, k + 0.5D, l, state));
 				}
 	}
 

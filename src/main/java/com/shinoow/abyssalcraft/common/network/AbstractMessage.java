@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.network;
 
 import java.io.IOException;
 
-import com.google.common.base.Throwables;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 
 import io.netty.buffer.ByteBuf;
@@ -88,7 +87,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 		try {
 			read(new PacketBuffer(buffer));
 		} catch (IOException e) {
-			throw Throwables.propagate(e);
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -97,7 +96,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 		try {
 			write(new PacketBuffer(buffer));
 		} catch (IOException e) {
-			throw Throwables.propagate(e);
+			throw new RuntimeException(e);
 		}
 	}
 

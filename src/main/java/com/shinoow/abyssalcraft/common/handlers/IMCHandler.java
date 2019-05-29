@@ -15,19 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 public class IMCHandler {
+
+	private static final Logger logger = LogManager.getLogger("AbyssalCraft|IMC");
 
 	public static void handleIMC(FMLInterModComms.IMCEvent event){
 		List<String> senders = new ArrayList<String>();
@@ -38,32 +39,6 @@ public class IMCHandler {
 					info("Received Shoggoth Food addition %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
 					if(!senders.contains(imcMessage.getSender()))
 						senders.add(imcMessage.getSender());
-				} catch (ClassNotFoundException e) {
-					warning("Could not find class %s", imcMessage.getStringValue());
-				}
-			else if(imcMessage.key.equals("registerTransmutatorFuel"))
-				try {
-					AbyssalCraftAPI.registerFuelHandler((IFuelHandler)Class.forName(imcMessage.getStringValue()).newInstance(), FuelType.TRANSMUTATOR);
-					info("Recieved Transmutator fuel handler %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
-					if(!senders.contains(imcMessage.getSender()))
-						senders.add(imcMessage.getSender());
-				} catch (InstantiationException e) {
-					warning("Could not create a instance of class %s (not a IFuelHandler?)", imcMessage.getStringValue());
-				} catch (IllegalAccessException e) {
-					warning("Unable to access class %s", imcMessage.getStringValue());
-				} catch (ClassNotFoundException e) {
-					warning("Could not find class %s", imcMessage.getStringValue());
-				}
-			else if(imcMessage.key.equals("registerCrystallizerFuel"))
-				try {
-					AbyssalCraftAPI.registerFuelHandler((IFuelHandler)Class.forName(imcMessage.getStringValue()).newInstance(), FuelType.CRYSTALLIZER);
-					info("Recieved Crystallizer fuel handler %s from mod %s", imcMessage.getStringValue(), imcMessage.getSender());
-					if(!senders.contains(imcMessage.getSender()))
-						senders.add(imcMessage.getSender());
-				} catch (InstantiationException e) {
-					warning("Could not create a instance of class %s (not a IFuelHandler?)", imcMessage.getStringValue());
-				} catch (IllegalAccessException e) {
-					warning("Unable to access class %s", imcMessage.getStringValue());
 				} catch (ClassNotFoundException e) {
 					warning("Could not find class %s", imcMessage.getStringValue());
 				}
@@ -243,7 +218,7 @@ public class IMCHandler {
 					items[3] = input4;
 					items[4] = input5;
 					if(!failed)
-						AbyssalCraftAPI.addMaterialization(items, output);
+						AbyssalCraftAPI.addMaterialization(output, items);
 				}
 				if(failed)
 					warning("Received invalid Materializer recipe from mod %s!", imcMessage.getSender());
@@ -345,10 +320,10 @@ public class IMCHandler {
 	}
 
 	private static void info(String format, Object...data){
-		FMLLog.log("AbyssalCraft|IMC", Level.INFO, format, data);
+		logger.log(Level.INFO, format, data);
 	}
 
 	private static void warning(String format, Object...data){
-		FMLLog.log("AbyssalCraft|IMC", Level.WARN, format, data);
+		logger.log(Level.WARN, format, data);
 	}
 }

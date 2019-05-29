@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMine;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
@@ -153,9 +155,9 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 
 							for (int k3 = 0; k3 < 4; ++k3)
 								if ((d15 += d16) > 0.0D)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getStateFromMeta(2));
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.DREADSTONE));
 								else if (k2 * 8 + l2 < b0)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getStateFromMeta(3));
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSALNITE_STONE));
 
 							d10 += d12;
 							d11 += d13;

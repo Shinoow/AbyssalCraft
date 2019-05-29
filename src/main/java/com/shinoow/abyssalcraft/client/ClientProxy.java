@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.client.lib.LovecraftFont;
@@ -36,6 +37,7 @@ import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityPedestalBlockRenderer;
@@ -46,6 +48,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
@@ -167,6 +170,11 @@ public class ClientProxy extends CommonProxy {
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1  && stack.hasTagCompound() ? SpellRegistry.instance().getSpell(stack.getTagCompound().getString("Spell")).getColor() : 16777215, ACItems.scroll);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACLib.crystalColors[state.getBlock().getMetaFromState(state)], ACBlocks.crystal_cluster);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACLib.crystalColors[state.getBlock().getMetaFromState(state) + 16], ACBlocks.crystal_cluster2);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE));
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, I18n.format(NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE));
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, I18n.format(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE));
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.omothol_id, 3, I18n.format(NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE));
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 3, I18n.format(NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE));
 	}
 
 	@Override

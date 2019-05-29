@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
 
@@ -104,7 +106,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 								IBlockState iblockstate = null;
 
 								if (d15 > 0.0D)
-									iblockstate = ACBlocks.stone.getStateFromMeta(6);
+									iblockstate = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE);
 
 								int k2 = i2 + i1 * 8;
 								int l2 = l1 + k1 * 4;
@@ -133,8 +135,8 @@ public class ChunkProviderOmothol implements IChunkGenerator
 			{
 				int k = 1;
 				int l = -1;
-				IBlockState iblockstate = ACBlocks.stone.getStateFromMeta(6);
-				IBlockState iblockstate1 = ACBlocks.stone.getStateFromMeta(6);
+				IBlockState iblockstate = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE);
+				IBlockState iblockstate1 = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE);
 
 				for (int i1 = 127; i1 >= 0; --i1)
 				{
@@ -148,7 +150,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 							if (k <= 0)
 							{
 								iblockstate = Blocks.AIR.getDefaultState();
-								iblockstate1 = ACBlocks.stone.getStateFromMeta(6);
+								iblockstate1 = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE);
 							}
 
 							l = k;

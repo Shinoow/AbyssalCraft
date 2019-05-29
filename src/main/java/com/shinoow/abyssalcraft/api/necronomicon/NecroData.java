@@ -28,7 +28,6 @@ import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * Base data structure for Necronomicon information pages
@@ -123,7 +122,7 @@ public class NecroData implements INecroData {
 
 		if(hasText() ? containedData.size() < 7 : containedData.size() < 14)
 			containedData.add(data);
-		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "NecroData instance is already full, can't add more data!");
+		else AbyssalCraftAPI.logger.log(Level.ERROR, "NecroData instance is already full, can't add more data!");
 	}
 
 	public void removeData(String identifier){

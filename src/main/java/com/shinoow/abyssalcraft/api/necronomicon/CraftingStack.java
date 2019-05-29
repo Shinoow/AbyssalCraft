@@ -71,7 +71,7 @@ public class CraftingStack {
 					if(recipe instanceof ShapedOreRecipe){
 						for(int i = 0; i < recipe.getIngredients().size(); i++)
 							stuff[i] = ((ShapedOreRecipe) recipe).getIngredients().get(i);
-						size = ((ShapedOreRecipe) recipe).getHeight() * ((ShapedOreRecipe) recipe).getWidth();
+						size = ((ShapedOreRecipe) recipe).getRecipeHeight() * ((ShapedOreRecipe) recipe).getRecipeWidth();
 					} if(recipe instanceof ShapelessOreRecipe)
 						for(int i = 0; i < recipe.getIngredients().size(); i++)
 							stuff[i] = ((ShapelessOreRecipe) recipe).getIngredients().get(i);

@@ -14,11 +14,12 @@ package com.shinoow.abyssalcraft.api.ritual;
 import java.util.*;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * Registry class for Necronomicon Rituals
@@ -32,6 +33,8 @@ public class RitualRegistry {
 	private final Map<Integer, String> dimToName = new HashMap<>();
 	private final Map<NecronomiconRitual, Integer> ritualToBookType = new HashMap<>();
 	private final List<NecronomiconRitual> rituals = new ArrayList<>();
+
+	private final Logger logger = LogManager.getLogger("RitualRegistry");
 
 	private static final RitualRegistry instance = new RitualRegistry();
 
@@ -52,8 +55,8 @@ public class RitualRegistry {
 		if(bookType <= 4 && bookType >= 0)
 			if(dim != -1 && dim != 1)
 				dimToBookType.put(dim, bookType);
-			else FMLLog.log("RitualRegistry", Level.ERROR, "You're not allowed to register that Dimension ID: %d", dim);
-		else FMLLog.log("RitualRegistry", Level.ERROR, "Necronomicon book type does not exist: %d", bookType);
+			else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: %d", dim);
+		else logger.log(Level.ERROR, "Necronomicon book type does not exist: %d", bookType);
 	}
 
 	/**
@@ -66,7 +69,7 @@ public class RitualRegistry {
 	public void addDimensionToName(int dim, String name){
 		if(dim != -1 && dim != 1)
 			dimToName.put(dim, name);
-		else FMLLog.log("RitualRegistry", Level.ERROR, "You're not allowed to register that Dimension ID: %d", dim);
+		else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: %d", dim);
 	}
 
 	/**
@@ -119,11 +122,11 @@ public class RitualRegistry {
 		if(ritual.getBookType() <= 4 && ritual.getBookType() >= 0){
 			for(NecronomiconRitual entry : rituals)
 				if(ritual.getUnlocalizedName().equals(entry.getUnlocalizedName())){
-					FMLLog.log("RitualRegistry", Level.ERROR, "Necronomicon Ritual already registered: %s", ritual.getUnlocalizedName());
+					logger.log(Level.ERROR, "Necronomicon Ritual already registered: %s", ritual.getUnlocalizedName());
 					return;
 				}
 			rituals.add(ritual);
-		} else FMLLog.log("RitualRegistry", Level.ERROR, "Necronomicon book type does not exist: %d", ritual.getBookType());
+		} else logger.log(Level.ERROR, "Necronomicon book type does not exist: %d", ritual.getBookType());
 	}
 
 	/**

@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
 import com.shinoow.abyssalcraft.common.structures.abyss.Chains;
@@ -149,7 +151,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 
 							for (int k3 = 0; k3 < 4; ++k3)
 								if ((d15 += d16) > 0.0D)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getStateFromMeta(1));
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSAL_STONE));
 								else if (k2 * 8 + l2 < b0)
 									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.liquid_coralium.getDefaultState());
 
@@ -349,7 +351,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 			k1 = rand.nextInt(16) + 8;
 			l1 = rand.nextInt(128);
 			i2 = rand.nextInt(16) + 8;
-			new WorldGenAbyLake(ACBlocks.stone.getStateFromMeta(1)).generate(worldObj, rand, pos.add(k1, l1, i2));
+			new WorldGenAbyLake(ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSAL_STONE)).generate(worldObj, rand, pos.add(k1, l1, i2));
 		}
 		if(ACConfig.generateAbyssalWastelandPillars)
 			for(int i = 0; i < 1; i++) {

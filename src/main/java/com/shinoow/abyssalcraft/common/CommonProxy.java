@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common;
 
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.client.gui.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
@@ -139,7 +140,13 @@ public class CommonProxy implements IGuiHandler {
 
 	public void preInit() {}
 
-	public void init() {}
+	public void init() {
+		RitualRegistry.instance().addDimensionToBookType(0, 0);
+		RitualRegistry.instance().addDimensionToBookType(ACLib.abyssal_wasteland_id, 1);
+		RitualRegistry.instance().addDimensionToBookType(ACLib.dreadlands_id, 2);
+		RitualRegistry.instance().addDimensionToBookType(ACLib.omothol_id, 3);
+		RitualRegistry.instance().addDimensionToBookType(ACLib.dark_realm_id, 3);
+	}
 
 	public void postInit() {}
 

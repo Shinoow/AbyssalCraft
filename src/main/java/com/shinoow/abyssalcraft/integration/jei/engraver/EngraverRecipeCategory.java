@@ -25,8 +25,8 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 
 public class EngraverRecipeCategory implements IRecipeCategory {
 	protected static final int inputSlot = 0;
@@ -51,7 +51,7 @@ public class EngraverRecipeCategory implements IRecipeCategory {
 		ResourceLocation location = new ResourceLocation("abyssalcraft", "textures/gui/container/engraver_NEI.png");
 		background = guiHelper.createDrawable(location,  55, 16, 82, 54);
 
-		localizedName = I18n.translateToLocal("container.abyssalcraft.engraver.nei");
+		localizedName = I18n.format("container.abyssalcraft.engraver.nei");
 	}
 
 	@Override

@@ -14,6 +14,8 @@ package com.shinoow.abyssalcraft.api;
 import java.util.*;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
@@ -39,7 +41,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.IFuelHandler;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -103,6 +107,8 @@ public class AbyssalCraftAPI {
 	private static IInternalMethodHandler internalMethodHandler = new DummyMethodHandler();
 
 	public static Fluid liquid_coralium_fluid, liquid_antimatter_fluid;
+
+	public static final Logger logger = LogManager.getLogger("AbyssalCraftAPI");
 
 	@SideOnly(Side.CLIENT)
 	private static FontRenderer aklo_font;
@@ -405,7 +411,7 @@ public class AbyssalCraftAPI {
 	public static void addCoin(ItemStack coin){
 		if(!EngraverRecipes.instance().getCoinList().contains(coin))
 			EngraverRecipes.instance().addCoin(coin);
-		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Coin is already registered!");
+		else logger.log(Level.ERROR, "This Coin is already registered!");
 	}
 
 	/**
@@ -419,7 +425,7 @@ public class AbyssalCraftAPI {
 	public static void addCoin(Item coin){
 		if(!EngraverRecipes.instance().getCoinList().contains(new ItemStack(coin)))
 			EngraverRecipes.instance().addCoin(coin);
-		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Coin is already registered!");
+		else logger.log(Level.ERROR, "This Coin is already registered!");
 	}
 
 	/**
@@ -434,7 +440,7 @@ public class AbyssalCraftAPI {
 		if(!EngraverRecipes.instance().getEngravings().containsKey(engraving) &&
 				!EngraverRecipes.instance().getEngravings().containsValue(coin))
 			EngraverRecipes.instance().addEngraving(coin, engraving, xp);
-		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
+		else logger.log(Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
 	}
 
 	/**
@@ -449,7 +455,7 @@ public class AbyssalCraftAPI {
 		if(!EngraverRecipes.instance().getEngravings().containsKey(engraving) &&
 				!EngraverRecipes.instance().getEngravings().containsValue(new ItemStack(coin)))
 			EngraverRecipes.instance().addEngraving(coin, engraving, xp);
-		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
+		else logger.log(Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
 	}
 
 	/**
@@ -482,8 +488,8 @@ public class AbyssalCraftAPI {
 		if(input.length > 0 && input != null)
 			if(input.length <= 5)
 				MaterializerRecipes.instance().materialize(input, output);
-			else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Materializer recipe has more than 5 inputs! (%d)", input.length);
-		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "This Materializer recipe has no inputs!");
+			else logger.log(Level.ERROR, "This Materializer recipe has more than 5 inputs! (%d)", input.length);
+		else logger.log(Level.ERROR, "This Materializer recipe has no inputs!");
 	}
 
 	/**
@@ -573,7 +579,7 @@ public class AbyssalCraftAPI {
 	public static void registerNecronomiconData(NecroData data, int bookType){
 		if(bookType <= 4 && bookType >= 0)
 			necroData.put(data, bookType);
-		else FMLLog.log("AbyssalCraftAPI", Level.ERROR, "Necronomicon book type does not exist: %d", bookType);
+		else logger.log(Level.ERROR, "Necronomicon book type does not exist: %d", bookType);
 	}
 
 	/**
@@ -596,7 +602,7 @@ public class AbyssalCraftAPI {
 	public static void addGhoulHelmetTexture(Item helmet, ResourceLocation res){
 		if(helmet == null || res == null) return;
 		if(ghoul_helmet.containsKey(helmet))
-			FMLLog.log("AbyssalCraftAPI", Level.INFO, "Mod %s is overwriting the texture for Helmet %s", Loader.instance().activeModContainer().getModId(), helmet.getItemStackDisplayName(new ItemStack(helmet)));
+			logger.log(Level.INFO, "Mod %s is overwriting the texture for Helmet %s", Loader.instance().activeModContainer().getModId(), helmet.getItemStackDisplayName(new ItemStack(helmet)));
 		ghoul_helmet.put(helmet, res);
 	}
 
@@ -610,7 +616,7 @@ public class AbyssalCraftAPI {
 	public static void addGhoulChestplateTexture(Item chestplate, ResourceLocation res){
 		if(chestplate == null || res == null) return;
 		if(ghoul_chestplate.containsKey(chestplate))
-			FMLLog.log("AbyssalCraftAPI", Level.INFO, "Mod %s is overwriting the texture for Chestplate %s", Loader.instance().activeModContainer().getModId(), chestplate.getItemStackDisplayName(new ItemStack(chestplate)));
+			logger.log(Level.INFO, "Mod %s is overwriting the texture for Chestplate %s", Loader.instance().activeModContainer().getModId(), chestplate.getItemStackDisplayName(new ItemStack(chestplate)));
 		ghoul_chestplate.put(chestplate, res);
 	}
 
@@ -624,7 +630,7 @@ public class AbyssalCraftAPI {
 	public static void addGhoulLeggingsTexture(Item leggings, ResourceLocation res){
 		if(leggings == null || res == null) return;
 		if(ghoul_leggings.containsKey(leggings))
-			FMLLog.log("AbyssalCraftAPI", Level.INFO, "Mod %s is overwriting the texture for Leggings %s", Loader.instance().activeModContainer().getModId(), leggings.getItemStackDisplayName(new ItemStack(leggings)));
+			logger.log(Level.INFO, "Mod %s is overwriting the texture for Leggings %s", Loader.instance().activeModContainer().getModId(), leggings.getItemStackDisplayName(new ItemStack(leggings)));
 		ghoul_leggings.put(leggings, res);
 	}
 
@@ -638,7 +644,7 @@ public class AbyssalCraftAPI {
 	public static void addGhoulBootsTexture(Item boots, ResourceLocation res){
 		if(boots == null || res == null) return;
 		if(ghoul_boots.containsKey(boots))
-			FMLLog.log("AbyssalCraftAPI", Level.INFO, "Mod %s is overwriting the texture for Boots %s", Loader.instance().activeModContainer().getModId(), boots.getItemStackDisplayName(new ItemStack(boots)));
+			logger.log(Level.INFO, "Mod %s is overwriting the texture for Boots %s", Loader.instance().activeModContainer().getModId(), boots.getItemStackDisplayName(new ItemStack(boots)));
 		ghoul_boots.put(boots, res);
 	}
 

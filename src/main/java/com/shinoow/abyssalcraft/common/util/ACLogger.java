@@ -12,13 +12,15 @@
 package com.shinoow.abyssalcraft.common.util;
 
 import org.apache.logging.log4j.Level;
-
-import net.minecraftforge.fml.common.FMLLog;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ACLogger {
 
+	private static final Logger log = LogManager.getLogger("AbyssalCraft");
+
 	public static void log(Level level, String format, Object... data) {
-		FMLLog.log("AbyssalCraft", level, format, data);
+		log.log(level, format, data);
 	}
 
 	public static void severe(String format, Object... data) {

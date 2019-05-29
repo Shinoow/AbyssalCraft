@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.IAmplifierCharm;
 import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -26,7 +27,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 /**
@@ -68,8 +68,8 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
-		l.add(I18n.translateToLocal("ac.text.amplifier") + ": " + EnergyEnum.getAmplifierName(getAmplifier(is)));
-		l.add(I18n.translateToLocal("ac.text.deity") + ": " + EnergyEnum.getDeityName(getDeity(is)));
+		l.add(I18n.format("ac.text.amplifier") + ": " + EnergyEnum.getAmplifierName(getAmplifier(is)));
+		l.add(I18n.format("ac.text.deity") + ": " + EnergyEnum.getDeityName(getDeity(is)));
 	}
 
 	@Override
@@ -88,7 +88,8 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		return I18n.translateToLocal(getUnlocalizedName() + ".name");
+	public String getUnlocalizedName(ItemStack stack)
+	{
+		return getUnlocalizedName();
 	}
 }

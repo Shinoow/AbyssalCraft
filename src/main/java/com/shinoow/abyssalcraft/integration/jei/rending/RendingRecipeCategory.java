@@ -27,7 +27,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 
 public class RendingRecipeCategory implements IRecipeCategory {
 
@@ -42,7 +42,7 @@ public class RendingRecipeCategory implements IRecipeCategory {
 
 	public RendingRecipeCategory(IGuiHelper guiHelper){
 		background = guiHelper.createBlankDrawable(166, 100);
-		localizedName = I18n.translateToLocal("container.abyssalcraft.rending.nei");
+		localizedName = I18n.format("container.abyssalcraft.rending.nei");
 
 		slotDrawable = guiHelper.getSlotDrawable();
 	}

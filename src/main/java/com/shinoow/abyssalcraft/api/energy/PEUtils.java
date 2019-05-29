@@ -304,7 +304,7 @@ public class PEUtils {
 	public static boolean canTransfer(World world, BlockPos pos, EnumFacing face, int dist){
 
 		for(int i = 1; i < dist+1; i++){
-			if(world.getBlockState(pos.offset(face, i)).getBlock().isFullCube(world.getBlockState(pos.offset(face, i))) && !world.isAirBlock(pos.offset(face, i))) return false;
+			if(world.getBlockState(pos.offset(face, i)).isFullCube() && !world.isAirBlock(pos.offset(face, i))) return false;
 			if(isContainer(world.getTileEntity(pos.offset(face, i))))
 				return ((IEnergyContainer) world.getTileEntity(pos.offset(face, i))).canAcceptPE();
 		}

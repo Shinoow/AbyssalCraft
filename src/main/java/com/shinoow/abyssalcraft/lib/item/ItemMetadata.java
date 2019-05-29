@@ -23,7 +23,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -59,8 +58,9 @@ public class ItemMetadata extends Item implements IUnlockableItem {
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		return I18n.translateToLocal(getUnlocalizedName() + "." + names[par1ItemStack.getItemDamage()] + ".name");
+	public String getUnlocalizedName(ItemStack stack)
+	{
+		return getUnlocalizedName() + "." + names[stack.getItemDamage()];
 	}
 
 	@Override

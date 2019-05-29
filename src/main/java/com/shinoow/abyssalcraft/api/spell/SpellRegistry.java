@@ -15,12 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * Registry class for Necronomicon Spells<br>
@@ -32,6 +33,8 @@ import net.minecraftforge.fml.common.FMLLog;
 public class SpellRegistry {
 
 	private final List<Spell> spells = new ArrayList<>();
+
+	private final Logger logger = LogManager.getLogger("SpellRegistry");
 
 	private static final SpellRegistry instance = new SpellRegistry();
 
@@ -49,11 +52,11 @@ public class SpellRegistry {
 		if(spell.getBookType() <= 4 && spell.getBookType() >= 0){
 			for(Spell entry : spells)
 				if(spell.getUnlocalizedName().equals(entry.getUnlocalizedName())){
-					FMLLog.log("SpellRegistry", Level.ERROR, "Necronomicon Spell already registered: %s", spell.getUnlocalizedName());
+					logger.log(Level.ERROR, "Necronomicon Spell already registered: %s", spell.getUnlocalizedName());
 					return;
 				}
 			spells.add(spell);
-		} else FMLLog.log("SpellRegistry", Level.ERROR, "Necronomicon book type does not exist: %d", spell.getBookType());
+		} else logger.log(Level.ERROR, "Necronomicon book type does not exist: %d", spell.getBookType());
 	}
 
 	/**

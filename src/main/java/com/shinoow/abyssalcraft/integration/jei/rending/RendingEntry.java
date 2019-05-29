@@ -11,8 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.rending;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
 
 public class RendingEntry {
 
@@ -24,8 +24,8 @@ public class RendingEntry {
 	public RendingEntry(ItemStack output, int dimension, String type, String description){
 		this.output = output;
 		this.dimension = dimension;
-		this.type = I18n.translateToLocal(type);
-		this.description = I18n.translateToLocal(description);
+		this.type = I18n.format(type);
+		this.description = I18n.format(description);
 	}
 
 	public RendingEntry(ItemStack output, String type, String description){
