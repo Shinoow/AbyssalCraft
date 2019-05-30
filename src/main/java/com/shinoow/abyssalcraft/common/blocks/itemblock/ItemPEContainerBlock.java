@@ -33,7 +33,7 @@ public class ItemPEContainerBlock extends ItemBlockAC {
 	}
 
 	@Override
-	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
+	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		l.add(String.format("%d/%d PE", (int)getContainedEnergy(is), getMaxEnergy(is)));
 		if(Block.getBlockFromItem(is.getItem()) == ACBlocks.energy_relay)
 			l.add("Range: 4 Blocks");

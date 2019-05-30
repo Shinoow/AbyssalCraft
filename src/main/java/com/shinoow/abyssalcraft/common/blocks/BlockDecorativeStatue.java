@@ -126,6 +126,7 @@ public class BlockDecorativeStatue extends BlockContainer {
 		return new TileEntityDecorativeStatue();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public BlockStateContainer createBlockState()
 	{

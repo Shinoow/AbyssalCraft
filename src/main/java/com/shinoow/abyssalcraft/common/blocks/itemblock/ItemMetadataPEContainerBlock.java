@@ -17,7 +17,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class ItemMetadataPEContainerBlock extends ItemBlockAC {
@@ -33,7 +32,7 @@ public class ItemMetadataPEContainerBlock extends ItemBlockAC {
 	}
 
 	@Override
-	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
+	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		l.add(String.format("%d/%d PE", (int)getContainedEnergy(is), getMaxEnergy(is)));
 	}
 
@@ -72,8 +71,8 @@ public class ItemMetadataPEContainerBlock extends ItemBlockAC {
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-
-		return I18n.translateToLocal(getUnlocalizedName() + "." + subNames[par1ItemStack.getItemDamage()] + ".name");
+	public String getUnlocalizedName(ItemStack stack)
+	{
+		return getUnlocalizedName() + "." + subNames[stack.getItemDamage()];
 	}
 }

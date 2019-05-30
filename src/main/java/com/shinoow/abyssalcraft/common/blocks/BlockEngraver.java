@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -23,7 +22,6 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -39,13 +37,8 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJModel;
-import net.minecraftforge.common.model.TRSRTransformation;
-import net.minecraftforge.common.property.ExtendedBlockState;
-import net.minecraftforge.common.property.IExtendedBlockState;
-import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -53,7 +46,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockEngraver extends BlockContainer {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	private ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[] {FACING}, new IUnlistedProperty[]{OBJModel.OBJProperty.INSTANCE});
 
 	private static boolean keepInventory;
 
@@ -154,15 +146,7 @@ public class BlockEngraver extends BlockContainer {
 		return new ItemStack(ACBlocks.engraver);
 	}
 
-	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		EnumFacing facing = state.getValue(FACING);
-		TRSRTransformation transform = new TRSRTransformation(facing);
-		OBJModel.OBJState retState = new OBJModel.OBJState(Arrays.asList(new String[]{OBJModel.Group.ALL}), true, transform);
-		return ((IExtendedBlockState) state).withProperty(OBJModel.OBJProperty.INSTANCE, retState);
-	}
-
+	@SuppressWarnings("deprecation")
 	@Override
 	public BlockStateContainer createBlockState()
 	{

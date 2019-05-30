@@ -14,7 +14,12 @@ package com.shinoow.abyssalcraft.common.structures.abyss;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone.EnumCobblestoneType;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -24,6 +29,8 @@ public class Chains extends WorldGenerator {
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
+		IBlockState abyssal_stone = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSAL_STONE);
+		IBlockState coralium_cobblestone = ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.CORALIUM_STONE);
 		int h = 5 + rand.nextInt(35);
 		int h2 = 255 - h * 6;
 		int t = 0;
@@ -47,62 +54,62 @@ public class Chains extends WorldGenerator {
 					if((j == -3 || j == 3) && flag){
 						if(k == 0){
 							if(b){
-								setBlockAndNotifyAdequately(worldIn, pos1.add(j, 0, i), ACBlocks.stone.getStateFromMeta(1));
-								setBlockAndNotifyAdequately(worldIn, pos1.add(i, 0, j), ACBlocks.stone.getStateFromMeta(1));
+								setBlockAndNotifyAdequately(worldIn, pos1.add(j, 0, i), abyssal_stone);
+								setBlockAndNotifyAdequately(worldIn, pos1.add(i, 0, j), abyssal_stone);
 							}
 
-							setBlockAndNotifyAdequately(worldIn, pos1.add(j, height, i), ACBlocks.stone.getStateFromMeta(1));
-							setBlockAndNotifyAdequately(worldIn, pos1.add(i, height, j), ACBlocks.stone.getStateFromMeta(1));
+							setBlockAndNotifyAdequately(worldIn, pos1.add(j, height, i), abyssal_stone);
+							setBlockAndNotifyAdequately(worldIn, pos1.add(i, height, j), abyssal_stone);
 						}
 					} else if(j == -2 || j == 2){
 						if(k == 1){
 							if(flag){
 								if(b){
-									setBlockAndNotifyAdequately(worldIn, pos1.add(j, k, i), ACBlocks.stone.getStateFromMeta(1));
-									setBlockAndNotifyAdequately(worldIn, pos1.add(i, k, j), ACBlocks.stone.getStateFromMeta(1));
+									setBlockAndNotifyAdequately(worldIn, pos1.add(j, k, i), abyssal_stone);
+									setBlockAndNotifyAdequately(worldIn, pos1.add(i, k, j), abyssal_stone);
 								}
 
-								setBlockAndNotifyAdequately(worldIn, pos1.add(j, height - k, i), ACBlocks.stone.getStateFromMeta(1));
-								setBlockAndNotifyAdequately(worldIn, pos1.add(i, height - k, j), ACBlocks.stone.getStateFromMeta(1));
+								setBlockAndNotifyAdequately(worldIn, pos1.add(j, height - k, i), abyssal_stone);
+								setBlockAndNotifyAdequately(worldIn, pos1.add(i, height - k, j), abyssal_stone);
 							}
 						} else if(k < 2 && i > -3 && i < 3){
 							if(b){
-								setBlockAndNotifyAdequately(worldIn, pos1.add(j, k, i), ACBlocks.stone.getStateFromMeta(1));
-								setBlockAndNotifyAdequately(worldIn, pos1.add(i, k, j), ACBlocks.stone.getStateFromMeta(1));
+								setBlockAndNotifyAdequately(worldIn, pos1.add(j, k, i), abyssal_stone);
+								setBlockAndNotifyAdequately(worldIn, pos1.add(i, k, j), abyssal_stone);
 							}
 
-							setBlockAndNotifyAdequately(worldIn, pos1.add(j, height - k, i), ACBlocks.stone.getStateFromMeta(1));
-							setBlockAndNotifyAdequately(worldIn, pos1.add(i, height - k, j), ACBlocks.stone.getStateFromMeta(1));
+							setBlockAndNotifyAdequately(worldIn, pos1.add(j, height - k, i), abyssal_stone);
+							setBlockAndNotifyAdequately(worldIn, pos1.add(i, height - k, j), abyssal_stone);
 						}
 					}
 					else if(j > -2 && j < 2 && flag){
 						if(b){
-							setBlockAndNotifyAdequately(worldIn, pos1.add(j, k, i), ACBlocks.stone.getStateFromMeta(1));
-							setBlockAndNotifyAdequately(worldIn, pos1.add(i, k, j), ACBlocks.stone.getStateFromMeta(1));
+							setBlockAndNotifyAdequately(worldIn, pos1.add(j, k, i), abyssal_stone);
+							setBlockAndNotifyAdequately(worldIn, pos1.add(i, k, j), abyssal_stone);
 						}
 
-						setBlockAndNotifyAdequately(worldIn, pos1.add(j, height - k, i), ACBlocks.stone.getStateFromMeta(1));
-						setBlockAndNotifyAdequately(worldIn, pos1.add(i, height - k, j), ACBlocks.stone.getStateFromMeta(1));
+						setBlockAndNotifyAdequately(worldIn, pos1.add(j, height - k, i), abyssal_stone);
+						setBlockAndNotifyAdequately(worldIn, pos1.add(i, height - k, j), abyssal_stone);
 					}
 			}
 
 		for(int i = 0; i < h; i++){
-			setBlockAndNotifyAdequately(worldIn, pos1.up(i*6), ACBlocks.cobblestone.getStateFromMeta(4));
+			setBlockAndNotifyAdequately(worldIn, pos1.up(i*6), coralium_cobblestone);
 
-			setBlockAndNotifyAdequately(worldIn, pos1.add(0, 1 + i*6, 1), ACBlocks.cobblestone.getStateFromMeta(4));
-			setBlockAndNotifyAdequately(worldIn, pos1.add(0, 1 + i*6, -1), ACBlocks.cobblestone.getStateFromMeta(4));
-			setBlockAndNotifyAdequately(worldIn, pos1.add(0, 2 + i*6, 1), ACBlocks.cobblestone.getStateFromMeta(4));
-			setBlockAndNotifyAdequately(worldIn, pos1.add(0, 2 + i*6, -1), ACBlocks.cobblestone.getStateFromMeta(4));
+			setBlockAndNotifyAdequately(worldIn, pos1.add(0, 1 + i*6, 1), coralium_cobblestone);
+			setBlockAndNotifyAdequately(worldIn, pos1.add(0, 1 + i*6, -1), coralium_cobblestone);
+			setBlockAndNotifyAdequately(worldIn, pos1.add(0, 2 + i*6, 1), coralium_cobblestone);
+			setBlockAndNotifyAdequately(worldIn, pos1.add(0, 2 + i*6, -1), coralium_cobblestone);
 
-			setBlockAndNotifyAdequately(worldIn, pos1.up(3 + i*6), ACBlocks.cobblestone.getStateFromMeta(4));
+			setBlockAndNotifyAdequately(worldIn, pos1.up(3 + i*6), coralium_cobblestone);
 
-			setBlockAndNotifyAdequately(worldIn, pos1.add(1, 4 + i*6, 0), ACBlocks.cobblestone.getStateFromMeta(4));
-			setBlockAndNotifyAdequately(worldIn, pos1.add(-1, 4 + i*6, 0), ACBlocks.cobblestone.getStateFromMeta(4));
-			setBlockAndNotifyAdequately(worldIn, pos1.add(1, 5 + i*6, 0), ACBlocks.cobblestone.getStateFromMeta(4));
-			setBlockAndNotifyAdequately(worldIn, pos1.add(-1, 5 + i*6, 0), ACBlocks.cobblestone.getStateFromMeta(4));
+			setBlockAndNotifyAdequately(worldIn, pos1.add(1, 4 + i*6, 0), coralium_cobblestone);
+			setBlockAndNotifyAdequately(worldIn, pos1.add(-1, 4 + i*6, 0), coralium_cobblestone);
+			setBlockAndNotifyAdequately(worldIn, pos1.add(1, 5 + i*6, 0), coralium_cobblestone);
+			setBlockAndNotifyAdequately(worldIn, pos1.add(-1, 5 + i*6, 0), coralium_cobblestone);
 
 			if(i + 1 == h)
-				setBlockAndNotifyAdequately(worldIn, pos1.up(6 + i*6), ACBlocks.cobblestone.getStateFromMeta(4));
+				setBlockAndNotifyAdequately(worldIn, pos1.up(6 + i*6), coralium_cobblestone);
 		}
 
 		return true;

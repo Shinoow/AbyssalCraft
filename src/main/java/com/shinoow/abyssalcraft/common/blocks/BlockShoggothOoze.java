@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -130,7 +131,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 		if(world.provider.getDimension() == ACLib.dreadlands_id)
 			return ACBlocks.dreadlands_dirt.getDefaultState();
 		if(world.provider.getDimension() == ACLib.omothol_id)
-			return ACBlocks.stone.getStateFromMeta(6);
+			return ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE);
 		if(world.provider.getDimension() == ACLib.dark_realm_id)
 			return ACBlocks.stone.getDefaultState();
 		if(world.provider.getDimension() == -1)
@@ -151,7 +152,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos.down());
 		Block block = iblockstate.getBlock();
-		return block != ACBlocks.shoggoth_biomass && iblockstate != ACBlocks.stone.getStateFromMeta(7) ? iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down()) ? true : block == this && iblockstate.getValue(LAYERS).intValue() == 8 ? true : iblockstate.isOpaqueCube() && iblockstate.getMaterial().blocksMovement() : false;
+		return block != ACBlocks.shoggoth_biomass && iblockstate != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE) ? iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down()) ? true : block == this && iblockstate.getValue(LAYERS).intValue() == 8 ? true : iblockstate.isOpaqueCube() && iblockstate.getMaterial().blocksMovement() : false;
 	}
 
 	@Override
@@ -185,6 +186,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)

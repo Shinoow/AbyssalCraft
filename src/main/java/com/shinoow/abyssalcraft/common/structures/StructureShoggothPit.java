@@ -84,14 +84,14 @@ public class StructureShoggothPit extends WorldGenerator {
 
 			Map<BlockPos, String> map = template.getDataBlocks(pos, placeSettings);
 
-			IBlockState monolithStone = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE);
+			IBlockState monolith_stone = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE);
 
 			switch(num) {
 			case 1:
 				for (Entry<BlockPos, String> entry : map.entrySet())
 					if("statue1".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -102,7 +102,7 @@ public class StructureShoggothPit extends WorldGenerator {
 						}
 					} else if("statue2".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -113,7 +113,7 @@ public class StructureShoggothPit extends WorldGenerator {
 						}
 					} else if("statue3".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -124,7 +124,7 @@ public class StructureShoggothPit extends WorldGenerator {
 						}
 					} else if("statue4".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -135,7 +135,7 @@ public class StructureShoggothPit extends WorldGenerator {
 						}
 					} else if("statue5".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -146,7 +146,7 @@ public class StructureShoggothPit extends WorldGenerator {
 						}
 					} else if("statue6".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -157,7 +157,7 @@ public class StructureShoggothPit extends WorldGenerator {
 						}
 					} else if("statue7".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -168,7 +168,7 @@ public class StructureShoggothPit extends WorldGenerator {
 						}
 					} else if("statue8".equals(entry.getValue()))
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -182,7 +182,7 @@ public class StructureShoggothPit extends WorldGenerator {
 				for (Entry<BlockPos, String> entry : map.entrySet())
 					if("statue1".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -193,7 +193,7 @@ public class StructureShoggothPit extends WorldGenerator {
 						}
 					} else if("statue2".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -204,7 +204,7 @@ public class StructureShoggothPit extends WorldGenerator {
 						}
 					} else if("statue3".equals(entry.getValue()))
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());
@@ -218,7 +218,7 @@ public class StructureShoggothPit extends WorldGenerator {
 				for (Entry<BlockPos, String> entry : map.entrySet())
 					if("statue1".equals(entry.getValue()))
 						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolithStone);
+							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand));
 							TileEntity te = world.getTileEntity(entry.getKey());

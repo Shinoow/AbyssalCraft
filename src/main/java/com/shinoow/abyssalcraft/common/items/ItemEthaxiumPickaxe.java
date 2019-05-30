@@ -15,6 +15,10 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
+import com.shinoow.abyssalcraft.common.blocks.IngotBlock;
+import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 
 import net.minecraft.block.Block;
@@ -34,8 +38,8 @@ public class ItemEthaxiumPickaxe extends ItemACPickaxe {
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state)
 	{
-		if(effectiveBlocks.contains(state.getBlock()) || state == ACBlocks.ingot_block.getStateFromMeta(3)
-				|| state == ACBlocks.stone.getStateFromMeta(5))
+		if(effectiveBlocks.contains(state.getBlock()) || state == ACBlocks.ingot_block.getDefaultState().withProperty(IngotBlock.TYPE, EnumIngotType.ETHAXIUM)
+				|| state == ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ETHAXIUM))
 			return efficiency * 10;
 		if (state.getBlock().isToolEffective("pickaxe", state))
 			return efficiency;

@@ -154,6 +154,7 @@ public class BlockStatue extends BlockContainer {
 		return new TileEntityStatue();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public BlockStateContainer createBlockState()
 	{

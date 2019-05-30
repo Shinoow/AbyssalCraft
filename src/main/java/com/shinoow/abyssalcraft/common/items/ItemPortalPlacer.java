@@ -15,6 +15,8 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -137,17 +139,17 @@ public class ItemPortalPlacer extends ItemACBasic {
 
 				switch(key){
 				case 0:
-					return buildPortal(world, pos, direction, ACBlocks.stone.getStateFromMeta(1), ACBlocks.coralium_fire.getDefaultState());
+					return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSAL_STONE), ACBlocks.coralium_fire.getDefaultState());
 				case 1:
 					if(player.dimension == ACLib.abyssal_wasteland_id && player.isSneaking() || player.dimension == 0 || o == 0)
-						return buildPortal(world, pos, direction, ACBlocks.stone.getStateFromMeta(1), ACBlocks.coralium_fire.getDefaultState());
-					else return buildPortal(world, pos, direction, ACBlocks.stone.getStateFromMeta(2), ACBlocks.dreaded_fire.getDefaultState());
+						return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSAL_STONE), ACBlocks.coralium_fire.getDefaultState());
+					else return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.DREADSTONE), ACBlocks.dreaded_fire.getDefaultState());
 				case 2:
 					if(player.dimension == ACLib.abyssal_wasteland_id && player.isSneaking() || player.dimension == 0 || o == 0)
-						return buildPortal(world, pos, direction, ACBlocks.stone.getStateFromMeta(1), ACBlocks.coralium_fire.getDefaultState());
+						return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSAL_STONE), ACBlocks.coralium_fire.getDefaultState());
 					else if(player.dimension == ACLib.dreadlands_id && player.isSneaking() || player.dimension == ACLib.abyssal_wasteland_id || o == 1)
-						return buildPortal(world, pos, direction, ACBlocks.stone.getStateFromMeta(2), ACBlocks.dreaded_fire.getDefaultState());
-					else return buildPortal(world, pos, direction, ACBlocks.stone.getStateFromMeta(6), ACBlocks.omothol_fire.getDefaultState());
+						return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.DREADSTONE), ACBlocks.dreaded_fire.getDefaultState());
+					else return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE), ACBlocks.omothol_fire.getDefaultState());
 				default:
 					return EnumActionResult.FAIL;
 				}
