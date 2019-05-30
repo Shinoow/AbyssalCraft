@@ -125,7 +125,6 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 				BlockPos pos = new BlockPos(MathHelper.floor(locationX), MathHelper.floor(locationY), MathHelper.floor(locationZ));
 				if(world.getBlockState(pos.down()).getBlock() == ACBlocks.shoggoth_ooze)
 					pos = pos.down();
-				else world.setBlockState(pos, ACBlocks.shoggoth_ooze.getDefaultState());
 				new WorldGenShoggothMonolith().generate(world, shoggoth.getRNG(), pos);
 			}
 			shoggoth.isBuilding = false;
@@ -166,8 +165,16 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 			if (world.isAirBlock(blockpos1.up()) && world.isAirBlock(blockpos1.up(1)) && world.getBlockState(blockpos1).getBlock().isReplaceable(world, blockpos1)
 					&& world.getBlockState(blockpos1.down()) != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)
 					&& !world.isAirBlock(blockpos1.down()) && world.getBlockState(blockpos1.down()).isSideSolid(world, blockpos1.down(), EnumFacing.UP)
-					&& world.getBlockState(blockpos1.down()) != ACBlocks.shoggoth_biomass.getDefaultState())
+					&& world.getBlockState(blockpos1.down()) != ACBlocks.shoggoth_biomass.getDefaultState()) {
+
+				for(BlockPos pos : BlockPos.getAllInBox(blockpos1.north().west().down(), blockpos1.south().east().up())) {
+					if(world.getBlockState(pos).getBlock() == ACBlocks.shoggoth_ooze)
+						return new Vec3d(pos);
+				}
+
 				return new Vec3d(blockpos1.getX(), blockpos1.getY(), blockpos1.getZ());
+			}
+
 		}
 
 		return null;
