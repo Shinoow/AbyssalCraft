@@ -167,10 +167,9 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 					&& !world.isAirBlock(blockpos1.down()) && world.getBlockState(blockpos1.down()).isSideSolid(world, blockpos1.down(), EnumFacing.UP)
 					&& world.getBlockState(blockpos1.down()) != ACBlocks.shoggoth_biomass.getDefaultState()) {
 
-				for(BlockPos pos : BlockPos.getAllInBox(blockpos1.north().west().down(), blockpos1.south().east().up())) {
+				for(BlockPos pos : BlockPos.getAllInBox(blockpos1.north().west().down(), blockpos1.south().east().up()))
 					if(world.getBlockState(pos).getBlock() == ACBlocks.shoggoth_ooze)
 						return new Vec3d(pos);
-				}
 
 				return new Vec3d(blockpos1.getX(), blockpos1.getY(), blockpos1.getZ());
 			}
