@@ -40,8 +40,7 @@ public class ItemTieredEnergyRelayBlock extends ItemMetadataPEContainerBlock {
 	}
 
 	@Override
-	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
-		super.addInformation(is, player, l, B);
+	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		l.add(String.format("Range: %d Blocks", getRange(is.getItemDamage())));
 	}
 

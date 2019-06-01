@@ -11,15 +11,15 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
-import java.util.List;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 
-public class ItemMetadataPEContainerBlock extends ItemBlockAC {
+public class ItemMetadataPEContainerBlock extends ItemBlockAC implements IEnergyContainerItem {
 
 	private static final String[] subNames = {
 			"0", "1",  "2", "3", "4", "5", "6", "7",
@@ -32,10 +32,6 @@ public class ItemMetadataPEContainerBlock extends ItemBlockAC {
 	}
 
 	@Override
-	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
-		l.add(String.format("%d/%d PE", (int)getContainedEnergy(is), getMaxEnergy(is)));
-	}
-
 	public float getContainedEnergy(ItemStack stack) {
 		float energy;
 		if(!stack.hasTagCompound())
@@ -49,6 +45,7 @@ public class ItemMetadataPEContainerBlock extends ItemBlockAC {
 		return energy;
 	}
 
+	@Override
 	public int getMaxEnergy(ItemStack stack) {
 		int base = 5000;
 		switch(stack.getItemDamage()){
@@ -74,5 +71,25 @@ public class ItemMetadataPEContainerBlock extends ItemBlockAC {
 	public String getUnlocalizedName(ItemStack stack)
 	{
 		return getUnlocalizedName() + "." + subNames[stack.getItemDamage()];
+	}
+
+	@Override
+	public void addEnergy(ItemStack stack, float energy) {
+		PEUtils.addEnergy(this, stack, energy);
+	}
+
+	@Override
+	public float consumeEnergy(ItemStack stack, float energy) {
+		return PEUtils.consumeEnergy(stack, energy);
+	}
+
+	@Override
+	public boolean canAcceptPE(ItemStack stack) {
+		return Block.getBlockFromItem(stack.getItem()) != ACBlocks.tiered_sacrificial_altar && getContainedEnergy(stack) < getMaxEnergy(stack);
+	}
+
+	@Override
+	public boolean canTransferPE(ItemStack stack) {
+		return getContainedEnergy(stack) > 0;
 	}
 }
