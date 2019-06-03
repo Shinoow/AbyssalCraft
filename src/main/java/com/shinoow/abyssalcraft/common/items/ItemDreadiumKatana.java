@@ -19,7 +19,7 @@ import net.minecraftforge.common.util.EnumHelper;
 public class ItemDreadiumKatana extends ItemACSword {
 
 	public static ToolMaterial hilt = EnumHelper.addToolMaterial("dreadiumkatana_hilt", 0, 200, 1, 1, 0).setRepairItem(new ItemStack(ACItems.crystal, 1, 14));
-	public static ToolMaterial katana = EnumHelper.addToolMaterial("dreadiumkatana_katana", 0, 1000, 1, 11, 0).setRepairItem(new ItemStack(ACItems.crystal, 1, 14));
+	public static ToolMaterial katana = EnumHelper.addToolMaterial("dreadiumkatana_katana", 0, 1000, 1, 11, 14).setRepairItem(new ItemStack(ACItems.crystal, 1, 14));
 
 	public ItemDreadiumKatana(String par1Str, ToolMaterial mat){
 		super(mat, par1Str);
