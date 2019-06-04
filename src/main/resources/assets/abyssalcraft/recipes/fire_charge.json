@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    [
+      {
+        "item": "abyssalcraft:charcoal"
+      }
+    ]
+  ],
+  "result": {
+    "item": "minecraft:fire_charge",
+    "count": 3
+  }
+}

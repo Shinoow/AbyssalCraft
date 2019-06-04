@@ -153,6 +153,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.dreadium_plate = new ItemACBasic("dreadplate").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 		ACItems.dreadium_katana_blade = new ItemACBasic("dreadblade").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 		ACItems.dread_plagued_gateway_key = new ItemACBasic("dreadkey").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
+		ACItems.charcoal = new ItemACBasic("cha_rcoal").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 
 		//Abyssalnite items
 		ACItems.chunk_of_abyssalnite = new ItemACBasic("abychunk").setUnlockCondition(new EntityCondition("abyssalcraft:abygolem"));
@@ -454,6 +455,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.antidote, "antidote");
 		registerItem(ACItems.darklands_oak_door, "door_dlt");
 		registerItem(ACItems.dreadlands_door, "door_drt");
+		registerItem(ACItems.charcoal, "charcoal");
 		//		registerItem(shadowPlate, "shadowplate");
 
 	}

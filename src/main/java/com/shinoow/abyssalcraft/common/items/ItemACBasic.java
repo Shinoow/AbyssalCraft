@@ -72,6 +72,6 @@ public class ItemACBasic extends Item implements IUnlockableItem {
 	@Override
 	public int getItemBurnTime(ItemStack itemStack)
 	{
-		return itemStack.getItem() == ACItems.methane ? 10000 : -1;
+		return itemStack.getItem() == ACItems.methane ? 10000 : itemStack.getItem() == ACItems.charcoal ? 1600 : -1;
 	}
 }

@@ -1357,6 +1357,7 @@ item.antidote.coralium.name=珊瑚侵染解药
 item.antidote.dread.name=恐惧侵染解药
 item.door_dlt.name=Darklands Oak Wood Door
 item.door_drt.name=Dreadlands Wood Door
+item.cha_rcoal.name=Cha'rcoal
 
 #实体
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼

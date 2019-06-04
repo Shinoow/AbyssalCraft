@@ -517,6 +517,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("crystalFragmentAlumina", new ItemStack(ACItems.crystal_fragment, 1, 22));
 		OreDictionary.registerOre("crystalFragmentMagnesia", new ItemStack(ACItems.crystal_fragment, 1, 23));
 		OreDictionary.registerOre("crystalFragmentZinc", new ItemStack(ACItems.crystal_fragment, 1, 24));
+		OreDictionary.registerOre("coal", ACItems.charcoal);
 	}
 
 	@SubscribeEvent

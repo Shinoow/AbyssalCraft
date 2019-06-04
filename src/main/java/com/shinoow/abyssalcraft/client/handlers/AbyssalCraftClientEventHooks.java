@@ -692,6 +692,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.antidote, 1, "dread_antidote");
 		registerItemRender(ACItems.darklands_oak_door, 0);
 		registerItemRender(ACItems.dreadlands_door, 0);
+		registerItemRender(ACItems.charcoal, 0);
 
 		registerItemRender(ACBlocks.stone, 0, "darkstone");
 		registerItemRender(ACBlocks.stone, 1, "abystone");
