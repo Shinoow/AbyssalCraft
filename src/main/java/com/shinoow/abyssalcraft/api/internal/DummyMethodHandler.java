@@ -43,4 +43,7 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 
 	@Override
 	public void completeRitualClient(BlockPos pos, EntityPlayer player, String ritual) {}
+
+	@Override
+	public boolean isImmuneOrCarrier(String entity, int list) { return false; }
 }

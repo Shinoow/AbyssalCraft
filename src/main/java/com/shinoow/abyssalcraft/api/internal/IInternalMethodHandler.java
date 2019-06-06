@@ -116,4 +116,13 @@ public interface IInternalMethodHandler {
 	 * @param ritual Ritual name
 	 */
 	public void completeRitualClient(BlockPos pos, EntityPlayer player, String ritual);
+
+	/**
+	 * Checks the configurable immunity and carrier lists for whether or not the entity is immune or a plague carrier<br>
+	 * (YOU SHOULD NEVER NEED TO CALL THIS, INTERNAL USE ONLY)
+	 * @param entity Entity ID String
+	 * @param list Which immunity/carrier list to check
+	 * @return True whether or not the Entity either is immune or a carrier
+	 */
+	public boolean isImmuneOrCarrier(String entity, int list);
 }

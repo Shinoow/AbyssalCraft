@@ -17,7 +17,6 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -110,7 +109,7 @@ public class PlagueEventHandler {
 				entity.world.playEvent(2002, new BlockPos(entity), PotionUtils.getPotionColorFromEffectList(Collections.singletonList(entity.getActivePotionEffect(AbyssalCraftAPI.dread_plague))));
 
 			}
-		} else if(entity instanceof IDreadEntity && !(entity instanceof EntityDemonAnimal) && entity.dimension != ACLib.dreadlands_id &&
+		} else if(EntityUtil.isDreadPlagueCarrier(entity) && !(entity instanceof EntityDemonAnimal) && entity.dimension != ACLib.dreadlands_id &&
 				entity.dimension != ACLib.omothol_id && entity.dimension != ACLib.dark_realm_id) {
 			EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
 			entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 600));

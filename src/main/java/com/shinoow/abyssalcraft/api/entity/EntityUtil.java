@@ -18,6 +18,7 @@ import java.util.UUID;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 
 /**
@@ -40,6 +42,10 @@ public final class EntityUtil {
 	private EntityUtil(){}
 
 	private static final List<Class<? extends EntityLivingBase>> shoggothFood = new ArrayList<>();
+	private static final List<String> dread_carriers = new ArrayList<>();
+	private static final List<String> dread_immunity = new ArrayList<>();
+	private static final List<String> coralium_carriers = new ArrayList<>();
+	private static final List<String> coralium_immunity = new ArrayList<>();
 
 	/**
 	 * Checks if the Entity is immune to the Coralium Plague
@@ -47,7 +53,9 @@ public final class EntityUtil {
 	 * @return True if the Entity is immune, otherwise false
 	 */
 	public static boolean isEntityCoralium(EntityLivingBase par1){
-		return par1 instanceof ICoraliumEntity || par1 instanceof IOmotholEntity || par1 instanceof EntityPlayer && isPlayerCoralium((EntityPlayer)par1);
+		return par1 instanceof ICoraliumEntity || par1 instanceof IOmotholEntity || par1 instanceof EntityPlayer && isPlayerCoralium((EntityPlayer)par1)
+				|| EntityList.getKey(par1) != null && (coralium_immunity.contains(EntityList.getKey(par1).toString())
+						|| AbyssalCraftAPI.getInternalMethodHandler().isImmuneOrCarrier(EntityList.getKey(par1).toString(), 2));
 	}
 
 	/**
@@ -67,7 +75,8 @@ public final class EntityUtil {
 	 * @return True if the Entity is immune, otherwise false
 	 */
 	public static boolean isEntityDread(EntityLivingBase par1){
-		return par1 instanceof IDreadEntity || par1 instanceof IOmotholEntity;
+		return par1 instanceof IDreadEntity || par1 instanceof IOmotholEntity || EntityList.getKey(par1) != null && (dread_immunity.contains(EntityList.getKey(par1).toString())
+				|| AbyssalCraftAPI.getInternalMethodHandler().isImmuneOrCarrier(EntityList.getKey(par1).toString(), 0));
 	}
 
 	/**
@@ -173,6 +182,66 @@ public final class EntityUtil {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Adds the entity to a list of entities considered immune to the Dread Plague
+	 * @param entity Entity ID string
+	 */
+	public static void addDreadPlagueImmunity(String entity) {
+		if(EntityList.isRegistered(new ResourceLocation(entity)))
+			dread_immunity.add(entity);
+	}
+
+	/**
+	 * Adds the entity to a list of entities considered carriers of the Dread Plague<br>
+	 * (this also adds it to the immunity list)
+	 * @param entity Entity ID string
+	 */
+	public static void addDreadPlagueCarrier(String entity) {
+		addDreadPlagueImmunity(entity);
+		if(EntityList.isRegistered(new ResourceLocation(entity)))
+			dread_carriers.add(entity);
+	}
+
+	/**
+	 * Adds the entity to a list of entities considered immune to the Coralium Plague
+	 * @param entity Entity ID string
+	 */
+	public static void addCoraliumPlagueImmunity(String entity) {
+		if(EntityList.isRegistered(new ResourceLocation(entity)))
+			coralium_immunity.add(entity);
+	}
+
+	/**
+	 * Adds the entity to a list of entities considered carriers of the Coralium Plague<br>
+	 * (this also adds it to the immunity list)
+	 * @param entity Entity ID string
+	 */
+	public static void addCoraliumPlagueCarrier(String entity) {
+		addCoraliumPlagueImmunity(entity);
+		if(EntityList.isRegistered(new ResourceLocation(entity)))
+			coralium_carriers.add(entity);
+	}
+
+	/**
+	 * Checks if the Entity is a carrier of the Dread Plague
+	 * @param entity The Entity to check
+	 * @return True if the Entity is a carrier, otherwise false
+	 */
+	public static boolean isDreadPlagueCarrier(EntityLivingBase entity) {
+		return entity instanceof IDreadEntity || EntityList.getKey(entity) != null && (dread_carriers.contains(EntityList.getKey(entity).toString())
+				|| AbyssalCraftAPI.getInternalMethodHandler().isImmuneOrCarrier(EntityList.getKey(entity).toString(), 1));
+	}
+
+	/**
+	 * Checks if the Entity is a carrier of the Coralium Plague
+	 * @param entity The Entity to check
+	 * @return True if the Entity is a carrier, otherwise false
+	 */
+	public static boolean isCoraliumPlagueCarrier(EntityLivingBase entity) {
+		return entity instanceof ICoraliumEntity || EntityList.getKey(entity) != null && (coralium_carriers.contains(EntityList.getKey(entity).toString())
+				|| AbyssalCraftAPI.getInternalMethodHandler().isImmuneOrCarrier(EntityList.getKey(entity).toString(), 3));
 	}
 
 	static class Vars{

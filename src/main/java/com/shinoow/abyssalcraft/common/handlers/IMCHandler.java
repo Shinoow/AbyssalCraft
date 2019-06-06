@@ -314,6 +314,58 @@ public class IMCHandler {
 					warning("Received invalid Ghoul Boots Texture Registration from mod %s!", imcMessage.getSender());
 				else info("Received Ghoul Boots Texture Registration from mod %s", imcMessage.getSender());
 			}
+			else if(imcMessage.key.equals("addDreadPlagueImmunity")){
+				boolean failed = false;
+				if(!imcMessage.isStringMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					EntityUtil.addDreadPlagueImmunity(imcMessage.getStringValue());
+				}
+				if(failed)
+					warning("Received invalid Dread Plague Immunity registration from mod %s!", imcMessage.getSender());
+				else info("Received Dread Plague Immunity registration from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addDreadPlagueCarrier")){
+				boolean failed = false;
+				if(!imcMessage.isStringMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					EntityUtil.addDreadPlagueCarrier(imcMessage.getStringValue());
+				}
+				if(failed)
+					warning("Received invalid Dread Plague Carrier registration from mod %s!", imcMessage.getSender());
+				else info("Received Dread Plague Carrier registration from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addCoraliumPlagueImmunity")){
+				boolean failed = false;
+				if(!imcMessage.isStringMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					EntityUtil.addCoraliumPlagueImmunity(imcMessage.getStringValue());
+				}
+				if(failed)
+					warning("Received invalid Coralium Plague Immunity registration from mod %s!", imcMessage.getSender());
+				else info("Received Coralium Plague Immunity registration from mod %s", imcMessage.getSender());
+			}
+			else if(imcMessage.key.equals("addCoraliumPlagueCarrier")){
+				boolean failed = false;
+				if(!imcMessage.isStringMessage())
+					failed = true;
+				else {
+					if(!senders.contains(imcMessage.getSender()))
+						senders.add(imcMessage.getSender());
+					EntityUtil.addCoraliumPlagueCarrier(imcMessage.getStringValue());
+				}
+				if(failed)
+					warning("Received invalid Coralium Plague Carrier registration from mod %s!", imcMessage.getSender());
+				else info("Received Coralium Plague Carrier registration from mod %s", imcMessage.getSender());
+			}
 			else warning("Received an IMC Message with unknown key (%s) from mod %s!", imcMessage.key, imcMessage.getSender());
 		if(!senders.isEmpty())
 			info("Recieved messages from the following mods: %s", senders);

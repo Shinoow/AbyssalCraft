@@ -20,8 +20,9 @@ package com.shinoow.abyssalcraft.api;
 public class IMCHelper {
 
 	//SHOGGOTH FOOD ////////////////////////////////////////////////////////////////////////////
+
 	/**
-	 * This is a IMC version of AbyssalCraftAPI#addShoggothFood
+	 * This is a IMC version of EntityUtil#addShoggothFood
 	 * You can use the IMC message "shoggothFood" to add a Entity to the Shoggoth Food list
 	 * The format for the message should be the string path to the entity class
 	 *
@@ -131,5 +132,18 @@ public class IMCHelper {
 	 *
 	 * The message is sent this way (where <name of armor piece> is replaced with the name of the armor piece you want to register):
 	 * FMLInterModComms.sendMessage("abyssalcraft", "addGhoul<name of armor piece>", <a NBTTagCompound with the aforementioned tags>);
+	 */
+
+	//PLAGUE IMMUNITY/CARRIER REGISTRATION /////////////////////////////////////////////////////
+
+	/**
+	 * These are IMC versions of EntityUtil#addDreadPlagueImmunity, EntityUtil#addCoraliumPlagueImmunity etc
+	 * You can use the IMC message "addDreadPlagueImmunity" respective "addDreadPlagueCarrier",
+	 * "addCoraliumPlagueImmunity" and "addCoraliumPlagueCarrier" to make the Entity either immune or
+	 * a carrier of the respective plague.
+	 * The format for the message should be the string path value of the Entity ID
+	 *
+	 * Example of how it would look like if I added the Zombie to the Dread Plague Carrier list:
+	 * FMLInterModComms.sendMessage("abyssalcraft", "addDreadPlagueCarrier", "minecraft:zombie");
 	 */
 }

@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.common.network.client.DisruptionMessage;
 import com.shinoow.abyssalcraft.common.network.client.PEStreamMessage;
 import com.shinoow.abyssalcraft.common.network.client.RitualMessage;
 import com.shinoow.abyssalcraft.common.world.DarklandsStructureGenerator;
+import com.shinoow.abyssalcraft.init.InitHandler;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -63,5 +64,10 @@ public class InternalMethodHandler extends DummyMethodHandler {
 	@Override
 	public void completeRitualClient(BlockPos pos, EntityPlayer player, String ritual) {
 		PacketDispatcher.sendToAllAround(new RitualMessage(ritual, pos), player, 5);
+	}
+
+	@Override
+	public boolean isImmuneOrCarrier(String entity, int list) {
+		return InitHandler.INSTANCE.isImmuneOrCarrier(entity, list);
 	}
 }

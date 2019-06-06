@@ -72,7 +72,8 @@ public class InitHandler implements ILifeCycleHandler {
 	public static Configuration cfg;
 
 	private static String[] abyssalZombieBlacklist, depthsGhoulBlacklist, antiAbyssalZombieBlacklist, antiGhoulBlacklist,
-	omotholGhoulBlacklist, interdimensionalCageBlacklist;
+	omotholGhoulBlacklist, interdimensionalCageBlacklist, dreadPlagueImmunityList, dreadPlagueCarrierList,
+	coraliumPlagueImmunityList, coraliumPlagueCarrierList;
 
 	public static int[] coraliumOreGeneration;
 	private static int[] blackHoleBlacklist, oreGenDimBlacklist, structureGenDimBlacklist;
@@ -92,6 +93,11 @@ public class InitHandler implements ILifeCycleHandler {
 	private static final List<ItemStack> anti_abyssal_zombie_blacklist = new ArrayList<>();
 	private static final List<ItemStack> anti_ghoul_blacklist = new ArrayList<>();
 	private static final List<ItemStack> omothol_ghoul_blacklist = new ArrayList<>();
+
+	private static final List<String> dread_carriers = new ArrayList<>();
+	private static final List<String> dread_immunity = new ArrayList<>();
+	private static final List<String> coralium_carriers = new ArrayList<>();
+	private static final List<String> coralium_immunity = new ArrayList<>();
 
 	public static final Map<ResourceLocation, Tuple<Integer, Float>> demon_transformations = new HashMap<>();
 
@@ -345,6 +351,10 @@ public class InitHandler implements ILifeCycleHandler {
 		portalSpawnsNearPlayer = cfg.get(Configuration.CATEGORY_GENERAL, "Portal Mob Spawning Near Players", true, "Toggles whether or not portals require a player to be nearby in order for it to rarely spawn mobs. If this option is disabled they follow the same principle as Nether portals.").getBoolean();
 		showBossDialogs = cfg.get(Configuration.CATEGORY_GENERAL, "Show Boss Dialogs", true, "Toggles whether or not boss dialogs are displayed at any point during their fights (when they spawn, when they die,  etc)").getBoolean();
 		knowledgeSyncDelay = cfg.get(Configuration.CATEGORY_GENERAL, "Knowledge Sync Delay", 60, "Delay in ticks until Knowledge is synced to the client upon changing dimensions. Higher numbers mean you might see item names re-locked for a few seconds when changing dimension, but might reduce load time for the dimension by a little (useful in larger modpacks).\\n[range: 20 ~ 400, default: 60]", 20, 400).getInt();
+		dreadPlagueImmunityList = cfg.get(Configuration.CATEGORY_GENERAL, "Dread Plague Immunity List", new String[0], "Entities added to this list are considered immune to the Dread Plague.").getStringList();
+		dreadPlagueCarrierList = cfg.get(Configuration.CATEGORY_GENERAL, "Dread Plague Carrier List", new String[0], "Entities added to this list are considered carriers of the Dread Plague (this also makes them immune).").getStringList();
+		coraliumPlagueImmunityList = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague Immunity List", new String[0], "Entities added to this list are considered immune to the Coralium Plague.").getStringList();
+		coraliumPlagueCarrierList = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague Carrier List", new String[0], "Entities added to this list are considered carriers of the Coralium Plague (this also makes them immune).").getStringList();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -469,6 +479,17 @@ public class InitHandler implements ILifeCycleHandler {
 					demon_transformations.put(new ResourceLocation(stuff[0]), new Tuple(Integer.valueOf(stuff[1]), stuff.length == 3 ? Float.valueOf(stuff[2]) : 1));
 				else ACLogger.severe("Invalid Demon Animal Transformation: %s", str);
 			}
+
+		clearImmunityLists();
+
+		for(String str : dreadPlagueImmunityList)
+			addDreadPlagueImmunity(str);
+		for(String str : dreadPlagueCarrierList)
+			addDreadPlagueCarrier(str);
+		for(String str : coraliumPlagueImmunityList)
+			addCoraliumPlagueImmunity(str);
+		for(String str : coraliumPlagueCarrierList)
+			addCoraliumPlagueCarrier(str);
 
 		if(cfg.hasChanged())
 			cfg.save();
@@ -618,6 +639,69 @@ public class InitHandler implements ILifeCycleHandler {
 			if(check == id)
 				return true;
 		return false;
+	}
+
+	/**
+	 * Adds the entity to a list of entities considered immune to the Dread Plague
+	 * @param entity Entity ID string
+	 */
+	private static void addDreadPlagueImmunity(String entity) {
+		if(EntityList.isRegistered(new ResourceLocation(entity)))
+			dread_immunity.add(entity);
+	}
+
+	/**
+	 * Adds the entity to a list of entities considered carriers of the Dread Plague<br>
+	 * (this also adds it to the immunity list)
+	 * @param entity Entity ID string
+	 */
+	private static void addDreadPlagueCarrier(String entity) {
+		addDreadPlagueImmunity(entity);
+		if(EntityList.isRegistered(new ResourceLocation(entity)))
+			dread_carriers.add(entity);
+	}
+
+	/**
+	 * Adds the entity to a list of entities considered immune to the Coralium Plague
+	 * @param entity Entity ID string
+	 */
+	private static void addCoraliumPlagueImmunity(String entity) {
+		if(EntityList.isRegistered(new ResourceLocation(entity)))
+			coralium_immunity.add(entity);
+	}
+
+	/**
+	 * Adds the entity to a list of entities considered carriers of the Coralium Plague<br>
+	 * (this also adds it to the immunity list)
+	 * @param entity Entity ID string
+	 */
+	private static void addCoraliumPlagueCarrier(String entity) {
+		addCoraliumPlagueImmunity(entity);
+		if(EntityList.isRegistered(new ResourceLocation(entity)))
+			coralium_carriers.add(entity);
+	}
+
+	private static void clearImmunityLists() {
+		dread_immunity.clear();
+		dread_carriers.clear();
+		coralium_immunity.clear();
+		coralium_carriers.clear();
+	}
+
+	public boolean isImmuneOrCarrier(String entity, int list) {
+
+		switch(list) {
+		case 0:
+			return dread_immunity.contains(entity);
+		case 1:
+			return dread_carriers.contains(entity);
+		case 2:
+			return coralium_immunity.contains(entity);
+		case 3:
+			return coralium_carriers.contains(entity);
+		default:
+			return false;
+		}
 	}
 
 	private String getSupporterList(){

@@ -82,7 +82,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 		tasks.addTask(3, new EntityAILookIdle(this));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 16.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true, false, entity -> !(entity instanceof IDreadEntity)));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true, false, entity -> !EntityUtil.isDreadPlagueCarrier((EntityLivingBase) entity)));
 		ignoreFrustumCheck = true;
 		isImmuneToFire = true;
 	}

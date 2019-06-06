@@ -18,7 +18,9 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.entity.*;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -160,13 +162,15 @@ public class AbyssalCraftEventHooks {
 	@SubscribeEvent
 	public void damageStuff(LivingAttackEvent event){
 		EntityLivingBase entity = event.getEntityLiving();
-		if(EntityUtil.isEntityCoralium(entity) || entity instanceof IDreadEntity || entity instanceof IAntiEntity ||
+		if(EntityUtil.isEntityCoralium(entity) || EntityUtil.isEntityDread(entity) || entity instanceof IAntiEntity ||
 				entity.getCreatureAttribute() == AbyssalCraftAPI.SHADOW) {
 			DamageSource source = event.getSource();
-			if(entity instanceof IDreadEntity && (source.getTrueSource() instanceof IDreadEntity
+			if(EntityUtil.isEntityDread(entity) && (source.getTrueSource() instanceof EntityLivingBase &&
+					EntityUtil.isDreadPlagueCarrier((EntityLivingBase) source.getTrueSource())
 					|| source == AbyssalCraftAPI.dread))
 				event.setCanceled(true);
-			if(entity instanceof ICoraliumEntity && (source.getTrueSource() instanceof ICoraliumEntity
+			if(!(entity instanceof EntityPlayer) && EntityUtil.isEntityCoralium(entity) && (source.getTrueSource() instanceof EntityLivingBase &&
+					EntityUtil.isCoraliumPlagueCarrier((EntityLivingBase) source.getTrueSource())
 					|| source == AbyssalCraftAPI.coralium))
 				event.setCanceled(true);
 			if(entity instanceof IAntiEntity && (source.getTrueSource() instanceof IAntiEntity

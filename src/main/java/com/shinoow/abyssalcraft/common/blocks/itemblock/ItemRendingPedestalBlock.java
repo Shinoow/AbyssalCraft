@@ -27,7 +27,6 @@ public class ItemRendingPedestalBlock extends ItemPEContainerBlock {
 
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
-//		super.addInformation(is, player, l, B);
 		int abyssal = getEnergy(is, "Abyssal");
 		int dread = getEnergy(is, "Dread");
 		int omothol = getEnergy(is, "Omothol");

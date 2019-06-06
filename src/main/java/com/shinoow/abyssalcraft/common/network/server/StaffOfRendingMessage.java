@@ -14,8 +14,7 @@ package com.shinoow.abyssalcraft.common.network.server;
 import java.io.IOException;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -73,12 +72,12 @@ public class StaffOfRendingMessage extends AbstractServerMessage<StaffOfRendingM
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
 							staff.increaseEnergy(stack, "Shadow");
-				} else if(player.world.provider.getDimension() == ACLib.abyssal_wasteland_id && target instanceof ICoraliumEntity &&
+				} else if(player.world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(target) &&
 						target.isNonBoss()){
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
 							staff.increaseEnergy(stack, "Abyssal");
-				} else if(player.world.provider.getDimension() == ACLib.dreadlands_id && target instanceof IDreadEntity &&
+				} else if(player.world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(target) &&
 						target.isNonBoss()){
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
@@ -96,12 +95,12 @@ public class StaffOfRendingMessage extends AbstractServerMessage<StaffOfRendingM
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
 							staff.increaseEnergy(stack, "Shadow");
-				} else if(player.world.provider.getDimension() == ACLib.abyssal_wasteland_id && parent instanceof ICoraliumEntity &&
+				} else if(player.world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(parent) &&
 						parent.isNonBoss()){
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
 							staff.increaseEnergy(stack, "Abyssal");
-				} else if(player.world.provider.getDimension() == ACLib.dreadlands_id && parent instanceof IDreadEntity &&
+				} else if(player.world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(parent) &&
 						parent.isNonBoss()){
 					if(!target.isDead)
 						if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack)))
