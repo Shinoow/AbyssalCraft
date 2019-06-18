@@ -34,6 +34,7 @@ public class ACBlocks {
 	public static Block darkstone_cobblestone_stairs;
 	public static Block darklands_oak_leaves;
 	public static Block darklands_oak_wood;
+	public static Block darklands_oak_wood_2;
 	public static Block darklands_oak_sapling;
 	/** Metadata block, 0 = Abyssal Stone Bricks, 1 = Chiseled Abyssal Stone Bricks, 2 = Cracked Abyssal Stone Bricks */
 	public static Block abyssal_stone_brick;

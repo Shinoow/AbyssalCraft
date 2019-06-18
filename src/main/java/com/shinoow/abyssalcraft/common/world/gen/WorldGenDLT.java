@@ -19,6 +19,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -53,7 +54,7 @@ public class WorldGenDLT extends WorldGenTrees {
 		setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), Blocks.DIRT.getDefaultState());
 
 		for (int i = 0; i < height; i++)
-			setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z), ACBlocks.darklands_oak_wood.getDefaultState());
+			setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z), getLogBlock(rand).getDefaultState());
 		setBlockAndNotifyAdequately(world, new BlockPos(x, y + height, z), ACBlocks.darklands_oak_leaves.getDefaultState());
 		createTrunk(world, rand, x, y, z);
 
@@ -69,7 +70,7 @@ public class WorldGenDLT extends WorldGenTrees {
 			while (c < branchLenght) {
 				c++;
 				hd += 0.5f;
-				setBlockAndNotifyAdequately(world, new BlockPos(x + (int) (c * xd), y + (int) hd, z + (int) (c * yd)), ACBlocks.darklands_oak_wood.getStateFromMeta(12));
+				setBlockAndNotifyAdequately(world, new BlockPos(x + (int) (c * xd), y + (int) hd, z + (int) (c * yd)), getLogBlock(rand).getStateFromMeta(12));
 				if(world.isAirBlock(new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd))))
 					setBlockAndNotifyAdequately(world, new BlockPos(x + (int) (c * xd), y + (int) hd + 1, z + (int) (c * yd)), ACBlocks.darklands_oak_leaves.getDefaultState());
 			}
@@ -85,9 +86,13 @@ public class WorldGenDLT extends WorldGenTrees {
 			sh = rand.nextInt(3) + y;
 			int i = sh;
 			while (sh > y - 1) {
-				setBlockAndNotifyAdequately(world, new BlockPos(x + pos[t * 2], sh, z + pos[t * 2 + 1]), i == sh ? ACBlocks.darklands_oak_wood.getStateFromMeta(12) : ACBlocks.darklands_oak_wood.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x + pos[t * 2], sh, z + pos[t * 2 + 1]), i == sh ? getLogBlock(rand).getStateFromMeta(12) : getLogBlock(rand).getDefaultState());
 				sh--;
 			}
 		}
+	}
+	
+	private Block getLogBlock(Random rand) {
+		return rand.nextInt(10) == 0 ? ACBlocks.darklands_oak_wood_2 : ACBlocks.darklands_oak_wood;
 	}
 }

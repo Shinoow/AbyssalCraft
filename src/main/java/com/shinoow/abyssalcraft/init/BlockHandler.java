@@ -63,6 +63,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.darklands_oak_sapling = new BlockACSapling(new WorldGenDLT(true)).setHardness(0.0F).setResistance(0.0F).setUnlocalizedName("dltsapling");
 		ACBlocks.darklands_oak_leaves = new BlockACLeaves(ACBlocks.darklands_oak_sapling, MapColor.BLUE).setHardness(0.2F).setResistance(1.0F).setUnlocalizedName("dltleaves");
 		ACBlocks.darklands_oak_wood = new BlockACLog(MapColor.BROWN).setHardness(2.0F).setResistance(1.0F).setUnlocalizedName("dltlog");
+		ACBlocks.darklands_oak_wood_2 = new BlockACLog(MapColor.BROWN).setHardness(2.0F).setResistance(1.0F).setUnlocalizedName("dltlog");
 		ACBlocks.abyssal_stone_brick = new BlockACBrick(2, 1.8F, 12.0F, MapColor.GREEN).setUnlocalizedName("abybrick");
 		if(ACConfig.abyssal_stone_brick_slab) {
 			ACBlocks.abyssal_stone_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 2, SoundType.STONE, MapColor.GREEN).setCreativeTab(ACTabs.tabBlock).setHardness(1.8F).setResistance(12.0F).setUnlocalizedName("abyslab1");
@@ -306,6 +307,7 @@ public class BlockHandler implements ILifeCycleHandler {
 			registerBlock(ACBlocks.darkstone_cobblestone_stairs, "dcstairs");
 		registerBlock(ACBlocks.darklands_oak_leaves, "dltleaves");
 		registerBlock(ACBlocks.darklands_oak_wood, "dltlog");
+		registerBlock(ACBlocks.darklands_oak_wood_2, "dltlog2");
 		registerBlock(ACBlocks.darklands_oak_sapling, "dltsapling");
 		registerBlock(ACBlocks.abyssal_stone_brick, new ItemMetadataBlock(ACBlocks.abyssal_stone_brick), "abybrick");
 		if(ACConfig.abyssal_stone_brick_slab) {
@@ -502,6 +504,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_fence, 5, 20);
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_stairs, 5, 20);
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_wood, 5, 5);
+		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_wood_2, 5, 5);
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_leaves, 30, 60);
 
 		Blocks.FIRE.setFireInfo(ACBlocks.dreadlands_planks, 5, 20);

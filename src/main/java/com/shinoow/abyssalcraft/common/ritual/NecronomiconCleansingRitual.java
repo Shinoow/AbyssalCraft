@@ -82,7 +82,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 								world.setBlockState(pos1.up(y), Blocks.STONE.getDefaultState(), 2);
 							else if(state.getBlock() == ACBlocks.darklands_oak_leaves)
 								world.setBlockState(pos1.up(y), Blocks.LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, state.getValue(BlockLeaves.CHECK_DECAY)).withProperty(BlockLeaves.DECAYABLE, state.getValue(BlockLeaves.DECAYABLE)), 2);
-							else if(state.getBlock() == ACBlocks.darklands_oak_wood)
+							else if(state.getBlock() == ACBlocks.darklands_oak_wood || state.getBlock() == ACBlocks.darklands_oak_wood_2)
 								world.setBlockState(pos1.up(y), Blocks.LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, state.getValue(BlockLog.LOG_AXIS)), 2);
 							else if(state.getBlock() == ACBlocks.abyssalnite_ore)
 								world.setBlockState(pos1.up(y), Blocks.IRON_ORE.getDefaultState(), 2);

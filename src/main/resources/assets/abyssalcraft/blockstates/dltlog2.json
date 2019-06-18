@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"axis=y":  { "model": "abyssalcraft:dltlog_2" },
+        "axis=z":   { "model": "abyssalcraft:dltlog_2", "x": 90 },
+        "axis=x":   { "model": "abyssalcraft:dltlog_2", "x": 90, "y": 90 },
+        "axis=none": { "model": "abyssalcraft:dltlog_bark_2" }
+	}
+}

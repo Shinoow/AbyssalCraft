@@ -725,6 +725,7 @@ public class AbyssalCraftClientEventHooks {
 			registerItemRender(ACBlocks.darkstone_cobblestone_stairs, 0);
 		registerItemRender(ACBlocks.darklands_oak_leaves, 0);
 		registerItemRender(ACBlocks.darklands_oak_wood, 0);
+		registerItemRender(ACBlocks.darklands_oak_wood_2, 0);
 		registerItemRender(ACBlocks.darklands_oak_sapling, 0);
 		registerItemRender(ACBlocks.abyssal_stone_brick, 0, "abybrick_0");
 		registerItemRender(ACBlocks.abyssal_stone_brick, 1, "abybrick_1");

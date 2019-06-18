@@ -399,6 +399,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("materialCoraliumPearl", ACItems.coralium_pearl);
 		OreDictionary.registerOre("liquidAntimatter", ACBlocks.liquid_antimatter);
 		OreDictionary.registerOre("logWood", ACBlocks.darklands_oak_wood);
+		OreDictionary.registerOre("logWood", ACBlocks.darklands_oak_wood_2);
 		OreDictionary.registerOre("logWood", ACBlocks.dreadlands_log);
 		OreDictionary.registerOre("plankWood", ACBlocks.darklands_oak_planks);
 		OreDictionary.registerOre("plankWood", ACBlocks.dreadlands_planks);
@@ -530,6 +531,7 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.darkstone_shovel, 2, 0, new LootFunction[0], new LootCondition[0], modid + ":darkstone_shovel"));
 				main.addEntry(new LootEntryItem(ACItems.darkstone_sword, 2, 0, new LootFunction[0], new LootCondition[0], modid + ":darkstone_sword"));
 				main.addEntry(new LootEntryItem(Item.getItemFromBlock(ACBlocks.darklands_oak_wood), 10, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":darklands_oak_wood"));
+				main.addEntry(new LootEntryItem(Item.getItemFromBlock(ACBlocks.darklands_oak_wood_2), 10, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":darklands_oak_wood_2"));
 				main.addEntry(new LootEntryItem(ACItems.cobblestone_upgrade_kit, 2, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":cobblestone_upgrade_kit"));
 			}
 		}
