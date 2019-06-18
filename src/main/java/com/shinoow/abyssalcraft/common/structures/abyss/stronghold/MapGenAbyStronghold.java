@@ -15,7 +15,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -110,7 +109,6 @@ public class MapGenAbyStronghold extends MapGenStructure
 	public void markStructureExplored(World world, BlockPos pos) {
 		StructureStart structure = getStructureAt(pos);
 		if(structure instanceof Start) {
-			ACLogger.info("%b", ((Start) structure).isExplored());
 			((Start) structure).setExplored(true);
 			WorldSavedData data = world.getPerWorldStorage().getOrLoadData(MapGenStructureData.class, getStructureName());
 			if(data instanceof MapGenStructureData) {

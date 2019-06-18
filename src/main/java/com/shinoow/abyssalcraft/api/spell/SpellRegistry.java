@@ -52,11 +52,11 @@ public class SpellRegistry {
 		if(spell.getBookType() <= 4 && spell.getBookType() >= 0){
 			for(Spell entry : spells)
 				if(spell.getUnlocalizedName().equals(entry.getUnlocalizedName())){
-					logger.log(Level.ERROR, "Necronomicon Spell already registered: %s", spell.getUnlocalizedName());
+					logger.log(Level.ERROR, "Necronomicon Spell already registered: {}", spell.getUnlocalizedName());
 					return;
 				}
 			spells.add(spell);
-		} else logger.log(Level.ERROR, "Necronomicon book type does not exist: %d", spell.getBookType());
+		} else logger.log(Level.ERROR, "Necronomicon book type does not exist: {}", spell.getBookType());
 	}
 
 	/**

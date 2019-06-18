@@ -372,7 +372,7 @@ public class MiscHandler implements ILifeCycleHandler {
 						NecroData nd = NecroDataJsonUtil.deserializeNecroData(json);
 						int book = NecroDataJsonUtil.getInteger(json, "booktype");
 						if(nd != null){
-							ACLogger.info("Successfully deserialized JSON file for NecroData %s", nd.getIdentifier());
+							ACLogger.info("Successfully deserialized JSON file for NecroData {}", nd.getIdentifier());
 							AbyssalCraftAPI.registerNecronomiconData(nd, book);
 						}
 					}

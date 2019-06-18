@@ -56,7 +56,7 @@ public class DisruptionHandler {
 	public void registerDisruption(DisruptionEntry disruption){
 		for(DisruptionEntry entry : disruptions)
 			if(disruption.getUnlocalizedName().equals(entry.getUnlocalizedName())){
-				logger.log(Level.ERROR, "Disruption Entry already registered: %s", disruption.getUnlocalizedName());
+				logger.log(Level.ERROR, "Disruption Entry already registered: {}", disruption.getUnlocalizedName());
 				return;
 			}
 		disruptions.add(disruption);

@@ -48,8 +48,8 @@ public class ConditionProcessorRegistry {
 		if(type > -1) {
 			if(!processors.containsKey(type))
 				processors.put(type, processor);
-			else logger.log(Level.ERROR, "Processor already registed for type %d", type);
-		} else logger.log(Level.ERROR, "Invalid type: %d", type);
+			else logger.log(Level.ERROR, "Processor already registed for type {}", type);
+		} else logger.log(Level.ERROR, "Invalid type: {}", type);
 	}
 
 	/**

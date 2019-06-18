@@ -41,7 +41,7 @@ public class IntegrationHandler implements ILifeCycleHandler {
 		fetchModIntegrations(asmDataTable);
 
 		if(!temp.isEmpty())
-			ACLogger.info("Preliminary integration search complete: found %d possible mod integration(s)!", temp.size());
+			ACLogger.info("Preliminary integration search complete: found {} possible mod integration(s)!", temp.size());
 	}
 
 	private void fetchModIntegrations(ASMDataTable asmDataTable){
@@ -83,7 +83,7 @@ public class IntegrationHandler implements ILifeCycleHandler {
 		if(!temp.isEmpty()){
 			for(IACPlugin plugin : temp)
 				if(plugin.canLoad()){
-					ACLogger.info("Found a integration for mod %s", plugin.getModName());
+					ACLogger.info("Found a integration for mod {}", plugin.getModName());
 					integrations.add(plugin);
 					mods.add(plugin.getModName());
 				}
@@ -92,7 +92,7 @@ public class IntegrationHandler implements ILifeCycleHandler {
 		}
 
 		if(!mods.isEmpty())
-			ACLogger.info("Mod integrations found: %s", mods);
+			ACLogger.info("Mod integrations found: {}", mods);
 	}
 
 	@Override

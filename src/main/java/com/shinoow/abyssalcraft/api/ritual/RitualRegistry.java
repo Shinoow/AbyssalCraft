@@ -55,8 +55,8 @@ public class RitualRegistry {
 		if(bookType <= 4 && bookType >= 0)
 			if(dim != -1 && dim != 1)
 				dimToBookType.put(dim, bookType);
-			else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: %d", dim);
-		else logger.log(Level.ERROR, "Necronomicon book type does not exist: %d", bookType);
+			else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: {}", dim);
+		else logger.log(Level.ERROR, "Necronomicon book type does not exist: {}", bookType);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class RitualRegistry {
 	public void addDimensionToName(int dim, String name){
 		if(dim != -1 && dim != 1)
 			dimToName.put(dim, name);
-		else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: %d", dim);
+		else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: {}", dim);
 	}
 
 	/**
@@ -122,11 +122,11 @@ public class RitualRegistry {
 		if(ritual.getBookType() <= 4 && ritual.getBookType() >= 0){
 			for(NecronomiconRitual entry : rituals)
 				if(ritual.getUnlocalizedName().equals(entry.getUnlocalizedName())){
-					logger.log(Level.ERROR, "Necronomicon Ritual already registered: %s", ritual.getUnlocalizedName());
+					logger.log(Level.ERROR, "Necronomicon Ritual already registered: {}", ritual.getUnlocalizedName());
 					return;
 				}
 			rituals.add(ritual);
-		} else logger.log(Level.ERROR, "Necronomicon book type does not exist: %d", ritual.getBookType());
+		} else logger.log(Level.ERROR, "Necronomicon book type does not exist: {}", ritual.getBookType());
 	}
 
 	/**

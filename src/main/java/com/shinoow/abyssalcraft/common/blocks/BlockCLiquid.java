@@ -147,7 +147,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 				try {
 					blocks.add(block.getStateFromMeta(((ItemBlock)stack.getItem()).getMetadata(stack.getMetadata() == OreDictionary.WILDCARD_VALUE ? 0 : stack.getMetadata())));
 				} catch(Exception e){
-					ACLogger.severe("Unable to convert %s with meta %d into a BlockState", block.getRegistryName(), stack.getMetadata());
+					ACLogger.severe("Unable to convert {} with meta {} into a BlockState", block.getRegistryName(), stack.getMetadata());
 				}
 		}
 

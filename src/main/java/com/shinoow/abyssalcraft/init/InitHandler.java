@@ -477,7 +477,7 @@ public class InitHandler implements ILifeCycleHandler {
 				String[] stuff = str.split(";");
 				if(stuff.length >= 2)
 					demon_transformations.put(new ResourceLocation(stuff[0]), new Tuple(Integer.valueOf(stuff[1]), stuff.length == 3 ? Float.valueOf(stuff[2]) : 1));
-				else ACLogger.severe("Invalid Demon Animal Transformation: %s", str);
+				else ACLogger.severe("Invalid Demon Animal Transformation: {}", str);
 			}
 
 		clearImmunityLists();
@@ -503,7 +503,7 @@ public class InitHandler implements ILifeCycleHandler {
 					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
 					if(item != null)
 						abyssal_zombie_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("%s is not a valid Item!", str);
+					else ACLogger.severe("{} is not a valid Item!", str);
 				}
 		if(depthsGhoulBlacklist.length > 0)
 			for(String str : depthsGhoulBlacklist)
@@ -512,7 +512,7 @@ public class InitHandler implements ILifeCycleHandler {
 					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
 					if(item != null)
 						depths_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("%s is not a valid Item!", str);
+					else ACLogger.severe("{} is not a valid Item!", str);
 				}
 		if(antiAbyssalZombieBlacklist.length > 0)
 			for(String str : antiAbyssalZombieBlacklist)
@@ -521,7 +521,7 @@ public class InitHandler implements ILifeCycleHandler {
 					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
 					if(item != null)
 						anti_abyssal_zombie_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("%s is not a valid Item!", str);
+					else ACLogger.severe("{} is not a valid Item!", str);
 				}
 		if(antiGhoulBlacklist.length > 0)
 			for(String str : antiGhoulBlacklist)
@@ -530,7 +530,7 @@ public class InitHandler implements ILifeCycleHandler {
 					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
 					if(item != null)
 						anti_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("%s is not a valid Item!", str);
+					else ACLogger.severe("{} is not a valid Item!", str);
 				}
 		if(omotholGhoulBlacklist.length > 0)
 			for(String str : omotholGhoulBlacklist)
@@ -539,7 +539,7 @@ public class InitHandler implements ILifeCycleHandler {
 					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
 					if(item != null)
 						omothol_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("%s is not a valid Item!", str);
+					else ACLogger.severe("{} is not a valid Item!", str);
 				}
 	}
 

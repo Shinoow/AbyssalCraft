@@ -49,7 +49,7 @@ public class StructureHandler {
 	public void registerStructure(IPlaceOfPower place){
 		for(IPlaceOfPower entry : structures)
 			if(place.getIdentifier().equals(entry.getIdentifier())){
-				logger.log(Level.ERROR, "Place of Power already registered: %s", place.getIdentifier());
+				logger.log(Level.ERROR, "Place of Power already registered: {}", place.getIdentifier());
 				return;
 			}
 		structures.add(place);

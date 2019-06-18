@@ -488,7 +488,7 @@ public class AbyssalCraftAPI {
 		if(input.length > 0 && input != null)
 			if(input.length <= 5)
 				MaterializerRecipes.instance().materialize(input, output);
-			else logger.log(Level.ERROR, "This Materializer recipe has more than 5 inputs! (%d)", input.length);
+			else logger.log(Level.ERROR, "This Materializer recipe has more than 5 inputs! ({})", input.length);
 		else logger.log(Level.ERROR, "This Materializer recipe has no inputs!");
 	}
 
@@ -579,7 +579,7 @@ public class AbyssalCraftAPI {
 	public static void registerNecronomiconData(NecroData data, int bookType){
 		if(bookType <= 4 && bookType >= 0)
 			necroData.put(data, bookType);
-		else logger.log(Level.ERROR, "Necronomicon book type does not exist: %d", bookType);
+		else logger.log(Level.ERROR, "Necronomicon book type does not exist: {}", bookType);
 	}
 
 	/**
@@ -602,7 +602,7 @@ public class AbyssalCraftAPI {
 	public static void addGhoulHelmetTexture(Item helmet, ResourceLocation res){
 		if(helmet == null || res == null) return;
 		if(ghoul_helmet.containsKey(helmet))
-			logger.log(Level.INFO, "Mod %s is overwriting the texture for Helmet %s", Loader.instance().activeModContainer().getModId(), helmet.getItemStackDisplayName(new ItemStack(helmet)));
+			logger.log(Level.INFO, "Mod {} is overwriting the texture for Helmet {}", Loader.instance().activeModContainer().getModId(), helmet.getRegistryName());
 		ghoul_helmet.put(helmet, res);
 	}
 
@@ -616,7 +616,7 @@ public class AbyssalCraftAPI {
 	public static void addGhoulChestplateTexture(Item chestplate, ResourceLocation res){
 		if(chestplate == null || res == null) return;
 		if(ghoul_chestplate.containsKey(chestplate))
-			logger.log(Level.INFO, "Mod %s is overwriting the texture for Chestplate %s", Loader.instance().activeModContainer().getModId(), chestplate.getItemStackDisplayName(new ItemStack(chestplate)));
+			logger.log(Level.INFO, "Mod {} is overwriting the texture for Chestplate {}", Loader.instance().activeModContainer().getModId(), chestplate.getRegistryName());
 		ghoul_chestplate.put(chestplate, res);
 	}
 
@@ -630,7 +630,7 @@ public class AbyssalCraftAPI {
 	public static void addGhoulLeggingsTexture(Item leggings, ResourceLocation res){
 		if(leggings == null || res == null) return;
 		if(ghoul_leggings.containsKey(leggings))
-			logger.log(Level.INFO, "Mod %s is overwriting the texture for Leggings %s", Loader.instance().activeModContainer().getModId(), leggings.getItemStackDisplayName(new ItemStack(leggings)));
+			logger.log(Level.INFO, "Mod {} is overwriting the texture for Leggings {}", Loader.instance().activeModContainer().getModId(), leggings.getRegistryName());
 		ghoul_leggings.put(leggings, res);
 	}
 
@@ -644,7 +644,7 @@ public class AbyssalCraftAPI {
 	public static void addGhoulBootsTexture(Item boots, ResourceLocation res){
 		if(boots == null || res == null) return;
 		if(ghoul_boots.containsKey(boots))
-			logger.log(Level.INFO, "Mod %s is overwriting the texture for Boots %s", Loader.instance().activeModContainer().getModId(), boots.getItemStackDisplayName(new ItemStack(boots)));
+			logger.log(Level.INFO, "Mod {} is overwriting the texture for Boots {}", Loader.instance().activeModContainer().getModId(), boots.getRegistryName());
 		ghoul_boots.put(boots, res);
 	}
 
