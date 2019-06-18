@@ -14,15 +14,17 @@ package com.shinoow.abyssalcraft.common.inventory;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 
+import invtweaks.api.container.ChestContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Optional.Interface;
 
-//@Interface(iface = "invtweaks.api.container.ChestContainer", modid = "inventorytweaks")
-//@ChestContainer
+@Interface(iface = "invtweaks.api.container.ChestContainer", modid = "inventorytweaks")
+@ChestContainer
 public class ContainerCrystalBag extends Container
 {
 	/** The Item Inventory for this Container */
