@@ -791,30 +791,33 @@ ac.ritual.moderateScroll.desc=Средний свиток изготавлива
 
 #Spells
 ac.spell.lifedrain=Вампиризм
-ac.spell.lifedrain.desc=Siphon the lifeforce of your enemy to heal your wounds.
-ac.spell.entropy=Entropy
-ac.spell.entropy.desc=Draw energy straight from the ground as it crumbles to dust.
-ac.spell.mining=Mining
-ac.spell.mining.desc=Superheat the ground in a straight line, melting any stone and leaving all ores intact.
-ac.spell.graspofcthulhu=Grasp of Cthulhu
-ac.spell.graspofcthulhu.desc=Damages the target over time while holding them in place. The damage can never reduce the target to 0HP or less
-ac.spell.invisibility=Hide from the Eye
-ac.spell.invisibility.desc=Caster or target goes Invisible for 5 minutes.
-ac.spell.detachment=Detachment
-ac.spell.detachment.desc=Removes one piece of equipment from the target causing it to fall on the ground. Equipped item is chosen randomly from among its equipped/held items.
-ac.spell.stealvigor=Steal Vigor
-ac.spell.stealvigor.desc=The target is temporarily weakened while the caster claims their strength.
-ac.spell.sirenssong=Siren's Song
-ac.spell.sirenssong.desc=By singing to a creature's very soul you encourage it to join your team. (Useless on Players.)
-ac.spell.undeathtodust=Undeath to Dust
-ac.spell.undeathtodust.desc=Instantly disintegrate one undead creature, leaving nothing behind.
-ac.spell.oozeremoval=Ooze Removal
-ac.spell.oozeremoval.desc=Disperses any Shoggoth Ooze in the vicinity of the caster.
-ac.spell.teleporthostiles=Sacrificial Interdiction
-ac.spell.teleporthostiles.desc=By sacrificing the life of an innocent child, the dark ones are pushed away. Cast the spell while targeting an animal baby, and all mobs within 50 blocks will be teleported away from you.
+ac.spell.lifedrain.desc=Крадёт жизненную силы вашего врага, чтобы залечить твои раны.
+ac.spell.entropy=Энтропия
+ac.spell.entropy.desc=Черпает энергию прямо из земли, поскольку она рассыпается в пыль.
+ac.spell.mining=Добыча
+ac.spell.mining.desc=На прямую перегревает землю, плавя любой камень и оставляя все руды нетронутыми.
+ac.spell.graspofcthulhu=Хватка Ктулху
+ac.spell.graspofcthulhu.desc=Повреждает мишени со временем, удерживая их на месте. Нанесённый ущерб никогда не сможет снизить здоровье цели до 0HP или меньше.
+ac.spell.invisibility=Скрыть от глаз
+ac.spell.invisibility.desc=Заклинатель или цель становятся невидимыми в течение 5 минут.
+ac.spell.detachment=Отслоение
+ac.spell.detachment.desc=Удаляет одну часть экипировки из цели, заставляя это упасть на землю. Экипированный предмет выбирается случайным образом из его числа экипировки/удержанным предметом.
+ac.spell.stealvigor=Кража сил
+ac.spell.stealvigor.desc=Цель временно слабеет, в то время как заклинатель требует их силы.
+ac.spell.sirenssong=Песня сирены
+ac.spell.sirenssong.desc=Поя самой душе существа, вы поощряете его присоединиться к вашей команде. (Неиспользуется на Игроке).
+ac.spell.undeathtodust=Нежить в пыль
+ac.spell.undeathtodust.desc=Мгновенно разлагает одно нежить, не оставляя ничего позади.
+ac.spell.oozeremoval=Устранение ила
+ac.spell.oozeremoval.desc=Рассеивает Ил Шогготов в непосредственной близости от заклинателя.
+ac.spell.teleporthostiles=Жертвенный перехват
+ac.spell.teleporthostiles.desc=Жертвуя жизнью безвредного ребёнка, темные отталкиваются. Произнесите заклинание, нацеливаясь на детёныша, и все мобы в пределах 50 блоков будут телепортированы от вас.
 
 #Places of Power
+=======
 ac.structure.basic.description=Маленький и простой Храм. Обеспечивает повышеный диапазон пострадавших статуй.
+ac.structure.totempole.description=Теперь вам просто нужен костёр, определённые инструменты и паздничное платье!
+ac.structure.archway.description=Небольшой кусок, который может быть использован в декоративной манере. Любые лестницы, плиты и блоки стен можно использовать для его формирования.
 
 #Rending
 ac.rending.shadowgem=Теневые жемчужины изготавливаются из сбора Тёмной энергии из Живых теней.
