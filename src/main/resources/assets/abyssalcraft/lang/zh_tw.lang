@@ -814,6 +814,8 @@ ac.spell.teleporthostiles.desc=By sacrificing the life of an innocent child, the
 
 #Places of Power
 ac.structure.basic.description=A small and simple shrine. Provides a range boost to affected statues.
+ac.structure.totempole.description=Now you just need a campfire, some instruments and a jingle dress!
+ac.structure.archway.description=A small piece that can be used in a decorative manner. Any stair, slab and wall blocks can be used to form it.
 
 #撕裂
 ac.rending.shadowgem=陰影寶石可以從活陰影收穫陰影能量得到。

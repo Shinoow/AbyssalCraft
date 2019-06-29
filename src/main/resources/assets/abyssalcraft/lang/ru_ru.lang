@@ -815,6 +815,8 @@ ac.spell.teleporthostiles.desc=By sacrificing the life of an innocent child, the
 
 #Places of Power
 ac.structure.basic.description=A small and simple shrine. Provides a range boost to affected statues.
+ac.structure.totempole.description=Now you just need a campfire, some instruments and a jingle dress!
+ac.structure.archway.description=A small piece that can be used in a decorative manner. Any stair, slab and wall blocks can be used to form it.
 
 #Rending
 ac.rending.shadowgem=Теневые жемчужины изготавливаются из сбора Тёмной энергии из Живых теней.
