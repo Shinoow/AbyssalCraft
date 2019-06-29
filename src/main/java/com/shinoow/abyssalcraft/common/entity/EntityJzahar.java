@@ -273,7 +273,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			if(health < 10)
 				health = 10;
 
-			if(par1DamageSource.getTrueSource() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getTrueSource()).capabilities.isCreativeMode && getRNG().nextInt(health) == 0) {
+			if(par1DamageSource.getTrueSource() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getTrueSource()).capabilities.isCreativeMode && getRNG().nextInt(health) == 0 && ACConfig.jzaharBreaksFourthWall) {
 				((EntityPlayer)par1DamageSource.getTrueSource()).setGameType(GameType.SURVIVAL);
 				par1DamageSource.getTrueSource().attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), Integer.MAX_VALUE);
 				if(par1DamageSource.getTrueSource().isEntityAlive()) {
@@ -405,7 +405,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 					if(world.isRemote && ACConfig.showBossDialogs)
 						if(EntityUtil.isPlayerCoralium((EntityPlayer)entity))
 							SpecialTextUtil.JzaharText("<insert generic text here>");
-						else {
+						else if(ACConfig.jzaharBreaksFourthWall) {
 							SpecialTextUtil.JzaharText(String.format(I18n.translateToLocal("message.jzahar.creative.1"), entity.getName()));
 							SpecialTextUtil.JzaharText(I18n.translateToLocal("message.jzahar.creative.2"));
 						}

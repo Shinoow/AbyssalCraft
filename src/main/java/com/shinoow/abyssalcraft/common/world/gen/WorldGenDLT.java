@@ -91,7 +91,7 @@ public class WorldGenDLT extends WorldGenTrees {
 			}
 		}
 	}
-	
+
 	private Block getLogBlock(Random rand) {
 		return rand.nextInt(10) == 0 ? ACBlocks.darklands_oak_wood_2 : ACBlocks.darklands_oak_wood;
 	}
