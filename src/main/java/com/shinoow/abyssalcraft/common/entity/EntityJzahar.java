@@ -488,7 +488,6 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			{
 				swingArm(EnumHand.MAIN_HAND);
 				setTimer(0, 1000);
-				//			playSound(ACSounds.jzahar_blast, 10F, 1F);
 				playSound(ACSounds.jzahar_earthquake, 5F, 1F);
 				if (!world.isRemote)
 					SpecialTextUtil.JzaharGroup(world, "Shugnah throd!");
@@ -499,7 +498,6 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			{
 				swingArm(EnumHand.MAIN_HAND);
 				setTimer(2, 1200);
-				//			playSound(ACSounds.jzahar_blast, 10F, 1F);
 				playSound(ACSounds.jzahar_implosion, 5F, 1F);
 				if (!world.isRemote)
 					SpecialTextUtil.JzaharGroup(world, "Nilgh'ri mtli!");
@@ -515,11 +513,10 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 				setTimer(4, 100);
 			}
 
-			if (getTimer(1) < 0 && rand.nextInt(800) == 0 && getAttackTarget() != null && getTimer(4) < 0)
+			if (getTimer(1) < 0 && rand.nextInt(800) == 0 && getAttackTarget() != null && getTimer(4) < 0 && !ACConfig.no_black_holes)
 			{
 				swingArm(EnumHand.MAIN_HAND);
 				setTimer(1, 1600);
-				//			playSound(ACSounds.jzahar_blast, 10F, 1F);
 				playSound(ACSounds.jzahar_black_hole, 5F, 1F);
 				if (!world.isRemote)
 					SpecialTextUtil.JzaharGroup(world, "Ph'nilgh'ri n'ghft!");

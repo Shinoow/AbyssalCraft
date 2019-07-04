@@ -445,6 +445,7 @@ public class InitHandler implements ILifeCycleHandler {
 		no_spectral_dragons = cfg.get("wet_noodle", "Disable Spectral Dragons", false, "Toggles whether or not Spectral Dragons should spawn in the Abyssal Wasteland.").getBoolean();
 		no_projectile_damage_immunity = cfg.get("wet_noodle", "Disable Projectile Damage Immunity", false, "Toggles whether or not Lesser Shoggoths are immune to projectile damage.").getBoolean();
 		no_disruptions = cfg.get("wet_noodle", "Disable Disruptions", false, "Toggles whether or not statues or failing rituals will trigger disruptions.").getBoolean();
+		no_black_holes = cfg.get("wet_noodle", "Disable Black Holes", false, "Toggles whether or not J'zahar can use his attack that creates a black hole.").getBoolean();
 
 		String[] transformations = cfg.getStringList("Demon Animal Transformations", Configuration.CATEGORY_GENERAL, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
 				+ "\nFormat: entityid;demonanimal;chance \nwhere entityid is the String used in the /summon command\n demonanimal is a Integer representing the Demon Animal to spawn (0 = Demon Pig, 1 = Demon Cow, 2 = Demon Chicken, 3 = Demon Sheep)"
