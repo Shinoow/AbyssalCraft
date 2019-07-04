@@ -77,7 +77,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 	@Override
 	public boolean displaceIfPossible(World world, BlockPos pos) {
 
-		if(!world.isRemote){
+		if(!world.isRemote)
 			if(ACConfig.shouldSpread || world.provider.getDimension() == ACLib.abyssal_wasteland_id){
 				if(world.getBlockState(pos).getMaterial().isLiquid() && world.getBlockState(pos).getBlock() != this && world.getBlockState(pos).getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(pos, getDefaultState());
@@ -113,7 +113,6 @@ public class BlockCLiquid extends BlockFluidClassic {
 							world.setBlockState(pos, ACBlocks.cobblestone.getStateFromMeta(1));
 					}else world.setBlockState(pos, ACBlocks.cobblestone.getStateFromMeta(1));
 			}
-		}
 		return super.displaceIfPossible(world, pos);
 	}
 
