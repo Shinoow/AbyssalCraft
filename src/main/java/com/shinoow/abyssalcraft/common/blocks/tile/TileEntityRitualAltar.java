@@ -30,6 +30,7 @@ import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.RitualMessage;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
@@ -207,14 +208,14 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos).grow(16, 16, 16));
 		if(user != null) {
 			RitualEvent.Failed event = new RitualEvent.Failed(user, ritual, DisruptionHandler.instance().getRandomDisruption(deity, world), world, pos);
-			if(!MinecraftForge.EVENT_BUS.post(event)) {
+			if(!MinecraftForge.EVENT_BUS.post(event) && !ACConfig.no_disruptions) {
 				DisruptionEntry disruption = event.getDisruption();
 				PacketDispatcher.sendToAllAround(new RitualMessage(ritual.getUnlocalizedName().substring("ac.ritual.".length()), pos, true, disruption.getUnlocalizedName()), user, 5);
 				if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, world, pos, players, disruption)))
 					disruption.disrupt(world, pos, players);
 				AbyssalCraftAPI.getInternalMethodHandler().sendDisruption(deity, disruption.getUnlocalizedName().substring("ac.disruption.".length()), pos, world.provider.getDimension());
-			} else DisruptionHandler.instance().generateDisruption(deity, world, pos, players);
-		} else DisruptionHandler.instance().generateDisruption(deity, world, pos, players);
+			} else if(!ACConfig.no_disruptions) DisruptionHandler.instance().generateDisruption(deity, world, pos, players);
+		} else if(!ACConfig.no_disruptions) DisruptionHandler.instance().generateDisruption(deity, world, pos, players);
 	}
 
 	@Override
