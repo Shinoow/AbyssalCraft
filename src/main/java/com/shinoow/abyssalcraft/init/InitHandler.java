@@ -443,6 +443,7 @@ public class InitHandler implements ILifeCycleHandler {
 		no_dreadlands_spread = cfg.get("wet_noodle", "Disable Dreadlands Spread", false, "Toggles whether or not the spreading of Dreadlands through the Dread Plague is disabled. Cha'garoth remains unaffected by this (because he doesn't naturally spawn outside of the dimension).").getBoolean();
 		no_acid_breaking_blocks = cfg.get("wet_noodle", "Disable Acid Projectiles Breaking Blocks", false, "Toggles whether or not the acid projectiles Lesser Shoggoths spit can break blocks.").getBoolean();
 		no_spectral_dragons = cfg.get("wet_noodle", "Disable Spectral Dragons", false, "Toggles whether or not Spectral Dragons should spawn in the Abyssal Wasteland.").getBoolean();
+		no_projectile_damage_immunity = cfg.get("wet_noodle", "Disable Projectile Damage Immunity", false, "Toggles whether or not Lesser Shoggoths are immune to projectile damage.").getBoolean();
 
 		String[] transformations = cfg.getStringList("Demon Animal Transformations", Configuration.CATEGORY_GENERAL, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
 				+ "\nFormat: entityid;demonanimal;chance \nwhere entityid is the String used in the /summon command\n demonanimal is a Integer representing the Demon Animal to spawn (0 = Demon Pig, 1 = Demon Cow, 2 = Demon Chicken, 3 = Demon Sheep)"

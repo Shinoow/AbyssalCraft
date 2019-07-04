@@ -427,7 +427,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par1DamageSource.isProjectile()){
+		if(par1DamageSource.isProjectile() && !ACConfig.no_projectile_damage_immunity){
 			playSound(SoundEvents.ENTITY_SLIME_JUMP, getSoundVolume(), ((rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
 			return false;
 		}
