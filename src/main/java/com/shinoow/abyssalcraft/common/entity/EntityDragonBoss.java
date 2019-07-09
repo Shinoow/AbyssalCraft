@@ -30,6 +30,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -407,6 +408,9 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 		if(getHealth() < getMaxHealth() / 4 && getHealth() > 0 && bossInfo.getColor() != BossInfo.Color.RED)
 			bossInfo.setColor(Color.RED);
 	}
+
+	@Override
+	public void addPotionEffect(PotionEffect potioneffectIn){}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)

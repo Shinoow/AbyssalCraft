@@ -507,6 +507,9 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 		super.onLivingUpdate();
 	}
 
+	@Override
+	public void addPotionEffect(PotionEffect potioneffectIn){}
+
 	private Entity getHeadLookTarget()
 	{
 		Entity pointedEntity = null;

@@ -536,6 +536,9 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 		super.onLivingUpdate();
 	}
 
+	@Override
+	public void addPotionEffect(PotionEffect potioneffectIn){}
+
 	private void addShoutParticles()
 	{
 		if (world.isRemote)

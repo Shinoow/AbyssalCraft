@@ -579,6 +579,9 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 		super.onLivingUpdate();
 	}
 
+	@Override
+	public void addPotionEffect(PotionEffect potioneffectIn){}
+
 	private Entity getHeadLookTarget()
 	{
 		Entity pointedEntity = null;
