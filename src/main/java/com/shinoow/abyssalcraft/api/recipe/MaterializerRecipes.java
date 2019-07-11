@@ -229,7 +229,7 @@ public class MaterializerRecipes {
 		for(int i = 0; i < array.length; i++)
 			inputTmp[i] = array[i].copy();
 
-		return Arrays.asList(inputTmp);
+		return new ArrayList<>(Arrays.asList(inputTmp));
 	}
 
 	public List<Materialization> getMaterializationList()
