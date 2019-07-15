@@ -542,11 +542,6 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
-				main.addEntry(new LootEntryItem(ACItems.abyssalnite_pickaxe, 2, 0 , new LootFunction[0], new LootCondition[0], modid + ":abyssalnite_pickaxe"));
-				main.addEntry(new LootEntryItem(ACItems.abyssalnite_helmet, 2, 0 , new LootFunction[0], new LootCondition[0], modid + ":abyssalnite_helmet"));
-				main.addEntry(new LootEntryItem(ACItems.abyssalnite_chestplate, 2, 0 , new LootFunction[0], new LootCondition[0], modid + ":abyssalnite_chestplate"));
-				main.addEntry(new LootEntryItem(ACItems.abyssalnite_leggings, 2, 0 , new LootFunction[0], new LootCondition[0], modid + ":abyssalnite_leggings"));
-				main.addEntry(new LootEntryItem(ACItems.abyssalnite_boots, 2, 0 , new LootFunction[0], new LootCondition[0], modid + ":abyssalnite_boots"));
 				main.addEntry(new LootEntryItem(ACItems.cobblestone_upgrade_kit, 10, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":cobblestone_upgrade_kit"));
 				main.addEntry(new LootEntryItem(ACItems.iron_upgrade_kit, 7, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":iron_upgrade_kit"));
 				main.addEntry(new LootEntryItem(ACItems.gold_upgrade_kit, 4, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":gold_upgrade_kit"));
