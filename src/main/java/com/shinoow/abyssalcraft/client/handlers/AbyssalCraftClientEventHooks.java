@@ -18,6 +18,7 @@ import java.util.Map;
 import org.lwjgl.input.Mouse;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -61,9 +62,7 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.event.MouseEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -285,6 +284,12 @@ public class AbyssalCraftClientEventHooks {
 				event.getToolTip().add(3, "Cast type: "+TextFormatting.GOLD+(spell.requiresCharging() ? "Charge" : "Instant"));
 			}
 		}
+	}
+
+	@SubscribeEvent
+	public void tooltipFont(RenderTooltipEvent.Pre event) {
+		if(!APIUtils.display_names && event.getLines().get(0).startsWith("\u00A7fLorem ipsum"))
+			event.setFontRenderer(AbyssalCraftAPI.getAkloFont());
 	}
 
 	@SubscribeEvent
