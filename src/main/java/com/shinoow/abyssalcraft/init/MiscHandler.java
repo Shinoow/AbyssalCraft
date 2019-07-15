@@ -523,6 +523,7 @@ public class MiscHandler implements ILifeCycleHandler {
 
 	@SubscribeEvent
 	public void lootLoad(LootTableLoadEvent event){
+		if(!ACConfig.lootTableContent) return;
 		if(event.getName().equals(LootTableList.CHESTS_SPAWN_BONUS_CHEST)){
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
