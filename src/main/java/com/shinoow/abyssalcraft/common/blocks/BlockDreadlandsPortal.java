@@ -13,11 +13,8 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.api.biome.ACBiomes;
-import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
-import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.common.world.TeleporterAC;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -102,37 +99,6 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 					entity.timeUntilPortal = entity.getPortalCooldown();
 			}
 		}
-
-		if(worldIn.getBiome(pos) != ACBiomes.purged && !ACConfig.no_dreadlands_spread)
-			if(worldIn.provider.getDimension() != ACLib.dreadlands_id && worldIn.provider.getDimension() != ACLib.omothol_id && !worldIn.isRemote && rand.nextInt(10) < worldIn.getDifficulty().getDifficultyId()) {
-				int distance = 5, num = 0;
-				for(int x = pos.getX() - distance; x <= pos.getX() + distance; x++)
-					for(int z = pos.getZ() - distance; z <= pos.getZ() + distance; z++)
-						if(!(worldIn.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
-						{
-							int i = (int)pos.distanceSq(x, pos.getY(), z);
-							if(distance > 5)
-								i /= distance;
-
-							if(i == 0 || rand.nextInt(i) == 0) {
-								num++;
-								BiomeUtil.updateBiome(worldIn, new BlockPos(x, 0, z), ACBiomes.dreadlands);
-							}
-						}
-				if(num == 0) {
-					distance +=5;
-					for(int x = pos.getX() - distance; x <= pos.getX() + distance; x++)
-						for(int z = pos.getZ() - distance; z <= pos.getZ() + distance; z++)
-							if(!(worldIn.getBiome(new BlockPos(x, 0, z)) instanceof IDreadlandsBiome))
-							{
-								int i = (int)pos.distanceSq(x, pos.getY(), z);
-								i /= 5;
-
-								if(i == 0 || rand.nextInt(i) == 0)
-									BiomeUtil.updateBiome(worldIn, new BlockPos(x, 0, z), ACBiomes.dreadlands);
-							}
-				}
-			}
 	}
 
 	@Override
