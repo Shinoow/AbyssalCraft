@@ -12,9 +12,7 @@
 package com.shinoow.abyssalcraft.init;
 
 import static com.shinoow.abyssalcraft.AbyssalCraft.instance;
-import static com.shinoow.abyssalcraft.lib.ACConfig.demonAnimalSpawnWeight;
-import static com.shinoow.abyssalcraft.lib.ACConfig.evilAnimalSpawnWeight;
-import static com.shinoow.abyssalcraft.lib.ACConfig.purgeMobSpawns;
+import static com.shinoow.abyssalcraft.lib.ACConfig.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -190,10 +188,16 @@ public class EntityHandler implements ILifeCycleHandler {
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.WATER).toArray(new Biome[0]));
-		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.BEACH).toArray(new Biome[0]));
-		EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.SWAMP).toArray(new Biome[0]));
-		EntityRegistry.removeSpawn(EntityDepthsGhoul.class, EnumCreatureType.MONSTER, Biomes.MUSHROOM_ISLAND_SHORE );
+		if(depthsGhoulBiomeDictSpawn) {
+			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.WATER).toArray(new Biome[0]));
+			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.BEACH).toArray(new Biome[0]));
+			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.SWAMP).toArray(new Biome[0]));
+			EntityRegistry.removeSpawn(EntityDepthsGhoul.class, EnumCreatureType.MONSTER, Biomes.MUSHROOM_ISLAND_SHORE );
+		} else {
+			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, Biomes.OCEAN, Biomes.DEEP_OCEAN,
+					Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER, Biomes.BEACH, Biomes.COLD_BEACH, Biomes.STONE_BEACH,
+					Biomes.SWAMPLAND, Biomes.MUTATED_SWAMPLAND);
+		}
 
 		if(evilAnimalSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER,
@@ -202,10 +206,16 @@ public class EntityHandler implements ILifeCycleHandler {
 					Biomes.ICE_PLAINS, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS,
 					Biomes.ROOFED_FOREST);
 
-		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.WATER).toArray(new Biome[0]));
-		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.BEACH).toArray(new Biome[0]));
-		EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.SWAMP).toArray(new Biome[0]));
-		EntityRegistry.removeSpawn(EntityAbyssalZombie.class, EnumCreatureType.MONSTER, Biomes.MUSHROOM_ISLAND_SHORE);
+		if(abyssalZombieBiomeDictSpawn) {
+			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.WATER).toArray(new Biome[0]));
+			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.BEACH).toArray(new Biome[0]));
+			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.SWAMP).toArray(new Biome[0]));
+			EntityRegistry.removeSpawn(EntityAbyssalZombie.class, EnumCreatureType.MONSTER, Biomes.MUSHROOM_ISLAND_SHORE);
+		} else {
+			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, Biomes.OCEAN, Biomes.DEEP_OCEAN,
+					Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER, Biomes.BEACH, Biomes.COLD_BEACH, Biomes.STONE_BEACH,
+					Biomes.SWAMPLAND, Biomes.MUTATED_SWAMPLAND);
+		}
 
 		if(demonAnimalSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityDemonPig.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.NETHER).toArray(new Biome[0]));

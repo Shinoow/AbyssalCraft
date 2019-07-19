@@ -356,6 +356,8 @@ public class InitHandler implements ILifeCycleHandler {
 		coraliumPlagueImmunityList = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague Immunity List", new String[0], "Entities added to this list are considered immune to the Coralium Plague.").getStringList();
 		coraliumPlagueCarrierList = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague Carrier List", new String[0], "Entities added to this list are considered carriers of the Coralium Plague (this also makes them immune).").getStringList();
 		lootTableContent = cfg.get(Configuration.CATEGORY_GENERAL, "Loot Table Content", true, "Toggles whether or not AbyssalCraft Items should be inserted into vanilla loot tables (dungeons, strongholds etc).").getBoolean();
+		depthsGhoulBiomeDictSpawn = cfg.get(Configuration.CATEGORY_GENERAL, "Depths Ghoul Biome Dictionary Spawning", true, "Toggles whether or not Depths Ghouls should use the Biome Dictionary for finding biomes to spawn in (which might lead to them spawning in dimensions from other mods).").getBoolean();
+		abyssalZombieBiomeDictSpawn = cfg.get(Configuration.CATEGORY_GENERAL, "Abyssal Zombie Biome Dictionary Spawning", true, "Toggles whether or not Abyssal Zombies should use the Biome Dictionary for finding biomes to spawn in (which might lead to them spawning in dimensions from other mods).").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
