@@ -193,11 +193,10 @@ public class EntityHandler implements ILifeCycleHandler {
 			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.BEACH).toArray(new Biome[0]));
 			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.SWAMP).toArray(new Biome[0]));
 			EntityRegistry.removeSpawn(EntityDepthsGhoul.class, EnumCreatureType.MONSTER, Biomes.MUSHROOM_ISLAND_SHORE );
-		} else {
+		} else
 			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, Biomes.OCEAN, Biomes.DEEP_OCEAN,
 					Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER, Biomes.BEACH, Biomes.COLD_BEACH, Biomes.STONE_BEACH,
 					Biomes.SWAMPLAND, Biomes.MUTATED_SWAMPLAND);
-		}
 
 		if(evilAnimalSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER,
@@ -211,11 +210,10 @@ public class EntityHandler implements ILifeCycleHandler {
 			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.BEACH).toArray(new Biome[0]));
 			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.SWAMP).toArray(new Biome[0]));
 			EntityRegistry.removeSpawn(EntityAbyssalZombie.class, EnumCreatureType.MONSTER, Biomes.MUSHROOM_ISLAND_SHORE);
-		} else {
+		} else
 			EntityRegistry.addSpawn(EntityAbyssalZombie.class, 10, 1, 3, EnumCreatureType.MONSTER, Biomes.OCEAN, Biomes.DEEP_OCEAN,
 					Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER, Biomes.BEACH, Biomes.COLD_BEACH, Biomes.STONE_BEACH,
 					Biomes.SWAMPLAND, Biomes.MUTATED_SWAMPLAND);
-		}
 
 		if(demonAnimalSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityDemonPig.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.NETHER).toArray(new Biome[0]));
