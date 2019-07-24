@@ -12,9 +12,11 @@
 package com.shinoow.abyssalcraft.lib.world;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 /**
  * Very basic "no portal" teleporter implementation,<br>
@@ -30,6 +32,12 @@ public class TeleporterDarkRealm extends Teleporter {
 
 	@Override
 	public void placeInPortal(Entity entity, float par8){
+		if(entity instanceof EntityPlayerMP && !((EntityPlayerMP)entity).capabilities.isCreativeMode) {
+			ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, true, "invulnerableDimensionChange", "field_184851_cj");
+			ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastExperience", "field_71144_ck");
+			ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1.0F, "lastHealth", "field_71149_ch");
+			ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastFoodLevel", "field_71146_ci");
+		}
 		entity.setPosition(MathHelper.floor(entity.posX), 80, MathHelper.floor(entity.posZ));
 		entity.motionX = entity.motionY = entity.motionZ = 0;
 	}

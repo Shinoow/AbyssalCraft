@@ -32,15 +32,12 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -198,52 +195,19 @@ public class BlockOmotholPortal extends BlockBreakable {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity)
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-
-		if (!par5Entity.isRiding() && !par5Entity.isBeingRidden() && !par1World.isRemote)
-			if(par5Entity.timeUntilPortal <= 0){
-				if(par5Entity instanceof EntityPlayerMP){
-					EntityPlayerMP thePlayer = (EntityPlayerMP)par5Entity;
-					//					thePlayer.addStat(ACAchievements.enter_omothol, 1);
-
-					thePlayer.timeUntilPortal = ACConfig.portalCooldown;
-					if (thePlayer.dimension != ACLib.omothol_id)
-					{
-						if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.omothol_id)) return;
-						thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.omothol_id, new TeleporterAC(thePlayer.mcServer.getWorld(ACLib.omothol_id), this, ACBlocks.stone.getStateFromMeta(6)));
-					}
-					else {
-						if(!ForgeHooks.onTravelToDimension(thePlayer, ACLib.dreadlands_id)) return;
-						thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, ACLib.dreadlands_id, new TeleporterAC(thePlayer.mcServer.getWorld(ACLib.dreadlands_id), this, ACBlocks.stone.getStateFromMeta(6)));
-					}
+		if (!entity.isRiding() && !entity.isBeingRidden() && !world.isRemote && !entity.isDead && entity.isNonBoss())
+			if(entity.timeUntilPortal > 0) {
+				entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
+			} else {
+				entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
+				if(entity.dimension != ACLib.omothol_id) {
+					TeleporterAC.changeDimension(entity, ACLib.omothol_id, this, ACBlocks.stone.getStateFromMeta(6));
 				} else {
-					MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-					par5Entity.timeUntilPortal = par5Entity.getPortalCooldown();
-
-					if(par5Entity.dimension != ACLib.omothol_id){
-						if(!ForgeHooks.onTravelToDimension(par5Entity, ACLib.omothol_id)) return;
-
-						int i = par5Entity.dimension;
-
-						par5Entity.dimension = ACLib.omothol_id;
-						par1World.removeEntityDangerously(par5Entity);
-
-						par5Entity.isDead = false;
-
-						server.getPlayerList().transferEntityToWorld(par5Entity, i, server.getWorld(i), server.getWorld(ACLib.omothol_id), new TeleporterAC(server.getWorld(ACLib.omothol_id), this, ACBlocks.stone.getStateFromMeta(6)));
-					} else {
-						if(!ForgeHooks.onTravelToDimension(par5Entity, ACLib.dreadlands_id)) return;
-
-						par5Entity.dimension = ACLib.dreadlands_id;
-						par1World.removeEntityDangerously(par5Entity);
-
-						par5Entity.isDead = false;
-
-						server.getPlayerList().transferEntityToWorld(par5Entity, ACLib.omothol_id, server.getWorld(ACLib.omothol_id), server.getWorld(ACLib.dreadlands_id), new TeleporterAC(server.getWorld(ACLib.dreadlands_id), this, ACBlocks.stone.getStateFromMeta(6)));
-					}
+					TeleporterAC.changeDimension(entity, ACLib.dreadlands_id, this, ACBlocks.stone.getStateFromMeta(6));
 				}
-			} else par5Entity.timeUntilPortal = par5Entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  par5Entity.getPortalCooldown();
+			}
 	}
 
 	@Override

@@ -28,6 +28,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class TeleporterAC extends Teleporter
@@ -47,41 +48,29 @@ public class TeleporterAC extends Teleporter
 		this.frame = frame;
 	}
 
+	public static void changeDimension(Entity entity, int dimension, Block portal, IBlockState frame) {
+		Teleporter teleporter = new TeleporterAC(entity.getServer().getWorld(dimension), portal, frame);
+		if(entity instanceof EntityPlayerMP) {
+			if(!ForgeHooks.onTravelToDimension(entity, dimension)) return;
+			if(!((EntityPlayerMP)entity).capabilities.isCreativeMode) {
+				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, true, "invulnerableDimensionChange", "field_184851_cj");
+				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastExperience", "field_71144_ck");
+				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1.0F, "lastHealth", "field_71149_ch");
+				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastFoodLevel", "field_71146_ci");
+			}
+			((EntityPlayerMP)entity).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP)entity, dimension, teleporter);
+		} else {
+			entity.changeDimension(dimension, teleporter);
+		}
+	}
+
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw)
 	{
-		if (worldServerInstance.provider.getDimension() != 1)
+		if (!placeInExistingPortal(entityIn, rotationYaw))
 		{
-			if (entityIn instanceof EntityPlayerMP && !((EntityPlayerMP)entityIn).capabilities.isCreativeMode)
-				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entityIn, true, "invulnerableDimensionChange", "field_184851_cj");
-
-			if (!placeInExistingPortal(entityIn, rotationYaw))
-			{
-				makePortal(entityIn);
-				placeInExistingPortal(entityIn, rotationYaw);
-			}
-		}
-		else
-		{
-			int i = MathHelper.floor(entityIn.posX);
-			int j = MathHelper.floor(entityIn.posY) - 1;
-			int k = MathHelper.floor(entityIn.posZ);
-			int l = 1;
-			int i1 = 0;
-
-			for (int j1 = -2; j1 <= 2; ++j1)
-				for (int k1 = -2; k1 <= 2; ++k1)
-					for (int l1 = -1; l1 < 3; ++l1)
-					{
-						int i2 = i + k1 * l + j1 * i1;
-						int j2 = j + l1;
-						int k2 = k + k1 * i1 - j1 * l;
-						boolean flag = l1 < 0;
-						worldServerInstance.setBlockState(new BlockPos(i2, j2, k2), flag ? frame : Blocks.AIR.getDefaultState());
-					}
-
-			entityIn.setLocationAndAngles(i, j, k, entityIn.rotationYaw, 0.0F);
-			entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
+			makePortal(entityIn);
+			placeInExistingPortal(entityIn, rotationYaw);
 		}
 	}
 
