@@ -251,13 +251,15 @@ public class EntityHandler implements ILifeCycleHandler {
 		if(demonAnimalSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityDemonSheep.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.NETHER).toArray(new Biome[0]));
 
-		EntityRegistry.addSpawn(EntityShubOffspring.class, 5, 1, 3, EnumCreatureType.MONSTER,
-				Biomes.FOREST, Biomes.REDWOOD_TAIGA, Biomes.REDWOOD_TAIGA_HILLS, Biomes.FOREST_HILLS,
-				Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS, Biomes.MUTATED_FOREST,
-				Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.MUTATED_BIRCH_FOREST,
-				Biomes.MUTATED_BIRCH_FOREST_HILLS);
-		EntityRegistry.addSpawn(EntityShubOffspring.class, 10, 1, 3, EnumCreatureType.MONSTER,
-				ACBiomes.darklands_forest, Biomes.ROOFED_FOREST, Biomes.MUTATED_ROOFED_FOREST);
+		if(darkOffspringSpawnWeight > 0) {
+			EntityRegistry.addSpawn(EntityShubOffspring.class, darkOffspringSpawnWeight, 1, 3, EnumCreatureType.MONSTER,
+					Biomes.FOREST, Biomes.REDWOOD_TAIGA, Biomes.REDWOOD_TAIGA_HILLS, Biomes.FOREST_HILLS,
+					Biomes.MUTATED_REDWOOD_TAIGA, Biomes.MUTATED_REDWOOD_TAIGA_HILLS, Biomes.MUTATED_FOREST,
+					Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.MUTATED_BIRCH_FOREST,
+					Biomes.MUTATED_BIRCH_FOREST_HILLS);
+			EntityRegistry.addSpawn(EntityShubOffspring.class, darkOffspringSpawnWeight * 2, 1, 3, EnumCreatureType.MONSTER,
+					ACBiomes.darklands_forest, Biomes.ROOFED_FOREST, Biomes.MUTATED_ROOFED_FOREST);
+		}
 	}
 
 	@Override

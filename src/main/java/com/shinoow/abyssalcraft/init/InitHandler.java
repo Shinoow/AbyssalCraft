@@ -358,6 +358,7 @@ public class InitHandler implements ILifeCycleHandler {
 		lootTableContent = cfg.get(Configuration.CATEGORY_GENERAL, "Loot Table Content", true, "Toggles whether or not AbyssalCraft Items should be inserted into vanilla loot tables (dungeons, strongholds etc).").getBoolean();
 		depthsGhoulBiomeDictSpawn = cfg.get(Configuration.CATEGORY_GENERAL, "Depths Ghoul Biome Dictionary Spawning", true, "Toggles whether or not Depths Ghouls should use the Biome Dictionary for finding biomes to spawn in (which might lead to them spawning in dimensions from other mods).").getBoolean();
 		abyssalZombieBiomeDictSpawn = cfg.get(Configuration.CATEGORY_GENERAL, "Abyssal Zombie Biome Dictionary Spawning", true, "Toggles whether or not Abyssal Zombies should use the Biome Dictionary for finding biomes to spawn in (which might lead to them spawning in dimensions from other mods).").getBoolean();
+		darkOffspringSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Dark Offspring Spawn Weight", 5, "Spawn weight for Dark Offspring. They spawn twice as likely in Darklands Forests and Roofed Forests.\n[range: 0 ~ 50, default: 5]", 0, 50).getInt();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -370,8 +371,8 @@ public class InitHandler implements ILifeCycleHandler {
 		oozeExpire = cfg.get("shoggoth", "Ooze expiration", false, "Toggles whether or not Shoggoth Ooze slowly reverts to dirt after constant light exposure.").getBoolean();
 		consumeItems = cfg.get("shoggoth", "Item Consumption", true, "Toggles whether or not Lesser Shoggoths will consume any dropped item they run into.").getBoolean();
 		shieldsBlockAcid = cfg.get("shoggoth", "Shields Block Acid", true, "Toggles whether or not Shields can block the acid projectiles spat by Lesser Shoggoths.").getBoolean();
-		acidResistanceHardness = cfg.get("shoggoth", "Acid Resistance Hardness", 3.0D, "The minimum Block Hardness required for a Block to not be destroyed by Shoggoth Acid (some blocks are unaffected regardless of their hardness)\\n[range: 2.1 ~ 51.0, default: 3.0]", 2.1D, 51.0D).getDouble();
-		acidSpitFrequency = cfg.get("shoggoth", "Acid Spit Frequency", 100, "The frequency (in ticks) at which a Lesser Shoggoth can spit acid. Higher values increase the time between each spit attack, while lower values descrease the time (and 0 disables it).\\n[range: 0 ~ 300, default: 100]", 0, 300).getInt();
+		acidResistanceHardness = cfg.get("shoggoth", "Acid Resistance Hardness", 3.0D, "The minimum Block Hardness required for a Block to not be destroyed by Shoggoth Acid (some blocks are unaffected regardless of their hardness)\n[range: 2.1 ~ 51.0, default: 3.0]", 2.1D, 51.0D).getDouble();
+		acidSpitFrequency = cfg.get("shoggoth", "Acid Spit Frequency", 100, "The frequency (in ticks) at which a Lesser Shoggoth can spit acid. Higher values increase the time between each spit attack, while lower values descrease the time (and 0 disables it).\n[range: 0 ~ 300, default: 100]", 0, 300).getInt();
 
 		generateDarklandsStructures = cfg.get("worldgen", "Darklands Structures", true, "Toggles whether or not to generate random Darklands structures.").getBoolean();
 		generateShoggothLairs = cfg.get("worldgen", "Shoggoth Lairs", true, "Toggles whether or not to generate Shoggoth Lairs (however, they will still generate in Omothol).").getBoolean();
