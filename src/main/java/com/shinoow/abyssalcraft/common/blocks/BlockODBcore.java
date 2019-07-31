@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.Block;
@@ -117,7 +118,7 @@ public class BlockODBcore extends Block {
 	public void explode(World par1World, BlockPos pos, IBlockState state, EntityLivingBase par6)
 	{
 		if (!par1World.isRemote)
-			if (state.getValue(EXPLODE).booleanValue())
+			if (state.getValue(EXPLODE).booleanValue() && !ACConfig.no_odb_explosions)
 			{
 				EntityODBcPrimed var7 = new EntityODBcPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par6);
 				par1World.spawnEntity(var7);

@@ -99,7 +99,7 @@ public class EntityODBcPrimed extends Entity {
 
 	private void explode()
 	{
-		if(!world.isRemote){
+		if(!world.isRemote && !ACConfig.no_odb_explosions){
 			float var0 = 16.0F;
 			ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, var0, false, true);
 		}

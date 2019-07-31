@@ -36,7 +36,8 @@ public class ACConfig {
 	generateAbyssalDiamondOre, generateAbyssalNitreOre, generateAbyssalTinOre, generateAbyssalCopperOre,
 	generatePearlescentCoraliumOre, generateLiquifiedCoraliumOre;
 	public static boolean hcdarkness_aw, hcdarkness_dl, hcdarkness_omt, hcdarkness_dr;
-	public static boolean no_dreadlands_spread, no_acid_breaking_blocks, no_spectral_dragons, no_projectile_damage_immunity, no_disruptions, no_black_holes;
+	public static boolean no_dreadlands_spread, no_acid_breaking_blocks, no_spectral_dragons, no_projectile_damage_immunity,
+	no_disruptions, no_black_holes, no_odb_explosions;
 
 	public static boolean darkstone_brick_slab, darkstone_cobblestone_slab, darkstone_brick_stairs, darkstone_cobblestone_stairs, darkstone_slab,
 	darklands_oak_slab, darklands_oak_stairs, abyssal_stone_brick_slab, abyssal_stone_brick_stairs, coralium_stone_brick_slab, coralium_stone_brick_stairs,

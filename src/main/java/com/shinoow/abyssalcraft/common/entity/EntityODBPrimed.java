@@ -103,7 +103,7 @@ public class EntityODBPrimed extends Entity {
 
 	private void explode()
 	{
-		if(!world.isRemote){
+		if(!world.isRemote && !ACConfig.no_odb_explosions){
 			ACLogger.info("Unleashing hell shortly.");
 
 			float var0 = 80.0F;
