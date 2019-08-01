@@ -59,9 +59,8 @@ public class TeleporterAC extends Teleporter
 				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastFoodLevel", "field_71146_ci");
 			}
 			((EntityPlayerMP)entity).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP)entity, dimension, teleporter);
-		} else {
+		} else
 			entity.changeDimension(dimension, teleporter);
-		}
 	}
 
 	@Override

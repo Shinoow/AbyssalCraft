@@ -17,8 +17,8 @@ import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityODBPrimed;
 import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
-import com.shinoow.abyssalcraft.common.util.ScheduledProcess;
-import com.shinoow.abyssalcraft.common.util.Scheduler;
+import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
+import com.shinoow.abyssalcraft.lib.util.Scheduler;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

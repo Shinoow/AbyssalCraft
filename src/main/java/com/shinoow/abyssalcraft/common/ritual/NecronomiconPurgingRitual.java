@@ -16,9 +16,9 @@ import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
-import com.shinoow.abyssalcraft.common.util.ScheduledProcess;
-import com.shinoow.abyssalcraft.common.util.Scheduler;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
+import com.shinoow.abyssalcraft.lib.util.Scheduler;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;

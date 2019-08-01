@@ -225,9 +225,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 	 * Reduces this Shoggoth's monolith timer
 	 */
 	public void reduceMonolithTimer(){
-		if(monolithTimer - 200 >= 200)
-			monolithTimer -= 200;
-		else monolithTimer = 0;
+		monolithTimer = Math.max(monolithTimer - 200, 0);
 	}
 
 	public void resetMonolithTimer() {

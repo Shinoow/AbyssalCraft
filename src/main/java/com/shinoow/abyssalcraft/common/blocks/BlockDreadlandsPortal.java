@@ -197,15 +197,14 @@ public class BlockDreadlandsPortal extends BlockBreakable {
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
 		if (!entity.isRiding() && !entity.isBeingRidden() && !world.isRemote && !entity.isDead && entity.isNonBoss())
-			if(entity.timeUntilPortal > 0) {
+			if(entity.timeUntilPortal > 0)
 				entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown : entity.getPortalCooldown();
-			} else {
+			else {
 				entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown : entity.getPortalCooldown();
-				if(entity.dimension != ACLib.dreadlands_id) {
+				if(entity.dimension != ACLib.dreadlands_id)
 					TeleporterAC.changeDimension(entity, ACLib.dreadlands_id, this, ACBlocks.stone.getStateFromMeta(2));
-				} else {
+				else
 					TeleporterAC.changeDimension(entity, ACLib.abyssal_wasteland_id, this, ACBlocks.stone.getStateFromMeta(2));
-				}
 			}
 	}
 

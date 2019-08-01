@@ -198,15 +198,14 @@ public class BlockOmotholPortal extends BlockBreakable {
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
 		if (!entity.isRiding() && !entity.isBeingRidden() && !world.isRemote && !entity.isDead && entity.isNonBoss())
-			if(entity.timeUntilPortal > 0) {
+			if(entity.timeUntilPortal > 0)
 				entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
-			} else {
+			else {
 				entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
-				if(entity.dimension != ACLib.omothol_id) {
+				if(entity.dimension != ACLib.omothol_id)
 					TeleporterAC.changeDimension(entity, ACLib.omothol_id, this, ACBlocks.stone.getStateFromMeta(6));
-				} else {
+				else
 					TeleporterAC.changeDimension(entity, ACLib.dreadlands_id, this, ACBlocks.stone.getStateFromMeta(6));
-				}
 			}
 	}
 

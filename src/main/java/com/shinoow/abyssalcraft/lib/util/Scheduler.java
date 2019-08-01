@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.util;
+package com.shinoow.abyssalcraft.lib.util;
 
 import java.util.ArrayList;
 import java.util.List;

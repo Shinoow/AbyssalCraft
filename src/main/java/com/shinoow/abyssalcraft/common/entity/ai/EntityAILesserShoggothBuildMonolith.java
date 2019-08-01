@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.EnumFacing;
@@ -48,11 +49,13 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 
-		if(shoggoth.isChild())
+		if(ACConfig.monolithBuildingCooldown == 0)
+			return false;
+		else if(shoggoth.isChild())
 			return false;
 		else if(shoggoth.isAssisting || shoggoth.isBuilding)
 			return false;
-		else if(shoggoth.getMonolithTimer() < 1800)
+		else if(shoggoth.getMonolithTimer() < ACConfig.monolithBuildingCooldown)
 			return false;
 		else if(world.getEntitiesWithinAABB(shoggoth.getClass(), shoggoth.getEntityBoundingBox().grow(16D, 16D, 16D), e -> !e.equals(shoggoth) && !e.isAssisting && !e.isBuilding).size() < 3)
 			return false;
