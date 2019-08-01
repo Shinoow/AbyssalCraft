@@ -60,10 +60,10 @@ public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
-		int num = 1, num2 = 0;
+		int num = 1, num2 = 0, range = ACConfig.corruptionRitualRange * 8;
 		boolean b1 = world.rand.nextBoolean();
-		for(int x = pos.getX() -256; x < pos.getX() + 257; x++)
-			for(int z = pos.getZ() - 256; z < pos.getZ() + 257; z++){
+		for(int x = pos.getX() - range; x < pos.getX() + range + 1; x++)
+			for(int z = pos.getZ() - range; z < pos.getZ() + range + 1; z++){
 
 				BlockPos pos1 = new BlockPos(x, 0, z);
 

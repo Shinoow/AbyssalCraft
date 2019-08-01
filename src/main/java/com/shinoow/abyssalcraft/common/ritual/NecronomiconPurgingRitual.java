@@ -16,6 +16,7 @@ import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
@@ -55,9 +56,9 @@ public class NecronomiconPurgingRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
-		int num = 1, num2 = 0;
-		for(int x = pos.getX() - 256; x < pos.getX() + 257; x++)
-			for(int z = pos.getZ() - 256; z < pos.getZ() + 257; z++){
+		int num = 1, num2 = 0, range = ACConfig.purgingRitualRange * 8;
+		for(int x = pos.getX() - range; x < pos.getX() + range + 1; x++)
+			for(int z = pos.getZ() - range; z < pos.getZ() + range + 1; z++){
 
 				BlockPos pos1 = new BlockPos(x, 0, z);
 
