@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -70,7 +71,7 @@ public class chagarothlair extends WorldGenerator {
 					TileEntityChest tileentitychest = (TileEntityChest)te;
 
 					tileentitychest.setInventorySlotContents(13, new ItemStack(Blocks.DIRT, 1).setStackDisplayName(TextFormatting.GOLD +"The Legendary Treasure of The Dreadlands"));
-					if(world.rand.nextInt(10) == 0){
+					if(world.rand.nextInt(10) == 0 && ACConfig.foodstuff) {
 						tileentitychest.decrStackSize(13, 1);
 						tileentitychest.setInventorySlotContents(13, new ItemStack(ACItems.fried_egg, 1).setStackDisplayName(TextFormatting.GOLD +"The Legendary Treasure of The Dreadlands"));
 					}

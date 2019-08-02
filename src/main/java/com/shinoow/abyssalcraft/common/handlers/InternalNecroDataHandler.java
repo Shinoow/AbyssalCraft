@@ -35,6 +35,7 @@ import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconPlacesOfP
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
@@ -185,7 +186,6 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 	private void addPages(String necroidentifier, String chapteridentifier, Page...pages){
 		for(Page page : pages)
 			addPage(page, necroidentifier, chapteridentifier);
-
 	}
 
 	private void addInternalPages(String outernecroidentifier, String innernecroidentifier, String chapteridentifier, Page...pages) {
@@ -461,17 +461,24 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(19, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_15, NecronomiconText.PE_TUT_19),
 				new Page(20, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconText.PE_TUT_20));
 		addInternalPages("rituals", "placesofpower", "information", new Page(1, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_POWER_INFO_1), new Page(2, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_POWER_INFO_2));
-		addPages("miscinfo", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.cobblestone_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_1),
-				new Page(2, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.iron_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_2),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(new ItemStack(ACItems.iron_plate, 2), null, null, null, null, Items.IRON_INGOT, null, null, Items.IRON_INGOT, null), NecronomiconText.CRAFTING_IRON_PLATE),
-				new Page(4, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.washcloth), NecronomiconText.CRAFTING_WASHCLOTH),
-				new Page(5, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.mre), NecronomiconText.CRAFTING_MRE),
-				new Page(6, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.beef_on_a_plate), NecronomiconText.CRAFTING_PLATE_FOOD),
-				new Page(7, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACBlocks.odb_core), NecronomiconText.CRAFTING_ODB_CORE),
-				new Page(8, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACBlocks.oblivion_deathbomb), NecronomiconText.CRAFTING_ODB),
-				new Page(9, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.carbon_cluster), NecronomiconText.CRAFTING_CARBON_CLUSTER),
-				new Page(10, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.dense_carbon_cluster), NecronomiconText.CRAFTING_DENSE_CARBON_CLUSTER),
-				new Page(11, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACBlocks.wooden_crate), NecronomiconText.CRAFTING_CRATE));
+		
+		String title = NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS;
+		ArrayList<Page> pages = new ArrayList<Page>();
+		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.cobblestone_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_1));
+		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.iron_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_2));
+		if (ACConfig.foodstuff) {
+			pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(new ItemStack(ACItems.iron_plate, 2), null, null, null, null, Items.IRON_INGOT, null, null, Items.IRON_INGOT, null), NecronomiconText.CRAFTING_IRON_PLATE));
+			pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.washcloth), NecronomiconText.CRAFTING_WASHCLOTH));
+			pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.mre), NecronomiconText.CRAFTING_MRE));
+			pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.beef_on_a_plate), NecronomiconText.CRAFTING_PLATE_FOOD));
+		}
+		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACBlocks.odb_core), NecronomiconText.CRAFTING_ODB_CORE));
+		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACBlocks.oblivion_deathbomb), NecronomiconText.CRAFTING_ODB));
+		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.carbon_cluster), NecronomiconText.CRAFTING_CARBON_CLUSTER));
+		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.dense_carbon_cluster), NecronomiconText.CRAFTING_DENSE_CARBON_CLUSTER));
+		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACBlocks.wooden_crate), NecronomiconText.CRAFTING_CRATE));
+		addPages("miscinfo", "specialmaterials", pages.toArray(new Page[pages.size()]));
+		
 		addPages("miscinfo", "enchantments", new Page(1, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1)), NecronomiconText.ENCHANTMENT_CORALIUM, new NecronomiconCondition(1)),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1)), NecronomiconText.ENCHANTMENT_DREAD, new NecronomiconCondition(2)),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.light_pierce, AbyssalCraftAPI.light_pierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE, new MultiEntityCondition(EntityShadowCreature.class, EntityShadowMonster.class, EntityShadowBeast.class)),

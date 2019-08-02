@@ -58,7 +58,7 @@ public class ACTabs {
 
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(ACItems.iron_plate);
+			return new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone);
 		}
 	};
 	public static final CreativeTabs tabDecoration = new CreativeTabs("acdblocks"){

@@ -24,6 +24,7 @@ import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
 import com.shinoow.abyssalcraft.common.items.*;
 import com.shinoow.abyssalcraft.common.items.armor.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemCharm;
@@ -254,16 +255,18 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_upgrade_kit = new ItemUpgradeKit("Dreadium", "Ethaxium").setUnlockCondition(new DimensionCondition(ACLib.omothol_id)).setUnlocalizedName("ethaxiumu").setCreativeTab(ACTabs.tabItems);
 
 		//Foodstuffs
-		ACItems.iron_plate = new ItemACBasic("ironp");
-		ACItems.mre = new ItemPlatefood(20, 1F, false, "mre");
-		ACItems.chicken_on_a_plate = new ItemPlatefood(9, 0.9F, false, "chickenp");
-		ACItems.pork_on_a_plate = new ItemPlatefood(12, 1.2F, false, "porkp");
-		ACItems.beef_on_a_plate = new ItemPlatefood(12, 1.2F, false, "beefp");
-		ACItems.fish_on_a_plate = new ItemPlatefood(8, 0.9F, false, "fishp");
-		ACItems.dirty_plate = new ItemACBasic("dirtyplate");
-		ACItems.fried_egg = new ItemFood(5, 0.6F, false).setCreativeTab(ACTabs.tabFood).setUnlocalizedName("friedegg");
-		ACItems.fried_egg_on_a_plate = new ItemPlatefood(8, 0.9F, false, "eggp");
-		ACItems.washcloth = new ItemWashCloth();
+		if (ACConfig.foodstuff) {
+			ACItems.iron_plate = new ItemACBasic("ironp");
+			ACItems.mre = new ItemPlatefood(20, 1F, false, "mre");
+			ACItems.chicken_on_a_plate = new ItemPlatefood(9, 0.9F, false, "chickenp");
+			ACItems.pork_on_a_plate = new ItemPlatefood(12, 1.2F, false, "porkp");
+			ACItems.beef_on_a_plate = new ItemPlatefood(12, 1.2F, false, "beefp");
+			ACItems.fish_on_a_plate = new ItemPlatefood(8, 0.9F, false, "fishp");
+			ACItems.dirty_plate = new ItemACBasic("dirtyplate");
+			ACItems.fried_egg = new ItemFood(5, 0.6F, false).setCreativeTab(ACTabs.tabFood).setUnlocalizedName("friedegg");
+			ACItems.fried_egg_on_a_plate = new ItemPlatefood(8, 0.9F, false, "eggp");
+			ACItems.washcloth = new ItemWashCloth();
+		}
 
 		registerItem(devsword, "devsword");
 		registerItem(ACItems.oblivion_catalyst, "oc");
@@ -333,16 +336,18 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.diamond_upgrade_kit, "diamondu");
 		registerItem(ACItems.abyssalnite_upgrade_kit, "abyssalniteu");
 		registerItem(ACItems.coralium_upgrade_kit, "coraliumu");
-		registerItem(ACItems.mre, "mre");
-		registerItem(ACItems.iron_plate, "ironp");
-		registerItem(ACItems.chicken_on_a_plate, "chickenp");
-		registerItem(ACItems.pork_on_a_plate, "porkp");
-		registerItem(ACItems.beef_on_a_plate, "beefp");
-		registerItem(ACItems.fish_on_a_plate, "fishp");
-		registerItem(ACItems.dirty_plate, "dirtyplate");
-		registerItem(ACItems.fried_egg, "friedegg");
-		registerItem(ACItems.fried_egg_on_a_plate, "eggp");
-		registerItem(ACItems.washcloth, "cloth");
+		if (ACConfig.foodstuff) {
+			registerItem(ACItems.mre, "mre");
+			registerItem(ACItems.iron_plate, "ironp");
+			registerItem(ACItems.chicken_on_a_plate, "chickenp");
+			registerItem(ACItems.pork_on_a_plate, "porkp");
+			registerItem(ACItems.beef_on_a_plate, "beefp");
+			registerItem(ACItems.fish_on_a_plate, "fishp");
+			registerItem(ACItems.dirty_plate, "dirtyplate");
+			registerItem(ACItems.fried_egg, "friedegg");
+			registerItem(ACItems.fried_egg_on_a_plate, "eggp");
+			registerItem(ACItems.washcloth, "cloth");
+		}
 		registerItem(ACItems.shadow_fragment, "shadowfragment");
 		registerItem(ACItems.shadow_shard, "shadowshard");
 		registerItem(ACItems.shadow_gem, "shadowgem");
