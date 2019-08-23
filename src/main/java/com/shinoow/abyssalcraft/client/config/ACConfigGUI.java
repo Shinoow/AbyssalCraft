@@ -45,6 +45,7 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement(I18n.format("ac_blocks"), "ac_blocks", BlocksEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_mod_compat"), "ac_mod_compat", CompatEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_wet_noodle"), "ac_wet_noodle", WetNoodleEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("modules"), "modules", ModuleEntry.class));
 		return list;
 	}
 
@@ -186,6 +187,18 @@ public class ACConfigGUI extends GuiConfig {
 		@Override
 		protected GuiScreen buildChildScreen(){
 			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("wet_noodle")).getChildElements(), "abyssalcraft", "wet_noodle", false, false, I18n.format("ac_wet_noodle"));
+
+		}
+	}
+	public static class ModuleEntry extends CategoryEntry{
+
+		public ModuleEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("modules")).getChildElements(), "abyssalcraft", "modules", false, false, I18n.format("modules"));
 
 		}
 	}
