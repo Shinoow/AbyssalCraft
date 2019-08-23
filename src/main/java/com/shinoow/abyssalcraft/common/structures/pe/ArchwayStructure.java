@@ -150,7 +150,7 @@ public class ArchwayStructure implements IPlaceOfPower {
 					&& !(world.getBlockState(pos.up(3).west(2)).getBlock() instanceof BlockStairs))
 				temp = false;
 			else if(!(world.getBlockState(pos.up(4).north(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).north(1)).getBlock() instanceof BlockSlab)
-					&& !(world.getBlockState(pos.up(4)) instanceof BlockSlab) && !(world.getBlockState(pos.up(4).south(1)).getBlock() instanceof BlockSlab)
+					&& !(world.getBlockState(pos.up(4)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).south(1)).getBlock() instanceof BlockSlab)
 					&& !(world.getBlockState(pos.up(4).south(2)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).east(2)).getBlock() instanceof BlockSlab)
 					&& !(world.getBlockState(pos.up(4).east(1)).getBlock() instanceof BlockSlab) && !(world.getBlockState(pos.up(4).west(1)).getBlock() instanceof BlockSlab)
 					&& !(world.getBlockState(pos.up(4).west(2)).getBlock() instanceof BlockSlab))
