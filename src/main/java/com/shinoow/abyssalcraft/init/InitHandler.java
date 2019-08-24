@@ -465,6 +465,8 @@ public class InitHandler implements ILifeCycleHandler {
 		hcdarkness_omt = cfg.get("mod_compat", "Hardcore Darkness: Omothol", true, "Toggles whether or not Omothol should be darker if Hardcore Darkness is installed.").getBoolean();
 		hcdarkness_dr = cfg.get("mod_compat", "Hardcore Darkness: Dark Realm", true, "Toggles whether or not the Dark Realm should be darker if Hardcore Darkness is installed.").getBoolean();
 
+		foodstuff = cfg.get("modules", "Enable Foodstuffs", true, "Set to false to disable Abyssalcraft Food.").getBoolean();
+		
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
 		demonAnimalSpawnWeight = MathHelper.clamp(demonAnimalSpawnWeight, 0, 100);

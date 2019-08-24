@@ -168,10 +168,12 @@ public class AbyssalCrafting {
 
 		GameRegistry.addSmelting(ACItems.chunk_of_abyssalnite, new ItemStack(ACItems.abyssalnite_ingot), 3F);
 		GameRegistry.addSmelting(ACItems.chunk_of_coralium, new ItemStack(ACItems.refined_coralium_ingot, 2), 3F);
-		GameRegistry.addSmelting(Items.EGG, new ItemStack(ACItems.fried_egg, 1), 0F);
 		GameRegistry.addSmelting(ACItems.dreaded_chunk_of_abyssalnite, new ItemStack(ACItems.abyssalnite_ingot), 3F);
-
 		GameRegistry.addSmelting(ACItems.coin, new ItemStack(Items.IRON_INGOT, 4), 0.5F);
+		
+		if (ACConfig.foodstuff) {
+			GameRegistry.addSmelting(Items.EGG, new ItemStack(ACItems.fried_egg, 1), 0F);
+		}
 
 		if(ACConfig.smeltingRecipes){
 			GameRegistry.addSmelting(Items.LEATHER_HELMET, new ItemStack(Items.LEATHER), 1F);

@@ -465,7 +465,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, Items.COOKIE, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.SHEARS, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.FLINT_AND_STEEL, rand, adjustProbability(0.3F));
-				addCoinTrade(list, ACItems.fish_on_a_plate, rand, adjustProbability(0.3F));
+				if (ACConfig.foodstuff) {
+					addCoinTrade(list, ACItems.fish_on_a_plate, rand, adjustProbability(0.3F));
+				}
 				addCoinTrade(list, Items.ARROW, rand, adjustProbability(0.5F));
 
 				if (rand.nextFloat() < adjustProbability(0.5F))
@@ -568,11 +570,19 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addItemTrade(list, Items.PORKCHOP, rand, adjustProbability(0.5F));
 				addItemTrade(list, Items.BEEF, rand, adjustProbability(0.5F));
 				addItemTrade(list, Items.CHICKEN, rand, adjustProbability(0.5F));
-				addCoinTrade(list, ACItems.washcloth, rand, adjustProbability(0.4F));
-				addCoinTrade(list, ACItems.mre, rand, adjustProbability(0.1F));
-				addCoinTrade(list, ACItems.pork_on_a_plate, rand, adjustProbability(0.3F));
-				addCoinTrade(list, ACItems.beef_on_a_plate, rand, adjustProbability(0.3F));
-				addCoinTrade(list, ACItems.chicken_on_a_plate, rand, adjustProbability(0.3F));
+				if (ACConfig.foodstuff) {
+					addCoinTrade(list, ACItems.washcloth, rand, adjustProbability(0.4F));
+					addCoinTrade(list, ACItems.mre, rand, adjustProbability(0.1F));
+					addCoinTrade(list, ACItems.pork_on_a_plate, rand, adjustProbability(0.3F));
+					addCoinTrade(list, ACItems.beef_on_a_plate, rand, adjustProbability(0.3F));
+					addCoinTrade(list, ACItems.chicken_on_a_plate, rand, adjustProbability(0.3F));
+				} else {
+					addCoinTrade(list, Items.COOKIE, rand, adjustProbability(0.4F));
+					addCoinTrade(list, Items.GOLDEN_CARROT, rand, adjustProbability(0.1F));
+					addCoinTrade(list, Items.PUMPKIN_PIE, rand, adjustProbability(0.3F));
+					addCoinTrade(list, Items.RABBIT_STEW, rand, adjustProbability(0.3F));
+					addCoinTrade(list, Items.CAKE, rand, adjustProbability(0.3F));
+				}
 				break;
 			case 5:
 				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.cthulhu_engraved_coin, 1);
