@@ -32,7 +32,7 @@ public class PurgeEventHandler {
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void stopBonemeal(BonemealEvent event) {
 		if(event.getWorld().getBiome(event.getPos()) == ACBiomes.purged) {
-			if(!event.getWorld().isRemote && event.getBlock().getBlock() instanceof IGrowable)
+			if(!event.getWorld().isRemote && event.getBlock().getBlock() instanceof IGrowable && event.getStack().isStackable())
 				event.getStack().shrink(1);
 			event.setCanceled(true);
 		}
