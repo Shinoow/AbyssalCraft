@@ -260,7 +260,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 						float f3 = Biome1.getBaseHeight();
 						float f4 = Biome1.getHeightVariation();
 
-						if (worldType == WorldType.AMPLIFIED && f3 > 0.0F)
+						if (worldType == WorldType.AMPLIFIED && ACConfig.useAmplifiedWorldType && f3 > 0.0F)
 						{
 							f3 = 1.0F + f3 * 2.0F;
 							f4 = 1.0F + f4 * 4.0F;
