@@ -198,7 +198,7 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("modules")).getChildElements(), "abyssalcraft", "modules", false, false, I18n.format("modules"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("modules")).getChildElements(), "abyssalcraft", "modules", true, true, I18n.format("modules"));
 
 		}
 	}
