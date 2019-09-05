@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDecorativeStatue;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -235,7 +236,7 @@ public class StructureShoggothPit extends WorldGenerator {
 	}
 
 	private IBlockState getRandomStatue(Random rand){
-		if(rand.nextInt(5) == 0)
+		if(rand.nextInt(5) == 0 && ACConfig.generateStatuesInLairs)
 			return ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.byMetadata(rand.nextInt(7)));
 		return ACBlocks.decorative_statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.byMetadata(rand.nextInt(7)));
 	}
