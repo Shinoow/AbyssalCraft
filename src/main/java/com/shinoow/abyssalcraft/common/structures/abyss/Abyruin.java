@@ -16,7 +16,6 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
@@ -26,47 +25,19 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 public class Abyruin extends WorldGenerator
 {
-	protected IBlockState[] GetValidSpawnBlocks() {
-		return new IBlockState[] {
-				ACBlocks.stone.getStateFromMeta(1),
-				ACBlocks.fused_abyssal_sand.getDefaultState(),
-				ACBlocks.abyssal_sand.getDefaultState()
-		};
-	}
-
-	public boolean LocationIsValidSpawn(World world, BlockPos pos){
-		int distanceToAir = 0;
-		IBlockState checkID = world.getBlockState(pos);
-
-		while (checkID != Blocks.AIR.getDefaultState()){
-			distanceToAir++;
-			checkID = world.getBlockState(pos.up(distanceToAir));
-		}
-
-		if (distanceToAir > 1)
-			return false;
-		pos.up(distanceToAir - 1);
-
-		IBlockState blockID = world.getBlockState(pos);
-		IBlockState blockIDAbove = world.getBlockState(pos.up(1));
-		IBlockState blockIDBelow = world.getBlockState(pos.down(1));
-		for (IBlockState x : GetValidSpawnBlocks()){
-			if (blockIDAbove != Blocks.AIR.getDefaultState())
-				return false;
-			if (blockID == x)
-				return true;
-			else if (blockID == Blocks.SNOW.getDefaultState() && blockIDBelow == x)
-				return true;
-		}
-		return false;
-	}
 
 	public Abyruin() { }
 
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
 
-		if(!LocationIsValidSpawn(world, pos) || !LocationIsValidSpawn(world, pos.east(7)) || !LocationIsValidSpawn(world, pos.add(7, 0, 8)) || !LocationIsValidSpawn(world, pos.south(8)))
+		while(world.isAirBlock(pos) && pos.getY() > 2)
+			pos = pos.down();
+		if(pos.getY() <= 1) return false;
+		
+		if(world.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(1) &&
+				world.getBlockState(pos).getBlock() != ACBlocks.fused_abyssal_sand &&
+				world.getBlockState(pos).getBlock() != ACBlocks.abyssal_sand)
 			return false;
 
 		int i = pos.getX();

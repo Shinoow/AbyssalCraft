@@ -362,12 +362,13 @@ public class ChunkProviderAbyss implements IChunkGenerator
 					new Chains().generate(worldObj, rand, pos.add(Xcoord1, 0, Zcoord1));
 			}
 		if(ACConfig.generateAbyssalWastelandRuins)
-			for(int i = 0; i < 5; i++) {
+			for(int i = 0; i < 1; i++) {
 				int Xcoord2 = rand.nextInt(16) + 8;
-				int Ycoord2 = rand.nextInt(70);
 				int Zcoord2 = rand.nextInt(16) + 8;
+				BlockPos pos1 = worldObj.getHeight(pos.add(Xcoord2, 0, Zcoord2));
 
-				new Abyruin().generate(worldObj, rand, pos.add(Xcoord2, Ycoord2, Zcoord2));
+				if(rand.nextInt(200) == 0)
+					new Abyruin().generate(worldObj, rand, pos1);
 			}
 		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++) {
