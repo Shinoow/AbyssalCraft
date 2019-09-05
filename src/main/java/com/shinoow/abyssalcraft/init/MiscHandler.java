@@ -32,9 +32,6 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapabi
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabilityStorage;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
-import com.shinoow.abyssalcraft.common.caps.INecromancyCapability;
-import com.shinoow.abyssalcraft.common.caps.NecromancyCapability;
-import com.shinoow.abyssalcraft.common.caps.NecromancyCapabilityStorage;
 import com.shinoow.abyssalcraft.common.enchantments.EnchantmentIronWall;
 import com.shinoow.abyssalcraft.common.enchantments.EnchantmentLightPierce;
 import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
@@ -193,7 +190,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		jzahar_black_hole = registerSoundEvent("jzahar.black_hole");
 
 		CapabilityManager.INSTANCE.register(INecroDataCapability.class, NecroDataCapabilityStorage.instance, NecroDataCapability::new);
-		CapabilityManager.INSTANCE.register(INecromancyCapability.class, NecromancyCapabilityStorage.instance, NecromancyCapability::new);
 
 		ConditionProcessorRegistry.instance().registerProcessor(0, (condition, cap, player) -> { return cap.getBiomeTriggers().contains(condition.getConditionObject()); });
 		ConditionProcessorRegistry.instance().registerProcessor(1, (condition, cap, player) -> { return cap.getEntityTriggers().contains(condition.getConditionObject()); });

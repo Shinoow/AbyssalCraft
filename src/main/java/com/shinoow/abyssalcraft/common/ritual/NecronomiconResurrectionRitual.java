@@ -14,11 +14,10 @@ package com.shinoow.abyssalcraft.common.ritual;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.common.caps.INecromancyCapability;
-import com.shinoow.abyssalcraft.common.caps.NecromancyCapability;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
+import com.shinoow.abyssalcraft.common.world.data.NecromancyWorldSavedData;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
@@ -105,7 +104,7 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 			stack = ((IRitualAltar) altar).getItem();
 
 		if(!stack.isEmpty() && stack.getItem() == Items.NAME_TAG){
-			INecromancyCapability cap = NecromancyCapability.getCap(player);
+			NecromancyWorldSavedData cap = NecromancyWorldSavedData.get(world);
 			return cap.getDataForName(stack.getDisplayName()) != null && checkSurroundings(world, pos, cap.getSizeForName(stack.getDisplayName()));
 		}
 
@@ -122,7 +121,7 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 			stack = ((IRitualAltar) altar).getItem();
 
 		if(!stack.isEmpty() && stack.getItem() == Items.NAME_TAG){
-			INecromancyCapability cap = NecromancyCapability.getCap(player);
+			NecromancyWorldSavedData cap = NecromancyWorldSavedData.get(world);
 			cap.clearEntry(stack.getDisplayName());
 		}
 	}
@@ -137,7 +136,7 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 			stack = ((IRitualAltar) altar).getItem();
 
 		if(!stack.isEmpty() && stack.getItem() == Items.NAME_TAG){
-			INecromancyCapability cap = NecromancyCapability.getCap(player);
+			NecromancyWorldSavedData cap = NecromancyWorldSavedData.get(world);
 			Entity e = EntityList.createEntityFromNBT(cap.getDataForName(stack.getDisplayName()), world);
 			if(e instanceof EntityLiving){
 				EntityLiving entity = getEntity(e, cap.getSizeForName(stack.getDisplayName()));
