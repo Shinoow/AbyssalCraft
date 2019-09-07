@@ -339,11 +339,6 @@ public class ModelRemnant extends ModelBase {
 			rightarm.rotateAngleX += -((float)Math.PI / 5F);
 			leftarm.rotateAngleX += -((float)Math.PI / 5F);
 
-			leg1.rotateAngleX = -((float)Math.PI * 2F / 5F);
-			leg2.rotateAngleX = -((float)Math.PI * 2F / 5F);
-			leg3.rotateAngleX = -((float)Math.PI * 2F / 5F);
-			leg4.rotateAngleX = -((float)Math.PI * 2F / 5F);
-
 			leg1.rotateAngleY = (float)Math.PI / 10F;
 			leg2.rotateAngleY = -((float)Math.PI / 10F);
 			leg3.rotateAngleY = (float)Math.PI / 10F;
