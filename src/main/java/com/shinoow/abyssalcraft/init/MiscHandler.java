@@ -44,6 +44,7 @@ import com.shinoow.abyssalcraft.common.structures.pe.BasicStructure;
 import com.shinoow.abyssalcraft.common.structures.pe.TotemPoleStructure;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
@@ -93,9 +94,9 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		MinecraftForge.EVENT_BUS.register(this);
 
-		AbyssalCraftAPI.coralium_plague = new PotionCplague(true, 0x00FFFF).setIconIndex(1, 0).setPotionName("potion.Cplague");
-		AbyssalCraftAPI.dread_plague = new PotionDplague(true, 0xAD1313).setIconIndex(1, 0).setPotionName("potion.Dplague");
-		AbyssalCraftAPI.antimatter_potion = new PotionAntimatter(true, 0xFFFFFF).setIconIndex(1, 0).setPotionName("potion.Antimatter");
+		AbyssalCraftAPI.coralium_plague = new PotionCplague(true, ACClientVars.getCoraliumPlaguePotionColor()).setIconIndex(1, 0).setPotionName("potion.Cplague");
+		AbyssalCraftAPI.dread_plague = new PotionDplague(true, ACClientVars.getDreadPlaguePotionColor()).setIconIndex(1, 0).setPotionName("potion.Dplague");
+		AbyssalCraftAPI.antimatter_potion = new PotionAntimatter(true, ACClientVars.getAntimatterPotionColor()).setIconIndex(1, 0).setPotionName("potion.Antimatter");
 
 		registerPotion(new ResourceLocation("abyssalcraft", "cplague"), AbyssalCraftAPI.coralium_plague);
 		registerPotion(new ResourceLocation("abyssalcraft", "dplague"), AbyssalCraftAPI.dread_plague);

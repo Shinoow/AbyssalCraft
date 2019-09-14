@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.world;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -116,7 +117,7 @@ public class WorldProviderAbyss extends WorldProvider {
 	@Override
 	public net.minecraftforge.client.IRenderHandler getSkyRenderer()
 	{
-		return new ACSkyRenderer(new ResourceLocation("abyssalcraft:textures/environment/abyssal_wasteland_sky.png"), 0, 105, 45);
+		return new ACSkyRenderer(new ResourceLocation("abyssalcraft:textures/environment/abyssal_wasteland_sky.png"), ACClientVars.getAbyssalWastelandR(), ACClientVars.getAbyssalWastelandG(), ACClientVars.getAbyssalWastelandB());
 	}
 
 	@Override

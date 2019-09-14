@@ -88,27 +88,6 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int getSkyColorByTemp(float par1)
-	{
-		return 0;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getGrassColorAtPos(BlockPos pos)
-	{
-		return 0x910000;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getFoliageColorAtPos(BlockPos pos)
-	{
-		return 0x910000;
-	}
-
-	@Override
 	public void genTerrainBlocks(World world, Random rand, ChunkPrimer chunkPrimer, int x, int z, double d)
 	{
 		genDreadlandsTerrain(world, rand, chunkPrimer, x, z, d);

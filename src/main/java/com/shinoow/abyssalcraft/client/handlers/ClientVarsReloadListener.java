@@ -23,29 +23,30 @@ public class ClientVarsReloadListener implements ISelectiveResourceReloadListene
 	@Override
 	public void onResourceManagerReload(IResourceManager resourceManager, Predicate<IResourceType> resourcePredicate) {
 
-		if(resourcePredicate.test(VanillaResourceType.TEXTURES)) {
+		if(resourcePredicate.test(VanillaResourceType.TEXTURES))
+			updateVars(resourceManager);
+	}
 
-			IResource iresource = null;
+	public static void updateVars(IResourceManager resourceManager) {
+		IResource iresource = null;
 
-			try {
-				iresource = resourceManager.getResource(new ResourceLocation("abyssalcraft", "clientvars.json"));
-				InputStreamReader reader = new InputStreamReader(iresource.getInputStream());
-				ClientVars data = new Gson().fromJson(reader, ClientVars.class);
-				reader.close();
-				if(data != null) {
-					ACClientVars.setClientVars(data);
-				}
+		try {
+			iresource = resourceManager.getResource(new ResourceLocation("abyssalcraft", "clientvars.json"));
+			InputStreamReader reader = new InputStreamReader(iresource.getInputStream());
+			ClientVars data = new Gson().fromJson(reader, ClientVars.class);
+			reader.close();
+			if(data != null) {
+				ACClientVars.setClientVars(data);
 			}
-			catch (Exception e)
-			{
-				ACLogger.severe("An error occurred when parsing clientvars.json: {}", e);
-				e.printStackTrace();
-			}
-			finally
-			{
-				IOUtils.closeQuietly((Closeable)iresource);
-			}
-
+		}
+		catch (Exception e)
+		{
+			ACLogger.severe("An error occurred when parsing clientvars.json: {}", e);
+			e.printStackTrace();
+		}
+		finally
+		{
+			IOUtils.closeQuietly((Closeable)iresource);
 		}
 	}
 }

@@ -17,9 +17,13 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase
 {
@@ -48,5 +52,26 @@ public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase
 	public WorldGenAbstractTree getRandomTreeFeature(Random par1Random)
 	{
 		return WorldGenDreadTrees;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getSkyColorByTemp(float par1)
+	{
+		return ACClientVars.getDreadlandsForestSkyColor();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getGrassColorAtPos(BlockPos pos)
+	{
+		return ACClientVars.getDreadlandsForestGrassColor();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getFoliageColorAtPos(BlockPos pos)
+	{
+		return ACClientVars.getDreadlandsForestFoliageColor();
 	}
 }

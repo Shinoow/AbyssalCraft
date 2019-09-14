@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenNoTree;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.util.math.BlockPos;
@@ -81,20 +82,20 @@ public class BiomeGenDarklands extends Biome implements IDarklandsBiome {
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)
 	{
-		return 0;
+		return ACClientVars.getDarklandsSkyColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return 0x17375c;
+		return ACClientVars.getDarklandsGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return 0x17375c;
+		return ACClientVars.getDarklandsFoliageColor();
 	}
 }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
@@ -47,20 +48,20 @@ public class BiomePurged extends Biome {
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)
 	{
-		return 0xD7D8D9;
+		return ACClientVars.getPurgedSkyColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return 0xD7D8D9;
+		return ACClientVars.getPurgedGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return 0xD7D8D9;
+		return ACClientVars.getPurgedFoliageColor();
 	}
 }

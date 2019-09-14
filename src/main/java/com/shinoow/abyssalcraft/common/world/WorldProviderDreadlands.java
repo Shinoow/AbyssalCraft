@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.world;
 
 import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -98,7 +99,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 	@Override
 	public net.minecraftforge.client.IRenderHandler getSkyRenderer()
 	{
-		return new ACSkyRenderer(new ResourceLocation("abyssalcraft:textures/environment/dreadlands_sky.png"), 100, 14, 14);
+		return new ACSkyRenderer(new ResourceLocation("abyssalcraft:textures/environment/dreadlands_sky.png"), ACClientVars.getDreadlandsR(), ACClientVars.getDreadlandsG(), ACClientVars.getDreadlandsB());
 	}
 
 	@Override

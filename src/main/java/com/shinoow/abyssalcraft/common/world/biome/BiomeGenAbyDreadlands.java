@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityAbygolem;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.util.math.BlockPos;
@@ -99,15 +100,22 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public int getSkyColorByTemp(float par1)
+	{
+		return ACClientVars.getPurifiedDreadlandsSkyColor();
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return 0x30217A;
+		return ACClientVars.getPurifiedDreadlandsGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return 0x30217A;
+		return ACClientVars.getPurifiedDreadlandsFoliageColor();
 	}
 }

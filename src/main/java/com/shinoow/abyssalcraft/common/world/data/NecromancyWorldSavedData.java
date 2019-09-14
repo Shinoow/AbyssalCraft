@@ -17,7 +17,10 @@ public class NecromancyWorldSavedData extends WorldSavedData {
 
 	public NecromancyWorldSavedData() {
 		super(DATA_NAME);
+	}
 
+	public NecromancyWorldSavedData(String s) {
+		super(s);
 	}
 
 	@Override

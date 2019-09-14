@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.client.render.entity.layers;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -61,10 +62,10 @@ public class LayerJzaharDeath implements LayerRenderer<EntityJzahar>
 				float f3 = random.nextFloat() * 2.0F + 1.0F + f1;
 				worldrenderer.begin(6, DefaultVertexFormats.POSITION_COLOR);
 				worldrenderer.pos(0.0D, 0.0D, 0.0D).color(255, 255, 255, (int)(255.0F * (1.0F - f1))).endVertex();
-				worldrenderer.pos(-0.866D * f3, f2, -0.5F * f3).color(81, 189, 178, 0).endVertex();
-				worldrenderer.pos(0.866D * f3, f2, -0.5F * f3).color(81, 189, 178, 0).endVertex();
-				worldrenderer.pos(0.0D, f2, 1.0F * f3).color(81, 189, 178, 0).endVertex();
-				worldrenderer.pos(-0.866D * f3, f2, -0.5F * f3).color(81, 189, 178, 0).endVertex();
+				worldrenderer.pos(-0.866D * f3, f2, -0.5F * f3).color(ACClientVars.getJzaharDeathR(), ACClientVars.getJzaharDeathG(), ACClientVars.getJzaharDeathB(), 0).endVertex();
+				worldrenderer.pos(0.866D * f3, f2, -0.5F * f3).color(ACClientVars.getJzaharDeathR(), ACClientVars.getJzaharDeathG(), ACClientVars.getJzaharDeathB(), 0).endVertex();
+				worldrenderer.pos(0.0D, f2, 1.0F * f3).color(ACClientVars.getJzaharDeathR(), ACClientVars.getJzaharDeathG(), ACClientVars.getJzaharDeathB(), 0).endVertex();
+				worldrenderer.pos(-0.866D * f3, f2, -0.5F * f3).color(ACClientVars.getJzaharDeathR(), ACClientVars.getJzaharDeathG(), ACClientVars.getJzaharDeathB(), 0).endVertex();
 				tessellator.draw();
 			}
 

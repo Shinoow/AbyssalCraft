@@ -16,6 +16,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -156,7 +157,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	@Override
 	public net.minecraftforge.client.IRenderHandler getSkyRenderer()
 	{
-		return new ACSkyRenderer(new ResourceLocation("abyssalcraft:textures/environment/omothol_sky.png"), 40, 30, 40);
+		return new ACSkyRenderer(new ResourceLocation("abyssalcraft:textures/environment/omothol_sky.png"), ACClientVars.getOmotholR(), ACClientVars.getOmotholG(), ACClientVars.getOmotholB());
 	}
 
 	@Override

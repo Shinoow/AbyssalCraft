@@ -15,6 +15,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -42,20 +43,20 @@ public class BiomeGenDarkRealm extends Biome {
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)
 	{
-		return 0;
+		return ACClientVars.getDarkRealmSkyColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return 0x17375c;
+		return ACClientVars.getDarkRealmGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return 0x17375c;
+		return ACClientVars.getDarkRealmFoliageColor();
 	}
 }

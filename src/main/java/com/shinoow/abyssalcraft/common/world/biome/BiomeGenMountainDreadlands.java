@@ -13,6 +13,11 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 
 import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BiomeGenMountainDreadlands extends BiomeGenDreadlandsBase {
 
@@ -27,5 +32,26 @@ public class BiomeGenMountainDreadlands extends BiomeGenDreadlandsBase {
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 20, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothFist.class, 25, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothSpawn.class, 30, 1, 2));
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getSkyColorByTemp(float par1)
+	{
+		return ACClientVars.getDreadlandsMountainsSkyColor();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getGrassColorAtPos(BlockPos pos)
+	{
+		return ACClientVars.getDreadlandsMountainsGrassColor();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getFoliageColorAtPos(BlockPos pos)
+	{
+		return ACClientVars.getDreadlandsMountainsFoliageColor();
 	}
 }

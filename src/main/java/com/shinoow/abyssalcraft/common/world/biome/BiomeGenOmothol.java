@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 
 import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -43,20 +44,20 @@ public class BiomeGenOmothol extends Biome {
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)
 	{
-		return 0;
+		return ACClientVars.getOmotholSkyColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return 0x17375c;
+		return ACClientVars.getOmotholGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return 0x17375c;
+		return ACClientVars.getOmotholFoliageColor();
 	}
 }

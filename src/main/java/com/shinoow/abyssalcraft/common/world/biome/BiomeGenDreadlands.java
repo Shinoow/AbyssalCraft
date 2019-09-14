@@ -15,10 +15,13 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 {
@@ -44,5 +47,26 @@ public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 				int zPos = rand.nextInt(16) + 8;
 				new WorldGenDreadlandsStalagmite().generate(world, rand, world.getHeight(pos.add(xPos, 0, zPos)));
 			}
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getSkyColorByTemp(float par1)
+	{
+		return ACClientVars.getDreadlandsSkyColor();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getGrassColorAtPos(BlockPos pos)
+	{
+		return ACClientVars.getDreadlandsGrassColor();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getFoliageColorAtPos(BlockPos pos)
+	{
+		return ACClientVars.getDreadlandsFoliageColor();
 	}
 }

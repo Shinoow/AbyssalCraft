@@ -24,6 +24,7 @@ import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.client.handlers.ClientVarsReloadListener;
 import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
@@ -38,6 +39,7 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -154,6 +156,10 @@ public class InitHandler implements ILifeCycleHandler {
 			AbyssalCraftAPI.liquid_antimatter_fluid = FluidRegistry.getFluid("liquidantimatter");
 			FluidRegistry.registerFluid(LIQUID_ANTIMATTER);
 			FluidRegistry.addBucketForFluid(LIQUID_ANTIMATTER);
+		}
+
+		if(event.getSide().isClient()) {
+			ClientVarsReloadListener.updateVars(Minecraft.getMinecraft().getResourceManager());
 		}
 	}
 
@@ -405,7 +411,7 @@ public class InitHandler implements ILifeCycleHandler {
 		shoggothLairSpawnRateRivers = cfg.get("worldgen", "Shoggoth Lair Generation Chance: Rivers", 30, "Generation chance of a Shoggoth Lair in river biomes. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 30]", 0, 1000).getInt();
 		useAmplifiedWorldType = cfg.get("worldgen", "Use Amplified World Type", true, "Toggles whether or not the dimensions will have their terrain affected by the Amplified world type.").getBoolean();
 		generateStatuesInLairs = cfg.get("worldgen", "Generate Statues In Lairs", true, "Toggles whether or not statues have a chance of generating inside a Shoggoth Lair.").getBoolean();
-		
+
 		oreGenDimBlacklist = cfg.get("worldgen", "Ore Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld ores (Coralium, Nitre) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
 		structureGenDimBlacklist = cfg.get("worldgen", "Structure Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld structures (Darklands structures, Shoggoth lairs) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
 
@@ -468,7 +474,7 @@ public class InitHandler implements ILifeCycleHandler {
 		hcdarkness_dr = cfg.get("mod_compat", "Hardcore Darkness: Dark Realm", true, "Toggles whether or not the Dark Realm should be darker if Hardcore Darkness is installed.").getBoolean();
 
 		foodstuff = cfg.get("modules", "Enable Foodstuffs", true, "Set to false to disable Abyssalcraft Food.").getBoolean();
-		
+
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
 		demonAnimalSpawnWeight = MathHelper.clamp(demonAnimalSpawnWeight, 0, 100);

@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenAntimatterLake;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.Block;
@@ -110,13 +111,13 @@ public class BiomeGenCorSwamp extends Biome {
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return 0x59c6b4;
+		return ACClientVars.getCoraliumInfestedSwampGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return 0x59c6b4;
+		return ACClientVars.getCoraliumInfestedSwampFoliageColor();
 	}
 }
