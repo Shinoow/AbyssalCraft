@@ -1,6 +1,16 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2019 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.handlers;
 
-import java.io.Closeable;
 import java.io.InputStreamReader;
 import java.util.function.Predicate;
 
@@ -35,9 +45,8 @@ public class ClientVarsReloadListener implements ISelectiveResourceReloadListene
 			InputStreamReader reader = new InputStreamReader(iresource.getInputStream());
 			ClientVars data = new Gson().fromJson(reader, ClientVars.class);
 			reader.close();
-			if(data != null) {
+			if(data != null)
 				ACClientVars.setClientVars(data);
-			}
 		}
 		catch (Exception e)
 		{
@@ -46,7 +55,7 @@ public class ClientVarsReloadListener implements ISelectiveResourceReloadListene
 		}
 		finally
 		{
-			IOUtils.closeQuietly((Closeable)iresource);
+			IOUtils.closeQuietly(iresource);
 		}
 	}
 }

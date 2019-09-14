@@ -158,9 +158,8 @@ public class InitHandler implements ILifeCycleHandler {
 			FluidRegistry.addBucketForFluid(LIQUID_ANTIMATTER);
 		}
 
-		if(event.getSide().isClient()) {
+		if(event.getSide().isClient())
 			ClientVarsReloadListener.updateVars(Minecraft.getMinecraft().getResourceManager());
-		}
 	}
 
 	@Override

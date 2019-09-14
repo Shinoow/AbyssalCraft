@@ -465,9 +465,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, Items.COOKIE, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.SHEARS, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.FLINT_AND_STEEL, rand, adjustProbability(0.3F));
-				if (ACConfig.foodstuff) {
+				if (ACConfig.foodstuff)
 					addCoinTrade(list, ACItems.fish_on_a_plate, rand, adjustProbability(0.3F));
-				}
 				addCoinTrade(list, Items.ARROW, rand, adjustProbability(0.5F));
 
 				if (rand.nextFloat() < adjustProbability(0.5F))

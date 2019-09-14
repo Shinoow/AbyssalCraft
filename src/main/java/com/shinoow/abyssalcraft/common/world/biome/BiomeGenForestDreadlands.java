@@ -53,7 +53,7 @@ public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase
 	{
 		return WorldGenDreadTrees;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)

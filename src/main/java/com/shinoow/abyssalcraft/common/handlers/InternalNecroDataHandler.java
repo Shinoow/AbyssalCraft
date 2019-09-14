@@ -35,10 +35,7 @@ import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconPlacesOfP
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.NecronomiconResources;
-import com.shinoow.abyssalcraft.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.*;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 
 import net.minecraft.client.gui.GuiScreen;
@@ -461,7 +458,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(19, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_15, NecronomiconText.PE_TUT_19),
 				new Page(20, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconText.PE_TUT_20));
 		addInternalPages("rituals", "placesofpower", "information", new Page(1, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_POWER_INFO_1), new Page(2, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_POWER_INFO_2));
-		
+
 		String title = NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS;
 		ArrayList<Page> pages = new ArrayList<Page>();
 		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.cobblestone_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_1));
@@ -478,7 +475,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.dense_carbon_cluster), NecronomiconText.CRAFTING_DENSE_CARBON_CLUSTER));
 		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACBlocks.wooden_crate), NecronomiconText.CRAFTING_CRATE));
 		addPages("miscinfo", "specialmaterials", pages.toArray(new Page[pages.size()]));
-		
+
 		addPages("miscinfo", "enchantments", new Page(1, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1)), NecronomiconText.ENCHANTMENT_CORALIUM, new NecronomiconCondition(1)),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1)), NecronomiconText.ENCHANTMENT_DREAD, new NecronomiconCondition(2)),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.light_pierce, AbyssalCraftAPI.light_pierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE, new MultiEntityCondition(EntityShadowCreature.class, EntityShadowMonster.class, EntityShadowBeast.class)),

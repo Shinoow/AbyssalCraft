@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 public class OozeRemovalSpell extends Spell {
 
 	public OozeRemovalSpell() {
-		super("oozeremoval", 100F, (ACConfig.foodstuff) ? ACItems.washcloth : Blocks.SPONGE);
+		super("oozeremoval", 100F, ACConfig.foodstuff ? ACItems.washcloth : Blocks.SPONGE);
 		setRequiresCharging();
 		setColor(0x000);
 	}

@@ -104,7 +104,7 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 	{
 		return ACClientVars.getPurifiedDreadlandsSkyColor();
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)

@@ -34,7 +34,7 @@ public class Abyruin extends WorldGenerator
 		while(world.isAirBlock(pos) && pos.getY() > 2)
 			pos = pos.down();
 		if(pos.getY() <= 1) return false;
-		
+
 		if(world.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(1) &&
 				world.getBlockState(pos).getBlock() != ACBlocks.fused_abyssal_sand &&
 				world.getBlockState(pos).getBlock() != ACBlocks.abyssal_sand)

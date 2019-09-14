@@ -33,7 +33,7 @@ public class BiomeGenMountainDreadlands extends BiomeGenDreadlandsBase {
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothFist.class, 25, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothSpawn.class, 30, 1, 2));
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)

@@ -48,7 +48,7 @@ public class BiomeGenDreadlands extends BiomeGenDreadlandsBase
 				new WorldGenDreadlandsStalagmite().generate(world, rand, world.getHeight(pos.add(xPos, 0, zPos)));
 			}
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)

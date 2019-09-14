@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2019 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.util;
 
 import java.util.Arrays;
@@ -9,7 +20,6 @@ import java.util.Arrays;
  */
 public class ClientVars {
 
-	private int version;
 	private String[] crystalColors;
 	private int abyssalWastelandR;
 	private int abyssalWastelandG;
@@ -26,7 +36,6 @@ public class ClientVars {
 	private String darklandsGrassColor;
 	private String darklandsFoliageColor;
 	private String darklandsWaterColor;
-	private String darklandsSkyColor;
 	private String darklandsPlainsGrassColor;
 	private String darklandsPlainsFoliageColor;
 	private String darklandsPlainsWaterColor;
@@ -86,14 +95,14 @@ public class ClientVars {
 	private int implosionR;
 	private int implosionG;
 	private int implosionB;
-	
+
 	/**
 	 * Allocation of default values in case something is left out (which could have undesired side-effects)
 	 */
 	public ClientVars() {
 		crystalColors = new String[]{"0xD9D9D9", "0xF3CC3E", "0xF6FF00", "0x3D3D36", "16777215", "16777215", "16777215", "0x996A18",
-		        "0xD9D9D9", "0x1500FF", "0x19FC00", "0xFF0000", "0x4a1c89", "0x00FFEE", "0x880101", "0xFFCC00", "0xD9D8D7", "0xE89207", "0xD9D9D9",
-		        "0xD9D9D9", "0xD9D9D9", "16777215", "0xD9D8D9", "16777215", "0xD7D8D9", "0xD7D8D9", "0xD9D9D9", "16777215"};
+				"0xD9D9D9", "0x1500FF", "0x19FC00", "0xFF0000", "0x4a1c89", "0x00FFEE", "0x880101", "0xFFCC00", "0xD9D8D7", "0xE89207", "0xD9D9D9",
+				"0xD9D9D9", "0xD9D9D9", "16777215", "0xD9D8D9", "16777215", "0xD7D8D9", "0xD7D8D9", "0xD9D9D9", "16777215"};
 		abyssalWastelandR = 0;
 		abyssalWastelandG = 105;
 		abyssalWastelandB = 45;
@@ -109,7 +118,6 @@ public class ClientVars {
 		darklandsGrassColor = "0x17375c";
 		darklandsFoliageColor = "0x17375c";
 		darklandsWaterColor = "14745518";
-		darklandsSkyColor = "0";
 		darklandsPlainsGrassColor = "0x17375c";
 		darklandsPlainsFoliageColor = "0x17375c";
 		darklandsPlainsWaterColor = "14745518";
