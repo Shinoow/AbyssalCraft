@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
+import com.shinoow.abyssalcraft.client.handlers.ClientVarsReloadListener;
 import com.shinoow.abyssalcraft.client.lib.LovecraftFont;
 import com.shinoow.abyssalcraft.client.model.block.ModelDGhead;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
@@ -36,6 +37,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
@@ -144,8 +146,10 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init(){
 		AbyssalCraftAPI.setAkloFont(new LovecraftFont(Minecraft.getMinecraft().gameSettings, new ResourceLocation("abyssalcraft", "textures/font/aklo.png"), Minecraft.getMinecraft().renderEngine, true));
-		if(Minecraft.getMinecraft().getResourceManager() instanceof IReloadableResourceManager)
+		if(Minecraft.getMinecraft().getResourceManager() instanceof IReloadableResourceManager) {
 			((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(AbyssalCraftAPI.getAkloFont());
+			((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ClientVarsReloadListener());
+		}
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDGhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul.png"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul_pete.png"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul_wilson.png"));
@@ -163,13 +167,13 @@ public class ClientProxy extends CommonProxy {
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
 		RenderPlayer render2 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
 		render2.addLayer(new LayerStarSpawnTentacles(render2));
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ACLib.crystalColors[stack.getItemDamage()], ACItems.crystal, ACItems.crystal_shard, ACItems.crystal_fragment, Item.getItemFromBlock(ACBlocks.crystal_cluster));
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ACLib.crystalColors[stack.getItemDamage() + 16], Item.getItemFromBlock(ACBlocks.crystal_cluster2));
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ACClientVars.getCrystalColors()[stack.getItemDamage()], ACItems.crystal, ACItems.crystal_shard, ACItems.crystal_fragment, Item.getItemFromBlock(ACBlocks.crystal_cluster));
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ACClientVars.getCrystalColors()[stack.getItemDamage() + 16], Item.getItemFromBlock(ACBlocks.crystal_cluster2));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.elder_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.hastur_engraved_coin, ACItems.jzahar_engraved_coin,
 				ACItems.azathoth_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.shub_niggurath_engraved_coin);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1  && stack.hasTagCompound() ? SpellRegistry.instance().getSpell(stack.getTagCompound().getString("Spell")).getColor() : 16777215, ACItems.scroll);
-		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACLib.crystalColors[state.getBlock().getMetaFromState(state)], ACBlocks.crystal_cluster);
-		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACLib.crystalColors[state.getBlock().getMetaFromState(state) + 16], ACBlocks.crystal_cluster2);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACClientVars.getCrystalColors()[state.getBlock().getMetaFromState(state)], ACBlocks.crystal_cluster);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACClientVars.getCrystalColors()[state.getBlock().getMetaFromState(state) + 16], ACBlocks.crystal_cluster2);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, I18n.format(NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, I18n.format(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE));

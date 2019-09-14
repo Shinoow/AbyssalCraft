@@ -1,5 +1,9 @@
 package com.shinoow.abyssalcraft.lib;
 
+import java.util.Arrays;
+
+import com.shinoow.abyssalcraft.lib.util.ClientVars;
+
 /**
  * Contains values that can be changed through a resource pack
  * @author shinoow
@@ -76,9 +80,93 @@ public class ACClientVars {
 	private static int coraliumPlaguePotionColor = 0x00FFFF;
 	private static int dreadPlaguePotionColor = 0xAD1313;
 	private static int antimatterPotionColor = 0xFFFFFF;
+	private static int asorahDeathR = 0;
+	private static int asorahDeathG = 255;
+	private static int asorahDeathB = 255;
+	private static int jzaharDeathR = 81;
+	private static int jzaharDeathG = 189;
+	private static int jzaharDeathB = 178;
+	private static int implosionR = 255;
+	private static int implosionG = 255;
+	private static int implosionB = 255;
 
-	public static void init(String...args) {
-		
+	public static void setClientVars(ClientVars data) {
+		crystalColors = data.getCrystalColors();
+		abyssalWastelandR = data.getAbyssalWastelandR();
+		abyssalWastelandG = data.getAbyssalWastelandG();
+		abyssalWastelandB = data.getAbyssalWastelandB();
+		dreadlandsR = data.getDreadlandsR();
+		dreadlandsG = data.getDreadlandsG();
+		dreadlandsB = data.getDreadlandsB();
+		omotholR = data.getOmotholR();
+		omotholG = data.getOmotholG();
+		omotholB = data.getOmotholB();
+		darkRealmR = data.getDarkRealmR();
+		darkRealmG = data.getDarkRealmG();
+		darkRealmB = data.getDarkRealmB();
+		darklandsGrassColor = data.getDarklandsGrassColor();
+		darklandsFoliageColor = data.getDarklandsFoliageColor();
+		darklandsWaterColor = data.getDarklandsWaterColor();
+		darklandsSkyColor = data.getDarklandsSkyColor();
+		darklandsPlainsGrassColor = data.getDarklandsPlainsGrassColor();
+		darklandsPlainsFoliageColor = data.getDarklandsPlainsFoliageColor();
+		darklandsPlainsWaterColor = data.getDarklandsPlainsWaterColor();
+		darklandsPlainsSkyColor = data.getDarklandsPlainsSkyColor();
+		darklandsForestGrassColor = data.getDarklandsForestGrassColor();
+		darklandsForestFoliageColor = data.getDarklandsForestFoliageColor();
+		darklandsForestWaterColor = data.getDarklandsForestWaterColor();
+		darklandsForestSkyColor = data.getDarklandsForestSkyColor();
+		darklandsHighlandsGrassColor = data.getDarklandsHighlandsGrassColor();
+		darklandsHighlandsFoliageColor = data.getDarklandsHighlandsFoliageColor();
+		darklandsHighlandsWaterColor = data.getDarklandsHighlandsWaterColor();
+		darklandsHighlandsSkyColor = data.getDarklandsHighlandsSkyColor();
+		darklandsMountainsGrassColor = data.getDarklandsMountainsGrassColor();
+		darklandsMountainsFoliageColor = data.getDarklandsMountainsFoliageColor();
+		darklandsMountainsWaterColor = data.getDarklandsMountainsWaterColor();
+		darklandsMountainsSkyColor = data.getDarklandsMountainsSkyColor();
+		coraliumInfestedSwampGrassColor = data.getCoraliumInfestedSwampGrassColor();
+		coraliumInfestedSwampFoliageColor = data.getCoraliumInfestedSwampFoliageColor();
+		coraliumInfestedSwampWaterColor = data.getCoraliumInfestedSwampWaterColor();
+		abyssalWastelandGrassColor = data.getAbyssalWastelandGrassColor();
+		abyssalWastelandFoliageColor = data.getAbyssalWastelandFoliageColor();
+		abyssalWastelandWaterColor = data.getAbyssalWastelandWaterColor();
+		abyssalWastelandSkyColor = data.getAbyssalWastelandSkyColor();
+		dreadlandsGrassColor = data.getDreadlandsGrassColor();
+		dreadlandsFoliageColor = data.getDreadlandsFoliageColor();
+		dreadlandsSkyColor = data.getDreadlandsSkyColor();
+		dreadlandsForestGrassColor = data.getDreadlandsForestGrassColor();
+		dreadlandsForestFoliageColor = data.getDreadlandsForestFoliageColor();
+		dreadlandsForestSkyColor = data.getDreadlandsForestSkyColor();
+		dreadlandsMountainsGrassColor = data.getDreadlandsMountainsGrassColor();
+		dreadlandsMountainsFoliageColor = data.getDreadlandsMountainsFoliageColor();
+		dreadlandsMountainsSkyColor = data.getDreadlandsMountainsSkyColor();
+		purifiedDreadlandsGrassColor = data.getPurifiedDreadlandsGrassColor();
+		purifiedDreadlandsFoliageColor = data.getPurifiedDreadlandsFoliageColor();
+		purifiedDreadlandsSkyColor = data.getPurifiedDreadlandsSkyColor();
+		omotholGrassColor = data.getOmotholGrassColor();
+		omotholFoliageColor = data.getOmotholFoliageColor();
+		omotholWaterColor = data.getOmotholWaterColor();
+		omotholSkyColor = data.getOmotholSkyColor();
+		darkRealmGrassColor = data.getDarkRealmG();
+		darkRealmFoliageColor = data.getDarkRealmFoliageColor();
+		darkRealmWaterColor = data.getDarkRealmWaterColor();
+		darkRealmSkyColor = data.getDarkRealmSkyColor();
+		purgedGrassColor = data.getPurgedGrassColor();
+		purgedFoliageColor = data.getPurgedFoliageColor();
+		purgedWaterColor = data.getPurgedWaterColor();
+		purgedSkyColor = data.getPurgedSkyColor();
+		coraliumPlaguePotionColor = data.getCoraliumPlaguePotionColor();
+		dreadPlaguePotionColor = data.getDreadPlaguePotionColor();
+		antimatterPotionColor = data.getAntimatterPotionColor();
+		asorahDeathR = data.getAsorahDeathR();
+		asorahDeathG = data.getAsorahDeathG();
+		asorahDeathB = data.getAsorahDeathB();
+		jzaharDeathR = data.getJzaharDeathR();
+		jzaharDeathG = data.getJzaharDeathG();
+		jzaharDeathB = data.getJzaharDeathB();
+		implosionR = data.getImplosionR();
+		implosionG = data.getImplosionG();
+		implosionB = data.getImplosionB();
 	}
 	
 	public static int[] getCrystalColors() {
@@ -347,5 +435,41 @@ public class ACClientVars {
 
 	public static int getAntimatterPotionColor() {
 		return antimatterPotionColor;
+	}
+
+	public static int getAsorahDeathR() {
+		return asorahDeathR;
+	}
+
+	public static int getAsorahDeathG() {
+		return asorahDeathG;
+	}
+
+	public static int getAsorahDeathB() {
+		return asorahDeathB;
+	}
+
+	public static int getJzaharDeathR() {
+		return jzaharDeathR;
+	}
+
+	public static int getJzaharDeathG() {
+		return jzaharDeathG;
+	}
+
+	public static int getJzaharDeathB() {
+		return jzaharDeathB;
+	}
+
+	public static int getImplosionR() {
+		return implosionR;
+	}
+
+	public static int getImplosionG() {
+		return implosionG;
+	}
+
+	public static int getImplosionB() {
+		return implosionB;
 	}
 }
