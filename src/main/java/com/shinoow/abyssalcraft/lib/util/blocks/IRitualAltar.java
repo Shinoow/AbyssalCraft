@@ -11,6 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.util.blocks;
 
+import javax.annotation.Nullable;
+
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -60,5 +65,13 @@ public interface IRitualAltar extends ISingletonInventory {
 	 */
 	public boolean isPerformingRitual();
 
+	/**
+	 * Invoked on the client after a ritual has started (through a network packet). Sends over the necessary values for the visuals
+	 * @param ritual Active ritual (should never be null, but it wouldn't cause a side-effect)
+	 * @param offerData Data regarding the offerings placed on the pedestals
+	 * @param hasOffer Whether or not any of the pedestals has something on them
+	 * @param sacrifice The animal to sacrifice (if any)
+	 */
+	public void setRitualFields(@Nullable NecronomiconRitual ritual, int[][] offerData, boolean[] hasOffer, @Nullable EntityLiving sacrifice);
 
 }

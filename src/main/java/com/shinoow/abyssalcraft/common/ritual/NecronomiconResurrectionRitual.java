@@ -113,17 +113,7 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player) {
-		TileEntity altar = world.getTileEntity(pos);
 
-		ItemStack stack = ItemStack.EMPTY;
-
-		if(altar instanceof IRitualAltar)
-			stack = ((IRitualAltar) altar).getItem();
-
-		if(!stack.isEmpty() && stack.getItem() == Items.NAME_TAG){
-			NecromancyWorldSavedData cap = NecromancyWorldSavedData.get(world);
-			cap.clearEntry(stack.getDisplayName());
-		}
 	}
 
 	@Override

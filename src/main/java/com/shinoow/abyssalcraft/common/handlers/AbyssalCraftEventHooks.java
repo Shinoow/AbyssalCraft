@@ -359,7 +359,8 @@ public class AbyssalCraftEventHooks {
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			if(event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof EntityEvilSheep)
 				((EntityEvilSheep)event.getSource().getTrueSource()).setKilledPlayer(player);
-		} else if(event.getEntityLiving() instanceof EntityLiving && event.getEntityLiving().hasCustomName() && event.getEntityLiving().isNonBoss()) {
+		} else if(event.getEntityLiving() instanceof EntityLiving && event.getEntityLiving().hasCustomName() &&
+				event.getEntityLiving().isNonBoss() && !event.getEntityLiving().world.isRemote) {
 			EntityLivingBase e = event.getEntityLiving();
 			NecromancyWorldSavedData.get(e.world).storeData(e.getName(), e.serializeNBT(), calculateSize(e.height));
 		} else if(EntityList.getKey(event.getEntityLiving()) != null){

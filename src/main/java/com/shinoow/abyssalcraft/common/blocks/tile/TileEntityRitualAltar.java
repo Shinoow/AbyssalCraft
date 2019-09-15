@@ -30,6 +30,7 @@ import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.RitualMessage;
+import com.shinoow.abyssalcraft.common.network.client.RitualStartMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
@@ -190,6 +191,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		consumedEnergy = 0;
 		isDirty = true;
 		sacrifice = null;
+		hasOffer = new boolean[8];
+		offerData = new int[8][2];
 	}
 
 	private void collectPEFromPlayer() {
@@ -279,6 +282,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	@Override
 	public void performRitual(World world, BlockPos pos, EntityPlayer player){
 
+		if(world.isRemote) return;
 		if(!isPerformingRitual()){
 			ItemStack item = player.getHeldItemMainhand();
 			if(item.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)item.getItem()).isOwner(player, item))
@@ -298,6 +302,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 													user = player;
 													consumedEnergy = 0;
 													isDirty = true;
+													PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), sacrifice.getEntityId(), offerData, hasOffer), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
 													return;
 												}
 							} else if(ritual.canCompleteRitual(world, pos, player))
@@ -307,6 +312,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 									user = player;
 									consumedEnergy = 0;
 									isDirty = true;
+									PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), 0, offerData, hasOffer), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
 								}
 					}
 		}
@@ -353,5 +359,14 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	public void setItem(ItemStack item){
 		this.item = item;
 		isDirty = true;
+	}
+
+	@Override
+	public void setRitualFields(NecronomiconRitual ritual, int[][] offerData, boolean[] hasOffer, EntityLiving sacrifice) {
+		this.ritual = ritual;
+		this.offerData = offerData;
+		this.hasOffer = hasOffer;
+		this.sacrifice = sacrifice;
+		ritualTimer = 1;
 	}
 }

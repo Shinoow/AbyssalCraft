@@ -208,15 +208,13 @@ public abstract class NecronomiconRitual {
 	/**
 	 * Getter for the sacrifice (mainly used by Infusion Rituals)
 	 * @return An Object representing an item placed on the altar
-	 * (should be removed/replaced in both completeRitual methods, like
-	 * {@link NecronomiconCreationRitual#completeRitualClient(World, int, int, int, EntityPlayer)})
 	 */
 	public Object getSacrifice(){
 		return sacrifice;
 	}
 
 	/**
-	 * Override this to ensure that the ritual can be completed
+	 * Override this to ensure that the ritual can be completed (only fires on the server)
 	 * @param world Current World
 	 * @param x X coordinate
 	 * @param y Y coordinate

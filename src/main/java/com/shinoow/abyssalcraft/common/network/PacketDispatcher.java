@@ -77,6 +77,7 @@ public class PacketDispatcher
 		registerMessage(ShouldSyncMessage.class);
 		registerMessage(PrepareSyncMessage.class);
 		registerMessage(WindowPropertyMessage.class);
+		registerMessage(RitualStartMessage.class);
 	}
 
 	/**
