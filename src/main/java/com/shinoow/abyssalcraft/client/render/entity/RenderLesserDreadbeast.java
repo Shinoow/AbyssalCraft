@@ -26,7 +26,7 @@ public class RenderLesserDreadbeast extends RenderLiving<EntityLesserDreadbeast>
 
 	private float scale = 3.0F;
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/dread_guard.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/lesser_dreadbeast.png");
 
 	public RenderLesserDreadbeast(RenderManager manager)
 	{

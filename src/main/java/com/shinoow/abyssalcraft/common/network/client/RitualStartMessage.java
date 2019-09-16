@@ -15,7 +15,6 @@ import java.io.IOException;
 
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualAltar;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 

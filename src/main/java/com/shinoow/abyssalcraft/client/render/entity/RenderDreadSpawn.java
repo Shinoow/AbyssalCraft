@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderDreadSpawn extends RenderLiving<EntityDreadSpawn> {
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/dread_guard.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/dread_spawn.png");
 
 	public RenderDreadSpawn(RenderManager manager)
 	{

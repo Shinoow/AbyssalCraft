@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderChagarothSpawn extends RenderLiving<EntityChagarothSpawn> {
 
-	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/dread_guard.png");
+	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/spawn_of_chagaroth.png");
 
 	public RenderChagarothSpawn(RenderManager manager)
 	{
