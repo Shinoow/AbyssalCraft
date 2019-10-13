@@ -1,0 +1,16 @@
+body {
+    background: url('../images/bg.png') no-repeat fixed;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+p, li, h3 {
+    color: #FFF;
+}
+h3 {
+    text-align: center;
+}
+
+.content {
+    background: rgba(128, 128, 128, 0.5);
+    padding: 5px 20px;
+}
