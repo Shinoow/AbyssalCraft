@@ -9,6 +9,9 @@ p, li, h3 {
 h3 {
     text-align: center;
 }
+p {
+    font-weight: 700;
+}
 
 .content {
     background: rgba(128, 128, 128, 0.5);
