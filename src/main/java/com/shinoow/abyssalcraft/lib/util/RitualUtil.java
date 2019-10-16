@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -129,23 +130,31 @@ public class RitualUtil {
 			int z = 0;
 
 			world.destroyBlock(pos, false);
-			world.destroyBlock(pos.add(x -3, y, z), false);
-			world.destroyBlock(pos.add(x, y, z -3), false);
-			world.destroyBlock(pos.add(x + 3, y, z), false);
-			world.destroyBlock(pos.add(x, y, z + 3), false);
-			world.destroyBlock(pos.add(x -2, y, z + 2), false);
-			world.destroyBlock(pos.add(x -2, y, z -2), false);
-			world.destroyBlock(pos.add(x + 2, y, z + 2), false);
-			world.destroyBlock(pos.add(x + 2, y, z -2), false);
+			world.destroyBlock(pos.west(3), false);
+			world.destroyBlock(pos.north(3), false);
+			world.destroyBlock(pos.east(3), false);
+			world.destroyBlock(pos.south(3), false);
+			world.destroyBlock(pos.west(2).south(2), false);
+			world.destroyBlock(pos.west(2).north(2), false);
+			world.destroyBlock(pos.east(2).south(2), false);
+			world.destroyBlock(pos.east(2).north(2), false);
 			world.setBlockState(pos, ACBlocks.ritual_altar.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x -3, y, z), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x, y, z -3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x + 3, y, z), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x, y, z + 3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x -2, y, z + 2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x -2, y, z -2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x + 2, y, z + 2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.add(x + 2, y, z -2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			world.setBlockState(pos.west(3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			((IRitualPedestal)world.getTileEntity(pos.west(3))).setAltar(pos);
+			world.setBlockState(pos.north(3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			((IRitualPedestal)world.getTileEntity(pos.north(3))).setAltar(pos);
+			world.setBlockState(pos.east(3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			((IRitualPedestal)world.getTileEntity(pos.east(3))).setAltar(pos);
+			world.setBlockState(pos.south(3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			((IRitualPedestal)world.getTileEntity(pos.south(3))).setAltar(pos);
+			world.setBlockState(pos.west(2).south(2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			((IRitualPedestal)world.getTileEntity(pos.west(2).south(2))).setAltar(pos);
+			world.setBlockState(pos.west(2).north(2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			((IRitualPedestal)world.getTileEntity(pos.west(2).north(2))).setAltar(pos);
+			world.setBlockState(pos.east(2).south(2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			((IRitualPedestal)world.getTileEntity(pos.east(2).south(2))).setAltar(pos);
+			world.setBlockState(pos.east(2).north(2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
+			((IRitualPedestal)world.getTileEntity(pos.east(2).north(2))).setAltar(pos);
 		}
 	}
 

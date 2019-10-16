@@ -73,7 +73,7 @@ public class NecromancyWorldSavedData extends WorldSavedData {
 	}
 
 	public int getSizeForName(String name){
-		return sizes.get(name) != null ? sizes.get(name) : 0;
+		return sizes.getOrDefault(name, 0);
 	}
 
 	public void storeData(String name, NBTTagCompound data, int size) {

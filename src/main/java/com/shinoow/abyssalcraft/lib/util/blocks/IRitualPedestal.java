@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.util.blocks;
 
+import net.minecraft.util.math.BlockPos;
+
 /**
  * Internal interface for Ritual Pedestals TE's<br>
  * This shouldn't be used by other mods.<br>
@@ -20,4 +22,19 @@ package com.shinoow.abyssalcraft.lib.util.blocks;
  */
 public interface IRitualPedestal extends ISingletonInventory {
 
+	/**
+	 * Returns the Ritual Altar this pedestal is attached to<br>
+	 * (the BlockPos of the altar should be kept in the pedestal's NBT)
+	 */
+	public IRitualAltar getAltar();
+	
+	/**
+	 * Sets the Ritual Altar position
+	 */
+	public void setAltar(BlockPos pos);
+	
+	/**
+	 * Consumes the Item placed on the pedestal (if any)
+	 */
+	public void consumeItem();
 }

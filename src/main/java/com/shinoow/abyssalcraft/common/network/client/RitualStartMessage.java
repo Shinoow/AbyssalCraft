@@ -30,17 +30,13 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 
 	private BlockPos pos;
 	private String name;
-	private int[][] offerData;
-	private boolean[] hasOffer;
 	private int sacrifice;
 
 	public RitualStartMessage(){}
 
-	public RitualStartMessage(BlockPos pos, String name, int sacrifice, int[][] offerData, boolean[] hasOffer) {
+	public RitualStartMessage(BlockPos pos, String name, int sacrifice) {
 		this.pos = pos;
 		this.name = name;
-		this.hasOffer = hasOffer;
-		this.offerData = offerData;
 		this.sacrifice = sacrifice;
 	}
 
@@ -49,12 +45,6 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 
 		pos = buffer.readBlockPos();
 		name = ByteBufUtils.readUTF8String(buffer);
-		offerData = new int[8][2];
-		hasOffer = new boolean[8];
-		for(int i = 0; i < 8; i++) {
-			offerData[i] = buffer.readVarIntArray();
-			hasOffer[i] = buffer.readBoolean();
-		}
 		sacrifice = buffer.readVarInt();
 	}
 
@@ -63,10 +53,6 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 
 		buffer.writeBlockPos(pos);
 		ByteBufUtils.writeUTF8String(buffer, name);
-		for(int i = 0; i < 8; i++) {
-			buffer.writeVarIntArray(offerData[i]);
-			buffer.writeBoolean(hasOffer[i]);
-		}
 		buffer.writeVarInt(sacrifice);
 	}
 
@@ -82,7 +68,7 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 		TileEntity te = player.world.getTileEntity(pos);
 		if(te instanceof IRitualAltar) {
 			IRitualAltar altar = (IRitualAltar)te;
-			altar.setRitualFields(ritual, offerData, hasOffer, (EntityLiving)player.world.getEntityByID(sacrifice));
+			altar.setRitualFields(ritual, (EntityLiving)player.world.getEntityByID(sacrifice));
 		}
 	}
 }

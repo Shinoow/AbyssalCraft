@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.util.blocks;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
@@ -42,18 +44,9 @@ public interface IRitualAltar extends ISingletonInventory {
 	public boolean canPerform();
 
 	/**
-	 * Check the surroundings (to make sure there's Pedestals, and that they have items placed on them)
-	 * @param world Current World
-	 * @param pos TE BlockPos
-	 */
-	public boolean checkSurroundings(World world, BlockPos pos);
-
-	/**
 	 * Resets all the pedestals (removes any item placed on them)
-	 * @param world Current World
-	 * @param pos TE BlockPos
 	 */
-	public void resetPedestals(World world, BlockPos pos);
+	public void resetPedestals();
 
 	/**
 	 * Returns the cooldown until a new Ritual can be performed
@@ -68,10 +61,17 @@ public interface IRitualAltar extends ISingletonInventory {
 	/**
 	 * Invoked on the client after a ritual has started (through a network packet). Sends over the necessary values for the visuals
 	 * @param ritual Active ritual (should never be null, but it wouldn't cause a side-effect)
-	 * @param offerData Data regarding the offerings placed on the pedestals
-	 * @param hasOffer Whether or not any of the pedestals has something on them
 	 * @param sacrifice The animal to sacrifice (if any)
 	 */
-	public void setRitualFields(@Nullable NecronomiconRitual ritual, int[][] offerData, boolean[] hasOffer, @Nullable EntityLiving sacrifice);
+	public void setRitualFields(@Nullable NecronomiconRitual ritual, @Nullable EntityLiving sacrifice);
 
+	/**
+	 * Adds the selected pedestal to the altar's pedestal list
+	 */
+	public void addPedestal(IRitualPedestal pedestal);
+	
+	/**
+	 * Returns the pedestals associated to this altar
+	 */
+	public List<IRitualPedestal> getPedestals();
 }

@@ -41,7 +41,6 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -56,9 +55,6 @@ import net.minecraftforge.common.MinecraftForge;
 public class TileEntityRitualAltar extends TileEntity implements ITickable, IRitualAltar {
 
 	private int ritualTimer;
-	private ItemStack[] offers = new ItemStack[8];
-	private boolean[] hasOffer = new boolean[8];
-	private int[][] offerData = new int[8][2];
 	private NecronomiconRitual ritual;
 	private ItemStack item = ItemStack.EMPTY;
 	private int rot;
@@ -66,6 +62,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	private float consumedEnergy;
 	private boolean isDirty;
 	private EntityLiving sacrifice;
+	private List<IRitualPedestal> pedestals = new ArrayList<>();
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -151,25 +148,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 			} else ritualTimer = 0;
 
 			world.spawnParticle(EnumParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0,0,0);
-
-			double n = 0.5;
-
-			if(hasOffer[0])
-				spawnParticles(-2.5, 0.5, n, 0, offerData[0]);
-			if(hasOffer[1])
-				spawnParticles(0.5, -2.5, 0, n, offerData[1]);
-			if(hasOffer[2])
-				spawnParticles(3.5, 0.5, -n, 0, offerData[2]);
-			if(hasOffer[3])
-				spawnParticles(0.5, 3.5, 0, -n, offerData[3]);
-			if(hasOffer[4])
-				spawnParticles(-1.5, 2.5, n, -n, offerData[4]);
-			if(hasOffer[5])
-				spawnParticles(-1.5, -1.5, n, n, offerData[5]);
-			if(hasOffer[6])
-				spawnParticles(2.5, 2.5, -n, -n, offerData[6]);
-			if(hasOffer[7])
-				spawnParticles(2.5, -1.5, -n, n, offerData[7]);
 		}
 
 		if(rot == 360)
@@ -191,8 +169,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		consumedEnergy = 0;
 		isDirty = true;
 		sacrifice = null;
-		hasOffer = new boolean[8];
-		offerData = new int[8][2];
 	}
 
 	private void collectPEFromPlayer() {
@@ -224,34 +200,19 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	@Override
 	public boolean canPerform(){
 
-		return checkSurroundings(world, pos);
-	}
-
-	@Override
-	public boolean checkSurroundings(World world, BlockPos pos){
-
-		List<IRitualPedestal> l = getPedestals(world, pos);
-		if(!l.isEmpty()) {
-			boolean hasAnyOffer = false;
-			for(int i = 0; i < 8; i++) {
-				ItemStack stack = l.get(i).getItem();
-				offers[i] = stack;
-				if(!stack.isEmpty()) {
-					offerData[i] = new int[]{Item.getIdFromItem(stack.getItem()), stack.getMetadata()};
-					hasOffer[i] = true;
-					hasAnyOffer = true;
-				}
+		if(pedestals.isEmpty()) {
+			for(IRitualPedestal ped : getPedestals(world, pos)) {
+				ped.setAltar(pos);
 			}
-			return hasAnyOffer;
 		}
-		return false;
+
+		return pedestals.size() == 8 && pedestals.stream().anyMatch(p -> !p.getItem().isEmpty());
 	}
 
 	@Override
-	public void resetPedestals(World world, BlockPos pos){
+	public void resetPedestals(){
 
-		for(IRitualPedestal ped : getPedestals(world, pos))
-			ped.setItem(getStack(ped.getItem()));
+		pedestals.stream().forEach(IRitualPedestal::consumeItem);
 	}
 
 	private List<IRitualPedestal> getPedestals(World world, BlockPos pos){
@@ -273,49 +234,41 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		return new ArrayList();
 	}
 
-	private ItemStack getStack(ItemStack stack){
-		if(!stack.isEmpty() && stack.getItem().hasContainerItem(stack))
-			return stack.getItem().getContainerItem(stack);
-		else return ItemStack.EMPTY;
-	}
-
 	@Override
 	public void performRitual(World world, BlockPos pos, EntityPlayer player){
 
-		if(world.isRemote) return;
-		if(!isPerformingRitual()){
-			ItemStack item = player.getHeldItemMainhand();
-			if(item.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)item.getItem()).isOwner(player, item))
-				if(RitualRegistry.instance().canPerformAction(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType()))
-					if(canPerform()){
-						ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)item.getItem()).getBookType(), offers, this.item);
-						if(ritual != null && NecroDataCapability.getCap(player).isUnlocked(ritual.getUnlockCondition(), player))
-							if(ritual.requiresSacrifice()){
-								if(!world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)).isEmpty())
-									for(EntityLiving mob : world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)))
-										if(canBeSacrificed(mob))
-											if(ritual.canCompleteRitual(world, pos, player))
-												if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
-													sacrifice = mob;
-													ritualTimer = 1;
-													resetPedestals(world, pos);
-													user = player;
-													consumedEnergy = 0;
-													isDirty = true;
-													PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), sacrifice.getEntityId(), offerData, hasOffer), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
-													return;
-												}
-							} else if(ritual.canCompleteRitual(world, pos, player))
-								if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
-									ritualTimer = 1;
-									resetPedestals(world, pos);
-									user = player;
-									consumedEnergy = 0;
-									isDirty = true;
-									PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), 0, offerData, hasOffer), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
-								}
-					}
-		}
+		if(world.isRemote || isPerformingRitual()) return;
+		ItemStack stack = player.getHeldItemMainhand();
+		if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
+			if(RitualRegistry.instance().canPerformAction(world.provider.getDimension(), ((ItemNecronomicon)stack.getItem()).getBookType()))
+				if(canPerform()){
+					ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)stack.getItem()).getBookType(), pedestals.stream().map(p -> p.getItem()).toArray(ItemStack[]::new), this.item);
+					if(ritual != null && NecroDataCapability.getCap(player).isUnlocked(ritual.getUnlockCondition(), player))
+						if(ritual.requiresSacrifice()){
+							if(!world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)).isEmpty())
+								for(EntityLiving mob : world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)))
+									if(canBeSacrificed(mob))
+										if(ritual.canCompleteRitual(world, pos, player))
+											if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
+												sacrifice = mob;
+												ritualTimer = 1;
+												resetPedestals();
+												user = player;
+												consumedEnergy = 0;
+												isDirty = true;
+												PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), sacrifice.getEntityId()), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
+												return;
+											}
+						} else if(ritual.canCompleteRitual(world, pos, player))
+							if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
+								ritualTimer = 1;
+								resetPedestals();
+								user = player;
+								consumedEnergy = 0;
+								isDirty = true;
+								PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), 0), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
+							}
+				}
 	}
 
 	/**
@@ -362,11 +315,20 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	}
 
 	@Override
-	public void setRitualFields(NecronomiconRitual ritual, int[][] offerData, boolean[] hasOffer, EntityLiving sacrifice) {
+	public void setRitualFields(NecronomiconRitual ritual, EntityLiving sacrifice) {
 		this.ritual = ritual;
-		this.offerData = offerData;
-		this.hasOffer = hasOffer;
 		this.sacrifice = sacrifice;
 		ritualTimer = 1;
+	}
+
+	@Override
+	public void addPedestal(IRitualPedestal pedestal) {
+		pedestals.add(pedestal);
+	}
+
+	@Override
+	public List<IRitualPedestal> getPedestals() {
+
+		return pedestals;
 	}
 }

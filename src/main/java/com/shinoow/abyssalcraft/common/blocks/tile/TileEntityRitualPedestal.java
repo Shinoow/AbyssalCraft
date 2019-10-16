@@ -11,20 +11,25 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 
 public class TileEntityRitualPedestal extends TileEntity implements ITickable, IRitualPedestal {
 
 	private ItemStack item = ItemStack.EMPTY;
-	private int rot;
+	private int rot, itemID, itemMeta;
 	private boolean isDirty;
+	private BlockPos altarPos;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -33,6 +38,10 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
 		item = new ItemStack(nbtItem);
 		rot = nbttagcompound.getInteger("Rot");
+		if(nbttagcompound.hasKey("AltarPos"))
+			altarPos = BlockPos.fromLong(nbttagcompound.getLong("AltarPos"));
+		itemID = nbttagcompound.getInteger("ItemID");
+		itemMeta = nbttagcompound.getInteger("ItemMeta");
 	}
 
 	@Override
@@ -44,6 +53,10 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
 		nbttagcompound.setInteger("Rot", rot);
+		if(altarPos != null)
+			nbttagcompound.setLong("AltarPos", altarPos.toLong());
+		nbttagcompound.setInteger("ItemID", itemID);
+		nbttagcompound.setInteger("ItemMeta", itemMeta);
 
 		return nbttagcompound;
 	}
@@ -66,6 +79,14 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 	}
 
 	@Override
+	public void onLoad()
+	{
+		IRitualAltar altar = getAltar();
+		if(altar != null)
+			altar.addPedestal(this);
+	}
+
+	@Override
 	public void update()
 	{
 		if(isDirty){
@@ -77,6 +98,21 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 			rot = 0;
 		if(!item.isEmpty())
 			rot++;
+
+		IRitualAltar altar = getAltar();
+		if(altar != null && altar.isPerformingRitual() && itemID != 0) {
+			double xOffset = pos.getX() - altarPos.getX();
+			double zOffset = pos.getZ() - altarPos.getZ();
+			double velX = xOffset == 0 ? 0 : xOffset < 0 ? 0.5D : -0.5D;
+			double velZ = zOffset == 0 ? 0 : zOffset < 0 ? 0.5D : -0.5D;
+			spawnParticles(0.5D, 0.5D, velX, velZ, new int[] {itemID, itemMeta});
+		}
+	}
+
+	private void spawnParticles(double xOffset, double zOffset, double velX, double velZ, int[] data) {
+		world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
+		world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
+		world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
 	}
 
 	@Override
@@ -93,5 +129,35 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 	public void setItem(ItemStack item){
 		this.item = item;
 		isDirty = true;
+	}
+
+	private ItemStack getStack(ItemStack stack){
+		if(!stack.isEmpty() && stack.getItem().hasContainerItem(stack))
+			return stack.getItem().getContainerItem(stack);
+		else return ItemStack.EMPTY;
+	}
+
+	@Override
+	public IRitualAltar getAltar() {
+
+		return altarPos != null ? (IRitualAltar)world.getTileEntity(altarPos) : null;
+	}
+
+	@Override
+	public void setAltar(BlockPos pos) {
+		altarPos = pos;
+		getAltar().addPedestal(this);
+	}
+
+	@Override
+	public void consumeItem() {
+		if(!item.isEmpty()) {
+			itemID = Item.getIdFromItem(item.getItem());
+			itemMeta = item.getMetadata();
+			setItem(getStack(item));
+		} else {
+			itemID = itemMeta = 0;
+			isDirty = true;
+		}
 	}
 }

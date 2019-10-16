@@ -50,44 +50,9 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 		return true;
 	}
 
-	public boolean checkSurroundings(World world, BlockPos pos, int size){
-		ItemStack[] offers = new ItemStack[8];
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-		TileEntity ped1 = world.getTileEntity(new BlockPos(x - 3, y, z));
-		TileEntity ped2 = world.getTileEntity(new BlockPos(x, y, z - 3));
-		TileEntity ped3 = world.getTileEntity(new BlockPos(x + 3, y, z));
-		TileEntity ped4 = world.getTileEntity(new BlockPos(x, y, z + 3));
-		TileEntity ped5 = world.getTileEntity(new BlockPos(x - 2, y, z + 2));
-		TileEntity ped6 = world.getTileEntity(new BlockPos(x - 2, y, z - 2));
-		TileEntity ped7 = world.getTileEntity(new BlockPos(x + 2, y, z + 2));
-		TileEntity ped8 = world.getTileEntity(new BlockPos(x + 2, y, z - 2));
-		if(ped1 != null && ped2 != null && ped3 != null && ped4 != null && ped5 != null && ped6 != null && ped7 != null && ped8 != null)
-			if(ped1 instanceof IRitualPedestal && ped2 instanceof IRitualPedestal && ped3 instanceof IRitualPedestal
-					&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
-					&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal){
-				offers[0] = ((IRitualPedestal)ped1).getItem();
-				offers[1] = ((IRitualPedestal)ped2).getItem();
-				offers[2] = ((IRitualPedestal)ped3).getItem();
-				offers[3] = ((IRitualPedestal)ped4).getItem();
-				offers[4] = ((IRitualPedestal)ped5).getItem();
-				offers[5] = ((IRitualPedestal)ped6).getItem();
-				offers[6] = ((IRitualPedestal)ped7).getItem();
-				offers[7] = ((IRitualPedestal)ped8).getItem();
-				for(ItemStack stack : offers)
-					if(mismatch(stack, getOfferings()[0], size))
-						return false;
-				return true;
-			}
-		return false;
-	}
-
 	private boolean mismatch(ItemStack stack, Object obj, int size){
 
-		if(stack.isEmpty()) return false;
-
-		if(obj instanceof ItemStack[])
+		if(!stack.isEmpty() && obj instanceof ItemStack[])
 			return stack.getItem() != ((ItemStack[])obj)[size].getItem();
 
 		return false;
@@ -105,7 +70,8 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 		if(!stack.isEmpty() && stack.getItem() == Items.NAME_TAG){
 			NecromancyWorldSavedData cap = NecromancyWorldSavedData.get(world);
-			return cap.getDataForName(stack.getDisplayName()) != null && checkSurroundings(world, pos, cap.getSizeForName(stack.getDisplayName()));
+			int size = cap.getSizeForName(stack.getDisplayName());
+			return cap.getDataForName(stack.getDisplayName()) != null && ((IRitualAltar) altar).getPedestals().stream().noneMatch(p -> mismatch(p.getItem(), getOfferings()[0], size));
 		}
 
 		return false;

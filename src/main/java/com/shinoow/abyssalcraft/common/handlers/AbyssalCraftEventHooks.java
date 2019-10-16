@@ -416,9 +416,10 @@ public class AbyssalCraftEventHooks {
 			return;
 		}
 
+		ItemStack input = event.getLeft();
 		int cost = 0;
 
-		float f = (float)(event.getLeft().getMaxDamage() - event.getLeft().getItemDamage()) / (float)event.getLeft().getMaxDamage();
+		float f = (float)(input.getMaxDamage() - input.getItemDamage()) / (float)input.getMaxDamage();
 
 		if(f >= 0)
 			cost = 10;
@@ -441,26 +442,26 @@ public class AbyssalCraftEventHooks {
 		if(f >= 0.9f)
 			cost = 1;
 
-		ItemStack stack = UpgradeKitRecipes.instance().getUpgrade((ItemUpgradeKit)event.getRight().getItem(), event.getLeft());
+		ItemStack stack = UpgradeKitRecipes.instance().getUpgrade((ItemUpgradeKit)event.getRight().getItem(), input);
 
 		if(!stack.isEmpty()){
 
 			if(StringUtils.isNullOrEmpty(event.getName())){
-				if(event.getLeft().hasDisplayName()){
+				if(input.hasDisplayName()){
 					cost += 1;
 					stack.clearCustomName();
 				}
-			} else if(!event.getName().equals(event.getLeft().getDisplayName())){
+			} else if(!event.getName().equals(input.getDisplayName())){
 				cost += 1;
 				stack.setStackDisplayName(event.getName());
 			}
 
-			for(int i : EnchantmentHelper.getEnchantments(event.getLeft()).values())
+			for(int i : EnchantmentHelper.getEnchantments(input).values())
 				cost += i;
 
-			EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), stack);
-			stack.setCount(event.getLeft().getCount());
-			NBTTagCompound temp = event.getLeft().serializeNBT();
+			EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(input), stack);
+			stack.setCount(input.getCount());
+			NBTTagCompound temp = input.serializeNBT();
 			if(temp.hasKey("ForgeCaps")) {
 				NBTTagCompound temp1 = stack.serializeNBT();
 				temp1.setTag("ForgeCaps", temp.getTag("ForgeCaps"));
