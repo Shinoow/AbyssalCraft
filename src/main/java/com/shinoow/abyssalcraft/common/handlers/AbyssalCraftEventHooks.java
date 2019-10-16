@@ -460,6 +460,12 @@ public class AbyssalCraftEventHooks {
 
 			EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.getLeft()), stack);
 			stack.setCount(event.getLeft().getCount());
+			NBTTagCompound temp = event.getLeft().serializeNBT();
+			if(temp.hasKey("ForgeCaps")) {
+				NBTTagCompound temp1 = stack.serializeNBT();
+				temp1.setTag("ForgeCaps", temp.getTag("ForgeCaps"));
+				stack = new ItemStack(temp1);
+			}
 			event.setOutput(stack);
 		}
 
