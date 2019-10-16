@@ -27,12 +27,12 @@ public interface IRitualPedestal extends ISingletonInventory {
 	 * (the BlockPos of the altar should be kept in the pedestal's NBT)
 	 */
 	public IRitualAltar getAltar();
-	
+
 	/**
 	 * Sets the Ritual Altar position
 	 */
 	public void setAltar(BlockPos pos);
-	
+
 	/**
 	 * Consumes the Item placed on the pedestal (if any)
 	 */

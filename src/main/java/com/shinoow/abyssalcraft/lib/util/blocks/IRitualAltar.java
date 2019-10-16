@@ -69,7 +69,7 @@ public interface IRitualAltar extends ISingletonInventory {
 	 * Adds the selected pedestal to the altar's pedestal list
 	 */
 	public void addPedestal(IRitualPedestal pedestal);
-	
+
 	/**
 	 * Returns the pedestals associated to this altar
 	 */

@@ -19,7 +19,6 @@ import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
 import com.shinoow.abyssalcraft.common.world.data.NecromancyWorldSavedData;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

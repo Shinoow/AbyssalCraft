@@ -125,9 +125,6 @@ public class RitualUtil {
 	private static void createAltar(World world, BlockPos pos, IBlockState block){
 		if(altarMeta.containsKey(block)){
 			int meta = altarMeta.get(block);
-			int x = 0;
-			int y = 0;
-			int z = 0;
 
 			world.destroyBlock(pos, false);
 			world.destroyBlock(pos.west(3), false);

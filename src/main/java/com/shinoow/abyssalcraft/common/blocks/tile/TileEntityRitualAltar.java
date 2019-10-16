@@ -33,6 +33,8 @@ import com.shinoow.abyssalcraft.common.network.client.RitualMessage;
 import com.shinoow.abyssalcraft.common.network.client.RitualStartMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
+import com.shinoow.abyssalcraft.lib.util.Scheduler;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
@@ -156,12 +158,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 			rot++;
 	}
 
-	private void spawnParticles(double xOffset, double zOffset, double velX, double velZ, int[] data) {
-		world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
-		world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
-		world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
-	}
-
 	private void reset() {
 		ritualTimer = 0;
 		user = null;
@@ -200,11 +196,9 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	@Override
 	public boolean canPerform(){
 
-		if(pedestals.isEmpty()) {
-			for(IRitualPedestal ped : getPedestals(world, pos)) {
+		if(pedestals.isEmpty())
+			for(IRitualPedestal ped : getPedestals(world, pos))
 				ped.setAltar(pos);
-			}
-		}
 
 		return pedestals.size() == 8 && pedestals.stream().anyMatch(p -> !p.getItem().isEmpty());
 	}
@@ -242,7 +236,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
 			if(RitualRegistry.instance().canPerformAction(world.provider.getDimension(), ((ItemNecronomicon)stack.getItem()).getBookType()))
 				if(canPerform()){
-					ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)stack.getItem()).getBookType(), pedestals.stream().map(p -> p.getItem()).toArray(ItemStack[]::new), this.item);
+					ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)stack.getItem()).getBookType(), pedestals.stream().map(p -> p.getItem()).toArray(ItemStack[]::new), item);
 					if(ritual != null && NecroDataCapability.getCap(player).isUnlocked(ritual.getUnlockCondition(), player))
 						if(ritual.requiresSacrifice()){
 							if(!world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)).isEmpty())
@@ -250,23 +244,38 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 									if(canBeSacrificed(mob))
 										if(ritual.canCompleteRitual(world, pos, player))
 											if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
-												sacrifice = mob;
-												ritualTimer = 1;
 												resetPedestals();
-												user = player;
-												consumedEnergy = 0;
-												isDirty = true;
-												PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), sacrifice.getEntityId()), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
+												Scheduler.schedule(new ScheduledProcess(0) {
+
+													@Override
+													public void execute() {
+														sacrifice = mob;
+														ritualTimer = 1;
+														user = player;
+														consumedEnergy = 0;
+														isDirty = true;
+														PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), sacrifice.getEntityId()), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
+													}
+
+												});
+
 												return;
 											}
 						} else if(ritual.canCompleteRitual(world, pos, player))
 							if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
-								ritualTimer = 1;
 								resetPedestals();
-								user = player;
-								consumedEnergy = 0;
-								isDirty = true;
-								PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), 0), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
+								Scheduler.schedule(new ScheduledProcess(0) {
+
+									@Override
+									public void execute() {
+										ritualTimer = 1;
+										user = player;
+										consumedEnergy = 0;
+										isDirty = true;
+										PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), 0), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
+									}
+
+								});
 							}
 				}
 	}
