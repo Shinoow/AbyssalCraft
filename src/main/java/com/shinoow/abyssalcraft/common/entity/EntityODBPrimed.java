@@ -113,30 +113,6 @@ public class EntityODBPrimed extends Entity {
 			ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, var0, false, true);
 
 			ACLogger.info("Hell successfully unleashed.");
-
-			Scheduler.schedule(new ScheduledProcess(400) {
-
-				@Override
-				public void execute() {
-					int x, x1, z, z1;
-					for(x = 0; x < 9; x++)
-						for(z = 0; z < 9; z++)
-							for(x1 = 0; x1 < 9; x1++)
-								for(z1 = 0; z1 < 9; z1++){
-									world.setBlockState(new BlockPos(posX + x, posY, posZ + z), Blocks.OBSIDIAN.getDefaultState());
-									world.setBlockState(new BlockPos(posX - x1, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
-									world.setBlockState(new BlockPos(posX + x, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
-									world.setBlockState(new BlockPos(posX - x1, posY, posZ  + z), Blocks.OBSIDIAN.getDefaultState());
-								}
-					EntitySacthoth sacthoth = new EntitySacthoth(world);
-					sacthoth.setPosition(posX, posY + 1, posZ);
-					sacthoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY + 1, posZ)), null);
-					world.spawnEntity(sacthoth);
-					if(ACConfig.showBossDialogs)
-						SpecialTextUtil.SacthothGroup(world, I18n.translateToLocal("message.sacthoth.spawn.1"));
-				}
-
-			});
 		}
 	}
 
@@ -164,5 +140,31 @@ public class EntityODBPrimed extends Entity {
 	public float getEyeHeight()
 	{
 		return 0.0F;
+	}
+	
+	public void finishExplosion(int delay) {
+		Scheduler.schedule(new ScheduledProcess(delay) {
+
+			@Override
+			public void execute() {
+				int x, x1, z, z1;
+				for(x = 0; x < 9; x++)
+					for(z = 0; z < 9; z++)
+						for(x1 = 0; x1 < 9; x1++)
+							for(z1 = 0; z1 < 9; z1++){
+								world.setBlockState(new BlockPos(posX + x, posY, posZ + z), Blocks.OBSIDIAN.getDefaultState());
+								world.setBlockState(new BlockPos(posX - x1, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
+								world.setBlockState(new BlockPos(posX + x, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
+								world.setBlockState(new BlockPos(posX - x1, posY, posZ  + z), Blocks.OBSIDIAN.getDefaultState());
+							}
+				EntitySacthoth sacthoth = new EntitySacthoth(world);
+				sacthoth.setPosition(posX, posY + 1, posZ);
+				sacthoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY + 1, posZ)), null);
+				world.spawnEntity(sacthoth);
+				if(ACConfig.showBossDialogs)
+					SpecialTextUtil.SacthothGroup(world, I18n.translateToLocal("message.sacthoth.spawn.1"));
+			}
+
+		});
 	}
 }

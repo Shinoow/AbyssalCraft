@@ -26,7 +26,6 @@ import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -218,25 +217,28 @@ public class ACExplosion extends Explosion
 			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, explosionX, explosionY, explosionZ, 1.0D, 0.0D, 0.0D);
 
 		int num = 1;
+		int index = 0;
 		if (isSmoking){
-			List<List<BlockPos>> innerLists = Lists.partition(innerBlocks, 8000);
+			List<List<BlockPos>> innerLists = Lists.partition(innerBlocks, 1000);
 			for(List<BlockPos> innerList : innerLists) {
-				Scheduler.schedule(new ScheduledProcess(num * 5) {
+				Scheduler.schedule(new ScheduledProcess(num) {
 
 					@Override
 					public void execute() {
 						for(BlockPos pos : innerList)
-							worldObj.getChunkFromBlockCoords(pos).setBlockState(pos, Blocks.AIR.getDefaultState());
+							worldObj.setBlockToAir(pos);
 					}
 
 				});
-				num++;
+				index++;
+				if(index % 1000 == 0)
+					num++;
 			}
 
-			List<List<BlockPos>> outerLists = Lists.partition(outerBlocks, 4000);
+			List<List<BlockPos>> outerLists = Lists.partition(outerBlocks, 100);
 			for(List<BlockPos> outerList : outerLists) {
 				ACExplosion explosion = this;
-				Scheduler.schedule(new ScheduledProcess(num * 5) {
+				Scheduler.schedule(new ScheduledProcess(num) {
 
 					@Override
 					public void execute() {
@@ -247,14 +249,16 @@ public class ACExplosion extends Explosion
 					}
 
 				});
-				num++;
+				index++;
+				if(index % 100 == 0)
+					num++;
 			}
 		}
 
 		if (isAntimatter) {
-			List<List<BlockPos>> extraLists = Lists.partition(explosionSize <= 32 ? affectedBlockPositions : outerBlocks, 4000);
+			List<List<BlockPos>> extraLists = Lists.partition(explosionSize <= 32 ? affectedBlockPositions : outerBlocks, 100);
 			for(List<BlockPos> extraList : extraLists) {
-				Scheduler.schedule(new ScheduledProcess(num * 5) {
+				Scheduler.schedule(new ScheduledProcess(num) {
 
 					@Override
 					public void execute() {
@@ -269,8 +273,14 @@ public class ACExplosion extends Explosion
 					}
 
 				});
-				num++;
+				index++;
+				if(index % 100 == 0)
+					num++;
 			}
+		}
+
+		if(exploder instanceof EntityODBPrimed) {
+			((EntityODBPrimed)exploder).finishExplosion(num + 20);
 		}
 	}
 

@@ -35,7 +35,7 @@ public class ExplosionUtil {
 		explosion.doExplosionA();
 		explosion.doExplosionB(strength <= 32);
 
-		if(world instanceof WorldServer) {
+		if(world instanceof WorldServer && strength <= 32) {
 			List<List<BlockPos>> positionsLists = Lists.partition(explosion.getAffectedBlockPositions(), 4000);
 			for (EntityPlayer entityplayer : ((WorldServer)world).playerEntities)
 				if (entityplayer.getDistanceSq(x, y, z) < 4096.0D) {
