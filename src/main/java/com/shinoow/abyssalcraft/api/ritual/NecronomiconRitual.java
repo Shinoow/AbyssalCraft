@@ -36,6 +36,7 @@ public abstract class NecronomiconRitual {
 	private float requiredEnergy;
 	private boolean requiresSacrifice, nbtSensitive, nbtSensitiveSacrifice;
 	private IUnlockCondition condition = new DefaultCondition();
+	private EnumRitualParticle particle = EnumRitualParticle.ITEM;
 
 	/**
 	 * A Necronomicon Ritual
@@ -107,6 +108,14 @@ public abstract class NecronomiconRitual {
 		return this;
 	}
 
+	/**
+	 * Sets how particles are displayed on Ritual Pedestals during a ritual 
+	 */
+	public NecronomiconRitual setRitualParticle(EnumRitualParticle particle) {
+		this.particle = particle;
+		return this;
+	}
+	
 	/**
 	 * Used to fetch the offerings
 	 * @return An array of ItemStacks representing offerings
@@ -205,6 +214,13 @@ public abstract class NecronomiconRitual {
 		return condition;
 	}
 
+	/**
+	 * Returns how particles are displayed on Ritual Pedestals during a ritual
+	 */
+	public EnumRitualParticle getRitualParticle() {
+		return particle;
+	}
+	
 	/**
 	 * Getter for the sacrifice (mainly used by Infusion Rituals)
 	 * @return An Object representing an item placed on the altar

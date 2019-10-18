@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 
 import net.minecraft.entity.EntityLiving;
@@ -44,11 +45,6 @@ public interface IRitualAltar extends ISingletonInventory {
 	public boolean canPerform();
 
 	/**
-	 * Resets all the pedestals (removes any item placed on them)
-	 */
-	public void resetPedestals();
-
-	/**
 	 * Returns the cooldown until a new Ritual can be performed
 	 */
 	public int getRitualCooldown();
@@ -74,4 +70,9 @@ public interface IRitualAltar extends ISingletonInventory {
 	 * Returns the pedestals associated to this altar
 	 */
 	public List<IRitualPedestal> getPedestals();
+
+	/**
+	 * Returns how particles on Ritual Pedestals are displayed for the current ritual
+	 */
+	public EnumRitualParticle getRitualParticle();
 }

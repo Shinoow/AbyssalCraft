@@ -105,12 +105,26 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 			double zOffset = pos.getZ() - altarPos.getZ();
 			double velX = xOffset == 0 ? 0 : xOffset < 0 ? 0.5D : -0.5D;
 			double velZ = zOffset == 0 ? 0 : zOffset < 0 ? 0.5D : -0.5D;
-			spawnParticles(0.5D, 0.5D, velX, velZ, new int[] {itemID, itemMeta});
+			spawnParticles(0.5D, 0.5D, velX, velZ, new int[] {itemID, itemMeta}, altar);
 		}
 	}
 
-	private void spawnParticles(double xOffset, double zOffset, double velX, double velZ, int[] data) {
-		world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
+	private void spawnParticles(double xOffset, double zOffset, double velX, double velZ, int[] data, IRitualAltar altar) {
+		switch(altar.getRitualParticle()) {
+		case ITEM:
+			world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
+			break;
+		case ITEM_SMOKE_COMBO:
+			break;
+		case NONE:
+			break;
+		case SMOKE:
+			break;
+		case SMOKE_PILLARS:
+			break;
+		case SPRINKLER:
+			break;
+		}
 		world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
 		world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
 	}

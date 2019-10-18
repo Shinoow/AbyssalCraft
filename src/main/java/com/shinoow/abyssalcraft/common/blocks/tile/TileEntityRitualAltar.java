@@ -25,6 +25,7 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.event.ACEvents.DisruptionEvent;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
@@ -204,12 +205,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		return pedestals.size() == 8 && pedestals.stream().anyMatch(p -> !p.getItem().isEmpty());
 	}
 
-	@Override
-	public void resetPedestals(){
-
-		pedestals.stream().forEach(IRitualPedestal::consumeItem);
-	}
-
 	private List<IRitualPedestal> getPedestals(World world, BlockPos pos){
 
 		TileEntity ped1 = world.getTileEntity(pos.west(3));
@@ -245,7 +240,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 									if(canBeSacrificed(mob))
 										if(ritual.canCompleteRitual(world, pos, player))
 											if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
-												resetPedestals();
+												pedestals.stream().forEach(IRitualPedestal::consumeItem);
 												Scheduler.schedule(new ScheduledProcess(0) {
 
 													@Override
@@ -264,7 +259,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 											}
 						} else if(ritual.canCompleteRitual(world, pos, player))
 							if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
-								resetPedestals();
+								pedestals.stream().forEach(IRitualPedestal::consumeItem);
 								Scheduler.schedule(new ScheduledProcess(0) {
 
 									@Override
@@ -338,7 +333,11 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 	@Override
 	public List<IRitualPedestal> getPedestals() {
-
 		return pedestals;
+	}
+
+	@Override
+	public EnumRitualParticle getRitualParticle() {
+		return ritual != null ? ritual.getRitualParticle() : EnumRitualParticle.NONE;
 	}
 }

@@ -16,6 +16,7 @@ import java.util.Map;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
@@ -226,6 +227,14 @@ public class RitualUtil {
 				for(int i = 0; i < offerings.length; i++)
 					offerings[i] = APIUtils.areObjectsEqual(APIUtils.convertToStack(original), r.getOfferings()[i], nbt) ? replace : r.getOfferings()[i];
 				ReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, offerings, "offerings");
+				break;
+			}
+	}
+
+	public static void modifyRitualParticle(String name, EnumRitualParticle particle) {
+		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
+			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
+				r.setRitualParticle(particle);
 				break;
 			}
 	}
