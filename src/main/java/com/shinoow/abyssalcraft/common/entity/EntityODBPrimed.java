@@ -141,7 +141,7 @@ public class EntityODBPrimed extends Entity {
 	{
 		return 0.0F;
 	}
-	
+
 	public void finishExplosion(int delay) {
 		Scheduler.schedule(new ScheduledProcess(delay) {
 

@@ -20,20 +20,34 @@ import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
 import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
 
+import gnu.trove.set.hash.THashSet;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.network.play.server.SPacketChunkData;
+import net.minecraft.server.management.PlayerChunkMap;
+import net.minecraft.server.management.PlayerChunkMapEntry;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.*;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 
+/**
+ * Somewhat scalable explosion with spheroid craters
+ * The chunk-related bits are based off of similar code in Draconic Evolution (with some minor alterations)
+ * The sphere generation code used for the crater comes from WorldEdit (with some minor alterations)
+ *
+ */
 public class ACExplosion extends Explosion
 {
 	/** whether or not the explosion converts nearby blocks to liquid antimatter */
@@ -52,6 +66,8 @@ public class ACExplosion extends Explosion
 	private List<BlockPos> innerBlocks = new ArrayList<>();
 	private List<BlockPos> outerBlocks = new ArrayList<>();
 	private Map<EntityPlayer, Vec3d> playerKnockbackMap = new HashMap<>();
+	private Map<ChunkPos, Chunk> chunkCache = new HashMap<>();
+	private Set<Chunk> chunks = new THashSet<>();
 
 	public ACExplosion(World world, Entity entity, double x, double y, double z, float strength, boolean antimatter, boolean smoke)
 	{
@@ -67,12 +83,16 @@ public class ACExplosion extends Explosion
 	}
 
 	private void checkAndAdd(BlockPos pos, List<BlockPos> list){
-		IBlockState iblockstate = worldObj.getBlockState(pos);
 
-		float f2 = exploder != null ? exploder.getExplosionResistance(this, worldObj, pos, iblockstate) : iblockstate.getBlock().getExplosionResistance(worldObj, pos, (Entity)null, this);
+		if(!worldObj.isOutsideBuildHeight(pos)) {
+			Chunk c = getChunk(pos);
+			IBlockState iblockstate = c.getBlockState(pos);
 
-		if(f2 < 600000 && iblockstate.getMaterial() != Material.AIR)
-			list.add(pos);
+			float f2 = exploder != null ? exploder.getExplosionResistance(this, worldObj, pos, iblockstate) : iblockstate.getBlock().getExplosionResistance(worldObj, pos, (Entity)null, this);
+
+			if(f2 < 600000 && iblockstate.getMaterial() != Material.AIR)
+				list.add(pos);
+		}
 	}
 
 	/**
@@ -141,8 +161,10 @@ public class ACExplosion extends Explosion
 			}
 		}
 
-		affectedBlockPositions.addAll(innerBlocks);
-		affectedBlockPositions.addAll(outerBlocks);
+		if(explosionSize <= 32) {
+			affectedBlockPositions.addAll(innerBlocks);
+			affectedBlockPositions.addAll(outerBlocks);
+		}
 
 		if(!worldObj.isRemote){
 
@@ -203,6 +225,14 @@ public class ACExplosion extends Explosion
 		}
 	}
 
+	private Chunk getChunk(BlockPos pos) {
+
+		ChunkPos cp = new ChunkPos(pos);
+		chunkCache.putIfAbsent(cp, worldObj.getChunkFromChunkCoords(cp.x, cp.z));
+
+		return chunkCache.get(cp);
+	}
+
 	/**
 	 * Does the second part of the explosion (sound, particles, drop spawn)
 	 */
@@ -225,8 +255,14 @@ public class ACExplosion extends Explosion
 
 					@Override
 					public void execute() {
-						for(BlockPos pos : innerList)
-							worldObj.setBlockToAir(pos);
+						for(BlockPos pos : innerList) {
+							Chunk chunk = getChunk(pos);
+							ExtendedBlockStorage storage = chunk.getBlockStorageArray()[pos.getY() >> 4];
+							if(storage != null)
+								storage.set(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15, Blocks.AIR.getDefaultState());
+							chunks.add(chunk);
+						}
+
 					}
 
 				});
@@ -245,7 +281,13 @@ public class ACExplosion extends Explosion
 						for(BlockPos pos : outerList)
 							if(par1)
 								worldObj.getBlockState(pos).getBlock().onBlockExploded(worldObj, pos, explosion);
-							else worldObj.setBlockToAir(pos);
+							else {
+								Chunk chunk = getChunk(pos);
+								ExtendedBlockStorage storage = chunk.getBlockStorageArray()[pos.getY() >> 4];
+								if(storage != null)
+									storage.set(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15, Blocks.AIR.getDefaultState());
+								chunks.add(chunk);
+							}
 					}
 
 				});
@@ -279,9 +321,26 @@ public class ACExplosion extends Explosion
 			}
 		}
 
-		if(exploder instanceof EntityODBPrimed) {
-			((EntityODBPrimed)exploder).finishExplosion(num + 20);
-		}
+		Scheduler.schedule(new ScheduledProcess(num+1) {
+
+			@Override
+			public void execute() {
+				PlayerChunkMap pcm = ((WorldServer)worldObj).getPlayerChunkMap();
+				if(pcm != null)
+					for(Chunk c : chunks) {
+						c.setModified(true);
+						c.generateSkylightMap();
+
+						PlayerChunkMapEntry w = pcm.getEntry(c.x, c.z);
+						if(w != null)
+							w.sendPacket(new SPacketChunkData(c, 65535));
+					}
+			}
+
+		});
+
+		if(exploder instanceof EntityODBPrimed)
+			((EntityODBPrimed)exploder).finishExplosion(num + 10);
 	}
 
 	@Override

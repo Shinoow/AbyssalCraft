@@ -141,9 +141,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 							else
 								triggerDisruption();
 							reset();
-						} else {
+						} else
 							reset();
-						}
 					} else {
 						if(!world.isRemote)
 							triggerDisruption();
