@@ -199,8 +199,7 @@ public class ACExplosion extends Explosion
 							d5 /= d13;
 							d7 /= d13;
 							d9 /= d13;
-							double d14 = worldObj.getBlockDensity(vec3d, entity.getEntityBoundingBox());
-							double d10 = (1.0D - d12) * d14;
+							double d10 = (1.0D - d12);
 							entity.attackEntityFrom(DamageSource.causeExplosionDamage(this), (int)((d10 * d10 + d10) / 2.0D * 7.0D * f3 + 1.0D));
 							double d11 = 1.0D;
 
