@@ -27,7 +27,7 @@ public class ACConfig {
 	useAmplifiedWorldType, generateStatuesInLairs;
 	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate, acidSpitFrequency,
 	knowledgeSyncDelay, shoggothLairSpawnRateRivers, darkOffspringSpawnWeight, monolithBuildingCooldown, corruptionRitualRange,
-	cleansingRitualRange, purgingRitualRange;
+	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid;
 	public static double acidResistanceHardness;

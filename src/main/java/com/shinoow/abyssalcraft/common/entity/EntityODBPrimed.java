@@ -109,8 +109,7 @@ public class EntityODBPrimed extends Entity {
 		if(!world.isRemote && !ACConfig.no_odb_explosions){
 			ACLogger.info("Unleashing hell shortly.");
 
-			float var0 = 80.0F;
-			ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, var0, false, true);
+			ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, ACConfig.odbExplosionSize, false, true);
 
 			ACLogger.info("Hell successfully unleashed.");
 		}

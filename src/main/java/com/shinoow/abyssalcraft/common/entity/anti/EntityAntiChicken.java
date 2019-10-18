@@ -159,7 +159,7 @@ public class EntityAntiChicken extends EntityAnimal implements IAntiEntity {
 		if(!world.isRemote && par1Entity instanceof EntityChicken){
 			boolean flag = world.getGameRules().getBoolean("mobGriefing");
 			if(ACConfig.nuclearAntimatterExplosions)
-				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, 40, true, flag);
+				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, ACConfig.antimatterExplosionSize, true, flag);
 			else world.createExplosion(this, posX, posY, posZ, 5, flag);
 			setDead();
 		}

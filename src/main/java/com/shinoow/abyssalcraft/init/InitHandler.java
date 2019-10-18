@@ -423,6 +423,8 @@ public class InitHandler implements ILifeCycleHandler {
 		breakLogic = cfg.get("silly_settings", "Liquid Coralium Physics", false, "Set true to allow the Liquid Coralium to break the laws of physics in terms of movement").getBoolean();
 		nuclearAntimatterExplosions = cfg.get("silly_settings", "Nuclear Antimatter Explosions", false, "Take a wild guess what this does... Done guessing? Yeah, makes the antimatter explosions more genuine by making them go all nuclear. Recommended to not enable unless you want chaos and destruction.").getBoolean();
 		jzaharBreaksFourthWall = cfg.get("silly_settings", "J'zahar Can Break The Fourth Wall", true, "Toggles whether or not J'zahar can break the fourth wall.").getBoolean();
+		odbExplosionSize = cfg.get("silly_settings", "ODB Explosion Size", 160, "The explosion size of an ODB. 400 is the rough limit if running on 2GB of RAM, anything above that will require more allocated memory, and could crash the game or freeze it for longer periods of time.", 80, 800).getInt();
+		antimatterExplosionSize = cfg.get("silly_settings", "Antimatter Explosion Size", 80, "The explosion size of antimatter mobs colliding with their normal counterpart if Nucler Antimatter Explosions is enabled.", 40, 200).getInt();
 
 		darkstone_brick_slab = cfg.get("blocks", "Darkstone Brick Slab", true).getBoolean();
 		darkstone_cobblestone_slab = cfg.get("blocks", "Darkstone Cobblestone Slab", true).getBoolean();
@@ -491,6 +493,8 @@ public class InitHandler implements ILifeCycleHandler {
 		acidResistanceHardness = MathHelper.clamp(acidResistanceHardness, 2.1D, 51.0D);
 		acidSpitFrequency = MathHelper.clamp(acidSpitFrequency, 0, 300);
 		knowledgeSyncDelay = MathHelper.clamp(knowledgeSyncDelay, 20, 400);
+		odbExplosionSize = MathHelper.clamp(odbExplosionSize, 80, 800);
+		antimatterExplosionSize = MathHelper.clamp(antimatterExplosionSize, 40, 200);
 
 		demon_transformations.clear();
 
