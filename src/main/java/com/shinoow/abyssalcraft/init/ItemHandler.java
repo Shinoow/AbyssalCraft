@@ -245,15 +245,17 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_boots = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.FEET, "ethaxiumboots").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 
 		//Upgrade kits
-		ACItems.cobblestone_upgrade_kit = new ItemUpgradeKit("Wood", "Cobblestone").setUnlocalizedName("cobbleu").setCreativeTab(ACTabs.tabItems);
-		ACItems.iron_upgrade_kit = new ItemUpgradeKit("Cobblestone", "Iron").setUnlocalizedName("ironu").setCreativeTab(ACTabs.tabItems);
-		ACItems.gold_upgrade_kit = new ItemUpgradeKit("Iron", "Gold").setUnlocalizedName("goldu").setCreativeTab(ACTabs.tabItems);
-		ACItems.diamond_upgrade_kit = new ItemUpgradeKit("Gold", "Diamond").setUnlocalizedName("diamondu").setCreativeTab(ACTabs.tabItems);
-		ACItems.abyssalnite_upgrade_kit = new ItemUpgradeKit("Diamond", "Abyssalnite").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome)).setUnlocalizedName("abyssalniteu").setCreativeTab(ACTabs.tabItems);
-		ACItems.coralium_upgrade_kit = new ItemUpgradeKit("Abyssalnite", "Coralium").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id)).setUnlocalizedName("coraliumu").setCreativeTab(ACTabs.tabItems);
-		ACItems.dreadium_upgrade_kit = new ItemUpgradeKit("Coralium", "Dreadium").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id)).setUnlocalizedName("dreadiumu").setCreativeTab(ACTabs.tabItems);
-		ACItems.ethaxium_upgrade_kit = new ItemUpgradeKit("Dreadium", "Ethaxium").setUnlockCondition(new DimensionCondition(ACLib.omothol_id)).setUnlocalizedName("ethaxiumu").setCreativeTab(ACTabs.tabItems);
-
+		if (ACConfig.upgrade_kits) {
+			ACItems.cobblestone_upgrade_kit = new ItemUpgradeKit("Wood", "Cobblestone").setUnlocalizedName("cobbleu").setCreativeTab(ACTabs.tabItems);
+			ACItems.iron_upgrade_kit = new ItemUpgradeKit("Cobblestone", "Iron").setUnlocalizedName("ironu").setCreativeTab(ACTabs.tabItems);
+			ACItems.gold_upgrade_kit = new ItemUpgradeKit("Iron", "Gold").setUnlocalizedName("goldu").setCreativeTab(ACTabs.tabItems);
+			ACItems.diamond_upgrade_kit = new ItemUpgradeKit("Gold", "Diamond").setUnlocalizedName("diamondu").setCreativeTab(ACTabs.tabItems);
+			ACItems.abyssalnite_upgrade_kit = new ItemUpgradeKit("Diamond", "Abyssalnite").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome)).setUnlocalizedName("abyssalniteu").setCreativeTab(ACTabs.tabItems);
+			ACItems.coralium_upgrade_kit = new ItemUpgradeKit("Abyssalnite", "Coralium").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id)).setUnlocalizedName("coraliumu").setCreativeTab(ACTabs.tabItems);
+			ACItems.dreadium_upgrade_kit = new ItemUpgradeKit("Coralium", "Dreadium").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id)).setUnlocalizedName("dreadiumu").setCreativeTab(ACTabs.tabItems);
+			ACItems.ethaxium_upgrade_kit = new ItemUpgradeKit("Dreadium", "Ethaxium").setUnlockCondition(new DimensionCondition(ACLib.omothol_id)).setUnlocalizedName("ethaxiumu").setCreativeTab(ACTabs.tabItems);
+		}
+		
 		//Foodstuffs
 		if (ACConfig.foodstuff) {
 			ACItems.iron_plate = new ItemACBasic("ironp");
@@ -330,12 +332,16 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.depths_chestplate, "depthsplate");
 		registerItem(ACItems.depths_leggings, "depthslegs");
 		registerItem(ACItems.depths_boots, "depthsboots");
-		registerItem(ACItems.cobblestone_upgrade_kit, "cobbleu");
-		registerItem(ACItems.iron_upgrade_kit, "ironu");
-		registerItem(ACItems.gold_upgrade_kit, "goldu");
-		registerItem(ACItems.diamond_upgrade_kit, "diamondu");
-		registerItem(ACItems.abyssalnite_upgrade_kit, "abyssalniteu");
-		registerItem(ACItems.coralium_upgrade_kit, "coraliumu");
+		if (ACConfig.upgrade_kits) {
+			registerItem(ACItems.cobblestone_upgrade_kit, "cobbleu");
+			registerItem(ACItems.iron_upgrade_kit, "ironu");
+			registerItem(ACItems.gold_upgrade_kit, "goldu");
+			registerItem(ACItems.diamond_upgrade_kit, "diamondu");
+			registerItem(ACItems.abyssalnite_upgrade_kit, "abyssalniteu");
+			registerItem(ACItems.coralium_upgrade_kit, "coraliumu");
+			registerItem(ACItems.dreadium_upgrade_kit, "dreadiumu");
+			registerItem(ACItems.ethaxium_upgrade_kit, "ethaxiumu");
+		}
 		if (ACConfig.foodstuff) {
 			registerItem(ACItems.mre, "mre");
 			registerItem(ACItems.iron_plate, "ironp");
@@ -366,7 +372,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.dreadium_shovel, "dreadiumshovel");
 		registerItem(ACItems.dreadium_sword, "dreadiumsword");
 		registerItem(ACItems.dreadium_hoe, "dreadiumhoe");
-		registerItem(ACItems.dreadium_upgrade_kit, "dreadiumu");
+		
 		registerItem(ACItems.carbon_cluster, "carboncluster");
 		registerItem(ACItems.dense_carbon_cluster, "densecarboncluster");
 		registerItem(ACItems.methane, "methane");
@@ -406,7 +412,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.ethaxium_shovel, "ethaxiumshovel");
 		registerItem(ACItems.ethaxium_sword, "ethaxiumsword");
 		registerItem(ACItems.ethaxium_hoe, "ethaxiumhoe");
-		registerItem(ACItems.ethaxium_upgrade_kit, "ethaxiumu");
 		registerItem(ACItems.coin, "coin");
 		registerItem(ACItems.cthulhu_engraved_coin, "cthulhucoin");
 		registerItem(ACItems.elder_engraved_coin, "eldercoin");

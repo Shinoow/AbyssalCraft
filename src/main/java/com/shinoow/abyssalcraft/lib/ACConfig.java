@@ -48,7 +48,7 @@ public class ACConfig {
 	dreadstone_cobblestone_stairs, abyssalnite_cobblestone_slab, abyssalnite_cobblestone_stairs, darkstone_cobblestone_wall, abyssal_cobbblestone_wall,
 	coralium_cobblestone_wall, dreadstone_cobblestone_wall, abyssalnite_cobblestone_wall;
 
-	public static boolean foodstuff;
+	public static boolean foodstuff, upgrade_kits;
 
 	@Deprecated
 	public static int endAbyssalZombieSpawnWeight;

@@ -23,6 +23,7 @@ import com.shinoow.abyssalcraft.api.internal.*;
 import com.shinoow.abyssalcraft.api.item.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.recipe.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
@@ -807,7 +808,9 @@ public class AbyssalCraftAPI {
 	 * @since 1.9.0
 	 */
 	public static void addUpgrade(ItemUpgradeKit kit, ItemStack input, ItemStack output){
-		UpgradeKitRecipes.instance().addUpgrade(kit, input, output);
+		if (ACConfig.upgrade_kits) {
+			UpgradeKitRecipes.instance().addUpgrade(kit, input, output);
+		}
 	}
 
 	/**
