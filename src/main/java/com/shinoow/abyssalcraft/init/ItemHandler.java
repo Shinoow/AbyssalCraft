@@ -255,7 +255,7 @@ public class ItemHandler implements ILifeCycleHandler {
 			ACItems.dreadium_upgrade_kit = new ItemUpgradeKit("Coralium", "Dreadium").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id)).setUnlocalizedName("dreadiumu").setCreativeTab(ACTabs.tabItems);
 			ACItems.ethaxium_upgrade_kit = new ItemUpgradeKit("Dreadium", "Ethaxium").setUnlockCondition(new DimensionCondition(ACLib.omothol_id)).setUnlocalizedName("ethaxiumu").setCreativeTab(ACTabs.tabItems);
 		}
-		
+
 		//Foodstuffs
 		if (ACConfig.foodstuff) {
 			ACItems.iron_plate = new ItemACBasic("ironp");
