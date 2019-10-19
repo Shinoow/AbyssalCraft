@@ -372,7 +372,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.dreadium_shovel, "dreadiumshovel");
 		registerItem(ACItems.dreadium_sword, "dreadiumsword");
 		registerItem(ACItems.dreadium_hoe, "dreadiumhoe");
-		
 		registerItem(ACItems.carbon_cluster, "carboncluster");
 		registerItem(ACItems.dense_carbon_cluster, "densecarboncluster");
 		registerItem(ACItems.methane, "methane");
