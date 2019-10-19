@@ -540,10 +540,12 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
-				main.addEntry(new LootEntryItem(ACItems.cobblestone_upgrade_kit, 10, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":cobblestone_upgrade_kit"));
-				main.addEntry(new LootEntryItem(ACItems.iron_upgrade_kit, 7, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":iron_upgrade_kit"));
-				main.addEntry(new LootEntryItem(ACItems.gold_upgrade_kit, 4, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":gold_upgrade_kit"));
-				main.addEntry(new LootEntryItem(ACItems.diamond_upgrade_kit, 1, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":diamond_upgrade_kit"));
+				if (ACConfig.upgrade_kits) {
+					main.addEntry(new LootEntryItem(ACItems.cobblestone_upgrade_kit, 10, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":cobblestone_upgrade_kit"));
+					main.addEntry(new LootEntryItem(ACItems.iron_upgrade_kit, 7, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":iron_upgrade_kit"));
+					main.addEntry(new LootEntryItem(ACItems.gold_upgrade_kit, 4, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":gold_upgrade_kit"));
+					main.addEntry(new LootEntryItem(ACItems.diamond_upgrade_kit, 1, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":diamond_upgrade_kit"));
+				}
 			}
 		}
 		if(event.getName().equals(LootTableList.CHESTS_SIMPLE_DUNGEON)){

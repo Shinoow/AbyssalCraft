@@ -475,6 +475,7 @@ public class InitHandler implements ILifeCycleHandler {
 		hcdarkness_dr = cfg.get("mod_compat", "Hardcore Darkness: Dark Realm", true, "Toggles whether or not the Dark Realm should be darker if Hardcore Darkness is installed.").getBoolean();
 
 		foodstuff = cfg.get("modules", "Enable Foodstuffs", true, "Set to false to disable Abyssalcraft Food.").getBoolean();
+		upgrade_kits = cfg.get("modules", "Enable Upgrade Kits", true, "Set to false to disable Upgrade Kits.").getBoolean();
 
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);

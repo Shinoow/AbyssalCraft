@@ -461,8 +461,10 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 		String title = NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS;
 		ArrayList<Page> pages = new ArrayList<Page>();
-		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.cobblestone_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_1));
-		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.iron_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_2));
+		if (ACConfig.upgrade_kits) {
+			pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.cobblestone_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_1));
+			pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.iron_upgrade_kit), NecronomiconText.CRAFTING_UPGRADE_KIT_2));
+		}
 		if (ACConfig.foodstuff) {
 			pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(new ItemStack(ACItems.iron_plate, 2), null, null, null, null, Items.IRON_INGOT, null, null, Items.IRON_INGOT, null), NecronomiconText.CRAFTING_IRON_PLATE));
 			pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.washcloth), NecronomiconText.CRAFTING_WASHCLOTH));

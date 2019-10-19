@@ -549,12 +549,16 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.depths_helmet, 0);
 		registerItemRender(ACItems.depths_chestplate, 0);
 		registerItemRender(ACItems.depths_leggings, 0);
-		registerItemRender(ACItems.cobblestone_upgrade_kit, 0);
-		registerItemRender(ACItems.iron_upgrade_kit, 0);
-		registerItemRender(ACItems.gold_upgrade_kit, 0);
-		registerItemRender(ACItems.diamond_upgrade_kit, 0);
-		registerItemRender(ACItems.abyssalnite_upgrade_kit, 0);
-		registerItemRender(ACItems.coralium_upgrade_kit, 0);
+		if (ACConfig.upgrade_kits) {
+			registerItemRender(ACItems.cobblestone_upgrade_kit, 0);
+			registerItemRender(ACItems.iron_upgrade_kit, 0);
+			registerItemRender(ACItems.gold_upgrade_kit, 0);
+			registerItemRender(ACItems.diamond_upgrade_kit, 0);
+			registerItemRender(ACItems.abyssalnite_upgrade_kit, 0);
+			registerItemRender(ACItems.coralium_upgrade_kit, 0);
+			registerItemRender(ACItems.dreadium_upgrade_kit, 0);
+			registerItemRender(ACItems.ethaxium_upgrade_kit, 0);
+		}
 		if (ACConfig.foodstuff) {
 			registerItemRender(ACItems.mre, 0);
 			registerItemRender(ACItems.iron_plate, 0);
@@ -584,7 +588,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.dreadium_shovel, 0);
 		registerItemRender(ACItems.dreadium_sword, 0);
 		registerItemRender(ACItems.dreadium_hoe, 0);
-		registerItemRender(ACItems.dreadium_upgrade_kit, 0);
 		registerItemRender(ACItems.carbon_cluster, 0);
 		registerItemRender(ACItems.dense_carbon_cluster, 0);
 		registerItemRender(ACItems.methane, 0);
@@ -623,7 +626,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.ethaxium_shovel, 0);
 		registerItemRender(ACItems.ethaxium_sword, 0);
 		registerItemRender(ACItems.ethaxium_hoe, 0);
-		registerItemRender(ACItems.ethaxium_upgrade_kit, 0);
 		registerItemRender(ACItems.coin, 0);
 		registerItemRender(ACItems.cthulhu_engraved_coin, 0);
 		registerItemRender(ACItems.elder_engraved_coin, 0);
