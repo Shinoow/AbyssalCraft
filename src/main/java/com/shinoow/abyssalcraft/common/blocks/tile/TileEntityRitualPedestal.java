@@ -115,14 +115,57 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 			world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
 			break;
 		case ITEM_SMOKE_COMBO:
+			if(world.rand.nextBoolean())
+				world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
+			else world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, velX/2,0,velZ/2);
 			break;
 		case NONE:
 			break;
 		case SMOKE:
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, velX/2,0,velZ/2);
 			break;
 		case SMOKE_PILLARS:
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + xOffset, pos.getY() + 1, pos.getZ() + zOffset, 0,.15,0);
 			break;
 		case SPRINKLER:
+			int t = altar.getRitualCooldown();
+			while(t > 16)
+				t -= 16;
+			double v1 = 0.0;
+			double v2 = 0.0;
+			if(t % 2 == 0) {
+				v1 = 0;
+				v2 = 0.5;
+			}
+			if(t % 4 == 0) {
+				v1 = 0.5;
+				v2 = 0.5;
+			}
+			if(t % 6 == 0) {
+				v1 = 0.5;
+				v2 = 0;
+			}
+			if(t % 8 == 0) {
+				v1 = 0.5;
+				v2 = -0.5;
+			}
+			if(t % 10 == 0) {
+				v1 = 0;
+				v2 = -0.5;
+			}
+			if(t % 12 == 0) {
+				v1 = -0.5;
+				v2 = -0.5;
+			}
+			if(t % 14 == 0) {
+				v1 = -0.5;
+				v2 = 0;
+			}
+			if(t % 16 == 0) {
+				v1 = -0.5;
+				v2 = 0.5;
+			}
+			world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, v1,.15,v2, data);
 			break;
 		}
 		world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
