@@ -489,6 +489,7 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomMeshDefinition(ACItems.staff_of_the_gatekeeper, stack -> stack.hasTagCompound() && stack.getTagCompound().getInteger("Mode") == 1 ? new ModelResourceLocation("abyssalcraft:staff2", "inventory") : new ModelResourceLocation("abyssalcraft:staff", "inventory"));
 
 		registerItemRender(ItemHandler.devsword, 0);
+		registerItemRender(ItemHandler.shoggoth_projectile, 0);
 		registerItemRender(ACItems.oblivion_catalyst, 0);
 		registerItemRender(ACItems.gateway_key, 0);
 		registerItemRender(ACItems.powerstone_tracker, 0);

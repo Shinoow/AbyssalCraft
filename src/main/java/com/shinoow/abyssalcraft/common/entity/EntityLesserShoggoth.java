@@ -204,7 +204,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 	public void feed(EntityLivingBase entity){
 		int food = getFoodLevel() + getPointsFromSize(entity.height * entity.width);
 		dataManager.set(FOOD, Integer.valueOf(food));
-		playSound(SoundEvents.ENTITY_PLAYER_BURP, getSoundVolume(), getSoundPitch());
+		playSound(ACSounds.shoggoth_consume, getSoundVolume(), getSoundPitch());
 	}
 
 	private int getPointsFromSize(float size) {
@@ -268,7 +268,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 				shoggoth.setChild(true);
 				shoggoth.setShoggothType(getShoggothType());
 				world.spawnEntity(shoggoth);
-				playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+				playSound(ACSounds.shoggoth_birth, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 				if(getAttackTarget() != null && getAttackTarget().isEntityAlive() && getRNG().nextInt(3) == 0) {
 					EntityLivingBase target = getAttackTarget();
 					EntityAcidProjectile acidprojectile = new EntityAcidProjectile(world, this);
@@ -278,7 +278,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 					float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
 					acidprojectile.shoot(d0, d1 + f1, d2, 0.8F, 8.0F);
 					shoggoth.startRiding(acidprojectile);
-					playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
+					playSound(ACSounds.shoggoth_shoot, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 					world.spawnEntity(acidprojectile);
 				}
 			}
@@ -305,8 +305,10 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 				if(entity.getItem().getItem() instanceof ItemFood) {
 					int food = getFoodLevel() + entity.getItem().getCount();
 					dataManager.set(FOOD, Integer.valueOf(food));
-					playSound(SoundEvents.ENTITY_PLAYER_BURP, getSoundVolume(), getSoundPitch());
-				} else playSound(SoundEvents.ENTITY_ITEM_BREAK, getSoundVolume(), 1.0F);
+					playSound(ACSounds.shoggoth_consume, getSoundVolume(), getSoundPitch());
+				} else {
+					playSound(SoundEvents.ENTITY_ITEM_BREAK, getSoundVolume(), 1.0F);
+				}
 				world.removeEntity(entity);
 			}
 
@@ -462,7 +464,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 	@Override
 	protected void playStepSound(BlockPos pos, Block par4)
 	{
-		playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+		playSound(ACSounds.shoggoth_step, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -512,7 +514,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 		double d2 = target.posZ - posZ;
 		float f1 = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
 		acidprojectile.shoot(d0, d1 + f1, d2, 1.0F, 12.0F);
-		playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
+		playSound(ACSounds.shoggoth_shoot, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
 		world.spawnEntity(acidprojectile);
 	}
 

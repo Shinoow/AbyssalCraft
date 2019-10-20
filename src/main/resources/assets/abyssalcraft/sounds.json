@@ -204,6 +204,37 @@
 		],
 		"subtitle": "subtitle.abyssalcraft.shoggoth.death"
 	},
+	"shoggoth.step": {
+		"category": "hostile",
+		"sounds": [
+			"mob/spider/step1",
+			"mob/spider/step2",
+			"mob/spider/step3",
+			"mob/spider/step4"
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"shoggoth.shoot": {
+		"category": "hostile",
+		"sounds": [
+			"random/bow"
+		],
+		"subtitle": "subtitles.entity.skeleton.shoot"
+	},
+	"shoggoth.consume": {
+		"category": "hostile",
+		"sounds": [
+			"random/burp"
+		],
+		"subtitle": "subtitles.entity.player.burp"
+	},
+	"shoggoth.birth": {
+		"category": "hostile",
+		"sounds": [
+			"mob/chicken/plop"
+		],
+		"subtitle": "subtitles.entity.chicken.egg"
+	},
 	"jzahar.charge": {
 		"category": "hostile",
 		"sounds": [

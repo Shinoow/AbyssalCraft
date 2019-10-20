@@ -37,6 +37,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
@@ -117,7 +118,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityCoraliumSquid.class, manager -> new RenderCoraliumSquid(manager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityInkProjectile.class, manager -> new RenderSnowball(manager, Items.DYE, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDreadedCharge.class, manager -> new RenderDreadedCharge(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAcidProjectile.class, manager -> new RenderSnowball(manager, Items.SLIME_BALL, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAcidProjectile.class, manager -> new RenderSnowball(manager, ItemHandler.shoggoth_projectile, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackHole.class, manager -> new RenderBlackHole(manager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityImplosion.class, manager -> new RenderImplosion(manager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityShubOffspring.class, manager -> new RenderShubOffspring(manager));

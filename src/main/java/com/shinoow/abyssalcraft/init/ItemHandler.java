@@ -40,12 +40,13 @@ import net.minecraftforge.fml.common.event.*;
 
 public class ItemHandler implements ILifeCycleHandler {
 
-	public static Item devsword, shadowPlate;
+	public static Item devsword, shadowPlate, shoggoth_projectile;
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		//"secret" dev stuff
 		devsword = new AbyssalCraftTool();
+		shoggoth_projectile = new ItemHidden("shoggoth_projectile");
 
 		//Misc items
 		ACItems.oblivion_catalyst = new ItemOC();
@@ -271,6 +272,8 @@ public class ItemHandler implements ILifeCycleHandler {
 		}
 
 		registerItem(devsword, "devsword");
+		registerItem(shoggoth_projectile, "shoggoth_projectile");
+		
 		registerItem(ACItems.oblivion_catalyst, "oc");
 		registerItem(ACItems.gateway_key, "gatewaykey");
 		registerItem(ACItems.staff_of_the_gatekeeper, "staff");
@@ -466,7 +469,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.dreadlands_door, "door_drt");
 		registerItem(ACItems.charcoal, "charcoal");
 		//		registerItem(shadowPlate, "shadowplate");
-
 	}
 
 	@Override
