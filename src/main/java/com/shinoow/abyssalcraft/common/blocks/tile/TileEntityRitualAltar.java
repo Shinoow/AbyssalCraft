@@ -117,11 +117,11 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		}
 
 		if(isPerformingRitual()){
-			if(ritualTimer == 1){
+			if(ritualTimer == 1 && !world.isRemote){
 				SoundEvent chant = getRandomChant();
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
+				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
+				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
 			}
 			ritualTimer++;
 
