@@ -109,13 +109,13 @@ public abstract class NecronomiconRitual {
 	}
 
 	/**
-	 * Sets how particles are displayed on Ritual Pedestals during a ritual 
+	 * Sets how particles are displayed on Ritual Pedestals during a ritual
 	 */
 	public NecronomiconRitual setRitualParticle(EnumRitualParticle particle) {
 		this.particle = particle;
 		return this;
 	}
-	
+
 	/**
 	 * Used to fetch the offerings
 	 * @return An array of ItemStacks representing offerings
@@ -220,7 +220,7 @@ public abstract class NecronomiconRitual {
 	public EnumRitualParticle getRitualParticle() {
 		return particle;
 	}
-	
+
 	/**
 	 * Getter for the sacrifice (mainly used by Infusion Rituals)
 	 * @return An Object representing an item placed on the altar

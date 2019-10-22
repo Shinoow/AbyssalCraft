@@ -16,6 +16,7 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
@@ -34,6 +35,7 @@ public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 	public NecronomiconDreadSpawnRitual() {
 		super("dreadSpawn", 2, 500F, new Object[]{ACItems.dread_fragment, new ItemStack(ACBlocks.stone, 1, 2), new ItemStack(ACBlocks.stone, 1, 3), ACItems.chunk_of_abyssalnite,
 				ACItems.dreaded_chunk_of_abyssalnite, Items.ROTTEN_FLESH, ACItems.dreaded_shard_of_abyssalnite, ACItems.abyssalnite_ingot});
+		setRitualParticle(EnumRitualParticle.SMOKE_PILLARS);
 	}
 
 	@Override

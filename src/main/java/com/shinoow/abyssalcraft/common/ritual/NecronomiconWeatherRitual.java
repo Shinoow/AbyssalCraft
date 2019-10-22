@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.ritual;
 
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,6 +24,7 @@ public class NecronomiconWeatherRitual extends NecronomiconRitual {
 	public NecronomiconWeatherRitual() {
 		super("weather", 0, 100F, Items.FEATHER, Items.FEATHER, Items.FEATHER, Items.FEATHER,
 				Items.FEATHER, Items.FEATHER, Items.FEATHER, Items.FEATHER);
+		setRitualParticle(EnumRitualParticle.PE_STREAM);
 	}
 
 	@Override

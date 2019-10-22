@@ -177,7 +177,6 @@ public class ACExplosion extends Explosion
 			int j1 = MathHelper.floor(explosionZ + f3 + 1.0D);
 			List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(exploder, new AxisAlignedBB(k1, i2, j2, l1, i1, j1));
 			net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(worldObj, this, list, f3);
-			Vec3d vec3d = new Vec3d(explosionX, explosionY, explosionZ);
 
 			for (int k2 = 0; k2 < list.size(); ++k2)
 			{

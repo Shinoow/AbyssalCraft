@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.ritual;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -37,6 +38,7 @@ public class NecronomiconPurgingRitual extends NecronomiconRitual {
 	public NecronomiconPurgingRitual() {
 		super("purging", 3, 10000F, new ItemStack(ACBlocks.crystal_cluster2, 1, 9), null, new ItemStack(ACBlocks.crystal_cluster2, 1, 9),
 				null, new ItemStack(ACBlocks.crystal_cluster2, 1, 9), null, new ItemStack(ACBlocks.crystal_cluster2, 1, 9));
+		setRitualParticle(EnumRitualParticle.PE_STREAM);
 	}
 
 	@Override

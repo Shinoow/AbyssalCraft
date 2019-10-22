@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.ritual;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
@@ -42,6 +43,7 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 												new ItemStack(ACBlocks.crystal_cluster, 1, 7)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 2), new ItemStack(ACItems.crystal, 1, 2),
 														new ItemStack(ACBlocks.crystal_cluster, 1, 2)}});
 		sacrifice = Items.NAME_TAG;
+		setRitualParticle(EnumRitualParticle.SMOKE_PILLARS);
 	}
 
 	@Override

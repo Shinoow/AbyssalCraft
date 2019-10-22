@@ -46,6 +46,7 @@ public class NecronomiconEnchantmentRitual extends NecronomiconRitual {
 	public NecronomiconEnchantmentRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean requiresSacrifice, EnchantmentData enchantment, Object...offerings) {
 		super(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, offerings);
 		this.enchantment = enchantment;
+		setRitualParticle(EnumRitualParticle.SMOKE);
 	}
 
 	/**
