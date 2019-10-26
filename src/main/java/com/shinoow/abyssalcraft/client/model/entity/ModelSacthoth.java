@@ -572,6 +572,13 @@ public class ModelSacthoth extends ModelBase {
 		leftleg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
 		leftleg.rotateAngleY = 0.0F;
 
+		leftarm1.rotateAngleX = leftarm1.rotateAngleX * 0.5F - (float)Math.PI / 10F;
+		leftarm1.rotateAngleY = 0.0F;
+
+		rightarm1.rotateAngleY = 0.0F;
+
+		body.rotateAngleY = 0.0F;
+
 		if (isRiding)
 		{
 			rightarm1.rotateAngleX += -((float)Math.PI / 5F);
@@ -582,6 +589,26 @@ public class ModelSacthoth extends ModelBase {
 
 			leftleg.rotateAngleY = (float)Math.PI / 10F;
 			rightleg.rotateAngleY = -((float)Math.PI / 10F);
+		}
+
+		if (swingProgress > 0.0F)
+		{
+			ModelRenderer modelrenderer = leftarm1;
+			float f11 = swingProgress;
+			body.rotateAngleY = MathHelper.sin(MathHelper.sqrt(f1) * ((float)Math.PI * 2F)) * 0.2F;
+
+			rightarm1.rotateAngleY += body.rotateAngleY;
+			leftarm1.rotateAngleY += body.rotateAngleY;
+			leftarm1.rotateAngleX += body.rotateAngleY;
+			f11 = 1.0F - swingProgress;
+			f11 = f11 * f11;
+			f11 = f11 * f11;
+			f11 = 1.0F - f11;
+			float f12 = MathHelper.sin(f11 * (float)Math.PI);
+			float f13 = MathHelper.sin(swingProgress * (float)Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+			modelrenderer.rotateAngleX = (float)(modelrenderer.rotateAngleX - (f12 * 1.2D + f13));
+			modelrenderer.rotateAngleY += body.rotateAngleY * 2.0F;
+			modelrenderer.rotateAngleZ += MathHelper.sin(swingProgress * (float)Math.PI) * -0.4F;
 		}
 	}
 

@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelSacthoth;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerSacthothHeldItem;
 import com.shinoow.abyssalcraft.common.entity.EntitySacthoth;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -32,6 +33,7 @@ public class RenderSacthoth extends RenderLiving<EntitySacthoth> {
 	public RenderSacthoth(RenderManager manager)
 	{
 		super(manager, new ModelSacthoth(), 0.0F);
+		addLayer(new LayerSacthothHeldItem(this));
 	}
 
 	@Override
