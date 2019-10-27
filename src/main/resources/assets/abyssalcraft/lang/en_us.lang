@@ -447,6 +447,8 @@ necronomicon.text.enchantment.coralium=The Coralium Enchantment allows you to in
 necronomicon.text.enchantment.dread=The Dread Enchantment allows you to infect any entity you hit with the Dread Plague (that is, if they aren't immune). Can only be obtained through a ritual.
 necronomicon.text.enchantment.lightpierce=The Light Pierce Enchantment works like Bane of Arthropods, but on Shadow mobs.
 necronomicon.text.enchantment.ironwall=The Iron Wall Enchantment works as an anti-knockback enchantment, repelling knockback applied when hit.
+necronomicon.text.enchantment.sapping=The Sapping Enchantment increases the amount of energy a Staff of Rending can drain.
+necronomicon.text.enchantment.multirend=The Multi-rend Enchantment makes the Staff of Rending also drain energy from nearby mobs within a 3 block radius of the target.
 
 necronomicon.text.overworld.progression.1=In order to reach the Abyssal Wasteland, one must craft a Gateway Key, which requires one to travel to the Nether, and to visit a Darklands and a water-based biome. The water-based biome can be either a swamp or an ocean biome.
 necronomicon.text.overworld.progression.2=From the Nether you need 2 Blaze Rods, and probably a few more for later. From the Darklands biome you need to slay living shadows to finally obtain Shadow Gems. They are most commonly found in Darklands Mountains biomes. It is recommended to obtain a Staff of Rending in order to obtain Shadow Gems faster (more information in the special armor and tools section).
@@ -1438,6 +1440,10 @@ enchantment.abyssalcraft.iron_wall=Iron Wall
 enchantment.abyssalcraft.iron_wall.desc=Reduces the amount of knockback applied when hit by an attack
 enchantment.abyssalcraft.light_pierce=Light Pierce
 enchantment.abyssalcraft.light_pierce.desc=Increases damage against Shadow mobs
+enchantment.abyssalcraft.sapping=Sapping
+enchantment.abyssalcraft.sapping.desc=Increases the amount of energy a Staff of Rending can drain
+enchantment.abyssalcraft.multi_rend=Multi-rend
+enchantment.abyssalcraft.multi_rend.desc=Drains energy from mobs surrounding the target
 
 #Subtitles
 subtitle.abyssalcraft.dreadguard.death=Dreadguard dies

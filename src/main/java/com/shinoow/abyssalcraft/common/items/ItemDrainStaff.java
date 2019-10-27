@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -23,12 +24,14 @@ import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -99,18 +102,7 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 
 	@Override
 	public int getDrainAmount(ItemStack stack){
-		switch(stack.getItemDamage()){
-		case 0:
-			return 1;
-		case 1:
-			return 2;
-		case 2:
-			return 3;
-		case 3:
-			return 4;
-		default:
-			return 1;
-		}
+		return stack.getItemDamage() + 1 + MathHelper.clamp(EnchantmentHelper.getEnchantmentLevel(AbyssalCraftAPI.sapping, stack), 0, 3);
 	}
 
 	@Override
@@ -129,5 +121,17 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 		l.add(I18n.format("tooltip.drainstaff.energy.2")+": " + dread + "/100");
 		l.add(I18n.format("tooltip.drainstaff.energy.3")+": " + omothol + "/100");
 		l.add(I18n.format("tooltip.drainstaff.energy.4")+": " + shadow + "/200");
+	}
+
+	@Override
+	public boolean isEnchantable(ItemStack stack)
+	{
+		return getItemStackLimit(stack) == 1;
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack)
+	{
+		return 5 * (stack.getItemDamage() + 1);
 	}
 }

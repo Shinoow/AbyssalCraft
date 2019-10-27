@@ -447,6 +447,8 @@ necronomicon.text.enchantment.coralium=珊瑚附魔使你在擊中任何實體�
 necronomicon.text.enchantment.dread=恐懼附魔使你在擊中任何實體後傳染恐懼侵染（如果不免疫的話）。只能通過儀式獲取。
 necronomicon.text.enchantment.lightpierce=光之穿刺附魔類似於截肢剋星，但對陰影生物有效。
 necronomicon.text.enchantment.ironwall=鐵壁附魔是一種反擊退附魔，被擊中時會反彈擊退效果。
+necronomicon.text.enchantment.sapping=The Sapping Enchantment increases the amount of energy a Staff of Rending can drain.
+necronomicon.text.enchantment.multirend=The Multi-rend Enchantment makes the Staff of Rending also drain energy from nearby mobs within a 3 block radius of the target.
 
 necronomicon.text.overworld.progression.1=要想到達深淵荒蕪之地，你必須合成一把門鑰匙，這需要你旅行過地獄和黑暗之地和水域。水域可以是沼澤或者海洋。
 necronomicon.text.overworld.progression.2=從地獄你需要2根烈焰棒，以後可能需要更多。在黑暗之地你需要殺死活陰影以獲得陰影寶石。它們最常見於黑暗之地山區。推薦使用撕裂法杖以更快獲取陰影寶石（詳情見特殊武器裝備章節）。
@@ -1438,6 +1440,10 @@ enchantment.abyssalcraft.iron_wall=鐵壁
 enchantment.abyssalcraft.iron_wall.desc=減少被擊中時的擊退量
 enchantment.abyssalcraft.light_pierce=光之穿刺
 enchantment.abyssalcraft.light_pierce.desc=增加對陰影生物的傷害
+enchantment.abyssalcraft.sapping=Sapping
+enchantment.abyssalcraft.sapping.desc=Increases the amount of energy a Staff of Rending can drain
+enchantment.abyssalcraft.multi_rend=Multi-rend
+enchantment.abyssalcraft.multi_rend.desc=Drains energy from mobs surrounding the target
 
 #字幕
 subtitle.abyssalcraft.dreadguard.death=恐懼守衛：死亡

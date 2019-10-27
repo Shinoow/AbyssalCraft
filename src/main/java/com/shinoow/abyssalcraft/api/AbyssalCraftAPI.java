@@ -27,6 +27,7 @@ import com.shinoow.abyssalcraft.api.recipe.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -62,7 +63,7 @@ public class AbyssalCraftAPI {
 	 */
 	public static final String API_VERSION = "1.24.0";
 
-	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
+	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall, sapping, multi_rend;
 
 	public static Potion coralium_plague, dread_plague, antimatter_potion;
 
@@ -102,6 +103,8 @@ public class AbyssalCraftAPI {
 	public static final ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 1800, 12.0F, 5, 13);
 	public static final ToolMaterial dreadiumTool = EnumHelper.addToolMaterial("DREADIUM", 6, 2300, 14.0F, 6, 14);
 	public static final ToolMaterial ethaxiumTool = EnumHelper.addToolMaterial("ETHAXIUM", 8, 2800, 16.0F, 8, 20);
+
+	public static EnumEnchantmentType STAFF_OF_RENDING;
 
 	private static IInternalNecroDataHandler internalNDHandler = new DummyNecroDataHandler();
 	private static IInternalMethodHandler internalMethodHandler = new DummyMethodHandler();

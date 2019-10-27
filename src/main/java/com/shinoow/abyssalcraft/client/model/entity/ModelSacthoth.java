@@ -593,7 +593,6 @@ public class ModelSacthoth extends ModelBase {
 
 		if (swingProgress > 0.0F)
 		{
-			ModelRenderer modelrenderer = leftarm1;
 			float f11 = swingProgress;
 			body.rotateAngleY = MathHelper.sin(MathHelper.sqrt(f1) * ((float)Math.PI * 2F)) * 0.2F;
 
@@ -606,9 +605,9 @@ public class ModelSacthoth extends ModelBase {
 			f11 = 1.0F - f11;
 			float f12 = MathHelper.sin(f11 * (float)Math.PI);
 			float f13 = MathHelper.sin(swingProgress * (float)Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
-			modelrenderer.rotateAngleX = (float)(modelrenderer.rotateAngleX - (f12 * 1.2D + f13));
-			modelrenderer.rotateAngleY += body.rotateAngleY * 2.0F;
-			modelrenderer.rotateAngleZ += MathHelper.sin(swingProgress * (float)Math.PI) * -0.4F;
+			leftarm1.rotateAngleX = (float)(leftarm1.rotateAngleX - (f12 * 1.2D + f13));
+			leftarm1.rotateAngleY += body.rotateAngleY * 2.0F;
+			leftarm1.rotateAngleZ += MathHelper.sin(swingProgress * (float)Math.PI) * -0.4F;
 		}
 	}
 

@@ -447,6 +447,8 @@ necronomicon.text.enchantment.coralium=El encantamiento de Coralium le permite i
 necronomicon.text.enchantment.dread=El encantamiento de Dread le permite infectar cualquier entidad que se golpea con la plaga de Dread (es decir, si no son inmunes).
 necronomicon.text.enchantment.lightpierce=El encantamiento de La Luz de Pierce funciona como Perdición de los artrópodos,pero en los mobs oscuros.
 necronomicon.text.enchantment.ironwall=El encantamiento de Pared de Hierro funciona como Protección,repeliendo los ataques cuando es golpeado.
+necronomicon.text.enchantment.sapping=The Sapping Enchantment increases the amount of energy a Staff of Rending can drain.
+necronomicon.text.enchantment.multirend=The Multi-rend Enchantment makes the Staff of Rending also drain energy from nearby mobs within a 3 block radius of the target.
 
 necronomicon.text.overworld.progression.1=Con el fin de llegar al Abyssal Wasteland,hay que elaborar una Llave de Entrada,lo que requiere un viaje al Nether,y para visitar El Darklands y un bioma a base de agua.El bioma a base de agua puede ser un pantano o un bioma marino.
 necronomicon.text.overworld.progression.2=Desde el Nether se necesita 2 baritas de Blaze,y probablemente un poco más para más adelante.Desde el bioma del Darklands se necesita para matar a las sombras que viven para obtener finalmente las Gemas Oscuras.Se encuentran más comúnmente en las Montañas del Darklands.Se recomienda obtener un Bastón del Rending con el fin de obtener las Gemas Oscuras más rápido (más información en la sección de armaduras y herramientas especiales).
@@ -1438,6 +1440,10 @@ enchantment.abyssalcraft.iron_wall=Muro de hierro
 enchantment.abyssalcraft.iron_wall.desc=Reduces the amount of knockback applied when hit by an attack
 enchantment.abyssalcraft.light_pierce=Luz de Pierce
 enchantment.abyssalcraft.light_pierce.desc=Increases damage against Shadow mobs
+enchantment.abyssalcraft.sapping=Sapping
+enchantment.abyssalcraft.sapping.desc=Increases the amount of energy a Staff of Rending can drain
+enchantment.abyssalcraft.multi_rend=Multi-rend
+enchantment.abyssalcraft.multi_rend.desc=Drains energy from mobs surrounding the target
 
 #Subtitles
 subtitle.abyssalcraft.dreadguard.death=Dreadguard dies

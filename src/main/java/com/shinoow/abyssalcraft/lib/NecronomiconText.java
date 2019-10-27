@@ -211,6 +211,8 @@ public class NecronomiconText {
 	public static String ENCHANTMENT_DREAD = "necronomicon.text.enchantment.dread";
 	public static String ENCHANTMENT_LIGHT_PIERCE = "necronomicon.text.enchantment.lightpierce";
 	public static String ENCHANTMENT_IRON_WALL = "necronomicon.text.enchantment.ironwall";
+	public static String ENCHANTMENT_SAPPING = "necronomicon.text.enchantment.sapping";
+	public static String ENCHANTMENT_MULTI_REND = "necronomicon.text.enchantment.multirend";
 
 	public static String PROGRESSION_OVERWORLD_1 = "necronomicon.text.overworld.progression.1";
 	public static String PROGRESSION_OVERWORLD_2 = "necronomicon.text.overworld.progression.2";
