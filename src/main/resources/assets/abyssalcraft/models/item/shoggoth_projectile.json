@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "abyssalcraft:items/shoggoth_projectile"
+		"layer0": "items/slimeball"
 	}
 }

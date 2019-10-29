@@ -46,7 +46,7 @@ public class ItemHandler implements ILifeCycleHandler {
 	public void preInit(FMLPreInitializationEvent event) {
 		//"secret" dev stuff
 		devsword = new AbyssalCraftTool();
-		shoggoth_projectile = new ItemHidden("shoggoth_projectile");
+		shoggoth_projectile = new Item().setUnlocalizedName("shoggoth_projectile");
 
 		//Misc items
 		ACItems.oblivion_catalyst = new ItemOC();
