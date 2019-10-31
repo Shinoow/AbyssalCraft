@@ -1,8 +1,8 @@
 {
   "homepage": "https://shinoow.github.io/AbyssalCraft/",
   "promos": {
-	"1.12.2-latest": "1.9.13",
-	"1.12.2-recommended": "1.9.13",
+	"1.12.2-latest": "1.9.13.1",
+	"1.12.2-recommended": "1.9.13.1",
 	"1.12-latest": "1.9.4-pre-4",
 	"1.12-recommended": "1.9.4-pre-4",
 	"1.11.2-latest": "1.9.4.11-FINAL",
@@ -21,6 +21,7 @@
   "1.8.9-recommended": "1.9.3.10-FINAL"
   },
   "1.12.2": {
+	"1.9.13.1": "- Fixed a crash when any boss dialog is sent to chat on servers",
 	"1.9.13": "- Capabilities (like Embers heat) will now persist with Upgrade Kit upgrading\n- Improved the explosion code a fair bit\n- Large explosions no longer create particles (either the particles were oddly placed, or simply too many, might replace with something else in the future)\n- Added a config option for the size of an ODB explosion (also increased the default size)\n- Added a config option for the size of antimatter explosions (also increased the default size)\n- AbyssalCraft Explosions now deal more correct amounts of damage (the exposure property from the vanilla explosion damage code kinda nullified the damage)\n- The particle display from the Ritual Pedestals can now be customized for each individual ritual through a set of predefined sequences\n- Added a config option to toggle whether or not Upgrade Kits and the mechanic for them are added (courtesy of Mike-U5)\n- The ritual chant is now played on the server side instead of the client (so you'll always hear a chant when performing rituals while playing on a server)\n- Changed most of the ritual types to use the new particle displays\n- Sacthoth now wields his Soul Reaper Blade (and swings his arm)\n- Added two Enchantments for the Staff of Rending (Sapping and Multi-rend, Sapping increases the amount of energy drained by the staff, and Multi-rend drains energy from mobs near the target)\n- Moved the Potential Energy section out from the Ritual section in the Necronomicon\n- All Tile Entities with Capabilities properly indicate that they have them (so that pipes, for one, interacts with them)",
 	"1.9.12": "- Added a config option to toggle whether or not food items are added (courtesy of Mike-U5)\n- Added a config option to toggle whether or not the dimension terrain will be affected by the Amplified world type\n- Improved the generation code for the random Abyssal Wasteland structures (they're no longer height dependent, so they're more likely to generate in an amplified world)\n- Attempting to use any bonemeal-esque items in a Purged biome won't consume the item if it's not stackable\n- Added a config option to toggle whether or not statues can generate inside Shoggoth Lairs\n- The \"Dark Resurrection\" Ritual can now resurrect any named mob that has died (and any player can resurrect any named dead mob)\n- Adjusted the rotation of Remnant leg tentacles when riding something\n- Added a JSON file with previously hardcoded colors (for resource packs to override) named \"clientvars.json\"\n- Dread Spawn, Greater Dread Spawn, Lesser Dreadbeast and Spawn of Cha'garoth now have their own textures (rather than using the Dreadguard texture)",
 	"1.9.11": "- Improved the portal teleportation code (fixes the missing exp bug, hopefully also puts a more permanent end to portal looping)\n- The spawn weight for Dark Offsprings is now configurable\n- Added a config option to toggle whether or not ODBs can explode\n- The cooldown for the Lesser Shoggoth monolith building AI is now configurable\n- Added a configurable range for how many chunks the Ritual of Corruption can affect\n- Added a configurable range for how many chunks the Ritual of Cleansing can affect\n- Added a configurable range for how many chunks the Ritual of Purging can affect",

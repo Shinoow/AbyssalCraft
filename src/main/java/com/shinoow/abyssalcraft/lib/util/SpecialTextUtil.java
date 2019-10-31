@@ -19,6 +19,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SpecialTextUtil {
 
@@ -123,6 +125,7 @@ public class SpecialTextUtil {
 	 * @param name A name
 	 * @param text A message (or two, with the second being in aklo)
 	 */
+	@SideOnly(Side.CLIENT)
 	public static void customText(String name, String...text){
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		if(text.length == 1)
