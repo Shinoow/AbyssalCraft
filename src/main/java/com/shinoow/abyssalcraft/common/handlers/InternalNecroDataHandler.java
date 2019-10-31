@@ -479,13 +479,18 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACItems.dense_carbon_cluster), NecronomiconText.CRAFTING_DENSE_CARBON_CLUSTER));
 		pages.add(new Page(pages.size() + 1, title, 0, new CraftingStack(ACBlocks.wooden_crate), NecronomiconText.CRAFTING_CRATE));
 		addPages("miscinfo", "specialmaterials", pages.toArray(new Page[0]));
-
-		addPages("miscinfo", "enchantments", new Page(1, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1)), NecronomiconText.ENCHANTMENT_CORALIUM, new NecronomiconCondition(1)),
-				new Page(2, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1)), NecronomiconText.ENCHANTMENT_DREAD, new NecronomiconCondition(2)),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.light_pierce, AbyssalCraftAPI.light_pierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE, new MultiEntityCondition(EntityShadowCreature.class, EntityShadowMonster.class, EntityShadowBeast.class)),
-				new Page(4, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.iron_wall, 1)), NecronomiconText.ENCHANTMENT_IRON_WALL),
-				new Page(5, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.sapping, AbyssalCraftAPI.sapping.getMaxLevel())), NecronomiconText.ENCHANTMENT_SAPPING),
-				new Page(6, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.multi_rend, 1)), NecronomiconText.ENCHANTMENT_MULTI_REND));
+		if(ACConfig.plague_enchantments)
+			addPages("miscinfo", "enchantments", new Page(1, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1)), NecronomiconText.ENCHANTMENT_CORALIUM, new NecronomiconCondition(1)),
+					new Page(2, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1)), NecronomiconText.ENCHANTMENT_DREAD, new NecronomiconCondition(2)),
+					new Page(3, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.light_pierce, AbyssalCraftAPI.light_pierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE, new MultiEntityCondition(EntityShadowCreature.class, EntityShadowMonster.class, EntityShadowBeast.class)),
+					new Page(4, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.iron_wall, 1)), NecronomiconText.ENCHANTMENT_IRON_WALL),
+					new Page(5, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.sapping, AbyssalCraftAPI.sapping.getMaxLevel())), NecronomiconText.ENCHANTMENT_SAPPING),
+					new Page(6, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.multi_rend, 1)), NecronomiconText.ENCHANTMENT_MULTI_REND));
+		else
+			addPages("miscinfo", "enchantments", new Page(1, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.light_pierce, AbyssalCraftAPI.light_pierce.getMaxLevel())), NecronomiconText.ENCHANTMENT_LIGHT_PIERCE, new MultiEntityCondition(EntityShadowCreature.class, EntityShadowMonster.class, EntityShadowBeast.class)),
+					new Page(2, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.iron_wall, 1)), NecronomiconText.ENCHANTMENT_IRON_WALL),
+					new Page(3, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.sapping, AbyssalCraftAPI.sapping.getMaxLevel())), NecronomiconText.ENCHANTMENT_SAPPING),
+					new Page(4, NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0, ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(AbyssalCraftAPI.multi_rend, 1)), NecronomiconText.ENCHANTMENT_MULTI_REND));
 		addPages("miscinfo", "decorativestatues", new Page(1, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 3)), NecronomiconText.CRAFTING_DECORATIVE_AZATHOTH_STATUE),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 0)), NecronomiconText.CRAFTING_DECORATIVE_CTHULHU_STATUE),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0, new CraftingStack(new ItemStack(ACBlocks.decorative_statue, 1, 1)), NecronomiconText.CRAFTING_DECORATIVE_HASTUR_STATUE),

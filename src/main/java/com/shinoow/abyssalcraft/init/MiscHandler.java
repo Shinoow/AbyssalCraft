@@ -129,15 +129,19 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		AbyssalCraftAPI.STAFF_OF_RENDING = EnumHelper.addEnchantmentType("STAFF_OF_RENDING", i -> i instanceof IStaffOfRending);
 
-		AbyssalCraftAPI.coralium_enchantment = new EnchantmentWeaponInfusion("coralium");
-		AbyssalCraftAPI.dread_enchantment = new EnchantmentWeaponInfusion("dread");
+		if(ACConfig.plague_enchantments) {
+			AbyssalCraftAPI.coralium_enchantment = new EnchantmentWeaponInfusion("coralium");
+			AbyssalCraftAPI.dread_enchantment = new EnchantmentWeaponInfusion("dread");
+		}
 		AbyssalCraftAPI.light_pierce = new EnchantmentLightPierce();
 		AbyssalCraftAPI.iron_wall = new EnchantmentIronWall();
 		AbyssalCraftAPI.sapping = new EnchantmentSapping();
 		AbyssalCraftAPI.multi_rend = new EnchantmentMultiRend();
 
-		registerEnchantment(new ResourceLocation("abyssalcraft", "coralium"), AbyssalCraftAPI.coralium_enchantment);
-		registerEnchantment(new ResourceLocation("abyssalcraft", "dread"), AbyssalCraftAPI.dread_enchantment);
+		if(ACConfig.plague_enchantments) {
+			registerEnchantment(new ResourceLocation("abyssalcraft", "coralium"), AbyssalCraftAPI.coralium_enchantment);
+			registerEnchantment(new ResourceLocation("abyssalcraft", "dread"), AbyssalCraftAPI.dread_enchantment);
+		}
 		registerEnchantment(new ResourceLocation("abyssalcraft", "light_pierce"), AbyssalCraftAPI.light_pierce);
 		registerEnchantment(new ResourceLocation("abyssalcraft", "iron_wall"), AbyssalCraftAPI.iron_wall);
 		registerEnchantment(new ResourceLocation("abyssalcraft", "sapping"), AbyssalCraftAPI.sapping);

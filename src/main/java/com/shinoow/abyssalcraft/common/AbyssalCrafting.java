@@ -466,12 +466,14 @@ public class AbyssalCrafting {
 				PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.rotten_anti_flesh), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER),
 				new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.GUNPOWDER)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("antiPotionAoE", 0, 300F, AbyssalCraftAPI.antimatter_potion, antiaoeofferings));
-		Object[] corenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 1), ACItems.refined_coralium_ingot, ACItems.coralium_plagued_flesh, Items.BOOK,
-				ACItems.coralium_plagued_flesh, ACItems.refined_coralium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 1)};
-		RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("corEnchantment", 1, ACLib.abyssal_wasteland_id, 5000F, new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1), corenchofferings));
-		Object[] dreenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 2), ACItems.dreadium_ingot, ACItems.dread_fragment, Items.BOOK, ACItems.dread_fragment,
-				ACItems.dreadium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("dreEnchantment", 2, ACLib.dreadlands_id, 5000F, new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1), dreenchofferings));
+		if(ACConfig.plague_enchantments) {
+			Object[] corenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 1), ACItems.refined_coralium_ingot, ACItems.coralium_plagued_flesh, Items.BOOK,
+					ACItems.coralium_plagued_flesh, ACItems.refined_coralium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 1)};
+			RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("corEnchantment", 1, ACLib.abyssal_wasteland_id, 5000F, new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1), corenchofferings));
+			Object[] dreenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 2), ACItems.dreadium_ingot, ACItems.dread_fragment, Items.BOOK, ACItems.dread_fragment,
+					ACItems.dreadium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 2)};
+			RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("dreEnchantment", 2, ACLib.dreadlands_id, 5000F, new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1), dreenchofferings));
+		}
 		RitualRegistry.instance().registerRitual(new NecronomiconResurrectionRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCleansingRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCorruptionRitual());

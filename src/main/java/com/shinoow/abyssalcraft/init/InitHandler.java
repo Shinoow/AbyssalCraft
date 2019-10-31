@@ -476,6 +476,7 @@ public class InitHandler implements ILifeCycleHandler {
 
 		foodstuff = cfg.get("modules", "Enable Foodstuffs", true, "Set to false to disable Abyssalcraft Food.").getBoolean();
 		upgrade_kits = cfg.get("modules", "Enable Upgrade Kits", true, "Set to false to disable Upgrade Kits.").getBoolean();
+		plague_enchantments = cfg.get("modules", "Enable Plague Enchantments", true, "Set to false to disable the Coralium and Dread Enchantments.").getBoolean();
 
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
