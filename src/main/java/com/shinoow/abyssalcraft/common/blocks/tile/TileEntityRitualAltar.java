@@ -44,10 +44,12 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -122,12 +124,12 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
 				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
 				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
+				if(ritual != null && sacrifice != null && sacrifice.isEntityAlive())
+					sacrifice.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 200, 0, false, false));
 			}
 			ritualTimer++;
 
 			if(ritual != null){
-				if(sacrifice != null && sacrifice.isEntityAlive())
-					world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, sacrifice.posX, sacrifice.posY + sacrifice.getEyeHeight(), sacrifice.posZ, 0, 0, 0);
 				if(!world.isRemote && ritualTimer % 20 == 0)
 					if(user != null)
 						collectPEFromPlayer();

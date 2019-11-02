@@ -23,10 +23,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
@@ -124,7 +126,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 
 		if(entity != null){
 			if(getContainedEnergy() < getMaxEnergy())
-				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, entity.posX, entity.posY, entity.posZ, 0, 0, 0);
+				entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 20, 0, false, false));
 			if(!entity.isEntityAlive()){
 				float num = entity.getMaxHealth();
 				entity = null;
