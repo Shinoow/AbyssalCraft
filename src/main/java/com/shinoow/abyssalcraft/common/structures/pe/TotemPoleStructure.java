@@ -60,12 +60,6 @@ public class TotemPoleStructure implements IPlaceOfPower {
 	}
 
 	@Override
-	public String getDescription() {
-
-		return "ac.structure.totempole.description";
-	}
-
-	@Override
 	public float getAmplifier(AmplifierType type) {
 
 		if(type == AmplifierType.RANGE)

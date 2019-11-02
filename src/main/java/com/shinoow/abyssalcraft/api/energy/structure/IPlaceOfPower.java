@@ -48,7 +48,9 @@ public interface IPlaceOfPower {
 	/**
 	 * Returns a unlocalized string representing the description of the structure when viewed in the Necronomicon
 	 */
-	public String getDescription();
+	default String getDescription() {
+		return "ac.structure."+getIdentifier()+".description";
+	};
 
 	/**
 	 * If the Place of Power amplifies any stats of statues used in it, handle that here
@@ -89,4 +91,12 @@ public interface IPlaceOfPower {
 	 * Returns the position of the block that forms the structure when activated
 	 */
 	public BlockPos getActivationPointForRender();
+
+	/**
+	 * Returns a String (either the localization name or a fixed one) with semi-colon (;) separated values listing the
+	 * blocks required to build this structure
+	 */
+	default String getRequiredBlockNames(){
+		return "ac.structure."+getIdentifier()+".blocks";
+	}
 }

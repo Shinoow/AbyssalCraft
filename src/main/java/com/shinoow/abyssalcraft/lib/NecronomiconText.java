@@ -412,6 +412,7 @@ public class NecronomiconText {
 	public static String LABEL_STRUCTURES = "necronomicon.information.structures";
 	public static String LABEL_PANTHEON = "necronomicon.information.pantheon";
 	public static String LABEL_CASTING = "necronomicon.information.casting";
+	public static String LABEL_BUILT_WITH = "necronomicon.builtwith";
 
 	/**
 	 * The best way to drown an array of strings with nonsense

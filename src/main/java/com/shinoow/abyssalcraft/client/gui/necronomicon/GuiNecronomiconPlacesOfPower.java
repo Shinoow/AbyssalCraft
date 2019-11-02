@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 import javax.vecmath.Matrix4f;
@@ -27,6 +28,7 @@ import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
+import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
 import com.shinoow.abyssalcraft.client.lib.MultiblockRenderData;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
@@ -45,6 +47,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -59,6 +62,7 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 	private int ticksInBook;
 	private boolean showMultiblock = false;
 	private MultiblockRenderData multiblockObj = new MultiblockRenderData();
+	private IPlaceOfPower tooltipObj;
 
 	public GuiNecronomiconPlacesOfPower(int bookType, GuiNecronomicon gui){
 		super(bookType);
@@ -155,6 +159,8 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 		String title = localize(NecronomiconText.LABEL_STRUCTURES);
 		fontRenderer.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
 
+		tooltipObj = null;
+
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(NecronomiconResources.PLACE_OF_POWER);
 		drawTexturedModalRect(k, b0, 0, 0, 256, 256);
@@ -178,6 +184,10 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 
 		int xPos = k + 65;
 		int yPos = (int) (73 - (height - 3) * 10/ Math.max(1, height - 3));
+
+		if(x > k + 15 && x < k + 115 && y > 25 && y < 125)
+			tooltipObj = place;
+
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(xPos, yPos, 100);
 		GlStateManager.scale(scale, scale, scale);
@@ -210,6 +220,8 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 		renderElements(multiblockObj, BlockPos.getAllInBoxMutable(BlockPos.ORIGIN, new BlockPos(multiblockObj.sizeX - 1, multiblockObj.sizeY - 1, multiblockObj.sizeZ - 1)), eye, place.getActivationPointForRender());
 
 		GlStateManager.popMatrix();
+
+		renderTooltip(x, y);
 	}
 
 	private void renderElements(MultiblockRenderData mb, Iterable<? extends BlockPos> blocks, Vector4f eye, BlockPos activationPoint) {
@@ -338,6 +350,17 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 	}
 
 	//End of code borrowed from Patchouli
+
+	@Override
+	public void renderTooltip(int x, int y) {
+		if(tooltipObj != null)
+		{
+			List<String> tooltipData = Arrays.asList(localize(tooltipObj.getRequiredBlockNames()).split(";"));
+			List<String> parsedTooltip = tooltipData.stream().map(s -> TextFormatting.GRAY+s).collect(Collectors.toList());
+			parsedTooltip.add(0, localize(NecronomiconText.LABEL_BUILT_WITH)+":");
+			GuiRenderHelper.renderTooltip(x, y, parsedTooltip);
+		}
+	}
 
 	private void initStuff(){
 		for(IPlaceOfPower place : StructureHandler.instance().getStructures())
