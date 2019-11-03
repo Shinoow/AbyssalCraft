@@ -36,7 +36,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCollector, ISingletonInventory, ITickable {
 
 	private ItemStack item = ItemStack.EMPTY;
-	private int rot;
 	private float energy;
 	Random rand = new Random();
 	EntityLivingBase entity;
@@ -50,7 +49,6 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 		super.readFromNBT(nbttagcompound);
 		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
 		item = new ItemStack(nbtItem);
-		rot = nbttagcompound.getInteger("Rot");
 		energy = nbttagcompound.getFloat("PotEnergy");
 		collectionLimit = nbttagcompound.getInteger("CollectionLimit");
 		coolDown = nbttagcompound.getInteger("CoolDown");
@@ -64,7 +62,6 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 		if(!item.isEmpty())
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
-		nbttagcompound.setInteger("Rot", rot);
 		nbttagcompound.setFloat("PotEnergy", energy);
 		nbttagcompound.setInteger("CollectionLimit", collectionLimit);
 		nbttagcompound.setInteger("CoolDown", coolDown);
@@ -96,11 +93,6 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			isDirty = false;
 		}
-
-		if(rot == 360)
-			rot = 0;
-		if(!item.isEmpty())
-			rot++;
 
 		if(isCoolingDown())
 			coolDown--;
@@ -144,11 +136,6 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 
 		if(getContainedEnergy() > getMaxEnergy())
 			energy = getMaxEnergy();
-	}
-
-	@Override
-	public int getRotation(){
-		return rot;
 	}
 
 	@Override

@@ -478,9 +478,8 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 	}
 
 	@Override
-	public int getRotation() {
-
-		return 0;
+	public boolean shouldItemRotate() {
+		return false;
 	}
 
 	@Override

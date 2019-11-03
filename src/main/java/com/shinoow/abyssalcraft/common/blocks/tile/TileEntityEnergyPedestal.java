@@ -27,7 +27,6 @@ import net.minecraft.util.ITickable;
 public class TileEntityEnergyPedestal extends TileEntity implements IEnergyCollector, ISingletonInventory, ITickable {
 
 	private ItemStack item = ItemStack.EMPTY;
-	private int rot;
 	private float energy;
 	Random rand = new Random();
 	private boolean isDirty;
@@ -38,7 +37,6 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 		super.readFromNBT(nbttagcompound);
 		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
 		item = new ItemStack(nbtItem);
-		rot = nbttagcompound.getInteger("Rot");
 		energy = nbttagcompound.getFloat("PotEnergy");
 	}
 
@@ -50,7 +48,6 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 		if(!item.isEmpty())
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
-		nbttagcompound.setInteger("Rot", rot);
 		nbttagcompound.setFloat("PotEnergy", energy);
 
 		return nbttagcompound;
@@ -81,20 +78,10 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 			isDirty = false;
 		}
 
-		if(rot == 360)
-			rot = 0;
-		if(!item.isEmpty())
-			rot++;
-
 		if(!item.isEmpty())
 			if(item.getItem() instanceof IEnergyContainerItem)
 				if(!world.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
 					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(1));
-	}
-
-	@Override
-	public int getRotation(){
-		return rot;
 	}
 
 	@Override

@@ -48,7 +48,7 @@ public class TileEntityPedestalBlockRenderer extends TileEntitySpecialRenderer {
 
 			GlStateManager.rotate(180F, 1F, 0F, 0F);
 			GlStateManager.translate(0.0F, flag ? -0.56F : -0.37F, 0F);
-			GlStateManager.rotate(ped.getRotation(), 0F, 1F, 0F);
+			GlStateManager.rotate(ped.shouldItemRotate() ? getWorld().getWorldTime() : 0, 0F, 1F, 0F);
 
 			Minecraft.getMinecraft().getRenderItem().renderItem(ped.getItem(), ItemCameraTransforms.TransformType.GROUND);
 

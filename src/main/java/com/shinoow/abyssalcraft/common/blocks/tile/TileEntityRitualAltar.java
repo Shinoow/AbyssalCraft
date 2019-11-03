@@ -62,7 +62,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	private int ritualTimer;
 	private NecronomiconRitual ritual;
 	private ItemStack item = ItemStack.EMPTY;
-	private int rot;
 	private EntityPlayer user;
 	private float consumedEnergy;
 	private boolean isDirty;
@@ -75,7 +74,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		super.readFromNBT(nbttagcompound);
 		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
 		item = new ItemStack(nbtItem);
-		rot = nbttagcompound.getInteger("Rot");
 		ritualTimer = nbttagcompound.getInteger("Cooldown");
 	}
 
@@ -87,7 +85,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		if(!item.isEmpty())
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
-		nbttagcompound.setInteger("Rot", rot);
 		nbttagcompound.setInteger("Cooldown", ritualTimer);
 
 		return nbttagcompound;
@@ -155,11 +152,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 			world.spawnParticle(EnumParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0,0,0);
 		}
-
-		if(rot == 360)
-			rot = 0;
-		if(!item.isEmpty())
-			rot++;
 	}
 
 	private void reset() {
@@ -303,11 +295,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	@Override
 	public boolean isPerformingRitual(){
 		return ritualTimer < 200 && ritualTimer > 0;
-	}
-
-	@Override
-	public int getRotation(){
-		return rot;
 	}
 
 	@Override

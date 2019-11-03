@@ -29,7 +29,7 @@ import net.minecraft.util.math.Vec3d;
 public class TileEntityRitualPedestal extends TileEntity implements ITickable, IRitualPedestal {
 
 	private ItemStack item = ItemStack.EMPTY;
-	private int rot, itemID, itemMeta;
+	private int itemID, itemMeta;
 	private boolean isDirty;
 	private BlockPos altarPos;
 
@@ -39,7 +39,6 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 		super.readFromNBT(nbttagcompound);
 		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
 		item = new ItemStack(nbtItem);
-		rot = nbttagcompound.getInteger("Rot");
 		if(nbttagcompound.hasKey("AltarPos"))
 			altarPos = BlockPos.fromLong(nbttagcompound.getLong("AltarPos"));
 		itemID = nbttagcompound.getInteger("ItemID");
@@ -54,7 +53,6 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 		if(!item.isEmpty())
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
-		nbttagcompound.setInteger("Rot", rot);
 		if(altarPos != null)
 			nbttagcompound.setLong("AltarPos", altarPos.toLong());
 		nbttagcompound.setInteger("ItemID", itemID);
@@ -95,11 +93,6 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			isDirty = false;
 		}
-
-		if(rot == 360)
-			rot = 0;
-		if(!item.isEmpty())
-			rot++;
 
 		IRitualAltar altar = getAltar();
 		if(altar != null && altar.isPerformingRitual() && itemID != 0) {
@@ -194,11 +187,6 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 		}
 		world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
 		world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
-	}
-
-	@Override
-	public int getRotation(){
-		return rot;
 	}
 
 	@Override
