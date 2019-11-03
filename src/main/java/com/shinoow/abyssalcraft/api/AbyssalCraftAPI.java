@@ -61,7 +61,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.24.0";
+	public static final String API_VERSION = "1.25.0";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall, sapping, multi_rend;
 

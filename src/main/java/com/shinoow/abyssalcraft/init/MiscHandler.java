@@ -200,9 +200,9 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		CapabilityManager.INSTANCE.register(INecroDataCapability.class, NecroDataCapabilityStorage.instance, NecroDataCapability::new);
 
-		ConditionProcessorRegistry.instance().registerProcessor(0, (condition, cap, player) -> { return cap.getBiomeTriggers().contains(condition.getConditionObject()); });
-		ConditionProcessorRegistry.instance().registerProcessor(1, (condition, cap, player) -> { return cap.getEntityTriggers().contains(condition.getConditionObject()); });
-		ConditionProcessorRegistry.instance().registerProcessor(2, (condition, cap, player) -> { return cap.getDimensionTriggers().contains(condition.getConditionObject()); });
+		ConditionProcessorRegistry.instance().registerProcessor(0, (condition, cap, player) -> cap.getBiomeTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(1, (condition, cap, player) -> cap.getEntityTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(2, (condition, cap, player) -> cap.getDimensionTriggers().contains(condition.getConditionObject()));
 		ConditionProcessorRegistry.instance().registerProcessor(3, (condition, cap, player) -> {
 			for(String name : (String[])condition.getConditionObject())
 				if(cap.getBiomeTriggers().contains(name))
@@ -227,10 +227,16 @@ public class MiscHandler implements ILifeCycleHandler {
 					return true;
 			return false;
 		});
-		ConditionProcessorRegistry.instance().registerProcessor(7, (condition, cap, player) -> { return cap.getArtifactTriggers().contains(condition.getConditionObject()); });
-		ConditionProcessorRegistry.instance().registerProcessor(8, (condition, cap, player) -> { return cap.getPageTriggers().contains(condition.getConditionObject()); });
-		ConditionProcessorRegistry.instance().registerProcessor(9, (condition, cap, player) -> { return cap.getWhisperTriggers().contains(condition.getConditionObject()); });
-		ConditionProcessorRegistry.instance().registerProcessor(10, (condition, cap, player) -> { return cap.getMiscTriggers().contains(condition.getConditionObject()); });
+		ConditionProcessorRegistry.instance().registerProcessor(7, (condition, cap, player) -> cap.getArtifactTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(8, (condition, cap, player) -> cap.getPageTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(9, (condition, cap, player) -> cap.getWhisperTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(10, (condition, cap, player) -> cap.getMiscTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(11, (condition, cap, player) -> {
+			for(String name : (String[])condition.getConditionObject())
+				if(!cap.getEntityTriggers().contains(name))
+					return false;
+			return true;
+		});
 
 		addDungeonHooks();
 		sendIMC();

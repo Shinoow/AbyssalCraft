@@ -29,7 +29,7 @@ public class ConditionProcessorRegistry {
 
 	private final Map<Integer, IConditionProcessor> processors = new HashMap<>();
 
-	private final Logger logger = LogManager.getLogger("StructureHandler");
+	private final Logger logger = LogManager.getLogger("ConditionProcessorRegistry");
 
 	private static final ConditionProcessorRegistry INSTANCE = new ConditionProcessorRegistry();
 
@@ -46,9 +46,8 @@ public class ConditionProcessorRegistry {
 	 */
 	public void registerProcessor(int type, IConditionProcessor processor) {
 		if(type > -1) {
-			if(!processors.containsKey(type))
-				processors.put(type, processor);
-			else logger.log(Level.ERROR, "Processor already registed for type {}", type);
+			if(processors.putIfAbsent(type, processor) != null)
+				logger.log(Level.ERROR, "Processor already registed for type {}", type);
 		} else logger.log(Level.ERROR, "Invalid type: {}", type);
 	}
 
@@ -58,6 +57,6 @@ public class ConditionProcessorRegistry {
 	 * @return A IConditionProcessor or an empty one if none were found
 	 */
 	public IConditionProcessor getProcessor(int type) {
-		return processors.containsKey(type) ? processors.get(type) : (condition, cap, player) -> { return false; };
+		return processors.getOrDefault(type, (condition, cap, player) -> false);
 	}
 }
