@@ -310,7 +310,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 				world.removeEntity(entity);
 			}
 
-		for (int i = 0; i < 2 * getBrightness() && getShoggothType() == 4 && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
+		for (int i = 0; i < 2 * (getBrightness() > 0.1f ? getBrightness() : 0) && getShoggothType() == 4 && ACConfig.particleEntity; ++i)
 			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		double a = Math.toRadians(rotationYaw);
