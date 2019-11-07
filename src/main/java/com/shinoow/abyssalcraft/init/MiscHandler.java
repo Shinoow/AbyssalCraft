@@ -122,10 +122,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		addBrewing(PotionTypes.AWKWARD, ACItems.dread_fragment, Dplague_normal);
 		addBrewing(Dplague_normal, Items.REDSTONE, Dplague_long);
 		addBrewing(Dplague_normal, Items.GLOWSTONE_DUST, Dplague_strong);
-		addBrewing(PotionTypes.AWKWARD, ACItems.rotten_anti_flesh, antiMatter_normal);
-		addBrewing(PotionTypes.AWKWARD, ACItems.anti_plagued_flesh, antiMatter_normal);
-		addBrewing(PotionTypes.AWKWARD, ACItems.anti_plagued_flesh_on_a_bone, antiMatter_normal);
-		addBrewing(antiMatter_normal, Items.REDSTONE, antiMatter_long);
 
 		AbyssalCraftAPI.STAFF_OF_RENDING = EnumHelper.addEnchantmentType("STAFF_OF_RENDING", i -> i instanceof IStaffOfRending);
 
