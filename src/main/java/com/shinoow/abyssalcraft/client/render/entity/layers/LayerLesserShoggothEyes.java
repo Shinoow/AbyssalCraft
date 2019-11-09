@@ -52,7 +52,7 @@ public class LayerLesserShoggothEyes implements LayerRenderer<EntityLesserShoggo
 		int j = i % 65536;
 		int k = i / 65536;
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, entitylivingbaseIn.getShoggothType() == 4 ? entitylivingbaseIn.getBrightness() : 1.0F);
 		shoggothRenderer.getMainModel().render(entitylivingbaseIn, p_177141_2_, p_177141_3_, p_177141_5_, p_177141_6_, p_177141_7_, scale);
 		i = entitylivingbaseIn.getBrightnessForRender();
 		j = i % 65536;
