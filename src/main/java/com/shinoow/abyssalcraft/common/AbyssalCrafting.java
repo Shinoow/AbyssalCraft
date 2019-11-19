@@ -477,6 +477,7 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconResurrectionRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCleansingRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCorruptionRitual());
+		RitualRegistry.instance().registerRitual(new NecronomiconMassEnchantRitual());
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};

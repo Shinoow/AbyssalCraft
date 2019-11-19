@@ -791,6 +791,8 @@ ac.ritual.lesserScroll=Небольшой свиток
 ac.ritual.lesserScroll.desc=Небольшой свиток изготавливается из 2-ух Книг, Колючка пустоши и светящийся чертополох
 ac.ritual.moderateScroll=Средний свиток
 ac.ritual.moderateScroll.desc=Средний свиток изготавливается из 2-ух Книг, a Страшный фрагмент и Страшный осколок Абиссальнита
+ac.ritual.massEnchantment=Mass Enchantment
+ac.ritual.massEnchantment.desc=By presesenting 8 Enchanted Books and an Item on the altar, all of the Enchantments will be combined and applied on the Item. You can use any combination of Enchantments, and all levels will be combined, so multiple instances of the same Enchantment can surpass the normal boundaries.
 
 #Spells
 ac.spell.lifedrain=Вампиризм
