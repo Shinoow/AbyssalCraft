@@ -24,10 +24,10 @@ public class ACConfig {
 	particleEntity, hardcoreMode, antiItemDisintegration, smeltingRecipes, purgeMobSpawns, mimicFire,
 	armorPotionEffects, nuclearAntimatterExplosions, syncDataOnBookOpening, dreadGrassSpread, portalSpawnsNearPlayer,
 	showBossDialogs, jzaharBreaksFourthWall, lootTableContent, depthsGhoulBiomeDictSpawn, abyssalZombieBiomeDictSpawn,
-	useAmplifiedWorldType, generateStatuesInLairs;
+	useAmplifiedWorldType, generateStatuesInLairs, enchantBooks;
 	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate, acidSpitFrequency,
 	knowledgeSyncDelay, shoggothLairSpawnRateRivers, darkOffspringSpawnWeight, monolithBuildingCooldown, corruptionRitualRange,
-	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize;
+	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize, enchantmentMaxLevel;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid;
 	public static double acidResistanceHardness;

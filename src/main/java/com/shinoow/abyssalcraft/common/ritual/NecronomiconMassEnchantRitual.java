@@ -15,6 +15,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
 import net.minecraft.enchantment.Enchantment;
@@ -52,6 +53,8 @@ public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IRitualAltar) {
 			IRitualAltar altar = (IRitualAltar) tile;
+			if(altar.getItem().getItem() == Items.BOOK && !ACConfig.enchantBooks)
+				return false;
 			if(altar.getItem().isItemEnchantable()) {
 				books = altar.getPedestals().stream().map(p -> p.getItem()).filter(i -> i.getRarity() == EnumRarity.UNCOMMON).collect(Collectors.toList());
 
@@ -76,20 +79,31 @@ public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
 
 			Map<Integer, Integer> enchantments = new HashMap<>();
 
-			for(ItemStack stack : books) {
-				NBTTagList nbttaglist = ItemEnchantedBook.getEnchantments(stack);
-
-				for (int i = 0; i < nbttaglist.tagCount(); ++i)
+			books.stream().map(s -> ItemEnchantedBook.getEnchantments(s)).forEach(n -> {
+				for (int i = 0; i < n.tagCount(); ++i)
 				{
-					NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
+					NBTTagCompound nbttagcompound = n.getCompoundTagAt(i);
 					int id = nbttagcompound.getShort("id");
-					int lvl = nbttagcompound.getShort("lvl");
-					enchantments.merge(id, lvl, (k, v) -> k+v); //maybe restrict this with a max value? Could lock it at 10 or something, with a config option for the sake of destroying balance
+					int lvl = Math.min(nbttagcompound.getShort("lvl"), ACConfig.enchantmentMaxLevel);
+					enchantments.merge(id, lvl, (k, v) -> Math.min(k+v, ACConfig.enchantmentMaxLevel));
 				}
-			}
+			});
 
 			if(!enchantments.isEmpty())
-				EnchantmentHelper.setEnchantments(enchantments.entrySet().stream().collect(Collectors.toMap(e -> Enchantment.getEnchantmentByID(e.getKey()), e -> e.getValue())), altar.getItem());
+				if(altar.getItem().getItem() == Items.BOOK && ACConfig.enchantBooks) {
+					ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
+					book.setTagCompound(new NBTTagCompound());
+					NBTTagList list = new NBTTagList();
+					enchantments.entrySet().stream().forEach(e -> {
+						NBTTagCompound nbt = new NBTTagCompound();
+						nbt.setShort("id", e.getKey().shortValue());
+						nbt.setShort("lvl", e.getValue().shortValue());
+						list.appendTag(nbt);
+					});
+					book.getTagCompound().setTag("StoredEnchantments", list);
+					altar.setItem(book);
+				} else if(altar.getItem().getItem() != Items.BOOK)
+					EnchantmentHelper.setEnchantments(enchantments.entrySet().stream().collect(Collectors.toMap(e -> Enchantment.getEnchantmentByID(e.getKey()), e -> e.getValue())), altar.getItem());
 		}
 	}
 
