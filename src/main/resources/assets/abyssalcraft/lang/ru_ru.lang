@@ -919,6 +919,7 @@ itemGroup.acfood=AbyssalCraft: Еда
 itemGroup.acdblocks=AbyssalCraft: Декоративные блоки
 itemGroup.accrystals=AbyssalCraft: Кристаллизированные кристаллы
 itemGroup.accoins=Abyssalcraft: Монеты
+itemGroup.acspells=AbyssalCraft Spells
 
 #Fluids
 fluid.liquidcoralium=Жидкий коралл

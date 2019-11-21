@@ -12,17 +12,19 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.spell.IScroll;
-import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.*;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
-import com.shinoow.abyssalcraft.api.spell.SpellUtils;
+import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemScroll extends ItemMetadata implements IScroll {
 
@@ -72,5 +74,21 @@ public class ItemScroll extends ItemMetadata implements IScroll {
 		if(stack.getItem() == ACItems.unique_scroll)
 			return ScrollType.UNIQUE;
 		return ScrollType.BASIC;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
+		super.getSubItems(par2CreativeTab, par3List);
+		if(this == ACItems.scroll && par2CreativeTab == ACTabs.tabSpells) {
+			ItemStack greater_scroll = new ItemStack(ACItems.scroll, 1, 3);
+			ItemStack antimatter_scroll = new ItemStack(ACItems.unique_scroll, 1, 0);
+			ItemStack oblivion_scroll = new ItemStack(ACItems.unique_scroll, 1, 1);
+			SpellRegistry.instance().getSpells().stream().forEach(s -> {
+				par3List.add(SpellRegistry.instance().inscribeSpell(s, greater_scroll.copy()));
+				par3List.add(SpellRegistry.instance().inscribeSpell(s, antimatter_scroll.copy()));
+				par3List.add(SpellRegistry.instance().inscribeSpell(s, oblivion_scroll.copy()));
+			});
+		}
 	}
 }

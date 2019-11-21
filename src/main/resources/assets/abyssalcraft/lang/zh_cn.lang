@@ -918,6 +918,7 @@ itemGroup.acfood=深渊国度食物
 itemGroup.acdblocks=深渊国度装饰方块
 itemGroup.accrystals=深渊国度结晶器晶体
 itemGroup.accoins=深渊国度钱币
+itemGroup.acspells=AbyssalCraft Spells
 
 #流体
 fluid.liquidcoralium=液态珊瑚

@@ -918,6 +918,7 @@ itemGroup.acfood=AbyssalCraft Cosas de Comida
 itemGroup.acdblocks=AbyssalCraft Bloques Decorativos
 itemGroup.accrystals=AbyssalCraft Cristales para el Cristalizador
 itemGroup.accoins=Abyssalcraft Monedas
+itemGroup.acspells=AbyssalCraft Spells
 
 #Fluids
 fluid.liquidcoralium=Coralium líquido
