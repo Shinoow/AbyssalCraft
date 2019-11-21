@@ -107,6 +107,12 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 	private void spawnParticles(double xOffset, double zOffset, double velX, double velZ, int[] data, IRitualAltar altar) {
 		if(!world.isRemote) return;
 		switch(altar.getRitualParticle()) {
+		case GLYPHS:
+			int x = velX != 0 && velZ != 0 ? 4 : 6;
+			int z = velZ != 0 && velX != 0 ? 4 : 6;
+			world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, altarPos.getX() + xOffset, altarPos.getY() + 2.05, altarPos.getZ() + zOffset, velX*x,.15,velZ*z);
+			world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, pos.getX() + 0.5, pos.getY() + 2.05, pos.getZ() + 0.5, 0, .15, 0);
+			break;
 		case ITEM:
 			world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
 			break;

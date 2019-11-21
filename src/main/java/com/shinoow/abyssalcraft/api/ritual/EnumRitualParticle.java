@@ -20,7 +20,7 @@ package com.shinoow.abyssalcraft.api.ritual;
  */
 public enum EnumRitualParticle {
 
-	NONE, ITEM, SMOKE, ITEM_SMOKE_COMBO, SMOKE_PILLARS, SPRINKLER, PE_STREAM;
+	NONE, ITEM, SMOKE, ITEM_SMOKE_COMBO, SMOKE_PILLARS, SPRINKLER, PE_STREAM, GLYPHS;
 
 	public static EnumRitualParticle fromId(int id) {
 		if (id < 0 || id >= values().length)

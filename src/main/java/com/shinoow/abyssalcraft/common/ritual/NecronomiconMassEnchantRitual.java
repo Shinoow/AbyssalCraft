@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.ritual;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
@@ -39,7 +40,7 @@ public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
 		super("massEnchantment", 4, 50000, new ItemStack(Items.ENCHANTED_BOOK), new ItemStack(Items.ENCHANTED_BOOK),
 				new ItemStack(Items.ENCHANTED_BOOK), new ItemStack(Items.ENCHANTED_BOOK), new ItemStack(Items.ENCHANTED_BOOK),
 				new ItemStack(Items.ENCHANTED_BOOK), new ItemStack(Items.ENCHANTED_BOOK), new ItemStack(Items.ENCHANTED_BOOK));
-
+		setRitualParticle(EnumRitualParticle.GLYPHS);
 	}
 
 	@Override
