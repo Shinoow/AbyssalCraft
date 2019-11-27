@@ -1,5 +1,6 @@
 body {
-    background: url('../images/bg.png') no-repeat fixed;
+    background: url('../images/bg.png') fixed;
+    background-size: cover;
     margin-left: 20%;
     margin-right: 20%;
 }
