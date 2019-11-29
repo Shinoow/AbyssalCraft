@@ -75,7 +75,7 @@ public class ItemScroll extends ItemMetadata implements IScroll {
 			return ScrollType.UNIQUE;
 		return ScrollType.BASIC;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
