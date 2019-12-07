@@ -110,6 +110,21 @@ public class PotionAntimatter extends Potion{
 				entity.copyLocationAndAnglesFrom(par1EntityLivingBase);
 				par1EntityLivingBase.world.removeEntity(par1EntityLivingBase);
 				entity.onInitialSpawn(par1EntityLivingBase.world.getDifficultyForLocation(par1EntityLivingBase.getPosition()),(IEntityLivingData)null);
+				String newname = "";
+
+				String name = par1EntityLivingBase.getName();
+				int length = name.length();
+				boolean[] cases = new boolean[length];
+				for(int j = 0; j < length; j++)
+					cases[j] = Character.isUpperCase(name.charAt(j));
+				for(int i = length - 1; i >= 0; i--) {
+					char c = name.charAt(i);
+					int k = length - 1 - i;
+					newname += cases[k] ? Character.toUpperCase(c) : Character.toLowerCase(c);
+				}
+
+				entity.setCustomNameTag(newname);
+				entity.enablePersistence();
 				par1EntityLivingBase.world.spawnEntity(entity);
 			} else if(par1EntityLivingBase instanceof EntitySkeleton){
 				EntityAntiSkeleton entity = new EntityAntiSkeleton(par1EntityLivingBase.world);

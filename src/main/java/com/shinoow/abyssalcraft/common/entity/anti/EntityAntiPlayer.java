@@ -75,11 +75,6 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	public boolean canDespawn(){
-		return false;
-	}
-
-	@Override
 	protected SoundEvent getHurtSound(DamageSource source)
 	{
 		return ACSounds.antiplayer_hurt;
@@ -94,27 +89,6 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	@Override
 	protected ResourceLocation getLootTable(){
 		return ACLoot.ENTITY_ANTI_PLAYER;
-	}
-
-	@Override
-	public void onKillEntity(EntityLivingBase par1EntityLivingBase)
-	{
-		super.onKillEntity(par1EntityLivingBase);
-
-		if (par1EntityLivingBase instanceof EntityPlayer)
-		{
-			if (rand.nextBoolean())
-				return;
-
-			EntityAntiPlayer antiPlayer = new EntityAntiPlayer(world);
-			antiPlayer.copyLocationAndAnglesFrom(par1EntityLivingBase);
-			world.removeEntity(par1EntityLivingBase);
-			antiPlayer.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-
-			world.spawnEntity(antiPlayer);
-			world.playEvent((EntityPlayer)null, 1016, new BlockPos(posX, posY, posZ), 0);
-
-		}
 	}
 
 	@Override
