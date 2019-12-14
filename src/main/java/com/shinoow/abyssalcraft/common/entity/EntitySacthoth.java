@@ -294,6 +294,12 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
+	@Override
+	public void onKillCommand()
+	{
+		super.attackEntityFrom(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+	}
+
 	protected boolean teleportRandomly()
 	{
 		double d0 = posX + (rand.nextDouble() - 0.5D) * 64.0D;

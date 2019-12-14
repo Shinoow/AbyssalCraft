@@ -148,6 +148,12 @@ public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, I
 	//	}
 
 	@Override
+	public void onKillCommand()
+	{
+		attackEntityFromPart(dragonPartHead, DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+	}
+
+	@Override
 	public void onLivingUpdate()
 	{
 		float f;

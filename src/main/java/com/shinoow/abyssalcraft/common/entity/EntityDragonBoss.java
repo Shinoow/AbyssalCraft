@@ -574,6 +574,12 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	}
 
 	@Override
+	public void onKillCommand()
+	{
+		func_82195_e(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+	}
+
+	@Override
 	protected void onDeathUpdate()
 	{
 		++deathTicks;

@@ -750,6 +750,12 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 	}
 
 	@Override
+	public void onKillCommand()
+	{
+		super.attackEntityFrom(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+	}
+
+	@Override
 	protected void onDeathUpdate()
 	{
 		++deathTicks;
