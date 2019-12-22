@@ -48,7 +48,7 @@ public class TileEntityAltarBlockRenderer extends TileEntitySpecialRenderer {
 
 			GlStateManager.rotate(180F, 1F, 0F, 0F);
 			GlStateManager.translate(0.0F, flag ? -0.62F : -0.43F, 0F);
-			GlStateManager.rotate(altar.getRotation(), 0F, 1F, 0F);
+			GlStateManager.rotate(altar.shouldItemRotate() ? getWorld().getWorldTime() : 0, 0F, 1F, 0F);
 
 			Minecraft.getMinecraft().getRenderItem().renderItem(altar.getItem(), ItemCameraTransforms.TransformType.GROUND);
 

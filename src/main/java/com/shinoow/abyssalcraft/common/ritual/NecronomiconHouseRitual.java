@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.ritual;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.util.IHiddenRitual;
@@ -29,6 +30,7 @@ public class NecronomiconHouseRitual extends NecronomiconInfusionRitual implemen
 				new ItemStack(Items.SPRUCE_DOOR), new ItemStack(Items.BIRCH_DOOR), new ItemStack(Items.JUNGLE_DOOR),
 				new ItemStack(Items.ACACIA_DOOR), new ItemStack(Items.DARK_OAK_DOOR)}, "plankWood", "stairWood",
 				"plankWood", "plankWood", "plankWood", "plankWood", "plankWood", "stairWood");
+		setRitualParticle(EnumRitualParticle.SPRINKLER);
 	}
 
 	@Override

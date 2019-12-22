@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import javax.annotation.Nullable;
+
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -31,8 +33,12 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class TileEntityCrystallizer extends TileEntity implements ISidedInventory, ITickable {
 
@@ -502,14 +508,24 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 		return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName(), new Object[0]);
 	}
 
-	net.minecraftforge.items.IItemHandler handlerTop = new net.minecraftforge.items.wrapper.SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);
-	net.minecraftforge.items.IItemHandler handlerBottom = new net.minecraftforge.items.wrapper.SidedInvWrapper(this, net.minecraft.util.EnumFacing.DOWN);
-	net.minecraftforge.items.IItemHandler handlerSide = new net.minecraftforge.items.wrapper.SidedInvWrapper(this, net.minecraft.util.EnumFacing.WEST);
+	@Override
+	public boolean isEmpty()
+	{
+		for (ItemStack itemstack : crystallizerItemStacks)
+			if (!itemstack.isEmpty())
+				return false;
+
+		return true;
+	}
+
+	IItemHandler handlerTop = new SidedInvWrapper(this, EnumFacing.UP);
+	IItemHandler handlerBottom = new SidedInvWrapper(this, EnumFacing.DOWN);
+	IItemHandler handlerSide = new SidedInvWrapper(this, EnumFacing.WEST);
 
 	@Override
-	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, net.minecraft.util.EnumFacing facing)
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		if (facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		if (facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			if (facing == EnumFacing.DOWN)
 				return (T) handlerBottom;
 			else if (facing == EnumFacing.UP)
@@ -520,12 +536,8 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	}
 
 	@Override
-	public boolean isEmpty()
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
 	{
-		for (ItemStack itemstack : crystallizerItemStacks)
-			if (!itemstack.isEmpty())
-				return false;
-
-		return true;
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing != null || super.hasCapability(capability, facing);
 	}
 }

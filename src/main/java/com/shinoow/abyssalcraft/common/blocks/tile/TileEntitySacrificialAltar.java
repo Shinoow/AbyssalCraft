@@ -23,19 +23,19 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 
 public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCollector, ISingletonInventory, ITickable {
 
 	private ItemStack item = ItemStack.EMPTY;
-	private int rot;
 	private float energy;
 	Random rand = new Random();
 	EntityLivingBase entity;
@@ -49,7 +49,6 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 		super.readFromNBT(nbttagcompound);
 		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
 		item = new ItemStack(nbtItem);
-		rot = nbttagcompound.getInteger("Rot");
 		energy = nbttagcompound.getFloat("PotEnergy");
 		collectionLimit = nbttagcompound.getInteger("CollectionLimit");
 		coolDown = nbttagcompound.getInteger("CoolDown");
@@ -63,7 +62,6 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 		if(!item.isEmpty())
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
-		nbttagcompound.setInteger("Rot", rot);
 		nbttagcompound.setFloat("PotEnergy", energy);
 		nbttagcompound.setInteger("CollectionLimit", collectionLimit);
 		nbttagcompound.setInteger("CoolDown", coolDown);
@@ -96,11 +94,6 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 			isDirty = false;
 		}
 
-		if(rot == 360)
-			rot = 0;
-		if(!item.isEmpty())
-			rot++;
-
 		if(isCoolingDown())
 			coolDown--;
 
@@ -124,7 +117,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 
 		if(entity != null){
 			if(getContainedEnergy() < getMaxEnergy())
-				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, entity.posX, entity.posY, entity.posZ, 0, 0, 0);
+				entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 20, 0, false, false));
 			if(!entity.isEntityAlive()){
 				float num = entity.getMaxHealth();
 				entity = null;
@@ -143,11 +136,6 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 
 		if(getContainedEnergy() > getMaxEnergy())
 			energy = getMaxEnergy();
-	}
-
-	@Override
-	public int getRotation(){
-		return rot;
 	}
 
 	@Override

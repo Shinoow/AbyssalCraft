@@ -27,6 +27,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 public class EntityODBPrimed extends Entity {
 
@@ -99,8 +100,8 @@ public class EntityODBPrimed extends Entity {
 
 		} else{
 			handleWaterMovement();
-			if(ACConfig.particleEntity)
-				world.spawnParticle(EnumParticleTypes.PORTAL, posX, posY + 0.5D, posZ, 1.0D, 0.0D, 0.0D);
+			if(ACConfig.particleEntity && !world.isRemote)
+				((WorldServer)world).spawnParticle(EnumParticleTypes.PORTAL, true, posX, posY + 0.5D, posZ, 10, 0.0D, 0, 0, 1D);
 		}
 	}
 

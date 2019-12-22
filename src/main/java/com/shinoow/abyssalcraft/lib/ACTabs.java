@@ -82,4 +82,12 @@ public class ACTabs {
 			return new ItemStack(ACItems.coin);
 		}
 	};
+	public static final CreativeTabs tabSpells = new CreativeTabs("acspells") {
+
+		@Override
+		public ItemStack getTabIconItem() {
+
+			return new ItemStack(ACItems.scroll, 1, 3);
+		}
+	};
 }

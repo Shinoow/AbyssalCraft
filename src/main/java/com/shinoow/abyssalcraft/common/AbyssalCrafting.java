@@ -466,15 +466,18 @@ public class AbyssalCrafting {
 				PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.rotten_anti_flesh), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER),
 				new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.GUNPOWDER)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("antiPotionAoE", 0, 300F, AbyssalCraftAPI.antimatter_potion, antiaoeofferings));
-		Object[] corenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 1), ACItems.refined_coralium_ingot, ACItems.coralium_plagued_flesh, Items.BOOK,
-				ACItems.coralium_plagued_flesh, ACItems.refined_coralium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 1)};
-		RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("corEnchantment", 1, ACLib.abyssal_wasteland_id, 5000F, new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1), corenchofferings));
-		Object[] dreenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 2), ACItems.dreadium_ingot, ACItems.dread_fragment, Items.BOOK, ACItems.dread_fragment,
-				ACItems.dreadium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("dreEnchantment", 2, ACLib.dreadlands_id, 5000F, new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1), dreenchofferings));
+		if(ACConfig.plague_enchantments) {
+			Object[] corenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 1), ACItems.refined_coralium_ingot, ACItems.coralium_plagued_flesh, Items.BOOK,
+					ACItems.coralium_plagued_flesh, ACItems.refined_coralium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 1)};
+			RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("corEnchantment", 1, ACLib.abyssal_wasteland_id, 5000F, new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1), corenchofferings));
+			Object[] dreenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 2), ACItems.dreadium_ingot, ACItems.dread_fragment, Items.BOOK, ACItems.dread_fragment,
+					ACItems.dreadium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 2)};
+			RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("dreEnchantment", 2, ACLib.dreadlands_id, 5000F, new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1), dreenchofferings));
+		}
 		RitualRegistry.instance().registerRitual(new NecronomiconResurrectionRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCleansingRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCorruptionRitual());
+		RitualRegistry.instance().registerRitual(new NecronomiconMassEnchantRitual());
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
@@ -582,7 +585,8 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 3), new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 2), omtoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
 		Object[] staffofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 2), ACItems.eldritch_scale, ACItems.ethaxium_ingot,
 				ACItems.rlyehian_gateway_key, ACItems.ethaxium_ingot, ACItems.eldritch_scale, new ItemStack(ACItems.essence, 1, 0)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStaff", 4, ACLib.omothol_id, 15000F, new ItemStack(ACItems.staff_of_the_gatekeeper), new ItemStack(ACItems.staff_of_rending, 1, 3), staffofferings));
+		String[] tags = {"energyShadow", "energyAbyssal", "energyDread", "energyOmothol", "ench"};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStaff", 4, ACLib.omothol_id, 15000F, new ItemStack(ACItems.staff_of_the_gatekeeper), new ItemStack(ACItems.staff_of_rending, 1, 3), staffofferings).setTags(tags));
 		RitualRegistry.instance().registerRitual(new NecronomiconWeatherRitual());
 		Object[] containerofferings = new Object[]{ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector,
 				ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard};
@@ -599,7 +603,6 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econAWupgrade", 1, 800F, new ItemStack(ACBlocks.tiered_energy_container, 1, 1), new ItemStack(ACBlocks.tiered_energy_container, 1, 0), awoffers).setTags("PotEnergy"));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econDLupgrade", 2, 1200F, new ItemStack(ACBlocks.tiered_energy_container, 1, 2), new ItemStack(ACBlocks.tiered_energy_container, 1, 1), dloffers).setTags("PotEnergy"));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.tiered_energy_container, 1, 3), new ItemStack(ACBlocks.tiered_energy_container, 1, 2), omtoffers).setTags("PotEnergy"));
-		String[] tags = {"energyShadow", "energyAbyssal", "energyDread", "energyOmothol"};
 		Object[] sorawofferings = new Object[]{ACItems.shadow_gem, new ItemStack(ACBlocks.stone, 1, 1), ACItems.coralium_plagued_flesh, new ItemStack(ACBlocks.stone, 1, 1), ACItems.coralium_plagued_flesh,
 				new ItemStack(ACBlocks.stone, 1, 1), ACItems.coralium_plagued_flesh, new ItemStack(ACBlocks.stone, 1, 1)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorAWupgrade", 1, ACLib.abyssal_wasteland_id, 1000F, new ItemStack(ACItems.staff_of_rending, 1, 1), new ItemStack(ACItems.staff_of_rending, 1, 0), sorawofferings).setTags(tags));

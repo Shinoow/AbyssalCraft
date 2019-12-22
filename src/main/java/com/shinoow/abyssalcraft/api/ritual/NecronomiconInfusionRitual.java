@@ -45,6 +45,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 			boolean requiresSacrifice, ItemStack item, Object sacrifice, Object...offerings) {
 		super(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, item, offerings);
 		this.sacrifice = sacrifice;
+		setRitualParticle(EnumRitualParticle.ITEM_SMOKE_COMBO);
 	}
 
 	/**

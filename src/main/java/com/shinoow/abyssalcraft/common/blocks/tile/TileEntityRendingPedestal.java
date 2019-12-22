@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import javax.annotation.Nullable;
+
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
@@ -36,6 +38,10 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class TileEntityRendingPedestal extends TileEntity implements IEnergyContainer, ITickable, ISidedInventory, ISingletonInventory {
 
@@ -443,15 +449,21 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 
 	}
 
-	net.minecraftforge.items.IItemHandler handlerBottom = new net.minecraftforge.items.wrapper.SidedInvWrapper(this, net.minecraft.util.EnumFacing.DOWN);
+	IItemHandler handlerBottom = new SidedInvWrapper(this, EnumFacing.DOWN);
 
 	@Override
-	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, net.minecraft.util.EnumFacing facing)
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		if (facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		if (facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			if (facing == EnumFacing.DOWN)
 				return (T) handlerBottom;
 		return super.getCapability(capability, facing);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
+	{
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.DOWN || super.hasCapability(capability, facing);
 	}
 
 	@Override
@@ -466,9 +478,8 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 	}
 
 	@Override
-	public int getRotation() {
-
-		return 0;
+	public boolean shouldItemRotate() {
+		return false;
 	}
 
 	@Override

@@ -24,10 +24,10 @@ public class ACConfig {
 	particleEntity, hardcoreMode, antiItemDisintegration, smeltingRecipes, purgeMobSpawns, mimicFire,
 	armorPotionEffects, nuclearAntimatterExplosions, syncDataOnBookOpening, dreadGrassSpread, portalSpawnsNearPlayer,
 	showBossDialogs, jzaharBreaksFourthWall, lootTableContent, depthsGhoulBiomeDictSpawn, abyssalZombieBiomeDictSpawn,
-	useAmplifiedWorldType, generateStatuesInLairs;
+	useAmplifiedWorldType, generateStatuesInLairs, enchantBooks;
 	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate, acidSpitFrequency,
 	knowledgeSyncDelay, shoggothLairSpawnRateRivers, darkOffspringSpawnWeight, monolithBuildingCooldown, corruptionRitualRange,
-	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize;
+	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize, enchantmentMaxLevel;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid;
 	public static double acidResistanceHardness;
@@ -48,7 +48,7 @@ public class ACConfig {
 	dreadstone_cobblestone_stairs, abyssalnite_cobblestone_slab, abyssalnite_cobblestone_stairs, darkstone_cobblestone_wall, abyssal_cobbblestone_wall,
 	coralium_cobblestone_wall, dreadstone_cobblestone_wall, abyssalnite_cobblestone_wall;
 
-	public static boolean foodstuff, upgrade_kits;
+	public static boolean foodstuff, upgrade_kits, plague_enchantments;
 
 	@Deprecated
 	public static int endAbyssalZombieSpawnWeight;

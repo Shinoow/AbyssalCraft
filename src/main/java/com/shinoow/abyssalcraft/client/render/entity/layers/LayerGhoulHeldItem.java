@@ -35,13 +35,13 @@ public class LayerGhoulHeldItem implements LayerRenderer<EntityLivingBase> {
 	}
 
 	@Override
-	public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float p_177141_2_, float p_177141_3_, float partialTicks, float p_177141_5_, float p_177141_6_, float p_177141_7_, float scale)
+	public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
 		boolean flag = entitylivingbaseIn.getPrimaryHand() == EnumHandSide.RIGHT;
 		ItemStack itemstack = flag ? entitylivingbaseIn.getHeldItemOffhand() : entitylivingbaseIn.getHeldItemMainhand();
 		ItemStack itemstack1 = flag ? entitylivingbaseIn.getHeldItemMainhand() : entitylivingbaseIn.getHeldItemOffhand();
 
-		if (itemstack != null || itemstack1 != null)
+		if (!itemstack.isEmpty() || !itemstack1.isEmpty())
 		{
 			GlStateManager.pushMatrix();
 
@@ -59,12 +59,12 @@ public class LayerGhoulHeldItem implements LayerRenderer<EntityLivingBase> {
 		}
 	}
 
-	private void renderHeldItem(EntityLivingBase p_188358_1_, ItemStack p_188358_2_, ItemCameraTransforms.TransformType p_188358_3_, EnumHandSide p_188358_4_)
+	private void renderHeldItem(EntityLivingBase entity, ItemStack stack, ItemCameraTransforms.TransformType transform, EnumHandSide hand)
 	{
-		if (p_188358_2_ != null)
+		if (!stack.isEmpty())
 		{
 			GlStateManager.pushMatrix();
-			((ModelDG)livingEntityRenderer.getMainModel()).postRenderArm(0.0625F, p_188358_4_);
+			((ModelDG)livingEntityRenderer.getMainModel()).postRenderArm(0.0625F, hand);
 			if(!livingEntityRenderer.getMainModel().isChild){
 				GlStateManager.translate(-0.08F, 0.55F, -0.16F);
 				GlStateManager.rotate(-45, 1, 0, 0);
@@ -73,14 +73,14 @@ public class LayerGhoulHeldItem implements LayerRenderer<EntityLivingBase> {
 				GlStateManager.rotate(-70, 1, 0, 0);
 			}
 
-			if (p_188358_1_.isSneaking())
+			if (entity.isSneaking())
 				GlStateManager.translate(0.0F, 0.2F, 0.0F);
 
 			GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
 			GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
-			boolean flag = p_188358_4_ == EnumHandSide.LEFT;
+			boolean flag = hand == EnumHandSide.LEFT;
 			GlStateManager.translate(flag ? -0.0625F : 0.0625F, 0.125F, -0.625F);
-			Minecraft.getMinecraft().getItemRenderer().renderItemSide(p_188358_1_, p_188358_2_, p_188358_3_, flag);
+			Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, stack, transform, flag);
 			GlStateManager.popMatrix();
 		}
 	}

@@ -44,10 +44,12 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -60,7 +62,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	private int ritualTimer;
 	private NecronomiconRitual ritual;
 	private ItemStack item = ItemStack.EMPTY;
-	private int rot;
 	private EntityPlayer user;
 	private float consumedEnergy;
 	private boolean isDirty;
@@ -73,7 +74,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		super.readFromNBT(nbttagcompound);
 		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
 		item = new ItemStack(nbtItem);
-		rot = nbttagcompound.getInteger("Rot");
 		ritualTimer = nbttagcompound.getInteger("Cooldown");
 	}
 
@@ -85,7 +85,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		if(!item.isEmpty())
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
-		nbttagcompound.setInteger("Rot", rot);
 		nbttagcompound.setInteger("Cooldown", ritualTimer);
 
 		return nbttagcompound;
@@ -117,17 +116,17 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		}
 
 		if(isPerformingRitual()){
-			if(ritualTimer == 1){
+			if(ritualTimer == 1 && !world.isRemote){
 				SoundEvent chant = getRandomChant();
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
-				world.playSound(pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1, true);
+				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
+				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
+				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
+				if(ritual != null && sacrifice != null && sacrifice.isEntityAlive())
+					sacrifice.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 200, 0, false, false));
 			}
 			ritualTimer++;
 
 			if(ritual != null){
-				if(sacrifice != null && sacrifice.isEntityAlive())
-					world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, sacrifice.posX, sacrifice.posY + sacrifice.getEyeHeight(), sacrifice.posZ, 0, 0, 0);
 				if(!world.isRemote && ritualTimer % 20 == 0)
 					if(user != null)
 						collectPEFromPlayer();
@@ -153,11 +152,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 			world.spawnParticle(EnumParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0,0,0);
 		}
-
-		if(rot == 360)
-			rot = 0;
-		if(!item.isEmpty())
-			rot++;
 	}
 
 	private void reset() {
@@ -301,11 +295,6 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	@Override
 	public boolean isPerformingRitual(){
 		return ritualTimer < 200 && ritualTimer > 0;
-	}
-
-	@Override
-	public int getRotation(){
-		return rot;
 	}
 
 	@Override

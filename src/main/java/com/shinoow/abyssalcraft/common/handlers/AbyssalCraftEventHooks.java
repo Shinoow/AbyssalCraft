@@ -29,6 +29,7 @@ import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
 import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
@@ -198,7 +199,8 @@ public class AbyssalCraftEventHooks {
 				//				player.addStat(ACAchievements.enter_dark_realm, 1);
 			}
 		}
-		if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)){
+		if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)
+				&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW){
 			Random rand = new Random();
 			if(ACConfig.particleEntity)
 				event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
@@ -357,8 +359,17 @@ public class AbyssalCraftEventHooks {
 	public void onDeath(LivingDeathEvent event){
 		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().world.isRemote){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-			if(event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof EntityEvilSheep)
+			if(event.getSource().getTrueSource() instanceof EntityEvilSheep)
 				((EntityEvilSheep)event.getSource().getTrueSource()).setKilledPlayer(player);
+			else if(event.getSource().getTrueSource() instanceof EntityAntiPlayer && player.getRNG().nextBoolean()) {
+				EntityAntiPlayer antiPlayer = new EntityAntiPlayer(player.world);
+				antiPlayer.copyLocationAndAnglesFrom(player);
+				antiPlayer.onInitialSpawn(player.world.getDifficultyForLocation(event.getSource().getTrueSource().getPosition()), (IEntityLivingData)null);
+				antiPlayer.setCustomNameTag(invert(player.getName()));
+				antiPlayer.enablePersistence();
+				player.world.spawnEntity(antiPlayer);
+				player.world.playEvent((EntityPlayer)null, 1016, event.getSource().getTrueSource().getPosition(), 0);
+			}
 		} else if(event.getEntityLiving() instanceof EntityLiving && event.getEntityLiving().hasCustomName() &&
 				event.getEntityLiving().isNonBoss() && !event.getEntityLiving().world.isRemote) {
 			EntityLivingBase e = event.getEntityLiving();
@@ -404,6 +415,22 @@ public class AbyssalCraftEventHooks {
 		}
 	}
 
+	private String invert(String name) {
+		String newname = "";
+
+		int length = name.length();
+		boolean[] cases = new boolean[length];
+		for(int j = 0; j < length; j++)
+			cases[j] = Character.isUpperCase(name.charAt(j));
+		for(int i = length - 1; i >= 0; i--) {
+			char c = name.charAt(i);
+			int k = length - 1 - i;
+			newname += cases[k] ? Character.toUpperCase(c) : Character.toLowerCase(c);
+		}
+		
+		return newname;
+	}
+	
 	@SubscribeEvent
 	public void upgradeKits(AnvilUpdateEvent event){
 		if(!(event.getRight().getItem() instanceof ItemUpgradeKit)) {
@@ -494,20 +521,7 @@ public class AbyssalCraftEventHooks {
 		ItemStack stack = event.getEntityPlayer().getHeldItem(event.getHand());
 		if(stack.getItem() == Items.NAME_TAG && stack.hasDisplayName() && event.getTarget() instanceof IAntiEntity) {
 			EntityLiving target = (EntityLiving)event.getTarget();
-			String newname = "";
-
-			String name = stack.getDisplayName();
-			int length = name.length();
-			boolean[] cases = new boolean[length];
-			for(int j = 0; j < length; j++)
-				cases[j] = Character.isUpperCase(name.charAt(j));
-			for(int i = length - 1; i >= 0; i--) {
-				char c = name.charAt(i);
-				int k = length - 1 - i;
-				newname += cases[k] ? Character.toUpperCase(c) : Character.toLowerCase(c);
-			}
-
-			target.setCustomNameTag(newname);
+			target.setCustomNameTag(invert(stack.getDisplayName()));
 			target.enablePersistence();
 			if(!event.getEntityPlayer().capabilities.isCreativeMode)
 				stack.shrink(1);

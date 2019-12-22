@@ -294,6 +294,12 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	}
 
 	@Override
+	public void onKillCommand()
+	{
+		super.attackEntityFrom(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+	}
+
+	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		bossInfo.setPercent(getHealth() / getMaxHealth());
 		//		List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().expand(10, 10, 10));

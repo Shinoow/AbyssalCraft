@@ -367,6 +367,8 @@ public class InitHandler implements ILifeCycleHandler {
 		corruptionRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Corruption Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Corruption (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		cleansingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Cleansing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Cleansing (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		purgingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Purging Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
+		enchantmentMaxLevel = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Max Level", 10, "The combined max level a single enchantment applied through the Mass Enchantment ritual can have. For example, if the max level is 10 and you apply 8 Sharpness 5 books, you'd end up with Sharpness 10 on the Item, rather than 40.\n[range: 1 ~ 100, default: 10]", 1, 100).getInt();
+		enchantBooks = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Books", false, "Toggles whether or not Books can be enchanted through the Mass Enchantment ritual.").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 5, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 5, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -476,6 +478,7 @@ public class InitHandler implements ILifeCycleHandler {
 
 		foodstuff = cfg.get("modules", "Enable Foodstuffs", true, "Set to false to disable Abyssalcraft Food.").getBoolean();
 		upgrade_kits = cfg.get("modules", "Enable Upgrade Kits", true, "Set to false to disable Upgrade Kits.").getBoolean();
+		plague_enchantments = cfg.get("modules", "Enable Plague Enchantments", true, "Set to false to disable the Coralium and Dread Enchantments.").getBoolean();
 
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
@@ -496,6 +499,7 @@ public class InitHandler implements ILifeCycleHandler {
 		knowledgeSyncDelay = MathHelper.clamp(knowledgeSyncDelay, 20, 400);
 		odbExplosionSize = MathHelper.clamp(odbExplosionSize, 80, 800);
 		antimatterExplosionSize = MathHelper.clamp(antimatterExplosionSize, 40, 200);
+		enchantmentMaxLevel = MathHelper.clamp(enchantmentMaxLevel, 1, 100);
 
 		demon_transformations.clear();
 

@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -21,11 +22,13 @@ import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -120,12 +123,24 @@ public class ItemStaff extends ItemACBasic implements IStaffOfRending{
 
 	@Override
 	public int getDrainAmount(ItemStack stack){
-		return 5;
+		return 5 + MathHelper.clamp(EnchantmentHelper.getEnchantmentLevel(AbyssalCraftAPI.sapping, stack), 0, 3);
 	}
 
 	@Override
 	public boolean getShareTag()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean isEnchantable(ItemStack stack)
+	{
+		return getItemStackLimit(stack) == 1;
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack)
+	{
+		return 25;
 	}
 }

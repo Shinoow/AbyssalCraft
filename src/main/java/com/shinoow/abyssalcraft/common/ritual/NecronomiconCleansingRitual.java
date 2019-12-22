@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.ritual;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
@@ -42,6 +43,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 		super("cleansing", 4, 0, 100000F, true, new Object[]{new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE),
 				new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE)});
+		setRitualParticle(EnumRitualParticle.PE_STREAM);
 	}
 
 	@Override

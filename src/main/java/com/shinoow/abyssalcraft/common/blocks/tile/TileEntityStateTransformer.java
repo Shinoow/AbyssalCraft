@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import javax.annotation.Nullable;
+
 import com.shinoow.abyssalcraft.common.blocks.BlockStateTransformer;
 import com.shinoow.abyssalcraft.common.items.ItemStoneTablet;
 
@@ -27,7 +29,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class TileEntityStateTransformer extends TileEntity implements ITickable, ISidedInventory {
 
@@ -340,14 +346,14 @@ public class TileEntityStateTransformer extends TileEntity implements ITickable,
 		}
 	}
 
-	net.minecraftforge.items.IItemHandler handlerTop = new net.minecraftforge.items.wrapper.SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);
-	net.minecraftforge.items.IItemHandler handlerBottom = new net.minecraftforge.items.wrapper.SidedInvWrapper(this, net.minecraft.util.EnumFacing.DOWN);
-	net.minecraftforge.items.IItemHandler handlerSide = new net.minecraftforge.items.wrapper.SidedInvWrapper(this, net.minecraft.util.EnumFacing.WEST);
+	IItemHandler handlerTop = new SidedInvWrapper(this, EnumFacing.UP);
+	IItemHandler handlerBottom = new SidedInvWrapper(this, EnumFacing.DOWN);
+	IItemHandler handlerSide = new SidedInvWrapper(this, EnumFacing.WEST);
 
 	@Override
-	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, net.minecraft.util.EnumFacing facing)
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		if (facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		if (facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			if (facing == EnumFacing.DOWN)
 				return (T) handlerBottom;
 			else if (facing == EnumFacing.UP)
@@ -355,5 +361,11 @@ public class TileEntityStateTransformer extends TileEntity implements ITickable,
 			else
 				return (T) handlerSide;
 		return super.getCapability(capability, facing);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
+	{
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing != null || super.hasCapability(capability, facing);
 	}
 }

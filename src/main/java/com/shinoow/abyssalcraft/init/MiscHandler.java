@@ -32,9 +32,7 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapabi
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabilityStorage;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
-import com.shinoow.abyssalcraft.common.enchantments.EnchantmentIronWall;
-import com.shinoow.abyssalcraft.common.enchantments.EnchantmentLightPierce;
-import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
+import com.shinoow.abyssalcraft.common.enchantments.*;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.potion.PotionAntimatter;
 import com.shinoow.abyssalcraft.common.potion.PotionCplague;
@@ -44,10 +42,9 @@ import com.shinoow.abyssalcraft.common.structures.pe.BasicStructure;
 import com.shinoow.abyssalcraft.common.structures.pe.TotemPoleStructure;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
-import com.shinoow.abyssalcraft.lib.ACClientVars;
-import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.*;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
+import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
@@ -75,6 +72,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.CraftingHelper.ShapedPrimer;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -124,20 +122,26 @@ public class MiscHandler implements ILifeCycleHandler {
 		addBrewing(PotionTypes.AWKWARD, ACItems.dread_fragment, Dplague_normal);
 		addBrewing(Dplague_normal, Items.REDSTONE, Dplague_long);
 		addBrewing(Dplague_normal, Items.GLOWSTONE_DUST, Dplague_strong);
-		addBrewing(PotionTypes.AWKWARD, ACItems.rotten_anti_flesh, antiMatter_normal);
-		addBrewing(PotionTypes.AWKWARD, ACItems.anti_plagued_flesh, antiMatter_normal);
-		addBrewing(PotionTypes.AWKWARD, ACItems.anti_plagued_flesh_on_a_bone, antiMatter_normal);
-		addBrewing(antiMatter_normal, Items.REDSTONE, antiMatter_long);
 
-		AbyssalCraftAPI.coralium_enchantment = new EnchantmentWeaponInfusion("coralium");
-		AbyssalCraftAPI.dread_enchantment = new EnchantmentWeaponInfusion("dread");
+		AbyssalCraftAPI.STAFF_OF_RENDING = EnumHelper.addEnchantmentType("STAFF_OF_RENDING", i -> i instanceof IStaffOfRending);
+
+		if(ACConfig.plague_enchantments) {
+			AbyssalCraftAPI.coralium_enchantment = new EnchantmentWeaponInfusion("coralium");
+			AbyssalCraftAPI.dread_enchantment = new EnchantmentWeaponInfusion("dread");
+		}
 		AbyssalCraftAPI.light_pierce = new EnchantmentLightPierce();
 		AbyssalCraftAPI.iron_wall = new EnchantmentIronWall();
+		AbyssalCraftAPI.sapping = new EnchantmentSapping();
+		AbyssalCraftAPI.multi_rend = new EnchantmentMultiRend();
 
-		registerEnchantment(new ResourceLocation("abyssalcraft", "coralium"), AbyssalCraftAPI.coralium_enchantment);
-		registerEnchantment(new ResourceLocation("abyssalcraft", "dread"), AbyssalCraftAPI.dread_enchantment);
+		if(ACConfig.plague_enchantments) {
+			registerEnchantment(new ResourceLocation("abyssalcraft", "coralium"), AbyssalCraftAPI.coralium_enchantment);
+			registerEnchantment(new ResourceLocation("abyssalcraft", "dread"), AbyssalCraftAPI.dread_enchantment);
+		}
 		registerEnchantment(new ResourceLocation("abyssalcraft", "light_pierce"), AbyssalCraftAPI.light_pierce);
 		registerEnchantment(new ResourceLocation("abyssalcraft", "iron_wall"), AbyssalCraftAPI.iron_wall);
+		registerEnchantment(new ResourceLocation("abyssalcraft", "sapping"), AbyssalCraftAPI.sapping);
+		registerEnchantment(new ResourceLocation("abyssalcraft", "multi_rend"), AbyssalCraftAPI.multi_rend);
 
 		InitHandler.LIQUID_CORALIUM.setBlock(ACBlocks.liquid_coralium);
 		InitHandler.LIQUID_ANTIMATTER.setBlock(ACBlocks.liquid_antimatter);
@@ -196,9 +200,9 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		CapabilityManager.INSTANCE.register(INecroDataCapability.class, NecroDataCapabilityStorage.instance, NecroDataCapability::new);
 
-		ConditionProcessorRegistry.instance().registerProcessor(0, (condition, cap, player) -> { return cap.getBiomeTriggers().contains(condition.getConditionObject()); });
-		ConditionProcessorRegistry.instance().registerProcessor(1, (condition, cap, player) -> { return cap.getEntityTriggers().contains(condition.getConditionObject()); });
-		ConditionProcessorRegistry.instance().registerProcessor(2, (condition, cap, player) -> { return cap.getDimensionTriggers().contains(condition.getConditionObject()); });
+		ConditionProcessorRegistry.instance().registerProcessor(0, (condition, cap, player) -> cap.getBiomeTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(1, (condition, cap, player) -> cap.getEntityTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(2, (condition, cap, player) -> cap.getDimensionTriggers().contains(condition.getConditionObject()));
 		ConditionProcessorRegistry.instance().registerProcessor(3, (condition, cap, player) -> {
 			for(String name : (String[])condition.getConditionObject())
 				if(cap.getBiomeTriggers().contains(name))
@@ -223,10 +227,16 @@ public class MiscHandler implements ILifeCycleHandler {
 					return true;
 			return false;
 		});
-		ConditionProcessorRegistry.instance().registerProcessor(7, (condition, cap, player) -> { return cap.getArtifactTriggers().contains(condition.getConditionObject()); });
-		ConditionProcessorRegistry.instance().registerProcessor(8, (condition, cap, player) -> { return cap.getPageTriggers().contains(condition.getConditionObject()); });
-		ConditionProcessorRegistry.instance().registerProcessor(9, (condition, cap, player) -> { return cap.getWhisperTriggers().contains(condition.getConditionObject()); });
-		ConditionProcessorRegistry.instance().registerProcessor(10, (condition, cap, player) -> { return cap.getMiscTriggers().contains(condition.getConditionObject()); });
+		ConditionProcessorRegistry.instance().registerProcessor(7, (condition, cap, player) -> cap.getArtifactTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(8, (condition, cap, player) -> cap.getPageTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(9, (condition, cap, player) -> cap.getWhisperTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(10, (condition, cap, player) -> cap.getMiscTriggers().contains(condition.getConditionObject()));
+		ConditionProcessorRegistry.instance().registerProcessor(11, (condition, cap, player) -> {
+			for(String name : (String[])condition.getConditionObject())
+				if(!cap.getEntityTriggers().contains(name))
+					return false;
+			return true;
+		});
 
 		addDungeonHooks();
 		sendIMC();
@@ -355,6 +365,7 @@ public class MiscHandler implements ILifeCycleHandler {
 			}
 
 		});
+		ACTabs.tabTools.setRelevantEnchantmentTypes(AbyssalCraftAPI.STAFF_OF_RENDING);
 	}
 
 	@Override

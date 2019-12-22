@@ -125,7 +125,7 @@ public class InventoryCrystalBag implements IInventory
 	@Override
 	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return player.getHeldItem(EnumHand.MAIN_HAND) == invItem;
+		return APIUtils.areStacksEqual(player.getHeldItem(EnumHand.MAIN_HAND), invItem);
 	}
 
 	@Override

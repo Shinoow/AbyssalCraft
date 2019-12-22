@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 
@@ -33,6 +34,7 @@ public class NecronomiconBreedingRitual extends NecronomiconRitual {
 	public NecronomiconBreedingRitual() {
 		super("breeding", 0, 500F, new Object[]{Items.WHEAT, Items.POTATO, Items.CARROT, Items.MELON,
 				Blocks.PUMPKIN, Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS});
+		setRitualParticle(EnumRitualParticle.SMOKE_PILLARS);
 	}
 
 	@Override

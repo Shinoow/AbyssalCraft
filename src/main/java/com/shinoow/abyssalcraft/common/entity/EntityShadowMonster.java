@@ -16,7 +16,9 @@ import java.util.Calendar;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.lib.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.ACSounds;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -109,7 +111,7 @@ public class EntityShadowMonster extends EntityMob implements IOmotholEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		for (int i = 0; i < 2 * getBrightness() && ACConfig.particleEntity && world.provider.getDimension() != ACLib.dark_realm_id; ++i)
+		for (int i = 0; i < 2 * (getBrightness() > 0.1f ? getBrightness() : 0) && ACConfig.particleEntity; ++i)
 			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		super.onLivingUpdate();

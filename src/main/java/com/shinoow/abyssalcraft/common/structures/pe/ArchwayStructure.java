@@ -74,12 +74,6 @@ public class ArchwayStructure implements IPlaceOfPower {
 	}
 
 	@Override
-	public String getDescription() {
-
-		return "ac.structure.archway.description";
-	}
-
-	@Override
 	public float getAmplifier(AmplifierType type) {
 
 		if(type == AmplifierType.RANGE)
@@ -173,5 +167,4 @@ public class ArchwayStructure implements IPlaceOfPower {
 
 		return new BlockPos(2, 0, 0);
 	}
-
 }

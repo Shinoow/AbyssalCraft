@@ -48,6 +48,7 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 	public NecronomiconSummonRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean requiresSacrifice, Class<? extends EntityLivingBase> entity, Object...offerings) {
 		super(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, offerings);
 		this.entity = entity;
+		setRitualParticle(EnumRitualParticle.SMOKE_PILLARS);
 	}
 
 	/**

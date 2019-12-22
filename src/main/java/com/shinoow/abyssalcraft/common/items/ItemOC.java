@@ -13,6 +13,10 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,6 +33,28 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemOC extends ItemACBasic {
 
+	private final IUnlockCondition killed_bosses = new IUnlockCondition() {
+
+		@Override
+		public boolean areConditionObjectsEqual(Object stuff) {
+
+			return false;
+		}
+
+		@Override
+		public Object getConditionObject() {
+
+			return new String[] {"abyssalcraft:dragonboss", "abyssalcraft:chagaroth", "abyssalcraft:jzahar", "abyssalcraft:shadowboss"};
+		}
+
+		@Override
+		public int getType() {
+
+			return 11;
+		}
+
+	};
+
 	public ItemOC() {
 		super("oc");
 	}
@@ -40,21 +66,28 @@ public class ItemOC extends ItemACBasic {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 	{
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.SPEED, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 6000, 6));
-		par3EntityPlayer.addPotionEffect(new PotionEffect(MobEffects.HASTE, 6000, 6));
+		if(!world.isRemote) {
+			INecroDataCapability cap = NecroDataCapability.getCap(player);
+			if(cap != null && cap.isUnlocked(killed_bosses, player)) {
+				player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 600, 6, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 600, 6, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 600, 6, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 600, 6, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 600, 6, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 600, 6, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 600, 6, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 600, 6, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 600, 6, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.HASTE, 600, 6, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 600, 6, false, false));
 
-		par3EntityPlayer.getHeldItem(hand).shrink(1);
-		return new ActionResult(EnumActionResult.PASS, par3EntityPlayer.getHeldItem(hand));
+				player.getHeldItem(hand).shrink(1);
+			}
+		}
+
+		return new ActionResult(EnumActionResult.PASS, player.getHeldItem(hand));
 	}
 
 	@Override

@@ -64,6 +64,8 @@ public class RenderODB extends Render<EntityODBPrimed> {
 			GlStateManager.color(1.0F, 1.0F, 1.0F, f2);
 			GlStateManager.doPolygonOffset(-3.0F, -3.0F);
 			GlStateManager.enablePolygonOffset();
+			GlStateManager.rotate(-90, 0, 1, 0);
+			GlStateManager.translate(-1.0f, 0, 0);
 			blockrendererdispatcher.renderBlockBrightness(ACBlocks.oblivion_deathbomb.getDefaultState(), 1.0F);
 			GlStateManager.doPolygonOffset(0.0F, 0.0F);
 			GlStateManager.disablePolygonOffset();

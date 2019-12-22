@@ -12,8 +12,8 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelSacthoth;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerSacthothHeldItem;
 import com.shinoow.abyssalcraft.common.entity.EntitySacthoth;
-import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
@@ -32,13 +32,13 @@ public class RenderSacthoth extends RenderLiving<EntitySacthoth> {
 	public RenderSacthoth(RenderManager manager)
 	{
 		super(manager, new ModelSacthoth(), 0.0F);
+		addLayer(new LayerSacthothHeldItem(this));
 	}
 
 	@Override
 	protected void renderModel(EntitySacthoth entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
 	{
-		if(entitylivingbaseIn.dimension != ACLib.dark_realm_id)
-			GlStateManager.color(1.0F, 1.0F, 1.0F, Math.max(entitylivingbaseIn.getBrightness(), 0.15f));
+		GlStateManager.color(1.0F, 1.0F, 1.0F, entitylivingbaseIn.getBrightness());
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
 		super.renderModel(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
