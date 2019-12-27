@@ -13,13 +13,12 @@ package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class UpgradeKitRecipes {
 
@@ -40,6 +39,8 @@ public class UpgradeKitRecipes {
 		return instance;
 	}
 
+	private UpgradeKitRecipes() {}
+
 	public void addUpgradeKit(ItemUpgradeKit kit){
 		upgrades.put(kit, new HashMap<>());
 	}
@@ -53,19 +54,14 @@ public class UpgradeKitRecipes {
 	}
 
 	public ItemStack getUpgrade(ItemUpgradeKit kit, ItemStack input){
-		for(Entry<ItemStack, ItemStack> entry : upgrades.get(kit).entrySet())
-			if(areStacksEqual(input, entry.getKey()))
-				return entry.getValue();
-
-		return ItemStack.EMPTY;
+		return upgrades.get(kit).entrySet().stream()
+				.filter(e -> APIUtils.areStacksEqual(input, e.getKey()))
+				.map(e -> e.getValue())
+				.findFirst()
+				.orElse(ItemStack.EMPTY);
 	}
 
 	public Map<ItemUpgradeKit, Map<ItemStack, ItemStack>> getAllUpgrades(){
 		return upgrades;
-	}
-
-	private boolean areStacksEqual(ItemStack input, ItemStack compare)
-	{
-		return compare.getItem() == input.getItem() && (compare.getItemDamage() == OreDictionary.WILDCARD_VALUE || compare.getItemDamage() == input.getItemDamage());
 	}
 }

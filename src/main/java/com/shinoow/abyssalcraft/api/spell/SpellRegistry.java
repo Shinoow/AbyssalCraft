@@ -68,16 +68,11 @@ public class SpellRegistry {
 	}
 
 	public Spell getSpell(int bookType, ItemStack parchment, ItemStack[] reagents){
-		for(Spell spell : spells)
-			if(areSpellsEqual(spell, bookType, parchment, reagents)) return spell;
-		return null;
+		return spells.stream().filter(spell -> areSpellsEqual(spell, bookType, parchment, reagents)).findFirst().orElse(null);
 	}
 
 	public Spell getSpell(String name){
-		for(Spell spell : spells)
-			if(spell.getUnlocalizedName().equals(name))
-				return spell;
-		return null;
+		return spells.stream().filter(spell -> spell.getUnlocalizedName().equals(name)).findFirst().orElse(null);
 	}
 
 	private boolean areSpellsEqual(Spell spell, int bookType, ItemStack parchment, ItemStack[] reagents){
@@ -100,6 +95,5 @@ public class SpellRegistry {
 		}
 
 		return ItemStack.EMPTY;
-
 	}
 }

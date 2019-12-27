@@ -12,13 +12,13 @@
 package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class MaterializerRecipes {
 
@@ -53,11 +53,7 @@ public class MaterializerRecipes {
 
 		if(inventory == null) return Collections.emptyList();
 
-		List<ItemStack> displayList = new ArrayList<>();
-
-		for(Materialization mat : materializationList)
-			if(arrayContainsOtherArray(inventory, mat.input))
-				displayList.add(mat.output.copy());
+		List<ItemStack> displayList = materializationList.stream().filter(m -> arrayContainsOtherArray(inventory, m.input)).map(m -> m.output.copy()).collect(Collectors.toList());
 
 		return displayList;
 	}
@@ -103,7 +99,7 @@ public class MaterializerRecipes {
 		for(int i = 0; i < invTemp.length; i++)
 			for(ItemStack recipeItem : recipe){
 				ItemStack invItem = invTemp[i];
-				if(areStacksEqual(invItem, recipeItem))
+				if(APIUtils.areStacksEqual(invItem, recipeItem))
 					if(invItem.getCount() >= recipeItem.getCount()){
 						invItem.shrink(recipeItem.getCount());
 						if(invItem.isEmpty()) invTemp[i] = ItemStack.EMPTY;
@@ -130,9 +126,7 @@ public class MaterializerRecipes {
 	 * @return A materialization recipe if one exists, otherwise null
 	 */
 	public Materialization getMaterializationFor(ItemStack output){
-		for(Materialization mat : materializationList)
-			if(areStacksEqual(output, mat.output)) return mat;
-		return null;
+		return materializationList.stream().filter(m -> APIUtils.areStacksEqual(output, m.output)).findFirst().orElse(null);
 	}
 
 	/**
@@ -190,12 +184,6 @@ public class MaterializerRecipes {
 		bag.getTagCompound().setTag("ItemInventory", items);
 	}
 
-	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
-	{
-		if(par1ItemStack.isEmpty() || par2ItemStack.isEmpty()) return false;
-		return par2ItemStack.getItem() == par1ItemStack.getItem() && (par2ItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || par2ItemStack.getItemDamage() == par1ItemStack.getItemDamage());
-	}
-
 	/**
 	 * Compares two arrays, checking if the first one contains the contents of the second
 	 * @param array1 First array
@@ -209,7 +197,7 @@ public class MaterializerRecipes {
 		if(inventory.size() >= recipe.size())
 			for(ItemStack invItem : inventory)
 				for(ItemStack recipeItem : recipe)
-					if(areStacksEqual(invItem, recipeItem))
+					if(APIUtils.areStacksEqual(invItem, recipeItem))
 						if(invItem.getCount() >= recipeItem.getCount()){
 							invItem.shrink(recipeItem.getCount());
 							if(invItem.isEmpty()) invItem = ItemStack.EMPTY;

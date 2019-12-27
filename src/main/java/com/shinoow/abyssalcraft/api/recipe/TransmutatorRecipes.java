@@ -13,7 +13,8 @@ package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
+
+import com.shinoow.abyssalcraft.api.APIUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -66,18 +67,13 @@ public class TransmutatorRecipes {
 	/**
 	 * Returns the transmutation result of an item.
 	 */
-	public ItemStack getTransmutationResult(ItemStack par1ItemStack)
+	public ItemStack getTransmutationResult(ItemStack stack)
 	{
-		for(Entry<ItemStack, ItemStack> entry : transmutationList.entrySet())
-			if(areStacksEqual(par1ItemStack, entry.getKey()))
-				return entry.getValue();
-
-		return ItemStack.EMPTY;
-	}
-
-	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
-	{
-		return par2ItemStack.getItem() == par1ItemStack.getItem() && (par2ItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || par2ItemStack.getItemDamage() == par1ItemStack.getItemDamage());
+		return transmutationList.entrySet().stream()
+				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
+				.map(e -> e.getValue())
+				.findFirst()
+				.orElse(ItemStack.EMPTY);
 	}
 
 	public Map<ItemStack, ItemStack> getTransmutationList()
@@ -85,15 +81,15 @@ public class TransmutatorRecipes {
 		return transmutationList;
 	}
 
-	public float getExperience(ItemStack par1ItemStack)
+	public float getExperience(ItemStack stack)
 	{
-		float ret = par1ItemStack.getItem().getSmeltingExperience(par1ItemStack);
+		float ret = stack.getItem().getSmeltingExperience(stack);
 		if (ret != -1) return ret;
 
-		for (Entry<ItemStack, Float> entry : experienceList.entrySet())
-			if (areStacksEqual(par1ItemStack, entry.getKey()))
-				return entry.getValue().floatValue();
-
-		return 0.0F;
+		return experienceList.entrySet().stream()
+				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
+				.map(e -> e.getValue().floatValue())
+				.findFirst()
+				.orElse(0.0F);
 	}
 }

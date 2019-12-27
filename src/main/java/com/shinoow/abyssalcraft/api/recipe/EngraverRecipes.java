@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
@@ -56,14 +55,11 @@ public class EngraverRecipes {
 	}
 
 	/**
-	 * Returns the engraving result of an item. This method doesn't do shit tbh
+	 * Returns the engraving result of an item. This method doesn't really do much
 	 */
-	public ItemStack getEngravingResult(ItemStack par1ItemStack)
+	public ItemStack getEngravingResult(ItemStack stack)
 	{
-		if(coins.contains(par1ItemStack))
-			return par1ItemStack;
-
-		return ItemStack.EMPTY;
+		return coins.stream().filter(i -> areStacksEqual(stack, i)).findFirst().orElse(ItemStack.EMPTY);
 	}
 
 	/**
@@ -81,9 +77,9 @@ public class EngraverRecipes {
 		return ItemStack.EMPTY;
 	}
 
-	private boolean areStacksEqual(ItemStack par1ItemStack, ItemStack par2ItemStack)
+	private boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
 	{
-		return (par2ItemStack.getItem() == par1ItemStack.getItem() || par1ItemStack.getItem() == ACItems.coin) && (par2ItemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || par2ItemStack.getItemDamage() == par1ItemStack.getItemDamage());
+		return (stack2.getItem() == stack1.getItem() || stack1.getItem() == ACItems.coin) && (stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack2.getItemDamage() == stack1.getItemDamage());
 	}
 
 	/**
@@ -107,15 +103,15 @@ public class EngraverRecipes {
 		return engravingList;
 	}
 
-	public float getExperience(ItemStack par1ItemStack)
+	public float getExperience(ItemStack stack)
 	{
-		float ret = par1ItemStack.getItem().getSmeltingExperience(par1ItemStack);
+		float ret = stack.getItem().getSmeltingExperience(stack);
 		if (ret != -1) return ret;
 
-		for (Entry<ItemStack, Float> entry : experienceList.entrySet())
-			if (areStacksEqual(par1ItemStack, entry.getKey()))
-				return entry.getValue().floatValue();
-
-		return 0.0F;
+		return experienceList.entrySet().stream()
+				.filter(e -> areStacksEqual(stack, e.getKey()))
+				.map(e -> e.getValue().floatValue())
+				.findFirst()
+				.orElse(0.0F);
 	}
 }

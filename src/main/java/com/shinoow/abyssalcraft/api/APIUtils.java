@@ -11,9 +11,11 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
@@ -52,11 +54,7 @@ public class APIUtils {
 	public static boolean isCrystal(ItemStack item){
 		if(item.getItem() instanceof ICrystal)
 			return true;
-		for(ItemStack crystal: AbyssalCraftAPI.getCrystals())
-			if(crystal.getItem() == item.getItem() && (crystal.getItemDamage() == OreDictionary.WILDCARD_VALUE
-			|| crystal.getItemDamage() == item.getItemDamage()))
-				return true;
-		return false;
+		return AbyssalCraftAPI.getCrystals().stream().anyMatch(crystal -> areStacksEqual(item, crystal));
 	}
 
 	/**
@@ -67,11 +65,7 @@ public class APIUtils {
 	 * @since 1.5
 	 */
 	public static boolean isCoin(ItemStack item){
-		for(ItemStack coin : EngraverRecipes.instance().getCoinList())
-			if(coin.getItem() == item.getItem() && (coin.getItemDamage() == OreDictionary.WILDCARD_VALUE
-			|| coin.getItemDamage() == item.getItemDamage()))
-				return true;
-		return false;
+		return EngraverRecipes.instance().getCoinList().stream().anyMatch(coin -> areStacksEqual(item, coin));
 	}
 
 	/**
@@ -109,19 +103,11 @@ public class APIUtils {
 	public static boolean areItemStackArraysEqual(Object[] array1, ItemStack[] array2, boolean nbt){
 
 		List<Object> compareList = nonNullList(array1);
-		List<ItemStack> itemList = new ArrayList<>();
-
-		for(ItemStack item : array2)
-			if(!item.isEmpty())
-				itemList.add(item);
+		List<ItemStack> itemList = Arrays.stream(array2).filter(Predicates.not(ItemStack::isEmpty)).collect(Collectors.toList());
 
 		if(itemList.size() == compareList.size())
-			for(ItemStack item : itemList)
-				for(Object compare : compareList)
-					if(areObjectsEqual(item, compare, nbt)){
-						compareList.remove(compare);
-						break;
-					}
+			for(ItemStack stack : itemList)
+				compareList.removeIf(o -> areObjectsEqual(stack, o, nbt));
 
 		return compareList.isEmpty();
 	}
@@ -132,13 +118,7 @@ public class APIUtils {
 	 * for visual alignment in a GUI (like, say, the Necronomicon).
 	 */
 	private static List<Object> nonNullList(Object[] array){
-		List<Object> l = new ArrayList<>();
-
-		for(Object o : array)
-			if(o != null)
-				l.add(o);
-
-		return l;
+		return Arrays.stream(array).filter(Predicates.notNull()).collect(Collectors.toList());
 	}
 
 	/**

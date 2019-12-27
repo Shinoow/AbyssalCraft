@@ -159,10 +159,7 @@ public class RitualRegistry {
 	 */
 	public NecronomiconRitual getRitual(int dimension, int bookType, ItemStack[] offerings, ItemStack sacrifice){
 
-		for(NecronomiconRitual ritual : rituals)
-			if(areRitualsSame(ritual, dimension, bookType, offerings, sacrifice)) return ritual;
-
-		return null;
+		return rituals.stream().filter(ritual -> areRitualsSame(ritual, dimension, bookType, offerings, sacrifice)).findFirst().orElse(null);
 	}
 
 	/**
