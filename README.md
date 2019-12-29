@@ -3,7 +3,7 @@
 ### Main information
 
 The mod thread can be located at
-http://minecraftforum.net/topic/1582727-/
+https://www.curseforge.com/minecraft/mc-mods/abyssalcraft
 
 ### Licensing
 
@@ -13,6 +13,8 @@ All rights reserved. This program and the accompanying materials
 are made available under the terms of the GNU Lesser Public License v3
 which accompanies this distribution, and is available at
 http://www.gnu.org/licenses/lgpl-3.0.txt
+
+The assets (textures, models, sounds) are copyrighted to Shinoow, NOT under LGPL.
 
 ### Support Development
 
