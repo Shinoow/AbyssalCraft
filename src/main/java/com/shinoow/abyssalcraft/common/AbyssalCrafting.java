@@ -413,6 +413,10 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.SEA_LANTERN), new ItemStack(ACItems.crystal, 9, 21), new ItemStack(ACItems.crystal, 9, 27));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.EGG), new ItemStack(ACItems.crystal, 1, 25), new ItemStack(ACItems.crystal, 1, 7));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.charcoal), new ItemStack(ACItems.crystal, 1, 3), new ItemStack(ACItems.crystal, 1, 14));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.COAL_BLOCK), new ItemStack(ACItems.crystal, 9, 3));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.REDSTONE_BLOCK), new ItemStack(ACItems.crystal, 9, 11));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.DIAMOND), new ItemStack(ACItems.crystal, 64, 3));
+		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.DIAMOND_ORE), new ItemStack(ACItems.crystal, 1, 21), new ItemStack(ACItems.crystal, 1, 23), new ItemStack(ACItems.crystal, 64, 3));
 	}
 
 	private static void addRitualRecipes(){
