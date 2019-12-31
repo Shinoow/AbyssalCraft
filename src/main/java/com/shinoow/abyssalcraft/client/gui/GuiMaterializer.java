@@ -17,7 +17,6 @@ import org.lwjgl.input.Mouse;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 import com.shinoow.abyssalcraft.common.inventory.ContainerMaterializer;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

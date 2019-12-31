@@ -427,10 +427,10 @@ public class AbyssalCraftEventHooks {
 			int k = length - 1 - i;
 			newname += cases[k] ? Character.toUpperCase(c) : Character.toLowerCase(c);
 		}
-		
+
 		return newname;
 	}
-	
+
 	@SubscribeEvent
 	public void upgradeKits(AnvilUpdateEvent event){
 		if(!(event.getRight().getItem() instanceof ItemUpgradeKit)) {

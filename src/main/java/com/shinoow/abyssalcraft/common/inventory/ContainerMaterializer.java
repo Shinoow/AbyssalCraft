@@ -16,7 +16,6 @@ import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -91,7 +90,6 @@ public class ContainerMaterializer extends Container {
 	public void scrollTo(int p_148329_1_)
 	{
 		int recipeAmount = getRecipeAmount();
-		int i = (recipeAmount + 6 - 1) / 6 - 3;
 		float j0 = recipeAmount / 18 + 1;
 		int j = (int)(p_148329_1_ / j0);
 
