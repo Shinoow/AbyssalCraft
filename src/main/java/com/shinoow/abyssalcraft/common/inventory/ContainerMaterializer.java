@@ -16,6 +16,7 @@ import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -87,11 +88,14 @@ public class ContainerMaterializer extends Container {
 		return i;
 	}
 
-	public void scrollTo(float p_148329_1_)
+	public void scrollTo(int p_148329_1_)
 	{
-		int i = (getRecipeAmount() + 6 - 1) / 6 - 3;
-		int j = (int)(p_148329_1_ * i + 0.5D);
+		int recipeAmount = getRecipeAmount();
+		int i = (recipeAmount + 6 - 1) / 6 - 3;
+		float j0 = recipeAmount / 18 + 1;
+		int j = (int)(p_148329_1_ / j0);
 
+		if(j > j0 && j0 < 3) j = (int)j0 + 1;
 		if (j < 0) j = 0;
 
 		for (int k = 0; k < 3; ++k)
@@ -99,7 +103,7 @@ public class ContainerMaterializer extends Container {
 			{
 				int i1 = l + (k + j) * 6;
 
-				if (i1 >= 2 && i1 < getRecipeAmount()) basicInventory.setInventorySlotContents(l + k * 6, tileMaterializer.getStackInSlot(i1));
+				if (i1 >= 2 && i1 < recipeAmount) basicInventory.setInventorySlotContents(l + k * 6, tileMaterializer.getStackInSlot(i1));
 				else
 					basicInventory.setInventorySlotContents(l + k * 6, ItemStack.EMPTY);
 			}

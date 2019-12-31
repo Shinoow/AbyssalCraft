@@ -17,6 +17,7 @@ import org.lwjgl.input.Mouse;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 import com.shinoow.abyssalcraft.common.inventory.ContainerMaterializer;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -58,7 +59,7 @@ public class GuiMaterializer extends GuiContainer {
 		String s1 = tileMaterializer.hasSecondCustomName() ? tileMaterializer.getSecondName() : I18n.format(tileMaterializer.getSecondName(), new Object[0]);
 		fontRenderer.drawString(s1, 8, ySize - 96 + 2, 4210752);
 
-		((ContainerMaterializer)inventorySlots).scrollTo(scrollbar.getOffset() / 18);
+		((ContainerMaterializer)inventorySlots).scrollTo(scrollbar.getOffset());
 	}
 
 	@Override
