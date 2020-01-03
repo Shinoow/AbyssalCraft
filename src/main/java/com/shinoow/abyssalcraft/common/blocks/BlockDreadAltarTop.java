@@ -99,13 +99,19 @@ public class BlockDreadAltarTop extends Block {
 		if(par1World.provider.getDimension() == ACLib.dreadlands_id){
 			if(par1World.getBiome(pos) == ACBiomes.dreadlands_mountains){
 				if(par1World.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom)
-					if(!par1World.isRemote){
-						SpecialTextUtil.ChagarothGroup(par1World, I18n.translateToLocal("message.dreadaltartop.spawn"));
-						//						par5EntityPlayer.addStat(ACAchievements.summon_chagaroth, 1);
-						chagarothlair lair = new chagarothlair();
-						lair.generate(par1World, par1World.rand, pos);
-						par1World.getChunkFromBlockCoords(pos).markDirty();
+					if(pos.getY() == 41) {
+						if(!par1World.isRemote){
+							SpecialTextUtil.ChagarothGroup(par1World, I18n.translateToLocal("message.dreadaltartop.spawn"));
+							//						par5EntityPlayer.addStat(ACAchievements.summon_chagaroth, 1);
+							chagarothlair lair = new chagarothlair();
+							lair.generate(par1World, par1World.rand, pos);
+							par1World.getChunkFromBlockCoords(pos).markDirty();
+						}
 					}
+					else if(pos.getY() < 41 && par1World.isRemote)
+						par5EntityPlayer.sendMessage(new TextComponentString("You still need to place the altar "+ (41 - pos.getY()) +" blocks higher."));
+					else if(pos.getY() > 41 && par1World.isRemote)
+						par5EntityPlayer.sendMessage(new TextComponentString("You still need to place the altar "+ (pos.getY() - 41) +" blocks lower."));
 			} else if(par1World.isRemote)
 				par5EntityPlayer.sendMessage(new TextComponentTranslation("message.dreadaltar.error.2"));
 		} else if(par1World.isRemote)
