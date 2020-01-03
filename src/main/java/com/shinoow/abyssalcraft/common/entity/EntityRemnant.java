@@ -313,6 +313,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		{
 			NBTTagCompound nbttagcompound1 = par1NBTTagCompound.getCompoundTag("Offers");
 			tradingList = new MerchantRecipeList(nbttagcompound1);
+			tradingList.removeIf(r -> r.getItemToSell().isEmpty());
 		}
 	}
 
@@ -696,6 +697,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 	private void addToListWithCheck(MerchantRecipeList list, MerchantRecipe recipe)
 	{
+		if(recipe.getItemToSell().isEmpty()) return;
 		for (int i = 0; i < list.size(); ++i)
 		{
 			MerchantRecipe merchantrecipe1 = list.get(i);
