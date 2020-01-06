@@ -87,13 +87,12 @@ public class ContainerMaterializer extends Container {
 		return i;
 	}
 
-	public void scrollTo(int p_148329_1_)
+	public void scrollTo(int pos)
 	{
 		int recipeAmount = getRecipeAmount();
-		float j0 = recipeAmount / 18 + 1;
-		int j = (int)(p_148329_1_ / j0);
+		float j0 = 110 / recipeAmount;
+		int j = (int)(pos / j0);
 
-		if(j > j0 && j0 < 3) j = (int)j0 + 1;
 		if (j < 0) j = 0;
 
 		for (int k = 0; k < 3; ++k)

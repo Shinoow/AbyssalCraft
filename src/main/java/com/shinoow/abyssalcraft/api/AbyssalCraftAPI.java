@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.internal.*;
@@ -37,6 +38,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
@@ -61,7 +63,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.26.0";
+	public static final String API_VERSION = "1.27.0";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall, sapping, multi_rend;
 
@@ -503,6 +505,25 @@ public class AbyssalCraftAPI {
 	 */
 	public static void addMaterialization(Materialization materialization){
 		MaterializerRecipes.instance().materialize(materialization);
+	}
+
+	/**
+	 * OreDictionary specific Materialization.<br>
+	 * Note: all inputs has to be either {@link ICrystal}s or be registered in the Crystal List {@link AbyssalCraftAPI#addCrystal(ItemStack)}
+	 * @param output The output (everything registered to the ore name will be added)
+	 * @param input An array of ItemStacks (maximum is 5)
+	 * 
+	 * @since 1.27.0
+	 */
+	public static void addMaterialization(String output, ItemStack...input) {
+		OreDictionary.getOres(output).forEach(stack -> {
+			if(stack.getHasSubtypes() && stack.getMetadata() == OreDictionary.WILDCARD_VALUE) {
+				NonNullList<ItemStack> list = NonNullList.create();
+				stack.getItem().getSubItems(stack.getItem().getCreativeTab(), list);
+				list.stream().filter(Predicates.not(ItemStack::isEmpty)).forEach(is -> addMaterialization(is, input));
+			}
+			else AbyssalCraftAPI.addMaterialization(stack, input);
+		});
 	}
 
 	/**

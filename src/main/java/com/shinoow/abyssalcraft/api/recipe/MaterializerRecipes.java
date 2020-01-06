@@ -191,7 +191,7 @@ public class MaterializerRecipes {
 	 * @return True if the first array contains the contents of the second, otherwise false
 	 */
 	private boolean arrayContainsOtherArray(ItemStack[] array1, ItemStack[] array2){
-		List<ItemStack> inventory = Arrays.asList(array1);
+		List<ItemStack> inventory = makeNonWriteThroughList(array1);
 		List<ItemStack> recipe = makeNonWriteThroughList(array2);
 
 		if(inventory.size() >= recipe.size())
