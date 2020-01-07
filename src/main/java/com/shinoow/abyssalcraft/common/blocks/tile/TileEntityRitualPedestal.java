@@ -215,7 +215,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 	@Override
 	public IRitualAltar getAltar() {
 
-		return altarPos != null ? (IRitualAltar)world.getTileEntity(altarPos) : null;
+		return altarPos != null && world.getTileEntity(altarPos) instanceof IRitualAltar ? (IRitualAltar)world.getTileEntity(altarPos) : null;
 	}
 
 	@Override
