@@ -746,6 +746,11 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 	{
 		if(par2 > 30) par2 = 10 + world.rand.nextInt(10);
 
+		if(par1DamageSource == DamageSource.OUT_OF_WORLD && posY <= 0 && !getEntityWorld().isRemote) {
+			getEntityWorld().removeEntity(this);
+			return false;
+		}
+
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 

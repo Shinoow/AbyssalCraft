@@ -291,6 +291,10 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.projectile"));
 			return false;
 		}
+		else if(par1DamageSource == DamageSource.OUT_OF_WORLD && posY <= 0 && !getEntityWorld().isRemote) {
+			getEntityWorld().removeEntity(this);
+			return false;
+		}
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 

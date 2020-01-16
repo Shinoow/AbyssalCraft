@@ -268,6 +268,11 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 		if (par1DamageSource.isMagicDamage())
 			return false;
 
+		if(par1DamageSource == DamageSource.OUT_OF_WORLD && posY <= 0 && !getEntityWorld().isRemote) {
+			getEntityWorld().removeEntity(this);
+			return false;
+		}
+
 		if(!getEntityWorld().isRemote) {
 			int health = (int)(getHealth() / getMaxHealth()) * 100;
 			if(health < 10)
