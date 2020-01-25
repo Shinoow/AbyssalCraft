@@ -41,35 +41,28 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 			state = ACBlocks.stone.getStateFromMeta(3);
 		else state = ACBlocks.stone.getStateFromMeta(2);
 
-		Chunk chunk1 = getChunk(world, pos.east(), chunk);
-		Chunk chunk2 = getChunk(world, pos.west(), chunk);
-		Chunk chunk3 = getChunk(world, pos.south(), chunk);
-		Chunk chunk4 = getChunk(world, pos.north(), chunk);
-		Chunk chunk5 = getChunk(world, pos.south().east(), chunk);
-		Chunk chunk6 = getChunk(world, pos.north().west(), chunk);
-		Chunk chunk7 = getChunk(world, pos.south().west(), chunk);
-		Chunk chunk8 = getChunk(world, pos.north().east(), chunk);
-
-		for(int i = 0; i < 7 + rand.nextInt(5); i++)
-			chunk.setBlockState(pos.up(i), state);
-		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			chunk1.setBlockState(pos.east().up(i), state);
-		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			chunk2.setBlockState(pos.west().up(i), state);
-		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			chunk3.setBlockState(pos.south().up(i), state);
-		for(int i = 0; i < 5 + rand.nextInt(5); i++)
-			chunk4.setBlockState(pos.north().up(i), state);
-		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			chunk5.setBlockState(pos.south().east().up(i), state);
-		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			chunk6.setBlockState(pos.north().west().up(i), state);
-		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			chunk7.setBlockState(pos.south().west().up(i), state);
-		for(int i = 0; i < 3 + rand.nextInt(5); i++)
-			chunk8.setBlockState(pos.north().east().up(i), state);
+		placeBlocks(world, chunk, state, pos, 7 + rand.nextInt(5));
+		placeBlocksAlt(world, chunk, state, pos.east(), 5 + rand.nextInt(5));
+		placeBlocksAlt(world, chunk, state, pos.west(), 5 + rand.nextInt(5));
+		placeBlocksAlt(world, chunk, state, pos.south(), 5 + rand.nextInt(5));
+		placeBlocksAlt(world, chunk, state, pos.north(), 5 + rand.nextInt(5));
+		placeBlocksAlt(world, chunk, state, pos.south().east(), 3 + rand.nextInt(5));
+		placeBlocksAlt(world, chunk, state, pos.north().west(), 3 + rand.nextInt(5));
+		placeBlocksAlt(world, chunk, state, pos.south().west(), 3 + rand.nextInt(5));
+		placeBlocksAlt(world, chunk, state, pos.north().east(), 3 + rand.nextInt(5));
 
 		return true;
+	}
+
+	private void placeBlocks(World world, Chunk chunk, IBlockState state, BlockPos pos, int height) {
+		for(int i = 0; i < height; i++)
+			if(!world.isOutsideBuildHeight(pos.up(i)))
+				chunk.setBlockState(pos.up(i), state);
+	}
+
+	private void placeBlocksAlt(World world, Chunk chunk, IBlockState state, BlockPos pos, int height) {
+		Chunk chunk1 = getChunk(world, pos, chunk);
+		placeBlocks(world, chunk, state, pos, height);
 	}
 
 	private Chunk getChunk(World world, BlockPos pos, Chunk chunk) {
