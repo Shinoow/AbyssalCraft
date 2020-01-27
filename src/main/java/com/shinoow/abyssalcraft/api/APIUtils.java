@@ -107,7 +107,11 @@ public class APIUtils {
 
 		if(itemList.size() == compareList.size())
 			for(ItemStack stack : itemList)
-				compareList.removeIf(o -> areObjectsEqual(stack, o, nbt));
+				for(Object compare : compareList)
+					if(areObjectsEqual(stack, compare, nbt)){
+						compareList.remove(compare);
+						break;
+					}
 
 		return compareList.isEmpty();
 	}
