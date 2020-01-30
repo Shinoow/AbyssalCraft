@@ -22,7 +22,7 @@ advancements.abyssalcraft.mineabyores.description=挖掘一些深渊之地的矿
 advancements.abyssalcraft.minedread.title=恐惧之地的矿产
 advancements.abyssalcraft.minedread.description=挖掘一些恐惧之地的矿石
 
-advancements.abyssalcraft.dreadium.title=侵染-免费的锭
+advancements.abyssalcraft.dreadium.title=瘟疫-免费的锭
 advancements.abyssalcraft.dreadium.description=嬗变一些恐惧锭
 
 advancements.abyssalcraft.ethaxium.title=是由谁的灵魂制成的……
@@ -266,13 +266,13 @@ necronomicon.information.enchantments=附魔
 necronomicon.sacrifice=需要祭品
 necronomicon.information.decorativestatues=装饰雕像
 necronomicon.information.knowledge=获得知识
-necronomicon.information.coraliumplague=珊瑚侵染
-necronomicon.information.dreadplague=恐惧侵染
-necronomicon.information.placesofpower=Places of Power
-necronomicon.information.structures=Structures
-necronomicon.information.pantheon=Pantheon
-necronomicon.information.casting=Casting
-necronomicon.builtwith=Built with
+necronomicon.information.coraliumplague=珊瑚瘟疫
+necronomicon.information.dreadplague=恐惧瘟疫
+necronomicon.information.placesofpower=权力之地
+necronomicon.information.structures=结构
+necronomicon.information.pantheon=万神殿
+necronomicon.information.casting=铸造
+necronomicon.builtwith=建造：
 
 #死灵之书文字
 #注意：每个字符串的最大字数为368个（184汉字）。
@@ -289,7 +289,7 @@ necronomicon.text.abyssalnomicon.2=虽然关于咒语和仪式的知识受限于
 
 necronomicon.text.abyssalcraft.1=这本书有助于你玩通深渊国度这个模组。深渊国度的关注点是在探险，有4个新的维度能供你探索。
 necronomicon.text.abyssalcraft.2=这些维度能通过用“门钥匙”去到，这些门钥匙被设计为能在维度之间创造传送门（除了通过掉出第三个维度才能去到第四个维度）。
-necronomicon.text.abyssalcraft.3=主世界新增了6种新的生物群系：黑暗之地（普通、平原、森林、高地、山脉）和珊瑚侵染沼泽。
+necronomicon.text.abyssalcraft.3=主世界新增了6种新的生物群系：黑暗之地（普通、平原、森林、高地、山脉）和珊瑚瘟疫沼泽。
 necronomicon.text.abyssalcraft.4=同样有5种新的石头和15种新的矿石能在主世界和新增维度找到。
 necronomicon.text.abyssalcraft.5=除了探险外，深渊国度引进了一种属于它自己的魔法，这种魔法是通过使用仪式来崇拜旧日支配者。
 necronomicon.text.abyssalcraft.6=除了魔法和探险外，还有允许你进行嬗变，结晶化和物质化的机器。此外还有一个钱币铸模器。
@@ -313,9 +313,9 @@ necronomicon.text.greatoldones=在人的时代之前，世界是被一群被叫�
 necronomicon.text.abyssalnomicon_info=深渊死灵之书是一本写在死灵之书里的邪恶的书，是扎哈尔读给阿尔哈兹莱德的章节。
 necronomicon.text.integration=如果能获得旧日支配者所不知道的技术，那个人就能利用这些来自深渊的技术用作新的用途。
 
-necronomicon.text.overworld=主世界新增一个待探索的新的生物群系，里面有黑暗之地和珊瑚侵染的沼泽。在你的旅途中你可能会遇到深渊食尸鬼和深渊僵尸，它们都是通过深渊荒芜之地进入到主世界的。
-necronomicon.text.abyssal=这是深渊的第一层，一个黑暗的绿色的地方，到处都是不死生物。传说遗民在看守这个地方，或者他的龙——阿索拉。或许这是珊瑚侵染的来源。
-necronomicon.text.dreadlands=这以前是一个盛产深渊锭世界，但恐惧侵染释放在世界之上，杀死了所有的矿工并污染深渊傀儡，恐惧之地的名字就由此而来。深渊的第二层关押着失去灵魂的生物。
+necronomicon.text.overworld=主世界新增一个待探索的新的生物群系，里面有黑暗之地和珊瑚瘟疫的沼泽。在你的旅途中你可能会遇到深渊食尸鬼和深渊僵尸，它们都是通过深渊荒芜之地进入到主世界的。
+necronomicon.text.abyssal=这是深渊的第一层，一个黑暗的绿色的地方，到处都是不死生物。传说遗民在看守这个地方，或者他的龙——阿索拉。或许这是珊瑚瘟疫的来源。
+necronomicon.text.dreadlands=这以前是一个盛产深渊锭世界，但恐惧瘟疫释放在世界之上，杀死了所有的矿工并污染深渊傀儡，恐惧之地的名字就由此而来。深渊的第二层关押着失去灵魂的生物。
 necronomicon.text.omothol=一个无尽神殿的城市建筑在理智的边缘。扎哈尔的国度有着唯一的入口去旧日支配者所居住的地方。守门者始终在看守着，没有人能活着离开深渊的最后一层。
 necronomicon.text.darkrealm=奥穆索所在的国度之下是有着不朽灵魂的等待转世的邪恶恶魔神所在之地。黑暗领域是活阴影诞生的地方，同时也是一个活灵魂应该到达的最后一个地方，因为它们会面临无尽的折磨。
 
@@ -328,22 +328,22 @@ necronomicon.text.materials.coralium.1=珊瑚石是一种能在海洋和沼泽�
 necronomicon.text.materials.coralium.2=大量的宝石能用来合成珊瑚石板，珊瑚石板能烧炼成精炼珊瑚锭。珊瑚珍珠能用来合成第一把门钥匙，用来去到第一个世界，深渊荒芜之地。
 necronomicon.text.materials.darklandsoak.1=黑暗之地橡木是一种能在黑暗之地找到的新的树木。能用来合成木板，木板能用来合成台阶、楼梯和栅栏。与普通橡木相比，它的颜色更深，并且能通过不同的的木材类型，在设计部分中显得更有个性。
 necronomicon.text.materials.nitre.1=硝石是一种能在主世界里随机找到的新的矿石。能用来合成火药，但除此之外没有其它更多的用途。它能结晶为钾和硝酸盐。
-necronomicon.text.materials.liquidantimatter.1=液态反物质是一种能在珊瑚侵染沼泽地下或者反物质牛身上找到的新的液体。它的功能是用来将实体反物质化，并且在接触后能使其他液体固化。
+necronomicon.text.materials.liquidantimatter.1=液态反物质是一种能在珊瑚瘟疫沼泽地下或者反物质牛身上找到的新的液体。它的功能是用来将实体反物质化，并且在接触后能使其他液体固化。
 necronomicon.text.materials.liquidantimatter.2=如果你掉进了液态反物质湖里，你会在大约5秒内死亡，因为液态反物质会在短时间内造成巨大的伤害，这使得在接触液态反物质的时候会难免发生死亡。
 necronomicon.text.materials.abyssalstone.1=深渊石头是一种能在深渊荒芜之地找到的新的石头。你至少需要铁制工具才能破坏它。与其他石头类型相比，它可以抵抗液态珊瑚的转化，并且可以变成深渊石砖。开采时会掉落深渊圆石。
 necronomicon.text.materials.abyssalores.1=在深渊荒芜之地，你能找到主世界里矿石的深渊版本，会掉落相应的深渊矿石。
 necronomicon.text.materials.abyssalores.2=有深渊版本的铁、金、钻石、铜、锡、硝石矿石。与相应的主世界的生成高度一致。
 necronomicon.text.materials.abyssalcoralium.1=深渊珊瑚石是一种在深渊荒芜之地找到的变种的珊瑚石。跟主世界的珊瑚石相对应。与普通的珊瑚石一样，深渊珊瑚石掉落珊瑚宝石，它有很多用途。产生在Y=55及以下。
 necronomicon.text.materials.liquifiedcoralium.1=液化珊瑚是一种在深渊荒芜之地找到的变种珊瑚锭。相比其他种类，挖掘时不掉落珊瑚宝石。开采时，掉落的矿石可以熔炼成精炼珊瑚锭。产生于Y=22及以下。
-necronomicon.text.materials.pearlescentcoralium.1=珠光四射的珊瑚石是一种在深渊荒芜之地找到的变种的珊瑚石。挖掘时掉落珊瑚珍珠，而不是珊瑚宝石。因为只能从矿石中获得的物品，所以非常罕见的，生成在Y=10以下。
+necronomicon.text.materials.pearlescentcoralium.1=珠光四射的珊瑚石是一种在深渊荒芜之地找到的变种的珊瑚石。挖掘时掉落珊瑚珍珠，而不是珊瑚宝石。因为只能从矿石中获得的物品，所以是非常罕见的，生成在Y=10以下。
 necronomicon.text.materials.liquidcoralium.1=液态珊瑚是一种在深渊荒芜之地找到的新的液体。有着改变接触物体的元素的能力，能将所有依赖于水的液体转变成液态珊瑚，并将所有石头转变成深渊石头。
-necronomicon.text.materials.liquidcoralium.2=它还会使接触到它的生物发生珊瑚侵染，如果该生物不能免疫就会被杀死。某些生物在死亡后会转变成深渊僵尸。如果液态珊瑚接触到液态反物质，会转变成珊瑚石头。
+necronomicon.text.materials.liquidcoralium.2=它还会使接触到它的生物发生珊瑚瘟疫，如果该生物不能免疫就会被杀死。某些生物在死亡后会转变成深渊僵尸。如果液态珊瑚接触到液态反物质，会转变成珊瑚石头。
 necronomicon.text.materials.powerstonedreadlands.1=恐惧之地蕴能石是一种在深渊要塞找到的特殊石头。你需要精炼珊瑚镐及以上等级的才能挖掘。如果你有其他部件，则可以用它来升级你的钥匙。
-necronomicon.text.materials.dreadstone.1=恐惧石头是一种在恐惧之地找到的普通的石头。它是远古前由于深渊石头被恐惧侵染而变成。能用来合成恐惧石砖。它也可用于制造查加罗特祭坛。
+necronomicon.text.materials.dreadstone.1=恐惧石头是一种在恐惧之地找到的普通的石头。它是远古前由于深渊石头被恐惧瘟疫而变成。能用来合成恐惧石砖。它也可用于制造查加罗特祭坛。
 necronomicon.text.materials.abyssalnitestone.1=深渊之国石头是一种在恐惧之地的净化恐惧之地里找到的石头。能用来合成深渊之国石砖。
 necronomicon.text.materials.abyssalnitestone.2=在恐惧之地没变成恐惧之地之前，这是以前构成恐惧之地的石头，这个世界曾一度有大量挖掘过大量净化深渊锭。
 necronomicon.text.materials.dreadlandsabyssalnite.1=恐惧之地深渊矿石是一种在恐惧之地找到的变种深渊矿石。挖掘后的矿石能烧炼成深渊锭。具有讽刺意味的是，根据这种矿石存在的条件，这是在任何地方都能找到的最纯净的深渊矿石。
-necronomicon.text.materials.dreadedabyssalnite.1=恐惧深渊矿石是一种在恐惧之地找到的变种深渊矿石。挖掘到的矿石能烧炼成深渊锭。如果你结晶这个矿石，你可以得到恐惧晶体，因为这种深渊岩石已经被恐惧侵染腐化了。
+necronomicon.text.materials.dreadedabyssalnite.1=恐惧深渊矿石是一种在恐惧之地找到的变种深渊矿石。挖掘到的矿石能烧炼成深渊锭。如果你结晶这个矿石，你可以得到恐惧晶体，因为这种深渊岩石已经被恐惧瘟疫腐化了。
 necronomicon.text.materials.dreadlandsgrass.1=恐惧之地草方块是一种在恐惧之地里的恐惧之地森林找到的草方块。相比于普通的草方块，它是红色的。
 necronomicon.text.materials.dreadlandstree.1=恐惧之地树是一种在恐惧之地里的恐惧之地森林找到的树。它的原木能用来合成木板，木板能用来合成楼梯、台阶和栅栏。与橡树相比，叶子和原木都是红色的。
 necronomicon.text.materials.omotholstone.1=奥穆索石头是构成奥穆索的一种石头。除了装饰之外没有别的用途。
@@ -386,7 +386,7 @@ necronomicon.text.crafting.abyssalnomicon.1=深渊之书用伊桑斯锭、邪术
 necronomicon.text.crafting.abyssalnomicon.2=邪术鳞片通过杀死残存者或守门者奴仆获得。
 necronomicon.text.crafting.rendingstaff.1=撕裂法杖由阴影宝石碎片和一个湮灭碎片合成。能用来从一些实体上获取能量（通过右击）。
 necronomicon.text.crafting.rendingstaff.2=深渊荒芜之地能量能从在深渊荒芜之地的一些珊瑚实体获取。恐惧之地能量能从在恐惧之地的一些恐惧实体获得。奥穆索能量能从在奥穆索的任何实体获得。阴影能量能从任何活阴影获得。在收集足够的能量后会产生精髓。
-necronomicon.text.crafting.skin_aby=深渊荒芜之地兽皮由珊瑚侵染腐肉和一个深渊荒芜之地精髓合成。精髓能通过使用撕裂法杖获得。
+necronomicon.text.crafting.skin_aby=深渊荒芜之地兽皮由珊瑚瘟疫腐肉和一个深渊荒芜之地精髓合成。精髓能通过使用撕裂法杖获得。
 necronomicon.text.crafting.skin_dre=恐惧之地兽皮由恐惧碎片和一个恐惧精髓合成。精髓能通过使用撕裂法杖获得。
 necronomicon.text.crafting.skin_omt=奥穆索兽皮由奥穆索食尸鬼腐肉和一个奥穆索精髓合成。精髓能通过使用撕裂法杖获得。
 necronomicon.text.crafting.dreadcloth=恐惧之布由恐惧碎片、线和一张皮革合成。
@@ -412,7 +412,7 @@ necronomicon.text.crafting.dreadium.2=当你有足够的恐惧锭就能合成结
 necronomicon.text.crafting.monolithpillar.1=巨石柱由巨石块合成。它的主要用途是扩大位能操纵器的范围（例如雕像）。
 necronomicon.text.crafting.ritualcharm.1=仪式符咒由金锭和一个钻石合成。单纯的符咒没有任何用途，但是通过仪式能扩展位能操纵器的不同状态。
 necronomicon.text.crafting.sacrificialaltar.1=献祭祭坛由巨石块，阴影宝石碎片，阴影宝石，和珊瑚宝石合成。它们将生命的能量转化为PE。
-necronomicon.text.crafting.sacrificialaltar.2=When an mob is targeted, it will start glowing. Once the mob dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult mobs that aren't players. It should be noted that the altar goes on a cooldown after collecting a fifth of it's max capacity, preventing collection for a minute.
+necronomicon.text.crafting.sacrificialaltar.2=当一个实体被作为目标时，它会发出烟雾粒子效果。一旦这个实体死亡，将收集到与其最大生命值的等量的PE。它只将不是玩家的成年亡灵实体作为目标。应当注意的是祭坛在收集至其最大容量的五分之一后会有一段冷却时间，停止收集位能一分钟。
 necronomicon.text.crafting.energycollector=能量收集器由巨石块和阴影宝石合成。它们可以收集PE，但需要能量中继器传送。
 necronomicon.text.crafting.energyrelay=能量中继器由巨石块，阴影宝石碎片和一个阴影宝石合成。它们可以在储能方块之间传送位能。
 necronomicon.text.crafting.rendingpedestal=撕裂基座由巨石、一个湮灭碎片和一个珊瑚珍珠合成。它们可以用于撕裂法杖的自动化。
@@ -444,12 +444,12 @@ necronomicon.text.crafting.decorativenyarlathotepstatue=装饰用奈亚拉托提
 necronomicon.text.crafting.decorativeshubniggurathstatue=装饰用莎布·尼古拉丝雕像用巨石块，粘土和墨囊合成。
 necronomicon.text.crafting.decorativeyogsothothstatue=装饰用犹格·索托斯雕像用巨石块，粘土和荧石粉合成。
 
-necronomicon.text.enchantment.coralium=珊瑚附魔使你在击中任何实体后传染珊瑚侵染（如果不免疫的话）。只能通过仪式获取。
-necronomicon.text.enchantment.dread=恐惧附魔使你在击中任何实体后传染恐惧侵染（如果不免疫的话）。只能通过仪式获取。
+necronomicon.text.enchantment.coralium=珊瑚附魔使你在击中任何实体后传染珊瑚瘟疫（如果不免疫的话）。只能通过仪式获取。
+necronomicon.text.enchantment.dread=恐惧附魔使你在击中任何实体后传染恐惧瘟疫（如果不免疫的话）。只能通过仪式获取。
 necronomicon.text.enchantment.lightpierce=光之穿刺附魔类似于节肢杀手，但对阴影生物有效。
 necronomicon.text.enchantment.ironwall=铁壁附魔是一种反击退附魔，被击中时会反弹击退效果。
-necronomicon.text.enchantment.sapping=The Sapping Enchantment increases the amount of energy a Staff of Rending can drain.
-necronomicon.text.enchantment.multirend=The Multi-rend Enchantment makes the Staff of Rending also drain energy from nearby mobs within a 3 block radius of the target.
+necronomicon.text.enchantment.sapping=虚弱附魔增加撕裂杖所能吸取的能量。
+necronomicon.text.enchantment.multirend=多重撕裂附魔使撕裂法杖也从目标方圆3格范围内的附近怪物身上吸取能量。
 
 necronomicon.text.overworld.progression.1=要想到达深渊荒芜之地，你必须合成一把门钥匙，这需要你旅行过下界和黑暗之地和水域。水域可以是沼泽或者海洋。
 necronomicon.text.overworld.progression.2=从下界你需要2根烈焰棒，以后可能需要更多。在黑暗之地你需要杀死活阴影以获得阴影宝石。它们最常见于黑暗之地山区。推荐使用撕裂法杖以更快获取阴影宝石（详情见特殊武器装备章节）。
@@ -462,8 +462,8 @@ necronomicon.text.abyssal.progression.2=阿索拉会用幽灵龙来治疗它自�
 necronomicon.text.abyssal.progression.3=在你追踪到蕴能石之后，你能用一个精炼珊瑚镐来挖掘它。最终你能升级你的门钥匙通过将需要成分注入到它（“阿索拉的恐惧之门钥匙”仪式）。升级你的死灵之书到恐惧之地死灵之书需要8个恐惧之地兽皮。
 
 necronomicon.text.dreadlands.progression.1=在你到达了恐惧之地后，你下一个目标就是到达奥穆索。你需要嬗变器，并且你需要打败恐惧野兽查加罗特。要找到查加罗特，你需要查加罗特的祭坛，由两个部分构成。两个部分都通过仪式获取。
-necronomicon.text.dreadlands.progression.2=当你有2个祭坛零件，你要将它们放在恐惧之地山脉的Y=40的高度并且右击它。做完后你就能进入到查加罗特的巢穴。在打败恐惧守卫并杀死查加罗特之后，你会获得一把恐惧侵染的门钥匙，随同着战利品。这把钥匙需要嬗变才能变成有功能的钥匙。
-necronomicon.text.dreadlands.progression.3=通过前面提及的嬗变器（合成表在深渊荒芜之地特殊材料章节）你可以将恐惧侵染的门钥匙嬗变成查加罗特的拉莱尔门钥匙，允许你到达奥穆索。升级你的死灵之书到奥穆索死灵之书需要8个奥穆索兽皮。
+necronomicon.text.dreadlands.progression.2=当你有2个祭坛零件，你要将它们放在恐惧之地山脉的Y=40的高度并且右击它。做完后你就能进入到查加罗特的巢穴。在打败恐惧守卫并杀死查加罗特之后，你会获得一把恐惧瘟疫的门钥匙，随同着战利品。这把钥匙需要嬗变才能变成有功能的钥匙。
+necronomicon.text.dreadlands.progression.3=通过前面提及的嬗变器（合成表在深渊荒芜之地特殊材料章节）你可以将恐惧瘟疫的门钥匙嬗变成查加罗特的拉莱尔门钥匙，允许你到达奥穆索。升级你的死灵之书到奥穆索死灵之书需要8个奥穆索兽皮。
 
 necronomicon.text.omothol.progression.1=现在你已经到了奥穆索，到了与深渊的守门者扎哈尔战斗的时候了。扎哈尔神庙坐落于奥穆索的中心（坐标 X=4，Y=53，Z=7）。击败守门者之后，你可以解锁死灵之书上的所有知识。
 necronomicon.text.omothol.progression.2=深渊之书需要用伊桑斯锭，邪术鳞片和守门者的精华（由扎哈尔掉落）合成。
@@ -475,14 +475,14 @@ necronomicon.text.omothol.progression.6=
 necronomicon.text.darkrealm.progression.1=在你到达了黑暗领域后，没有太多的事情可以做除了面对无尽的阴影生物和萨多斯，它们都是这里的土著。
 necronomicon.text.darkrealm.progression.2=主要来到这里的原因是能获得大量的阴影宝石和萨多斯的灵魂收割之刃。
 
-necronomicon.text.entity.anti.1=在珊瑚侵染沼泽里你能找到多种由反物质构成的生命形式。
+necronomicon.text.entity.anti.1=在珊瑚瘟疫沼泽里你能找到多种由反物质构成的生命形式。
 necronomicon.text.entity.anti.2=如果一个反物质生物接触到相应的正常生物会发生爆炸。有反物质版本的有。僵尸、深渊僵尸、骷髅、深渊食尸鬼、蝙蝠、牛、猪、鸡、爬行者、蜘蛛和玩家。反物质玩家不会爆炸。
 necronomicon.text.entity.evilanimals.1=如果你遇到了这些动物，你很快会发现它们是敌对的并会在你攻击它的时候发出尖叫。
 necronomicon.text.entity.evilanimals.2=这些邪恶动物是尚未进化的恶魔动物，在你杀死了当前恶魔所居住的生物体就会孵化。它们免疫火焰，并生成在大多数主世界的生物群系。
 necronomicon.text.entity.abyssalzombie.1=深渊僵尸能在海洋、沼泽、沙滩和黑暗之地生物群系里找到。
-necronomicon.text.entity.abyssalzombie.2=深渊僵尸是僵尸受到珊瑚侵染后变成的，对正常的僵尸有敌意。它们还生成在深渊荒芜之地和末地。
-necronomicon.text.entity.depthsghoul.1=深渊食尸鬼是受珊瑚侵染的不死生物进化的。生成同深渊僵尸。
-necronomicon.text.entity.depthsghoul.2=深渊食尸鬼是珊瑚侵染僵尸后的杰作，极少会变异成这种巨兽。有一些还会获得新的形式，例如皮特，威尔逊先生和奥兰治医生，每一个都比别的强大。
+necronomicon.text.entity.abyssalzombie.2=深渊僵尸是僵尸受到珊瑚瘟疫后变成的，对正常的僵尸有敌意。它们还生成在深渊荒芜之地和末地。
+necronomicon.text.entity.depthsghoul.1=深渊食尸鬼是受珊瑚瘟疫的不死生物进化的。生成同深渊僵尸。
+necronomicon.text.entity.depthsghoul.2=深渊食尸鬼是珊瑚瘟疫僵尸后的杰作，极少会变异成这种巨兽。有一些还会获得新的形式，例如皮特，威尔逊先生和奥兰治医生，每一个都比别的强大。
 necronomicon.text.entity.skeletongoliath.1=骷髅哥利亚是一种漫游在深渊荒芜之地，手握棍棒的巨型骷髅，来源不明。
 necronomicon.text.entity.skeletongoliath.2=敢想象一种手握棍棒的巨型骷髅会像是在Minecraft里的？好吧，骷髅哥利亚是行走在不死生物之中巨大并且强力的骷髅。在死亡后它们有小几率会掉落手中的棍棒。
 necronomicon.text.entity.spectraldragon.1=幽灵龙是极少生成在深渊荒芜之地的透明的龙。
@@ -492,7 +492,7 @@ necronomicon.text.entity.asorah.2=阿索拉是远古遗民的龙，他已经度�
 necronomicon.text.entity.abyssalnitegolem.1=深渊傀儡居住在恐惧之地的矿群中。
 necronomicon.text.entity.abyssalnitegolem.2=这些由固体深渊锭组成的生物是未变成恐惧之地之前的本土矿工。他们倾向于用挖掘来对抗他们的恐惧面，来为失去的世界复仇。
 necronomicon.text.entity.dreadgolem.1=恐惧傀儡居住在恐惧之地的矿群中。
-necronomicon.text.entity.dreadgolem.2=不像净化的深渊傀儡，这些红色的受侵染的深渊傀儡正在缓慢变成恐惧傀儡，并会采取一切措施来侵染任何残余的深渊傀儡。
+necronomicon.text.entity.dreadgolem.2=不像净化的深渊傀儡，这些红色的受瘟疫的深渊傀儡正在缓慢变成恐惧傀儡，并会采取一切措施来瘟疫任何残余的深渊傀儡。
 necronomicon.text.entity.dreadling.1=惧魔是在恐惧之地的变异生物。
 necronomicon.text.entity.dreadling.2=这些生物是未变成恐惧之地之前的深渊之国矿工。他们对过去没有任何记忆，现在活着是为了崇拜控制着他们的查加罗特。
 necronomicon.text.entity.dreadspawn.1=恐惧卵是能在恐惧之地里找到的变异生物。据说它们是与修格斯共同拥有某些遗传特性。
@@ -504,9 +504,9 @@ necronomicon.text.entity.chagarothspawn.2=相比于恐惧卵，这些变异生�
 necronomicon.text.entity.chagarothfist.1=查加罗特的拳头是在恐惧之地里的活着的手。
 necronomicon.text.entity.chagarothfist.2=因为恐惧野兽是无法移动的，查加罗特就设法创造出能延伸到恐惧之地无穷远的手臂，他用空眼球来凝视一切。这说白了就是一个有着眼球的手。
 necronomicon.text.entity.dreadguard.1=恐惧守卫是在恐惧之地找到的强大变异怪物。
-necronomicon.text.entity.dreadguard.2=这些有粒子效果的怪物被查加罗特所加强，并且有着受侵染的深渊锭盔甲，任务是守护它们的主人，它们把任务做的很好。
+necronomicon.text.entity.dreadguard.2=这些有粒子效果的怪物被查加罗特所加强，并且有着受瘟疫的深渊锭盔甲，任务是守护它们的主人，它们把任务做的很好。
 necronomicon.text.entity.chagaroth.1=恐惧野兽查加罗特，是深渊国度的第二个boss，存在于恐惧之地。
-necronomicon.text.entity.chagaroth.2=查加罗特是一种新型危险病毒造成的结果，用3个砍掉的九头蛇头颅和一个死亡的修格斯融合而成，变成了一个可以威胁旧日支配者生命的怪物，被放置在这个变成恐惧之地的维度，杀害和侵染一切生物。
+necronomicon.text.entity.chagaroth.2=查加罗特是一种新型危险病毒造成的结果，用3个砍掉的九头蛇头颅和一个死亡的修格斯融合而成，变成了一个可以威胁旧日支配者生命的怪物，被放置在这个变成恐惧之地的维度，杀害和瘟疫一切生物。
 necronomicon.text.entity.remnant.1=残存者是在奥穆索能找到的居民。
 necronomicon.text.entity.remnant.2=所有的旧日支配者都有不同的后代，扎哈尔的后代是残存者，但残存者很少像扎哈尔，没有获得扎哈尔所拥有的力量，反而崇拜扎哈尔雕像，并且用别的生命形式来交易物品。
 necronomicon.text.entity.omotholghoul.1=奥穆索食尸鬼是最终的进化体，在奥穆索里找到。
@@ -530,9 +530,9 @@ necronomicon.text.entity.shadowtitan.2=阴影泰坦是游荡在黑暗领域的�
 necronomicon.text.entity.sacthoth.1=末日先驱萨多斯能在黑暗领域中找到。
 necronomicon.text.entity.sacthoth.2=萨多斯是在黑暗领域里的最为强大的生物，同时也是活阴影的统治者。他离开黑暗领域出现在你面前的唯一方法就是通过湮灭弹的爆炸。他有一把能撕裂活物灵魂的强大的剑。
 necronomicon.text.entity.coraliumsquid.1=被珊瑚感染的鱿鱼发现在深渊荒芜之地里的液态珊瑚池中。
-necronomicon.text.entity.coraliumsquid.2=这些鱿鱼已经被珊瑚侵染改造，使他们能够将侵染转移到感染者所感染的受害者身上，或者它们喷洒的目标上。
-necronomicon.text.entity.shuboffspring.1=Dark Offspring are vile beasts resembling a goat mixed with a dead tree, and are the offspring of Shub-Niggurath.
-necronomicon.text.entity.shuboffspring.2=These beasts can rarely be found in forests (most common in Roofed Forests and Darklands Forests). You know you're getting close to one if you start hearing sheep out of nowhere. You're most likely to encounter one at night during a new moon.
+necronomicon.text.entity.coraliumsquid.2=这些鱿鱼已经被珊瑚瘟疫改造，使他们能够将瘟疫转移到感染者所感染的受害者身上，或者它们喷洒的目标上。
+necronomicon.text.entity.shuboffspring.1=黑暗后代是邪恶的野兽，像山羊和一棵死树混在一起，是莎布•尼古拉丝的后代。
+necronomicon.text.entity.shuboffspring.2=这些野兽很少在森林中发现（最常见于黑森林和黑暗之地森林），你知道如果你突然听到羊的叫声，你就离它很近了。你最有可能在新月的夜晚遇到一个。
 
 necronomicon.text.rituals.info=检查关于仪式的部分信息，或者其它章节有关可用仪式的信息。“位置”指定仪式能在哪里进行。
 
@@ -542,7 +542,7 @@ necronomicon.text.rituals.3=要建造祭坛，只需按上述方法摆放方块�
 necronomicon.text.rituals.4=然后，你能开始举行仪式！要进行一个仪式，将物品放在基座上然后手持死灵之书按住shift右击祭坛。
 necronomicon.text.rituals.5=仪式进行时，基座把放置的一部分物体投向祭坛。最终仪式获得物品的地方会有一束闪电击中祭坛。
 necronomicon.text.rituals.6=要进行仪式需要位能（每个仪式条目都会显示出需要多少）。位能是一种纯净形式的来源于存在于更高维度里的未开发的能量。主要用作燃料祭品来自旧日支配者（任何仪式）。放在修格斯巨石上的雕像据说能适合来抽取它。
-necronomicon.text.rituals.7=Some rituals require a living sacrifice. This means you need to have an adult animal within close proximity of the altar and pedestals. When the ritual starts, the target animal will begin to glow, and needs to die before the ritual ends. Failing to complete a ritual will trigger a Disruption, which is bad.
+necronomicon.text.rituals.7=某些仪式需要活祭品。这意味着你需要在靠近祭坛和基座的地方有一只成年动物。当仪式开始时，目标动物会开始释放烟雾粒子，需要在仪式结束之前杀死它。仪式失败会带来污染，这会有不好的影响。
 
 necronomicon.text.pe.1=位能（PE）是在深渊国度里新的一种能量。来源于一个更高的维度（一个没有人类存在的地方），只能通过用各种方法转变为射线来收集，可以用多种物品来做到，接下来会解释。
 necronomicon.text.pe.2=一个开始获得需要创造一些位能收集物品的材料的好地方是修格斯巢穴，修格斯巢穴能在沼泽和河流找到。
@@ -557,7 +557,7 @@ necronomicon.text.pe.10=当它放置在巨石柱上时，效果范围可以增�
 necronomicon.text.pe.11=能量沉积器是另一个位能操纵器。它像个发电机，不过其燃料是充能的石板。
 necronomicon.text.pe.12=一个加速雕像（其它位能操纵器也是）效率的方式是使用仪式符咒。能加速不同的效果（可查看工具提示）。
 necronomicon.text.pe.13=你也可以制作一个能量基座，它可以从雕像（和其他PE操纵器）收集PE。可储存PE的物品可以放在底座上进行充能。
-necronomicon.text.pe.14=Along with the Energy Pedestal there's the Sacrificial Altar, which can convert life-force from dying mobs into PE (targeted mobs glow).
+necronomicon.text.pe.14=除了能量基座，还有一个祭坛，它可以将死亡生物的生命转化为PE（目标生物发光）。
 necronomicon.text.pe.15=另一种从操纵器收集位能的方法是使用能量收集器。它与能量基座工作方式类似（除了不能在上面放置物品）。
 necronomicon.text.pe.16=能量中继器用于传输位能，可以在任何方向上传输（但是不能穿过固体方块，除了玻璃）。
 necronomicon.text.pe.17=建立能量中继器网络使你能够远距离传送位能。能量中继器可以从相邻的位能收集器中抽取位能。
@@ -567,7 +567,7 @@ necronomicon.text.pe.20=一旦到达奥穆索，你还能创造特定神祗仪�
 
 necronomicon.text.machines.info=查看信息章节来获得有关不同机器的信息，或者其他章节来获得特定机器的合成表。合成表并没有以任何方式进行分类。
 
-necronomicon.text.machines.1=嬗变器是用来嬗变物品到另一种物品的，能够恢复加工过的或者简单地转变一个物品到对立状态。能用任何珊瑚锭材料，珊瑚侵染腐肉和任何结晶元素（结晶整体或者碎片）作为燃料。
+necronomicon.text.machines.1=嬗变器是用来嬗变物品到另一种物品的，能够恢复加工过的或者简单地转变一个物品到对立状态。能用任何珊瑚锭材料，珊瑚瘟疫腐肉和任何结晶元素（结晶整体或者碎片）作为燃料。
 necronomicon.text.machines.2=结晶器是用来结晶化元素的，分离出组成它们的基本元素（或者分子）。能用任何恐惧材料，恐惧碎片和任何结晶元素（结晶整体或者碎片）作为燃料。
 necronomicon.text.machines.3=铸造器是用来铸造钱币的，允许你与残存者进行交易物品。用在铸造里的“燃料”是铸造模板，铸造模板在多次使用后会耗尽。如果你想重新铸造一枚钱币，你需要对它先用一个空白模板（目的是消除它的铸造）。
 necronomicon.text.machines.4=物质化器是通过结合基本元素（通过结晶获得）用来创造物品的。物质化器不需要燃料，但是需要一本死灵之书来运行，和一个有结晶的结晶袋作为物质化物品的来源。
@@ -576,22 +576,22 @@ necronomicon.text.knowledge.1=这本书里的一些信息对你那渺小的、�
 necronomicon.text.knowledge.2=野外宝箱有时会保存一些已遗失的包含大量信息的文稿，并且在散落各处的古老建筑结构中，你也会发现一些能赋予你知识的壁画。那些描绘着旧日支配者的雕像有时可以让你听到窃窃私语的声音。通过战斗，你可以在打败敌人之后获得关于敌人的知识。探索生物群系和维度也会为你提供新的知识。
 necronomicon.text.knowledge.3=你无法理解的信息将以Aklo glyphs（邪灵雕文）而不是人类的字母表的字型出现。下一页有这样一种字型的例子:
 
-necronomicon.text.coraliumplague.1=珊瑚侵染是一种源自深渊荒芜之地的疾病。它能够将被感染的受害者转化为更强壮的怪物。只有被它伤害的人才认为这是侵染。
-necronomicon.text.coraliumplague.2=珊瑚侵染解药可以用水瓶、荒原之刺、反物质侵染腐肉和深渊修格斯腐肉来制作。
+necronomicon.text.coraliumplague.1=珊瑚瘟疫是一种源自深渊荒芜之地的疾病。它能够将被感染的受害者转化为更强壮的怪物。只有被它伤害的人才认为这是瘟疫。
+necronomicon.text.coraliumplague.2=珊瑚瘟疫解药可以用水瓶、荒原之刺、反物质瘟疫腐肉和深渊修格斯腐肉来制作。
 
-necronomicon.text.dreadplague.1=恐惧侵染是一种源自恐惧之地的疾病。它是一种传染性很强的疾病，能在宿主之间迅速传播，但也会改变受它影响的人周围的环境，从而使侵染变得更强。唯一一个对恐惧侵染完全免疫的地方是奥穆索。
-necronomicon.text.dreadplague.2=恐惧侵染解药可以用水瓶，恐惧之地树苗，恐惧碎片和恐惧修格斯腐肉来制作。
+necronomicon.text.dreadplague.1=恐惧瘟疫是一种源自恐惧之地的疾病。它是一种传染性很强的疾病，能在宿主之间迅速传播，但也会改变受它影响的人周围的环境，从而使瘟疫变得更强。唯一一个对恐惧瘟疫完全免疫的地方是奥穆索。
+necronomicon.text.dreadplague.2=恐惧瘟疫解药可以用水瓶，恐惧之地树苗，恐惧碎片和恐惧修格斯腐肉来制作。
 
-necronomicon.text.placesofpower.info=Structures of devotion appeasing the Great Old Ones, allowing for safe PE generation.
+necronomicon.text.placesofpower.info=忠诚的态度安抚了伟大的旧日支配者，允许位能安全地生成。
 
-necronomicon.text.placesofpower.1=Places of Power are shrine-like structures built to show devotion to the Great Old Ones. These sites of worship spread the word of the Great Old Ones, while also enabling harvesting of PE without disruptions. Along with the safe retrieval of energy, these structures can also boost various stats of the statues contained in them.
-necronomicon.text.placesofpower.2=In the structures section you can view the structures you've gained knowledge on how to build, their dimensions and what stats they amplify (if any). The point where you form the structure (by sneak right-clicking it with your Necronomicon) will change block in the preview to indicate where it is. Hovering over the preview shows a list of blocks used to build it.
+necronomicon.text.placesofpower.1=权力之地是一座像神殿一样的建筑，为了向伟大的旧日支配者祈祷而建造的。 这些祭祀场所传播了伟大的旧日支配者的话语，同时也使人们在不受干扰的情况下收获了位能。随着能量的安全回收，这些结构还可以提高包含在其中的雕像的效果。
+necronomicon.text.placesofpower.2=在结构部分，你可以查看你已经了解了如何构建的结构、它们的维度以及它们放大的统计信息（如果有的话）。你形成结构的点（通过用死灵之书右键单击它）将在预览中更改方块以指示它的位置。
 
-necronomicon.text.spells.info=Check the information section for information regarding spells, or the compendium for available spells.
+necronomicon.text.spells.info=查看信息部分了解有关咒语的信息，或者查看可用咒语的概要。
 
-necronomicon.text.spells.1=In order to get started with spells you need to obtain some scrolls to inscribe the spells onto. Most of the available scrolls (except the greater) can be created through rituals or bought from Remnants. Spells in the compendium show which scroll they require (if the center slot is empty you can use any scroll).
-necronomicon.text.spells.2=Currently the quality of the scroll used has no impact on the inscribed spell, but in a future update some aspects of a spell will improve depending on which scroll you use. The unique scrolls will likely do something beyond that.
-necronomicon.text.spells.3=Spellcasting is done by right-clicking while holding an inscribed scroll (you also need an item that holds PE in your inventory for the casting to tap into). If the spell type is "Charging", you need to hold down the mouse button for 3 seconds, otherwise it's instant. Depending on the spell, you might need to target something specific while casting.
+necronomicon.text.spells.1=为了开始使用咒语，你需要获得一些卷轴来将咒语铭记在上面。大多数可用的卷轴（较大的除外）可以通过仪式创建，也可以从残存者购买。概要中的咒语显示它们需要哪个卷轴（如果中间的槽是空的，可以使用任何卷轴）。
+necronomicon.text.spells.2=目前使用的卷轴的质量对铭刻咒语没有影响，但在未来的更新中，咒语的某些方面将会根据你使用的卷轴而有所改进。独特的卷轴可能会做一些超越。
+necronomicon.text.spells.3=使用鼠标右键点击，同时按住一个刻有文字的卷轴（你还需要一个在你的背包中保存位能的物品，以便进行施法）。如果咒语类型是“充能”，你需要按住鼠标3秒，否则它是即时的。根据咒语的不同，你可能需要在施法时瞄准特定的目标。
 
 necronomicon.text.wip=这章节还未完成。
 
@@ -609,19 +609,19 @@ ac.ritual.summonSacthoth.desc=召唤来自黑暗领域的末日先驱萨多斯�
 ac.ritual.breeding=繁殖仪式
 ac.ritual.breeding.desc=繁殖周围的动物。如果不幸运的话有可能会全杀死它们。
 ac.ritual.depthsHelmet=深海面罩
-ac.ritual.depthsHelmet.desc=深海面罩能通过将2个珊瑚宝石簇（9个宝石）、珊瑚侵染腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚头盔获得。
+ac.ritual.depthsHelmet.desc=深海面罩能通过将2个珊瑚宝石簇（9个宝石）、珊瑚瘟疫腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚头盔获得。
 ac.ritual.depthsChestplate=深海胸甲
-ac.ritual.depthsChestplate.desc=深海胸甲能通过将2个珊瑚宝石簇（9个宝石）、珊瑚侵染腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚胸甲获得。
+ac.ritual.depthsChestplate.desc=深海胸甲能通过将2个珊瑚宝石簇（9个宝石）、珊瑚瘟疫腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚胸甲获得。
 ac.ritual.depthsLeggings=深海护腿
-ac.ritual.depthsLeggings.desc=深海护腿通过将2个珊瑚宝石簇（9个宝石）、珊瑚侵染腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚护腿获得。
+ac.ritual.depthsLeggings.desc=深海护腿通过将2个珊瑚宝石簇（9个宝石）、珊瑚瘟疫腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚护腿获得。
 ac.ritual.depthsBoots=深海之靴
-ac.ritual.depthsBoots.desc=深海之靴通过将2个珊瑚宝石簇（9个宝石）、珊瑚侵染腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚靴子获得。
+ac.ritual.depthsBoots.desc=深海之靴通过将2个珊瑚宝石簇（9个宝石）、珊瑚瘟疫腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚靴子获得。
 ac.ritual.dreadSpawn=进化仪式
 ac.ritual.dreadSpawn.desc=所有附近的恐惧卵（除了进化阶段的）被克隆并变成两倍。需要一个恐惧碎片、一个恐惧石、一个深渊之国石头、一个深渊石组块、一个恐惧深渊石组块、一块腐肉、一个恐惧深渊石碎片和一个深渊锭。
-ac.ritual.corPotionAoE=珊瑚侵染
-ac.ritual.corPotionAoE.desc=传播珊瑚侵染到附近实体。需要4个珊瑚侵染腐肉、3个水瓶和一个火药。
-ac.ritual.drePotionAoE=恐惧侵染
-ac.ritual.drePotionAoE.desc=传播恐惧侵染到附近实体。需要4个恐惧碎片、3个水瓶和一个火药。
+ac.ritual.corPotionAoE=珊瑚瘟疫
+ac.ritual.corPotionAoE.desc=传播珊瑚瘟疫到附近实体。需要4个珊瑚瘟疫腐肉、3个水瓶和一个火药。
+ac.ritual.drePotionAoE=恐惧瘟疫
+ac.ritual.drePotionAoE.desc=传播恐惧瘟疫到附近实体。需要4个恐惧碎片、3个水瓶和一个火药。
 ac.ritual.antiPotionAoE=反物质灭绝
 ac.ritual.antiPotionAoE.desc=附近实体受到液态反物质的侵袭。需要4个反物质腐肉、3个水瓶和一个火药。
 ac.ritual.cthulhuStatue=克苏鲁雕像
@@ -737,7 +737,7 @@ ac.ritual.altarOfChagarothBottom.desc=查加罗特祭坛（底部）可由恐惧
 ac.ritual.altarOfChagarothTop=查加罗特祭坛（顶部）
 ac.ritual.altarOfChagarothTop.desc=查加罗特祭坛（顶部）可用木棍、桶、恐惧之布和恐惧锭合成。
 ac.ritual.corEnchantment=珊瑚注魔
-ac.ritual.corEnchantment.desc=使用一个深渊荒芜之地精髓、深渊修格斯腐肉、精炼珊瑚锭、珊瑚侵染腐肉和一本书，你可以向祭坛上的武器施加珊瑚附魔（如果可行的话）。
+ac.ritual.corEnchantment.desc=使用一个深渊荒芜之地精髓、深渊修格斯腐肉、精炼珊瑚锭、珊瑚瘟疫腐肉和一本书，你可以向祭坛上的武器施加珊瑚附魔（如果可行的话）。
 ac.ritual.dreEnchantment=恐惧注魔
 ac.ritual.dreEnchantment.desc=使用一个恐惧之地精髓、恐惧修格斯腐肉、恐惧锭、恐惧碎片和一本书，你可以向祭坛上的武器施加恐惧附魔（如果可行的话）。
 ac.ritual.weather=求雨仪式
@@ -771,7 +771,7 @@ ac.ritual.econDLupgrade.desc=恐惧之地能量容器能通过将恐惧石砖、
 ac.ritual.econOMTupgrade=奥穆索能量容器
 ac.ritual.econOMTupgrade.desc=奥穆索能量容器能通过将伊桑斯砖块、深色伊桑斯砖块、阴影宝石碎片和珊瑚宝石注入恐惧之地能量容器中获得。
 ac.ritual.sorAWupgrade=深渊荒芜之地撕裂法杖
-ac.ritual.sorAWupgrade.desc=深渊荒芜之地撕裂法杖能通过将深渊石、珊瑚侵染腐肉和阴影宝石注入撕裂法杖中获得。
+ac.ritual.sorAWupgrade.desc=深渊荒芜之地撕裂法杖能通过将深渊石、珊瑚瘟疫腐肉和阴影宝石注入撕裂法杖中获得。
 ac.ritual.sorDLupgrade=恐惧之地撕裂法杖
 ac.ritual.sorDLupgrade.desc=恐惧之地撕裂法杖能通过将恐惧石、恐惧碎片和阴影宝石注入深渊荒芜之地撕裂法杖中获得。
 ac.ritual.sorOMTupgrade=奥穆索撕裂法杖
@@ -783,47 +783,47 @@ ac.ritual.corruption.desc=提供4个随机的雕像，4个黑暗石，大量的�
 ac.ritual.resurrection=黑暗复活
 ac.ritual.resurrection.desc=提供类似于生命六种元素的结晶混合物，一个活祭品和一个写有堕落伙伴名字的命名牌，来复活它。结晶的大小与堕落伙伴的生成规模有关（例如一只鸡，一群马，或者介于它们之间的什么东西）。但是生命是有限的。
 ac.ritual.purging=净化仪式
-ac.ritual.purging.desc=提供4个结晶钙簇和大量的能量，你从该地区净化了所有的恐惧侵染（和恐怖之地），并在此停下来（也杀死附近的生物）。虽然它使该地区不适合居住，没有侵染将能够在这里蔓延。在恐惧之地不起作用。
-ac.ritual.basicScroll=Basic Scroll
-ac.ritual.basicScroll.desc=A Basic Scroll is created with 4 Books
-ac.ritual.lesserScroll=Lesser Scroll
-ac.ritual.lesserScroll.desc=A Lesser Scroll is created with 2 Books, a Wasteland's Thorn and a Luminous Thistle
-ac.ritual.moderateScroll=Moderate Scroll
-ac.ritual.moderateScroll.desc=A Moderate Scroll is created with 2 Books, a Dread Fragment and a Dreaded Shard of Abyssalnite
-ac.ritual.massEnchantment=Mass Enchantment
-ac.ritual.massEnchantment.desc=By presesenting 8 Enchanted Books and an Item on the altar, all of the Enchantments will be combined and applied on the Item. You can use any combination of Enchantments, and all levels will be combined, so multiple instances of the same Enchantment can surpass the normal boundaries.
+ac.ritual.purging.desc=提供4个结晶钙簇和大量的能量，你从该地区净化了所有的恐惧瘟疫（和恐怖之地），并在此停下来（也杀死附近的生物）。虽然它使该地区不适合居住，没有瘟疫将能够在这里蔓延。在恐惧之地不起作用。
+ac.ritual.basicScroll=基础卷轴
+ac.ritual.basicScroll.desc=一个基础卷轴由4本书组成
+ac.ritual.lesserScroll=低级卷轴
+ac.ritual.lesserScroll.desc=一个低级卷轴由两本书，一个荒原之刺和一个发光蓟组成
+ac.ritual.moderateScroll=中等卷轴
+ac.ritual.moderateScroll.desc=一个中等卷轴由两本书，一个恐惧碎片和一个恐惧深渊石碎片组成
+ac.ritual.massEnchantment=汇聚附魔
+ac.ritual.massEnchantment.desc=通过在祭坛上放置8本附魔书和一件物品，所有附魔将被组合并应用到该物品上。你可以使用任何附魔，并且所有等级都将被相加，因此同一附魔的多个实例可以超过正常界限。
 
 #Spells
-ac.spell.lifedrain=Life Drain
-ac.spell.lifedrain.desc=Siphon the lifeforce of your enemy to heal your wounds.
-ac.spell.entropy=Entropy
-ac.spell.entropy.desc=Draw energy straight from the ground as it crumbles to dust.
-ac.spell.mining=Mining
-ac.spell.mining.desc=Superheat the ground in a straight line, melting any stone and leaving all ores intact.
-ac.spell.graspofcthulhu=Grasp of Cthulhu
-ac.spell.graspofcthulhu.desc=Damages the target over time while holding them in place. The damage can never reduce the target to 0HP or less
-ac.spell.invisibility=Hide from the Eye
-ac.spell.invisibility.desc=Caster or target goes Invisible for 5 minutes.
-ac.spell.detachment=Detachment
-ac.spell.detachment.desc=Removes one piece of equipment from the target causing it to fall on the ground. Equipped item is chosen randomly from among its equipped/held items.
-ac.spell.stealvigor=Steal Vigor
-ac.spell.stealvigor.desc=The target is temporarily weakened while the caster claims their strength.
-ac.spell.sirenssong=Siren's Song
-ac.spell.sirenssong.desc=By singing to a creature's very soul you encourage it to join your team. (Useless on Players.)
-ac.spell.undeathtodust=Undeath to Dust
-ac.spell.undeathtodust.desc=Instantly disintegrate one undead creature, leaving nothing behind.
-ac.spell.oozeremoval=Ooze Removal
-ac.spell.oozeremoval.desc=Disperses any Shoggoth Ooze in the vicinity of the caster.
-ac.spell.teleporthostiles=Sacrificial Interdiction
-ac.spell.teleporthostiles.desc=By sacrificing the life of an innocent child, the dark ones are pushed away. Cast the spell while targeting an animal baby, and all mobs within 50 blocks will be teleported away from you.
+ac.spell.lifedrain=生命吸取
+ac.spell.lifedrain.desc=吸取敌人的生命力以治愈你的伤口。
+ac.spell.entropy=熵
+ac.spell.entropy.desc=从地面抽取能量，直至其碎为尘埃。
+ac.spell.mining=挖掘
+ac.spell.mining.desc=过热在一条直线上的地面，熔化所有石头但使矿石完好无损。
+ac.spell.graspofcthulhu=克苏鲁紧握术
+ac.spell.graspofcthulhu.desc=将目标固定在一个位置并随着时间推移对它们造成伤害。不会使目标的血量降到0或者更低。
+ac.spell.invisibility=躲避视线
+ac.spell.invisibility.desc=使施法者或目标隐身5分钟。
+ac.spell.detachment=分离
+ac.spell.detachment.desc=从目标装备或手持的物品中随机选择一件，使其掉落在地面上。
+ac.spell.stealvigor=活力窃取
+ac.spell.stealvigor.desc=从目标处夺取力量以使它们虚弱。
+ac.spell.sirenssong=塞壬之歌
+ac.spell.sirenssong.desc=对一个生物的灵魂歌唱，从而使它加入你的团队。（对玩家无效。）
+ac.spell.undeathtodust=不死尘埃
+ac.spell.undeathtodust.desc=立刻瓦解一个不死生物，不会留下任何东西。
+ac.spell.oozeremoval=软泥去除
+ac.spell.oozeremoval.desc=驱散施法者附近的修格斯软泥。
+ac.spell.teleporthostiles=献祭驱散
+ac.spell.teleporthostiles.desc=献祭一个幼体的生命以驱逐黑暗的造物：对一个未成年的动物释放该法术以将50m内的敌对生物传送走。
 
 #Places of Power
-ac.structure.basic.description=A small and simple shrine. Provides a range boost to affected statues.
-ac.structure.basic.blocks=15x Monolith Stone;4x Monolith Stone Pillar;4x Statue (any)
-ac.structure.totempole.description=Now you just need a campfire, some instruments and a jingle dress!
-ac.structure.totempole.blocks=3x Statue (any);1x Monolith Stone
-ac.structure.archway.description=A small piece that can be used in a decorative manner. Any stair, slab and wall blocks can be used to form it.
-ac.structure.archway.blocks=6x Wall Block (any);4x Stair Block (any);6x Slab Block (any);1x Statue (any);1x Monolith Stone
+ac.structure.basic.description=一个小而简单的神殿，为受影响的雕像提供范围增强。
+ac.structure.basic.blocks=15个巨石块；4个巨石柱；4个雕像（任意）
+ac.structure.totempole.description=现在你只需要一个篝火，一些乐器和一件丁当作响的衣服！
+ac.structure.totempole.blocks=3个雕像（任意）；1个巨石块
+ac.structure.archway.description=一种可以装饰性使用的小物件。任何楼梯、台阶和方块都可以用来变成它。
+ac.structure.archway.blocks=6个墙方块（任意）；4个楼梯方块（任意）；6个台阶方块（任意）；1个雕像（任意）；1个巨石块
 
 #撕裂
 ac.rending.shadowgem=阴影宝石可以从活阴影收获阴影能量得到。
@@ -854,10 +854,10 @@ ac_silly_settings=杂项
 ac_silly_settings.tooltip=杂项设置
 ac_blocks=方块
 ac_blocks.tooltip=方块设置
-ac_mod_compat=Mod Compatibility
-ac_mod_compat.tooltip=Mod Compatibility Configuration
-ac_wet_noodle=Wet Noodle
-ac_wet_noodle.tooltip=Wet Noodle Configuration
+ac_mod_compat=mod兼容
+ac_mod_compat.tooltip=mod兼容配置
+ac_wet_noodle=湿面条
+ac_wet_noodle.tooltip=湿面条配置
 
 #键位
 key.abyssalcraft.category=深渊国度
@@ -865,9 +865,9 @@ key.staff_mode.desc=改变守门者法杖的模式
 key.use_cage.desc=用跨维度笼捕捉生物
 
 #伤害来源
-death.attack.coralium=%1$s由于珊瑚侵染而死亡
-death.attack.coralium.player=%1$s在试图逃离%2$s时屈服于珊瑚侵染之下
-death.attack.dread=%1$s由于恐惧侵染而死亡
+death.attack.coralium=%1$s由于珊瑚瘟疫而死亡
+death.attack.coralium.player=%1$s在试图逃离%2$s时屈服于珊瑚瘟疫之下
+death.attack.dread=%1$s由于恐惧瘟疫而死亡
 death.attack.dread.player=%1$s在试图逃离%2$s时屈服于查加罗特的拳头之下
 death.attack.antimatter=%1$s被解离成分子
 death.attack.antimatter.player=%1$s在试图逃离%2$s时被解离成分子
@@ -891,7 +891,7 @@ tooltip.cbucket.1=当与其它液体相混合时，
 tooltip.cbucket.2=这种液体有着危险的效果
 tooltip.cbucket.3=除了液态反物质。
 tooltip.corbow.1=弓箭在攻击时会
-tooltip.corbow.2=导致珊瑚侵染
+tooltip.corbow.2=导致珊瑚瘟疫
 tooltip.corb=该物品能改变其他材料性质。
 tooltip.odb=巨大的爆炸，自身也承受危险。
 tooltip.crystal=分子式
@@ -918,7 +918,7 @@ itemGroup.acfood=深渊国度食物
 itemGroup.acdblocks=深渊国度装饰方块
 itemGroup.accrystals=深渊国度结晶器晶体
 itemGroup.accoins=深渊国度钱币
-itemGroup.acspells=AbyssalCraft Spells
+itemGroup.acspells=深渊国度咒语
 
 #流体
 fluid.liquidcoralium=液态珊瑚
@@ -1129,9 +1129,9 @@ tile.rendingpedestal.name=撕裂基座
 tile.statetransformer.name=物态转换器
 tile.energydepositioner.name=能量沉积器
 tile.calcifiedstone.name=钙化石
-tile.door_dlt.name=Darklands Oak Wood Door
-tile.door_drt.name=Dreadlands Wood Door
-tile.multi_block.name=Multiblock
+tile.door_dlt.name=黑暗之地橡木门
+tile.door_drt.name=恐惧之地木门
+tile.multi_block.name=多方块
 
 #Pre/Postfixes
 decorativestatue.prefix=装饰用%s
@@ -1158,8 +1158,8 @@ item.cingot.name=精炼珊瑚锭
 item.platec.name=珊瑚石板
 item.coralium.name=珊瑚宝石
 item.transmutationgem.name=嬗变宝石
-item.corflesh.name=珊瑚侵染腐肉
-item.corbone.name=珊瑚侵染带骨腐肉
+item.corflesh.name=珊瑚瘟疫腐肉
+item.corbone.name=珊瑚瘟疫带骨腐肉
 item.dpick.name=黑暗石镐
 item.daxe.name=黑暗石斧
 item.dshovel.name=黑暗石锹
@@ -1268,7 +1268,7 @@ item.dreadplate.name=恐惧锭板
 item.dreadblade.name=恐惧武士刀刀刃
 item.dreadhilt.name=恐惧武士刀刀把
 item.dreadkatana.name=恐惧武士刀
-item.dreadkey.name=恐惧侵染的门钥匙
+item.dreadkey.name=恐惧瘟疫的门钥匙
 item.gatewaykeyjzh.name=查加罗特的拉莱耶门钥匙
 item.dreadiumsamuraihelmet.name=恐惧武士头盔
 item.dreadiumsamuraiplate.name=恐惧武士胸甲
@@ -1306,7 +1306,7 @@ item.engraving_elder.name=接骨木钱币铸模
 item.engraving_jzahar.name=扎哈尔钱币铸模
 item.eldritchscale.name=邪术鳞片
 item.omotholflesh.name=奥穆索食尸鬼腐肉
-item.anticorflesh.name=反物质侵染腐肉
+item.anticorflesh.name=反物质瘟疫腐肉
 item.anticorbone.name=反物质带骨腐肉
 item.shoggothflesh.overworld.name=修格斯腐肉
 item.shoggothflesh.abyssalwasteland.name=深渊修格斯腐肉
@@ -1364,11 +1364,11 @@ item.scroll.moderate.name=中等卷轴
 item.scroll.greater.name=高级卷轴
 item.unique_scroll.antimatter.name=反物质卷轴
 item.unique_scroll.oblivion.name=遗忘卷轴
-item.antidote.coralium.name=珊瑚侵染解药
-item.antidote.dread.name=恐惧侵染解药
-item.door_dlt.name=Darklands Oak Wood Door
-item.door_drt.name=Dreadlands Wood Door
-item.cha_rcoal.name=Cha'rcoal
+item.antidote.coralium.name=珊瑚瘟疫解药
+item.antidote.dread.name=恐惧瘟疫解药
+item.door_dlt.name=黑暗之地橡木门
+item.door_drt.name=恐惧之地木门
+item.cha_rcoal.name=木炭
 
 #实体
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -1419,19 +1419,19 @@ entity.abyssalcraft.demonchicken.name=恶魔鸡
 entity.abyssalcraft.evilsheep.name=羊
 entity.abyssalcraft.demonsheep.name=恶魔羊
 entity.abyssalcraft.coraliumsquid.name=被珊瑚感染的鱿鱼
-entity.abyssalcraft.shuboffspring.name=Dark Offspring
+entity.abyssalcraft.shuboffspring.name=黑暗后代
 
 #药水
-potion.Cplague=珊瑚侵染
-potion.effect.Cplague=珊瑚侵染药水
-splash_potion.effect.Cplague=喷溅珊瑚侵染药水
-lingering_potion.effect.Cplague=滞留珊瑚侵染药水
-tipped_arrow.effect.Cplague=珊瑚侵染之箭
-potion.Dplague=恐惧侵染
-potion.effect.Dplague=恐惧侵染药水
-splash_potion.effect.Dplague=喷溅恐惧侵染药水
-lingering_potion.effect.Dplague=滞留恐惧侵染药水
-tipped_arrow.effect.Dplague=恐惧侵染之箭
+potion.Cplague=珊瑚瘟疫
+potion.effect.Cplague=珊瑚瘟疫药水
+splash_potion.effect.Cplague=喷溅珊瑚瘟疫药水
+lingering_potion.effect.Cplague=滞留珊瑚瘟疫药水
+tipped_arrow.effect.Cplague=珊瑚瘟疫之箭
+potion.Dplague=恐惧瘟疫
+potion.effect.Dplague=恐惧瘟疫药水
+splash_potion.effect.Dplague=喷溅恐惧瘟疫药水
+lingering_potion.effect.Dplague=滞留恐惧瘟疫药水
+tipped_arrow.effect.Dplague=恐惧瘟疫之箭
 potion.Antimatter=反物质
 potion.effect.Antimatter=湮灭药水
 splash_potion.effect.Antimatter=喷溅湮灭药水
@@ -1440,17 +1440,17 @@ tipped_arrow.effect.Antimatter=湮灭之箭
 
 #附魔
 enchantment.abyssalcraft.coralium=珊瑚
-enchantment.abyssalcraft.coralium.desc=击中时传播珊瑚侵染
+enchantment.abyssalcraft.coralium.desc=击中时传播珊瑚瘟疫
 enchantment.abyssalcraft.dread=恐惧
-enchantment.abyssalcraft.dread.desc=击中时传播恐惧侵染
+enchantment.abyssalcraft.dread.desc=击中时传播恐惧瘟疫
 enchantment.abyssalcraft.iron_wall=铁壁
 enchantment.abyssalcraft.iron_wall.desc=减少被击中时的击退量
 enchantment.abyssalcraft.light_pierce=光之穿刺
 enchantment.abyssalcraft.light_pierce.desc=增加对阴影生物的伤害
-enchantment.abyssalcraft.sapping=Sapping
-enchantment.abyssalcraft.sapping.desc=Increases the amount of energy a Staff of Rending can drain
-enchantment.abyssalcraft.multi_rend=Multi-rend
-enchantment.abyssalcraft.multi_rend.desc=Drains energy from mobs surrounding the target
+enchantment.abyssalcraft.sapping=虚弱
+enchantment.abyssalcraft.sapping.desc=增加撕裂法杖吸取的能量
+enchantment.abyssalcraft.multi_rend=多重撕裂
+enchantment.abyssalcraft.multi_rend.desc=从目标周围的怪物身上吸取能量
 
 #字幕
 subtitle.abyssalcraft.dreadguard.death=恐惧守卫：死亡
@@ -1490,9 +1490,9 @@ subtitle.abyssalcraft.abyssalzombie.death=深渊僵尸：死亡
 subtitle.abyssalcraft.antiplayer.hurt=反物质玩家：受伤
 subtitle.abyssalcraft.dreadguard.barf=恐惧守卫：呕吐
 subtitle.abyssalcraft.jzahar.blast=BOOM
-subtitle.abyssalcraft.jzahar.shouts=J'zahar tries to Fus Ro Dah
-subtitle.abyssalcraft.jzahar.earthquake=J'zahar tries to rearrange the tectonic plates
-subtitle.abyssalcraft.jzahar.implosion=J'zahar tries to replace gravity with his own version
-subtitle.abyssalcraft.jzahar.black_hole=J'zahar tries to do a cover of a Soundgarden song
+subtitle.abyssalcraft.jzahar.shouts=扎哈尔试图 Fus Ro Dah
+subtitle.abyssalcraft.jzahar.earthquake=扎哈尔试图重排板块
+subtitle.abyssalcraft.jzahar.implosion=扎哈尔试图用自己的意志替代重力
+subtitle.abyssalcraft.jzahar.black_hole=扎哈尔试图掩盖声音花园的歌声
 
 #本地化完成
