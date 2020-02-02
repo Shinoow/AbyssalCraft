@@ -101,9 +101,11 @@ public class DisruptionHandler {
 
 		DisruptionEntry disruption = getRandomDisruption(deity, world);
 
-		if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, world, pos, players, disruption)))
-			disruption.disrupt(world, pos, players);
-		AbyssalCraftAPI.getInternalMethodHandler().sendDisruption(deity, disruption.getUnlocalizedName().substring("ac.disruption.".length()), pos, world.provider.getDimension());
+		if(disruption != null) {
+			if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, world, pos, players, disruption)))
+				disruption.disrupt(world, pos, players);
+			AbyssalCraftAPI.getInternalMethodHandler().sendDisruption(deity, disruption.getUnlocalizedName().substring("ac.disruption.".length()), pos, world.provider.getDimension());
+		}
 	}
 
 	/**
