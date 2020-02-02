@@ -306,9 +306,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 					int food = getFoodLevel() + entity.getItem().getCount();
 					dataManager.set(FOOD, Integer.valueOf(food));
 					playSound(ACSounds.shoggoth_consume, getSoundVolume(), getSoundPitch());
-				} else {
-					playSound(SoundEvents.ENTITY_ITEM_BREAK, getSoundVolume(), 1.0F);
-				}
+				} else playSound(SoundEvents.ENTITY_ITEM_BREAK, getSoundVolume(), 1.0F);
 				world.removeEntity(entity);
 			}
 

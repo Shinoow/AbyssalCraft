@@ -273,7 +273,7 @@ public class ItemHandler implements ILifeCycleHandler {
 
 		registerItem(devsword, "devsword");
 		registerItem(shoggoth_projectile, "shoggoth_projectile");
-		
+
 		registerItem(ACItems.oblivion_catalyst, "oc");
 		registerItem(ACItems.gateway_key, "gatewaykey");
 		registerItem(ACItems.staff_of_the_gatekeeper, "staff");

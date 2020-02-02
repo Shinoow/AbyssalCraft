@@ -512,7 +512,7 @@ public class AbyssalCraftAPI {
 	 * Note: all inputs has to be either {@link ICrystal}s or be registered in the Crystal List {@link AbyssalCraftAPI#addCrystal(ItemStack)}
 	 * @param output The output (everything registered to the ore name will be added)
 	 * @param input An array of ItemStacks (maximum is 5)
-	 * 
+	 *
 	 * @since 1.27.0
 	 */
 	public static void addMaterialization(String output, ItemStack...input) {

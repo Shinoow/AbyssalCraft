@@ -565,9 +565,8 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if(par1DamageSource == DamageSource.OUT_OF_WORLD && posY <= 0 && !getEntityWorld().isRemote) {
+		if(par1DamageSource == DamageSource.OUT_OF_WORLD && posY <= 0 && !getEntityWorld().isRemote)
 			getEntityWorld().removeEntity(this);
-		}
 
 		return false;
 	}

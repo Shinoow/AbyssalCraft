@@ -62,7 +62,7 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 
 	private void placeBlocksAlt(World world, Chunk chunk, IBlockState state, BlockPos pos, int height) {
 		Chunk chunk1 = getChunk(world, pos, chunk);
-		placeBlocks(world, chunk, state, pos, height);
+		placeBlocks(world, chunk1, state, pos, height);
 	}
 
 	private Chunk getChunk(World world, BlockPos pos, Chunk chunk) {
