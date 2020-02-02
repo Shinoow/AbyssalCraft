@@ -1,8 +1,8 @@
 {
   "homepage": "https://shinoow.github.io/AbyssalCraft/",
   "promos": {
-	"1.12.2-latest": "1.9.15",
-	"1.12.2-recommended": "1.9.15",
+	"1.12.2-latest": "1.9.16",
+	"1.12.2-recommended": "1.9.16",
 	"1.12-latest": "1.9.4-pre-4",
 	"1.12-recommended": "1.9.4-pre-4",
 	"1.11.2-latest": "1.9.4.11-FINAL",
@@ -21,6 +21,7 @@
   "1.8.9-recommended": "1.9.3.10-FINAL"
   },
   "1.12.2": {
+	"1.9.16": "- The Altar of Cha'garoth now actually checks the height prior to generating the lair\n- Remnants should no longer potentially have trades where they don't sell anything\n- Made the bark of the Darklands Oak Wood texture brighter\n- Added a bunch of Materializer recipes (including stone and all parts of a tree)\n- The Materializer now uses the Ore Dictionary for finding blocks and items of the same type to materialize\n- Fixed a bug related to fetching available Materialization recipes\n- Fixed a crash that happened if you replaced a Ritual Altar with a non-Ritual Altar Tile Entity\n- You can no longer kill the bosses by having them fall out of the world (they'll just despawn)\n- Dreadlands Stalagmites no longer crash the game if they generate outside building height (only really noticeable with amplified terrain)\n- Fixed a bug where all scroll rituals always returned the Basic Scroll (might be similar instances with other rituals)\n- Lesser Shoggoth sounds and projectiles can now be customized with resource packs (courtesy of Mike-U5)\n- Statues no longer crash when generating Disruptions while affected by tick accelerators",
 	"1.9.15": "- Anti-Players now despawn (under normal circumstances)\n- If a player dies to Antimatter, the Anti-Player that spawns will have the player's name\n- If an Anti-Player kills a player, there will actually be a chance of an Anti-Player spawning\n- Air pockets no longer generate beneath shoggoth lairs\n- Spectral Dragons, Asorah, Cha'garoth, J'zahar and Sacthoth can now be killed using /kill\n- Improved the scrolling inside the Materializer GUI (also fixes a bug related to scrolling)\n- Added some more Materialization recipes (Coal Block, Redstone Block, Diamond and Diamond Ore)",
 	"1.9.14": "- Added a config option to disable the plague Enchantments\n- The Ritual Altar and Sacrificial Altar now adds the Glowing Potion Effect to its target (instead of making it emit smoke)\n- Place of Power previews now show a tooltip with the blocks used to build it when hovered over\n- All Shadow mobs now become completely invisible when it's dark enough (instead of barely visible). Bring torches with you to the Dark Realm!\n- You can no longer brew Potions of Annihilation (considering how powerful the Potion Effect is, being able to brew it was just broken OP)\n- Made the usability check in the crystal bag inventory more strict (fixes a dupe bug)\n- Added a ritual (named Mass Enchantment) that combines the Enchantments of 8 Enchanted Books, then applies them on whatever is on the altar\n- Added a config option to set the combined max level a single Enchantment can have in the Mass Enchantment ritual\n- Added a config option to toggle whether or not you can enchant books through the Mass Enchantment ritual\n- Added a Creative Tab for all registered spells\n- Fixed the rendering of the primed ODB (should've done this half a decade ago...), also changed the particle spawning\n- Also totally a 7 year anniversary update",
 	"1.9.13.1": "- Fixed a crash when any boss dialog is sent to chat on servers",
