@@ -42,6 +42,10 @@ public class ACSounds {
 	public static SoundEvent shoggoth_ambient;
 	public static SoundEvent shoggoth_hurt;
 	public static SoundEvent shoggoth_death;
+	public static SoundEvent shoggoth_shoot;
+	public static SoundEvent shoggoth_step;
+	public static SoundEvent shoggoth_birth;
+	public static SoundEvent shoggoth_consume;
 	public static SoundEvent jzahar_charge;
 	public static SoundEvent cthulhu_chant;
 	public static SoundEvent yog_sothoth_chant_1;

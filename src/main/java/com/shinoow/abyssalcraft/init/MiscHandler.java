@@ -172,6 +172,10 @@ public class MiscHandler implements ILifeCycleHandler {
 		shoggoth_ambient = registerSoundEvent("shoggoth.idle");
 		shoggoth_hurt = registerSoundEvent("shoggoth.hit");
 		shoggoth_death = registerSoundEvent("shoggoth.death");
+		shoggoth_step = registerSoundEvent("shoggoth.step");
+		shoggoth_shoot = registerSoundEvent("shoggoth.shoot");
+		shoggoth_birth = registerSoundEvent("shoggoth.birth");
+		shoggoth_consume = registerSoundEvent("shoggoth.consume");
 		jzahar_charge = registerSoundEvent("jzahar.charge");
 		cthulhu_chant = registerSoundEvent("chant.cthulhu");
 		yog_sothoth_chant_1 = registerSoundEvent("chant.yog_sothoth_1");
