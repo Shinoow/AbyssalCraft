@@ -746,7 +746,7 @@ public class InitHandler implements ILifeCycleHandler {
 
 		} catch (IOException e) {
 			ACLogger.severe("Failed to fetch supporter list, using local version!");
-			names = "Tedyhere";
+			names = "Gentlemangamer2015";
 		}
 
 		return names;
