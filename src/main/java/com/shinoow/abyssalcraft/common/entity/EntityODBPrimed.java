@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
-import java.util.List;
-
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -20,8 +18,6 @@ import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
@@ -33,7 +29,6 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.chunk.Chunk;
 
 public class EntityODBPrimed extends Entity {
 
@@ -173,12 +168,9 @@ public class EntityODBPrimed extends Entity {
 
 		});
 	}
-	
+
 	private void checkAndReplace(BlockPos pos, Explosion explosion){
-
-			IBlockState iblockstate = world.getBlockState(pos);
-
-			if(getExplosionResistance(explosion, world, pos, iblockstate) < 600000 && iblockstate.getMaterial() != Material.AIR)
-				world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
+		if(getExplosionResistance(explosion, world, pos, world.getBlockState(pos)) < 600000)
+			world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
 	}
 }
