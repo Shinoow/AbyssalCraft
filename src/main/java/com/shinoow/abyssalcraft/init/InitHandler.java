@@ -617,10 +617,13 @@ public class InitHandler implements ILifeCycleHandler {
 	 * @return True if the Entity is blacklisted, otherwise false
 	 */
 	public boolean isEntityBlacklisted(Entity entity){
-		String id = EntityList.getEntityString(entity);
-		for(String str : interdimensionalCageBlacklist)
-			if(str.equals(id))
-				return true;
+		ResourceLocation key = EntityList.getKey(entity);
+		if(key != null) {
+			String id = key.toString();
+			for(String str : interdimensionalCageBlacklist)
+				if(str.equals(id))
+					return true;
+		}
 		return false;
 	}
 
