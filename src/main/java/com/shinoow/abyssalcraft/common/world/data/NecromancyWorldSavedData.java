@@ -11,20 +11,21 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.data;
 
-import java.util.*;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
+import net.minecraftforge.common.util.Constants.NBT;
 
 public class NecromancyWorldSavedData extends WorldSavedData {
 
 	private static final String DATA_NAME = "abyssalcraft_necromancy_data";
 	List<Tuple<String, NBTTagCompound>> data = new ArrayList<>();
-	Map<String, Integer> sizes = new HashMap<>();
 
 	public NecromancyWorldSavedData() {
 		super(DATA_NAME);
@@ -39,25 +40,38 @@ public class NecromancyWorldSavedData extends WorldSavedData {
 		NBTTagCompound properties = nbt;
 
 		NBTTagCompound data = properties.getCompoundTag("Data");
-		NBTTagCompound sizes = properties.getCompoundTag("Sizes");
+		if(properties.hasKey("Version"))
+		{
+			//Probably do a version check here in the future, when things have changed
+			for(String name : data.getKeySet())
+			{
+				NBTTagList list = data.getTagList(name, NBT.TAG_COMPOUND);
+				for(int i = 0; i < list.tagCount(); i++)
+					storeDataInternal(name, list.getCompoundTagAt(i));
+			}
+		} else {
+			NBTTagCompound sizes = properties.getCompoundTag("Sizes");
 
-		for(String name : data.getKeySet())
-			storeData(name, data.getCompoundTag(name), sizes.getInteger(name));
+			for(String name : data.getKeySet())
+				storeDataLegacy(name, data.getCompoundTag(name), sizes.getInteger(name));
+		}
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
 
-		NBTTagCompound sizes = new NBTTagCompound();
-		for(Entry<String, Integer> e : getSizeData().entrySet())
-			sizes.setInteger(e.getKey(), e.getValue());
-
-		properties.setTag("Sizes", sizes);
+		properties.setInteger("Version", 1);
 
 		NBTTagCompound data = new NBTTagCompound();
 		for(Tuple<String, NBTTagCompound> t : getData())
-			data.setTag(t.getFirst(), t.getSecond());
+			if(data.hasKey(t.getFirst()))
+				data.getTagList(t.getFirst(), NBT.TAG_COMPOUND).appendTag(t.getSecond());
+			else {
+				NBTTagList list = new NBTTagList();
+				list.appendTag(t.getSecond());
+				data.setTag(t.getFirst(), list);
+			}
 
 		properties.setTag("Data", data);
 
@@ -72,46 +86,38 @@ public class NecromancyWorldSavedData extends WorldSavedData {
 		return null;
 	}
 
-	public int getSizeForName(String name){
-		return sizes.getOrDefault(name, 0);
-	}
-
 	public void storeData(String name, NBTTagCompound data, int size) {
 
-		if(getDataForName(name) == null){
-			if(this.data.size() == 5){
-				sizes.remove(this.data.get(0).getFirst());
-				this.data.remove(0);
-			}
-			this.data.add(new Tuple(name, data));
-		} else
-			for(Tuple<String, NBTTagCompound> t : this.data)
-				if(t.getFirst().equals(name)){
-					t = new Tuple(name, data);
-					break;
-				}
-		sizes.put(name, size);
+		data.setInteger("ResurrectionRitualCrystalSize", size);
+		storeDataInternal(name, data);
 		markDirty();
 	}
 
+	private void storeDataInternal(String name, NBTTagCompound data)
+	{
+		if(this.data.size() == 5)//TODO considering the list is shared, maybe remove this limitation?
+			this.data.remove(0);
+		this.data.add(new Tuple(name, data));
+	}
+
+	private void storeDataLegacy(String name, NBTTagCompound data, int size) {
+		data.setInteger("ResurrectionRitualCrystalSize", size);
+		storeDataInternal(name, data);
+	}
+
 	public void clearEntry(String name) {
-		for(Tuple<String, NBTTagCompound> t : data)
-			if(t.getFirst().equals(name)){
-				data.remove(t);
+		for(int i = 0; i < data.size(); i++)
+			if(data.get(i).getFirst().equals(name))
+			{
+				data.remove(i);
 				break;
 			}
-		sizes.remove(name);
 		markDirty();
 	}
 
 	public List<Tuple<String, NBTTagCompound>> getData() {
 
 		return data;
-	}
-
-	public Map<String, Integer> getSizeData() {
-
-		return sizes;
 	}
 
 	public static NecromancyWorldSavedData get(World world) {

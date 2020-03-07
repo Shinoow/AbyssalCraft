@@ -28,6 +28,7 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -71,8 +72,8 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 		if(!stack.isEmpty() && stack.getItem() == Items.NAME_TAG){
 			NecromancyWorldSavedData cap = NecromancyWorldSavedData.get(world);
-			int size = cap.getSizeForName(stack.getDisplayName());
-			return cap.getDataForName(stack.getDisplayName()) != null && ((IRitualAltar) altar).getPedestals().stream().noneMatch(p -> mismatch(p.getItem(), getOfferings()[0], size));
+			NBTTagCompound data = cap.getDataForName(stack.getDisplayName());
+			return data != null && ((IRitualAltar) altar).getPedestals().stream().noneMatch(p -> mismatch(p.getItem(), getOfferings()[0], data.getInteger("ResurrectionRitualCrystalSize")));
 		}
 
 		return false;
@@ -94,9 +95,10 @@ public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 		if(!stack.isEmpty() && stack.getItem() == Items.NAME_TAG){
 			NecromancyWorldSavedData cap = NecromancyWorldSavedData.get(world);
-			Entity e = EntityList.createEntityFromNBT(cap.getDataForName(stack.getDisplayName()), world);
+			NBTTagCompound data = cap.getDataForName(stack.getDisplayName());
+			Entity e = EntityList.createEntityFromNBT(data, world);
 			if(e instanceof EntityLiving){
-				EntityLiving entity = getEntity(e, cap.getSizeForName(stack.getDisplayName()));
+				EntityLiving entity = getEntity(e, data.getInteger("ResurrectionRitualCrystalSize"));
 				world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 2, pos.getZ(), true));
 				entity.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), entity.rotationYaw, entity.rotationPitch);
 				entity.setHealth(entity.getMaxHealth());
