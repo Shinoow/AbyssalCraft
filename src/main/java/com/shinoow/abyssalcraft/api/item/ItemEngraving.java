@@ -54,6 +54,12 @@ public class ItemEngraving extends Item implements IUnlockableItem {
 	}
 
 	@Override
+	public int getItemStackLimit(ItemStack stack)
+	{
+		return stack.isItemDamaged() ? 1 : super.getItemStackLimit(stack);
+	}
+
+	@Override
 	public Item setUnlockCondition(IUnlockCondition condition) {
 		this.condition = condition;
 		return this;
