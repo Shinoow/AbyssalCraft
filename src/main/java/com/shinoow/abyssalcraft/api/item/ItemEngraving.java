@@ -46,6 +46,7 @@ public class ItemEngraving extends Item implements IUnlockableItem {
 		super();
 		setUnlocalizedName("engraving_" + par1);
 		setMaxDamage(par2);
+		setNoRepair();
 	}
 
 	@Override
@@ -57,6 +58,12 @@ public class ItemEngraving extends Item implements IUnlockableItem {
 	public int getItemStackLimit(ItemStack stack)
 	{
 		return stack.isItemDamaged() ? 1 : super.getItemStackLimit(stack);
+	}
+
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book)
+	{
+		return false;
 	}
 
 	@Override
