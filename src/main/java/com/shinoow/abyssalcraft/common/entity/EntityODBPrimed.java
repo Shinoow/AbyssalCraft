@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
+import java.util.List;
+
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -18,6 +20,8 @@ import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
@@ -26,8 +30,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
 
 public class EntityODBPrimed extends Entity {
 
@@ -142,7 +148,7 @@ public class EntityODBPrimed extends Entity {
 		return 0.0F;
 	}
 
-	public void finishExplosion(int delay) {
+	public void finishExplosion(int delay, Explosion explosion) {
 		Scheduler.schedule(new ScheduledProcess(delay) {
 
 			@Override
@@ -152,10 +158,10 @@ public class EntityODBPrimed extends Entity {
 					for(z = 0; z < 9; z++)
 						for(x1 = 0; x1 < 9; x1++)
 							for(z1 = 0; z1 < 9; z1++){
-								world.setBlockState(new BlockPos(posX + x, posY, posZ + z), Blocks.OBSIDIAN.getDefaultState());
-								world.setBlockState(new BlockPos(posX - x1, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
-								world.setBlockState(new BlockPos(posX + x, posY, posZ - z1), Blocks.OBSIDIAN.getDefaultState());
-								world.setBlockState(new BlockPos(posX - x1, posY, posZ  + z), Blocks.OBSIDIAN.getDefaultState());
+								checkAndReplace(new BlockPos(posX + x, posY, posZ + z), explosion);
+								checkAndReplace(new BlockPos(posX - x1, posY, posZ - z1), explosion);
+								checkAndReplace(new BlockPos(posX + x, posY, posZ - z1), explosion);
+								checkAndReplace(new BlockPos(posX - x1, posY, posZ  + z), explosion);
 							}
 				EntitySacthoth sacthoth = new EntitySacthoth(world);
 				sacthoth.setPosition(posX, posY + 1, posZ);
@@ -166,5 +172,13 @@ public class EntityODBPrimed extends Entity {
 			}
 
 		});
+	}
+	
+	private void checkAndReplace(BlockPos pos, Explosion explosion){
+
+			IBlockState iblockstate = world.getBlockState(pos);
+
+			if(getExplosionResistance(explosion, world, pos, iblockstate) < 600000 && iblockstate.getMaterial() != Material.AIR)
+				world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
 	}
 }

@@ -338,7 +338,7 @@ public class ACExplosion extends Explosion
 		});
 
 		if(exploder instanceof EntityODBPrimed)
-			((EntityODBPrimed)exploder).finishExplosion(num + 10);
+			((EntityODBPrimed)exploder).finishExplosion(num + 10, this);
 	}
 
 	@Override
