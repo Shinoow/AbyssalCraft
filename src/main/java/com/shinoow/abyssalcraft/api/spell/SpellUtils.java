@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -102,5 +103,19 @@ public class SpellUtils {
 				for(int i = 0; i < 3; i++)
 					world.spawnParticle(EnumParticleTypes.FLAME, player.posX + (world.rand.nextDouble() - 0.5D)*player.width, player.posY + 1.0, player.posZ + (world.rand.nextDouble() - 0.5D)*player.width, 0, 0, 0);
 			}
+	}
+
+	/**
+	 * Checks if a player can hurt another player (assuming they are also a player)
+	 */
+	public static boolean canPlayerHurt(EntityPlayer player, Entity target)
+	{
+		if(!(target instanceof EntityPlayer)) return true;
+
+		EntityPlayer player2 = (EntityPlayer) target;
+
+		if(player2.isCreative() || player2.isSpectator())
+			return false;
+		return player.canAttackPlayer(player2);
 	}
 }

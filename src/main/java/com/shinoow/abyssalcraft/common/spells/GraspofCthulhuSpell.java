@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellUtils;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.MobSpellMessage;
@@ -39,7 +40,7 @@ public class GraspofCthulhuSpell extends Spell {
 		if(world.isRemote){
 			RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
 			if(r != null && r.entityHit instanceof EntityLivingBase)
-				return true;
+				return SpellUtils.canPlayerHurt(player, r.entityHit);
 		}
 		return false;
 	}

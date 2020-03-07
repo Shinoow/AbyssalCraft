@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.spell.SpellUtils;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
 
 import net.minecraft.block.state.IBlockState;
@@ -71,7 +72,7 @@ public class MobSpellMessage extends AbstractServerMessage<MobSpellMessage> {
 		Entity e = player.world.getEntityByID(id);
 		if(e == null) return;
 
-		if(e instanceof EntityLivingBase){
+		if(e instanceof EntityLivingBase && SpellUtils.canPlayerHurt(player, e)){
 			EntityLivingBase target = (EntityLivingBase)e;
 			switch(spell) {
 			case 0:
