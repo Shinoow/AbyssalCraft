@@ -45,7 +45,8 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement(I18n.format("ac_blocks"), "ac_blocks", BlocksEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_mod_compat"), "ac_mod_compat", CompatEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_wet_noodle"), "ac_wet_noodle", WetNoodleEntry.class));
-		list.add(new DummyCategoryElement(I18n.format("modules"), "modules", ModuleEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_modules"), "ac_modules", ModuleEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_spells"), "ac_spells", SpellEntry.class));
 		return list;
 	}
 
@@ -198,7 +199,19 @@ public class ACConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("modules")).getChildElements(), "abyssalcraft", "modules", true, true, I18n.format("modules"));
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("modules")).getChildElements(), "abyssalcraft", "modules", true, true, I18n.format("ac_modules"));
+
+		}
+	}
+	public static class SpellEntry extends CategoryEntry{
+
+		public SpellEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory("spells")).getChildElements(), "abyssalcraft", "spells", true, true, I18n.format("ac_spells"));
 
 		}
 	}

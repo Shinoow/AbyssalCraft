@@ -306,6 +306,8 @@ public class InitHandler implements ILifeCycleHandler {
 		cfg.setCategoryComment("blocks", "These settings allow you to disable specific blocks in the mod, mainly slabs, stairs and walls. Any changes take effect after a Minecraft restart.");
 		cfg.setCategoryComment("mod_compat", "Mod compatibility configuration (settings in regards to certain compatiblity with other mods that can be disabled at will).");
 		cfg.setCategoryComment("wet_noodle", "These settings allow you to disable features of a destructive type, or things that to some extent will impact how the mod is played (while generally making it easier).");
+		cfg.setCategoryComment("modules", "These settings allow you to disable content from the mod that may be out of place to some extent, or other reasons. Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("spells", "Spell configuration (allows you to enable or disable specific spells added by the mod). Any changes take effect after a Minecraft restart.");
 
 		ACLib.abyssal_wasteland_id = cfg.get("dimensions", "The Abyssal Wasteland", 50, "The first dimension, full of undead monsters.").getInt();
 		ACLib.dreadlands_id = cfg.get("dimensions", "The Dreadlands", 51, "The second dimension, infested with mutated monsters.").getInt();
@@ -480,6 +482,18 @@ public class InitHandler implements ILifeCycleHandler {
 		foodstuff = cfg.get("modules", "Enable Foodstuffs", true, "Set to false to disable Abyssalcraft Food.").getBoolean();
 		upgrade_kits = cfg.get("modules", "Enable Upgrade Kits", true, "Set to false to disable Upgrade Kits.").getBoolean();
 		plague_enchantments = cfg.get("modules", "Enable Plague Enchantments", true, "Set to false to disable the Coralium and Dread Enchantments.").getBoolean();
+
+		entropy_spell = cfg.get("spells", "Entropy", true, "Set to false to disable the Entropy spell.").getBoolean();
+		life_drain_spell = cfg.get("spells", "Life Drain", true, "Set to false to disable the Life Drain spell.").getBoolean();
+		mining_spell = cfg.get("spells", "Mining", true, "Set to false to disable the Mining spell.").getBoolean();
+		grasp_of_cthulhu_spell = cfg.get("spells", "Grasp of Cthulhu", true, "Set to false to disable the Grasp of Cthulhu spell.").getBoolean();
+		invisibility_spell = cfg.get("spells", "Hide from the Eye", true, "Set to false to disable the Hide from the Eye spell.").getBoolean();
+		detachment_spell = cfg.get("spells", "Detachment", true, "Set to false to disable the Detachment spell.").getBoolean();
+		steal_vigor_spell = cfg.get("spells", "Steal Vigor", true, "Set to false to disable the Steal Vigor spell.").getBoolean();
+		sirens_song_spell = cfg.get("spells", "Siren's Song§", true, "Set to false to disable the Siren's Song spell.").getBoolean();
+		undeath_to_dust_spell = cfg.get("spells", "Undeath to Dust", true, "Set to false to disable the Undeath to Dust spell.").getBoolean();
+		ooze_removal_spell = cfg.get("spells", "Ooze Removal", true, "Set to false to disable the Ooze Removal spell.").getBoolean();
+		teleport_hostile_spell = cfg.get("spells", "Sacrificial Interdiction", true, "Set to false to disable the Sacrificial Interdiction spell.").getBoolean();
 
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);

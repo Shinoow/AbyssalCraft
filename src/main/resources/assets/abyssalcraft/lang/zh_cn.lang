@@ -858,6 +858,10 @@ ac_mod_compat=mod兼容
 ac_mod_compat.tooltip=mod兼容配置
 ac_wet_noodle=湿面条
 ac_wet_noodle.tooltip=湿面条配置
+ac_modules=Modules
+ac_modules.tooltip=Module Configuration
+ac_spells=Spells
+ac_spells.tooltip=Spell Configuration
 
 #键位
 key.abyssalcraft.category=深渊国度

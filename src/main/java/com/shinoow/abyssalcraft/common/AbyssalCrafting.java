@@ -670,17 +670,28 @@ public class AbyssalCrafting {
 	}
 
 	private static void addSpells(){
-		SpellRegistry.instance().registerSpell(new EntropySpell());
-		SpellRegistry.instance().registerSpell(new LifeDrainSpell());
-		SpellRegistry.instance().registerSpell(new MiningSpell());
-		SpellRegistry.instance().registerSpell(new GraspofCthulhuSpell());
-		SpellRegistry.instance().registerSpell(new InvisibilitySpell());
-		SpellRegistry.instance().registerSpell(new DetachmentSpell());
-		SpellRegistry.instance().registerSpell(new StealVigorSpell());
-		SpellRegistry.instance().registerSpell(new SirensSongSpell());
-		SpellRegistry.instance().registerSpell(new UndeathtoDustSpell());
-		SpellRegistry.instance().registerSpell(new OozeRemovalSpell());
-		SpellRegistry.instance().registerSpell(new TeleportHostilesSpell());
+		if(ACConfig.entropy_spell)
+			SpellRegistry.instance().registerSpell(new EntropySpell());
+		if(ACConfig.life_drain_spell)
+			SpellRegistry.instance().registerSpell(new LifeDrainSpell());
+		if(ACConfig.mining_spell)
+			SpellRegistry.instance().registerSpell(new MiningSpell());
+		if(ACConfig.grasp_of_cthulhu_spell)
+			SpellRegistry.instance().registerSpell(new GraspofCthulhuSpell());
+		if(ACConfig.invisibility_spell)
+			SpellRegistry.instance().registerSpell(new InvisibilitySpell());
+		if(ACConfig.detachment_spell)
+			SpellRegistry.instance().registerSpell(new DetachmentSpell());
+		if(ACConfig.steal_vigor_spell)
+			SpellRegistry.instance().registerSpell(new StealVigorSpell());
+		if(ACConfig.sirens_song_spell)
+			SpellRegistry.instance().registerSpell(new SirensSongSpell());
+		if(ACConfig.undeath_to_dust_spell)
+			SpellRegistry.instance().registerSpell(new UndeathtoDustSpell());
+		if(ACConfig.ooze_removal_spell)
+			SpellRegistry.instance().registerSpell(new OozeRemovalSpell());
+		if(ACConfig.teleport_hostile_spell)
+			SpellRegistry.instance().registerSpell(new TeleportHostilesSpell());
 	}
 
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
