@@ -77,9 +77,8 @@ public class ContainerMaterializer extends Container {
 	private int getRecipeAmount(){
 
 		for(int i = 2; i < 110; i++)
-			if(tileMaterializer.getStackInSlot(i).isEmpty()){
+			if(tileMaterializer.getStackInSlot(i).isEmpty())
 				return i;
-			}
 
 		return 110;
 	}

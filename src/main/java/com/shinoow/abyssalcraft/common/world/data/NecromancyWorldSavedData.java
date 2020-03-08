@@ -41,7 +41,6 @@ public class NecromancyWorldSavedData extends WorldSavedData {
 
 		NBTTagCompound data = properties.getCompoundTag("Data");
 		if(properties.hasKey("Version"))
-		{
 			//Probably do a version check here in the future, when things have changed
 			for(String name : data.getKeySet())
 			{
@@ -49,7 +48,7 @@ public class NecromancyWorldSavedData extends WorldSavedData {
 				for(int i = 0; i < list.tagCount(); i++)
 					storeDataInternal(name, list.getCompoundTagAt(i));
 			}
-		} else {
+		else {
 			NBTTagCompound sizes = properties.getCompoundTag("Sizes");
 
 			for(String name : data.getKeySet())
