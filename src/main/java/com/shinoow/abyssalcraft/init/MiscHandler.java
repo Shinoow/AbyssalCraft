@@ -461,7 +461,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("crystalAlumina", new ItemStack(ACItems.crystal, 1, 22));
 		OreDictionary.registerOre("crystalMagnesia", new ItemStack(ACItems.crystal, 1, 23));
 		OreDictionary.registerOre("crystalZinc", new ItemStack(ACItems.crystal, 1, 24));
-		OreDictionary.registerOre("foodFriedEgg", ACItems.fried_egg);
+		if(ACConfig.foodstuff)
+			OreDictionary.registerOre("foodFriedEgg", ACItems.fried_egg);
 		OreDictionary.registerOre("oreIron", ACBlocks.abyssal_iron_ore);
 		OreDictionary.registerOre("oreGold", ACBlocks.abyssal_gold_ore);
 		OreDictionary.registerOre("oreDiamond", ACBlocks.abyssal_diamond_ore);
@@ -545,7 +546,8 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.darkstone_sword, 2, 0, new LootFunction[0], new LootCondition[0], modid + ":darkstone_sword"));
 				main.addEntry(new LootEntryItem(Item.getItemFromBlock(ACBlocks.darklands_oak_wood), 10, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":darklands_oak_wood"));
 				main.addEntry(new LootEntryItem(Item.getItemFromBlock(ACBlocks.darklands_oak_wood_2), 10, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":darklands_oak_wood_2"));
-				main.addEntry(new LootEntryItem(ACItems.cobblestone_upgrade_kit, 2, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":cobblestone_upgrade_kit"));
+				if (ACConfig.upgrade_kits)
+					main.addEntry(new LootEntryItem(ACItems.cobblestone_upgrade_kit, 2, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":cobblestone_upgrade_kit"));
 			}
 		}
 		if(event.getName().equals(LootTableList.CHESTS_VILLAGE_BLACKSMITH)){
@@ -613,6 +615,11 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.shadow_shard, 5, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 6))}, new LootCondition[0], modid + ":shadow_gem_shard"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_gem, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":shadow_gem"));
 			}
+		}
+		if(event.getName().equals(ACLoot.CHEST_ABYSSAL_STRONGHOLD_CROSSING) && ACConfig.foodstuff) {
+			LootPool main = event.getTable().getPool("main");
+			if(main != null)
+				main.addEntry(new LootEntryItem(ACItems.mre, 10, 0 , new LootFunction[0], new LootCondition[0], modid + ":mre"));
 		}
 	}
 

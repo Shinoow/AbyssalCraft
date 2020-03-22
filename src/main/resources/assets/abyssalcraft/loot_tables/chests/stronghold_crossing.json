@@ -79,11 +79,6 @@
                 },
                 {
                     "type": "item",
-                    "name": "abyssalcraft:mre",
-                    "weight": 10
-                },
-                {
-                    "type": "item",
                     "name": "abyssalcraft:apick",
                     "weight": 1
                 },
