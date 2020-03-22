@@ -123,6 +123,9 @@ public class BlockShoggothOoze extends BlockACBasic {
 			if (!par1World.isRemote && par5Random.nextInt(10) == 0 && par1World.getLightFromNeighbors(pos.up()) >= 13)
 				if(state.getValue(LAYERS).intValue() == 8)
 					par1World.setBlockState(pos, getState(par1World));
+				else if(state.getValue(LAYERS).intValue() > 1)
+					par1World.setBlockState(pos, state.withProperty(LAYERS, state.getValue(LAYERS).intValue() -1));
+				else par1World.setBlockToAir(pos);
 	}
 
 	private IBlockState getState(World world){

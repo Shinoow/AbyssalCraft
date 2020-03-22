@@ -381,7 +381,7 @@ public class InitHandler implements ILifeCycleHandler {
 		coraliumWeight = cfg.get("biome_weight", "Coralium Infested Swamp", 5, "Biome weight for the Coralium Infested Swamp biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 
 		shoggothOoze = cfg.get("shoggoth", "Shoggoth Ooze Spread", true, "Toggles whether or not Lesser Shoggoths should spread their ooze when walking around.").getBoolean();
-		oozeExpire = cfg.get("shoggoth", "Ooze expiration", false, "Toggles whether or not Shoggoth Ooze slowly reverts to dirt after constant light exposure.").getBoolean();
+		oozeExpire = cfg.get("shoggoth", "Ooze expiration", false, "Toggles whether or not Shoggoth Ooze slowly reverts to dirt after constant light exposure. Ooze blocks that aren't full blocks will shrink instead.").getBoolean();
 		consumeItems = cfg.get("shoggoth", "Item Consumption", true, "Toggles whether or not Lesser Shoggoths will consume any dropped item they run into.").getBoolean();
 		shieldsBlockAcid = cfg.get("shoggoth", "Shields Block Acid", true, "Toggles whether or not Shields can block the acid projectiles spat by Lesser Shoggoths.").getBoolean();
 		acidResistanceHardness = cfg.get("shoggoth", "Acid Resistance Hardness", 3.0D, "The minimum Block Hardness required for a Block to not be destroyed by Shoggoth Acid (some blocks are unaffected regardless of their hardness)\n[range: 2.1 ~ 51.0, default: 3.0]", 2.1D, 51.0D).getDouble();
