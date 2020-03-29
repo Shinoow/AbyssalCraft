@@ -16,6 +16,7 @@ import com.shinoow.abyssalcraft.client.gui.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.inventory.*;
+import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -36,6 +37,7 @@ public class CommonProxy implements IGuiHandler {
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity entity = world.getTileEntity(new BlockPos(x, y, z));
 		ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
+		ItemStack stack1 = player.getHeldItem(EnumHand.OFF_HAND);
 
 		if(entity != null)
 			switch(ID) {
@@ -75,10 +77,24 @@ public class CommonProxy implements IGuiHandler {
 		if(!stack.isEmpty())
 			switch(ID){
 			case ACLib.crystalbagGuiID:
-				return new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack));
+				if(stack.getItem() instanceof ItemCrystalBag)
+					return new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack));
+				break;
 			case ACLib.necronomiconspellbookGuiID:
 				if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
 					return new ContainerSpellbook(player, stack);
+				break;
+			}
+		if(!stack1.isEmpty())
+			switch(ID){
+			case ACLib.crystalbagGuiID:
+				if(stack1.getItem() instanceof ItemCrystalBag)
+					return new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack1));
+				break;
+			case ACLib.necronomiconspellbookGuiID:
+				if(stack1.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack1.getItem()).isOwner(player, stack1))
+					return new ContainerSpellbook(player, stack1);
+				break;
 			}
 		return null;
 	}
@@ -87,6 +103,7 @@ public class CommonProxy implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity entity = world.getTileEntity(new BlockPos(x, y, z));
 		ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
+		ItemStack stack1 = player.getHeldItem(EnumHand.OFF_HAND);
 
 		if(entity != null)
 			switch(ID) {
@@ -130,10 +147,28 @@ public class CommonProxy implements IGuiHandler {
 					return GuiNecronomicon.currentNecro.withBookType(((ItemNecronomicon)stack.getItem()).getBookType());
 				break;
 			case ACLib.crystalbagGuiID:
-				return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack)));
+				if(stack.getItem() instanceof ItemCrystalBag)
+					return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack)));
+				break;
 			case ACLib.necronomiconspellbookGuiID:
 				if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
 					return new GuiSpellbook(new ContainerSpellbook(player, stack));
+				break;
+			}
+		if(!stack1.isEmpty())
+			switch(ID) {
+			case ACLib.necronmiconGuiID:
+				if(stack1.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack1.getItem()).isOwner(player, stack1))
+					return GuiNecronomicon.currentNecro.withBookType(((ItemNecronomicon)stack1.getItem()).getBookType());
+				break;
+			case ACLib.crystalbagGuiID:
+				if(stack1.getItem() instanceof ItemCrystalBag)
+					return new GuiCrystalBag(new ContainerCrystalBag(player.inventory, new InventoryCrystalBag(stack1)));
+				break;
+			case ACLib.necronomiconspellbookGuiID:
+				if(stack1.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack1.getItem()).isOwner(player, stack1))
+					return new GuiSpellbook(new ContainerSpellbook(player, stack1));
+				break;
 			}
 		return null;
 	}
