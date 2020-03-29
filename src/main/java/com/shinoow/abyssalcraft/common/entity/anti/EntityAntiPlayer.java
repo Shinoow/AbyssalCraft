@@ -109,7 +109,7 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		setCanPickUpLoot(true);
+		setCanPickUpLoot(ACConfig.antiPlayersPickupLoot);
 
 		setEquipmentBasedOnDifficulty(difficulty);
 		setEnchantmentBasedOnDifficulty(difficulty);
