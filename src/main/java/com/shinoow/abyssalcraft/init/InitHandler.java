@@ -25,7 +25,6 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.handlers.ClientVarsReloadListener;
-import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
@@ -122,7 +121,7 @@ public class InitHandler implements ILifeCycleHandler {
 		MinecraftForge.EVENT_BUS.register(new KnowledgeEventHandler());
 		MinecraftForge.EVENT_BUS.register(new PlagueEventHandler());
 		MinecraftForge.EVENT_BUS.register(new PurgeEventHandler());
-		NetworkRegistry.INSTANCE.registerGuiHandler(AbyssalCraft.instance, new CommonProxy());
+		NetworkRegistry.INSTANCE.registerGuiHandler(AbyssalCraft.instance, new GuiHandler());
 		AbyssalCraftAPI.setInternalNDHandler(new InternalNecroDataHandler());
 		AbyssalCraftAPI.setInternalMethodHandler(new InternalMethodHandler());
 		ACLoot.init();
