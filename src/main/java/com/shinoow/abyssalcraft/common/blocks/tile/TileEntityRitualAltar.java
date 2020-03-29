@@ -164,13 +164,19 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	}
 
 	private void collectPEFromPlayer() {
-		for(ItemStack stack : user.inventory.mainInventory)
-			if(!stack.isEmpty() && stack.getItem() instanceof IEnergyTransporterItem &&
-					((IEnergyTransporterItem) stack.getItem()).canTransferPEExternally(stack) && ((IEnergyTransporterItem) stack.getItem()).getContainedEnergy(stack) > 0 &&
-					(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(user, stack) || !(stack.getItem() instanceof ItemNecronomicon))){
-				consumedEnergy += ((IEnergyTransporterItem) stack.getItem()).consumeEnergy(stack, ritual.getReqEnergy()/10);
-				break;
-			}
+		ItemStack stack = user.getHeldItem(EnumHand.OFF_HAND);
+		if(!stack.isEmpty() && stack.getItem() instanceof IEnergyTransporterItem &&
+				((IEnergyTransporterItem) stack.getItem()).canTransferPEExternally(stack) && ((IEnergyTransporterItem) stack.getItem()).getContainedEnergy(stack) > 0 &&
+				(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(user, stack) || !(stack.getItem() instanceof ItemNecronomicon)))
+			consumedEnergy += ((IEnergyTransporterItem) stack.getItem()).consumeEnergy(stack, ritual.getReqEnergy()/10);
+		else
+			for(ItemStack stack1 : user.inventory.mainInventory)
+				if(!stack1.isEmpty() && stack1.getItem() instanceof IEnergyTransporterItem &&
+						((IEnergyTransporterItem) stack1.getItem()).canTransferPEExternally(stack1) && ((IEnergyTransporterItem) stack1.getItem()).getContainedEnergy(stack1) > 0 &&
+						(stack1.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack1.getItem()).isOwner(user, stack1) || !(stack1.getItem() instanceof ItemNecronomicon))){
+					consumedEnergy += ((IEnergyTransporterItem) stack1.getItem()).consumeEnergy(stack1, ritual.getReqEnergy()/10);
+					break;
+				}
 	}
 
 	private void triggerDisruption() {

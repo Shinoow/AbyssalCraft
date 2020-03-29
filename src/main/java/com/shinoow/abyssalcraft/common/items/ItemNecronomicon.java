@@ -18,7 +18,6 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.ShouldSyncMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -94,7 +93,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	public EnumActionResult onItemUse(EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		ItemStack is = player.getHeldItem(hand);
 		if(player.isSneaking())
-			if(!(w.getBlockState(pos).getBlock() instanceof BlockRitualAltar)){
+			if(!(w.getTileEntity(pos) instanceof IRitualAltar)){
 				if(isOwner(player, is))
 					if(RitualUtil.tryAltar(w, pos, bookType) || StructureHandler.instance().tryFormStructure(w, pos, bookType, player)){
 						w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);

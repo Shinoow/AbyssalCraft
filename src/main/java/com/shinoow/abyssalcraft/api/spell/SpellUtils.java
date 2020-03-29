@@ -42,12 +42,17 @@ public class SpellUtils {
 	 * @return Whether or not the player has enough PE
 	 */
 	private static boolean hasEnoughPE(EntityPlayer player, float req){
-		for(int i = 0; i < 9; i++){
-			ItemStack stack = player.inventory.getStackInSlot(i);
-			if(stack.getItem() instanceof IEnergyContainerItem
-					&& ((IEnergyContainerItem)stack.getItem()).getContainedEnergy(stack) >= req)
-				return true;
-		}
+		ItemStack stack = player.getHeldItemOffhand();
+		if(stack.getItem() instanceof IEnergyContainerItem
+				&& ((IEnergyContainerItem)stack.getItem()).getContainedEnergy(stack) >= req)
+			return true;
+		else
+			for(int i = 0; i < 9; i++){
+				ItemStack stack1 = player.inventory.getStackInSlot(i);
+				if(stack1.getItem() instanceof IEnergyContainerItem
+						&& ((IEnergyContainerItem)stack1.getItem()).getContainedEnergy(stack1) >= req)
+					return true;
+			}
 		return false;
 	}
 
@@ -57,14 +62,19 @@ public class SpellUtils {
 	 * @param energy Amount of energy to drain
 	 */
 	private static void drainPE(EntityPlayer player, float energy){
-		for(int i = 0; i < 9; i++){
-			ItemStack stack = player.inventory.getStackInSlot(i);
-			if(stack.getItem() instanceof IEnergyContainerItem
-					&& ((IEnergyContainerItem)stack.getItem()).getContainedEnergy(stack) >= energy){
-				((IEnergyContainerItem)stack.getItem()).consumeEnergy(stack, energy);
-				break;
+		ItemStack stack = player.getHeldItemOffhand();
+		if(stack.getItem() instanceof IEnergyContainerItem
+				&& ((IEnergyContainerItem)stack.getItem()).getContainedEnergy(stack) >= energy)
+			((IEnergyContainerItem)stack.getItem()).consumeEnergy(stack, energy);
+		else
+			for(int i = 0; i < 9; i++){
+				ItemStack stack1 = player.inventory.getStackInSlot(i);
+				if(stack1.getItem() instanceof IEnergyContainerItem
+						&& ((IEnergyContainerItem)stack1.getItem()).getContainedEnergy(stack1) >= energy){
+					((IEnergyContainerItem)stack1.getItem()).consumeEnergy(stack1, energy);
+					break;
+				}
 			}
-		}
 	}
 
 	/**
