@@ -397,6 +397,8 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			return 0;
 		else
 		{
+			int fuelValue = AbyssalCraftAPI.getFuelValue(par1ItemStack, FuelType.CRYSTALLIZER);
+			if(fuelValue >= 0) return fuelValue;
 			Item item = par1ItemStack.getItem();
 
 			if (item == ACItems.dread_fragment) return 100;
@@ -405,7 +407,7 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if (item == Items.BLAZE_POWDER) return 1200;
 			if (item == Items.BLAZE_ROD) return 2400;
 			if (item == ACItems.methane) return 10000;
-			return AbyssalCraftAPI.getFuelValue(par1ItemStack, FuelType.CRYSTALLIZER);
+			return 0;
 		}
 	}
 

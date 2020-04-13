@@ -37,7 +37,7 @@ public class FuelBurnTimeEvent extends Event
 {
 	@Nonnull
 	private final ItemStack itemStack;
-	private int burnTime;
+	private int burnTime = -1;
 	private final FuelType fuelType;
 
 	public FuelBurnTimeEvent(@Nonnull ItemStack itemStack, FuelType fuelType)
@@ -67,6 +67,7 @@ public class FuelBurnTimeEvent extends Event
 	/**
 	 * The resulting value of this event, the burn time for the ItemStack.
 	 * A value of 0 will prevent the item from being used as fuel.
+	 * A value of -1 will let the machine in question decide on the fuel value.
 	 */
 	public int getBurnTime()
 	{

@@ -562,7 +562,7 @@ public class AbyssalCraftAPI {
 			FuelBurnTimeEvent event = new FuelBurnTimeEvent(itemStack, type);
 			MinecraftForge.EVENT_BUS.post(event);
 
-			return event.getBurnTime() < 0 ? 0 : event.getBurnTime();
+			return event.getBurnTime();
 		}
 	}
 
