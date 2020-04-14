@@ -448,7 +448,7 @@ necronomicon.text.enchantment.coralium=珊瑚附魔使你在击中任何实体�
 necronomicon.text.enchantment.dread=恐惧附魔使你在击中任何实体后传染恐惧瘟疫（如果不免疫的话）。只能通过仪式获取。
 necronomicon.text.enchantment.lightpierce=光之穿刺附魔类似于节肢杀手，但对阴影生物有效。
 necronomicon.text.enchantment.ironwall=铁壁附魔是一种反击退附魔，被击中时会反弹击退效果。
-necronomicon.text.enchantment.sapping=虚弱附魔增加撕裂杖所能吸取的能量。
+necronomicon.text.enchantment.sapping=削弱附魔增加撕裂杖所能吸取的能量。
 necronomicon.text.enchantment.multirend=多重撕裂附魔使撕裂法杖也从目标方圆3格范围内的附近怪物身上吸取能量。
 
 necronomicon.text.overworld.progression.1=要想到达深渊荒芜之地，你必须合成一把门钥匙，这需要你旅行过下界和黑暗之地和水域。水域可以是沼泽或者海洋。
@@ -1451,7 +1451,7 @@ enchantment.abyssalcraft.iron_wall=铁壁
 enchantment.abyssalcraft.iron_wall.desc=减少被击中时的击退量
 enchantment.abyssalcraft.light_pierce=光之穿刺
 enchantment.abyssalcraft.light_pierce.desc=增加对阴影生物的伤害
-enchantment.abyssalcraft.sapping=虚弱
+enchantment.abyssalcraft.sapping=削弱
 enchantment.abyssalcraft.sapping.desc=增加撕裂法杖吸取的能量
 enchantment.abyssalcraft.multi_rend=多重撕裂
 enchantment.abyssalcraft.multi_rend.desc=从目标周围的怪物身上吸取能量
