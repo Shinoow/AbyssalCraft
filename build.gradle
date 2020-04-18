@@ -190,3 +190,71 @@ task signJar(type: SignJar, dependsOn: reobfJar) {
 
 // Runs this task automatically when build is ran. 
 build.dependsOn signJar
+
+//copies the source files over to the folder from which they will be included in a RAR-file
+task prepareFiles(type: Copy){
+    from "$rootDir"
+        include "build.gradle"
+        include "build.properties"
+        include "changelog.html"
+        include "gradle.properties"
+        include "src/main/**"
+    into "$buildDir/rarTemp"
+
+    String filePath = "${project.findProperty("sourceDirAC")}/AC source ${props.ac_version} (${props.mc_version}).rar"
+    String filePath1 = "${buildDir}/rarTemp/*"
+
+    new File(projectDir, "generateRAR.bat").text = project.findProperty("rarCommand")+' "'+filePath+'" "'+filePath1+'"';
+}
+
+//copies the API jar to the place where binaries are stored
+task copyApiJar(type: Copy){
+    from apiJar
+    into "${project.findProperty("binariesDir")}/${archivesBaseName}/api"
+}
+
+//copies the src jar to the place where binaries are stored
+task copySrcJar(type: Copy){
+    from srcJar
+    into "${project.findProperty("binariesDir")}/${archivesBaseName}/dev"
+}
+
+//copies the main jar to the place where binaries are stored
+task copyJar(type: Copy){
+    from jar
+    into "${project.findProperty("binariesDir")}/${archivesBaseName}"
+}
+
+//generates a jar file with the source code and gradle files, then places it in a good place
+task generateRar(type: Exec){
+    
+    commandLine 'cmd', "/c", "generateRAR.bat";
+    ignoreExitValue = true
+}
+
+//runs all of the tasks for building and deploying
+task buildAndDeploy(){
+    dependsOn 'clean'
+    dependsOn 'build'
+    dependsOn 'curseforge'
+    dependsOn 'bintray'
+    dependsOn 'copyApiJar'
+    dependsOn 'copySrcJar'
+    dependsOn 'copyJar'
+    dependsOn 'prepareFiles'
+    dependsOn 'generateRar'
+    tasks.findByName('build').mustRunAfter 'clean'
+    tasks.findByName('curseforge').mustRunAfter 'build'
+    tasks.findByName('bintray').mustRunAfter 'curseforge'
+    tasks.findByName('prepareFiles').mustRunAfter 'build'
+    tasks.findByName('generateRar').mustRunAfter 'prepareFiles'
+    tasks.findByName('copyApiJar').mustRunAfter 'prepareFiles'
+    tasks.findByName('copySrcJar').mustRunAfter 'prepareFiles'
+    tasks.findByName('copyJar').mustRunAfter 'prepareFiles'
+}
+
+//final cleanup
+buildAndDeploy.doLast {
+    delete "${buildDir}/rarTemp/"
+    delete "generateRAR.bat"
+}
