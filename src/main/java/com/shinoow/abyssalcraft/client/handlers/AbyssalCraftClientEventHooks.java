@@ -11,9 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.handlers;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.lwjgl.input.Mouse;
 
@@ -41,6 +39,7 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -54,16 +53,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -293,17 +292,67 @@ public class AbyssalCraftClientEventHooks {
 	}
 
 	@SubscribeEvent
-	public static void renderTick(RenderTickEvent event) {
+	public void renderTick(RenderTickEvent event) {
 		if(event.phase == Phase.START)
 			partialTicks = event.renderTickTime;
 	}
 
 	@SubscribeEvent
-	public static void clientTickEnd(ClientTickEvent event) {
+	public void clientTickEnd(ClientTickEvent event) {
 		if(event.phase == Phase.END) {
 			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
 			if(gui == null || !gui.doesGuiPauseGame())
 				partialTicks = 0;
+		}
+	}
+
+	@SubscribeEvent
+	public void voidFog(LivingUpdateEvent event) {
+		if(event.getEntityLiving() instanceof EntityPlayer)
+			doVoidFogParticles(event.getEntityLiving().world, event.getEntityLiving());
+	}
+
+	public void doVoidFogParticles(World world, Entity entity)
+	{
+		if(Minecraft.getMinecraft().isGamePaused() || !world.isRemote) return;
+		if(world.provider.getDimension() != ACLib.dark_realm_id && world.provider.getDimension() != ACLib.omothol_id) return;
+		byte b0 = 16;
+		byte b1 = 14;
+		int x = MathHelper.floor(entity.posX);
+		int y = MathHelper.floor(entity.posY);
+		int z = MathHelper.floor(entity.posZ);
+		Random random = new Random();
+		MutableBlockPos pos = new MutableBlockPos();
+		boolean darkRealm = world.provider.getDimension() == ACLib.dark_realm_id;
+		for (int l = 0; l < 100; ++l)
+		{
+			int i1 = x + world.rand.nextInt(b0) - world.rand.nextInt(b0);
+			int j1 = y + world.rand.nextInt(b0) - world.rand.nextInt(b0);
+			int k1 = z + world.rand.nextInt(b0) - world.rand.nextInt(b0);
+			if(darkRealm) {
+				if(j1 > y+b1 || j1+b1 < y) return;
+				if(i1 > x+b1 || i1+b1 < x) return;
+				if(k1 > z+b1 || k1+b1 < z) return;
+			}
+			pos.setPos(i1, j1, k1);
+			IBlockState state = world.getBlockState(pos);
+
+			if (state.getMaterial() == Material.AIR)
+			{
+				if (world.getLightFromNeighbors(pos) == 0)
+				{
+					boolean canSpawn = false;
+					if(darkRealm) {
+						canSpawn = world.canBlockSeeSky(pos);
+					} else if(world.getBlockState(pos.down()).getMaterial() != Material.AIR ||
+							world.getBlockState(pos.down(2)).getMaterial() != Material.AIR ||
+							world.getBlockState(pos.down(3)).getMaterial() != Material.AIR){
+						canSpawn = true;
+					}
+					if(canSpawn)
+						world.spawnParticle(EnumParticleTypes.SUSPENDED_DEPTH, (double)((float)i1 + world.rand.nextFloat()), (double)((float)j1 + world.rand.nextFloat()), (double)((float)k1 + world.rand.nextFloat()), 0.0D, 0.0D, 0.0D);
+				}
+			}
 		}
 	}
 
