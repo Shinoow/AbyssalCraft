@@ -13,18 +13,14 @@ package com.shinoow.abyssalcraft.common.entity.demon;
 
 import java.util.UUID;
 
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.EvilSheepMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -32,18 +28,16 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityEvilSheep extends EntityMob implements IShearable {
+public class EntityEvilSheep extends EntityEvilAnimal {
 
 	private UUID playerUUID = null;
 	private String playerName = null;
@@ -53,16 +47,10 @@ public class EntityEvilSheep extends EntityMob implements IShearable {
 	public EntityEvilSheep(World worldIn) {
 		super(worldIn);
 		setSize(0.9F, 1.3F);
-		isImmuneToFire = true;
-		double var2 = 0.35D;
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackMelee(this, var2, true));
 		tasks.addTask(3, entityAIEatGrass);
-		tasks.addTask(4, new EntityAIWander(this, var2));
+		tasks.addTask(4, new EntityAIWander(this, 0.35D));
 		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAILookIdle(this));
-		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -83,15 +71,6 @@ public class EntityEvilSheep extends EntityMob implements IShearable {
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
-
-		return super.attackEntityAsMob(par1Entity);
-	}
-
-	@Override
 	public String getName()
 	{
 		return I18n.translateToLocal("entity.Sheep.name");
@@ -101,12 +80,6 @@ public class EntityEvilSheep extends EntityMob implements IShearable {
 	protected SoundEvent getAmbientSound()
 	{
 		return SoundEvents.ENTITY_SHEEP_AMBIENT;
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource source)
-	{
-		return SoundEvents.ENTITY_GHAST_HURT;
 	}
 
 	@Override
@@ -191,45 +164,19 @@ public class EntityEvilSheep extends EntityMob implements IShearable {
 	}
 
 	@Override
-	public void onDeath(DamageSource par1DamageSource)
-	{
-		super.onDeath(par1DamageSource);
-
-		if(!world.isRemote)
-			if(!(par1DamageSource.getTrueSource() instanceof EntityLesserShoggoth))
-			{
-				EntityDemonSheep demonsheep = new EntityDemonSheep(world);
-				demonsheep.copyLocationAndAnglesFrom(this);
-				world.removeEntity(this);
-				demonsheep.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-				world.spawnEntity(demonsheep);
-			}
-	}
-
-	@Override
 	protected ResourceLocation getLootTable(){
 		return ACLoot.ENTITY_EVIL_SHEEP;
 	}
 
-	@Override public boolean isShearable(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos){ return true; }
 	@Override
-	public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess w, BlockPos pos, int fortune)
-	{
-		int i = 1 + rand.nextInt(3);
+	public EntityDemonAnimal getDemonAnimal() {
 
-		java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
-		for (int j = 0; j < i; ++j)
-			ret.add(new ItemStack(playerUUID != null && playerName != null ? Items.ROTTEN_FLESH : Item.getItemFromBlock(Blocks.WOOL)));
+		return new EntityDemonSheep(world);
+	}
 
-		playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
-		playSound(SoundEvents.ENTITY_GHAST_HURT, 1.0F, 0.2F);
-		if(!world.isRemote){
-			EntityDemonSheep demonsheep = new EntityDemonSheep(world);
-			demonsheep.copyLocationAndAnglesFrom(this);
-			world.removeEntity(this);
-			demonsheep.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY, posZ)), (IEntityLivingData)null);
-			world.spawnEntity(demonsheep);
-		}
-		return ret;
+	@Override
+	public ItemStack getShearingDrop() {
+
+		return new ItemStack(playerUUID != null && playerName != null ? Items.ROTTEN_FLESH : Item.getItemFromBlock(Blocks.WOOL));
 	}
 }

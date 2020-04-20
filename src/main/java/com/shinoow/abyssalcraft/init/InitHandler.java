@@ -371,6 +371,7 @@ public class InitHandler implements ILifeCycleHandler {
 		enchantmentMaxLevel = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Max Level", 10, "The combined max level a single enchantment applied through the Mass Enchantment ritual can have. For example, if the max level is 10 and you apply 8 Sharpness 5 books, you'd end up with Sharpness 10 on the Item, rather than 40.\n[range: 1 ~ 100, default: 10]", 1, 100).getInt();
 		enchantBooks = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Books", true, "Toggles whether or not Books can be enchanted through the Mass Enchantment ritual.").getBoolean();
 		nightVisionEverywhere = cfg.get(Configuration.CATEGORY_GENERAL, "Plated Coralium Helmet Night Vision Everywhere", true, "Toggles whether or not the Night Vision buff from the Plated Coralium Helmet should be applied in all dimensions, rather than only Surface Worlds.").getBoolean();
+		demonAnimalsSpawnOnDeath = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animals Spawn on Death", true, "Toggles whether or not an Evil Animal spawns a Demon Animal on death.").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 4, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 4, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
