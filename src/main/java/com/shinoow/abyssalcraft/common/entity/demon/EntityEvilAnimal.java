@@ -84,6 +84,19 @@ public abstract class EntityEvilAnimal extends EntityMob implements IShearable {
 		return ret;
 	}
 
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		if(ACConfig.evilAnimalNewMoonSpawning) {
+			if(!world.isDaytime())
+				if(world.getCurrentMoonPhaseFactor() == 0)
+					return super.getCanSpawnHere();
+
+			return false;
+		}
+		return super.getCanSpawnHere();
+	}
+
 	public abstract EntityDemonAnimal getDemonAnimal();
 
 	public abstract ItemStack getShearingDrop();
