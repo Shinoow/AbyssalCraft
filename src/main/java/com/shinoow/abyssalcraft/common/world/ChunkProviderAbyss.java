@@ -18,6 +18,7 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import java.util.List;
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
@@ -394,6 +395,8 @@ public class ChunkProviderAbyss implements IChunkGenerator
 	@Override
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
+		if(pos.getY() <= 5)
+			return ACBiomes.dark_realm.getSpawnableList(par1EnumCreatureType);
 		Biome biome = worldObj.getBiome(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}

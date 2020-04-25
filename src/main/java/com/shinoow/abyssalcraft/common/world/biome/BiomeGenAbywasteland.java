@@ -14,6 +14,8 @@ package com.shinoow.abyssalcraft.common.world.biome;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -118,7 +120,7 @@ public class BiomeGenAbywasteland extends Biome {
 			for (int rarity = 0; rarity < 8; rarity++){
 				int veinSize = 1 + par2Random.nextInt(4);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(30);
+				int y = par2Random.nextInt(30) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.liquified_coralium_ore.getDefaultState(), veinSize,
@@ -128,7 +130,7 @@ public class BiomeGenAbywasteland extends Biome {
 			for(int rarity = 0; rarity < var5 + 5 + par2Random.nextInt(3); rarity++) {
 				int veinSize =  2 + par2Random.nextInt(8);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(75);
+				int y = par2Random.nextInt(75) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.abyssal_coralium_ore.getDefaultState(), veinSize,
@@ -138,7 +140,7 @@ public class BiomeGenAbywasteland extends Biome {
 			for(int rarity = 0; rarity < 8; rarity++) {
 				int veinSize =  2 + par2Random.nextInt(6);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(60);
+				int y = par2Random.nextInt(60) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.abyssal_nitre_ore.getDefaultState(), veinSize,
@@ -148,7 +150,7 @@ public class BiomeGenAbywasteland extends Biome {
 			for(int rarity = 0; rarity < 8; rarity++) {
 				int veinSize = 2 + par2Random.nextInt(6);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(60);
+				int y = par2Random.nextInt(60) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.abyssal_iron_ore.getDefaultState(), veinSize,
@@ -158,7 +160,7 @@ public class BiomeGenAbywasteland extends Biome {
 			for(int rarity = 0; rarity < 8; rarity++) {
 				int veinSize = 2 + par2Random.nextInt(6);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(60);
+				int y = par2Random.nextInt(60) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.abyssal_copper_ore.getDefaultState(), veinSize,
@@ -168,7 +170,7 @@ public class BiomeGenAbywasteland extends Biome {
 			for(int rarity = 0; rarity < 5; rarity++) {
 				int veinSize = 2 + par2Random.nextInt(3);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(35);
+				int y = par2Random.nextInt(35) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.abyssal_gold_ore.getDefaultState(), veinSize,
@@ -178,7 +180,7 @@ public class BiomeGenAbywasteland extends Biome {
 			for(int rarity = 0; rarity < 5; rarity++) {
 				int veinSize = 1 + par2Random.nextInt(4);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(20);
+				int y = par2Random.nextInt(20) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.abyssal_diamond_ore.getDefaultState(), veinSize,
@@ -188,7 +190,7 @@ public class BiomeGenAbywasteland extends Biome {
 			for(int rarity = 0; rarity < var5; rarity++) {
 				int veinSize = 1 + par2Random.nextInt(4);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(15);
+				int y = par2Random.nextInt(15) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.pearlescent_coralium_ore.getDefaultState(), veinSize,
@@ -198,7 +200,7 @@ public class BiomeGenAbywasteland extends Biome {
 			for(int rarity = 0; rarity < 8; rarity++) {
 				int veinSize = 2 + par2Random.nextInt(6);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(60);
+				int y = par2Random.nextInt(60) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.abyssal_tin_ore.getDefaultState(), veinSize,
@@ -245,8 +247,21 @@ public class BiomeGenAbywasteland extends Biome {
 		new BlockPos.MutableBlockPos();
 
 		for (int j1 = 255; j1 >= 0; --j1)
-			if (j1 <= rand.nextInt(5))
-				chunkPrimerIn.setBlockState(i1, j1, l, Blocks.BEDROCK.getDefaultState());
+			if (j1 < 6)
+			{
+				if(j1 == 0)
+					chunkPrimerIn.setBlockState(i1, j1, l, Blocks.BEDROCK.getDefaultState());
+				else if(j1 == 5)
+					chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.cobblestone.getDefaultState());
+				else {
+					IBlockState state = Blocks.AIR.getDefaultState();
+
+					if(i1 % 4 == 2 && l % 4 == 2)
+						state = ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, j1 == 3 ? EnumBrickType.CHISELED : EnumBrickType.NORMAL);
+					chunkPrimerIn.setBlockState(i1, j1, l, state);
+
+				}
+			}
 			else
 			{
 				IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);

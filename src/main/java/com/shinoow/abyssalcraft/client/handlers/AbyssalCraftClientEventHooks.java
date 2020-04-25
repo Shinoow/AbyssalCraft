@@ -315,7 +315,8 @@ public class AbyssalCraftClientEventHooks {
 	public void doVoidFogParticles(World world, Entity entity)
 	{
 		if(Minecraft.getMinecraft().isGamePaused() || !world.isRemote) return;
-		if(world.provider.getDimension() != ACLib.dark_realm_id && world.provider.getDimension() != ACLib.omothol_id) return;
+		if(world.provider.getDimension() != ACLib.dark_realm_id && world.provider.getDimension() != ACLib.omothol_id
+				&& world.provider.getDimension() != ACLib.abyssal_wasteland_id && world.provider.getDimension() != ACLib.dreadlands_id) return;
 		byte b0 = 16;
 		byte b1 = 14;
 		int x = MathHelper.floor(entity.posX);
@@ -344,11 +345,18 @@ public class AbyssalCraftClientEventHooks {
 					boolean canSpawn = false;
 					if(darkRealm) {
 						canSpawn = world.canBlockSeeSky(pos);
-					} else if(world.getBlockState(pos.down()).getMaterial() != Material.AIR ||
-							world.getBlockState(pos.down(2)).getMaterial() != Material.AIR ||
-							world.getBlockState(pos.down(3)).getMaterial() != Material.AIR){
-						canSpawn = true;
-					}
+					} else if(world.provider.getDimension() == ACLib.omothol_id){
+						if(world.getBlockState(pos.down()).getMaterial() != Material.AIR ||
+								world.getBlockState(pos.down(2)).getMaterial() != Material.AIR ||
+								world.getBlockState(pos.down(3)).getMaterial() != Material.AIR){
+							canSpawn = true;
+						}
+					} else if(j1 <= 5)
+						if(world.getBlockState(pos.up()).getMaterial() != Material.AIR ||
+								world.getBlockState(pos.up(2)).getMaterial() != Material.AIR){
+							canSpawn = true;
+						}
+					
 					if(canSpawn)
 						world.spawnParticle(EnumParticleTypes.SUSPENDED_DEPTH, (double)((float)i1 + world.rand.nextFloat()), (double)((float)j1 + world.rand.nextFloat()), (double)((float)k1 + world.rand.nextFloat()), 0.0D, 0.0D, 0.0D);
 				}

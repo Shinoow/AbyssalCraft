@@ -96,7 +96,7 @@ public class TeleporterAC extends Teleporter
 				BlockPos blockpos1;
 
 				for (int i1 = -128; i1 <= 128; ++i1)
-					for (BlockPos blockpos = blockpos4.add(l, worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 0; blockpos = blockpos1) {
+					for (BlockPos blockpos = blockpos4.add(l, worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 6; blockpos = blockpos1) {
 						blockpos1 = blockpos.down();
 
 						if (worldServerInstance.getBlockState(blockpos).getBlock() == portal) {
@@ -231,10 +231,10 @@ public class TeleporterAC extends Teleporter
 				double d2 = l2 + 0.5D - p_85188_1_.posZ;
 				label142:
 
-					for (int j3 = worldServerInstance.getActualHeight() - 1; j3 >= 0; --j3)
+					for (int j3 = worldServerInstance.getActualHeight() - 1; j3 >= 6; --j3)
 						if (worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3, l2)))
 						{
-							while (j3 > 0 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3 - 1, l2)))
+							while (j3 > 5 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3 - 1, l2)))
 								--j3;
 
 							for (int k3 = i2; k3 < i2 + 4; ++k3)
@@ -287,10 +287,10 @@ public class TeleporterAC extends Teleporter
 					double d4 = j6 + 0.5D - p_85188_1_.posZ;
 					label562:
 
-						for (int i7 = worldServerInstance.getActualHeight() - 1; i7 >= 0; --i7)
+						for (int i7 = worldServerInstance.getActualHeight() - 1; i7 >= 6; --i7)
 							if (worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7, j6)))
 							{
-								while (i7 > 0 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7 - 1, j6)))
+								while (i7 > 5 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7 - 1, j6)))
 									--i7;
 
 								for (int k7 = i2; k7 < i2 + 2; ++k7)

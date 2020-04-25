@@ -18,6 +18,7 @@ import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVI
 import java.util.List;
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
@@ -196,7 +197,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 				IBlockState iblockstate = Blocks.LAVA.getDefaultState();
 
 				for (int j1 = 32; j1 >= 0; --j1)
-					if (j1 < 32 && j1 > rand.nextInt(5))
+					if (j1 < 32 && j1 > 5)
 					{
 						IBlockState iblockstate2 = primer.getBlockState(k, j1, j);
 
@@ -382,6 +383,8 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 	@Override
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
+		if(pos.getY() <= 5)
+			return ACBiomes.dark_realm.getSpawnableList(par1EnumCreatureType);
 		Biome biome = worldObj.getBiome(pos);
 		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
 	}

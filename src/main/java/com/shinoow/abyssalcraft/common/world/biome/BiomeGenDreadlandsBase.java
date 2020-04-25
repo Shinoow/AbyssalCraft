@@ -15,6 +15,8 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -68,7 +70,7 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 			for(int rarity = 0; rarity < 8; rarity++) {
 				int veinSize =  4 + par2Random.nextInt(12);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(60);
+				int y = par2Random.nextInt(60) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.dreaded_abyssalnite_ore.getDefaultState(), veinSize,
@@ -78,7 +80,7 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 		for (int rarity = 0; rarity < 3; rarity++)
 		{
 			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(55);
+			int y = par2Random.nextInt(55) + 5;
 			int z = par2Random.nextInt(16);
 			new WorldGenMinable(ACBlocks.stone.getStateFromMeta(3), 16,
 					state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
@@ -103,8 +105,21 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 		new BlockPos.MutableBlockPos();
 
 		for (int j1 = 255; j1 >= 0; --j1)
-			if (j1 <= rand.nextInt(5))
-				chunkPrimerIn.setBlockState(i1, j1, l, Blocks.BEDROCK.getDefaultState());
+			if (j1 < 6)
+			{
+				if(j1 == 0)
+					chunkPrimerIn.setBlockState(i1, j1, l, Blocks.BEDROCK.getDefaultState());
+				else if(j1 == 5)
+					chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.cobblestone.getDefaultState());
+				else {
+					IBlockState state = Blocks.AIR.getDefaultState();
+
+					if(i1 % 4 == 2 && l % 4 == 2)
+						state = ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, j1 == 3 ? EnumBrickType.CHISELED : EnumBrickType.NORMAL);
+					chunkPrimerIn.setBlockState(i1, j1, l, state);
+
+				}
+			}
 			else
 			{
 				IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);

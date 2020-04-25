@@ -50,7 +50,7 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 			for(int rarity = 0; rarity < 10; rarity++) {
 				int veinSize =  8 + par2Random.nextInt(12);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(60);
+				int y = par2Random.nextInt(60) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.dreadlands_abyssalnite_ore.getDefaultState(), veinSize,
@@ -59,7 +59,7 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
 			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(64);
+			int y = par2Random.nextInt(64) + 5;
 			int z = par2Random.nextInt(16);
 			new WorldGenMinable(ACBlocks.stone.getStateFromMeta(3), 48,
 					state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
@@ -67,7 +67,7 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
 			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(64);
+			int y = par2Random.nextInt(64) + 5;
 			int z = par2Random.nextInt(16);
 			new WorldGenMinable(ACBlocks.stone.getStateFromMeta(3), 36,
 					state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
@@ -75,7 +75,7 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
 			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(64);
+			int y = par2Random.nextInt(64) + 5;
 			int z = par2Random.nextInt(16);
 			new WorldGenMinable(ACBlocks.stone.getStateFromMeta(3), 24,
 					state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
@@ -84,7 +84,7 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 			for(int rarity = 0; rarity < 8; rarity++) {
 				int veinSize =  2 + par2Random.nextInt(4);
 				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(55);
+				int y = par2Random.nextInt(55) + 5;
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.dreadlands_abyssalnite_ore.getDefaultState(), veinSize,
