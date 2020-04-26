@@ -175,11 +175,8 @@ public class EntityHandler implements ILifeCycleHandler {
 		EntityUtil.addShoggothFood(EntityAnimal.class);
 		EntityUtil.addShoggothFood(EntityAmbientCreature.class);
 		EntityUtil.addShoggothFood(EntityWaterMob.class);
-		EntityUtil.addShoggothFood(EntityEvilpig.class);
-		EntityUtil.addShoggothFood(EntityEvilCow.class);
-		EntityUtil.addShoggothFood(EntityEvilChicken.class);
+		EntityUtil.addShoggothFood(EntityEvilAnimal.class);
 		EntityUtil.addShoggothFood(EntityDemonAnimal.class);
-		EntityUtil.addShoggothFood(EntityEvilSheep.class);
 		EntityUtil.addShoggothFood(EntitySpider.class);
 		EntityUtil.addShoggothFood(EntityCaveSpider.class);
 

@@ -376,8 +376,7 @@ public class AbyssalCraftEventHooks {
 			NecromancyWorldSavedData.get(e.world).storeData(e.getName(), e.serializeNBT(), calculateSize(e.height));
 		} else if(EntityList.getKey(event.getEntityLiving()) != null){
 			EntityLivingBase e = event.getEntityLiving();
-			if(!(e instanceof EntityEvilpig) && !(e instanceof EntityEvilCow) && !(e instanceof EntityEvilChicken)
-					&& !(e instanceof EntityEvilSheep) && !(e instanceof EntityDemonAnimal)){
+			if(!(e instanceof EntityEvilAnimal) && !(e instanceof EntityDemonAnimal)){
 				Tuple<Integer, Float> data = InitHandler.demon_transformations.get(EntityList.getKey(e));
 				World world = event.getEntityLiving().world;
 				if(data != null && world.rand.nextFloat() < data.getSecond() && !world.isRemote){
