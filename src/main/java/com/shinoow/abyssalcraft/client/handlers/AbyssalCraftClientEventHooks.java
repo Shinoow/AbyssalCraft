@@ -308,7 +308,7 @@ public class AbyssalCraftClientEventHooks {
 
 	@SubscribeEvent
 	public void voidFog(LivingUpdateEvent event) {
-		if(event.getEntityLiving() instanceof EntityPlayer)
+		if(event.getEntityLiving() == Minecraft.getMinecraft().player)
 			doVoidFogParticles(event.getEntityLiving().world, event.getEntityLiving());
 	}
 
