@@ -32,6 +32,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -51,19 +52,19 @@ public class PEUtils {
 	 */
 	public static void transferPEToNearbyPlayers(World world, BlockPos pos, IEnergyManipulator manipulator, int range){
 
-		List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).grow(range, range, range));
+		List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).grow(range, range, range),
+				EntityUtil::hasNecronomicon);
 
-		for(EntityPlayer player : players)
-			if(EntityUtil.hasNecronomicon(player)){
-				ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
-				ItemStack item1 = player.getHeldItem(EnumHand.OFF_HAND);
-				if(canStackAcceptPE(item) || canStackAcceptPE(item1))
-					if(manipulator.canTransferPE()){
-						transferPEToStack(item, manipulator);
-						transferPEToStack(item1, manipulator);
-						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, player, world.provider.getDimension());
-					}
-			}
+		for(EntityPlayer player : players){
+			ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack item1 = player.getHeldItem(EnumHand.OFF_HAND);
+			if(canStackAcceptPE(item) || canStackAcceptPE(item1))
+				if(manipulator.canTransferPE()){
+					transferPEToStack(item, manipulator);
+					transferPEToStack(item1, manipulator);
+					AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, player, world.provider.getDimension());
+				}
+		}
 	}
 
 	private static boolean canStackAcceptPE(ItemStack stack) {
@@ -82,16 +83,15 @@ public class PEUtils {
 	 */
 	public static void transferPEToNearbyDroppedItems(World world, BlockPos pos, IEnergyManipulator manipulator, int range){
 
-		List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).grow(range, range, range));
+		List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).grow(range, range, range),
+				e -> canStackAcceptPE(e.getItem()));
 
 		for(EntityItem item : items)
-			if(item.getItem().getItem() instanceof IEnergyTransporterItem)
-				if(world.rand.nextInt(120-(int)(20 * manipulator.getAmplifier(AmplifierType.DURATION))) == 0)
-					if(canStackAcceptPE(item.getItem()) && manipulator.canTransferPE()){
-						transferPEToStack(item.getItem(), manipulator);
-						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, item, world.provider.getDimension());
-					}
-
+			if(world.rand.nextInt(120-(int)(20 * manipulator.getAmplifier(AmplifierType.DURATION))) == 0)
+				if(manipulator.canTransferPE()){
+					transferPEToStack(item.getItem(), manipulator);
+					AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, item, world.provider.getDimension());
+				}
 	}
 
 	/**
@@ -122,12 +122,19 @@ public class PEUtils {
 
 		List<TileEntity> collectors = new ArrayList<>();
 
-		for(int x = -1*(3+boost); x <= 3+boost; x++)
+		MutableBlockPos pos1 = new MutableBlockPos();
+
+		outer: for(int x = -1*(3+boost); x <= 3+boost; x++)
 			for(int y = 0; y <= getRangeAmplifiers(world, pos, manipulator); y++)
 				for(int z = -1*(3+boost); z <= 3+boost; z++)
-					if(x < -2 || x > 2 || z < -2 || z > 2)
-						if(isCollector(world.getTileEntity(new BlockPos(xp + x, yp - y, zp + z))) && collectors.size() < 20)
-							collectors.add(world.getTileEntity(new BlockPos(xp + x, yp - y, zp + z)));
+					if(x < -2 || x > 2 || z < -2 || z > 2){
+						if(collectors.size() == 20)
+							break outer;
+						pos1.setPos(xp + x, yp - y, zp + z);
+						TileEntity te = world.getTileEntity(pos1);
+						if(isCollector(te))
+							collectors.add(te);
+					}
 
 		for(TileEntity tile : collectors)
 			if(checkForAdjacentCollectors(world, tile.getPos()))
