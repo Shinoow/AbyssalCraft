@@ -36,6 +36,7 @@ public class ClientVars {
 	private String darklandsGrassColor;
 	private String darklandsFoliageColor;
 	private String darklandsWaterColor;
+	private String darklandsSkyColor;
 	private String darklandsPlainsGrassColor;
 	private String darklandsPlainsFoliageColor;
 	private String darklandsPlainsWaterColor;
@@ -118,6 +119,7 @@ public class ClientVars {
 		darklandsGrassColor = "0x17375c";
 		darklandsFoliageColor = "0x17375c";
 		darklandsWaterColor = "14745518";
+		darklandsSkyColor = "0";
 		darklandsPlainsGrassColor = "0x17375c";
 		darklandsPlainsFoliageColor = "0x17375c";
 		darklandsPlainsWaterColor = "14745518";
@@ -244,7 +246,7 @@ public class ClientVars {
 	}
 
 	public int getDarklandsSkyColor() {
-		return Integer.decode(darklandsWaterColor);
+		return Integer.decode(darklandsSkyColor);
 	}
 
 	public int getDarklandsPlainsGrassColor() {
