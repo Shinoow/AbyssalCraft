@@ -16,6 +16,7 @@ import java.io.IOException;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
@@ -58,7 +59,8 @@ public class PEStreamMessage extends AbstractClientMessage<PEStreamMessage> {
 
 		double d = Math.sqrt(posTo.distanceSq(posFrom));
 
-		for(int i = 0; i < d * 15; i++){
+		int j = 1+Minecraft.getMinecraft().gameSettings.particleSetting;
+		for(int i = 0; i < d * 15; i+=j){
 			double i1 = i / 15D;
 			double xp = posFrom.getX() + vec.x * i1 + .5;
 			double yp = posFrom.getY() + vec.y * i1 + .5;
