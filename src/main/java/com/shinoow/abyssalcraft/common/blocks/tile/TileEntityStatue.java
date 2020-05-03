@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
@@ -49,6 +52,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	private int facing;
 	private boolean isMultiblock;
 	private BlockPos basePos;
+	private Set<BlockPos> positions = new HashSet<>();
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -215,6 +219,11 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	}
 
 	@Override
+	public Set<BlockPos> getEnergyCollectors(){
+		return positions;
+	}
+
+	@Override
 	public void update(){
 
 		if(isActive()){
@@ -224,16 +233,15 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 
 		int range = (int) (7 + PEUtils.getRangeAmplifiers(world, pos, this)*4 + getAmplifier(AmplifierType.RANGE));
 
-		int xp = pos.getX();
-		int yp = pos.getY();
-		int zp = pos.getZ();
-
 		if(world.canBlockSeeSky(pos) || isMultiblock)
 			if(PEUtils.checkForAdjacentManipulators(world, pos) || isMultiblock){
-				if(world.getClosestPlayer(xp, yp, zp, range, false) != null &&
-						EntityUtil.hasNecronomicon(world.getClosestPlayer(xp, yp, zp, range, false))){
-					ItemStack item = world.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.MAIN_HAND);
-					ItemStack item1 = world.getClosestPlayer(xp, yp, zp, range, false).getHeldItem(EnumHand.OFF_HAND);
+				if(world.getWorldTime() % 200 == 0)
+					PEUtils.locateCollectors(world, pos, this);
+				EntityPlayer player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), range, false);
+				if(player != null &&
+						EntityUtil.hasNecronomicon(player)){
+					ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
+					ItemStack item1 = player.getHeldItem(EnumHand.OFF_HAND);
 					if(!item.isEmpty() && item.getItem() instanceof IEnergyTransporterItem ||
 							!item1.isEmpty() && item1.getItem() instanceof IEnergyTransporterItem){
 						timer++;
@@ -245,7 +253,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 				}
 
 				PEUtils.transferPEToNearbyDroppedItems(world, pos, this, range);
-				PEUtils.transferPEToCollectors(world, pos, this, (int)(PEUtils.getRangeAmplifiers(world, pos, this) + getAmplifier(AmplifierType.RANGE)/2));
+				PEUtils.transferPEToCollectors(world, pos, this);
 			}
 		if(tolerance >= 100)
 			disrupt();

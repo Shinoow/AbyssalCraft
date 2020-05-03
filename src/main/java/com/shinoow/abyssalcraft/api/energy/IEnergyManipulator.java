@@ -11,10 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.energy;
 
+import java.util.Set;
+
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * Interface to use on tile entities that can manipulate Ley Lines (WIP)<br>
@@ -100,4 +103,11 @@ public interface IEnergyManipulator {
 	 * Fires off a Disruption, which can lead to bad things happening
 	 */
 	public void disrupt();
+
+	/**
+	 * Returns the current positions of the currently tracked Energy Collectors within range of the manipulator
+	 */
+	public default Set<BlockPos> getEnergyCollectors(){
+		return null;
+	}
 }

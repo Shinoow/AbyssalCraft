@@ -11,8 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Nullable;
 
@@ -62,6 +61,7 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	private int processingTime;
 	private ItemStack processingStack = ItemStack.EMPTY;
 	private NonNullList<ItemStack> containerItemStacks = NonNullList.withSize(2, ItemStack.EMPTY);
+	private Set<BlockPos> positions = new HashSet<>();
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -219,6 +219,11 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 		}
 	}
 
+	@Override
+	public Set<BlockPos> getEnergyCollectors(){
+		return positions;
+	}
+
 	public float getContainedEnergy(){
 		return energy;
 	}
@@ -251,10 +256,14 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 		if(flag)
 			markDirty();
 
-		if(PEUtils.checkForAdjacentManipulators(world, pos))
-			PEUtils.transferPEToCollectors(world, pos, this, (int)getAmplifier(AmplifierType.RANGE)/2);
+		if(PEUtils.checkForAdjacentManipulators(world, pos)) {
+			if(world.getWorldTime() % 200 == 0)
+				PEUtils.locateCollectors(world, pos, this);
 
-		if(tolerance >= 100)
+			PEUtils.transferPEToCollectors(world, pos, this);
+		}
+
+		if(tolerance >= 200)
 			disrupt();
 	}
 

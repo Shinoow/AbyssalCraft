@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.api.energy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
@@ -113,7 +114,9 @@ public class PEUtils {
 	 * @param pos Current BlockPos
 	 * @param manipulator PE Manipulator
 	 * @param boost Any range boost applied to the manipulator
+	 * @deprecated Use {@link PEUtils#transferPEToCollectors(World, BlockPos, IEnergyManipulator)} instead
 	 */
+	@Deprecated
 	public static void transferPEToCollectors(World world, BlockPos pos, IEnergyManipulator manipulator, int boost){
 
 		int xp = pos.getX();
@@ -143,6 +146,54 @@ public class PEUtils {
 						((IEnergyCollector) tile).addEnergy(manipulator.getEnergyQuanta());
 						manipulator.addTolerance(manipulator.isActive() ? 2 : 1);
 						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, tile.getPos(), world.provider.getDimension());
+					}
+	}
+
+	/**
+	 * Attempts to transfer PE from a Manipulator to nearby Collectors
+	 * @param world Current World
+	 * @param pos Current BlockPos
+	 * @param manipulator PE Manipulator
+	 */
+	public static void transferPEToCollectors(World world, BlockPos pos, IEnergyManipulator manipulator){
+		int timeDiscount = (int)(20 * manipulator.getAmplifier(AmplifierType.DURATION));
+
+		manipulator.getEnergyCollectors().stream().map(p -> world.getTileEntity(p)).filter(PEUtils::isCollector).forEach(tile -> {
+			if(checkForAdjacentCollectors(world, tile.getPos()))
+				if(world.rand.nextInt(120-timeDiscount) == 0)
+					if(((IEnergyCollector) tile).canAcceptPE() && manipulator.canTransferPE()){
+						((IEnergyCollector) tile).addEnergy(manipulator.getEnergyQuanta());
+						manipulator.addTolerance(manipulator.isActive() ? 2 : 1);
+						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, tile.getPos(), world.provider.getDimension());
+					}
+		});
+	}
+
+	/**
+	 * Locates and stores the positions of Energy Containers in range of the Manipulator
+	 * @param world Current World
+	 * @param pos Current Position
+	 * @param manipulator PE Manipulator
+	 */
+	public static void locateCollectors(World world, BlockPos pos, IEnergyManipulator manipulator) {
+		manipulator.getEnergyCollectors().clear();
+
+		Set<BlockPos> positions = manipulator.getEnergyCollectors();
+
+		int boost = (int) (getRangeAmplifiers(world, pos, manipulator) + manipulator.getAmplifier(AmplifierType.RANGE)/2);
+
+		MutableBlockPos pos1 = new MutableBlockPos();
+
+		outer: for(int x = -1*(3+boost); x <= 3+boost; x++)
+			for(int y = 0; y <= getRangeAmplifiers(world, pos, manipulator); y++)
+				for(int z = -1*(3+boost); z <= 3+boost; z++)
+					if(x < -2 || x > 2 || z < -2 || z > 2){
+						if(positions.size() == 20)
+							break outer;
+						pos1.setPos(pos.getX() + x, pos.getY() - y, pos.getZ() + z);
+						TileEntity te = world.getTileEntity(pos1);
+						if(isCollector(te))
+							positions.add(pos1.toImmutable());
 					}
 	}
 
