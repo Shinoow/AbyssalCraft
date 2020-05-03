@@ -17,6 +17,7 @@ import java.util.Map;
 
 import org.lwjgl.input.Mouse;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -64,6 +65,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -361,6 +363,12 @@ public class AbyssalCraftClientEventHooks {
 		}
 	}
 
+	@SubscribeEvent
+	public void onEntityJoin(EntityJoinWorldEvent event){
+		if(event.getEntity() == Minecraft.getMinecraft().player)
+			AbyssalCraft.proxy.resetParticleCount();
+	}
+	
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event){
 

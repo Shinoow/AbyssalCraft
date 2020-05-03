@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.client.particles;
 
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
+
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.entity.Entity;
@@ -47,6 +49,7 @@ public class PEStreamParticleFX extends Particle {
 		motionY *= 0.10000000149011612D;
 		motionZ *= 0.10000000149011612D;
 		//		noClip = true;
+		AbyssalCraft.proxy.incrementParticleCount();
 	}
 
 	@Override
@@ -76,4 +79,11 @@ public class PEStreamParticleFX extends Particle {
 		particleBlue = Math.min(1.0f, (float)colorB*(1.5f-lifeCoeff));
 		particleAlpha = lifeCoeff;
 	}
+	
+	@Override
+	public void setExpired()
+    {
+		AbyssalCraft.proxy.decrementParticleCount();
+		super.setExpired();
+    }
 }

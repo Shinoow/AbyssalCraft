@@ -71,6 +71,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelDreadiumSamuraiArmor chestPlate = new ModelDreadiumSamuraiArmor(1.0f);
 	private static final ModelDreadiumSamuraiArmor leggings = new ModelDreadiumSamuraiArmor(0.5f);
 	public static KeyBinding staff_mode, use_cage;
+	private int particleCount;
 
 	@Override
 	public void preInit() {
@@ -269,5 +270,25 @@ public class ClientProxy extends CommonProxy {
 				return;
 			}
 		}
+	}
+
+	@Override
+	public int getParticleCount() {
+		return particleCount;
+	}
+
+	@Override
+	public void incrementParticleCount() {
+		particleCount++;
+	}
+
+	@Override
+	public void decrementParticleCount() {
+		particleCount--;
+	}
+	
+	@Override
+	public void resetParticleCount() {
+		particleCount = 0;
 	}
 }
