@@ -457,7 +457,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("nuggetEthaxium", new ItemStack(ACItems.ingot_nugget, 1, 3));
 		OreDictionary.registerOre("blockGlass", ACBlocks.abyssal_sand_glass);
 		OreDictionary.registerOre("coal", ACItems.charcoal);
-		
+
 		for(int i = 0; i < ACLib.crystalNames.length; i++) {
 			String name = ACLib.crystalNames[i];
 			OreDictionary.registerOre("crystal"+name, new ItemStack(ACItems.crystal, 1, i));

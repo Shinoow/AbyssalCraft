@@ -11,7 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.handlers;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.lwjgl.input.Mouse;
 
@@ -322,7 +324,6 @@ public class AbyssalCraftClientEventHooks {
 		int x = MathHelper.floor(entity.posX);
 		int y = MathHelper.floor(entity.posY);
 		int z = MathHelper.floor(entity.posZ);
-		Random random = new Random();
 		MutableBlockPos pos = new MutableBlockPos();
 		boolean darkRealm = world.provider.getDimension() == ACLib.dark_realm_id;
 		for (int l = 0; l < 100; ++l)
@@ -339,28 +340,24 @@ public class AbyssalCraftClientEventHooks {
 			IBlockState state = world.getBlockState(pos);
 
 			if (state.getMaterial() == Material.AIR)
-			{
 				if (world.getLightFromNeighbors(pos) == 0)
 				{
 					boolean canSpawn = false;
-					if(darkRealm) {
+					if(darkRealm)
 						canSpawn = world.canBlockSeeSky(pos);
-					} else if(world.provider.getDimension() == ACLib.omothol_id){
+					else if(world.provider.getDimension() == ACLib.omothol_id){
 						if(world.getBlockState(pos.down()).getMaterial() != Material.AIR ||
 								world.getBlockState(pos.down(2)).getMaterial() != Material.AIR ||
-								world.getBlockState(pos.down(3)).getMaterial() != Material.AIR){
+								world.getBlockState(pos.down(3)).getMaterial() != Material.AIR)
 							canSpawn = true;
-						}
 					} else if(j1 <= 5)
 						if(world.getBlockState(pos.up()).getMaterial() != Material.AIR ||
-								world.getBlockState(pos.up(2)).getMaterial() != Material.AIR){
+						world.getBlockState(pos.up(2)).getMaterial() != Material.AIR)
 							canSpawn = true;
-						}
-					
+
 					if(canSpawn)
-						world.spawnParticle(EnumParticleTypes.SUSPENDED_DEPTH, (double)((float)i1 + world.rand.nextFloat()), (double)((float)j1 + world.rand.nextFloat()), (double)((float)k1 + world.rand.nextFloat()), 0.0D, 0.0D, 0.0D);
+						world.spawnParticle(EnumParticleTypes.SUSPENDED_DEPTH, i1 + world.rand.nextFloat(), j1 + world.rand.nextFloat(), k1 + world.rand.nextFloat(), 0.0D, 0.0D, 0.0D);
 				}
-			}
 		}
 	}
 
