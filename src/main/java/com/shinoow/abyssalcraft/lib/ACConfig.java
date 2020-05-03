@@ -49,7 +49,7 @@ public class ACConfig {
 	dreadstone_cobblestone_stairs, abyssalnite_cobblestone_slab, abyssalnite_cobblestone_stairs, darkstone_cobblestone_wall, abyssal_cobbblestone_wall,
 	coralium_cobblestone_wall, dreadstone_cobblestone_wall, abyssalnite_cobblestone_wall;
 
-	public static boolean foodstuff, upgrade_kits, plague_enchantments;
+	public static boolean foodstuff, upgrade_kits, plague_enchantments, crystal_rework;
 
 	public static boolean entropy_spell, life_drain_spell, mining_spell, grasp_of_cthulhu_spell, invisibility_spell,
 	detachment_spell, steal_vigor_spell, sirens_song_spell, undeath_to_dust_spell, ooze_removal_spell, teleport_hostile_spell;

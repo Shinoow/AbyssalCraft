@@ -540,18 +540,20 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void fuelBurnTime(FuelBurnTimeEvent event) {
-		ItemStack fuel = event.getItemStack();
-		if(fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster) ||
-				fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster2))
-			event.setBurnTime(12150);
-		if(fuel.getItem() == ACItems.crystal)
-			event.setBurnTime(1350);
-		if(fuel.getItem() == ACItems.crystal_shard)
-			event.setBurnTime(150);
-		if(fuel.getItem() == ACItems.crystal_fragment)
-			event.setBurnTime(17);
-		if(APIUtils.isCrystal(fuel))
-			event.setBurnTime(1000);
+		if(!ACConfig.crystal_rework) {
+			ItemStack fuel = event.getItemStack();
+			if(fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster) ||
+					fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster2))
+				event.setBurnTime(12150);
+			if(fuel.getItem() == ACItems.crystal)
+				event.setBurnTime(1350);
+			if(fuel.getItem() == ACItems.crystal_shard)
+				event.setBurnTime(150);
+			if(fuel.getItem() == ACItems.crystal_fragment)
+				event.setBurnTime(17);
+			if(APIUtils.isCrystal(fuel))
+				event.setBurnTime(1000);
+		}
 	}
 
 	@SubscribeEvent

@@ -436,31 +436,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("dustSaltpeter", ACItems.nitre);
 		OreDictionary.registerOre("materialMethane", ACItems.methane);
 		OreDictionary.registerOre("oreSaltpeter", ACBlocks.nitre_ore);
-		OreDictionary.registerOre("crystalIron", new ItemStack(ACItems.crystal, 1, 0));
-		OreDictionary.registerOre("crystalGold", new ItemStack(ACItems.crystal, 1, 1));
-		OreDictionary.registerOre("crystalSulfur", new ItemStack(ACItems.crystal, 1, 2));
-		OreDictionary.registerOre("crystalCarbon", new ItemStack(ACItems.crystal, 1, 3));
-		OreDictionary.registerOre("crystalOxygen", new ItemStack(ACItems.crystal, 1, 4));
-		OreDictionary.registerOre("crystalHydrogen", new ItemStack(ACItems.crystal, 1, 5));
-		OreDictionary.registerOre("crystalNitrogen", new ItemStack(ACItems.crystal, 1, 6));
-		OreDictionary.registerOre("crystalPhosphorus", new ItemStack(ACItems.crystal, 1, 7));
-		OreDictionary.registerOre("crystalPotassium", new ItemStack(ACItems.crystal, 1, 8));
-		OreDictionary.registerOre("crystalNitrate", new ItemStack(ACItems.crystal, 1, 9));
-		OreDictionary.registerOre("crystalMethane", new ItemStack(ACItems.crystal, 1, 10));
-		OreDictionary.registerOre("crystalRedstone", new ItemStack(ACItems.crystal, 1, 11));
-		OreDictionary.registerOre("crystalAbyssalnite", new ItemStack(ACItems.crystal, 1, 12));
-		OreDictionary.registerOre("crystalCoralium", new ItemStack(ACItems.crystal, 1, 13));
-		OreDictionary.registerOre("crystalDreadium", new ItemStack(ACItems.crystal, 1, 14));
-		OreDictionary.registerOre("crystalBlaze", new ItemStack(ACItems.crystal, 1, 15));
-		OreDictionary.registerOre("crystalTin", new ItemStack(ACItems.crystal, 1, 16));
-		OreDictionary.registerOre("crystalCopper", new ItemStack(ACItems.crystal, 1, 17));
-		OreDictionary.registerOre("crystalSilicon", new ItemStack(ACItems.crystal, 1, 18));
-		OreDictionary.registerOre("crystalMagnesium", new ItemStack(ACItems.crystal, 1, 19));
-		OreDictionary.registerOre("crystalAluminium", new ItemStack(ACItems.crystal, 1, 20));
-		OreDictionary.registerOre("crystalSilica", new ItemStack(ACItems.crystal, 1, 21));
-		OreDictionary.registerOre("crystalAlumina", new ItemStack(ACItems.crystal, 1, 22));
-		OreDictionary.registerOre("crystalMagnesia", new ItemStack(ACItems.crystal, 1, 23));
-		OreDictionary.registerOre("crystalZinc", new ItemStack(ACItems.crystal, 1, 24));
 		if(ACConfig.foodstuff)
 			OreDictionary.registerOre("foodFriedEgg", ACItems.fried_egg);
 		OreDictionary.registerOre("oreIron", ACBlocks.abyssal_iron_ore);
@@ -480,58 +455,16 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("nuggetLiquifiedCoralium", new ItemStack(ACItems.ingot_nugget, 1, 1));
 		OreDictionary.registerOre("nuggetDreadium", new ItemStack(ACItems.ingot_nugget, 1, 2));
 		OreDictionary.registerOre("nuggetEthaxium", new ItemStack(ACItems.ingot_nugget, 1, 3));
-		OreDictionary.registerOre("crystalShardIron", new ItemStack(ACItems.crystal_shard, 1, 0));
-		OreDictionary.registerOre("crystalShardGold", new ItemStack(ACItems.crystal_shard, 1, 1));
-		OreDictionary.registerOre("crystalShardSulfur", new ItemStack(ACItems.crystal_shard, 1, 2));
-		OreDictionary.registerOre("crystalShardCarbon", new ItemStack(ACItems.crystal_shard, 1, 3));
-		OreDictionary.registerOre("crystalShardOxygen", new ItemStack(ACItems.crystal_shard, 1, 4));
-		OreDictionary.registerOre("crystalShardHydrogen", new ItemStack(ACItems.crystal_shard, 1, 5));
-		OreDictionary.registerOre("crystalShardNitrogen", new ItemStack(ACItems.crystal_shard, 1, 6));
-		OreDictionary.registerOre("crystalShardPhosphorus", new ItemStack(ACItems.crystal_shard, 1, 7));
-		OreDictionary.registerOre("crystalShardPotassium", new ItemStack(ACItems.crystal_shard, 1, 8));
-		OreDictionary.registerOre("crystalShardNitrate", new ItemStack(ACItems.crystal_shard, 1, 9));
-		OreDictionary.registerOre("crystalShardMethane", new ItemStack(ACItems.crystal_shard, 1, 10));
-		OreDictionary.registerOre("crystalShardRedstone", new ItemStack(ACItems.crystal_shard, 1, 11));
-		OreDictionary.registerOre("crystalShardAbyssalnite", new ItemStack(ACItems.crystal_shard, 1, 12));
-		OreDictionary.registerOre("crystalShardCoralium", new ItemStack(ACItems.crystal_shard, 1, 13));
-		OreDictionary.registerOre("crystalShardDreadium", new ItemStack(ACItems.crystal_shard, 1, 14));
-		OreDictionary.registerOre("crystalShardBlaze", new ItemStack(ACItems.crystal_shard, 1, 15));
-		OreDictionary.registerOre("crystalShardTin", new ItemStack(ACItems.crystal_shard, 1, 16));
-		OreDictionary.registerOre("crystalShardCopper", new ItemStack(ACItems.crystal_shard, 1, 17));
-		OreDictionary.registerOre("crystalShardSilicon", new ItemStack(ACItems.crystal_shard, 1, 18));
-		OreDictionary.registerOre("crystalShardMagnesium", new ItemStack(ACItems.crystal_shard, 1, 19));
-		OreDictionary.registerOre("crystalShardAluminium", new ItemStack(ACItems.crystal_shard, 1, 20));
-		OreDictionary.registerOre("crystalShardSilica", new ItemStack(ACItems.crystal_shard, 1, 21));
-		OreDictionary.registerOre("crystalShardAlumina", new ItemStack(ACItems.crystal_shard, 1, 22));
-		OreDictionary.registerOre("crystalShardMagnesia", new ItemStack(ACItems.crystal_shard, 1, 23));
-		OreDictionary.registerOre("crystalShardZinc", new ItemStack(ACItems.crystal_shard, 1, 24));
 		OreDictionary.registerOre("blockGlass", ACBlocks.abyssal_sand_glass);
-		OreDictionary.registerOre("crystalFragmentIron", new ItemStack(ACItems.crystal_fragment, 1, 0));
-		OreDictionary.registerOre("crystalFragmentGold", new ItemStack(ACItems.crystal_fragment, 1, 1));
-		OreDictionary.registerOre("crystalFragmentSulfur", new ItemStack(ACItems.crystal_fragment, 1, 2));
-		OreDictionary.registerOre("crystalFragmentCarbon", new ItemStack(ACItems.crystal_fragment, 1, 3));
-		OreDictionary.registerOre("crystalFragmentOxygen", new ItemStack(ACItems.crystal_fragment, 1, 4));
-		OreDictionary.registerOre("crystalFragmentHydrogen", new ItemStack(ACItems.crystal_fragment, 1, 5));
-		OreDictionary.registerOre("crystalFragmentNitrogen", new ItemStack(ACItems.crystal_fragment, 1, 6));
-		OreDictionary.registerOre("crystalFragmentPhosphorus", new ItemStack(ACItems.crystal_fragment, 1, 7));
-		OreDictionary.registerOre("crystalFragmentPotassium", new ItemStack(ACItems.crystal_fragment, 1, 8));
-		OreDictionary.registerOre("crystalFragmentNitrate", new ItemStack(ACItems.crystal_fragment, 1, 9));
-		OreDictionary.registerOre("crystalFragmentMethane", new ItemStack(ACItems.crystal_fragment, 1, 10));
-		OreDictionary.registerOre("crystalFragmentRedstone", new ItemStack(ACItems.crystal_fragment, 1, 11));
-		OreDictionary.registerOre("crystalFragmentAbyssalnite", new ItemStack(ACItems.crystal_fragment, 1, 12));
-		OreDictionary.registerOre("crystalFragmentCoralium", new ItemStack(ACItems.crystal_fragment, 1, 13));
-		OreDictionary.registerOre("crystalFragmentDreadium", new ItemStack(ACItems.crystal_fragment, 1, 14));
-		OreDictionary.registerOre("crystalFragmentBlaze", new ItemStack(ACItems.crystal_fragment, 1, 15));
-		OreDictionary.registerOre("crystalFragmentTin", new ItemStack(ACItems.crystal_fragment, 1, 16));
-		OreDictionary.registerOre("crystalFragmentCopper", new ItemStack(ACItems.crystal_fragment, 1, 17));
-		OreDictionary.registerOre("crystalFragmentSilicon", new ItemStack(ACItems.crystal_fragment, 1, 18));
-		OreDictionary.registerOre("crystalFragmentMagnesium", new ItemStack(ACItems.crystal_fragment, 1, 19));
-		OreDictionary.registerOre("crystalFragmentAluminium", new ItemStack(ACItems.crystal_fragment, 1, 20));
-		OreDictionary.registerOre("crystalFragmentSilica", new ItemStack(ACItems.crystal_fragment, 1, 21));
-		OreDictionary.registerOre("crystalFragmentAlumina", new ItemStack(ACItems.crystal_fragment, 1, 22));
-		OreDictionary.registerOre("crystalFragmentMagnesia", new ItemStack(ACItems.crystal_fragment, 1, 23));
-		OreDictionary.registerOre("crystalFragmentZinc", new ItemStack(ACItems.crystal_fragment, 1, 24));
 		OreDictionary.registerOre("coal", ACItems.charcoal);
+		
+		for(int i = 0; i < ACLib.crystalNames.length; i++) {
+			String name = ACLib.crystalNames[i];
+			OreDictionary.registerOre("crystal"+name, new ItemStack(ACItems.crystal, 1, i));
+			OreDictionary.registerOre("crystalShard"+name, new ItemStack(ACItems.crystal_shard, 1, i));
+			OreDictionary.registerOre("crystalFragment"+name, new ItemStack(ACItems.crystal_fragment, 1, i));
+			OreDictionary.registerOre("crystalCluster"+name, i < 16 ? new ItemStack(ACBlocks.crystal_cluster, 1, i) : new ItemStack(ACBlocks.crystal_cluster2, 1, i-16));
+		}
 	}
 
 	@SubscribeEvent
