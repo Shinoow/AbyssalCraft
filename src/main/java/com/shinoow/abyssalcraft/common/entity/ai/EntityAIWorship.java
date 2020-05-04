@@ -18,7 +18,9 @@ import com.shinoow.abyssalcraft.lib.ACSounds;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 
 public class EntityAIWorship extends EntityAIBase
@@ -45,16 +47,21 @@ public class EntityAIWorship extends EntityAIBase
 	@Override
 	public boolean shouldExecute()
 	{
-		World world = idleEntity.getEntityWorld();
-		for(int x = -8; x < 9; x++)
-			for(int y = -8; y < 9; y++)
-				for(int z = -8; z < 9; z++){
-					BlockPos pos = idleEntity.getPosition().add(x, y, z);
-					if(world.getTileEntity(pos) instanceof TileEntityStatue || world.getTileEntity(pos) instanceof TileEntityDecorativeStatue) {
-						statuePos = pos;
-						return idleEntity.getRNG().nextFloat() < 0.01F;
+		if(idleEntity.getRNG().nextFloat() < 0.01F) {
+			MutableBlockPos pos = new MutableBlockPos();
+			World world = idleEntity.getEntityWorld();
+			BlockPos pos1 = idleEntity.getPosition();
+			for(int x = -8; x < 9; x++)
+				for(int y = -8; y < 9; y++)
+					for(int z = -8; z < 9; z++){
+						pos.setPos(pos1.getX() + x, pos1.getY() + y, pos1.getZ() + z);
+						TileEntity te = world.getTileEntity(pos);
+						if(te instanceof TileEntityStatue || te instanceof TileEntityDecorativeStatue) {
+							statuePos = pos.toImmutable();
+							return true;
+						}
 					}
-				}
+		}
 		return false;
 	}
 
