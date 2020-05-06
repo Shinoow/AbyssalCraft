@@ -368,7 +368,7 @@ public class AbyssalCraftClientEventHooks {
 		if(event.getEntity() == Minecraft.getMinecraft().player)
 			AbyssalCraft.proxy.resetParticleCount();
 	}
-	
+
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event){
 

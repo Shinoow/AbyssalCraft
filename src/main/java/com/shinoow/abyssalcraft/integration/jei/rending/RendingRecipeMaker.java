@@ -11,17 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.rending;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.rending.RendingRegistry;
-import com.shinoow.abyssalcraft.lib.ACLib;
-
-import net.minecraft.item.ItemStack;
 
 public class RendingRecipeMaker {
 

@@ -824,7 +824,7 @@ public class AbyssalCrafting {
 				e -> e.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && e.isNonBoss(),
 				"ac.rending.shadowgem", -1));
 	}
-	
+
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
 
 		if(ACConfig.upgrade_kits) {

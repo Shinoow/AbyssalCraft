@@ -286,7 +286,7 @@ public class ClientProxy extends CommonProxy {
 	public void decrementParticleCount() {
 		particleCount--;
 	}
-	
+
 	@Override
 	public void resetParticleCount() {
 		particleCount = 0;

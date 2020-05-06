@@ -79,11 +79,11 @@ public class PEStreamParticleFX extends Particle {
 		particleBlue = Math.min(1.0f, (float)colorB*(1.5f-lifeCoeff));
 		particleAlpha = lifeCoeff;
 	}
-	
+
 	@Override
 	public void setExpired()
-    {
+	{
 		AbyssalCraft.proxy.decrementParticleCount();
 		super.setExpired();
-    }
+	}
 }
