@@ -15,6 +15,7 @@ import java.util.*;
 
 import javax.annotation.Nonnull;
 
+import com.shinoow.abyssalcraft.api.rending.Rending;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
@@ -29,15 +30,15 @@ public class RendingRecipeWrapper implements IRecipeWrapper {
 
 	private final ItemStack output;
 	private final int dimension;
+	private final String type;
 	private final String description;
-	private final RendingEntry entry;
 	private Map<Integer, String> dimToString = new HashMap<>();
 
-	public RendingRecipeWrapper(@Nonnull RendingEntry entry){
-		output = entry.output;
-		dimension = entry.dimension;
-		description = entry.description;
-		this.entry = entry;
+	public RendingRecipeWrapper(@Nonnull Rending entry){
+		output = entry.getOutput();
+		dimension = entry.getDimension();
+		type = I18n.format(entry.getTooltip());
+		description = I18n.format(entry.getJeiDescription());
 	}
 
 	public int getDimension(){
@@ -58,13 +59,13 @@ public class RendingRecipeWrapper implements IRecipeWrapper {
 
 		FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
 
-		if(entry.dimension != -1){
-			fr.drawSplitString(I18n.format(NecronomiconText.LABEL_LOCATION, new Object[0]) + ": " + getDimension(entry.dimension), 2, 20, 180, 0);
-			fr.drawSplitString("Energy type: " + entry.type, 2, 40, 180, 0);
-			fr.drawSplitString(entry.description, 2, 70, 180, 0);
+		if(dimension != -1){
+			fr.drawSplitString(I18n.format(NecronomiconText.LABEL_LOCATION, new Object[0]) + ": " + getDimension(dimension), 2, 20, 180, 0);
+			fr.drawSplitString("Energy type: " + type, 2, 40, 180, 0);
+			fr.drawSplitString(description, 2, 70, 180, 0);
 		} else{
-			fr.drawSplitString("Energy type: " + entry.type, 2, 20, 180, 0);
-			fr.drawSplitString(entry.description, 2, 40, 180, 0);
+			fr.drawSplitString("Energy type: " + type, 2, 20, 180, 0);
+			fr.drawSplitString(description, 2, 40, 180, 0);
 		}
 	}
 

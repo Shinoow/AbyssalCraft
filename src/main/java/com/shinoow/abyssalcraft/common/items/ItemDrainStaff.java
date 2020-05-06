@@ -12,9 +12,11 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.rending.RendingRegistry;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.StaffOfRendingMessage;
@@ -80,22 +82,12 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 						PacketDispatcher.sendToServer(new StaffOfRendingMessage(mov.entityHit.getEntityId(), hand));
 		}
 
-		if(getEnergy(stack, "Shadow") >= 200){
-			setEnergy(0, stack, "Shadow");
-			player.inventory.addItemStackToInventory(new ItemStack(ACItems.shadow_gem));
-		}
-		if(getEnergy(stack, "Abyssal") >= 100){
-			setEnergy(0, stack, "Abyssal");
-			player.inventory.addItemStackToInventory(new ItemStack(ACItems.essence, 1, 0));
-		}
-		if(getEnergy(stack, "Dread") >= 100){
-			setEnergy(0, stack, "Dread");
-			player.inventory.addItemStackToInventory(new ItemStack(ACItems.essence, 1, 1));
-		}
-		if(getEnergy(stack, "Omothol") >= 100){
-			setEnergy(0, stack, "Omothol");
-			player.inventory.addItemStackToInventory(new ItemStack(ACItems.essence, 1, 2));
-		}
+		RendingRegistry.instance().getRendings().stream()
+		.filter(r -> getEnergy(stack, r.getName()) >= r.getMaxEnergy())
+		.forEach(r -> {
+			setEnergy(0, stack, r.getName());
+			player.inventory.addItemStackToInventory(r.getOutput());
+		});
 
 		return new ActionResult(EnumActionResult.PASS, stack);
 	}
@@ -113,14 +105,9 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
-		int abyssal = getEnergy(is, "Abyssal");
-		int dread = getEnergy(is, "Dread");
-		int omothol = getEnergy(is, "Omothol");
-		int shadow = getEnergy(is, "Shadow");
-		l.add(I18n.format("tooltip.drainstaff.energy.1")+": " + abyssal + "/100");
-		l.add(I18n.format("tooltip.drainstaff.energy.2")+": " + dread + "/100");
-		l.add(I18n.format("tooltip.drainstaff.energy.3")+": " + omothol + "/100");
-		l.add(I18n.format("tooltip.drainstaff.energy.4")+": " + shadow + "/200");
+		l.addAll(RendingRegistry.instance().getRendings().stream()
+				.map(r -> String.format("%s: %d/%d", I18n.format(r.getTooltip()), getEnergy(is, r.getName()), r.getMaxEnergy()))
+				.collect(Collectors.toList()));
 	}
 
 	@Override

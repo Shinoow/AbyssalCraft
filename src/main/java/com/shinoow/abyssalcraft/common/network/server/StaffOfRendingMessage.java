@@ -12,12 +12,12 @@
 package com.shinoow.abyssalcraft.common.network.server;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.api.rending.Rending;
+import com.shinoow.abyssalcraft.api.rending.RendingRegistry;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
-import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -61,67 +61,26 @@ public class StaffOfRendingMessage extends AbstractServerMessage<StaffOfRendingM
 	private boolean drain(EntityPlayer player, Entity entity, ItemStack stack) {
 		IStaffOfRending staff = (IStaffOfRending)stack.getItem();
 		int drainAmount = staff.getDrainAmount(stack);
+		boolean success = false;
 		if(entity instanceof EntityLiving) {
 			EntityLiving target = (EntityLiving)entity;
-			if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && target.isNonBoss()){
+			for(Rending r : RendingRegistry.instance().getRendings().stream().filter(r -> r.isApplicable(target)).collect(Collectors.toList()))
 				if(!target.isDead)
-					if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), drainAmount)) {
-						staff.increaseEnergy(stack, "Shadow");
-						return true;
-					}
-			} else if(player.world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(target) &&
-					target.isNonBoss()){
-				if(!target.isDead)
-					if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), drainAmount)) {
-						staff.increaseEnergy(stack, "Abyssal");
-						return true;
-					}
-			} else if(player.world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(target) &&
-					target.isNonBoss()){
-				if(!target.isDead)
-					if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), drainAmount)) {
-						staff.increaseEnergy(stack, "Dread");
-						return true;
-					}
-			} else if(player.world.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
-					target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && target.isNonBoss())
-				if(!target.isDead)
-					if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), drainAmount)) {
-						staff.increaseEnergy(stack, "Omothol");
-						return true;
+					if(success || target.attackEntityFrom(DamageSource.causePlayerDamage(player), drainAmount)) {
+						staff.increaseEnergy(stack, r.getName());
+						success = true;
 					}
 		} else if(entity instanceof MultiPartEntityPart) {
 			MultiPartEntityPart target = (MultiPartEntityPart)entity;
 			EntityLiving parent = (EntityLiving) target.parent;
-			if(parent.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && parent.isNonBoss()){
+			for(Rending r : RendingRegistry.instance().getRendings().stream().filter(r -> r.isApplicable(parent)).collect(Collectors.toList()))
 				if(!target.isDead)
-					if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack))) {
-						staff.increaseEnergy(stack, "Shadow");
-						return true;
-					}
-			} else if(player.world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(parent) &&
-					parent.isNonBoss()){
-				if(!target.isDead)
-					if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack))) {
-						staff.increaseEnergy(stack, "Abyssal");
-						return true;
-					}
-			} else if(player.world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(parent) &&
-					parent.isNonBoss()){
-				if(!target.isDead)
-					if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack))) {
-						staff.increaseEnergy(stack, "Dread");
-						return true;
-					}
-			} else if(player.world.provider.getDimension() == ACLib.omothol_id && parent instanceof IOmotholEntity &&
-					parent.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && parent.isNonBoss())
-				if(!target.isDead)
-					if(target.attackEntityFrom(DamageSource.causePlayerDamage(player), staff.getDrainAmount(stack))) {
-						staff.increaseEnergy(stack, "Omothol");
-						return true;
+					if(success || target.attackEntityFrom(DamageSource.causePlayerDamage(player), drainAmount)) {
+						staff.increaseEnergy(stack, r.getName());
+						success = true;
 					}
 		}
-		return false;
+		return success;
 	}
 
 	@Override

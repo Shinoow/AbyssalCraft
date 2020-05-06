@@ -15,9 +15,13 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.disruption.*;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
+import com.shinoow.abyssalcraft.api.rending.Rending;
+import com.shinoow.abyssalcraft.api.rending.RendingRegistry;
 import com.shinoow.abyssalcraft.api.ritual.*;
 import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.common.disruptions.*;
@@ -51,6 +55,7 @@ public class AbyssalCrafting {
 		addRitualRecipes();
 		addDisruptions();
 		addSpells();
+		addRendings();
 	}
 
 	private static void addBlockSmelting(){
@@ -805,6 +810,21 @@ public class AbyssalCrafting {
 			SpellRegistry.instance().registerSpell(new TeleportHostilesSpell());
 	}
 
+	private static void addRendings() {
+		RendingRegistry.instance().registerRending(new Rending("Abyssal", 100, new ItemStack(ACItems.essence, 1, 0),
+				e -> e.world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(e) && e.isNonBoss(),
+				"ac.rending.essence_aw", ACLib.abyssal_wasteland_id));
+		RendingRegistry.instance().registerRending(new Rending("Dread", 100, new ItemStack(ACItems.essence, 1, 1),
+				e -> e.world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(e) && e.isNonBoss(),
+				"ac.rending.essence_dl", ACLib.dreadlands_id));
+		RendingRegistry.instance().registerRending(new Rending("Omothol", 100, new ItemStack(ACItems.essence, 1, 2),
+				e -> e.world.provider.getDimension() == ACLib.omothol_id && e instanceof IOmotholEntity && e.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && e.isNonBoss(),
+				"ac.rending.essence_omt", ACLib.omothol_id));
+		RendingRegistry.instance().registerRending(new Rending("Shadow", 200, new ItemStack(ACItems.shadow_gem),
+				e -> e.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && e.isNonBoss(),
+				"ac.rending.shadowgem", -1));
+	}
+	
 	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
 
 		if(ACConfig.upgrade_kits) {
