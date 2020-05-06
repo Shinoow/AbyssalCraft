@@ -30,7 +30,7 @@ public class ACConfig {
 	knowledgeSyncDelay, shoggothLairSpawnRateRivers, darkOffspringSpawnWeight, monolithBuildingCooldown, corruptionRitualRange,
 	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize, enchantmentMaxLevel;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
-	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid;
+	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid, shoggothGlowingEyes;
 	public static double acidResistanceHardness;
 	public static boolean generateDarklandsStructures, generateShoggothLairs, generateAbyssalWastelandPillars,
 	generateAbyssalWastelandRuins, generateAntimatterLake, generateCoraliumLake, generateDreadlandsStalagmite;

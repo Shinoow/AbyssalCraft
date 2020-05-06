@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity.layers;
 
 import com.shinoow.abyssalcraft.client.render.entity.RenderLesserShoggoth;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -39,6 +40,7 @@ public class LayerLesserShoggothEyes implements LayerRenderer<EntityLesserShoggo
 	@Override
 	public void doRenderLayer(EntityLesserShoggoth entitylivingbaseIn, float p_177141_2_, float p_177141_3_, float partialTicks, float p_177141_5_, float p_177141_6_, float p_177141_7_, float scale)
 	{
+		if(!ACConfig.shoggothGlowingEyes) return;
 		shoggothRenderer.bindTexture(getEntityTexture(entitylivingbaseIn));
 		GlStateManager.enableBlend();
 		GlStateManager.blendFunc(1, 1);
