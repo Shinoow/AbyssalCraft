@@ -88,7 +88,7 @@ public class Rending {
 	 * Returns the Rending output
 	 */
 	public ItemStack getOutput() {
-		return output;
+		return output.copy();
 	}
 
 	/**
