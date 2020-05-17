@@ -792,6 +792,8 @@ ac.ritual.moderateScroll=中等卷轴
 ac.ritual.moderateScroll.desc=一个中等卷轴由两本书，一个恐惧碎片和一个恐惧深渊石碎片组成
 ac.ritual.massEnchantment=汇聚附魔
 ac.ritual.massEnchantment.desc=通过在祭坛上放置8本附魔书和一件物品，所有附魔将被组合并应用到该物品上。你可以使用任何附魔，并且所有等级都将被相加，因此同一附魔的多个实例可以超过正常界限。
+ac.ritual.curing=Ritual of Curing
+ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area of the Dread Plague and the Dreadlands, restoring what was there before. The closest non-dreadlands biome will take the place of the Dreadlands.
 
 #Spells
 ac.spell.lifedrain=生命吸取

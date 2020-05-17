@@ -792,6 +792,8 @@ ac.ritual.moderateScroll=Moderate Scroll
 ac.ritual.moderateScroll.desc=A Moderate Scroll is created with 2 Books, a Dread Fragment and a Dreaded Shard of Abyssalnite
 ac.ritual.massEnchantment=Mass Enchantment
 ac.ritual.massEnchantment.desc=By presesenting 8 Enchanted Books and an Item on the altar, all of the Enchantments will be combined and applied on the Item. You can use any combination of Enchantments, and all levels will be combined, so multiple instances of the same Enchantment can surpass the normal boundaries.
+ac.ritual.curing=Ritual of Curing
+ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area of the Dread Plague and the Dreadlands, restoring what was there before. The closest non-dreadlands biome will take the place of the Dreadlands.
 
 #Spells
 ac.spell.lifedrain=Life Drain

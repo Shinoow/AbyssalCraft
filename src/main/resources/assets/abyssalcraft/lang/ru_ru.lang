@@ -793,6 +793,8 @@ ac.ritual.moderateScroll=Средний свиток
 ac.ritual.moderateScroll.desc=Средний свиток изготавливается из 2-ух Книг, a Страшный фрагмент и Страшный осколок Абиссальнита
 ac.ritual.massEnchantment=Зачарование "Масса"
 ac.ritual.massEnchantment.desc=Представленные 8 Зачарованных книг и Предмет на алтаре, все Зачарования объединятся и применятся в предмет. Ты можешь использовать любую комбинацию Зачарований, и тогда, все уровни объединятся поэтому несколько экземпляров одного и того же Зачарования могут выйти за пределы обычного.
+ac.ritual.curing=Ritual of Curing
+ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area of the Dread Plague and the Dreadlands, restoring what was there before. The closest non-dreadlands biome will take the place of the Dreadlands.
 
 #Spells
 ac.spell.lifedrain=Вампиризм
