@@ -36,7 +36,7 @@ import net.minecraftforge.common.IPlantable;
 public class NecronomiconPurgingRitual extends NecronomiconRitual {
 
 	public NecronomiconPurgingRitual() {
-		super("purging", 3, 10000F, new ItemStack(ACBlocks.crystal_cluster2, 1, 9), null, new ItemStack(ACBlocks.crystal_cluster2, 1, 9),
+		super("purging", 2, 10000F, new ItemStack(ACBlocks.crystal_cluster2, 1, 9), null, new ItemStack(ACBlocks.crystal_cluster2, 1, 9),
 				null, new ItemStack(ACBlocks.crystal_cluster2, 1, 9), null, new ItemStack(ACBlocks.crystal_cluster2, 1, 9));
 		setRitualParticle(EnumRitualParticle.PE_STREAM);
 	}
