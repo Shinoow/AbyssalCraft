@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,9 +73,12 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 
 			if (materializerItemStacks.get(par1).getCount() <= par2)
 			{
-				if(par1 > 1)
+				if(par1 > 1) {
 					itemstack = materializerItemStacks.get(par1).copy();
-				else {
+					if(canMaterialize(itemstack, getStackInSlot(0))) {
+						MaterializerRecipes.instance().processMaterialization(itemstack, getStackInSlot(0));
+					} else itemstack = ItemStack.EMPTY;
+				} else {
 					itemstack = materializerItemStacks.get(par1);
 					materializerItemStacks.set(par1, ItemStack.EMPTY);
 				}
@@ -82,9 +86,12 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 			}
 			else
 			{
-				if(par1 > 1)
+				if(par1 > 1) {
 					itemstack = materializerItemStacks.get(par1).copy();
-				else
+					if(canMaterialize(itemstack, getStackInSlot(0))) {
+						MaterializerRecipes.instance().processMaterialization(itemstack, getStackInSlot(0));
+					} else itemstack = ItemStack.EMPTY;
+				}else
 					itemstack = materializerItemStacks.get(par1).splitStack(par2);
 
 				return itemstack;
@@ -102,7 +109,7 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 	{
 		if(par1 == 0) isDirty = true;
 		if(par1 == 1) setDisplayName(null);
-		return ItemStackHelper.getAndRemove(materializerItemStacks, par1);
+		return par1 > 1 ? ItemStack.EMPTY : ItemStackHelper.getAndRemove(materializerItemStacks, par1);
 	}
 
 	/**
@@ -115,10 +122,12 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 
 		if(par1 == 1 && !par2ItemStack.isEmpty()) clippyQuote();
 
-		materializerItemStacks.set(par1, par2ItemStack);
+		if(par1 < 2) {
+			materializerItemStacks.set(par1, par2ItemStack);
 
-		if (!par2ItemStack.isEmpty() && par2ItemStack.getCount() > getInventoryStackLimit())
-			par2ItemStack.setCount(getInventoryStackLimit());
+			if (!par2ItemStack.isEmpty() && par2ItemStack.getCount() > getInventoryStackLimit())
+				par2ItemStack.setCount(getInventoryStackLimit());
+		}
 	}
 
 	private void clippyQuote(){
@@ -299,5 +308,14 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 				return false;
 
 		return true;
+	}
+	
+	private boolean canMaterialize(ItemStack stack, ItemStack bag){
+
+		for(ItemStack stack1 : MaterializerRecipes.instance().getMaterializationResult(bag))
+			if(APIUtils.areStacksEqual(stack, stack1))
+				return true;
+
+		return false;
 	}
 }
