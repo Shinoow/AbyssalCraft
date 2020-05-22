@@ -31,6 +31,9 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.ConditionProcessorReg
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabilityStorage;
+import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
+import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
+import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityStorage;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
 import com.shinoow.abyssalcraft.common.enchantments.*;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -199,6 +202,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		jzahar_black_hole = registerSoundEvent("jzahar.black_hole");
 
 		CapabilityManager.INSTANCE.register(INecroDataCapability.class, NecroDataCapabilityStorage.instance, NecroDataCapability::new);
+		CapabilityManager.INSTANCE.register(IItemTransferCapability.class, ItemTransferCapabilityStorage.instance, ItemTransferCapability::new);
 
 		ConditionProcessorRegistry.instance().registerProcessor(0, (condition, cap, player) -> cap.getBiomeTriggers().contains(condition.getConditionObject()));
 		ConditionProcessorRegistry.instance().registerProcessor(1, (condition, cap, player) -> cap.getEntityTriggers().contains(condition.getConditionObject()));

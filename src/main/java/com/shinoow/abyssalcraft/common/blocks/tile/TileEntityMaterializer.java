@@ -309,7 +309,7 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 
 		return true;
 	}
-	
+
 	private boolean canMaterialize(ItemStack stack, ItemStack bag){
 
 		for(ItemStack stack1 : MaterializerRecipes.instance().getMaterializationResult(bag))
