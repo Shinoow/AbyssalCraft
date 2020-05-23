@@ -26,7 +26,6 @@ import com.shinoow.abyssalcraft.lib.util.Scheduler;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -84,8 +83,8 @@ public class NecronomiconCuringRitual extends NecronomiconRitual {
 					public void execute() {
 
 						for(EntityLivingBase e : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos1).grow(3, 128, 3), Predicates.and(EntitySelectors.IS_ALIVE, EntityUtil::isDreadPlagueCarrier)))
-								e.onKillCommand();
-						
+							e.onKillCommand();
+
 						BiomeUtil.updateBiome(world, pos1, replacementBiome, true);
 					}
 

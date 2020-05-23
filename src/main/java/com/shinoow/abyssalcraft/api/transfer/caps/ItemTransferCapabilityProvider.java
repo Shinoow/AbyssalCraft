@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -22,9 +22,9 @@ public class ItemTransferCapabilityProvider implements ICapabilityProvider, INBT
 
 	@CapabilityInject(IItemTransferCapability.class)
 	public static final Capability<IItemTransferCapability> ITEM_TRANSFER_CAP = null;
-	
+
 	private IItemTransferCapability capability;
-	
+
 	public ItemTransferCapabilityProvider() {
 		capability = new ItemTransferCapability();
 	}
@@ -40,10 +40,10 @@ public class ItemTransferCapabilityProvider implements ICapabilityProvider, INBT
 
 		if(capability == ITEM_TRANSFER_CAP)
 			return (T) this.capability;
-		
+
 		return null;
 	}
-	
+
 	@Override
 	public NBTBase serializeNBT() {
 		return ItemTransferCapabilityStorage.instance.writeNBT(ITEM_TRANSFER_CAP, capability, null);

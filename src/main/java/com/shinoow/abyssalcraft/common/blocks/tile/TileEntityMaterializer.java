@@ -75,9 +75,9 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 			{
 				if(par1 > 1) {
 					itemstack = materializerItemStacks.get(par1).copy();
-					if(canMaterialize(itemstack, getStackInSlot(0))) {
+					if(canMaterialize(itemstack, getStackInSlot(0)))
 						MaterializerRecipes.instance().processMaterialization(itemstack, getStackInSlot(0));
-					} else itemstack = ItemStack.EMPTY;
+					else itemstack = ItemStack.EMPTY;
 				} else {
 					itemstack = materializerItemStacks.get(par1);
 					materializerItemStacks.set(par1, ItemStack.EMPTY);
@@ -88,9 +88,9 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 			{
 				if(par1 > 1) {
 					itemstack = materializerItemStacks.get(par1).copy();
-					if(canMaterialize(itemstack, getStackInSlot(0))) {
+					if(canMaterialize(itemstack, getStackInSlot(0)))
 						MaterializerRecipes.instance().processMaterialization(itemstack, getStackInSlot(0));
-					} else itemstack = ItemStack.EMPTY;
+					else itemstack = ItemStack.EMPTY;
 				}else
 					itemstack = materializerItemStacks.get(par1).splitStack(par2);
 

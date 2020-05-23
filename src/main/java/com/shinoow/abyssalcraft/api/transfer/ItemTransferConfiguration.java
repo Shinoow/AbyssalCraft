@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -84,7 +84,7 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 		NBTTagList list = new NBTTagList();
 		Arrays.stream(route).map(b -> new NBTTagLong(b.toLong())).forEach(list::appendTag);
 		nbt.setTag("route", list);
-		NBTTagCompound filterNBT = new NBTTagCompound();
+		new NBTTagCompound();
 		ItemStackHelper.saveAllItems(nbt, filter);
 
 		return nbt;
@@ -98,9 +98,8 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 			entryFacing = EnumFacing.getFront(nbt.getInteger("entryFacing"));
 		NBTTagList list = nbt.getTagList("route", NBT.TAG_LONG);
 		List<BlockPos> positions = new ArrayList<>();
-		for(Iterator<NBTBase> i = list.iterator(); i.hasNext();) {
+		for(Iterator<NBTBase> i = list.iterator(); i.hasNext();)
 			positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
-		}
 		route = positions.toArray(new BlockPos[0]);
 		filter = NonNullList.withSize(5, ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(nbt, filter);

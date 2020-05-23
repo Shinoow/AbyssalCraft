@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
-import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.common.items.ItemConfigurator;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -76,9 +75,8 @@ public class ContainerConfigurator extends Container
 			}
 			else if(par2 > 4) {
 
-				if(!mergeItemStack(itemstack1, 0, 4, false)) {
+				if(!mergeItemStack(itemstack1, 0, 4, false))
 					return ItemStack.EMPTY;
-				}
 				else if (par2 >= 5 && par2 < 32)
 				{
 					if (!mergeItemStack(itemstack1, 32, 40, false))
@@ -87,7 +85,7 @@ public class ContainerConfigurator extends Container
 				else if (par2 >= 32 && par2 < 41 && !mergeItemStack(itemstack1, 5, 31, false))
 					return ItemStack.EMPTY;
 			} else if (!mergeItemStack(itemstack1, 5, 40, false))
-					return ItemStack.EMPTY;
+				return ItemStack.EMPTY;
 
 			if (itemstack1.isEmpty())
 				slot.putStack(ItemStack.EMPTY);

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.*;
 
 import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
@@ -74,11 +73,11 @@ public class EntitySpiritItem extends EntityItem {
 	public void onUpdate() {
 		super.onUpdate();
 		noClip = true;
-		this.setNoGravity(true);
-		this.collided = this.collidedHorizontally = this.collidedVertically = false;
+		setNoGravity(true);
+		collided = collidedHorizontally = collidedVertically = false;
 		if(world.isRemote || ticksExisted % 5 != 0) return;
 		target = route[pathIndex];
-		if(this.getPosition().distanceSq(target) < 1.0D) {
+		if(getPosition().distanceSq(target) < 1.0D) {
 			//we're here?
 			if(pathIndex == route.length - 1) {
 				//journey is complete!
@@ -88,14 +87,13 @@ public class EntitySpiritItem extends EntityItem {
 					if(inventory != null) {
 						ItemStack res = ItemStack.EMPTY;
 						ItemStack stack = getItem().copy();
-						if(stack.getMetadata() != 0 && !stack.getHasSubtypes()) { //TODO better sanity check
+						if(stack.getMetadata() != 0 && !stack.getHasSubtypes())
 							res = ItemHandlerHelper.insertItem(inventory, stack, false);
-						} else {
+						else
 							res = ItemHandlerHelper.insertItemStacked(inventory, stack, false);
-						}
-						if(res.isEmpty()) {
+						if(res.isEmpty())
 							setDead();
-						} else {
+						else {
 							entityDropItem(res, 1);//drop it on the ground because we failed?
 							setDead();
 						}
@@ -107,24 +105,25 @@ public class EntitySpiritItem extends EntityItem {
 			}
 		} else {
 			if(dX == 0 && dY == 0 && dZ == 0) {
-				dX = (target.getX() + 0.5D) - posX;
+				dX = target.getX() + 0.5D - posX;
 				dY = target.getY() - posY;
-				dZ = (target.getZ() + 0.5D) - posZ;
+				dZ = target.getZ() + 0.5D - posZ;
 				dX /= 10;
 				dY /= 10;
 				dZ /= 10;
 			}
 
-			this.move(MoverType.SELF, dX, dY, dZ);
-//						this.moveToBlockPosAndAngles(target, rotationYaw, rotationPitch);
+			move(MoverType.SELF, dX, dY, dZ);
+			//						this.moveToBlockPosAndAngles(target, rotationYaw, rotationPitch);
 		}
 	}
 
+	@Override
 	protected boolean pushOutOfBlocks(double x, double y, double z)
-    {
+	{
 		return false;
-    }
-	
+	}
+
 	@Override
 	public void move(MoverType type, double x, double y, double z)
 	{
@@ -155,9 +154,8 @@ public class EntitySpiritItem extends EntityItem {
 		super.readEntityFromNBT(tagCompound);
 		NBTTagList list = tagCompound.getTagList("route", NBT.TAG_LONG);
 		List<BlockPos> positions = new ArrayList<>();
-		for(Iterator<NBTBase> i = list.iterator(); i.hasNext();) {
+		for(Iterator<NBTBase> i = list.iterator(); i.hasNext();)
 			positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
-		}
 		route = positions.toArray(new BlockPos[0]);
 		pathIndex = tagCompound.getInteger("pathIndex");
 		if(tagCompound.hasKey("Facing"))

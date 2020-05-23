@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -48,16 +48,14 @@ public class ItemConfigurator extends ItemACBasic {
 			ItemStack stack = player.getHeldItem(hand);
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
-			if(!stack.getTagCompound().hasKey("Mode")) {
+			if(!stack.getTagCompound().hasKey("Mode"))
 				stack.getTagCompound().setInteger("Mode", 0);
-			}
 			int mode = stack.getTagCompound().getInteger("Mode");
 			if(player.isSneaking()) {
 				stack.getTagCompound().setInteger("Mode", mode == 0 ? 1 : 0);
 				player.sendMessage(new TextComponentString(String.format("Mode: %s", mode == 0 ? "Apply configuration" : "Set path")));
-			} else if(mode == 1) {
+			} else if(mode == 1)
 				player.openGui(AbyssalCraft.instance, ACLib.configuratorGuiID, player.world, (int) player.posX, (int) player.posY, (int) player.posZ);
-			}
 		}
 
 
@@ -78,11 +76,10 @@ public class ItemConfigurator extends ItemACBasic {
 
 			if(mode == 0) {
 				NBTTagList path = null;
-				if(nbt.hasKey("Path")) {
+				if(nbt.hasKey("Path"))
 					path = nbt.getTagList("Path", NBT.TAG_LONG);
-				} else {
+				else
 					path = new NBTTagList();
-				}
 
 				TileEntity te = w.getTileEntity(pos);
 
