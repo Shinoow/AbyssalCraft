@@ -55,14 +55,14 @@ public class ItemTransferEventHandler {
 			if(world.getTotalWorldTime() % 20 != 0) return;
 			world.loadedTileEntityList.stream()
 			.filter(t -> world.isBlockLoaded(t.getPos()))
-			.filter(t -> ItemTransferCapability.getCap(t) != null)
-			.filter(this::hasInventory)//maybe remove
+			.filter(this::hasCap)
+			.filter(ItemTransferEventHandler::hasInventory)//maybe remove
 			.forEach(tile -> {
 				IItemTransferCapability cap = ItemTransferCapability.getCap(tile);
 				for(ItemTransferConfiguration cfg : cap.getTransferConfigurations()) {
 					IItemHandler inventory = getInventory(tile, cfg.getExitFacing());
 					if(inventory != null) {//sided inventories, you never know
-						boolean hasFilter = !cfg.getFilter().isEmpty();
+						boolean hasFilter = !cfg.getFilter().isEmpty() && cfg.getFilter().stream().anyMatch(i -> !i.isEmpty());
 						ItemStack stack = ItemStack.EMPTY;
 						int slot = -1;
 						for(int i = 0; i < inventory.getSlots(); i++) {
@@ -93,29 +93,34 @@ public class ItemTransferEventHandler {
 			});
 		}
 	}
-	
+
 	public static IItemHandler getInventory(TileEntity te, EnumFacing face) {
-		
+
 		if(te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, face))
 			return te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, face);
 		else if(te instanceof ISidedInventory)
 			return new SidedInvWrapper((ISidedInventory)te, face);
 		else if(te instanceof IInventory)
 			return new InvWrapper((IInventory)te);
-		
+
 		return null;
 	}
-	
-	private boolean hasInventory(TileEntity te) {
+
+	public static boolean hasInventory(TileEntity te) {
 		return getInventory(te, EnumFacing.DOWN) != null;
 	}
-	
+
+	private boolean hasCap(TileEntity te) {
+		IItemTransferCapability cap = ItemTransferCapability.getCap(te);
+		return cap != null && cap.isRunning();
+	}
+
 	private boolean isInFilter(NonNullList<ItemStack> filter, ItemStack stack) {
-		
+
 		for(ItemStack stack1 : filter)
 			if(APIUtils.areStacksEqual(stack, stack1))
 				return true;
-		
+
 		return false;
 	}
 }

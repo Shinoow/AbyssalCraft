@@ -36,6 +36,7 @@ public class ItemTransferCapabilityStorage implements IStorage<IItemTransferCapa
 		instance.getTransferConfigurations().stream().map(i -> i.serializeNBT()).forEach(list::appendTag);
 
 		properties.setTag("configurations", list);
+		properties.setBoolean("isRunning", instance.isRunning());
 
 		return properties;
 	}
@@ -53,6 +54,7 @@ public class ItemTransferCapabilityStorage implements IStorage<IItemTransferCapa
 				instance.addTransferConfiguration(config);
 			}
 		}
+		instance.setRunning(properties.getBoolean("isRunning"));
 	}
 
 }

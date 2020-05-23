@@ -18,17 +18,13 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.common.util.Constants;
 
-public class InventoryCrystalBag implements IInventory
+public class InventoryConfigurator implements IInventory
 {
 	private String name;
-
-	public static int INV_SIZE;
 
 	private NonNullList<ItemStack> inventory;
 
@@ -38,13 +34,12 @@ public class InventoryCrystalBag implements IInventory
 	/**
 	 * @param itemstack - the ItemStack to which this inventory belongs
 	 */
-	public InventoryCrystalBag(ItemStack stack, EnumHand hand)
+	public InventoryConfigurator(ItemStack stack, EnumHand hand)
 	{
 		invItem = stack;
 		if (!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		INV_SIZE = stack.getTagCompound().getInteger("InvSize");
-		inventory = NonNullList.withSize(INV_SIZE, ItemStack.EMPTY);
+		inventory = NonNullList.withSize(5, ItemStack.EMPTY);
 		name = stack.getDisplayName();
 		this.hand = hand;
 
@@ -139,54 +134,34 @@ public class InventoryCrystalBag implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 	{
-		return APIUtils.isCrystal(itemstack);
+		return true;
 	}
 
 	public void readFromNBT(NBTTagCompound tagcompound)
 	{
-		NBTTagList items = tagcompound.getTagList("ItemInventory", Constants.NBT.TAG_COMPOUND);
-
-		for (int i = 0; i < items.tagCount(); ++i)
-		{
-			NBTTagCompound item = items.getCompoundTagAt(i);
-			byte slot = item.getByte("Slot");
-
-			if (slot >= 0 && slot < getSizeInventory())
-				inventory.set(slot, new ItemStack(item));
-		}
+		inventory = NonNullList.withSize(5, ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(tagcompound, inventory);
 	}
 
 	public void writeToNBT(NBTTagCompound tagcompound)
 	{
-		NBTTagList items = new NBTTagList();
-
-		for (int i = 0; i < getSizeInventory(); ++i)
-			if (!getStackInSlot(i).isEmpty())
-			{
-				NBTTagCompound item = new NBTTagCompound();
-				item.setInteger("Slot", i);
-				getStackInSlot(i).writeToNBT(item);
-
-				items.appendTag(item);
-			}
-		tagcompound.setTag("ItemInventory", items);
+		ItemStackHelper.saveAllItems(tagcompound, inventory);
 	}
 
 	@Override
 	public int getField(int id) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public int getFieldCount() {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 

@@ -21,6 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 public class ItemTransferCapability implements IItemTransferCapability {
 
 	private List<ItemTransferConfiguration> configurations = new ArrayList<>();
+	private boolean isRunning;
 
 	public static IItemTransferCapability getCap(TileEntity tile) {
 		return tile.getCapability(ItemTransferCapabilityProvider.ITEM_TRANSFER_CAP, null);
@@ -43,7 +44,19 @@ public class ItemTransferCapability implements IItemTransferCapability {
 	}
 
 	@Override
+	public void setRunning(boolean state) {
+		isRunning = state;
+	}
+
+	@Override
+	public boolean isRunning() {
+
+		return isRunning;
+	}
+
+	@Override
 	public void copy(IItemTransferCapability cap) {
 		configurations = cap.getTransferConfigurations();
 	}
+
 }

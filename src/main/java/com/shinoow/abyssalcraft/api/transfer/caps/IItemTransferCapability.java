@@ -23,5 +23,9 @@ public interface IItemTransferCapability {
 
 	public void clearConfigurations();
 
+	public void setRunning(boolean state);
+	
+	public boolean isRunning();
+
 	public void copy(IItemTransferCapability cap);
 }
