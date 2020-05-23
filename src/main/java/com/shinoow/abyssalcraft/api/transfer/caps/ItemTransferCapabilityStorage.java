@@ -49,7 +49,7 @@ public class ItemTransferCapabilityStorage implements IStorage<IItemTransferCapa
 			NBTTagList list = properties.getTagList("configurations", NBT.TAG_COMPOUND);
 			for(Iterator<NBTBase> iterator = list.iterator(); iterator.hasNext();) {
 				ItemTransferConfiguration config = new ItemTransferConfiguration();
-				config.deserializeNBT((NBTTagCompound)list.iterator().next());
+				config.deserializeNBT((NBTTagCompound)iterator.next());
 				instance.addTransferConfiguration(config);
 			}
 		}

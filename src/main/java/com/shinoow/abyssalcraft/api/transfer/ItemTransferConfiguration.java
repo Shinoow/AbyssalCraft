@@ -11,20 +11,14 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.transfer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagLong;
+import net.minecraft.nbt.*;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +28,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompound> {
 
 	private BlockPos[] route;
-	private NonNullList<ItemStack> filter = NonNullList.create();
+	private NonNullList<ItemStack> filter = NonNullList.withSize(5, ItemStack.EMPTY);
 	private EnumFacing exitFacing, entryFacing;
 
 	public ItemTransferConfiguration() {}
@@ -91,8 +85,7 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 		Arrays.stream(route).map(b -> new NBTTagLong(b.toLong())).forEach(list::appendTag);
 		nbt.setTag("route", list);
 		NBTTagCompound filterNBT = new NBTTagCompound();
-		ItemStackHelper.saveAllItems(filterNBT, filter);
-		nbt.setTag("filter", filterNBT);
+		ItemStackHelper.saveAllItems(nbt, filter);
 
 		return nbt;
 	}
@@ -109,7 +102,8 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 			positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
 		}
 		route = positions.toArray(new BlockPos[0]);
-		ItemStackHelper.loadAllItems(nbt.getCompoundTag("filter"), filter);
+		filter = NonNullList.withSize(5, ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(nbt, filter);
 	}
 
 }

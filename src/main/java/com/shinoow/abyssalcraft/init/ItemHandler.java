@@ -210,6 +210,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_sword = new ItemACSword(AbyssalCraftAPI.ethaxiumTool, "ethaxiumsword", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.ethaxium_hoe = new ItemACHoe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumhoe", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.staff_of_rending = new ItemDrainStaff().setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
+		ACItems.configurator = new ItemConfigurator();
 
 		//Armor
 		ACItems.abyssalnite_helmet = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.HEAD, "ahelmet").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
@@ -468,6 +469,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.darklands_oak_door, "door_dlt");
 		registerItem(ACItems.dreadlands_door, "door_drt");
 		registerItem(ACItems.charcoal, "charcoal");
+		registerItem(ACItems.configurator, "configurator");
 		//		registerItem(shadowPlate, "shadowplate");
 	}
 

@@ -172,6 +172,8 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		registerEntityWithEgg(EntityShubOffspring.class, "shuboffspring", 80, 80, 3, true, 0x2b2929, 0x211f1d);
 
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "spirititem"), EntitySpiritItem.class, "spirititem", 81, instance, 64, 10, true);
+
 		EntityUtil.addShoggothFood(EntityAnimal.class);
 		EntityUtil.addShoggothFood(EntityAmbientCreature.class);
 		EntityUtil.addShoggothFood(EntityWaterMob.class);
