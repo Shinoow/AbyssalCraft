@@ -32,10 +32,9 @@ import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
+import com.shinoow.abyssalcraft.common.items.ItemConfigurator;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.FireMessage;
-import com.shinoow.abyssalcraft.common.network.server.InterdimensionalCageMessage;
-import com.shinoow.abyssalcraft.common.network.server.StaffModeMessage;
+import com.shinoow.abyssalcraft.common.network.server.*;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -263,6 +262,47 @@ public class AbyssalCraftClientEventHooks {
 					if (mov.entityHit != null && !mov.entityHit.isDead)
 						if (mov.entityHit != Minecraft.getMinecraft().player )
 							PacketDispatcher.sendToServer(new InterdimensionalCageMessage(mov.entityHit.getEntityId(), EnumHand.OFF_HAND));
+			}
+		}
+		if(ClientProxy.configurator_mode.isPressed()) {
+			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
+			int mode1 = -1, mode2 = -1;
+
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator){
+				if(mainStack.hasTagCompound())
+					mode1 = mainStack.getTagCompound().getInteger("Mode");
+				if(mode1 > -1){
+					mode1 = mode1 == 0 ? 1 : mode1 == 1 ? 2 : 0;
+					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + ItemConfigurator.getMode(mode1)));
+				}
+			}
+			if(!offStack.isEmpty() && offStack.getItem() == ACItems.configurator){
+				if(offStack.hasTagCompound())
+					mode2 = offStack.getTagCompound().getInteger("Mode");
+				if(mode2 > -1){
+					mode2 = mode2 == 0 ? 1 : mode2 == 1 ? 2 : 0;
+					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + ItemConfigurator.getMode(mode2)));
+				}
+			}
+
+			if(mode1 > -1 || mode2 > -1)
+				PacketDispatcher.sendToServer(new ConfiguratorMessage(mode1, mode2));
+		}
+		if(ClientProxy.configurator_filter.isPressed()) {
+			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator ||
+					!offStack.isEmpty() && offStack.getItem() == ACItems.configurator)
+				PacketDispatcher.sendToServer(new ConfiguratorMessage(true));
+		}
+		if(ClientProxy.configurator_path.isPressed()) {
+			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator ||
+					!offStack.isEmpty() && offStack.getItem() == ACItems.configurator) {
+				PacketDispatcher.sendToServer(new ConfiguratorMessage(true, 0));
+				Minecraft.getMinecraft().player.sendMessage(new TextComponentString("Cleared path!"));
 			}
 		}
 	}

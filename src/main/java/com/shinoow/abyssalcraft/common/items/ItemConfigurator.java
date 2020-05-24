@@ -19,10 +19,13 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.transfer.ItemTransferConfiguration;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
+import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
@@ -31,6 +34,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 
@@ -42,26 +46,28 @@ public class ItemConfigurator extends ItemACBasic {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
-		if(!world.isRemote) {
-			ItemStack stack = player.getHeldItem(hand);
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+    {
+		if(isSelected) {
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
-			if(!stack.getTagCompound().hasKey("Mode"))
-				stack.getTagCompound().setInteger("Mode", 0);
 			int mode = stack.getTagCompound().getInteger("Mode");
-			if(player.isSneaking()) {
-				stack.getTagCompound().setInteger("Mode", mode == 0 ? 1 : 0);
-				player.sendMessage(new TextComponentString(String.format("Mode: %s", mode == 0 ? "Apply configuration" : "Set path")));
-			} else if(mode == 1)
-				player.openGui(AbyssalCraft.instance, ACLib.configuratorGuiID, player.world, (int) player.posX, (int) player.posY, (int) player.posZ);
+			if(mode == 0) {
+				NBTTagList path = stack.getTagCompound().getTagList("Path", NBT.TAG_LONG);
+				List<BlockPos> positions = new ArrayList<>();
+				for(Iterator<NBTBase> i = path.iterator(); i.hasNext();)
+					positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
+				
+				for(int i = 0; i < positions.size(); i++)
+				{
+					BlockPos pos = positions.get(i);
+					boolean last = i == positions.size() - 1;
+					worldIn.spawnParticle(last ? EnumParticleTypes.VILLAGER_HAPPY : EnumParticleTypes.REDSTONE, pos.getX()+0.5, pos.getY()+0.5 + (last ? 1.0 : 0), pos.getZ()+0.5, 0, 0, 0);
+				}
+			}
 		}
-
-
-		return super.onItemRightClick(world, player, hand);
-	}
-
+    }
+	
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 
@@ -72,7 +78,6 @@ public class ItemConfigurator extends ItemACBasic {
 				stack.setTagCompound(new NBTTagCompound());
 			NBTTagCompound nbt = stack.getTagCompound();
 			int mode = nbt.getInteger("Mode");
-			//modes: 0 = path creation, 1 = everything else?
 
 			if(mode == 0) {
 				NBTTagList path = null;
@@ -113,11 +118,42 @@ public class ItemConfigurator extends ItemACBasic {
 					cap.setRunning(true);
 					player.sendMessage(new TextComponentString("Configuration set for block!"));
 				}
+			} else if(mode == 2) {
+				TileEntity te = w.getTileEntity(pos);
+				if(te != null && ItemTransferCapability.getCap(te) != null) {
+					IItemTransferCapability cap = ItemTransferCapability.getCap(te);
+					cap.clearConfigurations();
+					player.sendMessage(new TextComponentString("Configurations cleared for block!"));
+				}
 			}
 
 			return EnumActionResult.PASS;
 		}
 
 		return super.onItemUse(player, w, pos, hand, side, hitX, hitY, hitZ);
+	}
+
+	public static String getMode(int mode) {
+		switch(mode) {
+		case 0:
+			return "Set Path";
+		case 1:
+			return "Apply Configuration";
+		case 2:
+			return "Clear Configurations";
+		default:
+			return "Set Path";
+		}
+	}
+
+	@Override
+	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
+		if(!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		int mode = is.getTagCompound().getInteger("Mode");
+		l.add(String.format("Mode: %s", TextFormatting.GOLD+getMode(mode)+TextFormatting.GRAY));
+		l.add(String.format("Change mode with %s", TextFormatting.GOLD+ClientProxy.configurator_mode.getDisplayName()+TextFormatting.GRAY));
+		l.add(String.format("Open filter inventory with %s", TextFormatting.GOLD+ClientProxy.configurator_filter.getDisplayName()+TextFormatting.GRAY));
+		l.add(String.format("Clear path with %s", TextFormatting.GOLD+ClientProxy.configurator_path.getDisplayName()+TextFormatting.GRAY));
 	}
 }
