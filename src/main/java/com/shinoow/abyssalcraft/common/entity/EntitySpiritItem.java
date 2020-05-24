@@ -75,7 +75,7 @@ public class EntitySpiritItem extends EntityItem {
 		noClip = true;
 		setNoGravity(true);
 		collided = collidedHorizontally = collidedVertically = false;
-		if(world.isRemote || ticksExisted % 5 != 0) return;
+		if(world.isRemote) return;
 		target = route[pathIndex];
 		if(getPosition().distanceSq(target) < 1.0D) {
 			//we're here?
@@ -104,17 +104,14 @@ public class EntitySpiritItem extends EntityItem {
 				dX = dY = dZ = 0;
 			}
 		} else {
-			if(dX == 0 && dY == 0 && dZ == 0) {
-				dX = target.getX() + 0.5D - posX;
+				dX = target.getX() + 0.5D > posX ? 0.1 : -0.1;
 				dY = target.getY() - posY;
-				dZ = target.getZ() + 0.5D - posZ;
-				dX /= 10;
+				dZ = target.getZ() + 0.5D > posZ ? 0.1 : -0.1;
 				dY /= 10;
-				dZ /= 10;
-			}
 
+			noClip = pathIndex >= route.length -2;
 			move(MoverType.SELF, dX, dY, dZ);
-			//						this.moveToBlockPosAndAngles(target, rotationYaw, rotationPitch);
+			noClip = true;
 		}
 	}
 
@@ -122,12 +119,6 @@ public class EntitySpiritItem extends EntityItem {
 	protected boolean pushOutOfBlocks(double x, double y, double z)
 	{
 		return false;
-	}
-
-	@Override
-	public void move(MoverType type, double x, double y, double z)
-	{
-		super.move(type, x, y, z);
 	}
 
 	@Override
