@@ -60,6 +60,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.*;
@@ -302,7 +303,7 @@ public class AbyssalCraftClientEventHooks {
 			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator ||
 					!offStack.isEmpty() && offStack.getItem() == ACItems.configurator) {
 				PacketDispatcher.sendToServer(new ConfiguratorMessage(true, 0));
-				Minecraft.getMinecraft().player.sendMessage(new TextComponentString("Cleared path!"));
+				Minecraft.getMinecraft().player.sendMessage(new TextComponentTranslation("message.configurator.5"));
 			}
 		}
 	}

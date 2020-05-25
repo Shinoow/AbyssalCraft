@@ -194,6 +194,11 @@ message.remnant.insult.0=%s, you speak Aklo just as well as modders speak 1.8.
 message.remnant.insult.1=You know nothing, %s.
 message.remnant.insult.2=You're worthless without a Necronomicon, %s.
 message.jzahar.respawn=I sense time was turned back. Did you fail to defeat me, %s?
+message.configurator.1=Block with Inventory discovered! Entry side set to the side you clicked at.
+message.configurator.2=Position added to path
+message.configurator.3=Configuration set for block!
+message.configurator.4=Configurations cleared for block!
+message.configurator.5=Cleared path!
 
 #Container Inventories
 container.abyssalcraft.crate=Crate
@@ -869,6 +874,9 @@ ac_spells.tooltip=Spell Configuration
 key.abyssalcraft.category=AbyssalCraft
 key.staff_mode.desc=Change Staff of The Gatekeeper Mode
 key.use_cage.desc=Capture mob with Interdimensional Cage
+key.configurator_mode.desc=Change Spirit Tablet Mode
+key.configurator_filter.desc=Open the Spirit Tablet Filter inventory
+key.configurator_path.desc=Clear the path in the Spirit Tablet
 
 #Damagesources
 death.attack.coralium=%1$s died from the Coralium Plague
@@ -914,6 +922,11 @@ tooltip.staff.mode.1=Mode
 tooltip.staff.mode.2=Press %s to change mode
 tooltip.stonetablet.cursed=Cursed
 tooltip.stonetablet.contents=%d stacks
+tooltip.configurator.1=Press %s to open the filter inventory
+tooltip.configurator.2=Press %s to clear the current path
+tooltip.configurator.mode.0=Set Path
+tooltip.configurator.mode.1=Apply Configuration
+tooltip.configurator.mode.2=Clear Configurations
 
 #Creative Tabs
 itemGroup.acblocks= Blocs d'AbyssalCraft
@@ -1375,6 +1388,7 @@ item.antidote.dread.name=Dread Plague Antidote
 item.door_dlt.name=Darklands Oak Wood Door
 item.door_drt.name=Dreadlands Wood Door
 item.cha_rcoal.name=Cha'rcoal
+item.configurator.name=Spirit Tablet
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs

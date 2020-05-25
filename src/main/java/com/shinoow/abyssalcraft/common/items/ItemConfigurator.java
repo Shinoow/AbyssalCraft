@@ -15,15 +15,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.transfer.ItemTransferConfiguration;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
-import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,21 +32,24 @@ import net.minecraft.nbt.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemConfigurator extends ItemACBasic {
 
 	public ItemConfigurator() {
 		super("configurator");
 		setCreativeTab(ACTabs.tabTools);
+		addPropertyOverride(new ResourceLocation("mode"), (stack, worldIn, entityIn) -> stack.hasTagCompound() ? intToFloat(stack.getTagCompound().getInteger("Mode")) : 0 );
 	}
 
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
-    {
+	{
 		if(isSelected) {
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
@@ -57,7 +59,7 @@ public class ItemConfigurator extends ItemACBasic {
 				List<BlockPos> positions = new ArrayList<>();
 				for(Iterator<NBTBase> i = path.iterator(); i.hasNext();)
 					positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
-				
+
 				for(int i = 0; i < positions.size(); i++)
 				{
 					BlockPos pos = positions.get(i);
@@ -66,8 +68,8 @@ public class ItemConfigurator extends ItemACBasic {
 				}
 			}
 		}
-    }
-	
+	}
+
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 
@@ -91,17 +93,16 @@ public class ItemConfigurator extends ItemACBasic {
 				if(te != null && ItemTransferEventHandler.hasInventory(te)) {
 					path.appendTag(new NBTTagLong(pos.toLong()));
 					nbt.setInteger("EntryFacing", side.getIndex());
-					player.sendMessage(new TextComponentString("Block with Inventory discovered! Entry side set to the side you clicked at."));
+					player.sendMessage(new TextComponentTranslation("message.configurator.1"));
 				} else {
 					path.appendTag(new NBTTagLong(pos.up().toLong()));
-					player.sendMessage(new TextComponentString("Position added to path"));
+					player.sendMessage(new TextComponentTranslation("message.configurator.2"));
 				}
 				nbt.setTag("Path", path);
 			} else if(mode == 1) {
 				TileEntity te = w.getTileEntity(pos);
 				if(te != null && ItemTransferCapability.getCap(te) != null) {
 					IItemTransferCapability cap = ItemTransferCapability.getCap(te);
-					//TODO grab the filter from somewhere...
 					NonNullList<ItemStack> filter = NonNullList.withSize(5, ItemStack.EMPTY);
 					ItemStackHelper.loadAllItems(nbt, filter);
 					NBTTagList path = nbt.getTagList("Path", NBT.TAG_LONG);
@@ -116,14 +117,14 @@ public class ItemConfigurator extends ItemACBasic {
 
 					cap.addTransferConfiguration(cfg);
 					cap.setRunning(true);
-					player.sendMessage(new TextComponentString("Configuration set for block!"));
+					player.sendMessage(new TextComponentTranslation("message.configurator.3"));
 				}
 			} else if(mode == 2) {
 				TileEntity te = w.getTileEntity(pos);
 				if(te != null && ItemTransferCapability.getCap(te) != null) {
 					IItemTransferCapability cap = ItemTransferCapability.getCap(te);
 					cap.clearConfigurations();
-					player.sendMessage(new TextComponentString("Configurations cleared for block!"));
+					player.sendMessage(new TextComponentTranslation("message.configurator.4"));
 				}
 			}
 
@@ -133,17 +134,24 @@ public class ItemConfigurator extends ItemACBasic {
 		return super.onItemUse(player, w, pos, hand, side, hitX, hitY, hitZ);
 	}
 
-	public static String getMode(int mode) {
-		switch(mode) {
+	private float intToFloat(int i) {
+		switch(i) {
 		case 0:
-			return "Set Path";
+			return 0;
 		case 1:
-			return "Apply Configuration";
+			return 0.5f;
 		case 2:
-			return "Clear Configurations";
+			return 1;
 		default:
-			return "Set Path";
+			return 0;
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static String getMode(int mode) {
+		if(mode >= 0 && mode <= 2)
+			return I18n.format("tooltip.configurator.mode."+mode);
+		else return getMode(0);
 	}
 
 	@Override
@@ -151,9 +159,9 @@ public class ItemConfigurator extends ItemACBasic {
 		if(!is.hasTagCompound())
 			is.setTagCompound(new NBTTagCompound());
 		int mode = is.getTagCompound().getInteger("Mode");
-		l.add(String.format("Mode: %s", TextFormatting.GOLD+getMode(mode)+TextFormatting.GRAY));
-		l.add(String.format("Change mode with %s", TextFormatting.GOLD+ClientProxy.configurator_mode.getDisplayName()+TextFormatting.GRAY));
-		l.add(String.format("Open filter inventory with %s", TextFormatting.GOLD+ClientProxy.configurator_filter.getDisplayName()+TextFormatting.GRAY));
-		l.add(String.format("Clear path with %s", TextFormatting.GOLD+ClientProxy.configurator_path.getDisplayName()+TextFormatting.GRAY));
+		l.add(String.format("%s: %s", I18n.format("tooltip.staff.mode.1"), TextFormatting.GOLD+getMode(mode)+TextFormatting.GRAY));
+		l.add(I18n.format("tooltip.staff.mode.2", TextFormatting.GOLD+ClientProxy.configurator_mode.getDisplayName()+TextFormatting.GRAY));
+		l.add(I18n.format("tooltip.configurator.1", TextFormatting.GOLD+ClientProxy.configurator_filter.getDisplayName()+TextFormatting.GRAY));
+		l.add(I18n.format("tooltip.configurator.2", TextFormatting.GOLD+ClientProxy.configurator_path.getDisplayName()+TextFormatting.GRAY));
 	}
 }

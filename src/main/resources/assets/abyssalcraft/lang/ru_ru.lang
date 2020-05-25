@@ -195,6 +195,11 @@ message.remnant.insult.0=%s, ты говоришь Акло так же хоро
 message.remnant.insult.1=Ты ничего не знаешь, %s.
 message.remnant.insult.2=Ты бесполезен без Некрономикона, %s.
 message.jzahar.respawn=Я чувствую, что время повернулось вспять. Тебе не удалось победить меня, %s?
+message.configurator.1=Block with Inventory discovered! Entry side set to the side you clicked at.
+message.configurator.2=Position added to path
+message.configurator.3=Configuration set for block!
+message.configurator.4=Configurations cleared for block!
+message.configurator.5=Cleared path!
 
 #Container Inventories
 container.abyssalcraft.crate=Ящик
@@ -870,6 +875,9 @@ ac_spells.tooltip=Spell Configuration
 key.abyssalcraft.category=AbyssalCraft
 key.staff_mode.desc=Изменить режим Посоха сторожа
 key.use_cage.desc=Улавливает монстров в Межпространственную Клетку
+key.configurator_mode.desc=Change Spirit Tablet Mode
+key.configurator_filter.desc=Open the Spirit Tablet Filter inventory
+key.configurator_path.desc=Clear the path in the Spirit Tablet
 
 #Damagesources
 death.attack.coralium=%1$s умер от Коралловой чумы
@@ -915,6 +923,11 @@ tooltip.staff.mode.1=Режим
 tooltip.staff.mode.2=Нажмите %s, чтобы изменить режим
 tooltip.stonetablet.cursed=Проклятая
 tooltip.stonetablet.contents=%d стэк
+tooltip.configurator.1=Press %s to open the filter inventory
+tooltip.configurator.2=Press %s to clear the current path
+tooltip.configurator.mode.0=Set Path
+tooltip.configurator.mode.1=Apply Configuration
+tooltip.configurator.mode.2=Clear Configurations
 
 #Creative Tabs
 itemGroup.acblocks=AbyssalCraft: Блоки
@@ -1376,6 +1389,7 @@ item.antidote.dread.name=Противоядие от Ужасной чумы
 item.door_dlt.name=Дубовая дверь из Тёмных земель
 item.door_drt.name=Деревянная дверь из Ужасных земель
 item.cha_rcoal.name=Древесный уголь
+item.configurator.name=Spirit Tablet
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Глубинный гуль

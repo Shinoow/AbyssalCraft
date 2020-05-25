@@ -194,6 +194,11 @@ message.remnant.insult.0=%s，你说Aklo就像mod制作者说1.8一样。
 message.remnant.insult.1=你什么都不知道，%s。
 message.remnant.insult.2=没有了死灵之书你什么都不是，%s。
 message.jzahar.respawn=我发现时间倒流了。你是不是又没能打败我，%s？
+message.configurator.1=Block with Inventory discovered! Entry side set to the side you clicked at.
+message.configurator.2=Position added to path
+message.configurator.3=Configuration set for block!
+message.configurator.4=Configurations cleared for block!
+message.configurator.5=Cleared path!
 
 #容器物品栏
 container.abyssalcraft.crate=板条箱
@@ -869,6 +874,9 @@ ac_spells.tooltip=咒术配置
 key.abyssalcraft.category=深渊国度
 key.staff_mode.desc=改变守门者法杖的模式
 key.use_cage.desc=用跨维度笼捕捉生物
+key.configurator_mode.desc=Change Spirit Tablet Mode
+key.configurator_filter.desc=Open the Spirit Tablet Filter inventory
+key.configurator_path.desc=Clear the path in the Spirit Tablet
 
 #伤害来源
 death.attack.coralium=%1$s由于珊瑚瘟疫而死亡
@@ -914,6 +922,11 @@ tooltip.staff.mode.1=模式
 tooltip.staff.mode.2=按下 %s 以改变模式
 tooltip.stonetablet.cursed=被诅咒的
 tooltip.stonetablet.contents=%d 组
+tooltip.configurator.1=Press %s to open the filter inventory
+tooltip.configurator.2=Press %s to clear the current path
+tooltip.configurator.mode.0=Set Path
+tooltip.configurator.mode.1=Apply Configuration
+tooltip.configurator.mode.2=Clear Configurations
 
 #创造模式物品栏
 itemGroup.acblocks=深渊国度方块
@@ -1375,6 +1388,7 @@ item.antidote.dread.name=恐惧瘟疫解药
 item.door_dlt.name=黑暗之地橡木门
 item.door_drt.name=恐惧之地木门
 item.cha_rcoal.name=查加罗炭
+item.configurator.name=Spirit Tablet
 
 #实体
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
