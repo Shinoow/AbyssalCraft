@@ -927,6 +927,8 @@ tooltip.configurator.2=Press %s to clear the current path
 tooltip.configurator.mode.0=Set Path
 tooltip.configurator.mode.1=Apply Configuration
 tooltip.configurator.mode.2=Clear Configurations
+tooltip.configurator.filter.0=Filter by subtype
+tooltip.configurator.filter.1=Filter by NBT
 
 #Creative Tabs
 itemGroup.acblocks= Blocs d'AbyssalCraft

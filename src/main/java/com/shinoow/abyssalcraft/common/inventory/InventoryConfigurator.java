@@ -151,12 +151,19 @@ public class InventoryConfigurator implements IInventory
 	@Override
 	public int getField(int id) {
 
+		if(id == 0)
+			return invItem.getTagCompound().getBoolean("FilterSubtype") ? 1 : 0;
+		else if (id == 1)
+			return invItem.getTagCompound().getBoolean("FilterNBT") ? 1 : 0;
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-
+		if(id == 0)
+			invItem.getTagCompound().setBoolean("FilterSubtype", value == 1 ? true : false);
+		else if(id == 1)
+			invItem.getTagCompound().setBoolean("FilterNBT", value == 1 ? true : false);
 	}
 
 	@Override

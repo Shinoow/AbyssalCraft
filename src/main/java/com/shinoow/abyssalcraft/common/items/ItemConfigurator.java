@@ -114,6 +114,9 @@ public class ItemConfigurator extends ItemACBasic {
 					if(nbt.hasKey("EntryFacing"))
 						cfg.setEntryFacing(EnumFacing.getFront(nbt.getInteger("EntryFacing")));
 					cfg.setFilter(filter);
+					cfg.setFilterSubtypes(nbt.getBoolean("FilterSubtype"));
+					cfg.setFilterNBT(nbt.getBoolean("FilterNBT"));
+					cfg.setupSubtypeFilter();
 
 					cap.addTransferConfiguration(cfg);
 					cap.setRunning(true);

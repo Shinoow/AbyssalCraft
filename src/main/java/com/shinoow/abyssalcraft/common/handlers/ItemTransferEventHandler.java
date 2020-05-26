@@ -67,11 +67,12 @@ public class ItemTransferEventHandler {
 						int slot = -1;
 						for(int i = 0; i < inventory.getSlots(); i++) {
 							stack = inventory.getStackInSlot(i);
-							if(!hasFilter || isInFilter(cfg.getFilter(), stack)) {
-								stack = inventory.extractItem(i, 1, true);
-								slot = i;
-								break;
-							}
+							if(!stack.isEmpty())
+								if(!hasFilter || isInFilter(cfg.getFilter(), stack, cfg.filterByNBT())) {
+									stack = inventory.extractItem(i, 1, true);
+									slot = i;
+									break;
+								}
 						}
 						if(!stack.isEmpty() && slot > -1) {
 							BlockPos exitPos = cfg.getRoute()[cfg.getRoute().length-1];
@@ -115,10 +116,10 @@ public class ItemTransferEventHandler {
 		return cap != null && cap.isRunning();
 	}
 
-	private boolean isInFilter(NonNullList<ItemStack> filter, ItemStack stack) {
+	private boolean isInFilter(NonNullList<ItemStack> filter, ItemStack stack, boolean nbt) {
 
 		for(ItemStack stack1 : filter)
-			if(APIUtils.areStacksEqual(stack, stack1))
+			if(APIUtils.areStacksEqual(stack, stack1, nbt))
 				return true;
 
 		return false;

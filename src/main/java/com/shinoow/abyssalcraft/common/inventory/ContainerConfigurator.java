@@ -27,17 +27,16 @@ public class ContainerConfigurator extends Container
 
 	private int rows;
 
-
 	public ContainerConfigurator(InventoryPlayer inventoryPlayer, InventoryConfigurator inventoryItem)
 	{
 		inventory = inventoryItem;
 		rows = inventoryItem.getSizeInventory() / 9;
 
-		addSlotToContainer(new Slot(inventoryItem, 0, 44, 27));
-		addSlotToContainer(new Slot(inventoryItem, 1, 62, 27));
-		addSlotToContainer(new Slot(inventoryItem, 2, 80, 27));
-		addSlotToContainer(new Slot(inventoryItem, 3, 98, 27));
-		addSlotToContainer(new Slot(inventoryItem, 4, 116, 27));
+		addSlotToContainer(new Slot(inventoryItem, 0, 44, 17));
+		addSlotToContainer(new Slot(inventoryItem, 1, 62, 17));
+		addSlotToContainer(new Slot(inventoryItem, 2, 80, 17));
+		addSlotToContainer(new Slot(inventoryItem, 3, 98, 17));
+		addSlotToContainer(new Slot(inventoryItem, 4, 116, 17));
 		int i;
 
 		for(i = 0; i < 3; i++)
@@ -54,6 +53,13 @@ public class ContainerConfigurator extends Container
 		return inventory.isUsableByPlayer(player);
 	}
 
+	@Override
+	public boolean enchantItem(EntityPlayer playerIn, int id)
+	{
+		inventory.setField(id, inventory.getField(id) == 1 ? 0 : 1);
+		return false;
+	}
+	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{

@@ -29,7 +29,8 @@ public class ItemTransferCapability implements IItemTransferCapability {
 
 	@Override
 	public void addTransferConfiguration(ItemTransferConfiguration config) {
-		configurations.add(config);
+		if(!configurations.stream().anyMatch(c -> c.equals(config)))
+			configurations.add(config);
 	}
 
 	@Override

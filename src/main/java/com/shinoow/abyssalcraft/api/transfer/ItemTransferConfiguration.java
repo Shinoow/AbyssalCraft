@@ -16,6 +16,8 @@ import java.util.*;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
+
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.*;
@@ -24,12 +26,15 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompound> {
 
 	private BlockPos[] route;
 	private NonNullList<ItemStack> filter = NonNullList.withSize(5, ItemStack.EMPTY);
+	private NonNullList<ItemStack> subtypeFilter = NonNullList.withSize(5, ItemStack.EMPTY);
 	private EnumFacing exitFacing, entryFacing;
+	private boolean filterSubtypes, filterNBT;
 
 	public ItemTransferConfiguration() {}
 
@@ -39,6 +44,7 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 
 	public ItemTransferConfiguration setFilter(NonNullList<ItemStack> filter) {
 		this.filter = filter;
+		subtypeFilter = filter;
 		return this;
 	}
 
@@ -52,6 +58,16 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 		return this;
 	}
 
+	public ItemTransferConfiguration setFilterSubtypes(boolean filterSubtypes) {
+		this.filterSubtypes = filterSubtypes;
+		return this;
+	}
+
+	public ItemTransferConfiguration setFilterNBT(boolean filterNBT) {
+		this.filterNBT = filterNBT;
+		return this;
+	}
+
 	@Nullable
 	public BlockPos[] getRoute() {
 		return route;
@@ -59,7 +75,7 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 
 	@Nonnull
 	public NonNullList<ItemStack> getFilter(){
-		return filter;
+		return filterSubtypes ? subtypeFilter : filter;
 	}
 
 	@Nullable
@@ -70,6 +86,21 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 	@Nullable
 	public EnumFacing getEntryFacing() {
 		return entryFacing;
+	}
+
+	public boolean filterBySubtypes() {
+		return filterSubtypes;
+	}
+
+	public boolean filterByNBT() {
+		return filterNBT;
+	}
+
+	public void setupSubtypeFilter() {
+		if(filterSubtypes)
+			for(ItemStack stack : subtypeFilter)
+				if(!stack.isEmpty() && stack.getHasSubtypes())
+					stack.setItemDamage(OreDictionary.WILDCARD_VALUE);
 	}
 
 	@Override
@@ -86,6 +117,8 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 		nbt.setTag("route", list);
 		new NBTTagCompound();
 		ItemStackHelper.saveAllItems(nbt, filter);
+		nbt.setBoolean("FilterSubtypes", filterSubtypes);
+		nbt.setBoolean("FilterNBT", filterNBT);
 
 		return nbt;
 	}
@@ -102,7 +135,46 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 			positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
 		route = positions.toArray(new BlockPos[0]);
 		filter = NonNullList.withSize(5, ItemStack.EMPTY);
+		subtypeFilter = NonNullList.withSize(5, ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(nbt, filter);
+		ItemStackHelper.loadAllItems(nbt, subtypeFilter);
+		filterSubtypes = nbt.getBoolean("FilterSubtypes");
+		filterNBT = nbt.getBoolean("FilterNBT");
+		setupSubtypeFilter();
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof ItemTransferConfiguration))
+			return false;
+		ItemTransferConfiguration cfg = (ItemTransferConfiguration)obj;
+
+		//if they are identical in serialized form, they are equal
+		if(cfg.serializeNBT().toString().equals(serializeNBT().toString()))
+			return true;
+		boolean filtersMatch = false;
+		List<ItemStack> temp = new ArrayList<>(filter);
+		temp.removeIf(ItemStack::isEmpty);
+		List<ItemStack> temp2 = new ArrayList<>(cfg.filter);
+		temp2.removeIf(ItemStack::isEmpty);
+		int len1 = temp.size();
+		int len2 = temp2.size();
+		if(temp.size() == temp2.size()) {//compare sizes, then contents
+			for(ItemStack stack : temp)
+				for(ItemStack stack2 : temp2)
+					if(APIUtils.areStacksEqual(stack2, stack)) {
+						stack.setCount(0);
+						stack2.setCount(0);
+					}
+			if(temp.stream().allMatch(ItemStack::isEmpty) &&
+					temp2.stream().allMatch(ItemStack::isEmpty))
+				filtersMatch = true;
+		}
+
+		boolean desinationMatch = route[route.length-1].equals(cfg.route[cfg.route.length-1]);
+		boolean filterDiff = len1 == 0 && len2 != 0 || len1 != 0 && len2 == 0;
+		//if destination match, and either filters are identical,
+		//or one has a filter while the other doesn't, equal
+		return (filtersMatch || filterDiff) && desinationMatch;
+	}
 }
