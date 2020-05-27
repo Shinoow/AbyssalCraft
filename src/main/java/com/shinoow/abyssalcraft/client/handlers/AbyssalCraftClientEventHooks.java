@@ -424,6 +424,7 @@ public class AbyssalCraftClientEventHooks {
 		ModelBakery.registerItemVariants(ACItems.scroll, makerl("scroll_basic", "scroll_lesser", "scroll_moderate", "scroll_greater"));
 		ModelBakery.registerItemVariants(ACItems.unique_scroll, makerl("scroll_unique_anti", "scroll_unique_oblivion"));
 		ModelBakery.registerItemVariants(ACItems.antidote, makerl("coralium_antidote", "dread_antidote"));
+		ModelBakery.registerItemVariants(ACItems.configurator_shard, makerl("configurator_shard_0", "configurator_shard_1", "configurator_shard_2", "configurator_shard_3"));
 
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ethaxium_brick), makerl("ethaxiumbrick_0", "ethaxiumbrick_1", "ethaxiumbrick_2"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.dark_ethaxium_brick), makerl("darkethaxiumbrick_0", "darkethaxiumbrick_1", "darkethaxiumbrick_2"));
@@ -807,6 +808,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.dreadlands_door, 0);
 		registerItemRender(ACItems.charcoal, 0);
 		registerItemRender(ACItems.configurator, 0);
+		registerItemRender(ACItems.configurator_shard, 0, "configurator_shard_0");
+		registerItemRender(ACItems.configurator_shard, 1, "configurator_shard_1");
+		registerItemRender(ACItems.configurator_shard, 2, "configurator_shard_2");
+		registerItemRender(ACItems.configurator_shard, 3, "configurator_shard_3");
 
 		registerItemRender(ACBlocks.stone, 0, "darkstone");
 		registerItemRender(ACBlocks.stone, 1, "abystone");

@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.api.transfer;
 import java.util.*;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 
@@ -68,7 +67,7 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 		return this;
 	}
 
-	@Nullable
+	@Nonnull
 	public BlockPos[] getRoute() {
 		return route;
 	}
@@ -78,12 +77,12 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 		return filterSubtypes ? subtypeFilter : filter;
 	}
 
-	@Nullable
+	@Nonnull
 	public EnumFacing getExitFacing() {
 		return exitFacing;
 	}
 
-	@Nullable
+	@Nonnull
 	public EnumFacing getEntryFacing() {
 		return entryFacing;
 	}
@@ -108,10 +107,8 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 
 		NBTTagCompound nbt = new NBTTagCompound();
 
-		if(exitFacing != null)
-			nbt.setInteger("exitFacing", exitFacing.getIndex());
-		if(entryFacing != null)
-			nbt.setInteger("entryFacing", entryFacing.getIndex());
+		nbt.setInteger("exitFacing", exitFacing.getIndex());
+		nbt.setInteger("entryFacing", entryFacing.getIndex());
 		NBTTagList list = new NBTTagList();
 		Arrays.stream(route).map(b -> new NBTTagLong(b.toLong())).forEach(list::appendTag);
 		nbt.setTag("route", list);
@@ -125,10 +122,8 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 
 	@Override
 	public void deserializeNBT(NBTTagCompound nbt) {
-		if(nbt.hasKey("exitFacing"))
-			exitFacing = EnumFacing.getFront(nbt.getInteger("exitFacing"));
-		if(nbt.hasKey("entryFacing"))
-			entryFacing = EnumFacing.getFront(nbt.getInteger("entryFacing"));
+		exitFacing = EnumFacing.getFront(nbt.getInteger("exitFacing"));
+		entryFacing = EnumFacing.getFront(nbt.getInteger("entryFacing"));
 		NBTTagList list = nbt.getTagList("route", NBT.TAG_LONG);
 		List<BlockPos> positions = new ArrayList<>();
 		for(Iterator<NBTBase> i = list.iterator(); i.hasNext();)

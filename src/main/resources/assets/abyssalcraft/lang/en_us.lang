@@ -199,6 +199,9 @@ message.configurator.2=Position added to path
 message.configurator.3=Configuration set for block!
 message.configurator.4=Configurations cleared for block!
 message.configurator.5=Cleared path!
+message.configurator.error.1=You can't create a configuration without a path!
+message.configurator.error.2=Desination block doesn't have an inventory!
+message.configurator.error.3=This Block doesn't support configurations!
 
 #Container Inventories
 container.abyssalcraft.crate=Crate
@@ -799,6 +802,8 @@ ac.ritual.massEnchantment=Mass Enchantment
 ac.ritual.massEnchantment.desc=By presesenting 8 Enchanted Books and an Item on the altar, all of the Enchantments will be combined and applied on the Item. You can use any combination of Enchantments, and all levels will be combined, so multiple instances of the same Enchantment can surpass the normal boundaries.
 ac.ritual.curing=Ritual of Curing
 ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area of the Dread Plague and the Dreadlands, restoring what was there before. The closest non-dreadlands biome will take the place of the Dreadlands.
+ac.ritual.spiritTablet=Spirit Tablet
+ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crystal with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
 
 #Spells
 ac.spell.lifedrain=Life Drain
@@ -1391,6 +1396,10 @@ item.door_dlt.name=Darklands Oak Wood Door
 item.door_drt.name=Dreadlands Wood Door
 item.cha_rcoal.name=Cha'rcoal
 item.configurator.name=Spirit Tablet
+item.configurator_shard.0.name=Spirit Tablet Shard #1
+item.configurator_shard.1.name=Spirit Tablet Shard #2
+item.configurator_shard.2.name=Spirit Tablet Shard #3
+item.configurator_shard.3.name=Spirit Tablet Shard #4
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul

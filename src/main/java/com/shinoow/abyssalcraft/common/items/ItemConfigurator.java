@@ -109,26 +109,35 @@ public class ItemConfigurator extends ItemACBasic {
 					List<BlockPos> positions = new ArrayList<>();
 					for(Iterator<NBTBase> i = path.iterator(); i.hasNext();)
 						positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
-					ItemTransferConfiguration cfg = new ItemTransferConfiguration(positions.toArray(new BlockPos[0]));
-					cfg.setExitFacing(side);
-					if(nbt.hasKey("EntryFacing"))
-						cfg.setEntryFacing(EnumFacing.getFront(nbt.getInteger("EntryFacing")));
-					cfg.setFilter(filter);
-					cfg.setFilterSubtypes(nbt.getBoolean("FilterSubtype"));
-					cfg.setFilterNBT(nbt.getBoolean("FilterNBT"));
+					if(positions.isEmpty()) {
+						player.sendMessage(new TextComponentTranslation("message.configurator.error.1"));
+						return EnumActionResult.FAIL;
+					}
+					EnumFacing facing = EnumFacing.getFront(nbt.getInteger("EntryFacing"));
+					TileEntity res = w.getTileEntity(positions.get(positions.size()-1));
+					if(res == null || ItemTransferEventHandler.getInventory(res, facing) == null) {
+						player.sendMessage(new TextComponentTranslation("message.configurator.error.2"));
+						return EnumActionResult.FAIL;
+					}
+					ItemTransferConfiguration cfg = new ItemTransferConfiguration(positions.toArray(new BlockPos[0]))
+							.setExitFacing(side)
+							.setEntryFacing(facing)
+							.setFilter(filter)
+							.setFilterSubtypes(nbt.getBoolean("FilterSubtype"))
+							.setFilterNBT(nbt.getBoolean("FilterNBT"));
 					cfg.setupSubtypeFilter();
 
 					cap.addTransferConfiguration(cfg);
 					cap.setRunning(true);
 					player.sendMessage(new TextComponentTranslation("message.configurator.3"));
-				}
+				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
 			} else if(mode == 2) {
 				TileEntity te = w.getTileEntity(pos);
 				if(te != null && ItemTransferCapability.getCap(te) != null) {
 					IItemTransferCapability cap = ItemTransferCapability.getCap(te);
 					cap.clearConfigurations();
 					player.sendMessage(new TextComponentTranslation("message.configurator.4"));
-				}
+				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
 			}
 
 			return EnumActionResult.PASS;

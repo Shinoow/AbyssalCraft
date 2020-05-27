@@ -89,6 +89,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.antidote = new ItemAntidote();
 		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setUnlocalizedName("door_dlt");
 		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setUnlocalizedName("door_drt");
+		ACItems.configurator_shard = new ItemMetadataMisc("configurator_shard", "0", "1", "2", "3").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 
 		//Coins
 		ACItems.coin = new ItemCoin("blankcoin").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
@@ -210,7 +211,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_sword = new ItemACSword(AbyssalCraftAPI.ethaxiumTool, "ethaxiumsword", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.ethaxium_hoe = new ItemACHoe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumhoe", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.staff_of_rending = new ItemDrainStaff().setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
-		ACItems.configurator = new ItemConfigurator();
+		ACItems.configurator = new ItemConfigurator().setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 
 		//Armor
 		ACItems.abyssalnite_helmet = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.HEAD, "ahelmet").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
@@ -470,6 +471,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.dreadlands_door, "door_drt");
 		registerItem(ACItems.charcoal, "charcoal");
 		registerItem(ACItems.configurator, "configurator");
+		registerItem(ACItems.configurator_shard, "configurator_shard");
 		//		registerItem(shadowPlate, "shadowplate");
 	}
 
