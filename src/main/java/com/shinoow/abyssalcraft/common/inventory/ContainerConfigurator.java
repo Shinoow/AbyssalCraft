@@ -59,7 +59,7 @@ public class ContainerConfigurator extends Container
 		inventory.setField(id, inventory.getField(id) == 1 ? 0 : 1);
 		return false;
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{

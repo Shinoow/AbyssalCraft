@@ -47,7 +47,7 @@ public class ConfiguratorMessage extends AbstractServerMessage<ConfiguratorMessa
 	}
 
 	/**
-	 * 
+	 *
 	 * @param n Yes, this parameter does nothing
 	 */
 	public ConfiguratorMessage(boolean clearPath, int n) {
@@ -84,9 +84,9 @@ public class ConfiguratorMessage extends AbstractServerMessage<ConfiguratorMessa
 			if(!offStack.isEmpty() && offStack.getItem() == ACItems.configurator)
 				offStack.getTagCompound().removeTag("Path");
 		}
-		else if(openFilter) {
+		else if(openFilter)
 			player.openGui(AbyssalCraft.instance, ACLib.configuratorGuiID, player.world, (int) player.posX, (int) player.posY, (int) player.posZ);
-		} else {
+		else {
 			ItemStack mainStack = player.getHeldItem(EnumHand.MAIN_HAND);
 			ItemStack offStack = player.getHeldItem(EnumHand.OFF_HAND);
 			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator && mode1 > -1)

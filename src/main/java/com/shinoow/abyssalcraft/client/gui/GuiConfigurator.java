@@ -44,7 +44,7 @@ public class GuiConfigurator extends GuiContainer
 		buttonList.add(new GuiButton(0, i + 122, j + 36, 40, 20, inventory.getField(0) == 1 ? "true" : "false"));
 		buttonList.add(new GuiButton(1, i + 122, j + 57, 40, 20, inventory.getField(1) == 1 ? "true" : "false"));
 	}
-	
+
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
@@ -59,11 +59,11 @@ public class GuiConfigurator extends GuiContainer
 		if(button.enabled && (button.id == 0 || button.id == 1)){
 			button.displayString = inventory.getField(button.id) == 0 ? "true" : "false";
 			inventory.setField(button.id, inventory.getField(button.id) == 1 ? 0 : 1);
-			
+
 			PacketDispatcher.sendToServer(new UpdateModeMessage(button.id, 1));
 		}
 	}
-	
+
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{

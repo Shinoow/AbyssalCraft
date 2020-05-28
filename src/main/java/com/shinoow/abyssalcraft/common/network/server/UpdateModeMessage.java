@@ -31,7 +31,7 @@ public class UpdateModeMessage extends AbstractServerMessage<UpdateModeMessage> 
 	public UpdateModeMessage(int mode) {
 		this(mode, 0);
 	}
-	
+
 	public UpdateModeMessage(int mode, int container){
 		this.mode = mode;
 		this.container = container;

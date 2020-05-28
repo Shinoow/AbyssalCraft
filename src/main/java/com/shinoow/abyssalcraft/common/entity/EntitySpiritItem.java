@@ -104,10 +104,10 @@ public class EntitySpiritItem extends EntityItem {
 				dX = dY = dZ = 0;
 			}
 		} else {
-				dX = target.getX() + 0.5D > posX ? 0.1 : -0.1;
-				dY = target.getY() - posY;
-				dZ = target.getZ() + 0.5D > posZ ? 0.1 : -0.1;
-				dY /= 10;
+			dX = target.getX() + 0.5D > posX ? 0.1 : -0.1;
+			dY = target.getY() - posY;
+			dZ = target.getZ() + 0.5D > posZ ? 0.1 : -0.1;
+			dY /= 10;
 
 			noClip = pathIndex >= route.length -2;
 			move(MoverType.SELF, dX, dY, dZ);

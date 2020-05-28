@@ -27,6 +27,13 @@ import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.oredict.OreDictionary;
 
+/**
+ * Data item in the Item Transfer System that information for
+ * where to send things, what to send and so on
+ * @author shinoow
+ *
+ * @since 1.30.0
+ */
 public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompound> {
 
 	private BlockPos[] route;
@@ -35,66 +42,110 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 	private EnumFacing exitFacing, entryFacing;
 	private boolean filterSubtypes, filterNBT;
 
+	/**
+	 * Constructor without parameters (only used when the capability is reading from NBT)
+	 */
 	public ItemTransferConfiguration() {}
 
+	/**
+	 * Initializes an Item Transfer Configuration with a route
+	 */
 	public ItemTransferConfiguration(BlockPos[] route) {
 		this.route = route;
 	}
 
+	/**
+	 * (optional) Sets the filter for the Item Transfer Configuration
+	 */
 	public ItemTransferConfiguration setFilter(NonNullList<ItemStack> filter) {
 		this.filter = filter;
 		subtypeFilter = filter;
 		return this;
 	}
 
+	/**
+	 * Sets the facing to use for accessing the inventory at the destination block
+	 */
 	public ItemTransferConfiguration setEntryFacing(EnumFacing facing) {
 		entryFacing = facing;
 		return this;
 	}
 
+	/**
+	 * Sets the facing to use for extracing items from the origin block
+	 */
 	public ItemTransferConfiguration setExitFacing(EnumFacing facing) {
 		exitFacing = facing;
 		return this;
 	}
 
+	/**
+	 * Sets whether or not the filter should take subtypes into account
+	 * <br>(For example, if used with vanilla planks in the filter, all types
+	 * of vanilla planks would be valid in the filter)
+	 */
 	public ItemTransferConfiguration setFilterSubtypes(boolean filterSubtypes) {
 		this.filterSubtypes = filterSubtypes;
 		return this;
 	}
 
+	/**
+	 * Sets whether or not the filter should take NBT into account
+	 */
 	public ItemTransferConfiguration setFilterNBT(boolean filterNBT) {
 		this.filterNBT = filterNBT;
 		return this;
 	}
 
+	/**
+	 * Getter for the route
+	 */
 	@Nonnull
 	public BlockPos[] getRoute() {
 		return route;
 	}
 
+	/**
+	 * Getter for the filter
+	 */
 	@Nonnull
 	public NonNullList<ItemStack> getFilter(){
 		return filterSubtypes ? subtypeFilter : filter;
 	}
 
+	/**
+	 * Getter for the exit facing (where Items leave the origin block)
+	 */
 	@Nonnull
 	public EnumFacing getExitFacing() {
 		return exitFacing;
 	}
 
+	/**
+	 * Getter for the entry facing (where Items enter the desination block)
+	 */
 	@Nonnull
 	public EnumFacing getEntryFacing() {
 		return entryFacing;
 	}
 
+	/**
+	 * Checks whether or not the filter should take subtypes into account
+	 */
 	public boolean filterBySubtypes() {
 		return filterSubtypes;
 	}
 
+	/**
+	 * Checks whether or not the filter should take NBT into account
+	 */
 	public boolean filterByNBT() {
 		return filterNBT;
 	}
 
+	/**
+	 * Initializes the subtype filter (if filtering by subtypes is enabled)
+	 */
 	public void setupSubtypeFilter() {
 		if(filterSubtypes)
 			for(ItemStack stack : subtypeFilter)
