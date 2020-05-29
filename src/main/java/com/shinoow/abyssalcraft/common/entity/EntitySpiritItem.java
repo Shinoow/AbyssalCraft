@@ -109,9 +109,7 @@ public class EntitySpiritItem extends EntityItem {
 			dZ = target.getZ() + 0.5D > posZ ? 0.1 : -0.1;
 			dY /= 10;
 
-			noClip = pathIndex >= route.length -2;
 			move(MoverType.SELF, dX, dY, dZ);
-			noClip = true;
 		}
 	}
 

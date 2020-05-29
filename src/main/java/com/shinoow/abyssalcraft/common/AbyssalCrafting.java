@@ -812,6 +812,8 @@ public class AbyssalCrafting {
 			SpellRegistry.instance().registerSpell(new OozeRemovalSpell());
 		if(ACConfig.teleport_hostile_spell)
 			SpellRegistry.instance().registerSpell(new TeleportHostilesSpell());
+		SpellRegistry.instance().registerSpell(new DisplayRoutesSpell());
+		SpellRegistry.instance().registerSpell(new ToggleStateSpell());
 	}
 
 	private static void addRendings() {
