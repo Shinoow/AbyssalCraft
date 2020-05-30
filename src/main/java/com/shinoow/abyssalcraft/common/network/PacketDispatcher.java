@@ -80,6 +80,7 @@ public class PacketDispatcher
 		registerMessage(RitualStartMessage.class);
 		registerMessage(ConfiguratorMessage.class);
 		registerMessage(DisplayRoutesMessage.class);
+		registerMessage(ToggleStateMessage.class);
 	}
 
 	/**
