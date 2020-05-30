@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.client.gui.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.inventory.*;
+import com.shinoow.abyssalcraft.common.items.ItemConfigurator;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -79,9 +80,9 @@ public class GuiHandler implements IGuiHandler {
 		});
 		serverElements.put(ACLib.crystalbagGuiID, ctx -> {
 			if(ctx.getMainHand().getItem() instanceof ItemCrystalBag)
-				return new ContainerCrystalBag(ctx.player.inventory, new InventoryCrystalBag(ctx.getMainHand()));
+				return new ContainerCrystalBag(ctx.player.inventory, new InventoryCrystalBag(ctx.getMainHand(), EnumHand.MAIN_HAND));
 			if(ctx.getOffHand().getItem() instanceof ItemCrystalBag)
-				return new ContainerCrystalBag(ctx.player.inventory, new InventoryCrystalBag(ctx.getOffHand()));
+				return new ContainerCrystalBag(ctx.player.inventory, new InventoryCrystalBag(ctx.getOffHand(), EnumHand.OFF_HAND));
 			return null;
 		});
 		serverElements.put(ACLib.necronomiconspellbookGuiID, ctx -> {
@@ -89,6 +90,13 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerSpellbook(ctx.player, ctx.getMainHand());
 			if(ctx.getOffHand().getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)ctx.getOffHand().getItem()).isOwner(ctx.player, ctx.getOffHand()))
 				return new ContainerSpellbook(ctx.player, ctx.getOffHand());
+			return null;
+		});
+		serverElements.put(ACLib.configuratorGuiID, ctx -> {
+			if(ctx.getMainHand().getItem() instanceof ItemConfigurator)
+				return new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getMainHand(), EnumHand.MAIN_HAND));
+			if(ctx.getOffHand().getItem() instanceof ItemConfigurator)
+				return new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getOffHand(), EnumHand.OFF_HAND));
 			return null;
 		});
 
@@ -141,14 +149,21 @@ public class GuiHandler implements IGuiHandler {
 		});
 		clientElements.put(ACLib.crystalbagGuiID, ctx -> {
 			if(ctx.getMainHand().getItem() instanceof ItemCrystalBag)
-				return new GuiCrystalBag(new ContainerCrystalBag(ctx.player.inventory, new InventoryCrystalBag(ctx.getMainHand())));
+				return new GuiCrystalBag(new ContainerCrystalBag(ctx.player.inventory, new InventoryCrystalBag(ctx.getMainHand(), EnumHand.MAIN_HAND)));
 			if(ctx.getOffHand().getItem() instanceof ItemCrystalBag)
-				return new GuiCrystalBag(new ContainerCrystalBag(ctx.player.inventory, new InventoryCrystalBag(ctx.getOffHand())));
+				return new GuiCrystalBag(new ContainerCrystalBag(ctx.player.inventory, new InventoryCrystalBag(ctx.getOffHand(), EnumHand.OFF_HAND)));
 			return null;
 		});
 		clientElements.put(ACLib.necronomiconspellbookGuiID, ctx -> {
 			if(ctx.getMainHand().getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)ctx.getMainHand().getItem()).isOwner(ctx.player, ctx.getMainHand()))
 				return new GuiSpellbook(new ContainerSpellbook(ctx.player, ctx.getMainHand()));
+			return null;
+		});
+		clientElements.put(ACLib.configuratorGuiID, ctx -> {
+			if(ctx.getMainHand().getItem() instanceof ItemConfigurator)
+				return new GuiConfigurator(new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getMainHand(), EnumHand.MAIN_HAND)));
+			if(ctx.getOffHand().getItem() instanceof ItemConfigurator)
+				return new GuiConfigurator(new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getOffHand(), EnumHand.OFF_HAND)));
 			return null;
 		});
 	}

@@ -243,5 +243,8 @@ public class ACItems {
 	public static Item darklands_oak_door;
 	public static Item dreadlands_door;
 	public static Item charcoal;
+	public static Item configurator;
+	/** Metadata Item, 0 - 3 = variations of the same item */
+	public static Item configurator_shard;
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
 }

@@ -85,7 +85,7 @@ public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 							else if(state.getBlock() == Blocks.LEAVES)
 								world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, state.getValue(BlockLeaves.CHECK_DECAY)).withProperty(BlockLeaves.DECAYABLE, state.getValue(BlockLeaves.DECAYABLE)), 2);
 							else if(state.getBlock() == Blocks.LOG)
-								world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_wood.getDefaultState().withProperty(BlockLog.LOG_AXIS, state.getValue(BlockLog.LOG_AXIS)), 2);
+								world.setBlockState(pos1.up(y), (world.rand.nextInt(10) == 0 ? ACBlocks.darklands_oak_wood_2 : ACBlocks.darklands_oak_wood).getDefaultState().withProperty(BlockLog.LOG_AXIS, state.getValue(BlockLog.LOG_AXIS)), 2);
 							else if(state.getBlock() == Blocks.COBBLESTONE)
 								world.setBlockState(pos1.up(y), ACBlocks.cobblestone.getDefaultState(), 2);
 							else if(state.getBlock() == Blocks.STONEBRICK)

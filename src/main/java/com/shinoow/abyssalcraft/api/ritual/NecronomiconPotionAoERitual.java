@@ -11,16 +11,15 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.ritual;
 
-import java.util.List;
-
+import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -96,13 +95,10 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player){
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).grow(16, 3, 16));
-
-		if(!entities.isEmpty())
-			for(Entity entity : entities)
-				if(entity instanceof EntityLivingBase && !entity.isDead)
-					if(!EntityUtil.isEntityImmune((EntityLivingBase) entity, getPotionEffect()))
-						((EntityLiving)entity).addPotionEffect(new PotionEffect(getPotionEffect(), 400));
+		for(Entity entity : world.getEntitiesInAABBexcluding(player, new AxisAlignedBB(pos).grow(16, 3, 16),
+				Predicates.and(EntitySelectors.IS_ALIVE, e -> e instanceof EntityLivingBase &&
+						!EntityUtil.isEntityImmune((EntityLivingBase) e, getPotionEffect()))))
+			((EntityLivingBase)entity).addPotionEffect(new PotionEffect(getPotionEffect(), 400));
 	}
 
 	@Override

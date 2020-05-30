@@ -32,10 +32,9 @@ import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
+import com.shinoow.abyssalcraft.common.items.ItemConfigurator;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.FireMessage;
-import com.shinoow.abyssalcraft.common.network.server.InterdimensionalCageMessage;
-import com.shinoow.abyssalcraft.common.network.server.StaffModeMessage;
+import com.shinoow.abyssalcraft.common.network.server.*;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -61,6 +60,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.*;
@@ -265,6 +265,47 @@ public class AbyssalCraftClientEventHooks {
 							PacketDispatcher.sendToServer(new InterdimensionalCageMessage(mov.entityHit.getEntityId(), EnumHand.OFF_HAND));
 			}
 		}
+		if(ClientProxy.configurator_mode.isPressed()) {
+			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
+			int mode1 = -1, mode2 = -1;
+
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator){
+				if(mainStack.hasTagCompound())
+					mode1 = mainStack.getTagCompound().getInteger("Mode");
+				if(mode1 > -1){
+					mode1 = mode1 == 0 ? 1 : mode1 == 1 ? 2 : 0;
+					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + ItemConfigurator.getMode(mode1)));
+				}
+			}
+			if(!offStack.isEmpty() && offStack.getItem() == ACItems.configurator){
+				if(offStack.hasTagCompound())
+					mode2 = offStack.getTagCompound().getInteger("Mode");
+				if(mode2 > -1){
+					mode2 = mode2 == 0 ? 1 : mode2 == 1 ? 2 : 0;
+					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + ItemConfigurator.getMode(mode2)));
+				}
+			}
+
+			if(mode1 > -1 || mode2 > -1)
+				PacketDispatcher.sendToServer(new ConfiguratorMessage(mode1, mode2));
+		}
+		if(ClientProxy.configurator_filter.isPressed()) {
+			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator ||
+					!offStack.isEmpty() && offStack.getItem() == ACItems.configurator)
+				PacketDispatcher.sendToServer(new ConfiguratorMessage(true));
+		}
+		if(ClientProxy.configurator_path.isPressed()) {
+			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator ||
+					!offStack.isEmpty() && offStack.getItem() == ACItems.configurator) {
+				PacketDispatcher.sendToServer(new ConfiguratorMessage(true, 0));
+				Minecraft.getMinecraft().player.sendMessage(new TextComponentTranslation("message.configurator.5"));
+			}
+		}
 	}
 
 	@SubscribeEvent
@@ -383,6 +424,7 @@ public class AbyssalCraftClientEventHooks {
 		ModelBakery.registerItemVariants(ACItems.scroll, makerl("scroll_basic", "scroll_lesser", "scroll_moderate", "scroll_greater"));
 		ModelBakery.registerItemVariants(ACItems.unique_scroll, makerl("scroll_unique_anti", "scroll_unique_oblivion"));
 		ModelBakery.registerItemVariants(ACItems.antidote, makerl("coralium_antidote", "dread_antidote"));
+		ModelBakery.registerItemVariants(ACItems.configurator_shard, makerl("configurator_shard_0", "configurator_shard_1", "configurator_shard_2", "configurator_shard_3"));
 
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ethaxium_brick), makerl("ethaxiumbrick_0", "ethaxiumbrick_1", "ethaxiumbrick_2"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.dark_ethaxium_brick), makerl("darkethaxiumbrick_0", "darkethaxiumbrick_1", "darkethaxiumbrick_2"));
@@ -765,6 +807,11 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.darklands_oak_door, 0);
 		registerItemRender(ACItems.dreadlands_door, 0);
 		registerItemRender(ACItems.charcoal, 0);
+		registerItemRender(ACItems.configurator, 0);
+		registerItemRender(ACItems.configurator_shard, 0, "configurator_shard_0");
+		registerItemRender(ACItems.configurator_shard, 1, "configurator_shard_1");
+		registerItemRender(ACItems.configurator_shard, 2, "configurator_shard_2");
+		registerItemRender(ACItems.configurator_shard, 3, "configurator_shard_3");
 
 		registerItemRender(ACBlocks.stone, 0, "darkstone");
 		registerItemRender(ACBlocks.stone, 1, "abystone");

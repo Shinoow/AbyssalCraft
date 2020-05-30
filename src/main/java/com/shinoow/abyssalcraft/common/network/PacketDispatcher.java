@@ -78,6 +78,8 @@ public class PacketDispatcher
 		registerMessage(PrepareSyncMessage.class);
 		registerMessage(WindowPropertyMessage.class);
 		registerMessage(RitualStartMessage.class);
+		registerMessage(ConfiguratorMessage.class);
+		registerMessage(DisplayRoutesMessage.class);
 	}
 
 	/**

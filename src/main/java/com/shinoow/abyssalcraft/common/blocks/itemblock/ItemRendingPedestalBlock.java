@@ -31,10 +31,10 @@ public class ItemRendingPedestalBlock extends ItemPEContainerBlock {
 		int dread = getEnergy(is, "Dread");
 		int omothol = getEnergy(is, "Omothol");
 		int shadow = getEnergy(is, "Shadow");
-		l.add(I18n.format("tooltip.drainstaff.energy.1")+": " + abyssal + "/100");
-		l.add(I18n.format("tooltip.drainstaff.energy.2")+": " + dread + "/100");
-		l.add(I18n.format("tooltip.drainstaff.energy.3")+": " + omothol + "/100");
-		l.add(I18n.format("tooltip.drainstaff.energy.4")+": " + shadow + "/200");
+		l.add(I18n.format("tooltip.drainstaff.energy.abyssal")+": " + abyssal + "/100");
+		l.add(I18n.format("tooltip.drainstaff.energy.dread")+": " + dread + "/100");
+		l.add(I18n.format("tooltip.drainstaff.energy.omothol")+": " + omothol + "/100");
+		l.add(I18n.format("tooltip.drainstaff.energy.shadow")+": " + shadow + "/200");
 	}
 
 	public int getEnergy(ItemStack par1ItemStack, String type)

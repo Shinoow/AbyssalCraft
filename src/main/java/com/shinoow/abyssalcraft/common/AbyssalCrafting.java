@@ -610,12 +610,16 @@ public class AbyssalCrafting {
 			RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("corEnchantment", 1, ACLib.abyssal_wasteland_id, 5000F, new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1), corenchofferings));
 			Object[] dreenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 2), ACItems.dreadium_ingot, ACItems.dread_fragment, Items.BOOK, ACItems.dread_fragment,
 					ACItems.dreadium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 2)};
-			RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("dreEnchantment", 2, ACLib.dreadlands_id, 5000F, new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1), dreenchofferings));
+			RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("dreEnchantment", 2, ACLib.dreadlands_id, 10000F, new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1), dreenchofferings));
 		}
 		RitualRegistry.instance().registerRitual(new NecronomiconResurrectionRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCleansingRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCorruptionRitual());
+		RitualRegistry.instance().registerRitual(new NecronomiconCuringRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconMassEnchantRitual());
+		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE), null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE),
+				null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE), null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spiritTablet", 3, -1, 5000F, new ItemStack(ACItems.configurator), new ItemStack(ACItems.life_crystal), spiritTabletOfferings));
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
@@ -808,6 +812,8 @@ public class AbyssalCrafting {
 			SpellRegistry.instance().registerSpell(new OozeRemovalSpell());
 		if(ACConfig.teleport_hostile_spell)
 			SpellRegistry.instance().registerSpell(new TeleportHostilesSpell());
+		SpellRegistry.instance().registerSpell(new DisplayRoutesSpell());
+		SpellRegistry.instance().registerSpell(new ToggleStateSpell());
 	}
 
 	private static void addRendings() {

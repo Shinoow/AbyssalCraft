@@ -1,0 +1,26 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "abyssalcraft:items/configurator/configurator"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "mode": 0
+            },
+            "model": "abyssalcraft:item/configurator_0"
+        },
+        {
+            "predicate": {
+                "mode": 0.5
+            },
+            "model": "abyssalcraft:item/configurator_1"
+        },
+        {
+            "predicate": {
+                "mode": 1
+            },
+            "model": "abyssalcraft:item/configurator_2"
+        }
+    ]
+}

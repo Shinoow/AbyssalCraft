@@ -33,11 +33,12 @@ public class InventoryCrystalBag implements IInventory
 	private NonNullList<ItemStack> inventory;
 
 	private final ItemStack invItem;
+	private final EnumHand hand;
 
 	/**
 	 * @param itemstack - the ItemStack to which this inventory belongs
 	 */
-	public InventoryCrystalBag(ItemStack stack)
+	public InventoryCrystalBag(ItemStack stack, EnumHand hand)
 	{
 		invItem = stack;
 		if (!stack.hasTagCompound())
@@ -45,6 +46,7 @@ public class InventoryCrystalBag implements IInventory
 		INV_SIZE = stack.getTagCompound().getInteger("InvSize");
 		inventory = NonNullList.withSize(INV_SIZE, ItemStack.EMPTY);
 		name = stack.getDisplayName();
+		this.hand = hand;
 
 		readFromNBT(stack.getTagCompound());
 	}
@@ -125,7 +127,7 @@ public class InventoryCrystalBag implements IInventory
 	@Override
 	public boolean isUsableByPlayer(EntityPlayer player)
 	{
-		return APIUtils.areStacksEqual(player.getHeldItem(EnumHand.MAIN_HAND), invItem);
+		return APIUtils.areStacksEqual(player.getHeldItem(hand), invItem);
 	}
 
 	@Override
