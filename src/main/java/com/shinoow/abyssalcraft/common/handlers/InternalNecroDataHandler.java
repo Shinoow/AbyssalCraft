@@ -49,6 +49,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
@@ -88,8 +89,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapter omotholprogression = new Chapter("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3);
 		Chapter omotholentities = new Chapter("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 3);
 		Chapter omotholspecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3);
+		Chapter itemtransportsystem = new Chapter("itemtransportsystem", NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3);
 		internalNecroData.add(new NecroData("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, NecronomiconText.INFORMATION_OMOTHOL,
-				new NecronomiconCondition(3), omotholmaterials, omotholprogression, omotholentities, omotholspecialmaterials));
+				new NecronomiconCondition(3), omotholmaterials, omotholprogression, omotholentities, omotholspecialmaterials, itemtransportsystem));
 		Chapter darkrealmmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 3);
 		Chapter darkrealmprogression = new Chapter("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3);
 		Chapter darkrealmentities = new Chapter("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 3);
@@ -398,6 +400,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(14, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, NecronomiconText.CRAFTING_MATERIALIZER_2),
 				new Page(15, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, new CraftingStack(ACItems.abyssalnomicon), NecronomiconText.CRAFTING_ABYSSALNOMICON_1),
 				new Page(16, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, NecronomiconText.CRAFTING_ABYSSALNOMICON_2));
+		addPages("omothol", "itemtransportsystem", new Page(1, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, new ItemStack(ACItems.configurator_shard), NecronomiconText.ITEM_TRANSPORT_SYSTEM_1),
+				new Page(2, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, new ItemStack(ACItems.configurator), NecronomiconText.ITEM_TRANSPORT_SYSTEM_2));
 		addPages("darkrealm", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.stone, 1, 0), NecronomiconText.MATERIAL_DARKSTONE_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_DARKSTONE_2));
 		addPages("darkrealm", "progression", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3, NecronomiconText.PROGRESSION_DARK_REALM_1),

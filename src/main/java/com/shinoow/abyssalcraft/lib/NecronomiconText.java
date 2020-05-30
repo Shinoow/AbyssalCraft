@@ -356,6 +356,9 @@ public class NecronomiconText {
 	public static String SPELL_TUT_2 = "necronomicon.text.spells.2";
 	public static String SPELL_TUT_3 = "necronomicon.text.spells.3";
 
+	public static String ITEM_TRANSPORT_SYSTEM_1 = "necronomicon.text.itemtransportsystem.1";
+	public static String ITEM_TRANSPORT_SYSTEM_2 = "necronomicon.text.itemtransportsystem.2";
+	
 	public static String WIP = "necronomicon.text.wip";
 
 	/** Text limit */
@@ -413,6 +416,7 @@ public class NecronomiconText {
 	public static String LABEL_PANTHEON = "necronomicon.information.pantheon";
 	public static String LABEL_CASTING = "necronomicon.information.casting";
 	public static String LABEL_BUILT_WITH = "necronomicon.builtwith";
+	public static String LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM = "necronomicon.information.itemtransportsystem";
 
 	/**
 	 * The best way to drown an array of strings with nonsense

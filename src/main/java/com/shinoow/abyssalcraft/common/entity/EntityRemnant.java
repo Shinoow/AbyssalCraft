@@ -137,7 +137,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 						{
 							MerchantRecipe merchantrecipe = (MerchantRecipe)iterator.next();
 
-							if (merchantrecipe.isRecipeDisabled())
+							if (merchantrecipe.isRecipeDisabled() && merchantrecipe.getItemToSell().getItem() != ACItems.configurator_shard)
 								merchantrecipe.increaseMaxTradeUses(rand.nextInt(6) + rand.nextInt(6) + 2);
 						}
 					}

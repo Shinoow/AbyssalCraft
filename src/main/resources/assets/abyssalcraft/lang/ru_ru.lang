@@ -282,6 +282,7 @@ necronomicon.information.structures=Структуры
 necronomicon.information.pantheon=Пантеон
 necronomicon.information.casting=Отливка
 necronomicon.builtwith=Сконструирован с
+necronomicon.information.itemtransportsystem=Item Transportation
 
 #Necronomicon Text
 #Примечание: максимальное кол-во букв в строке 368
@@ -601,6 +602,9 @@ necronomicon.text.spells.info=Проверьте раздел Информаци
 necronomicon.text.spells.1=Чтобы начать работу с заклинаниями, вам нужно получить несколько свитков, чтобы записать заклинания. Большинство доступных свитков (за исключением большего) могут быть созданы с помощью ритуалов или куплены у Пережитков. Заклинания в кратком изложении показывают, какой свиток они требуют (если центральный слот пуст, вы можете использовать любой свиток).
 necronomicon.text.spells.2=К настоящему времени качество используемого свитка не влияет на записанное заклинание, но в будущем обновлении некоторые аспекты заклинания улучшатся в зависимости от того, какой свиток вы используете. Уникальные свитки, вероятно, сделают что-то помимо этого.
 necronomicon.text.spells.3=Заклинание выполняется щелчком правой кнопкой мыши, удерживая надписанный свиток (тебе также нужен предмет, который содержит PE в вашем инвентаре для литья). Если тип заклинания "Зарядка", тебе нужно удерживать кнопку мыши в течение 3-ёх секунд, в ином случае моментально. В зависимости от заклинания, вам может понадобиться нацелиться на что-то конкретное во время литья.
+
+necronomicon.text.itemtransportsystem.1=Spirit Tablet Shards can either be bought from Remnants or found as loot in buildings throughout Omothol. In a ritual involving 4 pieces and a Life Crystal, you can create a Spirit Tablet.
+necronomicon.text.itemtransportsystem.2=The Spirit Tablet is a tool allowing you to move Items by having spirits possess them. The tablet comes with a bunch of keybindings used to switch modes, open the filter inventory, clear the current set path. The modes include one for setting paths, one for applying configurations and one for clearing them.
 
 necronomicon.text.wip=Этот раздел пока ещё незавершён.
 

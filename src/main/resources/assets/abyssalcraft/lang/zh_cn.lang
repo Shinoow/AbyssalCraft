@@ -281,6 +281,7 @@ necronomicon.information.structures=结构
 necronomicon.information.pantheon=万神殿
 necronomicon.information.casting=铸造
 necronomicon.builtwith=建造：
+necronomicon.information.itemtransportsystem=Item Transportation
 
 #死灵之书文字
 #注意：每个字符串的最大字数为368个（184汉字）。
@@ -600,6 +601,9 @@ necronomicon.text.spells.info=查看信息部分了解有关咒语的信息，�
 necronomicon.text.spells.1=为了开始使用咒语，你需要获得一些卷轴来将咒语铭记在上面。大多数可用的卷轴（较大的除外）可以通过仪式创建，也可以从残存者购买。概要中的咒语显示它们需要哪个卷轴（如果中间的槽是空的，可以使用任何卷轴）。
 necronomicon.text.spells.2=目前使用的卷轴的质量对铭刻咒语没有影响，但在未来的更新中，咒语的某些方面将会根据你使用的卷轴而有所改进。独特的卷轴可能会做一些超越。
 necronomicon.text.spells.3=使用鼠标右键点击，同时按住一个刻有文字的卷轴（你还需要一个在你的背包中保存位能的物品，以便进行施法）。如果咒语类型是“充能”，你需要按住鼠标3秒，否则它是即时的。根据咒语的不同，你可能需要在施法时瞄准特定的目标。
+
+necronomicon.text.itemtransportsystem.1=Spirit Tablet Shards can either be bought from Remnants or found as loot in buildings throughout Omothol. In a ritual involving 4 pieces and a Life Crystal, you can create a Spirit Tablet.
+necronomicon.text.itemtransportsystem.2=The Spirit Tablet is a tool allowing you to move Items by having spirits possess them. The tablet comes with a bunch of keybindings used to switch modes, open the filter inventory, clear the current set path. The modes include one for setting paths, one for applying configurations and one for clearing them.
 
 necronomicon.text.wip=这章节还未完成。
 

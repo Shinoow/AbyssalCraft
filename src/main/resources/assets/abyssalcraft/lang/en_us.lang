@@ -281,6 +281,7 @@ necronomicon.information.structures=Structures
 necronomicon.information.pantheon=Pantheon
 necronomicon.information.casting=Casting
 necronomicon.builtwith=Built with
+necronomicon.information.itemtransportsystem=Item Transportation
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -600,6 +601,9 @@ necronomicon.text.spells.info=Check the information section for information rega
 necronomicon.text.spells.1=In order to get started with spells you need to obtain some scrolls to inscribe the spells onto. Most of the available scrolls (except the greater) can be created through rituals or bought from Remnants. Spells in the compendium show which scroll they require (if the center slot is empty you can use any scroll).
 necronomicon.text.spells.2=Currently the quality of the scroll used has no impact on the inscribed spell, but in a future update some aspects of a spell will improve depending on which scroll you use. The unique scrolls will likely do something beyond that.
 necronomicon.text.spells.3=Spellcasting is done by right-clicking while holding an inscribed scroll (you also need an item that holds PE in your inventory for the casting to tap into). If the spell type is "Charging", you need to hold down the mouse button for 3 seconds, otherwise it's instant. Depending on the spell, you might need to target something specific while casting.
+
+necronomicon.text.itemtransportsystem.1=Spirit Tablet Shards can either be bought from Remnants or found as loot in buildings throughout Omothol. In a ritual involving 4 pieces and a Life Crystal, you can create a Spirit Tablet.
+necronomicon.text.itemtransportsystem.2=The Spirit Tablet is a tool allowing you to move Items by having spirits possess them. The tablet comes with a bunch of keybindings used to switch modes, open the filter inventory, clear the current set path. The modes include one for setting paths, one for applying configurations and one for clearing them.
 
 necronomicon.text.wip=This section is incomplete.
 
