@@ -12,9 +12,11 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,7 +26,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 
 public class TileEntityRitualPedestal extends TileEntity implements ITickable, IRitualPedestal {
 
@@ -175,17 +176,14 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 			break;
 		case PE_STREAM:
 			if(altar.getRitualCooldown() % 20 == 0) {
-				Vec3d vec = new Vec3d(altarPos.subtract(pos)).normalize();
 
-				double d = Math.sqrt(altarPos.distanceSq(pos));
+				int j = 1+Minecraft.getMinecraft().gameSettings.particleSetting;
 
-				for(int i = 0; i < d * 15; i++){
-					double i1 = i / 15D;
-					double xp = pos.getX() + vec.x * i1 + .5;
-					double yp = pos.getY() + vec.y * i1 + .95;
-					double zp = pos.getZ() + vec.z * i1 + .5;
-					AbyssalCraft.proxy.spawnParticle("PEStream", xp, yp, zp, vec.x * .1, .15, vec.z * .1);
-				}
+				ParticleUtil.spawnParticleLine(pos, altarPos, 15, j, (vec1, vec2) -> {
+					if(AbyssalCraft.proxy.getParticleCount() < 10000)
+						AbyssalCraft.proxy.spawnParticle("PEStream", vec2.x, vec2.y, vec2.z, vec1.x * .1, .15, vec1.z * .1);
+					return false;
+				});
 			}
 			break;
 		default:

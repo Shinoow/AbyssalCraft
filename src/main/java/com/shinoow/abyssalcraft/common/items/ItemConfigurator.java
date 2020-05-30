@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -50,7 +51,7 @@ public class ItemConfigurator extends ItemACBasic {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
-		if(isSelected) {
+		if(isSelected && worldIn.isRemote) {
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
 			int mode = stack.getTagCompound().getInteger("Mode");
@@ -60,11 +61,24 @@ public class ItemConfigurator extends ItemACBasic {
 				for(Iterator<NBTBase> i = path.iterator(); i.hasNext();)
 					positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
 
+				BlockPos prevPos = null;
 				for(int i = 0; i < positions.size(); i++)
 				{
 					BlockPos pos = positions.get(i);
 					boolean last = i == positions.size() - 1;
-					worldIn.spawnParticle(last ? EnumParticleTypes.VILLAGER_HAPPY : EnumParticleTypes.REDSTONE, pos.getX()+0.5, pos.getY()+0.5 + (last ? 1.0 : 0), pos.getZ()+0.5, 0, 0, 0);
+					if(last) {
+						worldIn.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5, 0, 0, 0);
+					}
+					if(prevPos == null) {
+						prevPos = pos;
+					} else {
+						ParticleUtil.spawnParticleLine(prevPos, pos, 4, (v1, v2) -> {
+							worldIn.spawnParticle(EnumParticleTypes.REDSTONE, v2.x, v2.y, v2.z, 0, 0, 0);
+							return false;
+						});
+					}
+
+					prevPos = pos;
 				}
 			}
 		}
