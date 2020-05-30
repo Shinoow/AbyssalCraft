@@ -64,8 +64,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	private int wealth;
 	private int timer;
 	private float field_82191_bN;
-	public static final Map<Item, Tuple> itemSellingList = new HashMap<Item, Tuple>();
-	public static final Map<Item, Tuple> coinSellingList = new HashMap<Item, Tuple>();
+	public static final Map<Item, Tuple<Integer, Integer>> itemSellingList = new HashMap<>();
+	public static final Map<Item, Tuple<Integer, Integer>> coinSellingList = new HashMap<>();
 
 	public EntityRemnant(World par1World) {
 		super(par1World);
@@ -561,6 +561,10 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, ACItems.ethaxium_chestplate, rand, adjustProbability(0.1F));
 				addCoinTrade(list, ACItems.ethaxium_leggings, rand, adjustProbability(0.1F));
 				addCoinTrade(list, ACItems.blank_engraving, rand, adjustProbability(0.2F));
+				addCoinTrade(list, new ItemStack(ACItems.configurator_shard, 1, 0), rand, adjustProbability(0.2F));
+				addCoinTrade(list, new ItemStack(ACItems.configurator_shard, 1, 1), rand, adjustProbability(0.2F));
+				addCoinTrade(list, new ItemStack(ACItems.configurator_shard, 1, 2), rand, adjustProbability(0.2F));
+				addCoinTrade(list, new ItemStack(ACItems.configurator_shard, 1, 3), rand, adjustProbability(0.2F));
 				break;
 			case 4:
 				addItemTrade(list, Items.COAL, rand, adjustProbability(0.7F));
@@ -635,6 +639,10 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, ACItems.nyarlathotep_engraving, rand, adjustProbability(0.1F));
 				addCoinTrade(list, ACItems.yog_sothoth_engraving, rand, adjustProbability(0.1F));
 				addCoinTrade(list, ACItems.shub_niggurath_engraving, rand, adjustProbability(0.1F));
+				addCoinTrade(list, new ItemStack(ACItems.configurator_shard, 1, 0), rand, adjustProbability(0.2F));
+				addCoinTrade(list, new ItemStack(ACItems.configurator_shard, 1, 1), rand, adjustProbability(0.2F));
+				addCoinTrade(list, new ItemStack(ACItems.configurator_shard, 1, 2), rand, adjustProbability(0.2F));
+				addCoinTrade(list, new ItemStack(ACItems.configurator_shard, 1, 3), rand, adjustProbability(0.2F));
 			}
 
 		if (list.isEmpty())
@@ -674,6 +682,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 			var1.incrementToolUses();
 			var1.incrementToolUses();
 		}
+		if(var1.getItemToSell().getItem() == ACItems.configurator_shard)
+			var1.incrementToolUses();
 		if(var1.getItemToBuy().getItem() instanceof ItemNecronomicon ||
 				var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
 			var1.compensateToolUses();
@@ -739,8 +749,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 	private static int getQuantity(Item item, Random rand)
 	{
-		Tuple tuple = itemSellingList.get(item);
-		return tuple == null ? 1 : ((Integer)tuple.getFirst()).intValue() >= ((Integer)tuple.getSecond()).intValue() ? ((Integer)tuple.getFirst()).intValue() : ((Integer)tuple.getFirst()).intValue() + rand.nextInt(((Integer)tuple.getSecond()).intValue() - ((Integer)tuple.getFirst()).intValue());
+		Tuple<Integer, Integer> tuple = itemSellingList.get(item);
+		return tuple == null ? 1 : tuple.getFirst().intValue() >= tuple.getSecond().intValue() ? tuple.getFirst().intValue() : tuple.getFirst().intValue() + rand.nextInt(tuple.getSecond().intValue() - tuple.getFirst().intValue());
 	}
 
 	public static void addCoinTrade(MerchantRecipeList list, Item item, Random rand, float probability)
@@ -769,14 +779,17 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				itemstack1.setCount(1);
 			}
 
-			list.add(new MerchantRecipe(itemstack, itemstack1));
+			if(stack.getItem() == ACItems.configurator_shard)
+				list.add(new MerchantRecipe(itemstack, ItemStack.EMPTY, itemstack1, 0, 1));
+			else
+				list.add(new MerchantRecipe(itemstack, itemstack1));
 		}
 	}
 
 	private static int getRarity(Item par1, Random par2)
 	{
-		Tuple tuple = coinSellingList.get(par1);
-		return tuple == null ? 1 : ((Integer)tuple.getFirst()).intValue() >= ((Integer)tuple.getSecond()).intValue() ? ((Integer)tuple.getFirst()).intValue() : ((Integer)tuple.getFirst()).intValue() + par2.nextInt(((Integer)tuple.getSecond()).intValue() - ((Integer)tuple.getFirst()).intValue());
+		Tuple<Integer, Integer> tuple = coinSellingList.get(par1);
+		return tuple == null ? 1 : tuple.getFirst().intValue() >= tuple.getSecond().intValue() ? tuple.getFirst().intValue() : tuple.getFirst().intValue() + par2.nextInt(tuple.getSecond().intValue() - tuple.getFirst().intValue());
 	}
 
 	@Override
@@ -903,6 +916,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		coinSellingList.put(ACItems.plated_coralium_leggings, new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
 		coinSellingList.put(ACItems.dreadium_samurai_leggings, new Tuple(Integer.valueOf(11), Integer.valueOf(14)));
 		coinSellingList.put(ACItems.staff_of_rending, new Tuple(Integer.valueOf(20), Integer.valueOf(25)));
+		coinSellingList.put(ACItems.configurator_shard, new Tuple(Integer.valueOf(64), Integer.valueOf(64)));
 	}
 
 	public void applyRandomTrade(Random rand){

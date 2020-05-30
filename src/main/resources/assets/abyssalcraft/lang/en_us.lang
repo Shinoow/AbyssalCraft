@@ -828,6 +828,10 @@ ac.spell.oozeremoval=Ooze Removal
 ac.spell.oozeremoval.desc=Disperses any Shoggoth Ooze in the vicinity of the caster.
 ac.spell.teleporthostiles=Sacrificial Interdiction
 ac.spell.teleporthostiles.desc=By sacrificing the life of an innocent child, the dark ones are pushed away. Cast the spell while targeting an animal baby, and all mobs within 50 blocks will be teleported away from you.
+ac.spell.displayRoutes=Display Routes
+ac.spell.displayRoutes.desc=Reveals any active Item transport routes within 16 blocks of the caster.
+ac.spell.toggleState=Toll The Bell
+ac.spell.toggleState.desc=Starts/stops the Item transportation of all blocks within a 16 block radius of the player (or the block they're looking at).
 
 #Places of Power
 ac.structure.basic.description=A small and simple shrine. Provides a range boost to affected statues.

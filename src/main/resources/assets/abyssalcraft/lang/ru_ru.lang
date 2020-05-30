@@ -829,6 +829,10 @@ ac.spell.oozeremoval=Устранение ила
 ac.spell.oozeremoval.desc=Рассеивает Ил Шогготов в непосредственной близости от заклинателя.
 ac.spell.teleporthostiles=Жертвенный перехват
 ac.spell.teleporthostiles.desc=Жертвуя жизнью безвредного ребёнка, тёмные отталкиваются. Произнеси заклинание, нацеливаясь на детёныша, и все мобы в пределах 50 блоков будут телепортированы от тебя.
+ac.spell.displayRoutes=Display Routes
+ac.spell.displayRoutes.desc=Reveals any active Item transport routes within 16 blocks of the caster.
+ac.spell.toggleState=Toll The Bell
+ac.spell.toggleState.desc=Starts/stops the Item transportation of all blocks within a 16 block radius of the player (or the block they're looking at).
 
 #Places of Power
 ac.structure.basic.description=Маленький и простой Храм. Обеспечивает повышеный диапазон пострадавших статуй.

@@ -828,6 +828,10 @@ ac.spell.oozeremoval=软泥去除
 ac.spell.oozeremoval.desc=驱散施法者附近的修格斯软泥。
 ac.spell.teleporthostiles=献祭驱散
 ac.spell.teleporthostiles.desc=献祭一个幼体的生命以驱逐黑暗的造物：对一个未成年的动物释放该法术以将50m内的敌对生物传送走。
+ac.spell.displayRoutes=Display Routes
+ac.spell.displayRoutes.desc=Reveals any active Item transport routes within 16 blocks of the caster.
+ac.spell.toggleState=Toll The Bell
+ac.spell.toggleState.desc=Starts/stops the Item transportation of all blocks within a 16 block radius of the player (or the block they're looking at).
 
 #Places of Power
 ac.structure.basic.description=一个小而简单的神殿，为受影响的雕像提供范围增强。

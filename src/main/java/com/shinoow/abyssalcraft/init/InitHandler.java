@@ -500,6 +500,8 @@ public class InitHandler implements ILifeCycleHandler {
 		undeath_to_dust_spell = cfg.get("spells", "Undeath to Dust", true, "Set to false to disable the Undeath to Dust spell.").getBoolean();
 		ooze_removal_spell = cfg.get("spells", "Ooze Removal", true, "Set to false to disable the Ooze Removal spell.").getBoolean();
 		teleport_hostile_spell = cfg.get("spells", "Sacrificial Interdiction", true, "Set to false to disable the Sacrificial Interdiction spell.").getBoolean();
+		display_routes_spell = cfg.get("spells", "Display Routes", true, "Set to false to disable the Display Routes spell.").getBoolean();
+		toggle_state_spell = cfg.get("spells", "Toll The Bell", true, "Set to false to disable the Toll The Bell spell.").getBoolean();
 
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
