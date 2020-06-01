@@ -356,8 +356,14 @@ public class NecronomiconText {
 	public static String SPELL_TUT_2 = "necronomicon.text.spells.2";
 	public static String SPELL_TUT_3 = "necronomicon.text.spells.3";
 
-	public static String ITEM_TRANSPORT_SYSTEM_1 = "necronomicon.text.itemtransportsystem.1";
-	public static String ITEM_TRANSPORT_SYSTEM_2 = "necronomicon.text.itemtransportsystem.2";
+	public static String ITEM_TRANSPORT_TUT_1 = "necronomicon.text.itemtransportsystem.1";
+	public static String ITEM_TRANSPORT_TUT_2 = "necronomicon.text.itemtransportsystem.2";
+	public static String ITEM_TRANSPORT_TUT_3 = "necronomicon.text.itemtransportsystem.3";
+	public static String ITEM_TRANSPORT_TUT_4 = "necronomicon.text.itemtransportsystem.4";
+	public static String ITEM_TRANSPORT_TUT_5 = "necronomicon.text.itemtransportsystem.5";
+	public static String ITEM_TRANSPORT_TUT_6 = "necronomicon.text.itemtransportsystem.6";
+	public static String ITEM_TRANSPORT_TUT_7 = "necronomicon.text.itemtransportsystem.7";
+	public static String ITEM_TRANSPORT_TUT_8 = "necronomicon.text.itemtransportsystem.8";
 	
 	public static String WIP = "necronomicon.text.wip";
 
