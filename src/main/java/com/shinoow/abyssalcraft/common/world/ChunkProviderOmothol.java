@@ -11,14 +11,14 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
+import com.shinoow.abyssalcraft.common.structures.omothol.StructureTemple;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -45,6 +45,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	double[] noiseData1, noiseData2, noiseData3, noiseData4, noiseData5;
 	int[][] field_73203_h = new int[32][32];
 	MapGenOmothol omotholGenerator = new MapGenOmothol();
+	private Set<BlockPos> positions = new HashSet<>();
 
 	public ChunkProviderOmothol(World par1World, long par2)
 	{
@@ -302,11 +303,24 @@ public class ChunkProviderOmothol implements IChunkGenerator
 				new StructureShoggothPit().generate(worldObj, rand, pos1);
 		}
 
+		int randX = k + rand.nextInt(2) + 1;
+		int randZ = l + rand.nextInt(2) + 1;
+		
+		BlockPos pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
+		
+		if(rand.nextBoolean() && !tooClose(pos2))
+			if(new StructureTemple().generate(worldObj, rand, pos2))
+				positions.add(pos2);
+		
 		Biome.decorate(worldObj, worldObj.rand, new BlockPos(k, 0, l));
 
 		BlockFalling.fallInstantly = false;
 	}
 
+	private boolean tooClose(BlockPos pos) {
+		return positions.stream().anyMatch(b -> b.getDistance(pos.getX(), pos.getY(), pos.getZ()) <= 200);
+	}
+	
 	@Override
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
