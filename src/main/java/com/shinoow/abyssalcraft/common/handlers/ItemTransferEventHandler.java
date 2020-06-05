@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityProvider;
 import com.shinoow.abyssalcraft.common.entity.EntitySpiritItem;
+import com.shinoow.abyssalcraft.init.InitHandler;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -43,8 +44,9 @@ public class ItemTransferEventHandler {
 
 	@SubscribeEvent
 	public void attachCapability(AttachCapabilitiesEvent<TileEntity> event) {
-		//TODO blacklist
-		event.addCapability(new ResourceLocation("abyssalcraft", "itemtransfer"), new ItemTransferCapabilityProvider());
+		ResourceLocation rl = TileEntity.getKey(event.getObject().getClass());
+		if(rl != null && !InitHandler.INSTANCE.isTileBlackListed(rl.toString()))
+			event.addCapability(new ResourceLocation("abyssalcraft", "itemtransfer"), new ItemTransferCapabilityProvider());
 	}
 
 	@SubscribeEvent
