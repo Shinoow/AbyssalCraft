@@ -114,44 +114,48 @@ public class ItemConfigurator extends ItemACBasic {
 				}
 				nbt.setTag("Path", path);
 			} else if(mode == 1) {
-				TileEntity te = w.getTileEntity(pos);
-				if(te != null && ItemTransferCapability.getCap(te) != null) {
-					IItemTransferCapability cap = ItemTransferCapability.getCap(te);
-					NonNullList<ItemStack> filter = NonNullList.withSize(5, ItemStack.EMPTY);
-					ItemStackHelper.loadAllItems(nbt, filter);
-					NBTTagList path = nbt.getTagList("Path", NBT.TAG_LONG);
-					List<BlockPos> positions = new ArrayList<>();
-					for(Iterator<NBTBase> i = path.iterator(); i.hasNext();)
-						positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
-					if(positions.isEmpty()) {
-						player.sendMessage(new TextComponentTranslation("message.configurator.error.1"));
-						return EnumActionResult.FAIL;
-					}
-					EnumFacing facing = EnumFacing.getFront(nbt.getInteger("EntryFacing"));
-					TileEntity res = w.getTileEntity(positions.get(positions.size()-1));
-					if(res == null || ItemTransferEventHandler.getInventory(res, facing) == null) {
-						player.sendMessage(new TextComponentTranslation("message.configurator.error.2"));
-						return EnumActionResult.FAIL;
-					}
-					ItemTransferConfiguration cfg = new ItemTransferConfiguration(positions.toArray(new BlockPos[0]))
-							.setExitFacing(side)
-							.setEntryFacing(facing)
-							.setFilter(filter)
-							.setFilterSubtypes(nbt.getBoolean("FilterSubtype"))
-							.setFilterNBT(nbt.getBoolean("FilterNBT"));
-					cfg.setupSubtypeFilter();
+				if(player.canPlayerEdit(pos.offset(side), side, stack)) {
+					TileEntity te = w.getTileEntity(pos);
+					if(te != null && ItemTransferCapability.getCap(te) != null) {
+						IItemTransferCapability cap = ItemTransferCapability.getCap(te);
+						NonNullList<ItemStack> filter = NonNullList.withSize(5, ItemStack.EMPTY);
+						ItemStackHelper.loadAllItems(nbt, filter);
+						NBTTagList path = nbt.getTagList("Path", NBT.TAG_LONG);
+						List<BlockPos> positions = new ArrayList<>();
+						for(Iterator<NBTBase> i = path.iterator(); i.hasNext();)
+							positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
+						if(positions.isEmpty()) {
+							player.sendMessage(new TextComponentTranslation("message.configurator.error.1"));
+							return EnumActionResult.FAIL;
+						}
+						EnumFacing facing = EnumFacing.getFront(nbt.getInteger("EntryFacing"));
+						TileEntity res = w.getTileEntity(positions.get(positions.size()-1));
+						if(res == null || ItemTransferEventHandler.getInventory(res, facing) == null) {
+							player.sendMessage(new TextComponentTranslation("message.configurator.error.2"));
+							return EnumActionResult.FAIL;
+						}
+						ItemTransferConfiguration cfg = new ItemTransferConfiguration(positions.toArray(new BlockPos[0]))
+								.setExitFacing(side)
+								.setEntryFacing(facing)
+								.setFilter(filter)
+								.setFilterSubtypes(nbt.getBoolean("FilterSubtype"))
+								.setFilterNBT(nbt.getBoolean("FilterNBT"));
+						cfg.setupSubtypeFilter();
 
-					cap.addTransferConfiguration(cfg);
-					cap.setRunning(true);
-					player.sendMessage(new TextComponentTranslation("message.configurator.3"));
-				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
+						cap.addTransferConfiguration(cfg);
+						cap.setRunning(true);
+						player.sendMessage(new TextComponentTranslation("message.configurator.3"));
+					} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
+				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.4"));
 			} else if(mode == 2) {
-				TileEntity te = w.getTileEntity(pos);
-				if(te != null && ItemTransferCapability.getCap(te) != null) {
-					IItemTransferCapability cap = ItemTransferCapability.getCap(te);
-					cap.clearConfigurations();
-					player.sendMessage(new TextComponentTranslation("message.configurator.4"));
-				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
+				if(player.canPlayerEdit(pos.offset(side), side, stack)) {
+					TileEntity te = w.getTileEntity(pos);
+					if(te != null && ItemTransferCapability.getCap(te) != null) {
+						IItemTransferCapability cap = ItemTransferCapability.getCap(te);
+						cap.clearConfigurations();
+						player.sendMessage(new TextComponentTranslation("message.configurator.4"));
+					} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
+				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.4"));
 			}
 
 			return EnumActionResult.PASS;
