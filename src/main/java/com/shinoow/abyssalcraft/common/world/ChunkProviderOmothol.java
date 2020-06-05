@@ -25,6 +25,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -33,6 +36,9 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import net.minecraft.world.gen.structure.template.PlacementSettings;
+import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 
 public class ChunkProviderOmothol implements IChunkGenerator
 {
@@ -46,6 +52,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	int[][] field_73203_h = new int[32][32];
 	MapGenOmothol omotholGenerator = new MapGenOmothol();
 	private Set<BlockPos> positions = new HashSet<>();
+	private Set<BlockPos> positions2 = new HashSet<>();
 
 	public ChunkProviderOmothol(World par1World, long par2)
 	{
@@ -305,12 +312,20 @@ public class ChunkProviderOmothol implements IChunkGenerator
 
 		int randX = k + rand.nextInt(2) + 1;
 		int randZ = l + rand.nextInt(2) + 1;
-		
+
 		BlockPos pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
-		
+
 		if(rand.nextBoolean() && !tooClose(pos2))
 			if(new StructureTemple().generate(worldObj, rand, pos2))
 				positions.add(pos2);
+
+		randX = k + rand.nextInt(8) + 8;
+		randZ = l + rand.nextInt(8) + 8;
+		
+		pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
+		
+		if(rand.nextBoolean() && !tooClose2(pos2))
+			generateRandomBuilding(pos2);
 		
 		Biome.decorate(worldObj, worldObj.rand, new BlockPos(k, 0, l));
 
@@ -320,7 +335,55 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	private boolean tooClose(BlockPos pos) {
 		return positions.stream().anyMatch(b -> b.getDistance(pos.getX(), pos.getY(), pos.getZ()) <= 200);
 	}
+
+	private boolean tooClose2(BlockPos pos) {
+		return positions2.stream().anyMatch(b -> b.getDistance(pos.getX(), pos.getY(), pos.getZ()) <= 16);
+	}
+
+	private void generateRandomBuilding(BlockPos pos) {
+		while(worldObj.isAirBlock(pos) && pos.getY() > 2)
+			pos = pos.down();
+		if(pos.getY() <= 1) return;
+
+		if(worldObj.getBlockState(pos).getBlock() != ACBlocks.stone) return;
+		
+		Rotation[] arotation = Rotation.values();
+
+		PlacementSettings placeSettings = new PlacementSettings().setRotation(arotation[rand.nextInt(arotation.length)]).setReplacedBlock(Blocks.STRUCTURE_VOID);
+		
+		MinecraftServer server = worldObj.getMinecraftServer();
+		TemplateManager templateManager = worldObj.getSaveHandler().getStructureTemplateManager();
+
+		Template template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", getRandomStructure(rand)));
+
+		template.addBlocksToWorld(worldObj, pos, placeSettings);
+		
+		positions2.add(pos);
+		
+		//TODO replace placeholder blocks
+	}
 	
+	private String getRandomStructure(Random rand) {
+		switch(rand.nextInt(7)) {
+		case 0:
+			return "omothol/bar";
+		case 1:
+			return "omothol/blacksmith";
+		case 2:
+			return "omothol/church";
+		case 3:
+			return "omothol/farm";
+		case 4:
+			return "omothol/farmhouse";
+		case 5:
+			return "omothol/house";
+		case 6:
+			return "omothol/library";
+		default:
+			return "omothol/bar";
+		}
+	}
+
 	@Override
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
 	{
