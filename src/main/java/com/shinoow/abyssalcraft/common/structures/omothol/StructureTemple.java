@@ -11,9 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.omothol;
 
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
@@ -35,6 +34,12 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 public class StructureTemple extends WorldGenerator {
 
+	private Set<BlockPos> positions = new HashSet<>();
+
+	public boolean tooClose(BlockPos pos) {
+		return positions.stream().anyMatch(b -> b.getDistance(pos.getX(), b.getY(), pos.getZ()) <= 200);
+	}
+
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
 
@@ -42,29 +47,44 @@ public class StructureTemple extends WorldGenerator {
 			pos = pos.down();
 		if(pos.getY() <= 1) return false;
 
-		if(world.getBlockState(pos).getBlock() != ACBlocks.stone) return false;
-
 		Rotation[] arotation = Rotation.values();
 
 		PlacementSettings placeSettings = new PlacementSettings().setRotation(arotation[rand.nextInt(arotation.length)]).setReplacedBlock(Blocks.STRUCTURE_VOID);
 
+		BlockPos center = pos;
+
 		switch(placeSettings.getRotation()) {
 		case CLOCKWISE_180:
 			pos = pos.add(28, 0, 28);
+			center = pos.north(14).west(14);
 			break;
 		case CLOCKWISE_90:
 			pos = pos.add(28, 0, 0);
+			center = pos.south(14).west(14);
 			break;
 		case COUNTERCLOCKWISE_90:
 			pos = pos.add(0, 0, 28);
+			center = pos.north(14).east(14);
 			break;
 		case NONE:
 			pos = pos.add(0, 0, 0);
+			center = pos.south(14).east(14);
 			break;
 		default:
 			pos = pos.add(0, 0, 0);
+			center = pos.south(14).east(14);
 			break;
 		}
+
+		if(world.getBlockState(center).getBlock() != ACBlocks.stone ||
+				world.getBlockState(center.north(14)).getBlock() != ACBlocks.stone ||
+				world.getBlockState(center.south(14)).getBlock() != ACBlocks.stone ||
+				world.getBlockState(center.west(14)).getBlock() != ACBlocks.stone ||
+				world.getBlockState(center.east(14)).getBlock() != ACBlocks.stone) return false;
+
+		center = world.getHeight(center);
+		if(center.getY() > pos.getY())
+			pos = pos.up(center.getY() - pos.getY());
 
 		//		switch(placeSettings.getRotation()) { //legacy offsets
 		//		case CLOCKWISE_180:
@@ -165,6 +185,8 @@ public class StructureTemple extends WorldGenerator {
 						break;
 					}
 			}
+
+		positions.add(pos);
 
 		return true;
 	}
