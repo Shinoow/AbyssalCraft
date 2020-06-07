@@ -11,9 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.omothol;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
+import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
@@ -28,117 +27,58 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 
-public class StructureCity extends WorldGenerator {
+public class StructureStorage extends WorldGenerator {
 
 	private Set<BlockPos> positions = new HashSet<>();
 
 	public boolean tooClose(BlockPos pos) {
-		return positions.stream().anyMatch(b -> b.getDistance(pos.getX(), b.getY(), pos.getZ()) <= 18);
+		return positions.stream().anyMatch(b -> b.getDistance(pos.getX(), b.getY(), pos.getZ()) <= 300);
 	}
 
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
-		int num = rand.nextInt(7);
-
-		if(num == 2 || num == 5 || num == 6) {
-			pos = pos.add(rand.nextInt(4) + 4, 0, rand.nextInt(4) + 4);
-		} else {
-			pos = pos.add(rand.nextInt(8) + 8, 0, rand.nextInt(8) + 8);
-		}
-
-		pos = worldIn.getHeight(pos);
-
 		while(worldIn.isAirBlock(pos) && pos.getY() > 2)
 			pos = pos.down();
 		if(pos.getY() <= 1) return false;
-
-
 
 		Rotation[] arotation = Rotation.values();
 
 		PlacementSettings placeSettings = new PlacementSettings().setRotation(arotation[rand.nextInt(arotation.length)]).setReplacedBlock(Blocks.STRUCTURE_VOID);
 
 		BlockPos center = pos;
-
-		int distX = 0, distZ = 0;
-		int widthX = 0, widthZ = 0;
-
-		switch(num) {
-		case 0:
-			widthX = 14;
-			widthZ = 14;
-			distX = 7;
-			distZ = 7;
-			break;
-		case 1:
-			widthX = 11;
-			widthZ = 14;
-			distX = 5;
-			distZ = 7;
-			break;
-		case 2:
-			widthX = 9;
-			widthZ = 14;
-			distX = 4;
-			distZ = 7;
-			break;
-		case 3:
-			widthX = 11;
-			widthZ = 14;
-			distX = 5;
-			distZ = 7;
-			break;
-		case 4:
-			widthX = 9;
-			widthZ = 8;
-			distX = 4;
-			distZ = 4;
-			break;
-		case 5:
-			widthX = 19;
-			widthZ = 14;
-			distX = 9;
-			distZ = 7;
-			break;
-		case 6:
-			widthX = 12;
-			widthZ = 16;
-			distX = 6;
-			distZ = 8;
-			break;
-		default:
-			widthX = 14;
-			widthZ = 14;
-			distX = 7;
-			distZ = 7;
-			break;
-		}
+		BlockPos crates = pos;
+		int distX = 8, distZ = 9;
 
 		switch(placeSettings.getRotation()) {
 		case CLOCKWISE_180:
-			pos = pos.add(widthX, 0, widthZ);
+			pos = pos.add(16, 0, 18);
 			center = pos.north(distZ).west(distX);
+			crates = pos.north(4).west(4);
 			break;
 		case CLOCKWISE_90:
-			swap(widthX, widthZ);
-			swap(distX, distZ);
-			pos = pos.add(widthX, 0, 0);
+			distX = 9;
+			distZ = 8;
+			pos = pos.add(18, 0, 0);
 			center = pos.south(distZ).west(distX);
+			crates = pos.south(4).west(4);
 			break;
 		case COUNTERCLOCKWISE_90:
-			swap(widthX, widthZ);
-			swap(distX, distZ);
-			pos = pos.add(0, 0, widthZ);
+			distX = 9;
+			distZ = 8;
+			pos = pos.add(0, 0, 16);
 			center = pos.north(distZ).east(distX);
+			crates = pos.north(4).east(4);
 			break;
 		case NONE:
 			pos = pos.add(0, 0, 0);
 			center = pos.south(distZ).east(distX);
+			crates = pos.south(4).east(4);
 			break;
 		default:
 			pos = pos.add(0, 0, 0);
 			center = pos.south(distZ).east(distX);
+			crates = pos.south(4).east(4);
 			break;
 		}
 
@@ -149,50 +89,34 @@ public class StructureCity extends WorldGenerator {
 				worldIn.getBlockState(center.east(distX)).getBlock() != ACBlocks.stone) return false;
 
 		center = worldIn.getHeight(center);
-		if(center.getY() > pos.getY())
+		if(center.getY() > pos.getY()) {
 			pos = pos.up(center.getY() - pos.getY());
-
-		if(num == 0)
-			pos = pos.down(4);
-		else if(num == 3)
-			pos = pos.down();
+			crates = crates.up(center.getY() - crates.getY());
+		}
 
 		MinecraftServer server = worldIn.getMinecraftServer();
 		TemplateManager templateManager = worldIn.getSaveHandler().getStructureTemplateManager();
 
-		Template template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", getRandomStructure(num)));
+		Template template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", "omothol/storage"));
 
 		template.addBlocksToWorld(worldIn, pos, placeSettings);
 
 		positions.add(pos);
 
+		int num = rand.nextInt(4) + 1;
+
+		template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", "omothol/crates_"+num));
+
+		template.addBlocksToWorld(worldIn, crates, placeSettings);
+
+		Map<BlockPos, String> map = template.getDataBlocks(crates, placeSettings);
+
+		for (Entry<BlockPos, String> entry : map.entrySet())
+			worldIn.setBlockState(entry.getKey(), ACBlocks.wooden_crate.getDefaultState());
+		//TODO loot table stuff
+
+
 		return true;
 	}
 
-	private void swap(int a, int b) {
-		int temp1 = a, temp2 = b;
-		a = temp2;
-		b = temp1;
-	}
-
-	private String getRandomStructure(int num) {
-		switch(num) {
-		case 0:
-			return "omothol/bar";
-		case 1:
-			return "omothol/blacksmith";
-		case 2:
-			return "omothol/church";
-		case 3:
-			return "omothol/farm";
-		case 4:
-			return "omothol/farmhouse";
-		case 5:
-			return "omothol/house";
-		case 6:
-			return "omothol/library";
-		default:
-			return "omothol/bar";
-		}
-	}
 }

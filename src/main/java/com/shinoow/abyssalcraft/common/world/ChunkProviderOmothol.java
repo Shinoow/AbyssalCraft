@@ -48,6 +48,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	private StructureTower towerGen = new StructureTower();
 	private StructureTemple templeGen = new StructureTemple();
 	private StructureCity cityGen = new StructureCity();
+	private StructureStorage storageGen = new StructureStorage();
 
 	public ChunkProviderOmothol(World par1World, long par2)
 	{
@@ -327,6 +328,14 @@ public class ChunkProviderOmothol implements IChunkGenerator
 			
 			if(rand.nextBoolean() && !towerGen.tooClose(pos2))
 				towerGen.generate(worldObj, rand, pos2);
+			
+			randX = k + rand.nextInt(7) + 7;
+			randZ = l + rand.nextInt(7) + 7;
+
+			pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
+			
+			if(rand.nextBoolean() && !storageGen.tooClose(pos2))
+				storageGen.generate(worldObj, rand, pos2);
 		}
 
 		Biome.decorate(worldObj, worldObj.rand, new BlockPos(k, 0, l));
