@@ -45,11 +45,10 @@ public class StructureCity extends WorldGenerator {
 
 		int num = rand.nextInt(7);
 
-		if(num == 2 || num == 5 || num == 6) {
+		if(num == 2 || num == 5 || num == 6)
 			pos = pos.add(rand.nextInt(4) + 4, 0, rand.nextInt(4) + 4);
-		} else {
+		else
 			pos = pos.add(rand.nextInt(8) + 8, 0, rand.nextInt(8) + 8);
-		}
 
 		pos = worldIn.getHeight(pos);
 
@@ -179,6 +178,7 @@ public class StructureCity extends WorldGenerator {
 				if(crate != null)
 					crate.setLootTable(getLootTable(num), rand.nextLong());
 			} else if(entry.getValue().equals("remnant")) {
+				worldIn.setBlockToAir(entry.getKey());
 				EntityRemnant remnant = new EntityRemnant(worldIn);
 				remnant.setLocationAndAngles(entry.getKey().getX() + 0.5D, entry.getKey().getY(), entry.getKey().getZ() + 0.5D, 0.0F, 0.0F);
 				remnant.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(remnant)), (IEntityLivingData)null);
@@ -209,16 +209,15 @@ public class StructureCity extends WorldGenerator {
 				worldIn.spawnEntity(remnant);
 			} else if(entry.getValue().startsWith("crystal")) {
 				if(rand.nextBoolean()) {
-					if(rand.nextInt(100) == 0) {
+					if(rand.nextInt(100) == 0)
 						worldIn.setBlockState(entry.getKey(), ACBlocks.dreadlands_infused_powerstone.getDefaultState());
-					} else {
+					else {
 						int meta = rand.nextInt(ACLib.crystalNames.length);
 						if(meta > 15) {
 							meta -= 16;
 							worldIn.setBlockState(entry.getKey(), ACBlocks.crystal_cluster2.getStateFromMeta(meta));
-						} else {
+						} else
 							worldIn.setBlockState(entry.getKey(), ACBlocks.crystal_cluster.getStateFromMeta(meta));
-						}
 					}
 				} else worldIn.setBlockToAir(entry.getKey());
 			} else if(entry.getValue().equals("pedestal")) {
@@ -255,7 +254,7 @@ public class StructureCity extends WorldGenerator {
 			return "omothol/bar";
 		}
 	}
-	
+
 	private ResourceLocation getLootTable(int num) {
 		switch(num) {
 		case 1:

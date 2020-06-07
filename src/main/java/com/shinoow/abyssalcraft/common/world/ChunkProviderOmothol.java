@@ -307,34 +307,36 @@ public class ChunkProviderOmothol implements IChunkGenerator
 		}
 
 		if((x > -2 || x < 2) && (z > 6 || z < -1)) {
-			int randX = k + rand.nextInt(2) + 1;
-			int randZ = l + rand.nextInt(2) + 1;
 
-			BlockPos pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
-
-			if(rand.nextBoolean() && !templeGen.tooClose(pos2))
-				templeGen.generate(worldObj, rand, pos2);
-
-			pos2 = worldObj.getHeight(new BlockPos(k, 0, l));
+			BlockPos pos2 = worldObj.getHeight(new BlockPos(k, 0, l));
 
 			//adding RNG to the coords to give a more accurate picture of the actual position
 			if(!cityGen.tooClose(pos2.add(rand.nextInt(8) + 8, 0, rand.nextInt(8) + 8)))
 				cityGen.generate(worldObj, rand, pos2);
 
+			int randX = k + rand.nextInt(2) + 1;
+			int randZ = l + rand.nextInt(2) + 1;
+
+			pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
+
+			if(rand.nextBoolean() && !templeGen.tooClose(pos2) && !cityGen.tooClose(pos2))
+				templeGen.generate(worldObj, rand, pos2);
+
+
 			randX = k + rand.nextInt(8) + 8;
 			randZ = l + rand.nextInt(8) + 8;
 
 			pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
-			
-			if(rand.nextBoolean() && !towerGen.tooClose(pos2))
+
+			if(rand.nextBoolean() && !towerGen.tooClose(pos2) && !cityGen.tooClose(pos2))
 				towerGen.generate(worldObj, rand, pos2);
-			
+
 			randX = k + rand.nextInt(7) + 7;
 			randZ = l + rand.nextInt(7) + 7;
 
 			pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
-			
-			if(rand.nextBoolean() && !storageGen.tooClose(pos2))
+
+			if(rand.nextBoolean() && !storageGen.tooClose(pos2) && !cityGen.tooClose(pos2))
 				storageGen.generate(worldObj, rand, pos2);
 		}
 

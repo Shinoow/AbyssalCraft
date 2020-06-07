@@ -66,17 +66,15 @@ public class ItemConfigurator extends ItemACBasic {
 				{
 					BlockPos pos = positions.get(i);
 					boolean last = i == positions.size() - 1;
-					if(last) {
+					if(last)
 						worldIn.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5, 0, 0, 0);
-					}
-					if(prevPos == null) {
+					if(prevPos == null)
 						prevPos = pos;
-					} else {
+					else
 						ParticleUtil.spawnParticleLine(prevPos, pos, 4, (v1, v2) -> {
 							worldIn.spawnParticle(EnumParticleTypes.REDSTONE, v2.x, v2.y, v2.z, 0, 0, 0);
 							return false;
 						});
-					}
 
 					prevPos = pos;
 				}
@@ -147,7 +145,7 @@ public class ItemConfigurator extends ItemACBasic {
 						player.sendMessage(new TextComponentTranslation("message.configurator.3"));
 					} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
 				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.4"));
-			} else if(mode == 2) {
+			} else if(mode == 2)
 				if(player.canPlayerEdit(pos.offset(side), side, stack)) {
 					TileEntity te = w.getTileEntity(pos);
 					if(te != null && ItemTransferCapability.getCap(te) != null) {
@@ -156,7 +154,6 @@ public class ItemConfigurator extends ItemACBasic {
 						player.sendMessage(new TextComponentTranslation("message.configurator.4"));
 					} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
 				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.4"));
-			}
 
 			return EnumActionResult.PASS;
 		}

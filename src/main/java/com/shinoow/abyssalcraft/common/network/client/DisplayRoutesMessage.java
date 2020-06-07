@@ -70,10 +70,10 @@ public class DisplayRoutesMessage extends AbstractClientMessage<DisplayRoutesMes
 	public void process(EntityPlayer player, Side side) {
 
 		BlockPos prevPos = null;
-		if(!routes.isEmpty()) {
+		if(!routes.isEmpty())
 			for(BlockPos[] route : routes) {
 				prevPos = null;
-				for(BlockPos pos : route) {
+				for(BlockPos pos : route)
 					if(prevPos == null)
 						prevPos = pos;
 					else {
@@ -83,8 +83,6 @@ public class DisplayRoutesMessage extends AbstractClientMessage<DisplayRoutesMes
 						});
 						prevPos = pos;
 					}
-				}
 			}
-		}
 	}
 }
