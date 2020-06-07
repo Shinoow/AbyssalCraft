@@ -15,6 +15,8 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrate;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
@@ -105,6 +107,8 @@ public class StructureStorage extends WorldGenerator {
 
 		int num = rand.nextInt(4) + 1;
 
+		boolean treasure = false;
+
 		template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", "omothol/crates_"+num));
 
 		template.addBlocksToWorld(worldIn, crates, placeSettings);
@@ -112,11 +116,21 @@ public class StructureStorage extends WorldGenerator {
 		Map<BlockPos, String> map = template.getDataBlocks(crates, placeSettings);
 
 		for (Entry<BlockPos, String> entry : map.entrySet())
-			worldIn.setBlockState(entry.getKey(), ACBlocks.wooden_crate.getDefaultState());
-		//TODO loot table stuff
-
+			if(entry.getValue().startsWith("crate")) {
+				worldIn.setBlockState(entry.getKey(), ACBlocks.wooden_crate.getDefaultState());
+				TileEntityCrate crate = (TileEntityCrate)worldIn.getTileEntity(entry.getKey());
+				if(crate != null) {
+					boolean chance = treasure ? false : rand.nextInt(10) == 0;
+					crate.setLootTable(getLootTable(chance), rand.nextLong());
+					if(chance)
+						treasure = true;
+				}
+			}
 
 		return true;
 	}
 
+	private ResourceLocation getLootTable(boolean treasure) {
+		return treasure ? ACLoot.CHEST_OMOTHOL_STORAGE_TREASURE : ACLoot.CHEST_OMOTHOL_STORAGE_JUNK;
+	}
 }

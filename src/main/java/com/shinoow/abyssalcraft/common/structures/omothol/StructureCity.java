@@ -11,12 +11,16 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.omothol;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
+import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrate;
+import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
+import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ACLoot;
 
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
@@ -166,6 +170,62 @@ public class StructureCity extends WorldGenerator {
 
 		positions.add(pos);
 
+		Map<BlockPos, String> map = template.getDataBlocks(pos, placeSettings);
+
+		for (Entry<BlockPos, String> entry : map.entrySet())
+			if(entry.getValue().equals("chest")) {
+				worldIn.setBlockState(entry.getKey(), ACBlocks.wooden_crate.getDefaultState());
+				TileEntityCrate crate = (TileEntityCrate)worldIn.getTileEntity(entry.getKey());
+				if(crate != null)
+					crate.setLootTable(getLootTable(num), rand.nextLong());
+			} else if(entry.getValue().equals("remnant")) {
+				EntityRemnant remnant = new EntityRemnant(worldIn);
+				remnant.setLocationAndAngles(entry.getKey().getX() + 0.5D, entry.getKey().getY(), entry.getKey().getZ() + 0.5D, 0.0F, 0.0F);
+				remnant.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(remnant)), (IEntityLivingData)null);
+				int profession = 0;
+				switch(num) {
+				case 0:
+					profession = rand.nextBoolean() ? 4 : 0;
+					break;
+				case 1:
+					profession = rand.nextInt(3) == 0 ? 6 : 3;
+					break;
+				case 2:
+					profession = 2;
+					break;
+				case 4:
+					profession = 4;
+					break;
+				case 5:
+					profession = rand.nextBoolean() ? 5 : 0;
+					break;
+				case 6:
+					profession = 1;
+					break;
+				default:
+					break;
+				}
+				remnant.setProfession(profession);
+				worldIn.spawnEntity(remnant);
+			} else if(entry.getValue().startsWith("crystal")) {
+				if(rand.nextBoolean()) {
+					if(rand.nextInt(100) == 0) {
+						worldIn.setBlockState(entry.getKey(), ACBlocks.dreadlands_infused_powerstone.getDefaultState());
+					} else {
+						int meta = rand.nextInt(ACLib.crystalNames.length);
+						if(meta > 15) {
+							meta -= 16;
+							worldIn.setBlockState(entry.getKey(), ACBlocks.crystal_cluster2.getStateFromMeta(meta));
+						} else {
+							worldIn.setBlockState(entry.getKey(), ACBlocks.crystal_cluster.getStateFromMeta(meta));
+						}
+					}
+				} else worldIn.setBlockToAir(entry.getKey());
+			} else if(entry.getValue().equals("pedestal")) {
+				int meta = rand.nextInt(4);
+				worldIn.setBlockState(entry.getKey(), ACBlocks.tiered_energy_pedestal.getStateFromMeta(meta));
+			}
+
 		return true;
 	}
 
@@ -193,6 +253,21 @@ public class StructureCity extends WorldGenerator {
 			return "omothol/library";
 		default:
 			return "omothol/bar";
+		}
+	}
+	
+	private ResourceLocation getLootTable(int num) {
+		switch(num) {
+		case 1:
+			return ACLoot.CHEST_OMOTHOL_BLACKSMITH;
+		case 4:
+			return ACLoot.CHEST_OMOTHOL_FARMHOUSE;
+		case 5:
+			return ACLoot.CHEST_OMOTHOL_HOUSE;
+		case 6:
+			return ACLoot.CHEST_OMOTHOL_LIBRARY;
+		default:
+			return ACLoot.CHEST_OMOTHOL_HOUSE;
 		}
 	}
 }

@@ -26,6 +26,12 @@ public class ACLoot {
 	public static final ResourceLocation CHEST_ABYSSAL_STRONGHOLD_CORRIDOR = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/stronghold_corridor"));
 	public static final ResourceLocation CHEST_ABYSSAL_STRONGHOLD_CROSSING = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/stronghold_crossing"));
 	public static final ResourceLocation CHEST_DREADLANDS_MINESHAFT = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/mineshaft"));
+	public static final ResourceLocation CHEST_OMOTHOL_BLACKSMITH = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/omothol/blacksmith"));
+	public static final ResourceLocation CHEST_OMOTHOL_HOUSE = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/omothol/house"));
+	public static final ResourceLocation CHEST_OMOTHOL_LIBRARY = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/omothol/library"));
+	public static final ResourceLocation CHEST_OMOTHOL_FARMHOUSE = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/omothol/farmhouse"));
+	public static final ResourceLocation CHEST_OMOTHOL_STORAGE_JUNK = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/omothol/storage_junk"));
+	public static final ResourceLocation CHEST_OMOTHOL_STORAGE_TREASURE = LootTableList.register(new ResourceLocation("abyssalcraft", "chests/omothol/storage_treasure"));
 
 	public static final ResourceLocation ENTITY_DEPTHS_GHOUL = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/depths_ghoul"));
 	public static final ResourceLocation ENTITY_DEPTHS_GHOUL_PETE = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/depths_ghoul_pete"));

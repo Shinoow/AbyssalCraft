@@ -1,0 +1,617 @@
+{
+    "pools": [
+        {
+            "name": "main",
+            "rolls":{
+                "min": 1,
+                "max": 2
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:corflesh",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:corbone",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:anticorflesh",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:anticorbone",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:omotholflesh",
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:dreadfragment",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:antiflesh",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:rotten_flesh",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:leather",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:rabbit_hide",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:skin",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 3
+                            }
+                        },
+                        {
+                            "function": "set_data",
+                            "data":{
+                                "min": 0,
+                                "max": 1
+                            }
+                        }
+                    ],
+                    "weight": 1
+                }
+            ]
+        },
+        {
+            "name": "pool1",
+            "rolls":{
+                "min": 1,
+                "max": 2
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:friedegg",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:antibeef",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:antichicken",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:antipork",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:porkchop",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:beef",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:chicken",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:rabbit",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:mutton",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                }
+            ]
+        },
+        {
+            "name": "pool2",
+            "rolls":{
+                "min": 1,
+                "max": 2
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:fish",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        },
+                        {
+                            "function": "set_data",
+                            "data":{
+                                "min": 0,
+                                "max": 3
+                            }
+                        }
+                    ],
+                    "weight": 10
+                }
+            ]
+        },
+        {
+            "name": "pool3",
+            "rolls":{
+                "min": 1,
+                "max": 2
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:bone",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:antibone",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:dye",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        },
+                        {
+                            "function": "set_data",
+                            "data": 15
+                        }
+                    ],
+                    "weight": 10
+                }
+            ]
+        },
+        {
+            "name": "pool4",
+            "rolls":{
+                "min": 1,
+                "max": 2
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:apple",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:brown_mushroom",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:red_mushroom",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:golden_apple",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:beetroot",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:carrot",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:potato",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:poisonous_potato",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                }
+            ]
+        },
+        {
+            "name": "pool5",
+            "rolls":{
+                "min": 1,
+                "max": 2
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:paper",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:book",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:dye",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+                    "weight": 10
+                }
+            ]
+        },
+        {
+            "name": "pool6",
+            "rolls":{
+                "min": 1,
+                "max": 2
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:crystalfragment",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 3
+                            }
+                        },
+                        {
+                            "function": "set_data",
+                            "data":{
+                                "min": 0,
+                                "max": 27
+                            }
+                        }
+                    ],
+                    "weight": 10
+                }
+            ]
+        },
+        {
+            "name": "pool7",
+            "rolls":{
+                "min": 1,
+                "max": 2
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:crystalshard",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 3
+                            }
+                        },
+                        {
+                            "function": "set_data",
+                            "data":{
+                                "min": 0,
+                                "max": 27
+                            }
+                        }
+                    ],
+                    "weight": 10
+                }
+            ]
+        }
+    ]
+}
