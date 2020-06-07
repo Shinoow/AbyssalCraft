@@ -39,11 +39,20 @@ public class StructureCity extends WorldGenerator {
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
+		int num = rand.nextInt(7);
+
+		if(num == 2 || num == 5 || num == 6) {
+			pos = pos.add(rand.nextInt(4) + 4, 0, rand.nextInt(4) + 4);
+		} else {
+			pos = pos.add(rand.nextInt(8) + 8, 0, rand.nextInt(8) + 8);
+		}
+
+		pos = worldIn.getHeight(pos);
+
 		while(worldIn.isAirBlock(pos) && pos.getY() > 2)
 			pos = pos.down();
 		if(pos.getY() <= 1) return false;
 
-		int num = rand.nextInt(7);
 
 
 		Rotation[] arotation = Rotation.values();
@@ -112,10 +121,14 @@ public class StructureCity extends WorldGenerator {
 			center = pos.north(distX).west(distZ);
 			break;
 		case CLOCKWISE_90:
+			swap(widthX, widthZ);
+			swap(distX, distZ);
 			pos = pos.add(widthX, 0, 0);
 			center = pos.south(distX).west(distZ);
 			break;
 		case COUNTERCLOCKWISE_90:
+			swap(widthX, widthZ);
+			swap(distX, distZ);
 			pos = pos.add(0, 0, widthZ);
 			center = pos.north(distX).east(distZ);
 			break;
@@ -154,6 +167,12 @@ public class StructureCity extends WorldGenerator {
 		positions.add(pos);
 
 		return true;
+	}
+
+	private void swap(int a, int b) {
+		int temp1 = a, temp2 = b;
+		a = temp2;
+		b = temp1;
 	}
 
 	private String getRandomStructure(int num) {
