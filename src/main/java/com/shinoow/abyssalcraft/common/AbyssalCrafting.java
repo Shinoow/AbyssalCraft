@@ -816,6 +816,8 @@ public class AbyssalCrafting {
 			SpellRegistry.instance().registerSpell(new DisplayRoutesSpell());
 		if(ACConfig.toggle_state_spell)
 			SpellRegistry.instance().registerSpell(new ToggleStateSpell());
+		if(ACConfig.floating_spell)
+			SpellRegistry.instance().registerSpell(new FloatingSpell());
 	}
 
 	private static void addRendings() {

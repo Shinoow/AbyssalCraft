@@ -843,6 +843,8 @@ ac.spell.displayRoutes=Display Routes
 ac.spell.displayRoutes.desc=Reveals any active Item transport routes within 16 blocks of the caster.
 ac.spell.toggleState=Toll The Bell
 ac.spell.toggleState.desc=Starts/stops the Item transportation of all blocks within a 16 block radius of the player (or the block they're looking at).
+ac.spell.floating=Floating
+ac.spell.floating.desc=As long as you're casting the spell, you're as light as a feather, allowing you to walk on air. Who needs gravity anyways?
 
 #Places of Power
 ac.structure.basic.description=一个小而简单的神殿，为受影响的雕像提供范围增强。
