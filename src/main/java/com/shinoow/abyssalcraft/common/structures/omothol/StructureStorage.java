@@ -120,8 +120,8 @@ public class StructureStorage extends WorldGenerator {
 				worldIn.setBlockState(entry.getKey(), ACBlocks.wooden_crate.getDefaultState());
 				TileEntityCrate crate = (TileEntityCrate)worldIn.getTileEntity(entry.getKey());
 				if(crate != null) {
-					boolean chance = treasure ? false : rand.nextInt(5) == 0;
-					crate.setLootTable(getLootTable(chance), rand.nextLong());
+					boolean chance = treasure ? false : worldIn.rand.nextInt(5) == 0;
+					crate.setLootTable(getLootTable(chance), worldIn.rand.nextLong());
 					if(chance)
 						treasure = true;
 				}

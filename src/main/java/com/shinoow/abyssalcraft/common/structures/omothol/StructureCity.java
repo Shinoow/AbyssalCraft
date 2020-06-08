@@ -176,7 +176,7 @@ public class StructureCity extends WorldGenerator {
 				worldIn.setBlockState(entry.getKey(), ACBlocks.wooden_crate.getDefaultState());
 				TileEntityCrate crate = (TileEntityCrate)worldIn.getTileEntity(entry.getKey());
 				if(crate != null)
-					crate.setLootTable(getLootTable(num), rand.nextLong());
+					crate.setLootTable(getLootTable(num), worldIn.rand.nextLong());
 			} else if(entry.getValue().equals("remnant")) {
 				worldIn.setBlockToAir(entry.getKey());
 				EntityRemnant remnant = new EntityRemnant(worldIn);
