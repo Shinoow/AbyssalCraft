@@ -818,6 +818,8 @@ public class AbyssalCrafting {
 			SpellRegistry.instance().registerSpell(new ToggleStateSpell());
 		if(ACConfig.floating_spell)
 			SpellRegistry.instance().registerSpell(new FloatingSpell());
+		if(ACConfig.teleport_home_spell)
+			SpellRegistry.instance().registerSpell(new TeleportHomeSpell());
 	}
 
 	private static void addRendings() {
