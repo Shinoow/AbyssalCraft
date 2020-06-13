@@ -105,7 +105,7 @@ public class EntitySpiritItem extends EntityItem {
 			}
 		} else {
 			dX = target.getX() + 0.5D > posX ? 0.1 : -0.1;
-			dY = target.getY() - posY;
+			dY = target.getY() > posY ? 0.1 : -0.1;
 			dZ = target.getZ() + 0.5D > posZ ? 0.1 : -0.1;
 			dY /= 10;
 
