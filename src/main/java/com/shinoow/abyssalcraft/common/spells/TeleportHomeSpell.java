@@ -29,6 +29,7 @@ public class TeleportHomeSpell extends Spell {
 		super("teleportHome", 1000F, new Object[] {new ItemStack(Items.BED, 1, OreDictionary.WILDCARD_VALUE)});
 		setRequiresCharging();
 		setScrollType(ScrollType.MODERATE);
+		setColor(0x0565ff);
 	}
 
 	@Override
@@ -45,9 +46,9 @@ public class TeleportHomeSpell extends Spell {
 
 		BlockPos bedPos = player.getBedLocation(player.getSpawnDimension());
 
-		if(player.dimension == player.getSpawnDimension()) {
+		if(player.dimension == player.getSpawnDimension())
 			player.setPositionAndUpdate(bedPos.getX() + 0.5D, bedPos.getY(), bedPos.getZ() + 0.5D);
-		} else {
+		else {
 			TeleporterHomeSpell teleporter = new TeleporterHomeSpell(player.getServer().getWorld(player.getSpawnDimension()), bedPos);
 			player.getServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP)player, player.getSpawnDimension(), teleporter);
 		}
