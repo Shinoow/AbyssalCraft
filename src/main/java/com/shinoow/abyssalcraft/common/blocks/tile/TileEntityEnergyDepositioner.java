@@ -54,7 +54,6 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyManipulator, ITickable, ISidedInventory {
 
-	private int activationTimer;
 	private AmplifierType currentAmplifier;
 	private int tolerance;
 	private float energy;
@@ -67,7 +66,6 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
-		activationTimer = nbttagcompound.getInteger("ActivationTimer");
 		tolerance = nbttagcompound.getInteger("Tolerance");
 		energy = nbttagcompound.getFloat("PotEnergy");
 		PEUtils.readManipulatorNBT(this, nbttagcompound);
@@ -80,7 +78,6 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setInteger("ActivationTimer", activationTimer);
 		nbttagcompound.setInteger("Tolerance", tolerance);
 		nbttagcompound.setFloat("PotEnergy", energy);
 		PEUtils.writeManipulatorNBT(this, nbttagcompound);
@@ -138,7 +135,6 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	@Override
 	public void setActive(AmplifierType amp, DeityType deity) {
 		if(!isActive()){
-			activationTimer = 1200;
 			setActiveAmplifier(amp);
 		}
 	}
@@ -146,7 +142,7 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	@Override
 	public boolean isActive() {
 
-		return activationTimer > 0;
+		return currentAmplifier != null;
 	}
 
 	@Override
@@ -232,7 +228,6 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	public void update() {
 
 		if(isActive()){
-			activationTimer--;
 			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0);
 		} else PEUtils.clearManipulatorData(this);
 

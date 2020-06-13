@@ -134,7 +134,6 @@ public class BlockStatue extends BlockContainer {
 				NBTTagCompound data = new NBTTagCompound();
 				tile.writeToNBT(data);
 				data.setInteger("Timer", stack.getTagCompound().getInteger("Timer"));
-				data.setInteger("ActivationTimer", stack.getTagCompound().getInteger("ActivationTimer"));
 				data.setInteger("Tolerance", stack.getTagCompound().getInteger("Tolerance") + 10);
 				tile.readFromNBT(data);
 				PEUtils.readManipulatorNBT((TileEntityStatue)tile, stack.getTagCompound());

@@ -45,7 +45,6 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 
 	private int timer;
 	private final int timerMax = 120;
-	private int activationTimer;
 	private AmplifierType currentAmplifier;
 	private DeityType currentDeity;
 	private int tolerance;
@@ -59,7 +58,6 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	{
 		super.readFromNBT(nbttagcompound);
 		timer = nbttagcompound.getInteger("Timer");
-		activationTimer = nbttagcompound.getInteger("ActivationTimer");
 		tolerance = nbttagcompound.getInteger("Tolerance");
 		PEUtils.readManipulatorNBT(this, nbttagcompound);
 		facing = nbttagcompound.getInteger("Facing");
@@ -72,7 +70,6 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	{
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setInteger("Timer", timer);
-		nbttagcompound.setInteger("ActivationTimer", activationTimer);
 		nbttagcompound.setInteger("Tolerance", tolerance);
 		PEUtils.writeManipulatorNBT(this, nbttagcompound);
 		nbttagcompound.setInteger("Facing", facing);
@@ -110,7 +107,6 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public void setActive(AmplifierType amp, DeityType deity){
 		if(!isActive()){
-			activationTimer = 1200;
 			setActiveDeity(deity);
 			setActiveAmplifier(amp);
 		}
@@ -118,7 +114,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 
 	@Override
 	public boolean isActive(){
-		return activationTimer > 0;
+		return currentAmplifier != null;
 	}
 
 	@Override
@@ -227,7 +223,6 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	public void update(){
 
 		if(isActive()){
-			activationTimer--;
 			((WorldServer)world).spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0, 0, 1.0);
 		} else PEUtils.clearManipulatorData(this);
 

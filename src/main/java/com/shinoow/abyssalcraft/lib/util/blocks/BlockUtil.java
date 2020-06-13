@@ -85,7 +85,6 @@ public class BlockUtil {
 			NBTTagCompound data = new NBTTagCompound();
 			tile.writeToNBT(data);
 			stack.getTagCompound().setInteger("Timer", data.getInteger("Timer"));
-			stack.getTagCompound().setInteger("ActivationTimer", data.getInteger("ActivationTimer"));
 			if(data.hasKey("PotEnergy")) {
 				stack.getTagCompound().setInteger("Tolerance", data.getInteger("Tolerance"));
 				stack.getTagCompound().setFloat("PotEnergy", data.getFloat("PotEnergy"));
