@@ -292,7 +292,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 
 		if (iframes > 10)
 			return false;
-		else
+		else if(par2 > 0) //don't activate iframes if no damage is dealt
 			iframes = 30;
 
 		return super.attackEntityFrom(par1DamageSource, par2);
