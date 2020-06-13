@@ -203,6 +203,7 @@ message.configurator.5=Cleared path!
 message.configurator.error.1=You can't create a configuration without a path!
 message.configurator.error.2=Desination block doesn't have an inventory!
 message.configurator.error.3=This Block doesn't support configurations!
+message.configurator.error.4=You're not allowed to interact with this block!
 
 #Container Inventories
 container.abyssalcraft.crate=Ящик
@@ -282,6 +283,7 @@ necronomicon.information.structures=Структуры
 necronomicon.information.pantheon=Пантеон
 necronomicon.information.casting=Отливка
 necronomicon.builtwith=Сконструирован с
+necronomicon.information.itemtransportsystem=Item Transportation
 
 #Necronomicon Text
 #Примечание: максимальное кол-во букв в строке 368
@@ -602,6 +604,15 @@ necronomicon.text.spells.1=Чтобы начать работу с заклин�
 necronomicon.text.spells.2=К настоящему времени качество используемого свитка не влияет на записанное заклинание, но в будущем обновлении некоторые аспекты заклинания улучшатся в зависимости от того, какой свиток вы используете. Уникальные свитки, вероятно, сделают что-то помимо этого.
 necronomicon.text.spells.3=Заклинание выполняется щелчком правой кнопкой мыши, удерживая надписанный свиток (тебе также нужен предмет, который содержит PE в вашем инвентаре для литья). Если тип заклинания "Зарядка", тебе нужно удерживать кнопку мыши в течение 3-ёх секунд, в ином случае моментально. В зависимости от заклинания, вам может понадобиться нацелиться на что-то конкретное во время литья.
 
+necronomicon.text.itemtransportsystem.1=Spirit Tablet Shards can either be bought from Remnants or found as loot in buildings throughout Omothol. In a ritual involving 4 pieces and a Life Crystal, you can create a Spirit Tablet.
+necronomicon.text.itemtransportsystem.2=The Spirit Tablet is a tool allowing you to move Items by having spirits possess them. The tablet comes with a bunch of keybindings used to switch modes, open the filter inventory, clear the current set path. The modes include one for setting paths, one for applying configurations and one for clearing them.
+necronomicon.text.itemtransportsystem.3=The "Set Path" mode allows you to create a route for the items to move by right-clicking with the tablet on the ground. Sneak right-click on the desination block.
+necronomicon.text.itemtransportsystem.4=You don't necessarily have to lay out a route if you don't want to, only selecting the destination block also works just fine. When the Spirit Tablet is in the "Set Path" mode, the selected path will display as a line of redstone particles (where the last selected position consist of green particles). The path can be cleared using a keybind (check the tooltip of the item).
+necronomicon.text.itemtransportsystem.5=With a keybind (check the item tooltip), you can open an inventory to set a filter, which support up to 5 Items, subtypes (a Block of Stone would also filter for Andesite, Granite, etc), NBT (a piece of enchanted armor would only allow for other pieces of enchanted armor). The filter is optional, and if not set anything is accepted.
+necronomicon.text.itemtransportsystem.6=When you're in the "Apply Configuration" mode, sneak right-click on the block you wish to transport items from. Side matters, so keep that in mind if the block only extracts from one side.
+necronomicon.text.itemtransportsystem.7=When you're in the "Remove Configuration" mode, you can remove all applied configurations from a block by sneak right-clicking them. Breaking and placing the block would do the same thing, but this saves you time in comparison.
+necronomicon.text.itemtransportsystem.8=There are two utility spells (named "Display Routes" and "Toll The Bell") which can aid you in keeping track of defined routes, and also starting/stopping them. "Display Routes" will reveal any active routes in your vicinity, and "Toll The Bell" will start or stop routes from the block you're looking at (or all nearby if not targeting one).
+
 necronomicon.text.wip=Этот раздел пока ещё незавершён.
 
 #Rituals
@@ -829,6 +840,14 @@ ac.spell.oozeremoval=Устранение ила
 ac.spell.oozeremoval.desc=Рассеивает Ил Шогготов в непосредственной близости от заклинателя.
 ac.spell.teleporthostiles=Жертвенный перехват
 ac.spell.teleporthostiles.desc=Жертвуя жизнью безвредного ребёнка, тёмные отталкиваются. Произнеси заклинание, нацеливаясь на детёныша, и все мобы в пределах 50 блоков будут телепортированы от тебя.
+ac.spell.displayRoutes=Display Routes
+ac.spell.displayRoutes.desc=Reveals any active Item transport routes within 16 blocks of the caster.
+ac.spell.toggleState=Toll The Bell
+ac.spell.toggleState.desc=Starts/stops the Item transportation of all blocks within a 16 block radius of the player (or the block they're looking at).
+ac.spell.floating=Floating
+ac.spell.floating.desc=As long as you're casting the spell, you're as light as a feather, allowing you to walk on air. Who needs gravity anyways?
+ac.spell.teleportHome=Teleport Home
+ac.spell.teleportHome=When cast, teleports you back to your spawn point from wherever you are (including other dimensions).
 
 #Places of Power
 ac.structure.basic.description=Маленький и простой Храм. Обеспечивает повышеный диапазон пострадавших статуй.

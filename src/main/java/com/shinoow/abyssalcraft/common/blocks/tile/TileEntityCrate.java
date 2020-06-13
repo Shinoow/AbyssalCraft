@@ -18,19 +18,18 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityLockableLoot;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.IInteractionObject;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class TileEntityCrate extends TileEntity implements IInventory, IInteractionObject
+public class TileEntityCrate extends TileEntityLockableLoot implements IInventory
 {
 	private NonNullList<ItemStack> crateContents = NonNullList.withSize(36, ItemStack.EMPTY);
 	private String customName;
@@ -39,40 +38,6 @@ public class TileEntityCrate extends TileEntity implements IInventory, IInteract
 	public int getSizeInventory()
 	{
 		return 36;
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int par1)
-	{
-		return crateContents.get(par1);
-	}
-
-	@Override
-	public ItemStack decrStackSize(int par1, int par2)
-	{
-		ItemStack itemstack = ItemStackHelper.getAndSplit(crateContents, par1, par2);
-
-		if (!itemstack.isEmpty())
-			markDirty();
-
-		return itemstack;
-	}
-
-	@Override
-	public ItemStack removeStackFromSlot(int par1)
-	{
-		return ItemStackHelper.getAndRemove(crateContents, par1);
-	}
-
-	@Override
-	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
-	{
-		crateContents.set(par1, par2ItemStack);
-
-		if (!par2ItemStack.isEmpty() && par2ItemStack.getCount() > getInventoryStackLimit())
-			par2ItemStack.setCount(getInventoryStackLimit());
-
-		markDirty();
 	}
 
 	@Override
@@ -87,6 +52,7 @@ public class TileEntityCrate extends TileEntity implements IInventory, IInteract
 		return customName != null && customName.length() > 0;
 	}
 
+	@Override
 	public void setCustomName(String par1Str)
 	{
 		customName = par1Str;
@@ -163,13 +129,9 @@ public class TileEntityCrate extends TileEntity implements IInventory, IInteract
 	}
 
 	@Override
-	public void clear() {
-		crateContents.clear();
-	}
-
-	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
 
+		fillWithLoot(playerIn);
 		return new ContainerChest(playerInventory, this, playerIn);
 	}
 
@@ -203,5 +165,11 @@ public class TileEntityCrate extends TileEntity implements IInventory, IInteract
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
 	{
 		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+	}
+
+	@Override
+	protected NonNullList<ItemStack> getItems() {
+
+		return crateContents;
 	}
 }

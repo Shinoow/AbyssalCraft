@@ -15,13 +15,13 @@ import java.io.IOException;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
+import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class PEStreamMessage extends AbstractClientMessage<PEStreamMessage> {
@@ -55,18 +55,12 @@ public class PEStreamMessage extends AbstractClientMessage<PEStreamMessage> {
 	@Override
 	public void process(EntityPlayer player, Side side) {
 
-		Vec3d vec = new Vec3d(posTo.subtract(posFrom)).normalize();
-
-		double d = Math.sqrt(posTo.distanceSq(posFrom));
-
 		int j = 1+Minecraft.getMinecraft().gameSettings.particleSetting;
-		for(int i = 0; i < d * 15; i+=j){
-			double i1 = i / 15D;
-			double xp = posFrom.getX() + vec.x * i1 + .5;
-			double yp = posFrom.getY() + vec.y * i1 + .5;
-			double zp = posFrom.getZ() + vec.z * i1 + .5;
+
+		ParticleUtil.spawnParticleLine(posFrom, posTo, 15, j, (v1, v2) -> {
 			if(AbyssalCraft.proxy.getParticleCount() < 10000)
-				AbyssalCraft.proxy.spawnParticle("PEStream", xp, yp, zp, vec.x * .1, .15, vec.z * .1);
-		}
+				AbyssalCraft.proxy.spawnParticle("PEStream", v2.x, v2.y, v2.z, v1.x * .1, .15, v1.z * .1);
+			return false;
+		});
 	}
 }

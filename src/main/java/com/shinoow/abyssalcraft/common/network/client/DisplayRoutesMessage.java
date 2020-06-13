@@ -17,13 +17,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
+import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.*;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
@@ -70,27 +70,19 @@ public class DisplayRoutesMessage extends AbstractClientMessage<DisplayRoutesMes
 	public void process(EntityPlayer player, Side side) {
 
 		BlockPos prevPos = null;
-		if(!routes.isEmpty()) {
+		if(!routes.isEmpty())
 			for(BlockPos[] route : routes) {
 				prevPos = null;
-				for(BlockPos pos : route) {
+				for(BlockPos pos : route)
 					if(prevPos == null)
 						prevPos = pos;
 					else {
-						Vec3d vec = new Vec3d(pos.subtract(prevPos)).normalize();
-
-						double d = Math.sqrt(pos.distanceSq(prevPos));
-						for(int i = 0; i < d * 15; i++){
-							double i1 = i / 15D;
-							double xp = prevPos.getX() + vec.x * i1 + .5;
-							double yp = prevPos.getY() + vec.y * i1 + .5;
-							double zp = prevPos.getZ() + vec.z * i1 + .5;
-							player.world.spawnParticle(EnumParticleTypes.REDSTONE, xp, yp, zp, vec.x * .1, .15, vec.z * .1);
-						}
+						ParticleUtil.spawnParticleLine(prevPos, pos, 15, (v1, v2) -> {
+							player.world.spawnParticle(EnumParticleTypes.REDSTONE, v2.x, v2.y, v2.z, v1.x * .1, .15, v1.z * .1);
+							return false;
+						});
 						prevPos = pos;
 					}
-				}
 			}
-		}
 	}
 }

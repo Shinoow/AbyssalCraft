@@ -42,20 +42,21 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		super(bookType);
 		parent = gui;
 		isInfo = true;
-		//		this.ritualnum = ritualnum;
 	}
 
 	@Override
 	public GuiNecronomicon withBookType(int par1){
-		//		if(getBookType() > par1)
-		//			isInvalid = true;
+		if(getBookType() != par1) {
+			currTurnup = 0;
+			isInvalid = true;
+		}
 		return super.withBookType(par1);
 	}
 
 	@Override
 	public void initGui(){
 		if(isInvalid)
-			mc.displayGuiScreen(parent.withBookType(getBookType()));
+			spells.clear();
 		currentNecro = this;
 		if(spells.isEmpty())
 			initStuff();

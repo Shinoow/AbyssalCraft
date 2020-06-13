@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2020 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.spells;
 
 import java.util.ArrayList;
@@ -63,7 +74,7 @@ public class DisplayRoutesSpell extends Spell {
 					TileEntity te = world.getTileEntity(pos1);
 					if(te != null) {
 						IItemTransferCapability cap = ItemTransferCapability.getCap(te);
-						if(cap != null && !cap.getTransferConfigurations().isEmpty())
+						if(cap != null && cap.isRunning())
 							for(ItemTransferConfiguration cfg : cap.getTransferConfigurations()) {
 								List<BlockPos> route = Lists.asList(te.getPos(), cfg.getRoute());
 								routes.add(route.toArray(new BlockPos[0]));

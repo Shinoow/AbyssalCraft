@@ -74,7 +74,7 @@ public class InitHandler implements ILifeCycleHandler {
 
 	private static String[] abyssalZombieBlacklist, depthsGhoulBlacklist, antiAbyssalZombieBlacklist, antiGhoulBlacklist,
 	omotholGhoulBlacklist, interdimensionalCageBlacklist, dreadPlagueImmunityList, dreadPlagueCarrierList,
-	coraliumPlagueImmunityList, coraliumPlagueCarrierList;
+	coraliumPlagueImmunityList, coraliumPlagueCarrierList, itemTransportBlacklist;
 
 	public static int[] coraliumOreGeneration;
 	private static int[] blackHoleBlacklist, oreGenDimBlacklist, structureGenDimBlacklist;
@@ -346,7 +346,7 @@ public class InitHandler implements ILifeCycleHandler {
 		demonAnimalSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal spawn weight", 15, "Spawn weight for the Demon Animals (Pigs, Cows, Chickens) spawning in the Nether.\n[range: 0 ~ 100, default: 15]", 0, 100).getInt();
 		smeltingRecipes = cfg.get(Configuration.CATEGORY_GENERAL, "Smelting Recipes", true, "Toggles whether or not to add smelting recipes for armor pieces.").getBoolean();
 		purgeMobSpawns = cfg.get(Configuration.CATEGORY_GENERAL, "Purge Mob Spawns", false, "Toggles whether or not to clear and repopulate the monster spawn list of all dimension biomes to ensure no mob from another mod got in there.").getBoolean();
-		interdimensionalCageBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Interdimensional Cage Blacklist", new String[]{}, "Entities added to this list can't be captured with the Interdimensional Cage.").getStringList();
+		interdimensionalCageBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Interdimensional Cage Blacklist", new String[0], "Entities added to this list can't be captured with the Interdimensional Cage.").getStringList();
 		damageAmpl = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode damage amplifier", 1.0D, "When Hardcore Mode is enabled, you can use this to amplify the armor-piercing damage mobs deal.\n[range: 1.0 ~ 10.0, default: 1.0]", 1.0D, 10.0D).getDouble();
 		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_GENERAL, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
 		mimicFire = cfg.get(Configuration.CATEGORY_GENERAL, "Mimic Fire", true, "Toggles whether or not Demon Animals will spread Mimic Fire instead of regular Fire (regular Fire can affect performance)").getBoolean();
@@ -375,6 +375,7 @@ public class InitHandler implements ILifeCycleHandler {
 		demonAnimalsSpawnOnDeath = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animals Spawn on Death", true, "Toggles whether or not an Evil Animal spawns a Demon Animal on death.").getBoolean();
 		evilAnimalNewMoonSpawning = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Animal New Moon Spawning", true, "Toggles whether or not Evil Animals only spawn at night during a new moon.").getBoolean();
 		curingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
+		itemTransportBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Item Transportation System Blacklist", new String[0], "Tile Entities added to this list will not be usable with the Item Transportation System (eg. you can't move Items from them). Format: modid:name").getStringList();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 4, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 4, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -500,6 +501,10 @@ public class InitHandler implements ILifeCycleHandler {
 		undeath_to_dust_spell = cfg.get("spells", "Undeath to Dust", true, "Set to false to disable the Undeath to Dust spell.").getBoolean();
 		ooze_removal_spell = cfg.get("spells", "Ooze Removal", true, "Set to false to disable the Ooze Removal spell.").getBoolean();
 		teleport_hostile_spell = cfg.get("spells", "Sacrificial Interdiction", true, "Set to false to disable the Sacrificial Interdiction spell.").getBoolean();
+		display_routes_spell = cfg.get("spells", "Display Routes", true, "Set to false to disable the Display Routes spell.").getBoolean();
+		toggle_state_spell = cfg.get("spells", "Toll The Bell", true, "Set to false to disable the Toll The Bell spell.").getBoolean();
+		floating_spell = cfg.get("spells", "Floating", true, "Set to false to disable the Floating spell.").getBoolean();
+		teleport_home_spell = cfg.get("spells", "Teleport Home", true, "Set to false to disable the Teleport Home spell.").getBoolean();
 
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
@@ -757,6 +762,10 @@ public class InitHandler implements ILifeCycleHandler {
 		default:
 			return false;
 		}
+	}
+
+	public boolean isTileBlackListed(String te) {
+		return Arrays.stream(itemTransportBlacklist).anyMatch(s -> s.equals(te));
 	}
 
 	private String getSupporterList(){

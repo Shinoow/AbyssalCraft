@@ -107,6 +107,9 @@ public class NecronomiconResources {
 	public static final ResourceLocation PE_TUT_14 = res("pe/energy_container");
 	public static final ResourceLocation PE_TUT_15 = res("pe/tiers");
 
+	public static final ResourceLocation ITEM_TRANSPORT_TUT_1 = res("transport/transport_1");
+	public static final ResourceLocation ITEM_TRANSPORT_TUT_2 = res("transport/transport_2");
+
 	//Transmutation grid
 	public static final ResourceLocation TRANSMUTATION = res("transmutation");
 

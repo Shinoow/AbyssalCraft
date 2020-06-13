@@ -52,7 +52,8 @@ public class ACConfig {
 	public static boolean foodstuff, upgrade_kits, plague_enchantments, crystal_rework;
 
 	public static boolean entropy_spell, life_drain_spell, mining_spell, grasp_of_cthulhu_spell, invisibility_spell,
-	detachment_spell, steal_vigor_spell, sirens_song_spell, undeath_to_dust_spell, ooze_removal_spell, teleport_hostile_spell;
+	detachment_spell, steal_vigor_spell, sirens_song_spell, undeath_to_dust_spell, ooze_removal_spell, teleport_hostile_spell,
+	display_routes_spell, toggle_state_spell, floating_spell, teleport_home_spell;
 
 	@Deprecated
 	public static int endAbyssalZombieSpawnWeight;

@@ -1,0 +1,118 @@
+{
+    "pools": [
+        {
+            "name": "main",
+            "rolls":{
+                "min": 1,
+                "max": 3
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:banner",
+                    "functions": [
+                        {
+                            "function": "set_nbt",
+                            "tag": "{BlockEntityTag: {Patterns: [{Pattern: \"flo\", Color: 12}, {Pattern: \"ts\", Color: 0}, {Pattern: \"bs\", Color: 0}]}}"
+                        }
+                    ],
+                    "weight": 1
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:dye",
+                    "functions": [
+                        {
+                            "function": "set_data",
+                            "data": 12
+                        },
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ],
+                    "weight": 10
+                }
+            ]
+        },
+        {
+            "name": "pool1",
+            "rolls":{
+                "min": 1,
+                "max": 3
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:banner",
+                    "functions": [
+                        {
+                            "function": "set_data",
+                            "data": 0
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:dye",
+                    "functions": [
+                        {
+                            "function": "set_data",
+                            "data": 0
+                        },
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ],
+                    "weight": 10
+                }          
+            ]
+        },
+        {
+            "name": "pool2",
+            "rolls":{
+                "min": 1,
+                "max": 3
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:banner",
+                    "functions": [
+                        {
+                            "function": "set_data",
+                            "data": 12
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:dye",
+                    "functions": [
+                        {
+                            "function": "set_data",
+                            "data": 12
+                        },
+                        {
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ],
+                    "weight": 10
+                }          
+            ]
+        }
+    ]
+}

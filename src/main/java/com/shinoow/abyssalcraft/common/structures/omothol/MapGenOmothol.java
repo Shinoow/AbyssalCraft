@@ -22,7 +22,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.MapGenStructure;
-import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 
 public class MapGenOmothol extends MapGenStructure
@@ -85,32 +84,33 @@ public class MapGenOmothol extends MapGenStructure
 			List<StructureOmotholPieces.PieceWeight> list = StructureOmotholPieces.getStructureVillageWeightedPieceList(rand, 100);
 			StructureOmotholPieces.Start StructureOmotholPieces$start = new StructureOmotholPieces.Start(worldIn.getBiomeProvider(), 0, rand, (x << 4) + 2, (z << 4) + 2, list, p_i2092_5_);
 			components.add(StructureOmotholPieces$start);
-			StructureOmotholPieces$start.buildComponent(StructureOmotholPieces$start, components, rand);
-			List<StructureComponent> list1 = StructureOmotholPieces$start.field_74930_j;
-			List<StructureComponent> list2 = StructureOmotholPieces$start.field_74932_i;
-
-			while (!list1.isEmpty() || !list2.isEmpty())
-				if (list1.isEmpty())
-				{
-					int i = rand.nextInt(list2.size());
-					StructureComponent structurecomponent = list2.remove(i);
-					structurecomponent.buildComponent(StructureOmotholPieces$start, components, rand);
-				}
-				else
-				{
-					int j = rand.nextInt(list1.size());
-					StructureComponent structurecomponent2 = list1.remove(j);
-					structurecomponent2.buildComponent(StructureOmotholPieces$start, components, rand);
-				}
-
+			//			StructureOmotholPieces$start.buildComponent(StructureOmotholPieces$start, components, rand);
+			//			List<StructureComponent> list1 = StructureOmotholPieces$start.field_74930_j;
+			//			List<StructureComponent> list2 = StructureOmotholPieces$start.field_74932_i;
+			//
+			//			while (!list1.isEmpty() || !list2.isEmpty())
+			//				if (list1.isEmpty())
+			//				{
+			//					int i = rand.nextInt(list2.size());
+			//					StructureComponent structurecomponent = list2.remove(i);
+			//					structurecomponent.buildComponent(StructureOmotholPieces$start, components, rand);
+			//				}
+			//				else
+			//				{
+			//					int j = rand.nextInt(list1.size());
+			//					StructureComponent structurecomponent2 = list1.remove(j);
+			//					structurecomponent2.buildComponent(StructureOmotholPieces$start, components, rand);
+			//				}
+			//
 			updateBoundingBox();
-			int k = 0;
-
-			for (StructureComponent structurecomponent1 : components)
-				if (!(structurecomponent1 instanceof StructureOmotholPieces.Road))
-					++k;
-
-			hasMoreThanTwoComponents = k > 2;
+			//			int k = 0;
+			//
+			//			for (StructureComponent structurecomponent1 : components)
+			//				if (!(structurecomponent1 instanceof StructureOmotholPieces.Road))
+			//					++k;
+			//
+			//			hasMoreThanTwoComponents = k > 2;
+			hasMoreThanTwoComponents = true;
 		}
 
 		/**

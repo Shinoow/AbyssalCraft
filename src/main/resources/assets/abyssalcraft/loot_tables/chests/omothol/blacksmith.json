@@ -1,0 +1,136 @@
+{
+    "pools": [
+        {
+            "name": "main",
+            "rolls": {
+                "min": 3,
+                "max": 8
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:abyingot",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:cingot",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:dreadiumingot",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:ethaxiumingot",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 2
+                            }
+                        }
+                    ],
+                    "weight": 2
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:tiningot",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 5
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:copperingot",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 5
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:cbrick",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 5
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:ethbrick",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 5
+                            }
+                        }
+                    ],
+                    "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:shield",
+                    "functions": [
+                        {
+                            "function": "set_nbt",
+                            "tag": "{RepairCost: 0, BlockEntityTag: {Patterns: [{Pattern: \"flo\", Color: 12}, {Pattern: \"ts\", Color: 0}, {Pattern: \"bs\", Color: 0}], Base: 0}, display: {Name: \"Abyssalshield\"}}"
+                        }
+                    ],
+                    "weight": 1
+                }
+            ]
+        }
+    ]
+}
