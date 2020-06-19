@@ -319,17 +319,17 @@ necronomicon.text.hastur.2=On sait peut de choses de lui, mais on sait qu'il app
 necronomicon.text.jzahar.1=J'zahar, le Gardien des Abysses, est la descendance illégitime d'Hastur.
 necronomicon.text.jzahar.2=Assoiffé de pouvoir et refusant l'exil, J'zahar a fusionné avec l'espace-temps pour fuir son sort. Il a obtenu un pouvoir similaire à celui de Yog-Sothoth, mais son châtiment fut celui de garder les Dieux et Grands Anciens pour l'éternité.
 
-necronomicon.text.greatoldones=Before the ages of man, the universe was ruled by a race of ancient demonic gods known as "The Great Old ones". Due to a conflict aeons ago, all of these beings are imprisoned far away where no man has ever set foot.
-necronomicon.text.abyssalnomicon_info=The Abyssalnomicon is the unholy tome from which the Necronomicon was written, when J'zahar read that section to Alhazred.
+necronomicon.text.greatoldones=Avant que l'Homme n'existe, l'Univers était régi par une race de dieux démoniaques nommés "les Grands Anciens" Un conflit remontant à la nuit des temps a mené à leur emprisonnement là où personne n'a jamais posé le pied.
+necronomicon.text.abyssalnomicon_info=L'Abyssalnomicon est un livre profane qui a servi à la rédaction du Necronomicon, quand J'zahar lut ce passage du grand livre à Alhazred.
 necronomicon.text.integration=Combiner une technologie inconnue des Grands Anciens à celle provenant des Abysses pourrait avoir une grande utilité.
 
-necronomicon.text.overworld=The Overworld has been expanded in new biomes to discover, among them the Darklands biomes and the Coralium Infested Swamp. You may also encounter Depths Ghouls and Abyssal Zombies during your travels, who enter the overworld through the Abyssal Wasteland.
-necronomicon.text.abyssal=This is the first layer of the Abyss, a place that's dark, green, and populated by the undead. Oblivionaire is said to be the one watching over this place, or his dragon, Asorah. Likely where Coralium originates from.
-necronomicon.text.dreadlands=Previously a world of Abyssalnite, the Dreadlands got it's name when the Dread Plague was unleashed on it, killing all miners and corrupting the peaceful Abyssalnite Golems. The second layer of the Abyss holds lost souls of the living.
-necronomicon.text.omothol=A endless temple city built at the very edge of sanity. The Realm of J'zahar holds the only entrance to where The Great Old Ones dwell. The Gatekeeper is always watching, and nobody leaves the final layer of the Abyss alive.
-necronomicon.text.darkrealm=Beneath Omothol lies the realm where the immortal souls of evil demonic gods rest, awaiting their reincarnation. The Dark Realm is where living shadows are born, and the last place a living souls should ever visit, as they will face eternal suffering.
+necronomicon.text.overworld=De nouveaux biomes ont été ajoutés à la Surface, dont notamment les Terres de l'Ombre mais également les Marécages Infestés. Vous pourrez aussi rencontrer des Goules et Zombies Abyssaux, provenant des Landes Abyssales.
+necronomicon.text.abyssal=Ce lieu est la première dimension des Abysses: un endroit sombre, vert, et peuplé de morts-vivants. Oblivionaire a probablement régné sur ce lieu, ou bien son dragon Asorah. Très certainment l'endroit d'où vient le Coralium.
+necronomicon.text.dreadlands=Il y a une éternité de cela, cet endroit était un monde d'Abyssalnite. Les Dreadlands reçurent leur nom lorsque Cha'garoth propagea l'Effroyable Peste Rouge, tuant et corrompant toute la dimension. La seconde dimension des Abysses est un lieu de sommeil des Âmes égarées.
+necronomicon.text.omothol=Une cyclopéenne cité infinie construite à la frontière du réel, le Royaume de J'zahar représente l'unique passage vers le lieu d'exil des Grands Anciens. Mais le Gardien des Abysses veille, et personne n'est jamais ressorti de la dernière dimension des Abysses vivant.
+necronomicon.text.darkrealm=Des univers en-dessous de l'Omothol se situe un monde désolé où reposent les Âmes de démons, en attente de leur réincarnation. Le Royaume de l'Ombre est là où naissent les Ombres, et le dernier endroit qu'une Âme vivante devrait visiter à cause de la souffrance éternelle qui les y attend.
 
-necronomicon.text.miscinformation=In this section you can find miscellaneous information not mentioned anywhere else in the Necronomicon.
+necronomicon.text.miscinformation=Vous pourrez trouver ici des informations introuvables ailleurs dans le Necronomicon.
 
 necronomicon.text.materials.abyssalnite.1=Abyssalnite is a new ore found in Darklands biomes. It is stronger than diamonds, and can be used to create tools, weapons and armor. Can be found below Y = 32. When mined, it drops ore blocks to smelt for ingots. The ingots are purple, much like the ore itself.
 necronomicon.text.materials.darkstone.1=Darkstone is a new type of stone found in Darklands biomes. Darklands Mountains are made out of this stone. The Dark Realm also consists of this material. When mined, it drops Darkstone Cobblestone, and it can be turned into Darkstone Bricks.
