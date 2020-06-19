@@ -149,7 +149,7 @@ ac.text.deity=神祗
 
 #放大器类型
 ac.amplifier.range=范围
-ac.amplifier.duration=时长
+ac.amplifier.duration=连续
 ac.amplifier.power=能量
 
 #消息
@@ -194,15 +194,15 @@ message.remnant.insult.0=%s，你说Aklo就像mod制作者说1.8一样。
 message.remnant.insult.1=你什么都不知道，%s。
 message.remnant.insult.2=没有了死灵之书,你什么都不是，%s。
 message.jzahar.respawn=我发现时间倒流了。你是不是又没能打败我，%s？
-message.configurator.1=Block with Inventory discovered! Entry side set to the side you clicked at.
-message.configurator.2=Position added to path
-message.configurator.3=Configuration set for block!
-message.configurator.4=Configurations cleared for block!
-message.configurator.5=Cleared path!
-message.configurator.error.1=You can't create a configuration without a path!
-message.configurator.error.2=Desination block doesn't have an inventory!
-message.configurator.error.3=This Block doesn't support configurations!
-message.configurator.error.4=You're not allowed to interact with this block!
+message.configurator.1=已发现有物品栏的方块！入口被设定至你点击的一侧。
+message.configurator.2=位置已添加至路径
+message.configurator.3=已为方块设定配置！
+message.configurator.4=已清除方块的配置！
+message.configurator.5=已清除路径！
+message.configurator.error.1=你不能在没有路径的情况下创建配置！
+message.configurator.error.2=目标方块没有物品栏！
+message.configurator.error.3=该方块不支持配置！
+message.configurator.error.4=你不能和这个方块互动！
 
 #容器物品栏
 container.abyssalcraft.crate=板条箱
@@ -282,15 +282,15 @@ necronomicon.information.structures=结构
 necronomicon.information.pantheon=万神殿
 necronomicon.information.casting=铸造
 necronomicon.builtwith=建造：
-necronomicon.information.itemtransportsystem=Item Transportation
+necronomicon.information.itemtransportsystem=物品输运
 
 #死灵之书文字
 #注意：每个字符串的最大字数为368个（184汉字）。
 #下列示例文字刚好达到字数极限:
 #Lorem ipsum dolor sit amet, nam an mutat eripuit temporibus. Eu eius luptatum similique eam. Erat euismod bonorum cu vis, malis salutatus neglegentur mea no. His et abhorreant conclusionemque, has prima movet dignissim an, vitae deleniti theophrastus ad mea. Est no offendit incorrupte, ferri illum labores qui ut. Sanctus adipisci eum ex, cu falli virtute dissentias.
 #当你试图阅读它的时候，任何超过这个长度的内容都会触发崩溃。
-necronomicon.text.necronomicon.1=这是死灵之书，一本由阿卜杜•阿尔哈兹莱德所写的书，人称“疯狂的阿拉伯人”。这本书囊括了旧日支配者的知识，他们的名字和怎么去召唤他们。里面同样有关于这本书所能举行的咒语和仪式的信息。
-necronomicon.text.necronomicon.2=死灵之书是深渊之书中的一章，由出名的恶魔兼深渊之书的作者 扎哈尔口授给阿尔哈兹莱德，该书有着无穷的来自旧日支配者的知识。
+necronomicon.text.necronomicon.1=这是死灵之书，一本由阿卜杜•阿尔哈兹莱德所写的书，作者也即广为人知的“疯狂的阿拉伯人”。这本书囊括了旧日支配者的知识，他们的名字和怎么去召唤他们。里面同样有关于这本书所能举行的咒语和仪式的信息。
+necronomicon.text.necronomicon.2=死灵之书是深渊之书中的一章，由被称为扎哈尔的恶魔口授给阿尔哈兹莱德，这位恶魔根据来自旧日支配者的无穷的知识创作了深渊之书。
 necronomicon.text.necronomicon.3=深渊之书中能登载4种死灵之书：死灵之书，深渊荒芜之地死灵之书，恐惧之地死灵之书和奥穆索死灵之书，每一本都与一个维度有关。
 necronomicon.text.necronomicon.4=要想解锁这些知识，必须要旅行到上述的世界并且通过该世界里的兽皮来赐予死灵之书解锁的力量。深渊之书囊括了额外的只有关于扎哈尔的知识，这些知识人类并不打算获得。
 
@@ -305,11 +305,11 @@ necronomicon.text.abyssalcraft.5=除了探险外，深渊国度引进了一种�
 necronomicon.text.abyssalcraft.6=除了魔法和探险外，还有允许你进行嬗变，结晶化和物质化的机器。此外还有一个钱币铸模器。
 
 necronomicon.text.azathoth.1=阿撒托斯，别名魔神之首，是所有存在的统治者和创造者。
-necronomicon.text.azathoth.2=它居住在世界之外，沉睡在不朽的笛鼓声中。尽管如此，它有着自己的意志，并向奈亚拉托提普下达命令。
+necronomicon.text.azathoth.2=祂居住在世界之外，沉睡在不朽的笛鼓声中。尽管如此，祂有着自己的意志，并向奈亚拉托提普下达命令。
 necronomicon.text.nyarlathotep.1=奈亚拉托提普，别名伏行之混沌，是一个没有被流亡和囚禁的外神。
-necronomicon.text.nyarlathotep.2=他行走隐匿于人的世界里，宣传疯狂的思想。除了服侍他信仰的外神，他还充满着对他所仆从的阿撒托斯的信仰。
+necronomicon.text.nyarlathotep.2=祂行走隐匿于人的世界里，宣传疯狂的思想。除了服侍祂信仰的外神，祂还负责执行祂所仆从的阿撒托斯的意愿。
 necronomicon.text.yog-sothoth.1=犹格•索托斯，别名居于户口之物，是一个外神，同时也是无名之雾的后代。
-necronomicon.text.yog-sothoth.2=值得注意的是，如果不明说，犹格•索托斯是全能的，并且被限制在世界之外，意味着他知道并且能同时看到所有的时空，就是说对于犹格•索托斯没有任何秘密。
+necronomicon.text.yog-sothoth.2=值得注意的是，如果不明说，犹格•索托斯是全能的，并且被限制在世界之外，这意味着祂知晓并且能同时看到所有的时空，对于犹格•索托斯而言没有任何秘密。
 necronomicon.text.shub-niggurath.1=莎布•尼古拉丝，别名孕育千万子孙的森之黑山羊，是在万神殿里的一个外神。
 necronomicon.text.shub-niggurath.2=她是一个堕落的生殖之神，传说中样子像一团巨大的云团，有着黑色触须，嘴角有粘液滴落，和短且盘绕的山羊腿。那个怪物还会不停吐出一些被消化的或逃跑的小生物，
 necronomicon.text.cthulhu.1=克苏鲁是一个旧日支配者，被封印在深海中的拉莱耶城并陷入无尽沉睡。
@@ -430,7 +430,7 @@ necronomicon.text.crafting.stonetablet=石板由阴影宝石碎片，阴影宝�
 necronomicon.text.crafting.statetransformer.1=物态转换器用巨石块，嬗变宝石和箱子合成。它可以放入物品，将其以PE的形式保存在石板中，为石板充能。
 necronomicon.text.crafting.statetransformer.2=在内部的槽位里放入一组组物品，然后把一个空的石板放在左侧槽位里以填充它。按下按钮转换模式，可以逆转这一进程，返还预先存储在石板里的物品。输入的每个物品产生的PE量是 1 * (64/每组最大堆叠数量) PE 每个物品。输入输出可以被自动化。
 necronomicon.text.crafting.energydepositioner.1=能量沉积器由巨石块，阴影宝石，嬗变宝石和能量中继器合成。这是个位能操纵器，类似于雕像。
-necronomicon.text.crafting.energydepositioner.2=在输入槽里放置一个充能的石板，沉积器将提取出内部存储的PE，返还空石板或者被诅咒的石板。这一操作会污染周围的区域（17x17方块），将其变为黑暗之地（更多的黑暗之地会提升产出诅咒石板的几率）。 输出可以自动化。
+necronomicon.text.crafting.energydepositioner.2=在输入槽里放置一个充能的石板，沉积器将提取出内部存储的PE，返还空石板或者被诅咒的石板。这一操作会污染周围的区域（17x17方块），将其变为黑暗之地（更多的黑暗之地会提升产出诅咒石板的几率）。输出可以自动化。
 necronomicon.text.crafting.ethaxiumpillar=伊桑斯石柱由伊桑斯砖块和伊桑斯石来合成。
 necronomicon.text.crafting.darkethaxiumpillar=深色伊桑斯石柱由深色伊桑斯砖块和奥穆索石头合成。
 
@@ -573,7 +573,7 @@ necronomicon.text.pe.16=能量中继器用于传输位能，可以在任何方�
 necronomicon.text.pe.17=建立能量中继器网络使你能够远距离传送位能。能量中继器可以从相邻的位能收集器中抽取位能。
 necronomicon.text.pe.18=为了储存大量位能，你可以制作能量容器。它们允许能量中继器输入或者与方块相互作用。
 necronomicon.text.pe.19=如果位能的产生依旧很缓慢，你还能通过注入仪式升级能量基座和献祭祭坛。
-necronomicon.text.pe.20=一旦到达奥穆索，你还能创造特定神祗仪式符咒（用深渊之书），或者从残存者牧师处购买。如果使用与符咒上面显示的神祗相同的操纵器，这些符咒会给予额外的加速效果。
+necronomicon.text.pe.20=一旦到达奥穆索，你还能创造特定神祗对应的仪式符咒（用深渊之书），或者从残存者牧师处购买。如果使用与符咒上面显示的神祗相同的操纵器，这些符咒会给予额外的加速效果。
 
 necronomicon.text.machines.info=查看信息章节来获得有关不同机器的信息，或者其他章节来获得特定机器的合成表。合成表并没有以任何方式进行分类。
 
@@ -603,14 +603,14 @@ necronomicon.text.spells.1=为了开始使用咒语，你需要获得一些卷�
 necronomicon.text.spells.2=目前使用的卷轴的质量对铭刻咒语没有影响，但在未来的更新中，咒语的某些方面将会根据你使用的卷轴而有所改进。独特的卷轴可能会做一些超越。
 necronomicon.text.spells.3=使用鼠标右键点击，同时按住一个刻有文字的卷轴（你还需要一个在你的背包中保存位能的物品，以便进行施法）。如果咒语类型是“充能”，你需要按住鼠标3秒，否则它是即时的。根据咒语的不同，你可能需要在施法时瞄准特定的目标。
 
-necronomicon.text.itemtransportsystem.1=Spirit Tablet Shards can either be bought from Remnants or found as loot in buildings throughout Omothol. In a ritual involving 4 pieces and a Life Crystal, you can create a Spirit Tablet.
-necronomicon.text.itemtransportsystem.2=The Spirit Tablet is a tool allowing you to move Items by having spirits possess them. The tablet comes with a bunch of keybindings used to switch modes, open the filter inventory, clear the current set path. The modes include one for setting paths, one for applying configurations and one for clearing them.
-necronomicon.text.itemtransportsystem.3=The "Set Path" mode allows you to create a route for the items to move by right-clicking with the tablet on the ground. Sneak right-click on the desination block.
-necronomicon.text.itemtransportsystem.4=You don't necessarily have to lay out a route if you don't want to, only selecting the destination block also works just fine. When the Spirit Tablet is in the "Set Path" mode, the selected path will display as a line of redstone particles (where the last selected position consist of green particles). The path can be cleared using a keybind (check the tooltip of the item).
-necronomicon.text.itemtransportsystem.5=With a keybind (check the item tooltip), you can open an inventory to set a filter, which support up to 5 Items, subtypes (a Block of Stone would also filter for Andesite, Granite, etc), NBT (a piece of enchanted armor would only allow for other pieces of enchanted armor). The filter is optional, and if not set anything is accepted.
-necronomicon.text.itemtransportsystem.6=When you're in the "Apply Configuration" mode, sneak right-click on the block you wish to transport items from. Side matters, so keep that in mind if the block only extracts from one side.
-necronomicon.text.itemtransportsystem.7=When you're in the "Remove Configuration" mode, you can remove all applied configurations from a block by sneak right-clicking them. Breaking and placing the block would do the same thing, but this saves you time in comparison.
-necronomicon.text.itemtransportsystem.8=There are two utility spells (named "Display Routes" and "Toll The Bell") which can aid you in keeping track of defined routes, and also starting/stopping them. "Display Routes" will reveal any active routes in your vicinity, and "Toll The Bell" will start or stop routes from the block you're looking at (or all nearby if not targeting one).
+necronomicon.text.itemtransportsystem.1=灵魂石板碎片可通过向残存者购买获得，或在遍及奥穆索的建筑中的战利品箱内寻得。通过一场包含4个碎片和1个生命结晶的仪式，你可以制作一块灵魂石板。
+necronomicon.text.itemtransportsystem.2=灵魂石板是一种工具，允许你让灵魂占据物品，以此来移动它们。灵魂石板有一系列绑定按键，用于切换模式，打开过滤面板，清空当前设定的路径。模式中包含设定路径，应用配置和清除配置。
+necronomicon.text.itemtransportsystem.3=“设定路径”模式允许你通过手持灵魂石板右击地面以创建物品移动的路径。潜行并右击目标方块。
+necronomicon.text.itemtransportsystem.4=如果你不想在地面设置路径，那么你无需这么做，只需选择目标方块也能达到效果。当灵魂石板处于“设定路径”模式时，被选定的路径会以红石颗粒线的形式显示（最后一次选定的位置由绿色颗粒组成）。设定的路径可通过绑定按键清除（检查物品的悬浮提示可知）。
+necronomicon.text.itemtransportsystem.5=通过使用绑定按键（检查物品的悬浮提示可知），你可以打开过滤面板，过滤器最多支持5个物品，允许对子类型（放入石头同样会过滤安山岩，花岗岩等）和NBT（一件附魔盔甲将只允许其他的附魔盔甲）进行过滤。过滤器是可选的，如果没有设置，那么任何物品都会被接受。
+necronomicon.text.itemtransportsystem.6=当你正在使用“应用配置”模式时，潜行并右击你想输出物品的方块。方块的面很重要，所以请记住方块是否仅从一面输出物品。
+necronomicon.text.itemtransportsystem.7=当你正在使用“清除配置”模式时，你可以通过潜行并右击方块来移除其上的配置。破坏或放置方块能达到相同效果，但这一操作相比之下能为你节省时间。
+necronomicon.text.itemtransportsystem.8=有两个实用咒术（名为“展示路线”和“鸣钟”），可以帮助你追踪已确定的路线，以及启动或停止它们。“展示路线”会显示你附近活动中的路线，“鸣钟”会启动或停止你正在注视的方块所连接的路线（或者若没有对准单个方块，会直接对附近的所有路线起作用）。
 
 necronomicon.text.wip=这章节还未完成。
 
@@ -626,7 +626,7 @@ ac.ritual.summonAsorah.desc=召唤来自黑暗领域的堕落者阿索拉。它�
 ac.ritual.summonSacthoth=阴影仪式
 ac.ritual.summonSacthoth.desc=召唤来自黑暗领域的末日先驱萨多斯。
 ac.ritual.breeding=繁殖仪式
-ac.ritual.breeding.desc=繁殖周围的动物。如果运气不好的话有可能会全杀死它们。
+ac.ritual.breeding.desc=繁殖周围的动物。如果运气不好的话有可能会把它们全部杀死。
 ac.ritual.depthsHelmet=深海面罩
 ac.ritual.depthsHelmet.desc=深海面罩能通过将2个珊瑚宝石簇（9个宝石）、珊瑚疫染腐肉、一个嬗变宝石、一个莲叶、一个藤蔓和一个液态珊瑚桶注入到一个精炼珊瑚头盔获得。
 ac.ritual.depthsChestplate=深海胸甲
@@ -811,10 +811,10 @@ ac.ritual.moderateScroll=中等卷轴
 ac.ritual.moderateScroll.desc=一个中等卷轴由两本书，一个恐惧碎片和一个恐惧深渊石碎片组成
 ac.ritual.massEnchantment=汇聚附魔
 ac.ritual.massEnchantment.desc=通过在祭坛上放置8本附魔书和一件物品，所有附魔将被组合并应用到该物品上。你可以使用任何附魔，并且所有等级都将被相加，因此同一附魔的多个实例可以超过正常界限。
-ac.ritual.curing=Ritual of Curing
-ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area of the Dread Plague and the Dreadlands, restoring what was there before. The closest non-dreadlands biome will take the place of the Dreadlands.
-ac.ritual.spiritTablet=Spirit Tablet
-ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crystal with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
+ac.ritual.curing=治愈仪式
+ac.ritual.curing.desc=通过放置4瓶恐惧瘟疫解药，你治愈了一片区域的恐惧瘟疫和恐惧之地，恢复了它们原来的面貌。地形最接近的非恐惧之地生物群系将会取代恐惧之地的位置。
+ac.ritual.spiritTablet=灵魂石板
+ac.ritual.spiritTablet.desc=一块灵魂石板可通过将4个灵魂石板碎片注入生命结晶来制作。它是一种工具，允许你使物品自主移动，以在方块间转移物品。阅读死灵之书奥穆索章节的相关内容以获取更多信息。
 
 #Spells
 ac.spell.lifedrain=生命吸取
@@ -838,15 +838,15 @@ ac.spell.undeathtodust.desc=立刻瓦解一个不死生物，不会留下任何�
 ac.spell.oozeremoval=软泥去除
 ac.spell.oozeremoval.desc=驱散施法者附近的修格斯软泥。
 ac.spell.teleporthostiles=献祭驱散
-ac.spell.teleporthostiles.desc=献祭一个幼体的生命以驱逐黑暗的造物：对一个未成年的动物释放该法术以将50m内的敌对生物传送走。
-ac.spell.displayRoutes=Display Routes
-ac.spell.displayRoutes.desc=Reveals any active Item transport routes within 16 blocks of the caster.
-ac.spell.toggleState=Toll The Bell
-ac.spell.toggleState.desc=Starts/stops the Item transportation of all blocks within a 16 block radius of the player (or the block they're looking at).
-ac.spell.floating=Floating
-ac.spell.floating.desc=As long as you're casting the spell, you're as light as a feather, allowing you to walk on air. Who needs gravity anyways?
-ac.spell.teleportHome=Teleport Home
-ac.spell.teleportHome=When cast, teleports you back to your spawn point from wherever you are (including other dimensions).
+ac.spell.teleporthostiles.desc=献祭一个幼体的生命以驱逐黑暗的造物：对一个未成年的动物释放该法术以将50格内的敌对生物传送走。
+ac.spell.displayRoutes=展示路线
+ac.spell.displayRoutes.desc=显示施法者16格范围内任意激活状态的物品输运路线。
+ac.spell.toggleState=鸣钟
+ac.spell.toggleState.desc=启动/停止玩家16格半径内所有方块的物品输运（或者仅对玩家正在注视的方块产生影响）。
+ac.spell.floating=浮空
+ac.spell.floating.desc=只要持续施法，你就会像羽毛一般轻盈，这使得你可以在空中行走。总之，谁会需要重力的束缚？
+ac.spell.teleportHome=归家
+ac.spell.teleportHome=施法后将你传送至你的重生点，无论你在什么地方（包括其他维度）。
 
 #Places of Power
 ac.structure.basic.description=一个小而简单的神殿，为受影响的雕像提供范围增强。
@@ -898,9 +898,9 @@ ac_spells.tooltip=咒术配置
 key.abyssalcraft.category=深渊国度
 key.staff_mode.desc=改变守门者法杖的模式
 key.use_cage.desc=用跨维度笼捕捉生物
-key.configurator_mode.desc=Change Spirit Tablet Mode
-key.configurator_filter.desc=Open the Spirit Tablet Filter inventory
-key.configurator_path.desc=Clear the path in the Spirit Tablet
+key.configurator_mode.desc=改变灵魂石板的模式
+key.configurator_filter.desc=打开灵魂石板的过滤面板
+key.configurator_path.desc=清除灵魂石板记录的路径
 
 #伤害来源
 death.attack.coralium=%1$s死于珊瑚瘟疫
@@ -946,13 +946,13 @@ tooltip.staff.mode.1=模式
 tooltip.staff.mode.2=按下 %s 以改变模式
 tooltip.stonetablet.cursed=被诅咒的
 tooltip.stonetablet.contents=%d 组
-tooltip.configurator.1=Press %s to open the filter inventory
-tooltip.configurator.2=Press %s to clear the current path
-tooltip.configurator.mode.0=Set Path
-tooltip.configurator.mode.1=Apply Configuration
-tooltip.configurator.mode.2=Clear Configurations
-tooltip.configurator.filter.0=Filter by subtype
-tooltip.configurator.filter.1=Filter by NBT
+tooltip.configurator.1=按下 %s 以打开过滤面板
+tooltip.configurator.2=按下 %s 以清除当前的路径
+tooltip.configurator.mode.0=设定路径
+tooltip.configurator.mode.1=应用配置
+tooltip.configurator.mode.2=清除配置
+tooltip.configurator.filter.0=根据子类型过滤
+tooltip.configurator.filter.1=根据NBT过滤
 
 #创造模式物品栏
 itemGroup.acblocks=深渊国度方块
@@ -1414,11 +1414,11 @@ item.antidote.dread.name=恐惧瘟疫解药
 item.door_dlt.name=黑暗之地橡木门
 item.door_drt.name=恐惧之地木门
 item.cha_rcoal.name=查加罗炭
-item.configurator.name=Spirit Tablet
-item.configurator_shard.0.name=Spirit Tablet Shard #1
-item.configurator_shard.1.name=Spirit Tablet Shard #2
-item.configurator_shard.2.name=Spirit Tablet Shard #3
-item.configurator_shard.3.name=Spirit Tablet Shard #4
+item.configurator.name=灵魂石板
+item.configurator_shard.0.name=灵魂石板碎片 #1
+item.configurator_shard.1.name=灵魂石板碎片 #2
+item.configurator_shard.2.name=灵魂石板碎片 #3
+item.configurator_shard.3.name=灵魂石板碎片 #4
 
 #实体
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -1539,7 +1539,7 @@ subtitle.abyssalcraft.abyssalzombie.hit=深渊僵尸：受伤
 subtitle.abyssalcraft.abyssalzombie.death=深渊僵尸：死亡
 subtitle.abyssalcraft.antiplayer.hurt=反物质玩家：受伤
 subtitle.abyssalcraft.dreadguard.barf=恐惧守卫：呕吐
-subtitle.abyssalcraft.jzahar.blast=爆炸
+subtitle.abyssalcraft.jzahar.blast=扎哈尔：发动爆炸
 subtitle.abyssalcraft.jzahar.shouts=扎哈尔：试图 Fus Ro Dah
 subtitle.abyssalcraft.jzahar.earthquake=扎哈尔：试图重排板块
 subtitle.abyssalcraft.jzahar.implosion=扎哈尔：试图用自己的意志替代重力
