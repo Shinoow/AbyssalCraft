@@ -2,28 +2,28 @@
 
 #Advancements
 advancements.abyssalcraft.necro.title=Bienvenido a AbyssalCraft!
-advancements.abyssalcraft.necro.description=Has crafteado el Necronomicon, y ahora qué?
+advancements.abyssalcraft.necro.description=Has crafteado el Necronomicon, ¿y ahora qué?
 
-advancements.abyssalcraft.mineaby.title=Mejor que los diamantes!
+advancements.abyssalcraft.mineaby.title=¡Mejor que los diamantes!
 advancements.abyssalcraft.mineaby.description=Has picado algo de Abyssalnite.
 
 advancements.abyssalcraft.minecorgem.title=Gemas del oceano
 advancements.abyssalcraft.minecorgem.description=Has Picado algunas gemas de coralium.
 
 advancements.abyssalcraft.shadowgems.title=Gemas de pura oscuridad
-advancements.abyssalcraft.shadowgems.description=Obtuviste una gema oscura.
+advancements.abyssalcraft.shadowgems.description=Has conseguido una gema oscura.
 
-advancements.abyssalcraft.minecor.title=Cosa verde
+advancements.abyssalcraft.minecor.title=Algo verde
 advancements.abyssalcraft.minecor.description=Has picado Abyssal Coralium.
 
-advancements.abyssalcraft.mineabyores.title=No veo esto en el  overworld?
-advancements.abyssalcraft.mineabyores.description=Has picado algunos minerales Abyssales.
+advancements.abyssalcraft.mineabyores.title=No hay cosas así en el overworld
+advancements.abyssalcraft.mineabyores.description=Has picado minerales Abyssales.
 
 advancements.abyssalcraft.minedread.title=Minerales del Dreadlands
 advancements.abyssalcraft.minedread.description=Has picado algunos minerales del Dreadlands 
 
-advancements.abyssalcraft.dreadium.title=Lingotes libres de peste
-advancements.abyssalcraft.dreadium.description=Has transmutado algunos Dreadium
+advancements.abyssalcraft.dreadium.title=Lingotes libres de enfermedades
+advancements.abyssalcraft.dreadium.description=Has transmutado Dreadium
 
 advancements.abyssalcraft.ethaxium.title=Que las almas estan hechas de...
 advancements.abyssalcraft.ethaxium.description=Has crafteado un lingote de Ethaxium 
@@ -37,14 +37,14 @@ advancements.abyssalcraft.ghoulhead.description=Esa es una cabeza grande...
 advancements.abyssalcraft.petehead.title=Esa cabeza...
 advancements.abyssalcraft.petehead.description=Yay, podemos ser amigos por siempre :D
 
-advancements.abyssalcraft.wilsonhead.title=El jefe de mal humor
+advancements.abyssalcraft.wilsonhead.title=El jefe de malvado
 advancements.abyssalcraft.wilsonhead.description=Donde esta mi cuerpo?
 
 advancements.abyssalcraft.orangehead.title=La cabéza medica
-advancements.abyssalcraft.orangehead.description=Su diagnóstico ha vuelto a aparecer, usted tiene Squaids.
+advancements.abyssalcraft.orangehead.description=Su diagnóstico ha vuelto a aparecer, usted tiene VIH.
 
-advancements.abyssalcraft.necrou1.title=Conocimiento de Wasteland
-advancements.abyssalcraft.necrou1.description=Ha elaborado el Necronomicon del Abyssal Wasteland.
+advancements.abyssalcraft.necrou1.title=Conocimiento del Páramo
+advancements.abyssalcraft.necrou1.description=Ha elaborado el Necronomicon del Páramo Abisal.
 
 advancements.abyssalcraft.necrou2.title=Conocimiento de lo corrupto
 advancements.abyssalcraft.necrou2.description=Ha elaborado el Necronomicon del Dreadlands.
@@ -53,10 +53,10 @@ advancements.abyssalcraft.necrou3.title=Conocimiento de lo desconocido
 advancements.abyssalcraft.necrou3.description=Ha elaborado el Necronomicon de Omothol.
 
 advancements.abyssalcraft.abyssaln.title=Todo a lo que no estaba destinado a saber
-advancements.abyssalcraft.abyssaln.description=Ha elaborado el Abyssalnomicon.J'zahar esta un tanto orgulloso de ti.
+advancements.abyssalcraft.abyssaln.description=Ha elaborado el Abyssalnomicon. J'zahar esta orgulloso de ti.
 
 advancements.abyssalcraft.ritual.title=Las artes oscuras
-advancements.abyssalcraft.ritual.description=No tienes idea en lo que te estas metiendo, ¿verdad?
+advancements.abyssalcraft.ritual.description=No tienes idea de en lo que te estas metiendo, ¿verdad?
 
 advancements.abyssalcraft.ritualsummon.title=He aquí la ira del Necronomicon!
 advancements.abyssalcraft.ritualsummon.description=Realiza un ritual de invocación.
@@ -70,23 +70,23 @@ advancements.abyssalcraft.ritualbBreed.description=Realiza un ritual para criado
 advancements.abyssalcraft.ritualpotion.title=Alquimia oculta
 advancements.abyssalcraft.ritualpotion.description=Realiza un ritual de la poción.
 
-advancements.abyssalcraft.ritualpotionaoe.title=Beacon temporal
+advancements.abyssalcraft.ritualpotionaoe.title=Faro temporal
 advancements.abyssalcraft.ritualpotionaoe.description=Realiza un ritual de una pocion de area con efecto.
 
 advancements.abyssalcraft.ritualinfusion.title=Fusión de energía
 advancements.abyssalcraft.ritualinfusion.description=Realiza un ritual de infusión.
 
-advancements.abyssalcraft.enterabyss.title=Bienvenido a wasteland
+advancements.abyssalcraft.enterabyss.title=Bienvenido al Páramo
 advancements.abyssalcraft.enterabyss.description=Entraste a la primera dimensión.
 
-advancements.abyssalcraft.killdragon.title=Undead undead redead
+advancements.abyssalcraft.killdragon.title=Redimido
 advancements.abyssalcraft.killdragon.description=Has matado un dragón espectral.
 
-advancements.abyssalcraft.summonasorah.title=La caída ha regresado!
+advancements.abyssalcraft.summonasorah.title=¡La caída ha regresado!
 advancements.abyssalcraft.summonasorah.description=Has invocado a Asorah, CORRE!!
 
 advancements.abyssalcraft.killasorah.title=Uno menos, faltan 2
-advancements.abyssalcraft.killasorah.description=Has matado a Asorah... Oblivionaire te odia ahora.
+advancements.abyssalcraft.killasorah.description=Has matado a Asorah... ahora Oblibionaire te odia.
 
 advancements.abyssalcraft.enterdreadlands.title=Bienvenido al infierno... errm el Dreadlands
 advancements.abyssalcraft.enterdreadlands.desc=Has entrado a la segunda dimensión.
@@ -118,7 +118,7 @@ advancements.abyssalcraft.killjzahar.description=¿De verdad cree que puede mata
 advancements.abyssalcraft.gk1.title=La llave de los no muertos
 advancements.abyssalcraft.gk1.description=Has crafteado una llave de la puerta.
 
-advancements.abyssalcraft.findpsdl.title=Ahora que es una roca extraña
+advancements.abyssalcraft.findpsdl.title=Una roca extraña
 advancements.abyssalcraft.findpsdl.description=Encontrada una infusión de PowerStone del Dreadlands.
 
 advancements.abyssalcraft.gk2.title=La llave del temido
@@ -130,14 +130,14 @@ advancements.abyssalcraft.gk3.description=Transmutada la llave de la puerta de C
 advancements.abyssalcraft.maketransmutator.title=Rompe todas las leyes de la física!
 advancements.abyssalcraft.maketransmutator.description=Has crafteado un Transmutador.
 
-advancements.abyssalcraft.makecrystallizer.title=cristalizalo todo
+advancements.abyssalcraft.makecrystallizer.title=Cristalizalo todo
 advancements.abyssalcraft.makecrystallizer.description= Has crafteado un Cristalizador.
 
 advancements.abyssalcraft.makematerializer.title=Crea tus propios materiales
 advancements.abyssalcraft.makematerializer.description=Has crafteado un Materializador.
 
-advancements.abyssalcraft.makecrystalbag.title=Almacena todos tus cristales aquí!
-advancements.abyssalcraft.makecrystalbag.description=Has crafteado una bolsa de cristal.Se pueden actualizar.
+advancements.abyssalcraft.makecrystalbag.title=¡Almacena todos tus cristales aquí!
+advancements.abyssalcraft.makecrystalbag.description=Has crafteado una bolsa de cristal. Se pueden actualizar.
 
 advancements.abyssalcraft.makeengraver.title=Monedas falsas infinitas!
 advancements.abyssalcraft.makeengraver.description=Craftea un Grabador.
@@ -153,7 +153,7 @@ ac.amplifier.duration=Duración
 ac.amplifier.power=Poder
 
 #Messages
-message.asorah.spawn=JAJA, absurdo humano, estoy desatado!
+message.asorah.spawn=JAJA, estupido humano, estoy desatado!
 message.asorah.death.1=Asorah?... Asorah?!
 message.asorah.death.2=TU, tendrás que pagar por esto mortal!!
 message.asorah.death.3=Además, no conseguiras llegar más allá del Dreadlands. Diviertete cavando tu propia tumba..
@@ -164,9 +164,9 @@ message.dreadaltartop.enter=Haga clic en el bloque superior para entrar en la gu
 message.dreadaltartop.spawn=Ah, me parece que tengo un visitante. Dreadguards, por favor devoren a nuestro invitado, si se puede.
 message.chagaroth.death.1=A continuación, haga que su llave, transmute por una que funcione.
 message.chagaroth.death.2=El cofre cerca de mi guarda "El tesoro legendario del Dreadlands".
-message.chagaroth.death.3=dejada por los que dirigían la mina antes de entrar en la imagen.
+message.chagaroth.death.3=dejada por los que dirigían la mina antes de que entrara yo.
 message.chagaroth.death.4=No se haga ilusiones, apuesto a que es sólo un bloque de tierra o algo así.
-message.jzahar.death.1=Felicidades, tu me "mataste".No, ni mucho menos.No se puede matar a un Gran Antiguo.
+message.jzahar.death.1=Felicidades, tu me "mataste". No, ni mucho menos. No se puede matar a un Gran Antiguo.
 message.jzahar.death.2=Lo que mataste es un simuraculum (una mera encarnación física de la oscuridad infinita).Algunos lo llaman marioneta.
 message.jzahar.death.3=Algo que se le escapa a un ser humano cuando se adentra en la locura es el concepto de la realidad.
 message.jzahar.death.4=Un ejemplo de esto es la creencia de que ha matado a un Gran Antiguo.
@@ -174,11 +174,11 @@ message.jzahar.death.5=Cualquier persona en su sano juicio se da cuenta que va d
 message.jzahar.death.6=Pero tú ... tu mente se ha retorcido y es más difícil con el conocimiento que usted ha ganado.
 message.jzahar.death.7=El hecho de que usted pensara por un segundo que me hubiera matado muestra cuán loco te has convertido.
 message.jzahar.death.8=Mis lecturas ya le han conducido hasta aquí, así que no le gustaría más conocimiento. Tal vez la muerte es lo que realmente desea.
-message.jzahar.death.9=Déjame desatar el último poder contenido dentro de este títere hueco.Me dará la respuesta.
+message.jzahar.death.9=Déjame desatar el último poder contenido dentro de este títere hueco. Me dará la respuesta.
 message.jzahar.death.10=Si sobrevivió a la explosión, tome este mero fragmento de mi ser, que le dará acceso a la Abyssalnomicon.
 message.jzahar.banish.vanilla=Nunca pregunté para estar dentro de la misma dimensión que usted. Vete, falsa bestia!
 message.jzahar.banish.ac=Ejem... pensé que te di una asignación eones atrás, ¿se le ha ocurrido pensar que era permanente?
-message.jzahar.banish.jzh=¡Solo puede haber uno! * Crea una espada de la nada *
+message.jzahar.banish.jzh=¡Solo puede haber uno!
 message.jzahar.banish.other=No creo que hemos estado familiarizados, yo soy el que te destierra de esta dimensión.
 message.jzahar.creative.1=%s, te das cuenta de que simplemente podía cambiar su modo de juego y yo haberlo matado a usted en ese momento? Yo soy ese tipo de entidad..
 message.jzahar.creative.2=Pero sí... técnicamente sería hacer trampa, así que sólo cumple las "reglas" y no hagas nada..
@@ -190,13 +190,13 @@ message.portalplacer.error.1=Se siente una presencia de negación, J'zahar no lo
 message.portalplacer.error.2=No pasó nada...
 message.necronomicon.nope=Parece que usted no posee este libro. Alguna vez pensó en no tratar de leerlo?
 message.remnant.busy=Lo siento, estoy actualmente ocupado con un cliente, vuelve más tarde.
-message.remnant.insult.0=%s, Usted habla Aklo igual de bien que los modders hablan de la 1.8.
-message.remnant.insult.1=Ya sabes nada, %s.
-message.remnant.insult.2=Eres un inútil sin un Necronomicon,%s.
+message.remnant.insult.0=%s, Usted habla igual de bien que los modders hablan sobre la 1.8.
+message.remnant.insult.1=No sabes nada, %s.
+message.remnant.insult.2=Eres un inútil sin un Necronomicon, %s.
 message.jzahar.respawn=Tengo la sensación de que el momento era cuando se dio la vuelta. ¿Fallaste en derrotarme %s?
-message.configurator.1=Block with Inventory discovered! Entry side set to the side you clicked at.
-message.configurator.2=Position added to path
-message.configurator.3=Configuration set for block!
+message.configurator.1=¡Un bloque con inventario encontrado! Entry side set to the side you clicked at.
+message.configurator.2=Posicion añadida al camino.
+message.configurator.3=Configuracion aplicada en el bloque!
 message.configurator.4=Configurations cleared for block!
 message.configurator.5=Cleared path!
 message.configurator.error.1=You can't create a configuration without a path!
@@ -210,22 +210,22 @@ container.abyssalcraft.crystallizer=Cristalizador
 container.abyssalcraft.transmutator=TransmutaDor
 container.abyssalcraft.engraver=Grabador
 container.abyssalcraft.materializer=Materializador
-container.abyssalcraft.energycontainer=Energy Container
-container.abyssalcraft.tieredenergycontainer=Tiered Energy Container
-container.abyssalcraft.rendingpedestal=Rending Pedestal
-container.abyssalcraft.statetransformer=State Transformer
-container.abyssalcraft.energydepositioner=Energy Depositioner
+container.abyssalcraft.energycontainer=Contenedor de energia
+container.abyssalcraft.tieredenergycontainer=Contenedor de energia nivelada
+container.abyssalcraft.rendingpedestal=Pedestal de desgarramineto
+container.abyssalcraft.statetransformer=Transformador de estados
+container.abyssalcraft.energydepositioner=Depositor de energia
 
 #Gui Buttons
-gui.abyssalcraft.statetransformer.insert=Insert
-gui.abyssalcraft.statetransformer.extract=Extract
+gui.abyssalcraft.statetransformer.insert=Insertar
+gui.abyssalcraft.statetransformer.extract=Extraer
 
 #NEI Integration
 container.abyssalcraft.crystallizer.nei=Cristalización
 container.abyssalcraft.transmutator.nei=Transmutación
 container.abyssalcraft.engraver.nei=Moneda de grabado
 container.abyssalcraft.materializer.nei=Materialización
-container.abyssalcraft.rituals.nei=Necronomicon Ritual
+container.abyssalcraft.rituals.nei=Ritual de Necronomicon
 container.abyssalcraft.rending.nei=Staff of Rending
 container.abyssalcraft.upgrade.nei=Upgrade Kit
 
@@ -244,8 +244,8 @@ necronomicon.information.goo=Los Grandes Antiguos
 necronomicon.information.abyssalnomicon=El Abyssalnomicon
 necronomicon.information.overworld=Overworld
 necronomicon.information.overworld.title=El Overworld
-necronomicon.information.abyssal=Abyssal Wasteland
-necronomicon.information.abyssal.title=El Abyssal Wasteland
+necronomicon.information.abyssal=Páramo Abisal
+necronomicon.information.abyssal.title=El Páramo Abisal
 necronomicon.information.dreadlands=Dreadlands
 necronomicon.information.dreadlands.title=El Dreadlands
 necronomicon.information.omothol=Omothol
@@ -273,16 +273,16 @@ necronomicon.turnupindicator=Pagina %1$s de %2$s
 necronomicon.miscinformation=Información Miscelánea
 necronomicon.information.enchantments=Encantamientos
 necronomicon.sacrifice=Requiere un sacrificio
-necronomicon.information.decorativestatues=Decorative Statues
-necronomicon.information.knowledge=Obtaining Knowledge
-necronomicon.information.coraliumplague=The Coralium Plague
-necronomicon.information.dreadplague=The Dread Plague
-necronomicon.information.placesofpower=Places of Power
-necronomicon.information.structures=Structures
-necronomicon.information.pantheon=Pantheon
-necronomicon.information.casting=Casting
-necronomicon.builtwith=Built with
-necronomicon.information.itemtransportsystem=Item Transportation
+necronomicon.information.decorativestatues=Estatuas decorativas
+necronomicon.information.knowledge=Obteniendo sabiduria
+necronomicon.information.coraliumplague=La Plaga de Coralium
+necronomicon.information.dreadplague=La Plaga de Dread
+necronomicon.information.placesofpower=Sitios de poder
+necronomicon.information.structures=Estructuras
+necronomicon.information.pantheon=Panteon
+necronomicon.information.casting=Invocación
+necronomicon.builtwith=Construir con.
+necronomicon.information.itemtransportsystem=Transportación de objetos
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -291,7 +291,7 @@ necronomicon.information.itemtransportsystem=Item Transportation
 #Anything longer than that will trigger a crash when you try to read it
 necronomicon.text.necronomicon.1=Este es el Necronomicón, un libro escrito por Abdul Alhazred, también conocido como "árabe loco".El libro contiene conocimientos sobre Los Grandes Antiguos, sus nombres y cómo convocarlos.También existe información acerca de los hechizos y rituales que el libro puede realizar.
 necronomicon.text.necronomicon.2=El Necronomicón en sí es un capítulo del Abyssalnomicon, que fue leído a Alhazred por un demonio conocido como J'zahar, que había compuesto el Abyssalnomicon de conocimiento infinito al conocer a Los Grandes Antiguos.
-necronomicon.text.necronomicon.3=Hay 4 tipos de Necronomicones dentro del Abyssalnomicon:El Necronomicon,El Necronomicon del abyssal Wasteland,El Necronomicon del Dreadlands y El Necronomicon del Omothol,cada uno con el conocimiento unido a una dimensión específica.
+necronomicon.text.necronomicon.3=Hay 4 tipos de Necronomicones dentro del Abyssalnomicon:El Necronomicon,El Necronomicon del Páramo Abisal,El Necronomicon del Dreadlands y El Necronomicon del Omothol,cada uno con el conocimiento unido a una dimensión específica.
 necronomicon.text.necronomicon.4=Con el fin de desbloquear el conocimiento,uno debe viajar a dicha dimensión y unir la autonomía del Necronomicon con la carne de ese mundo.El Abyssalnomicon contiene conocimientos adicionales que sólo conoce J'zahar,hombre de conocimiento que no estaba destinado a obtener.
 
 necronomicon.text.abyssalnomicon.1=Este es el Abyssalnomicon,un libro escrito por J'zahar,Guardián del abyss.El libro contiene el conocimiento de los 4 Necronomicones,como lo son en los capítulos de este libro.También hay un amplio conocimiento que no se menciona en los otros.
@@ -304,7 +304,7 @@ necronomicon.text.abyssalcraft.4=También hay 5 nuevos tipos de piedra y 15 nuev
 necronomicon.text.abyssalcraft.5=Además de explorar,AbyssalCraft presenta su propio tipo de magia,a través del uso de rituales con el fin de adorar a Los Grandes Antiguos.
 necronomicon.text.abyssalcraft.6=Aparte de la magia y la exploración,también hay máquinas,lo que le permite transmutar,cristalizar y materializar objetos.También hay un grabador de monedas.
 
-necronomicon.text.azathoth.1=Azathoth,el Demonio Sultan,es la regla y,posiblemente,el creador de todo lo existente. 
+necronomicon.text.azathoth.1=Azathoth, el Demonio Sultan, es la regla y, posiblemente, el creador de todo lo existente. 
 necronomicon.text.azathoth.2=Reside fuera del universo,sedado por el eterno sonido de flautas y tambores.A pesar de eso,tiene una voluntad propia,y cuestiones,comanda a Nyarlathotep.
 necronomicon.text.nyarlathotep.1=Nyarlathotep,el caos de arrastre,es un Dios externo que no estuvo exiliado ni encarcelado.
 necronomicon.text.nyarlathotep.2=Él camina sobre la tierra escondido entre los seres humanos,la difusión de la locura.Además de servir culto de los Dioses Exteriores,que cumple los deseos de Azathoth,a la que sirve.
@@ -323,7 +323,7 @@ necronomicon.text.greatoldones=Antes de las edades del hombre,el universo estaba
 necronomicon.text.abyssalnomicon_info=El Abyssalnomicon es el tomo profano a partir del cual se escribió el Necronomicón,cuando J'zahar le leyo esa sección para Alhazred.
 necronomicon.text.integration=Si se tiene acceso a la tecnología desconocida para Los Grandes Antiguos,se puede utilizar con la tecnología concedida desde el Abyss para nuevos fines.
 
-necronomicon.text.overworld=El Overworld se ha ampliado en los nuevos biomas para descubrir,entre ellos los biomas de Darklands y el pantano infestado Coralium.También puede encontrar Almas Oscuras y Abyssal Zombies durante sus viajes,que entran en el Overworld a través del Abyssal Wasteland.
+necronomicon.text.overworld=El Overworld se ha ampliado en los nuevos biomas para descubrir,entre ellos los biomas de Darklands y el pantano infestado Coralium.También puede encontrar Almas Oscuras y Abyssal Zombies durante sus viajes,que entran en el Overworld a través del Páramo Abisal.
 necronomicon.text.abyssal=Esta es la primera capa del Abyss, un lugar que está oscuro,verde,y poblado por los no-muertos.Oblivionaire se dice que es el que vigila este lugar,o su dragón,Asorah.Donde probablemente se origina a partir de Coralium.
 necronomicon.text.dreadlands=Anteriormente el mundo de Abyssalnite,los Dreadlands consiguió ese nombre cuando la temible plaga se desató en él,matando a todos los mineros y corrompiendo a los tranquilos Golems de Abyssalnite.La segunda capa del Abyss sostiene almas perdidas de los vivos.
 necronomicon.text.omothol=Una ciudad sin fin con un templo construido en el mismo borde de la cordura.El Reino de la J'zahar posee la única entrada al lugar donde Los Grandes Viejos habitan.El Guardián de la Puerta está mirando siempre,y nadie sale de la capa final del Abyss vivo.
@@ -331,22 +331,22 @@ necronomicon.text.darkrealm=En El Omothol se encuentra el Reino en el que las al
 
 necronomicon.text.miscinformation=En esta sección se puede encontrar información variada que no se menciona en ningún otro lugar en el Necronomicon.
 
-necronomicon.text.materials.abyssalnite.1=Abyssalnite is a new ore found in Darklands biomes. It is stronger than diamonds, and can be used to create tools, weapons and armor. Can be found below Y = 32. When mined, it drops ore blocks to smelt for ingots. The ingots are purple, much like the ore itself.
-necronomicon.text.materials.darkstone.1=Darkstone is a new type of stone found in Darklands biomes. Darklands Mountains are made out of this stone. The Dark Realm also consists of this material. When mined, it drops Darkstone Cobblestone, and it can be turned into Darkstone Bricks.
+necronomicon.text.materials.abyssalnite.1=Abyssalnite es el nuevo mineral encontrado en las montañas darklands. Es mas fuerte que el diamante, y se puede usar para crear herramientas, armas y armaduras. Se puede encontrar debajo de Y = 32. Al minarlo, suelta um mineral para derretirlo. Los lingotes son morados, como el mineral en si.
+necronomicon.text.materials.darkstone.1=Darkstone es un nuevo tipo de piedra encontrado en las montañas darklands. Las montañas Darklands están hechas de Darkstone. El reino oscuro también consiste en este materiál. Al ser minado, suelta Darkstone cobblestone, que se pueden convertir en ladrillos de darkstone.
 necronomicon.text.materials.darkstone.2=This material is slightly stronger than regular stone, and tools made from it are stronger than their counterparts.
 necronomicon.text.materials.coralium.1=El coralium es un nuevo mineral que se encuentra en los océanos y el bioma del pantano infestado.Las gemas tienen varios usos, entre ellos la creación de Perlas de Coralium.
-necronomicon.text.materials.coralium.2=Grandes cantidades de gemas se pueden utilizar para crear Trozos de Coralium, que puede ser fundido para ser refinado como lingotes de Coralium.Se requieren Perlas de Coralium para crear la primera llave de entrada,que se utiliza para llegar a la primera dimensión,El Abyssal Wasteland.
-necronomicon.text.materials.darklandsoak.1=Darklands Oak is a new tree commonly found in Darklands biomes. It's wood can be used to create planks, which can be used to craft stairs, slabs and fences. Compared to the normal Oak wood, it's darker in color, and could thus be more stylish in design patterns, shifting the different wood types.
+necronomicon.text.materials.coralium.2=Grandes cantidades de gemas se pueden utilizar para crear Trozos de Coralium, que puede ser fundido para ser refinado como lingotes de Coralium.Se requieren Perlas de Coralium para crear la primera llave de entrada,que se utiliza para llegar a la primera dimensión,El Páramo Abisal.
+necronomicon.text.materials.darklandsoak.1=Roble de Darklands es un nuevo tipo de arbol que se encuentra en las darklands. Se puede usar para crear vallas, puertas, etc. En comparación con la madera de roble normal, es de color más oscuro y, por lo tanto, podría ser más elegante en los patrones de diseño, cambiando los diferentes tipos de madera.
 necronomicon.text.materials.nitre.1=Nitre is a new ore found randomly in the Overworld. It can be used to create gunpowder, but doesn't have that many uses past that. It can be crystallized into Potassium and Nitrate crystals.
 necronomicon.text.materials.liquidantimatter.1=La antimateria líquida es un líquido recién encontrada bajo tierra en los pantanos infestados de Coralium.Tiene la capacidad de de-materializar entidades,y también puede obligar a otros líquidos a solidificarse tras una colisión.
 necronomicon.text.materials.liquidantimatter.2=Si le sucede que cae en un charco de antimateria líquida,es probable que muera dentro de aproximadamente 5 segundos,ya que se trata de una gran cantidad de daño en un tiempo muy corto,por lo que es bastante difícil de evitar una muerte segura al entrar en contacto con ella.
-necronomicon.text.materials.abyssalstone.1=Abyssal Stone is a new type of stone that the Abyssal Wasteland is made out of. You need iron tools or better to break it. Compared to other stone types, it is resistant to the transmutation produced by Liquid Coralium, and it can be turned into Abyssal Stone Bricks. Drops Abyssal Cobblestone when mined.
-necronomicon.text.materials.abyssalores.1=Dentro del Abyssal Wasteland,se pueden encontrar versiones "abismales" de los minerales que se encuentran en el Overworld,que cae en una versión Abyssal en gotas que de su contraparte en el overworld,si no es el mismo.
+necronomicon.text.materials.abyssalstone.1=Abyssal Stone es un nuevo tipo de piedra de la que está hecho Páramo Abisal. Necesita herramientas de hierro o mejores para romperlo. En comparación con otros tipos de piedra, es resistente a la transmutación producida por el coralium líquido, y puede convertirse en ladrillos de piedra abisal.
+necronomicon.text.materials.abyssalores.1=Dentro del Páramo Abisal,se pueden encontrar versiones "abismales" de los minerales que se encuentran en el Overworld,que cae en una versión Abyssal en gotas que de su contraparte en el overworld,si no es el mismo.
 necronomicon.text.materials.abyssalores.2=Hay una versión Abyssal de hierro,oro,diamantes,cobre,estaño y mineral de nitre.Que se generan en una altura similar a la del overworld.
-necronomicon.text.materials.abyssalcoralium.1=Abyssal Coralium is a variant of Coralium found within the Abyssal Wasteland. It is almost identical to it's overworld counterpart. Much like the regular Coralium Ore, the Abyssal Coralium Ore drops Coralium Gems, which has multiple uses. Generates around Y = 55 and below.
-necronomicon.text.materials.liquifiedcoralium.1=Liquified Coralium is a variant of Coralium found within the Abyssal Wasteland. Compared to the other variants, it doesn't drop Coralium Gems when mined. When mined, the dropped ore can be smelted down for Refined Coralium Ingots. Generates around Y = 22 and below.
-necronomicon.text.materials.pearlescentcoralium.1=Pearlescent Coralium is a variant of Coralium found within the Abyssal Wasteland. This variant drops Coralium Pearls when mined, instead of Coralium Gems. Due to the item gained from the ore, it is quite rare, and generates around Y = 10 and below.
-necronomicon.text.materials.liquidcoralium.1=El Coralium líquido  es un líquido que se encuentra dentro del nuevo Abyssal Wasteland.Tiene la capacidad de transmutar los elementos en contacto,como en la conversión de cualquier líquido a base de agua en sí misma,y la mayoría de los tipos de piedra en Piedra abyssal.
+necronomicon.text.materials.abyssalcoralium.1=El coralium abisal es una variante del coralium que se encuentra dentro del páramo abisal. Es casi idéntico a su contraparte del mundo. Al igual que el mineral de coral normal, el mineral de coral abisal deja caer gemas de coralio, que tiene múltiples usos. Genera alrededor de Y = 55 y menos.
+necronomicon.text.materials.liquifiedcoralium.1=Liquified Coralium is a variant of Coralium found within the Páramo Abisal. Compared to the other variants, it doesn't drop Coralium Gems when mined. When mined, the dropped ore can be smelted down for Refined Coralium Ingots. Generates around Y = 22 and below.
+necronomicon.text.materials.pearlescentcoralium.1=Pearlescent Coralium is a variant of Coralium found within the Páramo Abisal. This variant drops Coralium Pearls when mined, instead of Coralium Gems. Due to the item gained from the ore, it is quite rare, and generates around Y = 10 and below.
+necronomicon.text.materials.liquidcoralium.1=El Coralium líquido  es un líquido que se encuentra dentro del nuevo Páramo Abisal.Tiene la capacidad de transmutar los elementos en contacto,como en la conversión de cualquier líquido a base de agua en sí misma,y la mayoría de los tipos de piedra en Piedra abyssal.
 necronomicon.text.materials.liquidcoralium.2=También infecta a entidades que toca con la plaga de Coralium,matandolos a ellos si no son inmunes.Algunas entidades pueden ser convertidos en Abyssal Zombis sobre la muerte.Si el líquido choca con antimateria líquida,se convertirá en piedra de Coralium.
 necronomicon.text.materials.powerstonedreadlands.1=Dreadlands Infused Powerstone is a special stone found deep within Abyssal Strongholds. You need a pickaxe stronger or equal to a Refined Coralium Pickaxe in order to mine it. Once mined, it can be used to upgrade your Gateway Key if you have the other components.
 necronomicon.text.materials.dreadstone.1=Dreadstone is a stone found commonly in the Dreadlands. It was formerly Abyssalnite Stone that was converted by the Dread Plague aeons ago. You can turn it into Dreadstone Bricks. It is also used in when crafting the Altar of Cha'garoth.
@@ -363,8 +363,8 @@ necronomicon.text.materials.darkethaxium.1=Dark Ethaxium is a stronger version o
 necronomicon.text.materials.ritualaltar.1=El ritual del altar es el componente principal en la realización de rituales.Se usa presionando SHIFT mas clic-derecho con un Necronomicón que tenga la suficiente Energía Potencial.Para rituales exitosos,los pedestales cercanos al ritual necesitarán las ofrendas correctas puestas en ellas.
 necronomicon.text.materials.ritualpedestal.1=Los pedestales de ritual se utilizan para colocar las ofrendas al realizar rituales.Esto se realiza mediante la interacción con el pedestal mientras se mantiene la oferta que desea colocar.
 necronomicon.text.materials.monolithstone.1=El Monolito de piedra es un material utilizado en cierta medida con la energía potencial.Sus orígenes son desconocidos,aparte de que los Shoggoths son capaces de crearlo.Se puede obtener a partir de los monolitos o en guridas de Shoggoth esparcidas.
-necronomicon.text.materials.abyssalsand=Abyssal Sand is found around the surface layers of the Abyssal Wasteland. It can be smelted into Abyssal Sand Glass, which is green.
-necronomicon.text.materials.fusedabyssalsand=Fused Abyssal Sand covers the surface of the Abyssal Wasteland. It's glassy texture is formed from the sand reacting to the atmosphere of the dimension.
+necronomicon.text.materials.abyssalsand=Abyssal Sand is found around the surface layers of the Páramo Abisal. It can be smelted into Abyssal Sand Glass, which is green.
+necronomicon.text.materials.fusedabyssalsand=Fused Abyssal Sand covers the surface of the Páramo Abisal. It's glassy texture is formed from the sand reacting to the atmosphere of the dimension.
 
 necronomicon.text.crafting.coraliuminfusedstone.1=La Coralium Infused Stone se hace a mano con Gemas de Coralium,Clústeres y piedra. Los tres grupos pueden ser de cualquier tamaño, pero debe ser igual a 9.
 necronomicon.text.crafting.coraliuminfusedstone.2=Si se utiliza un grupo de 9-joyas,rodealo de bloques de piedra en lugar de 2 filas.Cuando este bloque se rompe (o se funde) se obtiene una Perla de Coralium.
@@ -372,9 +372,9 @@ necronomicon.text.crafting.shadowgem.1=Una Gema Oscura se craftea con los fragme
 necronomicon.text.crafting.shadowgem.2=Los Fragmentos de Oscuridad son droppeados por las criaturas de sombra,los Fragmentos de la Gema Oscura las dejan caer los Monstruos Oscuros y las Gemas Oscuras las dejan caer las Bestias Oscuras.Ellos estan en el bioma de Montaña de Darklands y el Reino de la Oscuridad.
 necronomicon.text.crafting.oblivionshard=Un fragmento del Olvido se hace con Gemas Oscuras y una Gema de Transmutación.
 necronomicon.text.crafting.gk1=La llave de entrada se hace con baritas de Blaze,Perlas de Coralium y un catalizador del Olvido.
-necronomicon.text.crafting.necro_c=El Necronomicon del Abyssal Wasteland se hace con la piel del Abyssal Wasteland y un Necronomicon.Contiene más conocimiento.
+necronomicon.text.crafting.necro_c=El Necronomicon del Páramo Abisal se hace con la piel del Páramo Abisal y un Necronomicon.Contiene más conocimiento.
 necronomicon.text.crafting.psdltracker=Un Powerstone Tracker se hace con Gemas Coralium y un ojo de Ender.
-necronomicon.text.crafting.necro_d=Un Necronomicon del Dreadlands se hace con piel del Dreadlands y un Necronomicon del Abyssal Wasteland.
+necronomicon.text.crafting.necro_d=Un Necronomicon del Dreadlands se hace con piel del Dreadlands y un Necronomicon del Páramo Abisal.
 necronomicon.text.crafting.transmutator.1=Un Transmutador se hace con ladrillos de Coralium,Bloques de refinados de Coralium,una joya de Transutacion y Coralium líquido en un cubo.
 necronomicon.text.crafting.transmutator.2=Para obtener ladrillos de Coralium,debe verter el líquido en Antimateria líquida de Coralium,a continuación,recoge la piedra formada a partir del líquido de Coralium.Luego,debe fundir la piedra de Coralium para los ladrillos de Coralium.
 necronomicon.text.crafting.crystallizer.1=Un cristalizador se hace utilizando ladrillos de Dreadstone, bloques de Dreadium y un horno.
@@ -389,14 +389,14 @@ necronomicon.text.crafting.engravingblank.2=Hay 4 Grabados de Moneda: En Blanco,
 necronomicon.text.crafting.coin=Una Moneda se hace con un pedernal y lingotes de hierro.También se pueden fabricar con estaño y lingotes de cobre.
 necronomicon.text.crafting.engraver=Un Grabador se hace Piedra, una Palanca, un Yunque y una Moineda de Grabado en Blanco.
 necronomicon.text.crafting.crystalbag.1=Una Bolsa de Cristal se hace con cuero y un lingote de oro.
-necronomicon.text.crafting.crystalbag.2=Se pueden actualizar rodeándolo con Piel del Abyssal Wasteland,Piel del Dreadlands,y a continuación,la Piel de Omothol.
+necronomicon.text.crafting.crystalbag.2=Se pueden actualizar rodeándolo con Piel del Páramo Abisal,Piel del Dreadlands,y a continuación,la Piel de Omothol.
 necronomicon.text.crafting.materializer.1=Un Materializador se hace con ladrillos de Ethaxium,Obsidiana,Bloques de Ethaxium y un Cubo de Antimateria Líquida.
 necronomicon.text.crafting.materializer.2=Para utilizar el Materializador,es necesario colocar una Bolsa de Cristal en la primera ranura,luego un Necronomicon en el segundo,a continuación,puede crear materiales que usan los cristales dentro de la bolsa.
 necronomicon.text.crafting.abyssalnomicon.1=El Abyssalnomicon se hace con lingotes de Ethaxium,Escalas de Eldritch,una Esencia del Guardián de la Puerta y un Necronomicon del Omothol.
 necronomicon.text.crafting.abyssalnomicon.2=Las Escalas de Eldritch se ganan al matar a Los Remanentes y Secuaces de El Guardián de la Puerta.
 necronomicon.text.crafting.rendingstaff.1=Un Bastón del Rending se hace con Fragmentos de Gema Oscura y un Fragmento del Olvido.Se puede obtener energía a partir de ciertas entidades (haciendo clic derecho).
-necronomicon.text.crafting.rendingstaff.2=Abyssal Wasteland La energía se recoge de cualquier entidad de Coralium.Dreadlands La energía se recoge de cualquier entidad de Dread.Omothol La energía se recoge de cualquier entidad del Omothol.La Energia Oscura se obtiene de cualquier Sombra viva.Las Esencias se crean cuando se recoge la energía suficiente.
-necronomicon.text.crafting.skin_aby=Una piel del Abyssal Wasteland se hace con Carne Plagada de Coralium y una Esencia del Abyssal Wasteland.La Esencia se obtiene mediante el uso del Baculo del Rending.
+necronomicon.text.crafting.rendingstaff.2=Páramo abisal La energía se recoge de cualquier entidad de Coralium.Dreadlands La energía se recoge de cualquier entidad de Dread.Omothol La energía se recoge de cualquier entidad del Omothol.La Energia Oscura se obtiene de cualquier Sombra viva.Las Esencias se crean cuando se recoge la energía suficiente.
+necronomicon.text.crafting.skin_aby=Una piel del Páramo abisal se hace con Carne Plagada de Coralium y una Esencia del Páramo abisal.La Esencia se obtiene mediante el uso del Baculo del Rending.
 necronomicon.text.crafting.skin_dre=Una piel del Dreadlands se hace con Fragmentos de Dread y una esencia del Dreadlands.La esencia se obtiene mediante el uso del Baculo del Rending.
 necronomicon.text.crafting.skin_omt=Una piel del Omothol se hace con Carne del espíritu necrófago de Omothol y una Esencia de Omothol.La esencia se obtiene mediante el uso del Bastón del Rending.
 necronomicon.text.crafting.dreadcloth=Una Tela de Dread se hace con Fragmentos de Dread,cuerdas y un pedazo de cuero.
@@ -461,19 +461,19 @@ necronomicon.text.enchantment.ironwall=El encantamiento de Pared de Hierro funci
 necronomicon.text.enchantment.sapping=The Sapping Enchantment increases the amount of energy a Staff of Rending can drain.
 necronomicon.text.enchantment.multirend=The Multi-rend Enchantment makes the Staff of Rending also drain energy from nearby mobs within a 3 block radius of the target.
 
-necronomicon.text.overworld.progression.1=Con el fin de llegar al Abyssal Wasteland,hay que elaborar una Llave de Entrada,lo que requiere un viaje al Nether,y para visitar El Darklands y un bioma a base de agua.El bioma a base de agua puede ser un pantano o un bioma marino.
+necronomicon.text.overworld.progression.1=Con el fin de llegar al Páramo abisal,hay que elaborar una Llave de Entrada,lo que requiere un viaje al Nether,y para visitar El Darklands y un bioma a base de agua.El bioma a base de agua puede ser un pantano o un bioma marino.
 necronomicon.text.overworld.progression.2=Desde el Nether se necesita 2 baritas de Blaze,y probablemente un poco más para más adelante.Desde el bioma del Darklands se necesita para matar a las sombras que viven para obtener finalmente las Gemas Oscuras.Se encuentran más comúnmente en las Montañas del Darklands.Se recomienda obtener un Bastón del Rending con el fin de obtener las Gemas Oscuras más rápido (más información en la sección de armaduras y herramientas especiales).
 necronomicon.text.overworld.progression.3=From the water-based biome you need Coralium Gems in order to create Coralium Pearls. Once you have obtained these items, you can create a Transmutation Gem through an Infusion Ritual (found in the ritual section). The recipe for Shards of Oblivion can be found in the special materials section.
 necronomicon.text.overworld.progression.4=When you have 4 Shards of Oblivion, use those and 4 units of Redstone Dust to infuse an Eye of Ender (through an infusion ritual, found in the ritual section of the Necronomicon) in order to create an Oblivion Catalyst, main component of the Gateway Key (the special materials section has the recipe).
-necronomicon.text.overworld.progression.5=Una vez que la Llave de Entrada es crafteada,simplemente haga clic derecho en el suelo para formar un portal.Para obtener más información,se necesita el Necronomicon del Abyssal Wasteland,que requiere 8 pieles del Abyssal Wasteland con el fin de actualizar.Se necesita el Bastón del Rending con el fin de obtener esencias utilizadas para elaborarlas.
+necronomicon.text.overworld.progression.5=Una vez que la Llave de Entrada es crafteada,simplemente haga clic derecho en el suelo para formar un portal.Para obtener más información,se necesita el Necronomicon del Páramo abisal,que requiere 8 pieles del Páramo abisal con el fin de actualizar.Se necesita el Bastón del Rending con el fin de obtener esencias utilizadas para elaborarlas.
 
-necronomicon.text.abyssal.progression.1=Una vez que haya llegado al Abyssal Wasteland,su próximo objetivo es llegar al Dreadlands.Se necesitan 3 componentes con el fin de actualizar su Llave de Entrada,un Ojo del Abyss,una infusión del Dreadlands Powerstone y una Gema de Transmutación.La primera se obtiene al derrotar a Asorah,El Caído,convocado por el ritual de "ritual del durmiente" (en la sección ritual).
+necronomicon.text.abyssal.progression.1=Una vez que haya llegado al Páramo Abisal,su próximo objetivo es llegar al Dreadlands.Se necesitan 3 componentes con el fin de actualizar su Llave de Entrada,un Ojo del Abyss,una infusión del Dreadlands Powerstone y una Gema de Transmutación.La primera se obtiene al derrotar a Asorah,El Caído,convocado por el ritual de "ritual del durmiente" (en la sección ritual).
 necronomicon.text.abyssal.progression.2=Asorah utiliza dragones espectrales para curarse a sí mismo,por lo que se deben retirar rápidamente a través de la lucha.Una vez derrotado,Asorah bajará su ojo con una gran cantidad de exp y los materiales encontrados en la dimensión.La infusión del Dreadlands Powerstone se encuentra dentro de una Fortaleza Abyssal,que se puede encontrar utilizando Powerstone Trackers (receta en la sección de materiales especiales).
 necronomicon.text.abyssal.progression.3=Una vez que haya localizado el Powerstone,puede extraerlo con un Pico de Coralium Refinado.Por último se puede actualizar la Llave de Entrada mediante la infusión con los componentes necesarios ("Llave de Entrada Dreaded de Asorah" rituales). Actualiza tu Necronomicon al Necronomicon del Dreadlands requiere 8 pieles del Dreadlands.
 
 necronomicon.text.dreadlands.progression.1=Una vez que haya alcanzado los Dreadlands, su próximo objetivo es llegar a Omothol. Tendrá que poseer un Transmutador, y que necesita para derrotar a Cha'garoth, La Dreadbeast. Con el fin de llegar a Cha'garoth, necesita el Altar de Cha'garoth, hecha de 2 piezas. Ambas piezas se crean a través de rituales.
 necronomicon.text.dreadlands.progression.2=Una vez que tenga las dos piezas de altar,es necesario colocarlos en Y=40 dentro del bioma de Montaña del Dreadlands y haga clic en él.Si lo hace,se autorizará la entrada a la guarida de Cha'garoth.Después de luchar con Dreadguards y eventualmente matando a Cha'garoth,recibirá una Llave de Entrada plagada-Dread,junto con el botín.La Llave necesita ser transmutada una funcional. 
-necronomicon.text.dreadlands.progression.3=Con el mencionado Transmutador (receta en la sección de materiales especiales Abyssal Wasteland) puede transmutar la Llave de Entrada plagada de Dread en Cha'garoth de la Llave de Entrada de R'lyehian,la concesión de acceso al Omothol.Actualización del Necronomicon al Necronomicon del Omothol requiere 8 Pieles de Omothol.
+necronomicon.text.dreadlands.progression.3=Con el mencionado Transmutador (receta en la sección de materiales especiales Páramo abisal) puede transmutar la Llave de Entrada plagada de Dread en Cha'garoth de la Llave de Entrada de R'lyehian,la concesión de acceso al Omothol.Actualización del Necronomicon al Necronomicon del Omothol requiere 8 Pieles de Omothol.
 
 necronomicon.text.omothol.progression.1=Al llegar al Omothol,es el momento de luchar con J'zahar,Guardián del Abyss.El templo de J'zahar puede estar situado en el corazón del Omothol (coordenadas X=4, Y=53, Z=7).Una vez que haya vencido al Guardián de la Puerta,usted será capaz de desbloquear todo el conocimiento oculto a través del Abyssalnomicon.
 necronomicon.text.omothol.progression.2=El Abyssalnomicon requiere Lingotes de Ethaxium,Escalas de Eldritch y la esencia del Guardián de la Puerta (Dado por J'zahar).
@@ -490,14 +490,14 @@ necronomicon.text.entity.anti.2=Si una Anti-entidad choca con su contraparte nor
 necronomicon.text.entity.evilanimals.1=Si encuentra alguno de estos animales,rápidamente se dará cuenta de que es hostil y gritan cuando le pegas.
 necronomicon.text.entity.evilanimals.2=Los Animales Malignos son pre-evolución de Animales Demonio,que eclosiona cuando matas el organismo de origen animal actual.Son inmunes al fuego,y desovan en la mayoría de los biomas del Overworld.
 necronomicon.text.entity.abyssalzombie.1=Abyssal Zombies se pueden encontrar en diversos biomas del océano,pantano,la playa y el Darklands.
-necronomicon.text.entity.abyssalzombie.2=Los Abyssal Zombies son Zombies que anteriormente han sido infectados con la Plaga de Coralium,haciendo que evolucionen hacia estos seres.Ellos son hostiles contra Zombies regulares.También desovan en el Abyssal Wasteland y en el End.
-necronomicon.text.entity.depthsghoul.1=Los espíritus necrófagos de las profundidades evolucionan con Coralium infestado.Se genera donde los Abyssal Zombies desovan.
+necronomicon.text.entity.abyssalzombie.2=Los Abyssal Zombies son Zombies que anteriormente han sido infectados con la Plaga de Coralium,haciendo que evolucionen hacia estos seres.Ellos son hostiles contra Zombies regulares.También desovan en el Páramo Abisal y en el End.
+necronomicon.text.entity.depthsghoul.1=Los espíritus necrófagos de las profundidades evolucionan con Coralium infestado.Se genera donde los Zombies abisales desovan.
 necronomicon.text.entity.depthsghoul.2=Los espíritus necrófagos son la obra maestra de la evolución de la plaga de Coralium sobre zombis, rara vez mutan en estos gigantes.Algunos de ellos adquieren nuevas formas, como Pete,el Sr. Wilson y el Dr.Orange,cada uno más fuerte que el otro.
-necronomicon.text.entity.skeletongoliath.1=Los Esqueletos Goliats son esqueletos masivos a garrotazos con itinerancia del Abyssal Wasteland.Origen Desconocido.
+necronomicon.text.entity.skeletongoliath.1=Los Esqueletos Goliats son esqueletos masivos a garrotazos con itinerancia del Páramo Abisal.Origen Desconocido.
 necronomicon.text.entity.skeletongoliath.2=Ha pensado alguna vez como se veria un esqueleto gigante en Minecraft? Bien,estos.Esqueletos Goliats son esqueletos grandes y potentes caminando entre los muertos.Ellos tienen una pequeña posibilidad de dejar caer el garrote en la muerte.
-necronomicon.text.entity.spectraldragon.1=Dragones Espectrales son dragones transparentes que rara vez aparecen en el Abyssal Wasteland.
+necronomicon.text.entity.spectraldragon.1=Dragones Espectrales son dragones transparentes que rara vez aparecen en el Páramo Abisal.
 necronomicon.text.entity.spectraldragon.2=Estos dragones fantasmales son en su mayoría una molestia en la cara,pero probablemente más difícil cuando Asorah devora su energía vital con el fin de regenerarse a sí mismo.Pueden volar a través de la materia sólida sin destruirla,a diferencia del dragón de Ender.
-necronomicon.text.entity.asorah.1=Asorah,El Caído, es el primer jefe encontrado en AbyssalCraft.Convocado dentro del Abyssal Wasteland.
+necronomicon.text.entity.asorah.1=Asorah,El Caído, es el primer jefe encontrado en AbyssalCraft.Convocado dentro del Páramo Abisal.
 necronomicon.text.entity.asorah.2=Asorah antes era el dragón de Oblivionaire,hasta que falleció hace eones,después de que ha sido reanimado a través del uso de Coralium hasta que fue destruido por un enemigo desconocido.Ahora su alma reside en el reino de la oscuridad.
 necronomicon.text.entity.abyssalnitegolem.1=Los Golems de Abyssalnite están viviendo sobre racimos de mineral que se encuentran en los Dreadlands.
 necronomicon.text.entity.abyssalnitegolem.2=Estas criaturas de Abyssalnite sólida eran la población nativa de la mina dimensional que se convirtió en el Dreadlands. Tienden a buscar pelea con su contraparte temida, para vengar su mundo perdido.
@@ -539,10 +539,10 @@ necronomicon.text.entity.shadowtitan.1=Los Titanes Oscuros son habitantes del Re
 necronomicon.text.entity.shadowtitan.2=Los Titanes Oscuros son poderosas sombras de vida de itinerancia en El Reino Oscuro.En comparación con la Bestia Oscura,Los Titanes Oscuros son blindados,y más potentes.
 necronomicon.text.entity.sacthoth.1=Sacthoth,mensajero de la muerte se encuentra en El Reino de la Oscuridad.
 necronomicon.text.entity.sacthoth.2=Sacthoth es el ser más fuerte en El Reino de la Oscuridad,y el gobernante de las sombras vivas.La única manera de que se fuese del Reino de La Oscuridad es a través de la explosión de una Bomba del Olvido.Él lleva una espada poderosa capaz de arrancar las almas de los vivos.
-necronomicon.text.entity.coraliumsquid.1=Coralium Infested Squids are found in pools of Liquid Coralium inside the Abyssal Wasteland.
-necronomicon.text.entity.coraliumsquid.2=These Squids have been transformed by the Coralium Plague, enabling them to transfer it to victims touched by them, or the ink they squirt on their targets.
-necronomicon.text.entity.shuboffspring.1=Dark Offspring are vile beasts resembling a goat mixed with a dead tree, and are the offspring of Shub-Niggurath.
-necronomicon.text.entity.shuboffspring.2=These beasts can rarely be found in forests (most common in Roofed Forests and Darklands Forests). You know you're getting close to one if you start hearing sheep out of nowhere. You're most likely to encounter one at night during a new moon.
+necronomicon.text.entity.coraliumsquid.1=Los calamares infestados de coralium se encuentran en lagos de coralium líquido dentro del páramo abisal.
+necronomicon.text.entity.coraliumsquid.2=Estos calamares han sido transformados por la peste coralina, lo que les permite transferirlo a las víctimas que tocan, o la tinta que arrojan sobre sus objetivos.
+necronomicon.text.entity.shuboffspring.1=Los descendientes oscuros son bestias viles que se asemejan a una cabra mezclada con un árbol muerto, y son descendientes de Shub-Niggurath.
+necronomicon.text.entity.shuboffspring.2=Estas bestias rara vez se pueden encontrar en los bosques (más común en los bosques techados y los bosques de tierras oscuras). Sabes que te estás acercando a uno si comienzas a escuchar ovejas de la nada. Es más probable que encuentres uno por la noche durante una luna nueva.
 
 necronomicon.text.rituals.info=Compruebe la sección de información para obtener información sobre los rituales,o las otras secciones para obtener información acerca de los rituales disponibles."Lugar" especifica dónde se puede realizar el ritual.
 
@@ -550,9 +550,9 @@ necronomicon.text.rituals.1=Con el fin de empezar a trabajar con los rituales es
 necronomicon.text.rituals.2=Those are: Cobblestone, Darkstone Cobblestone, Abyssal Cobblestone, Coralium Cobblestone, Dreadstone Cobblestone, Abyssalnite Cobblestone, Ethaxium Brick and Dark Ethaxium Brick. The materials can only be used in their specific dimension (eg. Cobblestone and Darkstone Cobblestone in the Overworld, Abyssal Cobblestone in the Abyssal Wasteland etc).
 necronomicon.text.rituals.3=Para crear el altar,sólo tiene que colocar los bloques en la formación anterior (mantener el área de color limpia) y hacer shift-clic derecho en el bloque central con un Necronomicon.
 necronomicon.text.rituals.4=Después de eso, usted puede comenzar a realizar rituales! Con el fin de realizar un ritual, coloque objetos sobre los pedestales y presionando shift-clic derecho en el altar con un Necronomicon.
-necronomicon.text.rituals.5=When performing, the pedestals project bits of their placed object towards the altar. Rituals where you gain objects always end with a bolt of lightning striking the altar.
+necronomicon.text.rituals.5=Al realizarlos, los pedestales proyectan trozos de su objeto colocado hacia el altar. Los rituales donde obtienes objetos siempre terminan con un rayo que golpea el altar.
 necronomicon.text.rituals.6=La energía potencial es necesaria con el fin de realizar rituales (cada ritual muestra la cantidad que necesita).La energía potencial es una forma pura de energía sin explotar que se origina a partir de un plano superior de existencia.Se utiliza principalmente para alimentar sacrificios hechos a los Grandes Antiguos (cualquier ritual).Estatuas colocadas en los monolitos de los shoggoth,se dice que son capaz de drenar la misma.
-necronomicon.text.rituals.7=Some rituals require a living sacrifice. This means you need to have an adult animal within close proximity of the altar and pedestals. When the ritual starts, the target animal will begin to glow, and needs to die before the ritual ends. Failing to complete a ritual will trigger a Disruption, which is bad.
+necronomicon.text.rituals.7=Algunos rituales requieren un sacrificio vivo. Esto significa que debe tener un animal adulto cerca del altar y los pedestales. Cuando comienza el ritual, el animal objetivo comenzará a brillar y necesita morir antes de que termine el ritual. No completar un ritual desencadenará una interrupción, lo cual es malo.
 
 necronomicon.text.pe.1=Energía potencial (EP) es una nueva forma de energía que se presenta en AbyssalCraft.Se origina a partir de un plano superior de existencia (donde ningún mortal se ha extraviado),y sólo se pueden recoger con la exploración de ley de líneas utilizando diversos métodos.Existen objetos capaces de hacerlo,que serán explicados aquí.
 necronomicon.text.pe.2=Un buen lugar para comenzar la obtención de los materiales necesarios para crear algunos de los objetos de recolección de EP es en las Guaridas Shoggoth,que se encuentran en pantanos y ríos.
@@ -582,17 +582,17 @@ necronomicon.text.machines.2=El cristalizador se utiliza para cristalizar los el
 necronomicon.text.machines.3=El grabador se utiliza para grabar las monedas,lo que le permite comerciar cosas con los Remanentes.El "combustible" que se utiliza en El Grabador son plantillas de grabado,que se desgastan después de una cierta cantidad de usos.Si desea volver a grabar una moneda,usted tiene que utilizar un grabado en blanco en ella en primer lugar (con un grabado).
 necronomicon.text.machines.4=El materializador se usa para crear objetos mediante la combinación de elementos de base (obtenido a través de la cristalización).El materializador no utiliza combustible,sino que requiere un Necronomicon para funcionar,y una bolsa de cristal con cristales para materializar objetos.
 
-necronomicon.text.knowledge.1=Some information in this book is incomprehensible to your puny, regular, untwisted mortal mind. By studying artifacts, listening to the whispers from statues, defeat monsters and explore the surroundings, you can expand your mind with new knowledge, enabling you to comprehend the information. Some Items and Blocks also require knowledge in order to be comprehended.
-necronomicon.text.knowledge.2=Treasure chests can contain lost pages with information, and in old structures scattered about, you can uncover murals that will grant you knowledge. Statues depicting Great Old Ones can sometimes be heard whispering things. Through combat you can gain knowledge of the enemy after defeating it. Exploring biomes and dimensions will grant you new knowledge.
-necronomicon.text.knowledge.3=Information you can't comprehend appears in Aklo glyphs rather than the human alphabet. The following page has an example of such glyphs:
+necronomicon.text.knowledge.1=Parte de la información de este libro es incomprensible para su mente mortal, débil y retorcida. Al estudiar artefactos, escuchar los susurros de las estatuas, derrotar a los monstruos y explorar los alrededores, puede expandir su mente con nuevos conocimientos, lo que le permite comprender la información. Algunos elementos y bloques también requieren conocimiento para ser comprendidos.
+necronomicon.text.knowledge.2=Los cofres del tesoro pueden contener páginas perdidas con información, y en estructuras antiguas diseminadas, puede descubrir murales que le otorgarán conocimiento. Las estatuas que representan a los Grandes Antiguos a veces se escuchan susurrando cosas. A través del combate puedes obtener conocimiento del enemigo después de derrotarlo. Explorar biomas y dimensiones le otorgará nuevos conocimientos.
+necronomicon.text.knowledge.3=La información que no puede comprender aparece en los glifos de Aklo en lugar del alfabeto humano. La siguiente página tiene un ejemplo de dichos glifos:
 
-necronomicon.text.coraliumplague.1=The Coralium Plague is a disease originating from the Abyssal Wasteland. It's capable of transforming infected victims on death into stronger monsters. It's only considered a plague by those harmed by it.
-necronomicon.text.coraliumplague.2=An antidote for the Coralium Plague can be made with a Water Bottle, a Wasteland's Thorn, a piece of Anti-Plagued Flesh and a piece of Abyssal Shoggoth Flesh.
+necronomicon.text.coraliumplague.1=La peste coralina es una enfermedad que se origina en el Páramo Abisal. Es capaz de transformar víctimas infectadas en la muerte en monstruos más fuertes. Solo es considerado una plaga por aquellos perjudicados por ella.
+necronomicon.text.coraliumplague.2=Se puede hacer un antídoto para la peste de coralina con una botella de agua, una espina del páramo, un trozo de carne anti plagada y un trozo de carne abisal de shoggoth.
 
-necronomicon.text.dreadplague.1=The Dread Plague is a disease originating from the Dreadlands. It's a very infectious disease, swiftly travelling between hosts, but also transforming the ground around those afflicted by it, thus allowing the plague to grow stronger. The only place known to be completely immune to the Dread Plague is Omothol.
-necronomicon.text.dreadplague.2=An antidote for the Dread Plague can be made with a Water Bottle, a Dreadlands Sapling, a Dread Fragment and a piece of Dreaded Shoggoth Flesh.
+necronomicon.text.dreadplague.1=La peste del terror es una enfermedad que se origina en las Dreadlands. Es una enfermedad muy infecciosa, que viaja rápidamente entre los anfitriones, pero también transforma el suelo alrededor de los afectados, permitiendo que la plaga se fortalezca. El único lugar que se sabe que es completamente inmune a la Plaga es el Omothol.
+necronomicon.text.dreadplague.2=Se puede hacer un antídoto para la peste aterradora con una botella de agua, un retoño de las Dreadlands, un fragmento de dread y un trozo de carne dread de shoggoth.
 
-necronomicon.text.placesofpower.info=Structures of devotion appeasing the Great Old Ones, allowing for safe PE generation.
+necronomicon.text.placesofpower.info=Estructuras de devoción que apaciguan a los Grandes Antiguos, lo que permite la generación segura de PE.
 
 necronomicon.text.placesofpower.1=Places of Power are shrine-like structures built to show devotion to the Great Old Ones. These sites of worship spread the word of the Great Old Ones, while also enabling harvesting of PE without disruptions. Along with the safe retrieval of energy, these structures can also boost various stats of the statues contained in them.
 necronomicon.text.placesofpower.2=In the structures section you can view the structures you've gained knowledge on how to build, their dimensions and what stats they amplify (if any). The point where you form the structure (by sneak right-clicking it with your Necronomicon) will change block in the preview to indicate where it is. Hovering over the preview shows a list of blocks used to build it.
@@ -817,8 +817,8 @@ ac.ritual.spiritTablet=Spirit Tablet
 ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crystal with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
 
 #Spells
-ac.spell.lifedrain=Life Drain
-ac.spell.lifedrain.desc=Siphon the lifeforce of your enemy to heal your wounds.
+ac.spell.lifedrain=Drenar salud
+ac.spell.lifedrain.desc=Sifona la fuerza vital de tu enemigo para curar tus heridas.
 ac.spell.entropy=Entropy
 ac.spell.entropy.desc=Draw energy straight from the ground as it crumbles to dust.
 ac.spell.mining=Mining
@@ -903,16 +903,16 @@ key.configurator_filter.desc=Open the Spirit Tablet Filter inventory
 key.configurator_path.desc=Clear the path in the Spirit Tablet
 
 #Damagesources
-death.attack.coralium=%1$s murio por la Plaga de Coralium
-death.attack.coralium.player=%1$s sucumbio a la Plaga de Coralium al mismo tiempo tratando de escapar de %2$s
-death.attack.dread=%1$s murio por la Dread Plaga
+death.attack.coralium=%1$s murio por la Plaga Coralina
+death.attack.coralium.player=%1$s sucumbio a la Plaga Coralina al mismo tiempo que trataba de escapar de %2$s
+death.attack.dread=%1$s sucumbió a la fuerza de Cha'garoth
 death.attack.dread.player=%1$s sucumbio a la fuerza de Cha'garoth al mismo tiempo tratando de escapar de %2$s
 death.attack.antimatter=%1$s fue desarmado molecularmente
 death.attack.antimatter.player=%1$s fue desarmado molecularmente tratando de escapar de %2$s
-death.attack.shadow=%1$s was consumed by darkness
-death.attack.shadow.player=%1$s was consumed by darkness whilst trying to escape %2$s
-death.attack.shoggoth_acid=%1$s was dissolved in Shoggoth Acid
-death.attack.shoggoth_acid.player=%1$s was dissolved in Shoggoth Acid whilst trying to escape %2$s
+death.attack.shadow=%1$s fue consumido por la oscuridad
+death.attack.shadow.player=%1$s fue consumido por la oscuridad mientras luchaba contra %2$s
+death.attack.shoggoth_acid=%1$s fue disuelto en Ácido Shoggoth
+death.attack.shoggoth_acid.player=%1$s fue disuelto en Ácido Shoggoth tratando de escapar de %2$s
 
 #Tooltips
 tooltip.portalplacer.1=Haga clic derecho en el suelo para
@@ -935,7 +935,7 @@ tooltip.odb=Explosivo pesado, uso bajo su propio riesgo.
 tooltip.crystal=Formula molecular
 tooltip.soulreaper=Almas cosechadas
 tooltip.crystalbag=Esta bolsa contiene elementos cristalizados
-tooltip.drainstaff.energy.abyssal=Energía de Abisal Wasteland
+tooltip.drainstaff.energy.abyssal=Energía del Páramo Abisal
 tooltip.drainstaff.energy.dread=Energía del Dreadlands
 tooltip.drainstaff.energy.omothol=Energía del Omothol
 tooltip.drainstaff.energy.shadow=Energía Oscura
@@ -966,7 +966,7 @@ itemGroup.accoins=Abyssalcraft Monedas
 itemGroup.acspells=AbyssalCraft Spells
 
 #Fluids
-fluid.liquidcoralium=Coralium líquido
+fluid.liquidcoralium=Coralio líquido
 fluid.liquidantimatter=Antimateria líquida
 
 #Blocks
@@ -1137,7 +1137,7 @@ tile.energycollector.name=Energy Collector
 tile.energyrelay.name=Energy Relay
 tile.energycontainer.name=Energy Container
 tile.tieredenergycollector.0.name=Overworld Energy Collector
-tile.tieredenergycollector.1.name=Abyssal Wasteland Energy Collector
+tile.tieredenergycollector.1.name=Abyssal Energy Collector
 tile.tieredenergycollector.2.name=Dreadlands Energy Collector
 tile.tieredenergycollector.3.name=Omothol Energy Collector
 tile.tieredenergyrelay.0.name=Overworld Energy Relay
@@ -1360,8 +1360,8 @@ item.shoggothflesh.omothol.name=Carne de Shoggoth del Omothol
 item.shoggothflesh.darkrealm.name=Carne de Shoggoth Oscuro
 item.shadowplate.name=Placa de Armadura de Titan Oscuro
 item.necronomicon.name=Necronomicon
-item.necronomicon_cor.name=Necronomicon del Abyssal Wasteland
-item.necronomicon_dre.name=Necronomicon del Dreadlands
+item.necronomicon_cor.name=Necronomicon del Páramo Abisal
+item.necronomicon_dre.name=Necronomicon de las Tierras del Terror
 item.necronomicon_omt.name=Necronomicon del Omothol
 item.abyssalnomicon.name=Abyssalnomicon
 item.crystalbag_small.name=Bolsa de Cristal Pequeña
@@ -1373,13 +1373,13 @@ item.nugget.coralium.name=Pepita de Coralium Refinado
 item.nugget.dreadium.name=Pepita de Dreadium
 item.nugget.ethaxium.name=Pepita de Ethaxium
 item.drainstaff.normal.name=Bastón del Rending
-item.drainstaff.aw.name=Abyssal Wasteland Staff of Rending
+item.drainstaff.aw.name=Abyssal Bastón de Rending del Páramo
 item.drainstaff.dl.name=Dreadlands Staff of Rending
 item.drainstaff.omt.name=Omothol Staff of Rending
-item.essence.abyssalwasteland.name=Esencia del Abyssal Wasteland
+item.essence.abyssalwasteland.name=Esencia del Páramo Abisal
 item.essence.dreadlands.name=Esencia del Dreadlands
 item.essence.omothol.name=Esencia del Omothol
-item.skin.abyssalwasteland.name=Piel del Abyssal Wasteland
+item.skin.abyssalwasteland.name=Piel del Páramo Abisal
 item.skin.dreadlands.name=Piel del Dreadlands
 item.skin.omothol.name=Piel del Omothol
 item.ritualcharm.name=Encanto de ritual
