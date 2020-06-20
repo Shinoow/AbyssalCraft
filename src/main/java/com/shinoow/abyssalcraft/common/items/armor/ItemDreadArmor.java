@@ -50,15 +50,15 @@ public class ItemDreadArmor extends ItemACArmor {
 		if(world.isRemote || !ACConfig.armorPotionEffects) return;
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_helmet){
 			if(world.provider.isSurfaceWorld())
-				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0, false, false));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.dread_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.dread_plague);
 		}
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_chestplate)
-			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 3));
+			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 3, false, false));
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_leggings)
-			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 3));
+			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 3, false, false));
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_boots)
-			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 3));
+			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 3, false, false));
 	}
 }

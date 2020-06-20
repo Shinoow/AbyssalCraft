@@ -49,10 +49,10 @@ public class ItemCoraliumArmor extends ItemACArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if(world.isRemote || !ACConfig.armorPotionEffects) return;
 		if (itemstack.getItem() == ACItems.refined_coralium_helmet)
-			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0, false, false));
 		if (itemstack.getItem() == ACItems.refined_coralium_chestplate)
-			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0, false, false));
 		if (itemstack.getItem() == ACItems.refined_coralium_boots)
-			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 0, false, false));
 	}
 }

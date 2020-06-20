@@ -89,18 +89,18 @@ public class ItemDreadiumSamuraiArmor extends ItemACArmor {
 		if(world.isRemote || !ACConfig.armorPotionEffects) return;
 		if (itemstack.getItem() == ACItems.dreadium_samurai_helmet) {
 			if(world.provider.isSurfaceWorld())
-				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0, false, false));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.dread_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.dread_plague);
 		}
 		if (itemstack.getItem() == ACItems.dreadium_samurai_chestplate) {
-			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20));
-			player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20));
+			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0, false, false));
+			player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 0, false, false));
 		}
 		if (itemstack.getItem() == ACItems.dreadium_samurai_leggings)
-			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 1, false, false));
 		if (itemstack.getItem() == ACItems.dreadium_samurai_boots)
-			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1, false, false));
 
 	}
 }

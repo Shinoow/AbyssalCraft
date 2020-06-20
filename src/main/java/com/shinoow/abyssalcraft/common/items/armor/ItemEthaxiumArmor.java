@@ -50,7 +50,7 @@ public class ItemEthaxiumArmor extends ItemACArmor {
 		if(world.isRemote || !ACConfig.armorPotionEffects) return;
 		if (itemstack.getItem() == ACItems.ethaxium_helmet) {
 			if(world.provider.isSurfaceWorld() && !world.provider.isDaytime())
-				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0, false, false));
 			if(player.getActivePotionEffect(MobEffects.HUNGER) !=null)
 				player.removePotionEffect(MobEffects.HUNGER);
 			if(player.getActivePotionEffect(MobEffects.POISON) !=null)
@@ -58,19 +58,19 @@ public class ItemEthaxiumArmor extends ItemACArmor {
 		}
 		if(itemstack.getItem() == ACItems.ethaxium_chestplate){
 			if(player.isBurning() || world.provider.doesWaterVaporize())
-				player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 2));
+				player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 2, false, false));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.antimatter_potion) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.antimatter_potion);
 			if(world.rand.nextInt(200) == 0)
-				player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 60));
+				player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 60, 0, false, false));
 		}
 		if(itemstack.getItem() == ACItems.ethaxium_leggings)
 			if(world.rand.nextInt(200) == 0)
-				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 60));
+				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 60, 0, false, false));
 		if(itemstack.getItem() == ACItems.ethaxium_boots)
 			if(player.isInWater()){
-				player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 2));
-				player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 1));
-			} else player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1));
+				player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 2, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 1, false, false));
+			} else player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1, false, false));
 	}
 }

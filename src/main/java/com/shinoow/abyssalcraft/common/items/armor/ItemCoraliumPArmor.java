@@ -50,14 +50,14 @@ public class ItemCoraliumPArmor extends ItemACArmor {
 		if(world.isRemote || !ACConfig.armorPotionEffects) return;
 		if (itemstack.getItem() == ACItems.plated_coralium_helmet) {
 			if(world.provider.isSurfaceWorld() || ACConfig.nightVisionEverywhere)
-				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0));
+				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0, false, false));
 			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
 				player.removePotionEffect(AbyssalCraftAPI.coralium_plague);
 		}
 		if (itemstack.getItem() == ACItems.plated_coralium_boots)
 			if(player.isInWater()){
-				player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 2));
-				player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 1));
-			} else player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1));
+				player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 2, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 1, false, false));
+			} else player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1, false, false));
 	}
 }

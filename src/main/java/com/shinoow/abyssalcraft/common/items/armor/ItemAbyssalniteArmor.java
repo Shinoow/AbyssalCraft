@@ -49,8 +49,8 @@ public class ItemAbyssalniteArmor extends ItemACArmor {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemstack) {
 		if(world.isRemote || !ACConfig.armorPotionEffects) return;
 		if (itemstack.getItem() == ACItems.abyssalnite_helmet)
-			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0, false, false));
 		if (itemstack.getItem() == ACItems.abyssalnite_boots)
-			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 0));
+			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 0, false, false));
 	}
 }
