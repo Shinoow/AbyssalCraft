@@ -134,9 +134,8 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 
 	@Override
 	public void setActive(AmplifierType amp, DeityType deity) {
-		if(!isActive()){
+		if(!isActive())
 			setActiveAmplifier(amp);
-		}
 	}
 
 	@Override
@@ -227,9 +226,9 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 	@Override
 	public void update() {
 
-		if(isActive()){
+		if(isActive())
 			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0);
-		} else PEUtils.clearManipulatorData(this);
+		else PEUtils.clearManipulatorData(this);
 
 		boolean flag = false;
 

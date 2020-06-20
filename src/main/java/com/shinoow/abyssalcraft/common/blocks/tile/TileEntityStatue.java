@@ -222,9 +222,9 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public void update(){
 
-		if(isActive()){
+		if(isActive())
 			((WorldServer)world).spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0, 0, 1.0);
-		} else PEUtils.clearManipulatorData(this);
+		else PEUtils.clearManipulatorData(this);
 
 		int range = (int) (7 + PEUtils.getRangeAmplifiers(world, pos, this)*4 + getAmplifier(AmplifierType.RANGE));
 

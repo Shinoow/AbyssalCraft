@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.common.handlers;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
