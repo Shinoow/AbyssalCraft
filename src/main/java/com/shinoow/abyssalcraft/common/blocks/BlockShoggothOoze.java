@@ -50,7 +50,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	protected static final AxisAlignedBB[] OOZE_AABB = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
 
 	public BlockShoggothOoze(){
-		super(Material.GROUND, 1.0F, 1.0F, SoundType.SAND);
+		super(Material.GROUND, 1.0F, 1.0F, SoundType.SLIME);
 		setDefaultState(blockState.getBaseState().withProperty(LAYERS, Integer.valueOf(1)));
 		setTickRandomly(ACConfig.oozeExpire);
 	}
