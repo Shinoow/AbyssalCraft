@@ -11,6 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.transfer.ItemTransferConfiguration;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
@@ -55,7 +59,8 @@ public class ItemTransferEventHandler {
 		{
 			World world = event.world;
 			if(world.getTotalWorldTime() % 20 != 0) return;
-			world.loadedTileEntityList.stream()
+			List<TileEntity> list = new ArrayList<>(world.loadedTileEntityList);
+			list.stream()
 			.filter(t -> world.isBlockLoaded(t.getPos()))
 			.filter(this::hasCap)
 			.filter(ItemTransferEventHandler::hasInventory)//maybe remove
