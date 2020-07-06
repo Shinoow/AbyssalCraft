@@ -547,7 +547,7 @@ necronomicon.text.entity.shuboffspring.2=这些野兽很少在森林中能被找
 necronomicon.text.rituals.info=检查关于仪式的部分信息，或者其它章节有关可用仪式的信息。“位置”指定仪式能在哪里进行。
 
 necronomicon.text.rituals.1=要想开始进行仪式，你必须创建一个祭坛来作为举行仪式的位置。你总共能用8种材料来构建你的仪式祭坛。
-necronomicon.text.rituals.2=那些材料是：圆石、黑暗圆石、深渊圆石、珊瑚圆石、恐惧圆石、渊素圆石、伊塞斯砖块和暗色伊塞斯砖块。不同的材料只能在其特定的维度使用（例如：圆石和黑暗圆石圆石在主世界，深渊圆石在深渊荒原等）。
+necronomicon.text.rituals.2=那些材料是：圆石、黑暗圆石、深渊圆石、珊瑚圆石、恐惧圆石、渊素圆石、伊塞斯砖块和暗色伊塞斯砖块。不同的材料只能在其特定的维度使用（例如：圆石和黑暗圆石在主世界，深渊圆石在深渊荒原等）。
 necronomicon.text.rituals.3=要建造祭坛，只需按上述方法摆放方块（保持涂色区域可见）然后手持死灵之书按住shift右击中心方块。
 necronomicon.text.rituals.4=然后，你能开始举行仪式！要进行一个仪式，将物品放在基座上然后手持死灵之书按住shift右击仪式祭坛即可。
 necronomicon.text.rituals.5=仪式进行时，基座会把放置的一部分物体投向祭坛。获得物品的仪式最后总是会有一束闪电击中仪式祭坛。
@@ -1005,7 +1005,7 @@ tile.abystairs.name=深渊石砖楼梯
 tile.coraliumore.name=珊瑚矿石
 tile.abyore.name=渊素矿石
 tile.abyfence.name=深渊石砖栅栏
-tile.dscwall.name=黑暗石圆石墙
+tile.dscwall.name=黑暗圆石墙
 tile.odb.name=湮灭弹
 tile.ingotblock.0.name=渊素块
 tile.ingotblock.1.name=精炼珊瑚块
