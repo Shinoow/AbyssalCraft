@@ -858,7 +858,7 @@ ac.structure.archway.blocks=6个墙方块（任意）；4个楼梯方块（任�
 
 #撕裂
 ac.rending.shadowgem=阴影宝石可以通过从阴影生物收获阴影能量获得。
-ac.rending.essence_aw=深渊荒原精华可以通过从深渊珊瑚实体收获深渊荒芜能量获得。
+ac.rending.essence_aw=深渊荒原精华可以通过从深渊珊瑚实体收获深渊荒原能量获得。
 ac.rending.essence_dl=恐惧之地精华可以通过从恐惧实体收获恐惧能量获得。
 ac.rending.essence_omt=奥穆索精华可以通过从奥穆索实体收获奥穆索能量获得。
 
