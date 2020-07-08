@@ -610,7 +610,7 @@ necronomicon.text.itemtransportsystem.4=如果你不想在地面设置路径，�
 necronomicon.text.itemtransportsystem.5=通过使用绑定按键（检查物品的悬浮提示可知），你可以打开过滤面板，过滤器最多支持5个物品，允许对子类型（放入石头同样会过滤安山岩，花岗岩等）和NBT（一件附魔盔甲将只允许其他的附魔盔甲）进行过滤。过滤器是可选的，如果没有设置，那么任何物品都会被接受。
 necronomicon.text.itemtransportsystem.6=当你正在使用“应用配置”模式时，潜行并右击你想输出物品的方块。方块的面很重要，所以请记住方块是否仅从一面输出物品。
 necronomicon.text.itemtransportsystem.7=当你正在使用“清除配置”模式时，你可以通过潜行并右击方块来移除其上的配置。破坏或放置方块能达到相同效果，但这一操作相比之下能为你节省时间。
-necronomicon.text.itemtransportsystem.8=有两个实用咒语（名为“展示路线”和“鸣钟”），可以帮助你追踪已确定的路线，以及启动或停止它们。“展示路线”会显示你附近活动中的路线，“鸣钟”会启动或停止你正在注视的方块所连接的路线（或者若没有对准单个方块，会直接对附近的所有路线起作用）。
+necronomicon.text.itemtransportsystem.8=有两个实用咒语（名为“魂径现形”和“鸣钟”），可以帮助你追踪已确定的路线，以及启动或停止它们。“魂径现形”会显示你附近活动中的路线，“鸣钟”会启动或停止你正在注视的方块所连接的路线（或者若没有对准单个方块，会直接对附近的所有路线起作用）。
 
 necronomicon.text.wip=这一章节还未完成。
 
@@ -839,7 +839,7 @@ ac.spell.oozeremoval=软泥去除
 ac.spell.oozeremoval.desc=驱散施咒者附近的修格斯软泥。
 ac.spell.teleporthostiles=献祭驱散
 ac.spell.teleporthostiles.desc=献祭一个幼体的生命以驱逐黑暗的造物：对一个未成年的动物释放该咒语以将50格内的敌对生物传送走。
-ac.spell.displayRoutes=展示路线
+ac.spell.displayRoutes=魂径现形
 ac.spell.displayRoutes.desc=显示施咒者16格范围内任意激活状态的物品输运路线。
 ac.spell.toggleState=鸣钟
 ac.spell.toggleState.desc=启动/停止玩家16格半径内所有方块的物品输运（或者仅对玩家正在注视的方块产生影响）。
