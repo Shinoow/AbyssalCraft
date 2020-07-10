@@ -1474,18 +1474,18 @@ entity.abyssalcraft.shuboffspring.name=黑暗幼崽
 #药水
 potion.Cplague=珊瑚瘟疫
 potion.effect.Cplague=珊瑚瘟疫药水
-splash_potion.effect.Cplague=喷溅珊瑚瘟疫药水
-lingering_potion.effect.Cplague=滞留珊瑚瘟疫药水
+splash_potion.effect.Cplague=喷溅型珊瑚瘟疫药水
+lingering_potion.effect.Cplague=滞留型珊瑚瘟疫药水
 tipped_arrow.effect.Cplague=珊瑚瘟疫之箭
 potion.Dplague=恐惧瘟疫
 potion.effect.Dplague=恐惧瘟疫药水
-splash_potion.effect.Dplague=喷溅恐惧瘟疫药水
-lingering_potion.effect.Dplague=滞留恐惧瘟疫药水
+splash_potion.effect.Dplague=喷溅型恐惧瘟疫药水
+lingering_potion.effect.Dplague=滞留型恐惧瘟疫药水
 tipped_arrow.effect.Dplague=恐惧瘟疫之箭
 potion.Antimatter=反物质
 potion.effect.Antimatter=湮灭药水
-splash_potion.effect.Antimatter=喷溅湮灭药水
-lingering_potion.effect.Antimatter=滞留湮灭药水
+splash_potion.effect.Antimatter=喷溅型湮灭药水
+lingering_potion.effect.Antimatter=滞留型湮灭药水
 tipped_arrow.effect.Antimatter=湮灭之箭
 
 #附魔
