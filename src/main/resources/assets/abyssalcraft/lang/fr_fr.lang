@@ -34,13 +34,13 @@ advancements.abyssalcraft.killghoul.description=Heu... qu'est-ce que j'ai fait p
 advancements.abyssalcraft.ghoulhead.title=La chasse commence
 advancements.abyssalcraft.ghoulhead.description=C'est une grosse tête..
 
-advancements.abyssalcraft.petehead.title=Cette tête...
+advancements.abyssalcraft.petehead.title=Ce crâne...
 advancements.abyssalcraft.petehead.description=Ouais, on peut être amis pour toujours :D
 
-advancements.abyssalcraft.wilsonhead.title=La tête grincheuse
+advancements.abyssalcraft.wilsonhead.title=Un Crâne en Colère
 advancements.abyssalcraft.wilsonhead.description=Où est mon corps !?
 
-advancements.abyssalcraft.orangehead.title=La tête du médecin
+advancements.abyssalcraft.orangehead.title=Le crâne sur le bureau du doc
 advancements.abyssalcraft.orangehead.description=J'ai les résultats des analyses, vous avez le VIH
 
 advancements.abyssalcraft.necrou1.title=Le Savoir Abyssal
@@ -86,7 +86,7 @@ advancements.abyssalcraft.summonasorah.title=Il veut reprendre le Trône!
 advancements.abyssalcraft.summonasorah.description=Vous avez réveillé Asorah. COUREEEEZZZ!!
 
 advancements.abyssalcraft.killasorah.title=Un en moins, plus que deux.
-advancements.abyssalcraft.killasorah.description=Vous avez vaincu Asorah... Les habitants d'Oblivion vous haïssent maintenant.
+advancements.abyssalcraft.killasorah.description=Vous avez vaincu Asorah... restez loin d'Oblivionaire pendant nun petit moment.
 
 advancements.abyssalcraft.enterdreadlands.title=Bienvenue en Enfer.
 advancements.abyssalcraft.enterdreadlands.description=Euh, les Dreadlands plutôt.
@@ -110,7 +110,7 @@ advancements.abyssalcraft.killomotholelite.title=Ce truc était plus puissant qu
 advancements.abyssalcraft.killomotholelite.description=Tuez un puissant monstre de l'Omothol.
 
 advancements.abyssalcraft.locatejzahar.title=Un J'zahar sauvage apparaît!
-advancements.abyssalcraft.locatejzahar.description=j'espère que vous avez des potions ou ce genre de choses.
+advancements.abyssalcraft.locatejzahar.description=J'espère que vous avez des potions ou ce genre de choses.
 
 advancements.abyssalcraft.killjzahar.title=La Mort d'un Dieu...
 advancements.abyssalcraft.killjzahar.description=Non, vous croyez vraiment pouvoir tuer un Grand Ancien?
@@ -119,7 +119,7 @@ advancements.abyssalcraft.gk1.title=La Clé des Abysses
 advancements.abyssalcraft.gk1.description=Créez la Clé du Portail
 
 advancements.abyssalcraft.findpsdl.title=Drôle de pierre...
-advancements.abyssalcraft.findpsdl.description=Découvrez une Pierre de Pusisance au fond d'un Fort des Abysses
+advancements.abyssalcraft.findpsdl.description=Découvrez une Pierre de Puissance au fond d'un Fort des Abysses
 
 advancements.abyssalcraft.gk2.title=La Clé de la Corruption
 advancements.abyssalcraft.gk2.description=Infusez la Clé Effroyable d'Asorah
@@ -162,10 +162,10 @@ message.dreadaltar.error.2=Il faut être au cœur des Montagnes des Dreadlands
 message.dreadaltar.error.3=Non, ça ne fonctionnera que dans les Dreadlands
 message.dreadaltartop.enter=Posez la main sur le bloc du haut pour entrer dans le repaire de Cha'garoth
 message.dreadaltartop.spawn=Ah, on dirait que nous avons un visiteur... Gardes, veuillez dévorer notre invité.
-message.chagaroth.death.1=C'est bon, c'est bon, reprends-la ta clé ! Il faut juste la nettoyer dans un Transmutateur. 
+message.chagaroth.death.1=C'est bon, c'est bon, reprends-la ta clé ! Passe-la dans un Transmutateur et elle devrait être utilisable.
 message.chagaroth.death.2=Le coffre dans la salle derrière moi contient "le Trésor Légendaire des Dreadlands".
 message.chagaroth.death.3=laissés par les mineurs qui travaillaient ici avant que je ne commence à tout détruire.
-message.chagaroth.death.4=Mais évite de te faire des illusions, ça doit juste être de la terre ou quelque chose comme ça.
+message.chagaroth.death.4=Mais évite de te faire des illusions, ça doit juste être de la boue ou quelque chose comme ça.
 message.jzahar.death.1=Félicitations. Tu m'as "vaincu". Bien sûr que non, loin de là... tu ne peux tuer un Grand Ancien.
 message.jzahar.death.2=Ce que tu viens de tuer n'est qu'un simuraculum (l'incarnation d'une force obscure de puissance infinie). On peut appeler ça une poupée.
 message.jzahar.death.3=Quelque chose fait pour échapper à un Humain lorsque celui-ci perd la notion de réalité.
@@ -184,14 +184,14 @@ message.jzahar.creative.1=%s, tu réalises sans doute que je suis capable de te 
 message.jzahar.creative.2=Mais techniquement parlant, ce serait tricher. Donc je vais m'en tenir à suivre les règles du jeu et te laisser faire ce que tu as à faire.
 message.sacthoth.spawn.1=Ressens la rage du Royaume des Ombres, mortel !!
 message.sacthoth.spawn.2=Mais avant tout, admire l'explosion.
-message.sacthoth.damage.explosion=je ne dis pas que tu §ne peux pas§r me bombarder d'explosifs, je dis juste que ça ne marchera pas.
+message.sacthoth.damage.explosion=Je ne dis pas que tu §ne peux pas§r me bombarder d'explosifs, je dis juste que ça ne marchera pas.
 message.sacthoth.damage.projectile=Ha, tes projectiles ne me font rien.
-message.portalplacer.error.1=Un sentiment de refus vous enveloppe. J'zahar désapprouve.
+message.portalplacer.error.1=Un sentiment de déséquilibre vous enveloppe. J'zahar désapprouve.
 message.portalplacer.error.2=Rien ne se passe...
 message.necronomicon.nope=Il semblerait que ce livre ne t'appartient pas... t'est-il venu à l'idée de ne pas le lire ?
 message.remnant.busy=Pardonnez-moi mais je suis occupé avec un client en ce moment, revenez plus tard.
-message.remnant.insult.0=%s, yvous parlez Aklo aussi bien qu'un modder parle 1.8.
-message.remnant.insult.1=Vous êtes un ignorant, %s.
+message.remnant.insult.0=%s, vous parlez Aklo encore plus mal qu'un modder parle 1.8.
+message.remnant.insult.1=Ignorant quz vous êtes, %s.
 message.remnant.insult.2=Vous ne valez rien sans Necronomicon, %s.
 message.jzahar.respawn=je sens que quelqu'un a remonté le temps. %s, aurais-tu échoué ?
 message.configurator.1=Bloc avec inventaire détecté ! Entrée configurée comme le coté sur lequel vous avez cliqué.
@@ -292,7 +292,7 @@ necronomicon.information.itemtransportsystem=Transport d'Objets
 necronomicon.text.necronomicon.1=Ce livre est le Necronomicon, un livre écrit par Abdul Alhazred, plus connu sous le nom de "l'Arabe Fou". Le livre contient des informations sur les Grands Anciens, leurs noms et comment les réveiller. Il y a aussi des informations sur les rituels et sorts que ce livre permet de faire.
 necronomicon.text.necronomicon.2=Le necronomicon en lui-même est un chapitre de l'Abyssalnomicon, qui fut lu à Alhazred par un démon connu sous le nom de J'zahar, qui écrit l'Abyssalnomicon à partir de connaissances infinies connues seulement des Grands Anciens.
 necronomicon.text.necronomicon.3=Il existe 4 types de Necronomicons dans l'Abyssalnomicon: le Necronomicon, le Necronomicon des landes Abyssales, le Necronomicon des Dreadlands et le Necronomicon de l'Omothol, chacun contenant du savoir spécifique à chaque dimension.
-necronomicon.text.necronomicon.4=Pour découvrir ce savoir, il faut voyager dans ladite dimension et enchanter le necronomicon avec la chair de ce monde. L'Abyssalnomicon contient des connaissances supplémentaires que seul J'zahar connaît, du savoir qu'aucun homme n'est censé savoir.
+necronomicon.text.necronomicon.4=Pour découvrir ce savoir, il faut voyager dans ladite dimension et enchanter le Necronomicon avec la chair de ce monde. L'Abyssalnomicon contient des connaissances supplémentaires que seul J'zahar connaît, du savoir qu'aucun homme n'est censé savoir.
 
 necronomicon.text.abyssalnomicon.1=Ce livre est l'Abyssalnomicon, un livre écrit par J'zahar, Gardien des Abysses. Le livre contient des connaissances venant des quatre Necronomicons, qui sont en réalité des chapitres de ce livre. Il y a aussi des connaissances supplémentaires non mentionnées dans les autres.
 necronomicon.text.abyssalnomicon.2=Les informations sur les sorts et rituels des autres Necronomicons sont limitées à celles de chaque dimension (et les précédentes dépendant du type de Necronomicon); l'Abyssalnomicon contient tout leur savoir en un seul livre, avec des suppléments.
@@ -305,7 +305,7 @@ necronomicon.text.abyssalcraft.5=En-dehors de l'exploration, AbyssalCraft introd
 necronomicon.text.abyssalcraft.6=Il y a également des machines, permettant de transmuter, cristallizer et matérialiser des objets variés. Il y a également une presse à monnaie.
 
 necronomicon.text.azathoth.1=Azathoth, le Sultan des Démons, est le Maître des autres Dieux et probablement le créateur de toute existence.
-necronomicon.text.azathoth.2=Il réside au centre de l'Univers, au-delà de l'espace-temps, baignant dans un son de flüte irréel. Il a une âme et une volonté, et chacun de ses désirs est immédiatement exaucé par Nyarlathotep.
+necronomicon.text.azathoth.2=Il réside au centre de l'Univers, au-delà de l'espace-temps, baignant dans un son de flûte irréel. Il a une âme et une volonté, et chacun de ses désirs est immédiatement exaucé par Nyarlathotep.
 necronomicon.text.nyarlathotep.1=Nyarlathotep, le Chaos Rampant, est un Autre Dieu qui n'est ni exilé ni emprisonné.
 necronomicon.text.nyarlathotep.2=Il erre sur Terre parmi les Humains, répandant folie et démence. Il sert le culte des Autres Dieux, et exécute la volonté de son maître Azathoth.
 necronomicon.text.yog-sothoth.1=Yog-Sothoth, le Tout en Un et l'Un en Tout, est un Autre Dieu, descendant des Brumes de l'Immonde.
@@ -329,9 +329,9 @@ necronomicon.text.dreadlands=Il y a une éternité de cela, cet endroit était u
 necronomicon.text.omothol=Une cyclopéenne cité infinie construite à la frontière du réel, le Royaume de J'zahar représente l'unique passage vers le lieu d'exil des Grands Anciens. Mais le Gardien des Abysses veille, et personne n'est jamais ressorti de la dernière dimension des Abysses vivant.
 necronomicon.text.darkrealm=Des univers en-dessous de l'Omothol se situe un monde désolé où reposent les Âmes de démons, en attente de leur réincarnation. Le Royaume de l'Ombre est là où naissent les Ombres, et le dernier endroit qu'une Âme vivante devrait visiter à cause de la souffrance éternelle qui les y attend.
 
-necronomicon.text.miscinformation=Vous pourrez trouver ici des informations introuvables ailleurs dans le Necronomicon.
+necronomicon.text.miscinformation=Vous pourrez trouver ici des informations introuvables ailleurs que dans le Necronomicon.
 
-necronomicon.text.materials.abyssalnite.1=Abyssalnite is a new ore found in Darklands biomes. It is stronger than diamonds, and can be used to create tools, weapons and armor. Can be found below Y = 32. When mined, it drops ore blocks to smelt for ingots. The ingots are purple, much like the ore itself.
+necronomicon.text.materials.abyssalnite.1=L'Abyssalnite est un nouveau minerai trouvable profondément sous les Terres de l'Ombre. Les lingots, violets comme le minerai lui-même, sont plus résistants que le diamant et permettent de créer outils, armes et armure. Il est trouvable en-dessous de Y=32.
 necronomicon.text.materials.darkstone.1=Darkstone is a new type of stone found in Darklands biomes. Darklands Mountains are made out of this stone. The Dark Realm also consists of this material. When mined, it drops Darkstone Cobblestone, and it can be turned into Darkstone Bricks.
 necronomicon.text.materials.darkstone.2=This material is slightly stronger than regular stone, and tools made from it are stronger than their counterparts.
 necronomicon.text.materials.coralium.1=Coralium is a new ore found in ocean biomes and swamp biomes. The gems from it has multiple uses, among them the creation of Coralium Pearls.
