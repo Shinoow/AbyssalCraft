@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMes
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.relauncher.Side;
@@ -42,12 +43,16 @@ public class StaffModeMessage extends AbstractServerMessage<StaffModeMessage> {
 		ItemStack mainStack = player.getHeldItem(EnumHand.MAIN_HAND);
 		ItemStack offStack = player.getHeldItem(EnumHand.OFF_HAND);
 		if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.staff_of_the_gatekeeper){
+			if(!mainStack.hasTagCompound())
+				mainStack.setTagCompound(new NBTTagCompound());
 			int mode = mainStack.getTagCompound().getInteger("Mode");
 			if(mode == 0)
 				mainStack.getTagCompound().setInteger("Mode", 1);
 			else mainStack.getTagCompound().setInteger("Mode", 0);
 		}
 		if(!offStack.isEmpty() && offStack.getItem() == ACItems.staff_of_the_gatekeeper){
+			if(!offStack.hasTagCompound())
+				offStack.setTagCompound(new NBTTagCompound());
 			int mode = offStack.getTagCompound().getInteger("Mode");
 			if(mode == 0)
 				offStack.getTagCompound().setInteger("Mode", 1);

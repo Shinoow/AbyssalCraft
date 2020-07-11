@@ -55,6 +55,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
@@ -221,8 +222,9 @@ public class AbyssalCraftClientEventHooks {
 			int mode1 = -1, mode2 = -1;
 
 			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.staff_of_the_gatekeeper){
-				if(mainStack.hasTagCompound())
-					mode1 = mainStack.getTagCompound().getInteger("Mode");
+				if(!mainStack.hasTagCompound())
+					mainStack.setTagCompound(new NBTTagCompound());
+				mode1 = mainStack.getTagCompound().getInteger("Mode");
 				if(mode1 > -1){
 					if(mode1 == 0)
 						mode1 = 1;
@@ -231,8 +233,9 @@ public class AbyssalCraftClientEventHooks {
 				}
 			}
 			if(!offStack.isEmpty() && offStack.getItem() == ACItems.staff_of_the_gatekeeper){
-				if(offStack.hasTagCompound())
-					mode2 = offStack.getTagCompound().getInteger("Mode");
+				if(!offStack.hasTagCompound())
+					offStack.setTagCompound(new NBTTagCompound());
+				mode2 = offStack.getTagCompound().getInteger("Mode");
 				if(mode2 > -1){
 					if(mode2 == 0)
 						mode2 = 1;
@@ -248,21 +251,29 @@ public class AbyssalCraftClientEventHooks {
 			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
 			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
 
-			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.interdimensional_cage && !mainStack.getTagCompound().hasKey("Entity")) {
-				RayTraceResult mov = getMouseOverExtended(3);
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.interdimensional_cage) {
+				if(!mainStack.hasTagCompound())
+					mainStack.setTagCompound(new NBTTagCompound());
+				if(!mainStack.getTagCompound().hasKey("Entity")) {
+					RayTraceResult mov = getMouseOverExtended(3);
 
-				if (mov != null)
-					if (mov.entityHit != null && !mov.entityHit.isDead)
-						if (mov.entityHit != Minecraft.getMinecraft().player )
-							PacketDispatcher.sendToServer(new InterdimensionalCageMessage(mov.entityHit.getEntityId(), EnumHand.MAIN_HAND));
+					if (mov != null)
+						if (mov.entityHit != null && !mov.entityHit.isDead)
+							if (mov.entityHit != Minecraft.getMinecraft().player )
+								PacketDispatcher.sendToServer(new InterdimensionalCageMessage(mov.entityHit.getEntityId(), EnumHand.MAIN_HAND));
+				}
 			}
-			if (!offStack.isEmpty() && offStack.getItem() == ACItems.interdimensional_cage && !offStack.getTagCompound().hasKey("Entity")) {
-				RayTraceResult mov = getMouseOverExtended(3);
+			if (!offStack.isEmpty() && offStack.getItem() == ACItems.interdimensional_cage) {
+				if(!offStack.hasTagCompound())
+					offStack.setTagCompound(new NBTTagCompound());
+				if(!offStack.getTagCompound().hasKey("Entity")) {
+					RayTraceResult mov = getMouseOverExtended(3);
 
-				if (mov != null)
-					if (mov.entityHit != null && !mov.entityHit.isDead)
-						if (mov.entityHit != Minecraft.getMinecraft().player )
-							PacketDispatcher.sendToServer(new InterdimensionalCageMessage(mov.entityHit.getEntityId(), EnumHand.OFF_HAND));
+					if (mov != null)
+						if (mov.entityHit != null && !mov.entityHit.isDead)
+							if (mov.entityHit != Minecraft.getMinecraft().player )
+								PacketDispatcher.sendToServer(new InterdimensionalCageMessage(mov.entityHit.getEntityId(), EnumHand.OFF_HAND));
+				}
 			}
 		}
 		if(ClientProxy.configurator_mode.isPressed()) {
@@ -271,16 +282,18 @@ public class AbyssalCraftClientEventHooks {
 			int mode1 = -1, mode2 = -1;
 
 			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator){
-				if(mainStack.hasTagCompound())
-					mode1 = mainStack.getTagCompound().getInteger("Mode");
+				if(!mainStack.hasTagCompound())
+					mainStack.setTagCompound(new NBTTagCompound());
+				mode1 = mainStack.getTagCompound().getInteger("Mode");
 				if(mode1 > -1){
 					mode1 = mode1 == 0 ? 1 : mode1 == 1 ? 2 : 0;
 					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + ItemConfigurator.getMode(mode1)));
 				}
 			}
 			if(!offStack.isEmpty() && offStack.getItem() == ACItems.configurator){
-				if(offStack.hasTagCompound())
-					mode2 = offStack.getTagCompound().getInteger("Mode");
+				if(!offStack.hasTagCompound())
+					offStack.setTagCompound(new NBTTagCompound());
+				mode2 = offStack.getTagCompound().getInteger("Mode");
 				if(mode2 > -1){
 					mode2 = mode2 == 0 ? 1 : mode2 == 1 ? 2 : 0;
 					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + ItemConfigurator.getMode(mode2)));
