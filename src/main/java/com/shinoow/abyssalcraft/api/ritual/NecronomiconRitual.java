@@ -15,10 +15,12 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Base Necronomicon Ritual.<br>
@@ -168,16 +170,18 @@ public abstract class NecronomiconRitual {
 	 * Used to fetch the localized name for a ritual
 	 * @return A localized string representing a name
 	 */
+	@SideOnly(Side.CLIENT)
 	public String getLocalizedName(){
-		return I18n.translateToLocal(getUnlocalizedName());
+		return I18n.format(getUnlocalizedName());
 	}
 
 	/**
 	 * Used to fetch the description for the ritual
 	 * @return A localized string representing a description
 	 */
+	@SideOnly(Side.CLIENT)
 	public String getDescription(){
-		return I18n.translateToLocal(getUnlocalizedName() + ".desc");
+		return I18n.format(getUnlocalizedName() + ".desc");
 	}
 
 	/**
