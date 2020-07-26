@@ -11,9 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures;
 
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
@@ -42,6 +41,13 @@ public class StructureShoggothPit extends WorldGenerator {
 
 	public StructureShoggothPit() {}
 
+	private Map<Integer, Set<BlockPos>> positions = new HashMap<>();
+
+	private boolean tooClose(int dim, BlockPos pos) {
+		positions.putIfAbsent(dim, new HashSet<BlockPos>());
+		return positions.get(dim).stream().anyMatch(b -> b.getDistance(pos.getX(), b.getY(), pos.getZ()) <= ACConfig.shoggothLairGenerationDistance);
+	}
+
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
 
@@ -53,6 +59,8 @@ public class StructureShoggothPit extends WorldGenerator {
 				world.getBlockState(pos).getMaterial() == Material.WOOD ||
 				world.getBlockState(pos).getMaterial() == Material.VINE ||
 				world.getBlockState(pos).getMaterial() == Material.CACTUS)
+			return false;
+		if(tooClose(world.provider.getDimension(), pos))
 			return false;
 		else {
 
@@ -82,6 +90,8 @@ public class StructureShoggothPit extends WorldGenerator {
 			Template template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", "shoggothlair/shoggothlair_"+num));
 
 			template.addBlocksToWorld(world, pos, placeSettings);
+
+			positions.get(world.provider.getDimension()).add(pos);
 
 			Map<BlockPos, String> map = template.getDataBlocks(pos, placeSettings);
 

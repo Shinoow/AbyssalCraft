@@ -34,6 +34,8 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
+	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
+	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator
 			chunkGenerator, IChunkProvider chunkProvider) {
@@ -115,7 +117,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 					if(swamp ? ACConfig.shoggothLairSpawnRate > 0 && random.nextInt(ACConfig.shoggothLairSpawnRate) == 0 :
 						ACConfig.shoggothLairSpawnRateRivers > 0 && random.nextInt(ACConfig.shoggothLairSpawnRateRivers) == 0)
 						if(!world.isAirBlock(pos1.north(13)) && !world.isAirBlock(pos1.north(20)) && !world.isAirBlock(pos1.north(27)))
-							new StructureShoggothPit().generate(world, random, pos1);
+							shoggothLair.generate(world, random, pos1);
 			}
 	}
 }

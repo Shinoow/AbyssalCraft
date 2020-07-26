@@ -70,6 +70,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 
 	private MapGenAbyStronghold strongholdGenerator = new MapGenAbyStronghold();
 	private MapGenBase ravineGenerator = new MapGenRavineAC();
+	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
 	private Biome[] biomesForGeneration;
 
 	double[] doubleArray1;
@@ -379,7 +380,7 @@ public class ChunkProviderAbyss implements IChunkGenerator
 				if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
 
 				if(rand.nextInt(200) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
-					new StructureShoggothPit().generate(worldObj, rand, pos1);
+					shoggothLair.generate(worldObj, rand, pos1);
 			}
 
 		Biome.decorate(worldObj, rand, new BlockPos(k, 0, l));

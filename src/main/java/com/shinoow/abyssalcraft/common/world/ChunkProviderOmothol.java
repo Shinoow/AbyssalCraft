@@ -49,6 +49,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	private StructureTemple templeGen = new StructureTemple();
 	private StructureCity cityGen = new StructureCity();
 	private StructureStorage storageGen = new StructureStorage();
+	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
 
 	public ChunkProviderOmothol(World par1World, long par2)
 	{
@@ -303,7 +304,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 			if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
 
 			if(rand.nextInt(100) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
-				new StructureShoggothPit().generate(worldObj, rand, pos1);
+				shoggothLair.generate(worldObj, rand, pos1);
 		}
 
 		if((x > -2 || x < 2) && (z > 6 || z < -1)) {
