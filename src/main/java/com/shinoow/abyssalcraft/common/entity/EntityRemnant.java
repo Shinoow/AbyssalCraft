@@ -463,8 +463,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, Items.COOKIE, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.SHEARS, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.FLINT_AND_STEEL, rand, adjustProbability(0.3F));
-				if (ACConfig.foodstuff)
-					addCoinTrade(list, ACItems.fish_on_a_plate, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.ARROW, rand, adjustProbability(0.5F));
 
 				if (rand.nextFloat() < adjustProbability(0.5F))
@@ -571,19 +569,12 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addItemTrade(list, Items.PORKCHOP, rand, adjustProbability(0.5F));
 				addItemTrade(list, Items.BEEF, rand, adjustProbability(0.5F));
 				addItemTrade(list, Items.CHICKEN, rand, adjustProbability(0.5F));
-				if (ACConfig.foodstuff) {
-					addCoinTrade(list, ACItems.washcloth, rand, adjustProbability(0.4F));
-					addCoinTrade(list, ACItems.mre, rand, adjustProbability(0.1F));
-					addCoinTrade(list, ACItems.pork_on_a_plate, rand, adjustProbability(0.3F));
-					addCoinTrade(list, ACItems.beef_on_a_plate, rand, adjustProbability(0.3F));
-					addCoinTrade(list, ACItems.chicken_on_a_plate, rand, adjustProbability(0.3F));
-				} else {
-					addCoinTrade(list, Items.COOKIE, rand, adjustProbability(0.4F));
-					addCoinTrade(list, Items.GOLDEN_CARROT, rand, adjustProbability(0.1F));
-					addCoinTrade(list, Items.PUMPKIN_PIE, rand, adjustProbability(0.3F));
-					addCoinTrade(list, Items.RABBIT_STEW, rand, adjustProbability(0.3F));
-					addCoinTrade(list, Items.CAKE, rand, adjustProbability(0.3F));
-				}
+
+				addCoinTrade(list, Items.COOKIE, rand, adjustProbability(0.4F));
+				addCoinTrade(list, Items.GOLDEN_CARROT, rand, adjustProbability(0.1F));
+				addCoinTrade(list, Items.PUMPKIN_PIE, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.RABBIT_STEW, rand, adjustProbability(0.3F));
+				addCoinTrade(list, Items.CAKE, rand, adjustProbability(0.3F));
 				break;
 			case 5:
 				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.cthulhu_engraved_coin, 1);
@@ -890,8 +881,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		coinSellingList.put(Items.COOKIE, new Tuple(Integer.valueOf(-10), Integer.valueOf(-7)));
 		coinSellingList.put(Item.getItemFromBlock(Blocks.GLASS), new Tuple(Integer.valueOf(-5), Integer.valueOf(-3)));
 		coinSellingList.put(Item.getItemFromBlock(Blocks.BOOKSHELF), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-		coinSellingList.put(ACItems.washcloth, new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
-		coinSellingList.put(ACItems.mre, new Tuple(Integer.valueOf(6), Integer.valueOf(8)));
 		coinSellingList.put(Items.EXPERIENCE_BOTTLE, new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
 		coinSellingList.put(Items.REDSTONE, new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
 		coinSellingList.put(Items.COMPASS, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
@@ -900,10 +889,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		coinSellingList.put(ACItems.abyssal_wasteland_necronomicon, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
 		coinSellingList.put(ACItems.dreadlands_necronomicon, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
 		coinSellingList.put(Item.getItemFromBlock(Blocks.GLOWSTONE), new Tuple(Integer.valueOf(-3), Integer.valueOf(-1)));
-		coinSellingList.put(ACItems.pork_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
-		coinSellingList.put(ACItems.beef_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
-		coinSellingList.put(ACItems.chicken_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
-		coinSellingList.put(ACItems.fish_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
 		coinSellingList.put(Items.COOKED_CHICKEN, new Tuple(Integer.valueOf(-8), Integer.valueOf(-6)));
 		coinSellingList.put(Items.ENDER_EYE, new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
 		coinSellingList.put(Items.ARROW, new Tuple(Integer.valueOf(-12), Integer.valueOf(-8)));

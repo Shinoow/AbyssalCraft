@@ -21,7 +21,9 @@ import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.internal.*;
-import com.shinoow.abyssalcraft.api.item.*;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.recipe.*;
 
@@ -44,7 +46,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
@@ -63,9 +64,9 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.30.0";
+	public static final String API_VERSION = "2.0.0";
 
-	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall, sapping, multi_rend;
+	public static Enchantment light_pierce, iron_wall, sapping, multi_rend;
 
 	public static Potion coralium_plague, dread_plague, antimatter_potion;
 
@@ -466,22 +467,6 @@ public class AbyssalCraftAPI {
 	/**
 	 * Basic Materialization.<br>
 	 * Note: all inputs has to be either {@link ICrystal}s or be registered in the Crystal List {@link AbyssalCraftAPI#addCrystal(ItemStack)}
-	 * @param input An array of ItemStacks (maximum is 5)
-	 * @param output The output
-	 * @param xp Amount of exp given
-	 *
-	 * @since 1.4.5
-	 *
-	 * @deprecated Use the one where input and output params have swapped places
-	 */
-	@Deprecated
-	public static void addMaterialization(ItemStack[] input, ItemStack output){
-		addMaterialization(output, input);
-	}
-
-	/**
-	 * Basic Materialization.<br>
-	 * Note: all inputs has to be either {@link ICrystal}s or be registered in the Crystal List {@link AbyssalCraftAPI#addCrystal(ItemStack)}
 	 * @param output The output
 	 * @param input An array of ItemStacks (maximum is 5)
 	 *
@@ -534,18 +519,6 @@ public class AbyssalCraftAPI {
 	public enum FuelType{
 		CRYSTALLIZER, TRANSMUTATOR, FURNACE
 	}
-
-	/**
-	 * Registers a fuel handler for an AbyssalCraft fuel type
-	 * @param handler The file that implements {@link IFuelHandler}
-	 * @param type The fuel type
-	 *
-	 * @since 1.0
-	 *
-	 * @deprecated use {@link FuelBurnTimeEvent} instead
-	 */
-	@Deprecated
-	public static void registerFuelHandler(IFuelHandler handler, FuelType type){}
 
 	/**
 	 * Gets the fuel value from an ItemStack, depending on the fuel type
@@ -820,28 +793,6 @@ public class AbyssalCraftAPI {
 	 */
 	public static int getGatewayKeyOverride(int dimId){
 		return !gateway_key_overrides.containsKey(dimId) ? -1 : gateway_key_overrides.get(dimId);
-	}
-
-	/**
-	 * Upgrade Kit recipe.
-	 * @param kit Upgrade Kit to use
-	 * @param input Old Item
-	 * @param output New Item
-	 *
-	 * @since 1.9.0
-	 */
-	public static void addUpgrade(ItemUpgradeKit kit, ItemStack input, ItemStack output){
-		UpgradeKitRecipes.instance().addUpgrade(kit, input, output);
-	}
-
-	/**
-	 * Registers a Upgrade Kit to be used in Upgrade Kit recipes.
-	 * @param kit Upgrade Kit to register
-	 *
-	 * @since 1.9.0
-	 */
-	public static void addUpgradeKit(ItemUpgradeKit kit){
-		UpgradeKitRecipes.instance().addUpgradeKit(kit);
 	}
 
 	/**

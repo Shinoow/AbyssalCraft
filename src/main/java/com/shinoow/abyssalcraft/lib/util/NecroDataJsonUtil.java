@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Level;
 
 import com.google.common.base.Strings;
 import com.google.gson.*;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
@@ -190,8 +191,8 @@ public class NecroDataJsonUtil {
 			json.addProperty("icontype", "craftingstack");
 			JsonArray stuff = new JsonArray();
 			stuff.add(new JsonPrimitive(outputStackToString(((CraftingStack) icon).getOutput())));
-			for(ItemStack stack : ((CraftingStack) icon).getCraftingRecipe())
-				stuff.add(new JsonPrimitive(stackToString(stack)));
+			for(Object stack : ((CraftingStack) icon).getRecipe())
+				stuff.add(new JsonPrimitive(stackToString(APIUtils.convertToStack(stack))));
 			json.add("icon", stuff);
 		}
 		else if(icon instanceof String){

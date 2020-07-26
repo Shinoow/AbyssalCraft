@@ -86,22 +86,6 @@ public class ACItems {
 	public static Item depths_chestplate;
 	public static Item depths_leggings;
 	public static Item depths_boots;
-	public static Item cobblestone_upgrade_kit;
-	public static Item iron_upgrade_kit;
-	public static Item gold_upgrade_kit;
-	public static Item diamond_upgrade_kit;
-	public static Item abyssalnite_upgrade_kit;
-	public static Item coralium_upgrade_kit;
-	public static Item mre;
-	public static Item iron_plate;
-	public static Item chicken_on_a_plate;
-	public static Item pork_on_a_plate;
-	public static Item beef_on_a_plate;
-	public static Item fish_on_a_plate;
-	public static Item dirty_plate;
-	public static Item fried_egg;
-	public static Item fried_egg_on_a_plate;
-	public static Item washcloth;
 	public static Item shadow_fragment;
 	public static Item shadow_shard;
 	public static Item shadow_gem;
@@ -120,7 +104,6 @@ public class ACItems {
 	public static Item dreadium_shovel;
 	public static Item dreadium_sword;
 	public static Item dreadium_hoe;
-	public static Item dreadium_upgrade_kit;
 	public static Item carbon_cluster;
 	public static Item dense_carbon_cluster;
 	public static Item methane;
@@ -168,7 +151,6 @@ public class ACItems {
 	public static Item ethaxium_shovel;
 	public static Item ethaxium_sword;
 	public static Item ethaxium_hoe;
-	public static Item ethaxium_upgrade_kit;
 	public static Item coin;
 	public static Item cthulhu_engraved_coin;
 	public static Item elder_engraved_coin;

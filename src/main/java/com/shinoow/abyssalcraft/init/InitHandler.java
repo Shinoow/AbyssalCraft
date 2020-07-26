@@ -486,9 +486,6 @@ public class InitHandler implements ILifeCycleHandler {
 		hcdarkness_omt = cfg.get("mod_compat", "Hardcore Darkness: Omothol", true, "Toggles whether or not Omothol should be darker if Hardcore Darkness is installed.").getBoolean();
 		hcdarkness_dr = cfg.get("mod_compat", "Hardcore Darkness: Dark Realm", true, "Toggles whether or not the Dark Realm should be darker if Hardcore Darkness is installed.").getBoolean();
 
-		foodstuff = cfg.get("modules", "Enable Foodstuffs", true, "Set to false to disable Abyssalcraft Food.").getBoolean();
-		upgrade_kits = cfg.get("modules", "Enable Upgrade Kits", true, "Set to false to disable Upgrade Kits.").getBoolean();
-		plague_enchantments = cfg.get("modules", "Enable Plague Enchantments", true, "Set to false to disable the Coralium and Dread Enchantments.").getBoolean();
 		crystal_rework = cfg.get("modules", "Crystal Rework", true, "Set to false to revert to the old crystal recipes (and them being fuels).").getBoolean();
 
 		entropy_spell = cfg.get("spells", "Entropy", true, "Set to false to disable the Entropy spell.").getBoolean();

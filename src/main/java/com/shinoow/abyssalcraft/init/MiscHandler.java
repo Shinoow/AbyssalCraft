@@ -128,19 +128,11 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		AbyssalCraftAPI.STAFF_OF_RENDING = EnumHelper.addEnchantmentType("STAFF_OF_RENDING", i -> i instanceof IStaffOfRending);
 
-		if(ACConfig.plague_enchantments) {
-			AbyssalCraftAPI.coralium_enchantment = new EnchantmentWeaponInfusion("coralium");
-			AbyssalCraftAPI.dread_enchantment = new EnchantmentWeaponInfusion("dread");
-		}
 		AbyssalCraftAPI.light_pierce = new EnchantmentLightPierce();
 		AbyssalCraftAPI.iron_wall = new EnchantmentIronWall();
 		AbyssalCraftAPI.sapping = new EnchantmentSapping();
 		AbyssalCraftAPI.multi_rend = new EnchantmentMultiRend();
 
-		if(ACConfig.plague_enchantments) {
-			registerEnchantment(new ResourceLocation("abyssalcraft", "coralium"), AbyssalCraftAPI.coralium_enchantment);
-			registerEnchantment(new ResourceLocation("abyssalcraft", "dread"), AbyssalCraftAPI.dread_enchantment);
-		}
 		registerEnchantment(new ResourceLocation("abyssalcraft", "light_pierce"), AbyssalCraftAPI.light_pierce);
 		registerEnchantment(new ResourceLocation("abyssalcraft", "iron_wall"), AbyssalCraftAPI.iron_wall);
 		registerEnchantment(new ResourceLocation("abyssalcraft", "sapping"), AbyssalCraftAPI.sapping);
@@ -440,8 +432,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("dustSaltpeter", ACItems.nitre);
 		OreDictionary.registerOre("materialMethane", ACItems.methane);
 		OreDictionary.registerOre("oreSaltpeter", ACBlocks.nitre_ore);
-		if(ACConfig.foodstuff)
-			OreDictionary.registerOre("foodFriedEgg", ACItems.fried_egg);
 		OreDictionary.registerOre("oreIron", ACBlocks.abyssal_iron_ore);
 		OreDictionary.registerOre("oreGold", ACBlocks.abyssal_gold_ore);
 		OreDictionary.registerOre("oreDiamond", ACBlocks.abyssal_diamond_ore);
@@ -483,8 +473,6 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.darkstone_sword, 2, 0, new LootFunction[0], new LootCondition[0], modid + ":darkstone_sword"));
 				main.addEntry(new LootEntryItem(Item.getItemFromBlock(ACBlocks.darklands_oak_wood), 10, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":darklands_oak_wood"));
 				main.addEntry(new LootEntryItem(Item.getItemFromBlock(ACBlocks.darklands_oak_wood_2), 10, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":darklands_oak_wood_2"));
-				if (ACConfig.upgrade_kits)
-					main.addEntry(new LootEntryItem(ACItems.cobblestone_upgrade_kit, 2, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":cobblestone_upgrade_kit"));
 			}
 		}
 		if(event.getName().equals(LootTableList.CHESTS_VILLAGE_BLACKSMITH)){
@@ -494,12 +482,6 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
-				if (ACConfig.upgrade_kits) {
-					main.addEntry(new LootEntryItem(ACItems.cobblestone_upgrade_kit, 10, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":cobblestone_upgrade_kit"));
-					main.addEntry(new LootEntryItem(ACItems.iron_upgrade_kit, 7, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":iron_upgrade_kit"));
-					main.addEntry(new LootEntryItem(ACItems.gold_upgrade_kit, 4, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":gold_upgrade_kit"));
-					main.addEntry(new LootEntryItem(ACItems.diamond_upgrade_kit, 1, 0, new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 2))}, new LootCondition[0], modid + ":diamond_upgrade_kit"));
-				}
 			}
 		}
 		if(event.getName().equals(LootTableList.CHESTS_SIMPLE_DUNGEON)){
@@ -513,8 +495,6 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.shadow_fragment, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 10))}, new LootCondition[0], modid + ":shadow_fragment"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_shard, 5, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 6))}, new LootCondition[0], modid + ":shadow_gem_shard"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_gem, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":shadow_gem"));
-				if (ACConfig.foodstuff)
-					main.addEntry(new LootEntryItem(ACItems.mre, 5, 0 , new LootFunction[0], new LootCondition[0], modid + ":mre"));
 			}
 		}
 		if(event.getName().equals(LootTableList.CHESTS_ABANDONED_MINESHAFT)){
@@ -552,11 +532,6 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.shadow_shard, 5, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 6))}, new LootCondition[0], modid + ":shadow_gem_shard"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_gem, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":shadow_gem"));
 			}
-		}
-		if(event.getName().equals(ACLoot.CHEST_ABYSSAL_STRONGHOLD_CROSSING) && ACConfig.foodstuff) {
-			LootPool main = event.getTable().getPool("main");
-			if(main != null)
-				main.addEntry(new LootEntryItem(ACItems.mre, 10, 0 , new LootFunction[0], new LootCondition[0], modid + ":mre"));
 		}
 	}
 

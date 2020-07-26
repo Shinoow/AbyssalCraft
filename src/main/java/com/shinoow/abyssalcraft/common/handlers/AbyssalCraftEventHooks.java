@@ -24,10 +24,7 @@ import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
-import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
-import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
@@ -44,8 +41,6 @@ import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,7 +59,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
-import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
@@ -428,76 +422,6 @@ public class AbyssalCraftEventHooks {
 		}
 
 		return newname;
-	}
-
-	@SubscribeEvent
-	public void upgradeKits(AnvilUpdateEvent event){
-		if(!(event.getRight().getItem() instanceof ItemUpgradeKit)) {
-			if(event.getRight().getItem() == Items.ENCHANTED_BOOK)
-				for(Enchantment ench : EnchantmentHelper.getEnchantments(event.getRight()).keySet())
-					if(ench instanceof EnchantmentWeaponInfusion) {
-						event.setCanceled(true);
-						return;
-					}
-			return;
-		} else if(ACConfig.upgrade_kits) {
-			ItemStack input = event.getLeft();
-			int cost = 0;
-
-			float f = (float)(input.getMaxDamage() - input.getItemDamage()) / (float)input.getMaxDamage();
-
-			if(f >= 0)
-				cost = 10;
-			if(f >= 0.1f)
-				cost = 9;
-			if(f >= 0.2f)
-				cost = 8;
-			if(f >= 0.3f)
-				cost = 7;
-			if(f >= 0.4f)
-				cost = 6;
-			if(f >= 0.5f)
-				cost = 5;
-			if(f >= 0.6f)
-				cost = 4;
-			if(f >= 0.7f)
-				cost = 3;
-			if(f >= 0.8f)
-				cost = 2;
-			if(f >= 0.9f)
-				cost = 1;
-
-			ItemStack stack = UpgradeKitRecipes.instance().getUpgrade((ItemUpgradeKit)event.getRight().getItem(), input);
-
-			if(!stack.isEmpty()){
-
-				if(StringUtils.isNullOrEmpty(event.getName())){
-					if(input.hasDisplayName()){
-						cost += 1;
-						stack.clearCustomName();
-					}
-				} else if(!event.getName().equals(input.getDisplayName())){
-					cost += 1;
-					stack.setStackDisplayName(event.getName());
-				}
-
-				for(int i : EnchantmentHelper.getEnchantments(input).values())
-					cost += i;
-
-				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(input), stack);
-				stack.setCount(input.getCount());
-				NBTTagCompound temp = input.serializeNBT();
-				if(temp.hasKey("ForgeCaps")) {
-					NBTTagCompound temp1 = stack.serializeNBT();
-					temp1.setTag("ForgeCaps", temp.getTag("ForgeCaps"));
-					stack = new ItemStack(temp1);
-				}
-				event.setOutput(stack);
-			}
-
-			event.setMaterialCost(1);
-			event.setCost(cost == 0 ? 1 : cost);
-		}
 	}
 
 	@SubscribeEvent

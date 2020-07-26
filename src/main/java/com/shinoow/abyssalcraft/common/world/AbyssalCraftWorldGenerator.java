@@ -35,7 +35,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
-	
+
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator
 			chunkGenerator, IChunkProvider chunkProvider) {

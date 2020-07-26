@@ -32,15 +32,6 @@ public interface ISingletonInventory {
 	public void setItem(ItemStack item);
 
 	/**
-	 * Returns the rotation of the ItemStack placed on the Altar, if rendered on the block
-	 * @deprecated World time is used instead now, so all placed items rotate at the same angle
-	 */
-	@Deprecated
-	default int getRotation() {
-		return 0;
-	}
-
-	/**
 	 * Returns whether or not the placed Item should rotate
 	 */
 	default boolean shouldItemRotate() {

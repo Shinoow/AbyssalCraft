@@ -99,62 +99,11 @@ public class CraftingStack {
 	}
 
 	/**
-	 * Getter for the ItemStack array containing the recipe
-	 * @return An array of ItemStacks representing the crafting recipe
-	 * @deprecated Use the version that returns an Object array instead
-	 */
-	@Deprecated
-	public ItemStack[] getCraftingRecipe(){
-		return new ItemStack[0];
-	}
-
-	/**
-	 * Getter for the first 3 positioned ItemStacks in the crafting grid
-	 * @return An ItemStack array with 3 ItemStacks
-	 * @deprecated Use the version that returns an Object array instead
-	 */
-	@Deprecated
-	public ItemStack[] getFirstArray(){
-		return new ItemStack[0];
-	}
-
-	/**
-	 * Getter for the second 3 positioned ItemStacks in the crafting grid
-	 * @return An ItemStack array with 3 ItemStacks
-	 * @deprecated Use the version that returns an Object array instead
-	 */
-	@Deprecated
-	public ItemStack[] getSecondArray(){
-		return new ItemStack[0];
-	}
-
-	/**
-	 * Getter for the third 3 positioned ItemStacks in the crafting grid
-	 * @return An ItemStack array with 3 ItemStacks
-	 * @deprecated Use the version that returns an Object array instead
-	 */
-	@Deprecated
-	public ItemStack[] getThirdArray(){
-		return new ItemStack[0];
-	}
-
-	/**
 	 * Getter for the Object array containing the recipe
 	 * @return An array of Objects representing the crafting recipe
 	 */
 	public Object[] getRecipe(){
 		return recipe;
-	}
-
-	/**
-	 * Easier way to make CraftingStack arrays
-	 * @param stacks A bunch of CraftingStacks
-	 * @return An Array with the CraftingStacks
-	 * @deprecated The usefulness of this was superseded in the page/chapter NecroData structure
-	 */
-	@Deprecated
-	public static CraftingStack[] arrayFrom(CraftingStack...stacks){
-		return stacks;
 	}
 
 	@Override

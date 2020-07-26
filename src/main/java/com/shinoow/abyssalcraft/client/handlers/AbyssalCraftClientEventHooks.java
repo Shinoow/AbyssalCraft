@@ -667,28 +667,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.depths_helmet, 0);
 		registerItemRender(ACItems.depths_chestplate, 0);
 		registerItemRender(ACItems.depths_leggings, 0);
-		if (ACConfig.upgrade_kits) {
-			registerItemRender(ACItems.cobblestone_upgrade_kit, 0);
-			registerItemRender(ACItems.iron_upgrade_kit, 0);
-			registerItemRender(ACItems.gold_upgrade_kit, 0);
-			registerItemRender(ACItems.diamond_upgrade_kit, 0);
-			registerItemRender(ACItems.abyssalnite_upgrade_kit, 0);
-			registerItemRender(ACItems.coralium_upgrade_kit, 0);
-			registerItemRender(ACItems.dreadium_upgrade_kit, 0);
-			registerItemRender(ACItems.ethaxium_upgrade_kit, 0);
-		}
-		if (ACConfig.foodstuff) {
-			registerItemRender(ACItems.mre, 0);
-			registerItemRender(ACItems.iron_plate, 0);
-			registerItemRender(ACItems.chicken_on_a_plate, 0);
-			registerItemRender(ACItems.pork_on_a_plate, 0);
-			registerItemRender(ACItems.beef_on_a_plate, 0);
-			registerItemRender(ACItems.fish_on_a_plate, 0);
-			registerItemRender(ACItems.dirty_plate, 0);
-			registerItemRender(ACItems.fried_egg, 0);
-			registerItemRender(ACItems.fried_egg_on_a_plate, 0);
-			registerItemRender(ACItems.washcloth, 0);
-		}
 		registerItemRender(ACItems.shadow_fragment, 0);
 		registerItemRender(ACItems.shadow_shard, 0);
 		registerItemRender(ACItems.shadow_gem, 0);

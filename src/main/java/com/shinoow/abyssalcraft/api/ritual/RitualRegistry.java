@@ -183,28 +183,4 @@ public class RitualRegistry {
 							return true;
 		return false;
 	}
-
-	/**
-	 * @deprecated see {@link APIUtils#areObjectsEqual(ItemStack, Object, boolean)}
-	 */
-	@Deprecated
-	public boolean areObjectsEqual(ItemStack stack, Object obj, boolean nbt){
-		return APIUtils.areObjectsEqual(stack, obj, nbt);
-	}
-
-	/**
-	 * @deprecated see {@link APIUtils#areStacksEqual(ItemStack, ItemStack, boolean)}
-	 */
-	@Deprecated
-	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2, boolean nbt){
-		return APIUtils.areStacksEqual(stack1, stack2, nbt);
-	}
-
-	/**
-	 * @deprecated see {@link APIUtils#areStacksEqual(ItemStack, ItemStack)}
-	 */
-	@Deprecated
-	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2){
-		return APIUtils.areStacksEqual(stack1, stack2);
-	}
 }
