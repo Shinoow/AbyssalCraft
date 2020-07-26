@@ -63,6 +63,10 @@ public class TeleporterAC extends Teleporter
 			entity.changeDimension(dimension, teleporter);
 	}
 
+	public static void changeDimension(Entity entity, int dimension) {
+		//TODO stuff
+	}
+	
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw)
 	{
