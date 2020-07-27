@@ -126,11 +126,12 @@ public class EntityPortal extends Entity {
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound compound) {
-
+		dataManager.set(DIMENSION, compound.getInteger("Dimension"));
+		data = DimensionDataRegistry.instance().getDataForDim(dataManager.get(DIMENSION));
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound compound) {
-
+		compound.setInteger("Dimension", dataManager.get(DIMENSION));
 	}
 }

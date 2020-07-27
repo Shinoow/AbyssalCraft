@@ -56,7 +56,7 @@ public class TeleporterAC extends Teleporter
 		this.portal = portal;
 		this.frame = frame;
 	}
-	
+
 	public static void changeDimension(Entity entity, int dimension, Block portal, IBlockState frame) {
 		Teleporter teleporter = new TeleporterAC(entity.getServer().getWorld(dimension), portal, frame);
 		if(entity instanceof EntityPlayerMP) {
@@ -86,7 +86,7 @@ public class TeleporterAC extends Teleporter
 		} else
 			entity.changeDimension(dimension, teleporter);
 	}
-	
+
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw)
 	{
@@ -116,37 +116,35 @@ public class TeleporterAC extends Teleporter
 		else {
 			BlockPos blockpos4 = new BlockPos(entityIn);
 
-//			for (int l = -128; l <= 128; ++l) {
-//				BlockPos blockpos1;
-//
-//				for (int i1 = -128; i1 <= 128; ++i1)
-//					for (BlockPos blockpos = blockpos4.add(l, worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 6; blockpos = blockpos1) {
-//						blockpos1 = blockpos.down();
-//
-//						if (worldServerInstance.getBlockState(blockpos).getBlock() == portal) {
-//							while (worldServerInstance.getBlockState(blockpos1 = blockpos.down()).getBlock() == portal)
-//								blockpos = blockpos1;
-//
-//							double d1 = blockpos.distanceSq(blockpos4);
-//
-//							if (d0 < 0.0D || d1 < d0) {
-//								d0 = d1;
-//								object = blockpos;
-//							}
-//						}
-//					}
-//			}
-			
-			for(EntityPortal portal : world.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(blockpos4).grow(128, 128, 128))) {
-				if(portal.getPosition().getY() > 6) {
-					double d1 = portal.getPosition().distanceSq(blockpos4);
-					if(d0 < 0.0D || d1 < d0) {
-						d0 = d1;
-						object = portal.getPosition();
-					}
+			//			for (int l = -128; l <= 128; ++l) {
+			//				BlockPos blockpos1;
+			//
+			//				for (int i1 = -128; i1 <= 128; ++i1)
+			//					for (BlockPos blockpos = blockpos4.add(l, worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 6; blockpos = blockpos1) {
+			//						blockpos1 = blockpos.down();
+			//
+			//						if (worldServerInstance.getBlockState(blockpos).getBlock() == portal) {
+			//							while (worldServerInstance.getBlockState(blockpos1 = blockpos.down()).getBlock() == portal)
+			//								blockpos = blockpos1;
+			//
+			//							double d1 = blockpos.distanceSq(blockpos4);
+			//
+			//							if (d0 < 0.0D || d1 < d0) {
+			//								d0 = d1;
+			//								object = blockpos;
+			//							}
+			//						}
+			//					}
+			//			}
+
+			for(EntityPortal portal : worldServerInstance.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(blockpos4).grow(128, 128, 128))) {
+				double d1 = portal.getPosition().distanceSq(blockpos4);
+				if(d0 < 0.0D || d1 < d0) {
+					d0 = d1;
+					object = portal.getPosition();
 				}
 			}
-			
+
 		}
 
 		if (d0 >= 0.0D) {
@@ -377,48 +375,48 @@ public class TeleporterAC extends Teleporter
 		portal.setDestination(prevDimension);
 		portal.setLocationAndAngles(i6 + 0.5, k2 + 1, k6 + 0.5, 0, 0);
 		worldServerInstance.spawnEntity(portal);
-		
-//		if (d0 < 0.0D)
-//		{
-//			j1 = MathHelper.clamp(j1, 70, worldServerInstance.getActualHeight() - 10);
-//			k2 = j1;
-//
-//			for (int j7 = -1; j7 <= 1; ++j7)
-//				for (int l7 = 1; l7 < 3; ++l7)
-//					for (int k8 = -1; k8 < 3; ++k8)
-//					{
-//						int k9 = i6 + (l7 - 1) * l6 + j7 * i3;
-//						int k10 = k2 + k8;
-//						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
-//						boolean flag = k8 < 0;
-//						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? frame : Blocks.AIR.getDefaultState());
-//					}
-//		}
-//
-//		IBlockState iblockstate = portal.getDefaultState().withProperty(BlockPortal.AXIS, l6 != 0 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
-//
-//		for (int i8 = 0; i8 < 4; ++i8)
-//		{
-//			for (int l8 = 0; l8 < 4; ++l8)
-//				for (int l9 = -1; l9 < 4; ++l9)
-//				{
-//					int l10 = i6 + (l8 - 1) * l6;
-//					int l11 = k2 + l9;
-//					int k12 = k6 + (l8 - 1) * i3;
-//					boolean flag1 = l8 == 0 || l8 == 3 || l9 == -1 || l9 == 3;
-//					worldServerInstance.setBlockState(new BlockPos(l10, l11, k12), flag1 ? frame : iblockstate, 2);
-//				}
-//
-//			for (int i9 = 0; i9 < 4; ++i9)
-//				for (int i10 = -1; i10 < 4; ++i10)
-//				{
-//					int i11 = i6 + (i9 - 1) * l6;
-//					int i12 = k2 + i10;
-//					int l12 = k6 + (i9 - 1) * i3;
-//					BlockPos blockpos = new BlockPos(i11, i12, l12);
-//					worldServerInstance.notifyNeighborsOfStateChange(blockpos, worldServerInstance.getBlockState(blockpos).getBlock(), false);
-//				}
-//		}
+
+		//		if (d0 < 0.0D)
+		//		{
+		//			j1 = MathHelper.clamp(j1, 70, worldServerInstance.getActualHeight() - 10);
+		//			k2 = j1;
+		//
+		//			for (int j7 = -1; j7 <= 1; ++j7)
+		//				for (int l7 = 1; l7 < 3; ++l7)
+		//					for (int k8 = -1; k8 < 3; ++k8)
+		//					{
+		//						int k9 = i6 + (l7 - 1) * l6 + j7 * i3;
+		//						int k10 = k2 + k8;
+		//						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
+		//						boolean flag = k8 < 0;
+		//						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? frame : Blocks.AIR.getDefaultState());
+		//					}
+		//		}
+		//
+		//		IBlockState iblockstate = portal.getDefaultState().withProperty(BlockPortal.AXIS, l6 != 0 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
+		//
+		//		for (int i8 = 0; i8 < 4; ++i8)
+		//		{
+		//			for (int l8 = 0; l8 < 4; ++l8)
+		//				for (int l9 = -1; l9 < 4; ++l9)
+		//				{
+		//					int l10 = i6 + (l8 - 1) * l6;
+		//					int l11 = k2 + l9;
+		//					int k12 = k6 + (l8 - 1) * i3;
+		//					boolean flag1 = l8 == 0 || l8 == 3 || l9 == -1 || l9 == 3;
+		//					worldServerInstance.setBlockState(new BlockPos(l10, l11, k12), flag1 ? frame : iblockstate, 2);
+		//				}
+		//
+		//			for (int i9 = 0; i9 < 4; ++i9)
+		//				for (int i10 = -1; i10 < 4; ++i10)
+		//				{
+		//					int i11 = i6 + (i9 - 1) * l6;
+		//					int i12 = k2 + i10;
+		//					int l12 = k6 + (i9 - 1) * i3;
+		//					BlockPos blockpos = new BlockPos(i11, i12, l12);
+		//					worldServerInstance.notifyNeighborsOfStateChange(blockpos, worldServerInstance.getBlockState(blockpos).getBlock(), false);
+		//				}
+		//		}
 
 		return true;
 	}
