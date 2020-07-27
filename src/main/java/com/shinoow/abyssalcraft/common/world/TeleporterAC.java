@@ -19,7 +19,6 @@ import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPortal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -371,27 +370,30 @@ public class TeleporterAC extends Teleporter
 			i3 = -i3;
 		}
 
+		if (d0 < 0.0D)
+		{
+			IBlockState state = worldServerInstance.getBiome(new BlockPos(i6, k2, k6)).topBlock;
+			j1 = MathHelper.clamp(j1, 70, worldServerInstance.getActualHeight() - 10);
+			k2 = j1;
+
+			for (int j7 = -1; j7 <= 1; ++j7)
+				for (int l7 = 1; l7 < 3; ++l7)
+					for (int k8 = -1; k8 < 3; ++k8)
+					{
+						int k9 = i6 + (l7 - 1) * l6 + j7 * i3;
+						int k10 = k2 + k8;
+						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
+						boolean flag = k8 < 0;
+						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? state : Blocks.AIR.getDefaultState());
+					}
+		}
+
 		EntityPortal portal = new EntityPortal(worldServerInstance);
 		portal.setDestination(prevDimension);
 		portal.setLocationAndAngles(i6 + 0.5, k2 + 1, k6 + 0.5, 0, 0);
 		worldServerInstance.spawnEntity(portal);
 
-		//		if (d0 < 0.0D)
-		//		{
-		//			j1 = MathHelper.clamp(j1, 70, worldServerInstance.getActualHeight() - 10);
-		//			k2 = j1;
-		//
-		//			for (int j7 = -1; j7 <= 1; ++j7)
-		//				for (int l7 = 1; l7 < 3; ++l7)
-		//					for (int k8 = -1; k8 < 3; ++k8)
-		//					{
-		//						int k9 = i6 + (l7 - 1) * l6 + j7 * i3;
-		//						int k10 = k2 + k8;
-		//						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
-		//						boolean flag = k8 < 0;
-		//						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? frame : Blocks.AIR.getDefaultState());
-		//					}
-		//		}
+
 		//
 		//		IBlockState iblockstate = portal.getDefaultState().withProperty(BlockPortal.AXIS, l6 != 0 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
 		//

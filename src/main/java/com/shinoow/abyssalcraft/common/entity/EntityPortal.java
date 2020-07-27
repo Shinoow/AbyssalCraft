@@ -89,7 +89,7 @@ public class EntityPortal extends Entity {
 							entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
 							TeleporterAC.changeDimension(entity, dataManager.get(DIMENSION));
 						}
-				}
+				} else entity.setDead();
 		}
 	}
 

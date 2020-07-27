@@ -41,7 +41,7 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 		if(!stack.isEmpty()) {
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
-			int id = stack.getTagCompound().getInteger("dimension");
+			int id = stack.getTagCompound().getInteger("Dimension");
 			if(id == world.provider.getDimension())
 				return false;
 			
@@ -74,7 +74,7 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 		if(!stack.isEmpty()) {
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
-			int id = stack.getTagCompound().getInteger("dimension");
+			int id = stack.getTagCompound().getInteger("Dimension");
 			
 			EntityPortal portal = new EntityPortal(world);
 			portal.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);

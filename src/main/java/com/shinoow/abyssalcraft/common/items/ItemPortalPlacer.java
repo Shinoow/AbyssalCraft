@@ -12,12 +12,11 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.dimension.DimensionData;
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -28,15 +27,12 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.FMLClientHandler;
 
 public class ItemPortalPlacer extends ItemACBasic {
 
@@ -69,7 +65,7 @@ public class ItemPortalPlacer extends ItemACBasic {
 	}
 
 	@Override
-	public void addInformation(ItemStack par1ItemStack, World entityplayer, List list, ITooltipFlag is){
+	public void addInformation(ItemStack par1ItemStack, World world, List list, ITooltipFlag is){
 		list.add(I18n.format("tooltip.portalplacer.1"));
 		list.add(I18n.format("tooltip.portalplacer.2"));
 		if(key > 0)
@@ -77,6 +73,29 @@ public class ItemPortalPlacer extends ItemACBasic {
 		if(Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null)
 			if(!isCorrectDim(Minecraft.getMinecraft().world.provider.getDimension()))
 				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.format("tooltip.portalplacer.4"));
+		if(!par1ItemStack.hasTagCompound())
+			par1ItemStack.setTagCompound(new NBTTagCompound());
+		int dim = par1ItemStack.getTagCompound().getInteger("Dimension");
+		list.add(String.format("Dimension: %s", DimensionDataRegistry.instance().getDimensionNameMappings().get(dim)));
+		DimensionData data = DimensionDataRegistry.instance().getDataForDim(dim);
+		if(data != null && world != null) {
+			int currDim = world.provider.getDimension();
+			boolean nope = false;
+			if(data.getId() == currDim) {
+				nope = true;
+			} else {
+				if(!data.getConnectedDimensions().isEmpty() && !data.getConnectedDimensions().contains(currDim)) {
+					//TODO insert gateway key override check here
+					nope = true;
+				} else {
+					if(!RitualRegistry.instance().canPerformAction(currDim, 4)) {
+						nope = true;
+					}
+				}
+			}
+			if(nope)
+				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+"You can't create a portal for that dimension here!");
+		}
 	}
 
 	private boolean isCorrectDim(int dim){
@@ -131,130 +150,48 @@ public class ItemPortalPlacer extends ItemACBasic {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
-		if(!world.isRemote){
-			if(isCorrectDim(player.dimension))
-			{
-				int direction = MathHelper.floor(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-
-				int o = DimensionDataRegistry.instance().getGatewayKeyOverride(player.dimension);
-
-				switch(key){
-				case 0:
-					return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSAL_STONE), ACBlocks.coralium_fire.getDefaultState());
-				case 1:
-					if(player.dimension == ACLib.abyssal_wasteland_id && player.isSneaking() || player.dimension == 0 || o == 0)
-						return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSAL_STONE), ACBlocks.coralium_fire.getDefaultState());
-					else return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.DREADSTONE), ACBlocks.dreaded_fire.getDefaultState());
-				case 2:
-					if(player.dimension == ACLib.abyssal_wasteland_id && player.isSneaking() || player.dimension == 0 || o == 0)
-						return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSAL_STONE), ACBlocks.coralium_fire.getDefaultState());
-					else if(player.dimension == ACLib.dreadlands_id && player.isSneaking() || player.dimension == ACLib.abyssal_wasteland_id || o == 1)
-						return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.DREADSTONE), ACBlocks.dreaded_fire.getDefaultState());
-					else return buildPortal(world, pos, direction, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE), ACBlocks.omothol_fire.getDefaultState());
-				default:
-					return EnumActionResult.FAIL;
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    {
+		ItemStack stack = playerIn.getHeldItem(handIn);
+	
+		if(!worldIn.isRemote){
+			
+			if(!stack.hasTagCompound())
+				stack.setTagCompound(new NBTTagCompound());
+			
+			int dim = stack.getTagCompound().getInteger("Dimension");
+			int newDim = 0;
+			List<DimensionData> dims = DimensionDataRegistry.instance().getDimensions().stream().filter(d -> d.getGatewayKey() <= key).collect(Collectors.toList());
+			if(playerIn.isSneaking()) {
+				for(int i = dims.size()-1; i > 0; i--) {
+					DimensionData data = dims.get(i);
+					if(data.getId() == dim) {
+						if(i == 0) {
+							newDim = dims.get(dims.size() -1).getId();
+						} else {
+							newDim = dims.get(i-1).getId();
+						}
+						break;
+					}
+				}
+			} else {
+				for(int i = 0; i < dims.size(); i++) {
+					DimensionData data = dims.get(i);
+					if(data.getId() == dim) {
+						if(i == dims.size() -1) {
+							newDim = dims.get(0).getId();
+						} else {
+							newDim = dims.get(i+1).getId();
+						}
+						break;
+					}
 				}
 			}
-		} else if(dimWarning(player.dimension))
-		{
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.portalplacer.error.2"));
-			return EnumActionResult.FAIL;
-		}
-		else if(!isCorrectDim(player.dimension)){
-			FMLClientHandler.instance().getClient().ingameGUI.getChatGUI().printChatMessage(new TextComponentTranslation("message.portalplacer.error.1"));
-			return EnumActionResult.FAIL;
-		}
-		return EnumActionResult.PASS;
-	}
-
-	private EnumActionResult buildPortal(World world, BlockPos pos, int direction, IBlockState frame, IBlockState fire){
-		if(direction == 1 || direction == 3)
-		{
-//			boolean b = true;
-//
-//			for(int z = -1; z < 3; z++)
-//				if(!world.getBlockState(pos.add(0, 0, z)).getBlock().isReplaceable(world, pos.add(0, 0, z)))
-//					b = false;
-//
-//			if(b) pos = pos.down();
-//
-//			for(int y = 1; y < 6; y++)
-//				for (int z = -1; z < 3; z++)
-//					if(!world.getBlockState(pos.add(0, y, z)).getBlock().isReplaceable(world, pos.add(0, y, z)))
-//						return EnumActionResult.FAIL;
-//
-//			world.setBlockState(pos.add(0, 1, 0), frame);
-//			world.setBlockState(pos.add(0, 1, 1), frame);
-//			world.setBlockState(pos.add(0, 1, 2), frame);
-//			world.setBlockState(pos.add(0, 1, -1), frame);
-//
-//			world.setBlockState(pos.add(0, 2, -1), frame);
-//			world.setBlockState(pos.add(0, 3, -1), frame);
-//			world.setBlockState(pos.add(0, 4, -1), frame);
-//			world.setBlockState(pos.add(0, 5, -1), frame);
-//
-//			world.setBlockState(pos.add(0, 2, 2), frame);
-//			world.setBlockState(pos.add(0, 3, 2), frame);
-//			world.setBlockState(pos.add(0, 4, 2), frame);
-//			world.setBlockState(pos.add(0, 5, 2), frame);
-//
-//			world.setBlockState(pos.add(0, 5, 0), frame);
-//			world.setBlockState(pos.add(0, 5, 1), frame);
-//
-//			world.setBlockState(pos.add(0, 2, 1), fire);
-
-			pos = pos.up();
 			
-			EntityPortal portal = new EntityPortal(world);
-			portal.setDestination(ACLib.abyssal_wasteland_id);
-			portal.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-			world.spawnEntity(portal);
-			
-			return EnumActionResult.SUCCESS;
+			stack.getTagCompound().setInteger("Dimension", newDim);
+			playerIn.sendStatusMessage(new TextComponentString(String.format("%d", newDim)), true);
 		}
-		else
-		{
-//			boolean b = true;
-//
-//			for(int x = -1; x < 3; x++)
-//				if(!world.getBlockState(pos.add(x, 0, 0)).getBlock().isReplaceable(world, pos.add(x, 0, 0)))
-//					b = false;
-//
-//			if(b) pos = pos.down();
-//
-//			for(int y = 1; y < 6; y++)
-//				for (int x = -1; x < 3; x++)
-//					if(!world.getBlockState(pos.add(x, y, 0)).getBlock().isReplaceable(world, pos.add(x, y, 0)))
-//						return EnumActionResult.FAIL;
-//
-//			world.setBlockState(pos.add(0, 1, 0), frame);
-//			world.setBlockState(pos.add(1, 1, 0), frame);
-//			world.setBlockState(pos.add(2, 1, 0), frame);
-//			world.setBlockState(pos.add(-1, 1, 0), frame);
-//
-//			world.setBlockState(pos.add(-1, 2, 0), frame);
-//			world.setBlockState(pos.add(-1, 3, 0), frame);
-//			world.setBlockState(pos.add(-1, 4, 0), frame);
-//			world.setBlockState(pos.add(-1, 5, 0), frame);
-//
-//			world.setBlockState(pos.add(2, 2, 0), frame);
-//			world.setBlockState(pos.add(2, 3, 0), frame);
-//			world.setBlockState(pos.add(2, 4, 0), frame);
-//			world.setBlockState(pos.add(2, 5, 0), frame);
-//
-//			world.setBlockState(pos.add(0, 5, 0), frame);
-//			world.setBlockState(pos.add(1, 5, 0), frame);
-//
-//			world.setBlockState(pos.add(1, 2, 0), fire);
-
-			pos = pos.up();
-			EntityPortal portal = new EntityPortal(world);
-			portal.setDestination(ACLib.abyssal_wasteland_id);
-			portal.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-			world.spawnEntity(portal);
-			
-			return EnumActionResult.SUCCESS;
-		}
-	}
+		
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
+    }
 }
