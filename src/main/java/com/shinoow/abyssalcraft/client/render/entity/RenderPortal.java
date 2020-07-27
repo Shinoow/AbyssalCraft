@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.shinoow.abyssalcraft.common.entity.EntityBlackHole;
+import com.shinoow.abyssalcraft.api.dimension.DimensionData;
 import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 
 import net.minecraft.client.renderer.BufferBuilder;
@@ -35,35 +35,40 @@ public class RenderPortal extends Render<EntityPortal> {
 		super(manager);
 	}
 
-	int ticks;
 
 	@Override
 	public void doRender(EntityPortal entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
-		ticks++;
+		entity.clientTicks++;
 
 		float wobbleScale = 0.05f;
-		float wobble = ticks / 10f;
+		float wobble = entity.clientTicks / 10f;
 		float wobbleX = (float) (Math.sin(wobble) * wobbleScale) + 1;
 		float wobbleY = (float) (Math.sin(wobble) * -1 * wobbleScale) + 1;
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y + 1, z);
-		GlStateManager.scale(wobbleX, wobbleY, 1);
+		if(entity.ticksExisted <= 30) {
+			float f = entity.ticksExisted / 30f;
+			GlStateManager.scale(f, f, f);
+		}
+		else GlStateManager.scale(wobbleX, wobbleY, 1);
 
-		GlStateManager.color(0, 1, 0, 1); //TODO fetch color from somewhere
-		
+		DimensionData data = entity.getDimensionData();
+
+		GlStateManager.color(data.getR(), data.getG(), data.getB(), 1);
+
 		GlStateManager.scale(1, 1.5, 1);
-		
+
 		bindEntityTexture(entity);
 
-		float rot = ticks * 2;
+		float rot = entity.clientTicks * 2;
 		double scale = 1;
 
 		GlStateManager.pushMatrix();
 
 		GlStateManager.rotate(-renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-//		GlStateManager.rotate(renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+		//		GlStateManager.rotate(renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
 
 		GlStateManager.pushMatrix();
 
@@ -77,10 +82,24 @@ public class RenderPortal extends Render<EntityPortal> {
 		tes.pos(scale, scale, 0).tex(1, 1).endVertex();
 		tes.pos(scale, -scale, 0).tex(1, 0).endVertex();
 		tessellator.draw();
+
+		if(data.getOverlay() != null) {
+			GlStateManager.color(1, 1, 1, 1);
+			bindTexture(data.getOverlay());
+
+			tes.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+			tes.pos(-scale, -scale, 0).tex(0, 0).endVertex();
+			tes.pos(-scale, scale, 0).tex(0, 1).endVertex();
+			tes.pos(scale, scale, 0).tex(1, 1).endVertex();
+			tes.pos(scale, -scale, 0).tex(1, 0).endVertex();
+			tessellator.draw();
+		}
+
 		GlStateManager.popMatrix();
 		GlStateManager.popMatrix();
 
 		GlStateManager.popMatrix();
+
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * A Necronomicon Infusion Ritual
@@ -74,7 +75,7 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
 	public NecronomiconInfusionRitual(String unlocalizedName, int bookType, float requiredEnergy, ItemStack item, Object sacrifice, Object...offerings) {
-		this(unlocalizedName, bookType, -1, requiredEnergy, item, sacrifice, offerings);
+		this(unlocalizedName, bookType, OreDictionary.WILDCARD_VALUE, requiredEnergy, item, sacrifice, offerings);
 	}
 
 	public NecronomiconInfusionRitual setTags(String... strings){

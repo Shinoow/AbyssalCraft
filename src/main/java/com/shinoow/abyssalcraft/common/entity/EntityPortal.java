@@ -1,16 +1,16 @@
 package com.shinoow.abyssalcraft.common.entity;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.dimension.DimensionData;
+import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.common.world.TeleporterAC;
 import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemMonsterPlacer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -22,9 +22,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityPortal extends EntityLiving {
+public class EntityPortal extends Entity {
 
 	private static final DataParameter<Integer> DIMENSION = EntityDataManager.createKey(EntityPortal.class, DataSerializers.VARINT);
+
+	private DimensionData data;
+	
+	public int clientTicks;
 
 	public EntityPortal(World worldIn) {
 		super(worldIn);
@@ -34,23 +38,30 @@ public class EntityPortal extends EntityLiving {
 	public EntityPortal setDestination(int dim) {
 
 		dataManager.set(DIMENSION, dim);
+		data = DimensionDataRegistry.instance().getDataForDim(dim);
 		return this;
+	}
+
+	public DimensionData getDimensionData() {
+		if(data == null)
+			data = DimensionDataRegistry.instance().getDataForDim(dataManager.get(DIMENSION));
+
+		return data;
 	}
 
 	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
 		dataManager.register(DIMENSION, 0);
 	}
 
 	@Override
 	public void onUpdate() {
-		if(!world.isRemote && ticksExisted % 10 == 0) {
+		if(!world.isRemote && ticksExisted % 10 == 0 && getDimensionData().getMobClass() != null) {
 			boolean playerNearby = ACConfig.portalSpawnsNearPlayer ? world.getClosestPlayer(posX, posY, posZ, 32, false) != null : true;
 			boolean nearbyMobs = world.getEntitiesWithinAABB(EntityAbyssalZombie.class, new AxisAlignedBB(getPosition()).grow(16)).size() < 10;
 
-			if (world.provider.getDimension() != ACLib.abyssal_wasteland_id && world.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < world.getDifficulty().getDifficultyId()
+			if (world.provider.getDimension() != dataManager.get(DIMENSION) && world.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < world.getDifficulty().getDifficultyId()
 					&& playerNearby && nearbyMobs)
 			{
 				int i = getPosition().getY();
@@ -61,26 +72,23 @@ public class EntityPortal extends EntityLiving {
 
 				if (i > 0 && !world.getBlockState(blockpos.up()).isNormalCube())
 				{
-					//TODO set based on destination dimension
-					Entity entity = ItemMonsterPlacer.spawnCreature(world, EntityList.getKey(EntityAbyssalZombie.class), blockpos.getX() + 0.5D, blockpos.getY() + 1.1D, blockpos.getZ() + 0.5D);
+					Entity entity = ItemMonsterPlacer.spawnCreature(world, EntityList.getKey(getDimensionData().getMobClass()), blockpos.getX() + 0.5D, blockpos.getY() + 1.1D, blockpos.getZ() + 0.5D);
 
 					if (entity != null)
 						entity.timeUntilPortal = entity.getPortalCooldown();
 				}
 			}
 		}
-	}
-
-	@Override
-	protected void collideWithEntity(Entity entity)
-	{
-		if(!(entity instanceof EntityPortal)) {
-			if (!entity.isRiding() && !entity.isBeingRidden() && !world.isRemote && !entity.isDead && entity.isNonBoss())
-				if(entity.timeUntilPortal > 0)
-					entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
-				else {
-					entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
-					TeleporterAC.changeDimension(entity, dataManager.get(DIMENSION));
+		if(!world.isRemote) {
+			for(Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox()))
+				if(!(entity instanceof EntityPortal)) {
+					if (!entity.isRiding() && !entity.isBeingRidden() && !world.isRemote && !entity.isDead && entity.isNonBoss())
+						if(entity.timeUntilPortal > 0)
+							entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
+						else {
+							entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
+							TeleporterAC.changeDimension(entity, dataManager.get(DIMENSION));
+						}
 				}
 		}
 	}
@@ -114,5 +122,15 @@ public class EntityPortal extends EntityLiving {
 	public boolean isInRangeToRenderDist(double distance)
 	{
 		return true;
+	}
+
+	@Override
+	protected void readEntityFromNBT(NBTTagCompound compound) {
+
+	}
+
+	@Override
+	protected void writeEntityToNBT(NBTTagCompound compound) {
+
 	}
 }

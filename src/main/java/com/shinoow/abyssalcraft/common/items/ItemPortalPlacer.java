@@ -15,8 +15,10 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
+import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -82,14 +84,14 @@ public class ItemPortalPlacer extends ItemACBasic {
 		case 0:
 			if(dim == 0 || dim == ACLib.abyssal_wasteland_id)
 				return true;
-			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) == 0)
+			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) == 0)
 				return true;
 			else return false;
 		case 1:
 			if(dim == 0 || dim == ACLib.abyssal_wasteland_id ||
 			dim == ACLib.dreadlands_id)
 				return true;
-			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) >= 0 && AbyssalCraftAPI.getGatewayKeyOverride(dim) < 2)
+			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) >= 0 && DimensionDataRegistry.instance().getGatewayKeyOverride(dim) < 2)
 				return true;
 			else return false;
 		case 2:
@@ -98,7 +100,7 @@ public class ItemPortalPlacer extends ItemACBasic {
 			dim == ACLib.omothol_id ||
 			dim == ACLib.dark_realm_id)
 				return true;
-			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) >= 0)
+			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) >= 0)
 				return true;
 			else return false;
 		default:
@@ -113,14 +115,14 @@ public class ItemPortalPlacer extends ItemACBasic {
 			dim == ACLib.omothol_id ||
 			dim == ACLib.dark_realm_id)
 				return true;
-			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) > 0)
+			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) > 0)
 				return true;
 			else return false;
 		case 1:
 			if(dim == ACLib.omothol_id ||
 			dim == ACLib.dark_realm_id)
 				return true;
-			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) > 1)
+			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) > 1)
 				return true;
 			else return false;
 		default:
@@ -135,7 +137,7 @@ public class ItemPortalPlacer extends ItemACBasic {
 			{
 				int direction = MathHelper.floor(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-				int o = AbyssalCraftAPI.getGatewayKeyOverride(player.dimension);
+				int o = DimensionDataRegistry.instance().getGatewayKeyOverride(player.dimension);
 
 				switch(key){
 				case 0:
@@ -169,76 +171,89 @@ public class ItemPortalPlacer extends ItemACBasic {
 	private EnumActionResult buildPortal(World world, BlockPos pos, int direction, IBlockState frame, IBlockState fire){
 		if(direction == 1 || direction == 3)
 		{
-			boolean b = true;
+//			boolean b = true;
+//
+//			for(int z = -1; z < 3; z++)
+//				if(!world.getBlockState(pos.add(0, 0, z)).getBlock().isReplaceable(world, pos.add(0, 0, z)))
+//					b = false;
+//
+//			if(b) pos = pos.down();
+//
+//			for(int y = 1; y < 6; y++)
+//				for (int z = -1; z < 3; z++)
+//					if(!world.getBlockState(pos.add(0, y, z)).getBlock().isReplaceable(world, pos.add(0, y, z)))
+//						return EnumActionResult.FAIL;
+//
+//			world.setBlockState(pos.add(0, 1, 0), frame);
+//			world.setBlockState(pos.add(0, 1, 1), frame);
+//			world.setBlockState(pos.add(0, 1, 2), frame);
+//			world.setBlockState(pos.add(0, 1, -1), frame);
+//
+//			world.setBlockState(pos.add(0, 2, -1), frame);
+//			world.setBlockState(pos.add(0, 3, -1), frame);
+//			world.setBlockState(pos.add(0, 4, -1), frame);
+//			world.setBlockState(pos.add(0, 5, -1), frame);
+//
+//			world.setBlockState(pos.add(0, 2, 2), frame);
+//			world.setBlockState(pos.add(0, 3, 2), frame);
+//			world.setBlockState(pos.add(0, 4, 2), frame);
+//			world.setBlockState(pos.add(0, 5, 2), frame);
+//
+//			world.setBlockState(pos.add(0, 5, 0), frame);
+//			world.setBlockState(pos.add(0, 5, 1), frame);
+//
+//			world.setBlockState(pos.add(0, 2, 1), fire);
 
-			for(int z = -1; z < 3; z++)
-				if(!world.getBlockState(pos.add(0, 0, z)).getBlock().isReplaceable(world, pos.add(0, 0, z)))
-					b = false;
-
-			if(b) pos = pos.down();
-
-			for(int y = 1; y < 6; y++)
-				for (int z = -1; z < 3; z++)
-					if(!world.getBlockState(pos.add(0, y, z)).getBlock().isReplaceable(world, pos.add(0, y, z)))
-						return EnumActionResult.FAIL;
-
-			world.setBlockState(pos.add(0, 1, 0), frame);
-			world.setBlockState(pos.add(0, 1, 1), frame);
-			world.setBlockState(pos.add(0, 1, 2), frame);
-			world.setBlockState(pos.add(0, 1, -1), frame);
-
-			world.setBlockState(pos.add(0, 2, -1), frame);
-			world.setBlockState(pos.add(0, 3, -1), frame);
-			world.setBlockState(pos.add(0, 4, -1), frame);
-			world.setBlockState(pos.add(0, 5, -1), frame);
-
-			world.setBlockState(pos.add(0, 2, 2), frame);
-			world.setBlockState(pos.add(0, 3, 2), frame);
-			world.setBlockState(pos.add(0, 4, 2), frame);
-			world.setBlockState(pos.add(0, 5, 2), frame);
-
-			world.setBlockState(pos.add(0, 5, 0), frame);
-			world.setBlockState(pos.add(0, 5, 1), frame);
-
-			world.setBlockState(pos.add(0, 2, 1), fire);
-
+			pos = pos.up();
+			
+			EntityPortal portal = new EntityPortal(world);
+			portal.setDestination(ACLib.abyssal_wasteland_id);
+			portal.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+			world.spawnEntity(portal);
+			
 			return EnumActionResult.SUCCESS;
 		}
 		else
 		{
-			boolean b = true;
+//			boolean b = true;
+//
+//			for(int x = -1; x < 3; x++)
+//				if(!world.getBlockState(pos.add(x, 0, 0)).getBlock().isReplaceable(world, pos.add(x, 0, 0)))
+//					b = false;
+//
+//			if(b) pos = pos.down();
+//
+//			for(int y = 1; y < 6; y++)
+//				for (int x = -1; x < 3; x++)
+//					if(!world.getBlockState(pos.add(x, y, 0)).getBlock().isReplaceable(world, pos.add(x, y, 0)))
+//						return EnumActionResult.FAIL;
+//
+//			world.setBlockState(pos.add(0, 1, 0), frame);
+//			world.setBlockState(pos.add(1, 1, 0), frame);
+//			world.setBlockState(pos.add(2, 1, 0), frame);
+//			world.setBlockState(pos.add(-1, 1, 0), frame);
+//
+//			world.setBlockState(pos.add(-1, 2, 0), frame);
+//			world.setBlockState(pos.add(-1, 3, 0), frame);
+//			world.setBlockState(pos.add(-1, 4, 0), frame);
+//			world.setBlockState(pos.add(-1, 5, 0), frame);
+//
+//			world.setBlockState(pos.add(2, 2, 0), frame);
+//			world.setBlockState(pos.add(2, 3, 0), frame);
+//			world.setBlockState(pos.add(2, 4, 0), frame);
+//			world.setBlockState(pos.add(2, 5, 0), frame);
+//
+//			world.setBlockState(pos.add(0, 5, 0), frame);
+//			world.setBlockState(pos.add(1, 5, 0), frame);
+//
+//			world.setBlockState(pos.add(1, 2, 0), fire);
 
-			for(int x = -1; x < 3; x++)
-				if(!world.getBlockState(pos.add(x, 0, 0)).getBlock().isReplaceable(world, pos.add(x, 0, 0)))
-					b = false;
-
-			if(b) pos = pos.down();
-
-			for(int y = 1; y < 6; y++)
-				for (int x = -1; x < 3; x++)
-					if(!world.getBlockState(pos.add(x, y, 0)).getBlock().isReplaceable(world, pos.add(x, y, 0)))
-						return EnumActionResult.FAIL;
-
-			world.setBlockState(pos.add(0, 1, 0), frame);
-			world.setBlockState(pos.add(1, 1, 0), frame);
-			world.setBlockState(pos.add(2, 1, 0), frame);
-			world.setBlockState(pos.add(-1, 1, 0), frame);
-
-			world.setBlockState(pos.add(-1, 2, 0), frame);
-			world.setBlockState(pos.add(-1, 3, 0), frame);
-			world.setBlockState(pos.add(-1, 4, 0), frame);
-			world.setBlockState(pos.add(-1, 5, 0), frame);
-
-			world.setBlockState(pos.add(2, 2, 0), frame);
-			world.setBlockState(pos.add(2, 3, 0), frame);
-			world.setBlockState(pos.add(2, 4, 0), frame);
-			world.setBlockState(pos.add(2, 5, 0), frame);
-
-			world.setBlockState(pos.add(0, 5, 0), frame);
-			world.setBlockState(pos.add(1, 5, 0), frame);
-
-			world.setBlockState(pos.add(1, 2, 0), fire);
-
+			pos = pos.up();
+			EntityPortal portal = new EntityPortal(world);
+			portal.setDestination(ACLib.abyssal_wasteland_id);
+			portal.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+			world.spawnEntity(portal);
+			
 			return EnumActionResult.SUCCESS;
 		}
 	}

@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.common.world;
 
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.common.entity.EntityPortal;
+
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
@@ -23,9 +25,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.*;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeHooks;
@@ -36,8 +36,17 @@ public class TeleporterAC extends Teleporter
 	private final WorldServer worldServerInstance;
 	private final Random random;
 	private final Long2ObjectMap<Teleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap(4096);
-	private final Block portal;
-	private final IBlockState frame;
+	private Block portal;
+	private IBlockState frame;
+	private int prevDimension;
+
+	public TeleporterAC(WorldServer par1WorldServer, int prevDimension)
+	{
+		super(par1WorldServer);
+		worldServerInstance = par1WorldServer;
+		this.prevDimension = prevDimension;
+		random = new Random(par1WorldServer.getSeed());
+	}
 
 	public TeleporterAC(WorldServer par1WorldServer, Block portal, IBlockState frame)
 	{
@@ -47,7 +56,7 @@ public class TeleporterAC extends Teleporter
 		this.portal = portal;
 		this.frame = frame;
 	}
-
+	
 	public static void changeDimension(Entity entity, int dimension, Block portal, IBlockState frame) {
 		Teleporter teleporter = new TeleporterAC(entity.getServer().getWorld(dimension), portal, frame);
 		if(entity instanceof EntityPlayerMP) {
@@ -64,7 +73,18 @@ public class TeleporterAC extends Teleporter
 	}
 
 	public static void changeDimension(Entity entity, int dimension) {
-		//TODO stuff
+		Teleporter teleporter = new TeleporterAC(entity.getServer().getWorld(dimension), entity.dimension);
+		if(entity instanceof EntityPlayerMP) {
+			if(!ForgeHooks.onTravelToDimension(entity, dimension)) return;
+			if(!((EntityPlayerMP)entity).capabilities.isCreativeMode) {
+				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, true, "invulnerableDimensionChange", "field_184851_cj");
+				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastExperience", "field_71144_ck");
+				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1.0F, "lastHealth", "field_71149_ch");
+				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastFoodLevel", "field_71146_ci");
+			}
+			((EntityPlayerMP)entity).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP)entity, dimension, teleporter);
+		} else
+			entity.changeDimension(dimension, teleporter);
 	}
 	
 	@Override
@@ -96,26 +116,37 @@ public class TeleporterAC extends Teleporter
 		else {
 			BlockPos blockpos4 = new BlockPos(entityIn);
 
-			for (int l = -128; l <= 128; ++l) {
-				BlockPos blockpos1;
-
-				for (int i1 = -128; i1 <= 128; ++i1)
-					for (BlockPos blockpos = blockpos4.add(l, worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 6; blockpos = blockpos1) {
-						blockpos1 = blockpos.down();
-
-						if (worldServerInstance.getBlockState(blockpos).getBlock() == portal) {
-							while (worldServerInstance.getBlockState(blockpos1 = blockpos.down()).getBlock() == portal)
-								blockpos = blockpos1;
-
-							double d1 = blockpos.distanceSq(blockpos4);
-
-							if (d0 < 0.0D || d1 < d0) {
-								d0 = d1;
-								object = blockpos;
-							}
-						}
+//			for (int l = -128; l <= 128; ++l) {
+//				BlockPos blockpos1;
+//
+//				for (int i1 = -128; i1 <= 128; ++i1)
+//					for (BlockPos blockpos = blockpos4.add(l, worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 6; blockpos = blockpos1) {
+//						blockpos1 = blockpos.down();
+//
+//						if (worldServerInstance.getBlockState(blockpos).getBlock() == portal) {
+//							while (worldServerInstance.getBlockState(blockpos1 = blockpos.down()).getBlock() == portal)
+//								blockpos = blockpos1;
+//
+//							double d1 = blockpos.distanceSq(blockpos4);
+//
+//							if (d0 < 0.0D || d1 < d0) {
+//								d0 = d1;
+//								object = blockpos;
+//							}
+//						}
+//					}
+//			}
+			
+			for(EntityPortal portal : world.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(blockpos4).grow(128, 128, 128))) {
+				if(portal.getPosition().getY() > 6) {
+					double d1 = portal.getPosition().distanceSq(blockpos4);
+					if(d0 < 0.0D || d1 < d0) {
+						d0 = d1;
+						object = portal.getPosition();
 					}
+				}
 			}
+			
 		}
 
 		if (d0 >= 0.0D) {
@@ -144,16 +175,16 @@ public class TeleporterAC extends Teleporter
 			if (enumfacing != null) {
 				EnumFacing enumfacing2 = enumfacing.rotateYCCW();
 				BlockPos blockpos2 = ((BlockPos) object).offset(enumfacing);
-				boolean flag2 = func_180265_a(blockpos2);
-				boolean flag3 = func_180265_a(blockpos2.offset(enumfacing2));
+				boolean flag2 = notAir(blockpos2);
+				boolean flag3 = notAir(blockpos2.offset(enumfacing2));
 
 				if (flag3 && flag2) {
 					object = ((BlockPos) object).offset(enumfacing2);
 					enumfacing = enumfacing.getOpposite();
 					enumfacing2 = enumfacing2.getOpposite();
 					BlockPos blockpos3 = ((BlockPos) object).offset(enumfacing);
-					flag2 = func_180265_a(blockpos3);
-					flag3 = func_180265_a(blockpos3.offset(enumfacing2));
+					flag2 = notAir(blockpos3);
+					flag3 = notAir(blockpos3.offset(enumfacing2));
 				}
 
 				float f6 = 0.5F;
@@ -207,7 +238,7 @@ public class TeleporterAC extends Teleporter
 			return false;
 	}
 
-	private boolean func_180265_a(BlockPos p_180265_1_) {
+	private boolean notAir(BlockPos p_180265_1_) {
 		return !worldServerInstance.isAirBlock(p_180265_1_) || !worldServerInstance.isAirBlock(p_180265_1_.up());
 	}
 
@@ -342,47 +373,52 @@ public class TeleporterAC extends Teleporter
 			i3 = -i3;
 		}
 
-		if (d0 < 0.0D)
-		{
-			j1 = MathHelper.clamp(j1, 70, worldServerInstance.getActualHeight() - 10);
-			k2 = j1;
-
-			for (int j7 = -1; j7 <= 1; ++j7)
-				for (int l7 = 1; l7 < 3; ++l7)
-					for (int k8 = -1; k8 < 3; ++k8)
-					{
-						int k9 = i6 + (l7 - 1) * l6 + j7 * i3;
-						int k10 = k2 + k8;
-						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
-						boolean flag = k8 < 0;
-						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? frame : Blocks.AIR.getDefaultState());
-					}
-		}
-
-		IBlockState iblockstate = portal.getDefaultState().withProperty(BlockPortal.AXIS, l6 != 0 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
-
-		for (int i8 = 0; i8 < 4; ++i8)
-		{
-			for (int l8 = 0; l8 < 4; ++l8)
-				for (int l9 = -1; l9 < 4; ++l9)
-				{
-					int l10 = i6 + (l8 - 1) * l6;
-					int l11 = k2 + l9;
-					int k12 = k6 + (l8 - 1) * i3;
-					boolean flag1 = l8 == 0 || l8 == 3 || l9 == -1 || l9 == 3;
-					worldServerInstance.setBlockState(new BlockPos(l10, l11, k12), flag1 ? frame : iblockstate, 2);
-				}
-
-			for (int i9 = 0; i9 < 4; ++i9)
-				for (int i10 = -1; i10 < 4; ++i10)
-				{
-					int i11 = i6 + (i9 - 1) * l6;
-					int i12 = k2 + i10;
-					int l12 = k6 + (i9 - 1) * i3;
-					BlockPos blockpos = new BlockPos(i11, i12, l12);
-					worldServerInstance.notifyNeighborsOfStateChange(blockpos, worldServerInstance.getBlockState(blockpos).getBlock(), false);
-				}
-		}
+		EntityPortal portal = new EntityPortal(worldServerInstance);
+		portal.setDestination(prevDimension);
+		portal.setLocationAndAngles(i6 + 0.5, k2 + 1, k6 + 0.5, 0, 0);
+		worldServerInstance.spawnEntity(portal);
+		
+//		if (d0 < 0.0D)
+//		{
+//			j1 = MathHelper.clamp(j1, 70, worldServerInstance.getActualHeight() - 10);
+//			k2 = j1;
+//
+//			for (int j7 = -1; j7 <= 1; ++j7)
+//				for (int l7 = 1; l7 < 3; ++l7)
+//					for (int k8 = -1; k8 < 3; ++k8)
+//					{
+//						int k9 = i6 + (l7 - 1) * l6 + j7 * i3;
+//						int k10 = k2 + k8;
+//						int k11 = k6 + (l7 - 1) * i3 - j7 * l6;
+//						boolean flag = k8 < 0;
+//						worldServerInstance.setBlockState(new BlockPos(k9, k10, k11), flag ? frame : Blocks.AIR.getDefaultState());
+//					}
+//		}
+//
+//		IBlockState iblockstate = portal.getDefaultState().withProperty(BlockPortal.AXIS, l6 != 0 ? EnumFacing.Axis.X : EnumFacing.Axis.Z);
+//
+//		for (int i8 = 0; i8 < 4; ++i8)
+//		{
+//			for (int l8 = 0; l8 < 4; ++l8)
+//				for (int l9 = -1; l9 < 4; ++l9)
+//				{
+//					int l10 = i6 + (l8 - 1) * l6;
+//					int l11 = k2 + l9;
+//					int k12 = k6 + (l8 - 1) * i3;
+//					boolean flag1 = l8 == 0 || l8 == 3 || l9 == -1 || l9 == 3;
+//					worldServerInstance.setBlockState(new BlockPos(l10, l11, k12), flag1 ? frame : iblockstate, 2);
+//				}
+//
+//			for (int i9 = 0; i9 < 4; ++i9)
+//				for (int i10 = -1; i10 < 4; ++i10)
+//				{
+//					int i11 = i6 + (i9 - 1) * l6;
+//					int i12 = k2 + i10;
+//					int l12 = k6 + (i9 - 1) * i3;
+//					BlockPos blockpos = new BlockPos(i11, i12, l12);
+//					worldServerInstance.notifyNeighborsOfStateChange(blockpos, worldServerInstance.getBlockState(blockpos).getBlock(), false);
+//				}
+//		}
 
 		return true;
 	}

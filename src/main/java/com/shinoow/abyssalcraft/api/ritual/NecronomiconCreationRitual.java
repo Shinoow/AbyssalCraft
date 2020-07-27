@@ -20,6 +20,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * A Necronomicon Creation Ritual
@@ -70,7 +71,7 @@ public class NecronomiconCreationRitual extends NecronomiconRitual {
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
 	public NecronomiconCreationRitual(String unlocalizedName, int bookType, float requiredEnergy, ItemStack item, Object...offerings) {
-		this(unlocalizedName, bookType, -1, requiredEnergy, item, offerings);
+		this(unlocalizedName, bookType, OreDictionary.WILDCARD_VALUE, requiredEnergy, item, offerings);
 	}
 
 	/**

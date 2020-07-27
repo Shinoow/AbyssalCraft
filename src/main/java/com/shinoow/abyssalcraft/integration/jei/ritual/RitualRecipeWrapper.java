@@ -17,10 +17,10 @@ import javax.annotation.Nonnull;
 
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -70,8 +70,8 @@ public class RitualRecipeWrapper implements IRecipeWrapper {
 
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		dimToString.put(-1, I18n.format(NecronomiconText.LABEL_ANYWHERE, new Object[0]));
-		dimToString.putAll(RitualRegistry.instance().getDimensionNameMappings());
+		dimToString.put(OreDictionary.WILDCARD_VALUE, I18n.format(NecronomiconText.LABEL_ANYWHERE, new Object[0]));
+		dimToString.putAll(DimensionDataRegistry.instance().getDimensionNameMappings());
 
 		FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
 

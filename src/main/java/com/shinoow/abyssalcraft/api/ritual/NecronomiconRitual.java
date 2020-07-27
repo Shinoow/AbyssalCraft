@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Base Necronomicon Ritual.<br>
@@ -83,7 +84,7 @@ public abstract class NecronomiconRitual {
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
 	public NecronomiconRitual(String unlocalizedName, int bookType, float requiredEnergy, Object...offerings){
-		this(unlocalizedName, bookType, -1, requiredEnergy, offerings);
+		this(unlocalizedName, bookType, OreDictionary.WILDCARD_VALUE, requiredEnergy, offerings);
 	}
 
 	/**

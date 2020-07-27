@@ -14,6 +14,11 @@ package com.shinoow.abyssalcraft.init;
 import static com.shinoow.abyssalcraft.AbyssalCraft.modid;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.dimension.DimensionData;
+import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
+import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.StructureAbyStrongholdPieces;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.StructureDreadlandsMinePieces;
@@ -78,6 +83,33 @@ public class WorldHandler implements ILifeCycleHandler {
 		DimensionManager.registerDimension(ACLib.dreadlands_id, ACLib.THE_DREADLANDS);
 		DimensionManager.registerDimension(ACLib.omothol_id, ACLib.OMOTHOL);
 		DimensionManager.registerDimension(ACLib.dark_realm_id, ACLib.THE_DARK_REALM);
+
+		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.abyssal_wasteland_id)
+				.addConnectedDimension(0)
+				.addConnectedDimension(ACLib.dreadlands_id)
+				.setColor(0, 1, 0)
+				.setGatewayKey(0)
+				.setMob(EntityAbyssalZombie.class)
+				.build());
+		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.dreadlands_id)
+				.addConnectedDimension(ACLib.abyssal_wasteland_id)
+				.addConnectedDimension(ACLib.omothol_id)
+				.setColor(1, 0, 0)
+				.setGatewayKey(1)
+				.setMob(EntityDreadling.class)
+				.build());
+		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.omothol_id)
+				.addConnectedDimension(ACLib.dark_realm_id)
+				.addConnectedDimension(ACLib.dreadlands_id)
+				.setColor(0, 0, 1)
+				.setGatewayKey(2)
+				.setMob(EntityGatekeeperMinion.class)
+				//TODO add overlay here
+				.build());
+		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(0)
+				.setColor(0, 1, 1)
+				.setGatewayKey(0)
+				.build());
 	}
 
 	@Override

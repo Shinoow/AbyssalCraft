@@ -85,7 +85,6 @@ public class AbyssalCraftAPI {
 	private static final Map<Item, ResourceLocation> ghoul_leggings = new HashMap<>();
 	private static final Map<Item, ResourceLocation> ghoul_boots = new HashMap<>();
 
-	private static final Map<Integer, Integer> gateway_key_overrides = new HashMap<>();
 
 	/**
 	 *  {@link EnumCreatureAttribute} used for the Shadow mobs
@@ -766,33 +765,6 @@ public class AbyssalCraftAPI {
 	 */
 	public static ResourceLocation getGhoulBootsTexture(Item boots){
 		return ghoul_boots.get(boots);
-	}
-
-	/**
-	 * Registers a Gateway Key Override, allowing you to use a Gateway Key inside the specified dimension.
-	 * @param dimId Dimension ID
-	 * @param type Which Portal to place down
-	 * <ul>
-	 * <li>0 = The Abyssal Wasteland</li>
-	 * <li>1 = The Dreadlands</li>
-	 * <li>2 = Omothol</li>
-	 * </ul>
-	 *
-	 * @since 1.8.9
-	 */
-	public static void addGatewayKeyOverride(int dimId, int type){
-		gateway_key_overrides.put(dimId, type);
-	}
-
-	/**
-	 * Fetches a Gateway Key Override for the specified dimension (provided one is registered)
-	 * @param dimId Dimension ID to fetch a override for
-	 * @return A Integer in the range 0 - 2 if a override was found, otherwise -1
-	 *
-	 * @since 1.8.9
-	 */
-	public static int getGatewayKeyOverride(int dimId){
-		return !gateway_key_overrides.containsKey(dimId) ? -1 : gateway_key_overrides.get(dimId);
 	}
 
 	/**

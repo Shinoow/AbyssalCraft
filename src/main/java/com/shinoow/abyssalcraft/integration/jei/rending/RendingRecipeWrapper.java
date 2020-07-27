@@ -15,8 +15,8 @@ import java.util.*;
 
 import javax.annotation.Nonnull;
 
+import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.rending.Rending;
-import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -25,6 +25,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class RendingRecipeWrapper implements IRecipeWrapper {
 
@@ -55,11 +56,11 @@ public class RendingRecipeWrapper implements IRecipeWrapper {
 
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		dimToString.putAll(RitualRegistry.instance().getDimensionNameMappings());
+		dimToString.putAll(DimensionDataRegistry.instance().getDimensionNameMappings());
 
 		FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
 
-		if(dimension != -1){
+		if(dimension != OreDictionary.WILDCARD_VALUE){
 			fr.drawSplitString(I18n.format(NecronomiconText.LABEL_LOCATION, new Object[0]) + ": " + getDimension(dimension), 2, 20, 180, 0);
 			fr.drawSplitString("Energy type: " + type, 2, 40, 180, 0);
 			fr.drawSplitString(description, 2, 70, 180, 0);

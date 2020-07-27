@@ -164,20 +164,6 @@
             "entries": [
                 {
                     "type": "item",
-                    "name": "abyssalcraft:friedegg",
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count":{
-                                "min": 1,
-                                "max": 4
-                            }
-                        }
-                    ],
-                    "weight": 10
-                },
-                {
-                    "type": "item",
                     "name": "abyssalcraft:antibeef",
                     "functions": [
                         {

@@ -486,6 +486,7 @@ public class AbyssalCrafting {
 		Object[] ocofferings = new Object[]{new ItemStack(Items.REDSTONE), new ItemStack(ACItems.shard_of_oblivion), new ItemStack(Items.REDSTONE), new ItemStack(ACItems.shard_of_oblivion),
 				new ItemStack(Items.REDSTONE), new ItemStack(ACItems.shard_of_oblivion), new ItemStack(Items.REDSTONE), new ItemStack(ACItems.shard_of_oblivion)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("oblivionCatalyst", 0, -1, 5000F, true, new ItemStack(ACItems.oblivion_catalyst), new ItemStack(Items.ENDER_EYE), ocofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconPortalRitual());
 
 		//Abyssal Wasteland progression
 		Object[] asorahofferings = new Object[]{new ItemStack(Items.GOLD_INGOT), new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLD_INGOT), ACItems.liquid_coralium_bucket_stack,
