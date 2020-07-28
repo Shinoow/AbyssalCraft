@@ -63,7 +63,7 @@ public class RenderPortal extends Render<EntityPortal> {
 
 		bindEntityTexture(entity);
 
-		float rot = entity.clientTicks * 2;
+		float rot = entity.clientTicks;
 		double scale = 1;
 
 		GlStateManager.pushMatrix();

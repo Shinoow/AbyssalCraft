@@ -81,6 +81,16 @@ public class DimensionDataRegistry {
 	}
 
 	/**
+	 * Returns the mapped name of a dimension
+	 * @param dim ID of dimension
+	 */
+	public String getDimensionName(int dim) {
+		if(!dimToName.containsKey(dim))
+			dimToName.put(dim, "DIM"+dim);
+		return dimToName.get(dim);
+	}
+	
+	/**
 	 * Registers a Gateway Key Override, allowing you to create portals going between the two dimensions
 	 * @param key Minimum required Gateway Key
 	 * <ul>

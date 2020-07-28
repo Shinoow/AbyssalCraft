@@ -13,8 +13,10 @@ package com.shinoow.abyssalcraft.common;
 
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -24,11 +26,11 @@ public class CommonProxy {
 	public void preInit() {}
 
 	public void init() {
-		RitualRegistry.instance().addDimensionToBookType(0, 0);
-		RitualRegistry.instance().addDimensionToBookType(ACLib.abyssal_wasteland_id, 1);
-		RitualRegistry.instance().addDimensionToBookType(ACLib.dreadlands_id, 2);
-		RitualRegistry.instance().addDimensionToBookType(ACLib.omothol_id, 3);
-		RitualRegistry.instance().addDimensionToBookType(ACLib.dark_realm_id, 3);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.omothol_id, 3, NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 3, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE);
 	}
 
 	public void postInit() {}

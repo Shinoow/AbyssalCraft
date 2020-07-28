@@ -101,13 +101,13 @@ public class WorldHandler implements ILifeCycleHandler {
 		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.omothol_id)
 				.addConnectedDimension(ACLib.dark_realm_id)
 				.addConnectedDimension(ACLib.dreadlands_id)
-				.setColor(0, 0, 1)
+				.setColor(0, 1, 1)
 				.setGatewayKey(2)
 				.setMob(EntityGatekeeperMinion.class)
-				//TODO add overlay here
+				.setOverlay(new ResourceLocation("abyssalcraft", "textures/model/omothol_portal.png"))
 				.build());
 		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(0)
-				.setColor(0, 1, 1)
+				.setColor(0, 0, 1)
 				.setGatewayKey(0)
 				.build());
 	}

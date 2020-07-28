@@ -17,20 +17,17 @@ import java.util.stream.Collectors;
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
-import com.shinoow.abyssalcraft.common.entity.EntityPortal;
-import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -72,29 +69,19 @@ public class ItemPortalPlacer extends ItemACBasic {
 	public void addInformation(ItemStack par1ItemStack, World world, List list, ITooltipFlag is){
 		list.add(I18n.format("tooltip.portalplacer.1"));
 		list.add(I18n.format("tooltip.portalplacer.2"));
-		if(key > 0)
-			list.add(I18n.format("tooltip.portalplacer.3"));
 		//		if(Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null)
 		//			if(!isCorrectDim(Minecraft.getMinecraft().world.provider.getDimension()))
 		//				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.format("tooltip.portalplacer.4"));
 		if(!par1ItemStack.hasTagCompound())
 			par1ItemStack.setTagCompound(new NBTTagCompound());
 		int dim = par1ItemStack.getTagCompound().getInteger("Dimension");
-		list.add(String.format("Dimension: %s", DimensionDataRegistry.instance().getDimensionNameMappings().get(dim)));
+		list.add(I18n.format("tooltip.portalplacer.3", DimensionDataRegistry.instance().getDimensionName(dim)));
 		DimensionData data = DimensionDataRegistry.instance().getDataForDim(dim);
 		if(world != null) {
 			int currDim = world.provider.getDimension();
-			boolean nope = false;
-			if(dim == currDim) {
-				nope = true;
-			} else {
-				if(!DimensionDataRegistry.instance().areDimensionsConnected(currDim, dim, key))
-					nope = true;
-				else if(!RitualRegistry.instance().canPerformAction(currDim, 4))
-					nope = true;
-			}
-			if(nope)
-				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+"You can't create a portal for that dimension here!");
+			if(dim == currDim || !DimensionDataRegistry.instance().areDimensionsConnected(currDim, dim, key)
+					|| !RitualRegistry.instance().canPerformAction(currDim, 4))
+				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.format("tooltip.portalplacer.4"));
 		}
 	}
 
@@ -189,7 +176,7 @@ public class ItemPortalPlacer extends ItemACBasic {
 			}
 
 			stack.getTagCompound().setInteger("Dimension", newDim);
-			playerIn.sendStatusMessage(new TextComponentString(String.format("%d", newDim)), true);
+			playerIn.sendStatusMessage(new TextComponentTranslation(DimensionDataRegistry.instance().getDimensionName(newDim)), true);
 		}
 
 		return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);

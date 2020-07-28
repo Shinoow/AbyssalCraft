@@ -48,14 +48,14 @@ public class AbyssalCraftTool extends Item {
 
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B) {
-		l.add(I18n.format("tooltip.devblade.1"));
-		l.add(I18n.format("tooltip.devblade.2"));
+		l.add("This blade is so unholy that your");
+		l.add("hand starts to decay while holding it.");
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
+		return TextFormatting.DARK_RED + "The Dev Blade";
 	}
 
 	@Override
