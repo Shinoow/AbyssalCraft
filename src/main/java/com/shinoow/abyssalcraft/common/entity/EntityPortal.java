@@ -27,7 +27,8 @@ public class EntityPortal extends Entity {
 	private static final DataParameter<Integer> DIMENSION = EntityDataManager.createKey(EntityPortal.class, DataSerializers.VARINT);
 
 	private DimensionData data;
-	
+	private boolean triedFetch;
+
 	public int clientTicks;
 
 	public EntityPortal(World worldIn) {
@@ -43,6 +44,11 @@ public class EntityPortal extends Entity {
 	}
 
 	public DimensionData getDimensionData() {
+
+		if(data == null && !triedFetch) {
+			data = DimensionDataRegistry.instance().getDataForDim(dataManager.get(DIMENSION));
+			triedFetch = true;
+		}
 
 		return data;
 	}

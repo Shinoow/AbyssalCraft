@@ -5,6 +5,7 @@ import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.entity.EntityPortal;
+import com.shinoow.abyssalcraft.common.items.ItemPortalPlacer;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,7 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 	public boolean requiresItemSacrifice(){
 		return true;
 	}
-	
+
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
 
@@ -37,24 +38,25 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 
 		if(altar instanceof IRitualAltar)
 			stack = ((IRitualAltar) altar).getItem();
-		
-		if(!stack.isEmpty()) {
+
+		if(!stack.isEmpty() && stack.getItem() instanceof ItemPortalPlacer) {
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
 			int id = stack.getTagCompound().getInteger("Dimension");
 			if(id == world.provider.getDimension())
 				return false;
-			
+
+			int key = ((ItemPortalPlacer)stack.getItem()).getKeyType();
+
 			DimensionData data = DimensionDataRegistry.instance().getDataForDim(id);
-			
+
 			if(data == null)
 				return false;
-			
-			//TODO add gateway key override check around here
-			if(data.getConnectedDimensions().isEmpty() || data.getConnectedDimensions().contains(world.provider.getDimension()))
+
+			if(DimensionDataRegistry.instance().areDimensionsConnected(world.provider.getDimension(), id, key))
 				return true;
 		}
-		
+
 		return false;
 	}
 
@@ -63,19 +65,19 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
-		
+
 		TileEntity altar = world.getTileEntity(pos);
 
 		ItemStack stack = ItemStack.EMPTY;
 
 		if(altar instanceof IRitualAltar)
 			stack = ((IRitualAltar) altar).getItem();
-		
+
 		if(!stack.isEmpty()) {
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
 			int id = stack.getTagCompound().getInteger("Dimension");
-			
+
 			EntityPortal portal = new EntityPortal(world);
 			portal.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
 			portal.setDestination(id);

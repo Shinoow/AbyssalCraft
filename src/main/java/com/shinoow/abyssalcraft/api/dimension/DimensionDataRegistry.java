@@ -1,6 +1,8 @@
 package com.shinoow.abyssalcraft.api.dimension;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
@@ -8,6 +10,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.util.Tuple;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
@@ -20,7 +24,7 @@ public class DimensionDataRegistry {
 
 	private final List<DimensionData> dimensions = new ArrayList<>();
 	private final Map<Integer, String> dimToName = new HashMap<>();
-	private final Map<Integer, Integer> gateway_key_overrides = new HashMap<>();
+	private final Map<Integer, Set<Tuple<Integer, Integer>>> gateway_key_overrides = new HashMap<>();
 
 	private final Logger logger = LogManager.getLogger("DimensionDataRegistry");
 
@@ -46,7 +50,7 @@ public class DimensionDataRegistry {
 	public List<DimensionData> getDimensions(){
 		return dimensions;
 	}
-	
+
 	/**
 	 * Maps a dimension to a name, in order to display it in the Necronomicon (and other places)
 	 * @param dim The Dimension ID
@@ -57,7 +61,7 @@ public class DimensionDataRegistry {
 			dimToName.put(dim, name);
 		else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: {}", dim);
 	}
-	
+
 	/**
 	 * Attempts to fetch Dimension Data tied to a dimension ID, if present
 	 * @param dim Dimension ID to check for
@@ -67,7 +71,7 @@ public class DimensionDataRegistry {
 	public DimensionData getDataForDim(int dim) {
 		return dimensions.stream().filter(d -> d.getId() == dim).findFirst().orElse(null);
 	}
-	
+
 	/**
 	 * Used to fetch the dimension/name mappings
 	 * @return A HashMap containing Dimension IDs and Strings associated with them
@@ -75,27 +79,83 @@ public class DimensionDataRegistry {
 	public Map<Integer, String> getDimensionNameMappings(){
 		return dimToName;
 	}
-	
+
 	/**
-	 * Registers a Gateway Key Override, allowing you to use a Gateway Key inside the specified dimension.
-	 * @param dimId Dimension ID
-	 * @param type Which Portal to place down
+	 * Registers a Gateway Key Override, allowing you to create portals going between the two dimensions
+	 * @param key Minimum required Gateway Key
 	 * <ul>
-	 * <li>0 = The Abyssal Wasteland</li>
-	 * <li>1 = The Dreadlands</li>
-	 * <li>2 = Omothol</li>
+	 * <li>0 = Gateway Key</li>
+	 * <li>1 = Asorah's Dreaded Gateway Key</li>
+	 * <li>1 = Cha'garoth's R'lyehian Gateway Key</li>
+	 * <li>3 = The Silver Key</li>
 	 * </ul>
+	 * @param dim1 First dimension to connect
+	 * @param dim2 Second dimension to connect
 	 */
-	public void addGatewayKeyOverride(int dimId, int type){
-		gateway_key_overrides.put(dimId, type);
+	public void addGatewayKeyOverride(int key, int dim1, int dim2){
+
+		int key1 = MathHelper.clamp(key, 0, 3);
+		
+		gateway_key_overrides.putIfAbsent(key1, new HashSet<>());
+
+		gateway_key_overrides.get(key1).add(new Tuple<>(dim1, dim2));
 	}
 
 	/**
-	 * Fetches a Gateway Key Override for the specified dimension (provided one is registered)
-	 * @param dimId Dimension ID to fetch a override for
-	 * @return A Integer in the range 0 - 2 if a override was found, otherwise -1
+	 * Fetches all Gateway Key Overrides for the specified key type
+	 * @param key The Gateway Key
+	 * <ul>
+	 * <li>0 = Gateway Key</li>
+	 * <li>1 = Asorah's Dreaded Gateway Key</li>
+	 * <li>1 = Cha'garoth's R'lyehian Gateway Key</li>
+	 * <li>3 = The Silver Key</li>
+	 * </ul>
 	 */
-	public int getGatewayKeyOverride(int dimId){
-		return !gateway_key_overrides.containsKey(dimId) ? -1 : gateway_key_overrides.get(dimId);
+	public Stream<Tuple<Integer, Integer>> getGatewayKeyOverrides(int key){
+
+		int key1 = MathHelper.clamp(key, 0, 3);
+		
+		gateway_key_overrides.putIfAbsent(key1, new HashSet<>());
+		
+		return gateway_key_overrides.entrySet().stream()
+				.filter(e -> e.getKey() <= key1)
+				.flatMap(e -> e.getValue().stream());
+	}
+
+	/**
+	 * Checks whether or not a portal can be created between the two dimension using the
+	 * current Gateway Key
+	 * @param dim1 Current dimension
+	 * @param dim2 Target dimension
+	 * @param key Gateway Key
+	 * <ul>
+	 * <li>0 = Gateway Key</li>
+	 * <li>1 = Asorah's Dreaded Gateway Key</li>
+	 * <li>1 = Cha'garoth's R'lyehian Gateway Key</li>
+	 * <li>3 = The Silver Key</li>
+	 * </ul>
+	 */
+	public boolean areDimensionsConnected(int dim1, int dim2, int key) {
+
+		DimensionData data1 = getDataForDim(dim1);
+		DimensionData data2 = getDataForDim(dim2);
+
+		if(data1 == null && data2 == null)
+			return false;
+
+		boolean bool1 = true;
+		boolean bool2 = true;
+
+		if(data1 != null)
+			bool1 = data1.getConnectedDimensions().isEmpty() || data1.getConnectedDimensions().contains(dim2);
+		if(data2 != null)
+			bool2 = data2.getConnectedDimensions().isEmpty() || data2.getConnectedDimensions().contains(dim1);
+
+		if(bool1 && bool2) {
+			return true;
+		}
+
+		return getGatewayKeyOverrides(key)
+		.anyMatch(t -> t.getFirst() == dim1 && t.getSecond() == dim2 || t.getFirst() == dim2 && t.getSecond() == dim1);
 	}
 }

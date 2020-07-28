@@ -64,101 +64,101 @@ public class ItemPortalPlacer extends ItemACBasic {
 		}
 	}
 
+	public int getKeyType() {
+		return key;
+	}
+
 	@Override
 	public void addInformation(ItemStack par1ItemStack, World world, List list, ITooltipFlag is){
 		list.add(I18n.format("tooltip.portalplacer.1"));
 		list.add(I18n.format("tooltip.portalplacer.2"));
 		if(key > 0)
 			list.add(I18n.format("tooltip.portalplacer.3"));
-		if(Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null)
-			if(!isCorrectDim(Minecraft.getMinecraft().world.provider.getDimension()))
-				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.format("tooltip.portalplacer.4"));
+		//		if(Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null)
+		//			if(!isCorrectDim(Minecraft.getMinecraft().world.provider.getDimension()))
+		//				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.format("tooltip.portalplacer.4"));
 		if(!par1ItemStack.hasTagCompound())
 			par1ItemStack.setTagCompound(new NBTTagCompound());
 		int dim = par1ItemStack.getTagCompound().getInteger("Dimension");
 		list.add(String.format("Dimension: %s", DimensionDataRegistry.instance().getDimensionNameMappings().get(dim)));
 		DimensionData data = DimensionDataRegistry.instance().getDataForDim(dim);
-		if(data != null && world != null) {
+		if(world != null) {
 			int currDim = world.provider.getDimension();
 			boolean nope = false;
-			if(data.getId() == currDim) {
+			if(dim == currDim) {
 				nope = true;
 			} else {
-				if(!data.getConnectedDimensions().isEmpty() && !data.getConnectedDimensions().contains(currDim)) {
-					//TODO insert gateway key override check here
+				if(!DimensionDataRegistry.instance().areDimensionsConnected(currDim, dim, key))
 					nope = true;
-				} else {
-					if(!RitualRegistry.instance().canPerformAction(currDim, 4)) {
-						nope = true;
-					}
-				}
+				else if(!RitualRegistry.instance().canPerformAction(currDim, 4))
+					nope = true;
 			}
 			if(nope)
 				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+"You can't create a portal for that dimension here!");
 		}
 	}
 
-	private boolean isCorrectDim(int dim){
-		switch(key){
-		case 0:
-			if(dim == 0 || dim == ACLib.abyssal_wasteland_id)
-				return true;
-			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) == 0)
-				return true;
-			else return false;
-		case 1:
-			if(dim == 0 || dim == ACLib.abyssal_wasteland_id ||
-			dim == ACLib.dreadlands_id)
-				return true;
-			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) >= 0 && DimensionDataRegistry.instance().getGatewayKeyOverride(dim) < 2)
-				return true;
-			else return false;
-		case 2:
-			if(dim == 0 || dim == ACLib.abyssal_wasteland_id ||
-			dim == ACLib.dreadlands_id ||
-			dim == ACLib.omothol_id ||
-			dim == ACLib.dark_realm_id)
-				return true;
-			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) >= 0)
-				return true;
-			else return false;
-		default:
-			return false;
-		}
-	}
-
-	private boolean dimWarning(int dim){
-		switch(key){
-		case 0:
-			if(dim == ACLib.dreadlands_id ||
-			dim == ACLib.omothol_id ||
-			dim == ACLib.dark_realm_id)
-				return true;
-			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) > 0)
-				return true;
-			else return false;
-		case 1:
-			if(dim == ACLib.omothol_id ||
-			dim == ACLib.dark_realm_id)
-				return true;
-			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) > 1)
-				return true;
-			else return false;
-		default:
-			return false;
-		}
-	}
+	//	private boolean isCorrectDim(int dim){
+	//		switch(key){
+	//		case 0:
+	//			if(dim == 0 || dim == ACLib.abyssal_wasteland_id)
+	//				return true;
+	//			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) == 0)
+	//				return true;
+	//			else return false;
+	//		case 1:
+	//			if(dim == 0 || dim == ACLib.abyssal_wasteland_id ||
+	//			dim == ACLib.dreadlands_id)
+	//				return true;
+	//			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) >= 0 && DimensionDataRegistry.instance().getGatewayKeyOverride(dim) < 2)
+	//				return true;
+	//			else return false;
+	//		case 2:
+	//			if(dim == 0 || dim == ACLib.abyssal_wasteland_id ||
+	//			dim == ACLib.dreadlands_id ||
+	//			dim == ACLib.omothol_id ||
+	//			dim == ACLib.dark_realm_id)
+	//				return true;
+	//			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) >= 0)
+	//				return true;
+	//			else return false;
+	//		default:
+	//			return false;
+	//		}
+	//	}
+	//
+	//	private boolean dimWarning(int dim){
+	//		switch(key){
+	//		case 0:
+	//			if(dim == ACLib.dreadlands_id ||
+	//			dim == ACLib.omothol_id ||
+	//			dim == ACLib.dark_realm_id)
+	//				return true;
+	//			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) > 0)
+	//				return true;
+	//			else return false;
+	//		case 1:
+	//			if(dim == ACLib.omothol_id ||
+	//			dim == ACLib.dark_realm_id)
+	//				return true;
+	//			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) > 1)
+	//				return true;
+	//			else return false;
+	//		default:
+	//			return false;
+	//		}
+	//	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
-    {
+	{
 		ItemStack stack = playerIn.getHeldItem(handIn);
-	
+
 		if(!worldIn.isRemote){
-			
+
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
-			
+
 			int dim = stack.getTagCompound().getInteger("Dimension");
 			int newDim = 0;
 			List<DimensionData> dims = DimensionDataRegistry.instance().getDimensions().stream().filter(d -> d.getGatewayKey() <= key).collect(Collectors.toList());
@@ -187,11 +187,11 @@ public class ItemPortalPlacer extends ItemACBasic {
 					}
 				}
 			}
-			
+
 			stack.getTagCompound().setInteger("Dimension", newDim);
 			playerIn.sendStatusMessage(new TextComponentString(String.format("%d", newDim)), true);
 		}
-		
-        return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
-    }
+
+		return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
+	}
 }
