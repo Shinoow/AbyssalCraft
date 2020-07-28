@@ -23,9 +23,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderAntiAbyssalZombie extends RenderBiped {
+public class RenderAntiAbyssalZombie extends RenderBiped<EntityAntiAbyssalZombie> {
 
 	private static final ResourceLocation zombieTexture = new ResourceLocation("abyssalcraft:textures/model/anti/abyssal_zombie.png");
+	private static final ResourceLocation zombieTextureAlt = new ResourceLocation("abyssalcraft:textures/model/anti/abyssal_zombie_old.png");
 
 	public RenderAntiAbyssalZombie(RenderManager manager)
 	{
@@ -41,14 +42,9 @@ public class RenderAntiAbyssalZombie extends RenderBiped {
 		});
 	}
 
-	protected ResourceLocation getZombieTexture(EntityAntiAbyssalZombie par1EntityLiving)
-	{
-		return zombieTexture;
-	}
-
 	@Override
-	protected ResourceLocation getEntityTexture(EntityLiving par1EntityLiving)
+	protected ResourceLocation getEntityTexture(EntityAntiAbyssalZombie par1EntityLiving)
 	{
-		return getZombieTexture((EntityAntiAbyssalZombie)par1EntityLiving);
+		return par1EntityLiving.getName().equalsIgnoreCase("woonihs") ? zombieTextureAlt : zombieTexture;
 	}
 }
