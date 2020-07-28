@@ -810,6 +810,8 @@ ac.ritual.spiritTablet=Spirit Tablet
 ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crystal with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
 ac.ritual.portal=Ritual of Open Doors
 ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed.
+ac.ritual.silverKey=The Silver Key
+ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key.
 
 #Spells
 ac.spell.lifedrain=Life Drain
@@ -1389,6 +1391,7 @@ item.configurator_shard.0.name=Spirit Tablet Shard #1
 item.configurator_shard.1.name=Spirit Tablet Shard #2
 item.configurator_shard.2.name=Spirit Tablet Shard #3
 item.configurator_shard.3.name=Spirit Tablet Shard #4
+item.silver_key.name=Silver Key
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul

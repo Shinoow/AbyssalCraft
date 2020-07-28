@@ -810,6 +810,8 @@ ac.ritual.spiritTablet=灵魂石板
 ac.ritual.spiritTablet.desc=一块灵魂石板可通过将4个灵魂石板碎片注入生命结晶来制作。它是一种工具，允许你使物品自主移动，以在方块间转移物品。阅读死灵之书奥穆索章节的相关内容以获取更多信息。
 ac.ritual.portal=Ritual of Open Doors
 ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed.
+ac.ritual.silverKey=The Silver Key
+ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key.
 
 #Spells
 ac.spell.lifedrain=生命吸取

@@ -87,6 +87,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setUnlocalizedName("door_dlt");
 		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setUnlocalizedName("door_drt");
 		ACItems.configurator_shard = new ItemMetadataMisc("configurator_shard", "0", "1", "2", "3").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
+		ACItems.silver_key = new ItemPortalPlacer(3, "silver_key");
 
 		//Coins
 		ACItems.coin = new ItemCoin("blankcoin").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
@@ -421,6 +422,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.charcoal, "charcoal");
 		registerItem(ACItems.configurator, "configurator");
 		registerItem(ACItems.configurator_shard, "configurator_shard");
+		registerItem(ACItems.silver_key, "silver_key");
 		//		registerItem(shadowPlate, "shadowplate");
 	}
 

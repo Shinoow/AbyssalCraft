@@ -647,6 +647,8 @@ public class AbyssalCrafting {
 				ACItems.rlyehian_gateway_key, ACItems.ethaxium_ingot, ACItems.eldritch_scale, new ItemStack(ACItems.essence, 1, 0)};
 		String[] tags = {"energyShadow", "energyAbyssal", "energyDread", "energyOmothol", "ench"};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStaff", 4, ACLib.omothol_id, 15000F, new ItemStack(ACItems.staff_of_the_gatekeeper), new ItemStack(ACItems.staff_of_rending, 1, 3), staffofferings).setTags(tags));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("silverKey", 4, ACLib.omothol_id, 20000F, true, new ItemStack(ACItems.silver_key), new ItemStack(ACItems.rlyehian_gateway_key),
+				new Object[] {ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot}));
 		RitualRegistry.instance().registerRitual(new NecronomiconWeatherRitual());
 		Object[] containerofferings = new Object[]{ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector,
 				ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard};
