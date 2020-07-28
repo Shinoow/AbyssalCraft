@@ -809,6 +809,8 @@ ac.ritual.curing=Ritual of Curing
 ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area of the Dread Plague and the Dreadlands, restoring what was there before. The closest non-dreadlands biome will take the place of the Dreadlands.
 ac.ritual.spiritTablet=Spirit Tablet
 ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crystal with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
+ac.ritual.portal=Ritual of Open Doors
+ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed.
 
 #Spells
 ac.spell.lifedrain=Вампиризм

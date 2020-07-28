@@ -3,6 +3,7 @@ package com.shinoow.abyssalcraft.common.ritual;
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import com.shinoow.abyssalcraft.common.items.ItemPortalPlacer;
@@ -19,9 +20,11 @@ import net.minecraft.world.World;
 public class NecronomiconPortalRitual extends NecronomiconRitual {
 
 	public NecronomiconPortalRitual() {
-		super("portal", 0, 1000F, new Object[] {Blocks.DIRT});
+		super("portal", 0, 1000F, new Object[] {ACItems.shadow_gem, null, ACItems.shadow_gem, null,
+				ACItems.shadow_gem, null, ACItems.shadow_gem});
 		sacrifice = new ItemStack[] {new ItemStack(ACItems.gateway_key), new ItemStack(ACItems.dreaded_gateway_key),
 				new ItemStack(ACItems.rlyehian_gateway_key)};
+		setRitualParticle(EnumRitualParticle.SMOKE_PILLARS);
 	}
 
 	@Override
