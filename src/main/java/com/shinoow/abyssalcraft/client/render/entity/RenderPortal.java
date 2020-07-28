@@ -56,7 +56,8 @@ public class RenderPortal extends Render<EntityPortal> {
 
 		DimensionData data = entity.getDimensionData();
 
-		GlStateManager.color(data.getR(), data.getG(), data.getB(), 1);
+		if(data != null)
+			GlStateManager.color(data.getR(), data.getG(), data.getB(), 1);
 
 		GlStateManager.scale(1, 1.5, 1);
 
@@ -83,7 +84,7 @@ public class RenderPortal extends Render<EntityPortal> {
 		tes.pos(scale, -scale, 0).tex(1, 0).endVertex();
 		tessellator.draw();
 
-		if(data.getOverlay() != null) {
+		if(data != null && data.getOverlay() != null) {
 			GlStateManager.color(1, 1, 1, 1);
 			bindTexture(data.getOverlay());
 

@@ -43,8 +43,6 @@ public class EntityPortal extends Entity {
 	}
 
 	public DimensionData getDimensionData() {
-		if(data == null)
-			data = DimensionDataRegistry.instance().getDataForDim(dataManager.get(DIMENSION));
 
 		return data;
 	}
@@ -57,7 +55,7 @@ public class EntityPortal extends Entity {
 
 	@Override
 	public void onUpdate() {
-		if(!world.isRemote && ticksExisted % 10 == 0 && getDimensionData().getMobClass() != null) {
+		if(!world.isRemote && ticksExisted % 10 == 0 && data != null && data.getMobClass() != null) {
 			boolean playerNearby = ACConfig.portalSpawnsNearPlayer ? world.getClosestPlayer(posX, posY, posZ, 32, false) != null : true;
 			boolean nearbyMobs = world.getEntitiesWithinAABB(EntityAbyssalZombie.class, new AxisAlignedBB(getPosition()).grow(16)).size() < 10;
 
@@ -72,7 +70,7 @@ public class EntityPortal extends Entity {
 
 				if (i > 0 && !world.getBlockState(blockpos.up()).isNormalCube())
 				{
-					Entity entity = ItemMonsterPlacer.spawnCreature(world, EntityList.getKey(getDimensionData().getMobClass()), blockpos.getX() + 0.5D, blockpos.getY() + 1.1D, blockpos.getZ() + 0.5D);
+					Entity entity = ItemMonsterPlacer.spawnCreature(world, EntityList.getKey(data.getMobClass()), blockpos.getX() + 0.5D, blockpos.getY() + 1.1D, blockpos.getZ() + 0.5D);
 
 					if (entity != null)
 						entity.timeUntilPortal = entity.getPortalCooldown();
