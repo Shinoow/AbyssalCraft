@@ -19,9 +19,7 @@ import com.shinoow.abyssalcraft.client.gui.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.inventory.*;
-import com.shinoow.abyssalcraft.common.items.ItemConfigurator;
-import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
-import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
+import com.shinoow.abyssalcraft.common.items.*;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -164,6 +162,13 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiConfigurator(new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getMainHand(), EnumHand.MAIN_HAND)));
 			if(ctx.getOffHand().getItem() instanceof ItemConfigurator)
 				return new GuiConfigurator(new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getOffHand(), EnumHand.OFF_HAND)));
+			return null;
+		});
+		clientElements.put(ACLib.faceBookGuiID, ctx -> {
+			if(ctx.getMainHand().getItem() instanceof ItemFaceBook)
+				return new GuiFaceBook();
+			if(ctx.getOffHand().getItem() instanceof ItemFaceBook)
+				return new GuiFaceBook();
 			return null;
 		});
 	}

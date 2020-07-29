@@ -81,6 +81,7 @@ public class PacketDispatcher
 		registerMessage(ConfiguratorMessage.class);
 		registerMessage(DisplayRoutesMessage.class);
 		registerMessage(ToggleStateMessage.class);
+		registerMessage(SyncNecromancyDataMessage.class);
 	}
 
 	/**

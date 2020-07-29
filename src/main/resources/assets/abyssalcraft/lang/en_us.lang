@@ -944,6 +944,8 @@ tooltip.configurator.mode.1=Apply Configuration
 tooltip.configurator.mode.2=Clear Configurations
 tooltip.configurator.filter.0=Filter by subtype
 tooltip.configurator.filter.1=Filter by NBT
+tooltip.face_book.1=If you listen closely, you can hear the
+tooltip.face_book.2=voices of lost souls calling out their names
 
 #Creative Tabs
 itemGroup.acblocks=AbyssalCraft Blocks
@@ -1392,6 +1394,7 @@ item.configurator_shard.1.name=Spirit Tablet Shard #2
 item.configurator_shard.2.name=Spirit Tablet Shard #3
 item.configurator_shard.3.name=Spirit Tablet Shard #4
 item.silver_key.name=Silver Key
+item.face_book.name=Book of Many Faces
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul

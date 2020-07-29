@@ -229,5 +229,6 @@ public class ACItems {
 	/** Metadata Item, 0 - 3 = variations of the same item */
 	public static Item configurator_shard;
 	public static Item silver_key;
+	public static Item book_of_many_faces;
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
 }
