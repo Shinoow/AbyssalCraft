@@ -32,11 +32,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 	public NecronomiconResurrectionRitual() {
-		super("resurrection", 2, -1, 1000F, true, new Object[]{ new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 3), new ItemStack(ACItems.crystal, 1, 3),
+		super("resurrection", 2, OreDictionary.WILDCARD_VALUE, 1000F, true, new Object[]{ new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 3), new ItemStack(ACItems.crystal, 1, 3),
 				new ItemStack(ACBlocks.crystal_cluster, 1, 3)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 5), new ItemStack(ACItems.crystal, 1, 5),
 						new ItemStack(ACBlocks.crystal_cluster, 1, 5)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 6), new ItemStack(ACItems.crystal, 1, 6),
 								new ItemStack(ACBlocks.crystal_cluster, 1, 6)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 4), new ItemStack(ACItems.crystal, 1, 4),

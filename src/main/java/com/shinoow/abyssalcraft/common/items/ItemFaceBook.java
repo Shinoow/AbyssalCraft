@@ -3,6 +3,7 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.SyncNecromancyDataMessage;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -22,6 +23,7 @@ public class ItemFaceBook extends ItemACBasic {
 	public ItemFaceBook(String par1) {
 		super(par1);
 		setMaxStackSize(1);
+		setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 	}
 
 	@Override

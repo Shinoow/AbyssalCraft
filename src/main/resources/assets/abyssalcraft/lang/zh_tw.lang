@@ -216,6 +216,10 @@ container.abyssalcraft.rendingpedestal=撕裂基座
 container.abyssalcraft.statetransformer=物態轉換器
 container.abyssalcraft.energydepositioner=能量沉積器
 
+#Gui Labels
+gui.abyssalcraft.facebook.name=Name
+gui.abyssalcraft.facebook.crystalsize=Crystal Size
+
 #Gui按鈕
 gui.abyssalcraft.statetransformer.insert=輸入
 gui.abyssalcraft.statetransformer.extract=輸出
@@ -812,6 +816,8 @@ ac.ritual.portal=Ritual of Open Doors
 ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed.
 ac.ritual.silverKey=The Silver Key
 ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key.
+ac.ritual.facebook=The Book of Many Faces
+ac.ritual.facebook.desc=By infusing a Book with crystallized compounds resembling the elements of life, an Arrow and an Ink Sac, you create a book capable of communicating with the dead and tell you the names of fallen companions.
 
 #Spells
 ac.spell.lifedrain=Life Drain
@@ -944,6 +950,8 @@ tooltip.configurator.mode.1=Apply Configuration
 tooltip.configurator.mode.2=Clear Configurations
 tooltip.configurator.filter.0=Filter by subtype
 tooltip.configurator.filter.1=Filter by NBT
+tooltip.face_book.1=If you listen closely, you can hear the
+tooltip.face_book.2=voices of lost souls calling out their names
 
 #創造模式物品欄
 itemGroup.acblocks=深淵國度方塊
@@ -1391,6 +1399,8 @@ item.configurator_shard.0.name=Spirit Tablet Shard #1
 item.configurator_shard.1.name=Spirit Tablet Shard #2
 item.configurator_shard.2.name=Spirit Tablet Shard #3
 item.configurator_shard.3.name=Spirit Tablet Shard #4
+item.silver_key.name=Silver Key
+item.face_book.name=Book of Many Faces
 
 #實體
 entity.abyssalcraft.depthsghoul.name=深淵食屍鬼

@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
@@ -23,12 +24,12 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiFaceBook extends GuiScreen {
 
-	private static final ResourceLocation bookGuiTextures = new ResourceLocation("abyssalcraft:textures/gui/necronomicon.png");
+	private static final ResourceLocation bookGuiTextures = new ResourceLocation("abyssalcraft:textures/gui/face_book.png");
 
 	private List<Tuple<String, Integer>> data = new ArrayList<>();
 
-	public final int guiWidth = 255;
-	public final int guiHeight = 192;
+	public final int guiWidth = 176;
+	public final int guiHeight = 160;
 
 	public GuiFaceBook() {
 		if(Minecraft.getMinecraft().world != null)
@@ -51,12 +52,17 @@ public class GuiFaceBook extends GuiScreen {
 		drawTexturedModalRect(k, b0, 0, 0, guiWidth, guiHeight);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
-		fontRenderer.drawString("Name | Crystal Size", k + 20, b0 + 16, 0);
+		fontRenderer.drawString(I18n.format("gui.abyssalcraft.facebook.name"), k + 20, b0 + 16, 0);
+		String s = I18n.format("gui.abyssalcraft.facebook.crystalsize");
+		fontRenderer.drawString(s, k - fontRenderer.getStringWidth(s) + guiWidth - 22, b0 + 16, 0);
 		
 		for(int i = 0; i < data.size(); i++) {
 			Tuple<String, Integer> dat = data.get(i);
-			fontRenderer.drawString(dat.getFirst(), k + 20, b0 + 32 + (16 * i), 0);
-			renderItem(k + 20 + 60, b0 + 26 + (16 * i), getStackForSize(dat.getSecond()), mouseX, mouseY);
+			int len = dat.getFirst().length();
+			int yOffset1 = len > 30 ? 14 : 32;
+			int yOffset2 = len > 30 ? 26 : 20;
+			fontRenderer.drawSplitString(dat.getFirst(), k + 20, b0 + yOffset1 + (yOffset2 * i), 90, 0);
+			renderItem(k - 16  + guiWidth - 45, b0 + 26 + (20 * i), getStackForSize(dat.getSecond()), mouseX, mouseY);
 		}
 	}
 

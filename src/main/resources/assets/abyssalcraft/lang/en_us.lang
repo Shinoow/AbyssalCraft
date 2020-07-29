@@ -216,6 +216,10 @@ container.abyssalcraft.rendingpedestal=Rending Pedestal
 container.abyssalcraft.statetransformer=State Transformer
 container.abyssalcraft.energydepositioner=Energy Depositioner
 
+#Gui Labels
+gui.abyssalcraft.facebook.name=Name
+gui.abyssalcraft.facebook.crystalsize=Crystal Size
+
 #Gui Buttons
 gui.abyssalcraft.statetransformer.insert=Insert
 gui.abyssalcraft.statetransformer.extract=Extract
@@ -812,6 +816,8 @@ ac.ritual.portal=Ritual of Open Doors
 ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed.
 ac.ritual.silverKey=The Silver Key
 ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key.
+ac.ritual.facebook=The Book of Many Faces
+ac.ritual.facebook.desc=By infusing a Book with crystallized compounds resembling the elements of life, an Arrow and an Ink Sac, you create a book capable of communicating with the dead and tell you the names of fallen companions.
 
 #Spells
 ac.spell.lifedrain=Life Drain

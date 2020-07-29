@@ -531,6 +531,9 @@ public class AbyssalCrafting {
 				new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.GUNPOWDER)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("antiPotionAoE", 0, 300F, AbyssalCraftAPI.antimatter_potion, antiaoeofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconResurrectionRitual());
+		Object[] facebookofferings = new Object[] {new ItemStack(ACItems.crystal, 1, 3), new ItemStack(ACItems.crystal, 1, 5), new ItemStack(ACItems.crystal, 1, 6), new ItemStack(ACItems.crystal, 1, 4), new ItemStack(ACItems.crystal, 1, 7),
+				new ItemStack(ACItems.crystal, 1, 2), Items.FEATHER, Items.DYE};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("facebook", 2, 2000F, new ItemStack(ACItems.book_of_many_faces), new ItemStack(Items.BOOK), facebookofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconCleansingRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCorruptionRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCuringRitual());
