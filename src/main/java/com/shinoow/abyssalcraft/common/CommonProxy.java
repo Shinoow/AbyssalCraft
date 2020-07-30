@@ -16,7 +16,6 @@ import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;

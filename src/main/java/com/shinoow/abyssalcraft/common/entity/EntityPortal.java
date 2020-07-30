@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2020 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
@@ -83,7 +94,7 @@ public class EntityPortal extends Entity {
 				}
 			}
 		}
-		if(!world.isRemote) {
+		if(!world.isRemote)
 			for(Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox()))
 				if(!(entity instanceof EntityPortal)) {
 					if (!entity.isRiding() && !entity.isBeingRidden() && !world.isRemote && !entity.isDead && entity.isNonBoss())
@@ -94,7 +105,6 @@ public class EntityPortal extends Entity {
 							TeleporterAC.changeDimension(entity, dataManager.get(DIMENSION));
 						}
 				} else entity.setDead();
-		}
 	}
 
 	@Override

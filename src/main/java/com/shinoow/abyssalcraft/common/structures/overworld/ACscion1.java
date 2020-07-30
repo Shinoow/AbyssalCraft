@@ -15,7 +15,6 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
-import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;

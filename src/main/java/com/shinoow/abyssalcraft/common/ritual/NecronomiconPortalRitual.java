@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2020 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.ritual;
 
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
@@ -10,7 +21,6 @@ import com.shinoow.abyssalcraft.common.items.ItemPortalPlacer;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

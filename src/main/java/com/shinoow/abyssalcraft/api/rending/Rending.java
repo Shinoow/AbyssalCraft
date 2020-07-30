@@ -15,7 +15,6 @@ import java.util.function.Predicate;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * A Staff of Rending target, with its corresponding energy type and output

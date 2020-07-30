@@ -15,7 +15,6 @@ import java.util.*;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
-import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;

@@ -60,7 +60,7 @@ public class RitualRegistry {
 		else logger.log(Level.ERROR, "Necronomicon book type does not exist: {}", bookType);
 	}
 
-	
+
 
 	/**
 	 * Maps a dimension to a book type, in order to specify dimensions where a ritual of that book type can be performed,<br>

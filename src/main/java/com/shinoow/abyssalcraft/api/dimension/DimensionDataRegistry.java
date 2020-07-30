@@ -1,7 +1,17 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2020 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.api.dimension;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
@@ -37,11 +47,10 @@ public class DimensionDataRegistry {
 	}
 
 	public void registerDimensionData(DimensionData data) {
-		if(dimensions.stream().anyMatch(d -> d.getId() == data.getId())) {
+		if(dimensions.stream().anyMatch(d -> d.getId() == data.getId()))
 			logger.log(Level.ERROR, "Dimension Data for dimension {} has already been registered", data.getId());
-		} else {
+		else
 			dimensions.add(data);
-		}
 	}
 
 	/**
@@ -89,7 +98,7 @@ public class DimensionDataRegistry {
 			dimToName.put(dim, "DIM"+dim);
 		return dimToName.get(dim);
 	}
-	
+
 	/**
 	 * Registers a Gateway Key Override, allowing you to create portals going between the two dimensions
 	 * @param key Minimum required Gateway Key
@@ -105,7 +114,7 @@ public class DimensionDataRegistry {
 	public void addGatewayKeyOverride(int key, int dim1, int dim2){
 
 		int key1 = MathHelper.clamp(key, 0, 3);
-		
+
 		gateway_key_overrides.putIfAbsent(key1, new HashSet<>());
 
 		gateway_key_overrides.get(key1).add(new Tuple<>(dim1, dim2));
@@ -124,9 +133,9 @@ public class DimensionDataRegistry {
 	public Stream<Tuple<Integer, Integer>> getGatewayKeyOverrides(int key){
 
 		int key1 = MathHelper.clamp(key, 0, 3);
-		
+
 		gateway_key_overrides.putIfAbsent(key1, new HashSet<>());
-		
+
 		return gateway_key_overrides.entrySet().stream()
 				.filter(e -> e.getKey() <= key1)
 				.flatMap(e -> e.getValue().stream());
@@ -161,11 +170,10 @@ public class DimensionDataRegistry {
 		if(data2 != null)
 			bool2 = data2.getConnectedDimensions().isEmpty() || data2.getConnectedDimensions().contains(dim1);
 
-		if(bool1 && bool2) {
+		if(bool1 && bool2)
 			return true;
-		}
 
 		return getGatewayKeyOverrides(key)
-		.anyMatch(t -> t.getFirst() == dim1 && t.getSecond() == dim2 || t.getFirst() == dim2 && t.getSecond() == dim1);
+				.anyMatch(t -> t.getFirst() == dim1 && t.getSecond() == dim2 || t.getFirst() == dim2 && t.getSecond() == dim1);
 	}
 }

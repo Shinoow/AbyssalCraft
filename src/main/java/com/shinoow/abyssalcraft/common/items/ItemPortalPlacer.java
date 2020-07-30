@@ -76,7 +76,7 @@ public class ItemPortalPlacer extends ItemACBasic {
 			par1ItemStack.setTagCompound(new NBTTagCompound());
 		int dim = par1ItemStack.getTagCompound().getInteger("Dimension");
 		list.add(I18n.format("tooltip.portalplacer.3", DimensionDataRegistry.instance().getDimensionName(dim)));
-		DimensionData data = DimensionDataRegistry.instance().getDataForDim(dim);
+		DimensionDataRegistry.instance().getDataForDim(dim);
 		if(world != null) {
 			int currDim = world.provider.getDimension();
 			if(dim == currDim || !DimensionDataRegistry.instance().areDimensionsConnected(currDim, dim, key)
@@ -149,31 +149,28 @@ public class ItemPortalPlacer extends ItemACBasic {
 			int dim = stack.getTagCompound().getInteger("Dimension");
 			int newDim = 0;
 			List<DimensionData> dims = DimensionDataRegistry.instance().getDimensions().stream().filter(d -> d.getGatewayKey() <= key).collect(Collectors.toList());
-			if(playerIn.isSneaking()) {
+			if(playerIn.isSneaking())
 				for(int i = dims.size()-1; i > 0; i--) {
 					DimensionData data = dims.get(i);
 					if(data.getId() == dim) {
-						if(i == 0) {
+						if(i == 0)
 							newDim = dims.get(dims.size() -1).getId();
-						} else {
+						else
 							newDim = dims.get(i-1).getId();
-						}
 						break;
 					}
 				}
-			} else {
+			else
 				for(int i = 0; i < dims.size(); i++) {
 					DimensionData data = dims.get(i);
 					if(data.getId() == dim) {
-						if(i == dims.size() -1) {
+						if(i == dims.size() -1)
 							newDim = dims.get(0).getId();
-						} else {
+						else
 							newDim = dims.get(i+1).getId();
-						}
 						break;
 					}
 				}
-			}
 
 			stack.getTagCompound().setInteger("Dimension", newDim);
 			playerIn.sendStatusMessage(new TextComponentTranslation(DimensionDataRegistry.instance().getDimensionName(newDim)), true);

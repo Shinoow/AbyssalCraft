@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2020 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.api.dimension;
 
 import java.util.HashSet;
@@ -25,16 +36,16 @@ public class DimensionData {
 	public DimensionData() {}
 
 	private DimensionData(Builder builder) {
-		this.id = builder.id;
-		this.r = builder.r;
-		this.g = builder.g;
-		this.b = builder.b;
-		this.gatewayKey = builder.gatewayKey;
-		this.connectedDimensions = builder.connectedDimensions;
-		this.mobClass = builder.mobClass;
-		this.overlay = builder.overlay;
+		id = builder.id;
+		r = builder.r;
+		g = builder.g;
+		b = builder.b;
+		gatewayKey = builder.gatewayKey;
+		connectedDimensions = builder.connectedDimensions;
+		mobClass = builder.mobClass;
+		overlay = builder.overlay;
 	}
-	
+
 	/**
 	 * Returns the red segment of the color
 	 */
@@ -55,14 +66,14 @@ public class DimensionData {
 	public int getB() {
 		return b;
 	}
-	
+
 	/**
-	 * Returns the dimension ID associated 
+	 * Returns the dimension ID associated
 	 */
 	public int getId() {
 		return id;
 	}
-	
+
 	/**
 	 * Returns the required Gateway Key
 	 * <ul>
@@ -75,7 +86,7 @@ public class DimensionData {
 	public int getGatewayKey() {
 		return gatewayKey;
 	}
-	
+
 	/**
 	 * Returns the dimensions this dimension is connected to<br>
 	 * If two dimensions are connected, you can make a portal in one going to the other
@@ -83,7 +94,7 @@ public class DimensionData {
 	public Set<Integer> getConnectedDimensions() {
 		return connectedDimensions;
 	}
-	
+
 	/**
 	 * Returns the class of the mob the portal can spawn at times
 	 */
@@ -91,7 +102,7 @@ public class DimensionData {
 	public Class<? extends EntityLiving> getMobClass() {
 		return mobClass;
 	}
-	
+
 	/**
 	 * Returns the overlay texture for the portal, if any
 	 */
@@ -99,23 +110,23 @@ public class DimensionData {
 	public ResourceLocation getOverlay() {
 		return overlay;
 	}
-	
+
 	public static class Builder {
-		
+
 		private int r, g, b;
 
 		private int id, gatewayKey;
 		private Set<Integer> connectedDimensions = new HashSet<>();
 		private Class<? extends EntityLiving> mobClass;
 		private ResourceLocation overlay;
-		
+
 		public Builder(int id) {
 			this.id = id;
-			this.r = 1;
-			this.g = 1;
-			this.b = 1;
+			r = 1;
+			g = 1;
+			b = 1;
 		}
-		
+
 		/**
 		 * Sets the portal color
 		 * @param r Red color
@@ -128,7 +139,7 @@ public class DimensionData {
 			this.b = b;
 			return this;
 		}
-		
+
 		/**
 		 * Sets the required gateway key
 		 * <ul>
@@ -143,7 +154,7 @@ public class DimensionData {
 			this.gatewayKey = gatewayKey;
 			return this;
 		}
-		
+
 		/**
 		 * Adds a connected dimension<br>
 		 * If two dimensions are connected, you can make a portal in one going to the other
@@ -154,7 +165,7 @@ public class DimensionData {
 			connectedDimensions.add(id);
 			return this;
 		}
-		
+
 		/**
 		 * Sets the mob the portal for this dimension can spawn at times
 		 * @param mobClass Class of the mob
@@ -163,7 +174,7 @@ public class DimensionData {
 			this.mobClass = mobClass;
 			return this;
 		}
-		
+
 		/**
 		 * Sets an overlay texture for the portal
 		 * @param overlay Resource Location pointing to the texture
@@ -172,7 +183,7 @@ public class DimensionData {
 			this.overlay = overlay;
 			return this;
 		}
-		
+
 		/**
 		 * Builds the Dimension Data
 		 */

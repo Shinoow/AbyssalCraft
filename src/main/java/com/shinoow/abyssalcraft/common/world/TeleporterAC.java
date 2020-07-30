@@ -36,7 +36,6 @@ public class TeleporterAC extends Teleporter
 	private final Random random;
 	private final Long2ObjectMap<Teleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap(4096);
 	private Block portal;
-	private IBlockState frame;
 	private int prevDimension;
 
 	public TeleporterAC(WorldServer par1WorldServer, int prevDimension)
@@ -53,7 +52,6 @@ public class TeleporterAC extends Teleporter
 		worldServerInstance = par1WorldServer;
 		random = new Random(par1WorldServer.getSeed());
 		this.portal = portal;
-		this.frame = frame;
 	}
 
 	public static void changeDimension(Entity entity, int dimension, Block portal, IBlockState frame) {

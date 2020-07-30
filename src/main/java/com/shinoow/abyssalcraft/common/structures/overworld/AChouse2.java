@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.structures.overworld;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

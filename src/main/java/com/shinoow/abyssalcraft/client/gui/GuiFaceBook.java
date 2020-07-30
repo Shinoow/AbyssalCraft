@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2020 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui;
 
 import java.util.ArrayList;
@@ -12,10 +23,10 @@ import com.shinoow.abyssalcraft.common.world.data.NecromancyWorldSavedData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -55,14 +66,14 @@ public class GuiFaceBook extends GuiScreen {
 		fontRenderer.drawString(I18n.format("gui.abyssalcraft.facebook.name"), k + 20, b0 + 16, 0);
 		String s = I18n.format("gui.abyssalcraft.facebook.crystalsize");
 		fontRenderer.drawString(s, k - fontRenderer.getStringWidth(s) + guiWidth - 22, b0 + 16, 0);
-		
+
 		for(int i = 0; i < data.size(); i++) {
 			Tuple<String, Integer> dat = data.get(i);
 			int len = dat.getFirst().length();
 			int yOffset1 = len > 30 ? 14 : 32;
 			int yOffset2 = len > 30 ? 26 : 20;
-			fontRenderer.drawSplitString(dat.getFirst(), k + 20, b0 + yOffset1 + (yOffset2 * i), 90, 0);
-			renderItem(k - 16  + guiWidth - 45, b0 + 26 + (20 * i), getStackForSize(dat.getSecond()), mouseX, mouseY);
+			fontRenderer.drawSplitString(dat.getFirst(), k + 20, b0 + yOffset1 + yOffset2 * i, 90, 0);
+			renderItem(k - 16  + guiWidth - 45, b0 + 26 + 20 * i, getStackForSize(dat.getSecond()), mouseX, mouseY);
 		}
 	}
 

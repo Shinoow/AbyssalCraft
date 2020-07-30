@@ -17,7 +17,6 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
-import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
