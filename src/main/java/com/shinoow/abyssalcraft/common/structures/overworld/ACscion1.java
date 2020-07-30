@@ -33,7 +33,7 @@ public class ACscion1 extends StructureDarklandsBase {
 		IBlockState grass = Blocks.GRASS.getDefaultState();
 		IBlockState glowing_brick = ACBlocks.glowing_darkstone_bricks.getDefaultState();
 		IBlockState chiseled_brick = ACBlocks.darkstone_brick.getStateFromMeta(1);
-		IBlockState brick_slab = ACConfig.darkstone_brick_slab ? ACBlocks.darkstone_brick_slab.getDefaultState() : Blocks.AIR.getDefaultState();
+		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
 
 		boolean shouldGrass = world.getBlockState(pos).getMaterial() == Material.GRASS;
 
@@ -73,14 +73,14 @@ public class ACscion1 extends StructureDarklandsBase {
 					if((j == -2 || j == 2) && flag2)
 						for(int k = 0; k < 4; k++){
 							if(k == 0){
-								setBlockAndNotifyAdequately(world, pos.add(j, k+2, i), i == 0 && ACConfig.darkstone_brick_stairs ? ACBlocks.darkstone_brick_stairs.getStateFromMeta(j > 0 ? 1 : 0) : glowing_brick);
-								setBlockAndNotifyAdequately(world, pos.add(i, k+2, j), i == 0 && ACConfig.darkstone_brick_stairs ? ACBlocks.darkstone_brick_stairs.getStateFromMeta(j > 0 ? 3 : 2) : glowing_brick);
+								setBlockAndNotifyAdequately(world, pos.add(j, k+2, i), i == 0 ? ACBlocks.darkstone_brick_stairs.getStateFromMeta(j > 0 ? 1 : 0) : glowing_brick);
+								setBlockAndNotifyAdequately(world, pos.add(i, k+2, j), i == 0 ? ACBlocks.darkstone_brick_stairs.getStateFromMeta(j > 0 ? 3 : 2) : glowing_brick);
 							}
 							if(k == 1){
 								setBlockAndNotifyAdequately(world, pos.add(j, k+2, i), i == 0 ? Blocks.AIR.getDefaultState() : brick_slab);
 								setBlockAndNotifyAdequately(world, pos.add(i, k+2, j), i == 0 ? Blocks.AIR.getDefaultState() : brick_slab);
 							}
-							if(k == 2 && ACConfig.darkstone_brick_stairs){
+							if(k == 2){
 								setBlockAndNotifyAdequately(world, pos.add(j, k+2, i), i == 0 ? brick_slab.withProperty(BlockSlab.HALF, EnumBlockHalf.TOP) : ACBlocks.darkstone_brick_stairs.getStateFromMeta(j > 0 ? 5 : 4));
 								setBlockAndNotifyAdequately(world, pos.add(i, k+2, j), i == 0 ? brick_slab.withProperty(BlockSlab.HALF, EnumBlockHalf.TOP) : ACBlocks.darkstone_brick_stairs.getStateFromMeta(j > 0 ? 7 : 6));
 							}

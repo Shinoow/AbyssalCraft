@@ -303,7 +303,6 @@ public class InitHandler implements ILifeCycleHandler {
 		cfg.setCategoryComment("worldgen", "World generation configuration (things that generate in the world). Any changes take effect immediately.");
 		cfg.setCategoryComment("item_blacklist", "Entity Item Blacklist (allows you to blacklist items/blocks for entities that can pick up things). Any changes take effect after a Minecraft restart.");
 		cfg.setCategoryComment("silly_settings", "These settings are generally out of place, and don't contribute to the mod experience. They exist because 'what if X did this?'");
-		cfg.setCategoryComment("blocks", "These settings allow you to disable specific blocks in the mod, mainly slabs, stairs and walls. Any changes take effect after a Minecraft restart.");
 		cfg.setCategoryComment("mod_compat", "Mod compatibility configuration (settings in regards to certain compatiblity with other mods that can be disabled at will).");
 		cfg.setCategoryComment("wet_noodle", "These settings allow you to disable features of a destructive type, or things that to some extent will impact how the mod is played (while generally making it easier).");
 		cfg.setCategoryComment("modules", "These settings allow you to disable content from the mod that may be out of place to some extent, or other reasons. Any changes take effect after a Minecraft restart.");
@@ -437,37 +436,6 @@ public class InitHandler implements ILifeCycleHandler {
 		jzaharBreaksFourthWall = cfg.get("silly_settings", "J'zahar Can Break The Fourth Wall", true, "Toggles whether or not J'zahar can break the fourth wall.").getBoolean();
 		odbExplosionSize = cfg.get("silly_settings", "ODB Explosion Size", 160, "The explosion size of an ODB. 400 is the rough limit if running on 2GB of RAM, anything above that will require more allocated memory, and could crash the game or freeze it for longer periods of time.", 80, 800).getInt();
 		antimatterExplosionSize = cfg.get("silly_settings", "Antimatter Explosion Size", 80, "The explosion size of antimatter mobs colliding with their normal counterpart if Nucler Antimatter Explosions is enabled.", 40, 200).getInt();
-
-		darkstone_brick_slab = cfg.get("blocks", "Darkstone Brick Slab", true).getBoolean();
-		darkstone_cobblestone_slab = cfg.get("blocks", "Darkstone Cobblestone Slab", true).getBoolean();
-		darkstone_brick_stairs = cfg.get("blocks", "Darkstone Brick Stairs", true).getBoolean();
-		darkstone_cobblestone_stairs = cfg.get("blocks", "Darkstone Cobblestone Stairs", true).getBoolean();
-		darkstone_slab = cfg.get("blocks", "Darkstone Slab", true).getBoolean();
-		darklands_oak_slab = cfg.get("blocks", "Darklands Oak Slab", true).getBoolean();
-		darklands_oak_stairs = cfg.get("blocks", "Darklands Oak Stairs", true).getBoolean();
-		abyssal_stone_brick_slab = cfg.get("blocks", "Abyssal Stone Brick Slab", true).getBoolean();
-		abyssal_stone_brick_stairs = cfg.get("blocks", "Abyssal Stone Brick Stairs", true).getBoolean();
-		coralium_stone_brick_slab = cfg.get("blocks", "Coralium Stone Brick Slab", true).getBoolean();
-		coralium_stone_brick_stairs = cfg.get("blocks", "Coralium Stone Brick Stairs", true).getBoolean();
-		dreadstone_brick_slab = cfg.get("blocks", "Dreadstone Brick Slab", true).getBoolean();
-		dreadstone_brick_stairs = cfg.get("blocks", "Dreadstone Brick Stairs", true).getBoolean();
-		abyssalnite_stone_brick_slab = cfg.get("blocks", "Abyssalnite Stone Brick Slab", true).getBoolean();
-		abyssalnite_stone_brick_stairs = cfg.get("blocks", "Abyssalnite Stone Brick Stairs", true).getBoolean();
-		ethaxium_brick_slab = cfg.get("blocks", "Ethaxium Brick Slab", true).getBoolean();
-		ethaxium_brick_stairs = cfg.get("blocks", "Ethaxium Brick Stairs", true).getBoolean();
-		abyssal_cobblestone_slab = cfg.get("blocks", "Abyssal Cobblestone Slab", true).getBoolean();
-		abyssal_cobblestone_stairs = cfg.get("blocks", "Abyssal Cobblestone Stairs", true).getBoolean();
-		coralium_cobblestone_slab = cfg.get("blocks", "Coralium Cobblestone Slab", true).getBoolean();
-		coralium_cobblestone_stairs = cfg.get("blocks", "Coralium Cobblestone Stairs", true).getBoolean();
-		dreadstone_cobblestone_slab = cfg.get("blocks", "Dreadstone Cobblestone Slab", true).getBoolean();
-		dreadstone_cobblestone_stairs = cfg.get("blocks", "Dreadstone Cobblestone Stairs", true).getBoolean();
-		abyssalnite_cobblestone_slab = cfg.get("blocks", "Abyssalnite Cobblestone Slab", true).getBoolean();
-		abyssalnite_cobblestone_stairs = cfg.get("blocks", "Abyssalnite Cobblestone Stairs", true).getBoolean();
-		darkstone_cobblestone_wall = cfg.get("blocks", "Darkstone Cobblestone Wall", true).getBoolean();
-		abyssal_cobbblestone_wall = cfg.get("blocks", "Abyssal Cobblestone Wall", true).getBoolean();
-		coralium_cobblestone_wall = cfg.get("blocks", "Coralium Cobblestone Wall", true).getBoolean();
-		dreadstone_cobblestone_wall = cfg.get("blocks", "Dreadstone Cobblestone Wall", true).getBoolean();
-		abyssalnite_cobblestone_wall = cfg.get("blocks", "Abyssalnite Cobblestone Wall", true).getBoolean();
 
 		no_dreadlands_spread = cfg.get("wet_noodle", "Disable Dreadlands Spread", false, "Toggles whether or not the spreading of Dreadlands through the Dread Plague is disabled. Cha'garoth remains unaffected by this (because he doesn't naturally spawn outside of the dimension).").getBoolean();
 		no_acid_breaking_blocks = cfg.get("wet_noodle", "Disable Acid Projectiles Breaking Blocks", false, "Toggles whether or not the acid projectiles Lesser Shoggoths spit can break blocks.").getBoolean();

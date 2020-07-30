@@ -307,11 +307,11 @@ public class AbyssalCraftEventHooks {
 				event.setReplacement(ACBlocks.darklands_oak_planks.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.OAK_STAIRS && ACConfig.darklands_oak_stairs){
+			if(event.getOriginal().getBlock() == Blocks.OAK_STAIRS){
 				event.setReplacement(ACBlocks.darklands_oak_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.STONE_STAIRS && ACConfig.darkstone_cobblestone_stairs){
+			if(event.getOriginal().getBlock() == Blocks.STONE_STAIRS){
 				event.setReplacement(ACBlocks.darkstone_cobblestone_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));;
 				event.setResult(Result.DENY);
 			}
@@ -319,11 +319,11 @@ public class AbyssalCraftEventHooks {
 				event.setReplacement(ACBlocks.darklands_oak_fence.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.STONE_SLAB && ACConfig.darkstone_slab){
+			if(event.getOriginal().getBlock() == Blocks.STONE_SLAB){
 				event.setReplacement(ACBlocks.darkstone_slab.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.DOUBLE_STONE_SLAB && ACConfig.darkstone_slab){
+			if(event.getOriginal().getBlock() == Blocks.DOUBLE_STONE_SLAB){
 				event.setReplacement(BlockHandler.Darkstoneslab2.getDefaultState());
 				event.setResult(Result.DENY);
 			}

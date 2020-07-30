@@ -31,9 +31,9 @@ public class StructureCircularShrine extends StructureDarklandsBase {
 
 		IBlockState brick = ACBlocks.darkstone_brick.getDefaultState();
 		IBlockState chiseled_brick = ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED);
-		IBlockState brick_slab = ACConfig.darkstone_brick_slab ? ACBlocks.darkstone_brick_slab.getDefaultState() : Blocks.AIR.getDefaultState();
+		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
 		IBlockState cobble = ACBlocks.cobblestone.getDefaultState();
-		IBlockState cobble_slab = ACConfig.darkstone_cobblestone_slab ? ACBlocks.darkstone_cobblestone_slab.getDefaultState() : Blocks.AIR.getDefaultState();
+		IBlockState cobble_slab = ACBlocks.darkstone_cobblestone_slab.getDefaultState();
 		IBlockState ooze = ACBlocks.shoggoth_ooze.getDefaultState().withProperty(BlockShoggothOoze.LAYERS, 8);
 		IBlockState air = Blocks.AIR.getDefaultState();
 

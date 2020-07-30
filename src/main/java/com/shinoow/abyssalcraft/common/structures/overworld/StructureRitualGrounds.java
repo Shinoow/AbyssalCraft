@@ -27,7 +27,7 @@ public class StructureRitualGrounds extends StructureDarklandsBase {
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
 		IBlockState glowing_brick = ACBlocks.glowing_darkstone_bricks.getDefaultState();
-		IBlockState brick_slab = ACConfig.darkstone_brick_slab ? ACBlocks.darkstone_brick_slab.getDefaultState() : Blocks.AIR.getDefaultState();
+		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
 		IBlockState cobble = ACBlocks.cobblestone.getDefaultState();
 
 		for(int i = -4; i < 5; i++)

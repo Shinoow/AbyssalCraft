@@ -27,9 +27,9 @@ public class StructureElevatedShrineLarge extends StructureDarklandsBase {
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
-		IBlockState brick_slab = ACConfig.darkstone_brick_slab ? ACBlocks.darkstone_brick_slab.getDefaultState() : Blocks.AIR.getDefaultState();
+		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
 		IBlockState cobble = ACBlocks.cobblestone.getDefaultState();
-		IBlockState cobble_wall = ACConfig.darkstone_cobblestone_wall ? ACBlocks.darkstone_cobblestone_wall.getDefaultState() : Blocks.AIR.getDefaultState();
+		IBlockState cobble_wall = ACBlocks.darkstone_cobblestone_wall.getDefaultState();
 
 		for(int i = -3; i < 4; i++)
 			for(int j = -5; j < 6; j++){
@@ -54,17 +54,15 @@ public class StructureElevatedShrineLarge extends StructureDarklandsBase {
 							worldIn.setBlockToAir(pos.add(j, k, i));
 						}
 
-				if((j == -5 || j == 5) && flag && ACConfig.darkstone_cobblestone_stairs){
+				if((j == -5 || j == 5) && flag){
 					setBlockAndNotifyAdequately(worldIn, pos.add(j, 1, i), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 1 : 0));
 					setBlockAndNotifyAdequately(worldIn, pos.add(i, 1, j), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 3 : 2));
 				}
 				if((j == -4 || j == 4) && flag){
 					setBlockAndNotifyAdequately(worldIn, pos.add(j, 1, i), cobble);
 					setBlockAndNotifyAdequately(worldIn, pos.add(i, 1, j), cobble);
-					if(ACConfig.darkstone_cobblestone_stairs) {
-						setBlockAndNotifyAdequately(worldIn, pos.add(j, 2, i), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 1 : 0));
-						setBlockAndNotifyAdequately(worldIn, pos.add(i, 2, j), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 3 : 2));
-					}
+					setBlockAndNotifyAdequately(worldIn, pos.add(j, 2, i), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 1 : 0));
+					setBlockAndNotifyAdequately(worldIn, pos.add(i, 2, j), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 3 : 2));
 
 					setBlockAndNotifyAdequately(worldIn, pos.add(j, 6, i), brick_slab);
 					setBlockAndNotifyAdequately(worldIn, pos.add(i, 6, j), brick_slab);

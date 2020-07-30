@@ -32,7 +32,7 @@ public class StructureCircularShrineColumns extends StructureDarklandsBase {
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
 		IBlockState chiseled_brick = ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED);
-		IBlockState brick_slab = ACConfig.darkstone_brick_slab ? ACBlocks.darkstone_brick_slab.getDefaultState() : Blocks.AIR.getDefaultState();
+		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
 
 		for(int i = -3; i < 4; i++)
 			for(int j = -5; j < 6; j++){
