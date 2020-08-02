@@ -375,6 +375,7 @@ public class InitHandler implements ILifeCycleHandler {
 		evilAnimalNewMoonSpawning = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Animal New Moon Spawning", true, "Toggles whether or not Evil Animals only spawn at night during a new moon.").getBoolean();
 		curingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		itemTransportBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Item Transportation System Blacklist", new String[0], "Tile Entities added to this list will not be usable with the Item Transportation System (eg. you can't move Items from them). Format: modid:name").getStringList();
+		startDimension = cfg.get(Configuration.CATEGORY_GENERAL, "First Portal Dimension", 0, "The dimension ID of the dimension where you make the portal to the Abyssal Wastelands.").getInt();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 4, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 4, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();

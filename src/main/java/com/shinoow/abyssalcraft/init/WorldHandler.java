@@ -85,7 +85,7 @@ public class WorldHandler implements ILifeCycleHandler {
 		DimensionManager.registerDimension(ACLib.dark_realm_id, ACLib.THE_DARK_REALM);
 
 		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.abyssal_wasteland_id)
-				.addConnectedDimension(0)
+				.addConnectedDimension(ACConfig.startDimension)
 				.addConnectedDimension(ACLib.dreadlands_id)
 				.setColor(0, 1, 0)
 				.setGatewayKey(0)
