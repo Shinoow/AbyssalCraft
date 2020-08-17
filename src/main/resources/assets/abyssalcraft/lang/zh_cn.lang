@@ -919,7 +919,7 @@ death.attack.shoggoth_acid.player=%1$s在试图逃离%2$s时溶解于修格斯�
 
 #工具提示
 tooltip.portalplacer.1=右击或按住Shift并右击
-tooltip.portalplacer.2=以在可行维度间循环往来
+tooltip.portalplacer.2=以在可用维度间循环切换
 tooltip.portalplacer.3=维度： %s
 tooltip.portalplacer.4=你不能在这里创建那个维度的传送门！
 tooltip.oc=这个物品蕴藏不可思议的力量。
