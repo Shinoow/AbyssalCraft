@@ -216,9 +216,9 @@ container.abyssalcraft.rendingpedestal=撕裂基座
 container.abyssalcraft.statetransformer=物态转换器
 container.abyssalcraft.energydepositioner=能量沉积器
 
-#Gui Labels
-gui.abyssalcraft.facebook.name=Name
-gui.abyssalcraft.facebook.crystalsize=Crystal Size
+#Gui标签
+gui.abyssalcraft.facebook.name=名字
+gui.abyssalcraft.facebook.crystalsize=结晶尺寸
 
 #Gui按钮
 gui.abyssalcraft.statetransformer.insert=输入
@@ -611,7 +611,7 @@ necronomicon.text.itemtransportsystem.8=有两个实用咒语（名为“魂径�
 
 necronomicon.text.wip=这一章节还未完成。
 
-#Rituals
+#仪式
 ac.ritual.oblivionCatalyst=湮灭媒介
 ac.ritual.oblivionCatalyst.desc=湮灭媒介可通过将湮灭碎片和红石粉注入一个末影之眼制成。
 ac.ritual.transmutationGem=嬗变宝石
@@ -812,14 +812,14 @@ ac.ritual.curing=治愈仪式
 ac.ritual.curing.desc=通过放置4瓶恐惧瘟疫解药，你治愈了一片区域的恐惧瘟疫和恐惧之地，恢复了它们原来的面貌。地形最接近的非恐惧之地生物群系将会取代恐惧之地的位置。
 ac.ritual.spiritTablet=灵魂石板
 ac.ritual.spiritTablet.desc=一块灵魂石板可通过将4个灵魂石板碎片注入生命结晶来制作。它是一种工具，允许你使物品自主移动，以在方块间转移物品。阅读死灵之书奥穆索章节的相关内容以获取更多信息。
-ac.ritual.portal=Ritual of Open Doors
-ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed.
-ac.ritual.silverKey=The Silver Key
-ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key.
-ac.ritual.facebook=The Book of Many Faces
-ac.ritual.facebook.desc=By infusing a Book with crystallized compounds resembling the elements of life, an Arrow and an Ink Sac, you create a book capable of communicating with the dead and tell you the names of fallen companions.
+ac.ritual.portal=启门仪式
+ac.ritual.portal.desc=通过献上4个阴影宝石和一把门钥匙，你在空间结构中撕开了孔洞，开启了通往另一维度的传送门。传送门将指向门钥匙所设置的维度。这一过程中门钥匙不会被消耗。
+ac.ritual.silverKey=银钥匙
+ac.ritual.silverKey.desc=通过向查伽洛斯的拉莱耶门钥匙注入8个伊塞斯锭并献上活祭品，它将变成银钥匙。
+ac.ritual.facebook=千面之书
+ac.ritual.facebook.desc=通过向书中注入类似于生命元素的结晶混合物、一支箭和一个墨囊，你创造了一本书，它能与死者交流，并告诉你已逝同伴的名字。
 
-#Spells
+#咒语
 ac.spell.lifedrain=生命吸取
 ac.spell.lifedrain.desc=吸取敌人的生命力以治愈你的伤口。
 ac.spell.entropy=熵
@@ -851,7 +851,7 @@ ac.spell.floating.desc=只要持续施咒，你就会像羽毛一般轻盈，这
 ac.spell.teleportHome=归家
 ac.spell.teleportHome=施咒后将你传送至你的重生点，无论你在什么地方（包括其他维度）。
 
-#Places of Power
+#权力之地
 ac.structure.basic.description=一个小而简单的神龛，为受影响的雕像提供范围加成。
 ac.structure.basic.blocks=15个巨石块；4个巨石柱；4个雕像（任意）
 ac.structure.totempole.description=现在你只需要一堆篝火，一些乐器和一件叮当作响的衣服！
@@ -918,10 +918,10 @@ death.attack.shoggoth_acid=%1$s溶解于修格斯的酸液之中
 death.attack.shoggoth_acid.player=%1$s在试图逃离%2$s时溶解于修格斯的酸液之中
 
 #工具提示
-tooltip.portalplacer.1=Right-click or Shift Right-click to cycle
-tooltip.portalplacer.2=back and forth between available dimensions
-tooltip.portalplacer.3=Dimension: %s
-tooltip.portalplacer.4=You can't create a portal for that dimension here!
+tooltip.portalplacer.1=右击或按住Shift并右击
+tooltip.portalplacer.2=以在可行维度间循环往来
+tooltip.portalplacer.3=维度： %s
+tooltip.portalplacer.4=你不能在这里创建那个维度的传送门！
 tooltip.oc=这个物品蕴藏不可思议的力量。
 tooltip.staff=深渊的守门者扎哈尔的权杖。
 tooltip.eoa=堕落者阿索拉之眼。
@@ -950,8 +950,8 @@ tooltip.configurator.mode.1=应用配置
 tooltip.configurator.mode.2=清除配置
 tooltip.configurator.filter.0=根据子类型过滤
 tooltip.configurator.filter.1=根据NBT过滤
-tooltip.face_book.1=If you listen closely, you can hear the
-tooltip.face_book.2=voices of lost souls calling out their names
+tooltip.face_book.1=如果你侧耳倾听，你会听到
+tooltip.face_book.2=失落的灵魂在呼喊它们的姓名
 
 #创造模式物品栏
 itemGroup.acblocks=深渊国度丨方块
@@ -968,7 +968,7 @@ itemGroup.acspells=深渊国度丨咒语
 fluid.liquidcoralium=液态珊瑚
 fluid.liquidantimatter=液态反物质
 
-#Blocks
+#方块
 tile.stone.0.name=黑暗石
 tile.stone.1.name=深渊石
 tile.stone.2.name=恐惧石
@@ -1074,8 +1074,8 @@ tile.dreadaltartop.name=查伽洛斯祭坛（顶部）
 tile.dreadaltarbottom.name=查伽洛斯祭坛（底部）
 tile.crystallizer.name=结晶器
 tile.transmutator.name=嬗变器
-tile.dreadguardspawner.name=恐惧守卫刷怪笼
-tile.chagarothspawner.name=查伽洛斯刷怪笼
+tile.dreadguardspawner.name=恐惧守卫生成方块
+tile.chagarothspawner.name=查伽洛斯生成方块
 tile.drtfence.name=恐惧之地木栅栏
 tile.nitreore.name=硝石矿石
 tile.abyiroore.name=深渊铁矿石
@@ -1177,7 +1177,7 @@ tile.door_dlt.name=黑暗之地橡木门
 tile.door_drt.name=恐惧之地木门
 tile.multi_block.name=多方块
 
-#Pre/Postfixes
+#前缀/后缀
 decorativestatue.prefix=装饰用%s
 crystalcluster.postfix=%s簇
 crystalshard.postfix=%s碎片
@@ -1399,8 +1399,8 @@ item.configurator_shard.0.name=灵魂石板碎片 #1
 item.configurator_shard.1.name=灵魂石板碎片 #2
 item.configurator_shard.2.name=灵魂石板碎片 #3
 item.configurator_shard.3.name=灵魂石板碎片 #4
-item.silver_key.name=Silver Key
-item.face_book.name=Book of Many Faces
+item.silver_key.name=银钥匙
+item.face_book.name=千面之书
 
 #实体
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
