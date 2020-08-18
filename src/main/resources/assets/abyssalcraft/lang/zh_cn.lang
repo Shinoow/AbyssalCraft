@@ -297,7 +297,7 @@ necronomicon.text.necronomicon.2=死灵之书是深渊之书中的一章，由�
 necronomicon.text.necronomicon.3=深渊之书内共有4种死灵之书：死灵之书，深渊荒原死灵之书，恐惧之地死灵之书和奥穆索死灵之书，每一本都与一个维度有关。
 necronomicon.text.necronomicon.4=要想解锁这些知识，必须要旅行到上述的世界并且通过该世界里的兽皮来赐予死灵之书解锁的力量。深渊之书囊括了额外的只有扎哈尔知晓的知识，这是人类不应获得的知识。
 
-necronomicon.text.abyssalnomicon.1=这是深渊之书，是由深渊的守门者扎哈尔所写的书。这本书囊括了四本死灵之书的知识，毕竟上它们实际上只是这本书的章节。同样这里有大量的在其它地方没有提及的知识。
+necronomicon.text.abyssalnomicon.1=这是深渊之书，是由深渊守门者扎哈尔所写的书。这本书囊括了四本死灵之书的知识，毕竟上它们实际上只是这本书的章节。同样这里有大量的在其它地方没有提及的知识。
 necronomicon.text.abyssalnomicon.2=虽然关于咒语和仪式的知识受限于特殊的维度（和之前的维度，取决于死灵之书的类型），但是深渊之书在同一个地方有着所有的知识，包括附加的知识。
 
 necronomicon.text.abyssalcraft.1=这本书有助于你玩通深渊国度这个模组。深渊国度的关注点是探索，有4个新的维度能供你探索。
@@ -319,7 +319,7 @@ necronomicon.text.cthulhu.1=克苏鲁是一个旧日支配者，被封印在深�
 necronomicon.text.cthulhu.2=他有着章鱼的脑袋，和背后长有翅膀的鳞片躯体。他因为一场对抗古老者的战斗而陷入无尽的沉睡中，这场战斗最终以拉莱耶沉入海底而告终。终有一天他会苏醒并且统治整个世界。
 necronomicon.text.hastur.1=哈斯塔，别名不可言说者，是一个旧日支配者，同时也是克苏鲁的异母兄弟。
 necronomicon.text.hastur.2=关于哈斯塔的事情世间知道的并不多，但他被熟知表现出来的形象是一个身穿黄色长袍的国王，戴着面具。像大多数旧日支配者一样，他能够以任何他喜欢的形式来展现自身。
-necronomicon.text.jzahar.1=扎哈尔，别名深渊的守门者，是哈斯塔的杂种后代。
+necronomicon.text.jzahar.1=扎哈尔，别名深渊守门者，是哈斯塔的杂种后代。
 necronomicon.text.jzahar.2=扎哈尔对力量充满欲望，不想被流放到星际，于是前往时间和空间之外来获得他的自由。结果他获得了和犹格·索托斯相似的力量，同时被被惩罚去永远守卫他同样被囚禁的神。
 
 necronomicon.text.greatoldones=在人类的时代之前，世界是被一群被叫做“旧日支配者”的远古魔神所统治。由于远古的一场冲突，所有这些存在都被囚禁在无人能够涉足的地方。
@@ -472,7 +472,7 @@ necronomicon.text.dreadlands.progression.1=在你到达了恐惧之地后，你�
 necronomicon.text.dreadlands.progression.2=当你有2个祭坛零件，你要将它们放在恐惧之地山脉的Y=40的高度并且右击它。做完后你就能进入到查伽洛斯的巢穴。在打败恐惧守卫并杀死查伽洛斯之后，你会获得一把恐惧疫染的门钥匙，随同着战利品。这把钥匙需要嬗变才能变成可用的钥匙。
 necronomicon.text.dreadlands.progression.3=通过前面提及的嬗变器（合成表在深渊荒原特殊材料章节）你可以将恐惧疫染的门钥匙嬗变成查伽洛斯的拉莱耶门钥匙，给予你前往奥穆索的途径。升级你的死灵之书到奥穆索死灵之书需要8个奥穆索兽皮。
 
-necronomicon.text.omothol.progression.1=现在你已经到了奥穆索，到了与深渊的守门者扎哈尔战斗的时候了。扎哈尔神殿坐落于奥穆索的中心（坐标 X=4，Y=53，Z=7）。击败守门者之后，你可以解锁死灵之书上的所有知识。
+necronomicon.text.omothol.progression.1=现在你已经到了奥穆索，到了与深渊守门者扎哈尔战斗的时候了。扎哈尔神殿坐落于奥穆索的中心（坐标 X=4，Y=53，Z=7）。击败守门者之后，你可以解锁死灵之书上的所有知识。
 necronomicon.text.omothol.progression.2=深渊之书需要用伊塞斯锭，邪术鳞片和守门者的精华（由扎哈尔掉落）合成。
 necronomicon.text.omothol.progression.3=
 necronomicon.text.omothol.progression.4=
@@ -923,7 +923,7 @@ tooltip.portalplacer.2=以在可用维度间循环切换
 tooltip.portalplacer.3=维度： %s
 tooltip.portalplacer.4=你不能在这里创建那个维度的传送门！
 tooltip.oc=这个物品蕴藏不可思议的力量。
-tooltip.staff=深渊的守门者扎哈尔的权杖。
+tooltip.staff=深渊守门者扎哈尔的权杖。
 tooltip.eoa=堕落者阿索拉之眼。
 tooltip.corbow.1=弓箭在命中时会
 tooltip.corbow.2=附加珊瑚瘟疫
@@ -1407,7 +1407,7 @@ entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
 entity.abyssalcraft.evilpig.name=猪
 entity.abyssalcraft.abyssalzombie.name=深渊僵尸
 entity.abyssalcraft.Primed ODB.name=待发的湮灭弹
-entity.abyssalcraft.Jzahar.name=深渊的守门者扎哈尔
+entity.abyssalcraft.Jzahar.name=深渊守门者扎哈尔
 entity.abyssalcraft.abygolem.name=渊素傀儡
 entity.abyssalcraft.dreadgolem.name=恐惧渊素傀儡
 entity.abyssalcraft.dreadguard.name=恐惧守卫
