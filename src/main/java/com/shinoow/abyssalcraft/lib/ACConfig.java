@@ -53,7 +53,6 @@ public class ACConfig {
 	public static final String CATEGORY_BIOMES = "biomes";
 	public static final String CATEGORY_SHOGGOTH = "shoggoth";
 	public static final String CATEGORY_WORLDGEN = "worldgen";
-	public static final String CATEGORY_ITEM_BLACKLIST = "item_blacklist";
 	public static final String CATEGORY_SILLY_SETTINGS = "silly_settings";
 	public static final String CATEGORY_MOD_COMPAT = "mod_compat";
 	public static final String CATEGORY_WET_NOODLE = "wet_noodle";

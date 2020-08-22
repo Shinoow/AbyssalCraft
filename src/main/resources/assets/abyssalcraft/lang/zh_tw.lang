@@ -849,7 +849,7 @@ ac.spell.toggleState.desc=Starts/stops the Item transportation of all blocks wit
 ac.spell.floating=Floating
 ac.spell.floating.desc=As long as you're casting the spell, you're as light as a feather, allowing you to walk on air. Who needs gravity anyways?
 ac.spell.teleportHome=Teleport Home
-ac.spell.teleportHome=When cast, teleports you back to your spawn point from wherever you are (including other dimensions).
+ac.spell.teleportHome.desc=When cast, teleports you back to your spawn point from wherever you are (including other dimensions).
 
 #Places of Power
 ac.structure.basic.description=A small and simple shrine. Provides a range boost to affected statues.
@@ -867,27 +867,17 @@ ac.rending.essence_omt=奧穆索精髓可以從奧穆索實體收穫奧穆索能
 
 #配置
 ac_dimensions=維度
-ac_dimensions.tooltip=維度ID設置
+ac_dimensions.tooltip=Dimension configuration
 ac_biomes=生態域
-ac_biomes.tooltip=生態域ID設置
-ac_biomegen=生態域生成
-ac_biomegen.tooltip=生態域生成設置
-ac_biomespawn=生態域生成物
-ac_biomespawn.tooltip=生態域生成物設置
-ac_biomeweight=生態域權重
-ac_biomeweight.tooltip=生態域權重設置
+ac_biomes.tooltip=Biome configuration
 ac_general=常規
 ac_general.tooltip=常規設置
-ac_shoggoth=修格斯軟泥
-ac_shoggoth.tooltip=修格斯軟泥設置
+ac_shoggoth=Shoggoth
+ac_shoggoth.tooltip=Shoggoth Configuration
 ac_worldgen=世界生成
 ac_worldgen.tooltip=世界生成設置
-ac_itemblacklist=物品實體黑名單
-ac_itemblacklist.tooltip=物品實體黑名單設置
 ac_silly_settings=雜項
 ac_silly_settings.tooltip=雜項設置
-ac_blocks=方塊
-ac_blocks.tooltip=方塊設置
 ac_mod_compat=Mod Compatibility
 ac_mod_compat.tooltip=Mod Compatibility Configuration
 ac_wet_noodle=Wet Noodle
@@ -896,6 +886,12 @@ ac_modules=Modules
 ac_modules.tooltip=Module Configuration
 ac_spells=Spells
 ac_spells.tooltip=Spell Configuration
+ac_client=Client
+ac_client.tooltip=Client Configuration
+ac_rituals=Rituals
+ac_rituals.tooltip=Ritual Configuration
+ac_mobs=Mobs
+ac_mobs.tooltip=Mob Configuration
 
 #鍵位
 key.abyssalcraft.category=深淵國度

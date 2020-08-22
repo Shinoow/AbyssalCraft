@@ -849,7 +849,7 @@ ac.spell.toggleState.desc=Starts/stops the Item transportation of all blocks wit
 ac.spell.floating=Floating
 ac.spell.floating.desc=As long as you're casting the spell, you're as light as a feather, allowing you to walk on air. Who needs gravity anyways?
 ac.spell.teleportHome=Teleport Home
-ac.spell.teleportHome=When cast, teleports you back to your spawn point from wherever you are (including other dimensions).
+ac.spell.teleportHome.desc=When cast, teleports you back to your spawn point from wherever you are (including other dimensions).
 
 #Places of Power
 ac.structure.basic.description=A small and simple shrine. Provides a range boost to affected statues.
@@ -867,27 +867,17 @@ ac.rending.essence_omt=Las Esencias Omothol se hacen cosechando Energía Omothol
 
 #Configuration
 ac_dimensions=Dimensiones
-ac_dimensions.tooltip=Configuración de la ID de las Dimensiones
+ac_dimensions.tooltip=Dimension configuration
 ac_biomes=Biomas
-ac_biomes.tooltip=Configuración ID de los biomas
-ac_biomegen=Generación del bioma
-ac_biomegen.tooltip=Configuración de la generación del bioma
-ac_biomespawn=Spawning del bioma
-ac_biomespawn.tooltip=Configuración de Spawning del bioma
-ac_biomeweight=Altura del bioma
-ac_biomeweight.tooltip=Configuración de la altura del bioma
+ac_biomes.tooltip=Biome configuration
 ac_general=General
 ac_general.tooltip=Configuración general
-ac_shoggoth=Shoggoth Ooze
-ac_shoggoth.tooltip=Configuración Shoggoth Ooze 
+ac_shoggoth=Shoggoth
+ac_shoggoth.tooltip=Configuración Shoggoth 
 ac_worldgen=Generación del Mundo
 ac_worldgen.tooltip=Configuración de la generación del mundo
-ac_itemblacklist=Entity Item Blacklist
-ac_itemblacklist.tooltip=Entity Item Blacklist configuration
 ac_silly_settings=Silly Settings
 ac_silly_settings.tooltip=Silly Settings Configuration
-ac_blocks=Blocks
-ac_blocks.tooltip=Block Configuration
 ac_mod_compat=Mod Compatibility
 ac_mod_compat.tooltip=Mod Compatibility Configuration
 ac_wet_noodle=Wet Noodle
@@ -896,6 +886,12 @@ ac_modules=Modules
 ac_modules.tooltip=Module Configuration
 ac_spells=Spells
 ac_spells.tooltip=Spell Configuration
+ac_client=Client
+ac_client.tooltip=Client Configuration
+ac_rituals=Rituals
+ac_rituals.tooltip=Ritual Configuration
+ac_mobs=Mobs
+ac_mobs.tooltip=Mob Configuration
 
 #Keybinds
 key.abyssalcraft.category=AbyssalCraft

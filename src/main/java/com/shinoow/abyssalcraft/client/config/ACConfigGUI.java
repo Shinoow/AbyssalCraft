@@ -40,7 +40,6 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement(I18n.format("ac_mod_compat"), "ac_mod_compat", CompatEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_dimensions"), "ac_dimensions", DimensionEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_general"), "ac_general", GeneralEntry.class));
-		list.add(new DummyCategoryElement(I18n.format("ac_itemblacklist"), "ac_itemblacklist", ItemBlacklistEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_mobs"), "ac_mobs", MobsEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_modules"), "ac_modules", ModuleEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_rituals"), "ac_rituals", RitualsEntry.class));
@@ -108,18 +107,6 @@ public class ACConfigGUI extends GuiConfig {
 		@Override
 		protected GuiScreen buildChildScreen(){
 			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory(ACConfig.CATEGORY_WORLDGEN)).getChildElements(), "abyssalcraft", ACConfig.CATEGORY_WORLDGEN, false, false, I18n.format("ac_worldgen"));
-
-		}
-	}
-	public static class ItemBlacklistEntry extends CategoryEntry{
-
-		public ItemBlacklistEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement) {
-			super(owningScreen, owningEntryList, configElement);
-		}
-
-		@Override
-		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory(ACConfig.CATEGORY_ITEM_BLACKLIST)).getChildElements(), "abyssalcraft", ACConfig.CATEGORY_ITEM_BLACKLIST, true, true, I18n.format("ac_itemblacklist"));
 
 		}
 	}
