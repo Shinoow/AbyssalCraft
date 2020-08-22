@@ -48,4 +48,17 @@ public class ACConfig {
 	public static boolean entropy_spell, life_drain_spell, mining_spell, grasp_of_cthulhu_spell, invisibility_spell,
 	detachment_spell, steal_vigor_spell, sirens_song_spell, undeath_to_dust_spell, ooze_removal_spell, teleport_hostile_spell,
 	display_routes_spell, toggle_state_spell, floating_spell, teleport_home_spell;
+
+	public static final String CATEGORY_DIMENSIONS = "dimensions";
+	public static final String CATEGORY_BIOMES = "biomes";
+	public static final String CATEGORY_SHOGGOTH = "shoggoth";
+	public static final String CATEGORY_WORLDGEN = "worldgen";
+	public static final String CATEGORY_ITEM_BLACKLIST = "item_blacklist";
+	public static final String CATEGORY_SILLY_SETTINGS = "silly_settings";
+	public static final String CATEGORY_MOD_COMPAT = "mod_compat";
+	public static final String CATEGORY_WET_NOODLE = "wet_noodle";
+	public static final String CATEGORY_MODULES = "modules";
+	public static final String CATEGORY_SPELLS = "spells";
+	public static final String CATEGORY_MOBS = "mobs";
+	public static final String CATEGORY_RITUALS = "rituals";
 }
