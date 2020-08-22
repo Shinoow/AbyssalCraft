@@ -18,7 +18,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
+import java.util.function.BiConsumer;
 
+import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -354,24 +356,16 @@ public class InitHandler implements ILifeCycleHandler {
 		purgeMobSpawns = cfg.get(Configuration.CATEGORY_GENERAL, "Purge Mob Spawns", false, "Toggles whether or not to clear and repopulate the monster spawn list of all dimension biomes to ensure no mob from another mod got in there.").getBoolean();
 		interdimensionalCageBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Interdimensional Cage Blacklist", new String[0], "Entities added to this list can't be captured with the Interdimensional Cage.").getStringList();
 		damageAmpl = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode damage amplifier", 1.0D, "When Hardcore Mode is enabled, you can use this to amplify the armor-piercing damage mobs deal.\n[range: 1.0 ~ 10.0, default: 1.0]", 1.0D, 10.0D).getDouble();
-		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_GENERAL, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
 		mimicFire = cfg.get(Configuration.CATEGORY_GENERAL, "Mimic Fire", true, "Toggles whether or not Demon Animals will spread Mimic Fire instead of regular Fire (regular Fire can affect performance)").getBoolean();
 		armorPotionEffects = cfg.get(Configuration.CATEGORY_GENERAL, "Armor Potion Effects", true, "Toggles any interactions where armor sets either give certain Potion Effects, or dispell others. Useful if you have another mod installed that provides similar customization to any armor set.").getBoolean();
 		syncDataOnBookOpening = cfg.get(Configuration.CATEGORY_GENERAL, "Necronomicon Data Syncing", true, "Toggles whether or not the Necronomicon knowledge will sync from the server to the client each time a player opens their Necronomicon.").getBoolean();
 		dreadGrassSpread = cfg.get(Configuration.CATEGORY_GENERAL, "Dreadlands Grass Spread", true, "Toggles whether or not Dreadlands Grass can spread onto normal grass and dirt, slowly turning them into their Dreadlands counterparts.").getBoolean();
-		APIUtils.display_names = cfg.get(Configuration.CATEGORY_GENERAL, "Display Item Names", false, "Toggles whether or not to override the name locking and display item names regardless of the knowledge being obtained or not.").getBoolean();
 		blackHoleBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Reality Maelstrom Blacklist", new int[0], "Dimension IDs added to this list won't be used as potential destinations for black holes created by J'zahar.").getIntList();
 		portalSpawnsNearPlayer = cfg.get(Configuration.CATEGORY_GENERAL, "Portal Mob Spawning Near Players", true, "Toggles whether or not portals require a player to be nearby in order for it to rarely spawn mobs. If this option is disabled they follow the same principle as Nether portals.").getBoolean();
 		showBossDialogs = cfg.get(Configuration.CATEGORY_GENERAL, "Show Boss Dialogs", true, "Toggles whether or not boss dialogs are displayed at any point during their fights (when they spawn, when they die,  etc)").getBoolean();
 		knowledgeSyncDelay = cfg.get(Configuration.CATEGORY_GENERAL, "Knowledge Sync Delay", 60, "Delay in ticks until Knowledge is synced to the client upon changing dimensions. Higher numbers mean you might see item names re-locked for a few seconds when changing dimension, but might reduce load time for the dimension by a little (useful in larger modpacks).\n[range: 20 ~ 400, default: 60]", 20, 400).getInt();
 		lootTableContent = cfg.get(Configuration.CATEGORY_GENERAL, "Loot Table Content", true, "Toggles whether or not AbyssalCraft Items should be inserted into vanilla loot tables (dungeons, strongholds etc).").getBoolean();
-		corruptionRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Corruption Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Corruption (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
-		cleansingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Cleansing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Cleansing (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
-		purgingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Purging Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
-		enchantmentMaxLevel = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Max Level", 10, "The combined max level a single enchantment applied through the Mass Enchantment ritual can have. For example, if the max level is 10 and you apply 8 Sharpness 5 books, you'd end up with Sharpness 10 on the Item, rather than 40.\n[range: 1 ~ 100, default: 10]", 1, 100).getInt();
-		enchantBooks = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Books", true, "Toggles whether or not Books can be enchanted through the Mass Enchantment ritual.").getBoolean();
 		nightVisionEverywhere = cfg.get(Configuration.CATEGORY_GENERAL, "Plated Coralium Helmet Night Vision Everywhere", true, "Toggles whether or not the Night Vision buff from the Plated Coralium Helmet should be applied in all dimensions, rather than only Surface Worlds.").getBoolean();
-		curingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		itemTransportBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Item Transportation System Blacklist", new String[0], "Tile Entities added to this list will not be usable with the Item Transportation System (eg. you can't move Items from them). Format: modid:name").getStringList();
 
 		demonAnimalFire = cfg.get(CATEGORY_MOBS, "Demon Animal burning", false, "Set to false to prevent Demon Animals (Pigs, Cows, Chickens) from burning in the overworld.").getBoolean();
@@ -390,6 +384,16 @@ public class InitHandler implements ILifeCycleHandler {
 		String[] transformations = cfg.getStringList("Demon Animal Transformations", CATEGORY_MOBS, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
 				+ "\nFormat: entityid;demonanimal;chance \nwhere entityid is the String used in the /summon command\n demonanimal is a Integer representing the Demon Animal to spawn (0 = Demon Pig, 1 = Demon Cow, 2 = Demon Chicken, 3 = Demon Sheep)"
 				+ "\nchance is a decimal number representing the chance (optional, can be left out) of the Demon Animal being spawned (0.2 would mean a 20% chance, defaults to 100% if not set");
+
+		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_CLIENT, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
+		APIUtils.display_names = cfg.get(Configuration.CATEGORY_CLIENT, "Display Item Names", false, "Toggles whether or not to override the name locking and display item names regardless of the knowledge being obtained or not.").getBoolean();
+
+		corruptionRitualRange = cfg.get(CATEGORY_RITUALS, "Corruption Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Corruption (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
+		cleansingRitualRange = cfg.get(CATEGORY_RITUALS, "Cleansing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Cleansing (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
+		purgingRitualRange = cfg.get(CATEGORY_RITUALS, "Purging Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
+		enchantmentMaxLevel = cfg.get(CATEGORY_RITUALS, "Mass Enchantment Max Level", 10, "The combined max level a single enchantment applied through the Mass Enchantment ritual can have. For example, if the max level is 10 and you apply 8 Sharpness 5 books, you'd end up with Sharpness 10 on the Item, rather than 40.\n[range: 1 ~ 100, default: 10]", 1, 100).getInt();
+		enchantBooks = cfg.get(CATEGORY_RITUALS, "Mass Enchantment Books", true, "Toggles whether or not Books can be enchanted through the Mass Enchantment ritual.").getBoolean();
+		curingRitualRange = cfg.get(CATEGORY_RITUALS, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 
 		shoggothOoze = cfg.get(CATEGORY_SHOGGOTH, "Shoggoth Ooze Spread", true, "Toggles whether or not Lesser Shoggoths should spread their ooze when walking around.").getBoolean();
 		oozeExpire = cfg.get(CATEGORY_SHOGGOTH, "Ooze expiration", true, "Toggles whether or not Shoggoth Ooze slowly reverts to dirt after constant light exposure. Ooze blocks that aren't full blocks will shrink instead.").getBoolean();
@@ -523,51 +527,25 @@ public class InitHandler implements ILifeCycleHandler {
 	}
 
 	private void constructBlacklists(){
-		if(abyssalZombieBlacklist.length > 0)
-			for(String str : abyssalZombieBlacklist)
-				if(str.length() > 0){
-					String[] stuff = str.split(":");
-					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-					if(item != null)
-						abyssal_zombie_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("{} is not a valid Item!", str);
-				}
-		if(depthsGhoulBlacklist.length > 0)
-			for(String str : depthsGhoulBlacklist)
-				if(str.length() > 0){
-					String[] stuff = str.split(":");
-					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-					if(item != null)
-						depths_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("{} is not a valid Item!", str);
-				}
-		if(antiAbyssalZombieBlacklist.length > 0)
-			for(String str : antiAbyssalZombieBlacklist)
-				if(str.length() > 0){
-					String[] stuff = str.split(":");
-					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-					if(item != null)
-						anti_abyssal_zombie_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("{} is not a valid Item!", str);
-				}
-		if(antiGhoulBlacklist.length > 0)
-			for(String str : antiGhoulBlacklist)
-				if(str.length() > 0){
-					String[] stuff = str.split(":");
-					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-					if(item != null)
-						anti_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("{} is not a valid Item!", str);
-				}
-		if(omotholGhoulBlacklist.length > 0)
-			for(String str : omotholGhoulBlacklist)
-				if(str.length() > 0){
-					String[] stuff = str.split(":");
-					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-					if(item != null)
-						omothol_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("{} is not a valid Item!", str);
-				}
+
+		BiConsumer<String, List<ItemStack>> insert = (s, l) -> {
+			String[] stuff = s.split(":");
+			Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
+			if(item != null)
+				l.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+			else ACLogger.severe("{} is not a valid Item!", s);
+		};
+		BiConsumer<String[], List<ItemStack>> construct = (a, l) -> {
+			Arrays.stream(a)
+			.filter(Predicates.not(String::isEmpty))
+			.forEach(s -> insert.accept(s, l));
+		};
+
+		construct.accept(abyssalZombieBlacklist, abyssal_zombie_blacklist);
+		construct.accept(depthsGhoulBlacklist, depths_ghoul_blacklist);
+		construct.accept(antiAbyssalZombieBlacklist, anti_abyssal_zombie_blacklist);
+		construct.accept(antiGhoulBlacklist, anti_ghoul_blacklist);
+		construct.accept(omotholGhoulBlacklist, omothol_ghoul_blacklist);
 	}
 
 	/**
@@ -578,33 +556,16 @@ public class InitHandler implements ILifeCycleHandler {
 	 */
 	public boolean isItemBlacklisted(Entity entity, ItemStack stack){
 		if(entity instanceof EntityAbyssalZombie)
-			if(!abyssal_zombie_blacklist.isEmpty())
-				for(ItemStack stack2 : abyssal_zombie_blacklist)
-					if(areStacksEqual(stack2, stack)) return true;
+			return abyssal_zombie_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
 		if(entity instanceof EntityDepthsGhoul)
-			if(!depths_ghoul_blacklist.isEmpty())
-				for(ItemStack stack2 : depths_ghoul_blacklist)
-					if(areStacksEqual(stack2, stack)) return true;
+			return depths_ghoul_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
 		if(entity instanceof EntityAntiAbyssalZombie)
-			if(!anti_abyssal_zombie_blacklist.isEmpty())
-				for(ItemStack stack2 : anti_abyssal_zombie_blacklist)
-					if(areStacksEqual(stack2, stack)) return true;
+			return anti_abyssal_zombie_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
 		if(entity instanceof EntityAntiGhoul)
-			if(!anti_ghoul_blacklist.isEmpty())
-				for(ItemStack stack2 : anti_ghoul_blacklist)
-					if(areStacksEqual(stack2, stack)) return true;
+			return anti_ghoul_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
 		if(entity instanceof EntityOmotholGhoul)
-			if(!omothol_ghoul_blacklist.isEmpty())
-				for(ItemStack stack2 : omothol_ghoul_blacklist)
-					if(areStacksEqual(stack2, stack)) return true;
+			return omothol_ghoul_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
 		return false;
-	}
-
-	private boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
-	{
-		if (stack1 == null || stack2 == null) return false;
-		return stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE
-				|| stack1.getItemDamage() == stack2.getItemDamage());
 	}
 
 	/**
@@ -616,9 +577,7 @@ public class InitHandler implements ILifeCycleHandler {
 		ResourceLocation key = EntityList.getKey(entity);
 		if(key != null) {
 			String id = key.toString();
-			for(String str : interdimensionalCageBlacklist)
-				if(str.equals(id))
-					return true;
+			return Arrays.stream(interdimensionalCageBlacklist).anyMatch(s -> s.equals(id));
 		}
 		return false;
 	}
@@ -641,10 +600,7 @@ public class InitHandler implements ILifeCycleHandler {
 	}
 
 	private boolean isDimBlacklisted(int id) {
-		for(int check : blackHoleBlacklist)
-			if(check == id)
-				return true;
-		return false;
+		return Arrays.stream(blackHoleBlacklist).anyMatch(i -> i == id);
 	}
 
 	/**
@@ -653,10 +609,7 @@ public class InitHandler implements ILifeCycleHandler {
 	 * @return True if the dimension is blacklisted, otherwise false
 	 */
 	public boolean isDimBlacklistedFromOreGen(int id) {
-		for(int check : oreGenDimBlacklist)
-			if(check == id)
-				return true;
-		return false;
+		return Arrays.stream(oreGenDimBlacklist).anyMatch(i -> i == id);
 	}
 
 	/**
@@ -665,10 +618,7 @@ public class InitHandler implements ILifeCycleHandler {
 	 * @return True if the dimension is blacklisted, otherwise false
 	 */
 	public boolean isDimBlacklistedFromStructureGen(int id) {
-		for(int check : structureGenDimBlacklist)
-			if(check == id)
-				return true;
-		return false;
+		return Arrays.stream(structureGenDimBlacklist).anyMatch(i -> i == id);
 	}
 
 	/**
