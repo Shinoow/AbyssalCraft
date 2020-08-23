@@ -219,13 +219,13 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 			}
 
 		if(ticksExisted % 400 == 0)
-			if(!world.isRemote && world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 20){
+			if(!world.isRemote && world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < ACConfig.dreadSpawnSpawnLimit){
 				EntityDreadSpawn spawn = new EntityDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
 				world.spawnEntity(spawn);
 			}
 		if(ticksExisted % 10000 == 0)
-			if(!world.isRemote && world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 10){
+			if(!world.isRemote && world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < ACConfig.greaterDreadSpawnSpawnLimit){
 				EntityGreaterDreadSpawn spawn = new EntityGreaterDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
 				world.spawnEntity(spawn);

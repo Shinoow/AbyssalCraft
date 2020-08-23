@@ -537,19 +537,19 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 		if(!world.isRemote && isEntityAlive())
 		{
 			if(ticksExisted % 600 == 0)
-				if(rand.nextBoolean() && world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 10) {
+				if(rand.nextBoolean() && world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < ACConfig.dreadSpawnSpawnLimit / 2) {
 					EntityDreadSpawn mob = new EntityDreadSpawn(world);
 					mob.copyLocationAndAnglesFrom(this);
 					world.spawnEntity(mob);
 					mob.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
-				} else if(world.getEntitiesWithinAABB(EntityChagarothSpawn.class, getEntityBoundingBox().grow(32)).size() < 10) {
+				} else if(world.getEntitiesWithinAABB(EntityChagarothSpawn.class, getEntityBoundingBox().grow(32)).size() < ACConfig.dreadSpawnSpawnLimit / 2) {
 					EntityChagarothSpawn spawn = new EntityChagarothSpawn(world);
 					spawn.copyLocationAndAnglesFrom(this);
 					world.spawnEntity(spawn);
 					spawn.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 				}
 
-			if(ticksExisted % 1200 == 0 && world.getEntitiesWithinAABB(EntityChagarothFist.class, getEntityBoundingBox().grow(32)).size() < 5)
+			if(ticksExisted % 1200 == 0 && world.getEntitiesWithinAABB(EntityChagarothFist.class, getEntityBoundingBox().grow(32)).size() < ACConfig.greaterDreadSpawnSpawnLimit / 2)
 			{
 				EntityChagarothFist fist = new EntityChagarothFist(world);
 				fist.copyLocationAndAnglesFrom(this);
@@ -557,7 +557,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 				fist.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 
-			if(ticksExisted % 2400 == 0 && world.getEntitiesWithinAABB(EntityDreadguard.class, getEntityBoundingBox().grow(32)).size() < 5)
+			if(ticksExisted % 2400 == 0 && world.getEntitiesWithinAABB(EntityDreadguard.class, getEntityBoundingBox().grow(32)).size() < ACConfig.greaterDreadSpawnSpawnLimit / 2)
 			{
 				EntityDreadguard dreadGuard = new EntityDreadguard(world);
 				dreadGuard.copyLocationAndAnglesFrom(this);
@@ -566,7 +566,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 				dreadGuard.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
 			}
 
-			if(ticksExisted % 4800 == 0 && world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 5)
+			if(ticksExisted % 4800 == 0 && world.getEntitiesWithinAABB(EntityGreaterDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < ACConfig.greaterDreadSpawnSpawnLimit / 2)
 			{
 				EntityGreaterDreadSpawn dreadGuard = new EntityGreaterDreadSpawn(world);
 				dreadGuard.copyLocationAndAnglesFrom(this);
