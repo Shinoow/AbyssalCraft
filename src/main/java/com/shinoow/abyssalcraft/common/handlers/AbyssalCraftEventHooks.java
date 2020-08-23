@@ -193,14 +193,15 @@ public class AbyssalCraftEventHooks {
 				//				player.addStat(ACAchievements.enter_dark_realm, 1);
 			}
 		}
-		if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)
-				&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW){
-			Random rand = new Random();
-			if(ACConfig.particleEntity)
-				event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
-						event.getEntityLiving().posY + rand.nextDouble() * event.getEntityLiving().height,
-						event.getEntityLiving().posZ + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width, 0,0,0);
-		}
+		if(ACConfig.darkRealmSmokeParticles)
+			if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)
+			&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW){
+				Random rand = new Random();
+				if(ACConfig.particleEntity)
+					event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
+							event.getEntityLiving().posY + rand.nextDouble() * event.getEntityLiving().height,
+							event.getEntityLiving().posZ + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width, 0,0,0);
+			}
 	}
 
 	@SubscribeEvent

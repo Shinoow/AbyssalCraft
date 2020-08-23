@@ -347,8 +347,6 @@ public class InitHandler implements ILifeCycleHandler {
 		shouldSpread = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Coralium transmutation", true, "Set true for the Liquid Coralium to convert other liquids into itself and transmute blocks into their Abyssal Wasteland counterparts outside of the Abyssal Wasteland.").getBoolean();
 		shouldInfect = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague spreading", false, "Set true to allow the Coralium Plague to spread outside The Abyssal Wasteland.").getBoolean();
 		destroyOcean = cfg.get(Configuration.CATEGORY_GENERAL, "Oceanic Coralium Pollution", false, "Set true to allow the Liquid Coralium to spread across oceans. WARNING: The game can crash from this.").getBoolean();
-		particleBlock = cfg.get(Configuration.CATEGORY_GENERAL, "Block particles", true, "Toggles whether blocks that emits particles should do so.").getBoolean();
-		particleEntity = cfg.get(Configuration.CATEGORY_GENERAL, "Entity particles", true, "Toggles whether entities that emits particles should do so.").getBoolean();
 		hardcoreMode = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode", false, "Toggles Hardcore mode. If set to true, all mobs (in the mod) will become tougher.").getBoolean();
 		antiItemDisintegration = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Antimatter item disintegration", true, "Toggles whether or not Liquid Antimatter will disintegrate any items dropped into a pool of it.").getBoolean();
 		smeltingRecipes = cfg.get(Configuration.CATEGORY_GENERAL, "Smelting Recipes", true, "Toggles whether or not to add smelting recipes for armor pieces.").getBoolean();
@@ -392,6 +390,9 @@ public class InitHandler implements ILifeCycleHandler {
 
 		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_CLIENT, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
 		APIUtils.display_names = cfg.get(Configuration.CATEGORY_CLIENT, "Display Item Names", false, "Toggles whether or not to override the name locking and display item names regardless of the knowledge being obtained or not.").getBoolean();
+		particleBlock = cfg.get(Configuration.CATEGORY_CLIENT, "Block particles", true, "Toggles whether blocks that emits particles should do so.").getBoolean();
+		particleEntity = cfg.get(Configuration.CATEGORY_CLIENT, "Entity particles", true, "Toggles whether entities that emits particles should do so.").getBoolean();
+		darkRealmSmokeParticles = cfg.get(Configuration.CATEGORY_CLIENT, "Dark Realm Smoke Particles", true, "Toggles whether or not non-shadow entities will emit smoke particles inside the Dark Realm.").getBoolean();
 
 		corruptionRitualRange = cfg.get(CATEGORY_RITUALS, "Corruption Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Corruption (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		cleansingRitualRange = cfg.get(CATEGORY_RITUALS, "Cleansing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Cleansing (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
