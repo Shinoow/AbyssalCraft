@@ -44,7 +44,6 @@ public class AbyssalCrafting {
 	public static void addRecipes()
 	{
 		addBlockSmelting();
-		addItemCrafting();
 		addItemSmelting();
 		addCrystallization();
 		addTransmutation();
@@ -91,14 +90,6 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(ACBlocks.dreadlands_log, new ItemStack(ACItems.charcoal), 1F);
 	}
 
-	private static void addItemCrafting(){
-
-		addArmor(ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots, ACItems.abyssalnite_ingot, new ItemStack(ACItems.ingot_nugget, 1, 0));
-		addArmor(ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots, ACItems.refined_coralium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 1));
-		addArmor(ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots, ACItems.dreadium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 2));
-		addArmor(ACItems.ethaxium_helmet, ACItems.ethaxium_chestplate, ACItems.ethaxium_leggings, ACItems.ethaxium_boots, ACItems.ethaxium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 3));
-	}
-
 	private static void addItemSmelting(){
 
 		GameRegistry.addSmelting(ACItems.chunk_of_abyssalnite, new ItemStack(ACItems.abyssalnite_ingot), 3F);
@@ -107,10 +98,11 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(ACItems.coin, new ItemStack(Items.IRON_INGOT, 4), 0.5F);
 
 		if(ACConfig.smeltingRecipes){
-			GameRegistry.addSmelting(Items.LEATHER_HELMET, new ItemStack(Items.LEATHER), 1F);
-			GameRegistry.addSmelting(Items.LEATHER_CHESTPLATE, new ItemStack(Items.LEATHER), 1F);
-			GameRegistry.addSmelting(Items.LEATHER_LEGGINGS, new ItemStack(Items.LEATHER), 1F);
-			GameRegistry.addSmelting(Items.LEATHER_BOOTS, new ItemStack(Items.LEATHER), 1F);
+			addArmorSmelting(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS, new ItemStack(Items.LEATHER));
+			addArmorSmelting(ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots, new ItemStack(ACItems.ingot_nugget, 1, 0));
+			addArmorSmelting(ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots, new ItemStack(ACItems.ingot_nugget, 1, 1));
+			addArmorSmelting(ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots, new ItemStack(ACItems.ingot_nugget, 1, 2));
+			addArmorSmelting(ACItems.ethaxium_helmet, ACItems.ethaxium_chestplate, ACItems.ethaxium_leggings, ACItems.ethaxium_boots, new ItemStack(ACItems.ingot_nugget, 1, 3));
 		}
 	}
 
@@ -760,13 +752,10 @@ public class AbyssalCrafting {
 				"ac.rending.shadowgem", OreDictionary.WILDCARD_VALUE));
 	}
 
-	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget){
-
-		if(ACConfig.smeltingRecipes){
-			GameRegistry.addSmelting(helmet, nugget, 1F);
-			GameRegistry.addSmelting(chestplate, nugget, 1F);
-			GameRegistry.addSmelting(pants, nugget, 1F);
-			GameRegistry.addSmelting(boots, nugget, 1F);
-		}
+	private static void addArmorSmelting(Item helmet, Item chestplate, Item pants, Item boots, ItemStack nugget){
+		GameRegistry.addSmelting(helmet, nugget, 1F);
+		GameRegistry.addSmelting(chestplate, nugget, 1F);
+		GameRegistry.addSmelting(pants, nugget, 1F);
+		GameRegistry.addSmelting(boots, nugget, 1F);
 	}
 }
