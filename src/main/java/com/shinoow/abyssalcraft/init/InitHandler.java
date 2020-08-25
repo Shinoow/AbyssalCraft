@@ -401,7 +401,7 @@ public class InitHandler implements ILifeCycleHandler {
 		purgingRitualRange = cfg.get(CATEGORY_RITUALS, "Purging Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		enchantmentMaxLevel = cfg.get(CATEGORY_RITUALS, "Mass Enchantment Max Level", 10, "The combined max level a single enchantment applied through the Mass Enchantment ritual can have. For example, if the max level is 10 and you apply 8 Sharpness 5 books, you'd end up with Sharpness 10 on the Item, rather than 40.\n[range: 1 ~ 100, default: 10]", 1, 100).getInt();
 		enchantBooks = cfg.get(CATEGORY_RITUALS, "Mass Enchantment Books", true, "Toggles whether or not Books can be enchanted through the Mass Enchantment ritual.").getBoolean();
-		curingRitualRange = cfg.get(CATEGORY_RITUALS, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
+		curingRitualRange = cfg.get(CATEGORY_RITUALS, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Curing (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 
 		shoggothOoze = cfg.get(CATEGORY_SHOGGOTH, "Shoggoth Ooze Spread", true, "Toggles whether or not Lesser Shoggoths should spread their ooze when walking around.").getBoolean();
 		oozeExpire = cfg.get(CATEGORY_SHOGGOTH, "Ooze expiration", true, "Toggles whether or not Shoggoth Ooze slowly reverts to dirt after constant light exposure. Ooze blocks that aren't full blocks will shrink instead.").getBoolean();
