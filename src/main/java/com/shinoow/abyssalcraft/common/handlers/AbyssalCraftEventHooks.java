@@ -35,6 +35,7 @@ import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
@@ -198,9 +199,7 @@ public class AbyssalCraftEventHooks {
 			&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW){
 				Random rand = new Random();
 				if(ACConfig.particleEntity)
-					event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
-							event.getEntityLiving().posY + rand.nextDouble() * event.getEntityLiving().height,
-							event.getEntityLiving().posZ + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width, 0,0,0);
+					ParticleUtil.spawnShadowParticles(event.getEntityLiving());
 			}
 	}
 
