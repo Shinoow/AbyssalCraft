@@ -27,6 +27,7 @@ import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -59,7 +60,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player) {
-		SpecialTextUtil.JzaharText("Undoing my malice on your "+TextFormatting.ITALIC+"beloved"+TextFormatting.RESET+" world? What a shame.");
+		SpecialTextUtil.JzaharText(I18n.format("message.jzahar.cleansing"));
 	}
 
 	@Override

@@ -203,6 +203,9 @@ message.configurator.error.1=Vous ne pouvez créer de configuration sans un chem
 message.configurator.error.2=Le bloc de destination n'a pas d'inventaire !
 message.configurator.error.3=Ce bloc ne supporte pas les configurations !
 message.configurator.error.4=Vous n'êtes pas autorisé à interagir avec ce bloc !
+message.jzahar.corrupting=Behold, as the darkness consumes the Overworld! Bit by bit, this world will crumble.
+message.jzahar.cleansing=Undoing my malice on your §obeloved§r world? What a shame.
+message.jzahar.fourthwall=Whoops, I slipped!
 
 #Container Inventories
 container.abyssalcraft.crate=Caisse
