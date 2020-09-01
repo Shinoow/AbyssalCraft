@@ -203,6 +203,9 @@ message.configurator.error.1=你不能在没有路径的情况下创建配置！
 message.configurator.error.2=目标方块没有物品栏！
 message.configurator.error.3=该方块不支持配置！
 message.configurator.error.4=你不能和这个方块互动！
+message.jzahar.corrupting=看啊，乘此黑暗吞噬主界之时！寸进蚕食间，这个世界终将崩溃消亡。
+message.jzahar.cleansing=消解我对你§o至爱§r的世界施加的恶意？真可惜。
+message.jzahar.fourthwall=哎哟，我手滑了！
 
 #容器物品栏
 container.abyssalcraft.crate=板条箱
