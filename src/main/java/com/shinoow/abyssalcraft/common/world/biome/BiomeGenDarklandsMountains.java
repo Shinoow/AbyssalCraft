@@ -31,8 +31,8 @@ public class BiomeGenDarklandsMountains extends Biome implements IDarklandsBiome
 	public BiomeGenDarklandsMountains(BiomeProperties par1)
 	{
 		super(par1);
-		topBlock = ACBlocks.stone.getDefaultState();
-		fillerBlock = ACBlocks.stone.getDefaultState();
+		topBlock = ACBlocks.darkstone.getDefaultState();
+		fillerBlock = ACBlocks.darkstone.getDefaultState();
 		decorator.treesPerChunk = 0;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 45, 1, 2));

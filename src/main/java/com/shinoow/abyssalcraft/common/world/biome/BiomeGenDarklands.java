@@ -68,7 +68,7 @@ public class BiomeGenDarklands extends Biome implements IDarklandsBiome {
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.stone.getDefaultState(), 20).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.darkstone.getDefaultState(), 20).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 

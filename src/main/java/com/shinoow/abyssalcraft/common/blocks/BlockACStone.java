@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Nullable;
@@ -42,96 +44,100 @@ import net.minecraft.world.World;
 
 public class BlockACStone extends Block {
 
-	public static final PropertyEnum<EnumStoneType> TYPE = PropertyEnum.create("type", EnumStoneType.class);
+//	public static final PropertyEnum<EnumStoneType> TYPE = PropertyEnum.create("type", EnumStoneType.class);
+	private EnumStoneType TYPE;
+	public static final Map<EnumStoneType, Block> VARIANTS = new HashMap<>();
 
-	public BlockACStone() {
+	public BlockACStone(EnumStoneType type) {
 		super(Material.ROCK);
-		setDefaultState(getDefaultState().withProperty(TYPE, EnumStoneType.DARKSTONE));
+		this.TYPE = type;
+//		setDefaultState(getDefaultState().withProperty(TYPE, EnumStoneType.DARKSTONE));
 		setHardness(2.0F);
 		setResistance(10.0F);
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabBlock);
 		setHarvestLevel("pickaxe", 0);
-		setTickRandomly(true);
+		VARIANTS.put(TYPE, this);
+//		setTickRandomly(true);
 	}
 
 	@Override
 	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_)
 	{
-		return state.getValue(TYPE).getMapColor();
+		return TYPE.getMapColor();
 	}
 
 	@Override
 	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
 	{
-		return blockState.getValue(TYPE).getHardness();
+		return TYPE.getHardness();
 	}
 
 	@Override
 	public float getExplosionResistance(World world, BlockPos pos, @Nullable Entity exploder, Explosion explosion)
 	{
-		return world.getBlockState(pos).getValue(TYPE).getResistance();
+		return TYPE.getResistance();
 	}
 
 	@Override
 	public int getHarvestLevel(IBlockState state)
 	{
-		return state.getValue(TYPE).getHarvestLevel();
+		return TYPE.getHarvestLevel();
 	}
 
-	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
-		return getDefaultState().withProperty(TYPE, EnumStoneType.byMetadata(meta));
-	}
-
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		return state.getValue(TYPE).getMeta();
-	}
+//	@Override
+//	public IBlockState getStateFromMeta(int meta)
+//	{
+//		return getDefaultState().withProperty(TYPE, EnumStoneType.byMetadata(meta));
+//	}
+//
+//	@Override
+//	public int getMetaFromState(IBlockState state)
+//	{
+//		return state.getValue(TYPE).getMeta();
+//	}
 
 	@Override
 	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
 	{
 		if(entity instanceof EntityDragon)
-			return state.getValue(TYPE) != EnumStoneType.OMOTHOL_STONE &&
-			state.getValue(TYPE) != EnumStoneType.ETHAXIUM;
+			return TYPE != EnumStoneType.OMOTHOL_STONE &&
+					TYPE != EnumStoneType.ETHAXIUM;
 		else if (entity instanceof EntityWither || entity instanceof EntityWitherSkull)
-			return state.getValue(TYPE) != EnumStoneType.ETHAXIUM;
+			return TYPE != EnumStoneType.ETHAXIUM;
 		return super.canEntityDestroy(state, world, pos, entity);
 	}
 
 	@Override
 	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
-		if (!par1World.isRemote && state.getValue(TYPE) == EnumStoneType.CORALIUM_STONE)
+		if (!par1World.isRemote && TYPE == EnumStoneType.CORALIUM_STONE)
 			for(EnumFacing face : EnumFacing.values())
 				if (par1World.getBlockState(pos.offset(face)).getBlock() == ACBlocks.liquid_coralium && par5Random.nextFloat() < 0.3)
 					par1World.setBlockState(pos.offset(face), state);
 	}
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random random, int j)
-	{
-		return damageDropped(state) < 5 ? Item.getItemFromBlock(ACBlocks.cobblestone) : super.getItemDropped(state, random, j);
-	}
+//	@Override //TODO uncomment and clean up
+//	public Item getItemDropped(IBlockState state, Random random, int j)
+//	{
+//		return TYPE.getMeta() < 5 ? Item.getItemFromBlock(ACBlocks.cobblestone) : super.getItemDropped(state, random, j);
+//	}
 
-	@Override
-	public int damageDropped (IBlockState state) {
-		return state.getValue(TYPE).getMeta();
-	}
+//	@Override
+//	public int damageDropped (IBlockState state) {
+//		return state.getValue(TYPE).getMeta();
+//	}
 
-	@Override
-	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-		for(int i = 0; i < EnumStoneType.values().length; i++)
-			par3List.add(new ItemStack(this, 1, i));
-	}
+//	@Override
+//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+//		for(int i = 0; i < EnumStoneType.values().length; i++)
+//			par3List.add(new ItemStack(this, 1, i));
+//	}
 
-	@Override
-	public BlockStateContainer createBlockState()
-	{
-		return new BlockStateContainer.Builder(this).add(TYPE).build();
-	}
+//	@Override
+//	public BlockStateContainer createBlockState()
+//	{
+//		return new BlockStateContainer.Builder(this).add(TYPE).build();
+//	}
 
 	public static enum EnumStoneType implements IStringSerializable
 	{

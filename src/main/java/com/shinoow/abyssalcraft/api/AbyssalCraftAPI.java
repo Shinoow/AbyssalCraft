@@ -172,7 +172,7 @@ public class AbyssalCraftAPI {
 		dreadiumSamuraiArmor.setRepairItem(new ItemStack(ACItems.dreadium_plate));
 		ethaxiumArmor.setRepairItem(new ItemStack(ACItems.ethaxium_ingot));
 
-		darkstoneTool.setRepairItem(new ItemStack(ACBlocks.cobblestone, 1, 0));
+		darkstoneTool.setRepairItem(new ItemStack(ACBlocks.darkstone_cobblestone));
 		abyssalniteTool.setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));
 		refinedCoraliumTool.setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
 		dreadiumTool.setRepairItem(new ItemStack(ACItems.dreadium_ingot));

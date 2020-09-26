@@ -34,8 +34,8 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 
 	public BiomeGenDreadlandsBase(BiomeProperties par1) {
 		super(par1);
-		topBlock = ACBlocks.stone.getStateFromMeta(2);
-		fillerBlock = ACBlocks.stone.getStateFromMeta(2);
+		topBlock = ACBlocks.dreadstone.getDefaultState();
+		fillerBlock = ACBlocks.dreadstone.getDefaultState();
 		decorator.treesPerChunk = -1;
 		decorator.flowersPerChunk= -1;
 		decorator.grassPerChunk = -1;
@@ -74,7 +74,7 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.dreaded_abyssalnite_ore.getDefaultState(), veinSize,
-						state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
+						state -> state != null && state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 
 		for (int rarity = 0; rarity < 3; rarity++)
@@ -82,8 +82,8 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(55) + 5;
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.stone.getStateFromMeta(3), 16,
-					state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 16,
+					state -> state != null && state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 
@@ -110,7 +110,7 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 				if(j1 == 0)
 					chunkPrimerIn.setBlockState(i1, j1, l, Blocks.BEDROCK.getDefaultState());
 				else if(j1 == 5)
-					chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.cobblestone.getDefaultState());
+					chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.darkstone_cobblestone.getDefaultState());
 				else {
 					IBlockState state = Blocks.AIR.getDefaultState();
 
@@ -126,13 +126,13 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 
 				if (iblockstate2.getMaterial() == Material.AIR)
 					j = -1;
-				else if (iblockstate2 == ACBlocks.stone.getStateFromMeta(2))
+				else if (iblockstate2 == ACBlocks.dreadstone.getDefaultState())
 					if (j == -1)
 					{
 						if (k <= 0)
 						{
 							iblockstate = null;
-							iblockstate1 = ACBlocks.stone.getStateFromMeta(2);
+							iblockstate1 = ACBlocks.dreadstone.getDefaultState();
 						}
 						else if (j1 >= i - 4 && j1 <= i + 1)
 						{
@@ -147,8 +147,8 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 						else if (j1 < i - 7 - k)
 						{
 							iblockstate = null;
-							iblockstate1 = ACBlocks.stone.getStateFromMeta(2);
-							chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.stone.getStateFromMeta(2));
+							iblockstate1 = ACBlocks.dreadstone.getDefaultState();
+							chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.dreadstone.getDefaultState());
 						} else
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
 					}

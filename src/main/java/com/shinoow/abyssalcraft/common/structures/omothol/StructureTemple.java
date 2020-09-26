@@ -76,11 +76,11 @@ public class StructureTemple extends WorldGenerator {
 			break;
 		}
 
-		if(world.getBlockState(center).getBlock() != ACBlocks.stone ||
-				world.getBlockState(center.north(14)).getBlock() != ACBlocks.stone ||
-				world.getBlockState(center.south(14)).getBlock() != ACBlocks.stone ||
-				world.getBlockState(center.west(14)).getBlock() != ACBlocks.stone ||
-				world.getBlockState(center.east(14)).getBlock() != ACBlocks.stone) return false;
+		if(world.getBlockState(center).getBlock() != ACBlocks.omothol_stone ||
+				world.getBlockState(center.north(14)).getBlock() != ACBlocks.omothol_stone ||
+				world.getBlockState(center.south(14)).getBlock() != ACBlocks.omothol_stone ||
+				world.getBlockState(center.west(14)).getBlock() != ACBlocks.omothol_stone ||
+				world.getBlockState(center.east(14)).getBlock() != ACBlocks.omothol_stone) return false;
 
 		center = world.getHeight(center);
 		if(center.getY() > pos.getY())

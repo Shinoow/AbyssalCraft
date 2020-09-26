@@ -38,8 +38,8 @@ public class ItemEthaxiumPickaxe extends ItemACPickaxe {
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state)
 	{
-		if(effectiveBlocks.contains(state.getBlock()) || state == ACBlocks.ingot_block.getDefaultState().withProperty(IngotBlock.TYPE, EnumIngotType.ETHAXIUM)
-				|| state == ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ETHAXIUM))
+		if(effectiveBlocks.contains(state.getBlock()) || state == ACBlocks.block_of_ethaxium.getDefaultState()
+				|| state == ACBlocks.ethaxium.getDefaultState())
 			return efficiency * 10;
 		if (state.getBlock().isToolEffective("pickaxe", state))
 			return efficiency;

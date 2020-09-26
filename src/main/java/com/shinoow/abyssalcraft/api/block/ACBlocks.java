@@ -22,11 +22,26 @@ import net.minecraft.block.Block;
 public class ACBlocks {
 
 	/** Metadata block, 0 = Darkstone, 1 = Abyssal Stone, 2 = Dreadstone, 3 = Abyssalnite Stone, 4 = Coralium Stone, 5 = Ethaxium, 6 = Omothol Stone, 7 = Monolith Stone */
-	public static Block stone;
+//	public static Block stone;
+	public static Block darkstone;
+	public static Block abyssal_stone;
+	public static Block dreadstone;
+	public static Block abyssalnite_stone;
+	public static Block coralium_stone;
+	public static Block ethaxium;
+	public static Block omothol_stone;
+	public static Block monolith_stone;
 	/** Metadata block, 0 = Darkstone, 1 = Abyssal Stone, 2 = Dreadstone, 3 = Abyssalnite Stone, 4 = Coralium Stone */
-	public static Block cobblestone;
+//	public static Block cobblestone;
+	public static Block darkstone_cobblestone;
+	public static Block abyssal_cobblestone;
+	public static Block dreadstone_cobblestone;
+	public static Block abyssalnite_cobblestone;
+	public static Block coralium_cobblestone;
 	/** Metadata block, 0 = Darkstone Bricks, 1 = Chiseled Darkstone Bricks, 2 = Cracked Darkstone Bricks */
 	public static Block darkstone_brick;
+	public static Block chiseled_darkstone_brick;
+	public static Block cracked_darkstone_brick;
 	public static Block glowing_darkstone_bricks;
 	public static Block darkstone_brick_slab;
 	public static Block darkstone_cobblestone_slab;
@@ -38,6 +53,8 @@ public class ACBlocks {
 	public static Block darklands_oak_sapling;
 	/** Metadata block, 0 = Abyssal Stone Bricks, 1 = Chiseled Abyssal Stone Bricks, 2 = Cracked Abyssal Stone Bricks */
 	public static Block abyssal_stone_brick;
+	public static Block chiseled_abyssal_stone_brick;
+	public static Block cracked_abyssal_stone_brick;
 	public static Block abyssal_stone_brick_slab;
 	public static Block abyssal_stone_brick_stairs;
 	public static Block coralium_ore;
@@ -46,7 +63,11 @@ public class ACBlocks {
 	public static Block darkstone_cobblestone_wall;
 	public static Block oblivion_deathbomb;
 	/** Metadata block, 0 = Block of Abyssalnite, 1 = Block of Refined Coralium, 2 = Block of Dreadium, 3 = Block of Ethaxium */
-	public static Block ingot_block;
+//	public static Block ingot_block;
+	public static Block block_of_abyssalnite;
+	public static Block block_of_refined_coralium;
+	public static Block block_of_dreadium;
+	public static Block block_of_ethaxium;
 	public static Block coralium_infused_stone;
 	public static Block odb_core;
 	public static Block wooden_crate;
@@ -72,8 +93,12 @@ public class ACBlocks {
 	public static Block dreaded_abyssalnite_ore;
 	/** Metadata block, 0 = Dreadstone Bricks, 1 = Chiseled Dreadstone Bricks, 2 = Cracked Dreadstone Bricks */
 	public static Block dreadstone_brick;
+	public static Block chiseled_dreadstone_brick;
+	public static Block cracked_dreadstone_brick;
 	/** Metadata block, 0 = Abyssalnite Stone Bricks, 1 = Chiseled Abyssalnite Stone Bricks, 2 = Cracked Abyssalnite Stone Bricks */
 	public static Block abyssalnite_stone_brick;
+	public static Block chiseled_abyssalnite_stone_brick;
+	public static Block cracked_abyssalnite_stone_brick;
 	public static Block dreadlands_grass;
 	public static Block dreadlands_log;
 	public static Block dreadlands_leaves;
@@ -94,6 +119,8 @@ public class ACBlocks {
 	public static Block liquid_antimatter;
 	/** Metadata block, 0 = Coralium Brick, 1 = Chiseled Coralium Brick, 2 = Cracked Coralium Brick */
 	public static Block coralium_stone_brick;
+	public static Block chiseled_coralium_stone_brick;
+	public static Block cracked_coralium_stone_brick;
 	public static Block coralium_stone_brick_fence;
 	public static Block coralium_stone_brick_slab;
 	public static Block coralium_stone_brick_stairs;
@@ -120,6 +147,8 @@ public class ACBlocks {
 	public static Block solid_lava;
 	/** Metadata block, 0 = Ethaxium Brick, 1 = Chiseled Ethaxium Brick, 2 = Cracked Ethaxium Brick */
 	public static Block ethaxium_brick;
+	public static Block chiseled_ethaxium_brick;
+	public static Block cracked_ethaxium_brick;
 	public static Block ethaxium_pillar;
 	public static Block ethaxium_brick_stairs;
 	public static Block ethaxium_brick_slab;
@@ -130,6 +159,8 @@ public class ACBlocks {
 	public static Block materializer;
 	/** Metadata block, 0 = Dark Ethaxium Brick, 1 = Chiseled Dark Ethaxium Brick, 2 = Cracked Dark Ethaxium Brick */
 	public static Block dark_ethaxium_brick;
+	public static Block chiseled_dark_ethaxium_brick;
+	public static Block cracked_dark_ethaxium_brick;
 	public static Block dark_ethaxium_pillar;
 	public static Block dark_ethaxium_brick_stairs;
 	public static Block dark_ethaxium_brick_slab;
@@ -138,20 +169,42 @@ public class ACBlocks {
 	public static Block ritual_pedestal;
 	public static Block shoggoth_ooze;
 	/** Metadata block, 0 = Cthulhu, 1 = Hastur, 2 = J'zahar, 3 = Azathoth, 4 = Nyarlathotep, 5 = Yog-Sothoth, 6 = Shub-Niggurath*/
-	public static Block statue;
+//	public static Block statue;
+	public static Block cthulhu_statue;
+	public static Block hastur_statue;
+	public static Block jzahar_statue;
+	public static Block azathoth_statue;
+	public static Block nyarlathotep_statue;
+	public static Block yog_sothoth_statue;
+	public static Block shub_niggurath_statue;
 	public static Block shoggoth_biomass;
 	public static Block energy_pedestal;
 	public static Block monolith_pillar;
 	public static Block sacrificial_altar;
 	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
 	public static Block tiered_energy_pedestal;
+	public static Block overworld_energy_pedestal;
+	public static Block abyssal_wasteland_energy_pedestal;
+	public static Block dreadlands_energy_pedestal;
+	public static Block omothol_energy_pedestal;
 	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
 	public static Block tiered_sacrificial_altar;
+	public static Block overworld_sacrificial_altar;
+	public static Block abyssal_wasteland_sacrificial_altar;
+	public static Block dreadlands_sacrificial_altar;
+	public static Block omothol_sacrificial_altar;
 	public static Block jzahar_spawner;
 	public static Block minion_of_the_gatekeeper_spawner;
 	public static Block mimic_fire;
 	/** Metadata block, 0 = Cthulhu, 1 = Hastur, 2 = J'zahar, 3 = Azathoth, 4 = Nyarlathotep, 5 = Yog-Sothoth, 6 = Shub-Niggurath*/
-	public static Block decorative_statue;
+//	public static Block decorative_statue;
+	public static Block decorative_cthulhu_statue;
+	public static Block decorative_hastur_statue;
+	public static Block decorative_jzahar_statue;
+	public static Block decorative_azathoth_statue;
+	public static Block decorative_nyarlathotep_statue;
+	public static Block decorative_yog_sothoth_statue;
+	public static Block decorative_shub_niggurath_statue;
 	public static Block crystal_cluster;
 	public static Block crystal_cluster2;
 	public static Block energy_collector;
@@ -159,10 +212,22 @@ public class ACBlocks {
 	public static Block energy_container;
 	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
 	public static Block tiered_energy_collector;
+	public static Block overworld_energy_collector;
+	public static Block abyssal_wasteland_energy_collector;
+	public static Block dreadlands_energy_collector;
+	public static Block omothol_energy_collector;
 	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
 	public static Block tiered_energy_relay;
+	public static Block overworld_energy_relay;
+	public static Block abyssal_wasteland_energy_relay;
+	public static Block dreadlands_energy_relay;
+	public static Block omothol_energy_relay;
 	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
 	public static Block tiered_energy_container;
+	public static Block overworld_energy_container;
+	public static Block abyssal_wasteland_energy_container;
+	public static Block dreadlands_energy_container;
+	public static Block omothol_energy_container;
 	public static Block abyssal_sand;
 	public static Block fused_abyssal_sand;
 	public static Block abyssal_sand_glass;

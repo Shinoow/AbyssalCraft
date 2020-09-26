@@ -30,9 +30,9 @@ import net.minecraft.world.World;
 
 public class BasicStructure implements IPlaceOfPower {
 
-	private IBlockState monolith_stone = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE);
+	private IBlockState monolith_stone = ACBlocks.monolith_stone.getDefaultState();
 	private IBlockState monolith_pillar = ACBlocks.monolith_pillar.getDefaultState();
-	private IBlockState statue = ACBlocks.statue.getDefaultState();
+	private IBlockState statue = ACBlocks.cthulhu_statue.getDefaultState();
 	private IBlockState[][][] data;
 
 	public BasicStructure() {
@@ -99,10 +99,10 @@ public class BasicStructure implements IPlaceOfPower {
 	public void validate(World world, BlockPos pos) {
 		boolean valid = false;
 		if(world.getBlockState(pos).getBlock() == ACBlocks.multi_block)
-			if(world.getBlockState(pos.north()).getBlock() == ACBlocks.statue
-			&& world.getBlockState(pos.south()).getBlock() == ACBlocks.statue
-			&& world.getBlockState(pos.east()).getBlock() == ACBlocks.statue
-			&& world.getBlockState(pos.west()).getBlock() == ACBlocks.statue) {
+			if(world.getBlockState(pos.north()).getBlock() instanceof BlockStatue
+			&& world.getBlockState(pos.south()).getBlock() instanceof BlockStatue
+			&& world.getBlockState(pos.east()).getBlock() instanceof BlockStatue
+			&& world.getBlockState(pos.west()).getBlock() instanceof BlockStatue) {
 				pos = pos.down();
 				if(isMonolithStone(world.getBlockState(pos)) && isMonolithStone(world.getBlockState(pos.north()))
 						&& isMonolithStone(world.getBlockState(pos.south()))
@@ -145,10 +145,10 @@ public class BasicStructure implements IPlaceOfPower {
 
 		IBlockState state = world.getBlockState(pos);
 		if(isMonolithStone(state))
-			if(world.getBlockState(pos.north()).getBlock() == ACBlocks.statue
-			&& world.getBlockState(pos.south()).getBlock() == ACBlocks.statue
-			&& world.getBlockState(pos.east()).getBlock() == ACBlocks.statue
-			&& world.getBlockState(pos.west()).getBlock() == ACBlocks.statue) {
+			if(world.getBlockState(pos.north()).getBlock() instanceof BlockStatue
+			&& world.getBlockState(pos.south()).getBlock() instanceof BlockStatue
+			&& world.getBlockState(pos.east()).getBlock() instanceof BlockStatue
+			&& world.getBlockState(pos.west()).getBlock() instanceof BlockStatue) {
 				pos = pos.down();
 				if(isMonolithStone(world.getBlockState(pos)) && isMonolithStone(world.getBlockState(pos.north()))
 						&& isMonolithStone(world.getBlockState(pos.south()))
@@ -172,7 +172,7 @@ public class BasicStructure implements IPlaceOfPower {
 	}
 
 	private static boolean isMonolithStone(IBlockState state) {
-		return state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) == EnumStoneType.MONOLITH_STONE;
+		return state.getBlock() == ACBlocks.monolith_stone;
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class BiomeGenDarklandsHills extends Biome implements IDarklandsBiome {
 	public BiomeGenDarklandsHills(BiomeProperties par1)
 	{
 		super(par1);
-		fillerBlock = ACBlocks.stone.getDefaultState();
+		fillerBlock = ACBlocks.darkstone.getDefaultState();
 		WorldGenDarkTrees = new WorldGenDLT(false);
 		decorator.treesPerChunk = 1;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
@@ -69,7 +69,7 @@ public class BiomeGenDarklandsHills extends Biome implements IDarklandsBiome {
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64);
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.stone.getDefaultState(), 32).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.darkstone.getDefaultState(), 32).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
 

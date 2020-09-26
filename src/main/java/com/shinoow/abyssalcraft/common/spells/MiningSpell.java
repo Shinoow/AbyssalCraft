@@ -62,14 +62,15 @@ public class MiningSpell extends Spell {
 
 	private IBlockState getRemains(IBlockState state){
 
-		if(state.getBlock() == Blocks.STONE || state.getBlock() == Blocks.DIRT || state.getBlock() == ACBlocks.stone
-				&& state.getValue(BlockACStone.TYPE) != EnumStoneType.CORALIUM_STONE
-				&& state.getValue(BlockACStone.TYPE) != EnumStoneType.ETHAXIUM || state.getBlock() == Blocks.GRAVEL
+		if(state.getBlock() == Blocks.STONE || state.getBlock() == Blocks.DIRT || state.getBlock() == ACBlocks.darkstone
+				|| state.getBlock() == ACBlocks.abyssal_stone || state.getBlock() == ACBlocks.dreadstone
+				|| state.getBlock() == ACBlocks.abyssalnite_stone || state.getBlock() == ACBlocks.omothol_stone
+				|| state.getBlock() == ACBlocks.monolith_stone || state.getBlock() == Blocks.GRAVEL
 				|| state.getBlock() == Blocks.SANDSTONE || state.getBlock() == ACBlocks.dreadlands_dirt)
 			return Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockLiquid.LEVEL, 7);
 		if(state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER)
 			return Blocks.AIR.getDefaultState();
-		if(state == ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.CORALIUM_STONE))
+		if(state == ACBlocks.coralium_stone.getDefaultState())
 			return ACBlocks.liquid_coralium.getDefaultState();
 		return null;
 	}
@@ -77,9 +78,9 @@ public class MiningSpell extends Spell {
 	private IBlockState getResult(IBlockState state){
 
 		if(state.getBlock() == Blocks.COBBLESTONE)
-			return Blocks.STONE.getDefaultState();
-		if(state.getBlock() == ACBlocks.cobblestone)
-			return ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.byMetadata(state.getValue(BlockACCobblestone.TYPE).getMeta()));
+			return Blocks.STONE.getDefaultState(); //TODO uncomment and clean up
+//		if(state.getBlock() == ACBlocks.cobblestone)
+//			return ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.byMetadata(state.getValue(BlockACCobblestone.TYPE).getMeta()));
 		if(state.getBlock() == Blocks.SAND && state.getValue(BlockSand.VARIANT) == EnumType.SAND)
 			return Blocks.GLASS.getDefaultState();
 		if(state.getBlock() == Blocks.SAND && state.getValue(BlockSand.VARIANT) == EnumType.RED_SAND)
