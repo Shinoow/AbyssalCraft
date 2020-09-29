@@ -431,7 +431,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 			return false;
 		}
 		if(par1DamageSource == DamageSource.IN_WALL)
-			if(world.getBlockState(getPosition())  != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE) && world.getGameRules().getBoolean("mobGriefing"))
+			if(world.getBlockState(getPosition())  != ACBlocks.monolith_stone && world.getGameRules().getBoolean("mobGriefing"))
 				sprayAcid(true);
 			else return false;
 		if(par1DamageSource == DamageSource.CACTUS) return false;
@@ -533,7 +533,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 				for(int k = 0; above ? k < 2 : k > -2; k=above ? k + 1 : k - 1){
 					BlockPos pos = new BlockPos(i, above ? aabb.maxY : aabb.minY , j);
 					if(!world.isAirBlock(pos) && world.getBlockState(pos).getBlockHardness(world, pos) < ACConfig.acidResistanceHardness
-							&& world.getBlockState(pos) != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)
+							&& world.getBlockState(pos) != ACBlocks.monolith_stone
 							&& world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos).getBlock().hasTileEntity(world.getBlockState(pos))
 							&& world.getBlockState(pos).getBlockHardness(world, pos) != -1 && world.getBlockState(pos).getBlock().canEntityDestroy(world.getBlockState(pos), world, pos, this))
 						world.destroyBlock(pos, false);

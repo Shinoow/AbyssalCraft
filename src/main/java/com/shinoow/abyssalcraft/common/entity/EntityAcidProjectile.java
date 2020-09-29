@@ -107,7 +107,7 @@ public class EntityAcidProjectile extends EntityThrowable {
 										double zp = pos.getZ() + vec.z * i1 + .5;
 										BlockPos pos2 = new BlockPos(xp, yp, zp);
 										if(!world.isAirBlock(pos2) && world.getBlockState(pos2).getBlockHardness(world, pos2) < ACConfig.acidResistanceHardness && world.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_ooze
-												&& world.getBlockState(pos2) != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)
+												&& world.getBlockState(pos2) != ACBlocks.monolith_stone.getDefaultState()
 												&& world.getBlockState(pos2).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos2).getBlock().hasTileEntity(world.getBlockState(pos2))
 												&& world.getBlockState(pos2).getBlockHardness(world, pos2) != -1 && world.getBlockState(pos2).getBlock().canEntityDestroy(world.getBlockState(pos2), world, pos2, getThrower()))
 											world.destroyBlock(pos2, false);
@@ -122,7 +122,7 @@ public class EntityAcidProjectile extends EntityThrowable {
 			if(mop.typeOfHit == Type.BLOCK && world.getGameRules().getBoolean("mobGriefing")) {
 				BlockPos pos = mop.getBlockPos();
 				if(!world.isAirBlock(pos) && world.getBlockState(pos).getBlockHardness(world, pos) < ACConfig.acidResistanceHardness && world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_ooze
-						&& world.getBlockState(pos) != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)
+						&& world.getBlockState(pos) != ACBlocks.monolith_stone.getDefaultState()
 						&& world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos).getBlock().hasTileEntity(world.getBlockState(pos))
 						&& world.getBlockState(pos).getBlockHardness(world, pos) != -1 && world.getBlockState(pos).getBlock().canEntityDestroy(world.getBlockState(pos), world, pos, getThrower()))
 					world.destroyBlock(pos, false);

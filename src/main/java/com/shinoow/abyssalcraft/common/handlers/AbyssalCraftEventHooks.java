@@ -86,7 +86,7 @@ public class AbyssalCraftEventHooks {
 						for (int z = 0; z < 16; ++z)
 							if(chunk.getBiome(new BlockPos(x, y, z), event.getWorld().getBiomeProvider()) == ACBiomes.darklands_mountains)
 								if (storage.get(x, y, z).getBlock() == Blocks.STONE)
-									storage.set(x, y, z, ACBlocks.stone.getDefaultState());
+									storage.set(x, y, z, ACBlocks.darkstone.getDefaultState());
 	}
 
 	//	@SubscribeEvent
@@ -300,7 +300,7 @@ public class AbyssalCraftEventHooks {
 				event.setResult(Result.DENY);
 			}
 			if(event.getOriginal().getBlock() == Blocks.COBBLESTONE){
-				event.setReplacement(ACBlocks.cobblestone.getDefaultState());
+				event.setReplacement(ACBlocks.darkstone_cobblestone.getDefaultState());
 				event.setResult(Result.DENY);
 			}
 			if(event.getOriginal().getBlock() == Blocks.PLANKS){

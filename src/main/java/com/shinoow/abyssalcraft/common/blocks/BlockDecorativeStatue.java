@@ -15,9 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDecorativeStatue;
 import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -25,9 +23,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;

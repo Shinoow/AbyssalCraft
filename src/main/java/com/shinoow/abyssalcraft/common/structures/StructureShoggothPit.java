@@ -15,20 +15,14 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.blocks.BlockDecorativeStatue;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
-import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDecorativeStatue;
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;

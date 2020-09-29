@@ -134,9 +134,9 @@ public class BlockShoggothOoze extends BlockACBasic {
 		if(world.provider.getDimension() == ACLib.dreadlands_id)
 			return ACBlocks.dreadlands_dirt.getDefaultState();
 		if(world.provider.getDimension() == ACLib.omothol_id)
-			return ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE);
+			return ACBlocks.omothol_stone.getDefaultState();
 		if(world.provider.getDimension() == ACLib.dark_realm_id)
-			return ACBlocks.stone.getDefaultState();
+			return ACBlocks.darkstone.getDefaultState();
 		if(world.provider.getDimension() == -1)
 			return Blocks.NETHERRACK.getDefaultState();
 		if(world.provider.getDimension() == 1)
@@ -155,7 +155,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos.down());
 		Block block = iblockstate.getBlock();
-		return block != ACBlocks.shoggoth_biomass && iblockstate != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE) ? iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down()) ? true : block == this && iblockstate.getValue(LAYERS).intValue() == 8 ? true : iblockstate.isOpaqueCube() && iblockstate.getMaterial().blocksMovement() : false;
+		return block != ACBlocks.shoggoth_biomass && iblockstate != ACBlocks.monolith_stone.getDefaultState() ? iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down()) ? true : block == this && iblockstate.getValue(LAYERS).intValue() == 8 ? true : iblockstate.isOpaqueCube() && iblockstate.getMaterial().blocksMovement() : false;
 	}
 
 	@Override

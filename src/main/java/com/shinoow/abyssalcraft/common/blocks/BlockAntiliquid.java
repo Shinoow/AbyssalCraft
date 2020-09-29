@@ -54,7 +54,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	public boolean displaceIfPossible(World world, BlockPos pos) {
 
 		if(!world.isRemote && world.getBlockState(pos).getBlock() == ACBlocks.liquid_coralium)
-			world.setBlockState(pos, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.CORALIUM_STONE));
+			world.setBlockState(pos, ACBlocks.coralium_stone.getDefaultState());
 
 		if(!world.isRemote && world.getBlockState(pos).getMaterial() == Material.WATER && world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this)
 			world.setBlockState(pos, Blocks.PACKED_ICE.getDefaultState());
