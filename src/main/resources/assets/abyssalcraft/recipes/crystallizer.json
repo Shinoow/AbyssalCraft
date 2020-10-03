@@ -14,8 +14,7 @@
       "item": "minecraft:furnace"
     },
     "\u0026": {
-      "item": "abyssalcraft:ingotblock",
-      "data": 2
+      "item": "abyssalcraft:dreadiumblock"
     }
   },
   "result": {

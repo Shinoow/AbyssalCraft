@@ -2,8 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "abyssalcraft:stone",
-      "data": 7
+      "item": "abyssalcraft:monolithstone"
     },
     {
       "item": "minecraft:clay_ball"
@@ -13,7 +12,6 @@
     }
   ],
   "result": {
-    "item": "abyssalcraft:decorativestatue",
-    "data": 3
+    "item": "abyssalcraft:decorativeazathothstatue"
   }
 }

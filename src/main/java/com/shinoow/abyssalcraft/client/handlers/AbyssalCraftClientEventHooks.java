@@ -776,6 +776,13 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.darklands_oak_door, 0);
 		registerItemRender(ACItems.dreadlands_door, 0);
 		registerItemRender(ACItems.charcoal, 0);
+		registerItemRender(ACItems.configurator, 0);
+		registerItemRender(ACItems.configurator_shard, 0, "configurator_shard_0");
+		registerItemRender(ACItems.configurator_shard, 1, "configurator_shard_1");
+		registerItemRender(ACItems.configurator_shard, 2, "configurator_shard_2");
+		registerItemRender(ACItems.configurator_shard, 3, "configurator_shard_3");
+		registerItemRender(ACItems.silver_key, 0);
+		registerItemRender(ACItems.book_of_many_faces, 0);
 
 //		registerItemRender(ACBlocks.stone, 0, "darkstone");
 //		registerItemRender(ACBlocks.stone, 1, "abystone");
