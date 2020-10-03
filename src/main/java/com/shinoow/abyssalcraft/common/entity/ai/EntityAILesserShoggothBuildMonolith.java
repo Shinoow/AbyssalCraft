@@ -166,7 +166,7 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 			BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
 			if (world.isAirBlock(blockpos1.up()) && world.isAirBlock(blockpos1.up(1)) && world.getBlockState(blockpos1).getBlock().isReplaceable(world, blockpos1)
-					&& world.getBlockState(blockpos1.down()) != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)
+					&& world.getBlockState(blockpos1.down()) != ACBlocks.monolith_stone.getDefaultState()
 					&& !world.isAirBlock(blockpos1.down()) && world.getBlockState(blockpos1.down()).isSideSolid(world, blockpos1.down(), EnumFacing.UP)
 					&& world.getBlockState(blockpos1.down()) != ACBlocks.shoggoth_biomass.getDefaultState()) {
 

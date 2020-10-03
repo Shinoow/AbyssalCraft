@@ -124,10 +124,7 @@ public class AbyssalCraftClientEventHooks {
 	private void extinguishFire(EntityPlayer player, BlockPos posIn, EnumFacing face, World world, Event event) {
 		BlockPos pos = posIn.offset(face);
 
-		if (world.getBlockState(pos).getBlock() == ACBlocks.mimic_fire ||
-				world.getBlockState(pos).getBlock() == ACBlocks.coralium_fire ||
-				world.getBlockState(pos).getBlock() == ACBlocks.dreaded_fire ||
-				world.getBlockState(pos).getBlock() == ACBlocks.omothol_fire)
+		if (world.getBlockState(pos).getBlock() == ACBlocks.mimic_fire)
 			if (event instanceof MouseEvent) {
 				PacketDispatcher.sendToServer(new FireMessage(pos));
 				player.swingArm(EnumHand.MAIN_HAND);
@@ -837,10 +834,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.coralium_infused_stone, 0);
 		registerItemRender(ACBlocks.odb_core, 0);
 		registerItemRender(ACBlocks.wooden_crate, 0);
-		registerItemRender(ACBlocks.abyssal_gateway, 0);
+//		registerItemRender(ACBlocks.abyssal_gateway, 0);
 		registerItemRender(ACBlocks.darkstone_slab, 0);
 		registerItemRender(BlockHandler.Darkstoneslab2, 0);
-		registerItemRender(ACBlocks.coralium_fire, 0);
+//		registerItemRender(ACBlocks.coralium_fire, 0);
 		registerItemRender(ACBlocks.darkstone_button, 0);
 		registerItemRender(ACBlocks.darkstone_pressure_plate, 0);
 		registerItemRender(ACBlocks.darklands_oak_planks, 0);
@@ -869,8 +866,8 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.dreadlands_leaves, 0);
 		registerItemRender(ACBlocks.dreadlands_sapling, 0);
 		registerItemRender(ACBlocks.dreadlands_planks, 0);
-		registerItemRender(ACBlocks.dreaded_gateway, 0);
-		registerItemRender(ACBlocks.dreaded_fire, 0);
+//		registerItemRender(ACBlocks.dreaded_gateway, 0);
+//		registerItemRender(ACBlocks.dreaded_fire, 0);
 		registerItemRender(ACBlocks.depths_ghoul_head, 0);
 		registerItemRender(ACBlocks.pete_head, 0);
 		registerItemRender(ACBlocks.mr_wilson_head, 0);
@@ -919,8 +916,8 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.ethaxium_brick_slab, 0);
 		registerItemRender(BlockHandler.ethaxiumslab2, 0);
 		registerItemRender(ACBlocks.ethaxium_brick_fence, 0);
-		registerItemRender(ACBlocks.omothol_gateway, 0);
-		registerItemRender(ACBlocks.omothol_fire, 0);
+//		registerItemRender(ACBlocks.omothol_gateway, 0);
+//		registerItemRender(ACBlocks.omothol_fire, 0);
 		registerItemRender(BlockHandler.house, 0);
 		registerItemRender(ACBlocks.materializer, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick, 0, "darkethaxiumbrick_0");

@@ -71,10 +71,10 @@ public class ACBlocks {
 	public static Block coralium_infused_stone;
 	public static Block odb_core;
 	public static Block wooden_crate;
-	public static Block abyssal_gateway;
+//	public static Block abyssal_gateway;
 	public static Block darkstone_slab;
 	public static Block darkstone_doubleslab;
-	public static Block coralium_fire;
+//	public static Block coralium_fire;
 	public static Block darkstone_button;
 	public static Block darkstone_pressure_plate;
 	public static Block darklands_oak_planks;
@@ -104,8 +104,8 @@ public class ACBlocks {
 	public static Block dreadlands_leaves;
 	public static Block dreadlands_sapling;
 	public static Block dreadlands_planks;
-	public static Block dreaded_gateway;
-	public static Block dreaded_fire;
+//	public static Block dreaded_gateway;
+//	public static Block dreaded_fire;
 	public static Block depths_ghoul_head;
 	public static Block pete_head;
 	public static Block mr_wilson_head;
@@ -153,8 +153,8 @@ public class ACBlocks {
 	public static Block ethaxium_brick_stairs;
 	public static Block ethaxium_brick_slab;
 	public static Block ethaxium_brick_fence;
-	public static Block omothol_gateway;
-	public static Block omothol_fire;
+//	public static Block omothol_gateway;
+//	public static Block omothol_fire;
 	public static Block engraver;
 	public static Block materializer;
 	/** Metadata block, 0 = Dark Ethaxium Brick, 1 = Chiseled Dark Ethaxium Brick, 2 = Cracked Dark Ethaxium Brick */

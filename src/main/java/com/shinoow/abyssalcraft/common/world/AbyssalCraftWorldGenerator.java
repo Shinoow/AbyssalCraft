@@ -63,7 +63,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			x = chunkX + random.nextInt(16) + 8;
 			z = chunkZ + random.nextInt(16) + 8;
 			DarklandsStructureGenerator.generate(4, world, random, world.getHeight(new BlockPos(x, 0, z)),
-					Blocks.GRASS.getDefaultState(), ACBlocks.stone.getDefaultState());
+					Blocks.GRASS.getDefaultState(), ACBlocks.darkstone.getDefaultState());
 
 			x = chunkX + random.nextInt(16) + 8;
 			z = chunkZ + random.nextInt(16) + 8;

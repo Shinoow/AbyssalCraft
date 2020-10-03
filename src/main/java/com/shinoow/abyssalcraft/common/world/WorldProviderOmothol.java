@@ -132,7 +132,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		return world.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE);
+		return world.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == ACBlocks.omothol_stone.getDefaultState();
 	}
 
 	@Override
