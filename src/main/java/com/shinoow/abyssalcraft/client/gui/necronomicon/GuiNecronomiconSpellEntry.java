@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -124,8 +125,8 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		String title = spell.getLocalizedName();
 		fontRenderer.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
 
-		writeText(1, "PE per cast: " + spell.getReqEnergy() + " PE", 125);
-		writeText(1, "Spell Type: "+ (spell.requiresCharging() ? "Charging" : "Instant"), 135);
+		writeText(1, localize(NecronomiconText.LABEL_SPELL_PE)+": " + spell.getReqEnergy() + " PE", 125);
+		writeText(1, localize(NecronomiconText.LABEL_SPELL_TYPE)+": "+ (spell.requiresCharging() ? "Charging" : "Instant"), 135);
 		writeText(2, spell.getDescription());
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(NecronomiconResources.SPELL);

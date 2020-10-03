@@ -492,7 +492,11 @@ public class GuiNecronomicon extends GuiScreen {
 	}
 
 	protected String localize(String str){
-		return I18n.format(str, new Object[0]);
+		return localize(str, new Object[0]);
+	}
+	
+	protected String localize(String str, Object...parameters) {
+		return I18n.format(str, parameters);
 	}
 
 	protected boolean isUnlocked(IUnlockCondition cnd){

@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.common.inventory.ContainerSpellbook;
+import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -52,9 +53,9 @@ public class GuiSpellbook extends GuiContainer {
 
 		Spell spell = spellbook.currentSpell;
 
-		fontRenderer.drawString("Spell name: "+TextFormatting.AQUA+(spell != null && spellbook.isUnlocked(spell) ? spell.getLocalizedName() : ""), 15, 30, 4210752);
-		fontRenderer.drawString("PE per cast: "+(spell != null && spellbook.isUnlocked(spell) ? (int)spell.getReqEnergy() : ""), 15, 40, 4210752);
-		fontRenderer.drawString("Spell type: "+TextFormatting.GOLD+(spell != null && spellbook.isUnlocked(spell) ? spell.requiresCharging() ? "Charging" : "Instant" : ""), 15, 50, 4210752);
+		fontRenderer.drawString(I18n.format(NecronomiconText.LABEL_SPELL_NAME)+": "+TextFormatting.AQUA+(spell != null && spellbook.isUnlocked(spell) ? spell.getLocalizedName() : ""), 15, 30, 4210752);
+		fontRenderer.drawString(I18n.format(NecronomiconText.LABEL_SPELL_PE)+": "+(spell != null && spellbook.isUnlocked(spell) ? (int)spell.getReqEnergy() : ""), 15, 40, 4210752);
+		fontRenderer.drawString(I18n.format(NecronomiconText.LABEL_SPELL_TYPE)+": "+TextFormatting.GOLD+(spell != null && spellbook.isUnlocked(spell) ? spell.requiresCharging() ? "Charging" : "Instant" : ""), 15, 50, 4210752);
 	}
 
 	@Override
