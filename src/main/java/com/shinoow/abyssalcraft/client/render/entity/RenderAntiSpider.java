@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import com.shinoow.abyssalcraft.client.render.entity.layers.LayerAntiSpiderEyes;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSpider;
 
 import net.minecraft.client.model.ModelSpider;
@@ -29,7 +29,7 @@ public class RenderAntiSpider extends RenderLiving<EntityAntiSpider>
 	public RenderAntiSpider(RenderManager manager)
 	{
 		super(manager, new ModelSpider(), 1.0F);
-		addLayer(new LayerAntiSpiderEyes(this));
+		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft:textures/model/anti/spider_eyes.png")));
 	}
 
 	@Override

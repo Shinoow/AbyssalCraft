@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumSquid;
 
 import net.minecraft.client.model.ModelSquid;
@@ -29,6 +30,7 @@ public class RenderCoraliumSquid extends RenderLiving<EntityCoraliumSquid>
 	public RenderCoraliumSquid(RenderManager renderManagerIn)
 	{
 		super(renderManagerIn, new ModelSquid(), 0.7F);
+		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft", "textures/model/coraliumsquid_eyes.png")));
 	}
 
 	/**

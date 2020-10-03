@@ -23,47 +23,28 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class LayerLesserShoggothEyes implements LayerRenderer<EntityLesserShoggoth>
+public class LayerLesserShoggothEyes extends LayerEyes<EntityLesserShoggoth>
 {
 	private static final ResourceLocation SHOGGOTH_EYES = new ResourceLocation("abyssalcraft:textures/model/shoggoth/lessershoggoth_eyes.png");
 	private static final ResourceLocation ABYSSAL_EYES = new ResourceLocation("abyssalcraft:textures/model/shoggoth/abyssalshoggoth_eyes.png");
 	private static final ResourceLocation DREADED_EYES = new ResourceLocation("abyssalcraft:textures/model/shoggoth/dreadedshoggoth_eyes.png");
 	private static final ResourceLocation OMOTHOL_EYES = new ResourceLocation("abyssalcraft:textures/model/shoggoth/omotholshoggoth_eyes.png");
 	private static final ResourceLocation DARK_EYES = new ResourceLocation("abyssalcraft:textures/model/shoggoth/shadowshoggoth_eyes.png");
-	private final RenderLesserShoggoth shoggothRenderer;
 
 	public LayerLesserShoggothEyes(RenderLesserShoggoth shoggothRendererIn)
 	{
-		shoggothRenderer = shoggothRendererIn;
+		super(shoggothRendererIn, SHOGGOTH_EYES);
+		addAlpha(e -> e.getShoggothType() == 4 ? e.getBrightness() : 1.0F);
 	}
 
 	@Override
 	public void doRenderLayer(EntityLesserShoggoth entitylivingbaseIn, float p_177141_2_, float p_177141_3_, float partialTicks, float p_177141_5_, float p_177141_6_, float p_177141_7_, float scale)
 	{
 		if(!ACConfig.shoggothGlowingEyes) return;
-		shoggothRenderer.bindTexture(getEntityTexture(entitylivingbaseIn));
-		GlStateManager.enableBlend();
-		GlStateManager.blendFunc(1, 1);
-
-		if (entitylivingbaseIn.isInvisible())
-			GlStateManager.depthMask(false);
-		else
-			GlStateManager.depthMask(true);
-
-		int i = 61680;
-		int j = i % 65536;
-		int k = i / 65536;
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-		GlStateManager.color(1.0F, 1.0F, 1.0F, entitylivingbaseIn.getShoggothType() == 4 ? entitylivingbaseIn.getBrightness() : 1.0F);
-		shoggothRenderer.getMainModel().render(entitylivingbaseIn, p_177141_2_, p_177141_3_, p_177141_5_, p_177141_6_, p_177141_7_, scale);
-		i = entitylivingbaseIn.getBrightnessForRender();
-		j = i % 65536;
-		k = i / 65536;
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-		shoggothRenderer.setLightmap(entitylivingbaseIn);
-		GlStateManager.disableBlend();
+		super.doRenderLayer(entitylivingbaseIn, p_177141_2_, p_177141_3_, partialTicks, p_177141_5_, p_177141_6_, p_177141_7_, scale);
 	}
 
+	@Override
 	protected ResourceLocation getEntityTexture(EntityLesserShoggoth par1EntityLiving) {
 
 		switch (par1EntityLiving.getShoggothType())
@@ -81,11 +62,5 @@ public class LayerLesserShoggothEyes implements LayerRenderer<EntityLesserShoggo
 		default:
 			return SHOGGOTH_EYES;
 		}
-	}
-
-	@Override
-	public boolean shouldCombineTextures()
-	{
-		return false;
 	}
 }
