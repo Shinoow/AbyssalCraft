@@ -98,81 +98,69 @@ public class StructureShoggothPit extends WorldGenerator {
 					if("statue1".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.EAST));
-						}
 					} else if("statue2".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.EAST));
-						}
 					} else if("statue3".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.EAST));
-						}
 					} else if("statue4".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.EAST));
-						}
 					} else if("statue5".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.WEST));
-						}
 					} else if("statue6".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.WEST));
-						}
 					} else if("statue7".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.WEST));
-						}
 					} else if("statue8".equals(entry.getValue()))
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.WEST));
-						}
 				break;
 			case 2:
 				for (Entry<BlockPos, String> entry : map.entrySet())
 					if("statue1".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.EAST));
-						}
 					} else if("statue2".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.SOUTH));
-						}
 					} else if("statue3".equals(entry.getValue()))
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.WEST));
-						}
 				break;
 			case 3:
 				for (Entry<BlockPos, String> entry : map.entrySet())
 					if("statue1".equals(entry.getValue()))
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
+						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.SOUTH));
-						}
 				break;
 			}
 

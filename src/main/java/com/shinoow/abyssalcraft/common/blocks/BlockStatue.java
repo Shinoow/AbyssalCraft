@@ -25,10 +25,8 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -43,13 +41,13 @@ import net.minecraftforge.client.model.obj.OBJModel;
 public class BlockStatue extends BlockContainer {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-//	public static final PropertyEnum<EnumDeityType> TYPE = PropertyEnum.create("type", EnumDeityType.class);
+	//	public static final PropertyEnum<EnumDeityType> TYPE = PropertyEnum.create("type", EnumDeityType.class);
 	public EnumDeityType TYPE;
 	public static final Map<EnumDeityType, Block> VARIANTS = new HashMap<>();
 
 	public BlockStatue(EnumDeityType type) {
 		super(Material.ROCK);
-		this.TYPE = type;
+		TYPE = type;
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		setHardness(6.0F);
 		setResistance(12.0F);
@@ -65,17 +63,17 @@ public class BlockStatue extends BlockContainer {
 		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
-//	@Override
-//	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-//	{
-//		EnumFacing facing = EnumFacing.NORTH;
-//
-//		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
-//		if(tile instanceof TileEntityStatue)
-//			facing = EnumFacing.getFront(((TileEntityStatue) tile).getFacing());
-//
-//		return state.withProperty(FACING, facing);
-//	}
+	//	@Override
+	//	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	//	{
+	//		EnumFacing facing = EnumFacing.NORTH;
+	//
+	//		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
+	//		if(tile instanceof TileEntityStatue)
+	//			facing = EnumFacing.getFront(((TileEntityStatue) tile).getFacing());
+	//
+	//		return state.withProperty(FACING, facing);
+	//	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
@@ -89,16 +87,16 @@ public class BlockStatue extends BlockContainer {
 		return state.getValue(FACING).getIndex();
 	}
 
-//	@Override
-//	public int damageDropped (IBlockState state) {
-//		return state.getValue(TYPE).getMeta();
-//	}
+	//	@Override
+	//	public int damageDropped (IBlockState state) {
+	//		return state.getValue(TYPE).getMeta();
+	//	}
 
-//	@Override
-//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-//		for(int i = 0; i < EnumDeityType.values().length; i++)
-//			par3List.add(new ItemStack(this, 1, i));
-//	}
+	//	@Override
+	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+	//		for(int i = 0; i < EnumDeityType.values().length; i++)
+	//			par3List.add(new ItemStack(this, 1, i));
+	//	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)

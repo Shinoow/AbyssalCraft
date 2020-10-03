@@ -18,8 +18,6 @@ import com.shinoow.abyssalcraft.api.energy.structure.IStructureBase;
 import com.shinoow.abyssalcraft.api.energy.structure.IStructureComponent;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
 
 import net.minecraft.block.state.IBlockState;
@@ -100,9 +98,9 @@ public class BasicStructure implements IPlaceOfPower {
 		boolean valid = false;
 		if(world.getBlockState(pos).getBlock() == ACBlocks.multi_block)
 			if(world.getBlockState(pos.north()).getBlock() instanceof BlockStatue
-			&& world.getBlockState(pos.south()).getBlock() instanceof BlockStatue
-			&& world.getBlockState(pos.east()).getBlock() instanceof BlockStatue
-			&& world.getBlockState(pos.west()).getBlock() instanceof BlockStatue) {
+					&& world.getBlockState(pos.south()).getBlock() instanceof BlockStatue
+					&& world.getBlockState(pos.east()).getBlock() instanceof BlockStatue
+					&& world.getBlockState(pos.west()).getBlock() instanceof BlockStatue) {
 				pos = pos.down();
 				if(isMonolithStone(world.getBlockState(pos)) && isMonolithStone(world.getBlockState(pos.north()))
 						&& isMonolithStone(world.getBlockState(pos.south()))
@@ -146,9 +144,9 @@ public class BasicStructure implements IPlaceOfPower {
 		IBlockState state = world.getBlockState(pos);
 		if(isMonolithStone(state))
 			if(world.getBlockState(pos.north()).getBlock() instanceof BlockStatue
-			&& world.getBlockState(pos.south()).getBlock() instanceof BlockStatue
-			&& world.getBlockState(pos.east()).getBlock() instanceof BlockStatue
-			&& world.getBlockState(pos.west()).getBlock() instanceof BlockStatue) {
+					&& world.getBlockState(pos.south()).getBlock() instanceof BlockStatue
+					&& world.getBlockState(pos.east()).getBlock() instanceof BlockStatue
+					&& world.getBlockState(pos.west()).getBlock() instanceof BlockStatue) {
 				pos = pos.down();
 				if(isMonolithStone(world.getBlockState(pos)) && isMonolithStone(world.getBlockState(pos.north()))
 						&& isMonolithStone(world.getBlockState(pos.south()))

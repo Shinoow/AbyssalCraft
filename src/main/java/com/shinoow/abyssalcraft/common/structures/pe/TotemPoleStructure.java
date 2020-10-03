@@ -18,10 +18,7 @@ import com.shinoow.abyssalcraft.api.energy.structure.IStructureBase;
 import com.shinoow.abyssalcraft.api.energy.structure.IStructureComponent;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
-import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -84,8 +81,8 @@ public class TotemPoleStructure implements IPlaceOfPower {
 		boolean valid = false;
 		if(world.getBlockState(pos).getBlock() == ACBlocks.multi_block)
 			if(world.getBlockState(pos.up()).getBlock() instanceof BlockStatue
-			&& world.getBlockState(pos.up(2)).getBlock() instanceof BlockStatue
-			&& world.getBlockState(pos.up(3)).getBlock() instanceof BlockStatue)
+					&& world.getBlockState(pos.up(2)).getBlock() instanceof BlockStatue
+					&& world.getBlockState(pos.up(3)).getBlock() instanceof BlockStatue)
 				valid = true;
 		for(int i = 1; i < 4; i++)
 			if(world.getTileEntity(pos.up(i)) instanceof IStructureComponent) {
@@ -100,8 +97,8 @@ public class TotemPoleStructure implements IPlaceOfPower {
 		IBlockState state = world.getBlockState(pos);
 		if(state.getBlock() == ACBlocks.monolith_stone)
 			return world.getBlockState(pos.up()).getBlock() instanceof BlockStatue
-			&& world.getBlockState(pos.up(2)).getBlock() instanceof BlockStatue
-			&& world.getBlockState(pos.up(3)).getBlock() instanceof BlockStatue;
+					&& world.getBlockState(pos.up(2)).getBlock() instanceof BlockStatue
+					&& world.getBlockState(pos.up(3)).getBlock() instanceof BlockStatue;
 
 		return false;
 	}

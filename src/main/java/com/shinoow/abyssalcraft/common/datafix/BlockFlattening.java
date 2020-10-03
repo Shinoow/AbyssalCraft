@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -43,7 +43,7 @@ import net.minecraftforge.registries.GameData;
  * @author Choonster
  */
 public class BlockFlattening implements IFixableData {
-//	private static final Marker LOG_MARKER = MarkerManager.getMarker("BlockFlattening").addParents(Logger.MOD_MARKER);
+	//	private static final Marker LOG_MARKER = MarkerManager.getMarker("BlockFlattening").addParents(Logger.MOD_MARKER);
 
 	private final List<FlatteningDefinition> flatteningDefinitions;
 
@@ -64,28 +64,27 @@ public class BlockFlattening implements IFixableData {
 		final Map<Integer, FlatteningDefinition[]> flattingDefinitionsPerBlockID = new HashMap<>();
 
 		flatteningDefinitions.stream()
-				.map(flatteningDefinition -> {
-					// Get the ID of the old name
-					int oldID = blockRegistry.getID(flatteningDefinition.oldName);
+		.map(flatteningDefinition -> {
+			// Get the ID of the old name
+			int oldID = blockRegistry.getID(flatteningDefinition.oldName);
 
-					// If the ID exists in this save, return a pair of the ID and the definition; else return an empty pair
-					return Optional.ofNullable(oldID > 0 ? Pair.of(oldID, flatteningDefinition) : null);
-				})
-				.forEach(optionalPair -> {
-					optionalPair.ifPresent(pair -> { // If the ID exists in this save,
-						final Integer blockID = pair.getKey();
-						final FlatteningDefinition flatteningDefinition = pair.getValue();
+			// If the ID exists in this save, return a pair of the ID and the definition; else return an empty pair
+			return Optional.ofNullable(oldID > 0 ? Pair.of(oldID, flatteningDefinition) : null);
+		})
+		.forEach(optionalPair -> {
+			optionalPair.ifPresent(pair -> { // If the ID exists in this save,
+				final Integer blockID = pair.getKey();
+				final FlatteningDefinition flatteningDefinition = pair.getValue();
 
-						// Add the definition to the ID's array using the old metadata as an index
-						final FlatteningDefinition[] flatteningDefinitions = flattingDefinitionsPerBlockID.computeIfAbsent(blockID, id -> new FlatteningDefinition[16]);
-						flatteningDefinitions[flatteningDefinition.oldMetadata] = flatteningDefinition;
-					});
-				});
+				// Add the definition to the ID's array using the old metadata as an index
+				final FlatteningDefinition[] flatteningDefinitions = flattingDefinitionsPerBlockID.computeIfAbsent(blockID, id -> new FlatteningDefinition[16]);
+				flatteningDefinitions[flatteningDefinition.oldMetadata] = flatteningDefinition;
+			});
+		});
 
 		// If there aren't any blocks to flatten in this save, do nothing
-		if (flattingDefinitionsPerBlockID.isEmpty()) {
+		if (flattingDefinitionsPerBlockID.isEmpty())
 			return compound;
-		}
 
 		final ObjectIntIdentityMap<IBlockState> blockStateIDMap = GameData.getBlockStateIDMap();
 
@@ -123,55 +122,54 @@ public class BlockFlattening implements IFixableData {
 				for (int blockIndex = 0; blockIndex < blockIDs.length; ++blockIndex) {
 					final int x = blockIndex & 15;
 					final int y = blockIndex >> 8 & 15;
-					final int z = blockIndex >> 4 & 15;
-					final int blockIDExtension = blockIDsExtension.get(x, y, z);
-					final int blockID = blockIDExtension << 8 | (blockIDs[blockIndex] & 255);
-					final int metadata = metadataArray.get(x, y, z);
+				final int z = blockIndex >> 4 & 15;
+			final int blockIDExtension = blockIDsExtension.get(x, y, z);
+			final int blockID = blockIDExtension << 8 | blockIDs[blockIndex] & 255;
+			final int metadata = metadataArray.get(x, y, z);
 
-					final FlatteningDefinition[] flatteningDefinitions = flattingDefinitionsPerBlockID.get(blockID);
+			final FlatteningDefinition[] flatteningDefinitions = flattingDefinitionsPerBlockID.get(blockID);
 
-					if (flatteningDefinitions != null) {
-						final FlatteningDefinition flatteningDefinition = flatteningDefinitions[metadata];
+			if (flatteningDefinitions != null) {
+				final FlatteningDefinition flatteningDefinition = flatteningDefinitions[metadata];
 
-						if (flatteningDefinition != null) {
-							// Calculate the world coordinates of the block
-							final BlockPos blockPos = chunkPos.getBlock(x, sectionY << 4 | y, z);
+				if (flatteningDefinition != null) {
+					// Calculate the world coordinates of the block
+					final BlockPos blockPos = chunkPos.getBlock(x, sectionY << 4 | y, z);
 
-							// Get the TileEntity NBT, if any
-							final Pair<Integer, NBTTagCompound> tileEntityPair = tileEntityMap.get(blockPos);
-							final NBTTagCompound tileEntityNBT = tileEntityPair != null ? tileEntityPair.getValue() : null;
+					// Get the TileEntity NBT, if any
+					final Pair<Integer, NBTTagCompound> tileEntityPair = tileEntityMap.get(blockPos);
+					final NBTTagCompound tileEntityNBT = tileEntityPair != null ? tileEntityPair.getValue() : null;
 
-							// Get the new block state from the flattening definition
-							final IBlockState newBlockState = flatteningDefinition.blockStateGetter.getBlockState(flatteningDefinition.newBlock, tileEntityNBT);
+					// Get the new block state from the flattening definition
+					final IBlockState newBlockState = flatteningDefinition.blockStateGetter.getBlockState(flatteningDefinition.newBlock, tileEntityNBT);
 
-							// Calculate the new block ID, block ID extension and metadata from the block state's ID
-							final int blockStateID = blockStateIDMap.get(newBlockState);
-							final byte newBlockID = (byte) (blockStateID >> 4 & 255);
-							final byte newBlockIDExtension = (byte) (blockStateID >> 12 & 15);
-							final byte newMetadata = (byte) (blockStateID & 15);
+					// Calculate the new block ID, block ID extension and metadata from the block state's ID
+					final int blockStateID = blockStateIDMap.get(newBlockState);
+					final byte newBlockID = (byte) (blockStateID >> 4 & 255);
+					final byte newBlockIDExtension = (byte) (blockStateID >> 12 & 15);
+					final byte newMetadata = (byte) (blockStateID & 15);
 
-							// Update the block ID and metadata
-							blockIDs[blockIndex] = newBlockID;
-							metadataArray.set(x, y, z, newMetadata);
+					// Update the block ID and metadata
+					blockIDs[blockIndex] = newBlockID;
+					metadataArray.set(x, y, z, newMetadata);
 
-							// Update the block ID extension if present
-							if (newBlockIDExtension != 0) {
-								hasExtendedBlockIDs = true;
-								blockIDsExtension.set(x, y, z, newBlockIDExtension);
-							}
-
-							// If there's a TileEntity and the flattening definition has a TileEntity processor,
-							if (tileEntityNBT != null && flatteningDefinition.tileEntityProcessor != null) {
-								// Run the processor
-								final TileEntityAction tileEntityAction = flatteningDefinition.tileEntityProcessor.processTileEntity(tileEntityNBT);
-
-								// If the processor requested the removal of the TileEntity, add the index to the removal list
-								if (tileEntityAction == TileEntityAction.REMOVE) {
-									tileEntityIndexesToRemove.add(tileEntityPair.getKey());
-								}
-							}
-						}
+					// Update the block ID extension if present
+					if (newBlockIDExtension != 0) {
+						hasExtendedBlockIDs = true;
+						blockIDsExtension.set(x, y, z, newBlockIDExtension);
 					}
+
+					// If there's a TileEntity and the flattening definition has a TileEntity processor,
+					if (tileEntityNBT != null && flatteningDefinition.tileEntityProcessor != null) {
+						// Run the processor
+						final TileEntityAction tileEntityAction = flatteningDefinition.tileEntityProcessor.processTileEntity(tileEntityNBT);
+
+						// If the processor requested the removal of the TileEntity, add the index to the removal list
+						if (tileEntityAction == TileEntityAction.REMOVE)
+							tileEntityIndexesToRemove.add(tileEntityPair.getKey());
+					}
+				}
+			}
 				}
 
 				// Update the block ID and metadata in the section
@@ -179,19 +177,17 @@ public class BlockFlattening implements IFixableData {
 				section.setByteArray("Data", metadataArray.getData());
 
 				// Update the block ID extensions in the section, if present
-				if (hasExtendedBlockIDs) {
+				if (hasExtendedBlockIDs)
 					section.setByteArray("Add", blockIDsExtension.getData());
-				}
 			}
 
 			// Remove the requested TileEntities, highest indexes first
 			tileEntityIndexesToRemove.sort(Comparator.reverseOrder());
-			for (final int tileEntityIndex : tileEntityIndexesToRemove) {
+			for (final int tileEntityIndex : tileEntityIndexesToRemove)
 				tileEntities.removeTag(tileEntityIndex);
-			}
 		} catch (final Exception e) {
 			ACLogger.severe("Unable to flatten blocks, level format may be missing tags. {}", e);
-//			Logger.error(LOG_MARKER, e, "Unable to flatten blocks, level format may be missing tags.");
+			//			Logger.error(LOG_MARKER, e, "Unable to flatten blocks, level format may be missing tags.");
 		}
 
 		return compound;

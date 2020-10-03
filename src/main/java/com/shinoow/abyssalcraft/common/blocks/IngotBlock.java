@@ -22,17 +22,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.projectile.EntityWitherSkull;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.Explosion;
@@ -41,14 +36,14 @@ import net.minecraft.world.World;
 
 public class IngotBlock extends Block {
 
-//	public static final PropertyEnum<EnumIngotType> TYPE = PropertyEnum.create("type", EnumIngotType.class);
+	//	public static final PropertyEnum<EnumIngotType> TYPE = PropertyEnum.create("type", EnumIngotType.class);
 	private EnumIngotType TYPE;
 	public static final Map<EnumIngotType, Block> VARIANTS = new HashMap<>();
 
 	public IngotBlock(EnumIngotType type) {
 		super(Material.IRON);
-		this.TYPE = type;
-//		setDefaultState(getDefaultState().withProperty(TYPE, EnumIngotType.ABYSSALNITE));
+		TYPE = type;
+		//		setDefaultState(getDefaultState().withProperty(TYPE, EnumIngotType.ABYSSALNITE));
 		setHardness(4.0F);
 		setResistance(12.0F);
 		setSoundType(SoundType.METAL);
@@ -88,34 +83,34 @@ public class IngotBlock extends Block {
 		return TYPE.getHarvestLevel();
 	}
 
-//	@Override
-//	public IBlockState getStateFromMeta(int meta)
-//	{
-//		return getDefaultState().withProperty(TYPE, EnumIngotType.byMetadata(meta));
-//	}
-//
-//	@Override
-//	public int getMetaFromState(IBlockState state)
-//	{
-//		return state.getValue(TYPE).getMeta();
-//	}
-//
-//	@Override
-//	public int damageDropped (IBlockState state) {
-//		return state.getValue(TYPE).getMeta();
-//	}
-//
-//	@Override
-//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-//		for(int i = 0; i < EnumIngotType.values().length; i++)
-//			par3List.add(new ItemStack(this, 1, i));
-//	}
+	//	@Override
+	//	public IBlockState getStateFromMeta(int meta)
+	//	{
+	//		return getDefaultState().withProperty(TYPE, EnumIngotType.byMetadata(meta));
+	//	}
+	//
+	//	@Override
+	//	public int getMetaFromState(IBlockState state)
+	//	{
+	//		return state.getValue(TYPE).getMeta();
+	//	}
+	//
+	//	@Override
+	//	public int damageDropped (IBlockState state) {
+	//		return state.getValue(TYPE).getMeta();
+	//	}
+	//
+	//	@Override
+	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+	//		for(int i = 0; i < EnumIngotType.values().length; i++)
+	//			par3List.add(new ItemStack(this, 1, i));
+	//	}
 
-//	@Override
-//	public BlockStateContainer createBlockState()
-//	{
-//		return new BlockStateContainer.Builder(this).add(TYPE).build();
-//	}
+	//	@Override
+	//	public BlockStateContainer createBlockState()
+	//	{
+	//		return new BlockStateContainer.Builder(this).add(TYPE).build();
+	//	}
 
 	public static enum EnumIngotType implements IStringSerializable
 	{

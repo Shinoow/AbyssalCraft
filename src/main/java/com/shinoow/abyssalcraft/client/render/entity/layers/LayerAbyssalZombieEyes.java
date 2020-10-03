@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -24,7 +24,7 @@ public class LayerAbyssalZombieEyes extends LayerEyes<EntityAbyssalZombie> {
 	private static final ResourceLocation EYES = new ResourceLocation("abyssalcraft:textures/model/abyssal_zombie_eyes.png");
 	private static final ResourceLocation EYES_ALT = new ResourceLocation("abyssalcraft:textures/model/abyssal_zombie_old_eyes.png");
 
-	
+
 	public LayerAbyssalZombieEyes(RenderAbyssalZombie rendererIn) {
 		super(rendererIn, EYES);
 

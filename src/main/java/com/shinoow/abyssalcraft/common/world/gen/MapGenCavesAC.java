@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.world.gen;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

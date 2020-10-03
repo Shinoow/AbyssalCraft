@@ -53,17 +53,17 @@ public class BlockDecorativeStatue extends Block {
 		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
-//	@Override
-//	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-//	{
-//		EnumFacing facing = EnumFacing.NORTH;
-//
-//		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
-//		if(tile instanceof TileEntityDecorativeStatue)
-//			facing = EnumFacing.getFront(((TileEntityDecorativeStatue) tile).getFacing());
-//
-//		return state.withProperty(FACING, facing);
-//	}
+	//	@Override
+	//	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	//	{
+	//		EnumFacing facing = EnumFacing.NORTH;
+	//
+	//		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
+	//		if(tile instanceof TileEntityDecorativeStatue)
+	//			facing = EnumFacing.getFront(((TileEntityDecorativeStatue) tile).getFacing());
+	//
+	//		return state.withProperty(FACING, facing);
+	//	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
@@ -76,17 +76,17 @@ public class BlockDecorativeStatue extends Block {
 	{
 		return state.getValue(FACING).getIndex();
 	}
-//
-//	@Override
-//	public int damageDropped (IBlockState state) {
-//		return state.getValue(TYPE).getMeta();
-//	}
-//
-//	@Override
-//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-//		for(int i = 0; i < EnumDeityType.values().length; i++)
-//			par3List.add(new ItemStack(this, 1, i));
-//	}
+	//
+	//	@Override
+	//	public int damageDropped (IBlockState state) {
+	//		return state.getValue(TYPE).getMeta();
+	//	}
+	//
+	//	@Override
+	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+	//		for(int i = 0; i < EnumDeityType.values().length; i++)
+	//			par3List.add(new ItemStack(this, 1, i));
+	//	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -105,25 +105,25 @@ public class BlockDecorativeStatue extends Block {
 	{
 		return false;
 	}
-//
-//	@Override
-//	public EnumBlockRenderType getRenderType(IBlockState state) {
-//		return EnumBlockRenderType.MODEL;
-//	}
+	//
+	//	@Override
+	//	public EnumBlockRenderType getRenderType(IBlockState state) {
+	//		return EnumBlockRenderType.MODEL;
+	//	}
 
-//	@Override
-//	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-//	{
-//		TileEntity tile = worldIn.getTileEntity(pos);
-//		if(tile instanceof TileEntityDecorativeStatue)
-//			((TileEntityDecorativeStatue) tile).setFacing(state.getValue(FACING).getIndex());
-//	}
-//
-//	@Override
-//	public TileEntity createNewTileEntity(World worldIn, int meta) {
-//
-//		return new TileEntityDecorativeStatue();
-//	}
+	//	@Override
+	//	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	//	{
+	//		TileEntity tile = worldIn.getTileEntity(pos);
+	//		if(tile instanceof TileEntityDecorativeStatue)
+	//			((TileEntityDecorativeStatue) tile).setFacing(state.getValue(FACING).getIndex());
+	//	}
+	//
+	//	@Override
+	//	public TileEntity createNewTileEntity(World worldIn, int meta) {
+	//
+	//		return new TileEntityDecorativeStatue();
+	//	}
 
 	@SuppressWarnings("deprecation")
 	@Override

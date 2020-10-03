@@ -53,7 +53,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -197,7 +199,6 @@ public class AbyssalCraftEventHooks {
 		if(ACConfig.darkRealmSmokeParticles)
 			if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)
 			&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW){
-				Random rand = new Random();
 				if(ACConfig.particleEntity)
 					ParticleUtil.spawnShadowParticles(event.getEntityLiving());
 			}

@@ -494,7 +494,7 @@ public class GuiNecronomicon extends GuiScreen {
 	protected String localize(String str){
 		return localize(str, new Object[0]);
 	}
-	
+
 	protected String localize(String str, Object...parameters) {
 		return I18n.format(str, parameters);
 	}

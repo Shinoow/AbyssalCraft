@@ -17,8 +17,6 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone.EnumCobblestoneType;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,21 +47,21 @@ public class EntropySpell extends Spell {
 	}
 
 	private IBlockState getDegradation(IBlockState state){//TODO uncomment and clean up
-//		if(state.getBlock() == ACBlocks.stone)
-//			switch(state.getValue(BlockACStone.TYPE)){
-//			case ABYSSALNITE_STONE:
-//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.ABYSSALNITE_STONE);
-//			case ABYSSAL_STONE:
-//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.ABYSSAL_STONE);
-//			case CORALIUM_STONE:
-//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.CORALIUM_STONE);
-//			case DARKSTONE:
-//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.DARKSTONE);
-//			case DREADSTONE:
-//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.DREADSTONE);
-//			default:
-//				return null;
-//			}
+		//		if(state.getBlock() == ACBlocks.stone)
+		//			switch(state.getValue(BlockACStone.TYPE)){
+		//			case ABYSSALNITE_STONE:
+		//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.ABYSSALNITE_STONE);
+		//			case ABYSSAL_STONE:
+		//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.ABYSSAL_STONE);
+		//			case CORALIUM_STONE:
+		//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.CORALIUM_STONE);
+		//			case DARKSTONE:
+		//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.DARKSTONE);
+		//			case DREADSTONE:
+		//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.DREADSTONE);
+		//			default:
+		//				return null;
+		//			}
 		if(state.getBlock() == Blocks.STONE)
 			return Blocks.COBBLESTONE.getDefaultState();
 		else if(state.getBlock() instanceof BlockACCobblestone || state.getBlock() == Blocks.COBBLESTONE)

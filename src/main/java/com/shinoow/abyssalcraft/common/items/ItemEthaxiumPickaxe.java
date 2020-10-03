@@ -15,10 +15,6 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
-import com.shinoow.abyssalcraft.common.blocks.IngotBlock;
-import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 
 import net.minecraft.block.Block;

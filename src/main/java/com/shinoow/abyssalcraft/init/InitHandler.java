@@ -294,27 +294,27 @@ public class InitHandler implements ILifeCycleHandler {
 		event.getRegistry().registerAll(SOUND_EVENTS.toArray(new SoundEvent[0]));
 	}
 
-//	@SubscribeEvent
-//	public void remapBlocks(RegistryEvent.MissingMappings<Block> event) {
-//		for(Mapping<Block> mapping : event.getMappings()) {
-//			if(mapping.key.toString().equals("abyssalcraft:stone")) {
-//				mapping.remap(ACBlocks.darkstone);
-//			}
-//			if(mapping.key.toString().equals("abyssalcraft:cobblestone")) {
-//				mapping.remap(ACBlocks.darkstone_cobblestone);
-//			}
-//			if(mapping.key.toString().equals("abyssalcraft:decorativestatue")) {
-//				mapping.remap(ACBlocks.decorative_cthulhu_statue);
-//			}
-//			if(mapping.key.toString().equals("abyssalcraft:statue")) {
-//				mapping.remap(ACBlocks.cthulhu_statue);
-//			}
-//			if(mapping.key.toString().equals("abyssalcraft:ingotblock")) {
-//				mapping.remap(ACBlocks.block_of_abyssalnite);
-//			}
-//		}
-//	}
-	
+	//	@SubscribeEvent
+	//	public void remapBlocks(RegistryEvent.MissingMappings<Block> event) {
+	//		for(Mapping<Block> mapping : event.getMappings()) {
+	//			if(mapping.key.toString().equals("abyssalcraft:stone")) {
+	//				mapping.remap(ACBlocks.darkstone);
+	//			}
+	//			if(mapping.key.toString().equals("abyssalcraft:cobblestone")) {
+	//				mapping.remap(ACBlocks.darkstone_cobblestone);
+	//			}
+	//			if(mapping.key.toString().equals("abyssalcraft:decorativestatue")) {
+	//				mapping.remap(ACBlocks.decorative_cthulhu_statue);
+	//			}
+	//			if(mapping.key.toString().equals("abyssalcraft:statue")) {
+	//				mapping.remap(ACBlocks.cthulhu_statue);
+	//			}
+	//			if(mapping.key.toString().equals("abyssalcraft:ingotblock")) {
+	//				mapping.remap(ACBlocks.block_of_abyssalnite);
+	//			}
+	//		}
+	//	}
+
 	private static void syncConfig(){
 
 		cfg.setCategoryComment(CATEGORY_DIMENSIONS, "Dimension configuration (ID configuration and dimension unloading). Any changes take effect after a Minecraft restart.");

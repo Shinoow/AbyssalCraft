@@ -22,14 +22,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -37,14 +32,14 @@ import net.minecraft.world.World;
 
 public class BlockACCobblestone extends Block {
 
-//	public static final PropertyEnum<EnumCobblestoneType> TYPE = PropertyEnum.create("type", EnumCobblestoneType.class);
+	//	public static final PropertyEnum<EnumCobblestoneType> TYPE = PropertyEnum.create("type", EnumCobblestoneType.class);
 	private EnumCobblestoneType TYPE;
 	public static final Map<EnumCobblestoneType, Block> VARIANTS = new HashMap<>();
 
 	public BlockACCobblestone(EnumCobblestoneType type) {
 		super(Material.ROCK);
-		this.TYPE = type;
-//		setDefaultState(getDefaultState().withProperty(TYPE, EnumCobblestoneType.DARKSTONE));
+		TYPE = type;
+		//		setDefaultState(getDefaultState().withProperty(TYPE, EnumCobblestoneType.DARKSTONE));
 		setHardness(2.0F);
 		setResistance(10.0F);
 		setSoundType(SoundType.STONE);
@@ -77,34 +72,34 @@ public class BlockACCobblestone extends Block {
 		return TYPE.getHarvestLevel();
 	}
 
-//	@Override
-//	public IBlockState getStateFromMeta(int meta)
-//	{
-//		return getDefaultState().withProperty(TYPE, EnumCobblestoneType.byMetadata(meta));
-//	}
-//
-//	@Override
-//	public int getMetaFromState(IBlockState state)
-//	{
-//		return state.getValue(TYPE).getMeta();
-//	}
+	//	@Override
+	//	public IBlockState getStateFromMeta(int meta)
+	//	{
+	//		return getDefaultState().withProperty(TYPE, EnumCobblestoneType.byMetadata(meta));
+	//	}
+	//
+	//	@Override
+	//	public int getMetaFromState(IBlockState state)
+	//	{
+	//		return state.getValue(TYPE).getMeta();
+	//	}
 
-//	@Override
-//	public int damageDropped (IBlockState state) {
-//		return state.getValue(TYPE).getMeta();
-//	}
+	//	@Override
+	//	public int damageDropped (IBlockState state) {
+	//		return state.getValue(TYPE).getMeta();
+	//	}
 
-//	@Override
-//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-//		for(int i = 0; i < EnumCobblestoneType.values().length; i++)
-//			par3List.add(new ItemStack(this, 1, i));
-//	}
+	//	@Override
+	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+	//		for(int i = 0; i < EnumCobblestoneType.values().length; i++)
+	//			par3List.add(new ItemStack(this, 1, i));
+	//	}
 
-//	@Override
-//	public BlockStateContainer createBlockState()
-//	{
-//		return new BlockStateContainer.Builder(this).add(TYPE).build();
-//	}
+	//	@Override
+	//	public BlockStateContainer createBlockState()
+	//	{
+	//		return new BlockStateContainer.Builder(this).add(TYPE).build();
+	//	}
 
 	public static enum EnumCobblestoneType implements IStringSerializable
 	{

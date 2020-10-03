@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -15,7 +15,6 @@ import java.util.Objects;
 
 import com.google.common.collect.ImmutableList;
 import com.shinoow.abyssalcraft.common.blocks.*;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import net.minecraft.util.EnumFacing;
 

@@ -34,7 +34,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.*;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 
