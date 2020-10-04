@@ -48,7 +48,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	private AmplifierType currentAmplifier;
 	private DeityType currentDeity;
 	private int tolerance;
-	private int facing;
+	//	private int facing;
 	private boolean isMultiblock;
 	private BlockPos basePos;
 	private Set<BlockPos> positions = new HashSet<>();
@@ -60,7 +60,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		timer = nbttagcompound.getInteger("Timer");
 		tolerance = nbttagcompound.getInteger("Tolerance");
 		PEUtils.readManipulatorNBT(this, nbttagcompound);
-		facing = nbttagcompound.getInteger("Facing");
+		//		facing = nbttagcompound.getInteger("Facing");
 		isMultiblock = nbttagcompound.getBoolean("IsMultiblock");
 		basePos = BlockPos.fromLong(nbttagcompound.getLong("BasePosition"));
 	}
@@ -72,7 +72,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 		nbttagcompound.setInteger("Timer", timer);
 		nbttagcompound.setInteger("Tolerance", tolerance);
 		PEUtils.writeManipulatorNBT(this, nbttagcompound);
-		nbttagcompound.setInteger("Facing", facing);
+		//		nbttagcompound.setInteger("Facing", facing);
 		nbttagcompound.setBoolean("IsMultiblock", isMultiblock);
 		if(basePos != null)
 			nbttagcompound.setLong("BasePosition", basePos.toLong());
@@ -126,7 +126,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public DeityType getDeity(IBlockState state) {
 
-		switch(state.getValue(BlockStatue.TYPE)) {
+		switch(((BlockStatue)state.getBlock()).TYPE) {
 		case AZATHOTH:
 			return DeityType.AZATHOTH;
 		case CTHULHU:
@@ -254,13 +254,13 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 			disrupt();
 	}
 
-	public int getFacing(){
-		return facing;
-	}
-
-	public void setFacing(int face){
-		facing = face;
-	}
+	//	public int getFacing(){
+	//		return facing;
+	//	}
+	//
+	//	public void setFacing(int face){
+	//		facing = face;
+	//	}
 
 	@Override
 	public boolean isInMultiblock() {

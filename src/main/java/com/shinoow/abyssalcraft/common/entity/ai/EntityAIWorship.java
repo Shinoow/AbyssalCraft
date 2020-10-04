@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.ai;
 
-import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDecorativeStatue;
+import com.shinoow.abyssalcraft.common.blocks.BlockDecorativeStatue;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -56,7 +56,7 @@ public class EntityAIWorship extends EntityAIBase
 					for(int z = -8; z < 9; z++){
 						pos.setPos(pos1.getX() + x, pos1.getY() + y, pos1.getZ() + z);
 						TileEntity te = world.getTileEntity(pos);
-						if(te instanceof TileEntityStatue || te instanceof TileEntityDecorativeStatue) {
+						if(te instanceof TileEntityStatue || world.getBlockState(pos).getBlock() instanceof BlockDecorativeStatue) {
 							statuePos = pos.toImmutable();
 							return true;
 						}

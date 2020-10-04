@@ -25,6 +25,7 @@ import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -189,9 +190,11 @@ public class APIUtils {
 	@SideOnly(Side.CLIENT)
 	public static FontRenderer getFontRenderer(ItemStack stack){
 		if(!(stack.getItem() instanceof IUnlockableItem) || display_names) return null;
-		INecroDataCapability cap = NecroDataCapability.getCap(Minecraft.getMinecraft().player);
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		if(player == null) return null;
+		INecroDataCapability cap = NecroDataCapability.getCap(player);
 
-		return cap.isUnlocked(((IUnlockableItem) stack.getItem()).getUnlockCondition(stack), Minecraft.getMinecraft().player) ? null : AbyssalCraftAPI.getAkloFont();
+		return cap.isUnlocked(((IUnlockableItem) stack.getItem()).getUnlockCondition(stack), player) ? null : AbyssalCraftAPI.getAkloFont();
 	}
 
 	/**

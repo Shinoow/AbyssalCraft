@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulHeldItem;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
@@ -34,6 +35,7 @@ public class RenderDepthsGhoul extends RenderLiving<EntityDepthsGhoul> {
 	public RenderDepthsGhoul(RenderManager manager)
 	{
 		this(manager, new ModelDG());
+		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft", "textures/model/depths_ghoul_eyes.png")));
 	}
 
 	public RenderDepthsGhoul(RenderManager manager, ModelDG model){

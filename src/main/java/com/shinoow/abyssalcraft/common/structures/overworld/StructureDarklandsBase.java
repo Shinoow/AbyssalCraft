@@ -17,7 +17,6 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
-import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -41,6 +40,23 @@ public abstract class StructureDarklandsBase extends WorldGenerator {
 	}
 
 	private IBlockState getStatue(Random rand){
-		return ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.byMetadata(rand.nextInt(7)));
+		switch(rand.nextInt(7)){
+		case 0:
+			return ACBlocks.cthulhu_statue.getDefaultState();
+		case 1:
+			return ACBlocks.hastur_statue.getDefaultState();
+		case 2:
+			return ACBlocks.jzahar_statue.getDefaultState();
+		case 3:
+			return ACBlocks.azathoth_statue.getDefaultState();
+		case 4:
+			return ACBlocks.nyarlathotep_statue.getDefaultState();
+		case 5:
+			return ACBlocks.yog_sothoth_statue.getDefaultState();
+		case 6:
+			return ACBlocks.shub_niggurath_statue.getDefaultState();
+		default:
+			return getStatue(rand);
+		}
 	}
 }

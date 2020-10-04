@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"axis=z": { "model": "abyssalcraft:dreadportal_ew" },
-		"axis=x": { "model": "abyssalcraft:dreadportal_ns" }
-	}
-}

@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"axis=z": { "model": "abyssalcraft:omotholportal_ew" },
-		"axis=x": { "model": "abyssalcraft:omotholportal_ns" }
-	}
-}

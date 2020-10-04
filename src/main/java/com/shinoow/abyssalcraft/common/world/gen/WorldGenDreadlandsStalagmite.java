@@ -32,14 +32,14 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 		while(chunk.getBlockState(pos).getBlock().isAir(chunk.getBlockState(pos), world, pos))
 			pos = pos.down();
 
-		if(chunk.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(3) &&
-				chunk.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(2))
+		if(chunk.getBlockState(pos) != ACBlocks.abyssalnite_stone.getDefaultState() &&
+				chunk.getBlockState(pos) != ACBlocks.dreadstone.getDefaultState())
 			return false;
 
 		IBlockState state;
 		if(world.getBiome(pos) == ACBiomes.purified_dreadlands)
-			state = ACBlocks.stone.getStateFromMeta(3);
-		else state = ACBlocks.stone.getStateFromMeta(2);
+			state = ACBlocks.abyssalnite_stone.getDefaultState();
+		else state = ACBlocks.dreadstone.getDefaultState();
 
 		placeBlocks(world, chunk, state, pos, 7 + rand.nextInt(5));
 		placeBlocksAlt(world, chunk, state, pos.east(), 5 + rand.nextInt(5));

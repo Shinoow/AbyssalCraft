@@ -14,10 +14,6 @@ package com.shinoow.abyssalcraft.common.structures.abyss;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone.EnumCobblestoneType;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -29,8 +25,8 @@ public class Chains extends WorldGenerator {
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
-		IBlockState abyssal_stone = ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.ABYSSAL_STONE);
-		IBlockState coralium_cobblestone = ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.CORALIUM_STONE);
+		IBlockState abyssal_stone = ACBlocks.abyssal_stone.getDefaultState();
+		IBlockState coralium_cobblestone = ACBlocks.coralium_cobblestone.getDefaultState();
 		int h = 5 + rand.nextInt(35);
 		int h2 = 255 - h * 6;
 		int t = 0;

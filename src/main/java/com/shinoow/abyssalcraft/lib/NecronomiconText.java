@@ -423,6 +423,17 @@ public class NecronomiconText {
 	public static String LABEL_CASTING = "necronomicon.information.casting";
 	public static String LABEL_BUILT_WITH = "necronomicon.builtwith";
 	public static String LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM = "necronomicon.information.itemtransportsystem";
+	public static String LABEL_CREATE_SPELLS = "necronomicon.createspells";
+	public static String LABEL_OPEN_COMPENDIUM = "necronomicon.opencompendium";
+	public static String LABEL_SPELL_NAME = "necronomicon.spell.name";
+	public static String LABEL_SPELL_PE = "necronomicon.spell.pe";
+	public static String LABEL_SPELL_TYPE = "necronomicon.spell.type";
+	public static String LABEL_HEIGHT = "necronomicon.height";
+	public static String LABEL_WIDTH = "necronomicon.width";
+	public static String LABEL_DEPTH = "necronomicon.depth";
+	public static String LABEL_RANGE_AMPLIFIER = "necronomicon.rangeamplifier";
+	public static String LABEL_DURATION_AMPLIFIER = "necronomicon.durationamplifier";
+	public static String LABEL_POWER_AMPLIFIER = "necronomicon.poweramplifier";
 
 	/**
 	 * The best way to drown an array of strings with nonsense

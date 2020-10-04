@@ -286,7 +286,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 					par1DamageSource.getTrueSource().attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), Integer.MAX_VALUE);
 				}
 				if(ACConfig.showBossDialogs)
-					SpecialTextUtil.JzaharGroup(getEntityWorld(), "Whoops, I slipped!");
+					SpecialTextUtil.JzaharGroup(getEntityWorld(), I18n.translateToLocal("message.jzahar.fourthwall"));
 			}
 		}
 

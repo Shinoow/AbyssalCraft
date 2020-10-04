@@ -52,10 +52,7 @@ public class FireMessage extends AbstractServerMessage<FireMessage> {
 		World world = player.world;
 
 		if(world.isRemote) return;
-		if(world.getBlockState(pos).getBlock() != ACBlocks.mimic_fire &&
-				world.getBlockState(pos).getBlock() != ACBlocks.coralium_fire &&
-				world.getBlockState(pos).getBlock() != ACBlocks.dreaded_fire &&
-				world.getBlockState(pos).getBlock() != ACBlocks.omothol_fire)
+		if(world.getBlockState(pos).getBlock() != ACBlocks.mimic_fire)
 			return;
 
 		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);

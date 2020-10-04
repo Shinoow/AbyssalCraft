@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerAbyssalZombieEyes;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 
 import net.minecraft.client.model.ModelZombie;
@@ -39,6 +40,7 @@ public class RenderAbyssalZombie extends RenderBiped<EntityAbyssalZombie> {
 				modelArmor = new ModelZombie(1.0F, true);
 			}
 		});
+		addLayer(new LayerAbyssalZombieEyes(this));
 	}
 
 	@Override

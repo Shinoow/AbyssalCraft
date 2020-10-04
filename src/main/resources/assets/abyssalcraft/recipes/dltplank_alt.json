@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A"
+  ],
+  "key": {
+    "A": {
+      "item": "abyssalcraft:dltlog2"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:dltplank",
+    "count": 4
+  }
+}

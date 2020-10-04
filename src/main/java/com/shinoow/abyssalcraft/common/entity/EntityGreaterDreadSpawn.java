@@ -232,7 +232,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 				}
 
 		if(ticksExisted % 2000 == 0)
-			if(!world.isRemote && world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 20){
+			if(!world.isRemote && world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < ACConfig.dreadSpawnSpawnLimit){
 				EntityDreadSpawn spawn = new EntityDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
 				world.spawnEntity(spawn);

@@ -164,11 +164,11 @@ public class BlockRitualAltar extends BlockContainer {
 
 	public void setBlocks() {
 		blockMeta.put(0, Blocks.COBBLESTONE.getDefaultState());
-		blockMeta.put(1, ACBlocks.cobblestone.getStateFromMeta(0));
-		blockMeta.put(2, ACBlocks.cobblestone.getStateFromMeta(1));
-		blockMeta.put(3, ACBlocks.cobblestone.getStateFromMeta(4));
-		blockMeta.put(4, ACBlocks.cobblestone.getStateFromMeta(2));
-		blockMeta.put(5, ACBlocks.cobblestone.getStateFromMeta(3));
+		blockMeta.put(1, ACBlocks.darkstone_cobblestone.getDefaultState());
+		blockMeta.put(2, ACBlocks.abyssal_cobblestone.getDefaultState());
+		blockMeta.put(3, ACBlocks.coralium_cobblestone.getDefaultState());
+		blockMeta.put(4, ACBlocks.dreadstone_cobblestone.getDefaultState());
+		blockMeta.put(5, ACBlocks.abyssalnite_cobblestone.getDefaultState());
 		blockMeta.put(6, ACBlocks.ethaxium_brick.getDefaultState());
 		blockMeta.put(7, ACBlocks.dark_ethaxium_brick.getDefaultState());
 	}

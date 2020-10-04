@@ -30,8 +30,8 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 
 	public BiomeGenAbyDreadlands(BiomeProperties par1) {
 		super(par1);
-		topBlock = ACBlocks.stone.getStateFromMeta(3);
-		fillerBlock = ACBlocks.stone.getStateFromMeta(3);
+		topBlock = ACBlocks.abyssalnite_stone.getDefaultState();
+		fillerBlock = ACBlocks.abyssalnite_stone.getDefaultState();
 	}
 
 	@Override
@@ -54,31 +54,31 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.dreadlands_abyssalnite_ore.getDefaultState(), veinSize,
-						state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
+						state -> state != null && state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64) + 5;
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.stone.getStateFromMeta(3), 48,
-					state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 48,
+					state -> state != null && state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64) + 5;
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.stone.getStateFromMeta(3), 36,
-					state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 36,
+					state -> state != null && state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
 			int x = par2Random.nextInt(16);
 			int y = par2Random.nextInt(64) + 5;
 			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.stone.getStateFromMeta(3), 24,
-					state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
+			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 24,
+					state -> state != null && state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 		if(ACConfig.generateDreadlandsAbyssalniteOre)
 			for(int rarity = 0; rarity < 8; rarity++) {
@@ -88,7 +88,7 @@ public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.dreadlands_abyssalnite_ore.getDefaultState(), veinSize,
-						state -> state != null && state == ACBlocks.stone.getStateFromMeta(2)).generate(par1World, par2Random, pos.add(x, y, z));
+						state -> state != null && state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 		if(ACConfig.generateDreadlandsStalagmite)
 			for(int i = 0; i < 1; i++){

@@ -124,10 +124,7 @@ public class AbyssalCraftClientEventHooks {
 	private void extinguishFire(EntityPlayer player, BlockPos posIn, EnumFacing face, World world, Event event) {
 		BlockPos pos = posIn.offset(face);
 
-		if (world.getBlockState(pos).getBlock() == ACBlocks.mimic_fire ||
-				world.getBlockState(pos).getBlock() == ACBlocks.coralium_fire ||
-				world.getBlockState(pos).getBlock() == ACBlocks.dreaded_fire ||
-				world.getBlockState(pos).getBlock() == ACBlocks.omothol_fire)
+		if (world.getBlockState(pos).getBlock() == ACBlocks.mimic_fire)
 			if (event instanceof MouseEvent) {
 				PacketDispatcher.sendToServer(new FireMessage(pos));
 				player.swingArm(EnumHand.MAIN_HAND);
@@ -461,8 +458,8 @@ public class AbyssalCraftClientEventHooks {
 		//				"nyarlathotepstatue", "yogsothothstatue", "shubniggurathstatue"));
 		//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.decorative_statue), makerl("cthulhustatue", "hasturstatue", "jzaharstatue", "azathothstatue",
 		//				"nyarlathotepstatue", "yogsothothstatue", "shubniggurathstatue"));
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.cobblestone), makerl("darkstone_cobble", "abyssalcobblestone", "dreadstonecobblestone",
-				"abyssalnitecobblestone", "coraliumcobblestone"));
+		//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.cobblestone), makerl("darkstone_cobble", "abyssalcobblestone", "dreadstonecobblestone",
+		//				"abyssalnitecobblestone", "coraliumcobblestone"));
 
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
 		registerFluidModel(ACBlocks.liquid_antimatter, "anti");
@@ -495,38 +492,38 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_slab, new StateMap.Builder().ignore(new IProperty[] {BlockACSlab.VARIANT_PROPERTY}).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.statue, new StateMapperBase(){
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				String stuff = "abyssalcraft:"+state.getValue(BlockStatue.TYPE).getName()+"statue";
-				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
-				map.remove(BlockStatue.TYPE);
-				return new ModelResourceLocation(stuff, getPropertyString(map));
-			}});
-		ModelLoader.setCustomStateMapper(ACBlocks.decorative_statue, new StateMapperBase(){
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				String stuff = "abyssalcraft:"+state.getValue(BlockStatue.TYPE).getName()+"statue";
-				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
-				map.remove(BlockStatue.TYPE);
-				return new ModelResourceLocation(stuff, getPropertyString(map));
-			}});
-		ModelLoader.setCustomStateMapper(ACBlocks.cobblestone, new StateMapperBase(){
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				String stuff = "abyssalcraft:"+state.getValue(BlockACCobblestone.TYPE).getState();
-				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
-				map.remove(BlockACCobblestone.TYPE);
-				return new ModelResourceLocation(stuff, getPropertyString(map));
-			}});
-		ModelLoader.setCustomStateMapper(ACBlocks.ingot_block, new StateMapperBase(){
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				String stuff = "abyssalcraft:"+state.getValue(IngotBlock.TYPE).getState();
-				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
-				map.remove(IngotBlock.TYPE);
-				return new ModelResourceLocation(stuff, getPropertyString(map));
-			}});
+		//		ModelLoader.setCustomStateMapper(ACBlocks.statue, new StateMapperBase(){
+		//			@Override
+		//			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+		//				String stuff = "abyssalcraft:"+state.getValue(BlockStatue.TYPE).getName()+"statue";
+		//				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
+		//				map.remove(BlockStatue.TYPE);
+		//				return new ModelResourceLocation(stuff, getPropertyString(map));
+		//			}});
+		//		ModelLoader.setCustomStateMapper(ACBlocks.decorative_statue, new StateMapperBase(){
+		//			@Override
+		//			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+		//				String stuff = "abyssalcraft:"+state.getValue(BlockStatue.TYPE).getName()+"statue";
+		//				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
+		//				map.remove(BlockStatue.TYPE);
+		//				return new ModelResourceLocation(stuff, getPropertyString(map));
+		//			}});
+		//		ModelLoader.setCustomStateMapper(ACBlocks.cobblestone, new StateMapperBase(){
+		//			@Override
+		//			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+		//				String stuff = "abyssalcraft:"+state.getValue(BlockACCobblestone.TYPE).getState();
+		//				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
+		//				map.remove(BlockACCobblestone.TYPE);
+		//				return new ModelResourceLocation(stuff, getPropertyString(map));
+		//			}});
+		//		ModelLoader.setCustomStateMapper(ACBlocks.ingot_block, new StateMapperBase(){
+		//			@Override
+		//			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+		//				String stuff = "abyssalcraft:"+state.getValue(IngotBlock.TYPE).getState();
+		//				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
+		//				map.remove(IngotBlock.TYPE);
+		//				return new ModelResourceLocation(stuff, getPropertyString(map));
+		//			}});
 		ModelLoader.setCustomStateMapper(ACBlocks.tiered_energy_relay, new StateMapperBase(){
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
@@ -551,31 +548,31 @@ public class AbyssalCraftClientEventHooks {
 				map.remove(BlockTieredEnergyPedestal.DIMENSION);
 				return new ModelResourceLocation(stuff, getPropertyString(map));
 			}});
-		ModelLoader.setCustomStateMapper(ACBlocks.stone, new StateMapperBase(){
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				String stuff = "abyssalcraft:"+state.getValue(BlockACStone.TYPE).getState();
-				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
-				map.remove(BlockACStone.TYPE);
-				return new ModelResourceLocation(stuff, getPropertyString(map));
-			}});
+		//		ModelLoader.setCustomStateMapper(ACBlocks.stone, new StateMapperBase(){
+		//			@Override
+		//			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+		//				String stuff = "abyssalcraft:"+state.getValue(BlockACStone.TYPE).getState();
+		//				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
+		//				map.remove(BlockACStone.TYPE);
+		//				return new ModelResourceLocation(stuff, getPropertyString(map));
+		//			}});
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_door, new StateMap.Builder().ignore(new IProperty[]{BlockDoor.POWERED}).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_door, new StateMap.Builder().ignore(new IProperty[]{BlockDoor.POWERED}).build());
 
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.statue), 1, new ModelResourceLocation("abyssalcraft:hasturstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_statue), 1, new ModelResourceLocation("abyssalcraft:hasturstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.statue), 2, new ModelResourceLocation("abyssalcraft:jzaharstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_statue), 2, new ModelResourceLocation("abyssalcraft:jzaharstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.statue), 3, new ModelResourceLocation("abyssalcraft:azathothstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_statue), 3, new ModelResourceLocation("abyssalcraft:azathothstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.statue), 4, new ModelResourceLocation("abyssalcraft:nyarlathotepstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_statue), 4, new ModelResourceLocation("abyssalcraft:nyarlathotepstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.statue), 5, new ModelResourceLocation("abyssalcraft:yogsothothstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_statue), 5, new ModelResourceLocation("abyssalcraft:yogsothothstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.statue), 6, new ModelResourceLocation("abyssalcraft:shubniggurathstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_statue), 6, new ModelResourceLocation("abyssalcraft:shubniggurathstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.cthulhu_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_cthulhu_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.hastur_statue), 0, new ModelResourceLocation("abyssalcraft:hasturstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_hastur_statue), 0, new ModelResourceLocation("abyssalcraft:hasturstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.jzahar_statue), 0, new ModelResourceLocation("abyssalcraft:jzaharstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_jzahar_statue), 0, new ModelResourceLocation("abyssalcraft:jzaharstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.azathoth_statue), 0, new ModelResourceLocation("abyssalcraft:azathothstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_azathoth_statue), 0, new ModelResourceLocation("abyssalcraft:azathothstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.nyarlathotep_statue), 0, new ModelResourceLocation("abyssalcraft:nyarlathotepstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_nyarlathotep_statue), 0, new ModelResourceLocation("abyssalcraft:nyarlathotepstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.yog_sothoth_statue), 0, new ModelResourceLocation("abyssalcraft:yogsothothstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_yog_sothoth_statue), 0, new ModelResourceLocation("abyssalcraft:yogsothothstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.shub_niggurath_statue), 0, new ModelResourceLocation("abyssalcraft:shubniggurathstatue", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_shub_niggurath_statue), 0, new ModelResourceLocation("abyssalcraft:shubniggurathstatue", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.engraver), 0, new ModelResourceLocation("abyssalcraft:engraver", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.oblivion_deathbomb), 0, new ModelResourceLocation("abyssalcraft:odb", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.chagaroth_altar_top), 0, new ModelResourceLocation("abyssalcraft:dreadaltartop", "inventory"));
@@ -787,19 +784,32 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.silver_key, 0);
 		registerItemRender(ACItems.book_of_many_faces, 0);
 
-		registerItemRender(ACBlocks.stone, 0, "darkstone");
-		registerItemRender(ACBlocks.stone, 1, "abystone");
-		registerItemRender(ACBlocks.stone, 2, "dreadstone");
-		registerItemRender(ACBlocks.stone, 3, "abydreadstone");
-		registerItemRender(ACBlocks.stone, 4, "cstone");
-		registerItemRender(ACBlocks.stone, 5, "ethaxium");
-		registerItemRender(ACBlocks.stone, 6, "omotholstone");
-		registerItemRender(ACBlocks.stone, 7, "monolithstone");
-		registerItemRender(ACBlocks.cobblestone, 0, "darkstone_cobble");
-		registerItemRender(ACBlocks.cobblestone, 1, "abyssalcobblestone");
-		registerItemRender(ACBlocks.cobblestone, 2, "dreadstonecobblestone");
-		registerItemRender(ACBlocks.cobblestone, 3, "abyssalnitecobblestone");
-		registerItemRender(ACBlocks.cobblestone, 4, "coraliumcobblestone");
+		//		registerItemRender(ACBlocks.stone, 0, "darkstone");
+		//		registerItemRender(ACBlocks.stone, 1, "abystone");
+		//		registerItemRender(ACBlocks.stone, 2, "dreadstone");
+		//		registerItemRender(ACBlocks.stone, 3, "abydreadstone");
+		//		registerItemRender(ACBlocks.stone, 4, "cstone");
+		//		registerItemRender(ACBlocks.stone, 5, "ethaxium");
+		//		registerItemRender(ACBlocks.stone, 6, "omotholstone");
+		//		registerItemRender(ACBlocks.stone, 7, "monolithstone");
+		registerItemRender(ACBlocks.darkstone, 0, "darkstone");
+		registerItemRender(ACBlocks.abyssal_stone, 0, "abystone");
+		registerItemRender(ACBlocks.dreadstone, 0, "dreadstone");
+		registerItemRender(ACBlocks.abyssalnite_stone, 0, "abydreadstone");
+		registerItemRender(ACBlocks.coralium_stone, 0, "cstone");
+		registerItemRender(ACBlocks.ethaxium, 0, "ethaxium");
+		registerItemRender(ACBlocks.omothol_stone, 0, "omotholstone");
+		registerItemRender(ACBlocks.monolith_stone, 0, "monolithstone");
+		//		registerItemRender(ACBlocks.cobblestone, 0, "darkstone_cobble");
+		//		registerItemRender(ACBlocks.cobblestone, 1, "abyssalcobblestone");
+		//		registerItemRender(ACBlocks.cobblestone, 2, "dreadstonecobblestone");
+		//		registerItemRender(ACBlocks.cobblestone, 3, "abyssalnitecobblestone");
+		//		registerItemRender(ACBlocks.cobblestone, 4, "coraliumcobblestone");
+		registerItemRender(ACBlocks.darkstone_cobblestone, 0, "darkstone_cobble");
+		registerItemRender(ACBlocks.abyssal_cobblestone, 1, "abyssalcobblestone");
+		registerItemRender(ACBlocks.dreadstone_cobblestone, 2, "dreadstonecobblestone");
+		registerItemRender(ACBlocks.abyssalnite_cobblestone, 3, "abyssalnitecobblestone");
+		registerItemRender(ACBlocks.coralium_cobblestone, 4, "coraliumcobblestone");
 		registerItemRender(ACBlocks.darkstone_brick, 0, "darkstone_brick_0");
 		registerItemRender(ACBlocks.darkstone_brick, 1, "darkstone_brick_1");
 		registerItemRender(ACBlocks.darkstone_brick, 2, "darkstone_brick_2");
@@ -824,17 +834,17 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.abyssalnite_ore, 0);
 		registerItemRender(ACBlocks.abyssal_stone_brick_fence, 0);
 		registerItemRender(ACBlocks.darkstone_cobblestone_wall, 0);
-		registerItemRender(ACBlocks.ingot_block, 0, "abyblock");
-		registerItemRender(ACBlocks.ingot_block, 1, "corblock");
-		registerItemRender(ACBlocks.ingot_block, 2, "dreadiumblock");
-		registerItemRender(ACBlocks.ingot_block, 3, "ethaxiumblock");
+		registerItemRender(ACBlocks.block_of_abyssalnite, 0, "abyblock");
+		registerItemRender(ACBlocks.block_of_refined_coralium, 0, "corblock");
+		registerItemRender(ACBlocks.block_of_dreadium, 0, "dreadiumblock");
+		registerItemRender(ACBlocks.block_of_ethaxium, 0, "ethaxiumblock");
 		registerItemRender(ACBlocks.coralium_infused_stone, 0);
 		registerItemRender(ACBlocks.odb_core, 0);
 		registerItemRender(ACBlocks.wooden_crate, 0);
-		registerItemRender(ACBlocks.abyssal_gateway, 0);
+		//		registerItemRender(ACBlocks.abyssal_gateway, 0);
 		registerItemRender(ACBlocks.darkstone_slab, 0);
 		registerItemRender(BlockHandler.Darkstoneslab2, 0);
-		registerItemRender(ACBlocks.coralium_fire, 0);
+		//		registerItemRender(ACBlocks.coralium_fire, 0);
 		registerItemRender(ACBlocks.darkstone_button, 0);
 		registerItemRender(ACBlocks.darkstone_pressure_plate, 0);
 		registerItemRender(ACBlocks.darklands_oak_planks, 0);
@@ -863,8 +873,8 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.dreadlands_leaves, 0);
 		registerItemRender(ACBlocks.dreadlands_sapling, 0);
 		registerItemRender(ACBlocks.dreadlands_planks, 0);
-		registerItemRender(ACBlocks.dreaded_gateway, 0);
-		registerItemRender(ACBlocks.dreaded_fire, 0);
+		//		registerItemRender(ACBlocks.dreaded_gateway, 0);
+		//		registerItemRender(ACBlocks.dreaded_fire, 0);
 		registerItemRender(ACBlocks.depths_ghoul_head, 0);
 		registerItemRender(ACBlocks.pete_head, 0);
 		registerItemRender(ACBlocks.mr_wilson_head, 0);
@@ -913,8 +923,8 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.ethaxium_brick_slab, 0);
 		registerItemRender(BlockHandler.ethaxiumslab2, 0);
 		registerItemRender(ACBlocks.ethaxium_brick_fence, 0);
-		registerItemRender(ACBlocks.omothol_gateway, 0);
-		registerItemRender(ACBlocks.omothol_fire, 0);
+		//		registerItemRender(ACBlocks.omothol_gateway, 0);
+		//		registerItemRender(ACBlocks.omothol_fire, 0);
 		registerItemRender(BlockHandler.house, 0);
 		registerItemRender(ACBlocks.materializer, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick, 0, "darkethaxiumbrick_0");

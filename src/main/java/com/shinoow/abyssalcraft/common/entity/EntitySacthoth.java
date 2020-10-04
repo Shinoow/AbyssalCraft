@@ -23,6 +23,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 import net.minecraft.block.state.IBlockState;
@@ -464,8 +465,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 	@Override
 	public void onLivingUpdate()
 	{
-		for (int i = 0; i < 2 * (getBrightness() > 0.1f ? getBrightness() : 0) && ACConfig.particleEntity; ++i)
-			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+		ParticleUtil.spawnShadowParticles(this);
 
 		for(Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(30.0D, 30.0D, 30.0D)))
 			if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)

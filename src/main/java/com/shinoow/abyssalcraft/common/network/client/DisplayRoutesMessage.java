@@ -79,7 +79,6 @@ public class DisplayRoutesMessage extends AbstractClientMessage<DisplayRoutesMes
 					else {
 						ParticleUtil.spawnParticleLine(prevPos, pos, 15, (v1, v2) -> {
 							player.world.spawnParticle(EnumParticleTypes.REDSTONE, v2.x, v2.y, v2.z, v1.x * .1, .15, v1.z * .1);
-							return false;
 						});
 						prevPos = pos;
 					}

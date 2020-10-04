@@ -389,7 +389,7 @@ public class AChouse2 extends StructureDarklandsBase {
 		world.setBlockState(new BlockPos(i + 6, j + 9, k + 8), getBrick(random), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 10, k + 4), ACBlocks.darkstone_brick_slab.getStateFromMeta(5), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 10, k + 5), getBrick(random), 2);
-		world.setBlockState(new BlockPos(i + 6, j + 10, k + 6), ACBlocks.stone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 6, j + 10, k + 6), ACBlocks.darkstone.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 10, k + 7), getBrick(random), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 10, k + 8), ACBlocks.darkstone_brick_slab.getStateFromMeta(5), 2);
 		world.setBlockState(new BlockPos(i + 6, j + 11, k + 5), ACBlocks.darkstone_brick_stairs.getStateFromMeta(2), 2);

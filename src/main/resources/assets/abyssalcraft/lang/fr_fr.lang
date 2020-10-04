@@ -203,6 +203,9 @@ message.configurator.error.1=Vous ne pouvez créer de configuration sans un chem
 message.configurator.error.2=Le bloc de destination n'a pas d'inventaire !
 message.configurator.error.3=Ce bloc ne supporte pas les configurations !
 message.configurator.error.4=Vous n'êtes pas autorisé à interagir avec ce bloc !
+message.jzahar.corrupting=Behold, as the darkness consumes the Overworld! Bit by bit, this world will crumble.
+message.jzahar.cleansing=Undoing my malice on your §obeloved§r world? What a shame.
+message.jzahar.fourthwall=Whoops, I slipped!
 
 #Container Inventories
 container.abyssalcraft.crate=Caisse
@@ -286,6 +289,17 @@ necronomicon.information.pantheon=Panthéon
 necronomicon.information.casting=Ensorcellement
 necronomicon.builtwith=Nécessite
 necronomicon.information.itemtransportsystem=Transport d'Objets
+necronomicon.createspells=Inscribe spells
+necronomicon.opencompendium=Open Compendium
+necronomicon.spell.name=Spell name
+necronomicon.spell.pe=PE per cast
+necronomicon.spell.type=Spell type
+necronomicon.height=Height: %s blocks
+necronomicon.width=Width: %s blocks
+necronomicon.depth=Depth: %s blocks
+necronomicon.rangeamplifier=Range amplifier
+necronomicon.durationamplifier=Duration amplifier
+necronomicon.poweramplifier=Power amplifier
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -849,7 +863,7 @@ ac.spell.toggleState.desc=Starts/stops the Item transportation of all blocks wit
 ac.spell.floating=Floating
 ac.spell.floating.desc=As long as you're casting the spell, you're as light as a feather, allowing you to walk on air. Who needs gravity anyways?
 ac.spell.teleportHome=Teleport Home
-ac.spell.teleportHome=When cast, teleports you back to your spawn point from wherever you are (including other dimensions).
+ac.spell.teleportHome.desc=When cast, teleports you back to your spawn point from wherever you are (including other dimensions).
 
 #Places of Power
 ac.structure.basic.description=A small and simple shrine. Provides a range boost to affected statues.
@@ -867,27 +881,17 @@ ac.rending.essence_omt=Omothol Essences are made from harvesting Omothol Energy 
 
 #Configuration
 ac_dimensions=Dimensions
-ac_dimensions.tooltip=Dimension ID configuration
+ac_dimensions.tooltip=Dimension configuration
 ac_biomes=Biomes
-ac_biomes.tooltip=Biome ID configuration
-ac_biomegen=Biome Generation
-ac_biomegen.tooltip=Biome Generation configuration
-ac_biomespawn=Biome Spawning
-ac_biomespawn.tooltip=Biome Spawning configuration
-ac_biomeweight=Biome Weight
-ac_biomeweight.tooltip=Biome Weight Configuration
+ac_biomes.tooltip=Biome configuration
 ac_general=General
 ac_general.tooltip=General configuration
-ac_shoggoth=Shoggoth Ooze
-ac_shoggoth.tooltip=Shoggoth Ooze Configuration
+ac_shoggoth=Shoggoth
+ac_shoggoth.tooltip=Shoggoth Configuration
 ac_worldgen=Worldgen
 ac_worldgen.tooltip=Worldgen configuration
-ac_itemblacklist=Entity Item Blacklist
-ac_itemblacklist.tooltip=Entity Item Blacklist configuration
 ac_silly_settings=Silly Settings
 ac_silly_settings.tooltip=Silly Settings Configuration
-ac_blocks=Blocks
-ac_blocks.tooltip=Block Configuration
 ac_mod_compat=Mod Compatibility
 ac_mod_compat.tooltip=Mod Compatibility Configuration
 ac_wet_noodle=Wet Noodle
@@ -896,6 +900,12 @@ ac_modules=Modules
 ac_modules.tooltip=Module Configuration
 ac_spells=Spells
 ac_spells.tooltip=Spell Configuration
+ac_client=Client
+ac_client.tooltip=Client Configuration
+ac_rituals=Rituals
+ac_rituals.tooltip=Ritual Configuration
+ac_mobs=Mobs
+ac_mobs.tooltip=Mob Configuration
 
 #Keybinds
 key.abyssalcraft.category=AbyssalCraft
@@ -1013,7 +1023,6 @@ tile.ingotblock.3.name=Block d'Ethaxium
 tile.coraliumstone.name=Roche avec une Perle de Coralium
 tile.odbcore.name=Noyau de Méga-Bombe
 tile.woodencrate.name=Caisse de Bois
-tile.abyportal.name=Portail des Landes Abyssales
 tile.darkstoneslab1.name=Dalle de Roche Noire
 tile.darkstoneslab2.name=Double Dalle de Roche Noire
 tile.coraliumfire.name=Feu de Coralium
@@ -1046,8 +1055,6 @@ tile.dreadlog.name=Bûche de Platane Effroyable
 tile.dreadleaves.name=Feuilles de Platane Effroyable
 tile.dreadsapling.name=Pousse de Platane Effroyable
 tile.dreadplanks.name=Planches de Platane Effroyable
-tile.dreadportal.name=Porte en Bois de Platane Effroyable
-tile.dreadfire.name=Feu Effroyable
 tile.dghead.name=Tête de Goule des Profondeurs
 tile.phead.name=Tête de Pete
 tile.whead.name=Tête de Mr. Wilson
@@ -1095,8 +1102,6 @@ tile.ethaxiumbrickstairs.name=Escaliers de Briques d'Ethaxium
 tile.ethaxiumbrickslab1.name=Dalle de Briques d'Ethaxium
 tile.ethaxiumbrickslab2.name=Double Dalle de Briques d'Ethaxium
 tile.ethaxiumfence.name=Barrière de Briques d'Ethaxium
-tile.omotholportal.name=Portail vers l'Omothol
-tile.omotholfire.name=Feu de l'Omothol
 tile.engraver.name=Presse à Monnaie
 tile.engraver_on.name=doot doot
 tile.materializer.name=Matérialiseur

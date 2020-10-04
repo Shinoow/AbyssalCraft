@@ -11,21 +11,22 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -40,58 +41,62 @@ import net.minecraftforge.client.model.obj.OBJModel;
 public class BlockStatue extends BlockContainer {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	public static final PropertyEnum<EnumDeityType> TYPE = PropertyEnum.create("type", EnumDeityType.class);
+	//	public static final PropertyEnum<EnumDeityType> TYPE = PropertyEnum.create("type", EnumDeityType.class);
+	public EnumDeityType TYPE;
+	public static final Map<EnumDeityType, Block> VARIANTS = new HashMap<>();
 
-	public BlockStatue() {
+	public BlockStatue(EnumDeityType type) {
 		super(Material.ROCK);
-		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(TYPE, EnumDeityType.CTHULHU));
+		TYPE = type;
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabDecoration);
 		setHarvestLevel("pickaxe", 0);
+		VARIANTS.put(TYPE, this);
 	}
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
 	{
-		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(TYPE, EnumDeityType.byMetadata(meta));
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
-	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-	{
-		EnumFacing facing = EnumFacing.NORTH;
-
-		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
-		if(tile instanceof TileEntityStatue)
-			facing = EnumFacing.getFront(((TileEntityStatue) tile).getFacing());
-
-		return state.withProperty(FACING, facing);
-	}
+	//	@Override
+	//	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	//	{
+	//		EnumFacing facing = EnumFacing.NORTH;
+	//
+	//		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
+	//		if(tile instanceof TileEntityStatue)
+	//			facing = EnumFacing.getFront(((TileEntityStatue) tile).getFacing());
+	//
+	//		return state.withProperty(FACING, facing);
+	//	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(TYPE, EnumDeityType.byMetadata(meta));
+		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return state.getValue(TYPE).getMeta();
+		return state.getValue(FACING).getIndex();
 	}
 
-	@Override
-	public int damageDropped (IBlockState state) {
-		return state.getValue(TYPE).getMeta();
-	}
+	//	@Override
+	//	public int damageDropped (IBlockState state) {
+	//		return state.getValue(TYPE).getMeta();
+	//	}
 
-	@Override
-	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-		for(int i = 0; i < EnumDeityType.values().length; i++)
-			par3List.add(new ItemStack(this, 1, i));
-	}
+	//	@Override
+	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+	//		for(int i = 0; i < EnumDeityType.values().length; i++)
+	//			par3List.add(new ItemStack(this, 1, i));
+	//	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -127,10 +132,10 @@ public class BlockStatue extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		TileEntity tile = worldIn.getTileEntity(pos);
-		if(tile instanceof TileEntityStatue){
-			((TileEntityStatue) tile).setFacing(state.getValue(FACING).getIndex());
-			if(stack.hasTagCompound()){
+		if(stack.hasTagCompound()){
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if(tile instanceof TileEntityStatue){
+				//			((TileEntityStatue) tile).setFacing(state.getValue(FACING).getIndex());
 				NBTTagCompound data = new NBTTagCompound();
 				tile.writeToNBT(data);
 				data.setInteger("Timer", stack.getTagCompound().getInteger("Timer"));
@@ -157,7 +162,7 @@ public class BlockStatue extends BlockContainer {
 	@Override
 	public BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer.Builder(this).add(FACING).add(OBJModel.OBJProperty.INSTANCE).add(TYPE).build();
+		return new BlockStateContainer.Builder(this).add(FACING).add(OBJModel.OBJProperty.INSTANCE).build();
 	}
 
 	public enum EnumDeityType implements IStringSerializable {

@@ -316,13 +316,13 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 			for(int y = 0; y < 256; y++){
 				IBlockState state = world.getBlockState(pos1.up(y));
 				if(state.getBlock() == Blocks.STONE)
-					world.setBlockState(pos1.up(y), ACBlocks.stone.getDefaultState());
+					world.setBlockState(pos1.up(y), ACBlocks.darkstone.getDefaultState());
 				else if(state.getBlock() == Blocks.LEAVES)
 					world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, state.getValue(BlockLeaves.CHECK_DECAY)).withProperty(BlockLeaves.DECAYABLE, state.getValue(BlockLeaves.DECAYABLE)));
 				else if(state.getBlock() == Blocks.LOG)
 					world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_wood.getDefaultState().withProperty(BlockLog.LOG_AXIS, state.getValue(BlockLog.LOG_AXIS)));
 				else if(state.getBlock() == Blocks.COBBLESTONE)
-					world.setBlockState(pos1.up(y), ACBlocks.cobblestone.getDefaultState());
+					world.setBlockState(pos1.up(y), ACBlocks.darkstone_cobblestone.getDefaultState());
 				else if(state.getBlock() == Blocks.STONEBRICK)
 					switch(state.getValue(BlockStoneBrick.VARIANT)){
 					case CHISELED:

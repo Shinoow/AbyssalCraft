@@ -73,7 +73,6 @@ public class ItemConfigurator extends ItemACBasic {
 					else
 						ParticleUtil.spawnParticleLine(prevPos, pos, 4, (v1, v2) -> {
 							worldIn.spawnParticle(EnumParticleTypes.REDSTONE, v2.x, v2.y, v2.z, 0, 0, 0);
-							return false;
 						});
 
 					prevPos = pos;

@@ -12,8 +12,6 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 import net.minecraft.entity.EntityLiving;
@@ -73,7 +71,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 						world.spawnEntity(mob);
 						spawnedShoggoths++;
 						if(spawnedShoggoths >= 5)
-							world.setBlockState(pos, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE), 2);
+							world.setBlockState(pos, ACBlocks.monolith_stone.getDefaultState(), 2);
 					}
 			}
 		}

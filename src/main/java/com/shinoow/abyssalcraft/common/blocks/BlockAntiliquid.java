@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.material.MapColor;
@@ -54,7 +53,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	public boolean displaceIfPossible(World world, BlockPos pos) {
 
 		if(!world.isRemote && world.getBlockState(pos).getBlock() == ACBlocks.liquid_coralium)
-			world.setBlockState(pos, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.CORALIUM_STONE));
+			world.setBlockState(pos, ACBlocks.coralium_stone.getDefaultState());
 
 		if(!world.isRemote && world.getBlockState(pos).getMaterial() == Material.WATER && world.getBlockState(pos).getBlock() != ACBlocks.liquid_coralium && world.getBlockState(pos).getBlock() != this)
 			world.setBlockState(pos, Blocks.PACKED_ICE.getDefaultState());

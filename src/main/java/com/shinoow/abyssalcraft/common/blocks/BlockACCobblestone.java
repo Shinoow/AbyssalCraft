@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -19,14 +22,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -34,70 +32,74 @@ import net.minecraft.world.World;
 
 public class BlockACCobblestone extends Block {
 
-	public static final PropertyEnum<EnumCobblestoneType> TYPE = PropertyEnum.create("type", EnumCobblestoneType.class);
+	//	public static final PropertyEnum<EnumCobblestoneType> TYPE = PropertyEnum.create("type", EnumCobblestoneType.class);
+	private EnumCobblestoneType TYPE;
+	public static final Map<EnumCobblestoneType, Block> VARIANTS = new HashMap<>();
 
-	public BlockACCobblestone() {
+	public BlockACCobblestone(EnumCobblestoneType type) {
 		super(Material.ROCK);
-		setDefaultState(getDefaultState().withProperty(TYPE, EnumCobblestoneType.DARKSTONE));
+		TYPE = type;
+		//		setDefaultState(getDefaultState().withProperty(TYPE, EnumCobblestoneType.DARKSTONE));
 		setHardness(2.0F);
 		setResistance(10.0F);
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabBlock);
 		setHarvestLevel("pickaxe", 0);
+		VARIANTS.put(TYPE, this);
 	}
 
 	@Override
 	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_)
 	{
-		return state.getValue(TYPE).getMapColor();
+		return TYPE.getMapColor();
 	}
 
 	@Override
 	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
 	{
-		return blockState.getValue(TYPE).getHardness();
+		return TYPE.getHardness();
 	}
 
 	@Override
 	public float getExplosionResistance(World world, BlockPos pos, @Nullable Entity exploder, Explosion explosion)
 	{
-		return world.getBlockState(pos).getValue(TYPE).getResistance();
+		return TYPE.getResistance();
 	}
 
 	@Override
 	public int getHarvestLevel(IBlockState state)
 	{
-		return state.getValue(TYPE).getHarvestLevel();
+		return TYPE.getHarvestLevel();
 	}
 
-	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
-		return getDefaultState().withProperty(TYPE, EnumCobblestoneType.byMetadata(meta));
-	}
+	//	@Override
+	//	public IBlockState getStateFromMeta(int meta)
+	//	{
+	//		return getDefaultState().withProperty(TYPE, EnumCobblestoneType.byMetadata(meta));
+	//	}
+	//
+	//	@Override
+	//	public int getMetaFromState(IBlockState state)
+	//	{
+	//		return state.getValue(TYPE).getMeta();
+	//	}
 
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		return state.getValue(TYPE).getMeta();
-	}
+	//	@Override
+	//	public int damageDropped (IBlockState state) {
+	//		return state.getValue(TYPE).getMeta();
+	//	}
 
-	@Override
-	public int damageDropped (IBlockState state) {
-		return state.getValue(TYPE).getMeta();
-	}
+	//	@Override
+	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+	//		for(int i = 0; i < EnumCobblestoneType.values().length; i++)
+	//			par3List.add(new ItemStack(this, 1, i));
+	//	}
 
-	@Override
-	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-		for(int i = 0; i < EnumCobblestoneType.values().length; i++)
-			par3List.add(new ItemStack(this, 1, i));
-	}
-
-	@Override
-	public BlockStateContainer createBlockState()
-	{
-		return new BlockStateContainer.Builder(this).add(TYPE).build();
-	}
+	//	@Override
+	//	public BlockStateContainer createBlockState()
+	//	{
+	//		return new BlockStateContainer.Builder(this).add(TYPE).build();
+	//	}
 
 	public static enum EnumCobblestoneType implements IStringSerializable
 	{

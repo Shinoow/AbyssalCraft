@@ -18,8 +18,6 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAILesserShoggothAttackMelee;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAILesserShoggothBuildMonolith;
@@ -27,6 +25,7 @@ import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.items.armor.ItemEthaxiumArmor;
 import com.shinoow.abyssalcraft.lib.*;
+import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -310,8 +309,8 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 				world.removeEntity(entity);
 			}
 
-		for (int i = 0; i < 2 * (getBrightness() > 0.1f ? getBrightness() : 0) && getShoggothType() == 4 && ACConfig.particleEntity; ++i)
-			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+		if(getShoggothType() == 4)
+			ParticleUtil.spawnShadowParticles(this);
 
 		double a = Math.toRadians(rotationYaw);
 		double offsetx = -Math.sin(a);
@@ -430,7 +429,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 			return false;
 		}
 		if(par1DamageSource == DamageSource.IN_WALL)
-			if(world.getBlockState(getPosition())  != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE) && world.getGameRules().getBoolean("mobGriefing"))
+			if(world.getBlockState(getPosition())  != ACBlocks.monolith_stone && world.getGameRules().getBoolean("mobGriefing"))
 				sprayAcid(true);
 			else return false;
 		if(par1DamageSource == DamageSource.CACTUS) return false;
@@ -532,7 +531,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 				for(int k = 0; above ? k < 2 : k > -2; k=above ? k + 1 : k - 1){
 					BlockPos pos = new BlockPos(i, above ? aabb.maxY : aabb.minY , j);
 					if(!world.isAirBlock(pos) && world.getBlockState(pos).getBlockHardness(world, pos) < ACConfig.acidResistanceHardness
-							&& world.getBlockState(pos) != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)
+							&& world.getBlockState(pos) != ACBlocks.monolith_stone
 							&& world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_biomass && !world.getBlockState(pos).getBlock().hasTileEntity(world.getBlockState(pos))
 							&& world.getBlockState(pos).getBlockHardness(world, pos) != -1 && world.getBlockState(pos).getBlock().canEntityDestroy(world.getBlockState(pos), world, pos, this))
 						world.destroyBlock(pos, false);

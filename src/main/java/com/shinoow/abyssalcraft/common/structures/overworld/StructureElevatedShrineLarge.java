@@ -26,7 +26,7 @@ public class StructureElevatedShrineLarge extends StructureDarklandsBase {
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
 		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
-		IBlockState cobble = ACBlocks.cobblestone.getDefaultState();
+		IBlockState cobble = ACBlocks.darkstone_cobblestone.getDefaultState();
 		IBlockState cobble_wall = ACBlocks.darkstone_cobblestone_wall.getDefaultState();
 
 		for(int i = -3; i < 4; i++)
@@ -89,8 +89,8 @@ public class StructureElevatedShrineLarge extends StructureDarklandsBase {
 
 				}
 				if((j == -2 || j == 2) && flag1){
-					setBlockAndNotifyAdequately(worldIn, pos.add(i, 2, j), flag ? ACBlocks.stone.getStateFromMeta(7) : cobble);
-					setBlockAndNotifyAdequately(worldIn, pos.add(j, 2, i), flag ? ACBlocks.stone.getStateFromMeta(7) : cobble);
+					setBlockAndNotifyAdequately(worldIn, pos.add(i, 2, j), flag ? ACBlocks.monolith_stone.getDefaultState() : cobble);
+					setBlockAndNotifyAdequately(worldIn, pos.add(j, 2, i), flag ? ACBlocks.monolith_stone.getDefaultState() : cobble);
 
 					for(int k = 0; k < 4; k++)
 						if(k < 3){

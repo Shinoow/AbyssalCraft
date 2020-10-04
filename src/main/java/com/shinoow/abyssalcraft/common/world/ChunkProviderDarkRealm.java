@@ -154,9 +154,9 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 
 							for (int k3 = 0; k3 < 4; ++k3)
 								if ((d15 += d16) > 0.0D)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.darkstone.getDefaultState());
 								else if (k2 * 8 + l2 < b0)
-									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.stone.getDefaultState());
+									primer.setBlockState(k * 4 + i3, k2 * 8 + l2, j1 * 4 + k3, ACBlocks.darkstone.getDefaultState());
 
 							d10 += d12;
 							d11 += d13;
@@ -265,7 +265,7 @@ public class ChunkProviderDarkRealm implements IChunkGenerator
 						{
 							if (k <= 0)
 							{
-								iblockstate = ACBlocks.stone.getDefaultState();
+								iblockstate = ACBlocks.darkstone.getDefaultState();
 								iblockstate1 = Blocks.AIR.getDefaultState();
 							}
 

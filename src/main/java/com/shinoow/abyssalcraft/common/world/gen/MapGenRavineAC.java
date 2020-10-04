@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.world.gen;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
-import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +22,7 @@ import net.minecraft.world.gen.MapGenRavine;
 public class MapGenRavineAC extends MapGenRavine {
 
 	private boolean isACStone(IBlockState state){
-		return state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) != EnumStoneType.ETHAXIUM;
+		return state.getBlock() instanceof BlockACStone && state.getBlock() != ACBlocks.ethaxium;
 	}
 
 	@Override

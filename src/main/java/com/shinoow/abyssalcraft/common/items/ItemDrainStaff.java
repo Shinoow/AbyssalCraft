@@ -85,7 +85,8 @@ public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
 		.filter(r -> getEnergy(stack, r.getName()) >= r.getMaxEnergy())
 		.forEach(r -> {
 			setEnergy(0, stack, r.getName());
-			player.inventory.addItemStackToInventory(r.getOutput());
+			if(!player.inventory.addItemStackToInventory(r.getOutput()))
+				player.dropItem(r.getOutput(), true);
 		});
 
 		return new ActionResult(EnumActionResult.PASS, stack);

@@ -28,7 +28,7 @@ public class StructureRitualGroundsColumns extends StructureDarklandsBase {
 
 		IBlockState chiseled_brick = ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED);
 		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
-		IBlockState cobble = ACBlocks.cobblestone.getDefaultState();
+		IBlockState cobble = ACBlocks.darkstone_cobblestone.getDefaultState();
 
 		for(int i = -3; i < 4; i++)
 			for(int j = -5; j < 6; j++){

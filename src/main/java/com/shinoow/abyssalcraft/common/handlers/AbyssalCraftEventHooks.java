@@ -35,6 +35,7 @@ import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
@@ -52,7 +53,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -85,7 +88,7 @@ public class AbyssalCraftEventHooks {
 						for (int z = 0; z < 16; ++z)
 							if(chunk.getBiome(new BlockPos(x, y, z), event.getWorld().getBiomeProvider()) == ACBiomes.darklands_mountains)
 								if (storage.get(x, y, z).getBlock() == Blocks.STONE)
-									storage.set(x, y, z, ACBlocks.stone.getDefaultState());
+									storage.set(x, y, z, ACBlocks.darkstone.getDefaultState());
 	}
 
 	//	@SubscribeEvent
@@ -193,14 +196,12 @@ public class AbyssalCraftEventHooks {
 				//				player.addStat(ACAchievements.enter_dark_realm, 1);
 			}
 		}
-		if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)
-				&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW){
-			Random rand = new Random();
-			if(ACConfig.particleEntity)
-				event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
-						event.getEntityLiving().posY + rand.nextDouble() * event.getEntityLiving().height,
-						event.getEntityLiving().posZ + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width, 0,0,0);
-		}
+		if(ACConfig.darkRealmSmokeParticles)
+			if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)
+			&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW){
+				if(ACConfig.particleEntity)
+					ParticleUtil.spawnShadowParticles(event.getEntityLiving());
+			}
 	}
 
 	@SubscribeEvent
@@ -300,7 +301,7 @@ public class AbyssalCraftEventHooks {
 				event.setResult(Result.DENY);
 			}
 			if(event.getOriginal().getBlock() == Blocks.COBBLESTONE){
-				event.setReplacement(ACBlocks.cobblestone.getDefaultState());
+				event.setReplacement(ACBlocks.darkstone_cobblestone.getDefaultState());
 				event.setResult(Result.DENY);
 			}
 			if(event.getOriginal().getBlock() == Blocks.PLANKS){

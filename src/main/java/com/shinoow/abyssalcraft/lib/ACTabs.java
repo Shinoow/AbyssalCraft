@@ -15,7 +15,6 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -30,7 +29,7 @@ public class ACTabs {
 
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(Item.getItemFromBlock(ACBlocks.stone));
+			return new ItemStack(ACBlocks.darkstone);
 		}
 	};
 	public static final CreativeTabs tabItems = new CreativeTabs("acitems"){
@@ -65,14 +64,14 @@ public class ACTabs {
 
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(Item.getItemFromBlock(ACBlocks.wooden_crate));
+			return new ItemStack(ACBlocks.wooden_crate);
 		}
 	};
 	public static final CreativeTabs tabCrystals = new CreativeTabs("accrystals"){
 
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(Item.getItemFromBlock(ACBlocks.crystallizer_idle));
+			return new ItemStack(ACBlocks.crystallizer_idle);
 		}
 	};
 	public static final CreativeTabs tabCoins = new CreativeTabs("accoins"){

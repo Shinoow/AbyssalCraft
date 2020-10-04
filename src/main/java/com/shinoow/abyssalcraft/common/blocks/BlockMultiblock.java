@@ -49,17 +49,12 @@ public class BlockMultiblock extends Block {
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Item.getItemFromBlock(ACBlocks.stone);
-	}
-
-	@Override
-	public int damageDropped (IBlockState state) {
-		return 7;
+		return Item.getItemFromBlock(ACBlocks.monolith_stone);
 	}
 
 	@Override
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(ACBlocks.stone, 1, 7);
+		return new ItemStack(ACBlocks.monolith_stone);
 	}
 }

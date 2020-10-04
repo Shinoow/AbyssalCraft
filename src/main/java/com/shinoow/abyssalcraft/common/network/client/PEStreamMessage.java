@@ -60,7 +60,6 @@ public class PEStreamMessage extends AbstractClientMessage<PEStreamMessage> {
 		ParticleUtil.spawnParticleLine(posFrom, posTo, 15, j, (v1, v2) -> {
 			if(AbyssalCraft.proxy.getParticleCount() < 10000)
 				AbyssalCraft.proxy.spawnParticle("PEStream", v2.x, v2.y, v2.z, v1.x * .1, .15, v1.z * .1);
-			return false;
 		});
 	}
 }

@@ -58,12 +58,9 @@ import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.datafix.FixTypes;
-import net.minecraft.util.datafix.IFixableData;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
@@ -310,57 +307,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		StructureHandler.instance().registerStructure(new BasicStructure());
 		StructureHandler.instance().registerStructure(new TotemPoleStructure());
 		StructureHandler.instance().registerStructure(new ArchwayStructure());
-		FMLCommonHandler.instance().getDataFixer().init(modid, 1).registerFix(FixTypes.BLOCK_ENTITY, new IFixableData() {
-
-			@Override
-			public int getFixVersion() {
-
-				return 1;
-			}
-
-			@Override
-			public NBTTagCompound fixTagCompound(NBTTagCompound compound) {
-				final String id = compound.getString("id");
-				switch(id) {
-				case "minecraft:tileentitycrate":
-				case "minecraft:tileentitydghead":
-				case "minecraft:tileentityphead":
-				case "minecraft:tileentitywhead":
-				case "minecraft:tileentityohead":
-				case "minecraft:tileentitycrystallizer":
-				case "minecraft:tileentitytransmutator":
-				case "minecraft:tileentitydradguardspawner":
-				case "minecraft:tileentitychagarothspawner":
-				case "minecraft:tileentityengraver":
-				case "minecraft:tileentitymaterializer":
-				case "minecraft:tileentityritualaltar":
-				case "minecraft:tileentityritualpedestal":
-				case "minecraft:tileentitystatue":
-				case "minecraft:tileentitydecorativestatue":
-				case "minecraft:tileentityshoggothbiomass":
-				case "minecraft:tileentityenergypedestal":
-				case "minecraft:tileentitysacrificialaltar":
-				case "minecraft:tileentitytieredenergypedestal":
-				case "minecraft:tileentitytieredsacrificialaltar":
-				case "minecraft:tileentityjzaharspawner":
-				case "minecraft:tileentitygatekeeperminionspawner":
-				case "minecraft:tileentityenergycollector":
-				case "minecraft:tileentityenergyrelay":
-				case "minecraft:tileentityenergycontainer":
-				case "minecraft:tileentitytieredenergycollector":
-				case "minecraft:tileentitytieredenergyrelay":
-				case "minecraft:tileentitytieredenergycontainer":
-				case "minecraft:tileentityrendingpedestal":
-				case "minecraft:tileentitystatetransformer":
-				case "minecraft:tileentityenergydepositioner":
-					compound.setString("id", id.replace("minecraft", "abyssalcraft"));
-					break;
-				}
-
-				return compound;
-			}
-
-		});
+		FMLCommonHandler.instance().getDataFixer().init(modid, 1);
+		//		modFixs.registerFix(FixTypes.CHUNK, BlockFlatteningDefinitions.createBlockFlattening());
 		ACTabs.tabTools.setRelevantEnchantmentTypes(AbyssalCraftAPI.STAFF_OF_RENDING);
 	}
 
@@ -421,9 +369,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("treeSapling", ACBlocks.dreadlands_sapling);
 		OreDictionary.registerOre("treeLeaves", ACBlocks.darklands_oak_leaves);
 		OreDictionary.registerOre("treeLeaves", ACBlocks.dreadlands_leaves);
-		OreDictionary.registerOre("blockAbyssalnite", new ItemStack(ACBlocks.ingot_block, 1, 0));
-		OreDictionary.registerOre("blockLiquifiedCoralium", new ItemStack(ACBlocks.ingot_block, 1, 1));
-		OreDictionary.registerOre("blockDreadium", new ItemStack(ACBlocks.ingot_block, 1, 2));
+		OreDictionary.registerOre("blockAbyssalnite", new ItemStack(ACBlocks.block_of_abyssalnite));
+		OreDictionary.registerOre("blockLiquifiedCoralium", new ItemStack(ACBlocks.block_of_refined_coralium));
+		OreDictionary.registerOre("blockDreadium", new ItemStack(ACBlocks.block_of_dreadium));
 		OreDictionary.registerOre("ingotCoraliumBrick", ACItems.coralium_brick);
 		OreDictionary.registerOre("ingotDreadium", ACItems.dreadium_ingot);
 		OreDictionary.registerOre("dustSulfur", ACItems.sulfur);
@@ -442,7 +390,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("oreLiquifiedCoralium", ACBlocks.liquified_coralium_ore);
 		OreDictionary.registerOre("ingotEthaxiumBrick", ACItems.ethaxium_brick);
 		OreDictionary.registerOre("ingotEthaxium", ACItems.ethaxium_ingot);
-		OreDictionary.registerOre("blockEthaxium", new ItemStack(ACBlocks.ingot_block, 1, 3));
+		OreDictionary.registerOre("blockEthaxium", new ItemStack(ACBlocks.block_of_ethaxium));
 		OreDictionary.registerOre("nuggetAbyssalnite", new ItemStack(ACItems.ingot_nugget, 1, 0));
 		OreDictionary.registerOre("nuggetLiquifiedCoralium", new ItemStack(ACItems.ingot_nugget, 1, 1));
 		OreDictionary.registerOre("nuggetDreadium", new ItemStack(ACItems.ingot_nugget, 1, 2));
@@ -540,8 +488,8 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		addShapedNBTRecipe(reg, rl("oblivion_deathbomb_0"), null, new ItemStack(ACBlocks.oblivion_deathbomb), "#%%", "&$%", "£%%", '#', ACItems.liquid_antimatter_bucket_stack, '£', ACItems.liquid_coralium_bucket_stack, '%', Blocks.OBSIDIAN, '&', ACItems.oblivion_catalyst, '$', ACBlocks.odb_core);
 		addShapedNBTRecipe(reg, rl("oblivion_deathbomb_1"), null, new ItemStack(ACBlocks.oblivion_deathbomb), "#%%", "&$%", "£%%", '#', ACItems.liquid_coralium_bucket_stack, '£', ACItems.liquid_antimatter_bucket_stack, '%', Blocks.OBSIDIAN, '&', ACItems.oblivion_catalyst, '$', ACBlocks.odb_core);
-		addShapedNBTRecipe(reg, rl("transmutator"), null, new ItemStack(ACBlocks.transmutator_idle, 1), "###", "#%#", "&$&", '#', ACItems.coralium_brick, '%', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(ACBlocks.ingot_block, 1, 1), '$', ACItems.liquid_coralium_bucket_stack);
-		addShapedNBTRecipe(reg, rl("materializer"), null, new ItemStack(ACBlocks.materializer), "###", "#%#", "&$&", '#', ACItems.ethaxium_brick, '%', Blocks.OBSIDIAN, '&', new ItemStack(ACBlocks.ingot_block, 1, 3), '$', ACItems.liquid_antimatter_bucket_stack);
+		addShapedNBTRecipe(reg, rl("transmutator"), null, new ItemStack(ACBlocks.transmutator_idle, 1), "###", "#%#", "&$&", '#', ACItems.coralium_brick, '%', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(ACBlocks.block_of_refined_coralium), '$', ACItems.liquid_coralium_bucket_stack);
+		addShapedNBTRecipe(reg, rl("materializer"), null, new ItemStack(ACBlocks.materializer), "###", "#%#", "&$&", '#', ACItems.ethaxium_brick, '%', Blocks.OBSIDIAN, '&', new ItemStack(ACBlocks.block_of_ethaxium), '$', ACItems.liquid_antimatter_bucket_stack);
 	}
 
 	private ResourceLocation rl(String name){
@@ -594,12 +542,12 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(cstonebrickslab2));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ethaxium_brick_slab));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ethaxiumslab2));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssal_gateway));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreaded_gateway));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.omothol_gateway));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.coralium_fire));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreaded_fire));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.omothol_fire));
+		//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssal_gateway));
+		//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreaded_gateway));
+		//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.omothol_gateway));
+		//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.coralium_fire));
+		//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreaded_fire));
+		//		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.omothol_fire));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.transmutator_active));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.crystallizer_active));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.engraver));
@@ -647,9 +595,15 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dark_ethaxium_brick_fence));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_altar));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.cthulhu_statue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.hastur_statue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.jzahar_statue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.azathoth_statue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.nyarlathotep_statue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.yog_sothoth_statue));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.shub_niggurath_statue));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.energy_pedestal));
-		FMLInterModComms.sendMessage( "chiselsandbits", "ignoreblocklogic", ACBlocks.stone.getRegistryName());
+		FMLInterModComms.sendMessage( "chiselsandbits", "ignoreblocklogic", ACBlocks.coralium_stone.getRegistryName());
 		FMLInterModComms.sendMessage( "chiselsandbits", "ignoreblocklogic", ACBlocks.abyssal_sand.getRegistryName());
 		FMLInterModComms.sendMessage( "chiselsandbits", "ignoreblocklogic", ACBlocks.abyssal_sand_glass.getRegistryName());
 	}

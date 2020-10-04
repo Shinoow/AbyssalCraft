@@ -6,12 +6,10 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:stone",
-      "data": 6
+      "item": "abyssalcraft:omotholstone"
     },
     "%": {
-      "item": "abyssalcraft:stone",
-      "data": 5
+      "item": "abyssalcraft:ethaxium"
     }
   },
   "result": {

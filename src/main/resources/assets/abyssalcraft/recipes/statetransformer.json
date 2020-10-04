@@ -10,8 +10,7 @@
       "item": "#CHESTWOOD"
     },
     "#": {
-      "item": "abyssalcraft:stone",
-      "data": 7
+      "item": "abyssalcraft:monolithstone"
     },
     "\u0026": {
       "item": "abyssalcraft:transmutationgem",
