@@ -12,6 +12,8 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelShadowBeast;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
+import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
@@ -26,7 +28,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderShadowBeast extends RenderLiving {
+public class RenderShadowBeast extends RenderLiving<EntityShadowBeast> {
 
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/elite/shadowbeast.png");
 
@@ -39,10 +41,11 @@ public class RenderShadowBeast extends RenderLiving {
 	{
 		super(manager, model, 0.0F);
 		addLayer(new LayerCustomHead(model.head));
+		addLayer(new LayerEyes<>(this, new ResourceLocation("abyssalcraft", "textures/model/elite/shadowbeast_eyes.png")).addAlpha(e -> e.getBrightness()));
 	}
 
 	@Override
-	protected void renderModel(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
+	protected void renderModel(EntityShadowBeast entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, entitylivingbaseIn.getBrightness());
 		GlStateManager.enableBlend();
@@ -52,7 +55,7 @@ public class RenderShadowBeast extends RenderLiving {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(EntityShadowBeast entity) {
 
 		return mobTexture;
 	}
