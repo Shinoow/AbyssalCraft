@@ -118,8 +118,11 @@ public class ItemTransferEventHandler {
 	}
 
 	private boolean hasCap(TileEntity te) {
-		IItemTransferCapability cap = ItemTransferCapability.getCap(te);
-		return cap != null && cap.isRunning();
+		if(te.hasCapability(ItemTransferCapabilityProvider.ITEM_TRANSFER_CAP, null)) {
+			IItemTransferCapability cap = ItemTransferCapability.getCap(te);
+			return cap != null && cap.isRunning();
+		}
+		return false;
 	}
 
 	private boolean isInFilter(NonNullList<ItemStack> filter, ItemStack stack, boolean nbt) {
