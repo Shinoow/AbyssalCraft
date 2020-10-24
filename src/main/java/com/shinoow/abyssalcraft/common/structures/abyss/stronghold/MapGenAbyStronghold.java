@@ -91,7 +91,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 			double d1 = blockpos$mutableblockpos.distanceSq(pos);
 
-			if ((blockpos == null) || (d1 < d0))
+			if (blockpos == null || d1 < d0)
 			{
 				blockpos = new BlockPos(blockpos$mutableblockpos);
 				d0 = d1;

@@ -57,7 +57,7 @@ public class EntityAIAntiCreeperSwell extends EntityAIBase
 	@Override
 	public void updateTask()
 	{
-		if ((creeperAttackTarget == null) || (swellingCreeper.getDistanceSq(creeperAttackTarget) > 49.0D) || !swellingCreeper.getEntitySenses().canSee(creeperAttackTarget))
+		if (creeperAttackTarget == null || swellingCreeper.getDistanceSq(creeperAttackTarget) > 49.0D || !swellingCreeper.getEntitySenses().canSee(creeperAttackTarget))
 			swellingCreeper.setCreeperState(-1);
 		else
 			swellingCreeper.setCreeperState(1);

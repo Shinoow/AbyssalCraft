@@ -76,7 +76,7 @@ public class CrystallizerRecipes {
 
 		return experienceList.entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(e -> e.getValue())
+				.map(Entry::getValue)
 				.findFirst()
 				.orElse(0.0F);
 	}

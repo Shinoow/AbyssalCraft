@@ -100,22 +100,7 @@ public class StructureShoggothPit extends WorldGenerator {
 							world.setBlockState(entry.getKey(), monolith_stone);
 						else
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.EAST));
-					} else if("statue5".equals(entry.getValue())) {
-						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolith_stone);
-						else
-							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.WEST));
-					} else if("statue6".equals(entry.getValue())) {
-						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolith_stone);
-						else
-							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.WEST));
-					} else if("statue7".equals(entry.getValue())) {
-						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolith_stone);
-						else
-							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.WEST));
-					} else if("statue8".equals(entry.getValue()))
+					} else if("statue5".equals(entry.getValue()) || "statue6".equals(entry.getValue()) || "statue7".equals(entry.getValue()) || "statue8".equals(entry.getValue()))
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
 						else
