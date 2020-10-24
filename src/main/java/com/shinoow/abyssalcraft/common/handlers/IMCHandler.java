@@ -31,7 +31,7 @@ public class IMCHandler {
 	private static final Logger logger = LogManager.getLogger("AbyssalCraft|IMC");
 
 	public static void handleIMC(FMLInterModComms.IMCEvent event){
-		List<String> senders = new ArrayList<String>();
+		List<String> senders = new ArrayList<>();
 		for (final FMLInterModComms.IMCMessage imcMessage : event.getMessages())
 			if(imcMessage.key.equals("shoggothFood"))
 				try {

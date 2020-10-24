@@ -78,65 +78,65 @@ public class ClientProxy extends CommonProxy {
 
 		OBJLoader.INSTANCE.addDomain(AbyssalCraft.modid);
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilpig.class, manager -> new RenderEvilPig(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDepthsGhoul.class, manager -> new RenderDepthsGhoul(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAbyssalZombie.class, manager -> new RenderAbyssalZombie(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityODBPrimed.class, manager -> new RenderODB(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityODBcPrimed.class, manager -> new RenderODBc(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityJzahar.class, manager -> new RenderJzahar(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAbygolem.class, manager -> new RenderAbyssalniteGolem(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadgolem.class, manager -> new RenderDreadedAbyssalniteGolem(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadguard.class, manager -> new RenderDreadguard(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDragonMinion.class, manager -> new RenderDragonMinion(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDragonBoss.class, manager -> new RenderDragonBoss(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilpig.class, RenderEvilPig::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDepthsGhoul.class, RenderDepthsGhoul::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAbyssalZombie.class, RenderAbyssalZombie::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityODBPrimed.class, RenderODB::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityODBcPrimed.class, RenderODBc::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityJzahar.class, RenderJzahar::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAbygolem.class, RenderAbyssalniteGolem::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadgolem.class, RenderDreadedAbyssalniteGolem::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadguard.class, RenderDreadguard::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonMinion.class, RenderDragonMinion::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonBoss.class, RenderDragonBoss::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityPSDLTracker.class, manager -> new RenderSnowball(manager, ACItems.powerstone_tracker, Minecraft.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadowCreature.class, manager -> new RenderShadowCreature(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadowMonster.class, manager -> new RenderShadowMonster(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadling.class, manager -> new RenderDreadling(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSpawn.class, manager -> new RenderDreadSpawn(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonPig.class, manager -> new RenderDemonPig(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonGoliath.class, manager -> new RenderSkeletonGoliath(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothSpawn.class, manager -> new RenderChagarothSpawn(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothFist.class, manager -> new RenderChagarothFist(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityChagaroth.class, manager -> new RenderChagaroth(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityShadowBeast.class, manager -> new RenderShadowBeast(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySacthoth.class, manager -> new RenderSacthoth(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityRemnant.class, manager -> new RenderRemnant(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityOmotholGhoul.class, manager -> new RenderOmotholGhoul(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCoraliumArrow.class, manager -> new RenderCoraliumArrow(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperMinion.class, manager -> new RenderGatekeeperMinion(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterDreadSpawn.class, manager -> new RenderGreaterDreadSpawn(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityLesserDreadbeast.class, manager -> new RenderLesserDreadbeast(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadowCreature.class, RenderShadowCreature::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadowMonster.class, RenderShadowMonster::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadling.class, RenderDreadling::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSpawn.class, RenderDreadSpawn::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonPig.class, RenderDemonPig::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonGoliath.class, RenderSkeletonGoliath::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothSpawn.class, RenderChagarothSpawn::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityChagarothFist.class, RenderChagarothFist::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityChagaroth.class, RenderChagaroth::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityShadowBeast.class, RenderShadowBeast::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySacthoth.class, RenderSacthoth::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityRemnant.class, RenderRemnant::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityOmotholGhoul.class, RenderOmotholGhoul::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityCoraliumArrow.class, RenderCoraliumArrow::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperMinion.class, RenderGatekeeperMinion::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterDreadSpawn.class, RenderGreaterDreadSpawn::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityLesserDreadbeast.class, RenderLesserDreadbeast::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSlug.class, manager -> new RenderSnowball(manager, ACItems.dread_fragment, Minecraft.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, manager -> new RenderLesserShoggoth(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilCow.class, manager -> new RenderEvilCow(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilChicken.class, manager -> new RenderEvilChicken(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonCow.class, manager -> new RenderDemonCow(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonChicken.class, manager -> new RenderDemonChicken(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, RenderLesserShoggoth::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilCow.class, RenderEvilCow::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilChicken.class, RenderEvilChicken::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonCow.class, RenderDemonCow::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonChicken.class, RenderDemonChicken::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGatekeeperEssence.class, manager -> new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityEvilSheep.class, manager -> new RenderEvilSheep(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDemonSheep.class, manager -> new RenderDemonSheep(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCoraliumSquid.class, manager -> new RenderCoraliumSquid(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityEvilSheep.class, RenderEvilSheep::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDemonSheep.class, RenderDemonSheep::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityCoraliumSquid.class, RenderCoraliumSquid::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityInkProjectile.class, manager -> new RenderSnowball(manager, Items.DYE, Minecraft.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreadedCharge.class, manager -> new RenderDreadedCharge(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreadedCharge.class, RenderDreadedCharge::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAcidProjectile.class, manager -> new RenderSnowball(manager, ItemHandler.shoggoth_projectile, Minecraft.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBlackHole.class, manager -> new RenderBlackHole(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityImplosion.class, manager -> new RenderImplosion(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityShubOffspring.class, manager -> new RenderShubOffspring(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlackHole.class, RenderBlackHole::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityImplosion.class, RenderImplosion::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityShubOffspring.class, RenderShubOffspring::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpiritItem.class, manager -> new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPortal.class, manager -> new RenderPortal(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPortal.class, RenderPortal::new);
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, manager -> new RenderAntiAbyssalZombie(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, manager -> new RenderAntiBat(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiChicken.class, manager -> new RenderAntiChicken(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCow.class, manager -> new RenderAntiCow(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCreeper.class, manager -> new RenderAntiCreeper(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiGhoul.class, manager -> new RenderAntiGhoul(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPig.class, manager -> new RenderAntiPig(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPlayer.class, manager -> new RenderAntiPlayer(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSkeleton.class, manager -> new RenderAntiSkeleton(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSpider.class, manager -> new RenderAntiSpider(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityAntiZombie.class, manager -> new RenderAntiZombie(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, RenderAntiAbyssalZombie::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, RenderAntiBat::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiChicken.class, RenderAntiChicken::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCow.class, RenderAntiCow::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiCreeper.class, RenderAntiCreeper::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiGhoul.class, RenderAntiGhoul::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPig.class, RenderAntiPig::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiPlayer.class, RenderAntiPlayer::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSkeleton.class, RenderAntiSkeleton::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiSpider.class, RenderAntiSpider::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntiZombie.class, RenderAntiZombie::new);
 
 		MinecraftForge.EVENT_BUS.register(new AbyssalCraftClientEventHooks());
 
@@ -262,12 +262,9 @@ public class ClientProxy extends CommonProxy {
 			Particle var21 = null;
 			double var22 = 16.0D;
 
-			if (var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22)
+			if ((var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22) || (var14 > 1))
 				return;
-			else if (var14 > 1)
-				return;
-			else
-			{
+			else {
 				if (particleName.equals("CorBlood"))
 				{
 					var21 = new ACParticleFX(theWorld, posX, posY, posZ, (float)velX, (float)velY, (float)velZ);

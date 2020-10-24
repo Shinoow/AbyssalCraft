@@ -21,8 +21,6 @@ import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -41,7 +39,7 @@ public class RenderShadowBeast extends RenderLiving<EntityShadowBeast> {
 	{
 		super(manager, model, 0.0F);
 		addLayer(new LayerCustomHead(model.head));
-		addLayer(new LayerEyes<>(this, new ResourceLocation("abyssalcraft", "textures/model/elite/shadowbeast_eyes.png")).addAlpha(e -> e.getBrightness()));
+		addLayer(new LayerEyes<>(this, new ResourceLocation("abyssalcraft", "textures/model/elite/shadowbeast_eyes.png")).addAlpha(EntityShadowBeast::getBrightness));
 	}
 
 	@Override

@@ -101,7 +101,7 @@ public class BlockACCobblestone extends Block {
 	//		return new BlockStateContainer.Builder(this).add(TYPE).build();
 	//	}
 
-	public static enum EnumCobblestoneType implements IStringSerializable
+	public enum EnumCobblestoneType implements IStringSerializable
 	{
 		DARKSTONE(0, "darkstone", "darkstone_cobble", 0, 2.2F, 12.0F, MapColor.BLACK),
 		ABYSSAL_STONE(1, "abyssalstone", "abyssalcobblestone", 2, 2.6F, 12.0F, MapColor.GREEN),

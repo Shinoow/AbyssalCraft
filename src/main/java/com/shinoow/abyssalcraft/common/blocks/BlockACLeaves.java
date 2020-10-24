@@ -43,7 +43,7 @@ public class BlockACLeaves extends BlockLeaves {
 
 	public BlockACLeaves(Block sapling, MapColor mapColor) {
 		setCreativeTab(ACTabs.tabDecoration);
-		setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+		setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
 		this.sapling = sapling;
 		this.mapColor = mapColor;
 	}
@@ -82,7 +82,7 @@ public class BlockACLeaves extends BlockLeaves {
 	@Override
 	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> ret = new ArrayList<>();
 		ret.add(new ItemStack(this, 1));
 		return ret;
 	}
@@ -90,7 +90,7 @@ public class BlockACLeaves extends BlockLeaves {
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+		List<ItemStack> ret = new java.util.ArrayList<>();
 
 		Random rand = world instanceof World ? ((World)world).rand : RANDOM;
 
@@ -107,13 +107,13 @@ public class BlockACLeaves extends BlockLeaves {
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
 	{
-		return getStateFromMeta(meta).withProperty(CHECK_DECAY, Boolean.valueOf(false)).withProperty(DECAYABLE, Boolean.valueOf(false));
+		return getStateFromMeta(meta).withProperty(CHECK_DECAY, false).withProperty(DECAYABLE, false);
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
+		return getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0).withProperty(CHECK_DECAY, (meta & 8) > 0);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class BlockACLeaves extends BlockLeaves {
 		if (!state.getValue(DECAYABLE).booleanValue())
 			i |= 4;
 
-		if (state.getValue(CHECK_DECAY).booleanValue())
+		if (state.getValue(CHECK_DECAY))
 			i |= 8;
 
 		return i;

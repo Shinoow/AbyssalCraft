@@ -31,11 +31,11 @@ public interface IAmplifierCharm {
 	 * Gets the amplifier associated with the item
 	 * @param stack ItemStack containing the item
 	 */
-	public AmplifierType getAmplifier(ItemStack stack);
+	AmplifierType getAmplifier(ItemStack stack);
 
 	/**
 	 * Gets the deity associated with the item (can be null)
 	 * @param stack ItemStack containing the item
 	 */
-	public DeityType getDeity(ItemStack stack);
+	DeityType getDeity(ItemStack stack);
 }

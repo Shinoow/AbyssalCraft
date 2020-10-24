@@ -176,6 +176,6 @@ public class ItemPortalPlacer extends ItemACBasic {
 			playerIn.sendStatusMessage(new TextComponentTranslation(DimensionDataRegistry.instance().getDimensionName(newDim)), true);
 		}
 
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
+		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}
 }

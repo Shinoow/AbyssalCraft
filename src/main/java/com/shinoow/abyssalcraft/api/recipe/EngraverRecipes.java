@@ -110,7 +110,7 @@ public class EngraverRecipes {
 
 		return experienceList.entrySet().stream()
 				.filter(e -> areStacksEqual(stack, e.getKey()))
-				.map(e -> e.getValue().floatValue())
+				.map(e -> e.getValue())
 				.findFirst()
 				.orElse(0.0F);
 	}

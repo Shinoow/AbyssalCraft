@@ -25,12 +25,12 @@ public interface IUnlockCondition {
 	 * @param stuff Condition Object to compare
 	 * @return True if they're the same, otherwise false
 	 */
-	public boolean areConditionObjectsEqual(Object stuff);
+	boolean areConditionObjectsEqual(Object stuff);
 
 	/**
 	 * Returns the Object this condition checks for
 	 */
-	public Object getConditionObject();
+	Object getConditionObject();
 
 	/**
 	 * Integer associated with the {@link IConditionProcessor}<br>
@@ -38,5 +38,5 @@ public interface IUnlockCondition {
 	 * Be sure to register one in {@link ConditionProcessorRegistr}<br>
 	 * when adding your own Unlock Conditions
 	 */
-	public int getType();
+	int getType();
 }

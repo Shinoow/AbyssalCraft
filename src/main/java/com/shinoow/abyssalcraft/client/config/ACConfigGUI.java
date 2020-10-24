@@ -34,7 +34,7 @@ public class ACConfigGUI extends GuiConfig {
 	}
 
 	private static List<IConfigElement> getConfigElements(){
-		List<IConfigElement> list = new ArrayList<IConfigElement>();
+		List<IConfigElement> list = new ArrayList<>();
 		list.add(new DummyCategoryElement(I18n.format("ac_biomes"), "ac_biomes", BiomesEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_client"), "ac_client", ClientEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_mod_compat"), "ac_mod_compat", CompatEntry.class));

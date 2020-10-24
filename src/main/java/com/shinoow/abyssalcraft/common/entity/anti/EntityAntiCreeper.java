@@ -101,9 +101,9 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(STATE, Integer.valueOf(-1));
-		dataManager.register(POWERED, Boolean.valueOf(false));
-		dataManager.register(IGNITED, Boolean.valueOf(false));
+		dataManager.register(STATE, -1);
+		dataManager.register(POWERED, false);
+		dataManager.register(IGNITED, false);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
 
-		if (dataManager.get(POWERED).booleanValue())
+		if (dataManager.get(POWERED))
 			par1NBTTagCompound.setBoolean("powered", true);
 
 		par1NBTTagCompound.setShort("Fuse", (short)fuseTime);
@@ -124,7 +124,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
 
-		dataManager.set(POWERED, Boolean.valueOf(par1NBTTagCompound.getBoolean("powered")));
+		dataManager.set(POWERED, par1NBTTagCompound.getBoolean("powered"));
 
 		if (par1NBTTagCompound.hasKey("Fuse", 99))
 			fuseTime = par1NBTTagCompound.getShort("Fuse");
@@ -213,7 +213,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
 	public boolean getPowered()
 	{
-		return dataManager.get(POWERED).booleanValue();
+		return dataManager.get(POWERED);
 	}
 
 	/**
@@ -241,7 +241,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	 */
 	public int getCreeperState()
 	{
-		return dataManager.get(STATE).intValue();
+		return dataManager.get(STATE);
 	}
 
 	/**
@@ -249,14 +249,14 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	 */
 	public void setCreeperState(int state)
 	{
-		dataManager.set(STATE, Integer.valueOf(state));
+		dataManager.set(STATE, state);
 	}
 
 	@Override
 	public void onStruckByLightning(EntityLightningBolt lightningBolt)
 	{
 		super.onStruckByLightning(lightningBolt);
-		dataManager.set(POWERED, Boolean.valueOf(true));
+		dataManager.set(POWERED, true);
 	}
 
 	@Override
@@ -291,11 +291,11 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
 	public boolean hasIgnited()
 	{
-		return dataManager.get(IGNITED).booleanValue();
+		return dataManager.get(IGNITED);
 	}
 
 	public void ignite()
 	{
-		dataManager.set(IGNITED, Boolean.valueOf(true));
+		dataManager.set(IGNITED, true);
 	}
 }

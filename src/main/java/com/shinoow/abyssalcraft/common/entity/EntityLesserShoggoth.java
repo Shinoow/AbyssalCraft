@@ -131,10 +131,10 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CHILD, Byte.valueOf((byte)0));
-		dataManager.register(TYPE, Integer.valueOf(0));
-		dataManager.register(FOOD, Integer.valueOf(0));
-		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
+		dataManager.register(CHILD, (byte)0);
+		dataManager.register(TYPE, 0);
+		dataManager.register(FOOD, 0);
+		dataManager.register(CLIMBING, (byte)0);
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 
 	public void setChild(boolean par1)
 	{
-		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		dataManager.set(CHILD, (byte)(par1 ? 1 : 0));
 
 		if (world != null && !world.isRemote)
 		{
@@ -187,12 +187,12 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 
 	public void setShoggothType(int par1) {
 
-		dataManager.set(TYPE, Integer.valueOf(par1));
+		dataManager.set(TYPE, par1);
 	}
 
 	public void setFoodLevel(int par1){
 
-		dataManager.set(FOOD, Integer.valueOf(par1));
+		dataManager.set(FOOD, par1);
 	}
 
 	public int getFoodLevel(){
@@ -202,7 +202,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 
 	public void feed(EntityLivingBase entity){
 		int food = getFoodLevel() + getPointsFromSize(entity.height * entity.width);
-		dataManager.set(FOOD, Integer.valueOf(food));
+		dataManager.set(FOOD, food);
 		playSound(ACSounds.shoggoth_consume, getSoundVolume(), getSoundPitch());
 	}
 
@@ -303,7 +303,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 			for(EntityItem entity : world.getEntitiesWithinAABB(EntityItem.class, getEntityBoundingBox())) {
 				if(entity.getItem().getItem() instanceof ItemFood) {
 					int food = getFoodLevel() + entity.getItem().getCount();
-					dataManager.set(FOOD, Integer.valueOf(food));
+					dataManager.set(FOOD, food);
 					playSound(ACSounds.shoggoth_consume, getSoundVolume(), getSoundPitch());
 				} else playSound(SoundEvents.ENTITY_ITEM_BREAK, getSoundVolume(), 1.0F);
 				world.removeEntity(entity);
@@ -388,7 +388,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, b0);
 	}
 
 	@Override

@@ -105,7 +105,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
+		dataManager.register(CLIMBING, (byte)0);
 	}
 
 	@Override
@@ -181,7 +181,7 @@ public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, I
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, b0);
 	}
 
 	@Override

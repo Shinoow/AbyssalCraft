@@ -153,7 +153,7 @@ public class BlockCrystallizer extends BlockContainer
 			if (tileentitycrystallizer instanceof TileEntityCrystallizer)
 			{
 				InventoryHelper.dropInventoryItems(par1World, pos, (TileEntityCrystallizer)tileentitycrystallizer);
-				par1World.updateComparatorOutputLevel(pos, this);;
+				par1World.updateComparatorOutputLevel(pos, this);
 			}
 		}
 

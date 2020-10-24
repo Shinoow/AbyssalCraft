@@ -154,9 +154,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 	}
 
 	private Biome getRealBiome(Biome b){
-		if(b == ACBiomes.darklands)
-			return Biomes.PLAINS;
-		else if(b == ACBiomes.darklands_plains)
+		if((b == ACBiomes.darklands) || (b == ACBiomes.darklands_plains))
 			return Biomes.PLAINS;
 		else if(b == ACBiomes.darklands_forest)
 			return Biomes.FOREST;

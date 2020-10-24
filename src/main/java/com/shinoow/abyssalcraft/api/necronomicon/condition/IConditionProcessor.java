@@ -31,5 +31,5 @@ public interface IConditionProcessor {
 	 * @param player Player context for the capability holder
 	 * @return True if the condition has been met, otherwise false
 	 */
-	public boolean processUnlock(IUnlockCondition condition, INecroDataCapability cap, EntityPlayer player);
+	boolean processUnlock(IUnlockCondition condition, INecroDataCapability cap, EntityPlayer player);
 }

@@ -27,5 +27,5 @@ public interface IEnergyAmplifier {
 	/**
 	 * Gets the amplifier type associated with the block
 	 */
-	public AmplifierType getAmplifierType();
+	AmplifierType getAmplifierType();
 }

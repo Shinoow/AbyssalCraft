@@ -39,7 +39,7 @@ public class RenderShadowMonster extends RenderLiving<EntityShadowMonster> {
 	{
 		super(manager, model, 0.0F);
 		addLayer(new LayerCustomHead(model.Head));
-		addLayer(new LayerEyes<>(this, new ResourceLocation("abyssalcraft", "textures/model/shadowmonster_eyes.png")).addAlpha(e -> e.getBrightness()));
+		addLayer(new LayerEyes<>(this, new ResourceLocation("abyssalcraft", "textures/model/shadowmonster_eyes.png")).addAlpha(EntityShadowMonster::getBrightness));
 	}
 
 	@Override

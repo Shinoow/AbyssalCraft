@@ -28,7 +28,7 @@ public interface IACPlugin {
 	 * Used to fetch the mod name
 	 * @return A String representing the mod's name
 	 */
-	public String getModName();
+	String getModName();
 
 	/**
 	 * Determines whether or not this plugin can be loaded.<br>
@@ -37,21 +37,21 @@ public interface IACPlugin {
 	 * the plugin, or just checking if the mod the plugin's for is present).
 	 * @return True if the plugin can be loaded, otherwise false.
 	 */
-	public boolean canLoad();
+	boolean canLoad();
 
 	/**
 	 * Won't be called by AbyssalCraft, allowing you to register any new Item/Block/Entity<br>
 	 * your plugin might add. Should be called at the pre-init stage.
 	 */
-	public void preInit();
+	void preInit();
 
 	/**
 	 * Will be called at the end of the init stage
 	 */
-	public void init();
+	void init();
 
 	/**
 	 * Will be called at the end of the post-init stage
 	 */
-	public void postInit();
+	void postInit();
 }

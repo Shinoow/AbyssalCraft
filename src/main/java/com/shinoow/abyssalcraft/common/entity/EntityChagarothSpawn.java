@@ -101,7 +101,7 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
+		dataManager.register(CLIMBING, (byte)0);
 	}
 
 	@Override
@@ -171,7 +171,7 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, b0);
 	}
 
 	@Override

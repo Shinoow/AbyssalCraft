@@ -15,7 +15,6 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
-import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 
 import net.minecraft.entity.player.EntityPlayer;

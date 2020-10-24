@@ -158,9 +158,7 @@ public class NecroData implements INecroData {
 	 * @since 1.6
 	 */
 	public static class Chapter implements INecroData {
-		private NavigableMap<Integer, Page> pages = new TreeMap<>((o1, o2) -> {
-			return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
-		});
+		private NavigableMap<Integer, Page> pages = new TreeMap<>((o1, o2) -> (o1 > o2 ? 1 : o1 < o2 ? -1 : 0));
 		private String identifier;
 		private String title;
 		private IUnlockCondition condition;
@@ -276,9 +274,7 @@ public class NecroData implements INecroData {
 		 */
 		public void removePage(int pageNum){
 			pages.remove(pageNum);
-			NavigableMap<Integer, Page> newPages = new TreeMap<>((o1, o2) -> {
-				return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
-			});
+			NavigableMap<Integer, Page> newPages = new TreeMap<>((o1, o2) -> (o1 > o2 ? 1 : o1 < o2 ? -1 : 0));
 			for(Entry<Integer, Page> e : pages.entrySet())
 				if(e.getKey() < pageNum)
 					newPages.put(e.getKey(), e.getValue());
@@ -312,9 +308,7 @@ public class NecroData implements INecroData {
 		 */
 		public void insertPage(Page page) {
 			if(hasPage(page.pageNum)) {
-				NavigableMap<Integer, Page> newPages = new TreeMap<>((o1, o2) -> {
-					return o1 > o2 ? 1 : o1 < o2 ? -1 : 0;
-				});
+				NavigableMap<Integer, Page> newPages = new TreeMap<>((o1, o2) -> (o1 > o2 ? 1 : o1 < o2 ? -1 : 0));
 				for(Entry<Integer, Page> e : pages.entrySet())
 					if(e.getKey() < page.pageNum)
 						newPages.put(e.getKey(), e.getValue());

@@ -124,7 +124,7 @@ public class BlockTieredEnergyPedestal extends BlockContainer {
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		return new java.util.ArrayList<ItemStack>();
+		return new java.util.ArrayList<>();
 	}
 
 	@Override

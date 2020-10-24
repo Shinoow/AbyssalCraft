@@ -125,12 +125,12 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 
 	public void setIsBatHanging(boolean par1)
 	{
-		byte b0 = dataManager.get(HANGING).byteValue();
+		byte b0 = dataManager.get(HANGING);
 
 		if (par1)
-			dataManager.set(HANGING, Byte.valueOf((byte)(b0 | 1)));
+			dataManager.set(HANGING, (byte)(b0 | 1));
 		else
-			dataManager.set(HANGING, Byte.valueOf((byte)(b0 & -2)));
+			dataManager.set(HANGING, (byte)(b0 & -2));
 	}
 
 	@Override
@@ -232,14 +232,14 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
-		dataManager.set(HANGING, Byte.valueOf(par1NBTTagCompound.getByte("BatFlags")));
+		dataManager.set(HANGING, par1NBTTagCompound.getByte("BatFlags"));
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setByte("BatFlags", dataManager.get(HANGING).byteValue());
+		par1NBTTagCompound.setByte("BatFlags", dataManager.get(HANGING));
 	}
 
 

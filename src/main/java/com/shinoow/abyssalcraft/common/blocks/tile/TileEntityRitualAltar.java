@@ -232,7 +232,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		if(stack.getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)stack.getItem()).isOwner(player, stack))
 			if(RitualRegistry.instance().canPerformAction(world.provider.getDimension(), ((ItemNecronomicon)stack.getItem()).getBookType()))
 				if(canPerform()){
-					ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)stack.getItem()).getBookType(), pedestals.stream().map(p -> p.getItem()).toArray(ItemStack[]::new), item);
+					ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)stack.getItem()).getBookType(), pedestals.stream().map(IRitualPedestal::getItem).toArray(ItemStack[]::new), item);
 					if(ritual != null && NecroDataCapability.getCap(player).isUnlocked(ritual.getUnlockCondition(), player))
 						if(ritual.requiresSacrifice()){
 							if(!world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)).isEmpty())

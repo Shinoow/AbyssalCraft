@@ -34,7 +34,7 @@ public class RenderSacthoth extends RenderLiving<EntitySacthoth> {
 	{
 		super(manager, new ModelSacthoth(), 0.0F);
 		addLayer(new LayerSacthothHeldItem(this));
-		addLayer(new LayerEyes<>(this, new ResourceLocation("abyssalcraft", "textures/model/boss/sacthoth_eyes.png")).addAlpha(e -> e.getBrightness()));
+		addLayer(new LayerEyes<>(this, new ResourceLocation("abyssalcraft", "textures/model/boss/sacthoth_eyes.png")).addAlpha(EntitySacthoth::getBrightness));
 	}
 
 	@Override

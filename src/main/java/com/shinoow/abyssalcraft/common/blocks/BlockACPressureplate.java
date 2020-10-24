@@ -40,7 +40,7 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 		super(par3Material);
 		sensitivity = par4EnumMobType;
 		this.setHarvestLevel(par5, par6);
-		setDefaultState(blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));
+		setDefaultState(blockState.getBaseState().withProperty(POWERED, false));
 		setSoundType(stepSound);
 	}
 
@@ -48,20 +48,20 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 	{
 		super(par3Material);
 		sensitivity = par4EnumMobType;
-		setDefaultState(blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));
+		setDefaultState(blockState.getBaseState().withProperty(POWERED, false));
 		setSoundType(stepSound);
 	}
 
 	@Override
 	protected int getRedstoneStrength(IBlockState state)
 	{
-		return state.getValue(POWERED).booleanValue() ? 15 : 0;
+		return state.getValue(POWERED) ? 15 : 0;
 	}
 
 	@Override
 	protected IBlockState setRedstoneStrength(IBlockState state, int strength)
 	{
-		return state.withProperty(POWERED, Boolean.valueOf(strength > 0));
+		return state.withProperty(POWERED, strength > 0);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(POWERED, Boolean.valueOf(meta == 1));
+		return getDefaultState().withProperty(POWERED, meta == 1);
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return state.getValue(POWERED).booleanValue() ? 1 : 0;
+		return state.getValue(POWERED) ? 1 : 0;
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class BlockACPressureplate extends BlockBasePressurePlate
 		return new BlockStateContainer(this, new IProperty[] {POWERED});
 	}
 
-	public static enum Sensitivity
+	public enum Sensitivity
 	{
 		EVERYTHING,
 		MOBS;

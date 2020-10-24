@@ -77,7 +77,7 @@ public class BlockACStone extends Block {
 		return Item.getItemFromBlock(TYPE.getDrop());
 	}
 
-	public static enum EnumStoneType implements IStringSerializable
+	public enum EnumStoneType implements IStringSerializable
 	{
 		DARKSTONE(0, "darkstone", "darkstone", 0, 1.65F, 12.0F, MapColor.BLACK, () -> ACBlocks.darkstone_cobblestone),
 		ABYSSAL_STONE(1, "abyssalstone", "abystone", 2, 1.8F, 12.0F, MapColor.GREEN, () -> ACBlocks.abyssal_cobblestone),

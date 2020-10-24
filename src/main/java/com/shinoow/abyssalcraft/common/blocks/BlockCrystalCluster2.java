@@ -92,7 +92,7 @@ public class BlockCrystalCluster2 extends BlockACBasic {
 		return new BlockStateContainer.Builder(this).add(TYPE).build();
 	}
 
-	public static enum EnumCrystalType2 implements IStringSerializable
+	public enum EnumCrystalType2 implements IStringSerializable
 	{
 		TIN(0, "tin"),
 		COPPER(1, "copper"),

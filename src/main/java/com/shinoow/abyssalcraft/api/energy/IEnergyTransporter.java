@@ -28,5 +28,5 @@ public interface IEnergyTransporter extends IEnergyContainer {
 	 * @param energy PE quanta to transfer
 	 * @return True if the transfer succeeded, otherwise false
 	 */
-	public void transferPE(EnumFacing facing, float energy);
+	void transferPE(EnumFacing facing, float energy);
 }
