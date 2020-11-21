@@ -341,7 +341,7 @@ public class InitHandler implements ILifeCycleHandler {
 		keepLoaded3 = cfg.get(CATEGORY_DIMENSIONS, "Prevent unloading: Omothol", false, "Set true to prevent Omothol from automatically unloading (might affect performance)").getBoolean();
 		keepLoaded4 = cfg.get(CATEGORY_DIMENSIONS, "Prevent unloading: The Dark Realm", false, "Set true to prevent The Dark Realm from automatically unloading (might affect performance)").getBoolean();
 
-		portalCooldown = cfg.get(CATEGORY_DIMENSIONS, "Portal cooldown", 100, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).\n[range: 10 ~ 300, default: 100]", 10, 300).getInt();
+		portalCooldown = cfg.get(CATEGORY_DIMENSIONS, "Portal cooldown", 200, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).\n[range: 10 ~ 300, default: 200]", 10, 300).getInt();
 		startDimension = cfg.get(CATEGORY_DIMENSIONS, "First Portal Dimension", 0, "The dimension ID of the dimension where you make the portal to the Abyssal Wastelands.").getInt();
 
 		dark1 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands", true, "Set true for the Darklands biome to generate.").getBoolean();
