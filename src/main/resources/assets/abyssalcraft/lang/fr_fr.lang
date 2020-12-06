@@ -218,6 +218,7 @@ container.abyssalcraft.tieredenergycontainer=Conteneur d'Énergie Amélioré
 container.abyssalcraft.rendingpedestal=Piédestal de Vampirisme
 container.abyssalcraft.statetransformer=Convertisseur d'Énergie
 container.abyssalcraft.energydepositioner=Dépôt d'Énergie
+container.abyssalcraft.sequential_brewing=Sequential Brewing Stand
 
 #Gui Labels
 gui.abyssalcraft.facebook.name=Name
@@ -450,6 +451,8 @@ necronomicon.text.crafting.energydepositioner.1=A Energy Depositioner is crafted
 necronomicon.text.crafting.energydepositioner.2=By placing a charged Stone Tablet in the input slot, the Depositioner will siphon out any PE stored in it, returning either a empty Stone Tablet or a cursed one. This operation will corrupt the surrounding area (17x17 blocks), converting it into Darklands (more Darklands increases the chance of cursed Stone Tablets). Output can be automated.
 necronomicon.text.crafting.ethaxiumpillar=Ethaxium Pillars are crafted with Ethaxium Bricks and Ethaxium blocks
 necronomicon.text.crafting.darkethaxiumpillar=Dark Ethaxium Pillars are crafted with Dark Ethaxium Bricks and Omothol Stone
+necronomicon.text.crafting.sequential_brewing_stand.1=A Sequential Brewing Stand is crafted using Blaze Rods, a Hopper and Brewing Stands. Sequential Brewing Stands can be chained, allowing one to transfer its output to the next one.
+necronomicon.text.crafting.sequential_brewing_stand.2=A pipe indicates the direction of transfer, and the pipes will connect on two connected Brewing Stands. Automation exists for ingredient input on the top, fuel and bottle input on the sides and output of the output slots on the bottom.
 
 necronomicon.text.crafting.odbcore=A ODB Core is crafted with Abyssalnite Ingots, Iron Ingots, Iron Blocks and a Coralium Pearl. Can be used as an explosive.
 necronomicon.text.crafting.odb=A Oblivion Deathbomb is crafted with Obsidian, A ODB Core, A Oblivion Catalyst, a Liquid Coralium Bucket and a Liquid Antimatter Bucket. Heavy explosive.
@@ -1025,7 +1028,6 @@ tile.odbcore.name=Noyau de Méga-Bombe
 tile.woodencrate.name=Caisse de Bois
 tile.darkstoneslab1.name=Dalle de Roche Noire
 tile.darkstoneslab2.name=Double Dalle de Roche Noire
-tile.coraliumfire.name=Feu de Coralium
 tile.dsbutton.name=Bouton en Roche Noire
 tile.dspplate.name=Plaque de Pression en Roche Noire
 tile.dltplank.name=Planche en Platane de l'Ombre
@@ -1181,6 +1183,7 @@ tile.calcifiedstone.name=Calcified Stone
 tile.door_dlt.name=Porte en Bois de Platane de l'Ombre
 tile.door_drt.name=porte en Bois de Platane Effroyable
 tile.multi_block.name=Multi-bloc
+tile.sequential_brewing_stand.name=Sequential Brewing Stand
 
 #Pre/Postfixes
 decorativestatue.prefix=%s Décorative

@@ -218,6 +218,7 @@ container.abyssalcraft.tieredenergycontainer=Contenedor de energia nivelada
 container.abyssalcraft.rendingpedestal=Pedestal de desgarramineto
 container.abyssalcraft.statetransformer=Transformador de estados
 container.abyssalcraft.energydepositioner=Depositor de energia
+container.abyssalcraft.sequential_brewing=Sequential Brewing Stand
 
 #Gui Labels
 gui.abyssalcraft.facebook.name=Name
@@ -450,6 +451,8 @@ necronomicon.text.crafting.energydepositioner.1=A Energy Depositioner is crafted
 necronomicon.text.crafting.energydepositioner.2=By placing a charged Stone Tablet in the input slot, the Depositioner will siphon out any PE stored in it, returning either a empty Stone Tablet or a cursed one. This operation will corrupt the surrounding area (17x17 blocks), converting it into Darklands (more Darklands increases the chance of cursed Stone Tablets). Output can be automated.
 necronomicon.text.crafting.ethaxiumpillar=Ethaxium Pillars are crafted with Ethaxium Bricks and Ethaxium blocks
 necronomicon.text.crafting.darkethaxiumpillar=Dark Ethaxium Pillars are crafted with Dark Ethaxium Bricks and Omothol Stone
+necronomicon.text.crafting.sequential_brewing_stand.1=A Sequential Brewing Stand is crafted using Blaze Rods, a Hopper and Brewing Stands. Sequential Brewing Stands can be chained, allowing one to transfer its output to the next one.
+necronomicon.text.crafting.sequential_brewing_stand.2=A pipe indicates the direction of transfer, and the pipes will connect on two connected Brewing Stands. Automation exists for ingredient input on the top, fuel and bottle input on the sides and output of the output slots on the bottom.
 
 necronomicon.text.crafting.odbcore=Un núcleo ODB se hace con lingotes de Abyssalnite,lingotes de hierro,bloques de hierro y una Perla de Coralium.Puede ser utilizado como explosivo.
 necronomicon.text.crafting.odb=Una Deathbomb del olvido se hace con obsidiana,un núcleo ODB,un Catalizador del Olvido,un cubo de Coralium líquido y un cubo de Antimateria líquida.Muy explosivo.
@@ -1025,7 +1028,6 @@ tile.odbcore.name=Núcleo ODB
 tile.woodencrate.name=Caja de madera
 tile.darkstoneslab1.name=Losa de Darkstone
 tile.darkstoneslab2.name=Doble losa de Darkstone
-tile.coraliumfire.name=Fuego de Coralium
 tile.dsbutton.name=Botón de Darkstone
 tile.dspplate.name=Placa de presión de Darkstone
 tile.dltplank.name=Madera de Roble de Darklands
@@ -1181,6 +1183,7 @@ tile.calcifiedstone.name=Piedra Calcificada
 tile.door_dlt.name=Puerta de Madera de Roble de Darklands
 tile.door_drt.name=Puerta de Madera de las Dreadlands
 tile.multi_block.name=Multibloque
+tile.sequential_brewing_stand.name=Sequential Brewing Stand
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorativo %s

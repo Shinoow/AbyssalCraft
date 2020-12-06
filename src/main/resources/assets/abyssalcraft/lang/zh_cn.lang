@@ -218,6 +218,7 @@ container.abyssalcraft.tieredenergycontainer=层叠能量容器
 container.abyssalcraft.rendingpedestal=撕裂基座
 container.abyssalcraft.statetransformer=物态转换器
 container.abyssalcraft.energydepositioner=能量沉积器
+container.abyssalcraft.sequential_brewing=Sequential Brewing Stand
 
 #Gui Labels
 gui.abyssalcraft.facebook.name=Name
@@ -450,6 +451,8 @@ necronomicon.text.crafting.energydepositioner.1=能量沉积器由巨石块，�
 necronomicon.text.crafting.energydepositioner.2=在输入槽里放置一个充能的石板，沉积器将提取出内部存储的PE，返还空石板或者被诅咒的石板。这一操作会污染周围的区域（17x17方块），将其变为黑暗之地（更多的黑暗之地会提升产出诅咒石板的几率）。输出可以自动化。
 necronomicon.text.crafting.ethaxiumpillar=伊塞斯石柱由伊塞斯砖块和伊塞斯石来合成。
 necronomicon.text.crafting.darkethaxiumpillar=暗色伊塞斯石柱由暗色伊塞斯砖块和奥穆索之石合成。
+necronomicon.text.crafting.sequential_brewing_stand.1=A Sequential Brewing Stand is crafted using Blaze Rods, a Hopper and Brewing Stands. Sequential Brewing Stands can be chained, allowing one to transfer its output to the next one.
+necronomicon.text.crafting.sequential_brewing_stand.2=A pipe indicates the direction of transfer, and the pipes will connect on two connected Brewing Stands. Automation exists for ingredient input on the top, fuel and bottle input on the sides and output of the output slots on the bottom.
 
 necronomicon.text.crafting.odbcore=湮灭弹核心由渊素锭、铁锭、铁块和珊瑚珍珠合成。可用作爆炸物。
 necronomicon.text.crafting.odb=湮灭弹由黑曜石、一个湮灭弹核心、一个湮灭催化剂、一桶液态珊瑚和一桶液态反物质合成。高爆。
@@ -1025,7 +1028,6 @@ tile.odbcore.name=湮灭弹核心
 tile.woodencrate.name=木制板条箱
 tile.darkstoneslab1.name=黑暗石台阶
 tile.darkstoneslab2.name=黑暗石双层台阶
-tile.coraliumfire.name=珊瑚火
 tile.dsbutton.name=黑暗石按钮
 tile.dspplate.name=黑暗石压力板
 tile.dltplank.name=黑暗之地橡木木板
@@ -1181,6 +1183,7 @@ tile.calcifiedstone.name=钙化石
 tile.door_dlt.name=黑暗之地橡木门
 tile.door_drt.name=恐惧之地木门
 tile.multi_block.name=多方块
+tile.sequential_brewing_stand.name=Sequential Brewing Stand
 
 #Pre/Postfixes
 decorativestatue.prefix=装饰用%s

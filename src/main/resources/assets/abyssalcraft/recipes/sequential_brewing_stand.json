@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "$%$",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:blaze_rod"
+        },
+        "%": {
+            "item": "minecraft:hopper"
+        },
+        "$": {
+            "item": "minecraft:brewing_stand"
+        }
+    },
+    "result": {
+        "item": "abyssalcraft:sequential_brewing_stand",
+        "count": 2
+    }
+}

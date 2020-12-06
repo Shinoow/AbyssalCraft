@@ -1,0 +1,47 @@
+{
+    "multipart": [
+        {   "apply": { "model": "brewing_stand" }},
+        {   "when": { "has_bottle_0": "true" },
+            "apply": { "model": "brewing_stand_bottle0" }
+        },
+        {   "when": { "has_bottle_1": "true" },
+            "apply": { "model": "brewing_stand_bottle1" }
+        },
+        {   "when": { "has_bottle_2": "true" },
+            "apply": { "model": "brewing_stand_bottle2" }
+        },
+        {   "when": { "has_bottle_0": "false" },
+            "apply": { "model": "brewing_stand_empty0" }
+        },
+        {   "when": { "has_bottle_1": "false" },
+            "apply": { "model": "brewing_stand_empty1" }
+        },
+        {   "when": { "has_bottle_2": "false" },
+            "apply": { "model": "brewing_stand_empty2" }
+        },
+        {   "when": { "exit_direction": "north" },
+            "apply": { "model": "abyssalcraft:brewing_stand_pipe" }
+        },
+        {   "when": { "exit_direction": "south" },
+            "apply": { "model": "abyssalcraft:brewing_stand_pipe", "y": 180 }
+        },
+        {   "when": { "exit_direction": "east" },
+            "apply": { "model": "abyssalcraft:brewing_stand_pipe", "y": 90 }
+        },
+        {   "when": { "exit_direction": "west" },
+            "apply": { "model": "abyssalcraft:brewing_stand_pipe", "y": 270 }
+        },
+        {   "when": { "entry_direction": "north" },
+            "apply": { "model": "abyssalcraft:brewing_stand_pipe" }
+        },
+        {   "when": { "entry_direction": "south" },
+            "apply": { "model": "abyssalcraft:brewing_stand_pipe", "y": 180 }
+        },
+        {   "when": { "entry_direction": "east" },
+            "apply": { "model": "abyssalcraft:brewing_stand_pipe", "y": 90 }
+        },
+        {   "when": { "entry_direction": "west" },
+            "apply": { "model": "abyssalcraft:brewing_stand_pipe", "y": 270 }
+        }
+    ]
+}

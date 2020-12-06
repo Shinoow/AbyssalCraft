@@ -273,7 +273,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(7, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(new ItemStack(ACItems.skin, 1, 0)), NecronomiconText.CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND_1, new DimensionCondition(ACLib.abyssal_wasteland_id)),
 				new Page(8, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.abyssal_wasteland_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_C, new DimensionCondition(ACLib.abyssal_wasteland_id)));
 		addPages("overworld", "armortools", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, new CraftingStack(ACItems.staff_of_rending), NecronomiconText.CRAFTING_STAFF_OF_RENDING_1),
-				new Page(2, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, NecronomiconText.CRAFTING_STAFF_OF_RENDING_2));
+				new Page(2, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, NecronomiconText.CRAFTING_STAFF_OF_RENDING_2),
+				new Page(3, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, new CraftingStack(ACBlocks.sequential_brewing_stand), NecronomiconText.CRAFTING_SEQUENTIAL_BREWING_STAND_1),
+				new Page(4, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, NecronomiconText.CRAFTING_SEQUENTIAL_BREWING_STAND_2));
 		addPages("abyssalwasteland", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.abyssal_stone), NecronomiconText.MATERIAL_ABYSSAL_STONE_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.abyssal_sand), NecronomiconText.MATERIAL_ABYSSAL_SAND),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.fused_abyssal_sand), NecronomiconText.MATERIAL_FUSED_ABYSSAL_SAND),

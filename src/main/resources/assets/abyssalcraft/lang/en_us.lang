@@ -218,6 +218,7 @@ container.abyssalcraft.tieredenergycontainer=Tiered Energy Container
 container.abyssalcraft.rendingpedestal=Rending Pedestal
 container.abyssalcraft.statetransformer=State Transformer
 container.abyssalcraft.energydepositioner=Energy Depositioner
+container.abyssalcraft.sequential_brewing=Sequential Brewing Stand
 
 #Gui Labels
 gui.abyssalcraft.facebook.name=Name
@@ -450,6 +451,8 @@ necronomicon.text.crafting.energydepositioner.1=An Energy Depositioner is crafte
 necronomicon.text.crafting.energydepositioner.2=By placing a charged Stone Tablet in the input slot, the Depositioner will siphon out any PE stored in it, returning either an empty Stone Tablet or a cursed one. This operation will corrupt the surrounding area (17x17 blocks), converting it into Darklands (more Darklands increases the chance of cursed Stone Tablets). Output can be automated.
 necronomicon.text.crafting.ethaxiumpillar=Ethaxium Pillars are crafted with Ethaxium Bricks and Ethaxium blocks
 necronomicon.text.crafting.darkethaxiumpillar=Dark Ethaxium Pillars are crafted with Dark Ethaxium Bricks and Omothol Stone
+necronomicon.text.crafting.sequential_brewing_stand.1=A Sequential Brewing Stand is crafted using Blaze Rods, a Hopper and Brewing Stands. Sequential Brewing Stands can be chained, allowing one to transfer its output to the next one.
+necronomicon.text.crafting.sequential_brewing_stand.2=A pipe indicates the direction of transfer, and the pipes will connect on two connected Brewing Stands. Automation exists for ingredient input on the top, fuel and bottle input on the sides and output of the output slots on the bottom.
 
 necronomicon.text.crafting.odbcore=An ODB Core is crafted with Abyssalnite Ingots, Iron Ingots, Iron Blocks and a Coralium Pearl. Can be used as an explosive.
 necronomicon.text.crafting.odb=An Oblivion Deathbomb is crafted with Obsidian, An ODB Core, An Oblivion Catalyst, a Liquid Coralium Bucket and a Liquid Antimatter Bucket. Heavy explosive.
@@ -1180,6 +1183,7 @@ tile.calcifiedstone.name=Calcified Stone
 tile.door_dlt.name=Darklands Oak Wood Door
 tile.door_drt.name=Dreadlands Wood Door
 tile.multi_block.name=Multiblock
+tile.sequential_brewing_stand.name=Sequential Brewing Stand
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorative %s

@@ -219,6 +219,7 @@ container.abyssalcraft.tieredenergycontainer=Многоуровневый рез
 container.abyssalcraft.rendingpedestal=Расщепляющий пьедестал
 container.abyssalcraft.statetransformer=Трансформатор состояния
 container.abyssalcraft.energydepositioner=Энергоотправитель
+container.abyssalcraft.sequential_brewing=Sequential Brewing Stand
 
 #Gui Labels
 gui.abyssalcraft.facebook.name=Name
@@ -451,6 +452,8 @@ necronomicon.text.crafting.energydepositioner.1=Энергоотправител
 necronomicon.text.crafting.energydepositioner.2=Поместив Заряженную каменную дощечку во входного слот, Энергоотправитель выкачивает любую PE хранящиеся в нём, возвращается либо в Пустую каменную дощечку или в 1-ну проклятую. Данная операция повредит окружающее пространство на (17x17 блоков), превратив его в Тёмные земли (больше Тёмных земель увеличивает шанс проклятых Каменных дощечек). Выход может быть автоматизирован.
 necronomicon.text.crafting.ethaxiumpillar=Столбы из этаксия изготавливается из Кирпичей из этаксия и Блоков из этаксия.
 necronomicon.text.crafting.darkethaxiumpillar=Тёмные столбы из этаксия изготавливается из Тёмных кирпичей из этаксия и Камня из Омотула.
+necronomicon.text.crafting.sequential_brewing_stand.1=A Sequential Brewing Stand is crafted using Blaze Rods, a Hopper and Brewing Stands. Sequential Brewing Stands can be chained, allowing one to transfer its output to the next one.
+necronomicon.text.crafting.sequential_brewing_stand.2=A pipe indicates the direction of transfer, and the pipes will connect on two connected Brewing Stands. Automation exists for ingredient input on the top, fuel and bottle input on the sides and output of the output slots on the bottom.
 
 necronomicon.text.crafting.odbcore=ОДБ ядро изготавливается из Абиссальнитовых слитков, Железных слитков, Железных блоков и Кораллового жемчуга. Может быть использована в качестве Взрывчатки.
 necronomicon.text.crafting.odb=Смертельная бомба забывчивости изготавливается из обсидиана, ОДБ ядра, Катализатора забывчивости, Ведра коралловой жидкости и Ведра жидкого антивещ-ва. Мощная взрывчатка.
@@ -1026,7 +1029,6 @@ tile.odbcore.name=ОДБ ядро
 tile.woodencrate.name=Деревянный ящик
 tile.darkstoneslab1.name=Тёмно-каменная плита
 tile.darkstoneslab2.name=Тёмно-каменная двойная плита
-tile.coraliumfire.name=Пламя коралла
 tile.dsbutton.name=Тёмно-каменная кнопка
 tile.dspplate.name=Тёмно-каменная нажимная пластина
 tile.dltplank.name=Дубовые доски из тёмных земель
@@ -1182,6 +1184,7 @@ tile.calcifiedstone.name=Кальцинированный камень
 tile.door_dlt.name=Дубовая дверь из Тёмных земель
 tile.door_drt.name=Деревянная дверь из Ужасных земель
 tile.multi_block.name=Мульти-блок
+tile.sequential_brewing_stand.name=Sequential Brewing Stand
 
 #Pre/Postfixes
 decorativestatue.prefix=Декоративная %s

@@ -1010,6 +1010,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.energy_depositioner, 0);
 		registerItemRender(ACBlocks.calcified_stone, 0);
 		registerItemRender(ACBlocks.multi_block, 0);
+		registerItemRender(ACBlocks.sequential_brewing_stand, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

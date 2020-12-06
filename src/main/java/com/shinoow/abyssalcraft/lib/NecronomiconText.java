@@ -183,6 +183,8 @@ public class NecronomiconText {
 	public static String CRAFTING_ENERGY_DEPOSITIONER_2 = "necronomicon.text.crafting.energydepositioner.2";
 	public static String CRAFTING_ETHAXIUM_PILLAR = "necronomicon.text.crafting.ethaxiumpillar";
 	public static String CRAFTING_DARK_ETHAXIUM_PILLAR = "necronomicon.text.crafting.darkethaxiumpillar";
+	public static String CRAFTING_SEQUENTIAL_BREWING_STAND_1 = "necronomicon.text.crafting.sequential_brewing_stand.1";
+	public static String CRAFTING_SEQUENTIAL_BREWING_STAND_2 = "necronomicon.text.crafting.sequential_brewing_stand.2";
 
 	//Misc crafting
 	public static String CRAFTING_UPGRADE_KIT_1 = "necronomicon.text.crafting.upgradekit.1";
