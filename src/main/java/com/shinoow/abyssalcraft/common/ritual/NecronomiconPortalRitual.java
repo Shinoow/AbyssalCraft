@@ -11,11 +11,14 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.ritual;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
 import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import com.shinoow.abyssalcraft.common.items.ItemPortalPlacer;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
@@ -95,6 +98,13 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 			portal.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
 			portal.setDestination(id);
 			world.spawnEntity(portal);
+			if(!player.addItemStackToInventory(stack)) {
+				player.dropItem(stack, false);
+			}
+			((IRitualAltar) altar).setItem(ItemStack.EMPTY);
+			world.setBlockState(pos, ACBlocks.portal_anchor.getDefaultState().withProperty(BlockPortalAnchor.ACTIVE, true), 2);
+			
+			((TileEntityPortalAnchor) world.getTileEntity(pos)).setDestination(id);
 		}
 	}
 

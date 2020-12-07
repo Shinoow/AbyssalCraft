@@ -254,4 +254,5 @@ public class ACBlocks {
 	public static Block dreadlands_door;
 	public static Block multi_block;
 	public static Block sequential_brewing_stand;
+	public static Block portal_anchor;
 }
