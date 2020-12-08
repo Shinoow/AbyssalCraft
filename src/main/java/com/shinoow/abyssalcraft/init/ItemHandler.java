@@ -48,10 +48,10 @@ public class ItemHandler implements ILifeCycleHandler {
 		//Misc items
 		ACItems.oblivion_catalyst = new ItemOC();
 		ACItems.staff_of_the_gatekeeper = new ItemStaff().setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.gateway_key = new ItemPortalPlacer(0, "gatewaykey");
+		ACItems.gateway_key = new ItemGatewayKey(0, "gatewaykey");
 		ACItems.powerstone_tracker = new ItemTrackerPSDL().setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 		ACItems.eye_of_the_abyss = new ItemEoA().setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.dreaded_gateway_key = new ItemPortalPlacer(1, "gatewaykeydl").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
+		ACItems.dreaded_gateway_key = new ItemGatewayKey(1, "gatewaykeydl").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 		ACItems.coralium_brick = new ItemACBasic("cbrick").setUnlockCondition(new MultiBiomeCondition(ACBiomes.abyssal_wastelands, ACBiomes.coralium_infested_swamp));
 		ACItems.cudgel = new ItemCudgel().setUnlockCondition(new EntityCondition("abyssalcraft:gskeleton"));
 		ACItems.carbon_cluster = new ItemACBasic("carboncluster").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
@@ -59,7 +59,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.methane = new ItemACBasic("methane");
 		ACItems.nitre = new ItemACBasic("nitre");
 		ACItems.sulfur = new ItemACBasic("sulfur");
-		ACItems.rlyehian_gateway_key = new ItemPortalPlacer(2, "gatewaykeyjzh").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
+		ACItems.rlyehian_gateway_key = new ItemGatewayKey(2, "gatewaykeyjzh").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 		ACItems.tin_ingot = new ItemACBasic("tiningot");
 		ACItems.copper_ingot = new ItemACBasic("copperingot");
 		ACItems.life_crystal = new ItemACBasic("lifecrystal").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
@@ -87,7 +87,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setUnlocalizedName("door_dlt");
 		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setUnlocalizedName("door_drt");
 		ACItems.configurator_shard = new ItemMetadataMisc("configurator_shard", "0", "1", "2", "3").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.silver_key = new ItemPortalPlacer(3, "silver_key");
+		ACItems.silver_key = new ItemGatewayKey(3, "silver_key");
 		ACItems.book_of_many_faces = new ItemFaceBook("face_book");
 
 		//Coins

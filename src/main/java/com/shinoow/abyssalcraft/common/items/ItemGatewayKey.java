@@ -14,28 +14,34 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
+import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class ItemPortalPlacer extends ItemACBasic {
+public class ItemGatewayKey extends ItemACBasic {
 
 	private final int key;
 
-	public ItemPortalPlacer(int key, String unlocalizedName){
+	public ItemGatewayKey(int key, String unlocalizedName){
 		super(unlocalizedName);
 		this.key = key;
 		maxStackSize = 1;
@@ -69,9 +75,6 @@ public class ItemPortalPlacer extends ItemACBasic {
 	public void addInformation(ItemStack par1ItemStack, World world, List list, ITooltipFlag is){
 		list.add(I18n.format("tooltip.portalplacer.1"));
 		list.add(I18n.format("tooltip.portalplacer.2"));
-		//		if(Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null)
-		//			if(!isCorrectDim(Minecraft.getMinecraft().world.provider.getDimension()))
-		//				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.format("tooltip.portalplacer.4"));
 		if(!par1ItemStack.hasTagCompound())
 			par1ItemStack.setTagCompound(new NBTTagCompound());
 		int dim = par1ItemStack.getTagCompound().getInteger("Dimension");
@@ -79,62 +82,15 @@ public class ItemPortalPlacer extends ItemACBasic {
 		DimensionDataRegistry.instance().getDataForDim(dim);
 		if(world != null) {
 			int currDim = world.provider.getDimension();
-			if(dim == currDim || !DimensionDataRegistry.instance().areDimensionsConnected(currDim, dim, key)
-					|| !RitualRegistry.instance().canPerformAction(currDim, 4))
+			if(!areDimensionsCompatible(currDim, dim) || !RitualRegistry.instance().canPerformAction(currDim, 4))
 				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.format("tooltip.portalplacer.4"));
 		}
 	}
 
-	//	private boolean isCorrectDim(int dim){
-	//		switch(key){
-	//		case 0:
-	//			if(dim == 0 || dim == ACLib.abyssal_wasteland_id)
-	//				return true;
-	//			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) == 0)
-	//				return true;
-	//			else return false;
-	//		case 1:
-	//			if(dim == 0 || dim == ACLib.abyssal_wasteland_id ||
-	//			dim == ACLib.dreadlands_id)
-	//				return true;
-	//			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) >= 0 && DimensionDataRegistry.instance().getGatewayKeyOverride(dim) < 2)
-	//				return true;
-	//			else return false;
-	//		case 2:
-	//			if(dim == 0 || dim == ACLib.abyssal_wasteland_id ||
-	//			dim == ACLib.dreadlands_id ||
-	//			dim == ACLib.omothol_id ||
-	//			dim == ACLib.dark_realm_id)
-	//				return true;
-	//			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) >= 0)
-	//				return true;
-	//			else return false;
-	//		default:
-	//			return false;
-	//		}
-	//	}
-	//
-	//	private boolean dimWarning(int dim){
-	//		switch(key){
-	//		case 0:
-	//			if(dim == ACLib.dreadlands_id ||
-	//			dim == ACLib.omothol_id ||
-	//			dim == ACLib.dark_realm_id)
-	//				return true;
-	//			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) > 0)
-	//				return true;
-	//			else return false;
-	//		case 1:
-	//			if(dim == ACLib.omothol_id ||
-	//			dim == ACLib.dark_realm_id)
-	//				return true;
-	//			else if(DimensionDataRegistry.instance().getGatewayKeyOverride(dim) > 1)
-	//				return true;
-	//			else return false;
-	//		default:
-	//			return false;
-	//		}
-	//	}
+	private boolean areDimensionsCompatible(int currentDim, int destinationDim) {
+		return currentDim != destinationDim &&
+				DimensionDataRegistry.instance().areDimensionsConnected(currentDim, destinationDim, key);
+	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
@@ -177,5 +133,39 @@ public class ItemPortalPlacer extends ItemACBasic {
 		}
 
 		return new ActionResult<>(EnumActionResult.PASS, stack);
+	}
+
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+
+		if(!worldIn.isRemote && getKeyType() == 3) {
+			IBlockState state = worldIn.getBlockState(pos);
+			if(state.getBlock() == ACBlocks.portal_anchor) {
+				boolean active = state.getValue(BlockPortalAnchor.ACTIVE);
+				worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(BlockPortalAnchor.ACTIVE), 2);
+
+				if(active) {
+					worldIn.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(pos).grow(2))
+					.stream().forEach(e -> worldIn.removeEntity(e));
+				} else {
+					TileEntity tile = worldIn.getTileEntity(pos);
+					ItemStack stack = player.getHeldItem(hand);
+					if(!stack.hasTagCompound())
+						stack.setTagCompound(new NBTTagCompound());
+
+					int dimension = stack.getTagCompound().getInteger("Dimension");
+
+					if(areDimensionsCompatible(worldIn.provider.getDimension(), dimension)) {
+						((TileEntityPortalAnchor) tile).setDestination(dimension);
+						EntityPortal portal = new EntityPortal(worldIn);
+						portal.setDestination(dimension);
+						portal.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
+						worldIn.spawnEntity(portal);
+					}
+				}
+			}
+		}
+
+		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 }

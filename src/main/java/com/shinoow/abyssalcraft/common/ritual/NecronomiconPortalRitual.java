@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
 import com.shinoow.abyssalcraft.common.entity.EntityPortal;
-import com.shinoow.abyssalcraft.common.items.ItemPortalPlacer;
+import com.shinoow.abyssalcraft.common.items.ItemGatewayKey;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,14 +55,14 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 		if(altar instanceof IRitualAltar)
 			stack = ((IRitualAltar) altar).getItem();
 
-		if(!stack.isEmpty() && stack.getItem() instanceof ItemPortalPlacer) {
+		if(!stack.isEmpty() && stack.getItem() instanceof ItemGatewayKey) {
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
 			int id = stack.getTagCompound().getInteger("Dimension");
 			if(id == world.provider.getDimension())
 				return false;
 
-			int key = ((ItemPortalPlacer)stack.getItem()).getKeyType();
+			int key = ((ItemGatewayKey)stack.getItem()).getKeyType();
 
 			DimensionData data = DimensionDataRegistry.instance().getDataForDim(id);
 

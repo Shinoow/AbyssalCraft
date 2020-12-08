@@ -39,7 +39,6 @@ public class TeleporterAC extends Teleporter
 	private final WorldServer worldServerInstance;
 	private final Random random;
 	private final Long2ObjectMap<Teleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap(4096);
-	private Block portal;
 	private int prevDimension;
 
 	public TeleporterAC(WorldServer par1WorldServer, int prevDimension)
@@ -48,29 +47,6 @@ public class TeleporterAC extends Teleporter
 		worldServerInstance = par1WorldServer;
 		this.prevDimension = prevDimension;
 		random = new Random(par1WorldServer.getSeed());
-	}
-
-	public TeleporterAC(WorldServer par1WorldServer, Block portal, IBlockState frame)
-	{
-		super(par1WorldServer);
-		worldServerInstance = par1WorldServer;
-		random = new Random(par1WorldServer.getSeed());
-		this.portal = portal;
-	}
-
-	public static void changeDimension(Entity entity, int dimension, Block portal, IBlockState frame) {
-		Teleporter teleporter = new TeleporterAC(entity.getServer().getWorld(dimension), portal, frame);
-		if(entity instanceof EntityPlayerMP) {
-			if(!ForgeHooks.onTravelToDimension(entity, dimension)) return;
-			if(!((EntityPlayerMP)entity).capabilities.isCreativeMode) {
-				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, true, "invulnerableDimensionChange", "field_184851_cj");
-				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastExperience", "field_71144_ck");
-				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1.0F, "lastHealth", "field_71149_ch");
-				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastFoodLevel", "field_71146_ci");
-			}
-			((EntityPlayerMP)entity).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP)entity, dimension, teleporter);
-		} else
-			entity.changeDimension(dimension, teleporter);
 	}
 
 	public static void changeDimension(Entity entity, int dimension) {
@@ -125,8 +101,6 @@ public class TeleporterAC extends Teleporter
 						blockpos1 = blockpos.down();
 
 						if (worldServerInstance.getBlockState(blockpos) == ACBlocks.portal_anchor.getDefaultState().withProperty(BlockPortalAnchor.ACTIVE, true)) {
-//							while (worldServerInstance.getBlockState(blockpos1 = blockpos.down()).getBlock() == ACBlocks.portal_anchor)
-//								blockpos = blockpos1;
 							TileEntity te = worldServerInstance.getTileEntity(blockpos);
 							
 							if(te instanceof TileEntityPortalAnchor && ((TileEntityPortalAnchor) te).getDestination() == prevDimension) {
@@ -142,14 +116,6 @@ public class TeleporterAC extends Teleporter
 					}
 			}
 
-//			for(EntityPortal portal : worldServerInstance.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(blockpos4).grow(128, 128, 128))) {
-//				double d1 = portal.getPosition().distanceSq(blockpos4);
-//				if(d0 < 0.0D || d1 < d0) {
-//					d0 = d1;
-//					object = portal.getPosition();
-//				}
-//			}
-
 		}
 
 		if (d0 >= 0.0D) {
@@ -159,81 +125,8 @@ public class TeleporterAC extends Teleporter
 			double d4 = ((BlockPos) object).getX() + 0.5D;
 			double d5 = ((BlockPos) object).getY() + 0.5D;
 			double d6 = ((BlockPos) object).getZ() + 0.5D;
-			EnumFacing enumfacing = null;
 
-			if (worldServerInstance.getBlockState(((BlockPos) object).west()).getBlock() == portal)
-				enumfacing = EnumFacing.NORTH;
-
-			if (worldServerInstance.getBlockState(((BlockPos) object).east()).getBlock() == portal)
-				enumfacing = EnumFacing.SOUTH;
-
-			if (worldServerInstance.getBlockState(((BlockPos) object).north()).getBlock() == portal)
-				enumfacing = EnumFacing.EAST;
-
-			if (worldServerInstance.getBlockState(((BlockPos) object).south()).getBlock() == portal)
-				enumfacing = EnumFacing.WEST;
-
-			EnumFacing enumfacing1 = EnumFacing.getHorizontal(MathHelper.floor(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3);
-
-			if (enumfacing != null) {
-				EnumFacing enumfacing2 = enumfacing.rotateYCCW();
-				BlockPos blockpos2 = ((BlockPos) object).offset(enumfacing);
-				boolean flag2 = notAir(blockpos2);
-				boolean flag3 = notAir(blockpos2.offset(enumfacing2));
-
-				if (flag3 && flag2) {
-					object = ((BlockPos) object).offset(enumfacing2);
-					enumfacing = enumfacing.getOpposite();
-					enumfacing2 = enumfacing2.getOpposite();
-					BlockPos blockpos3 = ((BlockPos) object).offset(enumfacing);
-					flag2 = notAir(blockpos3);
-					flag3 = notAir(blockpos3.offset(enumfacing2));
-				}
-
-				float f6 = 0.5F;
-				float f1 = 0.5F;
-
-				if (!flag3 && flag2)
-					f6 = 1.0F;
-				else if (flag3 && !flag2)
-					f6 = 0.0F;
-				else if (flag3)
-					f1 = 0.0F;
-
-				d4 = ((BlockPos) object).getX() + 0.5D;
-				d5 = ((BlockPos) object).getY() + 0.5D;
-				d6 = ((BlockPos) object).getZ() + 0.5D;
-				d4 += enumfacing2.getFrontOffsetX() * f6 + enumfacing.getFrontOffsetX() * f1;
-				d6 += enumfacing2.getFrontOffsetZ() * f6 + enumfacing.getFrontOffsetZ() * f1;
-				float f2 = 0.0F;
-				float f3 = 0.0F;
-				float f4 = 0.0F;
-				float f5 = 0.0F;
-
-				if (enumfacing == enumfacing1) {
-					f2 = 1.0F;
-					f3 = 1.0F;
-				}
-				else if (enumfacing == enumfacing1.getOpposite()) {
-					f2 = -1.0F;
-					f3 = -1.0F;
-				}
-				else if (enumfacing == enumfacing1.rotateY()) {
-					f4 = 1.0F;
-					f5 = -1.0F;
-				}
-				else {
-					f4 = -1.0F;
-					f5 = 1.0F;
-				}
-
-				double d2 = entityIn.motionX;
-				double d3 = entityIn.motionZ;
-				entityIn.motionX = d2 * f2 + d3 * f5;
-				entityIn.motionZ = d2 * f4 + d3 * f3;
-				entityIn.rotationYaw = p_180620_2_ - enumfacing1.getHorizontalIndex() * 90 + enumfacing.getHorizontalIndex() * 90;
-			} else
-				entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
+			entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
 
 			entityIn.setLocationAndAngles(d4, d5, d6, entityIn.rotationYaw, entityIn.rotationPitch);
 			return true;
