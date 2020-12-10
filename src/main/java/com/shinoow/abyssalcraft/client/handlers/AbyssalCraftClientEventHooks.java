@@ -1011,6 +1011,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.calcified_stone, 0);
 		registerItemRender(ACBlocks.multi_block, 0);
 		registerItemRender(ACBlocks.sequential_brewing_stand, 0);
+		registerItemRender(ACBlocks.portal_anchor, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

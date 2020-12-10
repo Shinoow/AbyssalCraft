@@ -159,10 +159,12 @@ public class ItemGatewayKey extends ItemACBasic {
 						((TileEntityPortalAnchor) tile).setDestination(dimension);
 						EntityPortal portal = new EntityPortal(worldIn);
 						portal.setDestination(dimension);
-						portal.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), 0, 0);
+						portal.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, 0, 0);
 						worldIn.spawnEntity(portal);
 					}
 				}
+				
+				return EnumActionResult.SUCCESS;
 			}
 		}
 

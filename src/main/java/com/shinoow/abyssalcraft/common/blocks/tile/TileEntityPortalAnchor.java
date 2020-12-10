@@ -1,5 +1,8 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import com.shinoow.abyssalcraft.api.dimension.DimensionData;
+import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -7,13 +10,14 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPortalAnchor extends TileEntity {
 
-	private int destination;
+	private int destination, color;
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
 		destination = nbttagcompound.getInteger("Destination");
+		color = nbttagcompound.getInteger("Color");
 	}
 
 	@Override
@@ -21,6 +25,7 @@ public class TileEntityPortalAnchor extends TileEntity {
 	{
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setInteger("Destination", destination);
+		nbttagcompound.setInteger("Color", color);
 
 		return nbttagcompound;
 	}
@@ -48,5 +53,14 @@ public class TileEntityPortalAnchor extends TileEntity {
 
 	public void setDestination(int destination) {
 		this.destination = destination;
+		DimensionData data = DimensionDataRegistry.instance().getDataForDim(destination);
+		if(data != null) {
+			//TODO fix the color
+			color = (0xff << 24) | ((data.getR()&0xff) << 16) | ((data.getG()&0xff) << 8) | (data.getB()&0xff);
+		}
+	}
+
+	public int getColor() {
+		return color;
 	}
 }

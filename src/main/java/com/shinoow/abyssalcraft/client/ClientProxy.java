@@ -33,6 +33,7 @@ import com.shinoow.abyssalcraft.client.render.entity.*;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
 import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
+import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
@@ -44,6 +45,7 @@ import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityPedestalBlockRenderer;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -57,6 +59,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -184,6 +187,14 @@ public class ClientProxy extends CommonProxy {
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1  && stack.hasTagCompound() ? SpellRegistry.instance().getSpell(stack.getTagCompound().getString("Spell")).getColor() : 16777215, ACItems.scroll);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACClientVars.getCrystalColors()[state.getBlock().getMetaFromState(state)], ACBlocks.crystal_cluster);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ACClientVars.getCrystalColors()[state.getBlock().getMetaFromState(state) + 16], ACBlocks.crystal_cluster2);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
+			if(state.getValue(BlockPortalAnchor.ACTIVE) && tintIndex == 1) {
+				TileEntity te = BlockUtil.getTileEntitySafely(world, pos);
+				return te instanceof TileEntityPortalAnchor ? ((TileEntityPortalAnchor) te).getColor() : 16777215;
+			}
+			
+			return 16777215;
+		}, ACBlocks.portal_anchor);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, I18n.format(NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, I18n.format(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE));
