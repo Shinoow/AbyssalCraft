@@ -57,7 +57,7 @@ public class RenderPortal extends Render<EntityPortal> {
 		DimensionData data = entity.getDimensionData();
 
 		if(data != null)
-			GlStateManager.color(data.getR(), data.getG(), data.getB(), 1);
+			GlStateManager.color(data.getR()/255F, data.getG()/255F, data.getB()/255F, 1);
 
 		GlStateManager.scale(1, 1.5, 1);
 

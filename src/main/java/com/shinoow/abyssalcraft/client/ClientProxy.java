@@ -192,7 +192,7 @@ public class ClientProxy extends CommonProxy {
 				TileEntity te = BlockUtil.getTileEntitySafely(world, pos);
 				return te instanceof TileEntityPortalAnchor ? ((TileEntityPortalAnchor) te).getColor() : 16777215;
 			}
-			
+
 			return 16777215;
 		}, ACBlocks.portal_anchor);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE));

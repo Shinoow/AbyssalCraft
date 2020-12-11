@@ -1179,6 +1179,7 @@ tile.door_dlt.name=다크랜드 참나무 문
 tile.door_drt.name=공포나무 문
 tile.multi_block.name=멀티블록
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
+tile.portal_anchor.name=Portal Anchor
 
 #Pre/Postfixes
 decorativestatue.prefix=장식 %s

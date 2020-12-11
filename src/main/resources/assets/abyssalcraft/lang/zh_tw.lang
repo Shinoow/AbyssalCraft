@@ -1183,7 +1183,8 @@ tile.calcifiedstone.name=鈣化石
 tile.door_dlt.name=Darklands Oak Wood Door
 tile.door_drt.name=Dreadlands Wood Door
 tile.multi_block.name=Multiblock
-tile.sequential_brewing_stand.name=Sequential Brewing Stand
+tile.sequential_brewing_stand.name=Sequential Brewing 
+tile.portal_anchor.name=Portal Anchor
 
 #Pre/Postfixes
 decorativestatue.prefix=裝飾用%s

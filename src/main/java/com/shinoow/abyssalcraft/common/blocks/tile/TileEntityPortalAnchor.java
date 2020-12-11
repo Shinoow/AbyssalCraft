@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2020 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
@@ -11,7 +22,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityPortalAnchor extends TileEntity {
 
 	private int destination, color;
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
@@ -29,7 +40,7 @@ public class TileEntityPortalAnchor extends TileEntity {
 
 		return nbttagcompound;
 	}
-	
+
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
@@ -54,10 +65,8 @@ public class TileEntityPortalAnchor extends TileEntity {
 	public void setDestination(int destination) {
 		this.destination = destination;
 		DimensionData data = DimensionDataRegistry.instance().getDataForDim(destination);
-		if(data != null) {
-			//TODO fix the color
-			color = (0xff << 24) | ((data.getR()&0xff) << 16) | ((data.getG()&0xff) << 8) | (data.getB()&0xff);
-		}
+		if(data != null)
+			color = 0xff << 24 | (data.getR()&0xff) << 16 | (data.getG()&0xff) << 8 | data.getB()&0xff;
 	}
 
 	public int getColor() {

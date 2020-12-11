@@ -1184,6 +1184,7 @@ tile.door_dlt.name=黑暗之地橡木门
 tile.door_drt.name=恐惧之地木门
 tile.multi_block.name=多方块
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
+tile.portal_anchor.name=Portal Anchor
 
 #Pre/Postfixes
 decorativestatue.prefix=装饰用%s

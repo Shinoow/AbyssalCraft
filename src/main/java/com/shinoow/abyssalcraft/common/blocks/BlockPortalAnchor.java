@@ -1,9 +1,21 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2020 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
+import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -34,9 +46,9 @@ public class BlockPortalAnchor extends BlockACBasic {
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
+		return new AxisAlignedBB(0.15F, 0.0F, 0.15F, 0.85F, 0.5F, 0.85F);
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube(IBlockState state){
 		return false;
@@ -47,7 +59,7 @@ public class BlockPortalAnchor extends BlockACBasic {
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean hasTileEntity(IBlockState state)
 	{
@@ -60,11 +72,21 @@ public class BlockPortalAnchor extends BlockACBasic {
 	{
 		return BlockRenderLayer.CUTOUT;
 	}
-	
+
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TileEntityPortalAnchor();
+	}
+
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+
+		if(!worldIn.isRemote && state.getValue(ACTIVE))
+			worldIn.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(pos).grow(2))
+			.stream().forEach(e -> worldIn.removeEntity(e));
+
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Override
@@ -84,13 +106,13 @@ public class BlockPortalAnchor extends BlockACBasic {
 	{
 		return getDefaultState().withProperty(ACTIVE, (meta & 1) > 0);
 	}
-	
+
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		return state.getValue(ACTIVE) ? 1 : 0;
 	}
-	
+
 	@Override
 	public BlockStateContainer createBlockState()
 	{

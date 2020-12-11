@@ -1184,6 +1184,7 @@ tile.door_dlt.name=Puerta de Madera de Roble de Darklands
 tile.door_drt.name=Puerta de Madera de las Dreadlands
 tile.multi_block.name=Multibloque
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
+tile.portal_anchor.name=Portal Anchor
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorativo %s

@@ -98,12 +98,19 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 			portal.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
 			portal.setDestination(id);
 			world.spawnEntity(portal);
-			if(!player.addItemStackToInventory(stack)) {
+			if(!player.addItemStackToInventory(stack))
 				player.dropItem(stack, false);
-			}
 			((IRitualAltar) altar).setItem(ItemStack.EMPTY);
+			((IRitualAltar) altar).getPedestals()
+			.stream()
+			.map(p -> ((TileEntity) p).getPos())
+			.forEach(p -> {
+				world.destroyBlock(p, false);
+				world.setBlockState(p, ACBlocks.monolith_pillar.getDefaultState());
+			});
+			world.destroyBlock(pos, false);
 			world.setBlockState(pos, ACBlocks.portal_anchor.getDefaultState().withProperty(BlockPortalAnchor.ACTIVE, true), 2);
-			
+
 			((TileEntityPortalAnchor) world.getTileEntity(pos)).setDestination(id);
 		}
 	}

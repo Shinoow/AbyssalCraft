@@ -21,14 +21,14 @@ import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeHooks;
@@ -102,9 +102,9 @@ public class TeleporterAC extends Teleporter
 
 						if (worldServerInstance.getBlockState(blockpos) == ACBlocks.portal_anchor.getDefaultState().withProperty(BlockPortalAnchor.ACTIVE, true)) {
 							TileEntity te = worldServerInstance.getTileEntity(blockpos);
-							
+
 							if(te instanceof TileEntityPortalAnchor && ((TileEntityPortalAnchor) te).getDestination() == prevDimension) {
-								
+
 								double d1 = blockpos.distanceSq(blockpos4);
 
 								if (d0 < 0.0D || d1 < d0) {
@@ -132,10 +132,6 @@ public class TeleporterAC extends Teleporter
 			return true;
 		} else
 			return false;
-	}
-
-	private boolean notAir(BlockPos p_180265_1_) {
-		return !worldServerInstance.isAirBlock(p_180265_1_) || !worldServerInstance.isAirBlock(p_180265_1_.up());
 	}
 
 	@Override
@@ -293,7 +289,7 @@ public class TeleporterAC extends Teleporter
 		worldServerInstance.spawnEntity(portal);
 
 		world.setBlockState(new BlockPos(i6, k2, k6), ACBlocks.portal_anchor.getDefaultState().withProperty(BlockPortalAnchor.ACTIVE, true));
-		
+
 		TileEntity te = world.getTileEntity(new BlockPos(i6, k2, k6));
 
 		if(te instanceof TileEntityPortalAnchor)

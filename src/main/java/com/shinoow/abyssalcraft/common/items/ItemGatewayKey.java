@@ -40,6 +40,7 @@ import net.minecraft.world.World;
 public class ItemGatewayKey extends ItemACBasic {
 
 	private final int key;
+	private boolean isUsing;
 
 	public ItemGatewayKey(int key, String unlocalizedName){
 		super(unlocalizedName);
@@ -97,40 +98,40 @@ public class ItemGatewayKey extends ItemACBasic {
 	{
 		ItemStack stack = playerIn.getHeldItem(handIn);
 
-		if(!worldIn.isRemote){
+		if(!worldIn.isRemote)
+			if(!isUsing) {
+				if(!stack.hasTagCompound())
+					stack.setTagCompound(new NBTTagCompound());
 
-			if(!stack.hasTagCompound())
-				stack.setTagCompound(new NBTTagCompound());
-
-			int dim = stack.getTagCompound().getInteger("Dimension");
-			int newDim = 0;
-			List<DimensionData> dims = DimensionDataRegistry.instance().getDimensions().stream().filter(d -> d.getGatewayKey() <= key).collect(Collectors.toList());
-			if(playerIn.isSneaking())
-				for(int i = dims.size()-1; i > 0; i--) {
-					DimensionData data = dims.get(i);
-					if(data.getId() == dim) {
-						if(i == 0)
-							newDim = dims.get(dims.size() -1).getId();
-						else
-							newDim = dims.get(i-1).getId();
-						break;
+				int dim = stack.getTagCompound().getInteger("Dimension");
+				int newDim = 0;
+				List<DimensionData> dims = DimensionDataRegistry.instance().getDimensions().stream().filter(d -> d.getGatewayKey() <= key).collect(Collectors.toList());
+				if(playerIn.isSneaking())
+					for(int i = dims.size()-1; i > 0; i--) {
+						DimensionData data = dims.get(i);
+						if(data.getId() == dim) {
+							if(i == 0)
+								newDim = dims.get(dims.size() -1).getId();
+							else
+								newDim = dims.get(i-1).getId();
+							break;
+						}
 					}
-				}
-			else
-				for(int i = 0; i < dims.size(); i++) {
-					DimensionData data = dims.get(i);
-					if(data.getId() == dim) {
-						if(i == dims.size() -1)
-							newDim = dims.get(0).getId();
-						else
-							newDim = dims.get(i+1).getId();
-						break;
+				else
+					for(int i = 0; i < dims.size(); i++) {
+						DimensionData data = dims.get(i);
+						if(data.getId() == dim) {
+							if(i == dims.size() -1)
+								newDim = dims.get(0).getId();
+							else
+								newDim = dims.get(i+1).getId();
+							break;
+						}
 					}
-				}
 
-			stack.getTagCompound().setInteger("Dimension", newDim);
-			playerIn.sendStatusMessage(new TextComponentTranslation(DimensionDataRegistry.instance().getDimensionName(newDim)), true);
-		}
+				stack.getTagCompound().setInteger("Dimension", newDim);
+				playerIn.sendStatusMessage(new TextComponentTranslation(DimensionDataRegistry.instance().getDimensionName(newDim)), true);
+			} else isUsing = false;
 
 		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}
@@ -141,14 +142,14 @@ public class ItemGatewayKey extends ItemACBasic {
 		if(!worldIn.isRemote && getKeyType() == 3) {
 			IBlockState state = worldIn.getBlockState(pos);
 			if(state.getBlock() == ACBlocks.portal_anchor) {
+				isUsing = true;
 				boolean active = state.getValue(BlockPortalAnchor.ACTIVE);
-				worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(BlockPortalAnchor.ACTIVE), 2);
 
 				if(active) {
+					worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(BlockPortalAnchor.ACTIVE), 2);
 					worldIn.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(pos).grow(2))
 					.stream().forEach(e -> worldIn.removeEntity(e));
 				} else {
-					TileEntity tile = worldIn.getTileEntity(pos);
 					ItemStack stack = player.getHeldItem(hand);
 					if(!stack.hasTagCompound())
 						stack.setTagCompound(new NBTTagCompound());
@@ -156,15 +157,18 @@ public class ItemGatewayKey extends ItemACBasic {
 					int dimension = stack.getTagCompound().getInteger("Dimension");
 
 					if(areDimensionsCompatible(worldIn.provider.getDimension(), dimension)) {
+						worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(BlockPortalAnchor.ACTIVE), 2);
+						TileEntity tile = worldIn.getTileEntity(pos);
 						((TileEntityPortalAnchor) tile).setDestination(dimension);
 						EntityPortal portal = new EntityPortal(worldIn);
 						portal.setDestination(dimension);
 						portal.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, 0, 0);
 						worldIn.spawnEntity(portal);
-					}
+					} else
+						player.sendStatusMessage(new TextComponentTranslation("message.portalplacer.error.2"), true);
 				}
-				
-				return EnumActionResult.SUCCESS;
+
+				return EnumActionResult.PASS;
 			}
 		}
 

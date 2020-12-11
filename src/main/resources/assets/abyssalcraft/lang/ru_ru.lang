@@ -1185,6 +1185,7 @@ tile.door_dlt.name=Дубовая дверь из Тёмных земель
 tile.door_drt.name=Деревянная дверь из Ужасных земель
 tile.multi_block.name=Мульти-блок
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
+tile.portal_anchor.name=Portal Anchor
 
 #Pre/Postfixes
 decorativestatue.prefix=Декоративная %s

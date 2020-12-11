@@ -85,10 +85,10 @@ public class BlockSequentialBrewingStand extends BlockContainer
 		EnumFacing facing = null;
 		if(tile instanceof TileEntitySequentialBrewingStand)
 			facing = ((TileEntitySequentialBrewingStand) tile).getDirection();
-		
+
 		return facing != null ? facing : def;
 	}
-	
+
 	private EnumFacing getAdjacentDirection(IBlockAccess worldIn, BlockPos pos, EnumFacing facing)
 	{
 		EnumFacing facing2 = null;
@@ -102,10 +102,10 @@ public class BlockSequentialBrewingStand extends BlockContainer
 					break;
 				}
 			}
-		
+
 		return facing2 != null ? facing2 : EnumFacing.UP;
 	}
-	
+
 	/**
 	 * Used to determine ambient occlusion and culling when rebuilding chunks for render
 	 */
