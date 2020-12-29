@@ -63,7 +63,7 @@ public final class EntityUtil {
 	 * @param par1 The Player to check
 	 * @return True if the Player has a certain name, otherwise false
 	 */
-	public static final boolean isPlayerCoralium(EntityPlayer par1){
+	public static boolean isPlayerCoralium(EntityPlayer par1){
 		if(Vars.dev)
 			return par1.getName().equals("shinoow") || par1.getName().equals("Oblivionaire");
 		else return par1.getUniqueID().equals(Vars.uuid1) || par1.getUniqueID().equals(Vars.uuid2);

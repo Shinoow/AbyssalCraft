@@ -128,7 +128,7 @@ public class DimensionData {
 		}
 
 		/**
-		 * Sets the portal color
+		 * Sets the portal color (a value between 0 and 255)
 		 * @param r Red color
 		 * @param g Green color
 		 * @param b Blue color

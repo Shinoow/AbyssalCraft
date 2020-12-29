@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 
@@ -61,7 +62,7 @@ public class TransmutatorRecipes {
 	public void transmute(ItemStack input, ItemStack output, float xp)
 	{
 		transmutationList.put(input, output);
-		experienceList.put(output, Float.valueOf(xp));
+		experienceList.put(output, xp);
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class TransmutatorRecipes {
 	{
 		return transmutationList.entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(e -> e.getValue())
+				.map(Entry::getValue)
 				.findFirst()
 				.orElse(ItemStack.EMPTY);
 	}
@@ -88,7 +89,7 @@ public class TransmutatorRecipes {
 
 		return experienceList.entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(e -> e.getValue().floatValue())
+				.map(Entry::getValue)
 				.findFirst()
 				.orElse(0.0F);
 	}

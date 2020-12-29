@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelGatekeeperMinion;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
 import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -29,6 +30,7 @@ public class RenderGatekeeperMinion extends RenderLiving<EntityGatekeeperMinion>
 	public RenderGatekeeperMinion(RenderManager manager)
 	{
 		this(manager, new ModelGatekeeperMinion());
+		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft", "textures/model/elite/gatekeeperminion_eyes.png")));
 	}
 
 	public RenderGatekeeperMinion(RenderManager manager, ModelGatekeeperMinion model)

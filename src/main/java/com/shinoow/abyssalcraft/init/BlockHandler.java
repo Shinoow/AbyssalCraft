@@ -243,6 +243,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.darklands_oak_door = new BlockACDoor(Material.WOOD, 3.0F, 15.0F, SoundType.WOOD, MapColor.BROWN).setUnlocalizedName("door_dlt");
 		ACBlocks.dreadlands_door = new BlockACDoor(Material.WOOD, 3.0F, 15.0F, SoundType.WOOD, MapColor.RED).setUnlocalizedName("door_drt");
 		ACBlocks.multi_block = new BlockMultiblock();
+		ACBlocks.sequential_brewing_stand = new BlockSequentialBrewingStand();
+		ACBlocks.portal_anchor = new BlockPortalAnchor();
 
 		((BlockRitualAltar)ACBlocks.ritual_altar).setBlocks();
 		((BlockRitualPedestal)ACBlocks.ritual_pedestal).setBlocks();
@@ -279,6 +281,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityStateTransformer.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityStateTransformer"));
 		GameRegistry.registerTileEntity(TileEntityEnergyDepositioner.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityEnergyDepositioner"));
 		GameRegistry.registerTileEntity(TileEntityMultiblock.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityMultiblock"));
+		GameRegistry.registerTileEntity(TileEntitySequentialBrewingStand.class, new ResourceLocation(AbyssalCraft.modid, "tileEntitySequentialBrewingStand"));
+		GameRegistry.registerTileEntity(TileEntityPortalAnchor.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityPortalAnchor"));
 
 		//		registerBlock(ACBlocks.stone, new ItemMetadataBlock(ACBlocks.stone), "stone");
 		registerBlock(ACBlocks.darkstone, "darkstone");
@@ -476,6 +480,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.darklands_oak_door, null, "door_dlt");
 		registerBlock(ACBlocks.dreadlands_door, null, "door_drt");
 		registerBlock(ACBlocks.multi_block, "multiblock");
+		registerBlock(ACBlocks.sequential_brewing_stand, "sequential_brewing_stand");
+		registerBlock(ACBlocks.portal_anchor, "portal_anchor");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);
@@ -564,7 +570,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.coralium_cobblestone_wall, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.luminous_thistle, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.wastelands_thorn, new DimensionCondition(ACLib.abyssal_wasteland_id));
-
+		addCondition(ACBlocks.sequential_brewing_stand, new DimensionCondition(-1));
 	}
 
 	private void addCondition(Block block, IUnlockCondition condition){

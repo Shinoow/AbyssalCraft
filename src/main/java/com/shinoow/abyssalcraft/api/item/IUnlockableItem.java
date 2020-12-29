@@ -31,12 +31,12 @@ public interface IUnlockableItem {
 	 * Sets the unlock condition for the Item
 	 * @param condition Unlock Condition
 	 */
-	public Item setUnlockCondition(IUnlockCondition condition);
+	Item setUnlockCondition(IUnlockCondition condition);
 
 	/**
 	 * Getter for the Unlock Condition
 	 * @param stack ItemStack holding the item requesting the Unlock Condition
 	 * @return the Unlock Condition associated with the ItemStack
 	 */
-	public IUnlockCondition getUnlockCondition(ItemStack stack);
+	IUnlockCondition getUnlockCondition(ItemStack stack);
 }

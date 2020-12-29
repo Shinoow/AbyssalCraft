@@ -111,7 +111,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 
 	public int getWatchedTargetId(int head)
 	{
-		return dataManager.get(HEAD_TARGETS[head]).intValue();
+		return dataManager.get(HEAD_TARGETS[head]);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 	 */
 	public void updateWatchedTargetId(int targetOffset, int newId)
 	{
-		dataManager.set(HEAD_TARGETS[targetOffset], Integer.valueOf(newId));
+		dataManager.set(HEAD_TARGETS[targetOffset], newId);
 	}
 
 	public int getBarfTimer() {

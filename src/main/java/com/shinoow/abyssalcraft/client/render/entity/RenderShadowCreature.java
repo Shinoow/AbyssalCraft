@@ -12,6 +12,8 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelShadowCreature;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
+import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
@@ -19,14 +21,12 @@ import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderShadowCreature extends RenderLiving {
+public class RenderShadowCreature extends RenderLiving<EntityShadowCreature> {
 
 	private static final ResourceLocation mobTexture = new ResourceLocation("abyssalcraft:textures/model/shadowcreature.png");
 
@@ -39,10 +39,11 @@ public class RenderShadowCreature extends RenderLiving {
 	{
 		super(manager, model, 0.0F);
 		addLayer(new LayerCustomHead(model.Head1));
+		addLayer(new LayerEyes<>(this, new ResourceLocation("abyssalcraft", "textures/model/shadowcreature_eyes.png")).addAlpha(EntityShadowCreature::getBrightness));
 	}
 
 	@Override
-	protected void renderModel(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
+	protected void renderModel(EntityShadowCreature entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
 	{
 		GlStateManager.color(1.0F, 1.0F, 1.0F, entitylivingbaseIn.getBrightness());
 		GlStateManager.enableBlend();
@@ -52,7 +53,7 @@ public class RenderShadowCreature extends RenderLiving {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(EntityShadowCreature entity) {
 
 		return mobTexture;
 	}

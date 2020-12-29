@@ -205,14 +205,14 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	 */
 	public void setBesideClimbableBlock(boolean par1)
 	{
-		byte b0 = dataManager.get(CLIMBING).byteValue();
+		byte b0 = dataManager.get(CLIMBING);
 
 		if (par1)
 			b0 = (byte)(b0 | 1);
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, b0);
 	}
 
 	@Override

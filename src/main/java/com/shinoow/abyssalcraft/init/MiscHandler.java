@@ -316,7 +316,7 @@ public class MiscHandler implements ILifeCycleHandler {
 	public void postInit(FMLPostInitializationEvent event) {
 		File folder = new File("config/abyssalcraft/");
 		folder.mkdirs();
-		Stack<File> folders = new Stack<File>();
+		Stack<File> folders = new Stack<>();
 		folders.add(folder);
 		while(!folders.isEmpty()){
 			File dir = folders.pop();

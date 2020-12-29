@@ -79,13 +79,10 @@ public class NecronomiconPurgingRitual extends NecronomiconRitual {
 							IBlockState state = world.getBlockState(pos1.up(y));
 							if(state.getBlock().hasTileEntity(state)) continue;
 							if(state.getBlockHardness(world, pos1.up(y)) == -1) continue;
-							if(state.getBlock() instanceof IPlantable)
+							if(state.getBlock() instanceof IPlantable || state.getMaterial().isLiquid() || !state.isFullCube())
 								world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
-							else if(state.getMaterial().isLiquid())
-								world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
-							else if(!state.isFullCube())
-								world.setBlockState(pos1.up(y), Blocks.AIR.getDefaultState(), 2);
-							else world.setBlockState(pos1.up(y), ACBlocks.calcified_stone.getDefaultState(), 2);
+							else
+								world.setBlockState(pos1.up(y), ACBlocks.calcified_stone.getDefaultState(), 2);
 						}
 
 						BiomeUtil.updateBiome(world, pos1, ACBiomes.purged, true);

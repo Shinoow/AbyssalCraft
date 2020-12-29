@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
@@ -110,7 +111,7 @@ public class EngraverRecipes {
 
 		return experienceList.entrySet().stream()
 				.filter(e -> areStacksEqual(stack, e.getKey()))
-				.map(e -> e.getValue().floatValue())
+				.map(Entry::getValue)
 				.findFirst()
 				.orElse(0.0F);
 	}

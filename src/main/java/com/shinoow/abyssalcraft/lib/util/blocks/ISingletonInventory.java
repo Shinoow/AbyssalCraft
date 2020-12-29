@@ -23,13 +23,13 @@ public interface ISingletonInventory {
 	/**
 	 * Returns the ItemStack placed on the Altar, if any
 	 */
-	public ItemStack getItem();
+	ItemStack getItem();
 
 	/**
 	 * Sets the ItemStack placed on the Altar
 	 * @param item ItemStack to place on the Altar
 	 */
-	public void setItem(ItemStack item);
+	void setItem(ItemStack item);
 
 	/**
 	 * Returns whether or not the placed Item should rotate

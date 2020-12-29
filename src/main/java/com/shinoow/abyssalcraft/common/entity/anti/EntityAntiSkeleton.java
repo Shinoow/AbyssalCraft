@@ -78,7 +78,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(field_184728_b, Boolean.valueOf(false));
+		dataManager.register(field_184728_b, false);
 	}
 
 	@Override
@@ -233,11 +233,11 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	@SideOnly(Side.CLIENT)
 	public boolean getSwingingArms()
 	{
-		return dataManager.get(field_184728_b).booleanValue();
+		return dataManager.get(field_184728_b);
 	}
 
 	@Override
 	public void setSwingingArms(boolean swingingArms) {
-		dataManager.set(field_184728_b, Boolean.valueOf(swingingArms));
+		dataManager.set(field_184728_b, swingingArms);
 	}
 }

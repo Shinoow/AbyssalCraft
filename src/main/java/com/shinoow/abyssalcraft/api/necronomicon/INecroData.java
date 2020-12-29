@@ -15,15 +15,15 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
 public interface INecroData {
 
-	public String getTitle();
+	String getTitle();
 
-	public int getDisplayIcon();
+	int getDisplayIcon();
 
-	public String getText();
+	String getText();
 
-	public boolean hasText();
+	boolean hasText();
 
-	public String getIdentifier();
+	String getIdentifier();
 
-	public IUnlockCondition getCondition();
+	IUnlockCondition getCondition();
 }

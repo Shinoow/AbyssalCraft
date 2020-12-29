@@ -40,7 +40,7 @@ public class BiomeProviderDreadlands extends BiomeProvider
 	public BiomeProviderDreadlands()
 	{
 		biomeCache = new BiomeCache(this);
-		biomesToSpawnIn = new ArrayList<Biome>();
+		biomesToSpawnIn = new ArrayList<>();
 		biomesToSpawnIn.add(ACBiomes.dreadlands);
 		biomesToSpawnIn.add(ACBiomes.purified_dreadlands);
 		biomesToSpawnIn.add(ACBiomes.dreadlands_forest);

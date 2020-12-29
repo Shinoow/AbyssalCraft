@@ -33,7 +33,7 @@ public interface IInternalMethodHandler {
 	 * @param pos BlockPos
 	 * @param id Dimension ID
 	 */
-	public void sendDisruption(DeityType deity, String name, BlockPos pos, int id);
+	void sendDisruption(DeityType deity, String name, BlockPos pos, int id);
 
 	/**
 	 * Spawns a particle
@@ -46,7 +46,7 @@ public interface IInternalMethodHandler {
 	 * @param velY Y velocity
 	 * @param velZ Z velocity
 	 */
-	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ);
+	void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ);
 
 	/**
 	 * Spawns a PE stream between two Positions
@@ -54,7 +54,7 @@ public interface IInternalMethodHandler {
 	 * @param posTo Target position
 	 * @param dimension Dimension ID
 	 */
-	public void spawnPEStream(BlockPos posFrom, BlockPos posTo, int dimension);
+	void spawnPEStream(BlockPos posFrom, BlockPos posTo, int dimension);
 
 	/**
 	 * Spawns a PE stream between a BlockPos and a Entity
@@ -62,7 +62,7 @@ public interface IInternalMethodHandler {
 	 * @param target Target entity
 	 * @param dimension Dimension ID
 	 */
-	public void spawnPEStream(BlockPos posFrom, Entity target, int dimension);
+	void spawnPEStream(BlockPos posFrom, Entity target, int dimension);
 
 	/**
 	 * Attempts to generate a Darklands Structure.<br>
@@ -82,7 +82,7 @@ public interface IInternalMethodHandler {
 	 * 0, chunkZ*16 + random.nextInt(16) rand.nextInt(5) * (random.nextBoolean() ? -1 : 1))<br></i>
 	 * is what's used for the Darklands
 	 */
-	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos);
+	void generateDarklandsStructure(int type, World world, Random random, BlockPos pos);
 
 	/**
 	 * Attempts to generate a Darklands Structure.<br>
@@ -104,7 +104,7 @@ public interface IInternalMethodHandler {
 	 * @param spawnBlock BlockState that the structures can generate on
 	 * @param extra (OPTIONAL) Additional BlockStates the structure can generate on
 	 */
-	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, IBlockState spawnBlock, IBlockState...extra);
+	void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, IBlockState spawnBlock, IBlockState...extra);
 
 	/**
 	 * Fires a message to the client on the completion of a ritual<br>
@@ -115,7 +115,7 @@ public interface IInternalMethodHandler {
 	 * @param player Player who completed the ritual
 	 * @param ritual Ritual name
 	 */
-	public void completeRitualClient(BlockPos pos, EntityPlayer player, String ritual);
+	void completeRitualClient(BlockPos pos, EntityPlayer player, String ritual);
 
 	/**
 	 * Checks the configurable immunity and carrier lists for whether or not the entity is immune or a plague carrier<br>
@@ -124,5 +124,5 @@ public interface IInternalMethodHandler {
 	 * @param list Which immunity/carrier list to check
 	 * @return True whether or not the Entity either is immune or a carrier
 	 */
-	public boolean isImmuneOrCarrier(String entity, int list);
+	boolean isImmuneOrCarrier(String entity, int list);
 }

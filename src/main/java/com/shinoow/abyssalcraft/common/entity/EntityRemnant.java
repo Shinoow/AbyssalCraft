@@ -181,7 +181,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(PROFESSION, Integer.valueOf(0));
+		dataManager.register(PROFESSION, 0);
 	}
 
 	/**
@@ -399,7 +399,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 	public void setProfession(int par1)
 	{
-		dataManager.set(PROFESSION, Integer.valueOf(par1));
+		dataManager.set(PROFESSION, par1);
 	}
 
 	public int getProfession()
@@ -741,7 +741,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	private static int getQuantity(Item item, Random rand)
 	{
 		Tuple<Integer, Integer> tuple = itemSellingList.get(item);
-		return tuple == null ? 1 : tuple.getFirst().intValue() >= tuple.getSecond().intValue() ? tuple.getFirst().intValue() : tuple.getFirst().intValue() + rand.nextInt(tuple.getSecond().intValue() - tuple.getFirst().intValue());
+		return tuple == null ? 1 : tuple.getFirst().intValue() >= tuple.getSecond().intValue() ? tuple.getFirst() : tuple.getFirst().intValue() + rand.nextInt(tuple.getSecond().intValue() - tuple.getFirst().intValue());
 	}
 
 	public static void addCoinTrade(MerchantRecipeList list, Item item, Random rand, float probability)
@@ -780,7 +780,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	private static int getRarity(Item par1, Random par2)
 	{
 		Tuple<Integer, Integer> tuple = coinSellingList.get(par1);
-		return tuple == null ? 1 : tuple.getFirst().intValue() >= tuple.getSecond().intValue() ? tuple.getFirst().intValue() : tuple.getFirst().intValue() + par2.nextInt(tuple.getSecond().intValue() - tuple.getFirst().intValue());
+		return tuple == null ? 1 : tuple.getFirst().intValue() >= tuple.getSecond().intValue() ? tuple.getFirst() : tuple.getFirst().intValue() + par2.nextInt(tuple.getSecond().intValue() - tuple.getFirst().intValue());
 	}
 
 	@Override

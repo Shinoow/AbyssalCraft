@@ -123,8 +123,8 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CHILD, Byte.valueOf((byte)0));
-		dataManager.register(TYPE, Integer.valueOf(0));
+		dataManager.register(CHILD, (byte)0);
+		dataManager.register(TYPE, 0);
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 	public void setChild(boolean par1)
 	{
-		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		dataManager.set(CHILD, (byte)(par1 ? 1 : 0));
 
 		if (world != null && !world.isRemote)
 		{
@@ -156,7 +156,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 	public void setGhoulType(int par1)
 	{
-		dataManager.set(TYPE, Integer.valueOf(par1));
+		dataManager.set(TYPE, par1);
 	}
 
 	@Override

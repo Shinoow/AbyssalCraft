@@ -56,7 +56,7 @@ public class ItemScroll extends ItemMetadata implements IScroll {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		SpellUtils.castInstantSpell(stack, worldIn, playerIn, handIn);
 
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
+		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}
 
 	@Override

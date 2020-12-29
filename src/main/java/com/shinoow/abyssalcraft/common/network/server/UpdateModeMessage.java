@@ -51,10 +51,7 @@ public class UpdateModeMessage extends AbstractServerMessage<UpdateModeMessage> 
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		if(container == 0 && player.openContainer instanceof ContainerStateTransformer){
-			player.openContainer.enchantItem(player, mode);
-			player.openContainer.detectAndSendChanges();
-		} else if(container == 1 && player.openContainer instanceof ContainerConfigurator) {
+		if(container == 0 && player.openContainer instanceof ContainerStateTransformer || container == 1 && player.openContainer instanceof ContainerConfigurator){
 			player.openContainer.enchantItem(player, mode);
 			player.openContainer.detectAndSendChanges();
 		}

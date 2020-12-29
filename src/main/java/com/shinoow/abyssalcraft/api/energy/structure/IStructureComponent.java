@@ -33,21 +33,20 @@ public interface IStructureComponent {
 	/**
 	 * Checks if the structure component is currently part of a Place of Power multiblock structure
 	 */
-	public boolean isInMultiblock();
+	boolean isInMultiblock();
 
 	/**
 	 * Setter for whether or not this structure component is part of a Place of Power multiblock structure
 	 */
-	public void setInMultiblock(boolean bool);
+	void setInMultiblock(boolean bool);
 
 	/**
 	 * Getter for the position of the structure base for the Place of Power this component is part of
 	 */
-	@Nullable
-	public BlockPos getBasePosition();
+	@Nullable BlockPos getBasePosition();
 
 	/**
 	 * Setter for the structure base position for the Place of Power this component is part of
 	 */
-	public void setBasePosition(BlockPos pos);
+	void setBasePosition(BlockPos pos);
 }

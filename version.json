@@ -1,8 +1,8 @@
 {
   "homepage": "https://shinoow.github.io/AbyssalCraft/",
   "promos": {
-	"1.12.2-latest": "1.10.2",
-	"1.12.2-recommended": "1.10.2",
+	"1.12.2-latest": "1.10.3",
+	"1.12.2-recommended": "1.10.3",
 	"1.12-latest": "1.9.4-pre-4",
 	"1.12-recommended": "1.9.4-pre-4",
 	"1.11.2-latest": "1.9.4.11-FINAL",
@@ -21,6 +21,7 @@
   "1.8.9-recommended": "1.9.3.10-FINAL"
   },
   "1.12.2": {
+	"1.10.3": "- Fixed a startup crash with Stackup\n- Fixed a world corrupting crash when a block without a proper capability implementation is \n- Added Korean translations (courtesy of hwantube)",
 	"1.10.2": "- Corrected some NBT checking when using keybinds on the Staff of The Gatekeeper, Interdimensional Cage and Spirit Tablet\n- Added a config option that sets the minimum distance two Shoggoth Lairs can generate from each \n- The Chinese, French and Spanish translations have been updated (by Determancer, PrizmaTec and Tosa13)",
 	"1.10.1": "- Fixed a server crash involving the Item Transportation System\n- The Potion Effects given from wearing various armor sets from the mod no longer display particles\n- Changed the sound of Shoggoth Ooze to slime",
 	"1.10.0": "- The ritual of Corruption now convert logs into both variants of the Darklands Oak Log (not just the ordinary without animations)\n- The ritual of Purging is now available with the Dreadlands Necronomicon, instead of the Omothol one\n- Added a ritual to cure the Dreadlands (changing the Dreadlands biome into the nearest non-dreadlands biome)\n- Fixed an exploit involving the Materializer\n- Fixed the tooltip texts on the Rending Pedestal\n- Fixed a crash when Potion AoE rituals tries to apply the potion effect to a player\n- Added a new item transportation system (more info in the Necronomicon)\n- Added the Spirit Tablet (the tool used to configure the item transportation system)\n- Added Spirit Tablet Shards (used to make the Spirit Tablet)\n- Added a spell that displays nearby routes for the item transportation system\n- Added a spell that allows you to start/stop the item transportation of nearby blocks\n- Added a configurable blacklist for the Item transportation system\n- Remnant Blacksmiths and Master Blacksmiths sell Spirit Tablet Shards\n- Overhauled random structure generation inside Omothol (no more village around the temple, random structures on islands)\n- Added a plethora of new loot tables to accompany the new buildings in Omothol\n- Added a spell that allows you to walk on air (unlocked around Omothol)\n- Added a spell that teleports you to your spawn point\n- Fixed a bug where you couldn't deal melee damage to J'zahar if Tough As Nails was installed\n- Amplifiers on Statues now last forever, instead of a minute, when applied",

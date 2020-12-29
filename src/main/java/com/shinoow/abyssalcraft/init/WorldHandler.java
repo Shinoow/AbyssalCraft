@@ -87,27 +87,27 @@ public class WorldHandler implements ILifeCycleHandler {
 		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.abyssal_wasteland_id)
 				.addConnectedDimension(ACConfig.startDimension)
 				.addConnectedDimension(ACLib.dreadlands_id)
-				.setColor(0, 1, 0)
+				.setColor(0, 255, 0)
 				.setGatewayKey(0)
 				.setMob(EntityAbyssalZombie.class)
 				.build());
 		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.dreadlands_id)
 				.addConnectedDimension(ACLib.abyssal_wasteland_id)
 				.addConnectedDimension(ACLib.omothol_id)
-				.setColor(1, 0, 0)
+				.setColor(255, 0, 0)
 				.setGatewayKey(1)
 				.setMob(EntityDreadling.class)
 				.build());
 		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.omothol_id)
 				.addConnectedDimension(ACLib.dark_realm_id)
 				.addConnectedDimension(ACLib.dreadlands_id)
-				.setColor(0, 1, 1)
+				.setColor(0, 255, 255)
 				.setGatewayKey(2)
 				.setMob(EntityGatekeeperMinion.class)
 				.setOverlay(new ResourceLocation("abyssalcraft", "textures/model/omothol_portal.png"))
 				.build());
 		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(0)
-				.setColor(0, 0, 1)
+				.setColor(0, 0, 255)
 				.setGatewayKey(0)
 				.build());
 	}

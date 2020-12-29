@@ -682,7 +682,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			}
 		if(deathTicks == 790 && !world.isRemote){
 			if(world.getGameRules().getBoolean("mobGriefing")) {
-				List<BlockPos> blocks = new ArrayList<BlockPos>();
+				List<BlockPos> blocks = new ArrayList<>();
 				for(int x = 0; x < 10; x++)
 					for(int y = 0; y < 10; y++)
 						for(int z = 0; z < 10; z++){

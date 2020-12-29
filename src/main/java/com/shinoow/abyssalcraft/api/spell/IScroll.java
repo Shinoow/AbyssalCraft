@@ -17,5 +17,5 @@ import net.minecraft.item.ItemStack;
 
 public interface IScroll {
 
-	public ScrollType getScrollType(ItemStack stack);
+	ScrollType getScrollType(ItemStack stack);
 }

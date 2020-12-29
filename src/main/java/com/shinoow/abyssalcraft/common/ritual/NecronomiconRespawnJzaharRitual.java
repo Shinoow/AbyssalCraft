@@ -49,7 +49,7 @@ public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 		StructureJzaharTemple temple = new StructureJzaharTemple();
 		temple.generate(world, world.rand, new BlockPos(4, 53, 7));
 		RitualUtil.tryAltar(world, pos, 4);
-		world.getChunkFromBlockCoords(pos).markDirty();;
+		world.getChunkFromBlockCoords(pos).markDirty();
 		SpecialTextUtil.JzaharGroup(world, I18n.translateToLocalFormatted("message.jzahar.respawn", player.getName()));
 	}
 }

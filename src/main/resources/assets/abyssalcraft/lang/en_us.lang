@@ -218,6 +218,7 @@ container.abyssalcraft.tieredenergycontainer=Tiered Energy Container
 container.abyssalcraft.rendingpedestal=Rending Pedestal
 container.abyssalcraft.statetransformer=State Transformer
 container.abyssalcraft.energydepositioner=Energy Depositioner
+container.abyssalcraft.sequential_brewing=Sequential Brewing Stand
 
 #Gui Labels
 gui.abyssalcraft.facebook.name=Name
@@ -450,6 +451,8 @@ necronomicon.text.crafting.energydepositioner.1=An Energy Depositioner is crafte
 necronomicon.text.crafting.energydepositioner.2=By placing a charged Stone Tablet in the input slot, the Depositioner will siphon out any PE stored in it, returning either an empty Stone Tablet or a cursed one. This operation will corrupt the surrounding area (17x17 blocks), converting it into Darklands (more Darklands increases the chance of cursed Stone Tablets). Output can be automated.
 necronomicon.text.crafting.ethaxiumpillar=Ethaxium Pillars are crafted with Ethaxium Bricks and Ethaxium blocks
 necronomicon.text.crafting.darkethaxiumpillar=Dark Ethaxium Pillars are crafted with Dark Ethaxium Bricks and Omothol Stone
+necronomicon.text.crafting.sequential_brewing_stand.1=A Sequential Brewing Stand is crafted using Blaze Rods, a Hopper and Brewing Stands. Sequential Brewing Stands can be chained, allowing one to transfer its output to the next one.
+necronomicon.text.crafting.sequential_brewing_stand.2=A pipe indicates the direction of transfer, and the pipes will connect on two connected Brewing Stands. Automation exists for ingredient input on the top, fuel and bottle input on the sides and output of the output slots on the bottom.
 
 necronomicon.text.crafting.odbcore=An ODB Core is crafted with Abyssalnite Ingots, Iron Ingots, Iron Blocks and a Coralium Pearl. Can be used as an explosive.
 necronomicon.text.crafting.odb=An Oblivion Deathbomb is crafted with Obsidian, An ODB Core, An Oblivion Catalyst, a Liquid Coralium Bucket and a Liquid Antimatter Bucket. Heavy explosive.
@@ -827,9 +830,9 @@ ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area 
 ac.ritual.spiritTablet=Spirit Tablet
 ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crystal with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
 ac.ritual.portal=Ritual of Open Doors
-ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed.
+ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed, but the altar will be replaced with a block.
 ac.ritual.silverKey=The Silver Key
-ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key.
+ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key. The Silver Key can open portals at will via Portal Anchors as well as closing them both by interacting with the block (right click).
 ac.ritual.facebook=The Book of Many Faces
 ac.ritual.facebook.desc=By infusing a Book with crystallized compounds resembling the elements of life, an Arrow and an Ink Sac, you create a book capable of communicating with the dead and tell you the names of fallen companions.
 
@@ -1180,6 +1183,8 @@ tile.calcifiedstone.name=Calcified Stone
 tile.door_dlt.name=Darklands Oak Wood Door
 tile.door_drt.name=Dreadlands Wood Door
 tile.multi_block.name=Multiblock
+tile.sequential_brewing_stand.name=Sequential Brewing Stand
+tile.portal_anchor.name=Portal Anchor
 
 #Pre/Postfixes
 decorativestatue.prefix=Decorative %s

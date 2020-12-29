@@ -82,7 +82,7 @@ public class BlockACBasic extends Block {
 				setHarvestLevel("shovel", 0);
 	}
 
-	public static enum EnumType implements IStringSerializable
+	public enum EnumType implements IStringSerializable
 	{
 		GENERIC(0, "generic", MapColor.AIR);
 

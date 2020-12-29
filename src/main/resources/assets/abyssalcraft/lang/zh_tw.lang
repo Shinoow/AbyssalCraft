@@ -218,6 +218,7 @@ container.abyssalcraft.tieredenergycontainer=層疊能量容器
 container.abyssalcraft.rendingpedestal=撕裂基座
 container.abyssalcraft.statetransformer=物態轉換器
 container.abyssalcraft.energydepositioner=能量沉積器
+container.abyssalcraft.sequential_brewing=Sequential Brewing Stand
 
 #Gui Labels
 gui.abyssalcraft.facebook.name=Name
@@ -450,6 +451,8 @@ necronomicon.text.crafting.energydepositioner.1=能量沉積器由巨石塊，�
 necronomicon.text.crafting.energydepositioner.2=在輸入槽裏放置一個充能的石板，沉積器將提取出內部存儲的PE，返還空石板或者被詛咒的石板。這一操作會污染周圍的區域（17x17方塊），將其變為黑暗之地（更多的黑暗之地會提升產出詛咒石板的幾率）。 輸出可以自動化。
 necronomicon.text.crafting.ethaxiumpillar=伊桑斯石柱由伊桑斯磚塊和伊桑斯石來合成。
 necronomicon.text.crafting.darkethaxiumpillar=深色伊桑斯石柱由深色伊桑斯磚塊和奧穆索石頭合成。
+necronomicon.text.crafting.sequential_brewing_stand.1=A Sequential Brewing Stand is crafted using Blaze Rods, a Hopper and Brewing Stands. Sequential Brewing Stands can be chained, allowing one to transfer its output to the next one.
+necronomicon.text.crafting.sequential_brewing_stand.2=A pipe indicates the direction of transfer, and the pipes will connect on two connected Brewing Stands. Automation exists for ingredient input on the top, fuel and bottle input on the sides and output of the output slots on the bottom.
 
 necronomicon.text.crafting.odbcore=湮滅彈核心由深淵錠、鐵錠、鐵塊和珊瑚珍珠合成。可用作爆炸物。
 necronomicon.text.crafting.odb=湮滅彈由黑曜石、一個湮滅彈核心、一個湮滅催化劑、一桶液態珊瑚和一桶液態反物質合成。高爆。
@@ -827,9 +830,9 @@ ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area 
 ac.ritual.spiritTablet=Spirit Tablet
 ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crystal with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
 ac.ritual.portal=Ritual of Open Doors
-ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed.
+ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed, but the altar will be replaced with a block.
 ac.ritual.silverKey=The Silver Key
-ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key.
+ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key. The Silver Key can open portals at will via Portal Anchors as well as closing them both by interacting with the block (right click).
 ac.ritual.facebook=The Book of Many Faces
 ac.ritual.facebook.desc=By infusing a Book with crystallized compounds resembling the elements of life, an Arrow and an Ink Sac, you create a book capable of communicating with the dead and tell you the names of fallen companions.
 
@@ -1025,7 +1028,6 @@ tile.odbcore.name=湮滅彈核心
 tile.woodencrate.name=木制板條箱
 tile.darkstoneslab1.name=黑暗石半磚
 tile.darkstoneslab2.name=黑暗石雙層半磚
-tile.coraliumfire.name=珊瑚火
 tile.dsbutton.name=黑暗石按鈕
 tile.dspplate.name=黑暗石壓力板
 tile.dltplank.name=黑暗之地橡木木板
@@ -1181,6 +1183,8 @@ tile.calcifiedstone.name=鈣化石
 tile.door_dlt.name=Darklands Oak Wood Door
 tile.door_drt.name=Dreadlands Wood Door
 tile.multi_block.name=Multiblock
+tile.sequential_brewing_stand.name=Sequential Brewing 
+tile.portal_anchor.name=Portal Anchor
 
 #Pre/Postfixes
 decorativestatue.prefix=裝飾用%s

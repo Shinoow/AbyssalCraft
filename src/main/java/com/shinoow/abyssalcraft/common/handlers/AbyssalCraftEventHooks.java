@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
 
-import java.util.Random;
-
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
@@ -198,10 +196,9 @@ public class AbyssalCraftEventHooks {
 		}
 		if(ACConfig.darkRealmSmokeParticles)
 			if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)
-			&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW){
+			&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW)
 				if(ACConfig.particleEntity)
 					ParticleUtil.spawnShadowParticles(event.getEntityLiving());
-			}
 	}
 
 	@SubscribeEvent
@@ -313,7 +310,7 @@ public class AbyssalCraftEventHooks {
 				event.setResult(Result.DENY);
 			}
 			if(event.getOriginal().getBlock() == Blocks.STONE_STAIRS){
-				event.setReplacement(ACBlocks.darkstone_cobblestone_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));;
+				event.setReplacement(ACBlocks.darkstone_cobblestone_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));
 				event.setResult(Result.DENY);
 			}
 			if(event.getOriginal().getBlock() == Blocks.OAK_FENCE){

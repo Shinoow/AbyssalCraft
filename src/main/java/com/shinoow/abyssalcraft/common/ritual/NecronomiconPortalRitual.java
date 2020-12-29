@@ -11,13 +11,16 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.ritual;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
 import com.shinoow.abyssalcraft.common.entity.EntityPortal;
-import com.shinoow.abyssalcraft.common.items.ItemPortalPlacer;
+import com.shinoow.abyssalcraft.common.items.ItemGatewayKey;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,14 +55,14 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 		if(altar instanceof IRitualAltar)
 			stack = ((IRitualAltar) altar).getItem();
 
-		if(!stack.isEmpty() && stack.getItem() instanceof ItemPortalPlacer) {
+		if(!stack.isEmpty() && stack.getItem() instanceof ItemGatewayKey) {
 			if(!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
 			int id = stack.getTagCompound().getInteger("Dimension");
 			if(id == world.provider.getDimension())
 				return false;
 
-			int key = ((ItemPortalPlacer)stack.getItem()).getKeyType();
+			int key = ((ItemGatewayKey)stack.getItem()).getKeyType();
 
 			DimensionData data = DimensionDataRegistry.instance().getDataForDim(id);
 
@@ -95,6 +98,20 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 			portal.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
 			portal.setDestination(id);
 			world.spawnEntity(portal);
+			if(!player.addItemStackToInventory(stack))
+				player.dropItem(stack, false);
+			((IRitualAltar) altar).setItem(ItemStack.EMPTY);
+			((IRitualAltar) altar).getPedestals()
+			.stream()
+			.map(p -> ((TileEntity) p).getPos())
+			.forEach(p -> {
+				world.destroyBlock(p, false);
+				world.setBlockState(p, ACBlocks.monolith_pillar.getDefaultState());
+			});
+			world.destroyBlock(pos, false);
+			world.setBlockState(pos, ACBlocks.portal_anchor.getDefaultState().withProperty(BlockPortalAnchor.ACTIVE, true), 2);
+
+			((TileEntityPortalAnchor) world.getTileEntity(pos)).setDestination(id);
 		}
 	}
 

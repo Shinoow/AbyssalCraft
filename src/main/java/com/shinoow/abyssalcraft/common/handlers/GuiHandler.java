@@ -97,6 +97,11 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getOffHand(), EnumHand.OFF_HAND));
 			return null;
 		});
+		serverElements.put(ACLib.sequentialBrewingStandGuiID, ctx -> {
+			if (ctx.getTE() instanceof TileEntitySequentialBrewingStand)
+				return new ContainerSequentialBrewingStand(ctx.player.inventory, (TileEntitySequentialBrewingStand) ctx.getTE());
+			return null;
+		});
 
 		clientElements.put(ACLib.crystallizerGuiID, ctx -> {
 			if (ctx.getTE() instanceof TileEntityCrystallizer)
@@ -169,6 +174,11 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiFaceBook();
 			if(ctx.getOffHand().getItem() instanceof ItemFaceBook)
 				return new GuiFaceBook();
+			return null;
+		});
+		clientElements.put(ACLib.sequentialBrewingStandGuiID, ctx -> {
+			if (ctx.getTE() instanceof TileEntitySequentialBrewingStand)
+				return new GuiSequentialBrewingStand(ctx.player.inventory, (TileEntitySequentialBrewingStand) ctx.getTE());
 			return null;
 		});
 	}

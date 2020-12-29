@@ -59,12 +59,9 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 	{
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
 
-		if (entitylivingbase == null)
+		if (entitylivingbase == null || !entitylivingbase.isEntityAlive())
 			return false;
-		else if (!entitylivingbase.isEntityAlive())
-			return false;
-		else
-		{
+		else {
 			if (canPenalize)
 				if (--delayCounter <= 0)
 				{
@@ -90,9 +87,7 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 	{
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
 
-		if (entitylivingbase == null)
-			return false;
-		else if (!entitylivingbase.isEntityAlive())
+		if (entitylivingbase == null || !entitylivingbase.isEntityAlive())
 			return false;
 		else if (!longMemory)
 			return !attacker.getNavigator().noPath();

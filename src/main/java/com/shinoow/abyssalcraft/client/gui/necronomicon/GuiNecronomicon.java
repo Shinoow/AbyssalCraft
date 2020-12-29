@@ -399,7 +399,7 @@ public class GuiNecronomicon extends GuiScreen {
 				stuff = localize(isNecroInfo ? NecronomiconText.LABEL_HUH : NecronomiconText.LABEL_KNOWLEDGE);
 				fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			}
-			s = I18n.format("necronomicon.turnupindicator", new Object[] {Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups)});
+			s = I18n.format("necronomicon.turnupindicator", Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups));
 
 			l = fontRenderer.getStringWidth(s);
 			if(getTurnupLimit() > 1)

@@ -26,7 +26,7 @@ import net.minecraft.world.gen.structure.StructureStart;
 
 public class MapGenOmothol extends MapGenStructure
 {
-	public static List<Biome> villageSpawnBiomes = Arrays.<Biome>asList(new Biome[] {ACBiomes.omothol});
+	public static List<Biome> villageSpawnBiomes = Arrays.<Biome>asList(ACBiomes.omothol);
 	/** World terrain type, 0 for normal, 1 for flat map */
 	private int terrainType;
 	private int field_82665_g;

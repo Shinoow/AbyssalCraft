@@ -21,11 +21,11 @@ import net.minecraft.item.ItemStack;
  */
 public interface IStaffOfRending {
 
-	public void increaseEnergy(ItemStack stack, String type);
+	void increaseEnergy(ItemStack stack, String type);
 
-	public void setEnergy(int amount, ItemStack stack, String type);
+	void setEnergy(int amount, ItemStack stack, String type);
 
-	public int getEnergy(ItemStack par1ItemStack, String type);
+	int getEnergy(ItemStack par1ItemStack, String type);
 
-	public int getDrainAmount(ItemStack stack);
+	int getDrainAmount(ItemStack stack);
 }

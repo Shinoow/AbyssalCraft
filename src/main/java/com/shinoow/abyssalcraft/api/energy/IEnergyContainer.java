@@ -25,40 +25,40 @@ public interface IEnergyContainer {
 	/**
 	 * Gets the Potential Energy contained within the tile entity
 	 */
-	public float getContainedEnergy();
+	float getContainedEnergy();
 
 	/**
 	 * Gets the maximum Potential Energy the tile entity can hold
 	 */
-	public int getMaxEnergy();
+	int getMaxEnergy();
 
 	/**
 	 * Adds Potential Energy to the tile entity
 	 * @param energy Energy quota to add
 	 */
-	public void addEnergy(float energy);
+	void addEnergy(float energy);
 
 	/**
 	 * Consumes (removes) Potential Energy from the tile entity
 	 * @param energy Energy quota to consume
 	 * @return The amount of energy consumed
 	 */
-	public float consumeEnergy(float energy);
+	float consumeEnergy(float energy);
 
 	/**
 	 * Returns whether or not this container can accept Potential Energy<br>
 	 * (eg. if it  has room for more Potential Energy, or if it accepts external input at all)
 	 */
-	public boolean canAcceptPE();
+	boolean canAcceptPE();
 
 	/**
 	 * Returns whether or not this container can transfer Potential Energy<br>
 	 * (eg. if it has any Potential Energy stored that it can transfer, or if it allows extraction at all)
 	 */
-	public boolean canTransferPE();
+	boolean canTransferPE();
 
 	/**
 	 * Returns the TileEntity this interface is bound to
 	 */
-	public TileEntity getContainerTile();
+	TileEntity getContainerTile();
 }

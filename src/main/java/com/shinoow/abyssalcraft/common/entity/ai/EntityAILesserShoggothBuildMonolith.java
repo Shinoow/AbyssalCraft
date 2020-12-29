@@ -47,15 +47,9 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 
-		if(ACConfig.monolithBuildingCooldown == 0)
+		if(ACConfig.monolithBuildingCooldown == 0 || shoggoth.isChild() || shoggoth.isAssisting || shoggoth.isBuilding)
 			return false;
-		else if(shoggoth.isChild())
-			return false;
-		else if(shoggoth.isAssisting || shoggoth.isBuilding)
-			return false;
-		else if(shoggoth.getMonolithTimer() < ACConfig.monolithBuildingCooldown)
-			return false;
-		else if(world.getEntitiesWithinAABB(shoggoth.getClass(), shoggoth.getEntityBoundingBox().grow(16D, 16D, 16D), e -> !e.equals(shoggoth) && !e.isAssisting && !e.isBuilding).size() < 3)
+		else if(shoggoth.getMonolithTimer() < ACConfig.monolithBuildingCooldown || world.getEntitiesWithinAABB(shoggoth.getClass(), shoggoth.getEntityBoundingBox().grow(16D, 16D, 16D), e -> !e.equals(shoggoth) && !e.isAssisting && !e.isBuilding).size() < 3)
 			return false;
 		else {
 
