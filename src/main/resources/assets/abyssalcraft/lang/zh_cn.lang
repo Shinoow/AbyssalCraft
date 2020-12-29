@@ -218,6 +218,7 @@ container.abyssalcraft.tieredenergycontainer=层叠能量容器
 container.abyssalcraft.rendingpedestal=撕裂基座
 container.abyssalcraft.statetransformer=物态转换器
 container.abyssalcraft.energydepositioner=能量沉积器
+container.abyssalcraft.sequential_brewing=递次酿造台
 
 #Gui标签
 gui.abyssalcraft.facebook.name=名字
@@ -450,6 +451,8 @@ necronomicon.text.crafting.energydepositioner.1=能量沉积器由巨石块，�
 necronomicon.text.crafting.energydepositioner.2=在输入槽里放置一个充能的石板，沉积器将提取出内部存储的PE，返还空石板或者被诅咒的石板。这一操作会污染周围的区域（17x17方块），将其变为黑暗之地（更多的黑暗之地会提升产出诅咒石板的几率）。输出可以自动化。
 necronomicon.text.crafting.ethaxiumpillar=伊塞斯石柱由伊塞斯砖块和伊塞斯石来合成。
 necronomicon.text.crafting.darkethaxiumpillar=暗色伊塞斯石柱由暗色伊塞斯砖块和奥穆索之石合成。
+necronomicon.text.crafting.sequential_brewing_stand.1=递次酿造台由烈焰棒、漏斗和酿造台合成。递次酿造台可相互连接，如此可以让一台酿造台将其产物转运到下一台酿造台中。
+necronomicon.text.crafting.sequential_brewing_stand.2=连接在两台递次酿造台间的管道会指示转运的方向。顶部放入的配料，侧边栏放入的瓶子和燃料，以及底部输出槽的输出产物均可实现自动化。
 
 necronomicon.text.crafting.odbcore=湮灭弹核心由渊素锭、铁锭、铁块和珊瑚珍珠合成。可用作爆炸物。
 necronomicon.text.crafting.odb=湮灭弹由黑曜石、一个湮灭弹核心、一个湮灭催化剂、一桶液态珊瑚和一桶液态反物质合成。高爆。
@@ -827,9 +830,9 @@ ac.ritual.curing.desc=通过放置4瓶恐惧瘟疫解药，你治愈了一片区
 ac.ritual.spiritTablet=灵魂石板
 ac.ritual.spiritTablet.desc=一块灵魂石板可通过将4个灵魂石板碎片注入生命结晶来制作。它是一种工具，允许你使物品自主移动，以在方块间转移物品。阅读死灵之书奥穆索章节的相关内容以获取更多信息。
 ac.ritual.portal=启门仪式
-ac.ritual.portal.desc=通过献上4个阴影宝石和一把门钥匙，你在空间结构中撕开了孔洞，开启了通往另一维度的传送门。传送门将指向门钥匙所设置的维度。这一过程中门钥匙不会被消耗。
+ac.ritual.portal.desc=通过献上4个阴影宝石和一把门钥匙，你在空间结构中撕开了孔洞，开启了通往另一维度的传送门。传送门将指向门钥匙所设置的维度。这一过程中门钥匙不会被消耗，但祭坛会被某种方块所取代。
 ac.ritual.silverKey=银钥匙
-ac.ritual.silverKey.desc=通过向查伽洛斯的拉莱耶门钥匙注入8个伊塞斯锭并献上活祭品，它将变成银钥匙。
+ac.ritual.silverKey.desc=通过向查伽洛斯的拉莱耶门钥匙注入8个伊塞斯锭并献上活祭品，它将变成银钥匙。银钥匙可借由传送门之锚随意开启传送门，也能通过与之交互（右击）来关闭传送门。
 ac.ritual.facebook=千面之书
 ac.ritual.facebook.desc=通过向书中注入类似于生命元素的结晶混合物、一支箭和一个墨囊，你创造了一本书，它能与死者交流，并告诉你已逝同伴的名字。
 
@@ -1180,6 +1183,8 @@ tile.calcifiedstone.name=钙化石
 tile.door_dlt.name=黑暗之地橡木门
 tile.door_drt.name=恐惧之地木门
 tile.multi_block.name=多方块
+tile.sequential_brewing_stand.name=递次酿造台
+tile.portal_anchor.name=传送门之锚
 
 #前缀/后缀
 decorativestatue.prefix=装饰用%s
