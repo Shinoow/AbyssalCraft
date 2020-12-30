@@ -103,17 +103,11 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 							else if(state == ACBlocks.darkstone_cobblestone.getDefaultState())
 								world.setBlockState(pos1.up(y), Blocks.COBBLESTONE.getDefaultState(), 2);
 							else if(state.getBlock() == ACBlocks.darkstone_brick)
-								switch(state.getValue(BlockACBrick.TYPE)){
-								case CHISELED:
-									world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CHISELED), 2);
-									break;
-								case CRACKED:
-									world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CRACKED), 2);
-									break;
-								default:
-									world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState(), 2);
-									break;
-								}
+								world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState(), 2);
+							else if(state.getBlock() == ACBlocks.chiseled_darkstone_brick)
+								world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CHISELED), 2);
+							else if(state.getBlock() == ACBlocks.cracked_darkstone_brick)
+								world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CRACKED), 2);
 							else if(state.getBlock() == ACBlocks.darkstone_cobblestone_wall)
 								world.setBlockState(pos1.up(y), Blocks.COBBLESTONE_WALL.getDefaultState(), 2);
 							else if(state == ACBlocks.ritual_altar.getDefaultState().withProperty(BlockRitualAltar.MATERIAL, BlockRitualAltar.EnumRitualMatType.DARKSTONE_COBBLESTONE))

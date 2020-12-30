@@ -48,7 +48,7 @@ public class chagarothlair extends WorldGenerator {
 		ITemplateProcessor processor = (worldIn, pos1, blockInfoIn) -> {
 
 			if(blockInfoIn.blockState == ACBlocks.dreadstone_brick.getDefaultState())
-				return worldIn.rand.nextInt(10) > 3 ? blockInfoIn : new BlockInfo(pos1, blockInfoIn.blockState.withProperty(BlockACBrick.TYPE, EnumBrickType.CRACKED), null);
+				return worldIn.rand.nextInt(10) > 3 ? blockInfoIn : new BlockInfo(pos1, ACBlocks.cracked_dreadstone_brick.getDefaultState(), null);
 				return blockInfoIn;
 		};
 

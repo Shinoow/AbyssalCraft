@@ -98,10 +98,10 @@ public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 							else if(state.getBlock() == Blocks.STONEBRICK)
 								switch(state.getValue(BlockStoneBrick.VARIANT)){
 								case CHISELED:
-									world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, BlockACBrick.EnumBrickType.CHISELED), 2);
+									world.setBlockState(pos1.up(y), ACBlocks.chiseled_darkstone_brick.getDefaultState(), 2);
 									break;
 								case CRACKED:
-									world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, BlockACBrick.EnumBrickType.CRACKED), 2);
+									world.setBlockState(pos1.up(y), ACBlocks.cracked_darkstone_brick.getDefaultState(), 2);
 									break;
 								default:
 									world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick.getDefaultState(), 2);

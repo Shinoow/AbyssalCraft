@@ -15,8 +15,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Map.Entry;
 
-import org.apache.logging.log4j.Level;
-
 import com.google.common.base.Strings;
 import com.google.gson.*;
 import com.shinoow.abyssalcraft.api.APIUtils;
@@ -24,11 +22,11 @@ import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * Utility class used to convert NecroData to/from Json
@@ -360,7 +358,7 @@ public class NecroDataJsonUtil {
 			fr.close();
 			return json;
 		} catch (Exception e) {
-			FMLLog.log("AbyssalCraft", Level.ERROR, "Failed to read JSON file: %s", file.toString());
+			ACLogger.severe("Failed to read JSON file: {}", file.toString());
 			e.printStackTrace();
 			return null;
 		}
