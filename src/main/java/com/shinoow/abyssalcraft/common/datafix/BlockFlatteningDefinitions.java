@@ -78,7 +78,18 @@ public class BlockFlatteningDefinitions {
 					},
 					tileEntityNBT -> BlockFlattening.TileEntityAction.REMOVE));
 		});
-
+		BlockACBrick.VARIANTS.forEach((name, variants) -> {
+			variants.forEach((type, variant) -> {
+				flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition(name,
+						type.getMeta(),
+						variant,
+						(block, tileEntityNBT) -> block.getDefaultState(),
+						null));
+			});
+		});
+		
+		//version 3 definitions TBD
+		
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
 }

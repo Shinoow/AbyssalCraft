@@ -36,20 +36,22 @@ import net.minecraft.world.World;
 
 public class IngotBlock extends Block {
 
-	//	public static final PropertyEnum<EnumIngotType> TYPE = PropertyEnum.create("type", EnumIngotType.class);
 	private EnumIngotType TYPE;
 	public static final Map<EnumIngotType, Block> VARIANTS = new HashMap<>();
 
 	public IngotBlock(EnumIngotType type) {
-		super(Material.IRON);
+		super(Material.IRON, type.getMapColor());
 		TYPE = type;
-		//		setDefaultState(getDefaultState().withProperty(TYPE, EnumIngotType.ABYSSALNITE));
 		setHardness(4.0F);
-		setResistance(12.0F);
+		setResistance(type == EnumIngotType.ETHAXIUM ? Float.MAX_VALUE : 12.0F);
 		setSoundType(SoundType.METAL);
 		setCreativeTab(ACTabs.tabBlock);
-		setHarvestLevel("pickaxe", 2);
+		setHarvestLevel("pickaxe", type.getHarvestLevel());
 		VARIANTS.put(TYPE, this);
+	}
+
+	public EnumIngotType getType() {
+		return TYPE;
 	}
 
 	@Override
@@ -64,53 +66,6 @@ public class IngotBlock extends Block {
 			return TYPE != EnumIngotType.ETHAXIUM;
 		return super.canEntityDestroy(state, world, pos, entity);
 	}
-
-	@Override
-	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_)
-	{
-		return TYPE.getMapColor();
-	}
-
-	@Override
-	public float getExplosionResistance(World world, BlockPos pos, @Nullable Entity exploder, Explosion explosion)
-	{
-		return TYPE == EnumIngotType.ETHAXIUM ? Float.MAX_VALUE : super.getExplosionResistance(world, pos, exploder, explosion);
-	}
-
-	@Override
-	public int getHarvestLevel(IBlockState state)
-	{
-		return TYPE.getHarvestLevel();
-	}
-
-	//	@Override
-	//	public IBlockState getStateFromMeta(int meta)
-	//	{
-	//		return getDefaultState().withProperty(TYPE, EnumIngotType.byMetadata(meta));
-	//	}
-	//
-	//	@Override
-	//	public int getMetaFromState(IBlockState state)
-	//	{
-	//		return state.getValue(TYPE).getMeta();
-	//	}
-	//
-	//	@Override
-	//	public int damageDropped (IBlockState state) {
-	//		return state.getValue(TYPE).getMeta();
-	//	}
-	//
-	//	@Override
-	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-	//		for(int i = 0; i < EnumIngotType.values().length; i++)
-	//			par3List.add(new ItemStack(this, 1, i));
-	//	}
-
-	//	@Override
-	//	public BlockStateContainer createBlockState()
-	//	{
-	//		return new BlockStateContainer.Builder(this).add(TYPE).build();
-	//	}
 
 	public enum EnumIngotType implements IStringSerializable
 	{

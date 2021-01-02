@@ -11,8 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -27,65 +31,45 @@ import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockACBrick extends BlockACBasic {
 
-	public static final PropertyEnum<EnumBrickType> TYPE = PropertyEnum.create("type", BlockACBrick.EnumBrickType.class);
-
+//	public static final PropertyEnum<EnumBrickType> TYPE = PropertyEnum.create("type", BlockACBrick.EnumBrickType.class);
+	
+	public static final Map<String, Map<EnumBrickType, Block>> VARIANTS = new HashMap<>();
+	
 	public BlockACBrick(int harvestlevel, float hardness, float resistance) {
 		super(Material.ROCK, "pickaxe", harvestlevel, hardness, resistance, SoundType.STONE);
-		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumBrickType.NORMAL));
 	}
 
 	public BlockACBrick(float hardness, float resistance) {
 		super(Material.ROCK, hardness, resistance, SoundType.STONE);
-		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumBrickType.NORMAL));
 	}
 
 	public BlockACBrick(int harvestlevel, float hardness, float resistance, MapColor mapColor) {
 		super(Material.ROCK, "pickaxe", harvestlevel, hardness, resistance, SoundType.STONE, mapColor);
-		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumBrickType.NORMAL));
 	}
 
 	public BlockACBrick(float hardness, float resistance, MapColor mapColor) {
 		super(Material.ROCK, hardness, resistance, SoundType.STONE, mapColor);
-		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumBrickType.NORMAL));
 	}
 
+	public BlockACBrick remap(String oldName, EnumBrickType type) {
+		Map<EnumBrickType, Block> variant = VARIANTS.getOrDefault(oldName, new HashMap<>());
+		variant.put(type, this);
+		VARIANTS.put(oldName, variant);
+		return this;
+	}
+	
 	@Override
 	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
 	{
 		if(entity instanceof EntityDragon || entity instanceof EntityWither || entity instanceof EntityWitherSkull)
 			return state.getBlock() != ACBlocks.ethaxium_brick && state.getBlock() != ACBlocks.dark_ethaxium_brick;
 		return super.canEntityDestroy(state, world, pos, entity);
-	}
-
-	@Override
-	public int damageDropped (IBlockState state) {
-		return state.getValue(TYPE).getMeta();
-	}
-
-	@Override
-	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-		for(int i = 0; i < EnumBrickType.values().length; i++)
-			par3List.add(new ItemStack(this, 1, i));
-	}
-
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(TYPE, EnumBrickType.byMetadata(meta));
-	}
-
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return state.getValue(TYPE).getMeta();
-	}
-
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer.Builder(this).add(TYPE).build();
 	}
 
 	public enum EnumBrickType implements IStringSerializable {

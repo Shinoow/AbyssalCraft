@@ -126,7 +126,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		fontRenderer.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
 
 		writeText(1, localize(NecronomiconText.LABEL_SPELL_PE)+": " + spell.getReqEnergy() + " PE", 125);
-		writeText(1, localize(NecronomiconText.LABEL_SPELL_TYPE)+": "+ (spell.requiresCharging() ? "Charging" : "Instant"), 135);
+		writeText(1, localize(NecronomiconText.LABEL_SPELL_TYPE)+": "+ localize(NecronomiconText.getSpellType(spell.requiresCharging())), 135);
 		writeText(2, spell.getDescription());
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(NecronomiconResources.SPELL);

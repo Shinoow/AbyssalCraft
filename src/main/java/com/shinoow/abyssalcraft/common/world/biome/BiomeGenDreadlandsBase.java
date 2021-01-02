@@ -102,7 +102,6 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 		int k = (int)(d / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 		int l = x & 15;
 		int i1 = z & 15;
-		new BlockPos.MutableBlockPos();
 
 		for (int j1 = 255; j1 >= 0; --j1)
 			if (j1 < 6)
@@ -115,7 +114,7 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 					IBlockState state = Blocks.AIR.getDefaultState();
 
 					if(i1 % 4 == 2 && l % 4 == 2)
-						state = ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, j1 == 3 ? EnumBrickType.CHISELED : EnumBrickType.NORMAL);
+						state = (j1 == 3 ? ACBlocks.chiseled_darkstone_brick : ACBlocks.darkstone_brick).getDefaultState();
 					chunkPrimerIn.setBlockState(i1, j1, l, state);
 
 				}

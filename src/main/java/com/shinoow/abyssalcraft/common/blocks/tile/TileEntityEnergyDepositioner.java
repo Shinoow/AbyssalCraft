@@ -326,10 +326,10 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 				else if(state.getBlock() == Blocks.STONEBRICK)
 					switch(state.getValue(BlockStoneBrick.VARIANT)){
 					case CHISELED:
-						world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, BlockACBrick.EnumBrickType.CHISELED));
+						world.setBlockState(pos1.up(y), ACBlocks.chiseled_darkstone_brick.getDefaultState());
 						break;
 					case CRACKED:
-						world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, BlockACBrick.EnumBrickType.CRACKED));
+						world.setBlockState(pos1.up(y), ACBlocks.cracked_darkstone_brick.getDefaultState());
 						break;
 					default:
 						world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick.getDefaultState());

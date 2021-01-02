@@ -35,7 +35,7 @@ public abstract class StructureDarklandsBase extends WorldGenerator {
 
 	protected IBlockState getBrick(Random rand){
 		IBlockState brick = ACBlocks.darkstone_brick.getDefaultState();
-		IBlockState cracked_brick = ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CRACKED);
+		IBlockState cracked_brick = ACBlocks.cracked_darkstone_brick.getDefaultState();
 		return rand.nextFloat() < 0.2 ? cracked_brick : brick;
 	}
 

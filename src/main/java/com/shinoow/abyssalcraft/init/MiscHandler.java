@@ -35,6 +35,7 @@ import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityStorage;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
+import com.shinoow.abyssalcraft.common.datafix.BlockFlatteningDefinitions;
 import com.shinoow.abyssalcraft.common.enchantments.*;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.potion.PotionAntimatter;
@@ -61,6 +62,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
@@ -73,6 +75,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.CraftingHelper.ShapedPrimer;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -307,8 +310,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		StructureHandler.instance().registerStructure(new BasicStructure());
 		StructureHandler.instance().registerStructure(new TotemPoleStructure());
 		StructureHandler.instance().registerStructure(new ArchwayStructure());
-		FMLCommonHandler.instance().getDataFixer().init(modid, 1);
-		//		modFixs.registerFix(FixTypes.CHUNK, BlockFlatteningDefinitions.createBlockFlattening());
+		ModFixs modFixs = FMLCommonHandler.instance().getDataFixer().init(modid, 2);
+		modFixs.registerFix(FixTypes.CHUNK, BlockFlatteningDefinitions.createBlockFlattening());
 		ACTabs.tabTools.setRelevantEnchantmentTypes(AbyssalCraftAPI.STAFF_OF_RENDING);
 	}
 

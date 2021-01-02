@@ -64,41 +64,6 @@ public class ItemMetadataBlock extends ItemBlockAC {
 	@Override
 	public IUnlockCondition getUnlockCondition(ItemStack stack) {
 
-		//TODO move to appropriate place
-		//		if(block == ACBlocks.stone)
-		//			switch(stack.getMetadata()){
-		//			case 1:
-		//			case 4:
-		//				return new DimensionCondition(ACLib.abyssal_wasteland_id);
-		//			case 2:
-		//			case 3:
-		//				return new DimensionCondition(ACLib.dreadlands_id);
-		//			case 5:
-		//			case 6:
-		//				return new DimensionCondition(ACLib.omothol_id);
-		//			}
-		//		else if(block == ACBlocks.cobblestone)
-		//			switch(stack.getMetadata()){
-		//			case 1:
-		//			case 4:
-		//				return new DimensionCondition(ACLib.abyssal_wasteland_id);
-		//			case 2:
-		//			case 3:
-		//				return new DimensionCondition(ACLib.dreadlands_id);
-		//			}
-		//		else if(block == ACBlocks.ingot_block)
-		//			switch(stack.getMetadata()){
-		//			case 0:
-		//				return new BiomePredicateCondition(b -> b instanceof IDarklandsBiome);
-		//			case 1:
-		//				return new DimensionCondition(ACLib.abyssal_wasteland_id);
-		//			case 2:
-		//				return new DimensionCondition(ACLib.dreadlands_id);
-		//			case 3:
-		//				return new DimensionCondition(ACLib.omothol_id);
-		//			}
-
-
 		return super.getUnlockCondition(stack);
 	}
 }

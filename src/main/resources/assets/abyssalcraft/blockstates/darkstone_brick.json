@@ -1,7 +1,5 @@
 {
 	"variants": {
-		"type=normal": { "model": "abyssalcraft:darkstone_brick_0" },
-		"type=chiseled": { "model": "abyssalcraft:darkstone_brick_1" },
-		"type=cracked": { "model": "abyssalcraft:darkstone_brick_2" }
+		"normal": { "model": "abyssalcraft:darkstone_brick_0" }
 	}
 }
