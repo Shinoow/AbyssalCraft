@@ -14,12 +14,12 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
-public class ItemDecorativeStatueBlock extends ItemMetadataBlock {
+public class ItemDecorativeStatueBlock extends ItemBlockAC {
 
 	public ItemDecorativeStatueBlock(Block block) {
 		super(block);
@@ -28,12 +28,12 @@ public class ItemDecorativeStatueBlock extends ItemMetadataBlock {
 	@Override
 	public void addInformation(ItemStack par1ItemStack, World par2EntityPlayer, List par3List, ITooltipFlag par4)
 	{
-		par3List.add(I18n.translateToLocal("tooltip.decorativestatue"));
+		par3List.add(I18n.format("tooltip.decorativestatue"));
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return I18n.translateToLocalFormatted("decorativestatue.prefix", super.getItemStackDisplayName(par1ItemStack));
+		return I18n.format("decorativestatue.prefix", super.getItemStackDisplayName(par1ItemStack));
 	}
 }

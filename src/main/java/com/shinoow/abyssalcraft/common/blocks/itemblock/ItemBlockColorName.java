@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
+import com.shinoow.abyssalcraft.common.blocks.IngotBlock;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -24,7 +26,10 @@ public class ItemBlockColorName extends ItemBlockAC {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		if(getUnlocalizedName().contains("odb") || getUnlocalizedName().contains("darkethaxium"))
+		if(block instanceof IngotBlock)
+			return ((IngotBlock) block).getType().getFormat() + super.getItemStackDisplayName(par1ItemStack);
+		else if(getUnlocalizedName().contains("odb") || getUnlocalizedName().contains("darkethaxium")
+				|| getUnlocalizedName().contains("dark_ethaxium"))
 			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 		else if(getUnlocalizedName().contains("ethaxium"))
 			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);

@@ -48,7 +48,6 @@ public class BlockHandler implements ILifeCycleHandler {
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		//		ACBlocks.stone = new BlockACStone().setUnlocalizedName("stone");
 		ACBlocks.darkstone = new BlockACStone(EnumStoneType.DARKSTONE).setUnlocalizedName("darkstone");
 		ACBlocks.abyssal_stone = new BlockACStone(EnumStoneType.ABYSSAL_STONE).setUnlocalizedName("abystone");
 		ACBlocks.dreadstone = new BlockACStone(EnumStoneType.DREADSTONE).setUnlocalizedName("dreadstone");
@@ -60,7 +59,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.darkstone_brick = new BlockACBrick(1.65F, 12.0F, MapColor.BLACK).setUnlocalizedName("darkstone_brick");
 		ACBlocks.chiseled_darkstone_brick = new BlockACBrick(1.65F, 12.0F, MapColor.BLACK).remap("darkstone_brick", EnumBrickType.CHISELED).setUnlocalizedName("chiseled_darkstone_brick");
 		ACBlocks.cracked_darkstone_brick = new BlockACBrick(1.65F, 12.0F, MapColor.BLACK).remap("darkstone_brick", EnumBrickType.CRACKED).setUnlocalizedName("cracked_darkstone_brick");
-		//		ACBlocks.cobblestone = new BlockACCobblestone().setUnlocalizedName("cobblestone");
 		ACBlocks.darkstone_cobblestone = new BlockACCobblestone(EnumCobblestoneType.DARKSTONE).setUnlocalizedName("darkstone_cobble");
 		ACBlocks.abyssal_cobblestone = new BlockACCobblestone(EnumCobblestoneType.ABYSSAL_STONE).setUnlocalizedName("abyssalcobblestone");
 		ACBlocks.dreadstone_cobblestone = new BlockACCobblestone(EnumCobblestoneType.DREADSTONE).setUnlocalizedName("dreadstonecobblestone");
@@ -89,17 +87,14 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.darkstone_cobblestone_wall = new BlockACWall(ACBlocks.darkstone_cobblestone).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("dscwall");
 		ACBlocks.wooden_crate = new BlockCrate().setHardness(3.0F).setResistance(6.0F).setUnlocalizedName("woodencrate");
 		ACBlocks.oblivion_deathbomb = new BlockODB().setHardness(3.0F).setResistance(0F).setUnlocalizedName("odb");
-		//		ACBlocks.ingot_block = new IngotBlock().setUnlocalizedName("ingotblock");
 		ACBlocks.block_of_abyssalnite = new IngotBlock(EnumIngotType.ABYSSALNITE).setUnlocalizedName("abyblock");
 		ACBlocks.block_of_refined_coralium = new IngotBlock(EnumIngotType.REFINED_CORALIUM).setUnlocalizedName("corblock");
 		ACBlocks.block_of_dreadium = new IngotBlock(EnumIngotType.DREADIUM).setUnlocalizedName("dreadiumblock");
 		ACBlocks.block_of_ethaxium = new IngotBlock(EnumIngotType.ETHAXIUM).setUnlocalizedName("ethaxiumblock");
 		ACBlocks.coralium_infused_stone = new BlockACOre(3, 3.0F, 6.0F).setUnlocalizedName("coraliumstone");
 		ACBlocks.odb_core = new BlockODBcore().setHardness(3.0F).setResistance(0F).setUnlocalizedName("odbcore");
-		//		ACBlocks.abyssal_gateway = new BlockAbyssPortal().setUnlocalizedName("abyportal");
 		ACBlocks.darkstone_slab = new BlockACSingleSlab(Material.ROCK, SoundType.STONE, MapColor.BLACK).setCreativeTab(ACTabs.tabBlock).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab1");
 		Darkstoneslab2 = new BlockACDoubleSlab(ACBlocks.darkstone_slab, Material.ROCK).setHardness(1.65F).setResistance(12.0F).setUnlocalizedName("darkstoneslab2");
-		//		ACBlocks.coralium_fire = new BlockCoraliumfire().setLightLevel(1.0F).setUnlocalizedName("coraliumfire");
 		ACBlocks.darkstone_button = new BlockACButton(true, "DS").setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("dsbutton");
 		ACBlocks.darkstone_pressure_plate = new BlockACPressureplate("DS", Material.ROCK, BlockACPressureplate.Sensitivity.MOBS, SoundType.STONE).setHardness(0.6F).setResistance(12.0F).setUnlocalizedName("dspplate");
 		ACBlocks.darklands_oak_planks = new BlockACBasic(Material.WOOD, 2.0F, 5.0F, SoundType.WOOD, MapColor.BROWN).setUnlocalizedName("dltplank");
@@ -127,8 +122,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadlands_log = new BlockACLog(MapColor.RED).setHardness(2.0F).setResistance(12.0F).setUnlocalizedName("dreadlog");
 		ACBlocks.dreadlands_leaves = new BlockACLeaves(ACBlocks.dreadlands_sapling, MapColor.RED).setHardness(0.2F).setResistance(1.0F).setUnlocalizedName("dreadleaves");
 		ACBlocks.dreadlands_planks = new BlockACBasic(Material.WOOD, 2.0F, 5.0F, SoundType.WOOD, MapColor.RED).setUnlocalizedName("dreadplanks");
-		//		ACBlocks.dreaded_gateway = new BlockDreadlandsPortal().setUnlocalizedName("dreadportal");
-		//		ACBlocks.dreaded_fire = new BlockDreadFire().setLightLevel(1.0F).setUnlocalizedName("dreadfire");
 		ACBlocks.depths_ghoul_head = new BlockDGhead().setUnlocalizedName("dghead");
 		ACBlocks.liquid_coralium = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setUnlocalizedName("cwater");
 		ACBlocks.dreadlands_grass = new BlockDreadGrass().setHardness(0.4F).setUnlocalizedName("dreadgrass");
@@ -295,11 +288,11 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityPortalAnchor.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityPortalAnchor"));
 
 		registerBlock(ACBlocks.darkstone, "darkstone");
-		registerBlock(ACBlocks.abyssal_stone, "abystone");
+		registerBlock(ACBlocks.abyssal_stone, new ItemBlockColorName(ACBlocks.abyssal_stone), "abystone");
 		registerBlock(ACBlocks.dreadstone, "dreadstone");
 		registerBlock(ACBlocks.abyssalnite_stone, "abydreadstone");
 		registerBlock(ACBlocks.coralium_stone, "cstone");
-		registerBlock(ACBlocks.ethaxium, "ethaxium");
+		registerBlock(ACBlocks.ethaxium, new ItemBlockColorName(ACBlocks.ethaxium), "ethaxium");
 		registerBlock(ACBlocks.omothol_stone, "omotholstone");
 		registerBlock(ACBlocks.monolith_stone, "monolithstone");
 		registerBlock(ACBlocks.darkstone_cobblestone, "darkstone_cobble");
@@ -307,7 +300,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.dreadstone_cobblestone, "dreadstonecobblestone");
 		registerBlock(ACBlocks.abyssalnite_cobblestone, "abyssalnitecobblestone");
 		registerBlock(ACBlocks.coralium_cobblestone, "coraliumcobblestone");
-		registerBlock(ACBlocks.darkstone_brick, new ItemMetadataBlock(ACBlocks.darkstone_brick), "darkstone_brick");
+		registerBlock(ACBlocks.darkstone_brick, "darkstone_brick");
 		registerBlock(ACBlocks.chiseled_darkstone_brick, "chiseled_darkstone_brick");
 		registerBlock(ACBlocks.cracked_darkstone_brick, "cracked_darkstone_brick");
 		registerBlock(ACBlocks.glowing_darkstone_bricks, "dsglow");
@@ -321,9 +314,9 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.darklands_oak_wood, "dltlog");
 		registerBlock(ACBlocks.darklands_oak_wood_2, "dltlog2");
 		registerBlock(ACBlocks.darklands_oak_sapling, "dltsapling");
-		registerBlock(ACBlocks.abyssal_stone_brick, new ItemMetadataBlock(ACBlocks.abyssal_stone_brick), "abybrick");
-		registerBlock(ACBlocks.chiseled_abyssal_stone_brick, "chiseled_abyssal_stone_brick");
-		registerBlock(ACBlocks.cracked_abyssal_stone_brick, "cracked_abyssal_stone_brick");
+		registerBlock(ACBlocks.abyssal_stone_brick, new ItemBlockColorName(ACBlocks.abyssal_stone_brick), "abybrick");
+		registerBlock(ACBlocks.chiseled_abyssal_stone_brick, new ItemBlockColorName(ACBlocks.chiseled_abyssal_stone_brick), "chiseled_abyssal_stone_brick");
+		registerBlock(ACBlocks.cracked_abyssal_stone_brick, new ItemBlockColorName(ACBlocks.cracked_abyssal_stone_brick), "cracked_abyssal_stone_brick");
 		registerBlock(ACBlocks.abyssal_stone_brick_slab, new ItemSlabAC(ACBlocks.abyssal_stone_brick_slab, ACBlocks.abyssal_stone_brick_slab, abyslab2).setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id)), "abyslab1");
 		registerBlock(abyslab2, new ItemSlabAC(abyslab2, ACBlocks.abyssal_stone_brick_slab, abyslab2).setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id)), "abyslab2");
 		registerBlock(ACBlocks.abyssal_stone_brick_stairs, new ItemBlockColorName(ACBlocks.abyssal_stone_brick_stairs), "abystairs");
@@ -332,10 +325,10 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.abyssal_stone_brick_fence, new ItemBlockColorName(ACBlocks.abyssal_stone_brick_fence), "abyfence");
 		registerBlock(ACBlocks.darkstone_cobblestone_wall, "dscwall");
 		registerBlock(ACBlocks.oblivion_deathbomb, new ItemODB(ACBlocks.oblivion_deathbomb), "odb");
-		registerBlock(ACBlocks.block_of_abyssalnite, "abyblock");
-		registerBlock(ACBlocks.block_of_refined_coralium, "corblock");
-		registerBlock(ACBlocks.block_of_dreadium, "dreadiumblock");
-		registerBlock(ACBlocks.block_of_ethaxium, "ethaxiumblock");
+		registerBlock(ACBlocks.block_of_abyssalnite, new ItemBlockColorName(ACBlocks.block_of_abyssalnite), "abyblock");
+		registerBlock(ACBlocks.block_of_refined_coralium, new ItemBlockColorName(ACBlocks.block_of_refined_coralium), "corblock");
+		registerBlock(ACBlocks.block_of_dreadium, new ItemBlockColorName(ACBlocks.block_of_dreadium), "dreadiumblock");
+		registerBlock(ACBlocks.block_of_ethaxium, new ItemBlockColorName(ACBlocks.block_of_ethaxium), "ethaxiumblock");
 		registerBlock(ACBlocks.coralium_infused_stone, "coraliumstone");
 		registerBlock(ACBlocks.odb_core, new ItemBlockColorName(ACBlocks.odb_core), "odbcore");
 		registerBlock(ACBlocks.wooden_crate, "crate");
@@ -359,10 +352,10 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.darklands_oak_fence, "dltfence");
 		registerBlock(ACBlocks.dreadlands_abyssalnite_ore, "abydreadore");
 		registerBlock(ACBlocks.dreaded_abyssalnite_ore, "dreadore");
-		registerBlock(ACBlocks.dreadstone_brick, new ItemMetadataBlock(ACBlocks.dreadstone_brick), "dreadbrick");
+		registerBlock(ACBlocks.dreadstone_brick, "dreadbrick");
 		registerBlock(ACBlocks.chiseled_dreadstone_brick, "chiseled_dreadstone_brick");
 		registerBlock(ACBlocks.cracked_dreadstone_brick, "cracked_dreadstone_brick");
-		registerBlock(ACBlocks.abyssalnite_stone_brick, new ItemMetadataBlock(ACBlocks.abyssalnite_stone_brick), "abydreadbrick");
+		registerBlock(ACBlocks.abyssalnite_stone_brick, "abydreadbrick");
 		registerBlock(ACBlocks.chiseled_abyssalnite_stone_brick, "chiseled_abyssalnite_stone_brick");
 		registerBlock(ACBlocks.cracked_abyssalnite_stone_brick, "cracked_abyssalnite_stone_brick");
 		registerBlock(ACBlocks.dreadlands_grass, "dreadgrass");
@@ -383,7 +376,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.abyssalnite_stone_brick_slab, new ItemSlabAC(ACBlocks.abyssalnite_stone_brick_slab, ACBlocks.abyssalnite_stone_brick_slab, abydreadbrickslab2).setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id)), "abydreadbrickslab1");
 		registerBlock(abydreadbrickslab2, new ItemSlabAC(abydreadbrickslab2, ACBlocks.abyssalnite_stone_brick_slab, abydreadbrickslab2).setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id)), "abydreadbrickslab2");
 		registerBlock(ACBlocks.liquid_antimatter, "antiwater");
-		registerBlock(ACBlocks.coralium_stone_brick, new ItemMetadataBlock(ACBlocks.coralium_stone_brick), "cstonebrick");
+		registerBlock(ACBlocks.coralium_stone_brick, "cstonebrick");
 		registerBlock(ACBlocks.chiseled_coralium_stone_brick, "chiseled_coralium_stone_brick");
 		registerBlock(ACBlocks.cracked_coralium_stone_brick, "cracked_coralium_stone_brick");
 		registerBlock(ACBlocks.coralium_stone_brick_fence, "cstonebrickfence");
@@ -411,9 +404,9 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.pearlescent_coralium_ore, "abypcorore");
 		registerBlock(ACBlocks.liquified_coralium_ore, "abylcorore");
 		registerBlock(ACBlocks.solid_lava, "solidlava");
-		registerBlock(ACBlocks.ethaxium_brick, new ItemMetadataBlock(ACBlocks.ethaxium_brick), "ethaxiumbrick");
-		registerBlock(ACBlocks.chiseled_ethaxium_brick, "chiseled_ethaxium_brick");
-		registerBlock(ACBlocks.cracked_ethaxium_brick, "cracked_ethaxium_brick");
+		registerBlock(ACBlocks.ethaxium_brick, new ItemBlockColorName(ACBlocks.ethaxium_brick), "ethaxiumbrick");
+		registerBlock(ACBlocks.chiseled_ethaxium_brick, new ItemBlockColorName(ACBlocks.chiseled_ethaxium_brick), "chiseled_ethaxium_brick");
+		registerBlock(ACBlocks.cracked_ethaxium_brick, new ItemBlockColorName(ACBlocks.cracked_ethaxium_brick), "cracked_ethaxium_brick");
 		registerBlock(ACBlocks.ethaxium_pillar, new ItemBlockColorName(ACBlocks.ethaxium_pillar), "ethaxiumpillar");
 		registerBlock(ACBlocks.ethaxium_brick_stairs, new ItemBlockColorName(ACBlocks.ethaxium_brick_stairs), "ethaxiumbrickstairs");
 		registerBlock(ACBlocks.ethaxium_brick_slab, new ItemSlabAC(ACBlocks.ethaxium_brick_slab, ACBlocks.ethaxium_brick_slab, ethaxiumslab2).setUnlockCondition(new DimensionCondition(ACLib.omothol_id)), "ethaxiumbrickslab1");
@@ -422,9 +415,9 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.engraver, "engraver");
 		registerBlock(house, "engraver_on");
 		registerBlock(ACBlocks.materializer, "materializer");
-		registerBlock(ACBlocks.dark_ethaxium_brick, new ItemMetadataBlock(ACBlocks.dark_ethaxium_brick), "darkethaxiumbrick");
-		registerBlock(ACBlocks.chiseled_dark_ethaxium_brick, "chiseled_dark_ethaxium_brick");
-		registerBlock(ACBlocks.cracked_dark_ethaxium_brick, "cracked_dark_ethaxium_brick");
+		registerBlock(ACBlocks.dark_ethaxium_brick, new ItemBlockColorName(ACBlocks.dark_ethaxium_brick), "darkethaxiumbrick");
+		registerBlock(ACBlocks.chiseled_dark_ethaxium_brick, new ItemBlockColorName(ACBlocks.chiseled_dark_ethaxium_brick), "chiseled_dark_ethaxium_brick");
+		registerBlock(ACBlocks.cracked_dark_ethaxium_brick, new ItemBlockColorName(ACBlocks.cracked_dark_ethaxium_brick), "cracked_dark_ethaxium_brick");
 		registerBlock(ACBlocks.dark_ethaxium_pillar, new ItemBlockColorName(ACBlocks.dark_ethaxium_pillar), "darkethaxiumpillar");
 		registerBlock(ACBlocks.dark_ethaxium_brick_stairs, new ItemBlockColorName(ACBlocks.dark_ethaxium_brick_stairs), "darkethaxiumbrickstairs");
 		registerBlock(ACBlocks.dark_ethaxium_brick_slab, new ItemSlabAC(ACBlocks.dark_ethaxium_brick_slab, ACBlocks.dark_ethaxium_brick_slab, darkethaxiumslab2).setUnlockCondition(new DimensionCondition(ACLib.omothol_id)), "darkethaxiumbrickslab1");
@@ -449,13 +442,13 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.jzahar_spawner, "jzaharspawner");
 		registerBlock(ACBlocks.minion_of_the_gatekeeper_spawner, "gatekeeperminionspawner");
 		registerBlock(ACBlocks.mimic_fire, "fire");
-		registerBlock(ACBlocks.decorative_cthulhu_statue, "decorativecthulhustatue");
-		registerBlock(ACBlocks.decorative_hastur_statue, "decorativehasturstatue");
-		registerBlock(ACBlocks.decorative_jzahar_statue, "decorativejzaharstatue");
-		registerBlock(ACBlocks.decorative_azathoth_statue, "decorativeazathothstatue");
-		registerBlock(ACBlocks.decorative_nyarlathotep_statue, "decorativenyarlathotepstatue");
-		registerBlock(ACBlocks.decorative_yog_sothoth_statue, "decorativeyogsothothstatue");
-		registerBlock(ACBlocks.decorative_shub_niggurath_statue, "decorativeshubniggurathstatue");
+		registerBlock(ACBlocks.decorative_cthulhu_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_cthulhu_statue), "decorativecthulhustatue");
+		registerBlock(ACBlocks.decorative_hastur_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_hastur_statue), "decorativehasturstatue");
+		registerBlock(ACBlocks.decorative_jzahar_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_jzahar_statue), "decorativejzaharstatue");
+		registerBlock(ACBlocks.decorative_azathoth_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_azathoth_statue), "decorativeazathothstatue");
+		registerBlock(ACBlocks.decorative_nyarlathotep_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_nyarlathotep_statue), "decorativenyarlathotepstatue");
+		registerBlock(ACBlocks.decorative_yog_sothoth_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_yog_sothoth_statue), "decorativeyogsothothstatue");
+		registerBlock(ACBlocks.decorative_shub_niggurath_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_shub_niggurath_statue), "decorativeshubniggurathstatue");
 		registerBlock(ACBlocks.crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.crystal_cluster), "crystalcluster");
 		registerBlock(ACBlocks.crystal_cluster2, new ItemCrystalClusterBlock2(ACBlocks.crystal_cluster2), "crystalcluster2");
 		registerBlock(ACBlocks.energy_collector, new ItemPEContainerBlock(ACBlocks.energy_collector), "energycollector");

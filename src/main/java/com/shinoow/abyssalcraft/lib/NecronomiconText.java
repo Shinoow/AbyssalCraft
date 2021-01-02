@@ -448,4 +448,8 @@ public class NecronomiconText {
 			temp[i] = TEST;
 		return temp;
 	}
+	
+	public static String getSpellType(boolean requiresCharging) {
+		return "necronomicon.spell.type."+(requiresCharging ? "charging" : "instant");
+	}
 }

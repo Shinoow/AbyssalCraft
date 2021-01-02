@@ -88,6 +88,8 @@ public class BlockFlatteningDefinitions {
 			});
 		});
 		
+		//version 3 definitions TBD
+		
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
 }

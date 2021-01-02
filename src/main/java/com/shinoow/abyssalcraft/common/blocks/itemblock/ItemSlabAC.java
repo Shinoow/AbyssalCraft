@@ -40,10 +40,10 @@ public class ItemSlabAC extends ItemSlab implements IUnlockableItem {
 	public String getItemStackDisplayName(ItemStack stack) {
 		if(getUnlocalizedName().contains("abyslab"))
 			return TextFormatting.BLUE + super.getItemStackDisplayName(stack);
-		else if(getUnlocalizedName().contains("ethaxiumbrickslab"))
-			return TextFormatting.AQUA + super.getItemStackDisplayName(stack);
 		else if(getUnlocalizedName().contains("darkethaxiumbrickslab"))
 			return TextFormatting.DARK_RED + super.getItemStackDisplayName(stack);
+		else if(getUnlocalizedName().contains("ethaxiumbrickslab"))
+			return TextFormatting.AQUA + super.getItemStackDisplayName(stack);
 		return super.getItemStackDisplayName(stack);
 	}
 
