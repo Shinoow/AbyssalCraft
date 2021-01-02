@@ -41,7 +41,7 @@ advancements.abyssalcraft.wilsonhead=暴戾头颅
 advancements.abyssalcraft.wilsonhead.description=我的身体去哪了？
 
 advancements.abyssalcraft.orangehead=医学头颅
-advancements.abyssalcraft.orangehead.description=诊断已完成，你有患了松鼠艾滋。
+advancements.abyssalcraft.orangehead.description=诊断已完成，你患有松鼠艾滋。
 
 advancements.abyssalcraft.necrou1=荒原的知识
 advancements.abyssalcraft.necrou1.description=合成一本深渊荒原死灵之书。
@@ -203,9 +203,9 @@ message.configurator.error.1=你不能在没有路径的情况下创建配置！
 message.configurator.error.2=目标方块没有物品栏！
 message.configurator.error.3=该方块不支持配置！
 message.configurator.error.4=你不能和这个方块互动！
-message.jzahar.corrupting=Behold, as the darkness consumes the Overworld! Bit by bit, this world will crumble.
-message.jzahar.cleansing=Undoing my malice on your §obeloved§r world? What a shame.
-message.jzahar.fourthwall=Whoops, I slipped!
+message.jzahar.corrupting=看啊，乘此黑暗吞噬主界之时！寸进蚕食间，这个世界终将崩溃消亡。
+message.jzahar.cleansing=消解我对你§o至爱§r的世界施加的恶意？真可惜。
+message.jzahar.fourthwall=哎哟，我手滑了！
 
 #容器物品栏
 container.abyssalcraft.crate=板条箱
@@ -218,11 +218,11 @@ container.abyssalcraft.tieredenergycontainer=层叠能量容器
 container.abyssalcraft.rendingpedestal=撕裂基座
 container.abyssalcraft.statetransformer=物态转换器
 container.abyssalcraft.energydepositioner=能量沉积器
-container.abyssalcraft.sequential_brewing=Sequential Brewing Stand
+container.abyssalcraft.sequential_brewing=递次酿造台
 
-#Gui Labels
-gui.abyssalcraft.facebook.name=Name
-gui.abyssalcraft.facebook.crystalsize=Crystal Size
+#Gui标签
+gui.abyssalcraft.facebook.name=名字
+gui.abyssalcraft.facebook.crystalsize=结晶尺寸
 
 #Gui按钮
 gui.abyssalcraft.statetransformer.insert=输入
@@ -290,19 +290,19 @@ necronomicon.information.pantheon=万神殿
 necronomicon.information.casting=施咒
 necronomicon.builtwith=建造：
 necronomicon.information.itemtransportsystem=物品输运
-necronomicon.createspells=Inscribe spells
-necronomicon.opencompendium=Open Compendium
-necronomicon.spell.name=Spell name
-necronomicon.spell.pe=PE per cast
-necronomicon.spell.type=Spell type
-necronomicon.height=Height: %s blocks
-necronomicon.width=Width: %s blocks
-necronomicon.depth=Depth: %s blocks
-necronomicon.rangeamplifier=Range amplifier
-necronomicon.durationamplifier=Duration amplifier
-necronomicon.poweramplifier=Power amplifier
-necronomicon.spell.type.charging=Charging
-necronomicon.spell.type.instant=Instant
+necronomicon.createspells=雕绘咒文
+necronomicon.opencompendium=咒语汇编
+necronomicon.spell.name=咒语名
+necronomicon.spell.pe=每次施咒消耗PE
+necronomicon.spell.type=施咒类型
+necronomicon.height=高度： %s 格
+necronomicon.width=宽度： %s 格
+necronomicon.depth=深度： %s 格
+necronomicon.rangeamplifier=范围加成
+necronomicon.durationamplifier=持续加成
+necronomicon.poweramplifier=能量加成
+necronomicon.spell.type.charging=蓄能
+necronomicon.spell.type.instant=瞬发
 
 #死灵之书文字
 #注意：每个字符串的最大字数为368个（184汉字）。
@@ -314,7 +314,7 @@ necronomicon.text.necronomicon.2=死灵之书是深渊之书中的一章，由�
 necronomicon.text.necronomicon.3=深渊之书内共有4种死灵之书：死灵之书，深渊荒原死灵之书，恐惧之地死灵之书和奥穆索死灵之书，每一本都与一个维度有关。
 necronomicon.text.necronomicon.4=要想解锁这些知识，必须要旅行到上述的世界并且通过该世界里的兽皮来赐予死灵之书解锁的力量。深渊之书囊括了额外的只有扎哈尔知晓的知识，这是人类不应获得的知识。
 
-necronomicon.text.abyssalnomicon.1=这是深渊之书，是由深渊的守门者扎哈尔所写的书。这本书囊括了四本死灵之书的知识，毕竟上它们实际上只是这本书的章节。同样这里有大量的在其它地方没有提及的知识。
+necronomicon.text.abyssalnomicon.1=这是深渊之书，是由深渊守门者扎哈尔所写的书。这本书囊括了四本死灵之书的知识，毕竟实际上后者只是这本书的章节。同样这里有大量的在其它地方没有提及的知识。
 necronomicon.text.abyssalnomicon.2=虽然关于咒语和仪式的知识受限于特殊的维度（和之前的维度，取决于死灵之书的类型），但是深渊之书在同一个地方有着所有的知识，包括附加的知识。
 
 necronomicon.text.abyssalcraft.1=这本书有助于你玩通深渊国度这个模组。深渊国度的关注点是探索，有4个新的维度能供你探索。
@@ -336,7 +336,7 @@ necronomicon.text.cthulhu.1=克苏鲁是一个旧日支配者，被封印在深�
 necronomicon.text.cthulhu.2=他有着章鱼的脑袋，和背后长有翅膀的鳞片躯体。他因为一场对抗古老者的战斗而陷入无尽的沉睡中，这场战斗最终以拉莱耶沉入海底而告终。终有一天他会苏醒并且统治整个世界。
 necronomicon.text.hastur.1=哈斯塔，别名不可言说者，是一个旧日支配者，同时也是克苏鲁的异母兄弟。
 necronomicon.text.hastur.2=关于哈斯塔的事情世间知道的并不多，但他被熟知表现出来的形象是一个身穿黄色长袍的国王，戴着面具。像大多数旧日支配者一样，他能够以任何他喜欢的形式来展现自身。
-necronomicon.text.jzahar.1=扎哈尔，别名深渊的守门者，是哈斯塔的杂种后代。
+necronomicon.text.jzahar.1=扎哈尔，别名深渊守门者，是哈斯塔的杂种后代。
 necronomicon.text.jzahar.2=扎哈尔对力量充满欲望，不想被流放到星际，于是前往时间和空间之外来获得他的自由。结果他获得了和犹格·索托斯相似的力量，同时被被惩罚去永远守卫他同样被囚禁的神。
 
 necronomicon.text.greatoldones=在人类的时代之前，世界是被一群被叫做“旧日支配者”的远古魔神所统治。由于远古的一场冲突，所有这些存在都被囚禁在无人能够涉足的地方。
@@ -453,8 +453,8 @@ necronomicon.text.crafting.energydepositioner.1=能量沉积器由巨石块，�
 necronomicon.text.crafting.energydepositioner.2=在输入槽里放置一个充能的石板，沉积器将提取出内部存储的PE，返还空石板或者被诅咒的石板。这一操作会污染周围的区域（17x17方块），将其变为黑暗之地（更多的黑暗之地会提升产出诅咒石板的几率）。输出可以自动化。
 necronomicon.text.crafting.ethaxiumpillar=伊塞斯石柱由伊塞斯砖块和伊塞斯石来合成。
 necronomicon.text.crafting.darkethaxiumpillar=暗色伊塞斯石柱由暗色伊塞斯砖块和奥穆索之石合成。
-necronomicon.text.crafting.sequential_brewing_stand.1=A Sequential Brewing Stand is crafted using Blaze Rods, a Hopper and Brewing Stands. Sequential Brewing Stands can be chained, allowing one to transfer its output to the next one.
-necronomicon.text.crafting.sequential_brewing_stand.2=A pipe indicates the direction of transfer, and the pipes will connect on two connected Brewing Stands. Automation exists for ingredient input on the top, fuel and bottle input on the sides and output of the output slots on the bottom.
+necronomicon.text.crafting.sequential_brewing_stand.1=递次酿造台由烈焰棒、漏斗和酿造台合成。递次酿造台可相互连接，如此可以让一台酿造台将其产物转运到下一台酿造台中。
+necronomicon.text.crafting.sequential_brewing_stand.2=连接在两台递次酿造台间的管道会指示转运的方向。顶部放入的配料，侧边栏放入的瓶子和燃料，以及底部输出槽的输出产物均可实现自动化。
 
 necronomicon.text.crafting.odbcore=湮灭弹核心由渊素锭、铁锭、铁块和珊瑚珍珠合成。可用作爆炸物。
 necronomicon.text.crafting.odb=湮灭弹由黑曜石、一个湮灭弹核心、一个湮灭催化剂、一桶液态珊瑚和一桶液态反物质合成。高爆。
@@ -491,7 +491,7 @@ necronomicon.text.dreadlands.progression.1=在你到达了恐惧之地后，你�
 necronomicon.text.dreadlands.progression.2=当你有2个祭坛零件，你要将它们放在恐惧之地山脉的Y=40的高度并且右击它。做完后你就能进入到查伽洛斯的巢穴。在打败恐惧守卫并杀死查伽洛斯之后，你会获得一把恐惧疫染的门钥匙，随同着战利品。这把钥匙需要嬗变才能变成可用的钥匙。
 necronomicon.text.dreadlands.progression.3=通过前面提及的嬗变器（合成表在深渊荒原特殊材料章节）你可以将恐惧疫染的门钥匙嬗变成查伽洛斯的拉莱耶门钥匙，给予你前往奥穆索的途径。升级你的死灵之书到奥穆索死灵之书需要8个奥穆索兽皮。
 
-necronomicon.text.omothol.progression.1=现在你已经到了奥穆索，到了与深渊的守门者扎哈尔战斗的时候了。扎哈尔神殿坐落于奥穆索的中心（坐标 X=4，Y=53，Z=7）。击败守门者之后，你可以解锁死灵之书上的所有知识。
+necronomicon.text.omothol.progression.1=现在你已经抵达奥穆索，是时候与深渊守门者扎哈尔战斗了。扎哈尔神殿坐落于奥穆索的中心（坐标 X=4，Y=53，Z=7）。击败守门者之后，你可以解锁死灵之书上的所有知识。
 necronomicon.text.omothol.progression.2=深渊之书需要用伊塞斯锭，邪术鳞片和守门者的精华（由扎哈尔掉落）合成。
 necronomicon.text.omothol.progression.3=
 necronomicon.text.omothol.progression.4=
@@ -630,7 +630,7 @@ necronomicon.text.itemtransportsystem.8=有两个实用咒语（名为“魂径�
 
 necronomicon.text.wip=这一章节还未完成。
 
-#Rituals
+#仪式
 ac.ritual.oblivionCatalyst=湮灭媒介
 ac.ritual.oblivionCatalyst.desc=湮灭媒介可通过将湮灭碎片和红石粉注入一个末影之眼制成。
 ac.ritual.transmutationGem=嬗变宝石
@@ -831,14 +831,14 @@ ac.ritual.curing=治愈仪式
 ac.ritual.curing.desc=通过放置4瓶恐惧瘟疫解药，你治愈了一片区域的恐惧瘟疫和恐惧之地，恢复了它们原来的面貌。地形最接近的非恐惧之地生物群系将会取代恐惧之地的位置。
 ac.ritual.spiritTablet=灵魂石板
 ac.ritual.spiritTablet.desc=一块灵魂石板可通过将4个灵魂石板碎片注入生命结晶来制作。它是一种工具，允许你使物品自主移动，以在方块间转移物品。阅读死灵之书奥穆索章节的相关内容以获取更多信息。
-ac.ritual.portal=Ritual of Open Doors
-ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed, but the altar will be replaced with a block.
-ac.ritual.silverKey=The Silver Key
-ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key. The Silver Key can open portals at will via Portal Anchors as well as closing them both by interacting with the block (right click).
-ac.ritual.facebook=The Book of Many Faces
-ac.ritual.facebook.desc=By infusing a Book with crystallized compounds resembling the elements of life, an Arrow and an Ink Sac, you create a book capable of communicating with the dead and tell you the names of fallen companions.
+ac.ritual.portal=启门仪式
+ac.ritual.portal.desc=通过献上4个阴影宝石和一把门钥匙，你在空间结构中撕开了孔洞，开启了通往另一维度的传送门。传送门将指向门钥匙所设置的维度。这一过程中门钥匙不会被消耗，但祭坛会被某种方块所取代。
+ac.ritual.silverKey=银钥匙
+ac.ritual.silverKey.desc=通过向查伽洛斯的拉莱耶门钥匙注入8个伊塞斯锭并献上活祭品，它将变成银钥匙。银钥匙可借由传送门之锚随意开启传送门，也能通过与之交互（右击）来关闭传送门。
+ac.ritual.facebook=千面之书
+ac.ritual.facebook.desc=通过向书中注入类似于生命元素的结晶混合物、一支箭和一个墨囊，你创造了一本书，它能与死者交流，并告诉你已逝同伴的名字。
 
-#Spells
+#咒语
 ac.spell.lifedrain=生命吸取
 ac.spell.lifedrain.desc=吸取敌人的生命力以治愈你的伤口。
 ac.spell.entropy=熵
@@ -870,7 +870,7 @@ ac.spell.floating.desc=只要持续施咒，你就会像羽毛一般轻盈，这
 ac.spell.teleportHome=归家
 ac.spell.teleportHome.desc=施咒后将你传送至你的重生点，无论你在什么地方（包括其他维度）。
 
-#Places of Power
+#权力之地
 ac.structure.basic.description=一个小而简单的神龛，为受影响的雕像提供范围加成。
 ac.structure.basic.blocks=15个巨石块；4个巨石柱；4个雕像（任意）
 ac.structure.totempole.description=现在你只需要一堆篝火，一些乐器和一件叮当作响的衣服！
@@ -886,31 +886,31 @@ ac.rending.essence_omt=奥穆索精华可以通过从奥穆索实体收获奥穆
 
 #配置
 ac_dimensions=维度
-ac_dimensions.tooltip=Dimension configuration
+ac_dimensions.tooltip=维度设置
 ac_biomes=生物群系
-ac_biomes.tooltip=Biome configuration
+ac_biomes.tooltip=生物群系设置
 ac_general=常规
 ac_general.tooltip=常规设置
-ac_shoggoth=Shoggoth
-ac_shoggoth.tooltip=Shoggoth Configuration
+ac_shoggoth=修格斯
+ac_shoggoth.tooltip=修格斯设置
 ac_worldgen=世界生成
 ac_worldgen.tooltip=世界生成设置
 ac_silly_settings=趣味设置
-ac_silly_settings.tooltip=趣味性配置
+ac_silly_settings.tooltip=趣味性设置
 ac_mod_compat=Mod兼容
-ac_mod_compat.tooltip=Mod兼容配置
+ac_mod_compat.tooltip=Mod兼容设置
 ac_wet_noodle=“湿面条”
-ac_wet_noodle.tooltip=“湿面条”配置
+ac_wet_noodle.tooltip=“湿面条”设置
 ac_modules=模块
-ac_modules.tooltip=模块配置
+ac_modules.tooltip=模块设置
 ac_spells=咒语
-ac_spells.tooltip=咒语配置
-ac_client=Client
-ac_client.tooltip=Client Configuration
-ac_rituals=Rituals
-ac_rituals.tooltip=Ritual Configuration
-ac_mobs=Mobs
-ac_mobs.tooltip=Mob Configuration
+ac_spells.tooltip=咒语设置
+ac_client=客户端
+ac_client.tooltip=客户端设置
+ac_rituals=仪式
+ac_rituals.tooltip=仪式设置
+ac_mobs=生物
+ac_mobs.tooltip=生物设置
 
 #键位
 key.abyssalcraft.category=深渊国度
@@ -933,12 +933,12 @@ death.attack.shoggoth_acid=%1$s溶解于修格斯的酸液之中
 death.attack.shoggoth_acid.player=%1$s在试图逃离%2$s时溶解于修格斯的酸液之中
 
 #工具提示
-tooltip.portalplacer.1=Right-click or Shift Right-click to cycle
-tooltip.portalplacer.2=back and forth between available dimensions
-tooltip.portalplacer.3=Dimension: %s
-tooltip.portalplacer.4=You can't create a portal for that dimension here!
+tooltip.portalplacer.1=右击或按住Shift并右击
+tooltip.portalplacer.2=以在可用维度间循环切换
+tooltip.portalplacer.3=维度： %s
+tooltip.portalplacer.4=你不能在这里创建那个维度的传送门！
 tooltip.oc=这个物品蕴藏不可思议的力量。
-tooltip.staff=深渊的守门者扎哈尔的权杖。
+tooltip.staff=深渊守门者扎哈尔的权杖。
 tooltip.eoa=堕落者阿索拉之眼。
 tooltip.corbow.1=弓箭在命中时会
 tooltip.corbow.2=附加珊瑚瘟疫
@@ -965,8 +965,8 @@ tooltip.configurator.mode.1=应用配置
 tooltip.configurator.mode.2=清除配置
 tooltip.configurator.filter.0=根据子类型过滤
 tooltip.configurator.filter.1=根据NBT过滤
-tooltip.face_book.1=If you listen closely, you can hear the
-tooltip.face_book.2=voices of lost souls calling out their names
+tooltip.face_book.1=如果你侧耳倾听，你会听到
+tooltip.face_book.2=失落的灵魂在呼喊它们的姓名
 
 #创造模式物品栏
 itemGroup.acblocks=深渊国度丨方块
@@ -983,7 +983,7 @@ itemGroup.acspells=深渊国度丨咒语
 fluid.liquidcoralium=液态珊瑚
 fluid.liquidantimatter=液态反物质
 
-#Blocks
+#方块
 tile.darkstone.name=黑暗石
 tile.abystone.name=深渊石
 tile.dreadstone.name=恐惧石
@@ -1085,8 +1085,8 @@ tile.dreadaltartop.name=查伽洛斯祭坛（顶部）
 tile.dreadaltarbottom.name=查伽洛斯祭坛（底部）
 tile.crystallizer.name=结晶器
 tile.transmutator.name=嬗变器
-tile.dreadguardspawner.name=恐惧守卫刷怪笼
-tile.chagarothspawner.name=查伽洛斯刷怪笼
+tile.dreadguardspawner.name=恐惧守卫生成方块
+tile.chagarothspawner.name=查伽洛斯生成方块
 tile.drtfence.name=恐惧之地木栅栏
 tile.nitreore.name=硝石矿石
 tile.abyiroore.name=深渊铁矿石
@@ -1097,7 +1097,7 @@ tile.abytinore.name=深渊锡矿石
 tile.abycopore.name=深渊铜矿石
 tile.abypcorore.name=珠光四射的珊瑚矿石
 tile.abylcorore.name=液化珊瑚矿石
-tile.solidlava.name=固态岩浆
+tile.solidlava.name=固态熔岩
 tile.ethaxiumbrick.name=伊塞斯砖块
 tile.chiseled_ethaxium_brick.name=錾制伊塞斯砖块
 tile.cracked_ethaxium_brick.name=裂纹伊塞斯砖块
@@ -1185,10 +1185,10 @@ tile.calcifiedstone.name=钙化石
 tile.door_dlt.name=黑暗之地橡木门
 tile.door_drt.name=恐惧之地木门
 tile.multi_block.name=多方块
-tile.sequential_brewing_stand.name=Sequential Brewing Stand
-tile.portal_anchor.name=Portal Anchor
+tile.sequential_brewing_stand.name=递次酿造台
+tile.portal_anchor.name=传送门之锚
 
-#Pre/Postfixes
+#前缀/后缀
 decorativestatue.prefix=装饰用%s
 crystalcluster.postfix=%s簇
 crystalshard.postfix=%s碎片
@@ -1410,15 +1410,15 @@ item.configurator_shard.0.name=灵魂石板碎片 #1
 item.configurator_shard.1.name=灵魂石板碎片 #2
 item.configurator_shard.2.name=灵魂石板碎片 #3
 item.configurator_shard.3.name=灵魂石板碎片 #4
-item.silver_key.name=Silver Key
-item.face_book.name=Book of Many Faces
+item.silver_key.name=银钥匙
+item.face_book.name=千面之书
 
 #实体
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
 entity.abyssalcraft.evilpig.name=猪
 entity.abyssalcraft.abyssalzombie.name=深渊僵尸
 entity.abyssalcraft.Primed ODB.name=待发的湮灭弹
-entity.abyssalcraft.Jzahar.name=深渊的守门者扎哈尔
+entity.abyssalcraft.Jzahar.name=深渊守门者扎哈尔
 entity.abyssalcraft.abygolem.name=渊素傀儡
 entity.abyssalcraft.dreadgolem.name=恐惧渊素傀儡
 entity.abyssalcraft.dreadguard.name=恐惧守卫
