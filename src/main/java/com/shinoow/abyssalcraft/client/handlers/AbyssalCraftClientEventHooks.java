@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2021 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -335,7 +335,7 @@ public class AbyssalCraftClientEventHooks {
 			if(spell != null){
 				event.getToolTip().add(1, I18n.format(NecronomiconText.LABEL_SPELL_NAME)+": "+TextFormatting.AQUA+spell.getLocalizedName());
 				event.getToolTip().add(2, I18n.format(NecronomiconText.LABEL_SPELL_PE)+": "+(int)spell.getReqEnergy());
-				event.getToolTip().add(3, I18n.format(NecronomiconText.LABEL_SPELL_TYPE)+": "+TextFormatting.GOLD+(I18n.format(NecronomiconText.getSpellType(spell.requiresCharging()))));
+				event.getToolTip().add(3, I18n.format(NecronomiconText.LABEL_SPELL_TYPE)+": "+TextFormatting.GOLD+I18n.format(NecronomiconText.getSpellType(spell.requiresCharging())));
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2021 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -20,27 +20,21 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.projectile.EntityWitherSkull;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockACBrick extends BlockACBasic {
 
-//	public static final PropertyEnum<EnumBrickType> TYPE = PropertyEnum.create("type", BlockACBrick.EnumBrickType.class);
-	
+	//	public static final PropertyEnum<EnumBrickType> TYPE = PropertyEnum.create("type", BlockACBrick.EnumBrickType.class);
+
 	public static final Map<String, Map<EnumBrickType, Block>> VARIANTS = new HashMap<>();
-	
+
 	public BlockACBrick(int harvestlevel, float hardness, float resistance) {
 		super(Material.ROCK, "pickaxe", harvestlevel, hardness, resistance, SoundType.STONE);
 	}
@@ -63,7 +57,7 @@ public class BlockACBrick extends BlockACBasic {
 		VARIANTS.put(oldName, variant);
 		return this;
 	}
-	
+
 	@Override
 	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
 	{

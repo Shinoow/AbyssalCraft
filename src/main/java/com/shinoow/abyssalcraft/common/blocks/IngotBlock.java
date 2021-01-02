@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2021 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,8 +13,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -30,9 +28,7 @@ import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
 public class IngotBlock extends Block {
 

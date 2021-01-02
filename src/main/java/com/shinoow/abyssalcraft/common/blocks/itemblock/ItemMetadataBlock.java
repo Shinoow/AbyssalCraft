@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2021 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
 
 import net.minecraft.block.Block;
@@ -59,11 +58,5 @@ public class ItemMetadataBlock extends ItemBlockAC {
 		else if(getUnlocalizedName().contains("ingotblock"))
 			return EnumIngotType.byMetadata(par1ItemStack.getItemDamage()).getFormat() + super.getItemStackDisplayName(par1ItemStack);
 		return super.getItemStackDisplayName(par1ItemStack);
-	}
-
-	@Override
-	public IUnlockCondition getUnlockCondition(ItemStack stack) {
-
-		return super.getUnlockCondition(stack);
 	}
 }
