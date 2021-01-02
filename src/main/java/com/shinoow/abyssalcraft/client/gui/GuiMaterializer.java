@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import org.lwjgl.input.Mouse;
 
+import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityMaterializer;
 import com.shinoow.abyssalcraft.common.inventory.ContainerMaterializer;
 
@@ -36,7 +37,7 @@ public class GuiMaterializer extends GuiContainer {
 		super(new ContainerMaterializer(par1InventoryPlayer, par2TileEntityMaterializer));
 		tileMaterializer = par2TileEntityMaterializer;
 		scrollbar = new Scrollbar(151, 15, 12, 54);
-		scrollbar.setMaxOffset(18);
+		scrollbar.setMaxOffset(MaterializerRecipes.instance().getMaterializationList().size() / 6);
 	}
 
 	@Override

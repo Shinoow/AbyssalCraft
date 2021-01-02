@@ -76,17 +76,19 @@ public class ContainerMaterializer extends Container {
 
 	private int getRecipeAmount(){
 
-		for(int i = 2; i < 110; i++)
+		for(int i = 2; i < 550; i++)
 			if(tileMaterializer.getStackInSlot(i).isEmpty())
 				return i;
 
-		return 110;
+		return 550;
 	}
 
 	public void scrollTo(int pos)
 	{
 		int recipeAmount = getRecipeAmount();
-		float j0 = 110 / recipeAmount;
+		if(recipeAmount < 550)
+			recipeAmount = 550;
+		float j0 = 550 / recipeAmount;
 		int j = (int)(pos / j0);
 
 		if (j < 0) j = 0;

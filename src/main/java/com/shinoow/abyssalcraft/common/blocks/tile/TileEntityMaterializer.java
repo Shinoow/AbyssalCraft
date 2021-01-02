@@ -33,7 +33,7 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 	/**
 	 * The ItemStacks that hold the items currently being used in the materializer
 	 */
-	private NonNullList<ItemStack> materializerItemStacks = NonNullList.<ItemStack>withSize(110, ItemStack.EMPTY);
+	private NonNullList<ItemStack> materializerItemStacks = NonNullList.<ItemStack>withSize(550, ItemStack.EMPTY);
 
 	private String containerName, invName;
 
@@ -249,7 +249,7 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 			List<ItemStack> list = MaterializerRecipes.instance().getMaterializationResult(materializerItemStacks.get(0));
 
 			if(!list.isEmpty())
-				for(int i = 0; i < (list.size() > 108 ? 108 : list.size()); i++)
+				for(int i = 0; i < (list.size() > 548 ? 548 : list.size()); i++)
 					materializerItemStacks.set(i+2, list.get(i));
 		}
 	}
