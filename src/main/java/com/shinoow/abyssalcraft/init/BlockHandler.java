@@ -508,6 +508,8 @@ public class BlockHandler implements ILifeCycleHandler {
 	public void init(FMLInitializationEvent event) {
 
 		addCondition(ACBlocks.abyssal_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.chiseled_abyssal_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.cracked_abyssal_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.abyssal_stone_brick_stairs, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.abyssalnite_ore, new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
 		addCondition(ACBlocks.abyssal_stone_brick_fence, new DimensionCondition(ACLib.abyssal_wasteland_id));
@@ -519,7 +521,11 @@ public class BlockHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.dreaded_abyssalnite_ore, new DimensionCondition(ACLib.dreadlands_id));
 		addCondition(ACBlocks.dreadlands_abyssalnite_ore, new DimensionCondition(ACLib.dreadlands_id));
 		addCondition(ACBlocks.dreadstone_brick, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.chiseled_dreadstone_brick, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.cracked_dreadstone_brick, new DimensionCondition(ACLib.dreadlands_id));
 		addCondition(ACBlocks.abyssalnite_stone_brick, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.chiseled_abyssalnite_stone_brick, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.cracked_abyssalnite_stone_brick, new DimensionCondition(ACLib.dreadlands_id));
 		addCondition(ACBlocks.dreadlands_sapling, new DimensionCondition(ACLib.dreadlands_id));
 		addCondition(ACBlocks.dreadlands_log, new DimensionCondition(ACLib.dreadlands_id));
 		addCondition(ACBlocks.dreadlands_leaves, new DimensionCondition(ACLib.dreadlands_id));
@@ -534,6 +540,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.abyssalnite_stone_brick_stairs, new DimensionCondition(ACLib.dreadlands_id));
 		addCondition(ACBlocks.abyssalnite_stone_brick_fence, new DimensionCondition(ACLib.dreadlands_id));
 		addCondition(ACBlocks.coralium_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.chiseled_coralium_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.cracked_coralium_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.coralium_stone_brick_fence, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.coralium_stone_brick_stairs, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.coralium_stone_button, new DimensionCondition(ACLib.abyssal_wasteland_id));
@@ -551,12 +559,16 @@ public class BlockHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.pearlescent_coralium_ore, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.liquified_coralium_ore, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.chiseled_ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.cracked_ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
 		addCondition(ACBlocks.ethaxium_pillar, new DimensionCondition(ACLib.omothol_id));
 		addCondition(ACBlocks.ethaxium_brick_stairs, new DimensionCondition(ACLib.omothol_id));
 		addCondition(ACBlocks.ethaxium_brick_fence, new DimensionCondition(ACLib.omothol_id));
 		addCondition(ACBlocks.engraver, new DimensionCondition(ACLib.omothol_id));
 		addCondition(ACBlocks.materializer, new DimensionCondition(ACLib.omothol_id));
 		addCondition(ACBlocks.dark_ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.chiseled_dark_ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.cracked_dark_ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
 		addCondition(ACBlocks.dark_ethaxium_pillar, new DimensionCondition(ACLib.omothol_id));
 		addCondition(ACBlocks.dark_ethaxium_brick_stairs, new DimensionCondition(ACLib.omothol_id));
 		addCondition(ACBlocks.dark_ethaxium_brick_fence, new DimensionCondition(ACLib.omothol_id));
@@ -577,6 +589,20 @@ public class BlockHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.luminous_thistle, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.wastelands_thorn, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.sequential_brewing_stand, new DimensionCondition(-1));
+		addCondition(ACBlocks.abyssal_stone, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.abyssal_cobblestone, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.coralium_stone, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.coralium_cobblestone, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.dreadstone, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.abyssalnite_stone, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.dreadstone_cobblestone, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.abyssalnite_cobblestone, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.ethaxium, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.omothol_stone, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.block_of_abyssalnite, new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
+		addCondition(ACBlocks.block_of_refined_coralium, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.block_of_dreadium, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.block_of_ethaxium, new DimensionCondition(ACLib.omothol_id));
 	}
 
 	private void addCondition(Block block, IUnlockCondition condition){
