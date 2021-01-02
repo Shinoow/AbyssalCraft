@@ -26,7 +26,8 @@ public class ItemEthaxiumPickaxe extends ItemACPickaxe {
 
 	private static Set<Block> effectiveBlocks = Sets.newHashSet(ACBlocks.ethaxium_brick, ACBlocks.ethaxium_pillar, ACBlocks.ethaxium_brick_fence, ACBlocks.ethaxium_brick_slab, BlockHandler.ethaxiumslab2,
 			ACBlocks.ethaxium_brick_stairs, ACBlocks.materializer, ACBlocks.dark_ethaxium_brick, ACBlocks.dark_ethaxium_pillar, ACBlocks.dark_ethaxium_brick_stairs, ACBlocks.dark_ethaxium_brick_slab,
-			BlockHandler.darkethaxiumslab2, ACBlocks.dark_ethaxium_brick_fence);
+			BlockHandler.darkethaxiumslab2, ACBlocks.dark_ethaxium_brick_fence, ACBlocks.cracked_ethaxium_brick, ACBlocks.chiseled_ethaxium_brick, ACBlocks.cracked_dark_ethaxium_brick,
+			ACBlocks.chiseled_dark_ethaxium_brick);
 
 	public ItemEthaxiumPickaxe(ToolMaterial mat, String name)
 	{

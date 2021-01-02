@@ -62,7 +62,7 @@ public class BlockACBrick extends BlockACBasic {
 	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
 	{
 		if(entity instanceof EntityDragon || entity instanceof EntityWither || entity instanceof EntityWitherSkull)
-			return state.getBlock() != ACBlocks.ethaxium_brick && state.getBlock() != ACBlocks.dark_ethaxium_brick;
+			return state.getBlock().getUnlocalizedName().contains("ethaxium");
 		return super.canEntityDestroy(state, world, pos, entity);
 	}
 

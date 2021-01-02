@@ -37,7 +37,6 @@ import net.minecraft.world.World;
 
 public class BlockACStone extends Block {
 
-	//	public static final PropertyEnum<EnumStoneType> TYPE = PropertyEnum.create("type", EnumStoneType.class);
 	private EnumStoneType TYPE;
 	public static final Map<EnumStoneType, Block> VARIANTS = new HashMap<>();
 
