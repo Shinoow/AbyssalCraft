@@ -26,9 +26,9 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenDarklandsMountains extends Biome implements IDarklandsBiome {
+public class BiomeDarklandsMountains extends Biome implements IDarklandsBiome {
 
-	public BiomeGenDarklandsMountains(BiomeProperties par1)
+	public BiomeDarklandsMountains(BiomeProperties par1)
 	{
 		super(par1);
 		topBlock = ACBlocks.darkstone.getDefaultState();

@@ -36,9 +36,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class ItemDrainStaff extends ItemMetadata implements IStaffOfRending {
+public class ItemStaffOfRending extends ItemMetadata implements IStaffOfRending {
 
-	public ItemDrainStaff(){
+	public ItemStaffOfRending(){
 		super("drainstaff", "normal", "aw", "dl", "omt");
 		setCreativeTab(ACTabs.tabTools);
 		setMaxStackSize(1);

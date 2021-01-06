@@ -25,12 +25,12 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenForestDreadlands extends BiomeGenDreadlandsBase
+public class BiomeForestDreadlands extends BiomeDreadlandsBase
 {
 
 	private WorldGenTrees WorldGenDreadTrees;
 
-	public BiomeGenForestDreadlands(BiomeProperties par1) {
+	public BiomeForestDreadlands(BiomeProperties par1) {
 		super(par1);
 		topBlock = ACBlocks.dreadlands_grass.getDefaultState();
 		fillerBlock = ACBlocks.dreadlands_dirt.getDefaultState();

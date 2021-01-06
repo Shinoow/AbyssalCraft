@@ -11,53 +11,62 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.biome;
 
+import java.util.Random;
 
-import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
+import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenOmothol extends Biome {
+public class BiomeDreadlands extends BiomeDreadlandsBase
+{
 
-	public BiomeGenOmothol(BiomeProperties par1){
+	public BiomeDreadlands(BiomeProperties par1) {
 		super(par1);
-		setMobSpawns();
 	}
 
+	@Override
 	public final void setMobSpawns(){
-		spawnableMonsterList.clear();
-		spawnableCreatureList.clear();
-		spawnableWaterCreatureList.clear();
-		spawnableCaveCreatureList.clear();
-		spawnableMonsterList.add(new SpawnListEntry(EntityRemnant.class, 3, 2, 4));
-		spawnableMonsterList.add(new SpawnListEntry(EntityOmotholGhoul.class, 50, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityGatekeeperMinion.class, 3, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 18, 1, 4));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 12, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 3, 1, 1));
+		super.setMobSpawns();
+		spawnableMonsterList.add(new SpawnListEntry(EntityDreadgolem.class, 100, 1, 5));
+	}
+
+	@Override
+	public void decorate(World world, Random rand, BlockPos pos)
+	{
+		super.decorate(world, rand, pos);
+
+		if(ACConfig.generateDreadlandsStalagmite)
+			for(int i = 0; i < 1; i++){
+				int xPos = rand.nextInt(16) + 8;
+				int zPos = rand.nextInt(16) + 8;
+				new WorldGenDreadlandsStalagmite().generate(world, rand, world.getHeight(pos.add(xPos, 0, zPos)));
+			}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)
 	{
-		return ACClientVars.getOmotholSkyColor();
+		return ACClientVars.getDreadlandsSkyColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getOmotholGrassColor();
+		return ACClientVars.getDreadlandsGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getOmotholFoliageColor();
+		return ACClientVars.getDreadlandsFoliageColor();
 	}
 }

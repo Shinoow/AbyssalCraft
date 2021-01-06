@@ -29,11 +29,11 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenDarklandsForest extends Biome implements IDarklandsBiome {
+public class BiomeDarklandsForest extends Biome implements IDarklandsBiome {
 
 	private WorldGenTrees WorldGenDarkTrees;
 
-	public BiomeGenDarklandsForest(BiomeProperties par1)
+	public BiomeDarklandsForest(BiomeProperties par1)
 	{
 		super(par1);
 		WorldGenDarkTrees = new WorldGenDLT(false);

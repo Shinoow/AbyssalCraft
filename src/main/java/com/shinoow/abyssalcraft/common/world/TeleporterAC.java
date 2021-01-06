@@ -161,7 +161,7 @@ public class TeleporterAC extends Teleporter
 					for (int j3 = worldServerInstance.getActualHeight() - 1; j3 >= 6; --j3)
 						if (worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3, l2)))
 						{
-							while (j3 > 5 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3 - 1, l2)))
+							while (j3 > 6 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(j2, j3 - 1, l2)))
 								--j3;
 
 							for (int k3 = i2; k3 < i2 + 4; ++k3)
@@ -217,7 +217,7 @@ public class TeleporterAC extends Teleporter
 						for (int i7 = worldServerInstance.getActualHeight() - 1; i7 >= 6; --i7)
 							if (worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7, j6)))
 							{
-								while (i7 > 5 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7 - 1, j6)))
+								while (i7 > 6 && worldServerInstance.isAirBlock(blockpos$mutableblockpos.setPos(l5, i7 - 1, j6)))
 									--i7;
 
 								for (int k7 = i2; k7 < i2 + 2; ++k7)

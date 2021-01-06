@@ -56,7 +56,7 @@ public class WorldProviderDreadlands extends WorldProvider {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkProviderDreadlands(world, world.getSeed(), true);
+		return new ChunkGeneratorDreadlands(world, world.getSeed(), true);
 	}
 
 	@Override

@@ -22,9 +22,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenDarkRealm extends Biome {
+public class BiomeDarkRealm extends Biome {
 
-	public BiomeGenDarkRealm(BiomeProperties par1){
+	public BiomeDarkRealm(BiomeProperties par1){
 		super(par1);
 		setMobSpawns();
 	}

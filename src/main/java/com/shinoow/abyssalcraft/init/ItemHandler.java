@@ -209,7 +209,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_shovel = new ItemACShovel(AbyssalCraftAPI.ethaxiumTool, "ethaxiumshovel", 8, TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.ethaxium_sword = new ItemACSword(AbyssalCraftAPI.ethaxiumTool, "ethaxiumsword", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.ethaxium_hoe = new ItemACHoe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumhoe", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.staff_of_rending = new ItemDrainStaff().setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
+		ACItems.staff_of_rending = new ItemStaffOfRending().setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
 		ACItems.configurator = new ItemConfigurator().setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 
 		//Armor

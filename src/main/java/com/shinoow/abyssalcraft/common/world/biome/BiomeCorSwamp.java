@@ -31,9 +31,9 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenCorSwamp extends Biome {
+public class BiomeCorSwamp extends Biome {
 
-	public BiomeGenCorSwamp(BiomeProperties par1) {
+	public BiomeCorSwamp(BiomeProperties par1) {
 		super(par1);
 		topBlock=Blocks.GRASS.getDefaultState();
 		fillerBlock=Blocks.DIRT.getDefaultState();

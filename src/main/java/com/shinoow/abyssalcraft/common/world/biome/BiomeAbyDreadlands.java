@@ -26,9 +26,9 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenAbyDreadlands extends BiomeGenDreadlandsBase {
+public class BiomeAbyDreadlands extends BiomeDreadlandsBase {
 
-	public BiomeGenAbyDreadlands(BiomeProperties par1) {
+	public BiomeAbyDreadlands(BiomeProperties par1) {
 		super(par1);
 		topBlock = ACBlocks.abyssalnite_stone.getDefaultState();
 		fillerBlock = ACBlocks.abyssalnite_stone.getDefaultState();

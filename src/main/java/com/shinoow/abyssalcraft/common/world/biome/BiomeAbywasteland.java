@@ -33,9 +33,9 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenAbywasteland extends Biome {
+public class BiomeAbywasteland extends Biome {
 
-	public BiomeGenAbywasteland(BiomeProperties par1){
+	public BiomeAbywasteland(BiomeProperties par1){
 		super(par1);
 		topBlock = ACBlocks.fused_abyssal_sand.getDefaultState();
 		fillerBlock = ACBlocks.abyssal_sand.getDefaultState();
@@ -244,17 +244,19 @@ public class BiomeGenAbywasteland extends Biome {
 		int i1 = p_180628_5_ & 15;
 
 		for (int j1 = 255; j1 >= 0; --j1)
-			if (j1 < 6)
+			if (j1 < 7)
 			{
 				if(j1 == 0)
 					chunkPrimerIn.setBlockState(i1, j1, l, Blocks.BEDROCK.getDefaultState());
-				else if(j1 == 5)
+				else if(j1 == 6)
 					chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.darkstone_cobblestone.getDefaultState());
+				else if(j1 == 1)
+					chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.darkstone.getDefaultState());
 				else {
 					IBlockState state = Blocks.AIR.getDefaultState();
 
 					if(i1 % 4 == 2 && l % 4 == 2)
-						state = (j1 == 3 ? ACBlocks.chiseled_darkstone_brick : ACBlocks.darkstone_brick).getDefaultState();
+						state = (j1 == 4 ? ACBlocks.chiseled_darkstone_brick : ACBlocks.darkstone_brick).getDefaultState();
 					chunkPrimerIn.setBlockState(i1, j1, l, state);
 
 				}

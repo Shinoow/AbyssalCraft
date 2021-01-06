@@ -9,6 +9,22 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
+/**
+ * AbyssalCraft
+ * Copyright 2012-2015 Shinoow
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
@@ -30,14 +46,13 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenDarklandsHills extends Biome implements IDarklandsBiome {
+public class BiomeDarklandsPlains extends Biome implements IDarklandsBiome {
 
 	private WorldGenTrees WorldGenDarkTrees;
 
-	public BiomeGenDarklandsHills(BiomeProperties par1)
+	public BiomeDarklandsPlains(BiomeProperties par1)
 	{
 		super(par1);
-		fillerBlock = ACBlocks.darkstone.getDefaultState();
 		WorldGenDarkTrees = new WorldGenDLT(false);
 		decorator.treesPerChunk = 1;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
@@ -73,6 +88,7 @@ public class BiomeGenDarklandsHills extends Biome implements IDarklandsBiome {
 		}
 	}
 
+
 	@Override
 	public WorldGenAbstractTree getRandomTreeFeature(Random par1Random)
 	{
@@ -84,20 +100,20 @@ public class BiomeGenDarklandsHills extends Biome implements IDarklandsBiome {
 
 	public int getSkyColorByTemp(float par1)
 	{
-		return ACClientVars.getDarklandsHighlandsSkyColor();
+		return ACClientVars.getDarklandsPlainsSkyColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getDarklandsHighlandsGrassColor();
+		return ACClientVars.getDarklandsPlainsGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getDarklandsHighlandsFoliageColor();
+		return ACClientVars.getDarklandsPlainsFoliageColor();
 	}
 }

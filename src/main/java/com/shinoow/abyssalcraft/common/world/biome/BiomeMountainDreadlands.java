@@ -19,9 +19,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeGenMountainDreadlands extends BiomeGenDreadlandsBase {
+public class BiomeMountainDreadlands extends BiomeDreadlandsBase {
 
-	public BiomeGenMountainDreadlands(BiomeProperties par1) {
+	public BiomeMountainDreadlands(BiomeProperties par1) {
 		super(par1);
 	}
 

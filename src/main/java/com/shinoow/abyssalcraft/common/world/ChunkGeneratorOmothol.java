@@ -32,7 +32,7 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 
-public class ChunkProviderOmothol implements IChunkGenerator
+public class ChunkGeneratorOmothol implements IChunkGenerator
 {
 	private Random rand;
 	private NoiseGeneratorOctaves noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5;
@@ -49,7 +49,7 @@ public class ChunkProviderOmothol implements IChunkGenerator
 	private StructureStorage storageGen = new StructureStorage();
 	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
 
-	public ChunkProviderOmothol(World par1World, long par2)
+	public ChunkGeneratorOmothol(World par1World, long par2)
 	{
 		worldObj = par1World;
 		rand = new Random(par2);

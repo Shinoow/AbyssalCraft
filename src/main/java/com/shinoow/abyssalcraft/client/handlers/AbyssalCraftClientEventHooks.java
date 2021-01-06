@@ -403,7 +403,7 @@ public class AbyssalCraftClientEventHooks {
 								world.getBlockState(pos.down(2)).getMaterial() != Material.AIR ||
 								world.getBlockState(pos.down(3)).getMaterial() != Material.AIR)
 							canSpawn = true;
-					} else if(j1 <= 5)
+					} else if(j1 <= 6)
 						if(world.getBlockState(pos.up()).getMaterial() != Material.AIR ||
 						world.getBlockState(pos.up(2)).getMaterial() != Material.AIR)
 							canSpawn = true;

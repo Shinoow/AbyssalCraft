@@ -44,7 +44,7 @@ import net.minecraft.world.gen.*;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-public class ChunkProviderDreadlands implements IChunkGenerator {
+public class ChunkGeneratorDreadlands implements IChunkGenerator {
 
 	private Random rand;
 
@@ -87,7 +87,7 @@ public class ChunkProviderDreadlands implements IChunkGenerator {
 		dreadlandsCaveGenerator = TerrainGen.getModdedMapGen(dreadlandsCaveGenerator, NETHER_CAVE);
 	}
 
-	public ChunkProviderDreadlands(World par1World, long par2, boolean par4)
+	public ChunkGeneratorDreadlands(World par1World, long par2, boolean par4)
 	{
 		worldObj = par1World;
 		mapFeaturesEnabled = par4;

@@ -18,7 +18,7 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
-import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
+import com.shinoow.abyssalcraft.common.items.ItemStaffOfRending;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -676,7 +676,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		if(var1.getItemToSell().getItem() == ACItems.configurator_shard)
 			var1.incrementToolUses();
 		if(var1.getItemToBuy().getItem() instanceof ItemNecronomicon ||
-				var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
+				var1.getItemToBuy().getItem() instanceof ItemStaffOfRending)
 			var1.compensateToolUses();
 		livingSoundTime = -getTalkInterval();
 		playSound(ACSounds.remnant_yes, getSoundVolume(), getSoundPitch());

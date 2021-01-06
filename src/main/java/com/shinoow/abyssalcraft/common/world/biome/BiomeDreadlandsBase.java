@@ -28,9 +28,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
-public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
+public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome {
 
-	public BiomeGenDreadlandsBase(BiomeProperties par1) {
+	public BiomeDreadlandsBase(BiomeProperties par1) {
 		super(par1);
 		topBlock = ACBlocks.dreadstone.getDefaultState();
 		fillerBlock = ACBlocks.dreadstone.getDefaultState();
@@ -102,17 +102,19 @@ public class BiomeGenDreadlandsBase extends Biome implements IDreadlandsBiome {
 		int i1 = z & 15;
 
 		for (int j1 = 255; j1 >= 0; --j1)
-			if (j1 < 6)
+			if (j1 < 7)
 			{
 				if(j1 == 0)
 					chunkPrimerIn.setBlockState(i1, j1, l, Blocks.BEDROCK.getDefaultState());
-				else if(j1 == 5)
+				else if(j1 == 6)
 					chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.darkstone_cobblestone.getDefaultState());
+				else if(j1 == 1)
+					chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.darkstone.getDefaultState());
 				else {
 					IBlockState state = Blocks.AIR.getDefaultState();
 
 					if(i1 % 4 == 2 && l % 4 == 2)
-						state = (j1 == 3 ? ACBlocks.chiseled_darkstone_brick : ACBlocks.darkstone_brick).getDefaultState();
+						state = (j1 == 4 ? ACBlocks.chiseled_darkstone_brick : ACBlocks.darkstone_brick).getDefaultState();
 					chunkPrimerIn.setBlockState(i1, j1, l, state);
 
 				}
