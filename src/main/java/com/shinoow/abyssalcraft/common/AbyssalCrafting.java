@@ -146,8 +146,7 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 1), new ItemStack(ACItems.crystal, 4, 21), new ItemStack(ACItems.crystal, 4, 27), 0.1F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 2), new ItemStack(ACItems.crystal_shard, 32, 21), new ItemStack(ACItems.crystal_shard, 32, 27), 0.1F);
 		AbyssalCraftAPI.addCrystallization(Items.EGG, new ItemStack(ACItems.crystal_shard, 4, 25), new ItemStack(ACItems.crystal_shard, 4, 7), 0.1F);
-		AbyssalCraftAPI.addCrystallization(ACItems.charcoal, new ItemStack(ACItems.crystal_shard, 4, 3), new ItemStack(ACItems.crystal_shard, 4, 14), 0.1F);
-
+		
 		if(ACConfig.crystal_rework) {
 			AbyssalCraftAPI.addSingleCrystallization(ACItems.refined_coralium_ingot, new ItemStack(ACItems.crystal, 1, 13), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(ACItems.chunk_of_coralium, new ItemStack(ACItems.crystal, 1, 13), 0.1F);
@@ -158,6 +157,7 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addSingleCrystallization(Items.IRON_INGOT, new ItemStack(ACItems.crystal, 1, 0), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.GOLD_INGOT, new ItemStack(ACItems.crystal, 1, 1), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.REDSTONE, new ItemStack(ACItems.crystal, 1, 11), 0.1F);
+			AbyssalCraftAPI.addSingleCrystallization(ACItems.charcoal, new ItemStack(ACItems.crystal, 1, 3), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(Items.COAL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.crystal, 1, 3), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("oreAbyssalnite", "crystalAbyssalnite", 2, 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("oreCoralium", "crystalCoralium", 2, 0.1F);
@@ -229,6 +229,7 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addSingleCrystallization(Items.IRON_INGOT, new ItemStack(ACItems.crystal_shard, 4, 0), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.GOLD_INGOT, new ItemStack(ACItems.crystal_shard, 4, 1), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.REDSTONE, new ItemStack(ACItems.crystal_shard, 4, 11), 0.1F);
+			AbyssalCraftAPI.addSingleCrystallization(ACItems.charcoal, new ItemStack(ACItems.crystal_shard, 4, 3), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(Items.COAL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.crystal_shard, 4, 3), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("oreAbyssalnite", "crystalShardAbyssalnite", 4, 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("oreCoralium", "crystalShardCoralium", 4, 0.1F);
