@@ -1479,7 +1479,9 @@ potion.Antimatter=Antimateria
 potion.effect.Antimatter=Poción de aniquilación
 splash_potion.effect.Antimatter=Poción arrojadisa de Aniquilación
 lingering_potion.effect.Antimatter=Poción persistente de Aniquilación
-tipped_arrow.effect.Antimatter=Flecha de Aniquilación
+tipped_arrow.effect.Antimatter=Flecha de 
+potion.coralium_antidote=Coralium Antidote
+potion.dread_antidote=Dread Antidote
 
 #Enchantments
 enchantment.abyssalcraft.iron_wall=Muro de hierro

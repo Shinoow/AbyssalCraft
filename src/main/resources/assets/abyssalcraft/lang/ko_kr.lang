@@ -1490,6 +1490,8 @@ potion.effect.Antimatter=소멸의 물약
 splash_potion.effect.Antimatter=소멸의 광범위형 물약
 lingering_potion.effect.Antimatter=소멸의 지속형 물약
 tipped_arrow.effect.Antimatter=소멸의 화살
+potion.coralium_antidote=Coralium Antidote
+potion.dread_antidote=Dread Antidote
 
 #Enchantments
 enchantment.abyssalcraft.coralium=코랄리움

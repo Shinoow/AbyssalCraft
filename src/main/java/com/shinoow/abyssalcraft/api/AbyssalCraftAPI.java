@@ -68,7 +68,7 @@ public class AbyssalCraftAPI {
 
 	public static Enchantment light_pierce, iron_wall, sapping, multi_rend;
 
-	public static Potion coralium_plague, dread_plague, antimatter_potion;
+	public static Potion coralium_plague, dread_plague, antimatter_potion, coralium_antidote, dread_antidote;
 
 	public static final DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static final DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();

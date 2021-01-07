@@ -1480,6 +1480,8 @@ potion.effect.Antimatter=Potion d'Annihilation
 splash_potion.effect.Antimatter=Potion d'Annihilation Jetable
 lingering_potion.effect.Antimatter=Potion d'Annihilation Persistante
 tipped_arrow.effect.Antimatter=Flèche d'Annihilation
+potion.coralium_antidote=Coralium Antidote
+potion.dread_antidote=Dread Antidote
 
 #Enchantments
 enchantment.abyssalcraft.iron_wall=Panzer

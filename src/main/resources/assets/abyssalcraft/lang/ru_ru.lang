@@ -1481,6 +1481,8 @@ potion.effect.Antimatter=Зелье уничтожения
 splash_potion.effect.Antimatter=Взрывное зелье уничтожения
 lingering_potion.effect.Antimatter=Затяжное зелье уничтожения
 tipped_arrow.effect.Antimatter=Стрела уничтожения
+potion.coralium_antidote=Coralium Antidote
+potion.dread_antidote=Dread Antidote
 
 #Enchantments
 enchantment.abyssalcraft.iron_wall=Железный барьер

@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.MiscCondition;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
@@ -24,6 +25,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
@@ -73,7 +75,10 @@ public class ItemAntidote extends ItemMetadata {
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
 	{
-		if (!worldIn.isRemote) entityLiving.curePotionEffects(stack);
+		if (!worldIn.isRemote) {
+			entityLiving.curePotionEffects(stack);
+			entityLiving.addPotionEffect(new PotionEffect(stack.getMetadata() == 1 ? AbyssalCraftAPI.dread_antidote : AbyssalCraftAPI.coralium_antidote, 1200));
+		}
 		EntityPlayer entityplayer = entityLiving instanceof EntityPlayer ? (EntityPlayer)entityLiving : null;
 		if (entityplayer == null || !entityplayer.capabilities.isCreativeMode)
 			drink(stack);

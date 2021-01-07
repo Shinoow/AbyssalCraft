@@ -38,9 +38,7 @@ import com.shinoow.abyssalcraft.common.AbyssalCrafting;
 import com.shinoow.abyssalcraft.common.datafix.BlockFlatteningDefinitions;
 import com.shinoow.abyssalcraft.common.enchantments.*;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.potion.PotionAntimatter;
-import com.shinoow.abyssalcraft.common.potion.PotionCplague;
-import com.shinoow.abyssalcraft.common.potion.PotionDplague;
+import com.shinoow.abyssalcraft.common.potion.*;
 import com.shinoow.abyssalcraft.common.structures.pe.ArchwayStructure;
 import com.shinoow.abyssalcraft.common.structures.pe.BasicStructure;
 import com.shinoow.abyssalcraft.common.structures.pe.TotemPoleStructure;
@@ -98,10 +96,14 @@ public class MiscHandler implements ILifeCycleHandler {
 		AbyssalCraftAPI.coralium_plague = new PotionCplague(true, ACClientVars.getCoraliumPlaguePotionColor()).setIconIndex(1, 0).setPotionName("potion.Cplague");
 		AbyssalCraftAPI.dread_plague = new PotionDplague(true, ACClientVars.getDreadPlaguePotionColor()).setIconIndex(1, 0).setPotionName("potion.Dplague");
 		AbyssalCraftAPI.antimatter_potion = new PotionAntimatter(true, ACClientVars.getAntimatterPotionColor()).setIconIndex(1, 0).setPotionName("potion.Antimatter");
+		AbyssalCraftAPI.coralium_antidote = new PotionAntidote(false, 0, () -> AbyssalCraftAPI.coralium_plague).setIconIndex(1, 0).setPotionName("potion.coralium_antidote");
+		AbyssalCraftAPI.dread_antidote = new PotionAntidote(false, 0, () -> AbyssalCraftAPI.dread_plague).setIconIndex(1, 0).setPotionName("potion.dread_antidote");
 
 		registerPotion(new ResourceLocation("abyssalcraft", "cplague"), AbyssalCraftAPI.coralium_plague);
 		registerPotion(new ResourceLocation("abyssalcraft", "dplague"), AbyssalCraftAPI.dread_plague);
 		registerPotion(new ResourceLocation("abyssalcraft", "antimatter"), AbyssalCraftAPI.antimatter_potion);
+		registerPotion(new ResourceLocation("abyssalcraft", "coralium_antidote"), AbyssalCraftAPI.coralium_antidote);
+		registerPotion(new ResourceLocation("abyssalcraft", "dread_antidote"), AbyssalCraftAPI.dread_antidote);
 
 		Cplague_normal = new PotionType("Cplague", new PotionEffect(AbyssalCraftAPI.coralium_plague, 3600));
 		Cplague_long = new PotionType("Cplague", new PotionEffect(AbyssalCraftAPI.coralium_plague, 9600));

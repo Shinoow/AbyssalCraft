@@ -1480,6 +1480,8 @@ potion.effect.Antimatter=湮滅藥水
 splash_potion.effect.Antimatter=噴濺湮滅藥水
 lingering_potion.effect.Antimatter=滯留湮滅藥水
 tipped_arrow.effect.Antimatter=湮滅之箭
+potion.coralium_antidote=Coralium Antidote
+potion.dread_antidote=Dread Antidote
 
 #附魔
 enchantment.abyssalcraft.iron_wall=鐵壁
