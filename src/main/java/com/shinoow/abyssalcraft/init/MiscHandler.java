@@ -96,8 +96,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		AbyssalCraftAPI.coralium_plague = new PotionCplague(true, ACClientVars.getCoraliumPlaguePotionColor()).setIconIndex(1, 0).setPotionName("potion.Cplague");
 		AbyssalCraftAPI.dread_plague = new PotionDplague(true, ACClientVars.getDreadPlaguePotionColor()).setIconIndex(1, 0).setPotionName("potion.Dplague");
 		AbyssalCraftAPI.antimatter_potion = new PotionAntimatter(true, ACClientVars.getAntimatterPotionColor()).setIconIndex(1, 0).setPotionName("potion.Antimatter");
-		AbyssalCraftAPI.coralium_antidote = new PotionAntidote(false, 0, () -> AbyssalCraftAPI.coralium_plague).setIconIndex(1, 0).setPotionName("potion.coralium_antidote");
-		AbyssalCraftAPI.dread_antidote = new PotionAntidote(false, 0, () -> AbyssalCraftAPI.dread_plague).setIconIndex(1, 0).setPotionName("potion.dread_antidote");
+		AbyssalCraftAPI.coralium_antidote = new PotionAntidote(false, ACClientVars.getCoraliumAntidotePotionColor(), () -> AbyssalCraftAPI.coralium_plague).setIconIndex(1, 0).setPotionName("potion.coralium_antidote");
+		AbyssalCraftAPI.dread_antidote = new PotionAntidote(false, ACClientVars.getDreadAntidotePotionColor(), () -> AbyssalCraftAPI.dread_plague).setIconIndex(1, 0).setPotionName("potion.dread_antidote");
 
 		registerPotion(new ResourceLocation("abyssalcraft", "cplague"), AbyssalCraftAPI.coralium_plague);
 		registerPotion(new ResourceLocation("abyssalcraft", "dplague"), AbyssalCraftAPI.dread_plague);

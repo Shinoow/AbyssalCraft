@@ -96,6 +96,8 @@ public class ClientVars {
 	private int implosionR;
 	private int implosionG;
 	private int implosionB;
+	private String coraliumAntidotePotionColor;
+	private String dreadAntidotePotionColor;
 
 	/**
 	 * Allocation of default values in case something is left out (which could have undesired side-effects)
@@ -179,6 +181,8 @@ public class ClientVars {
 		implosionR = 255;
 		implosionG = 255;
 		implosionB = 255;
+		coraliumAntidotePotionColor = "0x00ff06";
+		dreadAntidotePotionColor = "0x00ff06";
 	}
 
 	public int[] getCrystalColors() {
@@ -484,4 +488,13 @@ public class ClientVars {
 	public int getImplosionB() {
 		return implosionB;
 	}
+
+	public int getCoraliumAntidotePotionColor() {
+		return Integer.decode(coraliumAntidotePotionColor);
+	}
+
+	public int getDreadAntidotePotionColor() {
+		return Integer.decode(dreadAntidotePotionColor);
+	}
+	
 }
