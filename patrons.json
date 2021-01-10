@@ -8,9 +8,17 @@
 			"type": "page",
 			"version": 1,
 			"number": 1,
-			"icontype": "url",
-			"icon": "http://www.shinoow.com/AbyssalCraft/images/patreon/gentlemangamer2015.png",
-			"text": "Gentlemangamer2015"
+			"icontype": "resourcelocation",
+			"icon": "abyssalcraft:textures/gui/necronomicon/missing.png",
+			"text": "Jenni Mort"
+		},
+		{
+			"type": "page",
+			"version": 1,
+			"number": 2,
+			"icontype": "resourcelocation",
+			"icon": "abyssalcraft:textures/gui/necronomicon/missing.png",
+			"text": "Jason Lewis"
 		}
 	]
 }
