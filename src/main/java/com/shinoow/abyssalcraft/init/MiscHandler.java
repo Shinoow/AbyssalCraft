@@ -38,7 +38,8 @@ import com.shinoow.abyssalcraft.common.AbyssalCrafting;
 import com.shinoow.abyssalcraft.common.datafix.BlockFlatteningDefinitions;
 import com.shinoow.abyssalcraft.common.enchantments.*;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.potion.*;
+import com.shinoow.abyssalcraft.common.potion.PotionBuilder;
+import com.shinoow.abyssalcraft.common.potion.PotionEffectUtil;
 import com.shinoow.abyssalcraft.common.structures.pe.ArchwayStructure;
 import com.shinoow.abyssalcraft.common.structures.pe.BasicStructure;
 import com.shinoow.abyssalcraft.common.structures.pe.TotemPoleStructure;
@@ -93,11 +94,43 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		MinecraftForge.EVENT_BUS.register(this);
 
-		AbyssalCraftAPI.coralium_plague = new PotionCplague(true, ACClientVars.getCoraliumPlaguePotionColor()).setIconIndex(1, 0).setPotionName("potion.Cplague");
-		AbyssalCraftAPI.dread_plague = new PotionDplague(true, ACClientVars.getDreadPlaguePotionColor()).setIconIndex(1, 0).setPotionName("potion.Dplague");
-		AbyssalCraftAPI.antimatter_potion = new PotionAntimatter(true, ACClientVars.getAntimatterPotionColor()).setIconIndex(1, 0).setPotionName("potion.Antimatter");
-		AbyssalCraftAPI.coralium_antidote = new PotionAntidote(false, ACClientVars.getCoraliumAntidotePotionColor(), () -> AbyssalCraftAPI.coralium_plague).setIconIndex(1, 0).setPotionName("potion.coralium_antidote");
-		AbyssalCraftAPI.dread_antidote = new PotionAntidote(false, ACClientVars.getDreadAntidotePotionColor(), () -> AbyssalCraftAPI.dread_plague).setIconIndex(1, 0).setPotionName("potion.dread_antidote");
+		AbyssalCraftAPI.coralium_plague = new PotionBuilder(true, ACClientVars.getCoraliumPlaguePotionColor())
+				.setReadyFunction((a,b) -> true)
+				.setCurativeItems(new ItemStack(ACItems.antidote))
+				.setEffectFunction(PotionEffectUtil::applyCoraliumEffect)
+				.setIconIndex(1, 0)
+				.setStatusIconIndex(0)
+				.setPotionName("potion.Cplague")
+				.build();
+		AbyssalCraftAPI.dread_plague = new PotionBuilder(true, ACClientVars.getDreadPlaguePotionColor())
+				.setReadyFunction((a,b) -> true)
+				.setCurativeItems(new ItemStack(ACItems.antidote, 1, 1))
+				.setEffectFunction(PotionEffectUtil::applyDreadEffect)
+				.setIconIndex(1, 0)
+				.setStatusIconIndex(1)
+				.setPotionName("potion.Dplague")
+				.build();
+		AbyssalCraftAPI.antimatter_potion = new PotionBuilder(true, ACClientVars.getAntimatterPotionColor())
+				.setReadyFunction((a,b) -> true)
+				.setEffectFunction(PotionEffectUtil::applyAntimatterEffect)
+				.setIconIndex(1, 0)
+				.setStatusIconIndex(2)
+				.setPotionName("potion.Antimatter")
+				.build();
+		AbyssalCraftAPI.coralium_antidote = new PotionBuilder(false, ACClientVars.getCoraliumAntidotePotionColor())
+				.setReadyFunction((a,b) -> true)
+				.setEffectFunction((e,a) -> e.removePotionEffect(AbyssalCraftAPI.coralium_plague))
+				.setIconIndex(1, 0)
+				.setStatusIconIndex(3)
+				.setPotionName("potion.coralium_antidote")
+				.build();
+		AbyssalCraftAPI.dread_antidote = new PotionBuilder(false, ACClientVars.getDreadAntidotePotionColor())
+				.setReadyFunction((a,b) -> true)
+				.setEffectFunction((e,a) -> e.removePotionEffect(AbyssalCraftAPI.dread_plague))
+				.setIconIndex(1, 0)
+				.setStatusIconIndex(3)
+				.setPotionName("potion.dread_antidote")
+				.build();
 
 		registerPotion(new ResourceLocation("abyssalcraft", "cplague"), AbyssalCraftAPI.coralium_plague);
 		registerPotion(new ResourceLocation("abyssalcraft", "dplague"), AbyssalCraftAPI.dread_plague);
