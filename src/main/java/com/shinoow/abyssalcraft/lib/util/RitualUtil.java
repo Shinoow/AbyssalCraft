@@ -11,11 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.util;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Supplier;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
@@ -24,6 +23,7 @@ import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
@@ -34,82 +34,79 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
  */
 public class RitualUtil {
 
-	private static Map<IBlockState, Integer> ritualBlocks = new HashMap<>();
-	private static Map<IBlockState, Integer> altarMeta = new HashMap<>();
+	private static Map<Supplier<IBlockState>, Integer> bookTypeMappings = new HashMap<>();
+	private static Map<Supplier<IBlockState>, IBlockState> altars = new HashMap<>();
+	private static Map<Supplier<IBlockState>, IBlockState> pedestals = new HashMap<>();
 
-	public static void addBlocks(){
-		ritualBlocks.put(Blocks.COBBLESTONE.getDefaultState(), 0);
-		ritualBlocks.put(ACBlocks.darkstone_cobblestone.getDefaultState(), 0);
-		ritualBlocks.put(ACBlocks.abyssal_cobblestone.getDefaultState(), 1);
-		ritualBlocks.put(ACBlocks.coralium_cobblestone.getDefaultState(), 1);
-		ritualBlocks.put(ACBlocks.dreadstone_cobblestone.getDefaultState(), 2);
-		ritualBlocks.put(ACBlocks.abyssalnite_cobblestone.getDefaultState(), 2);
-		ritualBlocks.put(ACBlocks.ethaxium_brick.getDefaultState(), 3);
-		ritualBlocks.put(ACBlocks.dark_ethaxium_brick.getDefaultState(), 3);
+	public static final List<BlockPos> PEDESTAL_POSITIONS = Arrays.asList(
+			new BlockPos(-3, 0, 0), new BlockPos(0, 0, -3),
+			new BlockPos(3, 0, 0), new BlockPos(0, 0, 3),
+			new BlockPos(-2, 0, 2), new BlockPos(-2, 0, -2),
+			new BlockPos(2, 0, 2), new BlockPos(2, 0, -2)
+			);
 
-		altarMeta.put(Blocks.COBBLESTONE.getDefaultState(), 0);
-		altarMeta.put(ACBlocks.darkstone_cobblestone.getDefaultState(), 1);
-		altarMeta.put(ACBlocks.abyssal_cobblestone.getDefaultState(), 2);
-		altarMeta.put(ACBlocks.coralium_cobblestone.getDefaultState(), 3);
-		altarMeta.put(ACBlocks.dreadstone_cobblestone.getDefaultState(), 4);
-		altarMeta.put(ACBlocks.abyssalnite_cobblestone.getDefaultState(), 5);
-		altarMeta.put(ACBlocks.ethaxium_brick.getDefaultState(), 6);
-		altarMeta.put(ACBlocks.dark_ethaxium_brick.getDefaultState(), 7);
+	public static void addAltarTransformation(Supplier<IBlockState> state, IBlockState altar, int bookType) {
+		altars.put(state, altar);
+		bookTypeMappings.put(state, bookType);
+	}
+
+	public static void addPedestalTransformation(Supplier<IBlockState> state, IBlockState pedestal, int bookType) {
+		pedestals.put(state, pedestal);
+		bookTypeMappings.put(state, bookType);
+	}
+
+	private static boolean matches(IBlockState state, int bookType) {
+		Optional<Integer> book = bookTypeMappings.entrySet().stream()
+				.filter(e -> e.getKey().get() == state)
+				.map(e -> e.getValue())
+				.findFirst();
+
+		return book.orElse(-1) == bookType;
+	}
+
+	private static IBlockState getAltar(IBlockState state) {
+		Optional<IBlockState> altar = altars.entrySet().stream()
+				.filter(e -> e.getKey().get() == state)
+				.map(e -> e.getValue())
+				.findFirst();
+		return altar.orElse(Blocks.AIR.getDefaultState());
+	}
+
+	private static IBlockState getPedestal(IBlockState state) {
+		Optional<IBlockState> pedestal = pedestals.entrySet().stream()
+				.filter(e -> e.getKey().get() == state)
+				.map(e -> e.getValue())
+				.findFirst();
+		return pedestal.orElse(Blocks.AIR.getDefaultState());
 	}
 
 	/**
 	 * Checks if an altar can be created
 	 * @param world World object
-	 * @param x X coordinate
-	 * @param y Y coordinate
-	 * @param z Z coordinate
+	 * @param pos Block Position
 	 * @param bookType Level of the current Necronomicon held
 	 * @return True if a Ritual Altar can be constructed, otherwise false
 	 */
 	public static boolean tryAltar(World world, BlockPos pos, int bookType){
 		IBlockState ritualBlock = world.getBlockState(pos);
-		int x = 0;
-		int y = 0;
-		int z = 0;
-		if(ritualBlock != null && ritualBlocks.containsKey(ritualBlock))
-			if(bookType >= ritualBlocks.get(ritualBlock))
-				if(world.getBlockState(pos.add(x -3, y, z)) == ritualBlock &&
-				world.getBlockState(pos.add(x, y, z -3)) == ritualBlock &&
-				world.getBlockState(pos.add(x + 3, y, z)) == ritualBlock &&
-				world.getBlockState(pos.add(x, y, z + 3)) == ritualBlock &&
-				world.getBlockState(pos.add(x -2, y,z + 2)) == ritualBlock &&
-				world.getBlockState(pos.add(x -2, y, z -2)) == ritualBlock &&
-				world.getBlockState(pos.add(x + 2, y, z + 2)) == ritualBlock &&
-				world.getBlockState(pos.add(x + 2, y, z -2)) == ritualBlock)
-					if(!world.isBlockFullCube(pos.add(x -3, y, z -1)) && !world.isBlockFullCube(pos.add(x -3, y, z + 1)) &&
-							!world.isBlockFullCube(pos.add(x -4, y, z)) && !world.isBlockFullCube(pos.add(x -4, y, z -1)) &&
-							!world.isBlockFullCube(pos.add(x -4, y, z + 1)) && !world.isBlockFullCube(pos.add(x -3, y, z -2)) &&
-							!world.isBlockFullCube(pos.add(x -3, y, z -3)) && !world.isBlockFullCube(pos.add(x -2, y, z -3)) &&
-							!world.isBlockFullCube(pos.add(x -1, y, z -3)) && !world.isBlockFullCube(pos.add(x -1, y, z -4)) &&
-							!world.isBlockFullCube(pos.add(x, y, z -4)) && !world.isBlockFullCube(pos.add(x + 1, y, z -4)) &&
-							!world.isBlockFullCube(pos.add(x + 1, y, z -3)) && !world.isBlockFullCube(pos.add(x + 2, y, z -3)) &&
-							!world.isBlockFullCube(pos.add(x + 3, y, z -3)) && !world.isBlockFullCube(pos.add(x + 3, y, z -2)) &&
-							!world.isBlockFullCube(pos.add(x + 3, y, z -1)) && !world.isBlockFullCube(pos.add(x + 4, y, z -1)) &&
-							!world.isBlockFullCube(pos.add(x + 4, y, z)) && !world.isBlockFullCube(pos.add(x + 4, y, z + 1)) &&
-							!world.isBlockFullCube(pos.add(x + 3, y, z + 1)) && !world.isBlockFullCube(pos.add(x + 3, y, z + 2)) &&
-							!world.isBlockFullCube(pos.add(x + 3, y, z + 3)) && !world.isBlockFullCube(pos.add(x + 2, y, z + 3)) &&
-							!world.isBlockFullCube(pos.add(x + 1, y, z + 3)) && !world.isBlockFullCube(pos.add(x + 1, y, z + 4)) &&
-							!world.isBlockFullCube(pos.add(x, y, z + 4)) && !world.isBlockFullCube(pos.add(x -1, y, z + 4)) &&
-							!world.isBlockFullCube(pos.add(x -1, y, z + 3)) && !world.isBlockFullCube(pos.add(x -2, y, z + 3)) &&
-							!world.isBlockFullCube(pos.add(x-3, y, z + 3)) && !world.isBlockFullCube(pos.add(x -3, y, z + 2)) &&
-							!world.isBlockFullCube(pos.add(x-1, y, z + 0)) && !world.isBlockFullCube(pos.add(x + 1, y, z)) &&
-							!world.isBlockFullCube(pos.add(x, y, z -1)) && !world.isBlockFullCube(pos.add(x, y, z + 1)) &&
-							!world.isBlockFullCube(pos.add(x-1, y, z + 1)) && !world.isBlockFullCube(pos.add(x -2, y, z)) &&
-							!world.isBlockFullCube(pos.add(x-2, y, z)) && !world.isBlockFullCube(pos.add(x -2, y, z -1)) &&
-							!world.isBlockFullCube(pos.add(x-1, y, z -1)) && !world.isBlockFullCube(pos.add(x -1, y, z -2)) &&
-							!world.isBlockFullCube(pos.add(x, y, z -2)) && !world.isBlockFullCube(pos.add(x + 1, y, z -2)) &&
-							!world.isBlockFullCube(pos.add(x + 1, y, z -1)) && !world.isBlockFullCube(pos.add(x + 2, y, z -1)) &&
-							!world.isBlockFullCube(pos.add(x + 2, y, z)) && !world.isBlockFullCube(pos.add(x + 2, y, z + 1)) &&
-							!world.isBlockFullCube(pos.add(x + 1, y, z + 1)) && !world.isBlockFullCube(pos.add(x + 1, y, z + 2)) &&
-							!world.isBlockFullCube(pos.add(x, y, z + 2)) && !world.isBlockFullCube(pos.add(x -1, y, z + 2)))
-						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), ritualBlocks.get(ritualBlock))){
+
+		Optional<Integer> book = bookTypeMappings.entrySet().stream()
+				.filter(e -> e.getKey().get() == ritualBlock)
+				.map(e -> e.getValue())
+				.findFirst();
+
+		if(book.isPresent())
+			if(bookType >= book.get())
+				if(PEDESTAL_POSITIONS.stream().allMatch(p -> matches(world.getBlockState(pos.add(p)), book.get())))
+					if(PEDESTAL_POSITIONS.stream().map(p -> pos.add(p)).allMatch(p -> {
+						for(MutableBlockPos p1 : p.getAllInBoxMutable(p.south().west(), p.north().east()))
+							if(world.isBlockFullCube(p1) && !p1.equals(p))
+								return false;
+						return true;
+					}))
+						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), book.get())){
 							if(!world.isRemote)
-								createAltar(world, pos, ritualBlock);
+								createAltar(world, pos);
 							return true;
 						}
 		return false;
@@ -118,41 +115,20 @@ public class RitualUtil {
 	/**
 	 * Creates the altar
 	 * @param world World object
-	 * @param x X coordinate
-	 * @param y Y coordinate
-	 * @param z Z coordinate
-	 * @param block Ritual Block
+	 * @param pos Block Position
 	 */
-	private static void createAltar(World world, BlockPos pos, IBlockState block){
-		if(altarMeta.containsKey(block)){
-			int meta = altarMeta.get(block);
+	private static void createAltar(World world, BlockPos pos){
 
-			world.destroyBlock(pos, false);
-			world.destroyBlock(pos.west(3), false);
-			world.destroyBlock(pos.north(3), false);
-			world.destroyBlock(pos.east(3), false);
-			world.destroyBlock(pos.south(3), false);
-			world.destroyBlock(pos.west(2).south(2), false);
-			world.destroyBlock(pos.west(2).north(2), false);
-			world.destroyBlock(pos.east(2).south(2), false);
-			world.destroyBlock(pos.east(2).north(2), false);
-			world.setBlockState(pos, ACBlocks.ritual_altar.getStateFromMeta(meta), 2);
-			world.setBlockState(pos.west(3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			((IRitualPedestal)world.getTileEntity(pos.west(3))).setAltar(pos);
-			world.setBlockState(pos.north(3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			((IRitualPedestal)world.getTileEntity(pos.north(3))).setAltar(pos);
-			world.setBlockState(pos.east(3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			((IRitualPedestal)world.getTileEntity(pos.east(3))).setAltar(pos);
-			world.setBlockState(pos.south(3), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			((IRitualPedestal)world.getTileEntity(pos.south(3))).setAltar(pos);
-			world.setBlockState(pos.west(2).south(2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			((IRitualPedestal)world.getTileEntity(pos.west(2).south(2))).setAltar(pos);
-			world.setBlockState(pos.west(2).north(2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			((IRitualPedestal)world.getTileEntity(pos.west(2).north(2))).setAltar(pos);
-			world.setBlockState(pos.east(2).south(2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			((IRitualPedestal)world.getTileEntity(pos.east(2).south(2))).setAltar(pos);
-			world.setBlockState(pos.east(2).north(2), ACBlocks.ritual_pedestal.getStateFromMeta(meta), 2);
-			((IRitualPedestal)world.getTileEntity(pos.east(2).north(2))).setAltar(pos);
+		IBlockState altar = world.getBlockState(pos);
+		world.destroyBlock(pos, false);
+		world.setBlockState(pos, getAltar(altar), 2);
+
+		for(BlockPos pos1 : PEDESTAL_POSITIONS) {
+			BlockPos pos2 = pos.add(pos1);
+			IBlockState pedestal = world.getBlockState(pos2);
+			world.destroyBlock(pos2, false);
+			world.setBlockState(pos2, getPedestal(pedestal), 2);
+			((IRitualPedestal) world.getTileEntity(pos2)).setAltar(pos);
 		}
 	}
 

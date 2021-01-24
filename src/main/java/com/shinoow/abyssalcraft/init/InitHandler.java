@@ -207,7 +207,6 @@ public class InitHandler implements ILifeCycleHandler {
 	@SubscribeEvent
 	public void registerBlocks(RegistryEvent.Register<Block> event){
 		event.getRegistry().registerAll(BLOCKS.toArray(new Block[0]));
-		RitualUtil.addBlocks();
 	}
 
 	@SubscribeEvent

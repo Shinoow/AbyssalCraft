@@ -108,10 +108,10 @@ public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 								}
 							else if(state.getBlock() == Blocks.COBBLESTONE_WALL)
 								world.setBlockState(pos1.up(y), ACBlocks.darkstone_cobblestone_wall.getDefaultState(), 2);
-							else if(state == ACBlocks.ritual_altar.getDefaultState())
-								world.setBlockState(pos1.up(y), ACBlocks.ritual_altar.getDefaultState().withProperty(BlockRitualAltar.MATERIAL, BlockRitualAltar.EnumRitualMatType.DARKSTONE_COBBLESTONE), 2);
-							else if(state == ACBlocks.ritual_pedestal.getDefaultState())
-								world.setBlockState(pos1.up(y), ACBlocks.ritual_pedestal.getDefaultState().withProperty(BlockRitualAltar.MATERIAL, BlockRitualAltar.EnumRitualMatType.DARKSTONE_COBBLESTONE), 2);
+							else if(state == ACBlocks.ritual_altar_stone.getDefaultState())
+								world.setBlockState(pos1.up(y), ACBlocks.ritual_altar_darkstone.getDefaultState(), 2);
+							else if(state == ACBlocks.ritual_pedestal_stone.getDefaultState())
+								world.setBlockState(pos1.up(y), ACBlocks.ritual_pedestal_darkstone.getDefaultState(), 2);
 							else if(state.getBlock() == Blocks.STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.SMOOTHBRICK)
 								world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick_slab.getDefaultState().withProperty(BlockSlab.HALF, state.getValue(BlockSlab.HALF)), 2);
 							else if(state.getBlock() == Blocks.STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.COBBLESTONE)

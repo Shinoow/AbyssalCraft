@@ -90,6 +90,22 @@ public class BlockFlatteningDefinitions {
 
 		//version 3 definitions TBD
 
+		BlockRitualAltar.VARIANTS.forEach((type, variant) -> {
+			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("ritualaltar",
+					type.getMeta(),
+					variant,
+					(block, tileEntityNBT) -> block.getDefaultState(),
+					null));
+		});
+		
+		BlockRitualPedestal.VARIANTS.forEach((type, variant) -> {
+			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("ritualpedestal",
+					type.getMeta(),
+					variant,
+					(block, tileEntityNBT) -> block.getDefaultState(),
+					null));
+		});
+		
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
 }

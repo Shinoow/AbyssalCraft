@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -34,6 +35,7 @@ import com.shinoow.abyssalcraft.common.network.client.RitualMessage;
 import com.shinoow.abyssalcraft.common.network.client.RitualStartMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
@@ -207,21 +209,13 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 	private List<IRitualPedestal> getPedestals(World world, BlockPos pos){
 
-		TileEntity ped1 = world.getTileEntity(pos.west(3));
-		TileEntity ped2 = world.getTileEntity(pos.north(3));
-		TileEntity ped3 = world.getTileEntity(pos.east(3));
-		TileEntity ped4 = world.getTileEntity(pos.south(3));
-		TileEntity ped5 = world.getTileEntity(pos.west(2).south(2));
-		TileEntity ped6 = world.getTileEntity(pos.west(2).north(2));
-		TileEntity ped7 = world.getTileEntity(pos.east(2).south(2));
-		TileEntity ped8 = world.getTileEntity(pos.east(2).north(2));
-		if(ped1 instanceof IRitualPedestal && ped2 instanceof IRitualPedestal && ped3 instanceof IRitualPedestal
-				&& ped4 instanceof IRitualPedestal && ped5 instanceof IRitualPedestal && ped6 instanceof IRitualPedestal
-				&& ped7 instanceof IRitualPedestal && ped8 instanceof IRitualPedestal)
-			return ImmutableList.of((IRitualPedestal)ped1, (IRitualPedestal)ped2, (IRitualPedestal)ped3, (IRitualPedestal)ped4,
-					(IRitualPedestal)ped5, (IRitualPedestal)ped6, (IRitualPedestal)ped7, (IRitualPedestal)ped8);
+		List<IRitualPedestal> pedestals = RitualUtil.PEDESTAL_POSITIONS.stream()
+				.map(p -> world.getTileEntity(pos.add(p)))
+				.filter(t -> t instanceof IRitualPedestal)
+				.map(t -> (IRitualPedestal)t)
+				.collect(Collectors.toList());
 
-		return new ArrayList();
+		return pedestals.size() == 8 ? pedestals : new ArrayList<>();
 	}
 
 	@Override

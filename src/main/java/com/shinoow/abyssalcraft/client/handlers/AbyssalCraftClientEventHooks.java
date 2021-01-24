@@ -440,10 +440,10 @@ public class AbyssalCraftClientEventHooks {
 				"tieredenergypedestal_2", "tieredenergypedestal_3"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_sacrificial_altar), makerl("tieredsacrificialaltar_0", "tieredsacrificialaltar_1",
 				"tieredsacrificialaltar_2", "tieredsacrificialaltar_3"));
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_altar), makerl("ritualaltar_0", "ritualaltar_1", "ritualaltar_2", "ritualaltar_3",
-				"ritualaltar_4", "ritualaltar_5", "ritualaltar_6", "ritualaltar_7"));
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_pedestal), makerl("ritualpedestal_0", "ritualpedestal_1", "ritualpedestal_2",
-				"ritualpedestal_3", "ritualpedestal_4", "ritualpedestal_5", "ritualpedestal_6", "ritualpedestal_7"));
+//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_altar), makerl("ritualaltar_0", "ritualaltar_1", "ritualaltar_2", "ritualaltar_3",
+//				"ritualaltar_4", "ritualaltar_5", "ritualaltar_6", "ritualaltar_7"));
+//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_pedestal), makerl("ritualpedestal_0", "ritualpedestal_1", "ritualpedestal_2",
+//				"ritualpedestal_3", "ritualpedestal_4", "ritualpedestal_5", "ritualpedestal_6", "ritualpedestal_7"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_collector), makerl("tieredenergycollector_0", "tieredenergycollector_1",
 				"tieredenergycollector_2", "tieredenergycollector_3"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_container), makerl("tieredenergycontainer_0", "tieredenergycontainer_1",
@@ -865,22 +865,22 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.dark_ethaxium_brick_slab, 0);
 		registerItemRender(BlockHandler.darkethaxiumslab2, 0);
 		registerItemRender(ACBlocks.dark_ethaxium_brick_fence, 0);
-		registerItemRender(ACBlocks.ritual_altar, 0, "ritualaltar_0");
-		registerItemRender(ACBlocks.ritual_altar, 1, "ritualaltar_1");
-		registerItemRender(ACBlocks.ritual_altar, 2, "ritualaltar_2");
-		registerItemRender(ACBlocks.ritual_altar, 3, "ritualaltar_3");
-		registerItemRender(ACBlocks.ritual_altar, 4, "ritualaltar_4");
-		registerItemRender(ACBlocks.ritual_altar, 5, "ritualaltar_5");
-		registerItemRender(ACBlocks.ritual_altar, 6, "ritualaltar_6");
-		registerItemRender(ACBlocks.ritual_altar, 7, "ritualaltar_7");
-		registerItemRender(ACBlocks.ritual_pedestal, 0, "ritualpedestal_0");
-		registerItemRender(ACBlocks.ritual_pedestal, 1, "ritualpedestal_1");
-		registerItemRender(ACBlocks.ritual_pedestal, 2, "ritualpedestal_2");
-		registerItemRender(ACBlocks.ritual_pedestal, 3, "ritualpedestal_3");
-		registerItemRender(ACBlocks.ritual_pedestal, 4, "ritualpedestal_4");
-		registerItemRender(ACBlocks.ritual_pedestal, 5, "ritualpedestal_5");
-		registerItemRender(ACBlocks.ritual_pedestal, 6, "ritualpedestal_6");
-		registerItemRender(ACBlocks.ritual_pedestal, 7, "ritualpedestal_7");
+		registerItemRender(ACBlocks.ritual_altar_stone, 0, "ritualaltar_0");
+		registerItemRender(ACBlocks.ritual_altar_darkstone, 0, "ritualaltar_1");
+		registerItemRender(ACBlocks.ritual_altar_abyssal_stone, 0, "ritualaltar_2");
+		registerItemRender(ACBlocks.ritual_altar_coralium_stone, 0, "ritualaltar_3");
+		registerItemRender(ACBlocks.ritual_altar_dreadstone, 0, "ritualaltar_4");
+		registerItemRender(ACBlocks.ritual_altar_abyssalnite_stone, 0, "ritualaltar_5");
+		registerItemRender(ACBlocks.ritual_altar_ethaxium, 0, "ritualaltar_6");
+		registerItemRender(ACBlocks.ritual_altar_dark_ethaxium, 0, "ritualaltar_7");
+		registerItemRender(ACBlocks.ritual_pedestal_stone, 0, "ritualpedestal_0");
+		registerItemRender(ACBlocks.ritual_pedestal_darkstone, 0, "ritualpedestal_1");
+		registerItemRender(ACBlocks.ritual_pedestal_abyssal_stone, 0, "ritualpedestal_2");
+		registerItemRender(ACBlocks.ritual_pedestal_coralium_stone, 0, "ritualpedestal_3");
+		registerItemRender(ACBlocks.ritual_pedestal_dreadstone, 0, "ritualpedestal_4");
+		registerItemRender(ACBlocks.ritual_pedestal_abyssalnite_stone, 0, "ritualpedestal_5");
+		registerItemRender(ACBlocks.ritual_pedestal_ethaxium, 0, "ritualpedestal_6");
+		registerItemRender(ACBlocks.ritual_pedestal_dark_ethaxium, 0, "ritualpedestal_7");
 		registerItemRender(ACBlocks.shoggoth_ooze, 0);
 		registerItemRender(ACBlocks.shoggoth_biomass, 0);
 		registerItemRender(ACBlocks.energy_pedestal, 0);

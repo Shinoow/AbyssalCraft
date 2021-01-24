@@ -434,8 +434,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(5, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconResources.RITUAL_TUT_3, NecronomiconText.RITUAL_TUT_5),
 				new Page(6, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconText.RITUAL_TUT_6),
 				new Page(7, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconText.RITUAL_TUT_7));
-		addPages("rituals", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.ritual_altar), NecronomiconText.MATERIAL_RITUAL_ALTAR_1),
-				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.ritual_pedestal), NecronomiconText.MATERIAL_RITUAL_PEDESTAL_1),
+		addPages("rituals", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.ritual_altar_stone), NecronomiconText.MATERIAL_RITUAL_ALTAR_1),
+				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.ritual_pedestal_stone), NecronomiconText.MATERIAL_RITUAL_PEDESTAL_1),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.monolith_stone), NecronomiconText.MATERIAL_MONOLITH_STONE_1));
 		addPages("potentialenergy", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.monolith_stone), NecronomiconText.MATERIAL_MONOLITH_STONE_1));
 		addPages("potentialenergy", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACBlocks.energy_pedestal), NecronomiconText.CRAFTING_ENERGY_PEDESTAL_1),

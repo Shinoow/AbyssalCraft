@@ -336,10 +336,10 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 					}
 				else if(state.getBlock() == Blocks.COBBLESTONE_WALL)
 					world.setBlockState(pos1.up(y), ACBlocks.darkstone_cobblestone_wall.getDefaultState());
-				else if(state == ACBlocks.ritual_altar.getDefaultState())
-					world.setBlockState(pos1.up(y), ACBlocks.ritual_altar.getDefaultState().withProperty(BlockRitualAltar.MATERIAL, BlockRitualAltar.EnumRitualMatType.DARKSTONE_COBBLESTONE));
-				else if(state == ACBlocks.ritual_pedestal.getDefaultState())
-					world.setBlockState(pos1.up(y), ACBlocks.ritual_pedestal.getDefaultState().withProperty(BlockRitualAltar.MATERIAL, BlockRitualAltar.EnumRitualMatType.DARKSTONE_COBBLESTONE));
+				else if(state == ACBlocks.ritual_altar_stone.getDefaultState())
+					world.setBlockState(pos1.up(y), ACBlocks.ritual_altar_darkstone.getDefaultState());
+				else if(state == ACBlocks.ritual_pedestal_stone.getDefaultState())
+					world.setBlockState(pos1.up(y), ACBlocks.ritual_pedestal_darkstone.getDefaultState());
 				else if(state.getBlock() == Blocks.STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.SMOOTHBRICK)
 					world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick_slab.getDefaultState().withProperty(BlockSlab.HALF, state.getValue(BlockSlab.HALF)));
 				else if(state.getBlock() == Blocks.STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.COBBLESTONE)
