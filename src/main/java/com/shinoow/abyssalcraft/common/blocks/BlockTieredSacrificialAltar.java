@@ -89,10 +89,10 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 		return false;
 	}
 
-	@Override
-	public int damageDropped (IBlockState state) {
-		return state.getValue(DIMENSION).getMeta();
-	}
+//	@Override
+//	public int damageDropped (IBlockState state) {
+//		return state.getValue(DIMENSION).getMeta();
+//	}
 
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {

@@ -444,8 +444,8 @@ public class AbyssalCraftClientEventHooks {
 //				"ritualaltar_4", "ritualaltar_5", "ritualaltar_6", "ritualaltar_7"));
 //		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_pedestal), makerl("ritualpedestal_0", "ritualpedestal_1", "ritualpedestal_2",
 //				"ritualpedestal_3", "ritualpedestal_4", "ritualpedestal_5", "ritualpedestal_6", "ritualpedestal_7"));
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_collector), makerl("tieredenergycollector_0", "tieredenergycollector_1",
-				"tieredenergycollector_2", "tieredenergycollector_3"));
+//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_collector), makerl("tieredenergycollector_0", "tieredenergycollector_1",
+//				"tieredenergycollector_2", "tieredenergycollector_3"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_container), makerl("tieredenergycontainer_0", "tieredenergycontainer_1",
 				"tieredenergycontainer_2", "tieredenergycontainer_3"));
 
@@ -901,10 +901,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.energy_collector, 0);
 		registerItemRender(ACBlocks.energy_relay, 0);
 		registerItemRender(ACBlocks.energy_container, 0);
-		registerItemRender(ACBlocks.tiered_energy_collector, 0, "tieredenergycollector_0");
-		registerItemRender(ACBlocks.tiered_energy_collector, 1, "tieredenergycollector_1");
-		registerItemRender(ACBlocks.tiered_energy_collector, 2, "tieredenergycollector_2");
-		registerItemRender(ACBlocks.tiered_energy_collector, 3, "tieredenergycollector_3");
+		registerItemRender(ACBlocks.overworld_energy_collector, 0, "tieredenergycollector_0");
+		registerItemRender(ACBlocks.abyssal_wasteland_energy_collector, 0, "tieredenergycollector_1");
+		registerItemRender(ACBlocks.dreadlands_energy_collector, 0, "tieredenergycollector_2");
+		registerItemRender(ACBlocks.omothol_energy_collector, 0, "tieredenergycollector_3");
 		registerItemRender(ACBlocks.tiered_energy_relay, 0, "owenergyrelay");
 		registerItemRender(ACBlocks.tiered_energy_relay, 1, "awenergyrelay");
 		registerItemRender(ACBlocks.tiered_energy_relay, 2, "dlenergyrelay");

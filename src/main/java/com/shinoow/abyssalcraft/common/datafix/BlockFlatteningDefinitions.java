@@ -122,6 +122,14 @@ public class BlockFlatteningDefinitions {
 					null));
 		});
 		
+		BlockTieredEnergyCollector.VARIANTS.forEach((type, variant) -> {
+			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("tieredenergycollector",
+					type.getMeta(),
+					variant,
+					(block, tileEntityNBT) -> block.getDefaultState(),
+					null));
+		});
+		
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
 }

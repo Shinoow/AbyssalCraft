@@ -240,7 +240,11 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.energy_collector = new BlockEnergyCollector();
 		ACBlocks.energy_relay = new BlockEnergyRelay();
 		ACBlocks.energy_container = new BlockEnergyContainer();
-		ACBlocks.tiered_energy_collector = new BlockTieredEnergyCollector();
+//		ACBlocks.tiered_energy_collector = new BlockTieredEnergyCollector();
+		ACBlocks.overworld_energy_collector = new BlockTieredEnergyCollector(EnumDimType.OVERWORLD).setUnlocalizedName("overworld_energy_collector");
+		ACBlocks.abyssal_wasteland_energy_collector = new BlockTieredEnergyCollector(EnumDimType.ABYSSAL_WASTELAND).setUnlocalizedName("abyssal_wasteland_energy_collector");
+		ACBlocks.dreadlands_energy_collector = new BlockTieredEnergyCollector(EnumDimType.DREADLANDS).setUnlocalizedName("dreadlands_energy_collector");
+		ACBlocks.omothol_energy_collector = new BlockTieredEnergyCollector(EnumDimType.OMOTHOL).setUnlocalizedName("omothol_energy_collector");
 		ACBlocks.tiered_energy_relay = new BlockTieredEnergyRelay("tieredenergyrelay");
 		ACBlocks.tiered_energy_container = new BlockTieredEnergyContainer();
 		ACBlocks.abyssal_sand = new BlockAbyssalSand();
@@ -500,7 +504,11 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.energy_collector, new ItemPEContainerBlock(ACBlocks.energy_collector), "energycollector");
 		registerBlock(ACBlocks.energy_relay, new ItemPEContainerBlock(ACBlocks.energy_relay), "energyrelay");
 		registerBlock(ACBlocks.energy_container, new ItemPEContainerBlock(ACBlocks.energy_container), "energycontainer");
-		registerBlock(ACBlocks.tiered_energy_collector, new ItemTieredEnergyCollectorBlock(ACBlocks.tiered_energy_collector), "tieredenergycollector");
+//		registerBlock(ACBlocks.tiered_energy_collector, new ItemTieredEnergyCollectorBlock(ACBlocks.tiered_energy_collector), "tieredenergycollector");
+		registerBlock(ACBlocks.overworld_energy_collector, new ItemPEContainerBlock(ACBlocks.overworld_energy_collector), "overworld_energy_collector");
+		registerBlock(ACBlocks.abyssal_wasteland_energy_collector, new ItemPEContainerBlock(ACBlocks.abyssal_wasteland_energy_collector), "abyssal_wasteland_energy_collector");
+		registerBlock(ACBlocks.dreadlands_energy_collector, new ItemPEContainerBlock(ACBlocks.dreadlands_energy_collector), "dreadlands_energy_collector");
+		registerBlock(ACBlocks.omothol_energy_collector, new ItemPEContainerBlock(ACBlocks.omothol_energy_collector), "omothol_energy_collector");
 		registerBlock(ACBlocks.tiered_energy_relay, new ItemTieredEnergyRelayBlock(ACBlocks.tiered_energy_relay), "tieredenergyrelay");
 		registerBlock(ACBlocks.tiered_energy_container, new ItemTieredEnergyContainerBlock(ACBlocks.tiered_energy_container), "tieredenergycontainer");
 		registerBlock(ACBlocks.abyssal_sand, "abyssalsand");
