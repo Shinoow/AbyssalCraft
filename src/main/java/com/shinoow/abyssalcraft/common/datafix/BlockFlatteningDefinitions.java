@@ -88,7 +88,7 @@ public class BlockFlatteningDefinitions {
 			});
 		});
 
-		//version 3 definitions TBD
+		//version 3 definitions
 
 		BlockRitualAltar.VARIANTS.forEach((type, variant) -> {
 			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("ritualaltar",
@@ -145,6 +145,8 @@ public class BlockFlatteningDefinitions {
 					}));
 		});
 
+		//version 4 definitions TBD
+		
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
 }

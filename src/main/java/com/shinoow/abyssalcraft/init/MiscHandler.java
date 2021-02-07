@@ -345,7 +345,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		StructureHandler.instance().registerStructure(new BasicStructure());
 		StructureHandler.instance().registerStructure(new TotemPoleStructure());
 		StructureHandler.instance().registerStructure(new ArchwayStructure());
-		ModFixs modFixs = FMLCommonHandler.instance().getDataFixer().init(modid, 2);
+		ModFixs modFixs = FMLCommonHandler.instance().getDataFixer().init(modid, 3);
 		modFixs.registerFix(FixTypes.CHUNK, BlockFlatteningDefinitions.createBlockFlattening());
 		ACTabs.tabTools.setRelevantEnchantmentTypes(AbyssalCraftAPI.STAFF_OF_RENDING);
 	}
