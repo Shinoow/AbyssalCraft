@@ -436,8 +436,8 @@ public class AbyssalCraftClientEventHooks {
 		ModelBakery.registerItemVariants(ACItems.antidote, makerl("coralium_antidote", "dread_antidote"));
 		ModelBakery.registerItemVariants(ACItems.configurator_shard, makerl("configurator_shard_0", "configurator_shard_1", "configurator_shard_2", "configurator_shard_3"));
 
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_pedestal), makerl("tieredenergypedestal_0", "tieredenergypedestal_1",
-				"tieredenergypedestal_2", "tieredenergypedestal_3"));
+//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_pedestal), makerl("tieredenergypedestal_0", "tieredenergypedestal_1",
+//				"tieredenergypedestal_2", "tieredenergypedestal_3"));
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_sacrificial_altar), makerl("tieredsacrificialaltar_0", "tieredsacrificialaltar_1",
 				"tieredsacrificialaltar_2", "tieredsacrificialaltar_3"));
 //		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_altar), makerl("ritualaltar_0", "ritualaltar_1", "ritualaltar_2", "ritualaltar_3",
@@ -886,10 +886,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.energy_pedestal, 0);
 		registerItemRender(ACBlocks.monolith_pillar, 0);
 		registerItemRender(ACBlocks.sacrificial_altar, 0);
-		registerItemRender(ACBlocks.tiered_energy_pedestal, 0, "tieredenergypedestal_0");
-		registerItemRender(ACBlocks.tiered_energy_pedestal, 1, "tieredenergypedestal_1");
-		registerItemRender(ACBlocks.tiered_energy_pedestal, 2, "tieredenergypedestal_2");
-		registerItemRender(ACBlocks.tiered_energy_pedestal, 3, "tieredenergypedestal_3");
+		registerItemRender(ACBlocks.overworld_energy_pedestal, 0, "tieredenergypedestal_0");
+		registerItemRender(ACBlocks.abyssal_wasteland_energy_pedestal, 0, "tieredenergypedestal_1");
+		registerItemRender(ACBlocks.dreadlands_energy_pedestal, 0, "tieredenergypedestal_2");
+		registerItemRender(ACBlocks.omothol_energy_pedestal, 0, "tieredenergypedestal_3");
 		registerItemRender(ACBlocks.tiered_sacrificial_altar, 0, "tieredsacrificialaltar_0");
 		registerItemRender(ACBlocks.tiered_sacrificial_altar, 1, "tieredsacrificialaltar_1");
 		registerItemRender(ACBlocks.tiered_sacrificial_altar, 2, "tieredsacrificialaltar_2");

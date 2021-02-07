@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone.EnumCobblestone
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar.EnumRitualMatType;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
+import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.*;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
@@ -215,7 +216,10 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.energy_pedestal = new BlockEnergyPedestal();
 		ACBlocks.monolith_pillar = new BlockMonolithPillar();
 		ACBlocks.sacrificial_altar = new BlockSacrificialAltar();
-		ACBlocks.tiered_energy_pedestal = new BlockTieredEnergyPedestal();
+		ACBlocks.overworld_energy_pedestal = new BlockTieredEnergyPedestal(EnumDimType.OVERWORLD).setUnlocalizedName("overworld_energy_pedestal");
+		ACBlocks.abyssal_wasteland_energy_pedestal = new BlockTieredEnergyPedestal(EnumDimType.ABYSSAL_WASTELAND).setUnlocalizedName("abyssal_wasteland_energy_pedestal");
+		ACBlocks.dreadlands_energy_pedestal = new BlockTieredEnergyPedestal(EnumDimType.DREADLANDS).setUnlocalizedName("dreadlands_energy_pedestal");
+		ACBlocks.omothol_energy_pedestal = new BlockTieredEnergyPedestal(EnumDimType.OMOTHOL).setUnlocalizedName("omothol_energy_pedestal");
 		ACBlocks.tiered_sacrificial_altar = new BlockTieredSacrificialAltar();
 		ACBlocks.jzahar_spawner = new BlockSingleMobSpawner().setUnlocalizedName("jzaharspawner");
 		ACBlocks.minion_of_the_gatekeeper_spawner = new BlockSingleMobSpawner().setUnlocalizedName("gatekeeperminionspawner");
@@ -467,7 +471,11 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.energy_pedestal, new ItemPEContainerBlock(ACBlocks.energy_pedestal), "energypedestal");
 		registerBlock(ACBlocks.monolith_pillar, "monolithpillar");
 		registerBlock(ACBlocks.sacrificial_altar, new ItemPEContainerBlock(ACBlocks.sacrificial_altar), "sacrificialaltar");
-		registerBlock(ACBlocks.tiered_energy_pedestal, new ItemMetadataPEContainerBlock(ACBlocks.tiered_energy_pedestal), "tieredenergypedestal");
+//		registerBlock(ACBlocks.tiered_energy_pedestal, new ItemMetadataPEContainerBlock(ACBlocks.tiered_energy_pedestal), "tieredenergypedestal");
+		registerBlock(ACBlocks.overworld_energy_pedestal, new ItemPEContainerBlock(ACBlocks.overworld_energy_pedestal), "overworld_energy_pedestal");
+		registerBlock(ACBlocks.abyssal_wasteland_energy_pedestal, new ItemPEContainerBlock(ACBlocks.abyssal_wasteland_energy_pedestal), "abyssal_wasteland_energy_pedestal");
+		registerBlock(ACBlocks.dreadlands_energy_pedestal, new ItemPEContainerBlock(ACBlocks.dreadlands_energy_pedestal), "dreadlands_energy_pedestal");
+		registerBlock(ACBlocks.omothol_energy_pedestal, new ItemPEContainerBlock(ACBlocks.omothol_energy_pedestal), "omothol_energy_pedestal");
 		registerBlock(ACBlocks.tiered_sacrificial_altar, new ItemMetadataPEContainerBlock(ACBlocks.tiered_sacrificial_altar), "tieredsacrificialaltar");
 		registerBlock(ACBlocks.jzahar_spawner, "jzaharspawner");
 		registerBlock(ACBlocks.minion_of_the_gatekeeper_spawner, "gatekeeperminionspawner");

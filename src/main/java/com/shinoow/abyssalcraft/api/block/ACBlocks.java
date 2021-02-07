@@ -34,7 +34,6 @@ public class ACBlocks {
 	public static Block dreadstone_cobblestone;
 	public static Block abyssalnite_cobblestone;
 	public static Block coralium_cobblestone;
-	/** Metadata block, 0 = Darkstone Bricks, 1 = Chiseled Darkstone Bricks, 2 = Cracked Darkstone Bricks */
 	public static Block darkstone_brick;
 	public static Block chiseled_darkstone_brick;
 	public static Block cracked_darkstone_brick;
@@ -47,7 +46,6 @@ public class ACBlocks {
 	public static Block darklands_oak_wood;
 	public static Block darklands_oak_wood_2;
 	public static Block darklands_oak_sapling;
-	/** Metadata block, 0 = Abyssal Stone Bricks, 1 = Chiseled Abyssal Stone Bricks, 2 = Cracked Abyssal Stone Bricks */
 	public static Block abyssal_stone_brick;
 	public static Block chiseled_abyssal_stone_brick;
 	public static Block cracked_abyssal_stone_brick;
@@ -83,11 +81,9 @@ public class ACBlocks {
 	public static Block darklands_oak_fence;
 	public static Block dreadlands_abyssalnite_ore;
 	public static Block dreaded_abyssalnite_ore;
-	/** Metadata block, 0 = Dreadstone Bricks, 1 = Chiseled Dreadstone Bricks, 2 = Cracked Dreadstone Bricks */
 	public static Block dreadstone_brick;
 	public static Block chiseled_dreadstone_brick;
 	public static Block cracked_dreadstone_brick;
-	/** Metadata block, 0 = Abyssalnite Stone Bricks, 1 = Chiseled Abyssalnite Stone Bricks, 2 = Cracked Abyssalnite Stone Bricks */
 	public static Block abyssalnite_stone_brick;
 	public static Block chiseled_abyssalnite_stone_brick;
 	public static Block cracked_abyssalnite_stone_brick;
@@ -107,7 +103,6 @@ public class ACBlocks {
 	public static Block abyssalnite_stone_brick_fence;
 	public static Block abyssalnite_stone_brick_slab;
 	public static Block liquid_antimatter;
-	/** Metadata block, 0 = Coralium Brick, 1 = Chiseled Coralium Brick, 2 = Cracked Coralium Brick */
 	public static Block coralium_stone_brick;
 	public static Block chiseled_coralium_stone_brick;
 	public static Block cracked_coralium_stone_brick;
@@ -135,7 +130,6 @@ public class ACBlocks {
 	public static Block pearlescent_coralium_ore;
 	public static Block liquified_coralium_ore;
 	public static Block solid_lava;
-	/** Metadata block, 0 = Ethaxium Brick, 1 = Chiseled Ethaxium Brick, 2 = Cracked Ethaxium Brick */
 	public static Block ethaxium_brick;
 	public static Block chiseled_ethaxium_brick;
 	public static Block cracked_ethaxium_brick;
@@ -145,7 +139,6 @@ public class ACBlocks {
 	public static Block ethaxium_brick_fence;
 	public static Block engraver;
 	public static Block materializer;
-	/** Metadata block, 0 = Dark Ethaxium Brick, 1 = Chiseled Dark Ethaxium Brick, 2 = Cracked Dark Ethaxium Brick */
 	public static Block dark_ethaxium_brick;
 	public static Block chiseled_dark_ethaxium_brick;
 	public static Block cracked_dark_ethaxium_brick;
@@ -182,7 +175,7 @@ public class ACBlocks {
 	public static Block monolith_pillar;
 	public static Block sacrificial_altar;
 	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
-	public static Block tiered_energy_pedestal;
+//	public static Block tiered_energy_pedestal;
 	public static Block overworld_energy_pedestal;
 	public static Block abyssal_wasteland_energy_pedestal;
 	public static Block dreadlands_energy_pedestal;

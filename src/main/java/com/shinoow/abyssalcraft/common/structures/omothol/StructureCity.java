@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
@@ -221,8 +222,7 @@ public class StructureCity extends WorldGenerator {
 					}
 				} else worldIn.setBlockToAir(entry.getKey());
 			} else if(entry.getValue().equals("pedestal")) {
-				int meta = rand.nextInt(4);
-				worldIn.setBlockState(entry.getKey(), ACBlocks.tiered_energy_pedestal.getStateFromMeta(meta));
+				worldIn.setBlockState(entry.getKey(), getPedestal(rand));
 			}
 
 		return true;
@@ -267,6 +267,22 @@ public class StructureCity extends WorldGenerator {
 			return ACLoot.CHEST_OMOTHOL_LIBRARY;
 		default:
 			return ACLoot.CHEST_OMOTHOL_HOUSE;
+		}
+	}
+	
+	private IBlockState getPedestal(Random rand)
+	{
+		switch(rand.nextInt(4)) {
+		case 0:
+			return ACBlocks.overworld_energy_pedestal.getDefaultState();
+		case 1:
+			return ACBlocks.abyssal_wasteland_energy_pedestal.getDefaultState();
+		case 2:
+			return ACBlocks.dreadlands_energy_pedestal.getDefaultState();
+		case 3:
+			return ACBlocks.omothol_energy_pedestal.getDefaultState();
+		default:
+			return getPedestal(rand);
 		}
 	}
 }

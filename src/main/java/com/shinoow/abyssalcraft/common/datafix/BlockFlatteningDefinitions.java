@@ -106,6 +106,14 @@ public class BlockFlatteningDefinitions {
 					null));
 		});
 		
+		BlockTieredEnergyPedestal.VARIANTS.forEach((type, variant) -> {
+			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("tieredenergypedestal",
+					type.getMeta(),
+					variant,
+					(block, tileEntityNBT) -> block.getDefaultState(),
+					null));
+		});
+		
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
 }
