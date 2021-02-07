@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyContainer;
+
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityTieredEnergyContainer extends TileEntityEnergyContainer {
@@ -18,7 +20,8 @@ public class TileEntityTieredEnergyContainer extends TileEntityEnergyContainer {
 	@Override
 	public int getMaxEnergy() {
 		int base = 10000;
-		switch(getBlockMetadata()){
+		int meta = ((BlockTieredEnergyContainer)getBlockType()).TYPE.getMeta();
+		switch(meta){
 		case 0:
 			return base * 2;
 		case 1:

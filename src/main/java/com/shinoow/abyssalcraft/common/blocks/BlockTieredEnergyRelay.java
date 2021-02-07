@@ -57,6 +57,7 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabDecoration);
 		setHarvestLevel("pickaxe", 0);
+		TYPE = type;
 		VARIANTS.put(type, this);
 	}
 

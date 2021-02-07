@@ -446,8 +446,8 @@ public class AbyssalCraftClientEventHooks {
 //				"ritualpedestal_3", "ritualpedestal_4", "ritualpedestal_5", "ritualpedestal_6", "ritualpedestal_7"));
 //		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_collector), makerl("tieredenergycollector_0", "tieredenergycollector_1",
 //				"tieredenergycollector_2", "tieredenergycollector_3"));
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_container), makerl("tieredenergycontainer_0", "tieredenergycontainer_1",
-				"tieredenergycontainer_2", "tieredenergycontainer_3"));
+//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_container), makerl("tieredenergycontainer_0", "tieredenergycontainer_1",
+//				"tieredenergycontainer_2", "tieredenergycontainer_3"));
 
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
 		registerFluidModel(ACBlocks.liquid_antimatter, "anti");
@@ -909,10 +909,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.abyssal_wasteland_energy_relay, 0, "awenergyrelay");
 		registerItemRender(ACBlocks.dreadlands_energy_relay, 0, "dlenergyrelay");
 		registerItemRender(ACBlocks.omothol_energy_relay, 0, "omtenergyrelay");
-		registerItemRender(ACBlocks.tiered_energy_container, 0, "tieredenergycontainer_0");
-		registerItemRender(ACBlocks.tiered_energy_container, 1, "tieredenergycontainer_1");
-		registerItemRender(ACBlocks.tiered_energy_container, 2, "tieredenergycontainer_2");
-		registerItemRender(ACBlocks.tiered_energy_container, 3, "tieredenergycontainer_3");
+		registerItemRender(ACBlocks.overworld_energy_container, 0, "tieredenergycontainer_0");
+		registerItemRender(ACBlocks.abyssal_wasteland_energy_container, 0, "tieredenergycontainer_1");
+		registerItemRender(ACBlocks.dreadlands_energy_container, 0, "tieredenergycontainer_2");
+		registerItemRender(ACBlocks.omothol_energy_container, 0, "tieredenergycontainer_3");
 		registerItemRender(ACBlocks.abyssal_sand, 0);
 		registerItemRender(ACBlocks.fused_abyssal_sand, 0);
 		registerItemRender(ACBlocks.abyssal_sand_glass, 0);

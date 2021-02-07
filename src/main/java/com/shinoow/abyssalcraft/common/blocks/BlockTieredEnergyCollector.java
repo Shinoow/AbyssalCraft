@@ -58,6 +58,7 @@ public class BlockTieredEnergyCollector extends BlockContainer {
 		setCreativeTab(ACTabs.tabDecoration);
 //		setDefaultState(blockState.getBaseState().withProperty(DIMENSION, EnumDimType.OVERWORLD));
 		setHarvestLevel("pickaxe", 0);
+		TYPE = type;
 		VARIANTS.put(type, this);
 	}
 
@@ -115,7 +116,7 @@ public class BlockTieredEnergyCollector extends BlockContainer {
 	{
 		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("PotEnergy")){
 			TileEntity tile = worldIn.getTileEntity(pos);
-			if(tile != null && tile instanceof TileEntityTieredEnergyCollector)
+			if(tile instanceof TileEntityTieredEnergyCollector)
 				((TileEntityTieredEnergyCollector)tile).addEnergy(stack.getTagCompound().getFloat("PotEnergy"));
 		}
 	}
