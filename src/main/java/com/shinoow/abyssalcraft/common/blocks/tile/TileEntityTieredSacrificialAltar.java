@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import com.shinoow.abyssalcraft.common.blocks.BlockTieredSacrificialAltar;
+
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityTieredSacrificialAltar extends TileEntitySacrificialAltar {
@@ -18,18 +20,8 @@ public class TileEntityTieredSacrificialAltar extends TileEntitySacrificialAltar
 	@Override
 	public int getMaxEnergy() {
 		int base = 5000;
-		switch(getBlockMetadata()){
-		case 0:
-			return (int) (base * 1.5);
-		case 1:
-			return base * 2;
-		case 2:
-			return (int) (base * 2.5);
-		case 3:
-			return base * 3;
-		default:
-			return base;
-		}
+
+		return (int) (base * (1.5 + 0.5 * ((BlockTieredSacrificialAltar)getBlockType()).TYPE.getMeta()));
 	}
 
 	@Override

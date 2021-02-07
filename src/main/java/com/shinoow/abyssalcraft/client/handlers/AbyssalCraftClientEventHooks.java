@@ -438,8 +438,8 @@ public class AbyssalCraftClientEventHooks {
 
 //		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_pedestal), makerl("tieredenergypedestal_0", "tieredenergypedestal_1",
 //				"tieredenergypedestal_2", "tieredenergypedestal_3"));
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_sacrificial_altar), makerl("tieredsacrificialaltar_0", "tieredsacrificialaltar_1",
-				"tieredsacrificialaltar_2", "tieredsacrificialaltar_3"));
+//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_sacrificial_altar), makerl("tieredsacrificialaltar_0", "tieredsacrificialaltar_1",
+//				"tieredsacrificialaltar_2", "tieredsacrificialaltar_3"));
 //		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_altar), makerl("ritualaltar_0", "ritualaltar_1", "ritualaltar_2", "ritualaltar_3",
 //				"ritualaltar_4", "ritualaltar_5", "ritualaltar_6", "ritualaltar_7"));
 //		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_pedestal), makerl("ritualpedestal_0", "ritualpedestal_1", "ritualpedestal_2",
@@ -890,10 +890,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.abyssal_wasteland_energy_pedestal, 0, "tieredenergypedestal_1");
 		registerItemRender(ACBlocks.dreadlands_energy_pedestal, 0, "tieredenergypedestal_2");
 		registerItemRender(ACBlocks.omothol_energy_pedestal, 0, "tieredenergypedestal_3");
-		registerItemRender(ACBlocks.tiered_sacrificial_altar, 0, "tieredsacrificialaltar_0");
-		registerItemRender(ACBlocks.tiered_sacrificial_altar, 1, "tieredsacrificialaltar_1");
-		registerItemRender(ACBlocks.tiered_sacrificial_altar, 2, "tieredsacrificialaltar_2");
-		registerItemRender(ACBlocks.tiered_sacrificial_altar, 3, "tieredsacrificialaltar_3");
+		registerItemRender(ACBlocks.overworld_sacrificial_altar, 0, "tieredsacrificialaltar_0");
+		registerItemRender(ACBlocks.abyssal_wasteland_sacrificial_altar, 0, "tieredsacrificialaltar_1");
+		registerItemRender(ACBlocks.dreadlands_sacrificial_altar, 0, "tieredsacrificialaltar_2");
+		registerItemRender(ACBlocks.omothol_sacrificial_altar, 0, "tieredsacrificialaltar_3");
 		registerItemRender(ACBlocks.minion_of_the_gatekeeper_spawner, 0);
 		registerItemRender(ACBlocks.mimic_fire, 0);
 		registerItemRenders(ACBlocks.crystal_cluster, EnumCrystalType.values().length);

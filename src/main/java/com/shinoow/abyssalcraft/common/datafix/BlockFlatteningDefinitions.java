@@ -114,6 +114,14 @@ public class BlockFlatteningDefinitions {
 					null));
 		});
 		
+		BlockTieredSacrificialAltar.VARIANTS.forEach((type, variant) -> {
+			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("tieredsacrificialaltar",
+					type.getMeta(),
+					variant,
+					(block, tileEntityNBT) -> block.getDefaultState(),
+					null));
+		});
+		
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
 }

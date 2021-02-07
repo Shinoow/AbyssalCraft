@@ -42,6 +42,7 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 	@Override
 	public int getMaxEnergy(ItemStack stack) {
 		Block block = Block.getBlockFromItem(stack.getItem());
+		//TODO add some hook to the blocks where this value is fetched from
 		if(block == ACBlocks.energy_pedestal || block == ACBlocks.sacrificial_altar || block == ACBlocks.rending_pedestal)
 			return 5000;
 		else if(block == ACBlocks.energy_relay)

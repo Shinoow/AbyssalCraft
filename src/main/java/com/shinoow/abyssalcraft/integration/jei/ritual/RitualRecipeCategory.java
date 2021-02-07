@@ -104,7 +104,6 @@ public class RitualRecipeCategory implements IRecipeCategory {
 
 	@Override
 	public IDrawable getIcon() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

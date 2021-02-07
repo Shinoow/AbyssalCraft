@@ -181,7 +181,7 @@ public class ACBlocks {
 	public static Block dreadlands_energy_pedestal;
 	public static Block omothol_energy_pedestal;
 	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
-	public static Block tiered_sacrificial_altar;
+//	public static Block tiered_sacrificial_altar;
 	public static Block overworld_sacrificial_altar;
 	public static Block abyssal_wasteland_sacrificial_altar;
 	public static Block dreadlands_sacrificial_altar;

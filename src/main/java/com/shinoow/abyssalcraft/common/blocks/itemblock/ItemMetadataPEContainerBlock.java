@@ -19,6 +19,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+/**
+ * @deprecated should be removed post-flattening
+ *
+ */
+@Deprecated
 public class ItemMetadataPEContainerBlock extends ItemBlockAC implements IEnergyContainerItem {
 
 	private static final String[] subNames = {
@@ -85,7 +90,8 @@ public class ItemMetadataPEContainerBlock extends ItemBlockAC implements IEnergy
 
 	@Override
 	public boolean canAcceptPE(ItemStack stack) {
-		return Block.getBlockFromItem(stack.getItem()) != ACBlocks.tiered_sacrificial_altar && getContainedEnergy(stack) < getMaxEnergy(stack);
+		// Block.getBlockFromItem(stack.getItem()) != ACBlocks.tiered_sacrificial_altar &&
+		return getContainedEnergy(stack) < getMaxEnergy(stack);
 	}
 
 	@Override
