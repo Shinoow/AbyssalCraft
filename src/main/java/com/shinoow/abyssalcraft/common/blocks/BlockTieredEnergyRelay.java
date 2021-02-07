@@ -13,13 +13,16 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import static com.shinoow.abyssalcraft.common.blocks.BlockEnergyRelay.FACING;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredEnergyRelay;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -41,22 +44,26 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 
 	public static final PropertyEnum<EnumDimType> DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
 
-	public BlockTieredEnergyRelay(String name) {
+	public static final Map<EnumDimType, Block> VARIANTS = new HashMap<>();
+
+	public EnumDimType TYPE;
+
+	public BlockTieredEnergyRelay(EnumDimType type) {
 		super(Material.ROCK);
-		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(DIMENSION, EnumDimType.OVERWORLD));
-		setUnlocalizedName(name);
+		//		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(DIMENSION, EnumDimType.OVERWORLD));
+		//		setUnlocalizedName("tieredenergyrelay");
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabDecoration);
 		setHarvestLevel("pickaxe", 0);
+		VARIANTS.put(type, this);
 	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		IBlockState realstate = getActualState(state, source, pos);
-		EnumFacing enumfacing = realstate.getValue(FACING);
+		EnumFacing enumfacing = state.getValue(FACING);
 		switch (enumfacing)
 		{
 		case EAST:
@@ -76,13 +83,13 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 		}
 	}
 
-	@Override
-	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-		par3List.add(new ItemStack(this, 1, 0));
-		par3List.add(new ItemStack(this, 1, 1));
-		par3List.add(new ItemStack(this, 1, 2));
-		par3List.add(new ItemStack(this, 1, 3));
-	}
+	//	@Override
+	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+	//		par3List.add(new ItemStack(this, 1, 0));
+	//		par3List.add(new ItemStack(this, 1, 1));
+	//		par3List.add(new ItemStack(this, 1, 2));
+	//		par3List.add(new ItemStack(this, 1, 3));
+	//	}
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state){
@@ -95,10 +102,10 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 		return false;
 	}
 
-	@Override
-	public int damageDropped (IBlockState state) {
-		return state.getValue(DIMENSION).getMeta();
-	}
+	//	@Override
+	//	public int damageDropped (IBlockState state) {
+	//		return state.getValue(DIMENSION).getMeta();
+	//	}
 
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
@@ -116,10 +123,9 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		TileEntity tile = worldIn.getTileEntity(pos);
-		if(tile instanceof TileEntityTieredEnergyRelay){
-			((TileEntityTieredEnergyRelay) tile).setFacing(state.getValue(FACING).getIndex());
-			if(stack.hasTagCompound() && stack.getTagCompound().hasKey("PotEnergy"))
+		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("PotEnergy")) {
+			TileEntity tile = worldIn.getTileEntity(pos);
+			if(tile instanceof TileEntityTieredEnergyRelay)
 				((TileEntityTieredEnergyRelay)tile).addEnergy(stack.getTagCompound().getFloat("PotEnergy"));
 		}
 	}
@@ -133,20 +139,14 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
 	{
-		return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING, facing).withProperty(DIMENSION, EnumDimType.byMetadata(meta));
+		return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(FACING, facing);
 	}
 
 	@Override
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, EnumFacing side, float par7, float par8, float par9) {
 		if(!par1World.isRemote) {
 			TileEntity tileentity = par1World.getTileEntity(pos);
-			EnumFacing facing = state.getValue(FACING);
-			if(tileentity instanceof TileEntityTieredEnergyRelay) {
-				facing = EnumFacing.getFront(((TileEntityTieredEnergyRelay) tileentity).getFacing());
-				facing = EnumFacing.getFront(facing.ordinal() + 1);
-				((TileEntityTieredEnergyRelay) tileentity).setFacing(facing.getIndex());
-			}
-			par1World.setBlockState(pos, state.withProperty(FACING, facing), 3);
+			par1World.setBlockState(pos, state.cycleProperty(FACING), 3);
 			if(tileentity != null) {
 				tileentity.validate();
 				par1World.setTileEntity(pos, tileentity);
@@ -155,17 +155,17 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 		return true;
 	}
 
-	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-	{
-		EnumFacing facing = EnumFacing.NORTH;
-
-		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
-		if(tile instanceof TileEntityTieredEnergyRelay)
-			facing = EnumFacing.getFront(((TileEntityTieredEnergyRelay) tile).getFacing());
-
-		return state.withProperty(FACING, facing);
-	}
+	//	@Override
+	//	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	//	{
+	//		EnumFacing facing = EnumFacing.NORTH;
+	//
+	//		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
+	//		if(tile instanceof TileEntityTieredEnergyRelay)
+	//			facing = EnumFacing.getFront(((TileEntityTieredEnergyRelay) tile).getFacing());
+	//
+	//		return state.withProperty(FACING, facing);
+	//	}
 
 	/**
 	 * Convert the given metadata into a BlockState for this Block
@@ -173,7 +173,9 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(DIMENSION, EnumDimType.byMetadata(meta));
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+		return getDefaultState().withProperty(FACING, enumfacing);
 	}
 
 	/**
@@ -182,7 +184,7 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return state.getValue(DIMENSION).getMeta();
+		return state.getValue(FACING).getIndex();
 	}
 
 	@Override
@@ -194,6 +196,6 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer.Builder(this).add(FACING).add(DIMENSION).build();
+		return new BlockStateContainer.Builder(this).add(FACING).build();
 	}
 }

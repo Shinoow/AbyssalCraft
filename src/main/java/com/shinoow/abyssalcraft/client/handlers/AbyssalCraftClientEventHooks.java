@@ -480,30 +480,30 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.tiered_energy_relay, new StateMapperBase(){
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				String stuff = "abyssalcraft:";
-				switch(state.getValue(BlockTieredEnergyPedestal.DIMENSION)){
-				case ABYSSAL_WASTELAND:
-					stuff+="awenergyrelay";
-					break;
-				case DREADLANDS:
-					stuff+="dlenergyrelay";
-					break;
-				case OMOTHOL:
-					stuff+="omtenergyrelay";
-					break;
-				case OVERWORLD:
-					stuff+="owenergyrelay";
-					break;
-				default:
-					break;
-				}
-				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
-				map.remove(BlockTieredEnergyPedestal.DIMENSION);
-				return new ModelResourceLocation(stuff, getPropertyString(map));
-			}});
+//		ModelLoader.setCustomStateMapper(ACBlocks.tiered_energy_relay, new StateMapperBase(){
+//			@Override
+//			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+//				String stuff = "abyssalcraft:";
+//				switch(state.getValue(BlockTieredEnergyPedestal.DIMENSION)){
+//				case ABYSSAL_WASTELAND:
+//					stuff+="awenergyrelay";
+//					break;
+//				case DREADLANDS:
+//					stuff+="dlenergyrelay";
+//					break;
+//				case OMOTHOL:
+//					stuff+="omtenergyrelay";
+//					break;
+//				case OVERWORLD:
+//					stuff+="owenergyrelay";
+//					break;
+//				default:
+//					break;
+//				}
+//				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
+//				map.remove(BlockTieredEnergyPedestal.DIMENSION);
+//				return new ModelResourceLocation(stuff, getPropertyString(map));
+//			}});
 
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
@@ -905,10 +905,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.abyssal_wasteland_energy_collector, 0, "tieredenergycollector_1");
 		registerItemRender(ACBlocks.dreadlands_energy_collector, 0, "tieredenergycollector_2");
 		registerItemRender(ACBlocks.omothol_energy_collector, 0, "tieredenergycollector_3");
-		registerItemRender(ACBlocks.tiered_energy_relay, 0, "owenergyrelay");
-		registerItemRender(ACBlocks.tiered_energy_relay, 1, "awenergyrelay");
-		registerItemRender(ACBlocks.tiered_energy_relay, 2, "dlenergyrelay");
-		registerItemRender(ACBlocks.tiered_energy_relay, 3, "omtenergyrelay");
+		registerItemRender(ACBlocks.overworld_energy_relay, 0, "owenergyrelay");
+		registerItemRender(ACBlocks.abyssal_wasteland_energy_relay, 0, "awenergyrelay");
+		registerItemRender(ACBlocks.dreadlands_energy_relay, 0, "dlenergyrelay");
+		registerItemRender(ACBlocks.omothol_energy_relay, 0, "omtenergyrelay");
 		registerItemRender(ACBlocks.tiered_energy_container, 0, "tieredenergycontainer_0");
 		registerItemRender(ACBlocks.tiered_energy_container, 1, "tieredenergycontainer_1");
 		registerItemRender(ACBlocks.tiered_energy_container, 2, "tieredenergycontainer_2");

@@ -109,7 +109,7 @@ public class BlockEnergyRelay extends BlockContainer {
 	{
 		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("PotEnergy")){
 			TileEntity tile = worldIn.getTileEntity(pos);
-			if(tile != null && tile instanceof TileEntityEnergyRelay)
+			if(tile instanceof TileEntityEnergyRelay)
 				((TileEntityEnergyRelay)tile).addEnergy(stack.getTagCompound().getFloat("PotEnergy"));
 		}
 	}

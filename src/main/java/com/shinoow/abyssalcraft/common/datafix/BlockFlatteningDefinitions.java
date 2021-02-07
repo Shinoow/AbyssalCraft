@@ -130,6 +130,21 @@ public class BlockFlatteningDefinitions {
 					null));
 		});
 		
+		BlockTieredEnergyRelay.VARIANTS.forEach((type, variant) -> {
+			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("tieredenergyrelay",
+					type.getMeta(),
+					variant,
+					(block, tileEntityNBT) -> {
+						final int facingIndex = Objects.requireNonNull(tileEntityNBT).getInteger("Facing");
+						final EnumFacing facing = EnumFacing.getFront(facingIndex);
+						return block.getDefaultState().withProperty(BlockEnergyRelay.FACING, facing);
+					},
+					tileEntityNBT -> {
+						tileEntityNBT.removeTag("Facing");
+						return BlockFlattening.TileEntityAction.KEEP;
+					}));
+		});
+		
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
 }

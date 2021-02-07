@@ -30,6 +30,7 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
+		//TODO handling for tiered energy relays
 		if(Block.getBlockFromItem(is.getItem()) == ACBlocks.energy_relay)
 			l.add("Range: 4 Blocks");
 	}
@@ -66,6 +67,7 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 
 	@Override
 	public boolean canAcceptPE(ItemStack stack) {
+		//TODO handling for tiered sacrificial altar as well
 		return Block.getBlockFromItem(stack.getItem()) != ACBlocks.sacrificial_altar && getContainedEnergy(stack) < getMaxEnergy(stack);
 	}
 

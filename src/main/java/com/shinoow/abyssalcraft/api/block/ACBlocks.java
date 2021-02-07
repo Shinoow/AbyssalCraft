@@ -210,7 +210,7 @@ public class ACBlocks {
 	public static Block dreadlands_energy_collector;
 	public static Block omothol_energy_collector;
 	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
-	public static Block tiered_energy_relay;
+//	public static Block tiered_energy_relay;
 	public static Block overworld_energy_relay;
 	public static Block abyssal_wasteland_energy_relay;
 	public static Block dreadlands_energy_relay;
