@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRendingPedestal;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -39,7 +40,7 @@ import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRendingPedestal extends BlockContainer {
+public class BlockRendingPedestal extends BlockContainer implements IEnergyBlock {
 
 	public BlockRendingPedestal() {
 		super(Material.ROCK);
@@ -145,5 +146,16 @@ public class BlockRendingPedestal extends BlockContainer {
 	public BlockRenderLayer getBlockLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
+	public int getMaxEnergy(ItemStack stack) {
+
+		return 5000;
+	}
+
+	@Override
+	public boolean canTransferPE() {
+		return false;
 	}
 }

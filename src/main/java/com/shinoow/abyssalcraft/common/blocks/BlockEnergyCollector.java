@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyCollector;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
@@ -33,7 +34,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockEnergyCollector extends BlockContainer {
+public class BlockEnergyCollector extends BlockContainer implements IEnergyBlock {
 
 	public BlockEnergyCollector() {
 		super(Material.ROCK);
@@ -102,5 +103,11 @@ public class BlockEnergyCollector extends BlockContainer {
 	public BlockRenderLayer getBlockLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
+	public int getMaxEnergy(ItemStack stack) {
+
+		return 1000;
 	}
 }

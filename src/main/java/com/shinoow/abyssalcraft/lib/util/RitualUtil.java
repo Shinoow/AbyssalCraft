@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.lib.util;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.function.Supplier;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
@@ -58,7 +59,7 @@ public class RitualUtil {
 	private static boolean matches(IBlockState state, int bookType) {
 		Optional<Integer> book = bookTypeMappings.entrySet().stream()
 				.filter(e -> e.getKey().get() == state)
-				.map(e -> e.getValue())
+				.map(Entry::getValue)
 				.findFirst();
 
 		return book.orElse(-1) == bookType;
@@ -67,7 +68,7 @@ public class RitualUtil {
 	private static IBlockState getAltar(IBlockState state) {
 		Optional<IBlockState> altar = altars.entrySet().stream()
 				.filter(e -> e.getKey().get() == state)
-				.map(e -> e.getValue())
+				.map(Entry::getValue)
 				.findFirst();
 		return altar.orElse(Blocks.AIR.getDefaultState());
 	}
@@ -75,7 +76,7 @@ public class RitualUtil {
 	private static IBlockState getPedestal(IBlockState state) {
 		Optional<IBlockState> pedestal = pedestals.entrySet().stream()
 				.filter(e -> e.getKey().get() == state)
-				.map(e -> e.getValue())
+				.map(Entry::getValue)
 				.findFirst();
 		return pedestal.orElse(Blocks.AIR.getDefaultState());
 	}
@@ -92,14 +93,14 @@ public class RitualUtil {
 
 		Optional<Integer> book = bookTypeMappings.entrySet().stream()
 				.filter(e -> e.getKey().get() == ritualBlock)
-				.map(e -> e.getValue())
+				.map(Entry::getValue)
 				.findFirst();
 
 		if(book.isPresent())
 			if(bookType >= book.get())
 				if(PEDESTAL_POSITIONS.stream().allMatch(p -> matches(world.getBlockState(pos.add(p)), book.get())))
 					if(PEDESTAL_POSITIONS.stream().map(p -> pos.add(p)).allMatch(p -> {
-						for(MutableBlockPos p1 : p.getAllInBoxMutable(p.south().west(), p.north().east()))
+						for(MutableBlockPos p1 : BlockPos.getAllInBoxMutable(p.south().west(), p.north().east()))
 							if(world.isBlockFullCube(p1) && !p1.equals(p))
 								return false;
 						return true;

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.ImmutableList;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;

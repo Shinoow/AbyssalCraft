@@ -37,7 +37,6 @@ import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

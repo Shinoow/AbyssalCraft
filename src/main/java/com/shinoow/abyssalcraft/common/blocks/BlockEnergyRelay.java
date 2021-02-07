@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.energy.IEnergyRelayBlock;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyRelay;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
@@ -35,7 +36,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockEnergyRelay extends BlockContainer {
+public class BlockEnergyRelay extends BlockContainer implements IEnergyRelayBlock {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
@@ -164,5 +165,15 @@ public class BlockEnergyRelay extends BlockContainer {
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer.Builder(this).add(FACING).build();
+	}
+
+	@Override
+	public int getMaxEnergy(ItemStack stack) {
+		return 500;
+	}
+
+	@Override
+	public int getRange() {
+		return 4;
 	}
 }

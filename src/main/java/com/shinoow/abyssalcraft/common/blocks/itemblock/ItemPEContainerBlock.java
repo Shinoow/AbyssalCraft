@@ -13,9 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
-import com.shinoow.abyssalcraft.api.energy.PEUtils;
+import com.shinoow.abyssalcraft.api.energy.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -30,9 +28,9 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
-		//TODO handling for tiered energy relays
-		if(Block.getBlockFromItem(is.getItem()) == ACBlocks.energy_relay)
-			l.add("Range: 4 Blocks");
+		Block block = Block.getBlockFromItem(is.getItem());
+		if(block instanceof IEnergyRelayBlock)
+			l.add(String.format("Range: %d Blocks", ((IEnergyRelayBlock) block).getRange()));
 	}
 
 	@Override
@@ -43,15 +41,8 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 	@Override
 	public int getMaxEnergy(ItemStack stack) {
 		Block block = Block.getBlockFromItem(stack.getItem());
-		//TODO add some hook to the blocks where this value is fetched from
-		if(block == ACBlocks.energy_pedestal || block == ACBlocks.sacrificial_altar || block == ACBlocks.rending_pedestal)
-			return 5000;
-		else if(block == ACBlocks.energy_relay)
-			return 500;
-		else if(block == ACBlocks.energy_collector)
-			return 1000;
-		else if(block == ACBlocks.energy_container)
-			return 10000;
+		if(block instanceof IEnergyBlock)
+			return ((IEnergyBlock) block).getMaxEnergy(stack);
 		return 0;
 	}
 
@@ -67,12 +58,13 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 
 	@Override
 	public boolean canAcceptPE(ItemStack stack) {
-		//TODO handling for tiered sacrificial altar as well
-		return Block.getBlockFromItem(stack.getItem()) != ACBlocks.sacrificial_altar && getContainedEnergy(stack) < getMaxEnergy(stack);
+		Block block = Block.getBlockFromItem(stack.getItem());
+		return block instanceof IEnergyBlock && ((IEnergyBlock) block).canAcceptPE() && getContainedEnergy(stack) < getMaxEnergy(stack);
 	}
 
 	@Override
 	public boolean canTransferPE(ItemStack stack) {
-		return getContainedEnergy(stack) > 0;
+		Block block = Block.getBlockFromItem(stack.getItem());
+		return block instanceof IEnergyBlock && ((IEnergyBlock) block).canTransferPE() && getContainedEnergy(stack) > 0;
 	}
 }

@@ -186,7 +186,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dark_ethaxium_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 8, SoundType.STONE).setHardness(150.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrickslab1");
 		darkethaxiumslab2 = new BlockACDoubleSlab(ACBlocks.dark_ethaxium_brick_slab, Material.ROCK, "pickaxe", 8).setHardness(150.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrickslab2");
 		ACBlocks.dark_ethaxium_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 8, SoundType.STONE, MapColor.STONE).setHardness(150.0F).setResistance(Float.MAX_VALUE).setUnlocalizedName("darkethaxiumbrickfence");
-//		ACBlocks.ritual_altar = new BlockRitualAltar().setUnlocalizedName("ritualaltar");
 		ACBlocks.ritual_altar_stone = new BlockRitualAltar(() -> Blocks.COBBLESTONE.getDefaultState(), 0, EnumRitualMatType.COBBLESTONE).setUnlocalizedName("ritualaltar");
 		ACBlocks.ritual_altar_darkstone = new BlockRitualAltar(() -> ACBlocks.darkstone_cobblestone.getDefaultState(), 0, EnumRitualMatType.DARKSTONE_COBBLESTONE).setUnlocalizedName("ritualaltar");
 		ACBlocks.ritual_altar_abyssal_stone = new BlockRitualAltar(() -> ACBlocks.abyssal_cobblestone.getDefaultState(), 1, EnumRitualMatType.ABYSSAL_STONE_BRICK).setUnlocalizedName("ritualaltar");
@@ -195,7 +194,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.ritual_altar_abyssalnite_stone = new BlockRitualAltar(() -> ACBlocks.abyssalnite_cobblestone.getDefaultState(), 2, EnumRitualMatType.ABYSSALNITE_STONE_BRICK).setUnlocalizedName("ritualaltar");
 		ACBlocks.ritual_altar_ethaxium = new BlockRitualAltar(() -> ACBlocks.ethaxium_brick.getDefaultState(), 3, EnumRitualMatType.ETHAXIUM_BRICK).setUnlocalizedName("ritualaltar");
 		ACBlocks.ritual_altar_dark_ethaxium = new BlockRitualAltar(() -> ACBlocks.dark_ethaxium_brick.getDefaultState(), 3, EnumRitualMatType.DARK_ETHAXIUM_BRICK).setUnlocalizedName("ritualaltar");
-//		ACBlocks.ritual_pedestal = new BlockRitualPedestal().setUnlocalizedName("ritualpedestal");
 		ACBlocks.ritual_pedestal_stone = new BlockRitualPedestal(() -> Blocks.COBBLESTONE.getDefaultState(), 0, EnumRitualMatType.COBBLESTONE).setUnlocalizedName("ritualpedestal");
 		ACBlocks.ritual_pedestal_darkstone = new BlockRitualPedestal(() -> ACBlocks.darkstone_cobblestone.getDefaultState(), 0, EnumRitualMatType.DARKSTONE_COBBLESTONE).setUnlocalizedName("ritualpedestal");
 		ACBlocks.ritual_pedestal_abyssal_stone = new BlockRitualPedestal(() -> ACBlocks.abyssal_cobblestone.getDefaultState(), 1, EnumRitualMatType.ABYSSAL_STONE_BRICK).setUnlocalizedName("ritualpedestal");
@@ -220,7 +218,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.abyssal_wasteland_energy_pedestal = new BlockTieredEnergyPedestal(EnumDimType.ABYSSAL_WASTELAND).setUnlocalizedName("abyssal_wasteland_energy_pedestal");
 		ACBlocks.dreadlands_energy_pedestal = new BlockTieredEnergyPedestal(EnumDimType.DREADLANDS).setUnlocalizedName("dreadlands_energy_pedestal");
 		ACBlocks.omothol_energy_pedestal = new BlockTieredEnergyPedestal(EnumDimType.OMOTHOL).setUnlocalizedName("omothol_energy_pedestal");
-//		ACBlocks.tiered_sacrificial_altar = new BlockTieredSacrificialAltar();
 		ACBlocks.overworld_sacrificial_altar = new BlockTieredSacrificialAltar(EnumDimType.OVERWORLD).setUnlocalizedName("overworld_sacrificial_altar");
 		ACBlocks.abyssal_wasteland_sacrificial_altar = new BlockTieredSacrificialAltar(EnumDimType.ABYSSAL_WASTELAND).setUnlocalizedName("abyssal_wasteland_sacrificial_altar");
 		ACBlocks.dreadlands_sacrificial_altar = new BlockTieredSacrificialAltar(EnumDimType.DREADLANDS).setUnlocalizedName("dreadlands_sacrificial_altar");
@@ -240,17 +237,14 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.energy_collector = new BlockEnergyCollector();
 		ACBlocks.energy_relay = new BlockEnergyRelay();
 		ACBlocks.energy_container = new BlockEnergyContainer();
-//		ACBlocks.tiered_energy_collector = new BlockTieredEnergyCollector();
 		ACBlocks.overworld_energy_collector = new BlockTieredEnergyCollector(EnumDimType.OVERWORLD).setUnlocalizedName("overworld_energy_collector");
 		ACBlocks.abyssal_wasteland_energy_collector = new BlockTieredEnergyCollector(EnumDimType.ABYSSAL_WASTELAND).setUnlocalizedName("abyssal_wasteland_energy_collector");
 		ACBlocks.dreadlands_energy_collector = new BlockTieredEnergyCollector(EnumDimType.DREADLANDS).setUnlocalizedName("dreadlands_energy_collector");
 		ACBlocks.omothol_energy_collector = new BlockTieredEnergyCollector(EnumDimType.OMOTHOL).setUnlocalizedName("omothol_energy_collector");
-//		ACBlocks.tiered_energy_relay = new BlockTieredEnergyRelay("tieredenergyrelay");
 		ACBlocks.overworld_energy_relay = new BlockTieredEnergyRelay(EnumDimType.OVERWORLD).setUnlocalizedName("overworld_energy_relay");
 		ACBlocks.abyssal_wasteland_energy_relay = new BlockTieredEnergyRelay(EnumDimType.ABYSSAL_WASTELAND).setUnlocalizedName("abyssal_wasteland_energy_relay");
 		ACBlocks.dreadlands_energy_relay = new BlockTieredEnergyRelay(EnumDimType.DREADLANDS).setUnlocalizedName("dreadlands_energy_relay");
 		ACBlocks.omothol_energy_relay = new BlockTieredEnergyRelay(EnumDimType.OMOTHOL).setUnlocalizedName("omothol_energy_relay");
-//		ACBlocks.tiered_energy_container = new BlockTieredEnergyContainer();
 		ACBlocks.overworld_energy_container = new BlockTieredEnergyContainer(EnumDimType.OVERWORLD).setUnlocalizedName("overworld_energy_container");
 		ACBlocks.abyssal_wasteland_energy_container = new BlockTieredEnergyContainer(EnumDimType.ABYSSAL_WASTELAND).setUnlocalizedName("abyssal_wasteland_energy_container");
 		ACBlocks.dreadlands_energy_container = new BlockTieredEnergyContainer(EnumDimType.DREADLANDS).setUnlocalizedName("dreadlands_energy_container");
@@ -457,7 +451,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.dark_ethaxium_brick_slab, new ItemSlabAC(ACBlocks.dark_ethaxium_brick_slab, ACBlocks.dark_ethaxium_brick_slab, darkethaxiumslab2).setUnlockCondition(new DimensionCondition(ACLib.omothol_id)), "darkethaxiumbrickslab1");
 		registerBlock(darkethaxiumslab2, new ItemSlabAC(darkethaxiumslab2, ACBlocks.dark_ethaxium_brick_slab, darkethaxiumslab2).setUnlockCondition(new DimensionCondition(ACLib.omothol_id)), "darkethaxiumbrickslab2");
 		registerBlock(ACBlocks.dark_ethaxium_brick_fence, new ItemBlockColorName(ACBlocks.dark_ethaxium_brick_fence), "darkethaxiumbrickfence");
-//		registerBlock(ACBlocks.ritual_altar, new ItemRitualBlock(ACBlocks.ritual_altar), "ritualaltar");
 		registerBlock(ACBlocks.ritual_altar_stone, "ritual_altar_stone");
 		registerBlock(ACBlocks.ritual_altar_darkstone, "ritual_altar_darkstone");
 		registerBlock(ACBlocks.ritual_altar_abyssal_stone, "ritual_altar_abyssal_stone");
@@ -466,7 +459,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.ritual_altar_abyssalnite_stone, "ritual_altar_abyssalnite_stone");
 		registerBlock(ACBlocks.ritual_altar_ethaxium, "ritual_altar_ethaxium");
 		registerBlock(ACBlocks.ritual_altar_dark_ethaxium, "ritual_altar_dark_ethaxium");
-//		registerBlock(ACBlocks.ritual_pedestal, new ItemRitualBlock(ACBlocks.ritual_pedestal), "ritualpedestal");
 		registerBlock(ACBlocks.ritual_pedestal_stone, "ritual_pedestal_stone");
 		registerBlock(ACBlocks.ritual_pedestal_darkstone, "ritual_pedestal_darkstone");
 		registerBlock(ACBlocks.ritual_pedestal_abyssal_stone, "ritual_pedestal_abyssal_stone");
@@ -487,12 +479,10 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.energy_pedestal, new ItemPEContainerBlock(ACBlocks.energy_pedestal), "energypedestal");
 		registerBlock(ACBlocks.monolith_pillar, "monolithpillar");
 		registerBlock(ACBlocks.sacrificial_altar, new ItemPEContainerBlock(ACBlocks.sacrificial_altar), "sacrificialaltar");
-//		registerBlock(ACBlocks.tiered_energy_pedestal, new ItemMetadataPEContainerBlock(ACBlocks.tiered_energy_pedestal), "tieredenergypedestal");
 		registerBlock(ACBlocks.overworld_energy_pedestal, new ItemPEContainerBlock(ACBlocks.overworld_energy_pedestal), "overworld_energy_pedestal");
 		registerBlock(ACBlocks.abyssal_wasteland_energy_pedestal, new ItemPEContainerBlock(ACBlocks.abyssal_wasteland_energy_pedestal), "abyssal_wasteland_energy_pedestal");
 		registerBlock(ACBlocks.dreadlands_energy_pedestal, new ItemPEContainerBlock(ACBlocks.dreadlands_energy_pedestal), "dreadlands_energy_pedestal");
 		registerBlock(ACBlocks.omothol_energy_pedestal, new ItemPEContainerBlock(ACBlocks.omothol_energy_pedestal), "omothol_energy_pedestal");
-//		registerBlock(ACBlocks.tiered_sacrificial_altar, new ItemMetadataPEContainerBlock(ACBlocks.tiered_sacrificial_altar), "tieredsacrificialaltar");
 		registerBlock(ACBlocks.overworld_sacrificial_altar, new ItemPEContainerBlock(ACBlocks.overworld_sacrificial_altar), "overworld_sacrificial_altar");
 		registerBlock(ACBlocks.abyssal_wasteland_sacrificial_altar, new ItemPEContainerBlock(ACBlocks.abyssal_wasteland_sacrificial_altar), "abyssal_wasteland_sacrificial_altar");
 		registerBlock(ACBlocks.dreadlands_sacrificial_altar, new ItemPEContainerBlock(ACBlocks.dreadlands_sacrificial_altar), "dreadlands_sacrificial_altar");
@@ -512,17 +502,14 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.energy_collector, new ItemPEContainerBlock(ACBlocks.energy_collector), "energycollector");
 		registerBlock(ACBlocks.energy_relay, new ItemPEContainerBlock(ACBlocks.energy_relay), "energyrelay");
 		registerBlock(ACBlocks.energy_container, new ItemPEContainerBlock(ACBlocks.energy_container), "energycontainer");
-//		registerBlock(ACBlocks.tiered_energy_collector, new ItemTieredEnergyCollectorBlock(ACBlocks.tiered_energy_collector), "tieredenergycollector");
 		registerBlock(ACBlocks.overworld_energy_collector, new ItemPEContainerBlock(ACBlocks.overworld_energy_collector), "overworld_energy_collector");
 		registerBlock(ACBlocks.abyssal_wasteland_energy_collector, new ItemPEContainerBlock(ACBlocks.abyssal_wasteland_energy_collector), "abyssal_wasteland_energy_collector");
 		registerBlock(ACBlocks.dreadlands_energy_collector, new ItemPEContainerBlock(ACBlocks.dreadlands_energy_collector), "dreadlands_energy_collector");
 		registerBlock(ACBlocks.omothol_energy_collector, new ItemPEContainerBlock(ACBlocks.omothol_energy_collector), "omothol_energy_collector");
-//		registerBlock(ACBlocks.tiered_energy_relay, new ItemTieredEnergyRelayBlock(ACBlocks.tiered_energy_relay), "tieredenergyrelay");
 		registerBlock(ACBlocks.overworld_energy_relay, new ItemPEContainerBlock(ACBlocks.overworld_energy_relay), "overworld_energy_relay");
 		registerBlock(ACBlocks.abyssal_wasteland_energy_relay, new ItemPEContainerBlock(ACBlocks.abyssal_wasteland_energy_relay), "abyssal_wasteland_energy_relay");
 		registerBlock(ACBlocks.dreadlands_energy_relay, new ItemPEContainerBlock(ACBlocks.dreadlands_energy_relay), "dreadlands_energy_relay");
 		registerBlock(ACBlocks.omothol_energy_relay, new ItemPEContainerBlock(ACBlocks.omothol_energy_relay), "omothol_energy_relay");
-//		registerBlock(ACBlocks.tiered_energy_container, new ItemTieredEnergyContainerBlock(ACBlocks.tiered_energy_container), "tieredenergycontainer");
 		registerBlock(ACBlocks.overworld_energy_container, new ItemPEContainerBlock(ACBlocks.overworld_energy_container), "overworld_energy_container");
 		registerBlock(ACBlocks.abyssal_wasteland_energy_container, new ItemPEContainerBlock(ACBlocks.abyssal_wasteland_energy_container), "abyssal_wasteland_energy_container");
 		registerBlock(ACBlocks.dreadlands_energy_container, new ItemPEContainerBlock(ACBlocks.dreadlands_energy_container), "dreadlands_energy_container");
@@ -673,6 +660,21 @@ public class BlockHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.block_of_refined_coralium, new DimensionCondition(ACLib.abyssal_wasteland_id));
 		addCondition(ACBlocks.block_of_dreadium, new DimensionCondition(ACLib.dreadlands_id));
 		addCondition(ACBlocks.block_of_ethaxium, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.abyssal_wasteland_energy_pedestal, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.dreadlands_energy_pedestal, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.omothol_energy_pedestal, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.abyssal_wasteland_sacrificial_altar, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.dreadlands_sacrificial_altar, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.omothol_sacrificial_altar, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.abyssal_wasteland_energy_collector, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.dreadlands_energy_collector, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.omothol_energy_collector, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.abyssal_wasteland_energy_relay, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.dreadlands_energy_relay, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.omothol_energy_relay, new DimensionCondition(ACLib.omothol_id));
+		addCondition(ACBlocks.abyssal_wasteland_energy_container, new DimensionCondition(ACLib.abyssal_wasteland_id));
+		addCondition(ACBlocks.dreadlands_energy_container, new DimensionCondition(ACLib.dreadlands_id));
+		addCondition(ACBlocks.omothol_energy_container, new DimensionCondition(ACLib.omothol_id));
 	}
 
 	private void addCondition(Block block, IUnlockCondition condition){

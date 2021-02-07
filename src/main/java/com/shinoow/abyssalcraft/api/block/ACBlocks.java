@@ -174,14 +174,10 @@ public class ACBlocks {
 	public static Block energy_pedestal;
 	public static Block monolith_pillar;
 	public static Block sacrificial_altar;
-	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
-//	public static Block tiered_energy_pedestal;
 	public static Block overworld_energy_pedestal;
 	public static Block abyssal_wasteland_energy_pedestal;
 	public static Block dreadlands_energy_pedestal;
 	public static Block omothol_energy_pedestal;
-	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
-//	public static Block tiered_sacrificial_altar;
 	public static Block overworld_sacrificial_altar;
 	public static Block abyssal_wasteland_sacrificial_altar;
 	public static Block dreadlands_sacrificial_altar;
@@ -203,20 +199,14 @@ public class ACBlocks {
 	public static Block energy_collector;
 	public static Block energy_relay;
 	public static Block energy_container;
-	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
-//	public static Block tiered_energy_collector;
 	public static Block overworld_energy_collector;
 	public static Block abyssal_wasteland_energy_collector;
 	public static Block dreadlands_energy_collector;
 	public static Block omothol_energy_collector;
-	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
-//	public static Block tiered_energy_relay;
 	public static Block overworld_energy_relay;
 	public static Block abyssal_wasteland_energy_relay;
 	public static Block dreadlands_energy_relay;
 	public static Block omothol_energy_relay;
-	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
-//	public static Block tiered_energy_container;
 	public static Block overworld_energy_container;
 	public static Block abyssal_wasteland_energy_container;
 	public static Block dreadlands_energy_container;

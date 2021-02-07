@@ -11,11 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
-import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextFormatting;
 
 /**
  * Some sort of universal metadata itemblock thingy
@@ -44,19 +41,5 @@ public class ItemMetadataBlock extends ItemBlockAC {
 	public String getUnlocalizedName(ItemStack stack)
 	{
 		return getUnlocalizedName() + "." + subNames[stack.getItemDamage()];
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-
-		if(getUnlocalizedName().contains("darkethaxiumbrick"))
-			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("ethaxiumbrick") || getUnlocalizedName().endsWith("stone") && par1ItemStack.getItemDamage() == 5)
-			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("abybrick") || getUnlocalizedName().endsWith("stone") && par1ItemStack.getItemDamage() == 1)
-			return TextFormatting.BLUE + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("ingotblock"))
-			return EnumIngotType.byMetadata(par1ItemStack.getItemDamage()).getFormat() + super.getItemStackDisplayName(par1ItemStack);
-		return super.getItemStackDisplayName(par1ItemStack);
 	}
 }

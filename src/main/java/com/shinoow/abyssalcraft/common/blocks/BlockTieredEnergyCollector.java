@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredEnergyCollector;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -24,16 +25,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -41,22 +38,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockTieredEnergyCollector extends BlockContainer {
-
-	public static final PropertyEnum<EnumDimType> DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
+public class BlockTieredEnergyCollector extends BlockContainer implements IEnergyBlock {
 
 	public static final Map<EnumDimType, Block> VARIANTS = new HashMap<>();
-	
+
 	public EnumDimType TYPE;
-	
+
 	public BlockTieredEnergyCollector(EnumDimType type) {
 		super(Material.ROCK);
-//		setUnlocalizedName("tieredenergycollector");
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabDecoration);
-//		setDefaultState(blockState.getBaseState().withProperty(DIMENSION, EnumDimType.OVERWORLD));
 		setHarvestLevel("pickaxe", 0);
 		TYPE = type;
 		VARIANTS.put(type, this);
@@ -67,14 +60,6 @@ public class BlockTieredEnergyCollector extends BlockContainer {
 	{
 		return new AxisAlignedBB(0.25F, 0.0F, 0.25F, 0.75F, 0.8F, 0.75F);
 	}
-
-//	@Override
-//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-//		par3List.add(new ItemStack(this, 1, 0));
-//		par3List.add(new ItemStack(this, 1, 1));
-//		par3List.add(new ItemStack(this, 1, 2));
-//		par3List.add(new ItemStack(this, 1, 3));
-//	}
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
@@ -92,11 +77,6 @@ public class BlockTieredEnergyCollector extends BlockContainer {
 	{
 		return false;
 	}
-
-//	@Override
-//	public int damageDropped (IBlockState state) {
-//		return state.getValue(DIMENSION).getMeta();
-//	}
 
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
@@ -134,18 +114,10 @@ public class BlockTieredEnergyCollector extends BlockContainer {
 		return BlockRenderLayer.CUTOUT;
 	}
 
-//	@Override
-//	public IBlockState getStateFromMeta(int meta) {
-//		return getDefaultState().withProperty(DIMENSION, EnumDimType.byMetadata(meta));
-//	}
-//
-//	@Override
-//	public int getMetaFromState(IBlockState state) {
-//		return state.getValue(DIMENSION).getMeta();
-//	}
-//
-//	@Override
-//	protected BlockStateContainer createBlockState() {
-//		return new BlockStateContainer.Builder(this).add(DIMENSION).build();
-//	}
+	@Override
+	public int getMaxEnergy(ItemStack stack) {
+		int base = 1000;
+
+		return (int) (base * (1.5 + 0.5 * TYPE.getMeta()));
+	}
 }

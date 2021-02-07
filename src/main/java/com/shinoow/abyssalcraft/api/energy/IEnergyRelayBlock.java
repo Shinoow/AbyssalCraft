@@ -9,20 +9,20 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.blocks.itemblock;
+package com.shinoow.abyssalcraft.api.energy;
 
-import net.minecraft.block.Block;
+/**
+ * Interface to use on blocks for storing metadata used in the item
+ * representation of the block (Energy Relay version)
+ *
+ * @author shinoow
+ *
+ * @since 1.7.5
+ */
+public interface IEnergyRelayBlock extends IEnergyBlock {
 
-public class ItemRitualBlock extends ItemBlockAC {
-
-	public ItemRitualBlock(Block b) {
-		super(b);
-		setMaxDamage(0);
-		setHasSubtypes(true);
-	}
-
-	@Override
-	public int getMetadata(int meta) {
-		return meta;
-	}
+	/**
+	 * Returns the distance an Energy Relay can transfer Potential Energy
+	 */
+	int getRange();
 }

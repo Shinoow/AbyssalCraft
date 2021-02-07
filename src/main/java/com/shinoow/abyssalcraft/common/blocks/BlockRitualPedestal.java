@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar.EnumRitualMatType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualPedestal;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
@@ -27,12 +26,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -47,10 +42,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockRitualPedestal extends BlockContainer {
 
-//	public static final PropertyEnum<EnumRitualMatType> MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
+	//	public static final PropertyEnum<EnumRitualMatType> MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 	public static final Map<EnumRitualMatType, Block> VARIANTS = new HashMap<>();
 	private Supplier<IBlockState> dropState;
-	
+
 	public BlockRitualPedestal(Supplier<IBlockState> dropState, int bookType, EnumRitualMatType type) {
 		super(Material.ROCK);
 		setHardness(6.0F);

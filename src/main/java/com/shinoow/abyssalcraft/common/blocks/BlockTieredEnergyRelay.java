@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shinoow.abyssalcraft.api.energy.IEnergyRelayBlock;
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredEnergyRelay;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -26,23 +27,21 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockTieredEnergyRelay extends BlockContainer {
-
-	public static final PropertyEnum<EnumDimType> DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
+public class BlockTieredEnergyRelay extends BlockContainer implements IEnergyRelayBlock {
 
 	public static final Map<EnumDimType, Block> VARIANTS = new HashMap<>();
 
@@ -50,8 +49,6 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 
 	public BlockTieredEnergyRelay(EnumDimType type) {
 		super(Material.ROCK);
-		//		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(DIMENSION, EnumDimType.OVERWORLD));
-		//		setUnlocalizedName("tieredenergyrelay");
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setSoundType(SoundType.STONE);
@@ -84,14 +81,6 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 		}
 	}
 
-	//	@Override
-	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-	//		par3List.add(new ItemStack(this, 1, 0));
-	//		par3List.add(new ItemStack(this, 1, 1));
-	//		par3List.add(new ItemStack(this, 1, 2));
-	//		par3List.add(new ItemStack(this, 1, 3));
-	//	}
-
 	@Override
 	public boolean isOpaqueCube(IBlockState state){
 		return false;
@@ -102,11 +91,6 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	{
 		return false;
 	}
-
-	//	@Override
-	//	public int damageDropped (IBlockState state) {
-	//		return state.getValue(DIMENSION).getMeta();
-	//	}
 
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
@@ -156,18 +140,6 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 		return true;
 	}
 
-	//	@Override
-	//	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-	//	{
-	//		EnumFacing facing = EnumFacing.NORTH;
-	//
-	//		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
-	//		if(tile instanceof TileEntityTieredEnergyRelay)
-	//			facing = EnumFacing.getFront(((TileEntityTieredEnergyRelay) tile).getFacing());
-	//
-	//		return state.withProperty(FACING, facing);
-	//	}
-
 	/**
 	 * Convert the given metadata into a BlockState for this Block
 	 */
@@ -198,5 +170,19 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer.Builder(this).add(FACING).build();
+	}
+
+	@Override
+	public int getMaxEnergy(ItemStack stack) {
+
+		return 500;
+	}
+
+	@Override
+	public int getRange() {
+
+		int base = 6;
+
+		return base + 2 * TYPE.getMeta();
 	}
 }

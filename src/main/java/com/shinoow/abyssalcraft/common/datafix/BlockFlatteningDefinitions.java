@@ -97,7 +97,7 @@ public class BlockFlatteningDefinitions {
 					(block, tileEntityNBT) -> block.getDefaultState(),
 					null));
 		});
-		
+
 		BlockRitualPedestal.VARIANTS.forEach((type, variant) -> {
 			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("ritualpedestal",
 					type.getMeta(),
@@ -105,7 +105,7 @@ public class BlockFlatteningDefinitions {
 					(block, tileEntityNBT) -> block.getDefaultState(),
 					null));
 		});
-		
+
 		BlockTieredEnergyPedestal.VARIANTS.forEach((type, variant) -> {
 			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("tieredenergypedestal",
 					type.getMeta(),
@@ -113,7 +113,7 @@ public class BlockFlatteningDefinitions {
 					(block, tileEntityNBT) -> block.getDefaultState(),
 					null));
 		});
-		
+
 		BlockTieredSacrificialAltar.VARIANTS.forEach((type, variant) -> {
 			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("tieredsacrificialaltar",
 					type.getMeta(),
@@ -121,7 +121,7 @@ public class BlockFlatteningDefinitions {
 					(block, tileEntityNBT) -> block.getDefaultState(),
 					null));
 		});
-		
+
 		BlockTieredEnergyCollector.VARIANTS.forEach((type, variant) -> {
 			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("tieredenergycollector",
 					type.getMeta(),
@@ -129,7 +129,7 @@ public class BlockFlatteningDefinitions {
 					(block, tileEntityNBT) -> block.getDefaultState(),
 					null));
 		});
-		
+
 		BlockTieredEnergyRelay.VARIANTS.forEach((type, variant) -> {
 			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("tieredenergyrelay",
 					type.getMeta(),
@@ -144,7 +144,7 @@ public class BlockFlatteningDefinitions {
 						return BlockFlattening.TileEntityAction.KEEP;
 					}));
 		});
-		
+
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
 }

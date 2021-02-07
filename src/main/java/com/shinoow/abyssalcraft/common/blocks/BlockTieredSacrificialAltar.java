@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.*;
 
+import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredSacrificialAltar;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -22,10 +23,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,19 +36,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockTieredSacrificialAltar extends BlockContainer {
-
-	public static final PropertyEnum<EnumDimType> DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
+public class BlockTieredSacrificialAltar extends BlockContainer implements IEnergyBlock {
 
 	public static final Map<EnumDimType, Block> VARIANTS = new HashMap<>();
 
 	public EnumDimType TYPE;
-	
+
 	public BlockTieredSacrificialAltar(EnumDimType type){
 		super(Material.ROCK);
 		setHardness(6.0F);
 		setResistance(12.0F);
-//		setUnlocalizedName("tieredsacrificialaltar");
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabDecoration);
 		setHarvestLevel("pickaxe", 0);
@@ -63,14 +58,6 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 	{
 		return new AxisAlignedBB(0.15F, 0.0F, 0.15F, 0.85F, 0.9F, 0.85F);
 	}
-
-//	@Override
-//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-//		par3List.add(new ItemStack(this, 1, 0));
-//		par3List.add(new ItemStack(this, 1, 1));
-//		par3List.add(new ItemStack(this, 1, 2));
-//		par3List.add(new ItemStack(this, 1, 3));
-//	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
@@ -88,11 +75,6 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 	{
 		return false;
 	}
-
-//	@Override
-//	public int damageDropped (IBlockState state) {
-//		return state.getValue(DIMENSION).getMeta();
-//	}
 
 	@Override
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {
@@ -185,18 +167,11 @@ public class BlockTieredSacrificialAltar extends BlockContainer {
 		return new java.util.ArrayList<>();
 	}
 
-//	@Override
-//	public IBlockState getStateFromMeta(int meta) {
-//		return getDefaultState().withProperty(DIMENSION, EnumDimType.byMetadata(meta));
-//	}
-//
-//	@Override
-//	public int getMetaFromState(IBlockState state) {
-//		return state.getValue(DIMENSION).getMeta();
-//	}
-//
-//	@Override
-//	protected BlockStateContainer createBlockState() {
-//		return new BlockStateContainer.Builder(this).add(DIMENSION).build();
-//	}
+	@Override
+	public int getMaxEnergy(ItemStack stack) {
+
+		int base = 5000;
+
+		return (int) (base * (1.5 + 0.5 * TYPE.getMeta()));
+	}
 }

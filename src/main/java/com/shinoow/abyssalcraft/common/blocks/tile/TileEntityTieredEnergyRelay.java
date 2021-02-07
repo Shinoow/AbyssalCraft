@@ -24,24 +24,7 @@ import net.minecraft.util.EnumFacing;
 
 public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 
-//	private int facing;
 	private int ticksExisted;
-
-//	@Override
-//	public void readFromNBT(NBTTagCompound nbttagcompound)
-//	{
-//		super.readFromNBT(nbttagcompound);
-////		facing = nbttagcompound.getInteger("Facing");
-//	}
-//
-//	@Override
-//	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
-//	{
-//		super.writeToNBT(nbttagcompound);
-////		nbttagcompound.setInteger("Facing", facing);
-//
-//		return nbttagcompound;
-//	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
@@ -94,7 +77,7 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 	}
 
 	protected int getRange(){
-		
+
 		int base = 6;
 
 		return base + 2 * ((BlockTieredEnergyRelay)getBlockType()).TYPE.getMeta();
@@ -111,12 +94,4 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 
 		return base + 10 * ((BlockTieredEnergyRelay)getBlockType()).TYPE.getMeta();
 	}
-
-//	public int getFacing(){
-//		return facing;
-//	}
-//
-//	public void setFacing(int face){
-//		facing = face;
-//	}
 }

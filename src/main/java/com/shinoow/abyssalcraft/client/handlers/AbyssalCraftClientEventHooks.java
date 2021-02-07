@@ -11,9 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.handlers;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.lwjgl.input.Mouse;
 
@@ -29,8 +27,10 @@ import com.shinoow.abyssalcraft.api.spell.IScroll;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellUtils;
 import com.shinoow.abyssalcraft.client.ClientProxy;
-import com.shinoow.abyssalcraft.common.blocks.*;
+import com.shinoow.abyssalcraft.common.blocks.BlockACSlab;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.common.items.ItemConfigurator;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -42,7 +42,6 @@ import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -436,19 +435,6 @@ public class AbyssalCraftClientEventHooks {
 		ModelBakery.registerItemVariants(ACItems.antidote, makerl("coralium_antidote", "dread_antidote"));
 		ModelBakery.registerItemVariants(ACItems.configurator_shard, makerl("configurator_shard_0", "configurator_shard_1", "configurator_shard_2", "configurator_shard_3"));
 
-//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_pedestal), makerl("tieredenergypedestal_0", "tieredenergypedestal_1",
-//				"tieredenergypedestal_2", "tieredenergypedestal_3"));
-//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_sacrificial_altar), makerl("tieredsacrificialaltar_0", "tieredsacrificialaltar_1",
-//				"tieredsacrificialaltar_2", "tieredsacrificialaltar_3"));
-//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_altar), makerl("ritualaltar_0", "ritualaltar_1", "ritualaltar_2", "ritualaltar_3",
-//				"ritualaltar_4", "ritualaltar_5", "ritualaltar_6", "ritualaltar_7"));
-//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.ritual_pedestal), makerl("ritualpedestal_0", "ritualpedestal_1", "ritualpedestal_2",
-//				"ritualpedestal_3", "ritualpedestal_4", "ritualpedestal_5", "ritualpedestal_6", "ritualpedestal_7"));
-//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_collector), makerl("tieredenergycollector_0", "tieredenergycollector_1",
-//				"tieredenergycollector_2", "tieredenergycollector_3"));
-//		ModelBakery.registerItemVariants(Item.getItemFromBlock(ACBlocks.tiered_energy_container), makerl("tieredenergycontainer_0", "tieredenergycontainer_1",
-//				"tieredenergycontainer_2", "tieredenergycontainer_3"));
-
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
 		registerFluidModel(ACBlocks.liquid_antimatter, "anti");
 
@@ -480,30 +466,6 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
-//		ModelLoader.setCustomStateMapper(ACBlocks.tiered_energy_relay, new StateMapperBase(){
-//			@Override
-//			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-//				String stuff = "abyssalcraft:";
-//				switch(state.getValue(BlockTieredEnergyPedestal.DIMENSION)){
-//				case ABYSSAL_WASTELAND:
-//					stuff+="awenergyrelay";
-//					break;
-//				case DREADLANDS:
-//					stuff+="dlenergyrelay";
-//					break;
-//				case OMOTHOL:
-//					stuff+="omtenergyrelay";
-//					break;
-//				case OVERWORLD:
-//					stuff+="owenergyrelay";
-//					break;
-//				default:
-//					break;
-//				}
-//				Map<IProperty<?>, Comparable<?>> map = new LinkedHashMap<>(state.getProperties());
-//				map.remove(BlockTieredEnergyPedestal.DIMENSION);
-//				return new ModelResourceLocation(stuff, getPropertyString(map));
-//			}});
 
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());

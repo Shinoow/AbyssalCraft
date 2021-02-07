@@ -221,9 +221,8 @@ public class StructureCity extends WorldGenerator {
 							worldIn.setBlockState(entry.getKey(), ACBlocks.crystal_cluster.getStateFromMeta(meta));
 					}
 				} else worldIn.setBlockToAir(entry.getKey());
-			} else if(entry.getValue().equals("pedestal")) {
+			} else if(entry.getValue().equals("pedestal"))
 				worldIn.setBlockState(entry.getKey(), getPedestal(rand));
-			}
 
 		return true;
 	}
@@ -269,7 +268,7 @@ public class StructureCity extends WorldGenerator {
 			return ACLoot.CHEST_OMOTHOL_HOUSE;
 		}
 	}
-	
+
 	private IBlockState getPedestal(Random rand)
 	{
 		switch(rand.nextInt(4)) {

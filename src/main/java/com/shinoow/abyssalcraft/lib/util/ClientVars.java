@@ -496,5 +496,5 @@ public class ClientVars {
 	public int getDreadAntidotePotionColor() {
 		return Integer.decode(dreadAntidotePotionColor);
 	}
-	
+
 }

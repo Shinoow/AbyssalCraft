@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.List;
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntitySacrificialAltar;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.SingletonInventoryUtil;
@@ -34,7 +35,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockSacrificialAltar extends BlockContainer {
+public class BlockSacrificialAltar extends BlockContainer implements IEnergyBlock {
 
 	public BlockSacrificialAltar(){
 		super(Material.ROCK);
@@ -158,5 +159,15 @@ public class BlockSacrificialAltar extends BlockContainer {
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		return new java.util.ArrayList<>();
+	}
+
+	@Override
+	public int getMaxEnergy(ItemStack stack) {
+		return 5000;
+	}
+
+	@Override
+	public boolean canAcceptPE() {
+		return false;
 	}
 }

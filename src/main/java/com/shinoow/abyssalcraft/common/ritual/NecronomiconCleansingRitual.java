@@ -15,7 +15,6 @@ import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;

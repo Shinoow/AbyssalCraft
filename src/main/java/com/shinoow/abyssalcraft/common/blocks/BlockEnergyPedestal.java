@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyPedestal;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
@@ -34,7 +35,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockEnergyPedestal extends BlockContainer {
+public class BlockEnergyPedestal extends BlockContainer implements IEnergyBlock {
 
 	public BlockEnergyPedestal() {
 		super(Material.ROCK);
@@ -108,5 +109,11 @@ public class BlockEnergyPedestal extends BlockContainer {
 	public BlockRenderLayer getBlockLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
+	public int getMaxEnergy(ItemStack stack) {
+
+		return 5000;
 	}
 }
