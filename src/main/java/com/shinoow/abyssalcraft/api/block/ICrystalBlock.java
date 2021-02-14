@@ -9,29 +9,25 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.item;
+package com.shinoow.abyssalcraft.api.block;
 
-import net.minecraft.item.ItemStack;
+import com.shinoow.abyssalcraft.api.item.ICrystal;
+
+import net.minecraft.block.state.IBlockState;
 
 /**
- * Items with this interface are recognized as crystallized elements by AbyssalCraft.
- *
+ * Blocks with this interface are recognized as crystallized elements by AbyssalCraft.
+ * The ICrystal methods can be delegated to the ItemBlock for this Block
+ * 
  * @author shinoow
- *
- * @since 1.3
+ * 
+ * @since 2.0
  */
-public interface ICrystal {
+public interface ICrystalBlock extends ICrystal {
 
 	/**
-	 * Retrieves the crystal color
-	 * @param stack Current Item Stack
+	 * BlockState-sensitive version of {@link ICrystal#getColor(net.minecraft.item.ItemStack)}
+	 * @param state Current Block State
 	 */
-	public int getColor(ItemStack stack);
-
-	/**
-	 * Retrieves the molecular formula for the crystal compound
-	 * @param stack Current Item Stack
-	 */
-	public String getFormula(ItemStack stack);
-
+	public int getColor(IBlockState state);
 }

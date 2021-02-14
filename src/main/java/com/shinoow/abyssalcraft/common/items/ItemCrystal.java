@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -67,14 +68,21 @@ public class ItemCrystal extends ItemACBasic implements ICrystal {
 	}
 
 	@Override
-	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
-		l.add(I18n.translateToLocal("tooltip.crystal")+ ": " + ACLib.crystalAtoms[is.getItemDamage()]);
-	}
-
-	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 		if(postfix)
 			return I18n.translateToLocalFormatted(getUnlocalizedName().substring(5)+ ".postfix", I18n.translateToLocal("item.crystal." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name"));
 		else return I18n.translateToLocal(getUnlocalizedName() + "." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name");
+	}
+
+	@Override
+	public int getColor(ItemStack stack) {
+
+		return ACClientVars.getCrystalColors()[stack.getMetadata()];
+	}
+
+	@Override
+	public String getFormula(ItemStack stack) {
+
+		return ACLib.crystalAtoms[stack.getMetadata()];
 	}
 }

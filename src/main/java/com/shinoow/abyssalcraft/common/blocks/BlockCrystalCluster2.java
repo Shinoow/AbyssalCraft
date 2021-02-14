@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import com.shinoow.abyssalcraft.api.block.ICrystalBlock;
+import com.shinoow.abyssalcraft.lib.ACClientVars;
+import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.SoundType;
@@ -26,7 +29,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockCrystalCluster2 extends BlockACBasic {
+public class BlockCrystalCluster2 extends BlockACBasic implements ICrystalBlock {
 
 	public static final PropertyEnum<EnumCrystalType2> TYPE = PropertyEnum.create("type", EnumCrystalType2.class);
 
@@ -75,6 +78,21 @@ public class BlockCrystalCluster2 extends BlockACBasic {
 	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
 		for(int i = 0; i < EnumCrystalType2.values().length; i++)
 			par3List.add(new ItemStack(this, 1, i));
+	}
+
+	@Override
+	public int getColor(ItemStack stack) {
+		return ACClientVars.getCrystalColors()[stack.getMetadata() + 16];
+	}
+
+	@Override
+	public String getFormula(ItemStack stack) {
+		return ACLib.crystalAtoms[stack.getMetadata() + 16];
+	}
+
+	@Override
+	public int getColor(IBlockState state) {
+		return ACClientVars.getCrystalColors()[getMetaFromState(state) + 16];
 	}
 
 	@Override

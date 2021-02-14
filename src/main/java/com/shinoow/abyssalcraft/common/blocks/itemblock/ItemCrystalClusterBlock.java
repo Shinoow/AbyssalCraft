@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.block.ICrystalBlock;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster.EnumCrystalType;
@@ -32,11 +33,6 @@ public class ItemCrystalClusterBlock extends ItemMetadataBlock implements ICryst
 	}
 
 	@Override
-	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
-		l.add(I18n.translateToLocal("tooltip.crystal")+ ": " + ACLib.crystalAtoms[is.getItemDamage()]);
-	}
-
-	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
 		return I18n.translateToLocalFormatted("crystalcluster.postfix", name(par1ItemStack.getItemDamage()));
@@ -46,5 +42,17 @@ public class ItemCrystalClusterBlock extends ItemMetadataBlock implements ICryst
 		String s = EnumCrystalType.byMetadata(meta).getName();
 		String name = s.substring(0, 1).toUpperCase() + s.substring(1);
 		return I18n.translateToLocal("item.crystal."+name+".name");
+	}
+
+	@Override
+	public int getColor(ItemStack stack) {
+
+		return ((ICrystalBlock) block).getColor(stack);
+	}
+
+	@Override
+	public String getFormula(ItemStack stack) {
+
+		return ((ICrystalBlock) block).getFormula(stack);
 	}
 }
