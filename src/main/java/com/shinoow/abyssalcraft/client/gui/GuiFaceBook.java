@@ -84,7 +84,7 @@ public class GuiFaceBook extends GuiScreen {
 		case 1:
 			return new ItemStack(ACItems.crystal);
 		case 2:
-			return new ItemStack(ACBlocks.crystal_cluster);
+			return new ItemStack(ACBlocks.iron_crystal_cluster);
 		default:
 			return new ItemStack(ACItems.crystal_shard);
 		}

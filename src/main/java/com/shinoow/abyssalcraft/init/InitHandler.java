@@ -103,8 +103,8 @@ public class InitHandler implements ILifeCycleHandler {
 
 	public static final Map<ResourceLocation, Tuple<Integer, Float>> demon_transformations = new HashMap<>();
 
-	final List<Block> BLOCKS = new ArrayList<>();
-	final List<Item> ITEMS = new ArrayList<>();
+	public final List<Block> BLOCKS = new ArrayList<>();
+	public final List<Item> ITEMS = new ArrayList<>();
 	final List<Biome> BIOMES = new ArrayList<>();
 	final List<Enchantment> ENCHANTMENTS = new ArrayList<>();
 	final List<Potion> POTIONS = new ArrayList<>();

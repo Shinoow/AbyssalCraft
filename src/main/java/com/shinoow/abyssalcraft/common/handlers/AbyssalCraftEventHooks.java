@@ -23,6 +23,7 @@ import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
+import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemCrystalClusterBlock;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
@@ -464,8 +465,7 @@ public class AbyssalCraftEventHooks {
 	public void fuelBurnTime(FuelBurnTimeEvent event) {
 		if(!ACConfig.crystal_rework) {
 			ItemStack fuel = event.getItemStack();
-			if(fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster) ||
-					fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster2))
+			if(fuel.getItem() instanceof ItemCrystalClusterBlock)
 				event.setBurnTime(12150);
 			if(fuel.getItem() == ACItems.crystal)
 				event.setBurnTime(1350);

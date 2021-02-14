@@ -345,7 +345,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		StructureHandler.instance().registerStructure(new BasicStructure());
 		StructureHandler.instance().registerStructure(new TotemPoleStructure());
 		StructureHandler.instance().registerStructure(new ArchwayStructure());
-		ModFixs modFixs = FMLCommonHandler.instance().getDataFixer().init(modid, 3);
+		ModFixs modFixs = FMLCommonHandler.instance().getDataFixer().init(modid, 4);
 		modFixs.registerFix(FixTypes.CHUNK, BlockFlatteningDefinitions.createBlockFlattening());
 		ACTabs.tabTools.setRelevantEnchantmentTypes(AbyssalCraftAPI.STAFF_OF_RENDING);
 	}
@@ -441,7 +441,8 @@ public class MiscHandler implements ILifeCycleHandler {
 			OreDictionary.registerOre("crystal"+name, new ItemStack(ACItems.crystal, 1, i));
 			OreDictionary.registerOre("crystalShard"+name, new ItemStack(ACItems.crystal_shard, 1, i));
 			OreDictionary.registerOre("crystalFragment"+name, new ItemStack(ACItems.crystal_fragment, 1, i));
-			OreDictionary.registerOre("crystalCluster"+name, i < 16 ? new ItemStack(ACBlocks.crystal_cluster, 1, i) : new ItemStack(ACBlocks.crystal_cluster2, 1, i-16));
+			//TODO handle
+//			OreDictionary.registerOre("crystalCluster"+name, i < 16 ? new ItemStack(ACBlocks.crystal_cluster, 1, i) : new ItemStack(ACBlocks.crystal_cluster2, 1, i-16));
 		}
 	}
 

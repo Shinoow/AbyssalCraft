@@ -40,6 +40,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -49,6 +50,7 @@ import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityPedestalBlockRenderer;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.Particle;
@@ -182,13 +184,11 @@ public class ClientProxy extends CommonProxy {
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
 		RenderPlayer render2 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
 		render2.addLayer(new LayerStarSpawnTentacles(render2));
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ((ICrystal) stack.getItem()).getColor(stack), ACItems.crystal, ACItems.crystal_shard, ACItems.crystal_fragment, Item.getItemFromBlock(ACBlocks.crystal_cluster));
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ((ICrystal) stack.getItem()).getColor(stack), Item.getItemFromBlock(ACBlocks.crystal_cluster2));
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ((ICrystal) stack.getItem()).getColor(stack), InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ICrystal).toArray(Item[]::new));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.elder_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.hastur_engraved_coin, ACItems.jzahar_engraved_coin,
 				ACItems.azathoth_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.shub_niggurath_engraved_coin);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1  && stack.hasTagCompound() ? SpellRegistry.instance().getSpell(stack.getTagCompound().getString("Spell")).getColor() : 16777215, ACItems.scroll);
-		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ((ICrystalBlock) state.getBlock()).getColor(state), ACBlocks.crystal_cluster);
-		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ((ICrystalBlock) state.getBlock()).getColor(state), ACBlocks.crystal_cluster2);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ((ICrystalBlock) state.getBlock()).getColor(state), InitHandler.INSTANCE.BLOCKS.stream().filter(b -> b instanceof ICrystalBlock).toArray(Block[]::new));
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
 			if(state.getValue(BlockPortalAnchor.ACTIVE) && tintIndex == 1) {
 				TileEntity te = BlockUtil.getTileEntitySafely(world, pos);

@@ -192,10 +192,34 @@ public class ACBlocks {
 	public static Block decorative_nyarlathotep_statue;
 	public static Block decorative_yog_sothoth_statue;
 	public static Block decorative_shub_niggurath_statue;
-	/** *COUGH* Metadata block */
-	public static Block crystal_cluster;
-	/** *COUGH* Metadata block */
-	public static Block crystal_cluster2;
+	public static Block iron_crystal_cluster;
+	public static Block gold_crystal_cluster;
+	public static Block sulfur_crystal_cluster;
+	public static Block carbon_crystal_cluster;
+	public static Block oxygen_crystal_cluster;
+	public static Block hydrogen_crystal_cluster;
+	public static Block nitrogen_crystal_cluster;
+	public static Block phosphorus_crystal_cluster;
+	public static Block potassium_crystal_cluster;
+	public static Block nitrate_crystal_cluster;
+	public static Block methane_crystal_cluster;
+	public static Block redstone_crystal_cluster;
+	public static Block abyssalnite_crystal_cluster;
+	public static Block coralium_crystal_cluster;
+	public static Block dreadium_crystal_cluster;
+	public static Block blaze_crystal_cluster;
+	public static Block tin_crystal_cluster;
+	public static Block copper_crystal_cluster;
+	public static Block silicon_crystal_cluster;
+	public static Block magnesium_crystal_cluster;
+	public static Block aluminium_crystal_cluster;
+	public static Block silica_crystal_cluster;
+	public static Block alumina_crystal_cluster;
+	public static Block magnesia_crystal_cluster;
+	public static Block zinc_crystal_cluster;
+	public static Block calcium_crystal_cluster;
+	public static Block beryllium_crystal_cluster;
+	public static Block beryl_crystal_cluster;
 	public static Block energy_collector;
 	public static Block energy_relay;
 	public static Block energy_container;
