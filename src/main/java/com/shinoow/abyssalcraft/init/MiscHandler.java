@@ -35,6 +35,7 @@ import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityStorage;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
+import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster;
 import com.shinoow.abyssalcraft.common.datafix.BlockFlatteningDefinitions;
 import com.shinoow.abyssalcraft.common.enchantments.*;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -441,9 +442,12 @@ public class MiscHandler implements ILifeCycleHandler {
 			OreDictionary.registerOre("crystal"+name, new ItemStack(ACItems.crystal, 1, i));
 			OreDictionary.registerOre("crystalShard"+name, new ItemStack(ACItems.crystal_shard, 1, i));
 			OreDictionary.registerOre("crystalFragment"+name, new ItemStack(ACItems.crystal_fragment, 1, i));
-			//TODO handle
-//			OreDictionary.registerOre("crystalCluster"+name, i < 16 ? new ItemStack(ACBlocks.crystal_cluster, 1, i) : new ItemStack(ACBlocks.crystal_cluster2, 1, i-16));
 		}
+
+		InitHandler.INSTANCE.BLOCKS.stream().filter(b -> b instanceof BlockCrystalCluster).forEach(b -> {
+			String name = ACLib.crystalNames[((BlockCrystalCluster)b).index];
+			OreDictionary.registerOre("crystalCluster"+name, new ItemStack(b));
+		});
 	}
 
 	@SubscribeEvent

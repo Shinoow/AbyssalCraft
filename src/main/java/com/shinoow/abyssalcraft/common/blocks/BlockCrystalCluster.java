@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.shinoow.abyssalcraft.api.block.ICrystalBlock;
-import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster2.EnumCrystalType2;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -23,31 +22,24 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockCrystalCluster extends BlockACBasic implements ICrystalBlock {
 
-//	public static final PropertyEnum<EnumCrystalType> TYPE = PropertyEnum.create("type", EnumCrystalType.class);
-
 	public static final Map<EnumCrystalType, Block> VARIANTS = new HashMap<>();
 
 	public static final Map<EnumCrystalType2, Block> VARIANTS_2 = new HashMap<>();
 
-	private int index;
+	public int index;
 	
 	public BlockCrystalCluster() {
 		super(Material.ROCK, "pickaxe", 3, 4.0F, 8.0F, SoundType.GLASS);
 		setCreativeTab(ACTabs.tabCrystals);
-//		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumCrystalType.IRON));
 	}
 
 	public BlockCrystalCluster remap(EnumCrystalType type) {
@@ -108,21 +100,6 @@ public class BlockCrystalCluster extends BlockACBasic implements ICrystalBlock {
 		return ACClientVars.getCrystalColors()[index];
 	}
 
-//	@Override
-//	public IBlockState getStateFromMeta(int meta) {
-//		return getDefaultState().withProperty(TYPE, EnumCrystalType.byMetadata(meta));
-//	}
-//
-//	@Override
-//	public int getMetaFromState(IBlockState state) {
-//		return state.getValue(TYPE).getMetadata();
-//	}
-//
-//	@Override
-//	protected BlockStateContainer createBlockState() {
-//		return new BlockStateContainer.Builder(this).add(TYPE).build();
-//	}
-
 	public enum EnumCrystalType implements IStringSerializable
 	{
 		IRON(0, "iron"),
@@ -180,6 +157,63 @@ public class BlockCrystalCluster extends BlockACBasic implements ICrystalBlock {
 		static
 		{
 			for (EnumCrystalType enumtype : values())
+				META_LOOKUP[enumtype.getMetadata()] = enumtype;
+		}
+	}
+	
+	public enum EnumCrystalType2 implements IStringSerializable
+	{
+		TIN(0, "tin"),
+		COPPER(1, "copper"),
+		SILICON(2, "silicon"),
+		MAGNESIUM(3, "magnesium"),
+		ALUMINIUM(4, "aluminium"),
+		SILICA(5, "silica"),
+		ALUMINA(6, "alumina"),
+		MAGNESIA(7, "magnesia"),
+		ZINC(8, "zinc"),
+		CALCIUM(9, "calcium"),
+		BERYLLIUM(10, "beryllium"),
+		BERYL(11, "beryl");
+
+		private static final EnumCrystalType2[] META_LOOKUP = new EnumCrystalType2[values().length];
+		private final int meta;
+		private final String name;
+
+		private EnumCrystalType2(int meta, String name)
+		{
+			this.meta = meta;
+			this.name = name;
+		}
+
+		public int getMetadata()
+		{
+			return meta;
+		}
+
+		@Override
+		public String toString()
+		{
+			return name;
+		}
+
+		public static EnumCrystalType2 byMetadata(int meta)
+		{
+			if (meta < 0 || meta >= META_LOOKUP.length)
+				meta = 0;
+
+			return META_LOOKUP[meta];
+		}
+
+		@Override
+		public String getName()
+		{
+			return name;
+		}
+
+		static
+		{
+			for (EnumCrystalType2 enumtype : values())
 				META_LOOKUP[enumtype.getMetadata()] = enumtype;
 		}
 	}
