@@ -75,9 +75,17 @@ public class MiningSpell extends Spell {
 	private IBlockState getResult(IBlockState state){
 
 		if(state.getBlock() == Blocks.COBBLESTONE)
-			return Blocks.STONE.getDefaultState(); //TODO uncomment and clean up
-		//		if(state.getBlock() == ACBlocks.cobblestone)
-		//			return ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.byMetadata(state.getValue(BlockACCobblestone.TYPE).getMeta()));
+			return Blocks.STONE.getDefaultState();
+		if(state.getBlock() == ACBlocks.darkstone_cobblestone)
+			return ACBlocks.darkstone.getDefaultState();
+		if(state.getBlock() == ACBlocks.abyssal_cobblestone)
+			return ACBlocks.abyssal_stone.getDefaultState();
+		if(state.getBlock() == ACBlocks.coralium_cobblestone)
+			return ACBlocks.coralium_stone.getDefaultState();
+		if(state.getBlock() == ACBlocks.dreadstone_cobblestone)
+			return ACBlocks.dreadstone.getDefaultState();
+		if(state.getBlock() == ACBlocks.abyssalnite_cobblestone)
+			return ACBlocks.abyssalnite_stone.getDefaultState();
 		if(state.getBlock() == Blocks.SAND && state.getValue(BlockSand.VARIANT) == EnumType.SAND)
 			return Blocks.GLASS.getDefaultState();
 		if(state.getBlock() == Blocks.SAND && state.getValue(BlockSand.VARIANT) == EnumType.RED_SAND)

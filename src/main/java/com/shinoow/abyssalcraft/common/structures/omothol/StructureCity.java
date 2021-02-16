@@ -212,9 +212,8 @@ public class StructureCity extends WorldGenerator {
 				if(rand.nextBoolean()) {
 					if(rand.nextInt(100) == 0)
 						worldIn.setBlockState(entry.getKey(), ACBlocks.dreadlands_infused_powerstone.getDefaultState());
-					else {
+					else
 						worldIn.setBlockState(entry.getKey(), getCrystalCluster(rand));
-					}
 				} else worldIn.setBlockToAir(entry.getKey());
 			} else if(entry.getValue().equals("pedestal"))
 				worldIn.setBlockState(entry.getKey(), getPedestal(rand));

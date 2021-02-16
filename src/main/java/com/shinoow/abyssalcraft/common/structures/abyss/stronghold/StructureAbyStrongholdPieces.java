@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.structures.abyss.stronghold;
 import java.util.*;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
@@ -1055,7 +1054,7 @@ public class StructureAbyStrongholdPieces
 				float f = par1Random.nextFloat();
 
 				if(f < 0.2F)
-					blockstate = ACBlocks.abyssal_stone_brick.getStateFromMeta(EnumBrickType.CRACKED.getMeta());
+					blockstate = ACBlocks.cracked_abyssal_stone_brick.getDefaultState();
 				else blockstate = ACBlocks.abyssal_stone_brick.getDefaultState();
 			} else blockstate = Blocks.AIR.getDefaultState();
 		}
@@ -1095,6 +1094,7 @@ public class StructureAbyStrongholdPieces
 		/**
 		 * builds a door of the enumerated types (empty opening is a door)
 		 */
+		@SuppressWarnings("deprecation")
 		protected void placeDoor(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox, StructureAbyStrongholdPieces.Stronghold.Door par4EnumDoor, int par5, int par6, int par7)
 		{
 			switch (StructureAbyStrongholdPieces.SwitchDoor.doorEnum[par4EnumDoor.ordinal()])

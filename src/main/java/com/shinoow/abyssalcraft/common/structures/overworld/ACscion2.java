@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 public class ACscion2 extends StructureDarklandsBase {
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean generate(World world, Random random, BlockPos pos) {
 
 		pos = pos.add(-3, 1, -3);

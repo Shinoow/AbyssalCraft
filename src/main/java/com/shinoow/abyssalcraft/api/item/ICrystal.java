@@ -26,12 +26,12 @@ public interface ICrystal {
 	 * Retrieves the crystal color
 	 * @param stack Current Item Stack
 	 */
-	public int getColor(ItemStack stack);
+	int getColor(ItemStack stack);
 
 	/**
 	 * Retrieves the molecular formula for the crystal compound
 	 * @param stack Current Item Stack
 	 */
-	public String getFormula(ItemStack stack);
+	String getFormula(ItemStack stack);
 
 }

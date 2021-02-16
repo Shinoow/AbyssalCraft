@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 public class StructureElevatedShrine extends StructureDarklandsBase {
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
 		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();

@@ -23,8 +23,6 @@ import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStro
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.StructureAbyStrongholdPieces;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.StructureDreadlandsMinePieces;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.StructureDreadlandsMineStart;
-import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
-import com.shinoow.abyssalcraft.common.structures.omothol.StructureOmotholPieces;
 import com.shinoow.abyssalcraft.common.world.*;
 import com.shinoow.abyssalcraft.common.world.biome.*;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
@@ -118,8 +116,6 @@ public class WorldHandler implements ILifeCycleHandler {
 		StructureAbyStrongholdPieces.registerStructurePieces();
 		MapGenStructureIO.registerStructure(StructureDreadlandsMineStart.class, "DreadMine");
 		StructureDreadlandsMinePieces.registerStructurePieces();
-		MapGenStructureIO.registerStructure(MapGenOmothol.Start.class, "Omothol");
-		StructureOmotholPieces.registerOmotholPieces();
 		GameRegistry.registerWorldGenerator(new AbyssalCraftWorldGenerator(), 0);
 	}
 

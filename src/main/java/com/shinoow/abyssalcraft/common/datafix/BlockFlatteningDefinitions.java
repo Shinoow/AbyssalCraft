@@ -146,7 +146,7 @@ public class BlockFlatteningDefinitions {
 		});
 
 		//version 4 definitions TBD
-		
+
 		BlockCrystalCluster.VARIANTS.forEach((type, variant) -> {
 			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("crystalcluster",
 					type.getMetadata(),
@@ -154,7 +154,7 @@ public class BlockFlatteningDefinitions {
 					(block, tileEntityNBT) -> block.getDefaultState(),
 					null));
 		});
-		
+
 		BlockCrystalCluster.VARIANTS_2.forEach((type, variant) -> {
 			flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("crystalcluster2",
 					type.getMetadata(),
@@ -162,7 +162,7 @@ public class BlockFlatteningDefinitions {
 					(block, tileEntityNBT) -> block.getDefaultState(),
 					null));
 		});
-		
+
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
 }

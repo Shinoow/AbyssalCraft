@@ -29,6 +29,7 @@ public class Abyruin extends WorldGenerator
 	public Abyruin() { }
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean generate(World world, Random rand, BlockPos pos) {
 
 		while(world.isAirBlock(pos) && pos.getY() > 2)

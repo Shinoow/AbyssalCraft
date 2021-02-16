@@ -234,7 +234,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.decorative_nyarlathotep_statue = new BlockDecorativeStatue(EnumDeityType.NYARLATHOTEP).setUnlocalizedName("nyarlathotepstatue");
 		ACBlocks.decorative_yog_sothoth_statue = new BlockDecorativeStatue(EnumDeityType.YOGSOTHOTH).setUnlocalizedName("yogsothothstatue");
 		ACBlocks.decorative_shub_niggurath_statue = new BlockDecorativeStatue(EnumDeityType.SHUBNIGGURATH).setUnlocalizedName("shubniggurathstatue");
-//		ACBlocks.crystal_cluster = new BlockCrystalCluster().setUnlocalizedName("crystalcluster");
 		ACBlocks.iron_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.IRON);
 		ACBlocks.gold_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.GOLD);
 		ACBlocks.sulfur_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.SULFUR);
@@ -251,7 +250,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.coralium_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.CORALIUM);
 		ACBlocks.dreadium_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.DREADIUM);
 		ACBlocks.blaze_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.BLAZE);
-//		ACBlocks.crystal_cluster2 = new BlockCrystalCluster2().setUnlocalizedName("crystalcluster2");
 		ACBlocks.tin_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.TIN);
 		ACBlocks.copper_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.COPPER);
 		ACBlocks.silicon_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.SILICON);
@@ -527,7 +525,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.decorative_nyarlathotep_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_nyarlathotep_statue), "decorativenyarlathotepstatue");
 		registerBlock(ACBlocks.decorative_yog_sothoth_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_yog_sothoth_statue), "decorativeyogsothothstatue");
 		registerBlock(ACBlocks.decorative_shub_niggurath_statue, new ItemDecorativeStatueBlock(ACBlocks.decorative_shub_niggurath_statue), "decorativeshubniggurathstatue");
-//		registerBlock(ACBlocks.crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.crystal_cluster), "crystalcluster");
 		registerBlock(ACBlocks.iron_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.iron_crystal_cluster), "iron_crystal_cluster");
 		registerBlock(ACBlocks.gold_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.gold_crystal_cluster), "gold_crystal_cluster");
 		registerBlock(ACBlocks.sulfur_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.sulfur_crystal_cluster), "sulfur_crystal_cluster");
@@ -544,7 +541,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.coralium_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.coralium_crystal_cluster), "coralium_crystal_cluster");
 		registerBlock(ACBlocks.dreadium_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.dreadium_crystal_cluster), "dreadium_crystal_cluster");
 		registerBlock(ACBlocks.blaze_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.blaze_crystal_cluster), "blaze_crystal_cluster");
-//		registerBlock(ACBlocks.crystal_cluster2, new ItemCrystalClusterBlock2(ACBlocks.crystal_cluster2), "crystalcluster2");
 		registerBlock(ACBlocks.tin_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.tin_crystal_cluster), "tin_crystal_cluster");
 		registerBlock(ACBlocks.copper_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.copper_crystal_cluster), "copper_crystal_cluster");
 		registerBlock(ACBlocks.silicon_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.silicon_crystal_cluster), "silicon_crystal_cluster");

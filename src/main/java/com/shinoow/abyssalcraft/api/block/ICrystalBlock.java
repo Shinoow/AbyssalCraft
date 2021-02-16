@@ -18,9 +18,9 @@ import net.minecraft.block.state.IBlockState;
 /**
  * Blocks with this interface are recognized as crystallized elements by AbyssalCraft.
  * The ICrystal methods can be delegated to the ItemBlock for this Block
- * 
+ *
  * @author shinoow
- * 
+ *
  * @since 2.0
  */
 public interface ICrystalBlock extends ICrystal {
@@ -29,5 +29,5 @@ public interface ICrystalBlock extends ICrystal {
 	 * BlockState-sensitive version of {@link ICrystal#getColor(net.minecraft.item.ItemStack)}
 	 * @param state Current Block State
 	 */
-	public int getColor(IBlockState state);
+	int getColor(IBlockState state);
 }

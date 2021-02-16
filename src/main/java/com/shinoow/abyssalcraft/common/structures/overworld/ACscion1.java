@@ -27,11 +27,12 @@ import net.minecraft.world.World;
 public class ACscion1 extends StructureDarklandsBase {
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean generate(World world, Random random, BlockPos pos) {
 
 		IBlockState grass = Blocks.GRASS.getDefaultState();
 		IBlockState glowing_brick = ACBlocks.glowing_darkstone_bricks.getDefaultState();
-		IBlockState chiseled_brick = ACBlocks.darkstone_brick.getStateFromMeta(1);
+		IBlockState chiseled_brick = ACBlocks.chiseled_darkstone_brick.getDefaultState();
 		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
 
 		boolean shouldGrass = world.getBlockState(pos).getMaterial() == Material.GRASS;

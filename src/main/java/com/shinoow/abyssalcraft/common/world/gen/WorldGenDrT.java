@@ -26,6 +26,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
+@SuppressWarnings("deprecation")
 public class WorldGenDrT extends WorldGenTrees {
 
 	public WorldGenDrT(boolean flag)

@@ -24,7 +24,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
@@ -42,7 +41,6 @@ public class ChunkGeneratorOmothol implements IChunkGenerator
 	private Biome[] biomesForGeneration;
 	double[] noiseData1, noiseData2, noiseData3, noiseData4, noiseData5;
 	int[][] field_73203_h = new int[32][32];
-	MapGenOmothol omotholGenerator = new MapGenOmothol();
 	private StructureTower towerGen = new StructureTower();
 	private StructureTemple templeGen = new StructureTemple();
 	private StructureCity cityGen = new StructureCity();
@@ -181,8 +179,6 @@ public class ChunkGeneratorOmothol implements IChunkGenerator
 		setBlocksInChunk(x, z, primer);
 		replaceBlocksForBiome(primer);
 
-		omotholGenerator.generate(worldObj, x, z, primer);
-
 		Chunk chunk = new Chunk(worldObj, primer, x, z);
 		byte[] abyte = chunk.getBiomeArray();
 
@@ -290,10 +286,11 @@ public class ChunkGeneratorOmothol implements IChunkGenerator
 		int k = x * 16;
 		int l = z * 16;
 		Biome Biome = worldObj.getBiome(new BlockPos(k + 16, 0, l + 16));
-
-		ChunkPos chunkcoordintpair = new ChunkPos(x, z);
-
-		omotholGenerator.generateStructure(worldObj, rand, chunkcoordintpair);
+	
+		if(x == 0 && z == 0) { //TODO revise this to something close to no cascading chunkgen
+			StructureJzaharTemple temple = new StructureJzaharTemple();
+			temple.generate(worldObj, rand, new BlockPos(4, worldObj.getHeight(4, 7), 7));
+		}
 
 		for(int i = 0; i < 1; i++) {
 			int Xcoord2 = k + rand.nextInt(16) + 8;
@@ -359,8 +356,6 @@ public class ChunkGeneratorOmothol implements IChunkGenerator
 
 	@Override
 	public void recreateStructures(Chunk chunk, int x, int z) {
-
-		omotholGenerator.generate(worldObj, x, z, null);
 
 	}
 

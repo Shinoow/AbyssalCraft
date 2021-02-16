@@ -36,7 +36,7 @@ public class BlockCrystalCluster extends BlockACBasic implements ICrystalBlock {
 	public static final Map<EnumCrystalType2, Block> VARIANTS_2 = new HashMap<>();
 
 	public int index;
-	
+
 	public BlockCrystalCluster() {
 		super(Material.ROCK, "pickaxe", 3, 4.0F, 8.0F, SoundType.GLASS);
 		setCreativeTab(ACTabs.tabCrystals);
@@ -74,16 +74,16 @@ public class BlockCrystalCluster extends BlockACBasic implements ICrystalBlock {
 		return false;
 	}
 
-//	@Override
-//	public int damageDropped (IBlockState state) {
-//		return state.getValue(TYPE).getMetadata();
-//	}
-//
-//	@Override
-//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-//		for(int i = 0; i < EnumCrystalType.values().length; i++)
-//			par3List.add(new ItemStack(this, 1, i));
-//	}
+	//	@Override
+	//	public int damageDropped (IBlockState state) {
+	//		return state.getValue(TYPE).getMetadata();
+	//	}
+	//
+	//	@Override
+	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+	//		for(int i = 0; i < EnumCrystalType.values().length; i++)
+	//			par3List.add(new ItemStack(this, 1, i));
+	//	}
 
 	@Override
 	public int getColor(ItemStack stack) {
@@ -160,7 +160,7 @@ public class BlockCrystalCluster extends BlockACBasic implements ICrystalBlock {
 				META_LOOKUP[enumtype.getMetadata()] = enumtype;
 		}
 	}
-	
+
 	public enum EnumCrystalType2 implements IStringSerializable
 	{
 		TIN(0, "tin"),

@@ -53,6 +53,7 @@ public class BlockHouse extends Block {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean onBlockActivated(World par1World, BlockPos pos, IBlockState state, EntityPlayer par5EntityPlayer, EnumHand hand, EnumFacing side, float par7, float par8, float par9)
 	{
 		if(EntityUtil.isPlayerCoralium(par5EntityPlayer)){

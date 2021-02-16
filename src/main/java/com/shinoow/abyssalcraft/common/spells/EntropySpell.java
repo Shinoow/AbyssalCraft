@@ -46,23 +46,18 @@ public class EntropySpell extends Spell {
 		return false;
 	}
 
-	private IBlockState getDegradation(IBlockState state){//TODO uncomment and clean up
-		//		if(state.getBlock() == ACBlocks.stone)
-		//			switch(state.getValue(BlockACStone.TYPE)){
-		//			case ABYSSALNITE_STONE:
-		//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.ABYSSALNITE_STONE);
-		//			case ABYSSAL_STONE:
-		//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.ABYSSAL_STONE);
-		//			case CORALIUM_STONE:
-		//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.CORALIUM_STONE);
-		//			case DARKSTONE:
-		//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.DARKSTONE);
-		//			case DREADSTONE:
-		//				return ACBlocks.cobblestone.getDefaultState().withProperty(BlockACCobblestone.TYPE, EnumCobblestoneType.DREADSTONE);
-		//			default:
-		//				return null;
-		//			}
-		if(state.getBlock() == Blocks.STONE)
+	private IBlockState getDegradation(IBlockState state){
+		if(state.getBlock() == ACBlocks.darkstone)
+			return ACBlocks.darkstone_cobblestone.getDefaultState();
+		else if(state.getBlock() == ACBlocks.abyssal_stone)
+			return ACBlocks.abyssal_cobblestone.getDefaultState();
+		else if(state.getBlock() == ACBlocks.coralium_stone)
+			return ACBlocks.coralium_cobblestone.getDefaultState();
+		else if(state.getBlock() == ACBlocks.dreadstone)
+			return ACBlocks.dreadstone_cobblestone.getDefaultState();
+		else if(state.getBlock() == ACBlocks.abyssalnite_stone)
+			return ACBlocks.abyssalnite_cobblestone.getDefaultState();
+		else if(state.getBlock() == Blocks.STONE)
 			return Blocks.COBBLESTONE.getDefaultState();
 		else if(state.getBlock() instanceof BlockACCobblestone || state.getBlock() == Blocks.COBBLESTONE)
 			return Blocks.GRAVEL.getDefaultState();
