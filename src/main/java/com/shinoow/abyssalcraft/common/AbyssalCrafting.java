@@ -88,6 +88,7 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssalnite_cobblestone), new ItemStack(ACBlocks.abyssalnite_stone), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.coralium_cobblestone), new ItemStack(ACBlocks.coralium_stone), 0.1F);
 		GameRegistry.addSmelting(ACBlocks.dreadlands_log, new ItemStack(ACItems.charcoal), 1F);
+		GameRegistry.addSmelting(new ItemStack(ACItems.generic_meat), new ItemStack(ACItems.cooked_generic_meat), 0.35F);
 	}
 
 	private static void addItemSmelting(){
@@ -469,6 +470,16 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.DYE, 1, 4), new ItemStack(ACItems.crystal, 6, 21), new ItemStack(ACItems.crystal, 4, 2));
 		AbyssalCraftAPI.addMaterialization("oreLapis", new ItemStack(ACItems.crystal, 7, 21), new ItemStack(ACItems.crystal, 4, 2), new ItemStack(ACItems.crystal, 1, 23));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.LAPIS_BLOCK), new ItemStack(ACItems.crystal, 54, 21), new ItemStack(ACItems.crystal, 36, 2));
+		if(OreDictionary.getOres("listAllmeatraw", false).size() > 1) { //more than generic meat in the list
+			AbyssalCraftAPI.addMaterialization("listAllmeatraw", new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
+		} else {
+			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.BEEF), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
+			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.CHICKEN), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
+			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.PORKCHOP), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
+			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.MUTTON), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
+			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.RABBIT), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
+			AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.generic_meat), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
+		}
 	}
 
 	private static void addRitualRecipes(){

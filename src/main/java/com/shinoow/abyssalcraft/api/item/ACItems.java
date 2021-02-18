@@ -230,5 +230,7 @@ public class ACItems {
 	public static Item configurator_shard;
 	public static Item silver_key;
 	public static Item book_of_many_faces;
+	public static Item generic_meat;
+	public static Item cooked_generic_meat;
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
 }

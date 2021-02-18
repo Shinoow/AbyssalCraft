@@ -1412,6 +1412,8 @@ item.configurator_shard.2.name=Fragment de Tablette Spirituelle #3
 item.configurator_shard.3.name=Fragment de Tablette Spirituelle #4
 item.silver_key.name=Silver Key
 item.face_book.name=Book of Many Faces
+item.generic_meat.name=Generic Meat
+item.cooked_generic_meat.name=Cooked Generic Meat
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Goule des Profondeurs

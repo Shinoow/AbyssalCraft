@@ -1412,6 +1412,8 @@ item.configurator_shard.2.name=Spirit Tablet Shard #3
 item.configurator_shard.3.name=Spirit Tablet Shard #4
 item.silver_key.name=Silver Key
 item.face_book.name=Book of Many Faces
+item.generic_meat.name=Generic Meat
+item.cooked_generic_meat.name=Cooked Generic Meat
 
 #實體
 entity.abyssalcraft.depthsghoul.name=深淵食屍鬼

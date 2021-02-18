@@ -31,6 +31,7 @@ import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDoor;
+import net.minecraft.item.ItemFood;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.event.*;
@@ -246,6 +247,10 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_leggings = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.LEGS, "ethaxiumlegs").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.ethaxium_boots = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.FEET, "ethaxiumboots").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 
+		//Food
+		ACItems.generic_meat = new ItemFood(5, 0.5f, true).setUnlocalizedName("generic_meat").setCreativeTab(ACTabs.tabFood);
+		ACItems.cooked_generic_meat = new ItemFood(10, 1.0f, true).setUnlocalizedName("cooked_generic_meat").setCreativeTab(ACTabs.tabFood);
+		
 		registerItem(devsword, "devsword");
 		registerItem(shoggoth_projectile, "shoggoth_projectile");
 
@@ -425,6 +430,8 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.configurator_shard, "configurator_shard");
 		registerItem(ACItems.silver_key, "silver_key");
 		registerItem(ACItems.book_of_many_faces, "face_book");
+		registerItem(ACItems.generic_meat, "generic_meat");
+		registerItem(ACItems.cooked_generic_meat, "cooked_generic_meat");
 		//		registerItem(shadowPlate, "shadowplate");
 	}
 

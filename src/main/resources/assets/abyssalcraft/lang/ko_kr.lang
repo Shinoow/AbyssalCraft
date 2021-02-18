@@ -1422,6 +1422,8 @@ item.configurator_shard.0.name=영혼 태블릿 조각 #1
 item.configurator_shard.1.name=영혼 태블릿 조각 #2
 item.configurator_shard.2.name=영혼 태블릿 조각 #3
 item.configurator_shard.3.name=영혼 태블릿 조각 #4
+item.generic_meat.name=Generic Meat
+item.cooked_generic_meat.name=Cooked Generic Meat
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=심연의 구울

@@ -500,7 +500,7 @@ public class AbyssalCraftAPI {
 	 * @since 1.27.0
 	 */
 	public static void addMaterialization(String output, ItemStack...input) {
-		OreDictionary.getOres(output).forEach(stack -> {
+		OreDictionary.getOres(output, false).forEach(stack -> {
 			if(stack.getHasSubtypes() && stack.getMetadata() == OreDictionary.WILDCARD_VALUE) {
 				NonNullList<ItemStack> list = NonNullList.create();
 				stack.getItem().getSubItems(stack.getItem().getCreativeTab(), list);

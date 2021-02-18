@@ -1412,6 +1412,8 @@ item.configurator_shard.2.name=灵魂石板碎片 #3
 item.configurator_shard.3.name=灵魂石板碎片 #4
 item.silver_key.name=银钥匙
 item.face_book.name=千面之书
+item.generic_meat.name=Generic Meat
+item.cooked_generic_meat.name=Cooked Generic Meat
 
 #实体
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
