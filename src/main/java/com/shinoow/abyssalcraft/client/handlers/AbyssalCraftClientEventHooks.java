@@ -693,6 +693,8 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.configurator_shard, 3, "configurator_shard_3");
 		registerItemRender(ACItems.silver_key, 0);
 		registerItemRender(ACItems.book_of_many_faces, 0);
+		registerItemRender(ACItems.generic_meat, 0);
+		registerItemRender(ACItems.cooked_generic_meat, 0);
 
 		registerItemRender(ACBlocks.darkstone, 0, "darkstone");
 		registerItemRender(ACBlocks.abyssal_stone, 0, "abystone");
