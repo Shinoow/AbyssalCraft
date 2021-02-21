@@ -99,12 +99,6 @@ public class EntityShadowCreature extends EntityMob implements IOmotholEntity {
 	}
 
 	@Override
-	protected Item getDropItem()
-	{
-		return ACItems.shadow_fragment;
-	}
-
-	@Override
 	protected ResourceLocation getLootTable(){
 		return ACLoot.ENTITY_SHADOW_CREATURE;
 	}

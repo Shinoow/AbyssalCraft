@@ -72,15 +72,10 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 	{
 		super.applyEntityAttributes();
 
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(42.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
-
-		if(ACConfig.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
-		} else {
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
-		}
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 120.0D : 60.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 20.0D : 10.0D);
 	}
 
 	@Override
@@ -112,12 +107,6 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 	protected SoundEvent getDeathSound()
 	{
 		return ACSounds.shadow_death;
-	}
-
-	@Override
-	protected Item getDropItem()
-	{
-		return ACItems.shadow_gem;
 	}
 
 	@Override
