@@ -139,7 +139,7 @@ public class ItemGatewayKey extends ItemACBasic {
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
-		if(!worldIn.isRemote && getKeyType() == 3) {
+		if(getKeyType() == 3) {
 			IBlockState state = worldIn.getBlockState(pos);
 			if(state.getBlock() == ACBlocks.portal_anchor) {
 				isUsing = true;
@@ -160,11 +160,13 @@ public class ItemGatewayKey extends ItemACBasic {
 						worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(BlockPortalAnchor.ACTIVE), 2);
 						TileEntity tile = worldIn.getTileEntity(pos);
 						((TileEntityPortalAnchor) tile).setDestination(dimension);
-						EntityPortal portal = new EntityPortal(worldIn);
-						portal.setDestination(dimension);
-						portal.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, 0, 0);
-						worldIn.spawnEntity(portal);
-					} else
+						if(!worldIn.isRemote) {
+							EntityPortal portal = new EntityPortal(worldIn);
+							portal.setDestination(dimension);
+							portal.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, 0, 0);
+							worldIn.spawnEntity(portal);
+						}
+					} else if(!worldIn.isRemote)
 						player.sendStatusMessage(new TextComponentTranslation("message.portalplacer.error.2"), true);
 				}
 

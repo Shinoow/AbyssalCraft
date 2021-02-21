@@ -95,7 +95,8 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(80.0D);
+		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 1000.0D : 500.0D);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 60.0D : 30.0D);
 
@@ -186,12 +187,6 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	protected float getSoundVolume()
 	{
 		return 5.0F;
-	}
-
-	@Override
-	public int getTotalArmorValue()
-	{
-		return 10;
 	}
 
 	@Override
