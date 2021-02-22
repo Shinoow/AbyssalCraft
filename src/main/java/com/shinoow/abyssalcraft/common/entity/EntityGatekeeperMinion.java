@@ -11,10 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.UUID;
 
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -62,14 +62,8 @@ public class EntityGatekeeperMinion extends EntityMob implements IOmotholEntity 
 
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
-
-		if(ACConfig.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(500.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(36.0D);
-		} else {
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(250.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(18.0D);
-		}
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 200.0D : 100.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 36.0D : 18.0D);
 	}
 
 	@Override
@@ -115,35 +109,12 @@ public class EntityGatekeeperMinion extends EntityMob implements IOmotholEntity 
 		if(par1DamageSource.getTrueSource() != null && par1DamageSource.getTrueSource() instanceof EntityLivingBase)
 			enemy = (EntityLivingBase) par1DamageSource.getTrueSource();
 		if(rand.nextInt(10) == 0){
-			List<EntityRemnant> remnants = world.getEntitiesWithinAABB(EntityRemnant.class, getEntityBoundingBox().grow(16D, 16D, 16D));
-			if(remnants != null)
-				if(enemy != null){
-					Iterator<EntityRemnant> iter = remnants.iterator();
-					while(iter.hasNext())
-						iter.next().enrage(false, enemy);
-				}
+			if(enemy != null)
+				for(EntityRemnant rem : world.getEntitiesWithinAABB(EntityRemnant.class, getEntityBoundingBox().grow(16D, 16D, 16D)))
+					rem.enrage(false, enemy);
 			playSound(ACSounds.remnant_scream, 3F, 1F);
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
-	}
-
-	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
-		ItemStack item = new ItemStack(ACItems.eldritch_scale);
-
-		if(rand.nextInt(10) == 0) item = new ItemStack(ACItems.ethaxium_ingot);
-
-		if (item != null)
-		{
-			int i = rand.nextInt(3);
-
-			if (par2 > 0)
-				i += rand.nextInt(par2 + 1);
-
-			for (int j = 0; j < i; ++j)
-				entityDropItem(item, 0);
-		}
 	}
 
 	@Override

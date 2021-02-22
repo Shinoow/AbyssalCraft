@@ -99,8 +99,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		super.applyEntityAttributes();
 
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
-		if(ACConfig.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(64.0D);
-		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(32.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 48.0D : 24.0D);
 	}
 
 	@Override

@@ -30,7 +30,6 @@ import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.*;
@@ -50,7 +49,6 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -59,6 +57,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	private static final DataParameter<Integer> PROFESSION = EntityDataManager.<Integer>createKey(EntityRemnant.class, DataSerializers.VARINT);
 	private EntityPlayer tradingPlayer;
 	private MerchantRecipeList tradingList;
+	private Class<? extends EntityLivingBase> target;
 	private int timeUntilReset;
 	private boolean needsInitilization;
 	private int wealth;
@@ -80,6 +79,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
 		tasks.addTask(8, new EntityAIWorship(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 20, true, false, entity -> entity.getClass() == target));
 		setSize(0.6F, 1.95F);
 	}
 
@@ -90,14 +90,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
-
-		if(ACConfig.hardcoreMode){
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
-		} else {
-			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
-		}
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 100.0D : 50.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 20.0D: 10.0D);
 	}
 
 	@Override
@@ -246,12 +240,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	 */
 	public void enrage(boolean call){
 		if(call){
-			List<EntityRemnant> friends = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(16D, 16D, 16D));
-			if(friends != null){
-				Iterator<EntityRemnant> iter = friends.iterator();
-				while(iter.hasNext())
-					iter.next().enrage(false, getAttackTarget());
-			}
+			for(EntityRemnant rem : world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(16D, 16D, 16D)))
+				rem.enrage(false, getAttackTarget());
+			
 			playSound(ACSounds.remnant_scream, 3F, 1F);
 		}
 
@@ -281,9 +272,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 			timer--;
 			if(timer <= 0)
 				timer = 0;
-		}
-
-		if(!isAngry()) clearAttackAI();
+		} else target = null;
 	}
 
 	@Override
@@ -322,34 +311,10 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		timer = 600;
 	}
 
-	private void clearAttackAI(){
-		if(getAttackTarget() != null)
-			setAttackTarget(null);
-		EntityAINearestAttackableTarget ai = fetchAI();
-		if(ai == null) return;
-		else targetTasks.removeTask(ai);
-		if(targetTasks.taskEntries.size() > 1)
-			clearAttackAI();
-	}
-
 	private void setAttackAI(){
 		if(getAttackTarget() != null){
-			Class temp = getAttackTarget().getClass();
-			EntityAINearestAttackableTarget ai = fetchAI();
-			if(ai != null){
-				if(temp != ReflectionHelper.findField(ai.getClass(), "targetClass", "field_75307_b").getDeclaringClass()){
-					targetTasks.removeTask(ai);
-					targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, temp, true));
-				}
-			} else targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, temp, true));
+			target = getAttackTarget().getClass();
 		}
-	}
-
-	private EntityAINearestAttackableTarget fetchAI(){
-		for(EntityAITaskEntry entry : targetTasks.taskEntries)
-			if(entry.action instanceof EntityAINearestAttackableTarget)
-				return (EntityAINearestAttackableTarget) entry.action;
-		return null;
 	}
 
 	@Override
