@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -101,7 +101,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		if(!(entity instanceof EntityLesserShoggoth)){
+		if(!(entity instanceof EntityShoggothBase)){
 			entity.motionX *= 0.4D;
 			entity.motionZ *= 0.4D;
 			if(entity instanceof EntityLivingBase && !world.isRemote){

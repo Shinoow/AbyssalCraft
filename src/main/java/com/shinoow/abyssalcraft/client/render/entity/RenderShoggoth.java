@@ -12,8 +12,8 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelLesserShoggoth;
-import com.shinoow.abyssalcraft.client.render.entity.layers.LayerLesserShoggothEyes;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerShoggothEyes;
+import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderLesserShoggoth extends RenderLiving<EntityLesserShoggoth> {
+public class RenderShoggoth extends RenderLiving<EntityShoggothBase> {
 
 	private static final ResourceLocation shoggothResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/lessershoggoth.png");
 	private static final ResourceLocation abyssalResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/abyssalshoggoth.png");
@@ -33,14 +33,14 @@ public class RenderLesserShoggoth extends RenderLiving<EntityLesserShoggoth> {
 	private static final ResourceLocation omotholResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/omotholshoggoth.png");
 	private static final ResourceLocation darkResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/shadowshoggoth.png");
 
-	public RenderLesserShoggoth(RenderManager manager)
+	public RenderShoggoth(RenderManager manager, int size, float shadowSize)
 	{
-		super(manager, new ModelLesserShoggoth(), 1.6F);
-		addLayer(new LayerLesserShoggothEyes(this));
+		super(manager, new ModelLesserShoggoth(size), shadowSize);
+		addLayer(new LayerShoggothEyes(this));
 	}
 
 	@Override
-	protected void renderModel(EntityLesserShoggoth entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
+	protected void renderModel(EntityShoggothBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
 	{
 		if(entitylivingbaseIn.getShoggothType() < 4){
 			super.renderModel(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
@@ -55,7 +55,7 @@ public class RenderLesserShoggoth extends RenderLiving<EntityLesserShoggoth> {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityLesserShoggoth par1EntityLiving) {
+	protected ResourceLocation getEntityTexture(EntityShoggothBase par1EntityLiving) {
 
 		switch (par1EntityLiving.getShoggothType())
 		{

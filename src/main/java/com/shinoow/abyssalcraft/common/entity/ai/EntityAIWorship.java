@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.entity.ai;
 
 import com.shinoow.abyssalcraft.common.blocks.BlockDecorativeStatue;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 
 import net.minecraft.entity.EntityLiving;
@@ -87,7 +87,7 @@ public class EntityAIWorship extends EntityAIBase
 		if(statuePos != null) {
 			idleEntity.getNavigator().tryMoveToXYZ(statuePos.getX() + (idleEntity.getRNG().nextBoolean() ? 1 : -1), idleEntity.posY, statuePos.getZ()+ (idleEntity.getRNG().nextBoolean() ? 1 : -1), 0.5F);
 			if(!idleEntity.getEntityWorld().isRemote)
-				idleEntity.playSound(ACSounds.remnant_priest_chant, 1.0F, idleEntity instanceof EntityLesserShoggoth ? idleEntity.isChild() ? 1.5F : 0.8F : (idleEntity.getRNG().nextFloat() - idleEntity.getRNG().nextFloat()) * 0.2F + 1.0F);
+				idleEntity.playSound(ACSounds.remnant_priest_chant, 1.0F, idleEntity instanceof EntityShoggothBase ? idleEntity.isChild() ? 1.5F : 0.8F : (idleEntity.getRNG().nextFloat() - idleEntity.getRNG().nextFloat()) * 0.2F + 1.0F);
 		}
 	}
 

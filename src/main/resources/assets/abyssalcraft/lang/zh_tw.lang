@@ -1465,6 +1465,8 @@ entity.abyssalcraft.evilsheep.name=羊
 entity.abyssalcraft.demonsheep.name=惡魔羊
 entity.abyssalcraft.coraliumsquid.name=被珊瑚感染的烏賊
 entity.abyssalcraft.shuboffspring.name=Dark Offspring
+entity.abyssalcraft.shoggoth.name=Shoggoth
+entity.abyssalcraft.greatershoggoth.name=Greater Shoggoth
 
 #藥水
 potion.Cplague=珊瑚侵染

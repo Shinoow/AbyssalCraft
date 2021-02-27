@@ -1475,6 +1475,8 @@ entity.abyssalcraft.evilsheep.name=양
 entity.abyssalcraft.demonsheep.name=데몬 양
 entity.abyssalcraft.coraliumsquid.name=코랄리움에 감염된 오징어
 entity.abyssalcraft.shuboffspring.name=어둠의 자손
+entity.abyssalcraft.shoggoth.name=Shoggoth
+entity.abyssalcraft.greatershoggoth.name=Greater Shoggoth
 
 #Potions
 potion.Cplague=코랄리움 역병

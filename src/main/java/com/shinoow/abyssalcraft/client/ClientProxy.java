@@ -114,7 +114,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterDreadSpawn.class, RenderGreaterDreadSpawn::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityLesserDreadbeast.class, RenderLesserDreadbeast::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDreadSlug.class, manager -> new RenderSnowball(manager, ACItems.dread_fragment, Minecraft.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, RenderLesserShoggoth::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityLesserShoggoth.class, manager -> new RenderShoggoth(manager, 0, 0.8F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityEvilCow.class, RenderEvilCow::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityEvilChicken.class, RenderEvilChicken::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDemonCow.class, RenderDemonCow::new);
@@ -131,6 +131,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityShubOffspring.class, RenderShubOffspring::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpiritItem.class, manager -> new RenderEntityItem(manager, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPortal.class, RenderPortal::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityShoggoth.class, manager -> new RenderShoggoth(manager, 1, 1.0F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterShoggoth.class, manager -> new RenderShoggoth(manager, 2, 1.6F));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, RenderAntiAbyssalZombie::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, RenderAntiBat::new);

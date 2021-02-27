@@ -1466,6 +1466,8 @@ entity.abyssalcraft.evilsheep.name=Овца
 entity.abyssalcraft.demonsheep.name=Демоническая овца
 entity.abyssalcraft.coraliumsquid.name=Коралловый заражённый спрут
 entity.abyssalcraft.shuboffspring.name=Тёмный отпрыск
+entity.abyssalcraft.shoggoth.name=Shoggoth
+entity.abyssalcraft.greatershoggoth.name=Greater Shoggoth
 
 #Potions
 potion.Cplague=Коралловая чума

@@ -1465,6 +1465,8 @@ entity.abyssalcraft.evilsheep.name=Mouton
 entity.abyssalcraft.demonsheep.name=Mouton Démoniaque
 entity.abyssalcraft.coraliumsquid.name=Poulpe Contaminé au Coralium
 entity.abyssalcraft.shuboffspring.name=Chevreau de Shub-Niggurath
+entity.abyssalcraft.shoggoth.name=Shoggoth
+entity.abyssalcraft.greatershoggoth.name=Greater Shoggoth
 
 #Potions
 potion.Cplague=Pandémie Coralium

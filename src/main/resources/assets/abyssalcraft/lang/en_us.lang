@@ -1465,6 +1465,8 @@ entity.abyssalcraft.evilsheep.name=Sheep
 entity.abyssalcraft.demonsheep.name=Demon Sheep
 entity.abyssalcraft.coraliumsquid.name=Coralium Infested Squid
 entity.abyssalcraft.shuboffspring.name=Dark Offspring
+entity.abyssalcraft.shoggoth.name=Shoggoth
+entity.abyssalcraft.greatershoggoth.name=Greater Shoggoth
 
 #Potions
 potion.Cplague=Coralium Plague

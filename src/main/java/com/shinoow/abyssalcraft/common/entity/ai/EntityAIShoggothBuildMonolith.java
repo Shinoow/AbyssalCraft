@@ -18,7 +18,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenShoggothMonolith;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
@@ -29,15 +29,15 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
+public class EntityAIShoggothBuildMonolith extends EntityAIBase {
 
-	private EntityLesserShoggoth shoggoth;
+	private EntityShoggothBase shoggoth;
 	private double locationX, locationY, locationZ;
 	private final World world;
-	private List<EntityLesserShoggoth> shoggoths;
+	private List<EntityShoggothBase> shoggoths;
 	private int attemptTimer;
 
-	public EntityAILesserShoggothBuildMonolith(EntityLesserShoggoth shoggoth) {
+	public EntityAIShoggothBuildMonolith(EntityShoggothBase shoggoth) {
 		this.shoggoth = shoggoth;
 		world = shoggoth.world;
 		shoggoths = new ArrayList<>();
@@ -58,8 +58,8 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 				return false;
 			else {
 
-				List<EntityLesserShoggoth> list = world.getEntitiesWithinAABB(shoggoth.getClass(), shoggoth.getEntityBoundingBox().grow(16D, 16D, 16D), e -> !e.equals(shoggoth) && !e.isAssisting && !e.isBuilding);
-				for(EntityLesserShoggoth shoggoth1 : list) {
+				List<EntityShoggothBase> list = world.getEntitiesWithinAABB(shoggoth.getClass(), shoggoth.getEntityBoundingBox().grow(16D, 16D, 16D), e -> !e.equals(shoggoth) && !e.isAssisting && !e.isBuilding);
+				for(EntityShoggothBase shoggoth1 : list) {
 					if(shoggoths.size() == 3)
 						break;
 					if(shoggoth1.getDistance(shoggoth) <= 12) {
@@ -113,7 +113,7 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 		--attemptTimer;
 		if(shoggoth.getDistance(locationX, locationY, locationZ) <= 8 && allShoggothsNearby()) {
 			shoggoth.resetMonolithTimer();
-			for(EntityLesserShoggoth shoggoth : world.getEntitiesWithinAABB(shoggoth.getClass(), shoggoth.getEntityBoundingBox().grow(32D, 32D, 32D)))
+			for(EntityShoggothBase shoggoth : world.getEntitiesWithinAABB(shoggoth.getClass(), shoggoth.getEntityBoundingBox().grow(32D, 32D, 32D)))
 				if(shoggoth.getDistance(locationX, locationY, locationZ) <= 5)
 					shoggoth.getNavigator().tryMoveToXYZ(locationX + (shoggoth.getRNG().nextBoolean() ? 7 : -7), shoggoth.posY, locationZ + (shoggoth.getRNG().nextBoolean() ? 7 : -7), 0.7F);
 			if(!world.isRemote) {
@@ -129,7 +129,7 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 	@Override
 	public void resetTask()
 	{
-		for(EntityLesserShoggoth shoggoth1 : shoggoths)
+		for(EntityShoggothBase shoggoth1 : shoggoths)
 			shoggoth1.isBuilding = shoggoth1.isAssisting = false;
 		shoggoths.clear();
 		shoggoth.isBuilding = shoggoth.isAssisting = false;
@@ -140,7 +140,7 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 
 		boolean temp = true;
 
-		for(EntityLesserShoggoth shoggoth1 : shoggoths)
+		for(EntityShoggothBase shoggoth1 : shoggoths)
 			if(shoggoth1.getDistance(shoggoth.posX, shoggoth.posY, shoggoth.posZ) > 8)
 				temp = false;
 

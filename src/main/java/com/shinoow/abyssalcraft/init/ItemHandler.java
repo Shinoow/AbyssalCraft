@@ -250,7 +250,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		//Food
 		ACItems.generic_meat = new ItemFood(4, 0.4f, true).setUnlocalizedName("generic_meat").setCreativeTab(ACTabs.tabFood);
 		ACItems.cooked_generic_meat = new ItemFood(9, 0.9f, true).setUnlocalizedName("cooked_generic_meat").setCreativeTab(ACTabs.tabFood);
-		
+
 		registerItem(devsword, "devsword");
 		registerItem(shoggoth_projectile, "shoggoth_projectile");
 

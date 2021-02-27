@@ -242,7 +242,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		if(call){
 			for(EntityRemnant rem : world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(16D, 16D, 16D)))
 				rem.enrage(false, getAttackTarget());
-			
+
 			playSound(ACSounds.remnant_scream, 3F, 1F);
 		}
 
@@ -312,9 +312,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	}
 
 	private void setAttackAI(){
-		if(getAttackTarget() != null){
+		if(getAttackTarget() != null)
 			target = getAttackTarget().getClass();
-		}
 	}
 
 	@Override

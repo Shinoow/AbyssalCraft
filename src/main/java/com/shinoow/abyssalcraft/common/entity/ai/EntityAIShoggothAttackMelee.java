@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.ai;
 
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -22,10 +22,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityAILesserShoggothAttackMelee extends EntityAIBase
+public class EntityAIShoggothAttackMelee extends EntityAIBase
 {
 	World world;
-	protected EntityLesserShoggoth attacker;
+	protected EntityShoggothBase attacker;
 	/** An amount of decrementing ticks that allows the entity to attack once the tick reaches 0. */
 	protected int attackTick, rangedAttackTick;
 	/** The speed with which the mob will approach the target */
@@ -42,7 +42,7 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 	private int failedPathFindingPenalty = 0;
 	private boolean canPenalize = false;
 
-	public EntityAILesserShoggothAttackMelee(EntityLesserShoggoth creature, double speedIn, boolean useLongMemory)
+	public EntityAIShoggothAttackMelee(EntityShoggothBase creature, double speedIn, boolean useLongMemory)
 	{
 		attacker = creature;
 		world = creature.world;
@@ -166,7 +166,7 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 		}
 
 		attackTick = Math.max(attackTick - 1, 0);
-		if((!attacker.isChild() || ACConfig.hardcoreMode) && ACConfig.acidSpitFrequency > 0)
+		if((attacker.isBig() || ACConfig.hardcoreMode) && ACConfig.acidSpitFrequency > 0)
 			rangedAttackTick = Math.max(rangedAttackTick - 1, 0);
 		checkAndPerformAttack(entitylivingbase, d0);
 	}
@@ -186,7 +186,7 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 				if(attacker.motionX == 0 && attacker.motionZ == 0 && world.getGameRules().getBoolean("mobGriefing"))
 					attacker.sprayAcid(p_190102_1_.posY >= attacker.posY);
 			}
-		if(rangedAttackTick <= 0 && (!attacker.isChild() || ACConfig.hardcoreMode) && ACConfig.acidSpitFrequency > 0)
+		if(rangedAttackTick <= 0 && (attacker.isBig() || ACConfig.hardcoreMode) && ACConfig.acidSpitFrequency > 0)
 			if(attacker.getDistanceSq(p_190102_1_) > 32D) {
 				rangedAttackTick = ACConfig.acidSpitFrequency;
 				attacker.sprayAcidAt(p_190102_1_);

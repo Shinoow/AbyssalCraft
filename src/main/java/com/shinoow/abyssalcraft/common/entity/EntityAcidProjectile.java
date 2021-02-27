@@ -79,7 +79,7 @@ public class EntityAcidProjectile extends EntityThrowable {
 				if(ACConfig.hardcoreMode && mop.entityHit instanceof EntityPlayer)
 					mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()).setDamageBypassesArmor().setDamageIsAbsolute(), 1F);
 
-				if(mop.entityHit instanceof EntityLivingBase && !(mop.entityHit instanceof EntityLesserShoggoth)){
+				if(mop.entityHit instanceof EntityLivingBase && !(mop.entityHit instanceof EntityShoggothBase)){
 
 					EntityLivingBase entity = (EntityLivingBase)mop.entityHit;
 

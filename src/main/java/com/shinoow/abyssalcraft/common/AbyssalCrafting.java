@@ -470,9 +470,9 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.DYE, 1, 4), new ItemStack(ACItems.crystal, 6, 21), new ItemStack(ACItems.crystal, 4, 2));
 		AbyssalCraftAPI.addMaterialization("oreLapis", new ItemStack(ACItems.crystal, 7, 21), new ItemStack(ACItems.crystal, 4, 2), new ItemStack(ACItems.crystal, 1, 23));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.LAPIS_BLOCK), new ItemStack(ACItems.crystal, 54, 21), new ItemStack(ACItems.crystal, 36, 2));
-		if(OreDictionary.getOres("listAllmeatraw", false).size() > 1) { //more than generic meat in the list
+		if(OreDictionary.getOres("listAllmeatraw", false).size() > 1)
 			AbyssalCraftAPI.addMaterialization("listAllmeatraw", new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
-		} else {
+		else {
 			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.BEEF), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
 			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.CHICKEN), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
 			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.PORKCHOP), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));

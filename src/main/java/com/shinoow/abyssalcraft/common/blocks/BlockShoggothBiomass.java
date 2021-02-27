@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityShoggothBiomass;
-import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.BlockContainer;
@@ -77,7 +77,7 @@ public class BlockShoggothBiomass extends BlockContainer {
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		if(!(entity instanceof EntityLesserShoggoth)){
+		if(!(entity instanceof EntityShoggothBase)){
 			entity.motionX *= 0.4D;
 			entity.motionZ *= 0.4D;
 		}

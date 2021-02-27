@@ -1465,6 +1465,8 @@ entity.abyssalcraft.evilsheep.name=Oveja
 entity.abyssalcraft.demonsheep.name=Oveja Demonio
 entity.abyssalcraft.coraliumsquid.name=Coralium Infested Squid
 entity.abyssalcraft.shuboffspring.name=La descendencia oscura
+entity.abyssalcraft.shoggoth.name=Shoggoth
+entity.abyssalcraft.greatershoggoth.name=Greater Shoggoth
 
 #Potions
 potion.Cplague=Peste de Coralium

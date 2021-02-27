@@ -286,7 +286,7 @@ public class ChunkGeneratorOmothol implements IChunkGenerator
 		int k = x * 16;
 		int l = z * 16;
 		Biome Biome = worldObj.getBiome(new BlockPos(k + 16, 0, l + 16));
-	
+
 		if(x == 0 && z == 0) { //TODO revise this to something close to no cascading chunkgen
 			StructureJzaharTemple temple = new StructureJzaharTemple();
 			temple.generate(worldObj, rand, new BlockPos(4, worldObj.getHeight(4, 7), 7));
