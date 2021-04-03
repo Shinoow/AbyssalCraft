@@ -47,21 +47,6 @@ public class EntityLesserShoggoth extends EntityShoggothBase {
 		double offsetx = -Math.sin(a);
 		double offsetz = Math.cos(a);
 
-		//		if(!isChild()) {
-		//			//sizes
-		//			shoggothBody.height = 2.2F;
-		//			shoggothBody.width = 1.8F;
-		//
-		//			shoggothHead.width = 1.6F;
-		//			shoggothHead.height = 1.2F;
-		//
-		//			//rotations
-		//			shoggothBody.onUpdate();
-		//			shoggothBody.setLocationAndAngles(posX - offsetx * 0.5F, posY, posZ - offsetz * 0.5F, 0.0F, 0.0F);
-		//
-		//			shoggothHead.onUpdate();
-		//			shoggothHead.setLocationAndAngles(posX - offsetx * -0.5d, posY + 1.5f, posZ - offsetz * -0.5d, 0.0F, 0.0F);
-		//		} else {
 		//sizes
 		shoggothBody.height = 1.1F;
 		shoggothBody.width = 0.9F;
@@ -75,7 +60,6 @@ public class EntityLesserShoggoth extends EntityShoggothBase {
 
 		shoggothHead.onUpdate();
 		shoggothHead.setLocationAndAngles(posX - offsetx * -0.25d, posY + 0.75f, posZ - offsetz * -0.25d, 0.0F, 0.0F);
-		//		}
 	}
 
 	@Override
