@@ -1412,8 +1412,8 @@ item.configurator_shard.2.name=灵魂石板碎片 #3
 item.configurator_shard.3.name=灵魂石板碎片 #4
 item.silver_key.name=银钥匙
 item.face_book.name=千面之书
-item.generic_meat.name=Generic Meat
-item.cooked_generic_meat.name=Cooked Generic Meat
+item.generic_meat.name=泛制肉
+item.cooked_generic_meat.name=熟泛制肉
 
 #实体
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼
@@ -1465,8 +1465,8 @@ entity.abyssalcraft.evilsheep.name=羊
 entity.abyssalcraft.demonsheep.name=恶魔羊
 entity.abyssalcraft.coraliumsquid.name=被珊瑚侵染的鱿鱼
 entity.abyssalcraft.shuboffspring.name=黑暗幼崽
-entity.abyssalcraft.shoggoth.name=Shoggoth
-entity.abyssalcraft.greatershoggoth.name=Greater Shoggoth
+entity.abyssalcraft.shoggoth.name=修格斯
+entity.abyssalcraft.greatershoggoth.name=大型修格斯
 
 #药水
 potion.Cplague=珊瑚瘟疫
