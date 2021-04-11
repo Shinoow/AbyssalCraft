@@ -114,7 +114,7 @@ public class InitHandler implements ILifeCycleHandler {
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		AbyssalCraft.metadata = event.getModMetadata();
-		AbyssalCraft.metadata.description += "\n\n\u00a76Supporters: "+getSupporterList()+"\u00a7r";
+		getSupporterList();
 
 		MinecraftForge.EVENT_BUS.register(new AbyssalCraftEventHooks());
 		MinecraftForge.TERRAIN_GEN_BUS.register(new AbyssalCraftEventHooks());
@@ -708,20 +708,24 @@ public class InitHandler implements ILifeCycleHandler {
 		return Arrays.stream(itemTransportBlacklist).anyMatch(s -> s.equals(te));
 	}
 
-	private String getSupporterList(){
-		BufferedReader nameFile;
-		String names = "";
-		try {
-			nameFile = new BufferedReader(new InputStreamReader(new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/supporters.txt").openStream()));
+	private void getSupporterList(){
+		new Thread("AbyssalCraft Fetch Supporters") {
+			public void run() {
+				BufferedReader nameFile;
+				String names = "";
+				try {
+					nameFile = new BufferedReader(new InputStreamReader(new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/supporters.txt").openStream()));
 
-			names = nameFile.readLine();
-			nameFile.close();
+					names = nameFile.readLine();
+					nameFile.close();
 
-		} catch (IOException e) {
-			ACLogger.severe("Failed to fetch supporter list, using local version!");
-			names = "Gentlemangamer2015";
-		}
+				} catch (IOException e) {
+					ACLogger.severe("Failed to fetch supporter list, using local version!");
+					names = "Jenni Mort, Simon.R.K";
+				}
 
-		return names;
+				AbyssalCraft.metadata.description += String.format("\n\n\u00a76Supporters: %s\u00a7r", names);
+			};
+		}.start();
 	}
 }
