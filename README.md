@@ -7,7 +7,7 @@ https://www.curseforge.com/minecraft/mc-mods/abyssalcraft
 
 ### Licensing
 
-The source code for AbyssalCraft is licensed under GNU Lesser Public License V3 (http://www.gnu.org/licenses/lgpl-3.0.txt)
+The source code for AbyssalCraft is licensed under GNU Lesser General Public License V3 (http://www.gnu.org/licenses/lgpl-3.0.txt)
 
 The assets (textures, models, sounds) for AbyssalCraft are copyrighted to Shinoow as All Rights Reserved.
 
