@@ -44,7 +44,7 @@ repositories {
   maven {
       // Alternate fallback maven mirror
 	  name 'ModMaven'
-	  url 'modmaven.k-4u.nl'
+	  url 'modmaven.dev'
   }
 }
 ```
@@ -56,6 +56,8 @@ dependencies {
   deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:<mcversion>-<acversion>:<classifier>"
 }
 ```
+
+**As of May 1st, 2021, bintray has been shut down, so until I've set up a new Maven repo somewhere, ModMaven (or CurseForge, since they can be used as a Maven) is the place where you can download artifacts**
 
 Where `mcversion` is the Minecraft version you wish to use, `acversion` is the AbyssalCraft version you wish to use, and `classifier` denotes which type of file (eg. "dev" for a deobfuscated jar file, "src" for a jar file with source code or "api" for a zip folder contanining the API package, as of AbyssalCraft 1.9.4-pre-2, this will be a jar file instead of a zip) to download from the maven repo.
 As of AbyssalCraft 1.9.4-pre-4, the "dev" and "src" classifiers are no longer used, so either use the "api" classifier for the API jar file, or skip it for a mod jar file with source attachment.
