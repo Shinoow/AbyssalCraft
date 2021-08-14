@@ -725,7 +725,7 @@ public class InitHandler implements ILifeCycleHandler {
 				}
 
 				AbyssalCraft.metadata.description += String.format("\n\n\u00a76Supporters: %s\u00a7r", names);
-			};
+			}
 		}.start();
 	}
 }

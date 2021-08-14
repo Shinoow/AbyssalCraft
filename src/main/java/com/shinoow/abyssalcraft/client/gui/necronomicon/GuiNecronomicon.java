@@ -310,9 +310,7 @@ public class GuiNecronomicon extends GuiScreen {
 	}
 
 	public static void setPatreonInfo(Chapter info){
-		if(Loader.instance().getLoaderState() == LoaderState.INITIALIZATION
-				&& Loader.instance().activeModContainer().getModId().equals("abyssalcraft"))
-			patreon = info;
+		patreon = info;
 	}
 
 	/**
