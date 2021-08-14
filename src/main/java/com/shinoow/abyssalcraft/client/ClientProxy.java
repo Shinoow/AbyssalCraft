@@ -202,7 +202,7 @@ public class ClientProxy extends CommonProxy {
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, I18n.format(NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, I18n.format(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.omothol_id, 3, I18n.format(NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE));
-		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 3, I18n.format(NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE));
+		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE));
 	}
 
 	@Override
