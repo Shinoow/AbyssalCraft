@@ -522,7 +522,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				} catch (Exception e) {
 					ACLogger.warning("Failed to fetch the Patreon Data, using local version instead!");
 					chapter = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
-					chapter.addPage(new Page(1, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/gentlemangamer2015.png"), "Gentlemangamer2015"));
+					chapter.addPage(new Page(1, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/jenni_mort.png"), "Jenni Mort"));
 				}
 
 				if(chapter != null)

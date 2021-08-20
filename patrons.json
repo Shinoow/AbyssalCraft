@@ -8,17 +8,9 @@
 			"type": "page",
 			"version": 1,
 			"number": 1,
-			"icontype": "resourcelocation",
-			"icon": "abyssalcraft:textures/gui/necronomicon/missing.png",
+			"icontype": "url",
+			"icon": "http://www.shinoow.com/AbyssalCraft/images/patreon/jenni_mort.png",
 			"text": "Jenni Mort"
-		},
-		{
-			"type": "page",
-			"version": 1,
-			"number": 2,
-			"icontype": "resourcelocation",
-			"icon": "abyssalcraft:textures/gui/necronomicon/missing.png",
-			"text": "Simon.R.K"
 		}
 	]
 }
