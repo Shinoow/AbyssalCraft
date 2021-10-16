@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -28,9 +28,9 @@ public class IntegrationHandler implements ILifeCycleHandler {
 	boolean isInvTweaksLoaded = Loader.isModLoaded("inventorytweaks");
 	boolean isJEILoaded = Loader.isModLoaded("jei");
 
-	List<String> mods = new ArrayList<>();
-	List<IACPlugin> integrations = new ArrayList<>();
-	List<IACPlugin> temp = new ArrayList<>();
+	List<String> mods = new ArrayList<String>();
+	List<IACPlugin> integrations = new ArrayList<IACPlugin>();
+	List<IACPlugin> temp = new ArrayList<IACPlugin>();
 
 	/**
 	 * Attempts to find mod integrations.

@@ -1,0 +1,6 @@
+{
+	"parent": "block/cross",
+	"textures": {
+		"cross": "abyssalcraft:blocks/dfire_layer_0"
+	}
+}

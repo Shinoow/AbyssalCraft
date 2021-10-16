@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -43,11 +43,11 @@ public class StructureTower extends WorldGenerator {
 			pos = pos.down();
 		if(pos.getY() <= 1) return false;
 
-		if(worldIn.getBlockState(pos).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(pos.east(6)).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(pos.west(6)).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(pos.north(6)).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(pos.south(6)).getBlock()!= ACBlocks.omothol_stone) return false;
+		if(worldIn.getBlockState(pos).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(pos.east(6)).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(pos.west(6)).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(pos.north(6)).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(pos.south(6)).getBlock()!= ACBlocks.stone) return false;
 
 		pos = pos.up().north(6).west(6);
 

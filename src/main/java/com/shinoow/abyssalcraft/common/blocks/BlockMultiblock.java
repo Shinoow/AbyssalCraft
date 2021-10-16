@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -49,12 +49,17 @@ public class BlockMultiblock extends Block {
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Item.getItemFromBlock(ACBlocks.monolith_stone);
+		return Item.getItemFromBlock(ACBlocks.stone);
+	}
+
+	@Override
+	public int damageDropped (IBlockState state) {
+		return 7;
 	}
 
 	@Override
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(ACBlocks.monolith_stone);
+		return new ItemStack(ACBlocks.stone, 1, 7);
 	}
 }

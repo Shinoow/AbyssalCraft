@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -174,12 +174,6 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "spirititem"), EntitySpiritItem.class, "spirititem", 81, instance, 64, 10, true);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "portal"), EntityPortal.class, "portal", 82, instance, 64, 10, true);
-
-		registerEntityWithEgg(EntityShoggoth.class, "shoggoth", 83, 80, 3, true, 0x133133, 0x342122);
-
-		registerEntityWithEgg(EntityGreaterShoggoth.class, "greatershoggoth", 84, 80, 3, true, 0x133133, 0x342122);
-
 		EntityUtil.addShoggothFood(EntityAnimal.class);
 		EntityUtil.addShoggothFood(EntityAmbientCreature.class);
 		EntityUtil.addShoggothFood(EntityWaterMob.class);
@@ -224,12 +218,6 @@ public class EntityHandler implements ILifeCycleHandler {
 			EntityRegistry.addSpawn(EntityDemonPig.class, demonAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.NETHER).toArray(new Biome[0]));
 
 		EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, ACBiomes.abyssal_wastelands, ACBiomes.dreadlands,
-				ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
-
-		EntityRegistry.addSpawn(EntityShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, ACBiomes.abyssal_wastelands, ACBiomes.dreadlands,
-				ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
-
-		EntityRegistry.addSpawn(EntityGreaterShoggoth.class, 1, 1, 1, EnumCreatureType.MONSTER, ACBiomes.abyssal_wastelands, ACBiomes.dreadlands,
 				ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
 
 		if(evilAnimalSpawnWeight > 0)
@@ -278,16 +266,9 @@ public class EntityHandler implements ILifeCycleHandler {
 
 	@Override
 	public void loadComplete(FMLLoadCompleteEvent event) {
-		if(purgeMobSpawns) {
+		if(purgeMobSpawns)
 			EntityRegistry.addSpawn(EntityLesserShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, ACBiomes.abyssal_wastelands, ACBiomes.dreadlands,
 					ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
-
-			EntityRegistry.addSpawn(EntityShoggoth.class, 3, 1, 1, EnumCreatureType.MONSTER, ACBiomes.abyssal_wastelands, ACBiomes.dreadlands,
-					ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
-
-			EntityRegistry.addSpawn(EntityGreaterShoggoth.class, 1, 1, 1, EnumCreatureType.MONSTER, ACBiomes.abyssal_wastelands, ACBiomes.dreadlands,
-					ACBiomes.purified_dreadlands, ACBiomes.dreadlands_mountains, ACBiomes.dreadlands_forest, ACBiomes.omothol, ACBiomes.dark_realm);
-		}
 	}
 
 	private static void registerEntityWithEgg(Class<? extends Entity> entity, String name, int modid, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primaryColor, int secondaryColor) {

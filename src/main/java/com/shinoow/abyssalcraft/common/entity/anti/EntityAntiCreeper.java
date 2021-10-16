@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -76,7 +76,9 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 		super.applyEntityAttributes();
 
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 60.0D : 30.0D);
+
+		if(ACConfig.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0D);
+		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 	}
 
 	@Override
@@ -99,9 +101,9 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(STATE, -1);
-		dataManager.register(POWERED, false);
-		dataManager.register(IGNITED, false);
+		dataManager.register(STATE, Integer.valueOf(-1));
+		dataManager.register(POWERED, Boolean.valueOf(false));
+		dataManager.register(IGNITED, Boolean.valueOf(false));
 	}
 
 	@Override
@@ -109,7 +111,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
 
-		if (dataManager.get(POWERED))
+		if (dataManager.get(POWERED).booleanValue())
 			par1NBTTagCompound.setBoolean("powered", true);
 
 		par1NBTTagCompound.setShort("Fuse", (short)fuseTime);
@@ -122,7 +124,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
 
-		dataManager.set(POWERED, par1NBTTagCompound.getBoolean("powered"));
+		dataManager.set(POWERED, Boolean.valueOf(par1NBTTagCompound.getBoolean("powered")));
 
 		if (par1NBTTagCompound.hasKey("Fuse", 99))
 			fuseTime = par1NBTTagCompound.getShort("Fuse");
@@ -211,7 +213,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
 	public boolean getPowered()
 	{
-		return dataManager.get(POWERED);
+		return dataManager.get(POWERED).booleanValue();
 	}
 
 	/**
@@ -239,7 +241,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	 */
 	public int getCreeperState()
 	{
-		return dataManager.get(STATE);
+		return dataManager.get(STATE).intValue();
 	}
 
 	/**
@@ -247,14 +249,14 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 	 */
 	public void setCreeperState(int state)
 	{
-		dataManager.set(STATE, state);
+		dataManager.set(STATE, Integer.valueOf(state));
 	}
 
 	@Override
 	public void onStruckByLightning(EntityLightningBolt lightningBolt)
 	{
 		super.onStruckByLightning(lightningBolt);
-		dataManager.set(POWERED, true);
+		dataManager.set(POWERED, Boolean.valueOf(true));
 	}
 
 	@Override
@@ -289,11 +291,11 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 
 	public boolean hasIgnited()
 	{
-		return dataManager.get(IGNITED);
+		return dataManager.get(IGNITED).booleanValue();
 	}
 
 	public void ignite()
 	{
-		dataManager.set(IGNITED, true);
+		dataManager.set(IGNITED, Boolean.valueOf(true));
 	}
 }

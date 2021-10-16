@@ -12,6 +12,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:alumina_crystal_cluster"
+    "item": "abyssalcraft:crystalcluster2",
+    "data": 6
   }
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -27,12 +27,12 @@ public interface IEnergyTransporterItem extends IEnergyContainerItem {
 	 * (eg. a PE manipulator that transfers PE to a player's held item)
 	 * @param stack ItemStack containing the item
 	 */
-	boolean canAcceptPEExternally(ItemStack stack);
+	public boolean canAcceptPEExternally(ItemStack stack);
 
 	/**
 	 * Returns whether or not the item can transfer Potential Energy externally<br>
 	 * (eg. a Ritual Altar draining PE from a Necronomicon during a ritual)
 	 * @param stack ItemStack containing the item
 	 */
-	boolean canTransferPEExternally(ItemStack stack);
+	public boolean canTransferPEExternally(ItemStack stack);
 }

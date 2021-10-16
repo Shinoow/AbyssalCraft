@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:magnesia_crystal_cluster"
+      "item": "abyssalcraft:crystalcluster2",
+      "data": 7
     }
   },
   "result": {

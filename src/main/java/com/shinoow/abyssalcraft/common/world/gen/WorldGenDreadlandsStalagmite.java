@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -32,14 +32,14 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 		while(chunk.getBlockState(pos).getBlock().isAir(chunk.getBlockState(pos), world, pos))
 			pos = pos.down();
 
-		if(chunk.getBlockState(pos) != ACBlocks.abyssalnite_stone.getDefaultState() &&
-				chunk.getBlockState(pos) != ACBlocks.dreadstone.getDefaultState())
+		if(chunk.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(3) &&
+				chunk.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(2))
 			return false;
 
 		IBlockState state;
 		if(world.getBiome(pos) == ACBiomes.purified_dreadlands)
-			state = ACBlocks.abyssalnite_stone.getDefaultState();
-		else state = ACBlocks.dreadstone.getDefaultState();
+			state = ACBlocks.stone.getStateFromMeta(3);
+		else state = ACBlocks.stone.getStateFromMeta(2);
 
 		placeBlocks(world, chunk, state, pos, 7 + rand.nextInt(5));
 		placeBlocksAlt(world, chunk, state, pos.east(), 5 + rand.nextInt(5));

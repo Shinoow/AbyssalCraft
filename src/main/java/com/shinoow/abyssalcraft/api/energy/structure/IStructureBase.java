@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -26,17 +26,17 @@ public interface IStructureBase {
 	/**
 	 * Getter of the Place of Power this structure base is controlling
 	 */
-	IPlaceOfPower getMultiblock();
+	public IPlaceOfPower getMultiblock();
 
 	/**
 	 * Setter for the Place of Power this structure base is controlling
 	 */
-	void setMultiblock(IPlaceOfPower multiblock);
+	public void setMultiblock(IPlaceOfPower multiblock);
 
 	/**
 	 * Bridge method for {@link IPlaceOfPower#getAmplifier(AmplifierType)}
 	 * @param type Amplifier Type to amplify
 	 * @return A value to increase the selected stat with, or 0
 	 */
-	float getAmplifier(AmplifierType type);
+	public float getAmplifier(AmplifierType type);
 }

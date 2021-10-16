@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:corblock"
+    "item": "abyssalcraft:ingotblock",
+    "data": 1
   }
 }

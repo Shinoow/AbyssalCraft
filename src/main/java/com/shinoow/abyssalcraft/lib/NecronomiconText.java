@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -183,8 +183,6 @@ public class NecronomiconText {
 	public static String CRAFTING_ENERGY_DEPOSITIONER_2 = "necronomicon.text.crafting.energydepositioner.2";
 	public static String CRAFTING_ETHAXIUM_PILLAR = "necronomicon.text.crafting.ethaxiumpillar";
 	public static String CRAFTING_DARK_ETHAXIUM_PILLAR = "necronomicon.text.crafting.darkethaxiumpillar";
-	public static String CRAFTING_SEQUENTIAL_BREWING_STAND_1 = "necronomicon.text.crafting.sequential_brewing_stand.1";
-	public static String CRAFTING_SEQUENTIAL_BREWING_STAND_2 = "necronomicon.text.crafting.sequential_brewing_stand.2";
 
 	//Misc crafting
 	public static String CRAFTING_UPGRADE_KIT_1 = "necronomicon.text.crafting.upgradekit.1";
@@ -425,17 +423,6 @@ public class NecronomiconText {
 	public static String LABEL_CASTING = "necronomicon.information.casting";
 	public static String LABEL_BUILT_WITH = "necronomicon.builtwith";
 	public static String LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM = "necronomicon.information.itemtransportsystem";
-	public static String LABEL_CREATE_SPELLS = "necronomicon.createspells";
-	public static String LABEL_OPEN_COMPENDIUM = "necronomicon.opencompendium";
-	public static String LABEL_SPELL_NAME = "necronomicon.spell.name";
-	public static String LABEL_SPELL_PE = "necronomicon.spell.pe";
-	public static String LABEL_SPELL_TYPE = "necronomicon.spell.type";
-	public static String LABEL_HEIGHT = "necronomicon.height";
-	public static String LABEL_WIDTH = "necronomicon.width";
-	public static String LABEL_DEPTH = "necronomicon.depth";
-	public static String LABEL_RANGE_AMPLIFIER = "necronomicon.rangeamplifier";
-	public static String LABEL_DURATION_AMPLIFIER = "necronomicon.durationamplifier";
-	public static String LABEL_POWER_AMPLIFIER = "necronomicon.poweramplifier";
 
 	/**
 	 * The best way to drown an array of strings with nonsense
@@ -447,9 +434,5 @@ public class NecronomiconText {
 		for(int i = 0; i < par1; i++)
 			temp[i] = TEST;
 		return temp;
-	}
-
-	public static String getSpellType(boolean requiresCharging) {
-		return "necronomicon.spell.type."+(requiresCharging ? "charging" : "instant");
 	}
 }

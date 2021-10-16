@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -33,81 +33,81 @@ public interface IEnergyManipulator {
 	/**
 	 * Gets the quanta of Potential Energy that the tile entity can drain
 	 */
-	float getEnergyQuanta();
+	public float getEnergyQuanta();
 
 	/**
 	 * Activates the Amplifier boost
 	 * @param amp Current Amplifier
 	 * @param deity Current Deity
 	 */
-	void setActive(AmplifierType amp, DeityType deity);
+	public void setActive(AmplifierType amp, DeityType deity);
 
 	/**
 	 * Checks if the Amplifier boost is active
 	 */
-	boolean isActive();
+	public boolean isActive();
 
 	/**
 	 * Returns the Deity associated with this manipulator (can be null)
 	 */
-	DeityType getDeity(IBlockState state);
+	public DeityType getDeity(IBlockState state);
 
 	/**
 	 * Used to calculate Amplification through Charms.<br>
 	 * Should be called whenever something that can be amplified is calculated.
 	 * @param type Type to check
 	 */
-	float getAmplifier(AmplifierType type);
+	public float getAmplifier(AmplifierType type);
 
 	/**
 	 * Returns the Active Deity (assigned in {@link #setActive(AmplifierType, DeityType)})
 	 */
-	DeityType getActiveDeity();
+	public DeityType getActiveDeity();
 
 	/**
 	 * Returns the active Deity (assigned in {@link #setActive(AmplifierType, DeityType)})
 	 */
-	AmplifierType getActiveAmplifier();
+	public AmplifierType getActiveAmplifier();
 
 	/**
 	 * Sets the Active Deity
 	 * @param deity Deity Type
 	 */
-	void setActiveDeity(DeityType deity);
+	public void setActiveDeity(DeityType deity);
 
 	/**
 	 * Sets the Active Amplifier
 	 * @param amplifier Amplifier Type
 	 */
-	void setActiveAmplifier(AmplifierType amplifier);
+	public void setActiveAmplifier(AmplifierType amplifier);
 
 	/**
 	 * Increases the tolerance value (tolerance determines a disruption is fired)
 	 * @param num Amount to increase with
 	 */
-	void addTolerance(int num);
+	public void addTolerance(int num);
 
 	/**
 	 * Returns the manipulator's current tolerance value (tolerance determines a disruption is fired)
 	 */
-	int getTolerance();
+	public int getTolerance();
 
 	/**
 	 * Verifies if the manipulator can transfer PE to nearby Players and/or Collectors.<br>
 	 * This is called in PEUtils before any energy transfer, so use this for something like checking the
 	 * capacity of a PE buffer (provided the manipulator has one, otherwise just return true and call it a day).
 	 */
-	boolean canTransferPE();
+	public boolean canTransferPE();
 
 	/**
 	 * Fires off a Disruption, which can lead to bad things happening
 	 */
-	void disrupt();
+	public void disrupt();
 
 	/**
 	 * Returns the current positions of the currently tracked Energy Collectors within range of the manipulator
 	 */
-	default Set<BlockPos> getEnergyCollectors(){
+	public default Set<BlockPos> getEnergyCollectors(){
 		return null;
 	}
 }

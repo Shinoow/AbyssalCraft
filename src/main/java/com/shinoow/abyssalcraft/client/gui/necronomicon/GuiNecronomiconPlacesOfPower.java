@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -166,12 +166,12 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 		drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 
 		multiblockObj.calculateData(place.getRenderData());
-		writeText(1, localize(NecronomiconText.LABEL_HEIGHT, Integer.valueOf(multiblockObj.sizeY)), 127);
-		writeText(1, localize(NecronomiconText.LABEL_WIDTH, Integer.valueOf(multiblockObj.sizeX)), 137);
-		writeText(1, localize(NecronomiconText.LABEL_DEPTH, Integer.valueOf(multiblockObj.sizeZ)), 147);
-		writeText(2, localize(NecronomiconText.LABEL_RANGE_AMPLIFIER)+": "+place.getAmplifier(AmplifierType.RANGE));
-		writeText(2, localize(NecronomiconText.LABEL_DURATION_AMPLIFIER)+": "+place.getAmplifier(AmplifierType.DURATION), 38);
-		writeText(2, localize(NecronomiconText.LABEL_POWER_AMPLIFIER)+": "+place.getAmplifier(AmplifierType.POWER), 48);
+		writeText(1, "Height: "+multiblockObj.sizeY+" blocks", 127);
+		writeText(1, "Width: "+multiblockObj.sizeX+" blocks", 137);
+		writeText(1, "Depth: "+multiblockObj.sizeZ+" blocks", 147);
+		writeText(2, "Range amplifier: "+place.getAmplifier(AmplifierType.RANGE));
+		writeText(2, "Duration amplifier: "+place.getAmplifier(AmplifierType.DURATION), 38);
+		writeText(2, "Power amplifier: "+place.getAmplifier(AmplifierType.POWER), 48);
 		writeText(2, place.getDescription(), 64);
 
 		float maxX = 90;

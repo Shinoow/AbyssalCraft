@@ -12,6 +12,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:coralium_crystal_cluster"
+    "item": "abyssalcraft:crystalcluster",
+    "data": 13
   }
 }

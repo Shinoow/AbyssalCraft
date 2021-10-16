@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -16,6 +16,9 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockSand;
@@ -59,15 +62,14 @@ public class MiningSpell extends Spell {
 
 	private IBlockState getRemains(IBlockState state){
 
-		if(state.getBlock() == Blocks.STONE || state.getBlock() == Blocks.DIRT || state.getBlock() == ACBlocks.darkstone
-				|| state.getBlock() == ACBlocks.abyssal_stone || state.getBlock() == ACBlocks.dreadstone
-				|| state.getBlock() == ACBlocks.abyssalnite_stone || state.getBlock() == ACBlocks.omothol_stone
-				|| state.getBlock() == ACBlocks.monolith_stone || state.getBlock() == Blocks.GRAVEL
+		if(state.getBlock() == Blocks.STONE || state.getBlock() == Blocks.DIRT || state.getBlock() == ACBlocks.stone
+				&& state.getValue(BlockACStone.TYPE) != EnumStoneType.CORALIUM_STONE
+				&& state.getValue(BlockACStone.TYPE) != EnumStoneType.ETHAXIUM || state.getBlock() == Blocks.GRAVEL
 				|| state.getBlock() == Blocks.SANDSTONE || state.getBlock() == ACBlocks.dreadlands_dirt)
 			return Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockLiquid.LEVEL, 7);
 		if(state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER)
 			return Blocks.AIR.getDefaultState();
-		if(state == ACBlocks.coralium_stone.getDefaultState())
+		if(state == ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.CORALIUM_STONE))
 			return ACBlocks.liquid_coralium.getDefaultState();
 		return null;
 	}
@@ -76,16 +78,8 @@ public class MiningSpell extends Spell {
 
 		if(state.getBlock() == Blocks.COBBLESTONE)
 			return Blocks.STONE.getDefaultState();
-		if(state.getBlock() == ACBlocks.darkstone_cobblestone)
-			return ACBlocks.darkstone.getDefaultState();
-		if(state.getBlock() == ACBlocks.abyssal_cobblestone)
-			return ACBlocks.abyssal_stone.getDefaultState();
-		if(state.getBlock() == ACBlocks.coralium_cobblestone)
-			return ACBlocks.coralium_stone.getDefaultState();
-		if(state.getBlock() == ACBlocks.dreadstone_cobblestone)
-			return ACBlocks.dreadstone.getDefaultState();
-		if(state.getBlock() == ACBlocks.abyssalnite_cobblestone)
-			return ACBlocks.abyssalnite_stone.getDefaultState();
+		if(state.getBlock() == ACBlocks.cobblestone)
+			return ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.byMetadata(state.getValue(BlockACCobblestone.TYPE).getMeta()));
 		if(state.getBlock() == Blocks.SAND && state.getValue(BlockSand.VARIANT) == EnumType.SAND)
 			return Blocks.GLASS.getDefaultState();
 		if(state.getBlock() == Blocks.SAND && state.getValue(BlockSand.VARIANT) == EnumType.RED_SAND)

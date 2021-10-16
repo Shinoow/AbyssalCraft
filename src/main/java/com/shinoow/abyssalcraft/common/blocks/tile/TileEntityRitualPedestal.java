@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -182,6 +182,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 				ParticleUtil.spawnParticleLine(pos, altarPos, 15, j, (vec1, vec2) -> {
 					if(AbyssalCraft.proxy.getParticleCount() < 10000)
 						AbyssalCraft.proxy.spawnParticle("PEStream", vec2.x, vec2.y, vec2.z, vec1.x * .1, .15, vec1.z * .1);
+					return false;
 				});
 			}
 			break;

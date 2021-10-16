@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -91,15 +91,5 @@ public class ACLoot {
 	public static final ResourceLocation ENTITY_REMNANT_MASTER_BLACKSMITH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_master_blacksmith"));
 	public static final ResourceLocation ENTITY_REMNANT_PRIEST = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/remnant_priest"));
 	public static final ResourceLocation ENTITY_SHUB_OFFSPRING = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/shub_offspring"));
-	public static final ResourceLocation ENTITY_ABYSSAL_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/abyssal_shoggoth"));
-	public static final ResourceLocation ENTITY_DREADED_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/dreaded_shoggoth"));
-	public static final ResourceLocation ENTITY_OMOTHOL_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/omothol_shoggoth"));
-	public static final ResourceLocation ENTITY_SHADOW_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/shadow_shoggoth"));
-	public static final ResourceLocation ENTITY_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/shoggoth"));
-	public static final ResourceLocation ENTITY_GREATER_ABYSSAL_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/greater_abyssal_shoggoth"));
-	public static final ResourceLocation ENTITY_GREATER_DREADED_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/greater_dreaded_shoggoth"));
-	public static final ResourceLocation ENTITY_GREATER_OMOTHOL_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/greater_omothol_shoggoth"));
-	public static final ResourceLocation ENTITY_GREATER_SHADOW_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/greater_shadow_shoggoth"));
-	public static final ResourceLocation ENTITY_GREATER_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/greater_shoggoth"));
 
 }

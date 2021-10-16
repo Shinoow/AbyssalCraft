@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
+import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.rending.Rending;
 import com.shinoow.abyssalcraft.api.rending.RendingRegistry;
 import com.shinoow.abyssalcraft.api.ritual.*;
@@ -31,6 +32,7 @@ import com.shinoow.abyssalcraft.common.spells.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.*;
 import net.minecraft.item.Item;
@@ -44,6 +46,7 @@ public class AbyssalCrafting {
 	public static void addRecipes()
 	{
 		addBlockSmelting();
+		addItemCrafting();
 		addItemSmelting();
 		addCrystallization();
 		addTransmutation();
@@ -57,7 +60,7 @@ public class AbyssalCrafting {
 
 	private static void addBlockSmelting(){
 
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.darkstone_cobblestone), new ItemStack(ACBlocks.darkstone), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.cobblestone, 1, 0), new ItemStack(ACBlocks.stone, 1, 0), 0.1F);
 		AbyssalCraftAPI.addOreSmelting("oreAbyssalnite", "ingotAbyssalnite", 3F);
 		AbyssalCraftAPI.addOreSmelting("oreCoralium", "gemCoralium", 3F);
 		GameRegistry.addSmelting(ACBlocks.darklands_oak_wood, new ItemStack(Items.COAL, 1, 1), 1F);
@@ -66,7 +69,7 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(ACBlocks.pearlescent_coralium_ore, new ItemStack(ACItems.coralium_pearl), 3F);
 		GameRegistry.addSmelting(ACBlocks.liquified_coralium_ore, new ItemStack(ACItems.refined_coralium_ingot), 3F);
 		GameRegistry.addSmelting(ACBlocks.dreaded_abyssalnite_ore, new ItemStack(ACItems.abyssalnite_ingot, 1), 3F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.coralium_stone), new ItemStack(ACItems.coralium_brick, 1), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.stone, 1, 4), new ItemStack(ACItems.coralium_brick, 1), 0.1F);
 		GameRegistry.addSmelting(ACBlocks.nitre_ore, new ItemStack(ACItems.nitre, 1), 1F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_iron_ore, new ItemStack(Items.IRON_INGOT, 1), 0.7F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_gold_ore, new ItemStack(Items.GOLD_INGOT, 1), 1F);
@@ -74,21 +77,98 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(ACBlocks.abyssal_nitre_ore, new ItemStack(ACItems.nitre, 1), 1F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_tin_ore, new ItemStack(ACItems.tin_ingot, 1), 0.7F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_copper_ore, new ItemStack(ACItems.copper_ingot, 1), 0.7F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.ethaxium), new ItemStack(ACItems.ethaxium_brick), 0.2F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new ItemStack(ACBlocks.cracked_ethaxium_brick, 1), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), new ItemStack(ACBlocks.cracked_dark_ethaxium_brick, 1), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.darkstone_brick, 1, 0), new ItemStack(ACBlocks.cracked_darkstone_brick, 1), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), new ItemStack(ACBlocks.cracked_abyssal_stone_brick, 1), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.dreadstone_brick, 1, 0), new ItemStack(ACBlocks.cracked_dreadstone_brick, 1), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0), new ItemStack(ACBlocks.cracked_abyssalnite_stone_brick, 1), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new ItemStack(ACBlocks.cracked_coralium_stone_brick, 1), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.stone, 1, 5), new ItemStack(ACItems.ethaxium_brick), 0.2F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new ItemStack(ACBlocks.ethaxium_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.darkstone_brick, 1, 0), new ItemStack(ACBlocks.darkstone_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), new ItemStack(ACBlocks.abyssal_stone_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.dreadstone_brick, 1, 0), new ItemStack(ACBlocks.dreadstone_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0), new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new ItemStack(ACBlocks.coralium_stone_brick, 1, 2), 0.1F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_sand, new ItemStack(ACBlocks.abyssal_sand_glass), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssal_cobblestone), new ItemStack(ACBlocks.abyssal_stone), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.dreadstone_cobblestone), new ItemStack(ACBlocks.dreadstone), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssalnite_cobblestone), new ItemStack(ACBlocks.abyssalnite_stone), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.coralium_cobblestone), new ItemStack(ACBlocks.coralium_stone), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.cobblestone, 1, 1), new ItemStack(ACBlocks.stone, 1, 1), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.cobblestone, 1, 2), new ItemStack(ACBlocks.stone, 1, 2), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.cobblestone, 1, 3), new ItemStack(ACBlocks.stone, 1, 3), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.cobblestone, 1, 4), new ItemStack(ACBlocks.stone, 1, 4), 0.1F);
 		GameRegistry.addSmelting(ACBlocks.dreadlands_log, new ItemStack(ACItems.charcoal), 1F);
-		GameRegistry.addSmelting(new ItemStack(ACItems.generic_meat), new ItemStack(ACItems.cooked_generic_meat), 0.35F);
+	}
+
+	private static void addItemCrafting(){
+
+		addArmor(ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots, ACItems.abyssalnite_ingot, new ItemStack(ACItems.ingot_nugget, 1, 0), ACItems.abyssalnite_upgrade_kit, Items.DIAMOND_HELMET, Items.DIAMOND_CHESTPLATE, Items.DIAMOND_LEGGINGS, Items.DIAMOND_BOOTS);
+		addArmor(ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots, ACItems.refined_coralium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 1), ACItems.coralium_upgrade_kit, ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots);
+		addArmor(ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots, ACItems.dreadium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 2), ACItems.dreadium_upgrade_kit, ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots);
+		addArmor(ACItems.ethaxium_helmet, ACItems.ethaxium_chestplate, ACItems.ethaxium_leggings, ACItems.ethaxium_boots, ACItems.ethaxium_ingot, new ItemStack(ACItems.ingot_nugget, 1, 3), ACItems.ethaxium_upgrade_kit, ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots);
+
+		if(ACConfig.upgrade_kits) {
+			//Wood to Cobble Upgrade
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new ItemStack(Items.WOODEN_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.STONE_PICKAXE));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new ItemStack(Items.WOODEN_AXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.STONE_AXE));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new ItemStack(Items.WOODEN_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.STONE_SHOVEL));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new ItemStack(Items.WOODEN_SWORD, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.STONE_SWORD));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.cobblestone_upgrade_kit, new ItemStack(Items.WOODEN_HOE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.STONE_HOE));
+
+			//Stone to Iron Upgrade
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.iron_upgrade_kit, new ItemStack(Items.STONE_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.IRON_PICKAXE));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.iron_upgrade_kit, new ItemStack(Items.STONE_AXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.IRON_AXE));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.iron_upgrade_kit, new ItemStack(Items.STONE_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.IRON_SHOVEL));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.iron_upgrade_kit, new ItemStack(Items.STONE_SWORD, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.IRON_SWORD));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.iron_upgrade_kit, new ItemStack(Items.STONE_HOE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.IRON_HOE));
+
+			//Iron to Gold Upgrade
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_PICKAXE));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_AXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_AXE));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_SHOVEL));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_SWORD, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_SWORD));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_HOE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_HOE));
+
+			//Gold to Diamond Upgrade
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_PICKAXE));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_AXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_AXE));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_SHOVEL));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_SWORD, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_SWORD));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_HOE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_HOE));
+
+			//Diamond to Abyssalnite Upgrade
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new ItemStack(Items.DIAMOND_PICKAXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.abyssalnite_pickaxe));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new ItemStack(Items.DIAMOND_AXE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.abyssalnite_axe));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new ItemStack(Items.DIAMOND_SHOVEL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.abyssalnite_shovel));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new ItemStack(Items.DIAMOND_SWORD, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.abyssalnite_sword));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.abyssalnite_upgrade_kit, new ItemStack(Items.DIAMOND_HOE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.abyssalnite_hoe));
+
+			//Abyssalnite to Coralium Upgrade
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new ItemStack(ACItems.abyssalnite_pickaxe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.refined_coralium_pickaxe));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new ItemStack(ACItems.abyssalnite_axe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.refined_coralium_axe));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new ItemStack(ACItems.abyssalnite_shovel, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.refined_coralium_shovel));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new ItemStack(ACItems.abyssalnite_sword, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.refined_coralium_sword));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.coralium_upgrade_kit, new ItemStack(ACItems.abyssalnite_hoe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.refined_coralium_hoe));
+
+			//Coralium to Dreadium Upgrade
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new ItemStack(ACItems.refined_coralium_pickaxe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.dreadium_pickaxe));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new ItemStack(ACItems.refined_coralium_axe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.dreadium_axe));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new ItemStack(ACItems.refined_coralium_shovel, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.dreadium_shovel));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new ItemStack(ACItems.refined_coralium_sword, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.dreadium_sword));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.dreadium_upgrade_kit, new ItemStack(ACItems.refined_coralium_hoe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.dreadium_hoe));
+
+			//Dreadium to Ethaxium Upgrade
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new ItemStack(ACItems.dreadium_pickaxe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.ethaxium_pickaxe));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new ItemStack(ACItems.dreadium_axe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.ethaxium_axe));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new ItemStack(ACItems.dreadium_shovel, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.ethaxium_shovel));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new ItemStack(ACItems.dreadium_sword, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.ethaxium_sword));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.ethaxium_upgrade_kit, new ItemStack(ACItems.dreadium_hoe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.ethaxium_hoe));
+
+			//Iron to Gold armor
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_HELMET, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_HELMET));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_CHESTPLATE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_CHESTPLATE));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_LEGGINGS, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_LEGGINGS));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.gold_upgrade_kit, new ItemStack(Items.IRON_BOOTS, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLDEN_BOOTS));
+
+			//Gold to Diamond armor
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_HELMET, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_HELMET));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_CHESTPLATE, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_CHESTPLATE));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_LEGGINGS, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_LEGGINGS));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)ACItems.diamond_upgrade_kit, new ItemStack(Items.GOLDEN_BOOTS, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.DIAMOND_BOOTS));
+		}
 	}
 
 	private static void addItemSmelting(){
@@ -98,12 +178,14 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(ACItems.dreaded_chunk_of_abyssalnite, new ItemStack(ACItems.abyssalnite_ingot), 3F);
 		GameRegistry.addSmelting(ACItems.coin, new ItemStack(Items.IRON_INGOT, 4), 0.5F);
 
+		if (ACConfig.foodstuff)
+			GameRegistry.addSmelting(Items.EGG, new ItemStack(ACItems.fried_egg, 1), 0F);
+
 		if(ACConfig.smeltingRecipes){
-			addArmorSmelting(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS, new ItemStack(Items.LEATHER));
-			addArmorSmelting(ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots, new ItemStack(ACItems.ingot_nugget, 1, 0));
-			addArmorSmelting(ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots, new ItemStack(ACItems.ingot_nugget, 1, 1));
-			addArmorSmelting(ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots, new ItemStack(ACItems.ingot_nugget, 1, 2));
-			addArmorSmelting(ACItems.ethaxium_helmet, ACItems.ethaxium_chestplate, ACItems.ethaxium_leggings, ACItems.ethaxium_boots, new ItemStack(ACItems.ingot_nugget, 1, 3));
+			GameRegistry.addSmelting(Items.LEATHER_HELMET, new ItemStack(Items.LEATHER), 1F);
+			GameRegistry.addSmelting(Items.LEATHER_CHESTPLATE, new ItemStack(Items.LEATHER), 1F);
+			GameRegistry.addSmelting(Items.LEATHER_LEGGINGS, new ItemStack(Items.LEATHER), 1F);
+			GameRegistry.addSmelting(Items.LEATHER_BOOTS, new ItemStack(Items.LEATHER), 1F);
 		}
 	}
 
@@ -147,6 +229,7 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 1), new ItemStack(ACItems.crystal, 4, 21), new ItemStack(ACItems.crystal, 4, 27), 0.1F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 2), new ItemStack(ACItems.crystal_shard, 32, 21), new ItemStack(ACItems.crystal_shard, 32, 27), 0.1F);
 		AbyssalCraftAPI.addCrystallization(Items.EGG, new ItemStack(ACItems.crystal_shard, 4, 25), new ItemStack(ACItems.crystal_shard, 4, 7), 0.1F);
+		AbyssalCraftAPI.addCrystallization(ACItems.charcoal, new ItemStack(ACItems.crystal_shard, 4, 3), new ItemStack(ACItems.crystal_shard, 4, 14), 0.1F);
 
 		if(ACConfig.crystal_rework) {
 			AbyssalCraftAPI.addSingleCrystallization(ACItems.refined_coralium_ingot, new ItemStack(ACItems.crystal, 1, 13), 0.1F);
@@ -158,7 +241,6 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addSingleCrystallization(Items.IRON_INGOT, new ItemStack(ACItems.crystal, 1, 0), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.GOLD_INGOT, new ItemStack(ACItems.crystal, 1, 1), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.REDSTONE, new ItemStack(ACItems.crystal, 1, 11), 0.1F);
-			AbyssalCraftAPI.addSingleCrystallization(ACItems.charcoal, new ItemStack(ACItems.crystal, 1, 3), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(Items.COAL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.crystal, 1, 3), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("oreAbyssalnite", "crystalAbyssalnite", 2, 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("oreCoralium", "crystalCoralium", 2, 0.1F);
@@ -173,15 +255,15 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addSingleCrystallization("oreAluminum", "crystalAluminium", 2, 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("blockCopper", "crystalClusterCopper", 1, 0.9F);
 			AbyssalCraftAPI.addSingleCrystallization("blockTin", "crystalClusterTin", 1, 0.9F);
-			AbyssalCraftAPI.addSingleCrystallization(Blocks.GOLD_BLOCK, new ItemStack(ACBlocks.gold_crystal_cluster), 0.9F);
-			AbyssalCraftAPI.addSingleCrystallization(Blocks.IRON_BLOCK, new ItemStack(ACBlocks.iron_crystal_cluster), 0.9F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.block_of_abyssalnite), new ItemStack(ACBlocks.abyssalnite_crystal_cluster), 0.9F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.block_of_refined_coralium), new ItemStack(ACBlocks.coralium_crystal_cluster), 0.9F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.block_of_dreadium), new ItemStack(ACBlocks.dreadium_crystal_cluster), 0.9F);
+			AbyssalCraftAPI.addSingleCrystallization(Blocks.GOLD_BLOCK, new ItemStack(ACBlocks.crystal_cluster, 1, 1), 0.9F);
+			AbyssalCraftAPI.addSingleCrystallization(Blocks.IRON_BLOCK, new ItemStack(ACBlocks.crystal_cluster, 1, 0), 0.9F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.ingot_block, 1, 0), new ItemStack(ACBlocks.crystal_cluster, 1, 12), 0.9F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.ingot_block, 1, 1), new ItemStack(ACBlocks.crystal_cluster, 1, 13), 0.9F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.ingot_block, 1, 2), new ItemStack(ACBlocks.crystal_cluster, 1, 14), 0.9F);
 			AbyssalCraftAPI.addSingleCrystallization(Blocks.COAL_ORE, new ItemStack(ACItems.crystal, 2, 3), 0.1F);
-			AbyssalCraftAPI.addSingleCrystallization(Blocks.COAL_BLOCK, new ItemStack(ACBlocks.carbon_crystal_cluster), 0.9F);
+			AbyssalCraftAPI.addSingleCrystallization(Blocks.COAL_BLOCK, new ItemStack(ACBlocks.crystal_cluster, 1, 3), 0.9F);
 			AbyssalCraftAPI.addSingleCrystallization(Blocks.REDSTONE_ORE, new ItemStack(ACItems.crystal, 2, 11), 0.1F);
-			AbyssalCraftAPI.addSingleCrystallization(Blocks.REDSTONE_BLOCK, new ItemStack(ACBlocks.redstone_crystal_cluster), 0.9F);
+			AbyssalCraftAPI.addSingleCrystallization(Blocks.REDSTONE_BLOCK, new ItemStack(ACBlocks.crystal_cluster, 1, 11), 0.9F);
 			AbyssalCraftAPI.addSingleCrystallization("ingotZinc", "crystalZinc", 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("oreZinc", "crystalZinc", 2, 0.1F);
 			AbyssalCraftAPI.addCrystallization(ACBlocks.dreaded_abyssalnite_ore, new ItemStack(ACItems.crystal, 2, 12), new ItemStack(ACItems.crystal, 2, 14), 0.2F);
@@ -190,7 +272,7 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addCrystallization("ingotBronze", "crystalCopper", 3, "crystalTin", 1, 0.4F);
 			AbyssalCraftAPI.addCrystallization(new ItemStack(Items.DYE, 1, 4), new ItemStack(ACItems.crystal, 6, 21), new ItemStack(ACItems.crystal, 4, 2), 0.15F);
 			AbyssalCraftAPI.addCrystallization(Blocks.LAPIS_ORE, new ItemStack(ACItems.crystal, 12, 21), new ItemStack(ACItems.crystal, 8, 2), 0.15F);
-			AbyssalCraftAPI.addCrystallization(Blocks.LAPIS_BLOCK, new ItemStack(ACBlocks.silica_crystal_cluster, 6), new ItemStack(ACBlocks.sulfur_crystal_cluster, 4), 1.0F);
+			AbyssalCraftAPI.addCrystallization(Blocks.LAPIS_BLOCK, new ItemStack(ACBlocks.crystal_cluster2, 6, 5), new ItemStack(ACBlocks.crystal_cluster, 4, 2), 1.0F);
 			AbyssalCraftAPI.addCrystallization("ingotBrass", "crystalCopper", 3, "crystalZinc", 2, 0.5F);
 			AbyssalCraftAPI.addCrystallization("oreBrass", "crystalCopper", 6, "crystalZinc", 4, 0.5F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.GOLD_NUGGET, new ItemStack(ACItems.crystal_shard, 1, 1), 0.1F);
@@ -230,7 +312,6 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addSingleCrystallization(Items.IRON_INGOT, new ItemStack(ACItems.crystal_shard, 4, 0), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.GOLD_INGOT, new ItemStack(ACItems.crystal_shard, 4, 1), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.REDSTONE, new ItemStack(ACItems.crystal_shard, 4, 11), 0.1F);
-			AbyssalCraftAPI.addSingleCrystallization(ACItems.charcoal, new ItemStack(ACItems.crystal_shard, 4, 3), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(Items.COAL, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACItems.crystal_shard, 4, 3), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("oreAbyssalnite", "crystalShardAbyssalnite", 4, 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("oreCoralium", "crystalShardCoralium", 4, 0.1F);
@@ -247,9 +328,9 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addSingleCrystallization("blockTin", "crystalTin", 4, 0.9F);
 			AbyssalCraftAPI.addSingleCrystallization(Blocks.GOLD_BLOCK, new ItemStack(ACItems.crystal, 4, 1), 0.9F);
 			AbyssalCraftAPI.addSingleCrystallization(Blocks.IRON_BLOCK, new ItemStack(ACItems.crystal, 4, 0), 0.9F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.block_of_abyssalnite), new ItemStack(ACItems.crystal, 4, 12), 0.9F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.block_of_refined_coralium), new ItemStack(ACItems.crystal, 4, 13), 0.9F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.block_of_dreadium), new ItemStack(ACItems.crystal, 4, 14), 0.9F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.ingot_block, 1, 0), new ItemStack(ACItems.crystal, 4, 12), 0.9F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.ingot_block, 1, 1), new ItemStack(ACItems.crystal, 4, 13), 0.9F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACBlocks.ingot_block, 1, 2), new ItemStack(ACItems.crystal, 4, 14), 0.9F);
 			AbyssalCraftAPI.addSingleCrystallization(Blocks.COAL_ORE, new ItemStack(ACItems.crystal_shard, 4, 3), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization(Blocks.COAL_BLOCK, new ItemStack(ACItems.crystal, 4, 3), 0.9F);
 			AbyssalCraftAPI.addSingleCrystallization(Blocks.REDSTONE_ORE, new ItemStack(ACItems.crystal_shard, 4, 11), 0.1F);
@@ -297,22 +378,22 @@ public class AbyssalCrafting {
 
 	private static void addTransmutation(){
 
-		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.darkstone), new ItemStack(Blocks.STONE, 1), 0.0F);
+		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.stone, 1, 0), new ItemStack(Blocks.STONE, 1), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.dreaded_shard_of_abyssalnite, new ItemStack(ACItems.dreadium_ingot, 1), 0.2F);
-		AbyssalCraftAPI.addTransmutation(Blocks.STONE, new ItemStack(ACBlocks.darkstone), 0.0F);
+		AbyssalCraftAPI.addTransmutation(Blocks.STONE, new ItemStack(ACBlocks.stone, 1, 0), 0.0F);
 		AbyssalCraftAPI.addTransmutation(Blocks.STONEBRICK, new ItemStack(ACBlocks.darkstone_brick, 1, 0), 0.0F);
 		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.darkstone_brick, 1, 0), new ItemStack(Blocks.STONEBRICK), 0.0F);
-		AbyssalCraftAPI.addTransmutation(Blocks.COBBLESTONE, new ItemStack(ACBlocks.darkstone_cobblestone), 0.0F);
-		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.darkstone_cobblestone), new ItemStack(Blocks.COBBLESTONE, 1), 0.0F);
+		AbyssalCraftAPI.addTransmutation(Blocks.COBBLESTONE, new ItemStack(ACBlocks.cobblestone, 1, 0), 0.0F);
+		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.cobblestone, 1, 0), new ItemStack(Blocks.COBBLESTONE, 1), 0.0F);
 		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new ItemStack(ACItems.coralium_brick, 4), 0.0F);
-		AbyssalCraftAPI.addTransmutation(ACItems.coralium_brick, new ItemStack(ACBlocks.coralium_stone), 0.0F);
+		AbyssalCraftAPI.addTransmutation(ACItems.coralium_brick, new ItemStack(ACBlocks.stone, 1, 4), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.dense_carbon_cluster, new ItemStack(Items.DIAMOND), 0.5F);
 		AbyssalCraftAPI.addTransmutation(ACItems.dread_plagued_gateway_key, new ItemStack(ACItems.rlyehian_gateway_key), 1.0F);
 
 		AbyssalCraftAPI.addTransmutation(Items.LAVA_BUCKET, new ItemStack(ACBlocks.solid_lava), 0.0F);
-		AbyssalCraftAPI.addTransmutation(Blocks.END_STONE, new ItemStack(ACBlocks.ethaxium), 0.0F);
-		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.ethaxium), new ItemStack(Blocks.END_STONE), 0.0F);
-		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new ItemStack(ACBlocks.ethaxium), 0.0F);
+		AbyssalCraftAPI.addTransmutation(Blocks.END_STONE, new ItemStack(ACBlocks.stone, 1, 5), 0.0F);
+		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.stone, 1, 5), new ItemStack(Blocks.END_STONE), 0.0F);
+		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new ItemStack(ACBlocks.stone, 1, 5), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.anti_beef, new ItemStack(Items.COOKED_BEEF), 0.3F);
 		AbyssalCraftAPI.addTransmutation(ACItems.anti_pork, new ItemStack(Items.COOKED_PORKCHOP), 0.3F);
 		AbyssalCraftAPI.addTransmutation(ACItems.anti_chicken, new ItemStack(Items.COOKED_CHICKEN), 0.3F);
@@ -323,17 +404,17 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addTransmutation(ACItems.anti_plagued_flesh_on_a_bone, new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone, 2), 0.3F);
 
 		if(ACConfig.crystal_rework) {
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.abyssalnite_crystal_cluster), new ItemStack(ACItems.abyssalnite_ingot, 1), 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.coralium_crystal_cluster), new ItemStack(ACItems.refined_coralium_ingot, 1), 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.dreadium_crystal_cluster), new ItemStack(ACItems.dreadium_ingot, 1), 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.iron_crystal_cluster), new ItemStack(Items.IRON_INGOT, 1), 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.gold_crystal_cluster), new ItemStack(Items.GOLD_INGOT, 1), 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.sulfur_crystal_cluster), new ItemStack(ACItems.sulfur, 1), 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.blaze_crystal_cluster), new ItemStack(Items.BLAZE_POWDER, 1), 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.redstone_crystal_cluster), new ItemStack(Items.REDSTONE, 1), 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.methane_crystal_cluster), new ItemStack(ACItems.methane, 1), 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.tin_crystal_cluster), new ItemStack(ACItems.tin_ingot, 1), 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.copper_crystal_cluster), new ItemStack(ACItems.copper_ingot, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster, 1, 12), new ItemStack(ACItems.abyssalnite_ingot, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster, 1, 13), new ItemStack(ACItems.refined_coralium_ingot, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster, 1, 14), new ItemStack(ACItems.dreadium_ingot, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster, 1, 0), new ItemStack(Items.IRON_INGOT, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster, 1, 1), new ItemStack(Items.GOLD_INGOT, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster, 1, 2), new ItemStack(ACItems.sulfur, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster, 1, 15), new ItemStack(Items.BLAZE_POWDER, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster, 1, 11), new ItemStack(Items.REDSTONE, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster, 1, 10), new ItemStack(ACItems.methane, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster2, 1, 0), new ItemStack(ACItems.tin_ingot, 1), 0.2F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.crystal_cluster2, 1, 1), new ItemStack(ACItems.copper_ingot, 1), 0.2F);
 			AbyssalCraftAPI.addTransmutation("crystalClusterAluminium", "ingotAluminum", 0.2F);
 			AbyssalCraftAPI.addTransmutation("crystalClusterAluminium", "ingotAluminium", 0.2F);
 			AbyssalCraftAPI.addTransmutation("crystalClusterZinc", "ingotZinc", 0.2F);
@@ -470,16 +551,6 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.DYE, 1, 4), new ItemStack(ACItems.crystal, 6, 21), new ItemStack(ACItems.crystal, 4, 2));
 		AbyssalCraftAPI.addMaterialization("oreLapis", new ItemStack(ACItems.crystal, 7, 21), new ItemStack(ACItems.crystal, 4, 2), new ItemStack(ACItems.crystal, 1, 23));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Blocks.LAPIS_BLOCK), new ItemStack(ACItems.crystal, 54, 21), new ItemStack(ACItems.crystal, 36, 2));
-		if(OreDictionary.getOres("listAllmeatraw", false).size() > 1)
-			AbyssalCraftAPI.addMaterialization("listAllmeatraw", new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
-		else {
-			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.BEEF), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
-			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.CHICKEN), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
-			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.PORKCHOP), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
-			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.MUTTON), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
-			AbyssalCraftAPI.addMaterialization(new ItemStack(Items.RABBIT), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
-			AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.generic_meat), new ItemStack(ACItems.crystal, 14, 5), new ItemStack(ACItems.crystal, 5, 3), new ItemStack(ACItems.crystal, 6, 4), new ItemStack(ACItems.crystal, 1, 6));
-		}
 	}
 
 	private static void addRitualRecipes(){
@@ -489,8 +560,7 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("transmutationGem", 0, 300F, new ItemStack(ACItems.transmutation_gem), new ItemStack(ACItems.coralium_pearl), tgofferings));
 		Object[] ocofferings = new Object[]{new ItemStack(Items.REDSTONE), new ItemStack(ACItems.shard_of_oblivion), new ItemStack(Items.REDSTONE), new ItemStack(ACItems.shard_of_oblivion),
 				new ItemStack(Items.REDSTONE), new ItemStack(ACItems.shard_of_oblivion), new ItemStack(Items.REDSTONE), new ItemStack(ACItems.shard_of_oblivion)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("oblivionCatalyst", 0, OreDictionary.WILDCARD_VALUE, 5000F, true, new ItemStack(ACItems.oblivion_catalyst), new ItemStack(Items.ENDER_EYE), ocofferings));
-		RitualRegistry.instance().registerRitual(new NecronomiconPortalRitual());
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("oblivionCatalyst", 0, -1, 5000F, true, new ItemStack(ACItems.oblivion_catalyst), new ItemStack(Items.ENDER_EYE), ocofferings));
 
 		//Abyssal Wasteland progression
 		Object[] asorahofferings = new Object[]{new ItemStack(Items.GOLD_INGOT), new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.GOLD_INGOT), ACItems.liquid_coralium_bucket_stack,
@@ -500,7 +570,7 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("asorahGatewayKey", 1, ACLib.abyssal_wasteland_id, 10000F, new ItemStack(ACItems.dreaded_gateway_key), new ItemStack(ACItems.gateway_key), gk2offerings));
 
 		//Dreadlands Progression
-		Object[] dreadaltarbofferings = new Object[]{ACItems.dread_cloth, Items.BONE, ACItems.dreadium_ingot, ACBlocks.dreadstone, ACItems.dreaded_gateway_key, ACBlocks.dreadstone, ACItems.dreadium_ingot, Items.BONE};
+		Object[] dreadaltarbofferings = new Object[]{ACItems.dread_cloth, Items.BONE, ACItems.dreadium_ingot, new ItemStack(ACBlocks.stone, 1, 2), ACItems.dreaded_gateway_key, new ItemStack(ACBlocks.stone, 1, 2), ACItems.dreadium_ingot, Items.BONE};
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("altarOfChagarothBottom", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_bottom), dreadaltarbofferings));
 		Object[] dreadaltartofferings = new Object[]{Items.BUCKET, "stickWood", ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, "stickWood"};
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("altarOfChagarothTop", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_top), dreadaltartofferings));
@@ -534,44 +604,49 @@ public class AbyssalCrafting {
 				PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.rotten_anti_flesh), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER),
 				new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.GUNPOWDER)};
 		RitualRegistry.instance().registerRitual(new NecronomiconPotionAoERitual("antiPotionAoE", 0, 300F, AbyssalCraftAPI.antimatter_potion, antiaoeofferings));
+		if(ACConfig.plague_enchantments) {
+			Object[] corenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 1), ACItems.refined_coralium_ingot, ACItems.coralium_plagued_flesh, Items.BOOK,
+					ACItems.coralium_plagued_flesh, ACItems.refined_coralium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 1)};
+			RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("corEnchantment", 1, ACLib.abyssal_wasteland_id, 5000F, new EnchantmentData(AbyssalCraftAPI.coralium_enchantment, 1), corenchofferings));
+			Object[] dreenchofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 2), ACItems.dreadium_ingot, ACItems.dread_fragment, Items.BOOK, ACItems.dread_fragment,
+					ACItems.dreadium_ingot, new ItemStack(ACItems.shoggoth_flesh, 1, 2)};
+			RitualRegistry.instance().registerRitual(new NecronomiconEnchantmentRitual("dreEnchantment", 2, ACLib.dreadlands_id, 10000F, new EnchantmentData(AbyssalCraftAPI.dread_enchantment, 1), dreenchofferings));
+		}
 		RitualRegistry.instance().registerRitual(new NecronomiconResurrectionRitual());
-		Object[] facebookofferings = new Object[] {new ItemStack(ACItems.crystal, 1, 3), new ItemStack(ACItems.crystal, 1, 5), new ItemStack(ACItems.crystal, 1, 6), new ItemStack(ACItems.crystal, 1, 4), new ItemStack(ACItems.crystal, 1, 7),
-				new ItemStack(ACItems.crystal, 1, 2), Items.FEATHER, Items.DYE};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("facebook", 2, 2000F, new ItemStack(ACItems.book_of_many_faces), new ItemStack(Items.BOOK), facebookofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconCleansingRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCorruptionRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCuringRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconMassEnchantRitual());
 		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE), null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE),
 				null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE), null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spiritTablet", 3, OreDictionary.WILDCARD_VALUE, 5000F, new ItemStack(ACItems.configurator), new ItemStack(ACItems.life_crystal), spiritTabletOfferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spiritTablet", 3, -1, 5000F, new ItemStack(ACItems.configurator), new ItemStack(ACItems.life_crystal), spiritTabletOfferings));
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cthulhuStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.cthulhu_statue), new ItemStack(ACBlocks.monolith_stone), cthulhuofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cthulhuStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.statue, 1, 0), new ItemStack(ACBlocks.stone, 1, 7), cthulhuofferings));
 		Object[] hasturofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 1),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hasturStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.monolith_stone), hasturofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hasturStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.statue, 1, 1), new ItemStack(ACBlocks.stone, 1, 7), hasturofferings));
 		Object[] jzaharofferings = new Object[]{ACItems.eldritch_scale, ACItems.eldritch_scale, ACItems.eldritch_scale, ACItems.eldritch_scale, ACItems.eldritch_scale,
 				new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.monolith_stone), jzaharofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.statue, 1, 2), new ItemStack(ACBlocks.stone, 1, 7), jzaharofferings));
 		Object[] azathothofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 1), new ItemStack(ACItems.shoggoth_flesh, 1, 2),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("azathothStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.monolith_stone), azathothofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("azathothStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.statue, 1, 3), new ItemStack(ACBlocks.stone, 1, 7), azathothofferings));
 		Object[] nyarlathotepofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.shoggoth_flesh, 1, 2),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.shoggoth_flesh, 1, 2), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nyarlathotepStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.monolith_stone), nyarlathotepofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nyarlathotepStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.statue, 1, 4), new ItemStack(ACBlocks.stone, 1, 7), nyarlathotepofferings));
 		Object[] yogsothothofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.shoggoth_flesh, 1, 3),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.shoggoth_flesh, 1, 3), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yogsothothStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.yog_sothoth_statue), new ItemStack(ACBlocks.monolith_stone), yogsothothofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yogsothothStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.statue, 1, 5), new ItemStack(ACBlocks.stone, 1, 7), yogsothothofferings));
 		Object[] shubniggurathofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.shoggoth_flesh, 1, 4),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.shoggoth_flesh, 1, 4), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.shub_niggurath_statue), new ItemStack(ACBlocks.monolith_stone), shubniggurathofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.statue, 1, 6), new ItemStack(ACBlocks.stone, 1, 7), shubniggurathofferings));
 		Object[] psdlofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerStone", 4, ACLib.dreadlands_id, 5000F, new ItemStack(ACBlocks.dreadlands_infused_powerstone), ACBlocks.coralium_infused_stone, psdlofferings));
@@ -634,52 +709,50 @@ public class AbyssalCrafting {
 		Object[] scoffers = new Object[]{ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin,
 				ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathCharm", 4, 2000F, new ItemStack(ACItems.shub_niggurath_charm, 1, 0), new ItemStack(ACItems.ritual_charm, 1, 0), scoffers));
-		Object[] owoffers = new Object[]{ACItems.shadow_shard, Blocks.COBBLESTONE, ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone), ACItems.shadow_shard, Blocks.COBBLESTONE,
-				ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone)};
+		Object[] owoffers = new Object[]{ACItems.shadow_shard, Blocks.COBBLESTONE, ACItems.coralium_gem, new ItemStack(ACBlocks.cobblestone, 1, 0), ACItems.shadow_shard, Blocks.COBBLESTONE,
+				ACItems.coralium_gem, new ItemStack(ACBlocks.cobblestone, 1, 0)};
 		Object[] awoffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0),
 				ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0)};
 		Object[] dloffers = new Object[]{ACItems.shadow_shard, ACBlocks.dreadstone_brick, ACItems.coralium_gem, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.dreadstone_brick, 1, 0),
 				ACItems.coralium_gem, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0)};
 		Object[] omtoffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0),
 				ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_energy_pedestal), ACBlocks.energy_pedestal, owoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_energy_pedestal), new ItemStack(ACBlocks.overworld_energy_pedestal), awoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_energy_pedestal), new ItemStack(ACBlocks.abyssal_wasteland_energy_pedestal), dloffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_energy_pedestal), new ItemStack(ACBlocks.dreadlands_energy_pedestal), omtoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_sacrificial_altar), ACBlocks.sacrificial_altar, owoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_sacrificial_altar), new ItemStack(ACBlocks.overworld_sacrificial_altar), awoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_sacrificial_altar), new ItemStack(ACBlocks.abyssal_wasteland_sacrificial_altar), dloffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_sacrificial_altar), new ItemStack(ACBlocks.dreadlands_sacrificial_altar), omtoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epOWupgrade", 0, 400F, new ItemStack(ACBlocks.tiered_energy_pedestal, 1, 0), ACBlocks.energy_pedestal, owoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epAWupgrade", 1, 800F, new ItemStack(ACBlocks.tiered_energy_pedestal, 1, 1), new ItemStack(ACBlocks.tiered_energy_pedestal, 1, 0), awoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epDLupgrade", 2, 1200F, new ItemStack(ACBlocks.tiered_energy_pedestal, 1, 2), new ItemStack(ACBlocks.tiered_energy_pedestal, 1, 1), dloffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("epOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.tiered_energy_pedestal, 1, 3), new ItemStack(ACBlocks.tiered_energy_pedestal, 1, 2), omtoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saOWupgrade", 0, 400F, new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 0), ACBlocks.sacrificial_altar, owoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saAWupgrade", 1, 800F, new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 1), new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 0), awoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saDLupgrade", 2, 1200F, new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 2), new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 1), dloffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 3), new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, 2), omtoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
 		Object[] staffofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 2), ACItems.eldritch_scale, ACItems.ethaxium_ingot,
 				ACItems.rlyehian_gateway_key, ACItems.ethaxium_ingot, ACItems.eldritch_scale, new ItemStack(ACItems.essence, 1, 0)};
 		String[] tags = {"energyShadow", "energyAbyssal", "energyDread", "energyOmothol", "ench"};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStaff", 4, ACLib.omothol_id, 15000F, new ItemStack(ACItems.staff_of_the_gatekeeper), new ItemStack(ACItems.staff_of_rending, 1, 3), staffofferings).setTags(tags));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("silverKey", 4, ACLib.omothol_id, 20000F, true, new ItemStack(ACItems.silver_key), new ItemStack(ACItems.rlyehian_gateway_key),
-				new Object[] {ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot}));
 		RitualRegistry.instance().registerRitual(new NecronomiconWeatherRitual());
 		Object[] containerofferings = new Object[]{ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector,
 				ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("energyContainer", 0, 100F, new ItemStack(ACBlocks.energy_container), ACBlocks.energy_pedestal, containerofferings).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_energy_collector), ACBlocks.energy_collector, owoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_energy_collector), new ItemStack(ACBlocks.overworld_energy_collector), awoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_energy_collector), new ItemStack(ACBlocks.abyssal_wasteland_energy_collector), dloffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_energy_collector), new ItemStack(ACBlocks.dreadlands_energy_collector), omtoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("erOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_energy_relay), ACBlocks.energy_relay, owoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("erAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_energy_relay), new ItemStack(ACBlocks.overworld_energy_relay), awoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("erDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_energy_relay), new ItemStack(ACBlocks.abyssal_wasteland_energy_relay), dloffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("erOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_energy_relay), new ItemStack(ACBlocks.dreadlands_energy_relay), omtoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_energy_container), ACBlocks.energy_container, owoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_energy_container), new ItemStack(ACBlocks.overworld_energy_container), awoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_energy_container), new ItemStack(ACBlocks.abyssal_wasteland_energy_container), dloffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_energy_container), new ItemStack(ACBlocks.dreadlands_energy_container), omtoffers).setTags("PotEnergy"));
-		Object[] sorawofferings = new Object[]{ACItems.shadow_gem, new ItemStack(ACBlocks.abyssal_stone), ACItems.coralium_plagued_flesh, new ItemStack(ACBlocks.abyssal_stone), ACItems.coralium_plagued_flesh,
-				new ItemStack(ACBlocks.abyssal_stone), ACItems.coralium_plagued_flesh, new ItemStack(ACBlocks.abyssal_stone)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolOWupgrade", 0, 400F, new ItemStack(ACBlocks.tiered_energy_collector, 1, 0), ACBlocks.energy_collector, owoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolAWupgrade", 1, 800F, new ItemStack(ACBlocks.tiered_energy_collector, 1, 1), new ItemStack(ACBlocks.tiered_energy_collector, 1, 0), awoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolDLupgrade", 2, 1200F, new ItemStack(ACBlocks.tiered_energy_collector, 1, 2), new ItemStack(ACBlocks.tiered_energy_collector, 1, 1), dloffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ecolOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.tiered_energy_collector, 1, 3), new ItemStack(ACBlocks.tiered_energy_collector, 1, 2), omtoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("erOWupgrade", 0, 400F, new ItemStack(ACBlocks.tiered_energy_relay, 1, 0), ACBlocks.energy_relay, owoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("erAWupgrade", 1, 800F, new ItemStack(ACBlocks.tiered_energy_relay, 1, 1), new ItemStack(ACBlocks.tiered_energy_relay, 1, 0), awoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("erDLupgrade", 2, 1200F, new ItemStack(ACBlocks.tiered_energy_relay, 1, 2), new ItemStack(ACBlocks.tiered_energy_relay, 1, 1), dloffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("erOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.tiered_energy_relay, 1, 3), new ItemStack(ACBlocks.tiered_energy_relay, 1, 2), omtoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econOWupgrade", 0, 400F, new ItemStack(ACBlocks.tiered_energy_container, 1, 0), ACBlocks.energy_container, owoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econAWupgrade", 1, 800F, new ItemStack(ACBlocks.tiered_energy_container, 1, 1), new ItemStack(ACBlocks.tiered_energy_container, 1, 0), awoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econDLupgrade", 2, 1200F, new ItemStack(ACBlocks.tiered_energy_container, 1, 2), new ItemStack(ACBlocks.tiered_energy_container, 1, 1), dloffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("econOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.tiered_energy_container, 1, 3), new ItemStack(ACBlocks.tiered_energy_container, 1, 2), omtoffers).setTags("PotEnergy"));
+		Object[] sorawofferings = new Object[]{ACItems.shadow_gem, new ItemStack(ACBlocks.stone, 1, 1), ACItems.coralium_plagued_flesh, new ItemStack(ACBlocks.stone, 1, 1), ACItems.coralium_plagued_flesh,
+				new ItemStack(ACBlocks.stone, 1, 1), ACItems.coralium_plagued_flesh, new ItemStack(ACBlocks.stone, 1, 1)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorAWupgrade", 1, ACLib.abyssal_wasteland_id, 1000F, new ItemStack(ACItems.staff_of_rending, 1, 1), new ItemStack(ACItems.staff_of_rending, 1, 0), sorawofferings).setTags(tags));
-		Object[] sordlofferings = new Object[]{ACItems.shadow_gem, new ItemStack(ACBlocks.dreadstone), ACItems.dread_fragment, new ItemStack(ACBlocks.dreadstone), ACItems.dread_fragment,
-				new ItemStack(ACBlocks.dreadstone), ACItems.dread_fragment, new ItemStack(ACBlocks.dreadstone)};
+		Object[] sordlofferings = new Object[]{ACItems.shadow_gem, new ItemStack(ACBlocks.stone, 1, 2), ACItems.dread_fragment, new ItemStack(ACBlocks.stone, 1, 2), ACItems.dread_fragment,
+				new ItemStack(ACBlocks.stone, 1, 2), ACItems.dread_fragment, new ItemStack(ACBlocks.stone, 1, 2)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorDLupgrade", 2, ACLib.dreadlands_id, 2000F, new ItemStack(ACItems.staff_of_rending, 1, 2), new ItemStack(ACItems.staff_of_rending, 1, 1), sordlofferings).setTags(tags));
-		Object[] soromtofferings = new Object[]{ACItems.shadow_gem, new ItemStack(ACBlocks.omothol_stone), ACItems.omothol_flesh, new ItemStack(ACBlocks.omothol_stone), ACItems.omothol_flesh,
-				new ItemStack(ACBlocks.omothol_stone), ACItems.omothol_flesh, new ItemStack(ACBlocks.omothol_stone)};
+		Object[] soromtofferings = new Object[]{ACItems.shadow_gem, new ItemStack(ACBlocks.stone, 1, 6), ACItems.omothol_flesh, new ItemStack(ACBlocks.stone, 1, 6), ACItems.omothol_flesh,
+				new ItemStack(ACBlocks.stone, 1, 6), ACItems.omothol_flesh, new ItemStack(ACBlocks.stone, 1, 6)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sorOMTupgrade", 3, ACLib.omothol_id, 3000F, new ItemStack(ACItems.staff_of_rending, 1, 3), new ItemStack(ACItems.staff_of_rending, 1, 2), soromtofferings).setTags(tags));
 		RitualRegistry.instance().registerRitual(new NecronomiconHouseRitual());
 		Object[] basicscrollofferings = {Items.BOOK, null, Items.BOOK, null, Items.BOOK, null, Items.BOOK};
@@ -761,13 +834,23 @@ public class AbyssalCrafting {
 				"ac.rending.essence_omt", ACLib.omothol_id));
 		RendingRegistry.instance().registerRending(new Rending("Shadow", 200, new ItemStack(ACItems.shadow_gem),
 				e -> e.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && e.isNonBoss(),
-				"ac.rending.shadowgem", OreDictionary.WILDCARD_VALUE));
+				"ac.rending.shadowgem", -1));
 	}
 
-	private static void addArmorSmelting(Item helmet, Item chestplate, Item pants, Item boots, ItemStack nugget){
-		GameRegistry.addSmelting(helmet, nugget, 1F);
-		GameRegistry.addSmelting(chestplate, nugget, 1F);
-		GameRegistry.addSmelting(pants, nugget, 1F);
-		GameRegistry.addSmelting(boots, nugget, 1F);
+	private static void addArmor(Item helmet, Item chestplate, Item pants, Item boots, Item material, ItemStack nugget, Item upgrade, Item oldh, Item oldc, Item oldp, Item oldb){
+
+		if(ACConfig.upgrade_kits) {
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)upgrade, new ItemStack(oldh, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(helmet));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)upgrade, new ItemStack(oldc, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(chestplate));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)upgrade, new ItemStack(oldp, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(pants));
+			AbyssalCraftAPI.addUpgrade((ItemUpgradeKit)upgrade, new ItemStack(oldb, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(boots));
+		}
+
+		if(ACConfig.smeltingRecipes){
+			GameRegistry.addSmelting(helmet, nugget, 1F);
+			GameRegistry.addSmelting(chestplate, nugget, 1F);
+			GameRegistry.addSmelting(pants, nugget, 1F);
+			GameRegistry.addSmelting(boots, nugget, 1F);
+		}
 	}
 }

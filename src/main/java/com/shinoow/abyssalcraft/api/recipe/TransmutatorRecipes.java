@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 
@@ -62,7 +61,7 @@ public class TransmutatorRecipes {
 	public void transmute(ItemStack input, ItemStack output, float xp)
 	{
 		transmutationList.put(input, output);
-		experienceList.put(output, xp);
+		experienceList.put(output, Float.valueOf(xp));
 	}
 
 	/**
@@ -72,7 +71,7 @@ public class TransmutatorRecipes {
 	{
 		return transmutationList.entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(Entry::getValue)
+				.map(e -> e.getValue())
 				.findFirst()
 				.orElse(ItemStack.EMPTY);
 	}
@@ -89,7 +88,7 @@ public class TransmutatorRecipes {
 
 		return experienceList.entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(Entry::getValue)
+				.map(e -> e.getValue().floatValue())
 				.findFirst()
 				.orElse(0.0F);
 	}

@@ -10,7 +10,8 @@
       "data": 0
     },
     "%": {
-      "item": "abyssalcraft:ethaxium"
+      "item": "abyssalcraft:stone",
+      "data": 5
     }
   },
   "result": {

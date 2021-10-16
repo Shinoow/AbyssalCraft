@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -173,12 +173,9 @@ public class ModelLesserShoggoth extends ModelBase {
 	public ModelRenderer rBodyTentacle01b;
 	public ModelRenderer rBodyTentacle01c;
 
-	private int size;
-
-	public ModelLesserShoggoth(int size) {
+	public ModelLesserShoggoth() {
 		textureWidth = 128;
 		textureHeight = 128;
-		this.size = size;
 		lHindTentacle01a = new ModelRenderer(this, 0, 96);
 		lHindTentacle01a.setRotationPoint(4.1F, 6.7F, 4.9F);
 		lHindTentacle01a.addBox(-3.0F, -3.0F, 0.0F, 6, 6, 10, 0.0F);
@@ -935,18 +932,14 @@ public class ModelLesserShoggoth extends ModelBase {
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-
-		if(size == 0) {
+		if(isChild) {
 			GlStateManager.pushMatrix();
 			GlStateManager.scale(0.75F, 0.75F, 0.75F);
 			GlStateManager.translate(0.0F, 8.0F * f5, 0.5F);
 			headJoint.render(f5);
 			bodyBase.render(f5);
 			GlStateManager.popMatrix();
-		} else if(size == 1) {
-			headJoint.render(f5);
-			bodyBase.render(f5);
-		} else if(size == 2) {
+		} else {
 			GlStateManager.pushMatrix();
 			GlStateManager.scale(1.5F, 1.5F, 1.5F);
 			GlStateManager.translate(0.0F, -8.0F * f5, 0.5F);

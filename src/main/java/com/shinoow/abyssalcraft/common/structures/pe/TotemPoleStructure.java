@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -18,7 +18,10 @@ import com.shinoow.abyssalcraft.api.energy.structure.IStructureBase;
 import com.shinoow.abyssalcraft.api.energy.structure.IStructureComponent;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
+import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,10 +35,10 @@ public class TotemPoleStructure implements IPlaceOfPower {
 	public TotemPoleStructure() {
 
 		data = new IBlockState[][][] {
-			new IBlockState[][] {new IBlockState[] {ACBlocks.monolith_stone.getDefaultState()}},
-			new IBlockState[][] {new IBlockState[] {ACBlocks.yog_sothoth_statue.getDefaultState()}},
-			new IBlockState[][] {new IBlockState[] {ACBlocks.azathoth_statue.getDefaultState()}},
-			new IBlockState[][] {new IBlockState[] {ACBlocks.nyarlathotep_statue.getDefaultState()}}};
+			new IBlockState[][] {new IBlockState[] {ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)}},
+			new IBlockState[][] {new IBlockState[] {ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.YOGSOTHOTH)}},
+			new IBlockState[][] {new IBlockState[] {ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.AZATHOTH)}},
+			new IBlockState[][] {new IBlockState[] {ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.NYARLATHOTEP)}}};
 	}
 
 	@Override
@@ -80,9 +83,9 @@ public class TotemPoleStructure implements IPlaceOfPower {
 
 		boolean valid = false;
 		if(world.getBlockState(pos).getBlock() == ACBlocks.multi_block)
-			if(world.getBlockState(pos.up()).getBlock() instanceof BlockStatue
-					&& world.getBlockState(pos.up(2)).getBlock() instanceof BlockStatue
-					&& world.getBlockState(pos.up(3)).getBlock() instanceof BlockStatue)
+			if(world.getBlockState(pos.up()).getBlock() == ACBlocks.statue
+			&& world.getBlockState(pos.up(2)).getBlock() == ACBlocks.statue
+			&& world.getBlockState(pos.up(3)).getBlock() == ACBlocks.statue)
 				valid = true;
 		for(int i = 1; i < 4; i++)
 			if(world.getTileEntity(pos.up(i)) instanceof IStructureComponent) {
@@ -95,10 +98,10 @@ public class TotemPoleStructure implements IPlaceOfPower {
 	public boolean canConstruct(World world, BlockPos pos, EntityPlayer player) {
 
 		IBlockState state = world.getBlockState(pos);
-		if(state.getBlock() == ACBlocks.monolith_stone)
-			return world.getBlockState(pos.up()).getBlock() instanceof BlockStatue
-					&& world.getBlockState(pos.up(2)).getBlock() instanceof BlockStatue
-					&& world.getBlockState(pos.up(3)).getBlock() instanceof BlockStatue;
+		if(state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) == EnumStoneType.MONOLITH_STONE)
+			return world.getBlockState(pos.up()).getBlock() == ACBlocks.statue
+			&& world.getBlockState(pos.up(2)).getBlock() == ACBlocks.statue
+			&& world.getBlockState(pos.up(3)).getBlock() == ACBlocks.statue;
 
 		return false;
 	}

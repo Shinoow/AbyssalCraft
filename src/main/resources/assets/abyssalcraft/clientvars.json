@@ -1,5 +1,5 @@
 {
-    "version": 2,
+    "version": 1,
     "crystalColors": [
         "0xD9D9D9",
         "0xF3CC3E",
@@ -104,7 +104,5 @@
 	"jzaharDeathB": 178,
 	"implosionR": 255,
 	"implosionG": 255,
-	"implosionB": 255,
-	"coraliumAntidotePotionColor": "0x00ff06",
-	"dreadAntidotePotionColor": "0x00ff06"
+	"implosionB": 255
 }

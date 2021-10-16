@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,13 +15,10 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Base Necronomicon Ritual.<br>
@@ -84,7 +81,7 @@ public abstract class NecronomiconRitual {
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
 	public NecronomiconRitual(String unlocalizedName, int bookType, float requiredEnergy, Object...offerings){
-		this(unlocalizedName, bookType, OreDictionary.WILDCARD_VALUE, requiredEnergy, offerings);
+		this(unlocalizedName, bookType, -1, requiredEnergy, offerings);
 	}
 
 	/**
@@ -171,18 +168,16 @@ public abstract class NecronomiconRitual {
 	 * Used to fetch the localized name for a ritual
 	 * @return A localized string representing a name
 	 */
-	@SideOnly(Side.CLIENT)
 	public String getLocalizedName(){
-		return I18n.format(getUnlocalizedName());
+		return I18n.translateToLocal(getUnlocalizedName());
 	}
 
 	/**
 	 * Used to fetch the description for the ritual
 	 * @return A localized string representing a description
 	 */
-	@SideOnly(Side.CLIENT)
 	public String getDescription(){
-		return I18n.format(getUnlocalizedName() + ".desc");
+		return I18n.translateToLocal(getUnlocalizedName() + ".desc");
 	}
 
 	/**

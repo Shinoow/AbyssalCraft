@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -28,5 +28,5 @@ public interface IEnergyTransporter extends IEnergyContainer {
 	 * @param energy PE quanta to transfer
 	 * @return True if the transfer succeeded, otherwise false
 	 */
-	void transferPE(EnumFacing facing, float energy);
+	public void transferPE(EnumFacing facing, float energy);
 }

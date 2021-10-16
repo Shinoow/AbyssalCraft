@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -33,20 +33,21 @@ public interface IStructureComponent {
 	/**
 	 * Checks if the structure component is currently part of a Place of Power multiblock structure
 	 */
-	boolean isInMultiblock();
+	public boolean isInMultiblock();
 
 	/**
 	 * Setter for whether or not this structure component is part of a Place of Power multiblock structure
 	 */
-	void setInMultiblock(boolean bool);
+	public void setInMultiblock(boolean bool);
 
 	/**
 	 * Getter for the position of the structure base for the Place of Power this component is part of
 	 */
-	@Nullable BlockPos getBasePosition();
+	@Nullable
+	public BlockPos getBasePosition();
 
 	/**
 	 * Setter for the structure base position for the Place of Power this component is part of
 	 */
-	void setBasePosition(BlockPos pos);
+	public void setBasePosition(BlockPos pos);
 }

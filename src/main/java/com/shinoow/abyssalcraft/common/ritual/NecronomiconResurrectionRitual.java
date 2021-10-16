@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -32,18 +32,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class NecronomiconResurrectionRitual extends NecronomiconRitual {
 
 	public NecronomiconResurrectionRitual() {
-		super("resurrection", 2, OreDictionary.WILDCARD_VALUE, 1000F, true, new Object[]{ new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 3), new ItemStack(ACItems.crystal, 1, 3),
-				new ItemStack(ACBlocks.carbon_crystal_cluster)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 5), new ItemStack(ACItems.crystal, 1, 5),
-						new ItemStack(ACBlocks.hydrogen_crystal_cluster)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 6), new ItemStack(ACItems.crystal, 1, 6),
-								new ItemStack(ACBlocks.nitrogen_crystal_cluster)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 4), new ItemStack(ACItems.crystal, 1, 4),
-										new ItemStack(ACBlocks.oxygen_crystal_cluster)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 7), new ItemStack(ACItems.crystal, 1, 7),
-												new ItemStack(ACBlocks.phosphorus_crystal_cluster)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 2), new ItemStack(ACItems.crystal, 1, 2),
-														new ItemStack(ACBlocks.sulfur_crystal_cluster)}});
+		super("resurrection", 2, -1, 1000F, true, new Object[]{ new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 3), new ItemStack(ACItems.crystal, 1, 3),
+				new ItemStack(ACBlocks.crystal_cluster, 1, 3)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 5), new ItemStack(ACItems.crystal, 1, 5),
+						new ItemStack(ACBlocks.crystal_cluster, 1, 5)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 6), new ItemStack(ACItems.crystal, 1, 6),
+								new ItemStack(ACBlocks.crystal_cluster, 1, 6)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 4), new ItemStack(ACItems.crystal, 1, 4),
+										new ItemStack(ACBlocks.crystal_cluster, 1, 4)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 7), new ItemStack(ACItems.crystal, 1, 7),
+												new ItemStack(ACBlocks.crystal_cluster, 1, 7)}, new ItemStack[]{new ItemStack(ACItems.crystal_shard, 1, 2), new ItemStack(ACItems.crystal, 1, 2),
+														new ItemStack(ACBlocks.crystal_cluster, 1, 2)}});
 		sacrifice = Items.NAME_TAG;
 		setRitualParticle(EnumRitualParticle.SMOKE_PILLARS);
 	}

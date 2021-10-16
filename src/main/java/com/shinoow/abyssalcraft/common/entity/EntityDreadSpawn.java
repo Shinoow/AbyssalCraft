@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -105,7 +105,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CLIMBING, (byte)0);
+		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, b0);
+		dataManager.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override

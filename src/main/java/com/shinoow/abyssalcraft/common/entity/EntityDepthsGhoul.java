@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -86,8 +86,14 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(42.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 60.0D : 30.0D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 10.0D : 5.0D);
+
+		if(ACConfig.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+		}
 	}
 
 	@Override
@@ -117,8 +123,8 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CHILD, (byte)0);
-		dataManager.register(TYPE, 0);
+		dataManager.register(CHILD, Byte.valueOf((byte)0));
+		dataManager.register(TYPE, Integer.valueOf(0));
 	}
 
 	@Override
@@ -129,7 +135,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 	public void setChild(boolean par1)
 	{
-		dataManager.set(CHILD, (byte)(par1 ? 1 : 0));
+		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
 		if (world != null && !world.isRemote)
 		{
@@ -150,7 +156,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 	public void setGhoulType(int par1)
 	{
-		dataManager.set(TYPE, par1);
+		dataManager.set(TYPE, Integer.valueOf(par1));
 	}
 
 	@Override

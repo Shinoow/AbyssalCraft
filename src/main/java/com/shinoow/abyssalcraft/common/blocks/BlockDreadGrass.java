@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.*;
@@ -57,8 +58,10 @@ public class BlockDreadGrass extends BlockGrass {
 					Block block = worldIn.getBlockState(blockpos.up()).getBlock();
 					IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-					if (iblockstate.getBlock() == ACBlocks.dreadlands_dirt && block.getLightOpacity(worldIn.getBlockState(blockpos.up()), worldIn, blockpos.up()) <= 2)
+					if ((iblockstate.getBlock() == Blocks.GRASS && ACConfig.dreadGrassSpread || iblockstate.getBlock() == ACBlocks.dreadlands_dirt || iblockstate.getBlock() == Blocks.DIRT && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && ACConfig.dreadGrassSpread) && block.getLightOpacity(worldIn.getBlockState(blockpos.up()), worldIn, blockpos.up()) <= 2)
 						worldIn.setBlockState(blockpos, ACBlocks.dreadlands_grass.getDefaultState());
+					else if(ACConfig.dreadGrassSpread && iblockstate.getBlock() == Blocks.DIRT && iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.isSideSolid(blockpos, EnumFacing.UP) && !worldIn.getBlockState(blockpos.up()).getMaterial().isLiquid())
+						worldIn.setBlockState(blockpos, ACBlocks.dreadlands_dirt.getDefaultState());
 				}
 		}
 	}

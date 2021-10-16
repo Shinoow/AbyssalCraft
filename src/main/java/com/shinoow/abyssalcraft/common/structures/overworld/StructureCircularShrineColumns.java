@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,7 +14,12 @@ package com.shinoow.abyssalcraft.common.structures.overworld;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -26,8 +31,8 @@ public class StructureCircularShrineColumns extends StructureDarklandsBase {
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
-		IBlockState chiseled_brick = ACBlocks.chiseled_darkstone_brick.getDefaultState();
-		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
+		IBlockState chiseled_brick = ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, EnumBrickType.CHISELED);
+		IBlockState brick_slab = ACConfig.darkstone_brick_slab ? ACBlocks.darkstone_brick_slab.getDefaultState() : Blocks.AIR.getDefaultState();
 
 		for(int i = -3; i < 4; i++)
 			for(int j = -5; j < 6; j++){
@@ -83,8 +88,8 @@ public class StructureCircularShrineColumns extends StructureDarklandsBase {
 						}
 				}
 				if(j == -2 || j == 2){
-					setBlockAndNotifyAdequately(worldIn, pos.add(i, 1, j), i > -2 && i < 2 ? ACBlocks.monolith_stone.getDefaultState() : getBrick(rand));
-					setBlockAndNotifyAdequately(worldIn, pos.add(j, 1, i), i > -2 && i < 2 ? ACBlocks.monolith_stone.getDefaultState() : getBrick(rand));
+					setBlockAndNotifyAdequately(worldIn, pos.add(i, 1, j), i > -2 && i < 2 ? ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE) : getBrick(rand));
+					setBlockAndNotifyAdequately(worldIn, pos.add(j, 1, i), i > -2 && i < 2 ? ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE) : getBrick(rand));
 				}
 				if(j > -2 && j < 2 && i > -2 && i < 2)
 					setBlockAndNotifyAdequately(worldIn, pos.add(i, 1, j), ACBlocks.shoggoth_ooze.getDefaultState().withProperty(BlockShoggothOoze.LAYERS, 8));

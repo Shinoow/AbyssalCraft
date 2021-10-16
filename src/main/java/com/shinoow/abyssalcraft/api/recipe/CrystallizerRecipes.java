@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 
@@ -49,7 +48,7 @@ public class CrystallizerRecipes {
 	public void crystallize(ItemStack input, ItemStack output1, ItemStack output2, float xp)
 	{
 		crystallizationList.put(input, new ItemStack[]{output1, output2});
-		experienceList.put(output1, xp);
+		experienceList.put(output1, Float.valueOf(xp));
 	}
 
 	/**
@@ -59,7 +58,7 @@ public class CrystallizerRecipes {
 	{
 		return crystallizationList.entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(Entry::getValue)
+				.map(e -> e.getValue())
 				.findFirst()
 				.orElse(new ItemStack[] {ItemStack.EMPTY, ItemStack.EMPTY});
 	}
@@ -76,7 +75,7 @@ public class CrystallizerRecipes {
 
 		return experienceList.entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(Entry::getValue)
+				.map(e -> e.getValue().floatValue())
 				.findFirst()
 				.orElse(0.0F);
 	}

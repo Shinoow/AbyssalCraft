@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityShoggothBiomass;
-import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.BlockContainer;
@@ -77,7 +77,7 @@ public class BlockShoggothBiomass extends BlockContainer {
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		if(!(entity instanceof EntityShoggothBase)){
+		if(!(entity instanceof EntityLesserShoggoth)){
 			entity.motionX *= 0.4D;
 			entity.motionZ *= 0.4D;
 		}

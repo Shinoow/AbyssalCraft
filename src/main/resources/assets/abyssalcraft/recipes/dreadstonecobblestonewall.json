@@ -6,7 +6,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:dreadstonecobblestone"
+      "item": "abyssalcraft:cobblestone",
+      "data": 2
     }
   },
   "result": {

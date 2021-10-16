@@ -12,6 +12,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:nitrogen_crystal_cluster"
+    "item": "abyssalcraft:crystalcluster",
+    "data": 6
   }
 }

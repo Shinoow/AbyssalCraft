@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,8 @@ package com.shinoow.abyssalcraft.common.world;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -44,7 +46,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new ChunkGeneratorOmothol(world, 1251393890L);
+		return new ChunkProviderOmothol(world, 1251393890L);
 	}
 
 	@Override
@@ -130,7 +132,7 @@ public class WorldProviderOmothol extends WorldProvider {
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z)
 	{
-		return world.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == ACBlocks.omothol_stone.getDefaultState();
+		return world.getGroundAboveSeaLevel(new BlockPos(x, 0, z)) == ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE);
 	}
 
 	@Override

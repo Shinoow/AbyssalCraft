@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -33,7 +33,7 @@ import net.minecraft.world.World;
 public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 
 	public NecronomiconDreadSpawnRitual() {
-		super("dreadSpawn", 2, 500F, new Object[]{ACItems.dread_fragment, new ItemStack(ACBlocks.dreadstone), new ItemStack(ACBlocks.abyssalnite_stone), ACItems.chunk_of_abyssalnite,
+		super("dreadSpawn", 2, 500F, new Object[]{ACItems.dread_fragment, new ItemStack(ACBlocks.stone, 1, 2), new ItemStack(ACBlocks.stone, 1, 3), ACItems.chunk_of_abyssalnite,
 				ACItems.dreaded_chunk_of_abyssalnite, Items.ROTTEN_FLESH, ACItems.dreaded_shard_of_abyssalnite, ACItems.abyssalnite_ingot});
 		setRitualParticle(EnumRitualParticle.SMOKE_PILLARS);
 	}

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,19 +11,21 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import java.util.*;
+import java.util.List;
+import java.util.Random;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredSacrificialAltar;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.SingletonInventoryUtil;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,27 +38,32 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockTieredSacrificialAltar extends BlockContainer implements IEnergyBlock {
+public class BlockTieredSacrificialAltar extends BlockContainer {
 
-	public static final Map<EnumDimType, Block> VARIANTS = new HashMap<>();
+	public static final PropertyEnum<EnumDimType> DIMENSION = PropertyEnum.create("dimension", EnumDimType.class);
 
-	public EnumDimType TYPE;
-
-	public BlockTieredSacrificialAltar(EnumDimType type){
+	public BlockTieredSacrificialAltar(){
 		super(Material.ROCK);
 		setHardness(6.0F);
 		setResistance(12.0F);
+		setUnlocalizedName("tieredsacrificialaltar");
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabDecoration);
 		setHarvestLevel("pickaxe", 0);
-		TYPE = type;
-		VARIANTS.put(type, this);
 	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		return new AxisAlignedBB(0.15F, 0.0F, 0.15F, 0.85F, 0.9F, 0.85F);
+	}
+
+	@Override
+	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+		par3List.add(new ItemStack(this, 1, 0));
+		par3List.add(new ItemStack(this, 1, 1));
+		par3List.add(new ItemStack(this, 1, 2));
+		par3List.add(new ItemStack(this, 1, 3));
 	}
 
 	@Override
@@ -74,6 +81,11 @@ public class BlockTieredSacrificialAltar extends BlockContainer implements IEner
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
+	}
+
+	@Override
+	public int damageDropped (IBlockState state) {
+		return state.getValue(DIMENSION).getMeta();
 	}
 
 	@Override
@@ -164,14 +176,21 @@ public class BlockTieredSacrificialAltar extends BlockContainer implements IEner
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		return new java.util.ArrayList<>();
+		return new java.util.ArrayList<ItemStack>();
 	}
 
 	@Override
-	public int getMaxEnergy(ItemStack stack) {
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(DIMENSION, EnumDimType.byMetadata(meta));
+	}
 
-		int base = 5000;
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(DIMENSION).getMeta();
+	}
 
-		return (int) (base * (1.5 + 0.5 * TYPE.getMeta()));
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer.Builder(this).add(DIMENSION).build();
 	}
 }

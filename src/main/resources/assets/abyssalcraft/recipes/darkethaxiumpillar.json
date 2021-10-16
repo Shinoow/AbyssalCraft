@@ -10,7 +10,8 @@
       "data": 0
     },
     "%": {
-      "item": "abyssalcraft:omotholstone"
+      "item": "abyssalcraft:stone",
+      "data": 6
     }
   },
   "result": {

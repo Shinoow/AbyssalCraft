@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -91,7 +91,11 @@ public class StaffOfRendingMessage extends AbstractServerMessage<StaffOfRendingM
 		if(entity == null) return;
 
 		if(stack.getItem() instanceof IStaffOfRending)
-			if(entity instanceof EntityLiving || entity instanceof MultiPartEntityPart && ((MultiPartEntityPart) entity).parent instanceof EntityLiving)
+			if(entity instanceof EntityLiving){
+				if(drain(player, entity, stack) && EnchantmentHelper.getEnchantmentLevel(AbyssalCraftAPI.multi_rend, stack) == 1)
+					player.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().grow(3))
+					.stream().forEach(e -> drain(player, e, stack));
+			} else if(entity instanceof MultiPartEntityPart && ((MultiPartEntityPart) entity).parent instanceof EntityLiving)
 				if(drain(player, entity, stack) && EnchantmentHelper.getEnchantmentLevel(AbyssalCraftAPI.multi_rend, stack) == 1)
 					player.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().grow(3))
 					.stream().forEach(e -> drain(player, e, stack));

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,7 +15,7 @@ import java.util.*;
 
 import org.lwjgl.input.Keyboard;
 
-import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
@@ -29,7 +29,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 
@@ -172,7 +171,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		//north-west
 		renderObject(k + 32, b0 + 40, offerings[7], x, y);
 		//center
-		renderObject(k + 58, b0 + 66, ritual.getSacrifice(), x, y);
+		renderItem(k + 58, b0 + 66, APIUtils.convertToStack(ritual.getSacrifice()), x, y);
 
 		if(ritual instanceof NecronomiconCreationRitual)
 			renderItem(k + 58, b0 + 139, ((NecronomiconCreationRitual) ritual).getItem(), x, y);
@@ -187,8 +186,8 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	}
 
 	private void initStuff(){
-		dimToString.put(OreDictionary.WILDCARD_VALUE, localize(NecronomiconText.LABEL_ANYWHERE));
-		dimToString.putAll(DimensionDataRegistry.instance().getDimensionNameMappings());
+		dimToString.put(-1, localize(NecronomiconText.LABEL_ANYWHERE));
+		dimToString.putAll(RitualRegistry.instance().getDimensionNameMappings());
 
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
 			if(ritual.getBookType() == ritualnum && isUnlocked(ritual.getUnlockCondition()) && !(ritual instanceof IHiddenRitual))

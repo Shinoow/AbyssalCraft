@@ -12,6 +12,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:silica_crystal_cluster"
+    "item": "abyssalcraft:crystalcluster2",
+    "data": 5
   }
 }

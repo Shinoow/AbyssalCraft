@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -66,11 +66,16 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(42.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 100.0D : 50.0D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 24.0D : 12.0D);
+
+		if(ACConfig.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(24.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D);
+		}
 	}
 
 	@Override
@@ -104,7 +109,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CLIMBING, (byte)0);
+		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -180,7 +185,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, b0);
+		dataManager.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override
@@ -227,7 +232,7 @@ public class EntityGreaterDreadSpawn extends EntityMob implements IDreadEntity, 
 				}
 
 		if(ticksExisted % 2000 == 0)
-			if(!world.isRemote && world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < ACConfig.dreadSpawnSpawnLimit){
+			if(!world.isRemote && world.getEntitiesWithinAABB(EntityDreadSpawn.class, getEntityBoundingBox().grow(32)).size() < 20){
 				EntityDreadSpawn spawn = new EntityDreadSpawn(world);
 				spawn.copyLocationAndAnglesFrom(this);
 				world.spawnEntity(spawn);

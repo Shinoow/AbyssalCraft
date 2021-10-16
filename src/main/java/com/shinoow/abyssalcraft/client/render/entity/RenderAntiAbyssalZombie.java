@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -17,15 +17,15 @@ import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderAntiAbyssalZombie extends RenderBiped<EntityAntiAbyssalZombie> {
+public class RenderAntiAbyssalZombie extends RenderBiped {
 
 	private static final ResourceLocation zombieTexture = new ResourceLocation("abyssalcraft:textures/model/anti/abyssal_zombie.png");
-	private static final ResourceLocation zombieTextureAlt = new ResourceLocation("abyssalcraft:textures/model/anti/abyssal_zombie_old.png");
 
 	public RenderAntiAbyssalZombie(RenderManager manager)
 	{
@@ -41,9 +41,14 @@ public class RenderAntiAbyssalZombie extends RenderBiped<EntityAntiAbyssalZombie
 		});
 	}
 
-	@Override
-	protected ResourceLocation getEntityTexture(EntityAntiAbyssalZombie par1EntityLiving)
+	protected ResourceLocation getZombieTexture(EntityAntiAbyssalZombie par1EntityLiving)
 	{
-		return par1EntityLiving.getName().equalsIgnoreCase("woonihs") ? zombieTextureAlt : zombieTexture;
+		return zombieTexture;
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(EntityLiving par1EntityLiving)
+	{
+		return getZombieTexture((EntityAntiAbyssalZombie)par1EntityLiving);
 	}
 }

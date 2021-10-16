@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -84,11 +84,11 @@ public class StructureStorage extends WorldGenerator {
 			break;
 		}
 
-		if(worldIn.getBlockState(center).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(center.north(distZ)).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(center.south(distZ)).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(center.west(distX)).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(center.east(distX)).getBlock() != ACBlocks.omothol_stone) return false;
+		if(worldIn.getBlockState(center).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(center.north(distZ)).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(center.south(distZ)).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(center.west(distX)).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(center.east(distX)).getBlock() != ACBlocks.stone) return false;
 
 		center = worldIn.getHeight(center);
 		if(center.getY() > pos.getY()) {

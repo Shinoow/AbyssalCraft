@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:beryl_crystal_cluster"
+      "item": "abyssalcraft:crystalcluster2",
+      "data": 11
     }
   },
   "result": {

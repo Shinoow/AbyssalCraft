@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -26,20 +26,20 @@ public interface IEnergyContainerItem {
 	 * Gets the Potential Energy contained within the item
 	 * @param stack ItemStack containing the item
 	 */
-	float getContainedEnergy(ItemStack stack);
+	public float getContainedEnergy(ItemStack stack);
 
 	/**
 	 * Gets the maximum Potential Energy the item can hold
 	 * @param stack ItemStack containing the item
 	 */
-	int getMaxEnergy(ItemStack stack);
+	public int getMaxEnergy(ItemStack stack);
 
 	/**
 	 * Adds Potential Energy to the item
 	 * @param stack ItemStack containing the item
 	 * @param energy Energy quanta to add
 	 */
-	void addEnergy(ItemStack stack, float energy);
+	public void addEnergy(ItemStack stack, float energy);
 
 	/**
 	 * Consumes (removes) Potential Energy from the item
@@ -47,19 +47,19 @@ public interface IEnergyContainerItem {
 	 * @param energy Energy quanta to consume
 	 * @return The amount of energy consumed
 	 */
-	float consumeEnergy(ItemStack stack, float energy);
+	public float consumeEnergy(ItemStack stack, float energy);
 
 	/**
 	 * Returns Whether or not this item can accept Potential Energy<br>
 	 * (eg. if it  has room for more Potential Energy, or if it accepts input at all)
 	 * @param stack ItemStack containing the item
 	 */
-	boolean canAcceptPE(ItemStack stack);
+	public boolean canAcceptPE(ItemStack stack);
 
 	/**
 	 * Returns Whether or not this item can transfer Potential Energy<br>
 	 * (eg. if it has any Potential Energy stored that it can transfer, or if it allows extraction at all)
 	 * @param stack ItemStack containing the item
 	 */
-	boolean canTransferPE(ItemStack stack);
+	public boolean canTransferPE(ItemStack stack);
 }

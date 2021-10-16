@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -26,15 +26,15 @@ public interface IRitualPedestal extends ISingletonInventory {
 	 * Returns the Ritual Altar this pedestal is attached to<br>
 	 * (the BlockPos of the altar should be kept in the pedestal's NBT)
 	 */
-	IRitualAltar getAltar();
+	public IRitualAltar getAltar();
 
 	/**
 	 * Sets the Ritual Altar position
 	 */
-	void setAltar(BlockPos pos);
+	public void setAltar(BlockPos pos);
 
 	/**
 	 * Consumes the Item placed on the pedestal (if any)
 	 */
-	void consumeItem();
+	public void consumeItem();
 }

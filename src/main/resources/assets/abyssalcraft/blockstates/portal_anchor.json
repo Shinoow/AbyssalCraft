@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "active=true": { "model": "abyssalcraft:portal_anchor_active" },
-        "active=false": { "model": "abyssalcraft:portal_anchor" }
-    }
-}

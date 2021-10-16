@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -86,6 +86,22 @@ public class ACItems {
 	public static Item depths_chestplate;
 	public static Item depths_leggings;
 	public static Item depths_boots;
+	public static Item cobblestone_upgrade_kit;
+	public static Item iron_upgrade_kit;
+	public static Item gold_upgrade_kit;
+	public static Item diamond_upgrade_kit;
+	public static Item abyssalnite_upgrade_kit;
+	public static Item coralium_upgrade_kit;
+	public static Item mre;
+	public static Item iron_plate;
+	public static Item chicken_on_a_plate;
+	public static Item pork_on_a_plate;
+	public static Item beef_on_a_plate;
+	public static Item fish_on_a_plate;
+	public static Item dirty_plate;
+	public static Item fried_egg;
+	public static Item fried_egg_on_a_plate;
+	public static Item washcloth;
 	public static Item shadow_fragment;
 	public static Item shadow_shard;
 	public static Item shadow_gem;
@@ -104,6 +120,7 @@ public class ACItems {
 	public static Item dreadium_shovel;
 	public static Item dreadium_sword;
 	public static Item dreadium_hoe;
+	public static Item dreadium_upgrade_kit;
 	public static Item carbon_cluster;
 	public static Item dense_carbon_cluster;
 	public static Item methane;
@@ -151,6 +168,7 @@ public class ACItems {
 	public static Item ethaxium_shovel;
 	public static Item ethaxium_sword;
 	public static Item ethaxium_hoe;
+	public static Item ethaxium_upgrade_kit;
 	public static Item coin;
 	public static Item cthulhu_engraved_coin;
 	public static Item elder_engraved_coin;
@@ -228,9 +246,5 @@ public class ACItems {
 	public static Item configurator;
 	/** Metadata Item, 0 - 3 = variations of the same item */
 	public static Item configurator_shard;
-	public static Item silver_key;
-	public static Item book_of_many_faces;
-	public static Item generic_meat;
-	public static Item cooked_generic_meat;
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
 }

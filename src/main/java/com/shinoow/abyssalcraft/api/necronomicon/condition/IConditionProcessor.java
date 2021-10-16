@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -31,5 +31,5 @@ public interface IConditionProcessor {
 	 * @param player Player context for the capability holder
 	 * @return True if the condition has been met, otherwise false
 	 */
-	boolean processUnlock(IUnlockCondition condition, INecroDataCapability cap, EntityPlayer player);
+	public boolean processUnlock(IUnlockCondition condition, INecroDataCapability cap, EntityPlayer player);
 }

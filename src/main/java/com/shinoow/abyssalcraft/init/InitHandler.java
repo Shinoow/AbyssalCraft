@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -18,9 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
-import java.util.function.BiConsumer;
 
-import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -37,6 +35,7 @@ import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -103,8 +102,8 @@ public class InitHandler implements ILifeCycleHandler {
 
 	public static final Map<ResourceLocation, Tuple<Integer, Float>> demon_transformations = new HashMap<>();
 
-	public final List<Block> BLOCKS = new ArrayList<>();
-	public final List<Item> ITEMS = new ArrayList<>();
+	final List<Block> BLOCKS = new ArrayList<>();
+	final List<Item> ITEMS = new ArrayList<>();
 	final List<Biome> BIOMES = new ArrayList<>();
 	final List<Enchantment> ENCHANTMENTS = new ArrayList<>();
 	final List<Potion> POTIONS = new ArrayList<>();
@@ -206,6 +205,7 @@ public class InitHandler implements ILifeCycleHandler {
 	@SubscribeEvent
 	public void registerBlocks(RegistryEvent.Register<Block> event){
 		event.getRegistry().registerAll(BLOCKS.toArray(new Block[0]));
+		RitualUtil.addBlocks();
 	}
 
 	@SubscribeEvent
@@ -292,213 +292,220 @@ public class InitHandler implements ILifeCycleHandler {
 		event.getRegistry().registerAll(SOUND_EVENTS.toArray(new SoundEvent[0]));
 	}
 
-	//	@SubscribeEvent
-	//	public void remapBlocks(RegistryEvent.MissingMappings<Block> event) {
-	//		for(Mapping<Block> mapping : event.getMappings()) {
-	//			if(mapping.key.toString().equals("abyssalcraft:stone")) {
-	//				mapping.remap(ACBlocks.darkstone);
-	//			}
-	//			if(mapping.key.toString().equals("abyssalcraft:cobblestone")) {
-	//				mapping.remap(ACBlocks.darkstone_cobblestone);
-	//			}
-	//			if(mapping.key.toString().equals("abyssalcraft:decorativestatue")) {
-	//				mapping.remap(ACBlocks.decorative_cthulhu_statue);
-	//			}
-	//			if(mapping.key.toString().equals("abyssalcraft:statue")) {
-	//				mapping.remap(ACBlocks.cthulhu_statue);
-	//			}
-	//			if(mapping.key.toString().equals("abyssalcraft:ingotblock")) {
-	//				mapping.remap(ACBlocks.block_of_abyssalnite);
-	//			}
-	//		}
-	//	}
-
 	private static void syncConfig(){
 
-		cfg.setCategoryComment(CATEGORY_DIMENSIONS, "Dimension configuration (ID configuration and dimension unloading). Any changes take effect after a Minecraft restart.");
-		cfg.setCategoryComment(CATEGORY_BIOMES, "Biome configuration (biome generation, chance of a biome generating and whether or not a player ccan spawn there). Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("dimensions", "Dimension configuration (ID configuration and dimension unloading). Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("biome_generation", "Biome generation configuration (whether a biome should generate). Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("biome_spawning", "Biome spawning configuration (if players have a chance of spawning in the biomes). Any changes take effect after a Minecraft restart.");
 		cfg.setCategoryComment(Configuration.CATEGORY_GENERAL, "General configuration (misc things). Only the spawn weights require a Minecraft restart for changes to take effect.");
-		cfg.setCategoryComment(CATEGORY_SHOGGOTH, "Shoggoth Ooze configuration (blacklist materials from turning into ooze). Any changes take effect immediately.");
-		cfg.setCategoryComment(CATEGORY_WORLDGEN, "World generation configuration (things that generate in the world). Any changes take effect immediately.");
-		cfg.setCategoryComment(CATEGORY_SILLY_SETTINGS, "These settings are generally out of place, and don't contribute to the mod experience. They exist because 'what if X did this?'");
-		cfg.setCategoryComment(CATEGORY_MOD_COMPAT, "Mod compatibility configuration (settings in regards to certain compatiblity with other mods that can be disabled at will).");
-		cfg.setCategoryComment(CATEGORY_WET_NOODLE, "These settings allow you to disable features of a destructive type, or things that to some extent will impact how the mod is played (while generally making it easier).");
-		cfg.setCategoryComment(CATEGORY_MODULES, "These settings allow you to disable content from the mod that may be out of place to some extent, or other reasons. Any changes take effect after a Minecraft restart.");
-		cfg.setCategoryComment(CATEGORY_SPELLS, "Spell configuration (allows you to enable or disable specific spells added by the mod). Any changes take effect after a Minecraft restart.");
-		cfg.setCategoryComment(CATEGORY_RITUALS, "Ritual configuration (options regarding rituals). Any changes take effect immediately.");
-		cfg.setCategoryComment(Configuration.CATEGORY_CLIENT, "Client configuration (options that only affect the client). Any changes take effect immediately.");
-		cfg.setCategoryComment(CATEGORY_MOBS, "Mob configuration (spawn weights, plague immunities and more).");
+		cfg.setCategoryComment("biome_weight", "Biome weight configuration (the chance n out of 100 that a biome is picked to generate). Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("shoggoth", "Shoggoth Ooze configuration (blacklist materials from turning into ooze). Any changes take effect immediately.");
+		cfg.setCategoryComment("worldgen", "World generation configuration (things that generate in the world). Any changes take effect immediately.");
+		cfg.setCategoryComment("item_blacklist", "Entity Item Blacklist (allows you to blacklist items/blocks for entities that can pick up things). Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("silly_settings", "These settings are generally out of place, and don't contribute to the mod experience. They exist because 'what if X did this?'");
+		cfg.setCategoryComment("blocks", "These settings allow you to disable specific blocks in the mod, mainly slabs, stairs and walls. Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("mod_compat", "Mod compatibility configuration (settings in regards to certain compatiblity with other mods that can be disabled at will).");
+		cfg.setCategoryComment("wet_noodle", "These settings allow you to disable features of a destructive type, or things that to some extent will impact how the mod is played (while generally making it easier).");
+		cfg.setCategoryComment("modules", "These settings allow you to disable content from the mod that may be out of place to some extent, or other reasons. Any changes take effect after a Minecraft restart.");
+		cfg.setCategoryComment("spells", "Spell configuration (allows you to enable or disable specific spells added by the mod). Any changes take effect after a Minecraft restart.");
 
-		ACLib.abyssal_wasteland_id = cfg.get(CATEGORY_DIMENSIONS, "The Abyssal Wasteland", 50, "The first dimension, full of undead monsters.").getInt();
-		ACLib.dreadlands_id = cfg.get(CATEGORY_DIMENSIONS, "The Dreadlands", 51, "The second dimension, infested with mutated monsters.").getInt();
-		ACLib.omothol_id = cfg.get(CATEGORY_DIMENSIONS, "Omothol", 52, "The third dimension, also known as \u00A7oThe Realm of J'zahar\u00A7r.").getInt();
-		ACLib.dark_realm_id = cfg.get(CATEGORY_DIMENSIONS, "The Dark Realm", 53, "Hidden fourth dimension, reached by falling down from Omothol").getInt();
+		ACLib.abyssal_wasteland_id = cfg.get("dimensions", "The Abyssal Wasteland", 50, "The first dimension, full of undead monsters.").getInt();
+		ACLib.dreadlands_id = cfg.get("dimensions", "The Dreadlands", 51, "The second dimension, infested with mutated monsters.").getInt();
+		ACLib.omothol_id = cfg.get("dimensions", "Omothol", 52, "The third dimension, also known as \u00A7oThe Realm of J'zahar\u00A7r.").getInt();
+		ACLib.dark_realm_id = cfg.get("dimensions", "The Dark Realm", 53, "Hidden fourth dimension, reached by falling down from Omothol").getInt();
 
-		keepLoaded1 = cfg.get(CATEGORY_DIMENSIONS, "Prevent unloading: The Abyssal Wasteland", false, "Set true to prevent The Abyssal Wasteland from automatically unloading (might affect performance)").getBoolean();
-		keepLoaded2 = cfg.get(CATEGORY_DIMENSIONS, "Prevent unloading: The Dreadlands", false, "Set true to prevent The Dreadlands from automatically unloading (might affect performance)").getBoolean();
-		keepLoaded3 = cfg.get(CATEGORY_DIMENSIONS, "Prevent unloading: Omothol", false, "Set true to prevent Omothol from automatically unloading (might affect performance)").getBoolean();
-		keepLoaded4 = cfg.get(CATEGORY_DIMENSIONS, "Prevent unloading: The Dark Realm", false, "Set true to prevent The Dark Realm from automatically unloading (might affect performance)").getBoolean();
+		keepLoaded1 = cfg.get("dimensions", "Prevent unloading: The Abyssal Wasteland", false, "Set true to prevent The Abyssal Wasteland from automatically unloading (might affect performance)").getBoolean();
+		keepLoaded2 = cfg.get("dimensions", "Prevent unloading: The Dreadlands", false, "Set true to prevent The Dreadlands from automatically unloading (might affect performance)").getBoolean();
+		keepLoaded3 = cfg.get("dimensions", "Prevent unloading: Omothol", false, "Set true to prevent Omothol from automatically unloading (might affect performance)").getBoolean();
+		keepLoaded4 = cfg.get("dimensions", "Prevent unloading: The Dark Realm", false, "Set true to prevent The Dark Realm from automatically unloading (might affect performance)").getBoolean();
 
-		portalCooldown = cfg.get(CATEGORY_DIMENSIONS, "Portal cooldown", 200, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).\n[range: 10 ~ 300, default: 200]", 10, 300).getInt();
-		startDimension = cfg.get(CATEGORY_DIMENSIONS, "First Portal Dimension", 0, "The dimension ID of the dimension where you make the portal to the Abyssal Wastelands.").getInt();
+		dark1 = cfg.get("biome_generation", "Darklands", true, "Set true for the Darklands biome to generate.").getBoolean();
+		dark2 = cfg.get("biome_generation", "Darklands Forest", true, "Set true for the Darklands Forest biome to generate.").getBoolean();
+		dark3 = cfg.get("biome_generation", "Darklands Plains", true, "Set true for the Darklands Plains biome to generate.").getBoolean();
+		dark4 = cfg.get("biome_generation", "Darklands Highland", true, "Set true for the Darklands Highland biome to generate.").getBoolean();
+		dark5 = cfg.get("biome_generation", "Darklands Mountain", true, "Set true for the Darklands Mountain biome to generate.").getBoolean();
+		coralium1 = cfg.get("biome_generation", "Coralium Infested Swamp", true, "Set true for the Coralium Infested Swamp to generate.").getBoolean();
 
-		dark1 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands", true, "Set true for the Darklands biome to generate.").getBoolean();
-		dark2 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands Forest", true, "Set true for the Darklands Forest biome to generate.").getBoolean();
-		dark3 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands Plains", true, "Set true for the Darklands Plains biome to generate.").getBoolean();
-		dark4 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands Highland", true, "Set true for the Darklands Highland biome to generate.").getBoolean();
-		dark5 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands Mountain", true, "Set true for the Darklands Mountain biome to generate.").getBoolean();
-		coralium1 = cfg.get(CATEGORY_BIOMES, "Generating: Coralium Infested Swamp", true, "Set true for the Coralium Infested Swamp to generate.").getBoolean();
-
-		darkspawn1 = cfg.get(CATEGORY_BIOMES, "Spawning: Darklands", true, "If true, you can spawn in the Darklands biome.").getBoolean();
-		darkspawn2 = cfg.get(CATEGORY_BIOMES, "Spawning: Darklands Forest", true, "If true, you can spawn in the Darklands Forest biome.").getBoolean();
-		darkspawn3 = cfg.get(CATEGORY_BIOMES, "Spawning: Darklands Plains", true, "If true, you can spawn in the Darklands Plains biome.").getBoolean();
-		darkspawn4 = cfg.get(CATEGORY_BIOMES, "Spawning: Darklands Highland", true, "If true, you can spawn in the Darklands Highland biome.").getBoolean();
-		darkspawn5 = cfg.get(CATEGORY_BIOMES, "Spawning: Darklands Mountain", true, "If true, you can spawn in the Darklands Mountain biome.").getBoolean();
-		coraliumspawn1 = cfg.get(CATEGORY_BIOMES, "Spawning: Coralium Infested Swamp", true, "If true, you can spawn in the Coralium Infested Swamp biome.").getBoolean();
-
-		darkWeight1 = cfg.get(CATEGORY_BIOMES, "Biome Weight: Darklands", 4, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
-		darkWeight2 = cfg.get(CATEGORY_BIOMES, "Biome Weight: Darklands Forest", 4, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
-		darkWeight3 = cfg.get(CATEGORY_BIOMES, "Biome Weight: Darklands Plains", 4, "Biome weight for the Darklands Plains biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
-		darkWeight4 = cfg.get(CATEGORY_BIOMES, "Biome Weight: Darklands Highland", 4, "Biome weight for the Darklands Highland biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
-		darkWeight5 = cfg.get(CATEGORY_BIOMES, "Biome Weight: Darklands Mountain", 4, "Biome weight for the Darklands Mountain biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]").getInt();
-		coraliumWeight = cfg.get(CATEGORY_BIOMES, "Biome Weight: Coralium Infested Swamp", 6, "Biome weight for the Coralium Infested Swamp biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
+		darkspawn1 = cfg.get("biome_spawning", "Darklands", true, "If true, you can spawn in the Darklands biome.").getBoolean();
+		darkspawn2 = cfg.get("biome_spawning", "Darklands Forest", true, "If true, you can spawn in the Darklands Forest biome.").getBoolean();
+		darkspawn3 = cfg.get("biome_spawning", "Darklands Plains", true, "If true, you can spawn in the Darklands Plains biome.").getBoolean();
+		darkspawn4 = cfg.get("biome_spawning", "Darklands Highland", true, "If true, you can spawn in the Darklands Highland biome.").getBoolean();
+		darkspawn5 = cfg.get("biome_spawning", "Darklands Mountain", true, "If true, you can spawn in the Darklands Mountain biome.").getBoolean();
+		coraliumspawn1 = cfg.get("biome_spawning", "Coralium Infested Swamp", true, "If true, you can spawn in the Coralium Infested Swamp biome.").getBoolean();
 
 		shouldSpread = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Coralium transmutation", true, "Set true for the Liquid Coralium to convert other liquids into itself and transmute blocks into their Abyssal Wasteland counterparts outside of the Abyssal Wasteland.").getBoolean();
 		shouldInfect = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague spreading", false, "Set true to allow the Coralium Plague to spread outside The Abyssal Wasteland.").getBoolean();
 		destroyOcean = cfg.get(Configuration.CATEGORY_GENERAL, "Oceanic Coralium Pollution", false, "Set true to allow the Liquid Coralium to spread across oceans. WARNING: The game can crash from this.").getBoolean();
+		demonAnimalFire = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal burning", false, "Set to false to prevent Demon Animals (Pigs, Cows, Chickens) from burning in the overworld.").getBoolean();
+		evilAnimalSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Animal spawn weight", 15, "Spawn weight for the Evil Animals (Pigs, Cows, Chickens), keep under 35 to avoid complete annihilation.\n[range: 0 ~ 100, default: 20]", 0, 100).getInt();
+		particleBlock = cfg.get(Configuration.CATEGORY_GENERAL, "Block particles", true, "Toggles whether blocks that emits particles should do so.").getBoolean();
+		particleEntity = cfg.get(Configuration.CATEGORY_GENERAL, "Entity particles", true, "Toggles whether entities that emits particles should do so.").getBoolean();
 		hardcoreMode = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode", false, "Toggles Hardcore mode. If set to true, all mobs (in the mod) will become tougher.").getBoolean();
 		antiItemDisintegration = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Antimatter item disintegration", true, "Toggles whether or not Liquid Antimatter will disintegrate any items dropped into a pool of it.").getBoolean();
+		portalCooldown = cfg.get(Configuration.CATEGORY_GENERAL, "Portal cooldown", 100, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).\n[range: 10 ~ 300, default: 100]", 10, 300).getInt();
+		demonAnimalSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animal spawn weight", 15, "Spawn weight for the Demon Animals (Pigs, Cows, Chickens) spawning in the Nether.\n[range: 0 ~ 100, default: 15]", 0, 100).getInt();
 		smeltingRecipes = cfg.get(Configuration.CATEGORY_GENERAL, "Smelting Recipes", true, "Toggles whether or not to add smelting recipes for armor pieces.").getBoolean();
 		purgeMobSpawns = cfg.get(Configuration.CATEGORY_GENERAL, "Purge Mob Spawns", false, "Toggles whether or not to clear and repopulate the monster spawn list of all dimension biomes to ensure no mob from another mod got in there.").getBoolean();
 		interdimensionalCageBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Interdimensional Cage Blacklist", new String[0], "Entities added to this list can't be captured with the Interdimensional Cage.").getStringList();
 		damageAmpl = cfg.get(Configuration.CATEGORY_GENERAL, "Hardcore Mode damage amplifier", 1.0D, "When Hardcore Mode is enabled, you can use this to amplify the armor-piercing damage mobs deal.\n[range: 1.0 ~ 10.0, default: 1.0]", 1.0D, 10.0D).getDouble();
+		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_GENERAL, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
 		mimicFire = cfg.get(Configuration.CATEGORY_GENERAL, "Mimic Fire", true, "Toggles whether or not Demon Animals will spread Mimic Fire instead of regular Fire (regular Fire can affect performance)").getBoolean();
 		armorPotionEffects = cfg.get(Configuration.CATEGORY_GENERAL, "Armor Potion Effects", true, "Toggles any interactions where armor sets either give certain Potion Effects, or dispell others. Useful if you have another mod installed that provides similar customization to any armor set.").getBoolean();
 		syncDataOnBookOpening = cfg.get(Configuration.CATEGORY_GENERAL, "Necronomicon Data Syncing", true, "Toggles whether or not the Necronomicon knowledge will sync from the server to the client each time a player opens their Necronomicon.").getBoolean();
+		dreadGrassSpread = cfg.get(Configuration.CATEGORY_GENERAL, "Dreadlands Grass Spread", true, "Toggles whether or not Dreadlands Grass can spread onto normal grass and dirt, slowly turning them into their Dreadlands counterparts.").getBoolean();
+		APIUtils.display_names = cfg.get(Configuration.CATEGORY_GENERAL, "Display Item Names", false, "Toggles whether or not to override the name locking and display item names regardless of the knowledge being obtained or not.").getBoolean();
 		blackHoleBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Reality Maelstrom Blacklist", new int[0], "Dimension IDs added to this list won't be used as potential destinations for black holes created by J'zahar.").getIntList();
 		portalSpawnsNearPlayer = cfg.get(Configuration.CATEGORY_GENERAL, "Portal Mob Spawning Near Players", true, "Toggles whether or not portals require a player to be nearby in order for it to rarely spawn mobs. If this option is disabled they follow the same principle as Nether portals.").getBoolean();
 		showBossDialogs = cfg.get(Configuration.CATEGORY_GENERAL, "Show Boss Dialogs", true, "Toggles whether or not boss dialogs are displayed at any point during their fights (when they spawn, when they die,  etc)").getBoolean();
 		knowledgeSyncDelay = cfg.get(Configuration.CATEGORY_GENERAL, "Knowledge Sync Delay", 60, "Delay in ticks until Knowledge is synced to the client upon changing dimensions. Higher numbers mean you might see item names re-locked for a few seconds when changing dimension, but might reduce load time for the dimension by a little (useful in larger modpacks).\n[range: 20 ~ 400, default: 60]", 20, 400).getInt();
+		dreadPlagueImmunityList = cfg.get(Configuration.CATEGORY_GENERAL, "Dread Plague Immunity List", new String[0], "Entities added to this list are considered immune to the Dread Plague.").getStringList();
+		dreadPlagueCarrierList = cfg.get(Configuration.CATEGORY_GENERAL, "Dread Plague Carrier List", new String[0], "Entities added to this list are considered carriers of the Dread Plague (this also makes them immune).").getStringList();
+		coraliumPlagueImmunityList = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague Immunity List", new String[0], "Entities added to this list are considered immune to the Coralium Plague.").getStringList();
+		coraliumPlagueCarrierList = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague Carrier List", new String[0], "Entities added to this list are considered carriers of the Coralium Plague (this also makes them immune).").getStringList();
 		lootTableContent = cfg.get(Configuration.CATEGORY_GENERAL, "Loot Table Content", true, "Toggles whether or not AbyssalCraft Items should be inserted into vanilla loot tables (dungeons, strongholds etc).").getBoolean();
+		depthsGhoulBiomeDictSpawn = cfg.get(Configuration.CATEGORY_GENERAL, "Depths Ghoul Biome Dictionary Spawning", true, "Toggles whether or not Depths Ghouls should use the Biome Dictionary for finding biomes to spawn in (which might lead to them spawning in dimensions from other mods).").getBoolean();
+		abyssalZombieBiomeDictSpawn = cfg.get(Configuration.CATEGORY_GENERAL, "Abyssal Zombie Biome Dictionary Spawning", true, "Toggles whether or not Abyssal Zombies should use the Biome Dictionary for finding biomes to spawn in (which might lead to them spawning in dimensions from other mods).").getBoolean();
+		darkOffspringSpawnWeight = cfg.get(Configuration.CATEGORY_GENERAL, "Dark Offspring Spawn Weight", 5, "Spawn weight for Dark Offspring. They spawn twice as likely in Darklands Forests and Roofed Forests.\n[range: 0 ~ 50, default: 5]", 0, 50).getInt();
+		corruptionRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Corruption Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Corruption (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
+		cleansingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Cleansing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Cleansing (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
+		purgingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Purging Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
+		enchantmentMaxLevel = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Max Level", 10, "The combined max level a single enchantment applied through the Mass Enchantment ritual can have. For example, if the max level is 10 and you apply 8 Sharpness 5 books, you'd end up with Sharpness 10 on the Item, rather than 40.\n[range: 1 ~ 100, default: 10]", 1, 100).getInt();
+		enchantBooks = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Books", true, "Toggles whether or not Books can be enchanted through the Mass Enchantment ritual.").getBoolean();
 		nightVisionEverywhere = cfg.get(Configuration.CATEGORY_GENERAL, "Plated Coralium Helmet Night Vision Everywhere", true, "Toggles whether or not the Night Vision buff from the Plated Coralium Helmet should be applied in all dimensions, rather than only Surface Worlds.").getBoolean();
+		demonAnimalsSpawnOnDeath = cfg.get(Configuration.CATEGORY_GENERAL, "Demon Animals Spawn on Death", true, "Toggles whether or not an Evil Animal spawns a Demon Animal on death.").getBoolean();
+		evilAnimalNewMoonSpawning = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Animal New Moon Spawning", true, "Toggles whether or not Evil Animals only spawn at night during a new moon.").getBoolean();
+		curingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		itemTransportBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Item Transportation System Blacklist", new String[0], "Tile Entities added to this list will not be usable with the Item Transportation System (eg. you can't move Items from them). Format: modid:name").getStringList();
 
-		demonAnimalFire = cfg.get(CATEGORY_MOBS, "Demon Animal burning", false, "Set to false to prevent Demon Animals (Pigs, Cows, Chickens) from burning in the overworld.").getBoolean();
-		evilAnimalSpawnWeight = cfg.get(CATEGORY_MOBS, "Evil Animal spawn weight", 15, "Spawn weight for the Evil Animals (Pigs, Cows, Chickens), keep under 35 to avoid complete annihilation.\n[range: 0 ~ 100, default: 20]", 0, 100).getInt();
-		demonAnimalSpawnWeight = cfg.get(CATEGORY_MOBS, "Demon Animal spawn weight", 15, "Spawn weight for the Demon Animals (Pigs, Cows, Chickens) spawning in the Nether.\n[range: 0 ~ 100, default: 15]", 0, 100).getInt();
-		dreadPlagueImmunityList = cfg.get(CATEGORY_MOBS, "Dread Plague Immunity List", new String[0], "Entities added to this list are considered immune to the Dread Plague.").getStringList();
-		dreadPlagueCarrierList = cfg.get(CATEGORY_MOBS, "Dread Plague Carrier List", new String[0], "Entities added to this list are considered carriers of the Dread Plague (this also makes them immune).").getStringList();
-		coraliumPlagueImmunityList = cfg.get(CATEGORY_MOBS, "Coralium Plague Immunity List", new String[0], "Entities added to this list are considered immune to the Coralium Plague.").getStringList();
-		coraliumPlagueCarrierList = cfg.get(CATEGORY_MOBS, "Coralium Plague Carrier List", new String[0], "Entities added to this list are considered carriers of the Coralium Plague (this also makes them immune).").getStringList();
-		depthsGhoulBiomeDictSpawn = cfg.get(CATEGORY_MOBS, "Depths Ghoul Biome Dictionary Spawning", true, "Toggles whether or not Depths Ghouls should use the Biome Dictionary for finding biomes to spawn in (which might lead to them spawning in dimensions from other mods).").getBoolean();
-		abyssalZombieBiomeDictSpawn = cfg.get(CATEGORY_MOBS, "Abyssal Zombie Biome Dictionary Spawning", true, "Toggles whether or not Abyssal Zombies should use the Biome Dictionary for finding biomes to spawn in (which might lead to them spawning in dimensions from other mods).").getBoolean();
-		darkOffspringSpawnWeight = cfg.get(CATEGORY_MOBS, "Dark Offspring Spawn Weight", 5, "Spawn weight for Dark Offspring. They spawn twice as likely in Darklands Forests and Roofed Forests.\n[range: 0 ~ 50, default: 5]", 0, 50).getInt();
-		demonAnimalsSpawnOnDeath = cfg.get(CATEGORY_MOBS, "Demon Animals Spawn on Death", true, "Toggles whether or not an Evil Animal spawns a Demon Animal on death.").getBoolean();
-		evilAnimalNewMoonSpawning = cfg.get(CATEGORY_MOBS, "Evil Animal New Moon Spawning", true, "Toggles whether or not Evil Animals only spawn at night during a new moon.").getBoolean();
+		darkWeight1 = cfg.get("biome_weight", "Darklands", 4, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
+		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 4, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
+		darkWeight3 = cfg.get("biome_weight", "Darklands Plains", 4, "Biome weight for the Darklands Plains biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
+		darkWeight4 = cfg.get("biome_weight", "Darklands Highland", 4, "Biome weight for the Darklands Highland biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
+		darkWeight5 = cfg.get("biome_weight", "Darklands Mountain", 4, "Biome weight for the Darklands Mountain biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]").getInt();
+		coraliumWeight = cfg.get("biome_weight", "Coralium Infested Swamp", 6, "Biome weight for the Coralium Infested Swamp biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 
-		String[] transformations = cfg.getStringList("Demon Animal Transformations", CATEGORY_MOBS, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
+		shoggothOoze = cfg.get("shoggoth", "Shoggoth Ooze Spread", true, "Toggles whether or not Lesser Shoggoths should spread their ooze when walking around.").getBoolean();
+		oozeExpire = cfg.get("shoggoth", "Ooze expiration", true, "Toggles whether or not Shoggoth Ooze slowly reverts to dirt after constant light exposure. Ooze blocks that aren't full blocks will shrink instead.").getBoolean();
+		consumeItems = cfg.get("shoggoth", "Item Consumption", false, "Toggles whether or not Lesser Shoggoths will consume any dropped item they run into.").getBoolean();
+		shieldsBlockAcid = cfg.get("shoggoth", "Shields Block Acid", true, "Toggles whether or not Shields can block the acid projectiles spat by Lesser Shoggoths.").getBoolean();
+		acidResistanceHardness = cfg.get("shoggoth", "Acid Resistance Hardness", 3.0D, "The minimum Block Hardness required for a Block to not be destroyed by Shoggoth Acid (some blocks are unaffected regardless of their hardness)\n[range: 2.1 ~ 51.0, default: 3.0]", 2.1D, 51.0D).getDouble();
+		acidSpitFrequency = cfg.get("shoggoth", "Acid Spit Frequency", 120, "The frequency (in ticks) at which a Lesser Shoggoth can spit acid. Higher values increase the time between each spit attack, while lower values descrease the time (and 0 disables it).\n[range: 0 ~ 300, default: 100]", 0, 300).getInt();
+		monolithBuildingCooldown = cfg.get("shoggoth", "Monolith Building Cooldown", 1500, "The cooldown (in ticks) between each attempt by a Lesser Shoggoth to construct a monolith. Higher values increase the time, while lower values decrease it (and 0 disables it).\n[range: 0 ~ 2400, default: 1800]", 0, 2400).getInt();
+		shoggothGlowingEyes = cfg.get("shoggoth", "Glowing Eyes", true, "Toggles whether or not the eyes of Lesser Shoggoths should glow. The glowing can be heavy on performance, so if you're dropping FPS noticeably while looking at Lesser Shoggoths, consider turning this off. Client Side only!").getBoolean();
+
+		generateDarklandsStructures = cfg.get("worldgen", "Darklands Structures", true, "Toggles whether or not to generate random Darklands structures.").getBoolean();
+		generateShoggothLairs = cfg.get("worldgen", "Shoggoth Lairs", true, "Toggles whether or not to generate Shoggoth Lairs (however, they will still generate in Omothol).").getBoolean();
+		generateAbyssalWastelandPillars = cfg.get("worldgen", "Abyssal Wasteland Pillars", true, "Toggles whether or not to generate Tall Obsidian Pillars in the Abyssal Wasteland.").getBoolean();
+		generateAbyssalWastelandRuins = cfg.get("worldgen", "Abyssal Wasteland Ruins", true, "Toggles whether or not to generate small ruins in the Abyssal Wasteland.").getBoolean();
+		generateAntimatterLake = cfg.get("worldgen", "Liquid Antimatter Lakes", true, "Toggles whether or not to generate Liquid Antimatter Lakes in Coralium Infested Swamps.").getBoolean();
+		generateCoraliumLake = cfg.get("worldgen", "Liquid Coralium Lakes", true, "Toggles whether or not to generate Liquid Coralium Lakes in the Abyssal Wasteland.").getBoolean();
+		generateDreadlandsStalagmite = cfg.get("worldgen", "Dreadlands Stalagmites", true, "Toggles whether or not to generate Stalagmites in Dreadlands and Purified Dreadlands biomes.").getBoolean();
+
+		generateCoraliumOre = cfg.get("worldgen", "Coralium Ore", true, "Toggles whether or not to generate Coralium Ore in the Overworld.").getBoolean();
+		generateNitreOre = cfg.get("worldgen", "Nitre Ore", true, "Toggles whether or not to generate Nitre Ore in the Overworld.").getBoolean();
+		generateAbyssalniteOre = cfg.get("worldgen", "Abyssalnite Ore", true, "Toggles wheter or not to generate Abyssalnite Ore in Darklands Biomes.").getBoolean();
+		generateAbyssalCoraliumOre = cfg.get("worldgen", "Abyssal Coralium Ore", true, "Toggles whether or not to generate Coralium Ore in the Abyssal Wasteland.").getBoolean();
+		generateDreadlandsAbyssalniteOre = cfg.get("worldgen", "Dreadlands Abyssalnite Ore", true, "Toggles whether or not to generate Abyssalnite Ore in the Dreadlands.").getBoolean();
+		generateDreadedAbyssalniteOre = cfg.get("worldgen", "Dreaded Abyssalnite Ore", true, "Toggles whether or not to generate Dreaded Abyssalnite Ore in the Dreadlands.").getBoolean();
+		generateAbyssalIronOre = cfg.get("worldgen", "Abyssal Iron Ore", true, "Toggles whether or not to generate Iron Ore in the Abyssal Wasteland.").getBoolean();
+		generateAbyssalGoldOre = cfg.get("worldgen", "Abyssal Gold Ore", true, "Toggles whether or not to generate Gold Ore in the Abyssal Wasteland.").getBoolean();
+		generateAbyssalDiamondOre = cfg.get("worldgen", "Abyssal Diamond Ore", true, "Toggles whether or not to generate Diamond Ore in the Abyssal Wasteland").getBoolean();
+		generateAbyssalNitreOre = cfg.get("worldgen", "Abyssal Nitre Ore", true, "Toggles whether or not to generate Nitre Ore in the Abyssal Wasteland.").getBoolean();
+		generateAbyssalTinOre = cfg.get("worldgen", "Abyssal Tin Ore", true, "Toggles whether or not to generate Tin Ore in the Abyssal Wasteland").getBoolean();
+		generateAbyssalCopperOre = cfg.get("worldgen", "Abyssal Copper Ore", true, "Toggles whether or not to generate Copper Ore in the Abyssal Wasteland.").getBoolean();
+		generatePearlescentCoraliumOre = cfg.get("worldgen", "Pearlescent Coralium Ore", true, "Toggles whether or not to generate Pearlescent Coralium Ore in the Abyssal Wasteland.").getBoolean();
+		generateLiquifiedCoraliumOre = cfg.get("worldgen", "Liquified Coralium Ore", true, "Toggles whether or not to generate Liquified Coralium Ore in the Abyssal Wasteland.").getBoolean();
+		shoggothLairSpawnRate = cfg.get("worldgen", "Shoggoth Lair Generation Chance: Swamps", 35, "Generation chance of a Shoggoth Lair in swamp biomes. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 30]", 0, 1000).getInt();
+		coraliumOreGeneration = cfg.get("worldgen", "Coralium Ore Generation", new int[] {12, 8, 40}, "Coralium Ore generation. First parameter is the vein count, secound is amount of ores per vein, third is max height for it to generate at. Coralium Ore generation in swamps are half as common as oceans.").getIntList();
+		shoggothLairSpawnRateRivers = cfg.get("worldgen", "Shoggoth Lair Generation Chance: Rivers", 30, "Generation chance of a Shoggoth Lair in river biomes. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 30]", 0, 1000).getInt();
+		useAmplifiedWorldType = cfg.get("worldgen", "Use Amplified World Type", true, "Toggles whether or not the dimensions will have their terrain affected by the Amplified world type.").getBoolean();
+		generateStatuesInLairs = cfg.get("worldgen", "Generate Statues In Lairs", true, "Toggles whether or not statues have a chance of generating inside a Shoggoth Lair.").getBoolean();
+		shoggothLairGenerationDistance = cfg.get("worldgen", "Shoggoth Lair Generation Distance", 100, "The minimum distance at which two Shoggoth Lairs will generate from each other.\n[range: 40 ~ 1000, default: 100]").getInt();
+
+		oreGenDimBlacklist = cfg.get("worldgen", "Ore Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld ores (Coralium, Nitre) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
+		structureGenDimBlacklist = cfg.get("worldgen", "Structure Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld structures (Darklands structures, Shoggoth lairs) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
+
+		abyssalZombieBlacklist = cfg.get("item_blacklist", "Abyssal Zombie Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Abyssal Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
+		depthsGhoulBlacklist = cfg.get("item_blacklist", "Depths Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Depths Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
+		antiAbyssalZombieBlacklist = cfg.get("item_blacklist", "Abyssal Anti-Zombie Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Abyssal Anti-Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
+		antiGhoulBlacklist = cfg.get("item_blacklist", "Anti-Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Anti-Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
+		omotholGhoulBlacklist = cfg.get("item_blacklist", "Omothol Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Omothol Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
+		antiPlayersPickupLoot = cfg.get("item_blacklist", "Anti-Players Can Pick Up Loot", true, "Toggles whether or not Anti-Players can pick up loot. You really should just blacklist them in whatever mob spawner/duplicator instead.").getBoolean();
+
+		breakLogic = cfg.get("silly_settings", "Liquid Coralium Physics", false, "Set true to allow the Liquid Coralium to break the laws of physics in terms of movement").getBoolean();
+		nuclearAntimatterExplosions = cfg.get("silly_settings", "Nuclear Antimatter Explosions", false, "Take a wild guess what this does... Done guessing? Yeah, makes the antimatter explosions more genuine by making them go all nuclear. Recommended to not enable unless you want chaos and destruction.").getBoolean();
+		jzaharBreaksFourthWall = cfg.get("silly_settings", "J'zahar Can Break The Fourth Wall", true, "Toggles whether or not J'zahar can break the fourth wall.").getBoolean();
+		odbExplosionSize = cfg.get("silly_settings", "ODB Explosion Size", 160, "The explosion size of an ODB. 400 is the rough limit if running on 2GB of RAM, anything above that will require more allocated memory, and could crash the game or freeze it for longer periods of time.\n[range: 80 ~ 800, default: 160]", 80, 800).getInt();
+		antimatterExplosionSize = cfg.get("silly_settings", "Antimatter Explosion Size", 80, "The explosion size of antimatter mobs colliding with their normal counterpart if Nucler Antimatter Explosions is enabled.\n[range: 40 ~ 200, default: 80]", 40, 200).getInt();
+
+		darkstone_brick_slab = cfg.get("blocks", "Darkstone Brick Slab", true).getBoolean();
+		darkstone_cobblestone_slab = cfg.get("blocks", "Darkstone Cobblestone Slab", true).getBoolean();
+		darkstone_brick_stairs = cfg.get("blocks", "Darkstone Brick Stairs", true).getBoolean();
+		darkstone_cobblestone_stairs = cfg.get("blocks", "Darkstone Cobblestone Stairs", true).getBoolean();
+		darkstone_slab = cfg.get("blocks", "Darkstone Slab", true).getBoolean();
+		darklands_oak_slab = cfg.get("blocks", "Darklands Oak Slab", true).getBoolean();
+		darklands_oak_stairs = cfg.get("blocks", "Darklands Oak Stairs", true).getBoolean();
+		abyssal_stone_brick_slab = cfg.get("blocks", "Abyssal Stone Brick Slab", true).getBoolean();
+		abyssal_stone_brick_stairs = cfg.get("blocks", "Abyssal Stone Brick Stairs", true).getBoolean();
+		coralium_stone_brick_slab = cfg.get("blocks", "Coralium Stone Brick Slab", true).getBoolean();
+		coralium_stone_brick_stairs = cfg.get("blocks", "Coralium Stone Brick Stairs", true).getBoolean();
+		dreadstone_brick_slab = cfg.get("blocks", "Dreadstone Brick Slab", true).getBoolean();
+		dreadstone_brick_stairs = cfg.get("blocks", "Dreadstone Brick Stairs", true).getBoolean();
+		abyssalnite_stone_brick_slab = cfg.get("blocks", "Abyssalnite Stone Brick Slab", true).getBoolean();
+		abyssalnite_stone_brick_stairs = cfg.get("blocks", "Abyssalnite Stone Brick Stairs", true).getBoolean();
+		ethaxium_brick_slab = cfg.get("blocks", "Ethaxium Brick Slab", true).getBoolean();
+		ethaxium_brick_stairs = cfg.get("blocks", "Ethaxium Brick Stairs", true).getBoolean();
+		abyssal_cobblestone_slab = cfg.get("blocks", "Abyssal Cobblestone Slab", true).getBoolean();
+		abyssal_cobblestone_stairs = cfg.get("blocks", "Abyssal Cobblestone Stairs", true).getBoolean();
+		coralium_cobblestone_slab = cfg.get("blocks", "Coralium Cobblestone Slab", true).getBoolean();
+		coralium_cobblestone_stairs = cfg.get("blocks", "Coralium Cobblestone Stairs", true).getBoolean();
+		dreadstone_cobblestone_slab = cfg.get("blocks", "Dreadstone Cobblestone Slab", true).getBoolean();
+		dreadstone_cobblestone_stairs = cfg.get("blocks", "Dreadstone Cobblestone Stairs", true).getBoolean();
+		abyssalnite_cobblestone_slab = cfg.get("blocks", "Abyssalnite Cobblestone Slab", true).getBoolean();
+		abyssalnite_cobblestone_stairs = cfg.get("blocks", "Abyssalnite Cobblestone Stairs", true).getBoolean();
+		darkstone_cobblestone_wall = cfg.get("blocks", "Darkstone Cobblestone Wall", true).getBoolean();
+		abyssal_cobbblestone_wall = cfg.get("blocks", "Abyssal Cobblestone Wall", true).getBoolean();
+		coralium_cobblestone_wall = cfg.get("blocks", "Coralium Cobblestone Wall", true).getBoolean();
+		dreadstone_cobblestone_wall = cfg.get("blocks", "Dreadstone Cobblestone Wall", true).getBoolean();
+		abyssalnite_cobblestone_wall = cfg.get("blocks", "Abyssalnite Cobblestone Wall", true).getBoolean();
+
+		no_dreadlands_spread = cfg.get("wet_noodle", "Disable Dreadlands Spread", false, "Toggles whether or not the spreading of Dreadlands through the Dread Plague is disabled. Cha'garoth remains unaffected by this (because he doesn't naturally spawn outside of the dimension).").getBoolean();
+		no_acid_breaking_blocks = cfg.get("wet_noodle", "Disable Acid Projectiles Breaking Blocks", false, "Toggles whether or not the acid projectiles Lesser Shoggoths spit can break blocks.").getBoolean();
+		no_spectral_dragons = cfg.get("wet_noodle", "Disable Spectral Dragons", false, "Toggles whether or not Spectral Dragons should spawn in the Abyssal Wasteland.").getBoolean();
+		no_projectile_damage_immunity = cfg.get("wet_noodle", "Disable Projectile Damage Immunity", false, "Toggles whether or not Lesser Shoggoths are immune to projectile damage.").getBoolean();
+		no_disruptions = cfg.get("wet_noodle", "Disable Disruptions", false, "Toggles whether or not statues or failing rituals will trigger disruptions.").getBoolean();
+		no_black_holes = cfg.get("wet_noodle", "Disable Black Holes", false, "Toggles whether or not J'zahar can use his attack that creates a black hole.").getBoolean();
+		no_odb_explosions = cfg.get("wet_noodle", "Disable ODB Explosions", false, "Toggles whether or not Oblivion Deathbombs (or ODB Cores) can explode.").getBoolean();
+
+		String[] transformations = cfg.getStringList("Demon Animal Transformations", Configuration.CATEGORY_GENERAL, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
 				+ "\nFormat: entityid;demonanimal;chance \nwhere entityid is the String used in the /summon command\n demonanimal is a Integer representing the Demon Animal to spawn (0 = Demon Pig, 1 = Demon Cow, 2 = Demon Chicken, 3 = Demon Sheep)"
 				+ "\nchance is a decimal number representing the chance (optional, can be left out) of the Demon Animal being spawned (0.2 would mean a 20% chance, defaults to 100% if not set");
 
-		abyssalZombieBlacklist = cfg.get(CATEGORY_MOBS, "Abyssal Zombie Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Abyssal Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
-		depthsGhoulBlacklist = cfg.get(CATEGORY_MOBS, "Depths Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Depths Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
-		antiAbyssalZombieBlacklist = cfg.get(CATEGORY_MOBS, "Abyssal Anti-Zombie Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Abyssal Anti-Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
-		antiGhoulBlacklist = cfg.get(CATEGORY_MOBS, "Anti-Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Anti-Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
-		omotholGhoulBlacklist = cfg.get(CATEGORY_MOBS, "Omothol Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Omothol Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
-		antiPlayersPickupLoot = cfg.get(CATEGORY_MOBS, "Anti-Players Can Pick Up Loot", true, "Toggles whether or not Anti-Players can pick up loot. You really should just blacklist them in whatever mob spawner/duplicator instead.").getBoolean();
-		dreadSpawnSpawnLimit = cfg.get(CATEGORY_MOBS, "Dread Spawn Spawn Limit", 20, "Spawn limit on how many Dread Spawns can be spawned by other mobs capable of spawning them. The spawn limit for Cha'garoth is half of this.", 0, 50).getInt();
-		greaterDreadSpawnSpawnLimit = cfg.get(CATEGORY_MOBS, "Greater Dread Spawn Spawn Limit", 10, "Spawn limit on how many Greater Dread Spawns can be spawned by other mobs capable of spawning them. The spawn limit for Cha'garoth is half of this.", 0, 50).getInt();
+		hcdarkness_aw = cfg.get("mod_compat", "Hardcore Darkness: Abyssal Wasteland", true, "Toggles whether or not the Abyssal Wasteland should be darker if Hardcore Darkness is installed.").getBoolean();
+		hcdarkness_dl = cfg.get("mod_compat", "Hardcore Darkness: Dreadlands", true, "Toggles whether or not the Dreadlands should be darker if Hardcore Darkness is installed.").getBoolean();
+		hcdarkness_omt = cfg.get("mod_compat", "Hardcore Darkness: Omothol", true, "Toggles whether or not Omothol should be darker if Hardcore Darkness is installed.").getBoolean();
+		hcdarkness_dr = cfg.get("mod_compat", "Hardcore Darkness: Dark Realm", true, "Toggles whether or not the Dark Realm should be darker if Hardcore Darkness is installed.").getBoolean();
 
-		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_CLIENT, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
-		APIUtils.display_names = cfg.get(Configuration.CATEGORY_CLIENT, "Display Item Names", false, "Toggles whether or not to override the name locking and display item names regardless of the knowledge being obtained or not.").getBoolean();
-		particleBlock = cfg.get(Configuration.CATEGORY_CLIENT, "Block particles", true, "Toggles whether blocks that emits particles should do so.").getBoolean();
-		particleEntity = cfg.get(Configuration.CATEGORY_CLIENT, "Entity particles", true, "Toggles whether entities that emits particles should do so.").getBoolean();
-		darkRealmSmokeParticles = cfg.get(Configuration.CATEGORY_CLIENT, "Dark Realm Smoke Particles", true, "Toggles whether or not non-shadow entities will emit smoke particles inside the Dark Realm.").getBoolean();
+		foodstuff = cfg.get("modules", "Enable Foodstuffs", true, "Set to false to disable Abyssalcraft Food.").getBoolean();
+		upgrade_kits = cfg.get("modules", "Enable Upgrade Kits", true, "Set to false to disable Upgrade Kits.").getBoolean();
+		plague_enchantments = cfg.get("modules", "Enable Plague Enchantments", true, "Set to false to disable the Coralium and Dread Enchantments.").getBoolean();
+		crystal_rework = cfg.get("modules", "Crystal Rework", true, "Set to false to revert to the old crystal recipes (and them being fuels).").getBoolean();
 
-		corruptionRitualRange = cfg.get(CATEGORY_RITUALS, "Corruption Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Corruption (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
-		cleansingRitualRange = cfg.get(CATEGORY_RITUALS, "Cleansing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Cleansing (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
-		purgingRitualRange = cfg.get(CATEGORY_RITUALS, "Purging Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
-		enchantmentMaxLevel = cfg.get(CATEGORY_RITUALS, "Mass Enchantment Max Level", 10, "The combined max level a single enchantment applied through the Mass Enchantment ritual can have. For example, if the max level is 10 and you apply 8 Sharpness 5 books, you'd end up with Sharpness 10 on the Item, rather than 40.\n[range: 1 ~ 100, default: 10]", 1, 100).getInt();
-		enchantBooks = cfg.get(CATEGORY_RITUALS, "Mass Enchantment Books", true, "Toggles whether or not Books can be enchanted through the Mass Enchantment ritual.").getBoolean();
-		curingRitualRange = cfg.get(CATEGORY_RITUALS, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Curing (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
-
-		shoggothOoze = cfg.get(CATEGORY_SHOGGOTH, "Shoggoth Ooze Spread", true, "Toggles whether or not Lesser Shoggoths should spread their ooze when walking around.").getBoolean();
-		oozeExpire = cfg.get(CATEGORY_SHOGGOTH, "Ooze expiration", true, "Toggles whether or not Shoggoth Ooze slowly reverts to dirt after constant light exposure. Ooze blocks that aren't full blocks will shrink instead.").getBoolean();
-		consumeItems = cfg.get(CATEGORY_SHOGGOTH, "Item Consumption", false, "Toggles whether or not Lesser Shoggoths will consume any dropped item they run into.").getBoolean();
-		shieldsBlockAcid = cfg.get(CATEGORY_SHOGGOTH, "Shields Block Acid", true, "Toggles whether or not Shields can block the acid projectiles spat by Lesser Shoggoths.").getBoolean();
-		acidResistanceHardness = cfg.get(CATEGORY_SHOGGOTH, "Acid Resistance Hardness", 3.0D, "The minimum Block Hardness required for a Block to not be destroyed by Shoggoth Acid (some blocks are unaffected regardless of their hardness)\n[range: 2.1 ~ 51.0, default: 3.0]", 2.1D, 51.0D).getDouble();
-		acidSpitFrequency = cfg.get(CATEGORY_SHOGGOTH, "Acid Spit Frequency", 120, "The frequency (in ticks) at which a Lesser Shoggoth can spit acid. Higher values increase the time between each spit attack, while lower values descrease the time (and 0 disables it).\n[range: 0 ~ 300, default: 100]", 0, 300).getInt();
-		monolithBuildingCooldown = cfg.get(CATEGORY_SHOGGOTH, "Monolith Building Cooldown", 1500, "The cooldown (in ticks) between each attempt by a Lesser Shoggoth to construct a monolith. Higher values increase the time, while lower values decrease it (and 0 disables it).\n[range: 0 ~ 2400, default: 1800]", 0, 2400).getInt();
-		shoggothGlowingEyes = cfg.get(CATEGORY_SHOGGOTH, "Glowing Eyes", true, "Toggles whether or not the eyes of Lesser Shoggoths should glow. The glowing can be heavy on performance, so if you're dropping FPS noticeably while looking at Lesser Shoggoths, consider turning this off. Client Side only!").getBoolean();
-
-		generateDarklandsStructures = cfg.get(CATEGORY_WORLDGEN, "Darklands Structures", true, "Toggles whether or not to generate random Darklands structures.").getBoolean();
-		generateShoggothLairs = cfg.get(CATEGORY_WORLDGEN, "Shoggoth Lairs", true, "Toggles whether or not to generate Shoggoth Lairs (however, they will still generate in Omothol).").getBoolean();
-		generateAbyssalWastelandPillars = cfg.get(CATEGORY_WORLDGEN, "Abyssal Wasteland Pillars", true, "Toggles whether or not to generate Tall Obsidian Pillars in the Abyssal Wasteland.").getBoolean();
-		generateAbyssalWastelandRuins = cfg.get(CATEGORY_WORLDGEN, "Abyssal Wasteland Ruins", true, "Toggles whether or not to generate small ruins in the Abyssal Wasteland.").getBoolean();
-		generateAntimatterLake = cfg.get(CATEGORY_WORLDGEN, "Liquid Antimatter Lakes", true, "Toggles whether or not to generate Liquid Antimatter Lakes in Coralium Infested Swamps.").getBoolean();
-		generateCoraliumLake = cfg.get(CATEGORY_WORLDGEN, "Liquid Coralium Lakes", true, "Toggles whether or not to generate Liquid Coralium Lakes in the Abyssal Wasteland.").getBoolean();
-		generateDreadlandsStalagmite = cfg.get(CATEGORY_WORLDGEN, "Dreadlands Stalagmites", true, "Toggles whether or not to generate Stalagmites in Dreadlands and Purified Dreadlands biomes.").getBoolean();
-
-		generateCoraliumOre = cfg.get(CATEGORY_WORLDGEN, "Coralium Ore", true, "Toggles whether or not to generate Coralium Ore in the Overworld.").getBoolean();
-		generateNitreOre = cfg.get(CATEGORY_WORLDGEN, "Nitre Ore", true, "Toggles whether or not to generate Nitre Ore in the Overworld.").getBoolean();
-		generateAbyssalniteOre = cfg.get(CATEGORY_WORLDGEN, "Abyssalnite Ore", true, "Toggles wheter or not to generate Abyssalnite Ore in Darklands Biomes.").getBoolean();
-		generateAbyssalCoraliumOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Coralium Ore", true, "Toggles whether or not to generate Coralium Ore in the Abyssal Wasteland.").getBoolean();
-		generateDreadlandsAbyssalniteOre = cfg.get(CATEGORY_WORLDGEN, "Dreadlands Abyssalnite Ore", true, "Toggles whether or not to generate Abyssalnite Ore in the Dreadlands.").getBoolean();
-		generateDreadedAbyssalniteOre = cfg.get(CATEGORY_WORLDGEN, "Dreaded Abyssalnite Ore", true, "Toggles whether or not to generate Dreaded Abyssalnite Ore in the Dreadlands.").getBoolean();
-		generateAbyssalIronOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Iron Ore", true, "Toggles whether or not to generate Iron Ore in the Abyssal Wasteland.").getBoolean();
-		generateAbyssalGoldOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Gold Ore", true, "Toggles whether or not to generate Gold Ore in the Abyssal Wasteland.").getBoolean();
-		generateAbyssalDiamondOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Diamond Ore", true, "Toggles whether or not to generate Diamond Ore in the Abyssal Wasteland").getBoolean();
-		generateAbyssalNitreOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Nitre Ore", true, "Toggles whether or not to generate Nitre Ore in the Abyssal Wasteland.").getBoolean();
-		generateAbyssalTinOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Tin Ore", true, "Toggles whether or not to generate Tin Ore in the Abyssal Wasteland").getBoolean();
-		generateAbyssalCopperOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Copper Ore", true, "Toggles whether or not to generate Copper Ore in the Abyssal Wasteland.").getBoolean();
-		generatePearlescentCoraliumOre = cfg.get(CATEGORY_WORLDGEN, "Pearlescent Coralium Ore", true, "Toggles whether or not to generate Pearlescent Coralium Ore in the Abyssal Wasteland.").getBoolean();
-		generateLiquifiedCoraliumOre = cfg.get(CATEGORY_WORLDGEN, "Liquified Coralium Ore", true, "Toggles whether or not to generate Liquified Coralium Ore in the Abyssal Wasteland.").getBoolean();
-		shoggothLairSpawnRate = cfg.get(CATEGORY_WORLDGEN, "Shoggoth Lair Generation Chance: Swamps", 35, "Generation chance of a Shoggoth Lair in swamp biomes. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 30]", 0, 1000).getInt();
-		coraliumOreGeneration = cfg.get(CATEGORY_WORLDGEN, "Coralium Ore Generation", new int[] {12, 8, 40}, "Coralium Ore generation. First parameter is the vein count, secound is amount of ores per vein, third is max height for it to generate at. Coralium Ore generation in swamps are half as common as oceans.").getIntList();
-		shoggothLairSpawnRateRivers = cfg.get(CATEGORY_WORLDGEN, "Shoggoth Lair Generation Chance: Rivers", 30, "Generation chance of a Shoggoth Lair in river biomes. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 30]", 0, 1000).getInt();
-		useAmplifiedWorldType = cfg.get(CATEGORY_WORLDGEN, "Use Amplified World Type", true, "Toggles whether or not the dimensions will have their terrain affected by the Amplified world type.").getBoolean();
-		generateStatuesInLairs = cfg.get(CATEGORY_WORLDGEN, "Generate Statues In Lairs", true, "Toggles whether or not statues have a chance of generating inside a Shoggoth Lair.").getBoolean();
-		shoggothLairGenerationDistance = cfg.get(CATEGORY_WORLDGEN, "Shoggoth Lair Generation Distance", 100, "The minimum distance at which two Shoggoth Lairs will generate from each other.\n[range: 40 ~ 1000, default: 100]").getInt();
-
-		oreGenDimBlacklist = cfg.get(CATEGORY_WORLDGEN, "Ore Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld ores (Coralium, Nitre) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
-		structureGenDimBlacklist = cfg.get(CATEGORY_WORLDGEN, "Structure Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld structures (Darklands structures, Shoggoth lairs) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
-
-		breakLogic = cfg.get(CATEGORY_SILLY_SETTINGS, "Liquid Coralium Physics", false, "Set true to allow the Liquid Coralium to break the laws of physics in terms of movement").getBoolean();
-		nuclearAntimatterExplosions = cfg.get(CATEGORY_SILLY_SETTINGS, "Nuclear Antimatter Explosions", false, "Take a wild guess what this does... Done guessing? Yeah, makes the antimatter explosions more genuine by making them go all nuclear. Recommended to not enable unless you want chaos and destruction.").getBoolean();
-		jzaharBreaksFourthWall = cfg.get(CATEGORY_SILLY_SETTINGS, "J'zahar Can Break The Fourth Wall", true, "Toggles whether or not J'zahar can break the fourth wall.").getBoolean();
-		odbExplosionSize = cfg.get(CATEGORY_SILLY_SETTINGS, "ODB Explosion Size", 160, "The explosion size of an ODB. 400 is the rough limit if running on 2GB of RAM, anything above that will require more allocated memory, and could crash the game or freeze it for longer periods of time.\n[range: 80 ~ 800, default: 160]", 80, 800).getInt();
-		antimatterExplosionSize = cfg.get(CATEGORY_SILLY_SETTINGS, "Antimatter Explosion Size", 80, "The explosion size of antimatter mobs colliding with their normal counterpart if Nucler Antimatter Explosions is enabled.\n[range: 40 ~ 200, default: 80]", 40, 200).getInt();
-
-		no_dreadlands_spread = cfg.get(CATEGORY_WET_NOODLE, "Disable Dreadlands Spread", false, "Toggles whether or not the spreading of Dreadlands through the Dread Plague is disabled. Cha'garoth remains unaffected by this (because he doesn't naturally spawn outside of the dimension).").getBoolean();
-		no_acid_breaking_blocks = cfg.get(CATEGORY_WET_NOODLE, "Disable Acid Projectiles Breaking Blocks", false, "Toggles whether or not the acid projectiles Lesser Shoggoths spit can break blocks.").getBoolean();
-		no_spectral_dragons = cfg.get(CATEGORY_WET_NOODLE, "Disable Spectral Dragons", false, "Toggles whether or not Spectral Dragons should spawn in the Abyssal Wasteland.").getBoolean();
-		no_projectile_damage_immunity = cfg.get(CATEGORY_WET_NOODLE, "Disable Projectile Damage Immunity", false, "Toggles whether or not Lesser Shoggoths are immune to projectile damage.").getBoolean();
-		no_disruptions = cfg.get(CATEGORY_WET_NOODLE, "Disable Disruptions", false, "Toggles whether or not statues or failing rituals will trigger disruptions.").getBoolean();
-		no_black_holes = cfg.get(CATEGORY_WET_NOODLE, "Disable Black Holes", false, "Toggles whether or not J'zahar can use his attack that creates a black hole.").getBoolean();
-		no_odb_explosions = cfg.get(CATEGORY_WET_NOODLE, "Disable ODB Explosions", false, "Toggles whether or not Oblivion Deathbombs (or ODB Cores) can explode.").getBoolean();
-
-		hcdarkness_aw = cfg.get(CATEGORY_MOD_COMPAT, "Hardcore Darkness: Abyssal Wasteland", true, "Toggles whether or not the Abyssal Wasteland should be darker if Hardcore Darkness is installed.").getBoolean();
-		hcdarkness_dl = cfg.get(CATEGORY_MOD_COMPAT, "Hardcore Darkness: Dreadlands", true, "Toggles whether or not the Dreadlands should be darker if Hardcore Darkness is installed.").getBoolean();
-		hcdarkness_omt = cfg.get(CATEGORY_MOD_COMPAT, "Hardcore Darkness: Omothol", true, "Toggles whether or not Omothol should be darker if Hardcore Darkness is installed.").getBoolean();
-		hcdarkness_dr = cfg.get(CATEGORY_MOD_COMPAT, "Hardcore Darkness: Dark Realm", true, "Toggles whether or not the Dark Realm should be darker if Hardcore Darkness is installed.").getBoolean();
-
-		crystal_rework = cfg.get(CATEGORY_MODULES, "Crystal Rework", true, "Set to false to revert to the old crystal recipes (and them being fuels).").getBoolean();
-
-		entropy_spell = cfg.get(CATEGORY_SPELLS, "Entropy", true, "Set to false to disable the Entropy spell.").getBoolean();
-		life_drain_spell = cfg.get(CATEGORY_SPELLS, "Life Drain", true, "Set to false to disable the Life Drain spell.").getBoolean();
-		mining_spell = cfg.get(CATEGORY_SPELLS, "Mining", true, "Set to false to disable the Mining spell.").getBoolean();
-		grasp_of_cthulhu_spell = cfg.get(CATEGORY_SPELLS, "Grasp of Cthulhu", true, "Set to false to disable the Grasp of Cthulhu spell.").getBoolean();
-		invisibility_spell = cfg.get(CATEGORY_SPELLS, "Hide from the Eye", true, "Set to false to disable the Hide from the Eye spell.").getBoolean();
-		detachment_spell = cfg.get(CATEGORY_SPELLS, "Detachment", true, "Set to false to disable the Detachment spell.").getBoolean();
-		steal_vigor_spell = cfg.get(CATEGORY_SPELLS, "Steal Vigor", true, "Set to false to disable the Steal Vigor spell.").getBoolean();
-		sirens_song_spell = cfg.get(CATEGORY_SPELLS, "Siren's Song§", true, "Set to false to disable the Siren's Song spell.").getBoolean();
-		undeath_to_dust_spell = cfg.get(CATEGORY_SPELLS, "Undeath to Dust", true, "Set to false to disable the Undeath to Dust spell.").getBoolean();
-		ooze_removal_spell = cfg.get(CATEGORY_SPELLS, "Ooze Removal", true, "Set to false to disable the Ooze Removal spell.").getBoolean();
-		teleport_hostile_spell = cfg.get(CATEGORY_SPELLS, "Sacrificial Interdiction", true, "Set to false to disable the Sacrificial Interdiction spell.").getBoolean();
-		display_routes_spell = cfg.get(CATEGORY_SPELLS, "Display Routes", true, "Set to false to disable the Display Routes spell.").getBoolean();
-		toggle_state_spell = cfg.get(CATEGORY_SPELLS, "Toll The Bell", true, "Set to false to disable the Toll The Bell spell.").getBoolean();
-		floating_spell = cfg.get(CATEGORY_SPELLS, "Floating", true, "Set to false to disable the Floating spell.").getBoolean();
-		teleport_home_spell = cfg.get(CATEGORY_SPELLS, "Teleport Home", true, "Set to false to disable the Teleport Home spell.").getBoolean();
+		entropy_spell = cfg.get("spells", "Entropy", true, "Set to false to disable the Entropy spell.").getBoolean();
+		life_drain_spell = cfg.get("spells", "Life Drain", true, "Set to false to disable the Life Drain spell.").getBoolean();
+		mining_spell = cfg.get("spells", "Mining", true, "Set to false to disable the Mining spell.").getBoolean();
+		grasp_of_cthulhu_spell = cfg.get("spells", "Grasp of Cthulhu", true, "Set to false to disable the Grasp of Cthulhu spell.").getBoolean();
+		invisibility_spell = cfg.get("spells", "Hide from the Eye", true, "Set to false to disable the Hide from the Eye spell.").getBoolean();
+		detachment_spell = cfg.get("spells", "Detachment", true, "Set to false to disable the Detachment spell.").getBoolean();
+		steal_vigor_spell = cfg.get("spells", "Steal Vigor", true, "Set to false to disable the Steal Vigor spell.").getBoolean();
+		sirens_song_spell = cfg.get("spells", "Siren's Song§", true, "Set to false to disable the Siren's Song spell.").getBoolean();
+		undeath_to_dust_spell = cfg.get("spells", "Undeath to Dust", true, "Set to false to disable the Undeath to Dust spell.").getBoolean();
+		ooze_removal_spell = cfg.get("spells", "Ooze Removal", true, "Set to false to disable the Ooze Removal spell.").getBoolean();
+		teleport_hostile_spell = cfg.get("spells", "Sacrificial Interdiction", true, "Set to false to disable the Sacrificial Interdiction spell.").getBoolean();
+		display_routes_spell = cfg.get("spells", "Display Routes", true, "Set to false to disable the Display Routes spell.").getBoolean();
+		toggle_state_spell = cfg.get("spells", "Toll The Bell", true, "Set to false to disable the Toll The Bell spell.").getBoolean();
+		floating_spell = cfg.get("spells", "Floating", true, "Set to false to disable the Floating spell.").getBoolean();
+		teleport_home_spell = cfg.get("spells", "Teleport Home", true, "Set to false to disable the Teleport Home spell.").getBoolean();
 
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
@@ -547,25 +554,51 @@ public class InitHandler implements ILifeCycleHandler {
 	}
 
 	private void constructBlacklists(){
-
-		BiConsumer<String, List<ItemStack>> insert = (s, l) -> {
-			String[] stuff = s.split(":");
-			Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-			if(item != null)
-				l.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-			else ACLogger.severe("{} is not a valid Item!", s);
-		};
-		BiConsumer<String[], List<ItemStack>> construct = (a, l) -> {
-			Arrays.stream(a)
-			.filter(Predicates.not(String::isEmpty))
-			.forEach(s -> insert.accept(s, l));
-		};
-
-		construct.accept(abyssalZombieBlacklist, abyssal_zombie_blacklist);
-		construct.accept(depthsGhoulBlacklist, depths_ghoul_blacklist);
-		construct.accept(antiAbyssalZombieBlacklist, anti_abyssal_zombie_blacklist);
-		construct.accept(antiGhoulBlacklist, anti_ghoul_blacklist);
-		construct.accept(omotholGhoulBlacklist, omothol_ghoul_blacklist);
+		if(abyssalZombieBlacklist.length > 0)
+			for(String str : abyssalZombieBlacklist)
+				if(str.length() > 0){
+					String[] stuff = str.split(":");
+					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
+					if(item != null)
+						abyssal_zombie_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+					else ACLogger.severe("{} is not a valid Item!", str);
+				}
+		if(depthsGhoulBlacklist.length > 0)
+			for(String str : depthsGhoulBlacklist)
+				if(str.length() > 0){
+					String[] stuff = str.split(":");
+					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
+					if(item != null)
+						depths_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+					else ACLogger.severe("{} is not a valid Item!", str);
+				}
+		if(antiAbyssalZombieBlacklist.length > 0)
+			for(String str : antiAbyssalZombieBlacklist)
+				if(str.length() > 0){
+					String[] stuff = str.split(":");
+					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
+					if(item != null)
+						anti_abyssal_zombie_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+					else ACLogger.severe("{} is not a valid Item!", str);
+				}
+		if(antiGhoulBlacklist.length > 0)
+			for(String str : antiGhoulBlacklist)
+				if(str.length() > 0){
+					String[] stuff = str.split(":");
+					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
+					if(item != null)
+						anti_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+					else ACLogger.severe("{} is not a valid Item!", str);
+				}
+		if(omotholGhoulBlacklist.length > 0)
+			for(String str : omotholGhoulBlacklist)
+				if(str.length() > 0){
+					String[] stuff = str.split(":");
+					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
+					if(item != null)
+						omothol_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+					else ACLogger.severe("{} is not a valid Item!", str);
+				}
 	}
 
 	/**
@@ -576,16 +609,33 @@ public class InitHandler implements ILifeCycleHandler {
 	 */
 	public boolean isItemBlacklisted(Entity entity, ItemStack stack){
 		if(entity instanceof EntityAbyssalZombie)
-			return abyssal_zombie_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
+			if(!abyssal_zombie_blacklist.isEmpty())
+				for(ItemStack stack2 : abyssal_zombie_blacklist)
+					if(areStacksEqual(stack2, stack)) return true;
 		if(entity instanceof EntityDepthsGhoul)
-			return depths_ghoul_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
+			if(!depths_ghoul_blacklist.isEmpty())
+				for(ItemStack stack2 : depths_ghoul_blacklist)
+					if(areStacksEqual(stack2, stack)) return true;
 		if(entity instanceof EntityAntiAbyssalZombie)
-			return anti_abyssal_zombie_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
+			if(!anti_abyssal_zombie_blacklist.isEmpty())
+				for(ItemStack stack2 : anti_abyssal_zombie_blacklist)
+					if(areStacksEqual(stack2, stack)) return true;
 		if(entity instanceof EntityAntiGhoul)
-			return anti_ghoul_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
+			if(!anti_ghoul_blacklist.isEmpty())
+				for(ItemStack stack2 : anti_ghoul_blacklist)
+					if(areStacksEqual(stack2, stack)) return true;
 		if(entity instanceof EntityOmotholGhoul)
-			return omothol_ghoul_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
+			if(!omothol_ghoul_blacklist.isEmpty())
+				for(ItemStack stack2 : omothol_ghoul_blacklist)
+					if(areStacksEqual(stack2, stack)) return true;
 		return false;
+	}
+
+	private boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
+	{
+		if (stack1 == null || stack2 == null) return false;
+		return stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE
+				|| stack1.getItemDamage() == stack2.getItemDamage());
 	}
 
 	/**
@@ -597,7 +647,9 @@ public class InitHandler implements ILifeCycleHandler {
 		ResourceLocation key = EntityList.getKey(entity);
 		if(key != null) {
 			String id = key.toString();
-			return Arrays.stream(interdimensionalCageBlacklist).anyMatch(s -> s.equals(id));
+			for(String str : interdimensionalCageBlacklist)
+				if(str.equals(id))
+					return true;
 		}
 		return false;
 	}
@@ -620,7 +672,10 @@ public class InitHandler implements ILifeCycleHandler {
 	}
 
 	private boolean isDimBlacklisted(int id) {
-		return Arrays.stream(blackHoleBlacklist).anyMatch(i -> i == id);
+		for(int check : blackHoleBlacklist)
+			if(check == id)
+				return true;
+		return false;
 	}
 
 	/**
@@ -629,7 +684,10 @@ public class InitHandler implements ILifeCycleHandler {
 	 * @return True if the dimension is blacklisted, otherwise false
 	 */
 	public boolean isDimBlacklistedFromOreGen(int id) {
-		return Arrays.stream(oreGenDimBlacklist).anyMatch(i -> i == id);
+		for(int check : oreGenDimBlacklist)
+			if(check == id)
+				return true;
+		return false;
 	}
 
 	/**
@@ -638,7 +696,10 @@ public class InitHandler implements ILifeCycleHandler {
 	 * @return True if the dimension is blacklisted, otherwise false
 	 */
 	public boolean isDimBlacklistedFromStructureGen(int id) {
-		return Arrays.stream(structureGenDimBlacklist).anyMatch(i -> i == id);
+		for(int check : structureGenDimBlacklist)
+			if(check == id)
+				return true;
+		return false;
 	}
 
 	/**

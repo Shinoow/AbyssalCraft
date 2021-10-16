@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:blaze_crystal_cluster"
+      "item": "abyssalcraft:crystalcluster",
+      "data": 15
     }
   },
   "result": {

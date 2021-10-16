@@ -1,0 +1,12 @@
+{
+	"variants": {
+		"material=cobblestone": { "model": "abyssalcraft:ritualaltar_0" },
+		"material=darkstone_cobblestone": { "model": "abyssalcraft:ritualaltar_1" },
+		"material=abyssal_stone_brick": { "model": "abyssalcraft:ritualaltar_2" },
+		"material=coralium_stone_brick": { "model": "abyssalcraft:ritualaltar_3" },
+		"material=dreadstone_brick": { "model": "abyssalcraft:ritualaltar_4" },
+		"material=abyssalnite_stone_brick": { "model": "abyssalcraft:ritualaltar_5" },
+		"material=ethaxium_brick": { "model": "abyssalcraft:ritualaltar_6" },
+		"material=dark_ethaxium_brick": { "model": "abyssalcraft:ritualaltar_7" }
+	}
+}

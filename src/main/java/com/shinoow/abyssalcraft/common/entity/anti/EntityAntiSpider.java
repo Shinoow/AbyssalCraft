@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -99,7 +99,8 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		super.applyEntityAttributes();
 
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 48.0D : 24.0D);
+		if(ACConfig.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(64.0D);
+		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(32.0D);
 	}
 
 	@Override
@@ -204,14 +205,14 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	 */
 	public void setBesideClimbableBlock(boolean par1)
 	{
-		byte b0 = dataManager.get(CLIMBING);
+		byte b0 = dataManager.get(CLIMBING).byteValue();
 
 		if (par1)
 			b0 = (byte)(b0 | 1);
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, b0);
+		dataManager.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -24,5 +24,6 @@ public class AbyssalCraftRecipeCategoryUid {
 	public static final String FUEL_TRANSMUTATION = "abyssalcraft.fuel.transmutation";
 	public static final String FUEL_CRYSTALLIZATION = "abyssalcraft.fuel.crystallization";
 	public static final String RENDING = "abyssalcraft.rending";
+	public static final String UPGRADE = "abyssalcraft.upgrade";
 	public static final String MATERIALIZATION = "abyssalcraft.materialization";
 }

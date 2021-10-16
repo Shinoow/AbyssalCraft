@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -37,42 +37,42 @@ public interface IRitualAltar extends ISingletonInventory {
 	 * @param pos TE BlockPos
 	 * @param player Player interacting with the altar
 	 */
-	void performRitual(World world, BlockPos pos, EntityPlayer player);
+	public void performRitual(World world, BlockPos pos, EntityPlayer player);
 
 	/**
 	 * Used to determine if a Ritual can be performed
 	 */
-	boolean canPerform();
+	public boolean canPerform();
 
 	/**
 	 * Returns the cooldown until a new Ritual can be performed
 	 */
-	int getRitualCooldown();
+	public int getRitualCooldown();
 
 	/**
 	 * Determines if a Ritual is currently being performed
 	 */
-	boolean isPerformingRitual();
+	public boolean isPerformingRitual();
 
 	/**
 	 * Invoked on the client after a ritual has started (through a network packet). Sends over the necessary values for the visuals
 	 * @param ritual Active ritual (should never be null, but it wouldn't cause a side-effect)
 	 * @param sacrifice The animal to sacrifice (if any)
 	 */
-	void setRitualFields(@Nullable NecronomiconRitual ritual, @Nullable EntityLiving sacrifice);
+	public void setRitualFields(@Nullable NecronomiconRitual ritual, @Nullable EntityLiving sacrifice);
 
 	/**
 	 * Adds the selected pedestal to the altar's pedestal list
 	 */
-	void addPedestal(IRitualPedestal pedestal);
+	public void addPedestal(IRitualPedestal pedestal);
 
 	/**
 	 * Returns the pedestals associated to this altar
 	 */
-	List<IRitualPedestal> getPedestals();
+	public List<IRitualPedestal> getPedestals();
 
 	/**
 	 * Returns how particles on Ritual Pedestals are displayed for the current ritual
 	 */
-	EnumRitualParticle getRitualParticle();
+	public EnumRitualParticle getRitualParticle();
 }

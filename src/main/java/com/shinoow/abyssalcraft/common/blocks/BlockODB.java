@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -44,7 +44,7 @@ public class BlockODB extends Block {
 
 	public BlockODB() {
 		super(Material.IRON);
-		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, false));
+		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, Boolean.valueOf(false)));
 		setCreativeTab(ACTabs.tabBlock);
 		setSoundType(SoundType.METAL);
 	}
@@ -78,7 +78,7 @@ public class BlockODB extends Block {
 
 		if (par1World.isBlockPowered(pos))
 		{
-			onBlockDestroyedByPlayer(par1World, pos, state.withProperty(EXPLODE, true));
+			onBlockDestroyedByPlayer(par1World, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
 			par1World.setBlockToAir(pos);
 		}
 	}
@@ -88,7 +88,7 @@ public class BlockODB extends Block {
 	{
 		if (par1World.isBlockPowered(pos))
 		{
-			onBlockDestroyedByPlayer(par1World, pos, state.withProperty(EXPLODE, true));
+			onBlockDestroyedByPlayer(par1World, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
 			par1World.setBlockToAir(pos);
 		}
 	}
@@ -138,7 +138,7 @@ public class BlockODB extends Block {
 
 			if (item == Items.FLINT_AND_STEEL || item == Items.FIRE_CHARGE)
 			{
-				explode(par1World, pos, state.withProperty(EXPLODE, true), par5EntityPlayer);
+				explode(par1World, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)), par5EntityPlayer);
 				par1World.setBlockToAir(pos);
 
 				if (item == Items.FLINT_AND_STEEL)
@@ -162,7 +162,7 @@ public class BlockODB extends Block {
 
 			if (var6.isBurning())
 			{
-				explode(par1World, pos, par1World.getBlockState(pos).withProperty(EXPLODE, true), var6.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase)var6.shootingEntity : null);
+				explode(par1World, pos, par1World.getBlockState(pos).withProperty(EXPLODE, Boolean.valueOf(true)), var6.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase)var6.shootingEntity : null);
 				par1World.setBlockToAir(pos);
 			}
 		}
@@ -180,7 +180,7 @@ public class BlockODB extends Block {
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(EXPLODE, (meta & 1) > 0);
+		return getDefaultState().withProperty(EXPLODE, Boolean.valueOf((meta & 1) > 0));
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class BlockODB extends Block {
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return state.getValue(EXPLODE) ? 1 : 0;
+		return state.getValue(EXPLODE).booleanValue() ? 1 : 0;
 	}
 
 	@Override

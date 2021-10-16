@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerAntiSpiderEyes;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiSpider;
 
 import net.minecraft.client.model.ModelSpider;
@@ -29,7 +29,7 @@ public class RenderAntiSpider extends RenderLiving<EntityAntiSpider>
 	public RenderAntiSpider(RenderManager manager)
 	{
 		super(manager, new ModelSpider(), 1.0F);
-		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft:textures/model/anti/spider_eyes.png")));
+		addLayer(new LayerAntiSpiderEyes(this));
 	}
 
 	@Override

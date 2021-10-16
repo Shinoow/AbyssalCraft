@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:calcium_crystal_cluster"
+      "item": "abyssalcraft:crystalcluster2",
+      "data": 9
     }
   },
   "result": {

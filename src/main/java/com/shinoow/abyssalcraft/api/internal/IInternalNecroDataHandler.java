@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -21,21 +21,21 @@ public interface IInternalNecroDataHandler {
 	 * Fetches an internal NecroData from the provided identifier
 	 * @param identifier String representing the NecroData
 	 */
-	NecroData getInternalNecroData(String identifier);
+	public NecroData getInternalNecroData(String identifier);
 
 	/**
 	 * Adds a Chapter to an internal NecroData
 	 * @param chapter Chapter object
 	 * @param identifier String representing the NecroData
 	 */
-	void addChapter(Chapter chapter, String identifier);
+	public void addChapter(Chapter chapter, String identifier);
 
 	/**
 	 * Removes a Chapter from an internal NecroData
 	 * @param necroidentifier String representing the NecroData
 	 * @param chapteridentifier String representing the Chapter
 	 */
-	void removeChapter(String necroidentifier, String chapteridentifier);
+	public void removeChapter(String necroidentifier, String chapteridentifier);
 
 	/**
 	 * Adds a Page to a Chapter of an internal NecroData
@@ -44,7 +44,7 @@ public interface IInternalNecroDataHandler {
 	 * @param necroidentifier String representing the NecroData
 	 * @param chapteridentifier String representing the Chapter
 	 */
-	void addPage(Page page, String necroidentifier, String chapteridentifier);
+	public void addPage(Page page, String necroidentifier, String chapteridentifier);
 
 	/**
 	 * Removes a Page from a Chapter of an internal NecroData
@@ -52,7 +52,7 @@ public interface IInternalNecroDataHandler {
 	 * @param necroidentifier String representing the NecroData
 	 * @param chapteridentifier String representing the Chapter
 	 */
-	void removePage(int pageNum, String necroidentifier, String chapteridentifier);
+	public void removePage(int pageNum, String necroidentifier, String chapteridentifier);
 
 	/**
 	 * Inserts a Page into a Chapter of an internal NecroData, offsetting any existing page at the page number
@@ -60,18 +60,18 @@ public interface IInternalNecroDataHandler {
 	 * @param necroidentifier String representing the NecroData
 	 * @param chapteridentifier String representing the Chapter
 	 */
-	void insertPage(Page page, String necroidentifier, String chapteridentifier);
+	public void insertPage(Page page, String necroidentifier, String chapteridentifier);
 
 	/**
 	 * Utility for verifying an image fetched from a URL.<br>
 	 * Used to cache any URL-based images.
 	 * @param url URL String to check
 	 */
-	void verifyImageURL(String url);
+	public void verifyImageURL(String url);
 
 	/**
 	 * Adds the internal pages to the internal NecroDatas.<br>
 	 * This method is fired at Init.
 	 */
-	void registerInternalPages();
+	public void registerInternalPages();
 }

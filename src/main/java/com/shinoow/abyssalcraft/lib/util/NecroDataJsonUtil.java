@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,18 +15,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Map.Entry;
 
+import org.apache.logging.log4j.Level;
+
 import com.google.common.base.Strings;
 import com.google.gson.*;
-import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLLog;
 
 /**
  * Utility class used to convert NecroData to/from Json
@@ -189,8 +190,8 @@ public class NecroDataJsonUtil {
 			json.addProperty("icontype", "craftingstack");
 			JsonArray stuff = new JsonArray();
 			stuff.add(new JsonPrimitive(outputStackToString(((CraftingStack) icon).getOutput())));
-			for(Object stack : ((CraftingStack) icon).getRecipe())
-				stuff.add(new JsonPrimitive(stackToString(APIUtils.convertToStack(stack))));
+			for(ItemStack stack : ((CraftingStack) icon).getCraftingRecipe())
+				stuff.add(new JsonPrimitive(stackToString(stack)));
 			json.add("icon", stuff);
 		}
 		else if(icon instanceof String){
@@ -358,7 +359,7 @@ public class NecroDataJsonUtil {
 			fr.close();
 			return json;
 		} catch (Exception e) {
-			ACLogger.severe("Failed to read JSON file: {}", file.toString());
+			FMLLog.log("AbyssalCraft", Level.ERROR, "Failed to read JSON file: %s", file.toString());
 			e.printStackTrace();
 			return null;
 		}

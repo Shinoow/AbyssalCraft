@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:corblock"
+      "item": "abyssalcraft:ingotblock",
+      "data": 1
     }
   },
   "result": {

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -19,49 +19,49 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public interface INecroDataCapability {
 
-	boolean isUnlocked(IUnlockCondition cond, EntityPlayer player);
+	public boolean isUnlocked(IUnlockCondition cond, EntityPlayer player);
 
-	void triggerEntityUnlock(String name);
+	public void triggerEntityUnlock(String name);
 
-	void triggerBiomeUnlock(String name);
+	public void triggerBiomeUnlock(String name);
 
-	void triggerDimensionUnlock(int id);
+	public void triggerDimensionUnlock(int id);
 
-	void triggerArtifactUnlock(String name);
+	public void triggerArtifactUnlock(String name);
 
-	void triggerPageUnlock(String name);
+	public void triggerPageUnlock(String name);
 
-	void triggerWhisperUnlock(String name);
+	public void triggerWhisperUnlock(String name);
 
-	void triggerMiscUnlock(String name);
+	public void triggerMiscUnlock(String name);
 
-	void unlockAllKnowledge(boolean unlock);
+	public void unlockAllKnowledge(boolean unlock);
 
-	void setLastSyncTime(long time);
+	public void setLastSyncTime(long time);
 
-	void incrementSyncTimer();
+	public void incrementSyncTimer();
 
-	void resetSyncTimer();
+	public void resetSyncTimer();
 
-	List<String> getBiomeTriggers();
+	public List<String> getBiomeTriggers();
 
-	List<String> getEntityTriggers();
+	public List<String> getEntityTriggers();
 
-	List<Integer> getDimensionTriggers();
+	public List<Integer> getDimensionTriggers();
 
-	List<String> getArtifactTriggers();
+	public List<String> getArtifactTriggers();
 
-	List<String> getPageTriggers();
+	public List<String> getPageTriggers();
 
-	List<String> getWhisperTriggers();
+	public List<String> getWhisperTriggers();
 
-	List<String> getMiscTriggers();
+	public List<String> getMiscTriggers();
 
-	boolean hasUnlockedAllKnowledge();
+	public boolean hasUnlockedAllKnowledge();
 
-	long getLastSyncTime();
+	public long getLastSyncTime();
 
-	int getSyncTimer();
+	public int getSyncTimer();
 
-	void copy(INecroDataCapability cap);
+	public void copy(INecroDataCapability cap);
 }

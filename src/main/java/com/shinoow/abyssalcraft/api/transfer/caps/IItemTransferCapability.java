@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -27,27 +27,27 @@ public interface IItemTransferCapability {
 	 * Adds a configuration to the capability
 	 * @param config Item Transfer Configuraiton to add
 	 */
-	void addTransferConfiguration(ItemTransferConfiguration config);
+	public void addTransferConfiguration(ItemTransferConfiguration config);
 
 	/**
 	 * Returns a list of all stored configurations
 	 */
-	List<ItemTransferConfiguration> getTransferConfigurations();
+	public List<ItemTransferConfiguration> getTransferConfigurations();
 
 	/**
 	 * Clears all configurations in the capability
 	 */
-	void clearConfigurations();
+	public void clearConfigurations();
 
 	/**
 	 * Allows you to toggle the active state of the capability
 	 */
-	void setRunning(boolean state);
+	public void setRunning(boolean state);
 
 	/**
 	 * Returns whether or not the capability is active on the block
 	 */
-	boolean isRunning();
+	public boolean isRunning();
 
-	void copy(IItemTransferCapability cap);
+	public void copy(IItemTransferCapability cap);
 }

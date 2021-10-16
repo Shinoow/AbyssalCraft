@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,14 +15,12 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Base Necronomicon Spell.<br>
@@ -232,18 +230,16 @@ public abstract class Spell {
 	 * Used to fetch the localized name for a spell
 	 * @return A localized string representing a name
 	 */
-	@SideOnly(Side.CLIENT)
 	public String getLocalizedName(){
-		return I18n.format(getUnlocalizedName());
+		return I18n.translateToLocal(getUnlocalizedName());
 	}
 
 	/**
 	 * Used to fetch the description for the spell
 	 * @return A localized string representing a description
 	 */
-	@SideOnly(Side.CLIENT)
 	public String getDescription(){
-		return I18n.format(getUnlocalizedName() + ".desc");
+		return I18n.translateToLocal(getUnlocalizedName() + ".desc");
 	}
 
 	/**

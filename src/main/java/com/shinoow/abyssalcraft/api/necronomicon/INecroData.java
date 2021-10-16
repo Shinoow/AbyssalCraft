@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,15 +15,15 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 
 public interface INecroData {
 
-	String getTitle();
+	public String getTitle();
 
-	int getDisplayIcon();
+	public int getDisplayIcon();
 
-	String getText();
+	public String getText();
 
-	boolean hasText();
+	public boolean hasText();
 
-	String getIdentifier();
+	public String getIdentifier();
 
-	IUnlockCondition getCondition();
+	public IUnlockCondition getCondition();
 }

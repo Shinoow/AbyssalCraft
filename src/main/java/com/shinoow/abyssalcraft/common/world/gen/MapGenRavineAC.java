@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.world.gen;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +23,7 @@ import net.minecraft.world.gen.MapGenRavine;
 public class MapGenRavineAC extends MapGenRavine {
 
 	private boolean isACStone(IBlockState state){
-		return state.getBlock() instanceof BlockACStone && state.getBlock() != ACBlocks.ethaxium;
+		return state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) != EnumStoneType.ETHAXIUM;
 	}
 
 	@Override

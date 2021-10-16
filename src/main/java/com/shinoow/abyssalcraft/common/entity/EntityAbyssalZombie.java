@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -99,7 +99,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CHILD, (byte)0);
+		dataManager.register(CHILD, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	 */
 	public void setChild(boolean par1)
 	{
-		dataManager.set(CHILD, (byte)(par1 ? 1 : 0));
+		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
 		if (world != null && !world.isRemote)
 		{
@@ -249,7 +249,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		super.readEntityFromNBT(par1NBTTagCompound);
 
 		if(par1NBTTagCompound.getBoolean("IsBaby"))
-			setChild(true);
+			setChild(true);;
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -63,7 +63,7 @@ public final class EntityUtil {
 	 * @param par1 The Player to check
 	 * @return True if the Player has a certain name, otherwise false
 	 */
-	public static boolean isPlayerCoralium(EntityPlayer par1){
+	public static final boolean isPlayerCoralium(EntityPlayer par1){
 		if(Vars.dev)
 			return par1.getName().equals("shinoow") || par1.getName().equals("Oblivionaire");
 		else return par1.getUniqueID().equals(Vars.uuid1) || par1.getUniqueID().equals(Vars.uuid2);

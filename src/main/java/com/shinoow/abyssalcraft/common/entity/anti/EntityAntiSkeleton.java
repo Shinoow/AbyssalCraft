@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -70,14 +70,15 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 		super.applyEntityAttributes();
 
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 60.0D : 30.0D);
+		if(ACConfig.hardcoreMode) getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0D);
+		else getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 	}
 
 	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(field_184728_b, false);
+		dataManager.register(field_184728_b, Boolean.valueOf(false));
 	}
 
 	@Override
@@ -232,11 +233,11 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	@SideOnly(Side.CLIENT)
 	public boolean getSwingingArms()
 	{
-		return dataManager.get(field_184728_b);
+		return dataManager.get(field_184728_b).booleanValue();
 	}
 
 	@Override
 	public void setSwingingArms(boolean swingingArms) {
-		dataManager.set(field_184728_b, swingingArms);
+		dataManager.set(field_184728_b, Boolean.valueOf(swingingArms));
 	}
 }

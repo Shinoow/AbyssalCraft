@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -31,12 +31,12 @@ public interface IUnlockableItem {
 	 * Sets the unlock condition for the Item
 	 * @param condition Unlock Condition
 	 */
-	Item setUnlockCondition(IUnlockCondition condition);
+	public Item setUnlockCondition(IUnlockCondition condition);
 
 	/**
 	 * Getter for the Unlock Condition
 	 * @param stack ItemStack holding the item requesting the Unlock Condition
 	 * @return the Unlock Condition associated with the ItemStack
 	 */
-	IUnlockCondition getUnlockCondition(ItemStack stack);
+	public IUnlockCondition getUnlockCondition(ItemStack stack);
 }

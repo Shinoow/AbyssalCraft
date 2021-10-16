@@ -12,6 +12,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:sulfur_crystal_cluster"
+    "item": "abyssalcraft:crystalcluster",
+    "data": 2
   }
 }

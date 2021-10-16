@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -40,10 +40,10 @@ public class ItemSlabAC extends ItemSlab implements IUnlockableItem {
 	public String getItemStackDisplayName(ItemStack stack) {
 		if(getUnlocalizedName().contains("abyslab"))
 			return TextFormatting.BLUE + super.getItemStackDisplayName(stack);
-		else if(getUnlocalizedName().contains("darkethaxiumbrickslab"))
-			return TextFormatting.DARK_RED + super.getItemStackDisplayName(stack);
 		else if(getUnlocalizedName().contains("ethaxiumbrickslab"))
 			return TextFormatting.AQUA + super.getItemStackDisplayName(stack);
+		else if(getUnlocalizedName().contains("darkethaxiumbrickslab"))
+			return TextFormatting.DARK_RED + super.getItemStackDisplayName(stack);
 		return super.getItemStackDisplayName(stack);
 	}
 

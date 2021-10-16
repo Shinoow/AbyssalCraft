@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:dreadiumblock"
+    "item": "abyssalcraft:ingotblock",
+    "data": 2
   }
 }

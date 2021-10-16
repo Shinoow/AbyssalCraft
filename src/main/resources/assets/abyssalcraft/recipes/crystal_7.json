@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:phosphorus_crystal_cluster"
+      "item": "abyssalcraft:crystalcluster",
+      "data": 7
     }
   },
   "result": {

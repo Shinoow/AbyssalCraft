@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyRelayBlock;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyRelay;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
@@ -36,7 +35,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockEnergyRelay extends BlockContainer implements IEnergyRelayBlock {
+public class BlockEnergyRelay extends BlockContainer {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
@@ -110,7 +109,7 @@ public class BlockEnergyRelay extends BlockContainer implements IEnergyRelayBloc
 	{
 		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("PotEnergy")){
 			TileEntity tile = worldIn.getTileEntity(pos);
-			if(tile instanceof TileEntityEnergyRelay)
+			if(tile != null && tile instanceof TileEntityEnergyRelay)
 				((TileEntityEnergyRelay)tile).addEnergy(stack.getTagCompound().getFloat("PotEnergy"));
 		}
 	}
@@ -118,7 +117,7 @@ public class BlockEnergyRelay extends BlockContainer implements IEnergyRelayBloc
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		return new java.util.ArrayList<>();
+		return new java.util.ArrayList<ItemStack>();
 	}
 
 	@Override
@@ -165,15 +164,5 @@ public class BlockEnergyRelay extends BlockContainer implements IEnergyRelayBloc
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer.Builder(this).add(FACING).build();
-	}
-
-	@Override
-	public int getMaxEnergy(ItemStack stack) {
-		return 500;
-	}
-
-	@Override
-	public int getRange() {
-		return 4;
 	}
 }

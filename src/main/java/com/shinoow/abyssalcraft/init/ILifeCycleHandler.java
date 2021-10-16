@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -20,11 +20,11 @@ import net.minecraftforge.fml.common.event.*;
  */
 public interface ILifeCycleHandler {
 
-	void preInit(FMLPreInitializationEvent event);
+	public void preInit(FMLPreInitializationEvent event);
 
-	void init(FMLInitializationEvent event);
+	public void init(FMLInitializationEvent event);
 
-	void postInit(FMLPostInitializationEvent event);
+	public void postInit(FMLPostInitializationEvent event);
 
-	void loadComplete(FMLLoadCompleteEvent event);
+	public void loadComplete(FMLLoadCompleteEvent event);
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -53,7 +53,6 @@ import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings("deprecation")
 @Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
 public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
@@ -96,8 +95,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(80.0D);
-		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 1000.0D : 500.0D);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 60.0D : 30.0D);
 
@@ -188,6 +186,12 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	protected float getSoundVolume()
 	{
 		return 5.0F;
+	}
+
+	@Override
+	public int getTotalArmorValue()
+	{
+		return 10;
 	}
 
 	@Override
@@ -282,7 +286,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 					par1DamageSource.getTrueSource().attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), Integer.MAX_VALUE);
 				}
 				if(ACConfig.showBossDialogs)
-					SpecialTextUtil.JzaharGroup(getEntityWorld(), I18n.translateToLocal("message.jzahar.fourthwall"));
+					SpecialTextUtil.JzaharGroup(getEntityWorld(), "Whoops, I slipped!");
 			}
 		}
 
@@ -678,7 +682,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			}
 		if(deathTicks == 790 && !world.isRemote){
 			if(world.getGameRules().getBoolean("mobGriefing")) {
-				List<BlockPos> blocks = new ArrayList<>();
+				List<BlockPos> blocks = new ArrayList<BlockPos>();
 				for(int x = 0; x < 10; x++)
 					for(int y = 0; y < 10; y++)
 						for(int z = 0; z < 10; z++){

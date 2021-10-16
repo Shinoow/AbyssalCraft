@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -40,7 +40,7 @@ public class BiomeProviderDreadlands extends BiomeProvider
 	public BiomeProviderDreadlands()
 	{
 		biomeCache = new BiomeCache(this);
-		biomesToSpawnIn = new ArrayList<>();
+		biomesToSpawnIn = new ArrayList<Biome>();
 		biomesToSpawnIn.add(ACBiomes.dreadlands);
 		biomesToSpawnIn.add(ACBiomes.purified_dreadlands);
 		biomesToSpawnIn.add(ACBiomes.dreadlands_forest);

@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:silicon_crystal_cluster"
+      "item": "abyssalcraft:crystalcluster2",
+      "data": 2
     }
   },
   "result": {

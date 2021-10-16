@@ -11,6 +11,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:ethaxiumblock"
+    "item": "abyssalcraft:ingotblock",
+    "data": 3
   }
 }

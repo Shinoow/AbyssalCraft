@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -276,7 +276,11 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				}
 			}
 			if(icon1 instanceof String)
-				if(locked1 || failcache.contains(icon1)){
+				if(locked1){
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+					mc.renderEngine.bindTexture(MISSING_PICTURE);
+					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+				} else if(failcache.contains(icon1)){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k, b0, 0, 0, 256, 256);
@@ -345,7 +349,11 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				}
 			}
 			if(icon2 instanceof String)
-				if(locked2 || failcache.contains(icon2)){
+				if(locked2){
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+					mc.renderEngine.bindTexture(MISSING_PICTURE);
+					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);
+				} else if(failcache.contains(icon2)){
 					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					mc.renderEngine.bindTexture(MISSING_PICTURE);
 					drawTexturedModalRect(k + n, b0, 0, 0, 256, 256);

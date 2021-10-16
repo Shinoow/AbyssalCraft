@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.ai;
 
-import com.shinoow.abyssalcraft.common.blocks.BlockDecorativeStatue;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDecorativeStatue;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
-import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 
 import net.minecraft.entity.EntityLiving;
@@ -56,7 +56,7 @@ public class EntityAIWorship extends EntityAIBase
 					for(int z = -8; z < 9; z++){
 						pos.setPos(pos1.getX() + x, pos1.getY() + y, pos1.getZ() + z);
 						TileEntity te = world.getTileEntity(pos);
-						if(te instanceof TileEntityStatue || world.getBlockState(pos).getBlock() instanceof BlockDecorativeStatue) {
+						if(te instanceof TileEntityStatue || te instanceof TileEntityDecorativeStatue) {
 							statuePos = pos.toImmutable();
 							return true;
 						}
@@ -87,7 +87,7 @@ public class EntityAIWorship extends EntityAIBase
 		if(statuePos != null) {
 			idleEntity.getNavigator().tryMoveToXYZ(statuePos.getX() + (idleEntity.getRNG().nextBoolean() ? 1 : -1), idleEntity.posY, statuePos.getZ()+ (idleEntity.getRNG().nextBoolean() ? 1 : -1), 0.5F);
 			if(!idleEntity.getEntityWorld().isRemote)
-				idleEntity.playSound(ACSounds.remnant_priest_chant, 1.0F, idleEntity instanceof EntityShoggothBase ? idleEntity.isChild() ? 1.5F : 0.8F : (idleEntity.getRNG().nextFloat() - idleEntity.getRNG().nextFloat()) * 0.2F + 1.0F);
+				idleEntity.playSound(ACSounds.remnant_priest_chant, 1.0F, idleEntity instanceof EntityLesserShoggoth ? idleEntity.isChild() ? 1.5F : 0.8F : (idleEntity.getRNG().nextFloat() - idleEntity.getRNG().nextFloat()) * 0.2F + 1.0F);
 		}
 	}
 

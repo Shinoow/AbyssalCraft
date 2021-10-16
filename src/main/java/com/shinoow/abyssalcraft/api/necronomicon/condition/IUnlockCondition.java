@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -25,12 +25,12 @@ public interface IUnlockCondition {
 	 * @param stuff Condition Object to compare
 	 * @return True if they're the same, otherwise false
 	 */
-	boolean areConditionObjectsEqual(Object stuff);
+	public boolean areConditionObjectsEqual(Object stuff);
 
 	/**
 	 * Returns the Object this condition checks for
 	 */
-	Object getConditionObject();
+	public Object getConditionObject();
 
 	/**
 	 * Integer associated with the {@link IConditionProcessor}<br>
@@ -38,5 +38,5 @@ public interface IUnlockCondition {
 	 * Be sure to register one in {@link ConditionProcessorRegistr}<br>
 	 * when adding your own Unlock Conditions
 	 */
-	int getType();
+	public int getType();
 }

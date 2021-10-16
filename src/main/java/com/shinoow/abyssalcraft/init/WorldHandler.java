@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,15 +14,12 @@ package com.shinoow.abyssalcraft.init;
 import static com.shinoow.abyssalcraft.AbyssalCraft.modid;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
-import com.shinoow.abyssalcraft.api.dimension.DimensionData;
-import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
-import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
-import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.StructureAbyStrongholdPieces;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.StructureDreadlandsMinePieces;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.StructureDreadlandsMineStart;
+import com.shinoow.abyssalcraft.common.structures.omothol.MapGenOmothol;
+import com.shinoow.abyssalcraft.common.structures.omothol.StructureOmotholPieces;
 import com.shinoow.abyssalcraft.common.world.*;
 import com.shinoow.abyssalcraft.common.world.biome.*;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
@@ -41,19 +38,19 @@ public class WorldHandler implements ILifeCycleHandler {
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		ACBiomes.darklands = new BiomeDarklands(new BiomeProperties("Darklands").setWaterColor(ACClientVars.getDarklandsWaterColor()));
-		ACBiomes.abyssal_wastelands = new BiomeAbywasteland(new BiomeProperties("Abyssal Wastelands").setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
-		ACBiomes.dreadlands = new BiomeDreadlands(new BiomeProperties("Dreadlands").setRainDisabled());
-		ACBiomes.purified_dreadlands = new BiomeAbyDreadlands(new BiomeProperties("Purified Dreadlands").setRainDisabled());
-		ACBiomes.dreadlands_forest = new BiomeForestDreadlands(new BiomeProperties("Dreadlands Forest").setRainDisabled());
-		ACBiomes.dreadlands_mountains = new BiomeMountainDreadlands(new BiomeProperties("Dreadlands Mountains").setBaseHeight(1.3F).setHeightVariation(0.9F).setRainDisabled());
-		ACBiomes.darklands_forest = new BiomeDarklandsForest(new BiomeProperties("Darklands Forest").setWaterColor(ACClientVars.getDarklandsForestWaterColor()));
-		ACBiomes.darklands_plains = new BiomeDarklandsPlains(new BiomeProperties("Darklands Plains").setWaterColor(ACClientVars.getDarklandsPlainsWaterColor()));
-		ACBiomes.darklands_hills = new BiomeDarklandsHills(new BiomeProperties("Darklands Highland").setWaterColor(ACClientVars.getDarklandsHighlandsWaterColor()).setBaseHeight(1.1F).setHeightVariation(0.5F).setTemperature(0.2F).setRainfall(0.3F));
-		ACBiomes.darklands_mountains = new BiomeDarklandsMountains(new BiomeProperties("Darklands Mountains").setWaterColor(ACClientVars.getDarklandsMountainsWaterColor()).setBaseHeight(1.3F).setHeightVariation(0.9F).setTemperature(0.2F).setRainfall(0.3F));
-		ACBiomes.coralium_infested_swamp = new BiomeCorSwamp(new BiomeProperties("Coralium Infested Swamp").setWaterColor(ACClientVars.getCoraliumInfestedSwampWaterColor()).setBaseHeight(-0.2F).setHeightVariation(0.1F));
-		ACBiomes.omothol = new BiomeOmothol(new BiomeProperties("Omothol").setWaterColor(ACClientVars.getOmotholWaterColor()).setRainDisabled());
-		ACBiomes.dark_realm = new BiomeDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(ACClientVars.getDarkRealmWaterColor()).setRainDisabled());
+		ACBiomes.darklands = new BiomeGenDarklands(new BiomeProperties("Darklands").setWaterColor(ACClientVars.getDarklandsWaterColor()));
+		ACBiomes.abyssal_wastelands = new BiomeGenAbywasteland(new BiomeProperties("Abyssal Wastelands").setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
+		ACBiomes.dreadlands = new BiomeGenDreadlands(new BiomeProperties("Dreadlands").setRainDisabled());
+		ACBiomes.purified_dreadlands = new BiomeGenAbyDreadlands(new BiomeProperties("Purified Dreadlands").setRainDisabled());
+		ACBiomes.dreadlands_forest = new BiomeGenForestDreadlands(new BiomeProperties("Dreadlands Forest").setRainDisabled());
+		ACBiomes.dreadlands_mountains = new BiomeGenMountainDreadlands(new BiomeProperties("Dreadlands Mountains").setBaseHeight(1.3F).setHeightVariation(0.9F).setRainDisabled());
+		ACBiomes.darklands_forest = new BiomeGenDarklandsForest(new BiomeProperties("Darklands Forest").setWaterColor(ACClientVars.getDarklandsForestWaterColor()));
+		ACBiomes.darklands_plains = new BiomeGenDarklandsPlains(new BiomeProperties("Darklands Plains").setWaterColor(ACClientVars.getDarklandsPlainsWaterColor()));
+		ACBiomes.darklands_hills = new BiomeGenDarklandsHills(new BiomeProperties("Darklands Highland").setWaterColor(ACClientVars.getDarklandsHighlandsWaterColor()).setBaseHeight(1.1F).setHeightVariation(0.5F).setTemperature(0.2F).setRainfall(0.3F));
+		ACBiomes.darklands_mountains = new BiomeGenDarklandsMountains(new BiomeProperties("Darklands Mountains").setWaterColor(ACClientVars.getDarklandsMountainsWaterColor()).setBaseHeight(1.3F).setHeightVariation(0.9F).setTemperature(0.2F).setRainfall(0.3F));
+		ACBiomes.coralium_infested_swamp = new BiomeGenCorSwamp(new BiomeProperties("Coralium Infested Swamp").setWaterColor(ACClientVars.getCoraliumInfestedSwampWaterColor()).setBaseHeight(-0.2F).setHeightVariation(0.1F));
+		ACBiomes.omothol = new BiomeGenOmothol(new BiomeProperties("Omothol").setWaterColor(ACClientVars.getOmotholWaterColor()).setRainDisabled());
+		ACBiomes.dark_realm = new BiomeGenDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(ACClientVars.getDarkRealmWaterColor()).setRainDisabled());
 		ACBiomes.purged = new BiomePurged(new BiomeProperties("Purged").setWaterColor(ACClientVars.getPurgedWaterColor()).setRainDisabled());
 
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands.setRegistryName(new ResourceLocation(modid, "darklands")));
@@ -81,33 +78,6 @@ public class WorldHandler implements ILifeCycleHandler {
 		DimensionManager.registerDimension(ACLib.dreadlands_id, ACLib.THE_DREADLANDS);
 		DimensionManager.registerDimension(ACLib.omothol_id, ACLib.OMOTHOL);
 		DimensionManager.registerDimension(ACLib.dark_realm_id, ACLib.THE_DARK_REALM);
-
-		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.abyssal_wasteland_id)
-				.addConnectedDimension(ACConfig.startDimension)
-				.addConnectedDimension(ACLib.dreadlands_id)
-				.setColor(0, 255, 0)
-				.setGatewayKey(0)
-				.setMob(EntityAbyssalZombie.class)
-				.build());
-		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.dreadlands_id)
-				.addConnectedDimension(ACLib.abyssal_wasteland_id)
-				.addConnectedDimension(ACLib.omothol_id)
-				.setColor(255, 0, 0)
-				.setGatewayKey(1)
-				.setMob(EntityDreadling.class)
-				.build());
-		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.omothol_id)
-				.addConnectedDimension(ACLib.dark_realm_id)
-				.addConnectedDimension(ACLib.dreadlands_id)
-				.setColor(0, 255, 255)
-				.setGatewayKey(2)
-				.setMob(EntityGatekeeperMinion.class)
-				.setOverlay(new ResourceLocation("abyssalcraft", "textures/model/omothol_portal.png"))
-				.build());
-		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(0)
-				.setColor(0, 0, 255)
-				.setGatewayKey(0)
-				.build());
 	}
 
 	@Override
@@ -116,6 +86,8 @@ public class WorldHandler implements ILifeCycleHandler {
 		StructureAbyStrongholdPieces.registerStructurePieces();
 		MapGenStructureIO.registerStructure(StructureDreadlandsMineStart.class, "DreadMine");
 		StructureDreadlandsMinePieces.registerStructurePieces();
+		MapGenStructureIO.registerStructure(MapGenOmothol.Start.class, "Omothol");
+		StructureOmotholPieces.registerOmotholPieces();
 		GameRegistry.registerWorldGenerator(new AbyssalCraftWorldGenerator(), 0);
 	}
 
@@ -125,13 +97,13 @@ public class WorldHandler implements ILifeCycleHandler {
 	@Override
 	public void loadComplete(FMLLoadCompleteEvent event) {
 		if(ACConfig.purgeMobSpawns){
-			((BiomeAbywasteland) ACBiomes.abyssal_wastelands).setMobSpawns();
-			((BiomeDreadlands) ACBiomes.dreadlands).setMobSpawns();
-			((BiomeAbyDreadlands) ACBiomes.purified_dreadlands).setMobSpawns();
-			((BiomeForestDreadlands) ACBiomes.dreadlands_forest).setMobSpawns();
-			((BiomeMountainDreadlands) ACBiomes.dreadlands_mountains).setMobSpawns();
-			((BiomeOmothol) ACBiomes.omothol).setMobSpawns();
-			((BiomeDarkRealm) ACBiomes.dark_realm).setMobSpawns();
+			((BiomeGenAbywasteland) ACBiomes.abyssal_wastelands).setMobSpawns();
+			((BiomeGenDreadlands) ACBiomes.dreadlands).setMobSpawns();
+			((BiomeGenAbyDreadlands) ACBiomes.purified_dreadlands).setMobSpawns();
+			((BiomeGenForestDreadlands) ACBiomes.dreadlands_forest).setMobSpawns();
+			((BiomeGenMountainDreadlands) ACBiomes.dreadlands_mountains).setMobSpawns();
+			((BiomeGenOmothol) ACBiomes.omothol).setMobSpawns();
+			((BiomeGenDarkRealm) ACBiomes.dark_realm).setMobSpawns();
 		}
 	}
 }

@@ -215,7 +215,6 @@ container.abyssalcraft.tieredenergycontainer=계층형 에너지 보관함
 container.abyssalcraft.rendingpedestal=분열 받침대
 container.abyssalcraft.statetransformer=상태 변환기
 container.abyssalcraft.energydepositioner=에너지 증착기
-container.abyssalcraft.sequential_brewing=Sequential Brewing Stand
 
 #Gui Buttons
 gui.abyssalcraft.statetransformer.insert=주입
@@ -434,8 +433,6 @@ necronomicon.text.crafting.energydepositioner.1=에너지 증착기는 모놀리
 necronomicon.text.crafting.energydepositioner.2=충전된 돌 태블릿을 입력 슬롯에 배치하면, 증착기는 그 안에 저장된 모든 PE를 빨아들여 빈 돌 태블릿이나 저주받은 돌 태블릿을 반환하게 됩니다. 이 작업을 수행하면 주변(17x17 블록)이 손상되어 다크랜드로 변환됩니다(더 많은 다크랜드는 저주받은 돌 태블릿의 가능성을 높임). 출력은 자동화할 수 있습니다.
 necronomicon.text.crafting.ethaxiumpillar=에탁시움 기둥은 에탁시움 벽돌과 에탁시움 블록으로 제작됩니다.
 necronomicon.text.crafting.darkethaxiumpillar=다크 에탁시움 기둥은 다크 에탁시움 벽돌과 오모톨 돌으로 제작되었습니다.
-necronomicon.text.crafting.sequential_brewing_stand.1=A Sequential Brewing Stand is crafted using Blaze Rods, a Hopper and Brewing Stands. Sequential Brewing Stands can be chained, allowing one to transfer its output to the next one.
-necronomicon.text.crafting.sequential_brewing_stand.2=A pipe indicates the direction of transfer, and the pipes will connect on two connected Brewing Stands. Automation exists for ingredient input on the top, fuel and bottle input on the sides and output of the output slots on the bottom.
 
 necronomicon.text.crafting.upgradekit.1=업그레이드 키트는 나무 판자, 자갈돌, 끈 및 부싯돌로 제작됩니다. 업그레이드 키트는 모루을 통해 도구와 갑옷을 업그레이드할 수 있습니다.
 necronomicon.text.crafting.upgradekit.2=키트로 업그레이드하려면 다음 재료 2개와 현재 재료 1개가 필요합니다. 등급은 목재 -> 조약돌 -> 철 -> 다이아몬드 -> 심연광물 -> 정제된 코랄리움 -> 죽음광물 -> 에탁시움입니다.
@@ -1178,8 +1175,6 @@ tile.calcifiedstone.name=석회석
 tile.door_dlt.name=다크랜드 참나무 문
 tile.door_drt.name=공포나무 문
 tile.multi_block.name=멀티블록
-tile.sequential_brewing_stand.name=Sequential Brewing Stand
-tile.portal_anchor.name=Portal Anchor
 
 #Pre/Postfixes
 decorativestatue.prefix=장식 %s
@@ -1422,8 +1417,6 @@ item.configurator_shard.0.name=영혼 태블릿 조각 #1
 item.configurator_shard.1.name=영혼 태블릿 조각 #2
 item.configurator_shard.2.name=영혼 태블릿 조각 #3
 item.configurator_shard.3.name=영혼 태블릿 조각 #4
-item.generic_meat.name=Generic Meat
-item.cooked_generic_meat.name=Cooked Generic Meat
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=심연의 구울
@@ -1475,8 +1468,6 @@ entity.abyssalcraft.evilsheep.name=양
 entity.abyssalcraft.demonsheep.name=데몬 양
 entity.abyssalcraft.coraliumsquid.name=코랄리움에 감염된 오징어
 entity.abyssalcraft.shuboffspring.name=어둠의 자손
-entity.abyssalcraft.shoggoth.name=Shoggoth
-entity.abyssalcraft.greatershoggoth.name=Greater Shoggoth
 
 #Potions
 potion.Cplague=코랄리움 역병
@@ -1494,8 +1485,6 @@ potion.effect.Antimatter=소멸의 물약
 splash_potion.effect.Antimatter=소멸의 광범위형 물약
 lingering_potion.effect.Antimatter=소멸의 지속형 물약
 tipped_arrow.effect.Antimatter=소멸의 화살
-potion.coralium_antidote=Coralium Antidote
-potion.dread_antidote=Dread Antidote
 
 #Enchantments
 enchantment.abyssalcraft.coralium=코랄리움

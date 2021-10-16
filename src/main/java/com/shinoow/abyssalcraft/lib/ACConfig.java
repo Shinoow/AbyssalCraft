@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -22,14 +22,14 @@ public class ACConfig {
 
 	public static boolean shouldSpread, shouldInfect, breakLogic, destroyOcean, demonAnimalFire, particleBlock,
 	particleEntity, hardcoreMode, antiItemDisintegration, smeltingRecipes, purgeMobSpawns, mimicFire,
-	armorPotionEffects, nuclearAntimatterExplosions, syncDataOnBookOpening, portalSpawnsNearPlayer,
+	armorPotionEffects, nuclearAntimatterExplosions, syncDataOnBookOpening, dreadGrassSpread, portalSpawnsNearPlayer,
 	showBossDialogs, jzaharBreaksFourthWall, lootTableContent, depthsGhoulBiomeDictSpawn, abyssalZombieBiomeDictSpawn,
 	useAmplifiedWorldType, generateStatuesInLairs, enchantBooks, nightVisionEverywhere, antiPlayersPickupLoot,
-	demonAnimalsSpawnOnDeath, evilAnimalNewMoonSpawning, darkRealmSmokeParticles;
+	demonAnimalsSpawnOnDeath, evilAnimalNewMoonSpawning;
 	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate, acidSpitFrequency,
 	knowledgeSyncDelay, shoggothLairSpawnRateRivers, darkOffspringSpawnWeight, monolithBuildingCooldown, corruptionRitualRange,
 	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize, enchantmentMaxLevel, curingRitualRange,
-	shoggothLairGenerationDistance, startDimension, dreadSpawnSpawnLimit, greaterDreadSpawnSpawnLimit;
+	shoggothLairGenerationDistance;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid, shoggothGlowingEyes;
 	public static double acidResistanceHardness;
@@ -43,21 +43,21 @@ public class ACConfig {
 	public static boolean no_dreadlands_spread, no_acid_breaking_blocks, no_spectral_dragons, no_projectile_damage_immunity,
 	no_disruptions, no_black_holes, no_odb_explosions;
 
-	public static boolean crystal_rework;
+	public static boolean darkstone_brick_slab, darkstone_cobblestone_slab, darkstone_brick_stairs, darkstone_cobblestone_stairs, darkstone_slab,
+	darklands_oak_slab, darklands_oak_stairs, abyssal_stone_brick_slab, abyssal_stone_brick_stairs, coralium_stone_brick_slab, coralium_stone_brick_stairs,
+	dreadstone_brick_slab, dreadstone_brick_stairs, abyssalnite_stone_brick_slab, abyssalnite_stone_brick_stairs, ethaxium_brick_slab, ethaxium_brick_stairs,
+	abyssal_cobblestone_slab, abyssal_cobblestone_stairs, coralium_cobblestone_slab, coralium_cobblestone_stairs, dreadstone_cobblestone_slab,
+	dreadstone_cobblestone_stairs, abyssalnite_cobblestone_slab, abyssalnite_cobblestone_stairs, darkstone_cobblestone_wall, abyssal_cobbblestone_wall,
+	coralium_cobblestone_wall, dreadstone_cobblestone_wall, abyssalnite_cobblestone_wall;
+
+	public static boolean foodstuff, upgrade_kits, plague_enchantments, crystal_rework;
 
 	public static boolean entropy_spell, life_drain_spell, mining_spell, grasp_of_cthulhu_spell, invisibility_spell,
 	detachment_spell, steal_vigor_spell, sirens_song_spell, undeath_to_dust_spell, ooze_removal_spell, teleport_hostile_spell,
 	display_routes_spell, toggle_state_spell, floating_spell, teleport_home_spell;
 
-	public static final String CATEGORY_DIMENSIONS = "dimensions";
-	public static final String CATEGORY_BIOMES = "biomes";
-	public static final String CATEGORY_SHOGGOTH = "shoggoth";
-	public static final String CATEGORY_WORLDGEN = "worldgen";
-	public static final String CATEGORY_SILLY_SETTINGS = "silly_settings";
-	public static final String CATEGORY_MOD_COMPAT = "mod_compat";
-	public static final String CATEGORY_WET_NOODLE = "wet_noodle";
-	public static final String CATEGORY_MODULES = "modules";
-	public static final String CATEGORY_SPELLS = "spells";
-	public static final String CATEGORY_MOBS = "mobs";
-	public static final String CATEGORY_RITUALS = "rituals";
+	@Deprecated
+	public static int endAbyssalZombieSpawnWeight;
+	@Deprecated
+	public static boolean evilAnimalCreatureType, overworldShoggoths;
 }

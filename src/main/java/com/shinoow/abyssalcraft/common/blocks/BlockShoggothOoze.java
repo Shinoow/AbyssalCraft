@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -17,7 +17,8 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
@@ -50,14 +51,14 @@ public class BlockShoggothOoze extends BlockACBasic {
 
 	public BlockShoggothOoze(){
 		super(Material.GROUND, 1.0F, 1.0F, SoundType.SLIME);
-		setDefaultState(blockState.getBaseState().withProperty(LAYERS, 1));
+		setDefaultState(blockState.getBaseState().withProperty(LAYERS, Integer.valueOf(1)));
 		setTickRandomly(ACConfig.oozeExpire);
 	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return OOZE_AABB[state.getValue(LAYERS)];
+		return OOZE_AABB[state.getValue(LAYERS).intValue()];
 	}
 
 	@Override
@@ -101,7 +102,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
-		if(!(entity instanceof EntityShoggothBase)){
+		if(!(entity instanceof EntityLesserShoggoth)){
 			entity.motionX *= 0.4D;
 			entity.motionZ *= 0.4D;
 			if(entity instanceof EntityLivingBase && !world.isRemote){
@@ -133,9 +134,9 @@ public class BlockShoggothOoze extends BlockACBasic {
 		if(world.provider.getDimension() == ACLib.dreadlands_id)
 			return ACBlocks.dreadlands_dirt.getDefaultState();
 		if(world.provider.getDimension() == ACLib.omothol_id)
-			return ACBlocks.omothol_stone.getDefaultState();
+			return ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.OMOTHOL_STONE);
 		if(world.provider.getDimension() == ACLib.dark_realm_id)
-			return ACBlocks.darkstone.getDefaultState();
+			return ACBlocks.stone.getDefaultState();
 		if(world.provider.getDimension() == -1)
 			return Blocks.NETHERRACK.getDefaultState();
 		if(world.provider.getDimension() == 1)
@@ -154,7 +155,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos.down());
 		Block block = iblockstate.getBlock();
-		return block != ACBlocks.shoggoth_biomass && iblockstate != ACBlocks.monolith_stone.getDefaultState() ? iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down()) ? true : block == this && iblockstate.getValue(LAYERS).intValue() == 8 ? true : iblockstate.isOpaqueCube() && iblockstate.getMaterial().blocksMovement() : false;
+		return block != ACBlocks.shoggoth_biomass && iblockstate != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE) ? iblockstate.getBlock().isLeaves(iblockstate, worldIn, pos.down()) ? true : block == this && iblockstate.getValue(LAYERS).intValue() == 8 ? true : iblockstate.isOpaqueCube() && iblockstate.getMaterial().blocksMovement() : false;
 	}
 
 	@Override
@@ -205,7 +206,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(LAYERS, (meta & 7) + 1);
+		return getDefaultState().withProperty(LAYERS, Integer.valueOf((meta & 7) + 1));
 	}
 
 	@Override

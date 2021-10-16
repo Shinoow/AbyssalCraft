@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.item;
 
-import net.minecraft.item.ItemStack;
-
 /**
  * Items with this interface are recognized as crystallized elements by AbyssalCraft.
  *
@@ -21,17 +19,5 @@ import net.minecraft.item.ItemStack;
  * @since 1.3
  */
 public interface ICrystal {
-
-	/**
-	 * Retrieves the crystal color
-	 * @param stack Current Item Stack
-	 */
-	int getColor(ItemStack stack);
-
-	/**
-	 * Retrieves the molecular formula for the crystal compound
-	 * @param stack Current Item Stack
-	 */
-	String getFormula(ItemStack stack);
 
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -23,13 +23,22 @@ public interface ISingletonInventory {
 	/**
 	 * Returns the ItemStack placed on the Altar, if any
 	 */
-	ItemStack getItem();
+	public ItemStack getItem();
 
 	/**
 	 * Sets the ItemStack placed on the Altar
 	 * @param item ItemStack to place on the Altar
 	 */
-	void setItem(ItemStack item);
+	public void setItem(ItemStack item);
+
+	/**
+	 * Returns the rotation of the ItemStack placed on the Altar, if rendered on the block
+	 * @deprecated World time is used instead now, so all placed items rotate at the same angle
+	 */
+	@Deprecated
+	default int getRotation() {
+		return 0;
+	}
 
 	/**
 	 * Returns whether or not the placed Item should rotate

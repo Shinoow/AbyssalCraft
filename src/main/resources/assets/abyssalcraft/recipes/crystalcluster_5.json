@@ -12,6 +12,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:hydrogen_crystal_cluster"
+    "item": "abyssalcraft:crystalcluster",
+    "data": 5
   }
 }

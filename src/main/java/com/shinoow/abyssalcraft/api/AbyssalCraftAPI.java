@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -21,9 +21,7 @@ import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.internal.*;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.ICrystal;
-import com.shinoow.abyssalcraft.api.item.ItemEngraving;
+import com.shinoow.abyssalcraft.api.item.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.recipe.*;
 
@@ -46,6 +44,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
@@ -64,11 +63,11 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "2.0.0";
+	public static final String API_VERSION = "1.30.0";
 
-	public static Enchantment light_pierce, iron_wall, sapping, multi_rend;
+	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall, sapping, multi_rend;
 
-	public static Potion coralium_plague, dread_plague, antimatter_potion, coralium_antidote, dread_antidote;
+	public static Potion coralium_plague, dread_plague, antimatter_potion;
 
 	public static final DamageSource coralium = new DamageSource("coralium").setDamageBypassesArmor().setMagicDamage();
 	public static final DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
@@ -85,6 +84,7 @@ public class AbyssalCraftAPI {
 	private static final Map<Item, ResourceLocation> ghoul_leggings = new HashMap<>();
 	private static final Map<Item, ResourceLocation> ghoul_boots = new HashMap<>();
 
+	private static final Map<Integer, Integer> gateway_key_overrides = new HashMap<>();
 
 	/**
 	 *  {@link EnumCreatureAttribute} used for the Shadow mobs
@@ -172,7 +172,7 @@ public class AbyssalCraftAPI {
 		dreadiumSamuraiArmor.setRepairItem(new ItemStack(ACItems.dreadium_plate));
 		ethaxiumArmor.setRepairItem(new ItemStack(ACItems.ethaxium_ingot));
 
-		darkstoneTool.setRepairItem(new ItemStack(ACBlocks.darkstone_cobblestone));
+		darkstoneTool.setRepairItem(new ItemStack(ACBlocks.cobblestone, 1, 0));
 		abyssalniteTool.setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));
 		refinedCoraliumTool.setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
 		dreadiumTool.setRepairItem(new ItemStack(ACItems.dreadium_ingot));
@@ -466,6 +466,22 @@ public class AbyssalCraftAPI {
 	/**
 	 * Basic Materialization.<br>
 	 * Note: all inputs has to be either {@link ICrystal}s or be registered in the Crystal List {@link AbyssalCraftAPI#addCrystal(ItemStack)}
+	 * @param input An array of ItemStacks (maximum is 5)
+	 * @param output The output
+	 * @param xp Amount of exp given
+	 *
+	 * @since 1.4.5
+	 *
+	 * @deprecated Use the one where input and output params have swapped places
+	 */
+	@Deprecated
+	public static void addMaterialization(ItemStack[] input, ItemStack output){
+		addMaterialization(output, input);
+	}
+
+	/**
+	 * Basic Materialization.<br>
+	 * Note: all inputs has to be either {@link ICrystal}s or be registered in the Crystal List {@link AbyssalCraftAPI#addCrystal(ItemStack)}
 	 * @param output The output
 	 * @param input An array of ItemStacks (maximum is 5)
 	 *
@@ -500,7 +516,7 @@ public class AbyssalCraftAPI {
 	 * @since 1.27.0
 	 */
 	public static void addMaterialization(String output, ItemStack...input) {
-		OreDictionary.getOres(output, false).forEach(stack -> {
+		OreDictionary.getOres(output).forEach(stack -> {
 			if(stack.getHasSubtypes() && stack.getMetadata() == OreDictionary.WILDCARD_VALUE) {
 				NonNullList<ItemStack> list = NonNullList.create();
 				stack.getItem().getSubItems(stack.getItem().getCreativeTab(), list);
@@ -518,6 +534,18 @@ public class AbyssalCraftAPI {
 	public enum FuelType{
 		CRYSTALLIZER, TRANSMUTATOR, FURNACE
 	}
+
+	/**
+	 * Registers a fuel handler for an AbyssalCraft fuel type
+	 * @param handler The file that implements {@link IFuelHandler}
+	 * @param type The fuel type
+	 *
+	 * @since 1.0
+	 *
+	 * @deprecated use {@link FuelBurnTimeEvent} instead
+	 */
+	@Deprecated
+	public static void registerFuelHandler(IFuelHandler handler, FuelType type){}
 
 	/**
 	 * Gets the fuel value from an ItemStack, depending on the fuel type
@@ -765,6 +793,55 @@ public class AbyssalCraftAPI {
 	 */
 	public static ResourceLocation getGhoulBootsTexture(Item boots){
 		return ghoul_boots.get(boots);
+	}
+
+	/**
+	 * Registers a Gateway Key Override, allowing you to use a Gateway Key inside the specified dimension.
+	 * @param dimId Dimension ID
+	 * @param type Which Portal to place down
+	 * <ul>
+	 * <li>0 = The Abyssal Wasteland</li>
+	 * <li>1 = The Dreadlands</li>
+	 * <li>2 = Omothol</li>
+	 * </ul>
+	 *
+	 * @since 1.8.9
+	 */
+	public static void addGatewayKeyOverride(int dimId, int type){
+		gateway_key_overrides.put(dimId, type);
+	}
+
+	/**
+	 * Fetches a Gateway Key Override for the specified dimension (provided one is registered)
+	 * @param dimId Dimension ID to fetch a override for
+	 * @return A Integer in the range 0 - 2 if a override was found, otherwise -1
+	 *
+	 * @since 1.8.9
+	 */
+	public static int getGatewayKeyOverride(int dimId){
+		return !gateway_key_overrides.containsKey(dimId) ? -1 : gateway_key_overrides.get(dimId);
+	}
+
+	/**
+	 * Upgrade Kit recipe.
+	 * @param kit Upgrade Kit to use
+	 * @param input Old Item
+	 * @param output New Item
+	 *
+	 * @since 1.9.0
+	 */
+	public static void addUpgrade(ItemUpgradeKit kit, ItemStack input, ItemStack output){
+		UpgradeKitRecipes.instance().addUpgrade(kit, input, output);
+	}
+
+	/**
+	 * Registers a Upgrade Kit to be used in Upgrade Kit recipes.
+	 * @param kit Upgrade Kit to register
+	 *
+	 * @since 1.9.0
+	 */
+	public static void addUpgradeKit(ItemUpgradeKit kit){
+		UpgradeKitRecipes.instance().addUpgradeKit(kit);
 	}
 
 	/**

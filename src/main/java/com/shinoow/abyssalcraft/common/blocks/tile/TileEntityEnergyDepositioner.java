@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -23,6 +23,8 @@ import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.items.ItemStoneTablet;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.init.BlockHandler;
@@ -314,48 +316,48 @@ public class TileEntityEnergyDepositioner extends TileEntity implements IEnergyM
 			for(int y = 0; y < 256; y++){
 				IBlockState state = world.getBlockState(pos1.up(y));
 				if(state.getBlock() == Blocks.STONE)
-					world.setBlockState(pos1.up(y), ACBlocks.darkstone.getDefaultState());
+					world.setBlockState(pos1.up(y), ACBlocks.stone.getDefaultState());
 				else if(state.getBlock() == Blocks.LEAVES)
 					world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, state.getValue(BlockLeaves.CHECK_DECAY)).withProperty(BlockLeaves.DECAYABLE, state.getValue(BlockLeaves.DECAYABLE)));
 				else if(state.getBlock() == Blocks.LOG)
 					world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_wood.getDefaultState().withProperty(BlockLog.LOG_AXIS, state.getValue(BlockLog.LOG_AXIS)));
 				else if(state.getBlock() == Blocks.COBBLESTONE)
-					world.setBlockState(pos1.up(y), ACBlocks.darkstone_cobblestone.getDefaultState());
+					world.setBlockState(pos1.up(y), ACBlocks.cobblestone.getDefaultState());
 				else if(state.getBlock() == Blocks.STONEBRICK)
 					switch(state.getValue(BlockStoneBrick.VARIANT)){
 					case CHISELED:
-						world.setBlockState(pos1.up(y), ACBlocks.chiseled_darkstone_brick.getDefaultState());
+						world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, BlockACBrick.EnumBrickType.CHISELED));
 						break;
 					case CRACKED:
-						world.setBlockState(pos1.up(y), ACBlocks.cracked_darkstone_brick.getDefaultState());
+						world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick.getDefaultState().withProperty(BlockACBrick.TYPE, BlockACBrick.EnumBrickType.CRACKED));
 						break;
 					default:
 						world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick.getDefaultState());
 						break;
 					}
-				else if(state.getBlock() == Blocks.COBBLESTONE_WALL)
+				else if(state.getBlock() == Blocks.COBBLESTONE_WALL && ACConfig.darkstone_cobblestone_wall)
 					world.setBlockState(pos1.up(y), ACBlocks.darkstone_cobblestone_wall.getDefaultState());
-				else if(state == ACBlocks.ritual_altar_stone.getDefaultState())
-					world.setBlockState(pos1.up(y), ACBlocks.ritual_altar_darkstone.getDefaultState());
-				else if(state == ACBlocks.ritual_pedestal_stone.getDefaultState())
-					world.setBlockState(pos1.up(y), ACBlocks.ritual_pedestal_darkstone.getDefaultState());
-				else if(state.getBlock() == Blocks.STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.SMOOTHBRICK)
+				else if(state == ACBlocks.ritual_altar.getDefaultState())
+					world.setBlockState(pos1.up(y), ACBlocks.ritual_altar.getDefaultState().withProperty(BlockRitualAltar.MATERIAL, BlockRitualAltar.EnumRitualMatType.DARKSTONE_COBBLESTONE));
+				else if(state == ACBlocks.ritual_pedestal.getDefaultState())
+					world.setBlockState(pos1.up(y), ACBlocks.ritual_pedestal.getDefaultState().withProperty(BlockRitualAltar.MATERIAL, BlockRitualAltar.EnumRitualMatType.DARKSTONE_COBBLESTONE));
+				else if(state.getBlock() == Blocks.STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.SMOOTHBRICK && ACConfig.darkstone_brick_slab)
 					world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick_slab.getDefaultState().withProperty(BlockSlab.HALF, state.getValue(BlockSlab.HALF)));
-				else if(state.getBlock() == Blocks.STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.COBBLESTONE)
+				else if(state.getBlock() == Blocks.STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.COBBLESTONE && ACConfig.darkstone_cobblestone_slab)
 					world.setBlockState(pos1.up(y), ACBlocks.darkstone_cobblestone_slab.getDefaultState().withProperty(BlockSlab.HALF, state.getValue(BlockSlab.HALF)));
-				else if(state.getBlock() == Blocks.STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.STONE)
+				else if(state.getBlock() == Blocks.STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.STONE && ACConfig.darkstone_slab)
 					world.setBlockState(pos1.up(y), ACBlocks.darkstone_slab.getDefaultState().withProperty(BlockSlab.HALF, state.getValue(BlockSlab.HALF)));
-				else if(state.getBlock() == Blocks.DOUBLE_STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.STONE)
+				else if(state.getBlock() == Blocks.DOUBLE_STONE_SLAB && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.STONE && ACConfig.darkstone_slab)
 					world.setBlockState(pos1.up(y), BlockHandler.Darkstoneslab2.getDefaultState());
-				else if(state.getBlock() == Blocks.STONE_BRICK_STAIRS)
+				else if(state.getBlock() == Blocks.STONE_BRICK_STAIRS && ACConfig.darkstone_brick_stairs)
 					world.setBlockState(pos1.up(y), ACBlocks.darkstone_brick_stairs.getDefaultState().withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING)).withProperty(BlockStairs.HALF, state.getValue(BlockStairs.HALF)));
-				else if(state.getBlock() == Blocks.STONE_STAIRS)
+				else if(state.getBlock() == Blocks.STONE_STAIRS && ACConfig.darkstone_cobblestone_stairs)
 					world.setBlockState(pos1.up(y), ACBlocks.darkstone_cobblestone_stairs.getDefaultState().withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING)).withProperty(BlockStairs.HALF, state.getValue(BlockStairs.HALF)));
 				else if(state.getBlock() == Blocks.PLANKS)
 					world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_planks.getDefaultState());
-				else if(state.getBlock() == Blocks.OAK_STAIRS)
+				else if(state.getBlock() == Blocks.OAK_STAIRS && ACConfig.darklands_oak_stairs)
 					world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_stairs.getDefaultState().withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING)).withProperty(BlockStairs.HALF, state.getValue(BlockStairs.HALF)));
-				else if(state.getBlock() == Blocks.WOODEN_SLAB)
+				else if(state.getBlock() == Blocks.WOODEN_SLAB && ACConfig.darklands_oak_slab)
 					world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_slab.getDefaultState().withProperty(BlockSlab.HALF, state.getValue(BlockSlab.HALF)));
 				else if(state.getBlock() == Blocks.OAK_FENCE)
 					world.setBlockState(pos1.up(y), ACBlocks.darklands_oak_fence.getDefaultState());

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -30,11 +30,15 @@ import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeMaker;
 import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.transmutator.*;
+import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeCategory;
+import com.shinoow.abyssalcraft.integration.jei.upgrades.UpgradeRecipeMaker;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
@@ -72,6 +76,11 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_rending, 1, 2), AbyssalCraftRecipeCategoryUid.RENDING);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_rending, 1, 3), AbyssalCraftRecipeCategoryUid.RENDING);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_the_gatekeeper), AbyssalCraftRecipeCategoryUid.RENDING);
+		if(ACConfig.upgrade_kits) {
+			registry.addRecipeCatalyst(new ItemStack(Blocks.ANVIL, 1, 0), AbyssalCraftRecipeCategoryUid.UPGRADE);
+			registry.addRecipeCatalyst(new ItemStack(Blocks.ANVIL, 1, 1), AbyssalCraftRecipeCategoryUid.UPGRADE);
+			registry.addRecipeCatalyst(new ItemStack(Blocks.ANVIL, 1, 2), AbyssalCraftRecipeCategoryUid.UPGRADE);
+		}
 		registry.addRecipeCatalyst(new ItemStack(ACBlocks.materializer), AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
 
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
@@ -90,6 +99,8 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(RitualRecipeMaker.getRituals(), AbyssalCraftRecipeCategoryUid.RITUAL);
 		registry.addRecipes(EngravingRecipeMaker.getEngraverRecipes(), AbyssalCraftRecipeCategoryUid.ENGRAVING);
 		registry.addRecipes(RendingRecipeMaker.getRending(), AbyssalCraftRecipeCategoryUid.RENDING);
+		if(ACConfig.upgrade_kits)
+			registry.addRecipes(UpgradeRecipeMaker.getUpgrades(), AbyssalCraftRecipeCategoryUid.UPGRADE);
 		registry.addRecipes(MaterializerRecipes.instance().getMaterializationList(), AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
 
 		registry.handleRecipes(NecronomiconCreationRitual.class, RitualRecipeWrapper::new, AbyssalCraftRecipeCategoryUid.RITUAL);
@@ -108,13 +119,24 @@ public class ACJEIPlugin implements IModPlugin {
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {
 		IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
-		registry.addRecipeCategories(new TransmutatorFuelCategory(guiHelper),
-				new TransmutationCategory(guiHelper),
-				new CrystallizerFuelCategory(guiHelper),
-				new CrystallizationCategory(guiHelper),
-				new RitualRecipeCategory(guiHelper),
-				new EngraverRecipeCategory(guiHelper),
-				new RendingRecipeCategory(guiHelper),
-				new MaterializationRecipeCategory(guiHelper));
+		if(ACConfig.upgrade_kits)
+			registry.addRecipeCategories(new TransmutatorFuelCategory(guiHelper),
+					new TransmutationCategory(guiHelper),
+					new CrystallizerFuelCategory(guiHelper),
+					new CrystallizationCategory(guiHelper),
+					new RitualRecipeCategory(guiHelper),
+					new EngraverRecipeCategory(guiHelper),
+					new RendingRecipeCategory(guiHelper),
+					new UpgradeRecipeCategory(guiHelper),
+					new MaterializationRecipeCategory(guiHelper));
+		else
+			registry.addRecipeCategories(new TransmutatorFuelCategory(guiHelper),
+					new TransmutationCategory(guiHelper),
+					new CrystallizerFuelCategory(guiHelper),
+					new CrystallizationCategory(guiHelper),
+					new RitualRecipeCategory(guiHelper),
+					new EngraverRecipeCategory(guiHelper),
+					new RendingRecipeCategory(guiHelper),
+					new MaterializationRecipeCategory(guiHelper));
 	}
 }

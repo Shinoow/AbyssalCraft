@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -20,9 +20,11 @@ import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
+import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
 import com.shinoow.abyssalcraft.common.items.*;
 import com.shinoow.abyssalcraft.common.items.armor.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemCharm;
@@ -49,10 +51,10 @@ public class ItemHandler implements ILifeCycleHandler {
 		//Misc items
 		ACItems.oblivion_catalyst = new ItemOC();
 		ACItems.staff_of_the_gatekeeper = new ItemStaff().setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.gateway_key = new ItemGatewayKey(0, "gatewaykey");
+		ACItems.gateway_key = new ItemPortalPlacer(0, "gatewaykey");
 		ACItems.powerstone_tracker = new ItemTrackerPSDL().setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 		ACItems.eye_of_the_abyss = new ItemEoA().setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.dreaded_gateway_key = new ItemGatewayKey(1, "gatewaykeydl").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
+		ACItems.dreaded_gateway_key = new ItemPortalPlacer(1, "gatewaykeydl").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 		ACItems.coralium_brick = new ItemACBasic("cbrick").setUnlockCondition(new MultiBiomeCondition(ACBiomes.abyssal_wastelands, ACBiomes.coralium_infested_swamp));
 		ACItems.cudgel = new ItemCudgel().setUnlockCondition(new EntityCondition("abyssalcraft:gskeleton"));
 		ACItems.carbon_cluster = new ItemACBasic("carboncluster").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
@@ -60,7 +62,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.methane = new ItemACBasic("methane");
 		ACItems.nitre = new ItemACBasic("nitre");
 		ACItems.sulfur = new ItemACBasic("sulfur");
-		ACItems.rlyehian_gateway_key = new ItemGatewayKey(2, "gatewaykeyjzh").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
+		ACItems.rlyehian_gateway_key = new ItemPortalPlacer(2, "gatewaykeyjzh").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 		ACItems.tin_ingot = new ItemACBasic("tiningot");
 		ACItems.copper_ingot = new ItemACBasic("copperingot");
 		ACItems.life_crystal = new ItemACBasic("lifecrystal").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
@@ -88,8 +90,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setUnlocalizedName("door_dlt");
 		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setUnlocalizedName("door_drt");
 		ACItems.configurator_shard = new ItemMetadataMisc("configurator_shard", "0", "1", "2", "3").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.silver_key = new ItemGatewayKey(3, "silver_key");
-		ACItems.book_of_many_faces = new ItemFaceBook("face_book");
 
 		//Coins
 		ACItems.coin = new ItemCoin("blankcoin").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
@@ -210,7 +210,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_shovel = new ItemACShovel(AbyssalCraftAPI.ethaxiumTool, "ethaxiumshovel", 8, TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.ethaxium_sword = new ItemACSword(AbyssalCraftAPI.ethaxiumTool, "ethaxiumsword", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.ethaxium_hoe = new ItemACHoe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumhoe", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.staff_of_rending = new ItemStaffOfRending().setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
+		ACItems.staff_of_rending = new ItemDrainStaff().setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
 		ACItems.configurator = new ItemConfigurator().setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 
 		//Armor
@@ -247,9 +247,31 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_leggings = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.LEGS, "ethaxiumlegs").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.ethaxium_boots = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.FEET, "ethaxiumboots").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 
-		//Food
-		ACItems.generic_meat = new ItemFood(4, 0.4f, true).setUnlocalizedName("generic_meat").setCreativeTab(ACTabs.tabFood);
-		ACItems.cooked_generic_meat = new ItemFood(9, 0.9f, true).setUnlocalizedName("cooked_generic_meat").setCreativeTab(ACTabs.tabFood);
+		//Upgrade kits
+		if (ACConfig.upgrade_kits) {
+			ACItems.cobblestone_upgrade_kit = new ItemUpgradeKit("Wood", "Cobblestone").setUnlocalizedName("cobbleu").setCreativeTab(ACTabs.tabItems);
+			ACItems.iron_upgrade_kit = new ItemUpgradeKit("Cobblestone", "Iron").setUnlocalizedName("ironu").setCreativeTab(ACTabs.tabItems);
+			ACItems.gold_upgrade_kit = new ItemUpgradeKit("Iron", "Gold").setUnlocalizedName("goldu").setCreativeTab(ACTabs.tabItems);
+			ACItems.diamond_upgrade_kit = new ItemUpgradeKit("Gold", "Diamond").setUnlocalizedName("diamondu").setCreativeTab(ACTabs.tabItems);
+			ACItems.abyssalnite_upgrade_kit = new ItemUpgradeKit("Diamond", "Abyssalnite").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome)).setUnlocalizedName("abyssalniteu").setCreativeTab(ACTabs.tabItems);
+			ACItems.coralium_upgrade_kit = new ItemUpgradeKit("Abyssalnite", "Coralium").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id)).setUnlocalizedName("coraliumu").setCreativeTab(ACTabs.tabItems);
+			ACItems.dreadium_upgrade_kit = new ItemUpgradeKit("Coralium", "Dreadium").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id)).setUnlocalizedName("dreadiumu").setCreativeTab(ACTabs.tabItems);
+			ACItems.ethaxium_upgrade_kit = new ItemUpgradeKit("Dreadium", "Ethaxium").setUnlockCondition(new DimensionCondition(ACLib.omothol_id)).setUnlocalizedName("ethaxiumu").setCreativeTab(ACTabs.tabItems);
+		}
+
+		//Foodstuffs
+		if (ACConfig.foodstuff) {
+			ACItems.iron_plate = new ItemACBasic("ironp");
+			ACItems.mre = new ItemPlatefood(20, 1F, false, "mre");
+			ACItems.chicken_on_a_plate = new ItemPlatefood(9, 0.9F, false, "chickenp");
+			ACItems.pork_on_a_plate = new ItemPlatefood(12, 1.2F, false, "porkp");
+			ACItems.beef_on_a_plate = new ItemPlatefood(12, 1.2F, false, "beefp");
+			ACItems.fish_on_a_plate = new ItemPlatefood(8, 0.9F, false, "fishp");
+			ACItems.dirty_plate = new ItemACBasic("dirtyplate");
+			ACItems.fried_egg = new ItemFood(5, 0.6F, false).setCreativeTab(ACTabs.tabFood).setUnlocalizedName("friedegg");
+			ACItems.fried_egg_on_a_plate = new ItemPlatefood(8, 0.9F, false, "eggp");
+			ACItems.washcloth = new ItemWashCloth();
+		}
 
 		registerItem(devsword, "devsword");
 		registerItem(shoggoth_projectile, "shoggoth_projectile");
@@ -315,6 +337,28 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.depths_chestplate, "depthsplate");
 		registerItem(ACItems.depths_leggings, "depthslegs");
 		registerItem(ACItems.depths_boots, "depthsboots");
+		if (ACConfig.upgrade_kits) {
+			registerItem(ACItems.cobblestone_upgrade_kit, "cobbleu");
+			registerItem(ACItems.iron_upgrade_kit, "ironu");
+			registerItem(ACItems.gold_upgrade_kit, "goldu");
+			registerItem(ACItems.diamond_upgrade_kit, "diamondu");
+			registerItem(ACItems.abyssalnite_upgrade_kit, "abyssalniteu");
+			registerItem(ACItems.coralium_upgrade_kit, "coraliumu");
+			registerItem(ACItems.dreadium_upgrade_kit, "dreadiumu");
+			registerItem(ACItems.ethaxium_upgrade_kit, "ethaxiumu");
+		}
+		if (ACConfig.foodstuff) {
+			registerItem(ACItems.mre, "mre");
+			registerItem(ACItems.iron_plate, "ironp");
+			registerItem(ACItems.chicken_on_a_plate, "chickenp");
+			registerItem(ACItems.pork_on_a_plate, "porkp");
+			registerItem(ACItems.beef_on_a_plate, "beefp");
+			registerItem(ACItems.fish_on_a_plate, "fishp");
+			registerItem(ACItems.dirty_plate, "dirtyplate");
+			registerItem(ACItems.fried_egg, "friedegg");
+			registerItem(ACItems.fried_egg_on_a_plate, "eggp");
+			registerItem(ACItems.washcloth, "cloth");
+		}
 		registerItem(ACItems.shadow_fragment, "shadowfragment");
 		registerItem(ACItems.shadow_shard, "shadowshard");
 		registerItem(ACItems.shadow_gem, "shadowgem");
@@ -428,10 +472,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.charcoal, "charcoal");
 		registerItem(ACItems.configurator, "configurator");
 		registerItem(ACItems.configurator_shard, "configurator_shard");
-		registerItem(ACItems.silver_key, "silver_key");
-		registerItem(ACItems.book_of_many_faces, "face_book");
-		registerItem(ACItems.generic_meat, "generic_meat");
-		registerItem(ACItems.cooked_generic_meat, "cooked_generic_meat");
 		//		registerItem(shadowPlate, "shadowplate");
 	}
 

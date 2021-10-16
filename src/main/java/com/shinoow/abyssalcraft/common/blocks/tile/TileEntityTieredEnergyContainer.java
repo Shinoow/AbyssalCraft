@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyContainer;
-
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityTieredEnergyContainer extends TileEntityEnergyContainer {
@@ -20,8 +18,7 @@ public class TileEntityTieredEnergyContainer extends TileEntityEnergyContainer {
 	@Override
 	public int getMaxEnergy() {
 		int base = 10000;
-		int meta = ((BlockTieredEnergyContainer)getBlockType()).TYPE.getMeta();
-		switch(meta){
+		switch(getBlockMetadata()){
 		case 0:
 			return base * 2;
 		case 1:

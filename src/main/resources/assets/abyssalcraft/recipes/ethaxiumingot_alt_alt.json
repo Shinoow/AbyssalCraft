@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:ethaxiumblock"
+      "item": "abyssalcraft:ingotblock",
+      "data": 3
     }
   },
   "result": {

@@ -12,6 +12,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:methane_crystal_cluster"
+    "item": "abyssalcraft:crystalcluster",
+    "data": 10
   }
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,7 +14,10 @@ package com.shinoow.abyssalcraft.common.ritual;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.common.blocks.BlockACBrick;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -24,35 +27,23 @@ import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class NecronomiconCleansingRitual extends NecronomiconRitual {
 
 	public NecronomiconCleansingRitual() {
-		super("cleansing", 4, 0, 100000F, true, new Object[]{new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-				new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-				new ItemStack(ACBlocks.shub_niggurath_statue)}, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-						new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-						new ItemStack(ACBlocks.shub_niggurath_statue)}, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-								new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-								new ItemStack(ACBlocks.shub_niggurath_statue)}, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-										new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-										new ItemStack(ACBlocks.shub_niggurath_statue)}, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-												new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-												new ItemStack(ACBlocks.shub_niggurath_statue)}, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-														new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-														new ItemStack(ACBlocks.shub_niggurath_statue)}, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-																new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-																new ItemStack(ACBlocks.shub_niggurath_statue)}, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-																		new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-																		new ItemStack(ACBlocks.shub_niggurath_statue)}});
+		super("cleansing", 4, 0, 100000F, true, new Object[]{new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE),
+				new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE),
+				new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE)});
+		setRitualParticle(EnumRitualParticle.PE_STREAM);
 	}
 
 	@Override
@@ -68,7 +59,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualClient(World world, BlockPos pos, EntityPlayer player) {
-		SpecialTextUtil.JzaharText(I18n.format("message.jzahar.cleansing"));
+		SpecialTextUtil.JzaharText("Undoing my malice on your "+TextFormatting.ITALIC+"beloved"+TextFormatting.RESET+" world? What a shame.");
 	}
 
 	@Override
@@ -90,7 +81,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 						for(int y = 0; y < 256; y++){
 							if(world.isAirBlock(pos1.up(y))) continue;
 							IBlockState state = world.getBlockState(pos1.up(y));
-							if(state == ACBlocks.darkstone.getDefaultState())
+							if(state == ACBlocks.stone.getDefaultState())
 								world.setBlockState(pos1.up(y), Blocks.STONE.getDefaultState(), 2);
 							else if(state.getBlock() == ACBlocks.darklands_oak_leaves)
 								world.setBlockState(pos1.up(y), Blocks.LEAVES.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, state.getValue(BlockLeaves.CHECK_DECAY)).withProperty(BlockLeaves.DECAYABLE, state.getValue(BlockLeaves.DECAYABLE)), 2);
@@ -98,20 +89,26 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 								world.setBlockState(pos1.up(y), Blocks.LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, state.getValue(BlockLog.LOG_AXIS)), 2);
 							else if(state.getBlock() == ACBlocks.abyssalnite_ore)
 								world.setBlockState(pos1.up(y), Blocks.IRON_ORE.getDefaultState(), 2);
-							else if(state == ACBlocks.darkstone_cobblestone.getDefaultState())
+							else if(state == ACBlocks.cobblestone.getDefaultState())
 								world.setBlockState(pos1.up(y), Blocks.COBBLESTONE.getDefaultState(), 2);
 							else if(state.getBlock() == ACBlocks.darkstone_brick)
-								world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState(), 2);
-							else if(state.getBlock() == ACBlocks.chiseled_darkstone_brick)
-								world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CHISELED), 2);
-							else if(state.getBlock() == ACBlocks.cracked_darkstone_brick)
-								world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CRACKED), 2);
+								switch(state.getValue(BlockACBrick.TYPE)){
+								case CHISELED:
+									world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CHISELED), 2);
+									break;
+								case CRACKED:
+									world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CRACKED), 2);
+									break;
+								default:
+									world.setBlockState(pos1.up(y), Blocks.STONEBRICK.getDefaultState(), 2);
+									break;
+								}
 							else if(state.getBlock() == ACBlocks.darkstone_cobblestone_wall)
 								world.setBlockState(pos1.up(y), Blocks.COBBLESTONE_WALL.getDefaultState(), 2);
-							else if(state == ACBlocks.ritual_altar_darkstone.getDefaultState())
-								world.setBlockState(pos1.up(y), ACBlocks.ritual_altar_stone.getDefaultState(), 2);
-							else if(state == ACBlocks.ritual_pedestal_darkstone.getDefaultState())
-								world.setBlockState(pos1.up(y), ACBlocks.ritual_pedestal_stone.getDefaultState(), 2);
+							else if(state == ACBlocks.ritual_altar.getDefaultState().withProperty(BlockRitualAltar.MATERIAL, BlockRitualAltar.EnumRitualMatType.DARKSTONE_COBBLESTONE))
+								world.setBlockState(pos1.up(y), ACBlocks.ritual_altar.getDefaultState(), 2);
+							else if(state == ACBlocks.ritual_pedestal.getDefaultState().withProperty(BlockRitualAltar.MATERIAL, BlockRitualAltar.EnumRitualMatType.DARKSTONE_COBBLESTONE))
+								world.setBlockState(pos1.up(y), ACBlocks.ritual_pedestal.getDefaultState(), 2);
 							else if(state.getBlock() == ACBlocks.darkstone_brick_slab)
 								world.setBlockState(pos1.up(y), Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, state.getValue(BlockSlab.HALF)).withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.SMOOTHBRICK), 2);
 							else if(state.getBlock() == ACBlocks.darkstone_cobblestone_slab)
@@ -146,7 +143,9 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 	}
 
 	private Biome getRealBiome(Biome b){
-		if(b == ACBiomes.darklands || b == ACBiomes.darklands_plains)
+		if(b == ACBiomes.darklands)
+			return Biomes.PLAINS;
+		else if(b == ACBiomes.darklands_plains)
 			return Biomes.PLAINS;
 		else if(b == ACBiomes.darklands_forest)
 			return Biomes.FOREST;

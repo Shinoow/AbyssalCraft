@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -98,8 +98,6 @@ public class ACClientVars {
 	private static int implosionR = 255;
 	private static int implosionG = 255;
 	private static int implosionB = 255;
-	private static int coraliumAntidotePotionColor = 0x00ff06;
-	private static int dreadAntidotePotionColor = 0x00ff06;
 
 	public static void setClientVars(ClientVars data) {
 		crystalColors = data.getCrystalColors();
@@ -178,8 +176,6 @@ public class ACClientVars {
 		implosionR = data.getImplosionR();
 		implosionG = data.getImplosionG();
 		implosionB = data.getImplosionB();
-		coraliumAntidotePotionColor = data.getCoraliumAntidotePotionColor();
-		dreadAntidotePotionColor = data.getDreadAntidotePotionColor();
 	}
 
 	public static int[] getCrystalColors() {
@@ -484,13 +480,5 @@ public class ACClientVars {
 
 	public static int getImplosionB() {
 		return implosionB;
-	}
-
-	public static int getCoraliumAntidotePotionColor() {
-		return coraliumAntidotePotionColor;
-	}
-
-	public static int getDreadAntidotePotionColor() {
-		return dreadAntidotePotionColor;
 	}
 }

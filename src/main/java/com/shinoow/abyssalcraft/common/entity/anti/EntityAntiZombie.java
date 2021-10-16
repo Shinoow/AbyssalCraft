@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -86,15 +86,21 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 		getAttributeMap().registerAttribute(spawnReinforcementsAttribute).setBaseValue(rand.nextDouble() * ForgeModContainer.zombieSummonBaseChance);
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(ACConfig.hardcoreMode ? 60.0D : 30.0D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 6.0D : 3.0D);
+
+		if(ACConfig.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(80.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+		}
 	}
 
 	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CHILD, (byte)0);
+		dataManager.register(CHILD, Byte.valueOf((byte)0));
 	}
 
 	public boolean canBearkDoors()
@@ -135,7 +141,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	 */
 	public void setChild(boolean par1)
 	{
-		dataManager.set(CHILD, (byte)(par1 ? 1 : 0));
+		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
 
 		if (world != null && !world.isRemote)
 		{

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -16,10 +16,12 @@ import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
+import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -74,11 +76,11 @@ public class StructureTemple extends WorldGenerator {
 			break;
 		}
 
-		if(world.getBlockState(center).getBlock() != ACBlocks.omothol_stone ||
-				world.getBlockState(center.north(14)).getBlock() != ACBlocks.omothol_stone ||
-				world.getBlockState(center.south(14)).getBlock() != ACBlocks.omothol_stone ||
-				world.getBlockState(center.west(14)).getBlock() != ACBlocks.omothol_stone ||
-				world.getBlockState(center.east(14)).getBlock() != ACBlocks.omothol_stone) return false;
+		if(world.getBlockState(center).getBlock() != ACBlocks.stone ||
+				world.getBlockState(center.north(14)).getBlock() != ACBlocks.stone ||
+				world.getBlockState(center.south(14)).getBlock() != ACBlocks.stone ||
+				world.getBlockState(center.west(14)).getBlock() != ACBlocks.stone ||
+				world.getBlockState(center.east(14)).getBlock() != ACBlocks.stone) return false;
 
 		center = world.getHeight(center);
 		if(center.getY() > pos.getY())
@@ -115,71 +117,73 @@ public class StructureTemple extends WorldGenerator {
 		for (Entry<BlockPos, String> entry : map.entrySet())
 			if("statue_center".equals(entry.getValue())) {
 				BlockPos pos2 = entry.getKey();
-				EnumFacing facing = EnumFacing.NORTH;
-				switch(placeSettings.getRotation()) {
-				case CLOCKWISE_180:
-					facing = EnumFacing.NORTH;
-					break;
-				case CLOCKWISE_90:
-					facing = EnumFacing.WEST;
-					break;
-				case COUNTERCLOCKWISE_90:
-					facing = EnumFacing.EAST;
-					break;
-				case NONE:
-					facing = EnumFacing.SOUTH;
-					break;
-				default:
-					facing = EnumFacing.SOUTH;
-					break;
-				}
 				world.setBlockToAir(pos2);
-				world.setBlockState(pos2.down(), getRandomStatue(rand, facing));
+				world.setBlockState(pos2.down(), ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.byMetadata(rand.nextInt(7))));
+				TileEntity te = world.getTileEntity(pos2.down());
+				if(te instanceof TileEntityStatue)
+					switch(placeSettings.getRotation()) {
+					case CLOCKWISE_180:
+						((TileEntityStatue) te).setFacing(EnumFacing.NORTH.ordinal());
+						break;
+					case CLOCKWISE_90:
+						((TileEntityStatue) te).setFacing(EnumFacing.WEST.ordinal());
+						break;
+					case COUNTERCLOCKWISE_90:
+						((TileEntityStatue) te).setFacing(EnumFacing.EAST.ordinal());
+						break;
+					case NONE:
+						((TileEntityStatue) te).setFacing(EnumFacing.SOUTH.ordinal());
+						break;
+					default:
+						((TileEntityStatue) te).setFacing(EnumFacing.SOUTH.ordinal());
+						break;
+					}
 			} else if("statue_left".equals(entry.getValue())) {
 				BlockPos pos2 = entry.getKey();
-				EnumFacing facing = EnumFacing.NORTH;
-				switch(placeSettings.getRotation()) {
-				case CLOCKWISE_180:
-					facing = EnumFacing.WEST;
-					break;
-				case CLOCKWISE_90:
-					facing = EnumFacing.SOUTH;
-					break;
-				case COUNTERCLOCKWISE_90:
-					facing = EnumFacing.NORTH;
-					break;
-				case NONE:
-					facing = EnumFacing.EAST;
-					break;
-				default:
-					facing = EnumFacing.EAST;
-					break;
-				}
 				world.setBlockToAir(pos2);
-				world.setBlockState(pos2.down(), getRandomStatue(rand, facing));
-
+				world.setBlockState(pos2.down(), ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.byMetadata(rand.nextInt(7))));
+				TileEntity te = world.getTileEntity(pos2.down());
+				if(te instanceof TileEntityStatue)
+					switch(placeSettings.getRotation()) {
+					case CLOCKWISE_180:
+						((TileEntityStatue) te).setFacing(EnumFacing.WEST.ordinal());
+						break;
+					case CLOCKWISE_90:
+						((TileEntityStatue) te).setFacing(EnumFacing.SOUTH.ordinal());
+						break;
+					case COUNTERCLOCKWISE_90:
+						((TileEntityStatue) te).setFacing(EnumFacing.NORTH.ordinal());
+						break;
+					case NONE:
+						((TileEntityStatue) te).setFacing(EnumFacing.EAST.ordinal());
+						break;
+					default:
+						((TileEntityStatue) te).setFacing(EnumFacing.EAST.ordinal());
+						break;
+					}
 			} else if("statue_right".equals(entry.getValue())) {
 				BlockPos pos2 = entry.getKey();
-				EnumFacing facing = EnumFacing.NORTH;
-				switch(placeSettings.getRotation()) {
-				case CLOCKWISE_180:
-					facing = EnumFacing.EAST;
-					break;
-				case CLOCKWISE_90:
-					facing = EnumFacing.NORTH;
-					break;
-				case COUNTERCLOCKWISE_90:
-					facing = EnumFacing.SOUTH;
-					break;
-				case NONE:
-					facing = EnumFacing.WEST;
-					break;
-				default:
-					facing = EnumFacing.WEST;
-					break;
-				}
 				world.setBlockToAir(pos2);
-				world.setBlockState(pos2.down(), getRandomStatue(rand, facing));
+				world.setBlockState(pos2.down(), ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.byMetadata(rand.nextInt(7))));
+				TileEntity te = world.getTileEntity(pos2.down());
+				if(te instanceof TileEntityStatue)
+					switch(placeSettings.getRotation()) {
+					case CLOCKWISE_180:
+						((TileEntityStatue) te).setFacing(EnumFacing.EAST.ordinal());
+						break;
+					case CLOCKWISE_90:
+						((TileEntityStatue) te).setFacing(EnumFacing.NORTH.ordinal());
+						break;
+					case COUNTERCLOCKWISE_90:
+						((TileEntityStatue) te).setFacing(EnumFacing.SOUTH.ordinal());
+						break;
+					case NONE:
+						((TileEntityStatue) te).setFacing(EnumFacing.WEST.ordinal());
+						break;
+					default:
+						((TileEntityStatue) te).setFacing(EnumFacing.WEST.ordinal());
+						break;
+					}
 			}
 
 		positions.add(pos);
@@ -187,24 +191,4 @@ public class StructureTemple extends WorldGenerator {
 		return true;
 	}
 
-	private IBlockState getRandomStatue(Random rand, EnumFacing facing){
-		switch(rand.nextInt(7)){
-		case 0:
-			return ACBlocks.cthulhu_statue.getDefaultState().withProperty(BlockStatue.FACING, facing);
-		case 1:
-			return ACBlocks.hastur_statue.getDefaultState().withProperty(BlockStatue.FACING, facing);
-		case 2:
-			return ACBlocks.jzahar_statue.getDefaultState().withProperty(BlockStatue.FACING, facing);
-		case 3:
-			return ACBlocks.azathoth_statue.getDefaultState().withProperty(BlockStatue.FACING, facing);
-		case 4:
-			return ACBlocks.nyarlathotep_statue.getDefaultState().withProperty(BlockStatue.FACING, facing);
-		case 5:
-			return ACBlocks.yog_sothoth_statue.getDefaultState().withProperty(BlockStatue.FACING, facing);
-		case 6:
-			return ACBlocks.shub_niggurath_statue.getDefaultState().withProperty(BlockStatue.FACING, facing);
-		default:
-			return getRandomStatue(rand, facing);
-		}
-	}
 }

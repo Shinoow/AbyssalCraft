@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -148,7 +148,7 @@ public class MapGenCavesDreadlands extends MapGenCavesHell {
 									{
 										IBlockState iblockstate1 = primer.getBlockState(i3, i2, j3);
 
-										if (iblockstate1 == ACBlocks.dreadstone.getDefaultState() || iblockstate1 == ACBlocks.abyssalnite_stone.getDefaultState() || iblockstate1.getBlock() == ACBlocks.dreadlands_dirt || iblockstate1.getBlock() == ACBlocks.dreadlands_grass)
+										if (iblockstate1 == ACBlocks.stone.getStateFromMeta(2) || iblockstate1 == ACBlocks.stone.getStateFromMeta(3) || iblockstate1.getBlock() == ACBlocks.dreadlands_dirt || iblockstate1.getBlock() == ACBlocks.dreadlands_grass)
 											primer.setBlockState(i3, i2, j3, AIR);
 									}
 								}

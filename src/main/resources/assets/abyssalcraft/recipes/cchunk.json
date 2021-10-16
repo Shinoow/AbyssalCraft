@@ -10,7 +10,8 @@
       "item": "abyssalcraft:ccluster9"
     },
     "%": {
-      "item": "abyssalcraft:abystone"
+      "item": "abyssalcraft:stone",
+      "data": 1
     }
   },
   "result": {

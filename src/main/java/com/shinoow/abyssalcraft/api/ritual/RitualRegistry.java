@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -18,10 +18,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Registry class for Necronomicon Rituals
@@ -32,6 +30,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class RitualRegistry {
 
 	private final Map<Integer, Integer> dimToBookType = new HashMap<>();
+	private final Map<Integer, String> dimToName = new HashMap<>();
 	private final Map<NecronomiconRitual, Integer> ritualToBookType = new HashMap<>();
 	private final List<NecronomiconRitual> rituals = new ArrayList<>();
 
@@ -54,13 +53,24 @@ public class RitualRegistry {
 	 */
 	public void addDimensionToBookType(int dim, int bookType){
 		if(bookType <= 4 && bookType >= 0)
-			if(dim != OreDictionary.WILDCARD_VALUE)
+			if(dim != -1 && dim != 1)
 				dimToBookType.put(dim, bookType);
 			else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: {}", dim);
 		else logger.log(Level.ERROR, "Necronomicon book type does not exist: {}", bookType);
 	}
 
-
+	/**
+	 * Maps a dimension to a name, in order to display it in the Necronomicon if rituals can only be performed in said dimension
+	 * @param dim The Dimension ID
+	 * @param name A String representing the name
+	 *
+	 * @since 1.4.5
+	 */
+	public void addDimensionToName(int dim, String name){
+		if(dim != -1 && dim != 1)
+			dimToName.put(dim, name);
+		else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: {}", dim);
+	}
 
 	/**
 	 * Maps a dimension to a book type, in order to specify dimensions where a ritual of that book type can be performed,<br>
@@ -73,7 +83,7 @@ public class RitualRegistry {
 	 */
 	public void addDimensionToBookTypeAndName(int dim, int bookType, String name){
 		addDimensionToBookType(dim, bookType);
-		DimensionDataRegistry.instance().addDimensionToName(dim, name);
+		addDimensionToName(dim, name);
 	}
 
 	/**
@@ -130,6 +140,14 @@ public class RitualRegistry {
 	}
 
 	/**
+	 * Used to fetch the dimension/name mappings
+	 * @return A HashMap containing Dimension IDs and Strings associated with them
+	 */
+	public Map<Integer, String> getDimensionNameMappings(){
+		return dimToName;
+	}
+
+	/**
 	 * Attempts to fetch a ritual
 	 * @param dimension The provided dimension
 	 * @param bookType The provided book type
@@ -156,7 +174,7 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	private boolean areRitualsSame(NecronomiconRitual ritual, int dimension, int bookType, ItemStack[] offerings, ItemStack sacrifice){
-		if(ritual.getDimension() == dimension || ritual.getDimension() == OreDictionary.WILDCARD_VALUE)
+		if(ritual.getDimension() == dimension || ritual.getDimension() == -1)
 			if(ritual.getBookType() <= bookType)
 				if(ritual.getOfferings() != null && offerings != null)
 					if(APIUtils.areItemStackArraysEqual(ritual.getOfferings(), offerings, ritual.isNBTSensitive()))
@@ -164,5 +182,29 @@ public class RitualRegistry {
 						APIUtils.areObjectsEqual(sacrifice, ritual.getSacrifice(), ritual.isSacrificeNBTSensitive()))
 							return true;
 		return false;
+	}
+
+	/**
+	 * @deprecated see {@link APIUtils#areObjectsEqual(ItemStack, Object, boolean)}
+	 */
+	@Deprecated
+	public boolean areObjectsEqual(ItemStack stack, Object obj, boolean nbt){
+		return APIUtils.areObjectsEqual(stack, obj, nbt);
+	}
+
+	/**
+	 * @deprecated see {@link APIUtils#areStacksEqual(ItemStack, ItemStack, boolean)}
+	 */
+	@Deprecated
+	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2, boolean nbt){
+		return APIUtils.areStacksEqual(stack1, stack2, nbt);
+	}
+
+	/**
+	 * @deprecated see {@link APIUtils#areStacksEqual(ItemStack, ItemStack)}
+	 */
+	@Deprecated
+	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2){
+		return APIUtils.areStacksEqual(stack1, stack2);
 	}
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -153,7 +153,7 @@ public class BlockCrystallizer extends BlockContainer
 			if (tileentitycrystallizer instanceof TileEntityCrystallizer)
 			{
 				InventoryHelper.dropInventoryItems(par1World, pos, (TileEntityCrystallizer)tileentitycrystallizer);
-				par1World.updateComparatorOutputLevel(pos, this);
+				par1World.updateComparatorOutputLevel(pos, this);;
 			}
 		}
 

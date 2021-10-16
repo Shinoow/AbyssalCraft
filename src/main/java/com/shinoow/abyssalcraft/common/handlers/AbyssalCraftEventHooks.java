@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,6 +10,8 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
+
+import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -22,8 +24,10 @@ import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
+import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
-import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemCrystalClusterBlock;
+import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
@@ -34,32 +38,33 @@ import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.*;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.Tuple;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
@@ -74,7 +79,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 import net.minecraftforge.fml.relauncher.Side;
 
-@SuppressWarnings("deprecation")
 public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
@@ -87,7 +91,7 @@ public class AbyssalCraftEventHooks {
 						for (int z = 0; z < 16; ++z)
 							if(chunk.getBiome(new BlockPos(x, y, z), event.getWorld().getBiomeProvider()) == ACBiomes.darklands_mountains)
 								if (storage.get(x, y, z).getBlock() == Blocks.STONE)
-									storage.set(x, y, z, ACBlocks.darkstone.getDefaultState());
+									storage.set(x, y, z, ACBlocks.stone.getDefaultState());
 	}
 
 	//	@SubscribeEvent
@@ -195,11 +199,14 @@ public class AbyssalCraftEventHooks {
 				//				player.addStat(ACAchievements.enter_dark_realm, 1);
 			}
 		}
-		if(ACConfig.darkRealmSmokeParticles)
-			if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)
-			&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW)
-				if(ACConfig.particleEntity)
-					ParticleUtil.spawnShadowParticles(event.getEntityLiving());
+		if(event.getEntityLiving().dimension == ACLib.dark_realm_id && !(event.getEntityLiving() instanceof EntityPlayer)
+				&& event.getEntityLiving().getCreatureAttribute() != AbyssalCraftAPI.SHADOW){
+			Random rand = new Random();
+			if(ACConfig.particleEntity)
+				event.getEntityLiving().world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, event.getEntityLiving().posX + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width,
+						event.getEntityLiving().posY + rand.nextDouble() * event.getEntityLiving().height,
+						event.getEntityLiving().posZ + (rand.nextDouble() - 0.5D) * event.getEntityLiving().width, 0,0,0);
+		}
 	}
 
 	@SubscribeEvent
@@ -299,30 +306,30 @@ public class AbyssalCraftEventHooks {
 				event.setResult(Result.DENY);
 			}
 			if(event.getOriginal().getBlock() == Blocks.COBBLESTONE){
-				event.setReplacement(ACBlocks.darkstone_cobblestone.getDefaultState());
+				event.setReplacement(ACBlocks.cobblestone.getDefaultState());
 				event.setResult(Result.DENY);
 			}
 			if(event.getOriginal().getBlock() == Blocks.PLANKS){
 				event.setReplacement(ACBlocks.darklands_oak_planks.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.OAK_STAIRS){
+			if(event.getOriginal().getBlock() == Blocks.OAK_STAIRS && ACConfig.darklands_oak_stairs){
 				event.setReplacement(ACBlocks.darklands_oak_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.STONE_STAIRS){
-				event.setReplacement(ACBlocks.darkstone_cobblestone_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));
+			if(event.getOriginal().getBlock() == Blocks.STONE_STAIRS && ACConfig.darkstone_cobblestone_stairs){
+				event.setReplacement(ACBlocks.darkstone_cobblestone_stairs.getDefaultState().withProperty(BlockStairs.FACING, event.getOriginal().getValue(BlockStairs.FACING)));;
 				event.setResult(Result.DENY);
 			}
 			if(event.getOriginal().getBlock() == Blocks.OAK_FENCE){
 				event.setReplacement(ACBlocks.darklands_oak_fence.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.STONE_SLAB){
+			if(event.getOriginal().getBlock() == Blocks.STONE_SLAB && ACConfig.darkstone_slab){
 				event.setReplacement(ACBlocks.darkstone_slab.getDefaultState());
 				event.setResult(Result.DENY);
 			}
-			if(event.getOriginal().getBlock() == Blocks.DOUBLE_STONE_SLAB){
+			if(event.getOriginal().getBlock() == Blocks.DOUBLE_STONE_SLAB && ACConfig.darkstone_slab){
 				event.setReplacement(BlockHandler.Darkstoneslab2.getDefaultState());
 				event.setResult(Result.DENY);
 			}
@@ -424,6 +431,76 @@ public class AbyssalCraftEventHooks {
 	}
 
 	@SubscribeEvent
+	public void upgradeKits(AnvilUpdateEvent event){
+		if(!(event.getRight().getItem() instanceof ItemUpgradeKit)) {
+			if(event.getRight().getItem() == Items.ENCHANTED_BOOK)
+				for(Enchantment ench : EnchantmentHelper.getEnchantments(event.getRight()).keySet())
+					if(ench instanceof EnchantmentWeaponInfusion) {
+						event.setCanceled(true);
+						return;
+					}
+			return;
+		} else if(ACConfig.upgrade_kits) {
+			ItemStack input = event.getLeft();
+			int cost = 0;
+
+			float f = (float)(input.getMaxDamage() - input.getItemDamage()) / (float)input.getMaxDamage();
+
+			if(f >= 0)
+				cost = 10;
+			if(f >= 0.1f)
+				cost = 9;
+			if(f >= 0.2f)
+				cost = 8;
+			if(f >= 0.3f)
+				cost = 7;
+			if(f >= 0.4f)
+				cost = 6;
+			if(f >= 0.5f)
+				cost = 5;
+			if(f >= 0.6f)
+				cost = 4;
+			if(f >= 0.7f)
+				cost = 3;
+			if(f >= 0.8f)
+				cost = 2;
+			if(f >= 0.9f)
+				cost = 1;
+
+			ItemStack stack = UpgradeKitRecipes.instance().getUpgrade((ItemUpgradeKit)event.getRight().getItem(), input);
+
+			if(!stack.isEmpty()){
+
+				if(StringUtils.isNullOrEmpty(event.getName())){
+					if(input.hasDisplayName()){
+						cost += 1;
+						stack.clearCustomName();
+					}
+				} else if(!event.getName().equals(input.getDisplayName())){
+					cost += 1;
+					stack.setStackDisplayName(event.getName());
+				}
+
+				for(int i : EnchantmentHelper.getEnchantments(input).values())
+					cost += i;
+
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(input), stack);
+				stack.setCount(input.getCount());
+				NBTTagCompound temp = input.serializeNBT();
+				if(temp.hasKey("ForgeCaps")) {
+					NBTTagCompound temp1 = stack.serializeNBT();
+					temp1.setTag("ForgeCaps", temp.getTag("ForgeCaps"));
+					stack = new ItemStack(temp1);
+				}
+				event.setOutput(stack);
+			}
+
+			event.setMaterialCost(1);
+			event.setCost(cost == 0 ? 1 : cost);
+		}
+	}
+
+	@SubscribeEvent
 	public void onUseHoe(UseHoeEvent event){
 
 		Block b = event.getWorld().getBlockState(event.getPos()).getBlock();
@@ -465,7 +542,8 @@ public class AbyssalCraftEventHooks {
 	public void fuelBurnTime(FuelBurnTimeEvent event) {
 		if(!ACConfig.crystal_rework) {
 			ItemStack fuel = event.getItemStack();
-			if(fuel.getItem() instanceof ItemCrystalClusterBlock)
+			if(fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster) ||
+					fuel.getItem() == Item.getItemFromBlock(ACBlocks.crystal_cluster2))
 				event.setBurnTime(12150);
 			if(fuel.getItem() == ACItems.crystal)
 				event.setBurnTime(1350);

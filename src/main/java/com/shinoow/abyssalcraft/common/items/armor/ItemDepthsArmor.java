@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -105,10 +105,10 @@ public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear {
 			BufferBuilder wr = t.getBuffer();
 
 			wr.begin(7, DefaultVertexFormats.POSITION_TEX);
-			wr.pos(0.0D, resolution.getScaledHeight(), 90.0D).tex(0.0D, 1.0D).endVertex();
-			wr.pos(resolution.getScaledWidth(), resolution.getScaledHeight(), 90.0D).tex(1.0D, 1.0D).endVertex();
-			wr.pos(resolution.getScaledWidth(), 0.0D, 90.0D).tex(1.0D, 0.0D).endVertex();
-			wr.pos(0.0D, 0.0D, 90.0D).tex(0.0D, 0.0D).endVertex();
+			wr.pos(0.0D, resolution.getScaledHeight(), 90.0D).tex(0.0D, 1.0D).endVertex();;
+			wr.pos(resolution.getScaledWidth(), resolution.getScaledHeight(), 90.0D).tex(1.0D, 1.0D).endVertex();;
+			wr.pos(resolution.getScaledWidth(), 0.0D, 90.0D).tex(1.0D, 0.0D).endVertex();;
+			wr.pos(0.0D, 0.0D, 90.0D).tex(0.0D, 0.0D).endVertex();;
 			t.draw();
 
 			GlStateManager.depthMask(true);

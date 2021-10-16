@@ -11,7 +11,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:chiseled_coralium_stone_brick",
-    "data": 0
+    "item": "abyssalcraft:cstonebrick",
+    "data": 1
   }
 }

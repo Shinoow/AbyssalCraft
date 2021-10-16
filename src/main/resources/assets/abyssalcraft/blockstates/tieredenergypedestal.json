@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"dimension=overworld": { "model": "abyssalcraft:tieredenergypedestal_0" },
+		"dimension=abyssal_wasteland": { "model": "abyssalcraft:tieredenergypedestal_1" },
+		"dimension=dreadlands": { "model": "abyssalcraft:tieredenergypedestal_2" },
+		"dimension=omothol": { "model": "abyssalcraft:tieredenergypedestal_3" }
+	}
+}

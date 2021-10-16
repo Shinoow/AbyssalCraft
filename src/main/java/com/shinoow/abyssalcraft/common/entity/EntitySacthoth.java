@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
@@ -22,7 +23,6 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
-import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 
 import net.minecraft.block.state.IBlockState;
@@ -57,7 +57,6 @@ import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings("deprecation")
 @Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
 public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
@@ -270,7 +269,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, b0);
+		dataManager.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override
@@ -465,7 +464,8 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 	@Override
 	public void onLivingUpdate()
 	{
-		ParticleUtil.spawnShadowParticles(this);
+		for (int i = 0; i < 2 * (getBrightness() > 0.1f ? getBrightness() : 0) && ACConfig.particleEntity; ++i)
+			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 
 		for(Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(30.0D, 30.0D, 30.0D)))
 			if (entity instanceof EntityPlayer && !entity.isDead && deathTicks == 0 && !((EntityPlayer)entity).capabilities.isCreativeMode)
@@ -497,7 +497,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.7F + 0.3F);
 			Entity target = getHeadLookTarget();
 			if (target != null) {
-				List<EntityLivingBase> list1 = world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().grow(2.0D, 2.0D, 2.0D), Predicates.and(EntitySelectors.IS_ALIVE));
+				List<EntityLivingBase> list1 = world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().grow(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
 
 				for(EntityLivingBase entity : list1)
 

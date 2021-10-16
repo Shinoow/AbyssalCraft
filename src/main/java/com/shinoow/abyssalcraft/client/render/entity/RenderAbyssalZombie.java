@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import com.shinoow.abyssalcraft.client.render.entity.layers.LayerAbyssalZombieEyes;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 
 import net.minecraft.client.model.ModelZombie;
@@ -26,7 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderAbyssalZombie extends RenderBiped<EntityAbyssalZombie> {
 
 	private static final ResourceLocation zombieTexture = new ResourceLocation("abyssalcraft:textures/model/abyssal_zombie.png");
-	private static final ResourceLocation zombieTextureAlt = new ResourceLocation("abyssalcraft:textures/model/abyssal_zombie_old.png");
 
 	public RenderAbyssalZombie(RenderManager manager)
 	{
@@ -40,12 +38,11 @@ public class RenderAbyssalZombie extends RenderBiped<EntityAbyssalZombie> {
 				modelArmor = new ModelZombie(1.0F, true);
 			}
 		});
-		addLayer(new LayerAbyssalZombieEyes(this));
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityAbyssalZombie par1EntityLiving)
 	{
-		return par1EntityLiving.getName().equalsIgnoreCase("shinoow") ? zombieTextureAlt : zombieTexture;
+		return zombieTexture;
 	}
 }

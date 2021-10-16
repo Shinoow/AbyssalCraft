@@ -12,6 +12,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:abyssalnite_crystal_cluster"
+    "item": "abyssalcraft:crystalcluster",
+    "data": 12
   }
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -18,8 +18,8 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
+import com.shinoow.abyssalcraft.common.items.ItemDrainStaff;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
-import com.shinoow.abyssalcraft.common.items.ItemStaffOfRending;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -30,6 +30,7 @@ import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.*;
@@ -49,6 +50,7 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -57,7 +59,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	private static final DataParameter<Integer> PROFESSION = EntityDataManager.<Integer>createKey(EntityRemnant.class, DataSerializers.VARINT);
 	private EntityPlayer tradingPlayer;
 	private MerchantRecipeList tradingList;
-	private Class<? extends EntityLivingBase> target;
 	private int timeUntilReset;
 	private boolean needsInitilization;
 	private int wealth;
@@ -79,7 +80,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
 		tasks.addTask(8, new EntityAIWorship(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 20, true, false, entity -> entity.getClass() == target));
 		setSize(0.6F, 1.95F);
 	}
 
@@ -90,8 +90,14 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2D);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 100.0D : 50.0D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 20.0D: 10.0D);
+
+		if(ACConfig.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
+		}
 	}
 
 	@Override
@@ -175,7 +181,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(PROFESSION, 0);
+		dataManager.register(PROFESSION, Integer.valueOf(0));
 	}
 
 	/**
@@ -240,9 +246,12 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	 */
 	public void enrage(boolean call){
 		if(call){
-			for(EntityRemnant rem : world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(16D, 16D, 16D)))
-				rem.enrage(false, getAttackTarget());
-
+			List<EntityRemnant> friends = world.getEntitiesWithinAABB(getClass(), getEntityBoundingBox().grow(16D, 16D, 16D));
+			if(friends != null){
+				Iterator<EntityRemnant> iter = friends.iterator();
+				while(iter.hasNext())
+					iter.next().enrage(false, getAttackTarget());
+			}
 			playSound(ACSounds.remnant_scream, 3F, 1F);
 		}
 
@@ -272,7 +281,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 			timer--;
 			if(timer <= 0)
 				timer = 0;
-		} else target = null;
+		}
+
+		if(!isAngry()) clearAttackAI();
 	}
 
 	@Override
@@ -311,9 +322,34 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		timer = 600;
 	}
 
-	private void setAttackAI(){
+	private void clearAttackAI(){
 		if(getAttackTarget() != null)
-			target = getAttackTarget().getClass();
+			setAttackTarget(null);
+		EntityAINearestAttackableTarget ai = fetchAI();
+		if(ai == null) return;
+		else targetTasks.removeTask(ai);
+		if(targetTasks.taskEntries.size() > 1)
+			clearAttackAI();
+	}
+
+	private void setAttackAI(){
+		if(getAttackTarget() != null){
+			Class temp = getAttackTarget().getClass();
+			EntityAINearestAttackableTarget ai = fetchAI();
+			if(ai != null){
+				if(temp != ReflectionHelper.findField(ai.getClass(), "targetClass", "field_75307_b").getDeclaringClass()){
+					targetTasks.removeTask(ai);
+					targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, temp, true));
+				}
+			} else targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, temp, true));
+		}
+	}
+
+	private EntityAINearestAttackableTarget fetchAI(){
+		for(EntityAITaskEntry entry : targetTasks.taskEntries)
+			if(entry.action instanceof EntityAINearestAttackableTarget)
+				return (EntityAINearestAttackableTarget) entry.action;
+		return null;
 	}
 
 	@Override
@@ -363,7 +399,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 	public void setProfession(int par1)
 	{
-		dataManager.set(PROFESSION, par1);
+		dataManager.set(PROFESSION, Integer.valueOf(par1));
 	}
 
 	public int getProfession()
@@ -427,6 +463,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, Items.COOKIE, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.SHEARS, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.FLINT_AND_STEEL, rand, adjustProbability(0.3F));
+				if (ACConfig.foodstuff)
+					addCoinTrade(list, ACItems.fish_on_a_plate, rand, adjustProbability(0.3F));
 				addCoinTrade(list, Items.ARROW, rand, adjustProbability(0.5F));
 
 				if (rand.nextFloat() < adjustProbability(0.5F))
@@ -533,12 +571,19 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addItemTrade(list, Items.PORKCHOP, rand, adjustProbability(0.5F));
 				addItemTrade(list, Items.BEEF, rand, adjustProbability(0.5F));
 				addItemTrade(list, Items.CHICKEN, rand, adjustProbability(0.5F));
-
-				addCoinTrade(list, Items.COOKIE, rand, adjustProbability(0.4F));
-				addCoinTrade(list, Items.GOLDEN_CARROT, rand, adjustProbability(0.1F));
-				addCoinTrade(list, Items.PUMPKIN_PIE, rand, adjustProbability(0.3F));
-				addCoinTrade(list, Items.RABBIT_STEW, rand, adjustProbability(0.3F));
-				addCoinTrade(list, Items.CAKE, rand, adjustProbability(0.3F));
+				if (ACConfig.foodstuff) {
+					addCoinTrade(list, ACItems.washcloth, rand, adjustProbability(0.4F));
+					addCoinTrade(list, ACItems.mre, rand, adjustProbability(0.1F));
+					addCoinTrade(list, ACItems.pork_on_a_plate, rand, adjustProbability(0.3F));
+					addCoinTrade(list, ACItems.beef_on_a_plate, rand, adjustProbability(0.3F));
+					addCoinTrade(list, ACItems.chicken_on_a_plate, rand, adjustProbability(0.3F));
+				} else {
+					addCoinTrade(list, Items.COOKIE, rand, adjustProbability(0.4F));
+					addCoinTrade(list, Items.GOLDEN_CARROT, rand, adjustProbability(0.1F));
+					addCoinTrade(list, Items.PUMPKIN_PIE, rand, adjustProbability(0.3F));
+					addCoinTrade(list, Items.RABBIT_STEW, rand, adjustProbability(0.3F));
+					addCoinTrade(list, Items.CAKE, rand, adjustProbability(0.3F));
+				}
 				break;
 			case 5:
 				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.cthulhu_engraved_coin, 1);
@@ -640,7 +685,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		if(var1.getItemToSell().getItem() == ACItems.configurator_shard)
 			var1.incrementToolUses();
 		if(var1.getItemToBuy().getItem() instanceof ItemNecronomicon ||
-				var1.getItemToBuy().getItem() instanceof ItemStaffOfRending)
+				var1.getItemToBuy().getItem() instanceof ItemDrainStaff)
 			var1.compensateToolUses();
 		livingSoundTime = -getTalkInterval();
 		playSound(ACSounds.remnant_yes, getSoundVolume(), getSoundPitch());
@@ -705,7 +750,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	private static int getQuantity(Item item, Random rand)
 	{
 		Tuple<Integer, Integer> tuple = itemSellingList.get(item);
-		return tuple == null ? 1 : tuple.getFirst().intValue() >= tuple.getSecond().intValue() ? tuple.getFirst() : tuple.getFirst().intValue() + rand.nextInt(tuple.getSecond().intValue() - tuple.getFirst().intValue());
+		return tuple == null ? 1 : tuple.getFirst().intValue() >= tuple.getSecond().intValue() ? tuple.getFirst().intValue() : tuple.getFirst().intValue() + rand.nextInt(tuple.getSecond().intValue() - tuple.getFirst().intValue());
 	}
 
 	public static void addCoinTrade(MerchantRecipeList list, Item item, Random rand, float probability)
@@ -744,7 +789,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	private static int getRarity(Item par1, Random par2)
 	{
 		Tuple<Integer, Integer> tuple = coinSellingList.get(par1);
-		return tuple == null ? 1 : tuple.getFirst().intValue() >= tuple.getSecond().intValue() ? tuple.getFirst() : tuple.getFirst().intValue() + par2.nextInt(tuple.getSecond().intValue() - tuple.getFirst().intValue());
+		return tuple == null ? 1 : tuple.getFirst().intValue() >= tuple.getSecond().intValue() ? tuple.getFirst().intValue() : tuple.getFirst().intValue() + par2.nextInt(tuple.getSecond().intValue() - tuple.getFirst().intValue());
 	}
 
 	@Override
@@ -845,6 +890,8 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		coinSellingList.put(Items.COOKIE, new Tuple(Integer.valueOf(-10), Integer.valueOf(-7)));
 		coinSellingList.put(Item.getItemFromBlock(Blocks.GLASS), new Tuple(Integer.valueOf(-5), Integer.valueOf(-3)));
 		coinSellingList.put(Item.getItemFromBlock(Blocks.BOOKSHELF), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
+		coinSellingList.put(ACItems.washcloth, new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
+		coinSellingList.put(ACItems.mre, new Tuple(Integer.valueOf(6), Integer.valueOf(8)));
 		coinSellingList.put(Items.EXPERIENCE_BOTTLE, new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
 		coinSellingList.put(Items.REDSTONE, new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
 		coinSellingList.put(Items.COMPASS, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
@@ -853,6 +900,10 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		coinSellingList.put(ACItems.abyssal_wasteland_necronomicon, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
 		coinSellingList.put(ACItems.dreadlands_necronomicon, new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
 		coinSellingList.put(Item.getItemFromBlock(Blocks.GLOWSTONE), new Tuple(Integer.valueOf(-3), Integer.valueOf(-1)));
+		coinSellingList.put(ACItems.pork_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
+		coinSellingList.put(ACItems.beef_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
+		coinSellingList.put(ACItems.chicken_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
+		coinSellingList.put(ACItems.fish_on_a_plate, new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
 		coinSellingList.put(Items.COOKED_CHICKEN, new Tuple(Integer.valueOf(-8), Integer.valueOf(-6)));
 		coinSellingList.put(Items.ENDER_EYE, new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
 		coinSellingList.put(Items.ARROW, new Tuple(Integer.valueOf(-12), Integer.valueOf(-8)));

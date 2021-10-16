@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -31,11 +31,11 @@ public interface IAmplifierCharm {
 	 * Gets the amplifier associated with the item
 	 * @param stack ItemStack containing the item
 	 */
-	AmplifierType getAmplifier(ItemStack stack);
+	public AmplifierType getAmplifier(ItemStack stack);
 
 	/**
 	 * Gets the deity associated with the item (can be null)
 	 * @param stack ItemStack containing the item
 	 */
-	DeityType getDeity(ItemStack stack);
+	public DeityType getDeity(ItemStack stack);
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -38,7 +38,7 @@ public class Rending {
 	 * @param rendingPredicate Predicate that determines if the target can be drained (if you don't want to target bosses, you'll have to
 	 * add a check for that yourself)
 	 * @param jeiDescription Description for JEI
-	 * @param dimension Dimension for JEI (set to OreDictionary.WILDCARD_VALUE if your Rending isn't dimension-specific)
+	 * @param dimension Dimension for JEI (set to -1 if your Rending isn't dimension-specific)
 	 */
 	public Rending(String name, int maxEnergy, ItemStack output, Predicate<EntityLiving> rendingPredicate, String jeiDescription, int dimension) {
 		this.name = name;

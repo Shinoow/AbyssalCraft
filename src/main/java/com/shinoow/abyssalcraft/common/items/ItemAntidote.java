@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.MiscCondition;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
@@ -25,7 +24,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
@@ -75,10 +73,7 @@ public class ItemAntidote extends ItemMetadata {
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
 	{
-		if (!worldIn.isRemote) {
-			entityLiving.curePotionEffects(stack);
-			entityLiving.addPotionEffect(new PotionEffect(stack.getMetadata() == 1 ? AbyssalCraftAPI.dread_antidote : AbyssalCraftAPI.coralium_antidote, 1200));
-		}
+		if (!worldIn.isRemote) entityLiving.curePotionEffects(stack);
 		EntityPlayer entityplayer = entityLiving instanceof EntityPlayer ? (EntityPlayer)entityLiving : null;
 		if (entityplayer == null || !entityplayer.capabilities.isCreativeMode)
 			drink(stack);
@@ -101,7 +96,7 @@ public class ItemAntidote extends ItemMetadata {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
 		playerIn.setActiveHand(handIn);
-		return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+		return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
 	}
 
 	@Override

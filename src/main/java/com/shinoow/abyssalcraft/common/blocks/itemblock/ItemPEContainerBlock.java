@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,7 +13,9 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.energy.*;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -28,9 +30,8 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
-		Block block = Block.getBlockFromItem(is.getItem());
-		if(block instanceof IEnergyRelayBlock)
-			l.add(String.format("Range: %d Blocks", ((IEnergyRelayBlock) block).getRange()));
+		if(Block.getBlockFromItem(is.getItem()) == ACBlocks.energy_relay)
+			l.add("Range: 4 Blocks");
 	}
 
 	@Override
@@ -41,8 +42,14 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 	@Override
 	public int getMaxEnergy(ItemStack stack) {
 		Block block = Block.getBlockFromItem(stack.getItem());
-		if(block instanceof IEnergyBlock)
-			return ((IEnergyBlock) block).getMaxEnergy(stack);
+		if(block == ACBlocks.energy_pedestal || block == ACBlocks.sacrificial_altar || block == ACBlocks.rending_pedestal)
+			return 5000;
+		else if(block == ACBlocks.energy_relay)
+			return 500;
+		else if(block == ACBlocks.energy_collector)
+			return 1000;
+		else if(block == ACBlocks.energy_container)
+			return 10000;
 		return 0;
 	}
 
@@ -58,13 +65,11 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 
 	@Override
 	public boolean canAcceptPE(ItemStack stack) {
-		Block block = Block.getBlockFromItem(stack.getItem());
-		return block instanceof IEnergyBlock && ((IEnergyBlock) block).canAcceptPE() && getContainedEnergy(stack) < getMaxEnergy(stack);
+		return Block.getBlockFromItem(stack.getItem()) != ACBlocks.sacrificial_altar && getContainedEnergy(stack) < getMaxEnergy(stack);
 	}
 
 	@Override
 	public boolean canTransferPE(ItemStack stack) {
-		Block block = Block.getBlockFromItem(stack.getItem());
-		return block instanceof IEnergyBlock && ((IEnergyBlock) block).canTransferPE() && getContainedEnergy(stack) > 0;
+		return getContainedEnergy(stack) > 0;
 	}
 }

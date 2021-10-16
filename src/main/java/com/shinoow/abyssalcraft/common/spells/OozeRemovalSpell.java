@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,7 +12,9 @@
 package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -22,7 +24,7 @@ import net.minecraft.world.World;
 public class OozeRemovalSpell extends Spell {
 
 	public OozeRemovalSpell() {
-		super("oozeremoval", 100F, Blocks.SPONGE);
+		super("oozeremoval", 100F, ACConfig.foodstuff ? ACItems.washcloth : Blocks.SPONGE);
 		setRequiresCharging();
 		setColor(0x000);
 	}

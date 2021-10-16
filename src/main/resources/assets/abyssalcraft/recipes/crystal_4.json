@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:oxygen_crystal_cluster"
+      "item": "abyssalcraft:crystalcluster",
+      "data": 4
     }
   },
   "result": {

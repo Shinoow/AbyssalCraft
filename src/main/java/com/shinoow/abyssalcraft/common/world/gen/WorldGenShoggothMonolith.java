@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,6 +15,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
+import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
@@ -42,15 +43,15 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 
 			int max = rand.nextInt(8) + 5;
 			for(int i = 0; i < max; i++){
-				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z + 1), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z -1), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z + 1), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z -1), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z -1), ACBlocks.monolith_stone.getDefaultState());
-				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z + 1), ACBlocks.monolith_stone.getDefaultState());
+				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z + 1), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z -1), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z + 1), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z -1), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + i, z -1), ACBlocks.stone.getStateFromMeta(7));
+				setBlockAndNotifyAdequately(world, new BlockPos(x -1, y + i, z + 1), ACBlocks.stone.getStateFromMeta(7));
 			}
 			setBlockAndNotifyAdequately(world, pos, ACBlocks.shoggoth_biomass.getDefaultState());
 			setBlockAndNotifyAdequately(world, new BlockPos(x, y + max, z), getStatue(rand).withProperty(BlockStatue.FACING, EnumFacing.getHorizontal(rand.nextInt(3))));
@@ -62,23 +63,6 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 	}
 
 	private IBlockState getStatue(Random rand){
-		switch(rand.nextInt(7)){
-		case 0:
-			return ACBlocks.cthulhu_statue.getDefaultState();
-		case 1:
-			return ACBlocks.hastur_statue.getDefaultState();
-		case 2:
-			return ACBlocks.jzahar_statue.getDefaultState();
-		case 3:
-			return ACBlocks.azathoth_statue.getDefaultState();
-		case 4:
-			return ACBlocks.nyarlathotep_statue.getDefaultState();
-		case 5:
-			return ACBlocks.yog_sothoth_statue.getDefaultState();
-		case 6:
-			return ACBlocks.shub_niggurath_statue.getDefaultState();
-		default:
-			return getStatue(rand);
-		}
+		return ACBlocks.statue.getDefaultState().withProperty(BlockStatue.TYPE, EnumDeityType.byMetadata(rand.nextInt(7)));
 	}
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -27,7 +27,7 @@ import net.minecraft.world.storage.WorldSavedData;
 
 public class MapGenAbyStronghold extends MapGenStructure
 {
-	public static ArrayList<Biome> allowedBiomes = new ArrayList<>(Arrays.asList(ACBiomes.abyssal_wastelands));
+	public static ArrayList<Biome> allowedBiomes = new ArrayList<Biome>(Arrays.asList(ACBiomes.abyssal_wastelands));
 	private Biome[] allowedBiomeGenBases;
 
 	/**
@@ -91,7 +91,12 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 			double d1 = blockpos$mutableblockpos.distanceSq(pos);
 
-			if (blockpos == null || d1 < d0)
+			if (blockpos == null)
+			{
+				blockpos = new BlockPos(blockpos$mutableblockpos);
+				d0 = d1;
+			}
+			else if (d1 < d0)
 			{
 				blockpos = new BlockPos(blockpos$mutableblockpos);
 				d0 = d1;

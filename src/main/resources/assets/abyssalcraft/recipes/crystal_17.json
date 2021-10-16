@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:copper_crystal_cluster"
+      "item": "abyssalcraft:crystalcluster2",
+      "data": 1
     }
   },
   "result": {

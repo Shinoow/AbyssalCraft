@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,8 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -20,34 +19,35 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.projectile.EntityWitherSkull;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class IngotBlock extends Block {
 
-	private EnumIngotType TYPE;
-	public static final Map<EnumIngotType, Block> VARIANTS = new HashMap<>();
+	public static final PropertyEnum<EnumIngotType> TYPE = PropertyEnum.create("type", EnumIngotType.class);
 
-	public IngotBlock(EnumIngotType type) {
-		super(Material.IRON, type.getMapColor());
-		TYPE = type;
+	public IngotBlock() {
+		super(Material.IRON);
+		setDefaultState(getDefaultState().withProperty(TYPE, EnumIngotType.ABYSSALNITE));
 		setHardness(4.0F);
-		setResistance(type == EnumIngotType.ETHAXIUM ? Float.MAX_VALUE : 12.0F);
+		setResistance(12.0F);
 		setSoundType(SoundType.METAL);
 		setCreativeTab(ACTabs.tabBlock);
-		setHarvestLevel("pickaxe", type.getHarvestLevel());
-		VARIANTS.put(TYPE, this);
-	}
-
-	public EnumIngotType getType() {
-		return TYPE;
+		setHarvestLevel("pickaxe", 2);
 	}
 
 	@Override
@@ -59,11 +59,58 @@ public class IngotBlock extends Block {
 	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
 	{
 		if(entity instanceof EntityDragon || entity instanceof EntityWither || entity instanceof EntityWitherSkull)
-			return TYPE != EnumIngotType.ETHAXIUM;
+			return state.getValue(TYPE) != EnumIngotType.ETHAXIUM;
 		return super.canEntityDestroy(state, world, pos, entity);
 	}
 
-	public enum EnumIngotType implements IStringSerializable
+	@Override
+	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_)
+	{
+		return state.getValue(TYPE).getMapColor();
+	}
+
+	@Override
+	public float getExplosionResistance(World world, BlockPos pos, @Nullable Entity exploder, Explosion explosion)
+	{
+		return world.getBlockState(pos).getValue(TYPE) == EnumIngotType.ETHAXIUM ? Float.MAX_VALUE : super.getExplosionResistance(world, pos, exploder, explosion);
+	}
+
+	@Override
+	public int getHarvestLevel(IBlockState state)
+	{
+		return state.getValue(TYPE).getHarvestLevel();
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(TYPE, EnumIngotType.byMetadata(meta));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(TYPE).getMeta();
+	}
+
+	@Override
+	public int damageDropped (IBlockState state) {
+		return state.getValue(TYPE).getMeta();
+	}
+
+	@Override
+	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
+		for(int i = 0; i < EnumIngotType.values().length; i++)
+			par3List.add(new ItemStack(this, 1, i));
+	}
+
+	@Override
+	public BlockStateContainer createBlockState()
+	{
+		return new BlockStateContainer.Builder(this).add(TYPE).build();
+	}
+
+	public static enum EnumIngotType implements IStringSerializable
 	{
 		ABYSSALNITE(0, "abyssalnite", "abyblock", 2, MapColor.PURPLE, TextFormatting.DARK_AQUA),
 		REFINED_CORALIUM(1, "refinedcoralium", "corblock", 5, MapColor.CYAN, TextFormatting.AQUA),

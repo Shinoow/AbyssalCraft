@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -96,8 +96,6 @@ public class ClientVars {
 	private int implosionR;
 	private int implosionG;
 	private int implosionB;
-	private String coraliumAntidotePotionColor;
-	private String dreadAntidotePotionColor;
 
 	/**
 	 * Allocation of default values in case something is left out (which could have undesired side-effects)
@@ -181,8 +179,6 @@ public class ClientVars {
 		implosionR = 255;
 		implosionG = 255;
 		implosionB = 255;
-		coraliumAntidotePotionColor = "0x00ff06";
-		dreadAntidotePotionColor = "0x00ff06";
 	}
 
 	public int[] getCrystalColors() {
@@ -488,13 +484,4 @@ public class ClientVars {
 	public int getImplosionB() {
 		return implosionB;
 	}
-
-	public int getCoraliumAntidotePotionColor() {
-		return Integer.decode(coraliumAntidotePotionColor);
-	}
-
-	public int getDreadAntidotePotionColor() {
-		return Integer.decode(dreadAntidotePotionColor);
-	}
-
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -62,8 +62,14 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.1D);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 60.0D : 30.0D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 16.0D : 8.0D);
+
+		if(ACConfig.hardcoreMode){
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(16.0D);
+		} else {
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
+		}
 	}
 
 	@Override
@@ -95,7 +101,7 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CLIMBING, (byte)0);
+		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -165,7 +171,7 @@ public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, b0);
+		dataManager.set(CLIMBING, Byte.valueOf(b0));
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,20 +15,21 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class StructureElevatedShrineLarge extends StructureDarklandsBase {
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
 
-		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
-		IBlockState cobble = ACBlocks.darkstone_cobblestone.getDefaultState();
-		IBlockState cobble_wall = ACBlocks.darkstone_cobblestone_wall.getDefaultState();
+		IBlockState brick_slab = ACConfig.darkstone_brick_slab ? ACBlocks.darkstone_brick_slab.getDefaultState() : Blocks.AIR.getDefaultState();
+		IBlockState cobble = ACBlocks.cobblestone.getDefaultState();
+		IBlockState cobble_wall = ACConfig.darkstone_cobblestone_wall ? ACBlocks.darkstone_cobblestone_wall.getDefaultState() : Blocks.AIR.getDefaultState();
 
 		for(int i = -3; i < 4; i++)
 			for(int j = -5; j < 6; j++){
@@ -53,15 +54,17 @@ public class StructureElevatedShrineLarge extends StructureDarklandsBase {
 							worldIn.setBlockToAir(pos.add(j, k, i));
 						}
 
-				if((j == -5 || j == 5) && flag){
+				if((j == -5 || j == 5) && flag && ACConfig.darkstone_cobblestone_stairs){
 					setBlockAndNotifyAdequately(worldIn, pos.add(j, 1, i), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 1 : 0));
 					setBlockAndNotifyAdequately(worldIn, pos.add(i, 1, j), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 3 : 2));
 				}
 				if((j == -4 || j == 4) && flag){
 					setBlockAndNotifyAdequately(worldIn, pos.add(j, 1, i), cobble);
 					setBlockAndNotifyAdequately(worldIn, pos.add(i, 1, j), cobble);
-					setBlockAndNotifyAdequately(worldIn, pos.add(j, 2, i), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 1 : 0));
-					setBlockAndNotifyAdequately(worldIn, pos.add(i, 2, j), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 3 : 2));
+					if(ACConfig.darkstone_cobblestone_stairs) {
+						setBlockAndNotifyAdequately(worldIn, pos.add(j, 2, i), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 1 : 0));
+						setBlockAndNotifyAdequately(worldIn, pos.add(i, 2, j), ACBlocks.darkstone_cobblestone_stairs.getStateFromMeta(j > 0 ? 3 : 2));
+					}
 
 					setBlockAndNotifyAdequately(worldIn, pos.add(j, 6, i), brick_slab);
 					setBlockAndNotifyAdequately(worldIn, pos.add(i, 6, j), brick_slab);
@@ -90,8 +93,8 @@ public class StructureElevatedShrineLarge extends StructureDarklandsBase {
 
 				}
 				if((j == -2 || j == 2) && flag1){
-					setBlockAndNotifyAdequately(worldIn, pos.add(i, 2, j), flag ? ACBlocks.monolith_stone.getDefaultState() : cobble);
-					setBlockAndNotifyAdequately(worldIn, pos.add(j, 2, i), flag ? ACBlocks.monolith_stone.getDefaultState() : cobble);
+					setBlockAndNotifyAdequately(worldIn, pos.add(i, 2, j), flag ? ACBlocks.stone.getStateFromMeta(7) : cobble);
+					setBlockAndNotifyAdequately(worldIn, pos.add(j, 2, i), flag ? ACBlocks.stone.getStateFromMeta(7) : cobble);
 
 					for(int k = 0; k < 4; k++)
 						if(k < 3){

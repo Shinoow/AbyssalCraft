@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -10,8 +10,6 @@
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
-
-import com.shinoow.abyssalcraft.common.blocks.IngotBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -26,10 +24,7 @@ public class ItemBlockColorName extends ItemBlockAC {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		if(block instanceof IngotBlock)
-			return ((IngotBlock) block).getType().getFormat() + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("odb") || getUnlocalizedName().contains("darkethaxium")
-				|| getUnlocalizedName().contains("dark_ethaxium"))
+		if(getUnlocalizedName().contains("odb") || getUnlocalizedName().contains("darkethaxium"))
 			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 		else if(getUnlocalizedName().contains("ethaxium"))
 			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);

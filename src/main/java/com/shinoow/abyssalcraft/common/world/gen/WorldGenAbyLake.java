@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -106,10 +106,10 @@ public class WorldGenAbyLake extends WorldGenerator
 						{
 							BlockPos blockpos = position.add(i2, j4 - 1, j3);
 
-							if (worldIn.getBlockState(blockpos) == ACBlocks.abyssal_stone.getDefaultState() && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
+							if (worldIn.getBlockState(blockpos) == ACBlocks.stone.getStateFromMeta(1) && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(i2, j4, j3)) > 0)
 								if(n <= 32)
 									worldIn.setBlockState(blockpos, ACBlocks.liquified_coralium_ore.getDefaultState(), 2);
-								else worldIn.setBlockState(blockpos, ACBlocks.abyssal_stone.getDefaultState(), 2);
+								else worldIn.setBlockState(blockpos, ACBlocks.stone.getStateFromMeta(1), 2);
 						}
 
 			return true;

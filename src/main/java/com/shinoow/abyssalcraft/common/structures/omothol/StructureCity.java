@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -20,7 +20,6 @@ import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
@@ -146,11 +145,11 @@ public class StructureCity extends WorldGenerator {
 			break;
 		}
 
-		if(worldIn.getBlockState(center).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(center.north(distZ)).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(center.south(distZ)).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(center.west(distX)).getBlock() != ACBlocks.omothol_stone ||
-				worldIn.getBlockState(center.east(distX)).getBlock() != ACBlocks.omothol_stone) return false;
+		if(worldIn.getBlockState(center).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(center.north(distZ)).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(center.south(distZ)).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(center.west(distX)).getBlock() != ACBlocks.stone ||
+				worldIn.getBlockState(center.east(distX)).getBlock() != ACBlocks.stone) return false;
 
 		center = worldIn.getHeight(center);
 		if(center.getY() > pos.getY())
@@ -212,11 +211,19 @@ public class StructureCity extends WorldGenerator {
 				if(rand.nextBoolean()) {
 					if(rand.nextInt(100) == 0)
 						worldIn.setBlockState(entry.getKey(), ACBlocks.dreadlands_infused_powerstone.getDefaultState());
-					else
-						worldIn.setBlockState(entry.getKey(), getCrystalCluster(rand));
+					else {
+						int meta = rand.nextInt(ACLib.crystalNames.length);
+						if(meta > 15) {
+							meta -= 16;
+							worldIn.setBlockState(entry.getKey(), ACBlocks.crystal_cluster2.getStateFromMeta(meta));
+						} else
+							worldIn.setBlockState(entry.getKey(), ACBlocks.crystal_cluster.getStateFromMeta(meta));
+					}
 				} else worldIn.setBlockToAir(entry.getKey());
-			} else if(entry.getValue().equals("pedestal"))
-				worldIn.setBlockState(entry.getKey(), getPedestal(rand));
+			} else if(entry.getValue().equals("pedestal")) {
+				int meta = rand.nextInt(4);
+				worldIn.setBlockState(entry.getKey(), ACBlocks.tiered_energy_pedestal.getStateFromMeta(meta));
+			}
 
 		return true;
 	}
@@ -260,84 +267,6 @@ public class StructureCity extends WorldGenerator {
 			return ACLoot.CHEST_OMOTHOL_LIBRARY;
 		default:
 			return ACLoot.CHEST_OMOTHOL_HOUSE;
-		}
-	}
-
-	private IBlockState getPedestal(Random rand) {
-		switch(rand.nextInt(4)) {
-		case 0:
-			return ACBlocks.overworld_energy_pedestal.getDefaultState();
-		case 1:
-			return ACBlocks.abyssal_wasteland_energy_pedestal.getDefaultState();
-		case 2:
-			return ACBlocks.dreadlands_energy_pedestal.getDefaultState();
-		case 3:
-			return ACBlocks.omothol_energy_pedestal.getDefaultState();
-		default:
-			return getPedestal(rand);
-		}
-	}
-
-	private IBlockState getCrystalCluster(Random rand) {
-		switch(rand.nextInt(ACLib.crystalNames.length)) {
-		case 0:
-			return ACBlocks.iron_crystal_cluster.getDefaultState();
-		case 1:
-			return ACBlocks.gold_crystal_cluster.getDefaultState();
-		case 2:
-			return ACBlocks.sulfur_crystal_cluster.getDefaultState();
-		case 3:
-			return ACBlocks.carbon_crystal_cluster.getDefaultState();
-		case 4:
-			return ACBlocks.oxygen_crystal_cluster.getDefaultState();
-		case 5:
-			return ACBlocks.hydrogen_crystal_cluster.getDefaultState();
-		case 6:
-			return ACBlocks.nitrogen_crystal_cluster.getDefaultState();
-		case 7:
-			return ACBlocks.phosphorus_crystal_cluster.getDefaultState();
-		case 8:
-			return ACBlocks.potassium_crystal_cluster.getDefaultState();
-		case 9:
-			return ACBlocks.nitrate_crystal_cluster.getDefaultState();
-		case 10:
-			return ACBlocks.methane_crystal_cluster.getDefaultState();
-		case 11:
-			return ACBlocks.redstone_crystal_cluster.getDefaultState();
-		case 12:
-			return ACBlocks.abyssalnite_crystal_cluster.getDefaultState();
-		case 13:
-			return ACBlocks.coralium_crystal_cluster.getDefaultState();
-		case 14:
-			return ACBlocks.dreadium_crystal_cluster.getDefaultState();
-		case 15:
-			return ACBlocks.blaze_crystal_cluster.getDefaultState();
-		case 16:
-			return ACBlocks.tin_crystal_cluster.getDefaultState();
-		case 17:
-			return ACBlocks.copper_crystal_cluster.getDefaultState();
-		case 18:
-			return ACBlocks.silicon_crystal_cluster.getDefaultState();
-		case 19:
-			return ACBlocks.magnesium_crystal_cluster.getDefaultState();
-		case 20:
-			return ACBlocks.aluminium_crystal_cluster.getDefaultState();
-		case 21:
-			return ACBlocks.silica_crystal_cluster.getDefaultState();
-		case 22:
-			return ACBlocks.alumina_crystal_cluster.getDefaultState();
-		case 23:
-			return ACBlocks.magnesia_crystal_cluster.getDefaultState();
-		case 24:
-			return ACBlocks.zinc_crystal_cluster.getDefaultState();
-		case 25:
-			return ACBlocks.calcium_crystal_cluster.getDefaultState();
-		case 26:
-			return ACBlocks.beryllium_crystal_cluster.getDefaultState();
-		case 27:
-			return ACBlocks.beryl_crystal_cluster.getDefaultState();
-		default:
-			return getCrystalCluster(rand);
 		}
 	}
 }

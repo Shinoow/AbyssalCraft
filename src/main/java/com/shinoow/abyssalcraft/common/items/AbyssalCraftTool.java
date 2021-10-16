@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -47,14 +48,14 @@ public class AbyssalCraftTool extends Item {
 
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B) {
-		l.add("This blade is so unholy that your");
-		l.add("hand starts to decay while holding it.");
+		l.add(I18n.format("tooltip.devblade.1"));
+		l.add(I18n.format("tooltip.devblade.2"));
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return TextFormatting.DARK_RED + "The Dev Blade";
+		return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
 	}
 
 	@Override

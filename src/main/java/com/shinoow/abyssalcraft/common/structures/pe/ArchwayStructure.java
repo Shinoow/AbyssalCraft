@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -18,7 +18,8 @@ import com.shinoow.abyssalcraft.api.energy.structure.IStructureBase;
 import com.shinoow.abyssalcraft.api.energy.structure.IStructureComponent;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
-import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;
@@ -38,9 +39,9 @@ public class ArchwayStructure implements IPlaceOfPower {
 	public ArchwayStructure() {
 
 		data = new IBlockState[][][] {
-			new IBlockState[][] {new IBlockState[] {ACBlocks.darkstone_cobblestone_wall.getDefaultState()}, new IBlockState[] {null}, new IBlockState[] {ACBlocks.monolith_stone.getDefaultState()},
+			new IBlockState[][] {new IBlockState[] {ACBlocks.darkstone_cobblestone_wall.getDefaultState()}, new IBlockState[] {null}, new IBlockState[] {ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)},
 				new IBlockState[] {null}, new IBlockState[] {ACBlocks.darkstone_cobblestone_wall.getDefaultState()}},
-			new IBlockState[][] {new IBlockState[] {ACBlocks.darkstone_cobblestone_wall.getDefaultState()}, new IBlockState[] {null}, new IBlockState[] {ACBlocks.cthulhu_statue.getDefaultState()}, new IBlockState[] {null},
+			new IBlockState[][] {new IBlockState[] {ACBlocks.darkstone_cobblestone_wall.getDefaultState()}, new IBlockState[] {null}, new IBlockState[] {ACBlocks.statue.getDefaultState()}, new IBlockState[] {null},
 					new IBlockState[] {ACBlocks.darkstone_cobblestone_wall.getDefaultState()}},
 			new IBlockState[][] {new IBlockState[] {ACBlocks.darkstone_cobblestone_wall.getDefaultState()}, new IBlockState[] {null}, new IBlockState[] {null}, new IBlockState[] {null},
 						new IBlockState[] {ACBlocks.darkstone_cobblestone_wall.getDefaultState()}},
@@ -93,7 +94,7 @@ public class ArchwayStructure implements IPlaceOfPower {
 	@Override
 	public void validate(World world, BlockPos pos) {
 		boolean valid = true;
-		if(world.getBlockState(pos).getBlock() == ACBlocks.multi_block && world.getBlockState(pos.up()).getBlock() instanceof BlockStatue) {
+		if(world.getBlockState(pos).getBlock() == ACBlocks.multi_block && world.getBlockState(pos.up()).getBlock() == ACBlocks.statue) {
 			for(int i = 0; i < 3; i++)
 				if(!(world.getBlockState(pos.east(2).up(i)).getBlock() instanceof BlockWall)
 						&& !(world.getBlockState(pos.west(2).up(i)).getBlock() instanceof BlockWall) &&
@@ -124,7 +125,8 @@ public class ArchwayStructure implements IPlaceOfPower {
 	public boolean canConstruct(World world, BlockPos pos, EntityPlayer player) {
 
 		IBlockState state = world.getBlockState(pos);
-		if(state.getBlock() == ACBlocks.monolith_stone && world.getBlockState(pos.up()).getBlock() instanceof BlockStatue) {
+		if(state.getBlock() == ACBlocks.stone && state.getValue(BlockACStone.TYPE) == EnumStoneType.MONOLITH_STONE
+				&& world.getBlockState(pos.up()).getBlock() == ACBlocks.statue) {
 			boolean temp = true;
 			for(int i = 0; i < 3; i++)
 				if(!(world.getBlockState(pos.east(2).up(i)).getBlock() instanceof BlockWall)

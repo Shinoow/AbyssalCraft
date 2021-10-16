@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -25,8 +25,7 @@ import net.minecraftforge.common.util.Constants.NBT;
 public class NecromancyWorldSavedData extends WorldSavedData {
 
 	private static final String DATA_NAME = "abyssalcraft_necromancy_data";
-	private List<Tuple<String, NBTTagCompound>> data = new ArrayList<>();
-	private List<Tuple<String, Integer>> clientData = new ArrayList<>();
+	List<Tuple<String, NBTTagCompound>> data = new ArrayList<>();
 
 	public NecromancyWorldSavedData() {
 		super(DATA_NAME);
@@ -49,6 +48,12 @@ public class NecromancyWorldSavedData extends WorldSavedData {
 				for(int i = 0; i < list.tagCount(); i++)
 					storeDataInternal(name, list.getCompoundTagAt(i));
 			}
+		else {
+			NBTTagCompound sizes = properties.getCompoundTag("Sizes");
+
+			for(String name : data.getKeySet())
+				storeDataLegacy(name, data.getCompoundTag(name), sizes.getInteger(name));
+		}
 	}
 
 	@Override
@@ -94,6 +99,11 @@ public class NecromancyWorldSavedData extends WorldSavedData {
 		this.data.add(new Tuple(name, data));
 	}
 
+	private void storeDataLegacy(String name, NBTTagCompound data, int size) {
+		data.setInteger("ResurrectionRitualCrystalSize", size);
+		storeDataInternal(name, data);
+	}
+
 	public void clearEntry(String name) {
 		for(int i = 0; i < data.size(); i++)
 			if(data.get(i).getFirst().equals(name))
@@ -107,14 +117,6 @@ public class NecromancyWorldSavedData extends WorldSavedData {
 	public List<Tuple<String, NBTTagCompound>> getData() {
 
 		return data;
-	}
-
-	public List<Tuple<String, Integer>> getClientData(){
-		return clientData;
-	}
-
-	public void populateClientData(List<Tuple<String, Integer>> clientData) {
-		this.clientData = clientData;
 	}
 
 	public static NecromancyWorldSavedData get(World world) {

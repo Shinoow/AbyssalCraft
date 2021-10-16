@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.energy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -105,6 +106,47 @@ public class PEUtils {
 				((IEnergyTransporterItem) stack.getItem()).addEnergy(stack, manipulator.getEnergyQuanta());
 				manipulator.addTolerance(manipulator.isActive() ? 4 : 2);
 			}
+	}
+
+	/**
+	 * Attempts to transfer PE from a Manipulator to nearby Collectors
+	 * @param world Current World
+	 * @param pos Current BlockPos
+	 * @param manipulator PE Manipulator
+	 * @param boost Any range boost applied to the manipulator
+	 * @deprecated Use {@link PEUtils#transferPEToCollectors(World, BlockPos, IEnergyManipulator)} instead
+	 */
+	@Deprecated
+	public static void transferPEToCollectors(World world, BlockPos pos, IEnergyManipulator manipulator, int boost){
+
+		int xp = pos.getX();
+		int yp = pos.getY();
+		int zp = pos.getZ();
+
+		List<TileEntity> collectors = new ArrayList<>();
+
+		MutableBlockPos pos1 = new MutableBlockPos();
+
+		outer: for(int x = -1*(3+boost); x <= 3+boost; x++)
+			for(int y = 0; y <= getRangeAmplifiers(world, pos, manipulator); y++)
+				for(int z = -1*(3+boost); z <= 3+boost; z++)
+					if(x < -2 || x > 2 || z < -2 || z > 2){
+						if(collectors.size() == 20)
+							break outer;
+						pos1.setPos(xp + x, yp - y, zp + z);
+						TileEntity te = world.getTileEntity(pos1);
+						if(isCollector(te))
+							collectors.add(te);
+					}
+
+		for(TileEntity tile : collectors)
+			if(checkForAdjacentCollectors(world, tile.getPos()))
+				if(world.rand.nextInt(120-(int)(20 * manipulator.getAmplifier(AmplifierType.DURATION))) == 0)
+					if(((IEnergyCollector) tile).canAcceptPE() && manipulator.canTransferPE()){
+						((IEnergyCollector) tile).addEnergy(manipulator.getEnergyQuanta());
+						manipulator.addTolerance(manipulator.isActive() ? 2 : 1);
+						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, tile.getPos(), world.provider.getDimension());
+					}
 	}
 
 	/**

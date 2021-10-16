@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.entity.demon;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.entity.Entity;
@@ -63,7 +63,7 @@ public abstract class EntityEvilAnimal extends EntityMob implements IShearable {
 		super.onDeath(par1DamageSource);
 
 		if(!world.isRemote)
-			if(!(par1DamageSource.getTrueSource() instanceof EntityShoggothBase) && ACConfig.demonAnimalsSpawnOnDeath)
+			if(!(par1DamageSource.getTrueSource() instanceof EntityLesserShoggoth) && ACConfig.demonAnimalsSpawnOnDeath)
 			{
 				EntityDemonAnimal demon = getDemonAnimal();
 				demon.copyLocationAndAnglesFrom(this);

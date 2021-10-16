@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -29,14 +29,13 @@ public class Abyruin extends WorldGenerator
 	public Abyruin() { }
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public boolean generate(World world, Random rand, BlockPos pos) {
 
 		while(world.isAirBlock(pos) && pos.getY() > 2)
 			pos = pos.down();
 		if(pos.getY() <= 1) return false;
 
-		if(world.getBlockState(pos) != ACBlocks.abyssal_stone.getDefaultState() &&
+		if(world.getBlockState(pos) != ACBlocks.stone.getStateFromMeta(1) &&
 				world.getBlockState(pos).getBlock() != ACBlocks.fused_abyssal_sand &&
 				world.getBlockState(pos).getBlock() != ACBlocks.abyssal_sand)
 			return false;
@@ -119,8 +118,8 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 2, j, k - 5), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j, k - 4), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j, k - 3), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j, k - 2), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 2, j, k - 1), ACBlocks.abyssal_stone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i - 2, j, k - 2), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i - 2, j, k - 1), ACBlocks.stone.getStateFromMeta(1), 2);
 		world.setBlockState(new BlockPos(i - 2, j, k), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j, k + 1), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 2, j, k + 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
@@ -165,12 +164,12 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i - 1, j - 1, k + 1), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j, k - 6), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j, k - 5), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j, k - 4), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j, k - 3), ACBlocks.abyssal_stone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i - 1, j, k - 4), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i - 1, j, k - 3), ACBlocks.stone.getStateFromMeta(1), 2);
 		world.setBlockState(new BlockPos(i - 1, j, k - 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j, k - 1), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j, k), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i - 1, j, k + 1), ACBlocks.abyssal_stone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i - 1, j, k - 1), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i - 1, j, k), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i - 1, j, k + 1), ACBlocks.stone.getStateFromMeta(1), 2);
 		world.setBlockState(new BlockPos(i - 1, j, k + 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 1, k + 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i - 1, j + 2, k + 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
@@ -209,11 +208,11 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i, j, k - 6), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j, k - 5), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j, k - 4), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i, j, k - 3), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i, j, k - 2), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i, j, k - 1), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i, j, k), ACBlocks.coralium_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i, j, k + 1), ACBlocks.abyssal_stone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i, j, k - 3), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i, j, k - 2), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i, j, k - 1), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i, j, k), ACBlocks.stone.getStateFromMeta(4), 2);
+		world.setBlockState(new BlockPos(i, j, k + 1), ACBlocks.stone.getStateFromMeta(1), 2);
 		world.setBlockState(new BlockPos(i, j, k + 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i, j + 1, k + 1), Blocks.CHEST.getStateFromMeta(2), 2);
 		TileEntityChest tileentitychest2 = (TileEntityChest)world.getTileEntity(new BlockPos(i, j + 1, k + 1));
@@ -255,12 +254,12 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 1, j - 1, k + 1), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j, k - 6), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j, k - 5), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j, k - 4), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j, k - 3), ACBlocks.abyssal_stone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j, k - 4), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i + 1, j, k - 3), ACBlocks.stone.getStateFromMeta(1), 2);
 		world.setBlockState(new BlockPos(i + 1, j, k - 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j, k - 1), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j, k), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 1, j, k + 1), ACBlocks.abyssal_stone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 1, j, k - 1), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i + 1, j, k), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i + 1, j, k + 1), ACBlocks.stone.getStateFromMeta(1), 2);
 		world.setBlockState(new BlockPos(i + 1, j, k + 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 1, k + 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 1, j + 2, k + 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
@@ -289,8 +288,8 @@ public class Abyruin extends WorldGenerator
 		world.setBlockState(new BlockPos(i + 2, j, k - 5), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j, k - 4), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j, k - 3), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j, k - 2), ACBlocks.abyssal_stone.getDefaultState(), 2);
-		world.setBlockState(new BlockPos(i + 2, j, k - 1), ACBlocks.abyssal_stone.getDefaultState(), 2);
+		world.setBlockState(new BlockPos(i + 2, j, k - 2), ACBlocks.stone.getStateFromMeta(1), 2);
+		world.setBlockState(new BlockPos(i + 2, j, k - 1), ACBlocks.stone.getStateFromMeta(1), 2);
 		world.setBlockState(new BlockPos(i + 2, j, k), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j, k + 1), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(i + 2, j, k + 2), ACBlocks.abyssal_stone_brick.getDefaultState(), 2);

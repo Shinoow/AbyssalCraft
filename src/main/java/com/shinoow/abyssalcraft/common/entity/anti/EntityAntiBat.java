@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -125,12 +125,12 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 
 	public void setIsBatHanging(boolean par1)
 	{
-		byte b0 = dataManager.get(HANGING);
+		byte b0 = dataManager.get(HANGING).byteValue();
 
 		if (par1)
-			dataManager.set(HANGING, (byte)(b0 | 1));
+			dataManager.set(HANGING, Byte.valueOf((byte)(b0 | 1)));
 		else
-			dataManager.set(HANGING, (byte)(b0 & -2));
+			dataManager.set(HANGING, Byte.valueOf((byte)(b0 & -2)));
 	}
 
 	@Override
@@ -232,14 +232,14 @@ public class EntityAntiBat extends EntityAmbientCreature implements IAntiEntity 
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
-		dataManager.set(HANGING, par1NBTTagCompound.getByte("BatFlags"));
+		dataManager.set(HANGING, Byte.valueOf(par1NBTTagCompound.getByte("BatFlags")));
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setByte("BatFlags", dataManager.get(HANGING));
+		par1NBTTagCompound.setByte("BatFlags", dataManager.get(HANGING).byteValue());
 	}
 
 

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityEnergyContainer;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -37,7 +36,7 @@ import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockEnergyContainer extends BlockContainer implements IEnergyBlock {
+public class BlockEnergyContainer extends BlockContainer {
 
 	public BlockEnergyContainer() {
 		super(Material.ROCK);
@@ -105,7 +104,7 @@ public class BlockEnergyContainer extends BlockContainer implements IEnergyBlock
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		return new java.util.ArrayList<>();
+		return new java.util.ArrayList<ItemStack>();
 	}
 
 	@Override
@@ -113,11 +112,5 @@ public class BlockEnergyContainer extends BlockContainer implements IEnergyBlock
 	public BlockRenderLayer getBlockLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
-	}
-
-	@Override
-	public int getMaxEnergy(ItemStack stack) {
-
-		return 10000;
 	}
 }

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -35,7 +35,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
-
+	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator
 			chunkGenerator, IChunkProvider chunkProvider) {
@@ -63,7 +63,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			x = chunkX + random.nextInt(16) + 8;
 			z = chunkZ + random.nextInt(16) + 8;
 			DarklandsStructureGenerator.generate(4, world, random, world.getHeight(new BlockPos(x, 0, z)),
-					Blocks.GRASS.getDefaultState(), ACBlocks.darkstone.getDefaultState());
+					Blocks.GRASS.getDefaultState(), ACBlocks.stone.getDefaultState());
 
 			x = chunkX + random.nextInt(16) + 8;
 			z = chunkZ + random.nextInt(16) + 8;

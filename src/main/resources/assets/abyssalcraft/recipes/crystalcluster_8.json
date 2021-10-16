@@ -12,6 +12,7 @@
     }
   },
   "result": {
-    "item": "abyssalcraft:potassium_crystal_cluster"
+    "item": "abyssalcraft:crystalcluster",
+    "data": 8
   }
 }

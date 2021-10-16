@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -23,7 +23,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * A Necronomicon Summoning Ritual
@@ -74,7 +73,7 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
 	public NecronomiconSummonRitual(String unlocalizedName, int bookType, float requiredEnergy, Class<? extends EntityLivingBase> entity, Object...offerings) {
-		this(unlocalizedName, bookType, OreDictionary.WILDCARD_VALUE, requiredEnergy, entity, offerings);
+		this(unlocalizedName, bookType, -1, requiredEnergy, entity, offerings);
 	}
 
 	/**
@@ -112,7 +111,7 @@ public class NecronomiconSummonRitual extends NecronomiconRitual {
 			e.printStackTrace();
 		}
 		if(entityliving != null){
-			entityliving.setLocationAndAngles(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, entityliving.rotationYaw, entityliving.rotationPitch);
+			entityliving.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), entityliving.rotationYaw, entityliving.rotationPitch);
 			((EntityLiving) entityliving).onInitialSpawn(world.getDifficultyForLocation(pos.up()), (IEntityLivingData)null);
 			for (EntityPlayerMP entityplayermp : world.getEntitiesWithinAABB(EntityPlayerMP.class, entityliving.getEntityBoundingBox().grow(5)))
 				CriteriaTriggers.SUMMONED_ENTITY.trigger(entityplayermp, entityliving);

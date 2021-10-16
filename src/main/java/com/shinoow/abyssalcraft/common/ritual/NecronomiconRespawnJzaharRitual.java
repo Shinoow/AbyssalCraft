@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -24,7 +24,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
-@SuppressWarnings("deprecation")
 public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 
 	public NecronomiconRespawnJzaharRitual() {
@@ -50,7 +49,7 @@ public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 		StructureJzaharTemple temple = new StructureJzaharTemple();
 		temple.generate(world, world.rand, new BlockPos(4, 53, 7));
 		RitualUtil.tryAltar(world, pos, 4);
-		world.getChunkFromBlockCoords(pos).markDirty();
+		world.getChunkFromBlockCoords(pos).markDirty();;
 		SpecialTextUtil.JzaharGroup(world, I18n.translateToLocalFormatted("message.jzahar.respawn", player.getName()));
 	}
 }

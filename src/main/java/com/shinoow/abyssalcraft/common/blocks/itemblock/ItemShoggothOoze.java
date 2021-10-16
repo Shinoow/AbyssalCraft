@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -56,11 +56,11 @@ public class ItemShoggothOoze extends ItemBlockAC
 
 			if (block == this.block)
 			{
-				int i = iblockstate.getValue(BlockShoggothOoze.LAYERS);
+				int i = iblockstate.getValue(BlockShoggothOoze.LAYERS).intValue();
 
 				if (i <= 7)
 				{
-					IBlockState iblockstate1 = iblockstate.withProperty(BlockShoggothOoze.LAYERS, i + 1);
+					IBlockState iblockstate1 = iblockstate.withProperty(BlockShoggothOoze.LAYERS, Integer.valueOf(i + 1));
 					AxisAlignedBB axisalignedbb = iblockstate1.getCollisionBoundingBox(worldIn, blockpos);
 
 					if (axisalignedbb != Block.NULL_AABB && worldIn.checkNoEntityCollision(axisalignedbb.offset(blockpos)) && worldIn.setBlockState(blockpos, iblockstate1, 10))

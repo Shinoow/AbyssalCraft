@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -26,7 +26,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
-@SuppressWarnings("deprecation")
 public class WorldGenDrT extends WorldGenTrees {
 
 	public WorldGenDrT(boolean flag)
@@ -48,10 +47,10 @@ public class WorldGenDrT extends WorldGenTrees {
 
 		IBlockState j1 = world.getBlockState(new BlockPos(x, y -1, z));
 
-		if (j1.getBlock() != Blocks.DIRT && j1.getBlock() != ACBlocks.dreadlands_dirt && j1 != ACBlocks.dreadstone && j1.getMaterial() != Material.GRASS || y >= 256 - height - 1)
+		if (j1.getBlock() != Blocks.DIRT && j1.getBlock() != ACBlocks.dreadlands_dirt && j1 != ACBlocks.stone.getStateFromMeta(2) && j1.getMaterial() != Material.GRASS || y >= 256 - height - 1)
 			return false;
 
-		if(j1.getBlock() != ACBlocks.dreadlands_grass && j1 != ACBlocks.dreadstone && j1.getBlock() != ACBlocks.dreadlands_dirt)
+		if(j1.getBlock() != ACBlocks.dreadlands_grass && j1 != ACBlocks.stone.getStateFromMeta(2) && j1.getBlock() != ACBlocks.dreadlands_dirt)
 			setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), Blocks.DIRT.getDefaultState());
 		else setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), ACBlocks.dreadlands_dirt.getDefaultState());
 

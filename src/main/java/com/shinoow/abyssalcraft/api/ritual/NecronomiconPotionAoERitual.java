@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -23,7 +23,6 @@ import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * A Necronomicon Area-of-Effect Ritual
@@ -72,7 +71,7 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 	 * @param offerings Components used to perform the ritual, are consumed afterwards
 	 */
 	public NecronomiconPotionAoERitual(String unlocalizedName, int bookType, float requiredEnergy, Object potion, Object...offerings) {
-		this(unlocalizedName, bookType, OreDictionary.WILDCARD_VALUE, requiredEnergy, potion, offerings);
+		this(unlocalizedName, bookType, -1, requiredEnergy, potion, offerings);
 	}
 
 	/**

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -28,7 +28,7 @@ public interface IACPlugin {
 	 * Used to fetch the mod name
 	 * @return A String representing the mod's name
 	 */
-	String getModName();
+	public String getModName();
 
 	/**
 	 * Determines whether or not this plugin can be loaded.<br>
@@ -37,21 +37,21 @@ public interface IACPlugin {
 	 * the plugin, or just checking if the mod the plugin's for is present).
 	 * @return True if the plugin can be loaded, otherwise false.
 	 */
-	boolean canLoad();
+	public boolean canLoad();
 
 	/**
 	 * Won't be called by AbyssalCraft, allowing you to register any new Item/Block/Entity<br>
 	 * your plugin might add. Should be called at the pre-init stage.
 	 */
-	void preInit();
+	public void preInit();
 
 	/**
 	 * Will be called at the end of the init stage
 	 */
-	void init();
+	public void init();
 
 	/**
 	 * Will be called at the end of the post-init stage
 	 */
-	void postInit();
+	public void postInit();
 }

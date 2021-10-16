@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -397,7 +397,7 @@ public class GuiNecronomicon extends GuiScreen {
 				stuff = localize(isNecroInfo ? NecronomiconText.LABEL_HUH : NecronomiconText.LABEL_KNOWLEDGE);
 				fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			}
-			s = I18n.format("necronomicon.turnupindicator", Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups));
+			s = I18n.format("necronomicon.turnupindicator", new Object[] {Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups)});
 
 			l = fontRenderer.getStringWidth(s);
 			if(getTurnupLimit() > 1)
@@ -490,11 +490,7 @@ public class GuiNecronomicon extends GuiScreen {
 	}
 
 	protected String localize(String str){
-		return localize(str, new Object[0]);
-	}
-
-	protected String localize(String str, Object...parameters) {
-		return I18n.format(str, parameters);
+		return I18n.format(str, new Object[0]);
 	}
 
 	protected boolean isUnlocked(IUnlockCondition cnd){

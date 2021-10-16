@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -21,11 +21,11 @@ import net.minecraft.item.ItemStack;
  */
 public interface IStaffOfRending {
 
-	void increaseEnergy(ItemStack stack, String type);
+	public void increaseEnergy(ItemStack stack, String type);
 
-	void setEnergy(int amount, ItemStack stack, String type);
+	public void setEnergy(int amount, ItemStack stack, String type);
 
-	int getEnergy(ItemStack par1ItemStack, String type);
+	public int getEnergy(ItemStack par1ItemStack, String type);
 
-	int getDrainAmount(ItemStack stack);
+	public int getDrainAmount(ItemStack stack);
 }

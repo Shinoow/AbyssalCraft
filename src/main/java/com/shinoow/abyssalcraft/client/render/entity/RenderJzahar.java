@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelJzahar;
-import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerJzaharDeath;
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 
@@ -32,7 +31,6 @@ public class RenderJzahar extends RenderLiving<EntityJzahar> {
 	{
 		super(manager, new ModelJzahar(true), 1.0F);
 		addLayer(new LayerJzaharDeath());
-		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft", "textures/model/boss/j'zahar_eyes.png")));
 	}
 
 	@Override

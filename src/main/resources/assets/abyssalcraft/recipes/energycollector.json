@@ -7,7 +7,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:monolithstone"
+      "item": "abyssalcraft:stone",
+      "data": 7
     },
     "%": {
       "item": "abyssalcraft:shadowgem"

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,8 +12,9 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
+import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
+import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
@@ -26,7 +27,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.World;
 
 public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 
@@ -67,13 +67,13 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 				resetNearbyBiomass(true);
 				if(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32, false) != null)
 					if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).grow(32)).size() <= 6){
-						EntityShoggothBase mob = getShoggoth(world);
+						EntityLesserShoggoth mob = new EntityLesserShoggoth(world);
 						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
 						mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);
 						world.spawnEntity(mob);
 						spawnedShoggoths++;
 						if(spawnedShoggoths >= 5)
-							world.setBlockState(pos, ACBlocks.monolith_stone.getDefaultState(), 2);
+							world.setBlockState(pos, ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE), 2);
 					}
 			}
 		}
@@ -176,17 +176,5 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 
 	public void setCooldown(int cd){
 		cooldown = cd;
-	}
-
-	private EntityShoggothBase getShoggoth(World world) {
-		if(world.rand.nextBoolean()) {
-			int dim = world.provider.getDimension();
-			boolean greater = world.rand.nextInt(100) == 0;
-			if(dim == ACLib.abyssal_wasteland_id || dim == ACLib.dreadlands_id
-					|| dim == ACLib.omothol_id || dim == ACLib.dark_realm_id)
-				return greater ? new EntityGreaterShoggoth(world) : new EntityShoggoth(world);
-		}
-
-		return new EntityLesserShoggoth(world);
 	}
 }

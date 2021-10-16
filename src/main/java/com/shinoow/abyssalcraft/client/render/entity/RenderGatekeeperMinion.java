@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelGatekeeperMinion;
-import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
 import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -30,7 +29,6 @@ public class RenderGatekeeperMinion extends RenderLiving<EntityGatekeeperMinion>
 	public RenderGatekeeperMinion(RenderManager manager)
 	{
 		this(manager, new ModelGatekeeperMinion());
-		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft", "textures/model/elite/gatekeeperminion_eyes.png")));
 	}
 
 	public RenderGatekeeperMinion(RenderManager manager, ModelGatekeeperMinion model)

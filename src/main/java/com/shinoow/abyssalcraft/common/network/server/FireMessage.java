@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2020 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -52,7 +52,10 @@ public class FireMessage extends AbstractServerMessage<FireMessage> {
 		World world = player.world;
 
 		if(world.isRemote) return;
-		if(world.getBlockState(pos).getBlock() != ACBlocks.mimic_fire)
+		if(world.getBlockState(pos).getBlock() != ACBlocks.mimic_fire &&
+				world.getBlockState(pos).getBlock() != ACBlocks.coralium_fire &&
+				world.getBlockState(pos).getBlock() != ACBlocks.dreaded_fire &&
+				world.getBlockState(pos).getBlock() != ACBlocks.omothol_fire)
 			return;
 
 		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);

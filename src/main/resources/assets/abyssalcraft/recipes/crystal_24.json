@@ -5,7 +5,8 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:zinc_crystal_cluster"
+      "item": "abyssalcraft:crystalcluster2",
+      "data": 8
     }
   },
   "result": {
