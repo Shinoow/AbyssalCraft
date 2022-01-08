@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
@@ -68,7 +69,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
 		if(!stack.getTagCompound().hasKey("owner")){
-			stack.getTagCompound().setString("owner", par3EntityPlayer.getName());
+			stack.getTagCompound().setString("owner", EntityPlayer.getUUID(par3EntityPlayer.getGameProfile()).toString());
 			if(!par3EntityPlayer.isSneaking()){
 				if(!par2World.isRemote && ACConfig.syncDataOnBookOpening)
 					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
@@ -76,7 +77,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 				return new ActionResult(EnumActionResult.SUCCESS, stack);
 			}
 		}
-		if(stack.getTagCompound().getString("owner").equals(par3EntityPlayer.getName())){
+		if(UUID.fromString(stack.getTagCompound().getString("owner")).equals(EntityPlayer.getUUID(par3EntityPlayer.getGameProfile()))){
 			if(!par3EntityPlayer.isSneaking()){
 				if(!par2World.isRemote && ACConfig.syncDataOnBookOpening)
 					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
@@ -111,13 +112,13 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 
 	public boolean isOwner(EntityPlayer player, ItemStack stack){
 		if(!stack.hasTagCompound()) return false;
-		return stack.getTagCompound().getString("owner").equals(player.getName());
+		return UUID.fromString(stack.getTagCompound().getString("owner")).equals(EntityPlayer.getUUID(player.getGameProfile()));
 	}
 
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("owner"))
-			l.add("Owner: " + is.getTagCompound().getString("owner"));
+			l.add("Owner: " + player.getPlayerEntityByUUID(UUID.fromString(is.getTagCompound().getString("owner"))).getName());
 	}
 
 	@Override
