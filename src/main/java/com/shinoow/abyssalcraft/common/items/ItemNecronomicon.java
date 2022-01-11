@@ -35,7 +35,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -70,6 +74,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		if (!stack.getTagCompound().hasKey("owner")) {
 			stack.getTagCompound().setString("owner",
 					EntityPlayer.getUUID(par3EntityPlayer.getGameProfile()).toString());
+			stack.getTagCompound().setString("ownerName", par3EntityPlayer.getName());
 			if (!par3EntityPlayer.isSneaking()) {
 				if (!par2World.isRemote && ACConfig.syncDataOnBookOpening)
 					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP) par3EntityPlayer);
@@ -79,6 +84,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		}
 		if (UUID.fromString(stack.getTagCompound().getString("owner"))
 				.equals(EntityPlayer.getUUID(par3EntityPlayer.getGameProfile()))) {
+			stack.getTagCompound().setString("ownerName", par3EntityPlayer.getName());
 			if (!par3EntityPlayer.isSneaking()) {
 				if (!par2World.isRemote && ACConfig.syncDataOnBookOpening)
 					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP) par3EntityPlayer);
@@ -121,9 +127,8 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B) {
-		if (is.hasTagCompound() && is.getTagCompound().hasKey("owner"))
-			l.add("Owner: "
-					+ player.getPlayerEntityByUUID(UUID.fromString(is.getTagCompound().getString("owner"))).getName());
+		if (is.hasTagCompound() && is.getTagCompound().hasKey("ownerName"))
+			l.add("Owner: " + is.getTagCompound().getString("ownerName"));
 	}
 
 	@Override
