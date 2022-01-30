@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -44,7 +44,7 @@ public class ItemHandler implements ILifeCycleHandler {
 	public void preInit(FMLPreInitializationEvent event) {
 		//"secret" dev stuff
 		devsword = new AbyssalCraftTool();
-		shoggoth_projectile = new Item().setUnlocalizedName("shoggoth_projectile");
+		shoggoth_projectile = new Item().setTranslationKey("shoggoth_projectile");
 
 		//Misc items
 		ACItems.oblivion_catalyst = new ItemOC();
@@ -85,8 +85,8 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.scroll = new ItemScroll("scroll", "basic", "lesser", "moderate", "greater");
 		ACItems.unique_scroll = new ItemScroll("unique_scroll", "antimatter", "oblivion");
 		ACItems.antidote = new ItemAntidote();
-		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setUnlocalizedName("door_dlt");
-		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setUnlocalizedName("door_drt");
+		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setTranslationKey("door_dlt");
+		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setTranslationKey("door_drt");
 		ACItems.configurator_shard = new ItemMetadataMisc("configurator_shard", "0", "1", "2", "3").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 		ACItems.silver_key = new ItemGatewayKey(3, "silver_key");
 		ACItems.book_of_many_faces = new ItemFaceBook("face_book");
@@ -248,8 +248,8 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_boots = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.FEET, "ethaxiumboots").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 
 		//Food
-		ACItems.generic_meat = new ItemFood(4, 0.4f, true).setUnlocalizedName("generic_meat").setCreativeTab(ACTabs.tabFood);
-		ACItems.cooked_generic_meat = new ItemFood(9, 0.9f, true).setUnlocalizedName("cooked_generic_meat").setCreativeTab(ACTabs.tabFood);
+		ACItems.generic_meat = new ItemFood(4, 0.4f, true).setTranslationKey("generic_meat").setCreativeTab(ACTabs.tabFood);
+		ACItems.cooked_generic_meat = new ItemFood(9, 0.9f, true).setTranslationKey("cooked_generic_meat").setCreativeTab(ACTabs.tabFood);
 
 		registerItem(devsword, "devsword");
 		registerItem(shoggoth_projectile, "shoggoth_projectile");

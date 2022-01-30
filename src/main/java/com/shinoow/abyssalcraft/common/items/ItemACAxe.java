@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -41,7 +41,7 @@ public class ItemACAxe extends ItemAxe implements IUnlockableItem {
 		super(mat, mat == AbyssalCraftAPI.darkstoneTool ? 8 : mat.getAttackDamage() + 5, -3.0F);
 		setCreativeTab(ACTabs.tabTools);
 		setHarvestLevel("axe", harvestlevel);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.format = format;
 	}
 

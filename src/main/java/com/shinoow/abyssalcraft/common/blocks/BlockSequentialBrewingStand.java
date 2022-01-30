@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -64,7 +64,7 @@ public class BlockSequentialBrewingStand extends BlockContainer
 				.withProperty(HAS_BOTTLE[2], false)
 				.withProperty(EXIT_DIRECTION, EnumFacing.NORTH)
 				.withProperty(ENTRY_DIRECTION, EnumFacing.UP));
-		setUnlocalizedName("sequential_brewing_stand");
+		setTranslationKey("sequential_brewing_stand");
 		setHardness(0.5F);
 		setLightLevel(0.125F);
 		setCreativeTab(ACTabs.tabBlock);
@@ -262,7 +262,7 @@ public class BlockSequentialBrewingStand extends BlockContainer
 	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
 	}

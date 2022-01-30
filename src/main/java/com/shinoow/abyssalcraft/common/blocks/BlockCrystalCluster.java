@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -45,14 +45,14 @@ public class BlockCrystalCluster extends BlockACBasic implements ICrystalBlock {
 	public BlockCrystalCluster remap(EnumCrystalType type) {
 		VARIANTS.put(type, this);
 		index = type.getMetadata();
-		setUnlocalizedName(type.getName() + "_crystal_cluster");
+		setTranslationKey(type.getName() + "_crystal_cluster");
 		return this;
 	}
 
 	public BlockCrystalCluster remap(EnumCrystalType2 type) {
 		VARIANTS_2.put(type, this);
 		index = type.getMetadata() + 16;
-		setUnlocalizedName(type.getName() + "_crystal_cluster");
+		setTranslationKey(type.getName() + "_crystal_cluster");
 		return this;
 	}
 

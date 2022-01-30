@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -125,7 +125,7 @@ public class ItemConfigurator extends ItemACBasic {
 							player.sendMessage(new TextComponentTranslation("message.configurator.error.1"));
 							return EnumActionResult.FAIL;
 						}
-						EnumFacing facing = EnumFacing.getFront(nbt.getInteger("EntryFacing"));
+						EnumFacing facing = EnumFacing.byIndex(nbt.getInteger("EntryFacing"));
 						TileEntity res = w.getTileEntity(positions.get(positions.size()-1));
 						if(res == null || ItemTransferEventHandler.getInventory(res, facing) == null) {
 							player.sendMessage(new TextComponentTranslation("message.configurator.error.2"));

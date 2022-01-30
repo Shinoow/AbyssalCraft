@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -37,7 +37,7 @@ public class ItemMetadata extends Item implements IUnlockableItem {
 	private IUnlockCondition condition = new DefaultCondition();
 
 	public ItemMetadata(String name, String...names){
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setCreativeTab(ACTabs.tabItems);
 		setMaxDamage(0);
 		setHasSubtypes(true);
@@ -58,9 +58,9 @@ public class ItemMetadata extends Item implements IUnlockableItem {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getTranslationKey(ItemStack stack)
 	{
-		return getUnlocalizedName() + "." + names[stack.getItemDamage()];
+		return getTranslationKey() + "." + names[stack.getItemDamage()];
 	}
 
 	@Override

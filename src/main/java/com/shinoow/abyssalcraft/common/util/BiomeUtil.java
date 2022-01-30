@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -57,7 +57,7 @@ public class BiomeUtil {
 	 * depending on how many chunks are being altered at once)
 	 */
 	public static void updateBiome(World worldIn, BlockPos pos, int b, boolean batched) {
-		Chunk c = worldIn.getChunkFromBlockCoords(pos);
+		Chunk c = worldIn.getChunk(pos);
 		c.getBiomeArray()[(pos.getZ() & 0xF) << 4 | pos.getX() & 0xF] = (byte)b;
 		c.setModified(true);
 		if(!worldIn.isRemote)

@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -44,7 +44,7 @@ public class BlockEnergyDepositioner extends BlockACBasic {
 
 	public BlockEnergyDepositioner() {
 		super(Material.ROCK, 2, 4, SoundType.STONE);
-		setUnlocalizedName("energydepositioner");
+		setTranslationKey("energydepositioner");
 		setCreativeTab(ACTabs.tabDecoration);
 	}
 
@@ -89,7 +89,7 @@ public class BlockEnergyDepositioner extends BlockACBasic {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
 	}

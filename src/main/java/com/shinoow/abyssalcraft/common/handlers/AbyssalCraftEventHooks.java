@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -79,7 +79,7 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void populateChunk(PopulateChunkEvent.Pre event) {
-		Chunk chunk = event.getWorld().getChunkFromChunkCoords(event.getChunkX(), event.getChunkZ());
+		Chunk chunk = event.getWorld().getChunk(event.getChunkX(), event.getChunkZ());
 		for (ExtendedBlockStorage storage : chunk.getBlockStorageArray())
 			if (storage != null && storage.getYLocation() >= 60)
 				for (int x = 0; x < 16; ++x)
@@ -191,7 +191,7 @@ public class AbyssalCraftEventHooks {
 			if(player.dimension == ACLib.omothol_id && player.posY <= 0){
 				player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
 				player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 20));
-				player.mcServer.getPlayerList().transferPlayerToDimension(player, ACLib.dark_realm_id, new TeleporterDarkRealm(worldServer));
+				player.server.getPlayerList().transferPlayerToDimension(player, ACLib.dark_realm_id, new TeleporterDarkRealm(worldServer));
 				//				player.addStat(ACAchievements.enter_dark_realm, 1);
 			}
 		}

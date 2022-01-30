@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -173,8 +173,8 @@ public class ItemTransferConfiguration implements INBTSerializable<NBTTagCompoun
 
 	@Override
 	public void deserializeNBT(NBTTagCompound nbt) {
-		exitFacing = EnumFacing.getFront(nbt.getInteger("exitFacing"));
-		entryFacing = EnumFacing.getFront(nbt.getInteger("entryFacing"));
+		exitFacing = EnumFacing.byIndex(nbt.getInteger("exitFacing"));
+		entryFacing = EnumFacing.byIndex(nbt.getInteger("entryFacing"));
 		NBTTagList list = nbt.getTagList("route", NBT.TAG_LONG);
 		List<BlockPos> positions = new ArrayList<>();
 		for(Iterator<NBTBase> i = list.iterator(); i.hasNext();)

@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -78,7 +78,7 @@ public class BlockODB extends Block {
 
 		if (par1World.isBlockPowered(pos))
 		{
-			onBlockDestroyedByPlayer(par1World, pos, state.withProperty(EXPLODE, true));
+			onPlayerDestroy(par1World, pos, state.withProperty(EXPLODE, true));
 			par1World.setBlockToAir(pos);
 		}
 	}
@@ -88,7 +88,7 @@ public class BlockODB extends Block {
 	{
 		if (par1World.isBlockPowered(pos))
 		{
-			onBlockDestroyedByPlayer(par1World, pos, state.withProperty(EXPLODE, true));
+			onPlayerDestroy(par1World, pos, state.withProperty(EXPLODE, true));
 			par1World.setBlockToAir(pos);
 		}
 	}
@@ -100,7 +100,7 @@ public class BlockODB extends Block {
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, BlockPos pos, Explosion par5Explosion)
+	public void onExplosionDestroy(World par1World, BlockPos pos, Explosion par5Explosion)
 	{
 		if (!par1World.isRemote)
 		{
@@ -111,7 +111,7 @@ public class BlockODB extends Block {
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World par1World, BlockPos pos, IBlockState state)
+	public void onPlayerDestroy(World par1World, BlockPos pos, IBlockState state)
 	{
 		explode(par1World, pos, state, (EntityLivingBase)null);
 	}
@@ -154,7 +154,7 @@ public class BlockODB extends Block {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity)
+	public void onEntityCollision(World par1World, BlockPos pos, IBlockState state, Entity par5Entity)
 	{
 		if (par5Entity instanceof EntityArrow && !par1World.isRemote)
 		{

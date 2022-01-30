@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -102,7 +102,7 @@ public class EntityBlackHole extends Entity
 								if(ForgeHooks.onTravelToDimension(thePlayer, id)) {
 									thePlayer.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 255));
 									thePlayer.setPosition(rand.nextInt(100), 80, rand.nextInt(100));
-									thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, id, new TeleporterDarkRealm(thePlayer.mcServer.getWorld(id)));
+									thePlayer.server.getPlayerList().transferPlayerToDimension(thePlayer, id, new TeleporterDarkRealm(thePlayer.server.getWorld(id)));
 								}
 							} else {
 								MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();

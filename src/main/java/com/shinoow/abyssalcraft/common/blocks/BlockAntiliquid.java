@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -65,8 +65,8 @@ public class BlockAntiliquid extends BlockFluidClassic {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
+	public void onEntityCollision(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
+		super.onEntityCollision(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityAnti((EntityLivingBase)par5Entity)){
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 400));

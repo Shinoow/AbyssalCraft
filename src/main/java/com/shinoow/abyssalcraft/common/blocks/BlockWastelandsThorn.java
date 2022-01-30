@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -29,7 +29,7 @@ public class BlockWastelandsThorn extends BlockBush {
 
 	public BlockWastelandsThorn(){
 		setSoundType(SoundType.PLANT);
-		setUnlocalizedName("wastelandsthorn");
+		setTranslationKey("wastelandsthorn");
 		setCreativeTab(ACTabs.tabDecoration);
 	}
 
@@ -41,7 +41,7 @@ public class BlockWastelandsThorn extends BlockBush {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
 		if(entityIn instanceof EntityPlayer && ((EntityPlayer)entityIn).getItemStackFromSlot(EntityEquipmentSlot.FEET) == null &&
 				((EntityPlayer)entityIn).getItemStackFromSlot(EntityEquipmentSlot.LEGS) == null)

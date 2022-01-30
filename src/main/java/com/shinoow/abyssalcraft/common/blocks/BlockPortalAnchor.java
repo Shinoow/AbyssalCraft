@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -39,7 +39,7 @@ public class BlockPortalAnchor extends BlockACBasic {
 
 	public BlockPortalAnchor() {
 		super(Material.ROCK, 10.0F, 24.0F, SoundType.STONE);
-		setUnlocalizedName("portal_anchor");
+		setTranslationKey("portal_anchor");
 		setDefaultState(blockState.getBaseState().withProperty(ACTIVE, false));
 	}
 
@@ -68,7 +68,7 @@ public class BlockPortalAnchor extends BlockACBasic {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
 	}

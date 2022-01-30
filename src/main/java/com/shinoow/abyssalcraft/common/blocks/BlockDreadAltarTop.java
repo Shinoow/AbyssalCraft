@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -105,7 +105,7 @@ public class BlockDreadAltarTop extends Block {
 							//						par5EntityPlayer.addStat(ACAchievements.summon_chagaroth, 1);
 							chagarothlair lair = new chagarothlair();
 							lair.generate(par1World, par1World.rand, pos);
-							par1World.getChunkFromBlockCoords(pos).markDirty();
+							par1World.getChunk(pos).markDirty();
 						}
 					}
 					else if(pos.getY() < 41 && par1World.isRemote)
@@ -120,8 +120,8 @@ public class BlockDreadAltarTop extends Block {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
+	public void onEntityCollision(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
+		super.onEntityCollision(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityDread((EntityLivingBase)par5Entity))
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 100));

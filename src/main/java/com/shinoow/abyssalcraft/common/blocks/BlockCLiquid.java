@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -125,8 +125,8 @@ public class BlockCLiquid extends BlockFluidClassic {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
-		super.onEntityCollidedWithBlock(par1World, pos, state, par5Entity);
+	public void onEntityCollision(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
+		super.onEntityCollision(par1World, pos, state, par5Entity);
 
 		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity) && ((EntityLivingBase)par5Entity).getActivePotionEffect(AbyssalCraftAPI.coralium_plague) == null)
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 200));
@@ -198,14 +198,14 @@ public class BlockCLiquid extends BlockFluidClassic {
 		bricks.add(Blocks.STONEBRICK.getStateFromMeta(3));
 		bricks.add(Blocks.NETHER_BRICK.getDefaultState());
 		bricks.add(ACBlocks.darkstone_brick.getDefaultState());
-		bricks.add(ACBlocks.darkstone_brick.getStateFromMeta(1));
-		bricks.add(ACBlocks.darkstone_brick.getStateFromMeta(2));
+		bricks.add(ACBlocks.cracked_darkstone_brick.getDefaultState());
+		bricks.add(ACBlocks.chiseled_darkstone_brick.getDefaultState());
 		bricks.add(ACBlocks.abyssalnite_stone_brick.getDefaultState());
-		bricks.add(ACBlocks.abyssalnite_stone_brick.getStateFromMeta(1));
-		bricks.add(ACBlocks.abyssalnite_stone_brick.getStateFromMeta(2));
+		bricks.add(ACBlocks.cracked_abyssalnite_stone_brick.getDefaultState());
+		bricks.add(ACBlocks.chiseled_abyssalnite_stone_brick.getDefaultState());
 		bricks.add(ACBlocks.dreadstone_brick.getDefaultState());
-		bricks.add(ACBlocks.dreadstone_brick.getStateFromMeta(1));
-		bricks.add(ACBlocks.dreadstone_brick.getStateFromMeta(2));
+		bricks.add(ACBlocks.cracked_dreadstone_brick.getDefaultState());
+		bricks.add(ACBlocks.chiseled_dreadstone_brick.getDefaultState());
 		bricks.add(Blocks.END_BRICKS.getDefaultState());
 		bricks.add(Blocks.RED_NETHER_BRICK.getDefaultState());
 		metals.add(ACBlocks.abyssal_iron_ore.getDefaultState());

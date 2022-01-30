@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -51,7 +51,7 @@ public class ItemCoraliumBow extends ItemBow implements IUnlockableItem {
 	private IUnlockCondition condition = new DefaultCondition();
 	/**
 	 * @param texture is String of item texture, ie itemName.png
-	 * 		also sets the UnlocalizedName to avoid render issues
+	 * 		also sets the TranslationKey to avoid render issues
 	 * @param texture_0 is String of item animation texture 0, ie itemName_0.png
 	 * @param texture_1 is String of item animation texture 1, ie itemName_1.png
 	 * @param texture_2 is String of item animation texture 2, ie itemName_2.png
@@ -68,7 +68,7 @@ public class ItemCoraliumBow extends ItemBow implements IUnlockableItem {
 	 */
 	public ItemCoraliumBow(float chargeTime, int anim_0, int anim_1, int anim_2) {
 		maxStackSize = 1;
-		setUnlocalizedName("corbow");
+		setTranslationKey("corbow");
 		setCreativeTab(ACTabs.tabCombat);
 
 		charge = chargeTime;
@@ -102,26 +102,6 @@ public class ItemCoraliumBow extends ItemBow implements IUnlockableItem {
 	public void addInformation(ItemStack par1ItemStack, World entityplayer, List list, ITooltipFlag is){
 		list.add(I18n.format("tooltip.corbow.1"));
 		list.add(I18n.format("tooltip.corbow.2"));
-	}
-
-	private ItemStack findAmmo(EntityPlayer player)
-	{
-		if (isArrow(player.getHeldItem(EnumHand.OFF_HAND)))
-			return player.getHeldItem(EnumHand.OFF_HAND);
-		else if (isArrow(player.getHeldItem(EnumHand.MAIN_HAND)))
-			return player.getHeldItem(EnumHand.MAIN_HAND);
-		else
-		{
-			for (int i = 0; i < player.inventory.getSizeInventory(); ++i)
-			{
-				ItemStack itemstack = player.inventory.getStackInSlot(i);
-
-				if (isArrow(itemstack))
-					return itemstack;
-			}
-
-			return null;
-		}
 	}
 
 	/**

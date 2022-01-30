@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -103,7 +103,7 @@ public class BlockMimicFire extends BlockFire {
 
 									if (k1 > 0)
 									{
-										int l1 = (k1 + 40 + worldIn.getDifficulty().getDifficultyId() * 7) / (i + 30);
+										int l1 = (k1 + 40 + worldIn.getDifficulty().getId() * 7) / (i + 30);
 
 										if (flag1)
 											l1 /= 2;
@@ -144,7 +144,7 @@ public class BlockMimicFire extends BlockFire {
 				worldIn.setBlockToAir(pos);
 
 			if (iblockstate.getBlock() == Blocks.TNT)
-				Blocks.TNT.onBlockDestroyedByPlayer(worldIn, pos, iblockstate.withProperty(BlockTNT.EXPLODE, true));
+				Blocks.TNT.onPlayerDestroy(worldIn, pos, iblockstate.withProperty(BlockTNT.EXPLODE, true));
 		}
 	}
 

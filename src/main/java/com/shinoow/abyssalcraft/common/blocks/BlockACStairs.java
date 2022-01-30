@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -40,10 +40,10 @@ public class BlockACStairs extends BlockStairs {
 		setCreativeTab(ACTabs.tabBlock);
 
 		if(getHarvestTool(getDefaultState()) == null)
-			if(blockMaterial == Material.ROCK || blockMaterial == Material.IRON || blockMaterial == Material.ANVIL)
+			if(material == Material.ROCK || material == Material.IRON || material == Material.ANVIL)
 				setHarvestLevel("pickaxe", 0);
-			else if(blockMaterial == Material.GROUND || blockMaterial == Material.GRASS || blockMaterial == Material.SAND ||
-					blockMaterial == Material.SNOW || blockMaterial == Material.CRAFTED_SNOW)
+			else if(material == Material.GROUND || material == Material.GRASS || material == Material.SAND ||
+					material == Material.SNOW || material == Material.CRAFTED_SNOW)
 				setHarvestLevel("shovel", 0);
 	}
 

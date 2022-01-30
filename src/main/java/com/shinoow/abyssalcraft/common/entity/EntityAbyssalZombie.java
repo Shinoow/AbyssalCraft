@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -192,8 +192,8 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 				if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity)
 				|| ACConfig.shouldInfect == true && !EntityUtil.isEntityCoralium((EntityLivingBase)par1Entity))
 					((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 100));
-			if(getHeldItemMainhand().isEmpty() && isBurning() && rand.nextFloat() < world.getDifficulty().getDifficultyId() * 0.3F)
-				par1Entity.setFire(2 * world.getDifficulty().getDifficultyId());
+			if(getHeldItemMainhand().isEmpty() && isBurning() && rand.nextFloat() < world.getDifficulty().getId() * 0.3F)
+				par1Entity.setFire(2 * world.getDifficulty().getId());
 		}
 
 		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)

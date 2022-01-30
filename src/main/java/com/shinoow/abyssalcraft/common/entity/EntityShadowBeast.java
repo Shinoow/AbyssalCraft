@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -161,12 +161,12 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
 		double range = 4D + rand.nextDouble() * 8D;
 		Vec3d srcVec = new Vec3d(posX, posY + getEyeHeight(), posZ);
 		Vec3d lookVec = getLook(1.0F);
-		RayTraceResult raytrace = world.rayTraceBlocks(srcVec, srcVec.addVector(lookVec.x * range, lookVec.y * range, lookVec.z * range));
+		RayTraceResult raytrace = world.rayTraceBlocks(srcVec, srcVec.add(lookVec.x * range, lookVec.y * range, lookVec.z * range));
 		BlockPos hitpos = raytrace != null ? raytrace.getBlockPos() : null;
 		double rx = hitpos == null ? range : Math.min(range, Math.abs(posX - hitpos.getX()));
 		double ry = hitpos == null ? range : Math.min(range, Math.abs(posY - hitpos.getY()));
 		double rz = hitpos == null ? range : Math.min(range, Math.abs(posZ - hitpos.getZ()));
-		Vec3d destVec = srcVec.addVector(lookVec.x * range, lookVec.y * range, lookVec.z * range);
+		Vec3d destVec = srcVec.add(lookVec.x * range, lookVec.y * range, lookVec.z * range);
 		float var9 = 4.0F;
 		List<Entity> possibleList = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().offset(lookVec.x * rx, lookVec.y * ry, lookVec.z * rz).grow(var9, var9, var9));
 		double hitDist = 0.0D;

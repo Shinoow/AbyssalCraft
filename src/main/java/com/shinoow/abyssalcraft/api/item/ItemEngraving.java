@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2021 Shinoow.
+ * Copyright (c) 2012 - 2022 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -44,7 +44,7 @@ public class ItemEngraving extends Item implements IUnlockableItem {
 	 */
 	public ItemEngraving(String par1, int par2){
 		super();
-		setUnlocalizedName("engraving_" + par1);
+		setTranslationKey("engraving_" + par1);
 		setMaxDamage(par2);
 		setNoRepair();
 	}
