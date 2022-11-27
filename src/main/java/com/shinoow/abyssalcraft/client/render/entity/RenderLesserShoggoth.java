@@ -26,11 +26,11 @@ public class RenderLesserShoggoth extends RenderLiving {
 
 	protected ModelLesserShoggoth model;
 
-	private static final ResourceLocation shoggothResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/LesserShoggoth.png");
-	private static final ResourceLocation abyssalResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/AbyssalShoggoth.png");
-	private static final ResourceLocation dreadedResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/DreadedShoggoth.png");
-	private static final ResourceLocation omotholResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/OmotholShoggoth.png");
-	private static final ResourceLocation darkResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/ShadowShoggoth.png");
+	private static final ResourceLocation shoggothResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/lessershoggoth.png");
+	private static final ResourceLocation abyssalResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/abyssalshoggoth.png");
+	private static final ResourceLocation dreadedResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/dreadedshoggoth.png");
+	private static final ResourceLocation omotholResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/omotholshoggoth.png");
+	private static final ResourceLocation darkResource = new ResourceLocation("abyssalcraft:textures/model/shoggoth/shadowshoggoth.png");
 
 	public RenderLesserShoggoth ()
 	{

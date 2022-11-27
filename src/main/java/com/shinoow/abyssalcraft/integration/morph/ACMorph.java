@@ -77,7 +77,7 @@ public class ACMorph implements IACPlugin {
 			Api.registerArmForModel(modelChagarothFist, modelChagarothFist.arm1);
 			Api.registerArmForModel(modelChagarothSpawn, modelChagarothSpawn.smallspike2);
 			Api.registerArmForModel(modelDG, modelDG.rarm1);
-			Api.registerArmForModel(modelLesserShoggoth, modelLesserShoggoth.rightleg1);
+			Api.registerArmForModel(modelLesserShoggoth, modelLesserShoggoth.rArm01a);
 		}
 
 		Api.blacklistEntity(EntityDragonMinion.class);
