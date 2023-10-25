@@ -1,15 +1,20 @@
 buildscript {
     repositories {
-        maven { url = 'https://maven.minecraftforge.net/' }
-        mavenCentral()
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+		maven {
+            // Required for the curseforge task
+            name = "gradle"
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.2.0"
     }
-}
-
-plugins {
-	id "com.matthewprenger.cursegradle" version "1.2.0"
 }
 
 repositories {
@@ -20,8 +25,8 @@ repositories {
 }
 
 apply plugin: 'java'
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.matthewprenger.cursegradle'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
@@ -41,82 +46,62 @@ archivesBaseName = "AbyssalCraft"
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-	
+    version = "${props.mc_version}-${props.forge_version}"
+    runDir = "run"
+
+	useDepAts = true
+    
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'stable', version: '39-1.12'
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-	
-    runs {
-        client {
-            workingDirectory project.file('run')
+    mappings = "stable_39"
+    makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-        }
-
-        server {
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-        }
-        }
-
-	// replaceIn "AbyssalCraft.java"
-    //     replace "forgeversion", props.forge_version
-	// 	replace "ac_version", props.ac_version
-	// 	replace "cert_fingerprint", project.findProperty('signSHA1')
+    replaceIn "AbyssalCraft.java"
+        replace "forgeversion", props.forge_version
+        replace "ac_version", props.ac_version
+        replace "cert_fingerprint", project.findProperty('signSHA1')
 }
 
 dependencies {
 	
-    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
+    deobfCompile "mezz.jei:jei_1.12.2:4.16.1.302"
 
-    compileOnly fg.deobf("mezz.jei:jei_1.12.2:4.11.0.206:api")
-
-    runtimeOnly fg.deobf("mezz.jei:jei_1.12.2:4.11.0.206")
 }
 
 version = "${props.mc_version}-${props.ac_version}"
 
-// processResources
-// {
-// 	// I really don't want that file to exist anywhere
-// 	exclude '**/Thumbs.db'
+processResources
+{
+	// I really don't want that file to exist anywhere
+	exclude '**/Thumbs.db'
 
-// 	// this will ensure that this task is redone when the versions change.
-//     inputs.property "version", project.version
-//     inputs.property "mcversion", '1.12.2'
+	// this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
 	
-//     // replace stuff in mcmod.info, nothing else
-//     from(sourceSets.main.resources.srcDirs) {
-//         include 'mcmod.info'
-// 		include 'version.properties'
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+		include 'version.properties'
 
-//         // replace version and mcversion
-//         expand ([
-// 			'version':project.version,
-// 			'acversion':project.props.ac_version,
-// 			'mcversion':project.props.mc_version,
-// 			'forgeversion':project.props.forge_version
-// 		])
-//     }
+        // replace version and mcversion
+        expand ([
+			'version':project.version,
+			'acversion':project.props.ac_version,
+			'mcversion':project.props.mc_version,
+			'forgeversion':project.props.forge_version
+		])
+    }
         
-//     // copy everything else, thats not the mcmod.info
-//     from(sourceSets.main.resources.srcDirs) {
-//         exclude 'mcmod.info'
-// 		exclude 'version.properties'
-//     }
-// }
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+        exclude 'version.properties'
+    }
+}
 	
 task srcJar(type: Jar) {
     from sourceSets.main.allJava
@@ -126,9 +111,9 @@ task srcJar(type: Jar) {
 }
 
 task apiJar(type: Jar, dependsOn: 'classes') {
-		from sourceSets.main.allSource
-		from sourceSets.main.output
-		include 'com/shinoow/abyssalcraft/api/**'
+    from sourceSets.main.allSource
+    from sourceSets.main.output
+    include 'com/shinoow/abyssalcraft/api/**'
 	
 	extension = 'jar'
 	classifier = 'api'
@@ -152,53 +137,39 @@ curseforge {
 	}
 }
 
-jar {
-    manifest {
-        attributes([
-            "Specification-Title": "AbyssalCraft",
-            "Specification-Vendor": "shinoow",
-            "Specification-Version": "${project.props.ac_version}",
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${project.version}",
-            "Implementation-Vendor" :"shinoow",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+publishing {
+    publications {
+        mavenStuff(MavenPublication) {
+            from components.java
+            artifact srcJar
+            artifact apiJar
+            groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
+        }
     }
 }
 
-// publishing {
-//     publications {
-//         mavenStuff(MavenPublication) {
-// 			from components.java
-//             artifact srcJar
-// 			artifact apiJar
-//             groupId project.group
-//             artifactId project.archivesBaseName
-//             version project.version
-//         }
-//     }
-// }
+task signJar(type: SignJar, dependsOn: reobfJar) {
 
-// // task signJar(type: SignJar, dependsOn: reobfJar) {
+    // Skips if the keyStore property is missing.
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
 
-// //     // Skips if the keyStore property is missing.
-// //     onlyIf {
-// //         project.hasProperty('keyStore')
-// //     }
+    // findProperty allows us to reference the property without it existing. 
+    // Using project.propName would cause the script to fail validation if 
+    // the property did not exist. 
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
+}
 
-// //     // findProperty allows us to reference the property without it existing. 
-// //     // Using project.propName would cause the script to fail validation if 
-// //     // the property did not exist. 
-// //     keyStore = project.findProperty('keyStore')
-// //     alias = project.findProperty('keyStoreAlias')
-// //     storePass = project.findProperty('keyStorePass')
-// //     keyPass = project.findProperty('keyStoreKeyPass')
-// //     inputFile = jar.archivePath
-// //     outputFile = jar.archivePath
-// // }
-
-// // // Runs this task automatically when build is ran. 
-// // build.dependsOn signJar
+// Runs this task automatically when build is ran. 
+build.dependsOn signJar
 
 //copies the source files over to the folder from which they will be included in a RAR-file
 task prepareFiles(type: Copy){
