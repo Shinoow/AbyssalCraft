@@ -128,4 +128,13 @@ public class SpellUtils {
 			return false;
 		return player.canAttackPlayer(player2);
 	}
+
+	/**
+	 * Attempts to fetch the color of a spell from an ItemStack
+	 * returning a fallback on failure
+	 */
+	public static int getSpellColor(ItemStack stack) {
+		Spell spell = getSpell(stack);
+		return spell != null ? spell.getColor() : 16777215;
+	}
 }
