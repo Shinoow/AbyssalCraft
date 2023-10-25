@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.common.network.server.TransferStackMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
@@ -58,11 +59,10 @@ public class InventoryMaterializer implements IInventory
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
-		ItemStack itemstack = inventoryContents.get(index).copy();
+		ItemStack itemstack = ItemStackHelper.getAndSplit(inventoryContents, index, count);
 
 		if (!itemstack.isEmpty())
 		{
-			itemstack.setCount(count);
 			markDirty();
 			if(tile.getWorld().isRemote)
 				PacketDispatcher.sendToServer(new TransferStackMessage(index, itemstack));
