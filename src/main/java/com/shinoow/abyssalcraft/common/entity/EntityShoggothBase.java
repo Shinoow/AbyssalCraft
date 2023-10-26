@@ -456,12 +456,12 @@ public abstract class EntityShoggothBase extends EntityMob implements IOmotholEn
 
 		if (par1NBTTagCompound.hasKey("ShoggothType"))
 		{
-			byte var2 = par1NBTTagCompound.getByte("ShoggothType");
+			int var2 = par1NBTTagCompound.getInteger("ShoggothType");
 			setShoggothType(var2);
 		}
 
 		if(par1NBTTagCompound.hasKey("FoodLevel")){
-			byte var2 = par1NBTTagCompound.getByte("FoodLevel");
+			int var2 = par1NBTTagCompound.getInteger("FoodLevel");
 			setFoodLevel(var2);
 		}
 
@@ -476,9 +476,9 @@ public abstract class EntityShoggothBase extends EntityMob implements IOmotholEn
 		if (isChild())
 			par1NBTTagCompound.setBoolean("IsBaby", true);
 
-		par1NBTTagCompound.setByte("ShoggothType", (byte)getShoggothType());
+		par1NBTTagCompound.setInteger("ShoggothType", getShoggothType());
 
-		par1NBTTagCompound.setByte("FoodLevel", (byte)getFoodLevel());
+		par1NBTTagCompound.setInteger("FoodLevel", getFoodLevel());
 
 		par1NBTTagCompound.setInteger("MonolithTimer", monolithTimer);
 	}

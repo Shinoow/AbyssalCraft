@@ -50,7 +50,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 
-	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityAntiZombie.class, DataSerializers.BYTE);
+	private static final DataParameter<Boolean> CHILD = EntityDataManager.createKey(EntityAntiZombie.class, DataSerializers.BOOLEAN);
 	protected static final IAttribute spawnReinforcementsAttribute = new RangedAttribute((IAttribute)null, "zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D).setDescription("Spawn Reinforcements Chance");
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
@@ -94,7 +94,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CHILD, (byte)0);
+		dataManager.register(CHILD, false);
 	}
 
 	public boolean canBearkDoors()
@@ -118,7 +118,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	@Override
 	public boolean isChild()
 	{
-		return dataManager.get(CHILD).byteValue() == 1;
+		return dataManager.get(CHILD).booleanValue();
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	 */
 	public void setChild(boolean par1)
 	{
-		dataManager.set(CHILD, (byte)(par1 ? 1 : 0));
+		dataManager.set(CHILD, par1);
 
 		if (world != null && !world.isRemote)
 		{
