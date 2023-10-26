@@ -15,7 +15,7 @@ See LICENSE and LICENSE_ASSETS for more information
 
 ### Support Development
 
-[![](https://s3.amazonaws.com/patreon_public_assets/kaGh5_patreon_name_and_message.png)](https://www.patreon.com/Shinoow)
+[Patreon link goes here](https://www.patreon.com/Shinoow)
 
 ### Reporting bugs
 
@@ -28,6 +28,10 @@ If you find something you think I should change in the mod that can enhance the 
 ### Contributing
 
 Contributions are welcome. Most contributions might end up being tweaks and improvements, but that's still a contribution.
+
+### Translation
+
+Translations of the mod are very welcome! You can find the English language file at `src/main/resources/assets/abyssalcraft/lang/en_us.lang`, make a copy of that and go wild!
 
 ### Integrations
 
