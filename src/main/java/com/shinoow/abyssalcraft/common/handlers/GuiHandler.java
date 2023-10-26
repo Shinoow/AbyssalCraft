@@ -84,9 +84,9 @@ public class GuiHandler implements IGuiHandler {
 			return null;
 		});
 		serverElements.put(ACLib.necronomiconspellbookGuiID, ctx -> {
-			if(ctx.getMainHand().getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)ctx.getMainHand().getItem()).isOwner(ctx.player, ctx.getMainHand()))
+			if(ctx.getMainHand().getItem() instanceof ItemNecronomicon)
 				return new ContainerSpellbook(ctx.player, ctx.getMainHand());
-			if(ctx.getOffHand().getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)ctx.getOffHand().getItem()).isOwner(ctx.player, ctx.getOffHand()))
+			if(ctx.getOffHand().getItem() instanceof ItemNecronomicon)
 				return new ContainerSpellbook(ctx.player, ctx.getOffHand());
 			return null;
 		});
@@ -144,9 +144,9 @@ public class GuiHandler implements IGuiHandler {
 			return null;
 		});
 		clientElements.put(ACLib.necronmiconGuiID, ctx -> {
-			if(ctx.getMainHand().getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)ctx.getMainHand().getItem()).isOwner(ctx.player, ctx.getMainHand()))
+			if(ctx.getMainHand().getItem() instanceof ItemNecronomicon)
 				return GuiNecronomicon.currentNecro.withBookType(((ItemNecronomicon)ctx.getMainHand().getItem()).getBookType());
-			if(ctx.getOffHand().getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)ctx.getOffHand().getItem()).isOwner(ctx.player, ctx.getOffHand()))
+			if(ctx.getOffHand().getItem() instanceof ItemNecronomicon)
 				return GuiNecronomicon.currentNecro.withBookType(((ItemNecronomicon)ctx.getOffHand().getItem()).getBookType());
 			return null;
 		});
@@ -158,7 +158,7 @@ public class GuiHandler implements IGuiHandler {
 			return null;
 		});
 		clientElements.put(ACLib.necronomiconspellbookGuiID, ctx -> {
-			if(ctx.getMainHand().getItem() instanceof ItemNecronomicon && ((ItemNecronomicon)ctx.getMainHand().getItem()).isOwner(ctx.player, ctx.getMainHand()))
+			if(ctx.getMainHand().getItem() instanceof ItemNecronomicon)
 				return new GuiSpellbook(new ContainerSpellbook(ctx.player, ctx.getMainHand()));
 			return null;
 		});

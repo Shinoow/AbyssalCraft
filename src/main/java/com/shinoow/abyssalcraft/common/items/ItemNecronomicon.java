@@ -67,28 +67,14 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		ItemStack stack = par3EntityPlayer.getHeldItem(hand);
 		if (!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		if (!stack.getTagCompound().hasKey("owner")) {
-			stack.getTagCompound().setString("owner",
-					EntityPlayer.getUUID(par3EntityPlayer.getGameProfile()).toString());
-			stack.getTagCompound().setString("ownerName", par3EntityPlayer.getName());
-			if (!par3EntityPlayer.isSneaking()) {
-				if (!par2World.isRemote && ACConfig.syncDataOnBookOpening)
-					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP) par3EntityPlayer);
-				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
-				return new ActionResult(EnumActionResult.SUCCESS, stack);
-			}
+
+		if (!par3EntityPlayer.isSneaking()) {
+			if (!par2World.isRemote && ACConfig.syncDataOnBookOpening)
+				PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP) par3EntityPlayer);
+			par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
+			return new ActionResult(EnumActionResult.SUCCESS, stack);
 		}
-		if (UUID.fromString(stack.getTagCompound().getString("owner"))
-				.equals(EntityPlayer.getUUID(par3EntityPlayer.getGameProfile()))) {
-			stack.getTagCompound().setString("ownerName", par3EntityPlayer.getName());
-			if (!par3EntityPlayer.isSneaking()) {
-				if (!par2World.isRemote && ACConfig.syncDataOnBookOpening)
-					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP) par3EntityPlayer);
-				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
-				return new ActionResult(EnumActionResult.SUCCESS, stack);
-			}
-		} else if (par2World.isRemote)
-			SpecialTextUtil.JzaharText(I18n.format("message.necronomicon.nope"));
+		
 		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 
@@ -98,33 +84,18 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		ItemStack is = player.getHeldItem(hand);
 		if (player.isSneaking())
 			if (!(w.getTileEntity(pos) instanceof IRitualAltar)) {
-				if (isOwner(player, is))
-					if (RitualUtil.tryAltar(w, pos, bookType)
-							|| StructureHandler.instance().tryFormStructure(w, pos, bookType, player)) {
-						w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);
-						// player.addStat(ACAchievements.ritual_altar, 1);
-						return EnumActionResult.SUCCESS;
-					}
-			} else if (w.getTileEntity(pos) instanceof IRitualAltar)
-				if (isOwner(player, is)) {
-					IRitualAltar altar = (IRitualAltar) w.getTileEntity(pos);
-					altar.performRitual(w, pos, player);
+				if (RitualUtil.tryAltar(w, pos, bookType)
+						|| StructureHandler.instance().tryFormStructure(w, pos, bookType, player)) {
+					w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);
+					// player.addStat(ACAchievements.ritual_altar, 1);
 					return EnumActionResult.SUCCESS;
 				}
+			} else {
+				IRitualAltar altar = (IRitualAltar) w.getTileEntity(pos);
+				altar.performRitual(w, pos, player);
+				return EnumActionResult.SUCCESS;
+			}
 		return EnumActionResult.PASS;
-	}
-
-	public boolean isOwner(EntityPlayer player, ItemStack stack) {
-		if (!stack.hasTagCompound())
-			return false;
-		return UUID.fromString(stack.getTagCompound().getString("owner"))
-				.equals(EntityPlayer.getUUID(player.getGameProfile()));
-	}
-
-	@Override
-	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B) {
-		if (is.hasTagCompound() && is.getTagCompound().hasKey("ownerName"))
-			l.add("Owner: " + is.getTagCompound().getString("ownerName"));
 	}
 
 	@Override
