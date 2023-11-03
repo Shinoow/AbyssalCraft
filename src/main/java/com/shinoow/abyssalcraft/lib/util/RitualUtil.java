@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.lib.util;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
@@ -23,9 +24,11 @@ import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 /**
@@ -106,9 +109,11 @@ public class RitualUtil {
 						return true;
 					}))
 						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), book.get())){
-							if(!world.isRemote)
-								createAltar(world, pos);
-							return true;
+							if(sameChunk(world, pos)) {
+								if(!world.isRemote)
+									createAltar(world, pos);
+								return true;	
+							}
 						}
 		return false;
 	}
@@ -131,6 +136,26 @@ public class RitualUtil {
 			world.setBlockState(pos2, getPedestal(pedestal), 2);
 			((IRitualPedestal) world.getTileEntity(pos2)).setAltar(pos);
 		}
+	}
+
+	/**
+	 * Validates all blocks are within the same chunk
+	 * @param world World object
+	 * @param pos Block Position
+	 * @return True if the blocks are in the same chunk, otherwise false with particles on the affected blocks
+	 */
+	private static boolean sameChunk(World world, BlockPos pos) {
+		Chunk chunk = world.getChunk(pos);
+		if(PEDESTAL_POSITIONS.stream().map(p -> world.getChunk(pos.add(p))).allMatch(c -> c == chunk))
+			return true;
+
+		if(world.isRemote)
+			PEDESTAL_POSITIONS.stream()
+				.map(p -> pos.add(p))
+				.filter(p -> world.getChunk(p) != chunk)
+				.forEach(p -> world.spawnParticle(EnumParticleTypes.BARRIER, p.getX()+0.5, p.getY()+1.5, p.getZ()+0.5, 0, 0, 0));
+
+		return false;
 	}
 
 	public static void modifyRitualBookType(String name, int bookType){
