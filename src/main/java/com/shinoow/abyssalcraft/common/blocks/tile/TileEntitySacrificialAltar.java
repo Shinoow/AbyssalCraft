@@ -119,14 +119,12 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 			if(getContainedEnergy() < getMaxEnergy())
 				entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 20, 0, false, false));
 			if(!entity.isEntityAlive()){
-				float num = entity.getMaxHealth();
-				entity = null;
-				if(!isCoolingDown() && getContainedEnergy() < getMaxEnergy()){
-					//				if(entity.getLastAttacker() instanceof EntityPlayer){
+				if(entity.getLastDamageSource() != null && !isCoolingDown() && getContainedEnergy() < getMaxEnergy()){
+					float num = entity.getMaxHealth();
 					addEnergy(num);
-					//				}
 					collectionLimit += num;
 				}
+				entity = null;
 			}
 		}
 		if(collectionLimit >= getMaxEnergy() / 5){
