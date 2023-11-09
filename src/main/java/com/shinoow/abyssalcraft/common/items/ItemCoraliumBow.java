@@ -121,9 +121,9 @@ public class ItemCoraliumBow extends ItemBow implements IUnlockableItem {
 			i = ForgeEventFactory.onArrowLoose(par1ItemStack, par2World, player, i, itemstack != null || flag);
 			if(i < 0) return;
 
-			if (itemstack != null || flag)
+			if (!itemstack.isEmpty() || flag)
 			{
-				if (itemstack == null)
+				if (itemstack.isEmpty())
 					itemstack = new ItemStack(Items.ARROW);
 
 				float f = getArrowVelocity(i);
@@ -203,7 +203,7 @@ public class ItemCoraliumBow extends ItemBow implements IUnlockableItem {
 	{
 
 		ItemStack par1ItemStack = par3EntityPlayer.getHeldItem(hand);
-		boolean flag = findAmmo(par3EntityPlayer) != null;
+		boolean flag = !findAmmo(par3EntityPlayer).isEmpty();
 
 		ActionResult<ItemStack> ret = ForgeEventFactory.onArrowNock(par1ItemStack, par2World, par3EntityPlayer, hand, flag);
 		if(ret != null) return ret;
