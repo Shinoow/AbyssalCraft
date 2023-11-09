@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -74,7 +74,7 @@ public class ItemCrystal extends ItemACBasic implements ICrystal {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 		if(postfix)
-			return I18n.translateToLocalFormatted(getUnlocalizedName().substring(5)+ ".postfix", I18n.translateToLocal("item.crystal." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name"));
-		else return I18n.translateToLocal(getUnlocalizedName() + "." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name");
+			return I18n.translateToLocalFormatted(getTranslationKey().substring(5)+ ".postfix", I18n.translateToLocal("item.crystal." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name"));
+		else return I18n.translateToLocal(getTranslationKey() + "." + ACLib.crystalNames[par1ItemStack.getItemDamage()] + ".name");
 	}
 }

@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -27,7 +27,7 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
 
-		Chunk chunk = world.getChunkFromBlockCoords(pos);
+		Chunk chunk = world.getChunk(pos);
 
 		while(chunk.getBlockState(pos).getBlock().isAir(chunk.getBlockState(pos), world, pos))
 			pos = pos.down();
@@ -68,6 +68,6 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 	private Chunk getChunk(World world, BlockPos pos, Chunk chunk) {
 		if(pos.getX() >> 4 == chunk.x && pos.getZ() >> 4 == chunk.z)
 			return chunk;
-		return world.getChunkFromBlockCoords(pos);
+		return world.getChunk(pos);
 	}
 }

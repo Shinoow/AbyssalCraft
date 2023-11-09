@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -80,7 +80,7 @@ public class BlockOmotholPortal extends BlockBreakable {
 		boolean playerNearby = ACConfig.portalSpawnsNearPlayer ? worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32, false) != null : true;
 		boolean nearbyMobs = worldIn.getEntitiesWithinAABB(EntityGatekeeperMinion.class, new AxisAlignedBB(pos).grow(16)).size() < 10;
 
-		if (worldIn.provider.getDimension() != ACLib.omothol_id && worldIn.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < worldIn.getDifficulty().getDifficultyId()
+		if (worldIn.provider.getDimension() != ACLib.omothol_id && worldIn.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < worldIn.getDifficulty().getId()
 				&& playerNearby && nearbyMobs)
 		{
 			int i = pos.getY();
@@ -195,7 +195,7 @@ public class BlockOmotholPortal extends BlockBreakable {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity)
+	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity)
 	{
 		if (!entity.isRiding() && !entity.isBeingRidden() && !world.isRemote && !entity.isDead && entity.isNonBoss())
 			if(entity.timeUntilPortal > 0)
@@ -218,7 +218,7 @@ public class BlockOmotholPortal extends BlockBreakable {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}

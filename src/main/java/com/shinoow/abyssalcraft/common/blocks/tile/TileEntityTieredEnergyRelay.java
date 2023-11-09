@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -65,10 +65,10 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 		++ticksExisted;
 
 		if(ticksExisted % 20 == 0)
-			PEUtils.collectNearbyPE(this, world, pos, EnumFacing.getFront(facing).getOpposite(), getDrainQuanta());
+			PEUtils.collectNearbyPE(this, world, pos, EnumFacing.byIndex(facing).getOpposite(), getDrainQuanta());
 
 		if(ticksExisted % 40 == 0 && canTransferPE())
-			transferPE(EnumFacing.getFront(facing), getTransferQuanta());
+			transferPE(EnumFacing.byIndex(facing), getTransferQuanta());
 	}
 
 	@Override

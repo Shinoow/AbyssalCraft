@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -351,7 +351,7 @@ public class StructureDreadlandsMinePieces
 		protected void readStructureFromNBT(NBTTagCompound par1NBTTagCompound, TemplateManager p_143011_2_)
 		{
 			isMultipleFloors = par1NBTTagCompound.getBoolean("tf");
-			corridorDirection = EnumFacing.getHorizontal(par1NBTTagCompound.getInteger("D"));
+			corridorDirection = EnumFacing.byHorizontalIndex(par1NBTTagCompound.getInteger("D"));
 		}
 
 		public Cross(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumFacing par4)

@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -42,21 +42,21 @@ public class ItemMetadataBlock extends ItemBlockAC {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack)
+	public String getTranslationKey(ItemStack stack)
 	{
-		return getUnlocalizedName() + "." + subNames[stack.getItemDamage()];
+		return getTranslationKey() + "." + subNames[stack.getItemDamage()];
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		if(getUnlocalizedName().contains("darkethaxiumbrick"))
+		if(getTranslationKey().contains("darkethaxiumbrick"))
 			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("ethaxiumbrick") || getUnlocalizedName().endsWith("stone") && par1ItemStack.getItemDamage() == 5)
+		else if(getTranslationKey().contains("ethaxiumbrick") || getTranslationKey().endsWith("stone") && par1ItemStack.getItemDamage() == 5)
 			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("abybrick") || getUnlocalizedName().endsWith("stone") && par1ItemStack.getItemDamage() == 1)
+		else if(getTranslationKey().contains("abybrick") || getTranslationKey().endsWith("stone") && par1ItemStack.getItemDamage() == 1)
 			return TextFormatting.BLUE + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("ingotblock"))
+		else if(getTranslationKey().contains("ingotblock"))
 			return EnumIngotType.byMetadata(par1ItemStack.getItemDamage()).getFormat() + super.getItemStackDisplayName(par1ItemStack);
 		return super.getItemStackDisplayName(par1ItemStack);
 	}

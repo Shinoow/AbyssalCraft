@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -46,7 +46,7 @@ public class ItemHandler implements ILifeCycleHandler {
 	public void preInit(FMLPreInitializationEvent event) {
 		//"secret" dev stuff
 		devsword = new AbyssalCraftTool();
-		shoggoth_projectile = new Item().setUnlocalizedName("shoggoth_projectile");
+		shoggoth_projectile = new Item().setTranslationKey("shoggoth_projectile");
 
 		//Misc items
 		ACItems.oblivion_catalyst = new ItemOC();
@@ -87,8 +87,8 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.scroll = new ItemScroll("scroll", "basic", "lesser", "moderate", "greater");
 		ACItems.unique_scroll = new ItemScroll("unique_scroll", "antimatter", "oblivion");
 		ACItems.antidote = new ItemAntidote();
-		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setUnlocalizedName("door_dlt");
-		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setUnlocalizedName("door_drt");
+		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setTranslationKey("door_dlt");
+		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setTranslationKey("door_drt");
 		ACItems.configurator_shard = new ItemMetadataMisc("configurator_shard", "0", "1", "2", "3").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
 
 		//Coins
@@ -249,14 +249,14 @@ public class ItemHandler implements ILifeCycleHandler {
 
 		//Upgrade kits
 		if (ACConfig.upgrade_kits) {
-			ACItems.cobblestone_upgrade_kit = new ItemUpgradeKit("Wood", "Cobblestone").setUnlocalizedName("cobbleu").setCreativeTab(ACTabs.tabItems);
-			ACItems.iron_upgrade_kit = new ItemUpgradeKit("Cobblestone", "Iron").setUnlocalizedName("ironu").setCreativeTab(ACTabs.tabItems);
-			ACItems.gold_upgrade_kit = new ItemUpgradeKit("Iron", "Gold").setUnlocalizedName("goldu").setCreativeTab(ACTabs.tabItems);
-			ACItems.diamond_upgrade_kit = new ItemUpgradeKit("Gold", "Diamond").setUnlocalizedName("diamondu").setCreativeTab(ACTabs.tabItems);
-			ACItems.abyssalnite_upgrade_kit = new ItemUpgradeKit("Diamond", "Abyssalnite").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome)).setUnlocalizedName("abyssalniteu").setCreativeTab(ACTabs.tabItems);
-			ACItems.coralium_upgrade_kit = new ItemUpgradeKit("Abyssalnite", "Coralium").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id)).setUnlocalizedName("coraliumu").setCreativeTab(ACTabs.tabItems);
-			ACItems.dreadium_upgrade_kit = new ItemUpgradeKit("Coralium", "Dreadium").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id)).setUnlocalizedName("dreadiumu").setCreativeTab(ACTabs.tabItems);
-			ACItems.ethaxium_upgrade_kit = new ItemUpgradeKit("Dreadium", "Ethaxium").setUnlockCondition(new DimensionCondition(ACLib.omothol_id)).setUnlocalizedName("ethaxiumu").setCreativeTab(ACTabs.tabItems);
+			ACItems.cobblestone_upgrade_kit = new ItemUpgradeKit("Wood", "Cobblestone").setTranslationKey("cobbleu").setCreativeTab(ACTabs.tabItems);
+			ACItems.iron_upgrade_kit = new ItemUpgradeKit("Cobblestone", "Iron").setTranslationKey("ironu").setCreativeTab(ACTabs.tabItems);
+			ACItems.gold_upgrade_kit = new ItemUpgradeKit("Iron", "Gold").setTranslationKey("goldu").setCreativeTab(ACTabs.tabItems);
+			ACItems.diamond_upgrade_kit = new ItemUpgradeKit("Gold", "Diamond").setTranslationKey("diamondu").setCreativeTab(ACTabs.tabItems);
+			ACItems.abyssalnite_upgrade_kit = new ItemUpgradeKit("Diamond", "Abyssalnite").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome)).setTranslationKey("abyssalniteu").setCreativeTab(ACTabs.tabItems);
+			ACItems.coralium_upgrade_kit = new ItemUpgradeKit("Abyssalnite", "Coralium").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id)).setTranslationKey("coraliumu").setCreativeTab(ACTabs.tabItems);
+			ACItems.dreadium_upgrade_kit = new ItemUpgradeKit("Coralium", "Dreadium").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id)).setTranslationKey("dreadiumu").setCreativeTab(ACTabs.tabItems);
+			ACItems.ethaxium_upgrade_kit = new ItemUpgradeKit("Dreadium", "Ethaxium").setUnlockCondition(new DimensionCondition(ACLib.omothol_id)).setTranslationKey("ethaxiumu").setCreativeTab(ACTabs.tabItems);
 		}
 
 		//Foodstuffs
@@ -268,7 +268,7 @@ public class ItemHandler implements ILifeCycleHandler {
 			ACItems.beef_on_a_plate = new ItemPlatefood(12, 1.2F, false, "beefp");
 			ACItems.fish_on_a_plate = new ItemPlatefood(8, 0.9F, false, "fishp");
 			ACItems.dirty_plate = new ItemACBasic("dirtyplate");
-			ACItems.fried_egg = new ItemFood(5, 0.6F, false).setCreativeTab(ACTabs.tabFood).setUnlocalizedName("friedegg");
+			ACItems.fried_egg = new ItemFood(5, 0.6F, false).setCreativeTab(ACTabs.tabFood).setTranslationKey("friedegg");
 			ACItems.fried_egg_on_a_plate = new ItemPlatefood(8, 0.9F, false, "eggp");
 			ACItems.washcloth = new ItemWashCloth();
 		}

@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -92,8 +92,8 @@ public class LayerGhoulArmor extends LayerArmorBase<ModelDGArmor>
 		case HEAD:
 			res = AbyssalCraftAPI.getGhoulHelmetTexture(stack.getItem());
 			if(type != null && type.equals("overlay") && res != null){
-				String domain = res.getResourceDomain();
-				String path = res.getResourcePath();
+				String domain = res.getNamespace();
+				String path = res.getPath();
 				res = new ResourceLocation(domain, path.substring(0, path.length() -4).concat("_overlay.png"));
 			}
 			if(res == null)
@@ -102,8 +102,8 @@ public class LayerGhoulArmor extends LayerArmorBase<ModelDGArmor>
 		case CHEST:
 			res = AbyssalCraftAPI.getGhoulChestplateTexture(stack.getItem());
 			if(type != null && type.equals("overlay") && res != null){
-				String domain = res.getResourceDomain();
-				String path = res.getResourcePath();
+				String domain = res.getNamespace();
+				String path = res.getPath();
 				res = new ResourceLocation(domain, path.substring(0, path.length() -4).concat("_overlay.png"));
 			}
 			if(res == null)
@@ -112,8 +112,8 @@ public class LayerGhoulArmor extends LayerArmorBase<ModelDGArmor>
 		case LEGS:
 			res = AbyssalCraftAPI.getGhoulLeggingsTexture(stack.getItem());
 			if(type != null && type.equals("overlay") && res != null){
-				String domain = res.getResourceDomain();
-				String path = res.getResourcePath();
+				String domain = res.getNamespace();
+				String path = res.getPath();
 				res = new ResourceLocation(domain, path.substring(0, path.length() -4).concat("_overlay.png"));
 			}
 			if(res == null)
@@ -122,8 +122,8 @@ public class LayerGhoulArmor extends LayerArmorBase<ModelDGArmor>
 		case FEET:
 			res = AbyssalCraftAPI.getGhoulBootsTexture(stack.getItem());
 			if(type != null && type.equals("overlay") && res != null){
-				String domain = res.getResourceDomain();
-				String path = res.getResourcePath();
+				String domain = res.getNamespace();
+				String path = res.getPath();
 				res = new ResourceLocation(domain, path.substring(0, path.length() -4).concat("_overlay.png"));
 			}
 			if(res == null)

@@ -13,22 +13,20 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-		classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.1.0"
-		classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7"
+		classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.2.0"
     }
 }
 
 repositories {
-	maven {
-			name 'progwml6'
-			url "http://dvs1.progwml6.com/files/maven/"
-	}
+    maven {
+        name 'progwml6'
+        url "http://dvs1.progwml6.com/files/maven/"
+    }
 }
 
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.matthewprenger.cursegradle'
-apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
@@ -45,13 +43,10 @@ version = props.ac_version
 group= "com.shinoow.abyssalcraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "AbyssalCraft"
 
-sourceCompatibility = targetCompatibility = "1.8"
-compileJava {
-    sourceCompatibility = targetCompatibility = "1.8"
-}
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    version = "1.12.2-14.23.4.2747"
+    version = "${props.mc_version}-${props.forge_version}"
     runDir = "run"
     
 	useDepAts = true
@@ -61,7 +56,7 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20180421"
+    mappings = "stable_39"
     makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 	
 	replaceIn "AbyssalCraft.java"
@@ -71,8 +66,9 @@ minecraft {
 }
 
 dependencies {
-	
-	deobfCompile "mezz.jei:jei_1.12.2:4.11.0.206"
+
+    deobfCompile "mezz.jei:jei_1.12.2:4.16.1.302"
+
 }
 
 version = "${props.mc_version}-${props.ac_version}"
@@ -154,22 +150,6 @@ publishing {
     }
 }
 
-bintray {
-	user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : ''
-	key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : ''
-	publications = ['mavenStuff']
-	pkg {
-        repo = 'maven'
-        name = 'abyssalcraft'
-		
-		version {
-            name = project.version
-            released  = new Date()
-            vcsTag = props.ac_version
-        }
-    }
-}
-
 task signJar(type: SignJar, dependsOn: reobfJar) {
 
     // Skips if the keyStore property is missing.
@@ -237,7 +217,6 @@ task buildAndDeploy(){
     dependsOn 'clean'
     dependsOn 'build'
     dependsOn 'curseforge'
-    // dependsOn 'bintrayUpload'
     dependsOn 'copyApiJar'
     dependsOn 'copySrcJar'
     dependsOn 'copyJar'
@@ -245,7 +224,6 @@ task buildAndDeploy(){
     dependsOn 'generateRar'
     tasks.findByName('build').mustRunAfter 'clean'
     tasks.findByName('curseforge').mustRunAfter 'build'
-    // tasks.findByName('bintrayUpload').mustRunAfter 'curseforge'
     tasks.findByName('prepareFiles').mustRunAfter 'build'
     tasks.findByName('generateRar').mustRunAfter 'prepareFiles'
     tasks.findByName('copyApiJar').mustRunAfter 'prepareFiles'

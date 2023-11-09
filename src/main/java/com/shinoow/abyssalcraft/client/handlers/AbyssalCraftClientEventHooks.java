@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -161,7 +161,7 @@ public class AbyssalCraftClientEventHooks {
 				calcdist = returnMOP.hitVec.distanceTo(pos);
 
 			Vec3d lookvec = theRenderViewEntity.getLook(0);
-			Vec3d var8 = pos.addVector(lookvec.x * var2,
+			Vec3d var8 = pos.add(lookvec.x * var2,
 					lookvec.y * var2,
 					lookvec.z * var2);
 			Entity pointedEntity = null;
@@ -1105,7 +1105,7 @@ public class AbyssalCraftClientEventHooks {
 	}
 
 	protected void registerItemRender(Item item, int meta){
-		registerItemRender(item, meta, item.getRegistryName().getResourcePath());
+		registerItemRender(item, meta, item.getRegistryName().getPath());
 	}
 
 	protected void registerItemRenders(Item item, int metas){
@@ -1118,7 +1118,7 @@ public class AbyssalCraftClientEventHooks {
 	}
 
 	protected void registerItemRender(Block block, int meta){
-		registerItemRender(block, meta, block.getRegistryName().getResourcePath());
+		registerItemRender(block, meta, block.getRegistryName().getPath());
 	}
 
 	protected void registerItemRenders(Block block, int metas){

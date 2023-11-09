@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -24,11 +24,11 @@ public class ItemBlockColorName extends ItemBlockAC {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
-		if(getUnlocalizedName().contains("odb") || getUnlocalizedName().contains("darkethaxium"))
+		if(getTranslationKey().contains("odb") || getTranslationKey().contains("darkethaxium"))
 			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("ethaxium"))
+		else if(getTranslationKey().contains("ethaxium"))
 			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
-		else if(getUnlocalizedName().contains("aby"))
+		else if(getTranslationKey().contains("aby"))
 			return TextFormatting.BLUE + super.getItemStackDisplayName(par1ItemStack);
 		return super.getItemStackDisplayName(par1ItemStack);
 	}

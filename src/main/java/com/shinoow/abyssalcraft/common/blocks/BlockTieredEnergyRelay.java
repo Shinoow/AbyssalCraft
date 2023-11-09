@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -44,7 +44,7 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 	public BlockTieredEnergyRelay(String name) {
 		super(Material.ROCK);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(DIMENSION, EnumDimType.OVERWORLD));
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setSoundType(SoundType.STONE);
@@ -142,8 +142,8 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 			TileEntity tileentity = par1World.getTileEntity(pos);
 			EnumFacing facing = state.getValue(FACING);
 			if(tileentity instanceof TileEntityTieredEnergyRelay) {
-				facing = EnumFacing.getFront(((TileEntityTieredEnergyRelay) tileentity).getFacing());
-				facing = EnumFacing.getFront(facing.ordinal() + 1);
+				facing = EnumFacing.byIndex(((TileEntityTieredEnergyRelay) tileentity).getFacing());
+				facing = EnumFacing.byIndex(facing.ordinal() + 1);
 				((TileEntityTieredEnergyRelay) tileentity).setFacing(facing.getIndex());
 			}
 			par1World.setBlockState(pos, state.withProperty(FACING, facing), 3);
@@ -162,7 +162,7 @@ public class BlockTieredEnergyRelay extends BlockContainer {
 
 		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
 		if(tile instanceof TileEntityTieredEnergyRelay)
-			facing = EnumFacing.getFront(((TileEntityTieredEnergyRelay) tile).getFacing());
+			facing = EnumFacing.byIndex(((TileEntityTieredEnergyRelay) tile).getFacing());
 
 		return state.withProperty(FACING, facing);
 	}

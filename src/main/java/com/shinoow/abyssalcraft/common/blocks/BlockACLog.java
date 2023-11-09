@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -101,9 +101,9 @@ public class BlockACLog extends BlockLog {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
-		return this == ACBlocks.darklands_oak_wood_2 ? BlockRenderLayer.CUTOUT : super.getBlockLayer();
+		return this == ACBlocks.darklands_oak_wood_2 ? BlockRenderLayer.CUTOUT : super.getRenderLayer();
 	}
 
 	@Override

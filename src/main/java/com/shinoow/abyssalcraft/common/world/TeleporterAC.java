@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -58,7 +58,7 @@ public class TeleporterAC extends Teleporter
 				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1.0F, "lastHealth", "field_71149_ch");
 				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastFoodLevel", "field_71146_ci");
 			}
-			((EntityPlayerMP)entity).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP)entity, dimension, teleporter);
+			((EntityPlayerMP)entity).server.getPlayerList().transferPlayerToDimension((EntityPlayerMP)entity, dimension, teleporter);
 		} else
 			entity.changeDimension(dimension, teleporter);
 	}
@@ -135,7 +135,7 @@ public class TeleporterAC extends Teleporter
 			if (worldServerInstance.getBlockState(((BlockPos) object).south()).getBlock() == portal)
 				enumfacing = EnumFacing.WEST;
 
-			EnumFacing enumfacing1 = EnumFacing.getHorizontal(MathHelper.floor(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3);
+			EnumFacing enumfacing1 = EnumFacing.byHorizontalIndex(MathHelper.floor(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3);
 
 			if (enumfacing != null) {
 				EnumFacing enumfacing2 = enumfacing.rotateYCCW();
@@ -165,8 +165,8 @@ public class TeleporterAC extends Teleporter
 				d4 = ((BlockPos) object).getX() + 0.5D;
 				d5 = ((BlockPos) object).getY() + 0.5D;
 				d6 = ((BlockPos) object).getZ() + 0.5D;
-				d4 += enumfacing2.getFrontOffsetX() * f6 + enumfacing.getFrontOffsetX() * f1;
-				d6 += enumfacing2.getFrontOffsetZ() * f6 + enumfacing.getFrontOffsetZ() * f1;
+				d4 += enumfacing2.getXOffset() * f6 + enumfacing.getXOffset() * f1;
+				d6 += enumfacing2.getZOffset() * f6 + enumfacing.getZOffset() * f1;
 				float f2 = 0.0F;
 				float f3 = 0.0F;
 				float f4 = 0.0F;

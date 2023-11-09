@@ -1,11 +1,11 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2020 Shinoow.
+ * Copyright (c) 2012 - 2023 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- *
+ * 
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -48,7 +48,7 @@ public class BlockStateTransformer extends BlockACBasic {
 	public BlockStateTransformer() {
 		super(Material.ROCK, 2, 4, SoundType.STONE);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(TABLET, false));
-		setUnlocalizedName("statetransformer");
+		setTranslationKey("statetransformer");
 		setCreativeTab(ACTabs.tabDecoration);
 	}
 
@@ -139,7 +139,7 @@ public class BlockStateTransformer extends BlockACBasic {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
 	}
@@ -195,7 +195,7 @@ public class BlockStateTransformer extends BlockACBasic {
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
 			enumfacing = EnumFacing.NORTH;
