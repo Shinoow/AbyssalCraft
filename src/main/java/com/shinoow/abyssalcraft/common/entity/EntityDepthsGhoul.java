@@ -124,7 +124,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	@Override
 	public boolean isChild()
 	{
-		return dataManager.get(CHILD).booleanValue();
+		return dataManager.get(CHILD);
 	}
 
 	public void setChild(boolean par1)

@@ -112,7 +112,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	public boolean isChild()
 	{
-		return dataManager.get(CHILD).booleanValue();
+		return dataManager.get(CHILD);
 	}
 
 	/**

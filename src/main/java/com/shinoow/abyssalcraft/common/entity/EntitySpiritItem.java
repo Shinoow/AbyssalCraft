@@ -15,7 +15,6 @@ import java.util.*;
 
 import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
 
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.*;

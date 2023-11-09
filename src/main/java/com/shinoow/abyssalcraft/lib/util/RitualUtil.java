@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.lib.util;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
@@ -108,13 +107,12 @@ public class RitualUtil {
 								return false;
 						return true;
 					}))
-						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), book.get())){
+						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), book.get()))
 							if(sameChunk(world, pos)) {
 								if(!world.isRemote)
 									createAltar(world, pos);
-								return true;	
+								return true;
 							}
-						}
 		return false;
 	}
 
@@ -151,9 +149,9 @@ public class RitualUtil {
 
 		if(world.isRemote)
 			PEDESTAL_POSITIONS.stream()
-				.map(p -> pos.add(p))
-				.filter(p -> world.getChunk(p) != chunk)
-				.forEach(p -> world.spawnParticle(EnumParticleTypes.BARRIER, p.getX()+0.5, p.getY()+1.5, p.getZ()+0.5, 0, 0, 0));
+			.map(p -> pos.add(p))
+			.filter(p -> world.getChunk(p) != chunk)
+			.forEach(p -> world.spawnParticle(EnumParticleTypes.BARRIER, p.getX()+0.5, p.getY()+1.5, p.getZ()+0.5, 0, 0, 0));
 
 		return false;
 	}

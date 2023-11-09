@@ -11,9 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
-import java.util.List;
-import java.util.UUID;
-
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
@@ -25,11 +22,8 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
-import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -74,14 +68,14 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 			par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
 			return new ActionResult(EnumActionResult.SUCCESS, stack);
 		}
-		
+
 		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side,
 			float hitX, float hitY, float hitZ) {
-		ItemStack is = player.getHeldItem(hand);
+		player.getHeldItem(hand);
 		if (player.isSneaking())
 			if (!(w.getTileEntity(pos) instanceof IRitualAltar)) {
 				if (RitualUtil.tryAltar(w, pos, bookType)

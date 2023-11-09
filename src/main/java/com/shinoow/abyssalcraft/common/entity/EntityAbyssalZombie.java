@@ -110,7 +110,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	public boolean isChild()
 	{
-		return dataManager.get(CHILD).booleanValue();
+		return dataManager.get(CHILD);
 	}
 
 	/**
