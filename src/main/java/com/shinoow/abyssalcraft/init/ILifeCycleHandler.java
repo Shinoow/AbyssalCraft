@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -20,11 +20,11 @@ import net.minecraftforge.fml.common.event.*;
  */
 public interface ILifeCycleHandler {
 
-	public void preInit(FMLPreInitializationEvent event);
+	void preInit(FMLPreInitializationEvent event);
 
-	public void init(FMLInitializationEvent event);
+	void init(FMLInitializationEvent event);
 
-	public void postInit(FMLPostInitializationEvent event);
+	void postInit(FMLPostInitializationEvent event);
 
-	public void loadComplete(FMLLoadCompleteEvent event);
+	void loadComplete(FMLLoadCompleteEvent event);
 }

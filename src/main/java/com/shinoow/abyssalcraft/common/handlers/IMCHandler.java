@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -31,7 +31,7 @@ public class IMCHandler {
 	private static final Logger logger = LogManager.getLogger("AbyssalCraft|IMC");
 
 	public static void handleIMC(FMLInterModComms.IMCEvent event){
-		List<String> senders = new ArrayList<String>();
+		List<String> senders = new ArrayList<>();
 		for (final FMLInterModComms.IMCMessage imcMessage : event.getMessages())
 			if(imcMessage.key.equals("shoggothFood"))
 				try {

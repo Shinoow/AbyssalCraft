@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -15,7 +15,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
@@ -269,7 +268,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, b0);
 	}
 
 	@Override
@@ -497,7 +496,7 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 				world.playSound(null, new BlockPos(posX + 0.5D, posY + getEyeHeight(), posZ + 0.5D), SoundEvents.ENTITY_GHAST_SHOOT, getSoundCategory(), 0.5F + getRNG().nextFloat(), getRNG().nextFloat() * 0.7F + 0.3F);
 			Entity target = getHeadLookTarget();
 			if (target != null) {
-				List<EntityLivingBase> list1 = world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().grow(2.0D, 2.0D, 2.0D), Predicates.and(new Predicate[] { EntitySelectors.IS_ALIVE }));
+				List<EntityLivingBase> list1 = world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().grow(2.0D, 2.0D, 2.0D), Predicates.and(EntitySelectors.IS_ALIVE));
 
 				for(EntityLivingBase entity : list1)
 

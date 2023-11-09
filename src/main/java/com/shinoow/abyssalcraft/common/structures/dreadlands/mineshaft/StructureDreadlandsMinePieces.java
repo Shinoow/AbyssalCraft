@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -77,10 +77,9 @@ public class StructureDreadlandsMinePieces
 
 	private static StructureComponent getNextMineShaftComponent(StructureComponent par0StructureComponent, List<StructureComponent> par1List, Random par2Random, int par3, int par4, int par5, EnumFacing par6, int par7)
 	{
-		if (par7 > 8)
+		if ((par7 > 8) || !(Math.abs(par3 - par0StructureComponent.getBoundingBox().minX) <= 80 && Math.abs(par5 - par0StructureComponent.getBoundingBox().minZ) <= 80))
 			return null;
-		else if (Math.abs(par3 - par0StructureComponent.getBoundingBox().minX) <= 80 && Math.abs(par5 - par0StructureComponent.getBoundingBox().minZ) <= 80)
-		{
+		else {
 			StructureComponent structurecomponent1 = getRandomComponent(par1List, par2Random, par3, par4, par5, par6, par7 + 1);
 
 			if (structurecomponent1 != null)
@@ -90,8 +89,7 @@ public class StructureDreadlandsMinePieces
 			}
 
 			return structurecomponent1;
-		} else
-			return null;
+		}
 	}
 
 	public static class Corridor extends StructureComponent
@@ -487,7 +485,7 @@ public class StructureDreadlandsMinePieces
 	public static class Room extends StructureComponent
 	{
 		/** List of other Mineshaft components linked to this room. */
-		private List<StructureBoundingBox> roomsLinkedToTheRoom = new LinkedList<StructureBoundingBox>();
+		private List<StructureBoundingBox> roomsLinkedToTheRoom = new LinkedList<>();
 		public Room() {}
 
 		public Room(int par1, Random par2Random, int par3, int par4)

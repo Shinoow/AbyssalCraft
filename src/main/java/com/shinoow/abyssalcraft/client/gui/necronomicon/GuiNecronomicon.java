@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -52,8 +52,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -397,7 +395,7 @@ public class GuiNecronomicon extends GuiScreen {
 				stuff = localize(isNecroInfo ? NecronomiconText.LABEL_HUH : NecronomiconText.LABEL_KNOWLEDGE);
 				fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			}
-			s = I18n.format("necronomicon.turnupindicator", new Object[] {Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups)});
+			s = I18n.format("necronomicon.turnupindicator", Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups));
 
 			l = fontRenderer.getStringWidth(s);
 			if(getTurnupLimit() > 1)

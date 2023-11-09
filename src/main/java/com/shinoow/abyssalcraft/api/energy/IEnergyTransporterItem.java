@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -27,12 +27,12 @@ public interface IEnergyTransporterItem extends IEnergyContainerItem {
 	 * (eg. a PE manipulator that transfers PE to a player's held item)
 	 * @param stack ItemStack containing the item
 	 */
-	public boolean canAcceptPEExternally(ItemStack stack);
+	boolean canAcceptPEExternally(ItemStack stack);
 
 	/**
 	 * Returns whether or not the item can transfer Potential Energy externally<br>
 	 * (eg. a Ritual Altar draining PE from a Necronomicon during a ritual)
 	 * @param stack ItemStack containing the item
 	 */
-	public boolean canTransferPEExternally(ItemStack stack);
+	boolean canTransferPEExternally(ItemStack stack);
 }

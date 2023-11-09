@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -100,40 +100,7 @@ public class StructureShoggothPit extends WorldGenerator {
 			switch(num) {
 			case 1:
 				for (Entry<BlockPos, String> entry : map.entrySet())
-					if("statue1".equals(entry.getValue())) {
-						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
-							world.setBlockState(entry.getKey(), getRandomStatue(rand));
-							TileEntity te = world.getTileEntity(entry.getKey());
-							if(te instanceof TileEntityStatue)
-								((TileEntityStatue) te).setFacing(EnumFacing.EAST.ordinal());
-							else if(te instanceof TileEntityDecorativeStatue)
-								((TileEntityDecorativeStatue) te).setFacing(EnumFacing.EAST.ordinal());
-						}
-					} else if("statue2".equals(entry.getValue())) {
-						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
-							world.setBlockState(entry.getKey(), getRandomStatue(rand));
-							TileEntity te = world.getTileEntity(entry.getKey());
-							if(te instanceof TileEntityStatue)
-								((TileEntityStatue) te).setFacing(EnumFacing.EAST.ordinal());
-							else if(te instanceof TileEntityDecorativeStatue)
-								((TileEntityDecorativeStatue) te).setFacing(EnumFacing.EAST.ordinal());
-						}
-					} else if("statue3".equals(entry.getValue())) {
-						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
-							world.setBlockState(entry.getKey(), getRandomStatue(rand));
-							TileEntity te = world.getTileEntity(entry.getKey());
-							if(te instanceof TileEntityStatue)
-								((TileEntityStatue) te).setFacing(EnumFacing.EAST.ordinal());
-							else if(te instanceof TileEntityDecorativeStatue)
-								((TileEntityDecorativeStatue) te).setFacing(EnumFacing.EAST.ordinal());
-						}
-					} else if("statue4".equals(entry.getValue())) {
+					if("statue1".equals(entry.getValue()) || "statue2".equals(entry.getValue()) || "statue3".equals(entry.getValue()) || "statue4".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
 						else {

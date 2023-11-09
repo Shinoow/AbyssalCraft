@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -28,5 +28,5 @@ public interface IEnergyTransporter extends IEnergyContainer {
 	 * @param energy PE quanta to transfer
 	 * @return True if the transfer succeeded, otherwise false
 	 */
-	public void transferPE(EnumFacing facing, float energy);
+	void transferPE(EnumFacing facing, float energy);
 }

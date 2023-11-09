@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -376,7 +376,7 @@ public class MiscHandler implements ILifeCycleHandler {
 	public void postInit(FMLPostInitializationEvent event) {
 		File folder = new File("config/abyssalcraft/");
 		folder.mkdirs();
-		Stack<File> folders = new Stack<File>();
+		Stack<File> folders = new Stack<>();
 		folders.add(folder);
 		while(!folders.isEmpty()){
 			File dir = folders.pop();

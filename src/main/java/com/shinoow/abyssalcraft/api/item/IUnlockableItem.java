@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -31,12 +31,12 @@ public interface IUnlockableItem {
 	 * Sets the unlock condition for the Item
 	 * @param condition Unlock Condition
 	 */
-	public Item setUnlockCondition(IUnlockCondition condition);
+	Item setUnlockCondition(IUnlockCondition condition);
 
 	/**
 	 * Getter for the Unlock Condition
 	 * @param stack ItemStack holding the item requesting the Unlock Condition
 	 * @return the Unlock Condition associated with the ItemStack
 	 */
-	public IUnlockCondition getUnlockCondition(ItemStack stack);
+	IUnlockCondition getUnlockCondition(ItemStack stack);
 }

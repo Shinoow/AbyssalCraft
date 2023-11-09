@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -92,7 +92,7 @@ public class BlockCrystalCluster2 extends BlockACBasic {
 		return new BlockStateContainer.Builder(this).add(TYPE).build();
 	}
 
-	public static enum EnumCrystalType2 implements IStringSerializable
+	public enum EnumCrystalType2 implements IStringSerializable
 	{
 		TIN(0, "tin"),
 		COPPER(1, "copper"),

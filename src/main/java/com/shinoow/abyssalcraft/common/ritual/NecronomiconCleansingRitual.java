@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -143,9 +143,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 	}
 
 	private Biome getRealBiome(Biome b){
-		if(b == ACBiomes.darklands)
-			return Biomes.PLAINS;
-		else if(b == ACBiomes.darklands_plains)
+		if((b == ACBiomes.darklands) || (b == ACBiomes.darklands_plains))
 			return Biomes.PLAINS;
 		else if(b == ACBiomes.darklands_forest)
 			return Biomes.FOREST;

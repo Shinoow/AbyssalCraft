@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -51,14 +51,14 @@ public class BlockShoggothOoze extends BlockACBasic {
 
 	public BlockShoggothOoze(){
 		super(Material.GROUND, 1.0F, 1.0F, SoundType.SLIME);
-		setDefaultState(blockState.getBaseState().withProperty(LAYERS, Integer.valueOf(1)));
+		setDefaultState(blockState.getBaseState().withProperty(LAYERS, 1));
 		setTickRandomly(ACConfig.oozeExpire);
 	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return OOZE_AABB[state.getValue(LAYERS).intValue()];
+		return OOZE_AABB[state.getValue(LAYERS)];
 	}
 
 	@Override
@@ -206,7 +206,7 @@ public class BlockShoggothOoze extends BlockACBasic {
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(LAYERS, Integer.valueOf((meta & 7) + 1));
+		return getDefaultState().withProperty(LAYERS, (meta & 7) + 1);
 	}
 
 	@Override

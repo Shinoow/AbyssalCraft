@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -35,7 +35,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
-	
+
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator
 			chunkGenerator, IChunkProvider chunkProvider) {

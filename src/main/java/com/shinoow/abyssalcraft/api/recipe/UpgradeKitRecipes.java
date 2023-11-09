@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -56,7 +57,7 @@ public class UpgradeKitRecipes {
 	public ItemStack getUpgrade(ItemUpgradeKit kit, ItemStack input){
 		return upgrades.get(kit).entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(input, e.getKey()))
-				.map(e -> e.getValue())
+				.map(Entry::getValue)
 				.findFirst()
 				.orElse(ItemStack.EMPTY);
 	}

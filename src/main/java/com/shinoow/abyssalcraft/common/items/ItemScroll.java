@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -56,7 +56,7 @@ public class ItemScroll extends ItemMetadata implements IScroll {
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		SpellUtils.castInstantSpell(stack, worldIn, playerIn, handIn);
 
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
+		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}
 
 	@Override

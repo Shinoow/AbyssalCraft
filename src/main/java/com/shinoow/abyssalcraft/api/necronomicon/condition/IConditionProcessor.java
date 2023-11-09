@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -31,5 +31,5 @@ public interface IConditionProcessor {
 	 * @param player Player context for the capability holder
 	 * @return True if the condition has been met, otherwise false
 	 */
-	public boolean processUnlock(IUnlockCondition condition, INecroDataCapability cap, EntityPlayer player);
+	boolean processUnlock(IUnlockCondition condition, INecroDataCapability cap, EntityPlayer player);
 }

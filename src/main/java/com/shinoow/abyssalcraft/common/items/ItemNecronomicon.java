@@ -5,13 +5,11 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
-
-import java.util.List;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
@@ -24,11 +22,8 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
-import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -67,57 +62,32 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		ItemStack stack = par3EntityPlayer.getHeldItem(hand);
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		if(!stack.getTagCompound().hasKey("owner")){
-			stack.getTagCompound().setString("owner", par3EntityPlayer.getName());
-			if(!par3EntityPlayer.isSneaking()){
-				if(!par2World.isRemote && ACConfig.syncDataOnBookOpening)
-					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
-				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
-				return new ActionResult(EnumActionResult.SUCCESS, stack);
-			}
+
+		if(!par3EntityPlayer.isSneaking()){
+			if(!par2World.isRemote && ACConfig.syncDataOnBookOpening)
+				PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
+			par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
+			return new ActionResult(EnumActionResult.SUCCESS, stack);
 		}
-		if(stack.getTagCompound().getString("owner").equals(par3EntityPlayer.getName())){
-			if(!par3EntityPlayer.isSneaking()){
-				if(!par2World.isRemote && ACConfig.syncDataOnBookOpening)
-					PacketDispatcher.sendTo(new ShouldSyncMessage(par3EntityPlayer), (EntityPlayerMP)par3EntityPlayer);
-				par3EntityPlayer.openGui(AbyssalCraft.instance, ACLib.necronmiconGuiID, par2World, 0, 0, 0);
-				return new ActionResult(EnumActionResult.SUCCESS, stack);
-			}
-		}
-		else if(par2World.isRemote)
-			SpecialTextUtil.JzaharText(I18n.format("message.necronomicon.nope"));
+
 		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
-		ItemStack is = player.getHeldItem(hand);
 		if(player.isSneaking())
 			if(!(w.getTileEntity(pos) instanceof IRitualAltar)){
-				if(isOwner(player, is))
-					if(RitualUtil.tryAltar(w, pos, bookType) || StructureHandler.instance().tryFormStructure(w, pos, bookType, player)){
-						w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);
-						//						player.addStat(ACAchievements.ritual_altar, 1);
-						return EnumActionResult.SUCCESS;
-					}
-			} else if(w.getTileEntity(pos) instanceof IRitualAltar)
-				if(isOwner(player, is)){
-					IRitualAltar altar = (IRitualAltar) w.getTileEntity(pos);
-					altar.performRitual(w, pos, player);
+				if(RitualUtil.tryAltar(w, pos, bookType) || StructureHandler.instance().tryFormStructure(w, pos, bookType, player)){
+					w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);
+					//						player.addStat(ACAchievements.ritual_altar, 1);
 					return EnumActionResult.SUCCESS;
 				}
+			} else {
+				IRitualAltar altar = (IRitualAltar) w.getTileEntity(pos);
+				altar.performRitual(w, pos, player);
+				return EnumActionResult.SUCCESS;
+			}
 		return EnumActionResult.PASS;
-	}
-
-	public boolean isOwner(EntityPlayer player, ItemStack stack){
-		if(!stack.hasTagCompound()) return false;
-		return stack.getTagCompound().getString("owner").equals(player.getName());
-	}
-
-	@Override
-	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("owner"))
-			l.add("Owner: " + is.getTagCompound().getString("owner"));
 	}
 
 	@Override

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -54,7 +54,7 @@ import net.minecraftforge.common.ForgeModContainer;
 
 public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 
-	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityAbyssalZombie.class, DataSerializers.BYTE);
+	private static final DataParameter<Boolean> CHILD = EntityDataManager.createKey(EntityAbyssalZombie.class, DataSerializers.BOOLEAN);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
@@ -99,7 +99,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CHILD, Byte.valueOf((byte)0));
+		dataManager.register(CHILD, false);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	public boolean isChild()
 	{
-		return dataManager.get(CHILD).byteValue() == 1;
+		return dataManager.get(CHILD);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	 */
 	public void setChild(boolean par1)
 	{
-		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		dataManager.set(CHILD, par1);
 
 		if (world != null && !world.isRemote)
 		{
@@ -249,7 +249,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		super.readEntityFromNBT(par1NBTTagCompound);
 
 		if(par1NBTTagCompound.getBoolean("IsBaby"))
-			setChild(true);;
+			setChild(true);
 	}
 
 	@Override

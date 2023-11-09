@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -33,45 +33,45 @@ public interface IPlaceOfPower {
 	/**
 	 * Returns the identifier (String associated with this Place of Power)
 	 */
-	public String getIdentifier();
+	String getIdentifier();
 
 	/**
 	 * Returns the Book Type required in order to form this Place of Power
 	 */
-	public int getBookType();
+	int getBookType();
 
 	/**
 	 * Returns the Unlock Condition required in order to form this Place of Power
 	 */
-	public IUnlockCondition getUnlockCondition();
+	IUnlockCondition getUnlockCondition();
 
 	/**
 	 * Returns a unlocalized string representing the description of the structure when viewed in the Necronomicon
 	 */
 	default String getDescription() {
 		return "ac.structure."+getIdentifier()+".description";
-	};
+	}
 
 	/**
 	 * If the Place of Power amplifies any stats of statues used in it, handle that here
 	 * @param type Amplifier Type to amplify
 	 * @return A value to increase the selected stat with, or 0
 	 */
-	public float getAmplifier(AmplifierType type);
+	float getAmplifier(AmplifierType type);
 
 	/**
 	 * Constructs the Place of Power
 	 * @param world Current world
 	 * @param pos Current position (where the Player constructing this right-clicked)
 	 */
-	public void construct(World world, BlockPos pos);
+	void construct(World world, BlockPos pos);
 
 	/**
 	 * Check that the structure is still valid, then take actions accordingly
 	 * @param world Current World
 	 * @param pos Position of base block
 	 */
-	public void validate(World world, BlockPos pos);
+	void validate(World world, BlockPos pos);
 
 	/**
 	 * Checks whether or not the structure can be constructed (the Book Type and Unlock Condition are checked prior to this)
@@ -80,17 +80,17 @@ public interface IPlaceOfPower {
 	 * @param player Player attempting to construct this
 	 * @return True if the structure can be constructed, otherwise false
 	 */
-	public boolean canConstruct(World world, BlockPos pos, EntityPlayer player);
+	boolean canConstruct(World world, BlockPos pos, EntityPlayer player);
 
 	/**
 	 * Returns a multidimensional array of Block States depicting how the structure looks when assembled
 	 */
-	public IBlockState[][][] getRenderData();
+	IBlockState[][][] getRenderData();
 
 	/**
 	 * Returns the position of the block that forms the structure when activated
 	 */
-	public BlockPos getActivationPointForRender();
+	BlockPos getActivationPointForRender();
 
 	/**
 	 * Returns a String (either the localization name or a fixed one) with semi-colon (;) separated values listing the

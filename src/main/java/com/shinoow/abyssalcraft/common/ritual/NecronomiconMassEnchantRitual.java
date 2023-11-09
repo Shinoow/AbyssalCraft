@@ -5,19 +5,21 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.ritual;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -57,7 +59,7 @@ public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
 			if(altar.getItem().getItem() == Items.BOOK && !ACConfig.enchantBooks)
 				return false;
 			if(altar.getItem().isItemEnchantable()) {
-				books = altar.getPedestals().stream().map(p -> p.getItem()).filter(i -> i.getRarity() == EnumRarity.UNCOMMON).collect(Collectors.toList());
+				books = altar.getPedestals().stream().map(IRitualPedestal::getItem).filter(i -> i.getRarity() == EnumRarity.UNCOMMON).collect(Collectors.toList());
 
 				return books.size() == 8;
 			}
@@ -80,7 +82,7 @@ public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
 
 			Map<Integer, Integer> enchantments = new HashMap<>();
 
-			books.stream().map(s -> ItemEnchantedBook.getEnchantments(s)).forEach(n -> {
+			books.stream().map(ItemEnchantedBook::getEnchantments).forEach(n -> {
 				for (int i = 0; i < n.tagCount(); ++i)
 				{
 					NBTTagCompound nbttagcompound = n.getCompoundTagAt(i);
@@ -104,7 +106,7 @@ public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
 					book.getTagCompound().setTag("StoredEnchantments", list);
 					altar.setItem(book);
 				} else if(altar.getItem().getItem() != Items.BOOK)
-					EnchantmentHelper.setEnchantments(enchantments.entrySet().stream().collect(Collectors.toMap(e -> Enchantment.getEnchantmentByID(e.getKey()), e -> e.getValue())), altar.getItem());
+					EnchantmentHelper.setEnchantments(enchantments.entrySet().stream().collect(Collectors.toMap(e -> Enchantment.getEnchantmentByID(e.getKey()), Entry::getValue)), altar.getItem());
 		}
 	}
 

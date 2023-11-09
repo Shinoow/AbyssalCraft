@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -19,49 +19,49 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public interface INecroDataCapability {
 
-	public boolean isUnlocked(IUnlockCondition cond, EntityPlayer player);
+	boolean isUnlocked(IUnlockCondition cond, EntityPlayer player);
 
-	public void triggerEntityUnlock(String name);
+	void triggerEntityUnlock(String name);
 
-	public void triggerBiomeUnlock(String name);
+	void triggerBiomeUnlock(String name);
 
-	public void triggerDimensionUnlock(int id);
+	void triggerDimensionUnlock(int id);
 
-	public void triggerArtifactUnlock(String name);
+	void triggerArtifactUnlock(String name);
 
-	public void triggerPageUnlock(String name);
+	void triggerPageUnlock(String name);
 
-	public void triggerWhisperUnlock(String name);
+	void triggerWhisperUnlock(String name);
 
-	public void triggerMiscUnlock(String name);
+	void triggerMiscUnlock(String name);
 
-	public void unlockAllKnowledge(boolean unlock);
+	void unlockAllKnowledge(boolean unlock);
 
-	public void setLastSyncTime(long time);
+	void setLastSyncTime(long time);
 
-	public void incrementSyncTimer();
+	void incrementSyncTimer();
 
-	public void resetSyncTimer();
+	void resetSyncTimer();
 
-	public List<String> getBiomeTriggers();
+	List<String> getBiomeTriggers();
 
-	public List<String> getEntityTriggers();
+	List<String> getEntityTriggers();
 
-	public List<Integer> getDimensionTriggers();
+	List<Integer> getDimensionTriggers();
 
-	public List<String> getArtifactTriggers();
+	List<String> getArtifactTriggers();
 
-	public List<String> getPageTriggers();
+	List<String> getPageTriggers();
 
-	public List<String> getWhisperTriggers();
+	List<String> getWhisperTriggers();
 
-	public List<String> getMiscTriggers();
+	List<String> getMiscTriggers();
 
-	public boolean hasUnlockedAllKnowledge();
+	boolean hasUnlockedAllKnowledge();
 
-	public long getLastSyncTime();
+	long getLastSyncTime();
 
-	public int getSyncTimer();
+	int getSyncTimer();
 
-	public void copy(INecroDataCapability cap);
+	void copy(INecroDataCapability cap);
 }

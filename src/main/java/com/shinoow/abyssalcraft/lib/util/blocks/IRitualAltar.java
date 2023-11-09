@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -37,42 +37,42 @@ public interface IRitualAltar extends ISingletonInventory {
 	 * @param pos TE BlockPos
 	 * @param player Player interacting with the altar
 	 */
-	public void performRitual(World world, BlockPos pos, EntityPlayer player);
+	void performRitual(World world, BlockPos pos, EntityPlayer player);
 
 	/**
 	 * Used to determine if a Ritual can be performed
 	 */
-	public boolean canPerform();
+	boolean canPerform();
 
 	/**
 	 * Returns the cooldown until a new Ritual can be performed
 	 */
-	public int getRitualCooldown();
+	int getRitualCooldown();
 
 	/**
 	 * Determines if a Ritual is currently being performed
 	 */
-	public boolean isPerformingRitual();
+	boolean isPerformingRitual();
 
 	/**
 	 * Invoked on the client after a ritual has started (through a network packet). Sends over the necessary values for the visuals
 	 * @param ritual Active ritual (should never be null, but it wouldn't cause a side-effect)
 	 * @param sacrifice The animal to sacrifice (if any)
 	 */
-	public void setRitualFields(@Nullable NecronomiconRitual ritual, @Nullable EntityLiving sacrifice);
+	void setRitualFields(@Nullable NecronomiconRitual ritual, @Nullable EntityLiving sacrifice);
 
 	/**
 	 * Adds the selected pedestal to the altar's pedestal list
 	 */
-	public void addPedestal(IRitualPedestal pedestal);
+	void addPedestal(IRitualPedestal pedestal);
 
 	/**
 	 * Returns the pedestals associated to this altar
 	 */
-	public List<IRitualPedestal> getPedestals();
+	List<IRitualPedestal> getPedestals();
 
 	/**
 	 * Returns how particles on Ritual Pedestals are displayed for the current ritual
 	 */
-	public EnumRitualParticle getRitualParticle();
+	EnumRitualParticle getRitualParticle();
 }

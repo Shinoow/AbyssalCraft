@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -127,5 +127,14 @@ public class SpellUtils {
 		if(player2.isCreative() || player2.isSpectator())
 			return false;
 		return player.canAttackPlayer(player2);
+	}
+
+	/**
+	 * Attempts to fetch the color of a spell from an ItemStack
+	 * returning a fallback on failure
+	 */
+	public static int getSpellColor(ItemStack stack) {
+		Spell spell = getSpell(stack);
+		return spell != null ? spell.getColor() : 16777215;
 	}
 }

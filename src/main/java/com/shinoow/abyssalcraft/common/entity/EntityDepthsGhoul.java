@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -51,7 +51,7 @@ import net.minecraftforge.common.ForgeModContainer;
 public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityDepthsGhoul.class, DataSerializers.VARINT);
-	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityDepthsGhoul.class, DataSerializers.BYTE);
+	private static final DataParameter<Boolean> CHILD = EntityDataManager.createKey(EntityDepthsGhoul.class, DataSerializers.BOOLEAN);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
 	private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
@@ -123,19 +123,19 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CHILD, Byte.valueOf((byte)0));
-		dataManager.register(TYPE, Integer.valueOf(0));
+		dataManager.register(CHILD, false);
+		dataManager.register(TYPE, 0);
 	}
 
 	@Override
 	public boolean isChild()
 	{
-		return dataManager.get(CHILD).byteValue() == 1;
+		return dataManager.get(CHILD);
 	}
 
 	public void setChild(boolean par1)
 	{
-		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		dataManager.set(CHILD, par1);
 
 		if (world != null && !world.isRemote)
 		{
@@ -156,7 +156,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 	public void setGhoulType(int par1)
 	{
-		dataManager.set(TYPE, Integer.valueOf(par1));
+		dataManager.set(TYPE, par1);
 	}
 
 	@Override
@@ -306,7 +306,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 
 		if (par1NBTTagCompound.hasKey("GhoulType"))
 		{
-			byte var2 = par1NBTTagCompound.getByte("GhoulType");
+			int var2 = par1NBTTagCompound.getInteger("GhoulType");
 			setGhoulType(var2);
 		}
 	}
@@ -319,7 +319,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		if(isChild())
 			par1NBTTagCompound.setBoolean("IsBaby", true);
 
-		par1NBTTagCompound.setByte("GhoulType", (byte)getGhoulType());
+		par1NBTTagCompound.setInteger("GhoulType", getGhoulType());
 	}
 
 	@Override

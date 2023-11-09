@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -33,81 +33,81 @@ public interface IEnergyManipulator {
 	/**
 	 * Gets the quanta of Potential Energy that the tile entity can drain
 	 */
-	public float getEnergyQuanta();
+	float getEnergyQuanta();
 
 	/**
 	 * Activates the Amplifier boost
 	 * @param amp Current Amplifier
 	 * @param deity Current Deity
 	 */
-	public void setActive(AmplifierType amp, DeityType deity);
+	void setActive(AmplifierType amp, DeityType deity);
 
 	/**
 	 * Checks if the Amplifier boost is active
 	 */
-	public boolean isActive();
+	boolean isActive();
 
 	/**
 	 * Returns the Deity associated with this manipulator (can be null)
 	 */
-	public DeityType getDeity(IBlockState state);
+	DeityType getDeity(IBlockState state);
 
 	/**
 	 * Used to calculate Amplification through Charms.<br>
 	 * Should be called whenever something that can be amplified is calculated.
 	 * @param type Type to check
 	 */
-	public float getAmplifier(AmplifierType type);
+	float getAmplifier(AmplifierType type);
 
 	/**
 	 * Returns the Active Deity (assigned in {@link #setActive(AmplifierType, DeityType)})
 	 */
-	public DeityType getActiveDeity();
+	DeityType getActiveDeity();
 
 	/**
 	 * Returns the active Deity (assigned in {@link #setActive(AmplifierType, DeityType)})
 	 */
-	public AmplifierType getActiveAmplifier();
+	AmplifierType getActiveAmplifier();
 
 	/**
 	 * Sets the Active Deity
 	 * @param deity Deity Type
 	 */
-	public void setActiveDeity(DeityType deity);
+	void setActiveDeity(DeityType deity);
 
 	/**
 	 * Sets the Active Amplifier
 	 * @param amplifier Amplifier Type
 	 */
-	public void setActiveAmplifier(AmplifierType amplifier);
+	void setActiveAmplifier(AmplifierType amplifier);
 
 	/**
 	 * Increases the tolerance value (tolerance determines a disruption is fired)
 	 * @param num Amount to increase with
 	 */
-	public void addTolerance(int num);
+	void addTolerance(int num);
 
 	/**
 	 * Returns the manipulator's current tolerance value (tolerance determines a disruption is fired)
 	 */
-	public int getTolerance();
+	int getTolerance();
 
 	/**
 	 * Verifies if the manipulator can transfer PE to nearby Players and/or Collectors.<br>
 	 * This is called in PEUtils before any energy transfer, so use this for something like checking the
 	 * capacity of a PE buffer (provided the manipulator has one, otherwise just return true and call it a day).
 	 */
-	public boolean canTransferPE();
+	boolean canTransferPE();
 
 	/**
 	 * Fires off a Disruption, which can lead to bad things happening
 	 */
-	public void disrupt();
+	void disrupt();
 
 	/**
 	 * Returns the current positions of the currently tracked Energy Collectors within range of the manipulator
 	 */
-	public default Set<BlockPos> getEnergyCollectors(){
+	default Set<BlockPos> getEnergyCollectors(){
 		return null;
 	}
 }

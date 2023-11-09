@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -28,9 +28,9 @@ public class IntegrationHandler implements ILifeCycleHandler {
 	boolean isInvTweaksLoaded = Loader.isModLoaded("inventorytweaks");
 	boolean isJEILoaded = Loader.isModLoaded("jei");
 
-	List<String> mods = new ArrayList<String>();
-	List<IACPlugin> integrations = new ArrayList<IACPlugin>();
-	List<IACPlugin> temp = new ArrayList<IACPlugin>();
+	List<String> mods = new ArrayList<>();
+	List<IACPlugin> integrations = new ArrayList<>();
+	List<IACPlugin> temp = new ArrayList<>();
 
 	/**
 	 * Attempts to find mod integrations.

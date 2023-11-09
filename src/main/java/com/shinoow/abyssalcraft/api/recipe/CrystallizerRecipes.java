@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 
@@ -48,7 +49,7 @@ public class CrystallizerRecipes {
 	public void crystallize(ItemStack input, ItemStack output1, ItemStack output2, float xp)
 	{
 		crystallizationList.put(input, new ItemStack[]{output1, output2});
-		experienceList.put(output1, Float.valueOf(xp));
+		experienceList.put(output1, xp);
 	}
 
 	/**
@@ -58,7 +59,7 @@ public class CrystallizerRecipes {
 	{
 		return crystallizationList.entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(e -> e.getValue())
+				.map(Entry::getValue)
 				.findFirst()
 				.orElse(new ItemStack[] {ItemStack.EMPTY, ItemStack.EMPTY});
 	}
@@ -75,7 +76,7 @@ public class CrystallizerRecipes {
 
 		return experienceList.entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(e -> e.getValue().floatValue())
+				.map(e -> e.getValue())
 				.findFirst()
 				.orElse(0.0F);
 	}

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -51,10 +51,7 @@ public class UpdateModeMessage extends AbstractServerMessage<UpdateModeMessage> 
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		if(container == 0 && player.openContainer instanceof ContainerStateTransformer){
-			player.openContainer.enchantItem(player, mode);
-			player.openContainer.detectAndSendChanges();
-		} else if(container == 1 && player.openContainer instanceof ContainerConfigurator) {
+		if((container == 0 && player.openContainer instanceof ContainerStateTransformer) || (container == 1 && player.openContainer instanceof ContainerConfigurator)){
 			player.openContainer.enchantItem(player, mode);
 			player.openContainer.detectAndSendChanges();
 		}

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -80,11 +80,10 @@ public class ItemPortalPlacer extends ItemACBasic {
 	private boolean isCorrectDim(int dim){
 		switch(key){
 		case 0:
-			if(dim == 0 || dim == ACLib.abyssal_wasteland_id)
+			if((dim == 0 || dim == ACLib.abyssal_wasteland_id) || (AbyssalCraftAPI.getGatewayKeyOverride(dim) == 0))
 				return true;
-			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) == 0)
-				return true;
-			else return false;
+			else
+				return false;
 		case 1:
 			if(dim == 0 || dim == ACLib.abyssal_wasteland_id ||
 			dim == ACLib.dreadlands_id)
@@ -109,20 +108,18 @@ public class ItemPortalPlacer extends ItemACBasic {
 	private boolean dimWarning(int dim){
 		switch(key){
 		case 0:
-			if(dim == ACLib.dreadlands_id ||
+			if((dim == ACLib.dreadlands_id ||
 			dim == ACLib.omothol_id ||
-			dim == ACLib.dark_realm_id)
+			dim == ACLib.dark_realm_id) || (AbyssalCraftAPI.getGatewayKeyOverride(dim) > 0))
 				return true;
-			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) > 0)
-				return true;
-			else return false;
+			else
+				return false;
 		case 1:
-			if(dim == ACLib.omothol_id ||
-			dim == ACLib.dark_realm_id)
+			if((dim == ACLib.omothol_id ||
+			dim == ACLib.dark_realm_id) || (AbyssalCraftAPI.getGatewayKeyOverride(dim) > 1))
 				return true;
-			else if(AbyssalCraftAPI.getGatewayKeyOverride(dim) > 1)
-				return true;
-			else return false;
+			else
+				return false;
 		default:
 			return false;
 		}

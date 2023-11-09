@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -26,17 +26,17 @@ public interface IStructureBase {
 	/**
 	 * Getter of the Place of Power this structure base is controlling
 	 */
-	public IPlaceOfPower getMultiblock();
+	IPlaceOfPower getMultiblock();
 
 	/**
 	 * Setter for the Place of Power this structure base is controlling
 	 */
-	public void setMultiblock(IPlaceOfPower multiblock);
+	void setMultiblock(IPlaceOfPower multiblock);
 
 	/**
 	 * Bridge method for {@link IPlaceOfPower#getAmplifier(AmplifierType)}
 	 * @param type Amplifier Type to amplify
 	 * @return A value to increase the selected stat with, or 0
 	 */
-	public float getAmplifier(AmplifierType type);
+	float getAmplifier(AmplifierType type);
 }

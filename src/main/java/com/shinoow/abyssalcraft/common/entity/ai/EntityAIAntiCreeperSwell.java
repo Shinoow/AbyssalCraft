@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -57,11 +57,7 @@ public class EntityAIAntiCreeperSwell extends EntityAIBase
 	@Override
 	public void updateTask()
 	{
-		if (creeperAttackTarget == null)
-			swellingCreeper.setCreeperState(-1);
-		else if (swellingCreeper.getDistanceSq(creeperAttackTarget) > 49.0D)
-			swellingCreeper.setCreeperState(-1);
-		else if (!swellingCreeper.getEntitySenses().canSee(creeperAttackTarget))
+		if ((creeperAttackTarget == null) || (swellingCreeper.getDistanceSq(creeperAttackTarget) > 49.0D) || !swellingCreeper.getEntitySenses().canSee(creeperAttackTarget))
 			swellingCreeper.setCreeperState(-1);
 		else
 			swellingCreeper.setCreeperState(1);

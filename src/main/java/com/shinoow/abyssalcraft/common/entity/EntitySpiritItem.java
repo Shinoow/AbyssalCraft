@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -15,7 +15,6 @@ import java.util.*;
 
 import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
 
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.*;
@@ -41,6 +40,8 @@ public class EntitySpiritItem extends EntityItem {
 		setInfinitePickupDelay();
 		motionX = motionY = motionZ = 0;
 		setSize(0.1F, 0.1F);
+		noClip = true;
+		setNoGravity(true);
 	}
 
 	public EntitySpiritItem(World worldIn, double x, double y, double z) {
@@ -49,6 +50,8 @@ public class EntitySpiritItem extends EntityItem {
 		setInfinitePickupDelay();
 		motionX = motionY = motionZ = 0;
 		setSize(0.1F, 0.1F);
+		noClip = true;
+		setNoGravity(true);
 	}
 
 	public EntitySpiritItem(World worldIn, double x, double y, double z, ItemStack stack) {
@@ -57,6 +60,8 @@ public class EntitySpiritItem extends EntityItem {
 		setInfinitePickupDelay();
 		motionX = motionY = motionZ = 0;
 		setSize(0.1F, 0.1F);
+		noClip = true;
+		setNoGravity(true);
 	}
 
 	public EntitySpiritItem setRoute(BlockPos[] route) {
@@ -72,8 +77,6 @@ public class EntitySpiritItem extends EntityItem {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		noClip = true;
-		setNoGravity(true);
 		collided = collidedHorizontally = collidedVertically = false;
 		if(world.isRemote) return;
 		target = route[pathIndex];
@@ -104,11 +107,23 @@ public class EntitySpiritItem extends EntityItem {
 				dX = dY = dZ = 0;
 			}
 		} else {
-			dX = target.getX() + 0.5D > posX ? 0.1 : -0.1;
-			dY = target.getY() + 0.3D > posY ? 0.1 : -0.1;
-			dZ = target.getZ() + 0.5D > posZ ? 0.1 : -0.1;
+			if(target.getX() + 0.5D > posX)
+				dX = 0.1;
+			else if(target.getX() + 0.5D < posX)
+				dX = -0.1;
+			if(target.getY() + 0.3D > posY)
+				dY = 0.1;
+			else if(target.getY() + 0.3D < posY)
+				dY = -0.1;
+			if(target.getZ() + 0.5D > posZ)
+				dZ = 0.1;
+			else if(target.getZ() + 0.5D < posZ)
+				dZ = -0.1;
 
-			move(MoverType.SELF, dX, dY, dZ);
+			motionX = dX;
+			if(target.getY() > posY || target.getY() < posY)
+				motionY = dY;
+			motionZ = dZ;
 		}
 	}
 

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -33,7 +33,7 @@ public class ItemTransferCapabilityStorage implements IStorage<IItemTransferCapa
 		NBTTagCompound properties = new NBTTagCompound();
 
 		NBTTagList list = new NBTTagList();
-		instance.getTransferConfigurations().stream().map(i -> i.serializeNBT()).forEach(list::appendTag);
+		instance.getTransferConfigurations().stream().map(ItemTransferConfiguration::serializeNBT).forEach(list::appendTag);
 
 		properties.setTag("configurations", list);
 		properties.setBoolean("isRunning", instance.isRunning());

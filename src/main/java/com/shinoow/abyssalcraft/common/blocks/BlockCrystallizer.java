@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -153,7 +153,7 @@ public class BlockCrystallizer extends BlockContainer
 			if (tileentitycrystallizer instanceof TileEntityCrystallizer)
 			{
 				InventoryHelper.dropInventoryItems(par1World, pos, (TileEntityCrystallizer)tileentitycrystallizer);
-				par1World.updateComparatorOutputLevel(pos, this);;
+				par1World.updateComparatorOutputLevel(pos, this);
 			}
 		}
 

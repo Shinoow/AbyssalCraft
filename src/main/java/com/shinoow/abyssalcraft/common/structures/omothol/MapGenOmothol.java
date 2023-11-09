@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -26,7 +26,7 @@ import net.minecraft.world.gen.structure.StructureStart;
 
 public class MapGenOmothol extends MapGenStructure
 {
-	public static List<Biome> villageSpawnBiomes = Arrays.<Biome>asList(new Biome[] {ACBiomes.omothol});
+	public static List<Biome> villageSpawnBiomes = Arrays.<Biome>asList(ACBiomes.omothol);
 	/** World terrain type, 0 for normal, 1 for flat map */
 	private int terrainType;
 	private int field_82665_g;

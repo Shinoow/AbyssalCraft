@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -111,7 +111,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 
 	public int getWatchedTargetId(int head)
 	{
-		return dataManager.get(HEAD_TARGETS[head]).intValue();
+		return dataManager.get(HEAD_TARGETS[head]);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 	 */
 	public void updateWatchedTargetId(int targetOffset, int newId)
 	{
-		dataManager.set(HEAD_TARGETS[targetOffset], Integer.valueOf(newId));
+		dataManager.set(HEAD_TARGETS[targetOffset], newId);
 	}
 
 	public int getBarfTimer() {

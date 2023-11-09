@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -78,7 +78,7 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(field_184728_b, Boolean.valueOf(false));
+		dataManager.register(field_184728_b, false);
 	}
 
 	@Override
@@ -233,11 +233,11 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	@SideOnly(Side.CLIENT)
 	public boolean getSwingingArms()
 	{
-		return dataManager.get(field_184728_b).booleanValue();
+		return dataManager.get(field_184728_b);
 	}
 
 	@Override
 	public void setSwingingArms(boolean swingingArms) {
-		dataManager.set(field_184728_b, Boolean.valueOf(swingingArms));
+		dataManager.set(field_184728_b, swingingArms);
 	}
 }

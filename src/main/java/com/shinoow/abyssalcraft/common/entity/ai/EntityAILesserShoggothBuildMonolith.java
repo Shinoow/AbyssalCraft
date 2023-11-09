@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -49,11 +49,7 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 
-		if(ACConfig.monolithBuildingCooldown == 0)
-			return false;
-		else if(shoggoth.isChild())
-			return false;
-		else if(shoggoth.isAssisting || shoggoth.isBuilding)
+		if((ACConfig.monolithBuildingCooldown == 0) || shoggoth.isChild() || (shoggoth.isAssisting || shoggoth.isBuilding))
 			return false;
 		else if(shoggoth.getMonolithTimer() < ACConfig.monolithBuildingCooldown)
 			return false;

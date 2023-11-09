@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -99,7 +99,7 @@ public class BlockACCobblestone extends Block {
 		return new BlockStateContainer.Builder(this).add(TYPE).build();
 	}
 
-	public static enum EnumCobblestoneType implements IStringSerializable
+	public enum EnumCobblestoneType implements IStringSerializable
 	{
 		DARKSTONE(0, "darkstone", "darkstone_cobble", 0, 2.2F, 12.0F, MapColor.BLACK),
 		ABYSSAL_STONE(1, "abyssalstone", "abyssalcobblestone", 2, 2.6F, 12.0F, MapColor.GREEN),

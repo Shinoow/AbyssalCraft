@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -31,11 +31,11 @@ public interface IAmplifierCharm {
 	 * Gets the amplifier associated with the item
 	 * @param stack ItemStack containing the item
 	 */
-	public AmplifierType getAmplifier(ItemStack stack);
+	AmplifierType getAmplifier(ItemStack stack);
 
 	/**
 	 * Gets the deity associated with the item (can be null)
 	 * @param stack ItemStack containing the item
 	 */
-	public DeityType getDeity(ItemStack stack);
+	DeityType getDeity(ItemStack stack);
 }

@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -79,7 +79,7 @@ public class StructureAbyStrongholdPieces
 	 */
 	public static void prepareStructurePieces()
 	{
-		structurePieceList = new ArrayList<PieceWeight>();
+		structurePieceList = new ArrayList<>();
 		StructureAbyStrongholdPieces.PieceWeight[] apieceweight = pieceWeightArray;
 		int i = apieceweight.length;
 
@@ -201,10 +201,9 @@ public class StructureAbyStrongholdPieces
 
 	private static StructureComponent getNextValidComponent(StructureAbyStrongholdPieces.Stairs2 par0ComponentStrongholdStairs2, List<StructureComponent> par1List, Random par2Random, int par3, int par4, int par5, EnumFacing par6, int par7)
 	{
-		if (par7 > 50)
+		if ((par7 > 50) || !(Math.abs(par3 - par0ComponentStrongholdStairs2.getBoundingBox().minX) <= 112 && Math.abs(par5 - par0ComponentStrongholdStairs2.getBoundingBox().minZ) <= 112))
 			return null;
-		else if (Math.abs(par3 - par0ComponentStrongholdStairs2.getBoundingBox().minX) <= 112 && Math.abs(par5 - par0ComponentStrongholdStairs2.getBoundingBox().minZ) <= 112)
-		{
+		else {
 			StructureAbyStrongholdPieces.Stronghold stronghold = getNextComponent(par0ComponentStrongholdStairs2, par1List, par2Random, par3, par4, par5, par6, par7 + 1);
 
 			if (stronghold != null)
@@ -214,8 +213,7 @@ public class StructureAbyStrongholdPieces
 			}
 
 			return stronghold;
-		} else
-			return null;
+		}
 	}
 
 	public static class Stairs extends StructureAbyStrongholdPieces.Stronghold
@@ -884,7 +882,7 @@ public class StructureAbyStrongholdPieces
 	{
 		public StructureAbyStrongholdPieces.PieceWeight strongholdPieceWeight;
 		public StructureAbyStrongholdPieces.PortalRoom strongholdPortalRoom;
-		public List<Stronghold> field_75026_c = new ArrayList<Stronghold>();
+		public List<Stronghold> field_75026_c = new ArrayList<>();
 		public Stairs2() {}
 
 		public Stairs2(int par1, Random par2Random, int par3, int par4)
@@ -1245,7 +1243,7 @@ public class StructureAbyStrongholdPieces
 			return par0StructureBoundingBox != null && par0StructureBoundingBox.minY > 10;
 		}
 
-		public static enum Door
+		public enum Door
 		{
 			OPENING,
 			WOOD_DOOR,
@@ -1482,7 +1480,7 @@ public class StructureAbyStrongholdPieces
 			}
 			catch (NoSuchFieldError var4)
 			{
-				;
+
 			}
 
 			try
@@ -1491,7 +1489,7 @@ public class StructureAbyStrongholdPieces
 			}
 			catch (NoSuchFieldError var3)
 			{
-				;
+
 			}
 
 			try
@@ -1500,7 +1498,7 @@ public class StructureAbyStrongholdPieces
 			}
 			catch (NoSuchFieldError var2)
 			{
-				;
+
 			}
 
 			try
@@ -1509,7 +1507,7 @@ public class StructureAbyStrongholdPieces
 			}
 			catch (NoSuchFieldError var1)
 			{
-				;
+
 			}
 		}
 	}

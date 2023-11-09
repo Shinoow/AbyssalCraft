@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -110,7 +110,7 @@ public class IngotBlock extends Block {
 		return new BlockStateContainer.Builder(this).add(TYPE).build();
 	}
 
-	public static enum EnumIngotType implements IStringSerializable
+	public enum EnumIngotType implements IStringSerializable
 	{
 		ABYSSALNITE(0, "abyssalnite", "abyblock", 2, MapColor.PURPLE, TextFormatting.DARK_AQUA),
 		REFINED_CORALIUM(1, "refinedcoralium", "corblock", 5, MapColor.CYAN, TextFormatting.AQUA),

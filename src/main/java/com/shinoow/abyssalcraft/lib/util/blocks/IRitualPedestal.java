@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -26,15 +26,15 @@ public interface IRitualPedestal extends ISingletonInventory {
 	 * Returns the Ritual Altar this pedestal is attached to<br>
 	 * (the BlockPos of the altar should be kept in the pedestal's NBT)
 	 */
-	public IRitualAltar getAltar();
+	IRitualAltar getAltar();
 
 	/**
 	 * Sets the Ritual Altar position
 	 */
-	public void setAltar(BlockPos pos);
+	void setAltar(BlockPos pos);
 
 	/**
 	 * Consumes the Item placed on the pedestal (if any)
 	 */
-	public void consumeItem();
+	void consumeItem();
 }

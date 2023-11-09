@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -62,7 +62,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, IEntityMultiPart, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityLesserShoggoth.class, DataSerializers.BYTE);
-	private static final DataParameter<Byte> CHILD = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.BYTE);
+	private static final DataParameter<Boolean> CHILD = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> FOOD = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.VARINT);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
@@ -132,10 +132,10 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CHILD, Byte.valueOf((byte)0));
-		dataManager.register(TYPE, Integer.valueOf(0));
-		dataManager.register(FOOD, Integer.valueOf(0));
-		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
+		dataManager.register(CHILD, false);
+		dataManager.register(TYPE, 0);
+		dataManager.register(FOOD, 0);
+		dataManager.register(CLIMBING, (byte)0);
 	}
 
 	@Override
@@ -155,12 +155,12 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 	@Override
 	public boolean isChild()
 	{
-		return dataManager.get(CHILD).byteValue() == 1;
+		return dataManager.get(CHILD);
 	}
 
 	public void setChild(boolean par1)
 	{
-		dataManager.set(CHILD, Byte.valueOf((byte)(par1 ? 1 : 0)));
+		dataManager.set(CHILD, par1);
 
 		if (world != null && !world.isRemote)
 		{
@@ -188,12 +188,12 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 
 	public void setShoggothType(int par1) {
 
-		dataManager.set(TYPE, Integer.valueOf(par1));
+		dataManager.set(TYPE, par1);
 	}
 
 	public void setFoodLevel(int par1){
 
-		dataManager.set(FOOD, Integer.valueOf(par1));
+		dataManager.set(FOOD, par1);
 	}
 
 	public int getFoodLevel(){
@@ -203,7 +203,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 
 	public void feed(EntityLivingBase entity){
 		int food = getFoodLevel() + getPointsFromSize(entity.height * entity.width);
-		dataManager.set(FOOD, Integer.valueOf(food));
+		dataManager.set(FOOD, food);
 		playSound(ACSounds.shoggoth_consume, getSoundVolume(), getSoundPitch());
 	}
 
@@ -304,7 +304,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 			for(EntityItem entity : world.getEntitiesWithinAABB(EntityItem.class, getEntityBoundingBox())) {
 				if(entity.getItem().getItem() instanceof ItemFood) {
 					int food = getFoodLevel() + entity.getItem().getCount();
-					dataManager.set(FOOD, Integer.valueOf(food));
+					dataManager.set(FOOD, food);
 					playSound(ACSounds.shoggoth_consume, getSoundVolume(), getSoundPitch());
 				} else playSound(SoundEvents.ENTITY_ITEM_BREAK, getSoundVolume(), 1.0F);
 				world.removeEntity(entity);
@@ -389,7 +389,7 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, b0);
 	}
 
 	@Override
@@ -588,12 +588,12 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 
 		if (par1NBTTagCompound.hasKey("ShoggothType"))
 		{
-			byte var2 = par1NBTTagCompound.getByte("ShoggothType");
+			int var2 = par1NBTTagCompound.getInteger("ShoggothType");
 			setShoggothType(var2);
 		}
 
 		if(par1NBTTagCompound.hasKey("FoodLevel")){
-			byte var2 = par1NBTTagCompound.getByte("FoodLevel");
+			int var2 = par1NBTTagCompound.getInteger("FoodLevel");
 			setFoodLevel(var2);
 		}
 
@@ -608,9 +608,9 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 		if (isChild())
 			par1NBTTagCompound.setBoolean("IsBaby", true);
 
-		par1NBTTagCompound.setByte("ShoggothType", (byte)getShoggothType());
+		par1NBTTagCompound.setInteger("ShoggothType", getShoggothType());
 
-		par1NBTTagCompound.setByte("FoodLevel", (byte)getFoodLevel());
+		par1NBTTagCompound.setInteger("FoodLevel", getFoodLevel());
 
 		par1NBTTagCompound.setInteger("MonolithTimer", monolithTimer);
 	}

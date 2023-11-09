@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -48,11 +48,11 @@ public class BlockMimicFire extends BlockFire {
 				worldIn.setBlockToAir(pos);
 			else
 			{
-				int i = state.getValue(AGE).intValue();
+				int i = state.getValue(AGE);
 
 				if (i < 4)
 				{
-					state = state.withProperty(AGE, Integer.valueOf(i + rand.nextInt(3) / 2));
+					state = state.withProperty(AGE, i + rand.nextInt(3) / 2);
 					worldIn.setBlockState(pos, state, 4);
 				}
 
@@ -115,7 +115,7 @@ public class BlockMimicFire extends BlockFire {
 											if (i2 > 4)
 												i2 = 4;
 
-											worldIn.setBlockState(blockpos, state.withProperty(AGE, Integer.valueOf(i2)), 3);
+											worldIn.setBlockState(blockpos, state.withProperty(AGE, i2), 3);
 										}
 									}
 								}
@@ -139,12 +139,12 @@ public class BlockMimicFire extends BlockFire {
 				if (j > 15)
 					j = 15;
 
-				worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, Integer.valueOf(j)), 3);
+				worldIn.setBlockState(pos, getDefaultState().withProperty(AGE, j), 3);
 			} else
 				worldIn.setBlockToAir(pos);
 
 			if (iblockstate.getBlock() == Blocks.TNT)
-				Blocks.TNT.onPlayerDestroy(worldIn, pos, iblockstate.withProperty(BlockTNT.EXPLODE, Boolean.valueOf(true)));
+				Blocks.TNT.onPlayerDestroy(worldIn, pos, iblockstate.withProperty(BlockTNT.EXPLODE, true));
 		}
 	}
 

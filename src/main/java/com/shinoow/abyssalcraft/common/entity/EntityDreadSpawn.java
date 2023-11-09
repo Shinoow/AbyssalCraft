@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -105,7 +105,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 	protected void entityInit()
 	{
 		super.entityInit();
-		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
+		dataManager.register(CLIMBING, (byte)0);
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public class EntityDreadSpawn extends EntityMob implements IDreadEntity
 		else
 			b0 &= -2;
 
-		dataManager.set(CLIMBING, Byte.valueOf(b0));
+		dataManager.set(CLIMBING, b0);
 	}
 
 	@Override

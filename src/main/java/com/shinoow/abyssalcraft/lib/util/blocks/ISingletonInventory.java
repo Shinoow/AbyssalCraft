@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -23,13 +23,13 @@ public interface ISingletonInventory {
 	/**
 	 * Returns the ItemStack placed on the Altar, if any
 	 */
-	public ItemStack getItem();
+	ItemStack getItem();
 
 	/**
 	 * Sets the ItemStack placed on the Altar
 	 * @param item ItemStack to place on the Altar
 	 */
-	public void setItem(ItemStack item);
+	void setItem(ItemStack item);
 
 	/**
 	 * Returns the rotation of the ItemStack placed on the Altar, if rendered on the block
