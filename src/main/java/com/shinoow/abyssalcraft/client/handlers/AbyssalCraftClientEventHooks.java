@@ -82,22 +82,22 @@ public class AbyssalCraftClientEventHooks {
 
 	@SubscribeEvent
 	public void onUpdateFOV(FOVUpdateEvent event) {
-		float fov = event.getFov();
 
-		if( event.getEntity().isHandActive() && event.getEntity().getActiveItemStack() != null
+		if(event.getEntity().isHandActive() && !event.getEntity().getActiveItemStack().isEmpty()
 				&& event.getEntity().getActiveItemStack().getItem() == ACItems.coralium_longbow) {
 			int duration = event.getEntity().getItemInUseCount();
 			float multiplier = duration / 20.0F;
+			float fov = event.getFov();
 
-			if( multiplier > 1.0F )
+			if(multiplier > 1.0F )
 				multiplier = 1.0F;
 			else
 				multiplier *= multiplier;
 
 			fov *= 1.0F - multiplier * 0.15F;
+			event.setNewfov(fov);
 		}
 
-		event.setNewfov(fov);
 	}
 
 	@SubscribeEvent
