@@ -19,6 +19,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -64,7 +65,7 @@ public class TransmutationRecipe implements IRecipeWrapper {
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {
-		ingredients.setInputLists(ItemStack.class, input);
-		ingredients.setOutputs(ItemStack.class, outputs);
+		ingredients.setInputLists(VanillaTypes.ITEM, input);
+		ingredients.setOutputs(VanillaTypes.ITEM, outputs);
 	}
 }

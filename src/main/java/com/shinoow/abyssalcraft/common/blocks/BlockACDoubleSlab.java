@@ -22,12 +22,14 @@ import net.minecraft.world.World;
 
 public class BlockACDoubleSlab extends BlockACSlab {
 
+	@SuppressWarnings("deprecation")
 	public BlockACDoubleSlab(Block par1SingleSlab, Material par3Material, String tooltype, int harvestlevel)
 	{
 		super(par1SingleSlab, par3Material, tooltype, harvestlevel);
 		setSoundType(par1SingleSlab.getSoundType());
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlockACDoubleSlab(Block par1SingleSlab, Material par3Material)
 	{
 		super(par1SingleSlab, par3Material);

@@ -33,6 +33,7 @@ public class BlockACOre extends BlockACBasic {
 		super(Material.ROCK, "pickaxe", harvestlevel, hardness, resistance, SoundType.STONE);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_)
 	{

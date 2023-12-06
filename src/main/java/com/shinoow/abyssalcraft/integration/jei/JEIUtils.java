@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
 
 import mezz.jei.api.ingredients.IIngredientRegistry;
+import mezz.jei.api.ingredients.VanillaTypes;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -52,7 +53,7 @@ public class JEIUtils {
 		List<ItemStack> fuelsTMutable = new ArrayList<>();
 		List<ItemStack> fuelsCMutable = new ArrayList<>();
 
-		for(ItemStack stack : registry.getAllIngredients(ItemStack.class)){
+		for(ItemStack stack : registry.getAllIngredients(VanillaTypes.ITEM)){
 			addItemStack(stack, FuelType.TRANSMUTATOR, fuelsTMutable);
 			addItemStack(stack, FuelType.CRYSTALLIZER, fuelsCMutable);
 		}

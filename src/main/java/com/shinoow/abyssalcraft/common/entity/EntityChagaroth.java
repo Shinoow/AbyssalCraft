@@ -28,6 +28,7 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.entity.*;
@@ -49,7 +50,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraftforge.fml.common.Optional.Interface;
@@ -804,13 +804,13 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity, com.gith
 
 		if(ACConfig.showBossDialogs) {
 			if(deathTicks == 20 && !world.isRemote)
-				SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.1"));
+				SpecialTextUtil.ChagarothGroup(world, TranslationUtil.toLocal("message.chagaroth.death.1"));
 			if(deathTicks == 80 && !world.isRemote)
-				SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.2"));
+				SpecialTextUtil.ChagarothGroup(world, TranslationUtil.toLocal("message.chagaroth.death.2"));
 			if(deathTicks == 140 && !world.isRemote)
-				SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.3"));
+				SpecialTextUtil.ChagarothGroup(world, TranslationUtil.toLocal("message.chagaroth.death.3"));
 			if(deathTicks == 200 && !world.isRemote)
-				SpecialTextUtil.ChagarothGroup(world, I18n.translateToLocal("message.chagaroth.death.4"));
+				SpecialTextUtil.ChagarothGroup(world, TranslationUtil.toLocal("message.chagaroth.death.4"));
 		}
 		if(deathTicks == 200 && !world.isRemote) {
 			setDead();

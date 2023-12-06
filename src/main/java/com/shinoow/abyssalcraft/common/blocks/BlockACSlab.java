@@ -52,6 +52,7 @@ public abstract class BlockACSlab extends BlockSlab {
 		setHarvestLevel(tooltype, harvestlevel);
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlockACSlab(Block par1SingleSlab, Material par3Material)
 	{
 		super(par3Material);

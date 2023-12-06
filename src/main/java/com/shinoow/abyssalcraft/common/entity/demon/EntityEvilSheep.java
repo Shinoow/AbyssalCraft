@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.EvilSheepMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -32,7 +33,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -73,7 +73,7 @@ public class EntityEvilSheep extends EntityEvilAnimal {
 	@Override
 	public String getName()
 	{
-		return I18n.translateToLocal("entity.Sheep.name");
+		return TranslationUtil.toLocal("entity.Sheep.name");
 	}
 
 	@Override

@@ -26,6 +26,7 @@ import net.minecraft.world.World;
  *
  * @since 1.5
  */
+@SuppressWarnings("deprecation")
 public abstract class DisruptionEntry {
 
 	private DeityType deity;

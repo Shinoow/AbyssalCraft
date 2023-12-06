@@ -14,9 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
-import com.shinoow.abyssalcraft.lib.util.Scheduler;
-import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.*;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,7 +23,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -163,7 +160,7 @@ public class EntityODBPrimed extends Entity {
 				sacthoth.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(posX, posY + 1, posZ)), null);
 				world.spawnEntity(sacthoth);
 				if(ACConfig.showBossDialogs)
-					SpecialTextUtil.SacthothGroup(world, I18n.translateToLocal("message.sacthoth.spawn.1"));
+					SpecialTextUtil.SacthothGroup(world, TranslationUtil.toLocal("message.sacthoth.spawn.1"));
 			}
 
 		});

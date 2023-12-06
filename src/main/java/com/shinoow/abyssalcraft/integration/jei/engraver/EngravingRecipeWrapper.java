@@ -20,6 +20,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -75,7 +76,7 @@ public class EngravingRecipeWrapper implements IRecipeWrapper {
 	public void getIngredients(IIngredients ingredients) {
 		List<List<ItemStack>> inputs = new ArrayList<>(input);
 		inputs.add(Collections.singletonList(engraving));
-		ingredients.setInputLists(ItemStack.class, inputs);
-		ingredients.setOutputs(ItemStack.class, output);
+		ingredients.setInputLists(VanillaTypes.ITEM, inputs);
+		ingredients.setOutputs(VanillaTypes.ITEM, output);
 	}
 }

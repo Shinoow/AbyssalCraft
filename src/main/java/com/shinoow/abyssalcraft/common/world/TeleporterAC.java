@@ -32,7 +32,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class TeleporterAC extends Teleporter
 {
@@ -54,10 +54,10 @@ public class TeleporterAC extends Teleporter
 		if(entity instanceof EntityPlayerMP) {
 			if(!ForgeHooks.onTravelToDimension(entity, dimension)) return;
 			if(!((EntityPlayerMP)entity).capabilities.isCreativeMode) {
-				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, true, "invulnerableDimensionChange", "field_184851_cj");
-				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastExperience", "field_71144_ck");
-				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1.0F, "lastHealth", "field_71149_ch");
-				ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "lastFoodLevel", "field_71146_ci");
+				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, true, "field_184851_cj");
+				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "field_71144_ck");
+				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1.0F, "field_71149_ch");
+				ObfuscationReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, -1, "field_71146_ci");
 			}
 			((EntityPlayerMP)entity).server.getPlayerList().transferPlayerToDimension((EntityPlayerMP)entity, dimension, teleporter);
 		} else

@@ -21,6 +21,7 @@ import net.minecraftforge.common.util.EnumHelper;
  *
  * @since 1.5
  */
+@SuppressWarnings("deprecation")
 public class EnergyEnum {
 
 	/**

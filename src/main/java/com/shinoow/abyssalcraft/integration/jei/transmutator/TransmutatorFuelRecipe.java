@@ -22,6 +22,7 @@ import com.google.common.base.Preconditions;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -62,6 +63,6 @@ public class TransmutatorFuelRecipe implements IRecipeWrapper {
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {
-		ingredients.setInputLists(ItemStack.class, inputs);
+		ingredients.setInputLists(VanillaTypes.ITEM, inputs);
 	}
 }

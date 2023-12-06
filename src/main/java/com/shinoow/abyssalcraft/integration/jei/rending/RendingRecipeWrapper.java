@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.rending.Rending;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -78,6 +79,6 @@ public class RendingRecipeWrapper implements IRecipeWrapper {
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {
-		ingredients.setOutput(ItemStack.class, output);
+		ingredients.setOutput(VanillaTypes.ITEM, output);
 	}
 }

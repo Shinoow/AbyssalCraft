@@ -59,7 +59,7 @@ public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
 			if(altar.getItem().getItem() == Items.BOOK && !ACConfig.enchantBooks)
 				return false;
 			if(altar.getItem().isItemEnchantable()) {
-				books = altar.getPedestals().stream().map(IRitualPedestal::getItem).filter(i -> i.getRarity() == EnumRarity.UNCOMMON).collect(Collectors.toList());
+				books = altar.getPedestals().stream().map(IRitualPedestal::getItem).filter(i -> i.getItem().getForgeRarity(i) == EnumRarity.UNCOMMON).collect(Collectors.toList());
 
 				return books.size() == 8;
 			}

@@ -60,12 +60,14 @@ public class BlockACLeaves extends BlockLeaves {
 		return Item.getItemFromBlock(sapling);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return Blocks.LEAVES.isOpaqueCube(state);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {

@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItem;
@@ -36,7 +37,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfoServer;
@@ -627,11 +627,11 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 
 		if(ACConfig.showBossDialogs) {
 			if(deathTicks == 20 && !world.isRemote)
-				SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.1"));
+				SpecialTextUtil.OblivionaireGroup(world, TranslationUtil.toLocal("message.asorah.death.1"));
 			if(deathTicks == 80 && !world.isRemote)
-				SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.2"));
+				SpecialTextUtil.OblivionaireGroup(world, TranslationUtil.toLocal("message.asorah.death.2"));
 			if(deathTicks == 140 && !world.isRemote)
-				SpecialTextUtil.OblivionaireGroup(world, I18n.translateToLocal("message.asorah.death.3"));
+				SpecialTextUtil.OblivionaireGroup(world, TranslationUtil.toLocal("message.asorah.death.3"));
 		}
 		if (deathTicks == 200 && !world.isRemote){
 			setDead();

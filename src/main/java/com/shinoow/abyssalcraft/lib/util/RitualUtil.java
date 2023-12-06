@@ -35,6 +35,7 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
  * @author shinoow
  *
  */
+@SuppressWarnings("deprecation")
 public class RitualUtil {
 
 	private static Map<Supplier<IBlockState>, Integer> bookTypeMappings = new HashMap<>();

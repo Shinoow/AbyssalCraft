@@ -24,6 +24,7 @@ import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -132,7 +133,7 @@ public class RitualRecipeWrapper implements IRecipeWrapper {
 			input.add(list(obj) ? getList(obj) : Collections.singletonList(APIUtils.convertToStack(obj)));
 		input.add(Collections.singletonList(APIUtils.convertToStack(sacrifice)));
 		input.add(Collections.singletonList(getItem(bookType)));
-		ingredients.setInputLists(ItemStack.class, input);
-		ingredients.setOutput(ItemStack.class, output);
+		ingredients.setInputLists(VanillaTypes.ITEM, input);
+		ingredients.setOutput(VanillaTypes.ITEM, output);
 	}
 }

@@ -23,6 +23,7 @@ import com.shinoow.abyssalcraft.common.items.ItemStaffOfRending;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -44,7 +45,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
@@ -158,7 +158,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 						par1EntityPlayer.displayVillagerTradeGui(this);
 						return true;
 					}
-				} else if(!tradingPlayer.getUniqueID().equals(par1EntityPlayer.getUniqueID())) par1EntityPlayer.sendMessage(new TextComponentString(getName()+": "+I18n.translateToLocal("message.remnant.busy")));
+				} else if(!tradingPlayer.getUniqueID().equals(par1EntityPlayer.getUniqueID())) par1EntityPlayer.sendMessage(new TextComponentString(getName()+": "+TranslationUtil.toLocal("message.remnant.busy")));
 			} else {
 				insult(par1EntityPlayer);
 				return true;
@@ -181,7 +181,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	private void insult(EntityPlayer player){
 		int insultNum = world.rand.nextInt(3);
 		String insult = getName()+": "+String.format(getInsult(insultNum), player.getName());
-		String translated = getName()+": "+String.format(I18n.translateToLocal("message.remnant.insult."+insultNum), player.getName());
+		String translated = getName()+": "+String.format(TranslationUtil.toLocal("message.remnant.insult."+insultNum), player.getName());
 
 		if(world.isRemote){
 			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, player.getEntityBoundingBox().grow(16D, 16D, 16D));

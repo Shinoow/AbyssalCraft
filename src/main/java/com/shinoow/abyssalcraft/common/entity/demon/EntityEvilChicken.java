@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity.demon;
 
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -26,7 +27,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class EntityEvilChicken extends EntityEvilAnimal {
@@ -58,7 +58,7 @@ public class EntityEvilChicken extends EntityEvilAnimal {
 	@Override
 	public String getName()
 	{
-		return I18n.translateToLocal("entity.Chicken.name");
+		return TranslationUtil.toLocal("entity.Chicken.name");
 	}
 
 	@Override

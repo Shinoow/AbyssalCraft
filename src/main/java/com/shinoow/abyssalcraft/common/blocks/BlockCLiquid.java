@@ -132,6 +132,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 200));
 	}
 
+	@SuppressWarnings("deprecation")
 	private List<IBlockState> oresToBlocks(List<ItemStack> list){
 		List<IBlockState> blocks = new ArrayList<>();
 		for(ItemStack stack : list){
@@ -147,6 +148,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		return blocks;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void addBlocks(){
 		dusts.addAll(oresToBlocks(OreDictionary.getOres("oreSaltpeter")));
 		if(!OreDictionary.getOres("oreSulfur").isEmpty())

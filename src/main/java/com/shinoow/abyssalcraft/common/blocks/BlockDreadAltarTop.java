@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.chagarothlair;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -37,7 +38,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -101,7 +101,7 @@ public class BlockDreadAltarTop extends Block {
 				if(par1World.getBlockState(pos.down()).getBlock() == ACBlocks.chagaroth_altar_bottom)
 					if(pos.getY() == 41) {
 						if(!par1World.isRemote){
-							SpecialTextUtil.ChagarothGroup(par1World, I18n.translateToLocal("message.dreadaltartop.spawn"));
+							SpecialTextUtil.ChagarothGroup(par1World, TranslationUtil.toLocal("message.dreadaltartop.spawn"));
 							//						par5EntityPlayer.addStat(ACAchievements.summon_chagaroth, 1);
 							chagarothlair lair = new chagarothlair();
 							lair.generate(par1World, par1World.rand, pos);

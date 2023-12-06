@@ -36,9 +36,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class EntityHandler implements ILifeCycleHandler {
 
@@ -49,7 +49,7 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		if(SharedMonsterAttributes.MAX_HEALTH.clampValue(Integer.MAX_VALUE) <= 2000)
 			try{
-				Field f = ReflectionHelper.findField(RangedAttribute.class, "maximumValue", "field_111118_b");
+				Field f = ObfuscationReflectionHelper.findField(RangedAttribute.class, "field_111118_b");
 				Field modifiersField = Field.class.getDeclaredField("modifiers");
 				modifiersField.setAccessible(true);
 				modifiersField.setInt(f, f.getModifiers() & ~Modifier.FINAL);

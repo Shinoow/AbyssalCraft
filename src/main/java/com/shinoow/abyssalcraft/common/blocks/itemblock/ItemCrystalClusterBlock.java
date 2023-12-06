@@ -16,10 +16,10 @@ import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
 
 public class ItemCrystalClusterBlock extends ItemBlockAC implements ICrystal {
 
@@ -31,13 +31,13 @@ public class ItemCrystalClusterBlock extends ItemBlockAC implements ICrystal {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return I18n.translateToLocalFormatted("crystalcluster.postfix", name());
+		return TranslationUtil.toLocalFormatted("crystalcluster.postfix", name());
 	}
 
 	public String name() {
 		int meta = ((BlockCrystalCluster)block).index;
 		String s = ACLib.crystalNames[meta];
-		return I18n.translateToLocal("item.crystal."+s+".name");
+		return TranslationUtil.toLocal("item.crystal."+s+".name");
 	}
 
 	@Override

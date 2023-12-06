@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.world.biome;
 
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
@@ -27,6 +28,8 @@ public class BiomeDarkRealm extends Biome {
 	public BiomeDarkRealm(BiomeProperties par1){
 		super(par1);
 		setMobSpawns();
+		topBlock = ACBlocks.darkstone.getDefaultState();
+		fillerBlock = ACBlocks.darkstone.getDefaultState();
 	}
 
 	public final void setMobSpawns(){
