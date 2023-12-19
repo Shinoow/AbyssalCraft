@@ -465,7 +465,8 @@ necronomicon.text.overworld.progression.1=アビス荒野に到達するため�
 necronomicon.text.overworld.progression.2=まずはネザーでブレイズロッドを2本以上集める必要があります。ダークランドでは、シャドウ系モンスターを倒してようやくシャドウジェムを集めることができます。山岳が最も入手しやすい場所です。より多く入手するために、切り裂きの杖を使用することをお勧めします。(詳細は[特別な装備とツール]の項目を参照)
 necronomicon.text.overworld.progression.3=水系のバイオームでは、コラリウムパールを作成するためにコラリウムジェムを集める必要があります。アイテムを全て手に入れたら、『注入の儀式』([儀式]の項に記載)によって『変性の宝石』を作成できます。『忘却の欠片』のレシピは、[特別な素材]の項に載っています。
 necronomicon.text.overworld.progression.4=『忘却の欠片』が4個集まったら、それらとレッドストーン4個とエンダーアイを使い、ゲートウェイキーの主要材料である『忘却の触媒』を作ります(レシピは[特別な素材]の項に記載)。
-necronomicon.text.overworld.progression.5=ゲートウェイキーは、オーバーワールドで地面を右クリックするだけでポータルが作成できます。アビス荒野での知識を得るには、アビス荒野のネクロノミコンを作成してください(『アビス荒野の皮』が3枚(または8枚)必要です。また、材料となる『アビス荒野のエッセンス』の入手には切り裂きの杖が必要です)。
+necronomicon.text.overworld.progression.5=Once the Gateway Key is crafted, you can create portals through the Ritual of Open Doors (check the ritual section of the Necronomicon for more information).
+necronomicon.text.overworld.progression.6=For more information, you will need the Abyssal Wasteland Necronomicon, which requires 8 Skins of The Abyssal Wasteland in order to upgrade. The Staff of Rending is needed in order to obtain essences used to craft those.
 
 necronomicon.text.abyssal.progression.1=アビス荒野に到着したら、次の目標はドレッドランドに向かうことです。ゲートウェイキーをグレードアップさせるためには、『深淵の目』『ドレッドランド入りのパワーストーン』『変性の宝石』が必要です。1つ目の素材は、『眠り人の儀式』という儀式で召喚される、『堕落した者アソラ』を倒すことで入手できます。
 necronomicon.text.abyssal.progression.2=アソラはスペクトラルドラゴンを使い自身を回復するので、倒しつつ戦う必要があります。倒すと、大量のEXPと様々なアイテム、そして深淵の目をドロップします。ドレッドランド入りのパワーストーンはアビス要塞の中にあり、パワーストーントラッカーを使って見つけることができます(レシピは[特別な素材]の項を参照)

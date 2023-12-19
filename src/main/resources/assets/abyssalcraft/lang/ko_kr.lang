@@ -468,7 +468,8 @@ necronomicon.text.overworld.progression.1=심연의 황무지에 도달하기 �
 necronomicon.text.overworld.progression.2=지옥에서는 2개의 블레이즈 막대가 필요하며, 나중에 몇 개 더 필요할 것입니다. 다크랜드에서는 살아있는 그림자를 물리쳐 그림자 보석을 얻을 수 있습니다. 그것들은 다크랜드 산맥의 바이옴에서 가장 흔하게 발견됩니다. 그림자 보석을 더 빨리 획득하려면 분열의 지팡이를 확보하는 것이 좋습니다. (특수 갑옷 및 도구 섹션 참고).
 necronomicon.text.overworld.progression.3=워터 바이옴에서 코랄리움 진주를 만들기 위해서는 코랄리움 보석이 필요합니다. 이 아이템을 획득한 후에는 주입 의식(의식 섹션)을 통해 변형 보석을 만들 수 있습니다. (오블리비언 조각을 위한 레시피는 특수 물질 섹션 참고).
 necronomicon.text.overworld.progression.4=4개의 오블리비언 조각이 있는 경우, 이 조각과 4개의 레드스톤 가루, 엔더의 눈을 주입합니다(의식 섹션 참고). 게이트웨이 열쇠의 주요 구성 요소인 오블리비언 카탈리스트(특수 물질 섹션 참고)를 만듭니다.
-necronomicon.text.overworld.progression.5=게이트웨이 열쇠가 제작되면 지면에 오른쪽 버튼을 클릭하면 포털이 형성됩니다. 더 많은 정보를 알 수 있는 심연의 황무지 네크로노미콘으로 업그레이드하고 싶다면, 8개의 심연의 황무지 살점이 필요합니다. 분열의 지팡이는 그것을 만들때 사용되는 정수를 얻기 위해 필요합니다.
+necronomicon.text.overworld.progression.5=Once the Gateway Key is crafted, you can create portals through the Ritual of Open Doors (check the ritual section of the Necronomicon for more information).
+necronomicon.text.overworld.progression.6=For more information, you will need the Abyssal Wasteland Necronomicon, which requires 8 Skins of The Abyssal Wasteland in order to upgrade. The Staff of Rending is needed in order to obtain essences used to craft those.
 
 necronomicon.text.abyssal.progression.1=심연의 황무지에 도달하면 다음 목표는 공포의 땅에 도달하는 것입니다. 게이트웨이 열쇠, 심연의 눈, 공포가 주입된 파워스톤 및 변형 보석등의 3가지 구성 요소가 필요합니다. 첫번째는 "잠자는 자의 의식"을 통해 소환된 "타락한 자" 아소라를 물리침으로써 얻습니다.
 necronomicon.text.abyssal.progression.2=아소라는 영혼 드래곤을 이용하여 자신을 치료하기 때문에, 전투중에 최대한 빠르게 제거해야 합니다. 아소라를 처치하면 다량의 경험치와 차원에서 발견되는 물질들이 드롭될 것입니다. 공포가 주입된 파워스톤은 파워스톤 추적기(특수 물질 섹션)를 사용하여 찾을 수 있는 심연의 요새 안에 있습니다.

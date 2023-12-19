@@ -481,7 +481,8 @@ necronomicon.text.overworld.progression.1=要想到达深渊荒原，必须合�
 necronomicon.text.overworld.progression.2=从下界你需要2根烈焰棒，以后可能需要更多。在黑暗之地你需要杀死活阴影以获得阴影宝石。它们最常见于黑暗之地山脉生物群系。推荐使用撕裂法杖以更快获取阴影宝石（详情见特殊武器装备章节）。
 necronomicon.text.overworld.progression.3=从水域你需要获得珊瑚宝石来合成珊瑚珍珠。一旦你获得了上述物品，你可以通过注入仪式（在仪式部分找到）创建一个嬗变宝石。湮灭碎片的合成表能在特殊材料章节找到。
 necronomicon.text.overworld.progression.4=当你有4个湮灭碎片，将这些和4个红石粉来注入末影之眼（通过注入仪式，在死灵之书的仪式章节可找到）来合成一个湮灭媒介，门钥匙的主要成分（特殊材料章节有合成表）。
-necronomicon.text.overworld.progression.5=一旦门钥匙合成了，将门钥匙右击在地面上就能生成一个传送门。要获得更多的信息，你需要深渊荒原死灵之书，需要8个深渊荒原兽皮来升级。需要撕裂法杖来获得用作合成的精华。
+necronomicon.text.overworld.progression.5=Once the Gateway Key is crafted, you can create portals through the Ritual of Open Doors (check the ritual section of the Necronomicon for more information).
+necronomicon.text.overworld.progression.6=For more information, you will need the Abyssal Wasteland Necronomicon, which requires 8 Skins of The Abyssal Wasteland in order to upgrade. The Staff of Rending is needed in order to obtain essences used to craft those.
 
 necronomicon.text.abyssal.progression.1=在你到达了深渊荒原后，你下一个目标就是到达恐惧之地。你需要3个部件来升级你的门钥匙，一个深渊之眼，一个恐惧之地蕴能石和一个嬗变宝石。第一个需要打败堕落者阿索拉来获得，通过“沉睡者仪式”可召唤阿索拉（看仪式章节）。
 necronomicon.text.abyssal.progression.2=阿索拉会用幽灵龙来治疗它自己，所以需要在战斗中首先解决掉幽灵龙。在你击败阿索拉后，它会掉落它的眼睛和大量经验和这个世界里的一些材料。恐惧之地蕴能石位于深渊要塞之中，能通过使用蕴能石追踪器找到（合成表在特殊材料章节）。

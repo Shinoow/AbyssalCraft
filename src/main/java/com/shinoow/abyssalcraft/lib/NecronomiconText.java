@@ -221,6 +221,7 @@ public class NecronomiconText {
 	public static String PROGRESSION_OVERWORLD_3 = "necronomicon.text.overworld.progression.3";
 	public static String PROGRESSION_OVERWORLD_4 = "necronomicon.text.overworld.progression.4";
 	public static String PROGRESSION_OVERWORLD_5 = "necronomicon.text.overworld.progression.5";
+	public static String PROGRESSION_OVERWORLD_6 = "necronomicon.text.overworld.progression.6";
 
 	public static String PROGRESSION_ABYSSAL_1 = "necronomicon.text.abyssal.progression.1";
 	public static String PROGRESSION_ABYSSAL_2 = "necronomicon.text.abyssal.progression.2";
