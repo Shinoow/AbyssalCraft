@@ -13,14 +13,13 @@ package com.shinoow.abyssalcraft.common.items;
 
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.BiomePredicateCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 
 import net.minecraft.item.ItemStack;
 
+@Deprecated
 public class ItemMetadataMisc extends ItemMetadata {
 
 	public ItemMetadataMisc(String name, String...names) {
@@ -34,7 +33,7 @@ public class ItemMetadataMisc extends ItemMetadata {
 		if(stack.getItem() == ACItems.ingot_nugget)
 			switch(stack.getMetadata()){
 			case 0:
-				return new BiomePredicateCondition(b -> b instanceof IDarklandsBiome);
+				return UnlockConditions.DARKLANDS_BIOME;
 			case 1:
 				return new DimensionCondition(ACLib.abyssal_wasteland_id);
 			case 2:

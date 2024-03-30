@@ -1419,10 +1419,10 @@ item.door_dlt.name=다크랜드 참나무 문
 item.door_drt.name=공포나무 문
 item.cha_rcoal.name=차콜
 item.configurator.name=영혼 태블릿
-item.configurator_shard.0.name=영혼 태블릿 조각 #1
-item.configurator_shard.1.name=영혼 태블릿 조각 #2
-item.configurator_shard.2.name=영혼 태블릿 조각 #3
-item.configurator_shard.3.name=영혼 태블릿 조각 #4
+item.configurator_shard_0.name=영혼 태블릿 조각 #1
+item.configurator_shard_1.name=영혼 태블릿 조각 #2
+item.configurator_shard_2.name=영혼 태블릿 조각 #3
+item.configurator_shard_3.name=영혼 태블릿 조각 #4
 item.generic_meat.name=Generic Meat
 item.cooked_generic_meat.name=Cooked Generic Meat
 

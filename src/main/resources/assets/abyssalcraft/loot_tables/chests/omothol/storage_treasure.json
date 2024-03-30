@@ -6,16 +6,22 @@
             "entries": [
                 {
                     "type": "item",
-                    "name": "abyssalcraft:configurator_shard",
-                    "functions": [
-                        {
-                            "function": "set_data",
-                            "data":{
-                                "min": 0,
-                                "max": 3
-                            }
-                        }
-                    ],
+                    "name": "abyssalcraft:configurator_shard_0",
+                    "weight": 100
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:configurator_shard_1",
+                    "weight": 100
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:configurator_shard_2",
+                    "weight": 100
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:configurator_shard_3",
                     "weight": 100
                 }
             ]

@@ -87,7 +87,10 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.antidote = new ItemAntidote();
 		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setTranslationKey("door_dlt");
 		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setTranslationKey("door_drt");
-		ACItems.configurator_shard = new ItemMetadataMisc("configurator_shard", "0", "1", "2", "3").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
+		ACItems.configurator_shard_0 = new ItemACBasic("configurator_shard_0").setUnlockCondition(UnlockConditions.OMOTHOL);
+		ACItems.configurator_shard_1 = new ItemACBasic("configurator_shard_1").setUnlockCondition(UnlockConditions.OMOTHOL);
+		ACItems.configurator_shard_2 = new ItemACBasic("configurator_shard_2").setUnlockCondition(UnlockConditions.OMOTHOL);
+		ACItems.configurator_shard_3 = new ItemACBasic("configurator_shard_3").setUnlockCondition(UnlockConditions.OMOTHOL);
 		ACItems.silver_key = new ItemGatewayKey(3, "silver_key");
 		ACItems.book_of_many_faces = new ItemFaceBook("face_book");
 
@@ -427,7 +430,10 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.dreadlands_door, "door_drt");
 		registerItem(ACItems.charcoal, "charcoal");
 		registerItem(ACItems.configurator, "configurator");
-		registerItem(ACItems.configurator_shard, "configurator_shard");
+		registerItem(ACItems.configurator_shard_0, "configurator_shard_0");
+		registerItem(ACItems.configurator_shard_1, "configurator_shard_1");
+		registerItem(ACItems.configurator_shard_2, "configurator_shard_2");
+		registerItem(ACItems.configurator_shard_3, "configurator_shard_3");
 		registerItem(ACItems.silver_key, "silver_key");
 		registerItem(ACItems.book_of_many_faces, "face_book");
 		registerItem(ACItems.generic_meat, "generic_meat");

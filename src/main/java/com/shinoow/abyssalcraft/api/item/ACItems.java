@@ -226,8 +226,10 @@ public class ACItems {
 	public static Item dreadlands_door;
 	public static Item charcoal;
 	public static Item configurator;
-	/** Metadata Item, 0 - 3 = variations of the same item */
-	public static Item configurator_shard;
+	public static Item configurator_shard_0;
+	public static Item configurator_shard_1;
+	public static Item configurator_shard_2;
+	public static Item configurator_shard_3;
 	public static Item silver_key;
 	public static Item book_of_many_faces;
 	public static Item generic_meat;

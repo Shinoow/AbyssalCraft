@@ -1417,10 +1417,10 @@ item.door_dlt.name=Дубовая дверь Тёмных земель
 item.door_drt.name=Деревянная дверь Ужасных земель
 item.cha_rcoal.name=Ча'древесный уголь
 item.configurator.name=Мемориальная табличка
-item.configurator_shard.0.name=Осколок мемориальной таблички #1
-item.configurator_shard.1.name=Осколок мемориальной таблички #2
-item.configurator_shard.2.name=Осколок мемориальной таблички #3
-item.configurator_shard.3.name=Осколок мемориальной таблички #4
+item.configurator_shard_0.name=Осколок мемориальной таблички #1
+item.configurator_shard_1.name=Осколок мемориальной таблички #2
+item.configurator_shard_2.name=Осколок мемориальной таблички #3
+item.configurator_shard_3.name=Осколок мемориальной таблички #4
 
 #Сущности
 entity.abyssalcraft.depthsghoul.name=Гуль глубин

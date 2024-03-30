@@ -1415,10 +1415,10 @@ item.door_dlt.name=ダークランドオークのドア
 item.door_drt.name=ドレッドウッドのドア
 item.cha_rcoal.name=チャコール
 item.configurator.name=スピリットタブレット
-item.configurator_shard.0.name=スピリットタブレットの欠片 #1
-item.configurator_shard.1.name=スピリットタブレットの欠片 #2
-item.configurator_shard.2.name=スピリットタブレットの欠片 #3
-item.configurator_shard.3.name=スピリットタブレットの欠片 #4
+item.configurator_shard_0.name=スピリットタブレットの欠片 #1
+item.configurator_shard_1.name=スピリットタブレットの欠片 #2
+item.configurator_shard_2.name=スピリットタブレットの欠片 #3
+item.configurator_shard_3.name=スピリットタブレットの欠片 #4
 
 #エンティティ名  Entities
 entity.abyssalcraft.depthsghoul.name=デプスグール

@@ -31,6 +31,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @author shinoow
  *
  */
+@Deprecated
 public class ItemMetadata extends Item implements IUnlockableItem {
 
 	private String[] names;

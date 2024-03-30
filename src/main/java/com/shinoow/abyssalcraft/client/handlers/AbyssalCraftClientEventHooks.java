@@ -432,7 +432,6 @@ public class AbyssalCraftClientEventHooks {
 		ModelBakery.registerItemVariants(ACItems.scroll, makerl("scroll_basic", "scroll_lesser", "scroll_moderate", "scroll_greater"));
 		ModelBakery.registerItemVariants(ACItems.unique_scroll, makerl("scroll_unique_anti", "scroll_unique_oblivion"));
 		ModelBakery.registerItemVariants(ACItems.antidote, makerl("coralium_antidote", "dread_antidote"));
-		ModelBakery.registerItemVariants(ACItems.configurator_shard, makerl("configurator_shard_0", "configurator_shard_1", "configurator_shard_2", "configurator_shard_3"));
 
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
 		registerFluidModel(ACBlocks.liquid_antimatter, "anti");
@@ -455,8 +454,6 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_sapling, new StateMap.Builder().ignore(BlockSapling.TYPE).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.mimic_fire, new StateMap.Builder().ignore(BlockFire.AGE).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
-		//		ModelLoader.setCustomStateMapper(ACBlocks.crystal_cluster, new StateMap.Builder().ignore(BlockCrystalCluster.TYPE).build());
-		//		ModelLoader.setCustomStateMapper(ACBlocks.crystal_cluster2, new StateMap.Builder().ignore(BlockCrystalCluster2.TYPE).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.abyssal_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
@@ -687,10 +684,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.dreadlands_door, 0);
 		registerItemRender(ACItems.charcoal, 0);
 		registerItemRender(ACItems.configurator, 0);
-		registerItemRender(ACItems.configurator_shard, 0, "configurator_shard_0");
-		registerItemRender(ACItems.configurator_shard, 1, "configurator_shard_1");
-		registerItemRender(ACItems.configurator_shard, 2, "configurator_shard_2");
-		registerItemRender(ACItems.configurator_shard, 3, "configurator_shard_3");
+		registerItemRender(ACItems.configurator_shard_0, 0);
+		registerItemRender(ACItems.configurator_shard_1, 0);
+		registerItemRender(ACItems.configurator_shard_2, 0);
+		registerItemRender(ACItems.configurator_shard_3, 0);
 		registerItemRender(ACItems.silver_key, 0);
 		registerItemRender(ACItems.book_of_many_faces, 0);
 		registerItemRender(ACItems.generic_meat, 0);

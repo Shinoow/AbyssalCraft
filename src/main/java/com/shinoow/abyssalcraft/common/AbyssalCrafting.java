@@ -542,8 +542,10 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconCorruptionRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCuringRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconMassEnchantRitual());
-		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE), null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE),
-				null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE), null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE)};
+		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}, null,
+				new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)},
+				null, new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}, null,
+				new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spiritTablet", 3, OreDictionary.WILDCARD_VALUE, 5000F, new ItemStack(ACItems.configurator), new ItemStack(ACItems.life_crystal), spiritTabletOfferings));
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
