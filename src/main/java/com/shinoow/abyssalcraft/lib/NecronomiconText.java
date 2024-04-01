@@ -376,7 +376,7 @@ public class NecronomiconText {
 	public static String TEST_50_1 = "Ut in geometria, prima si dederis, danda sunt omnia. Nihil opus est exemplis hoc facere longius. Egone non intellego, quid sit don Graece, Latine voluptas?";
 	public static String TEST_50_2 = "Recte dicis; Ne in odium veniam, si amicum destitero tueri. Aliter homines, aliter philosophos loqui putas oportere? Non est igitur voluptas bonum.";
 
-	public static String LABEL_TEST = "Lorem ipsum";
+	public static String LABEL_TEST = "...What's this?";
 
 	public static String LABEL_INDEX = "necronomicon.index";
 	public static String LABEL_INFORMATION = "necronomicon.information";

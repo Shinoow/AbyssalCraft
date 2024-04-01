@@ -324,7 +324,7 @@ public class AbyssalCraftClientEventHooks {
 		if(!APIUtils.display_names)
 			if(stack.getItem() instanceof IUnlockableItem && event.getEntityPlayer() != null && !NecroDataCapability.getCap(event.getEntityPlayer()).isUnlocked(((IUnlockableItem)stack.getItem()).getUnlockCondition(stack), event.getEntityPlayer())){
 				event.getToolTip().remove(0);
-				event.getToolTip().add(0, "Lorem ipsum");
+				event.getToolTip().add(0, "...What's this?");
 			}
 		if(stack.getItem() instanceof IScroll) {
 			Spell spell = SpellUtils.getSpell(stack);
@@ -340,7 +340,7 @@ public class AbyssalCraftClientEventHooks {
 
 	@SubscribeEvent
 	public void tooltipFont(RenderTooltipEvent.Pre event) {
-		if(!APIUtils.display_names && event.getLines().get(0).startsWith("\u00A7fLorem ipsum"))
+		if(!APIUtils.display_names && event.getLines().get(0).startsWith("\u00A7f...What's this?"))
 			event.setFontRenderer(AbyssalCraftAPI.getAkloFont());
 	}
 
