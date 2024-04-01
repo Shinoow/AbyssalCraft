@@ -12,10 +12,8 @@
 package com.shinoow.abyssalcraft.init;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
 import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.BlockACBrick.EnumBrickType;
 import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone.EnumCobblestoneType;
@@ -616,122 +614,7 @@ public class BlockHandler implements ILifeCycleHandler {
 	}
 
 	@Override
-	public void init(FMLInitializationEvent event) {
-
-		addCondition(ACBlocks.abyssal_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.chiseled_abyssal_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.cracked_abyssal_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.abyssal_stone_brick_stairs, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.abyssalnite_ore, new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		addCondition(ACBlocks.abyssal_stone_brick_fence, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.oblivion_deathbomb, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreadlands_infused_powerstone, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.abyssal_coralium_ore, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.abyssal_stone_button, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.abyssal_stone_pressure_plate, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreaded_abyssalnite_ore, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.dreadlands_abyssalnite_ore, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.dreadstone_brick, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.chiseled_dreadstone_brick, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.cracked_dreadstone_brick, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.abyssalnite_stone_brick, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.chiseled_abyssalnite_stone_brick, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.cracked_abyssalnite_stone_brick, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.dreadlands_sapling, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.dreadlands_log, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.dreadlands_leaves, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.dreadlands_planks, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.depths_ghoul_head, new EntityCondition("abyssalcraft:depthsghoul"));
-		addCondition(ACBlocks.dreadlands_grass, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.pete_head, new EntityCondition("abyssalcraft:depthsghoul"));
-		addCondition(ACBlocks.mr_wilson_head, new EntityCondition("abyssalcraft:depthsghoul"));
-		addCondition(ACBlocks.dr_orange_head, new EntityCondition("abyssalcraft:depthsghoul"));
-		addCondition(ACBlocks.dreadstone_brick_stairs, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.dreadstone_brick_fence, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.abyssalnite_stone_brick_stairs, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.abyssalnite_stone_brick_fence, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.coralium_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.chiseled_coralium_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.cracked_coralium_stone_brick, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.coralium_stone_brick_fence, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.coralium_stone_brick_stairs, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.coralium_stone_button, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.coralium_stone_pressure_plate, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.chagaroth_altar_top, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.chagaroth_altar_bottom, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.crystallizer_idle, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.crystallizer_active, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.transmutator_idle, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.transmutator_active, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreadlands_wood_fence, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.abyssal_iron_ore, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.abyssal_gold_ore, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.abyssal_diamond_ore, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.pearlescent_coralium_ore, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.liquified_coralium_ore, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.chiseled_ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.cracked_ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.ethaxium_pillar, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.ethaxium_brick_stairs, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.ethaxium_brick_fence, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.engraver, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.materializer, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.dark_ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.chiseled_dark_ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.cracked_dark_ethaxium_brick, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.dark_ethaxium_pillar, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.dark_ethaxium_brick_stairs, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.dark_ethaxium_brick_fence, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.abyssal_sand, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.fused_abyssal_sand, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.abyssal_sand_glass, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreadlands_dirt, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.abyssal_cobblestone_stairs, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.abyssal_cobblestone_wall, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreadstone_cobblestone_stairs, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.dreadstone_cobblestone_wall, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.abyssalnite_cobblestone_stairs, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.abyssalnite_cobblestone_wall, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.coralium_cobblestone_stairs, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.coralium_cobblestone_wall, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.luminous_thistle, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.wastelands_thorn, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.sequential_brewing_stand, new DimensionCondition(-1));
-		addCondition(ACBlocks.abyssal_stone, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.abyssal_cobblestone, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.coralium_stone, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.coralium_cobblestone, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreadstone, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.abyssalnite_stone, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.dreadstone_cobblestone, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.abyssalnite_cobblestone, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.ethaxium, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.omothol_stone, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.block_of_abyssalnite, new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		addCondition(ACBlocks.block_of_refined_coralium, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.block_of_dreadium, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.block_of_ethaxium, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.abyssal_wasteland_energy_pedestal, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreadlands_energy_pedestal, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.omothol_energy_pedestal, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.abyssal_wasteland_sacrificial_altar, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreadlands_sacrificial_altar, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.omothol_sacrificial_altar, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.abyssal_wasteland_energy_collector, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreadlands_energy_collector, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.omothol_energy_collector, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.abyssal_wasteland_energy_relay, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreadlands_energy_relay, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.omothol_energy_relay, new DimensionCondition(ACLib.omothol_id));
-		addCondition(ACBlocks.abyssal_wasteland_energy_container, new DimensionCondition(ACLib.abyssal_wasteland_id));
-		addCondition(ACBlocks.dreadlands_energy_container, new DimensionCondition(ACLib.dreadlands_id));
-		addCondition(ACBlocks.omothol_energy_container, new DimensionCondition(ACLib.omothol_id));
-	}
-
-	private void addCondition(Block block, IUnlockCondition condition){
-		((IUnlockableItem) Item.getItemFromBlock(block)).setUnlockCondition(condition);
-	}
+	public void init(FMLInitializationEvent event) {}
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {

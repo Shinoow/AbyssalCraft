@@ -26,8 +26,6 @@ import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.UnlockConditions;
 import com.shinoow.abyssalcraft.client.handlers.ClientVarsReloadListener;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
@@ -161,8 +159,6 @@ public class InitHandler implements ILifeCycleHandler {
 			FluidRegistry.addBucketForFluid(LIQUID_ANTIMATTER);
 		}
 
-		initUnlockConditions();
-		
 		if(event.getSide().isClient())
 			ClientVarsReloadListener.updateVars(Minecraft.getMinecraft().getResourceManager());
 	}
@@ -570,13 +566,6 @@ public class InitHandler implements ILifeCycleHandler {
 		construct.accept(antiAbyssalZombieBlacklist, anti_abyssal_zombie_blacklist);
 		construct.accept(antiGhoulBlacklist, anti_ghoul_blacklist);
 		construct.accept(omotholGhoulBlacklist, omothol_ghoul_blacklist);
-	}
-	
-	private void initUnlockConditions() {
-		UnlockConditions.ABYSSAL_WASTELAND = new DimensionCondition(ACLib.abyssal_wasteland_id);
-		UnlockConditions.DREADLANDS = new DimensionCondition(ACLib.dreadlands_id);
-		UnlockConditions.OMOTHOL = new DimensionCondition(ACLib.omothol_id);
-		UnlockConditions.DARK_REALM = new DimensionCondition(ACLib.dark_realm_id);
 	}
 
 	/**

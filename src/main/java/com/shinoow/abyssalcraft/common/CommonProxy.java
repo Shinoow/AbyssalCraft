@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common;
 
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
@@ -22,7 +24,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy {
 
-	public void preInit() {}
+	public void preInit() {
+		initUnlockConditions();
+	}
 
 	public void init() {
 		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE);
@@ -34,6 +38,16 @@ public class CommonProxy {
 
 	public void postInit() {}
 
+	protected void initUnlockConditions() {
+		UnlockConditions.CORALIUM_INFESTED_SWAMP = new BiomeCondition(ACBiomes.coralium_infested_swamp);
+		UnlockConditions.CORALIUM_BIOMES = new MultiBiomeCondition(ACBiomes.abyssal_wastelands, ACBiomes.coralium_infested_swamp);
+		
+		UnlockConditions.ABYSSAL_WASTELAND = new DimensionCondition(ACLib.abyssal_wasteland_id);
+		UnlockConditions.DREADLANDS = new DimensionCondition(ACLib.dreadlands_id);
+		UnlockConditions.OMOTHOL = new DimensionCondition(ACLib.omothol_id);
+		UnlockConditions.DARK_REALM = new DimensionCondition(ACLib.dark_realm_id);
+	}
+	
 	public ModelBiped getArmorModel(int id){
 		return null;
 	}

@@ -26,8 +26,11 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.ConditionProcessorRegistry;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.UnlockConditions;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabilityStorage;
@@ -50,6 +53,7 @@ import com.shinoow.abyssalcraft.lib.*;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -328,6 +332,8 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		//		RecipeSorter.register("abyssalcraft:shapednbt", ShapedNBTRecipe.class, Category.SHAPED, "after:minecraft:shaped");
 
+		setUnlockConditions();
+		
 		AbyssalCrafting.addRecipes();
 		AbyssalCraftAPI.addGhoulArmorTextures(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS, "abyssalcraft:textures/armor/ghoul/leather_1.png", "abyssalcraft:textures/armor/ghoul/leather_2.png");
 		AbyssalCraftAPI.addGhoulArmorTextures(Items.CHAINMAIL_HELMET, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS, "abyssalcraft:textures/armor/ghoul/chainmail_1.png", "abyssalcraft:textures/armor/ghoul/chainmail_2.png");
@@ -688,5 +694,183 @@ public class MiscHandler implements ILifeCycleHandler {
 
 	private void addBrewing(PotionType input, Item ingredient, PotionType output){
 		PotionHelper.addMix(input, ingredient, output);
+	}
+	
+	private void setUnlockConditions() {
+		
+		//Items
+		addCondition(ACItems.staff_of_the_gatekeeper, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.powerstone_tracker, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACItems.eye_of_the_abyss, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACItems.dreaded_gateway_key, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACItems.coralium_brick, UnlockConditions.CORALIUM_BIOMES);
+		addCondition(ACItems.cudgel, UnlockConditions.SKELETON_GOLIATH);
+		addCondition(ACItems.carbon_cluster, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.dense_carbon_cluster, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.rlyehian_gateway_key, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.life_crystal, UnlockConditions.DREADLANDS);
+		//shoggoth flesh goes brrr?
+		addCondition(ACItems.eldritch_scale, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.omothol_flesh, UnlockConditions.OMOTHOL_GHOUL);
+		addCondition(ACItems.abyssal_wasteland_necronomicon, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACItems.dreadlands_necronomicon, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.omothol_necronomicon, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.abyssalnomicon, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.small_crystal_bag, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.medium_crystal_bag, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.large_crystal_bag, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.huge_crystal_bag, UnlockConditions.DREADLANDS);
+		//nuggets go brrr?
+		//essences go brrr?
+		//skins go brrr?
+		addCondition(ACItems.essence_of_the_gatekeeper, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.interdimensional_cage, UnlockConditions.DREADLANDS);
+		//maybe unique scrolls will go brrr?
+		//antidotes go brrr?
+		addCondition(ACItems.configurator_shard_0, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.configurator_shard_1, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.configurator_shard_2, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.configurator_shard_3, UnlockConditions.OMOTHOL);
+		//silver key will go brrr?
+		addCondition(ACItems.book_of_many_faces, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.coin, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.cthulhu_engraved_coin, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.elder_engraved_coin, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.jzahar_engraved_coin, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.blank_engraving, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.cthulhu_engraving, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.elder_engraving, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.jzahar_engraving, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.hastur_engraved_coin, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.azathoth_engraved_coin, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.nyarlathotep_engraved_coin, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.yog_sothoth_engraved_coin, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.shub_niggurath_engraved_coin, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.hastur_engraving, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.azathoth_engraving, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.nyarlathotep_engraving, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.yog_sothoth_engraving, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.shub_niggurath_engraving, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.ethaxium_brick, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.ethaxium_ingot, UnlockConditions.OMOTHOL);
+		
+		//Blocks
+		addCondition(ACBlocks.abyssal_stone_brick, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.chiseled_abyssal_stone_brick, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.cracked_abyssal_stone_brick, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.abyssal_stone_brick_stairs, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.abyssalnite_ore, UnlockConditions.DARKLANDS_BIOME);
+		addCondition(ACBlocks.abyssal_stone_brick_fence, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.oblivion_deathbomb, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreadlands_infused_powerstone, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.abyssal_coralium_ore, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.abyssal_stone_button, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.abyssal_stone_pressure_plate, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreaded_abyssalnite_ore, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.dreadlands_abyssalnite_ore, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.dreadstone_brick, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.chiseled_dreadstone_brick, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.cracked_dreadstone_brick, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.abyssalnite_stone_brick, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.chiseled_abyssalnite_stone_brick, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.cracked_abyssalnite_stone_brick, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.dreadlands_sapling, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.dreadlands_log, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.dreadlands_leaves, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.dreadlands_planks, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.depths_ghoul_head, UnlockConditions.DEPTHS_GHOUL);
+		addCondition(ACBlocks.dreadlands_grass, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.pete_head, UnlockConditions.DEPTHS_GHOUL);
+		addCondition(ACBlocks.mr_wilson_head, UnlockConditions.DEPTHS_GHOUL);
+		addCondition(ACBlocks.dr_orange_head, UnlockConditions.DEPTHS_GHOUL);
+		addCondition(ACBlocks.dreadstone_brick_stairs, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.dreadstone_brick_fence, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.abyssalnite_stone_brick_stairs, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.abyssalnite_stone_brick_fence, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.coralium_stone_brick, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.chiseled_coralium_stone_brick, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.cracked_coralium_stone_brick, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.coralium_stone_brick_fence, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.coralium_stone_brick_stairs, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.coralium_stone_button, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.coralium_stone_pressure_plate, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.chagaroth_altar_top, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.chagaroth_altar_bottom, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.crystallizer_idle, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.crystallizer_active, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.transmutator_idle, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.transmutator_active, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreadlands_wood_fence, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.abyssal_iron_ore, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.abyssal_gold_ore, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.abyssal_diamond_ore, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.pearlescent_coralium_ore, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.liquified_coralium_ore, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.ethaxium_brick, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.chiseled_ethaxium_brick, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.cracked_ethaxium_brick, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.ethaxium_pillar, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.ethaxium_brick_stairs, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.ethaxium_brick_fence, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.engraver, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.materializer, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.dark_ethaxium_brick, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.chiseled_dark_ethaxium_brick, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.cracked_dark_ethaxium_brick, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.dark_ethaxium_pillar, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.dark_ethaxium_brick_stairs, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.dark_ethaxium_brick_fence, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.abyssal_sand, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.fused_abyssal_sand, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.abyssal_sand_glass, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreadlands_dirt, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.abyssal_cobblestone_stairs, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.abyssal_cobblestone_wall, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreadstone_cobblestone_stairs, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.dreadstone_cobblestone_wall, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.abyssalnite_cobblestone_stairs, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.abyssalnite_cobblestone_wall, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.coralium_cobblestone_stairs, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.coralium_cobblestone_wall, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.luminous_thistle, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.wastelands_thorn, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.sequential_brewing_stand, UnlockConditions.NETHER);
+		addCondition(ACBlocks.abyssal_stone, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.abyssal_cobblestone, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.coralium_stone, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.coralium_cobblestone, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreadstone, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.abyssalnite_stone, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.dreadstone_cobblestone, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.abyssalnite_cobblestone, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.ethaxium, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.omothol_stone, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.block_of_abyssalnite, UnlockConditions.DARKLANDS_BIOME);
+		addCondition(ACBlocks.block_of_refined_coralium, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.block_of_dreadium, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.block_of_ethaxium, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.abyssal_wasteland_energy_pedestal, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreadlands_energy_pedestal, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.omothol_energy_pedestal, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.abyssal_wasteland_sacrificial_altar, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreadlands_sacrificial_altar, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.omothol_sacrificial_altar, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.abyssal_wasteland_energy_collector, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreadlands_energy_collector, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.omothol_energy_collector, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.abyssal_wasteland_energy_relay, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreadlands_energy_relay, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.omothol_energy_relay, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.abyssal_wasteland_energy_container, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.dreadlands_energy_container, UnlockConditions.DREADLANDS);
+		addCondition(ACBlocks.omothol_energy_container, UnlockConditions.OMOTHOL);
+	}
+	
+	private void addCondition(Block block, IUnlockCondition condition) {
+		addCondition(Item.getItemFromBlock(block), condition);
+	}
+
+	private void addCondition(Item item, IUnlockCondition condition){
+		((IUnlockableItem) item).setUnlockCondition(condition);
 	}
 }

@@ -159,6 +159,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.registerKeyBinding(configurator_mode);
 		ClientRegistry.registerKeyBinding(configurator_filter);
 		ClientRegistry.registerKeyBinding(configurator_path);
+		initUnlockConditions();
 	}
 
 	@Override
