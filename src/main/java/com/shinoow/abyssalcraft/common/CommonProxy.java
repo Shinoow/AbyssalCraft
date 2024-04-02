@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -44,17 +44,17 @@ public class CommonProxy {
 	protected void initUnlockConditions() {
 		UnlockConditions.CORALIUM_INFESTED_SWAMP = new BiomeCondition(ACBiomes.coralium_infested_swamp);
 		UnlockConditions.CORALIUM_BIOMES = new MultiBiomeCondition(ACBiomes.abyssal_wastelands, ACBiomes.coralium_infested_swamp);
-		
+
 		UnlockConditions.ABYSSAL_WASTELAND = new DimensionCondition(ACLib.abyssal_wasteland_id);
 		UnlockConditions.DREADLANDS = new DimensionCondition(ACLib.dreadlands_id);
 		UnlockConditions.OMOTHOL = new DimensionCondition(ACLib.omothol_id);
 		UnlockConditions.DARK_REALM = new DimensionCondition(ACLib.dark_realm_id);
-		
+
 		UnlockConditions.EVIL_ANIMAL = new EntityPredicateCondition(e -> EntityEvilAnimal.class.isAssignableFrom(e));
 		UnlockConditions.SHOGGOTH = new EntityPredicateCondition(e -> EntityShoggothBase.class.isAssignableFrom(e));
 		UnlockConditions.DEMON_ANIMAL = new EntityPredicateCondition(e -> EntityDemonAnimal.class.isAssignableFrom(e));
 	}
-	
+
 	public ModelBiped getArmorModel(int id){
 		return null;
 	}

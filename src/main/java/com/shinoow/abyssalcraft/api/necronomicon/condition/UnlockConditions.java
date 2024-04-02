@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2024 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon.condition;
 
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
@@ -16,14 +27,14 @@ public class UnlockConditions {
 	public static IUnlockCondition DARKLANDS_BIOME = new BiomePredicateCondition(b -> b instanceof IDarklandsBiome);
 	public static IUnlockCondition CORALIUM_INFESTED_SWAMP;
 	public static IUnlockCondition CORALIUM_BIOMES;
-	
+
 	//Dimension conditions
 	public static IUnlockCondition ABYSSAL_WASTELAND;
 	public static IUnlockCondition DREADLANDS;
 	public static IUnlockCondition OMOTHOL;
 	public static IUnlockCondition DARK_REALM;
 	public static IUnlockCondition NETHER = new DimensionCondition(-1);
-	
+
 	//Entity conditions
 	public static IUnlockCondition ABYSSAL_ZOMBIE = new EntityCondition("abyssalcraft:abyssalzombie");
 	public static IUnlockCondition DEPTHS_GHOUL = new EntityCondition("abyssalcraft:depthsghoul");
@@ -52,14 +63,14 @@ public class UnlockConditions {
 	public static IUnlockCondition FIST_OF_CHAGAROTH = new EntityCondition("abyssalcraft:chagarothfist");
 	public static IUnlockCondition DREADGUARD = new EntityCondition("abyssalcraft:dreadguard");
 	public static IUnlockCondition MINION_OF_THE_GATEKEEPER = new EntityCondition("abyssalcraft:jzaharminion");
-	
+
 	//Misc conditions
 	public static IUnlockCondition CORALIUM_PLAGUE = new MiscCondition("coralium_plague");
 	public static IUnlockCondition DREAD_PLAGUE = new MiscCondition("dread_plague");
-	
+
 	//Book conditions
 	public static IUnlockCondition ABYSSAL_WASTELAND_NECRO = new NecronomiconCondition(1);
 	public static IUnlockCondition DREADLANDS_NECRO = new NecronomiconCondition(2);
 	public static IUnlockCondition OMOTHOL_NECRO = new NecronomiconCondition(3);
-	
+
 }

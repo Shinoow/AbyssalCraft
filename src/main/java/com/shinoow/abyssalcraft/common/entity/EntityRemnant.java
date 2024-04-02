@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -871,7 +871,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		int trade = rand.nextInt(7);
 		setProfession(trade);
 	}
-	
+
 	private static boolean isConfiguratorShard(ItemStack stack) {
 		return stack.getItem() == ACItems.configurator_shard_0 || stack.getItem() == ACItems.configurator_shard_1
 				|| stack.getItem() == ACItems.configurator_shard_2 || stack.getItem() == ACItems.configurator_shard_3;

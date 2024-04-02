@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -11,9 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
-import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.UnlockConditions;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 

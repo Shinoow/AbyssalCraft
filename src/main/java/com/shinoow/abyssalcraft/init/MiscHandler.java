@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -333,7 +333,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		//		RecipeSorter.register("abyssalcraft:shapednbt", ShapedNBTRecipe.class, Category.SHAPED, "after:minecraft:shaped");
 
 		setUnlockConditions();
-		
+
 		AbyssalCrafting.addRecipes();
 		AbyssalCraftAPI.addGhoulArmorTextures(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS, "abyssalcraft:textures/armor/ghoul/leather_1.png", "abyssalcraft:textures/armor/ghoul/leather_2.png");
 		AbyssalCraftAPI.addGhoulArmorTextures(Items.CHAINMAIL_HELMET, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS, "abyssalcraft:textures/armor/ghoul/chainmail_1.png", "abyssalcraft:textures/armor/ghoul/chainmail_2.png");
@@ -695,9 +695,9 @@ public class MiscHandler implements ILifeCycleHandler {
 	private void addBrewing(PotionType input, Item ingredient, PotionType output){
 		PotionHelper.addMix(input, ingredient, output);
 	}
-	
+
 	private void setUnlockConditions() {
-		
+
 		//Items
 		addCondition(ACItems.staff_of_the_gatekeeper, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.powerstone_tracker, UnlockConditions.ABYSSAL_WASTELAND);
@@ -842,7 +842,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.ethaxium_chestplate, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.ethaxium_leggings, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.ethaxium_boots, UnlockConditions.OMOTHOL);
-		
+
 		//Blocks
 		addCondition(ACBlocks.abyssal_stone_brick, UnlockConditions.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.chiseled_abyssal_stone_brick, UnlockConditions.ABYSSAL_WASTELAND);
@@ -954,7 +954,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.dreadlands_energy_container, UnlockConditions.DREADLANDS);
 		addCondition(ACBlocks.omothol_energy_container, UnlockConditions.OMOTHOL);
 	}
-	
+
 	private void addCondition(Block block, IUnlockCondition condition) {
 		addCondition(Item.getItemFromBlock(block), condition);
 	}
