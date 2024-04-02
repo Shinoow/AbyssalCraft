@@ -38,8 +38,8 @@ public class NecronomiconCuringRitual extends NecronomiconRitual {
 	private Biome replacementBiome;
 
 	public NecronomiconCuringRitual() {
-		super("curing", 4, 20000F, new ItemStack(ACItems.antidote, 1, 1), null, new ItemStack(ACItems.antidote, 1, 1),
-				null, new ItemStack(ACItems.antidote, 1, 1), null, new ItemStack(ACItems.antidote, 1, 1));
+		super("curing", 4, 20000F, new ItemStack(ACItems.dread_plague_antidote), null, new ItemStack(ACItems.dread_plague_antidote),
+				null, new ItemStack(ACItems.dread_plague_antidote), null, new ItemStack(ACItems.dread_plague_antidote));
 		setRitualParticle(EnumRitualParticle.PE_STREAM);
 	}
 

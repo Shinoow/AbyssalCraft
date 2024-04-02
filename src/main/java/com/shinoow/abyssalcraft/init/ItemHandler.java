@@ -82,7 +82,8 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.stone_tablet = new ItemStoneTablet();
 		ACItems.scroll = new ItemScroll("scroll", "basic", "lesser", "moderate", "greater");
 		ACItems.unique_scroll = new ItemScroll("unique_scroll", "antimatter", "oblivion");
-		ACItems.antidote = new ItemAntidote();
+		ACItems.coralium_plague_antidote = new ItemAntidote("antidote.coralium");
+		ACItems.dread_plague_antidote = new ItemAntidote("antidote.dread");
 		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setTranslationKey("door_dlt");
 		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setTranslationKey("door_drt");
 		ACItems.configurator_shard_0 = new ItemACBasic("configurator_shard_0");
@@ -423,7 +424,8 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.stone_tablet, "stonetablet");
 		registerItem(ACItems.scroll, "scroll");
 		registerItem(ACItems.unique_scroll, "unique_scroll");
-		registerItem(ACItems.antidote, "antidote");
+		registerItem(ACItems.coralium_plague_antidote, "coralium_antidote");
+		registerItem(ACItems.dread_plague_antidote, "dread_antidote");
 		registerItem(ACItems.darklands_oak_door, "door_dlt");
 		registerItem(ACItems.dreadlands_door, "door_drt");
 		registerItem(ACItems.charcoal, "charcoal");
@@ -441,7 +443,8 @@ public class ItemHandler implements ILifeCycleHandler {
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-
+		((ItemAntidote) ACItems.coralium_plague_antidote).setCure(AbyssalCraftAPI.coralium_antidote);
+		((ItemAntidote) ACItems.dread_plague_antidote).setCure(AbyssalCraftAPI.dread_antidote);
 	}
 
 	@Override

@@ -101,7 +101,7 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		AbyssalCraftAPI.coralium_plague = new PotionBuilder(true, ACClientVars.getCoraliumPlaguePotionColor())
 				.setReadyFunction((a,b) -> true)
-				.setCurativeItems(new ItemStack(ACItems.antidote))
+				.setCurativeItems(new ItemStack(ACItems.coralium_plague_antidote))
 				.setEffectFunction(PotionEffectUtil::applyCoraliumEffect)
 				.setIconIndex(1, 0)
 				.setStatusIconIndex(0)
@@ -109,7 +109,7 @@ public class MiscHandler implements ILifeCycleHandler {
 				.build();
 		AbyssalCraftAPI.dread_plague = new PotionBuilder(true, ACClientVars.getDreadPlaguePotionColor())
 				.setReadyFunction((a,b) -> true)
-				.setCurativeItems(new ItemStack(ACItems.antidote, 1, 1))
+				.setCurativeItems(new ItemStack(ACItems.dread_plague_antidote))
 				.setEffectFunction(PotionEffectUtil::applyDreadEffect)
 				.setIconIndex(1, 0)
 				.setStatusIconIndex(1)
@@ -732,6 +732,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.configurator_shard_2, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.configurator_shard_3, UnlockConditions.OMOTHOL);
 		//silver key will go brrr?
+		addCondition(ACItems.coralium_plague_antidote, UnlockConditions.CORALIUM_PLAGUE);
+		addCondition(ACItems.dread_plague_antidote, UnlockConditions.DREAD_PLAGUE);
 		addCondition(ACItems.book_of_many_faces, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.coin, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.cthulhu_engraved_coin, UnlockConditions.OMOTHOL);

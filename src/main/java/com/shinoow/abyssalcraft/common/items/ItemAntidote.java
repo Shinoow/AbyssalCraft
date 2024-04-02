@@ -14,9 +14,6 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.MiscCondition;
-import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,14 +22,17 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-public class ItemAntidote extends ItemMetadata {
+public class ItemAntidote extends ItemACBasic {
 
-	public ItemAntidote() {
-		super("antidote", "coralium", "dread");
+	private Potion antidote;
+	
+	public ItemAntidote(String translationKey) {
+		super(translationKey);
 		setMaxStackSize(1);
 
 		addPropertyOverride(new ResourceLocation("content"), (stack, worldIn, entityIn) -> stack.hasTagCompound() && stack.getTagCompound().getInteger("content") > 0 ? getContentToFloat(stack.getTagCompound().getInteger("content")) : 0);
@@ -77,7 +77,7 @@ public class ItemAntidote extends ItemMetadata {
 	{
 		if (!worldIn.isRemote) {
 			entityLiving.curePotionEffects(stack);
-			entityLiving.addPotionEffect(new PotionEffect(stack.getMetadata() == 1 ? AbyssalCraftAPI.dread_antidote : AbyssalCraftAPI.coralium_antidote, 1200));
+			entityLiving.addPotionEffect(new PotionEffect(antidote, 1200));
 		}
 		EntityPlayer entityplayer = entityLiving instanceof EntityPlayer ? (EntityPlayer)entityLiving : null;
 		if (entityplayer == null || !entityplayer.capabilities.isCreativeMode)
@@ -97,15 +97,14 @@ public class ItemAntidote extends ItemMetadata {
 		else l.add("10 uses left");
 	}
 
+	public void setCure(Potion potion) {
+		antidote = potion;
+	}
+	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
 		playerIn.setActiveHand(handIn);
 		return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
-	}
-
-	@Override
-	public IUnlockCondition getUnlockCondition(ItemStack stack) {
-		return new MiscCondition((stack.getMetadata() == 1 ? "dread" : "coralium")+"_plague");
 	}
 }

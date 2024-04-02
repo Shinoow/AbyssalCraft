@@ -318,7 +318,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.plated_coralium_boots), NecronomiconText.CRAFTING_PLATED_CORALIUM_BOOTS),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.coralium_longbow), NecronomiconText.CRAFTING_CORALIUM_LONGBOW));
 		addPages("abyssalwasteland", "coraliumplague", new Page(1, NecronomiconText.LABEL_CORALIUM_PLAGUE, 1, NecronomiconText.CORALIUM_PLAGUE_INFO_1, UnlockConditions.CORALIUM_PLAGUE),
-				new Page(2, NecronomiconText.LABEL_CORALIUM_PLAGUE, 1, new CraftingStack(new ItemStack(ACItems.antidote, 1, 0)), NecronomiconText.CORALIUM_PLAGUE_INFO_2, UnlockConditions.CORALIUM_PLAGUE));
+				new Page(2, NecronomiconText.LABEL_CORALIUM_PLAGUE, 1, new CraftingStack(new ItemStack(ACItems.coralium_plague_antidote)), NecronomiconText.CORALIUM_PLAGUE_INFO_2, UnlockConditions.CORALIUM_PLAGUE));
 		addPages("dreadlands", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadstone), NecronomiconText.MATERIAL_DREADSTONE_1),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.abyssalnite_stone), NecronomiconText.MATERIAL_ABYSSALNITE_STONE_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, NecronomiconText.MATERIAL_ABYSSALNITE_STONE_2),
@@ -366,7 +366,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_samurai_boots), NecronomiconText.CRAFTING_DREADIUM_SAMURAI_BOOTS),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_katana), NecronomiconText.CRAFTING_DREADIUM_KATANA));
 		addPages("dreadlands", "dreadplague", new Page(1, NecronomiconText.LABEL_DREAD_PLAGUE, 2, NecronomiconText.DREAD_PLAGUE_INFO_1, UnlockConditions.DREAD_PLAGUE),
-				new Page(2, NecronomiconText.LABEL_DREAD_PLAGUE, 2, new CraftingStack(new ItemStack(ACItems.antidote, 1, 1)), NecronomiconText.DREAD_PLAGUE_INFO_2, UnlockConditions.DREAD_PLAGUE));
+				new Page(2, NecronomiconText.LABEL_DREAD_PLAGUE, 2, new CraftingStack(new ItemStack(ACItems.dread_plague_antidote)), NecronomiconText.DREAD_PLAGUE_INFO_2, UnlockConditions.DREAD_PLAGUE));
 		addPages("omothol", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.omothol_stone), NecronomiconText.MATERIAL_OMOTHOL_STONE_1),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.ethaxium), NecronomiconText.MATERIAL_ETHAXIUM_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_ETHAXIUM_2),

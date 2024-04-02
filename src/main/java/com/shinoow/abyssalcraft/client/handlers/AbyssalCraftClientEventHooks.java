@@ -431,7 +431,6 @@ public class AbyssalCraftClientEventHooks {
 		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
 		ModelBakery.registerItemVariants(ACItems.scroll, makerl("scroll_basic", "scroll_lesser", "scroll_moderate", "scroll_greater"));
 		ModelBakery.registerItemVariants(ACItems.unique_scroll, makerl("scroll_unique_anti", "scroll_unique_oblivion"));
-		ModelBakery.registerItemVariants(ACItems.antidote, makerl("coralium_antidote", "dread_antidote"));
 
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
 		registerFluidModel(ACBlocks.liquid_antimatter, "anti");
@@ -678,8 +677,8 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.scroll, 3, "scroll_greater");
 		registerItemRender(ACItems.unique_scroll, 0, "scroll_unique_anti");
 		registerItemRender(ACItems.unique_scroll, 1, "scroll_unique_oblivion");
-		registerItemRender(ACItems.antidote, 0, "coralium_antidote");
-		registerItemRender(ACItems.antidote, 1, "dread_antidote");
+		registerItemRender(ACItems.coralium_plague_antidote, 0);
+		registerItemRender(ACItems.dread_plague_antidote, 0);
 		registerItemRender(ACItems.darklands_oak_door, 0);
 		registerItemRender(ACItems.dreadlands_door, 0);
 		registerItemRender(ACItems.charcoal, 0);
