@@ -14,6 +14,9 @@ package com.shinoow.abyssalcraft.common;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilAnimal;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
@@ -46,6 +49,10 @@ public class CommonProxy {
 		UnlockConditions.DREADLANDS = new DimensionCondition(ACLib.dreadlands_id);
 		UnlockConditions.OMOTHOL = new DimensionCondition(ACLib.omothol_id);
 		UnlockConditions.DARK_REALM = new DimensionCondition(ACLib.dark_realm_id);
+		
+		UnlockConditions.EVIL_ANIMAL = new EntityPredicateCondition(e -> EntityEvilAnimal.class.isAssignableFrom(e));
+		UnlockConditions.SHOGGOTH = new EntityPredicateCondition(e -> EntityShoggothBase.class.isAssignableFrom(e));
+		UnlockConditions.DEMON_ANIMAL = new EntityPredicateCondition(e -> EntityDemonAnimal.class.isAssignableFrom(e));
 	}
 	
 	public ModelBiped getArmorModel(int id){

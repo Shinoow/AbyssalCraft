@@ -13,15 +13,12 @@ package com.shinoow.abyssalcraft.init;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.biome.ACBiomes;
-import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
-import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.MultiEntityCondition;
 import com.shinoow.abyssalcraft.common.items.*;
 import com.shinoow.abyssalcraft.common.items.armor.*;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -130,14 +127,14 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_ingot = new ItemACBasic("ethaxiumingot");
 
 		//anti-items
-		ACItems.anti_beef = new ItemAntiFood("antibeef").setUnlockCondition(new BiomeCondition(ACBiomes.coralium_infested_swamp));
-		ACItems.anti_chicken = new ItemAntiFood("antichicken").setUnlockCondition(new BiomeCondition(ACBiomes.coralium_infested_swamp));
-		ACItems.anti_pork = new ItemAntiFood("antipork").setUnlockCondition(new BiomeCondition(ACBiomes.coralium_infested_swamp));
-		ACItems.rotten_anti_flesh = new ItemAntiFood("antiflesh").setUnlockCondition(new BiomeCondition(ACBiomes.coralium_infested_swamp));
-		ACItems.anti_bone = new ItemACBasic("antibone").setUnlockCondition(new BiomeCondition(ACBiomes.coralium_infested_swamp));
-		ACItems.anti_spider_eye = new ItemAntiFood("antispidereye", false).setUnlockCondition(new BiomeCondition(ACBiomes.coralium_infested_swamp));
-		ACItems.anti_plagued_flesh = new ItemCorflesh(0, 0, false, "anticorflesh").setUnlockCondition(new BiomeCondition(ACBiomes.coralium_infested_swamp));
-		ACItems.anti_plagued_flesh_on_a_bone = new ItemCorbone(0, 0, false, "anticorbone").setUnlockCondition(new BiomeCondition(ACBiomes.coralium_infested_swamp));
+		ACItems.anti_beef = new ItemAntiFood("antibeef");
+		ACItems.anti_chicken = new ItemAntiFood("antichicken");
+		ACItems.anti_pork = new ItemAntiFood("antipork");
+		ACItems.rotten_anti_flesh = new ItemAntiFood("antiflesh");
+		ACItems.anti_bone = new ItemACBasic("antibone");
+		ACItems.anti_spider_eye = new ItemAntiFood("antispidereye", false);
+		ACItems.anti_plagued_flesh = new ItemCorflesh(0, 0, false, "anticorflesh");
+		ACItems.anti_plagued_flesh_on_a_bone = new ItemCorbone(0, 0, false, "anticorbone");
 
 		//crystals
 		ACItems.crystal = new ItemCrystal("crystal").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
@@ -145,26 +142,26 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.crystal_fragment = new ItemCrystal("crystalfragment", true).setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 
 		//Shadow items
-		ACItems.shadow_fragment = new ItemACBasic("shadowfragment").setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
-		ACItems.shadow_shard = new ItemACBasic("shadowshard").setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
-		ACItems.shadow_gem = new ItemACBasic("shadowgem").setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
-		ACItems.shard_of_oblivion = new ItemACBasic("oblivionshard").setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
+		ACItems.shadow_fragment = new ItemACBasic("shadowfragment");
+		ACItems.shadow_shard = new ItemACBasic("shadowshard");
+		ACItems.shadow_gem = new ItemACBasic("shadowgem");
+		ACItems.shard_of_oblivion = new ItemACBasic("oblivionshard");
 		shadowPlate = new ItemACBasic("shadowplate");
 
 		//Dread items
-		ACItems.dreaded_shard_of_abyssalnite = new ItemACBasic("dreadshard").setUnlockCondition(new MultiEntityCondition("abyssalcraft:dreadguard", "abyssalcraft:greaterdreadspawn", "abyssalcraft:lesserdreadbeast"));
-		ACItems.dreaded_chunk_of_abyssalnite = new ItemACBasic("dreadchunk").setUnlockCondition(new EntityCondition("abyssalcraft:dreadgolem"));
-		ACItems.dreadium_ingot = new ItemACBasic("dreadiumingot").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dread_fragment = new ItemACBasic("dreadfragment").setUnlockCondition(new EntityPredicateCondition(e -> IDreadEntity.class.isAssignableFrom(e)));
-		ACItems.dread_cloth = new ItemACBasic("dreadcloth").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_plate = new ItemACBasic("dreadplate").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_katana_blade = new ItemACBasic("dreadblade").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dread_plagued_gateway_key = new ItemACBasic("dreadkey").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.charcoal = new ItemACBasic("cha_rcoal").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
+		ACItems.dreaded_shard_of_abyssalnite = new ItemACBasic("dreadshard");
+		ACItems.dreaded_chunk_of_abyssalnite = new ItemACBasic("dreadchunk");
+		ACItems.dreadium_ingot = new ItemACBasic("dreadiumingot");
+		ACItems.dread_fragment = new ItemACBasic("dreadfragment");
+		ACItems.dread_cloth = new ItemACBasic("dreadcloth");
+		ACItems.dreadium_plate = new ItemACBasic("dreadplate");
+		ACItems.dreadium_katana_blade = new ItemACBasic("dreadblade");
+		ACItems.dread_plagued_gateway_key = new ItemACBasic("dreadkey");
+		ACItems.charcoal = new ItemACBasic("cha_rcoal");
 
 		//Abyssalnite items
-		ACItems.chunk_of_abyssalnite = new ItemACBasic("abychunk").setUnlockCondition(new EntityCondition("abyssalcraft:abygolem"));
-		ACItems.abyssalnite_ingot = new ItemACBasic("abyingot").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
+		ACItems.chunk_of_abyssalnite = new ItemACBasic("abychunk");
+		ACItems.abyssalnite_ingot = new ItemACBasic("abyingot");
 
 		//Coralium items
 		ACItems.coralium_gem_cluster_2 = new ItemCoraliumcluster("ccluster2", "2");
@@ -176,14 +173,14 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.coralium_gem_cluster_8 = new ItemCoraliumcluster("ccluster8", "8");
 		ACItems.coralium_gem_cluster_9 = new ItemCoraliumcluster("ccluster9", "9");
 		ACItems.coralium_pearl = new ItemACBasic("cpearl");
-		ACItems.chunk_of_coralium = new ItemACBasic("cchunk").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.refined_coralium_ingot = new ItemACBasic("cingot").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.coralium_plate = new ItemACBasic("platec").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
+		ACItems.chunk_of_coralium = new ItemACBasic("cchunk");
+		ACItems.refined_coralium_ingot = new ItemACBasic("cingot");
+		ACItems.coralium_plate = new ItemACBasic("platec");
 		ACItems.coralium_gem = new ItemACBasic("coralium");
 		ACItems.transmutation_gem = new ItemCorb();
-		ACItems.coralium_plagued_flesh = new ItemCorflesh(2, 0.1F, false, "corflesh").setUnlockCondition(new EntityCondition("abyssalcraft:abyssalzombie"));
-		ACItems.coralium_plagued_flesh_on_a_bone = new ItemCorbone(2, 0.1F, false, "corbone").setUnlockCondition(new EntityCondition("abyssalcraft:depthsghoul"));
-		ACItems.coralium_longbow = new ItemCoraliumBow(20.0F, 0, 8, 16).setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
+		ACItems.coralium_plagued_flesh = new ItemCorflesh(2, 0.1F, false, "corflesh");
+		ACItems.coralium_plagued_flesh_on_a_bone = new ItemCorbone(2, 0.1F, false, "corbone");
+		ACItems.coralium_longbow = new ItemCoraliumBow(20.0F, 0, 8, 16);
 
 		//Tools
 		ACItems.darkstone_pickaxe = new ItemACPickaxe(AbyssalCraftAPI.darkstoneTool, "dpick", 1);
@@ -191,65 +188,65 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.darkstone_shovel = new ItemACShovel(AbyssalCraftAPI.darkstoneTool, "dshovel", 1);
 		ACItems.darkstone_sword = new ItemACSword(AbyssalCraftAPI.darkstoneTool, "dsword");
 		ACItems.darkstone_hoe = new ItemACHoe(AbyssalCraftAPI.darkstoneTool, "dhoe");
-		ACItems.abyssalnite_pickaxe = new ItemACPickaxe(AbyssalCraftAPI.abyssalniteTool, "apick", 4, TextFormatting.DARK_AQUA).setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		ACItems.abyssalnite_axe = new ItemACAxe(AbyssalCraftAPI.abyssalniteTool, "aaxe", 4, TextFormatting.DARK_AQUA).setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		ACItems.abyssalnite_shovel = new ItemACShovel(AbyssalCraftAPI.abyssalniteTool, "ashovel", 4, TextFormatting.DARK_AQUA).setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		ACItems.abyssalnite_sword = new ItemACSword(AbyssalCraftAPI.abyssalniteTool, "asword", TextFormatting.DARK_AQUA).setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		ACItems.abyssalnite_hoe = new ItemACHoe(AbyssalCraftAPI.abyssalniteTool, "ahoe", TextFormatting.DARK_AQUA).setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		ACItems.refined_coralium_pickaxe = new ItemACPickaxe(AbyssalCraftAPI.refinedCoraliumTool, "corpick", 5, TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.refined_coralium_axe = new ItemACAxe(AbyssalCraftAPI.refinedCoraliumTool, "coraxe", 5, TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.refined_coralium_shovel = new ItemACShovel(AbyssalCraftAPI.refinedCoraliumTool, "corshovel", 5, TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.refined_coralium_sword = new ItemACSword(AbyssalCraftAPI.refinedCoraliumTool, "corsword", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.refined_coralium_hoe = new ItemACHoe(AbyssalCraftAPI.refinedCoraliumTool, "corhoe", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.dreadium_pickaxe = new ItemACPickaxe(AbyssalCraftAPI.dreadiumTool, "dreadiumpickaxe", 6, TextFormatting.DARK_RED).setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_axe = new ItemACAxe(AbyssalCraftAPI.dreadiumTool, "dreadiumaxe", 6, TextFormatting.DARK_RED).setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_shovel = new ItemACShovel(AbyssalCraftAPI.dreadiumTool, "dreadiumshovel", 6, TextFormatting.DARK_RED).setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_sword = new ItemACSword(AbyssalCraftAPI.dreadiumTool, "dreadiumsword", TextFormatting.DARK_RED).setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_hoe = new ItemACHoe(AbyssalCraftAPI.dreadiumTool, "dreadiumhoe", TextFormatting.DARK_RED).setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_katana_hilt = new ItemDreadiumKatana("dreadhilt", ItemDreadiumKatana.hilt).setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_katana = new ItemDreadiumKatana("dreadkatana", ItemDreadiumKatana.katana).setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.sacthoths_soul_harvesting_blade = new ItemSoulReaper("soulreaper").setUnlockCondition(new EntityCondition("abyssalcraft:shadowboss"));
-		ACItems.ethaxium_pickaxe = new ItemEthaxiumPickaxe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumpickaxe").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.ethaxium_axe = new ItemACAxe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumaxe", 8, TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.ethaxium_shovel = new ItemACShovel(AbyssalCraftAPI.ethaxiumTool, "ethaxiumshovel", 8, TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.ethaxium_sword = new ItemACSword(AbyssalCraftAPI.ethaxiumTool, "ethaxiumsword", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.ethaxium_hoe = new ItemACHoe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumhoe", TextFormatting.AQUA).setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
+		ACItems.abyssalnite_pickaxe = new ItemACPickaxe(AbyssalCraftAPI.abyssalniteTool, "apick", 4, TextFormatting.DARK_AQUA);
+		ACItems.abyssalnite_axe = new ItemACAxe(AbyssalCraftAPI.abyssalniteTool, "aaxe", 4, TextFormatting.DARK_AQUA);
+		ACItems.abyssalnite_shovel = new ItemACShovel(AbyssalCraftAPI.abyssalniteTool, "ashovel", 4, TextFormatting.DARK_AQUA);
+		ACItems.abyssalnite_sword = new ItemACSword(AbyssalCraftAPI.abyssalniteTool, "asword", TextFormatting.DARK_AQUA);
+		ACItems.abyssalnite_hoe = new ItemACHoe(AbyssalCraftAPI.abyssalniteTool, "ahoe", TextFormatting.DARK_AQUA);
+		ACItems.refined_coralium_pickaxe = new ItemACPickaxe(AbyssalCraftAPI.refinedCoraliumTool, "corpick", 5, TextFormatting.AQUA);
+		ACItems.refined_coralium_axe = new ItemACAxe(AbyssalCraftAPI.refinedCoraliumTool, "coraxe", 5, TextFormatting.AQUA);
+		ACItems.refined_coralium_shovel = new ItemACShovel(AbyssalCraftAPI.refinedCoraliumTool, "corshovel", 5, TextFormatting.AQUA);
+		ACItems.refined_coralium_sword = new ItemACSword(AbyssalCraftAPI.refinedCoraliumTool, "corsword", TextFormatting.AQUA);
+		ACItems.refined_coralium_hoe = new ItemACHoe(AbyssalCraftAPI.refinedCoraliumTool, "corhoe", TextFormatting.AQUA);
+		ACItems.dreadium_pickaxe = new ItemACPickaxe(AbyssalCraftAPI.dreadiumTool, "dreadiumpickaxe", 6, TextFormatting.DARK_RED);
+		ACItems.dreadium_axe = new ItemACAxe(AbyssalCraftAPI.dreadiumTool, "dreadiumaxe", 6, TextFormatting.DARK_RED);
+		ACItems.dreadium_shovel = new ItemACShovel(AbyssalCraftAPI.dreadiumTool, "dreadiumshovel", 6, TextFormatting.DARK_RED);
+		ACItems.dreadium_sword = new ItemACSword(AbyssalCraftAPI.dreadiumTool, "dreadiumsword", TextFormatting.DARK_RED);
+		ACItems.dreadium_hoe = new ItemACHoe(AbyssalCraftAPI.dreadiumTool, "dreadiumhoe", TextFormatting.DARK_RED);
+		ACItems.dreadium_katana_hilt = new ItemDreadiumKatana("dreadhilt", ItemDreadiumKatana.hilt);
+		ACItems.dreadium_katana = new ItemDreadiumKatana("dreadkatana", ItemDreadiumKatana.katana);
+		ACItems.sacthoths_soul_harvesting_blade = new ItemSoulReaper("soulreaper");
+		ACItems.ethaxium_pickaxe = new ItemEthaxiumPickaxe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumpickaxe");
+		ACItems.ethaxium_axe = new ItemACAxe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumaxe", 8, TextFormatting.AQUA);
+		ACItems.ethaxium_shovel = new ItemACShovel(AbyssalCraftAPI.ethaxiumTool, "ethaxiumshovel", 8, TextFormatting.AQUA);
+		ACItems.ethaxium_sword = new ItemACSword(AbyssalCraftAPI.ethaxiumTool, "ethaxiumsword", TextFormatting.AQUA);
+		ACItems.ethaxium_hoe = new ItemACHoe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumhoe", TextFormatting.AQUA);
 		ACItems.staff_of_rending = new ItemStaffOfRending().setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
-		ACItems.configurator = new ItemConfigurator().setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
+		ACItems.configurator = new ItemConfigurator();
 
 		//Armor
-		ACItems.abyssalnite_helmet = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.HEAD, "ahelmet").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		ACItems.abyssalnite_chestplate = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.CHEST, "aplate").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		ACItems.abyssalnite_leggings = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.LEGS, "alegs").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		ACItems.abyssalnite_boots = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.FEET, "aboots").setUnlockCondition(new BiomePredicateCondition(b -> b instanceof IDarklandsBiome));
-		ACItems.dreaded_abyssalnite_helmet = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.HEAD, "dhelmet").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreaded_abyssalnite_chestplate = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.CHEST, "dplate").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreaded_abyssalnite_leggings = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.LEGS, "dlegs").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreaded_abyssalnite_boots = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.FEET, "dboots").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.refined_coralium_helmet = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.HEAD, "corhelmet").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.refined_coralium_chestplate = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.CHEST, "corplate").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.refined_coralium_leggings = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.LEGS, "corlegs").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.refined_coralium_boots = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.FEET, "corboots").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.plated_coralium_helmet = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.HEAD, "corhelmetp").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.plated_coralium_chestplate = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.CHEST, "corplatep").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.plated_coralium_leggings = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.LEGS, "corlegsp").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.plated_coralium_boots = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.FEET, "corbootsp").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.depths_helmet = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.HEAD, "depthshelmet").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.depths_chestplate = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.CHEST, "depthsplate").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.depths_leggings = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.LEGS, "depthslegs").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.depths_boots = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.FEET, "depthsboots").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.dreadium_helmet = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.HEAD, "dreadiumhelmet").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_chestplate = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.CHEST, "dreadiumplate").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_leggings = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.LEGS, "dreadiumlegs").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_boots = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.FEET, "dreadiumboots").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_samurai_helmet = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, EntityEquipmentSlot.HEAD, "dreadiumsamuraihelmet").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_samurai_chestplate = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, EntityEquipmentSlot.CHEST, "dreadiumsamuraiplate").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_samurai_leggings = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, EntityEquipmentSlot.LEGS, "dreadiumsamurailegs").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.dreadium_samurai_boots = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, EntityEquipmentSlot.FEET, "dreadiumsamuraiboots").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
-		ACItems.ethaxium_helmet = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.HEAD, "ethaxiumhelmet").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.ethaxium_chestplate = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.CHEST, "ethaxiumplate").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.ethaxium_leggings = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.LEGS, "ethaxiumlegs").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
-		ACItems.ethaxium_boots = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.FEET, "ethaxiumboots").setUnlockCondition(new DimensionCondition(ACLib.omothol_id));
+		ACItems.abyssalnite_helmet = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.HEAD, "ahelmet");
+		ACItems.abyssalnite_chestplate = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.CHEST, "aplate");
+		ACItems.abyssalnite_leggings = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.LEGS, "alegs");
+		ACItems.abyssalnite_boots = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.FEET, "aboots");
+		ACItems.dreaded_abyssalnite_helmet = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.HEAD, "dhelmet");
+		ACItems.dreaded_abyssalnite_chestplate = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.CHEST, "dplate");
+		ACItems.dreaded_abyssalnite_leggings = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.LEGS, "dlegs");
+		ACItems.dreaded_abyssalnite_boots = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.FEET, "dboots");
+		ACItems.refined_coralium_helmet = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.HEAD, "corhelmet");
+		ACItems.refined_coralium_chestplate = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.CHEST, "corplate");
+		ACItems.refined_coralium_leggings = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.LEGS, "corlegs");
+		ACItems.refined_coralium_boots = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.FEET, "corboots");
+		ACItems.plated_coralium_helmet = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.HEAD, "corhelmetp");
+		ACItems.plated_coralium_chestplate = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.CHEST, "corplatep");
+		ACItems.plated_coralium_leggings = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.LEGS, "corlegsp");
+		ACItems.plated_coralium_boots = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.FEET, "corbootsp");
+		ACItems.depths_helmet = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.HEAD, "depthshelmet");
+		ACItems.depths_chestplate = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.CHEST, "depthsplate");
+		ACItems.depths_leggings = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.LEGS, "depthslegs");
+		ACItems.depths_boots = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.FEET, "depthsboots");
+		ACItems.dreadium_helmet = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.HEAD, "dreadiumhelmet");
+		ACItems.dreadium_chestplate = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.CHEST, "dreadiumplate");
+		ACItems.dreadium_leggings = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.LEGS, "dreadiumlegs");
+		ACItems.dreadium_boots = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.FEET, "dreadiumboots");
+		ACItems.dreadium_samurai_helmet = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, EntityEquipmentSlot.HEAD, "dreadiumsamuraihelmet");
+		ACItems.dreadium_samurai_chestplate = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, EntityEquipmentSlot.CHEST, "dreadiumsamuraiplate");
+		ACItems.dreadium_samurai_leggings = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, EntityEquipmentSlot.LEGS, "dreadiumsamurailegs");
+		ACItems.dreadium_samurai_boots = new ItemDreadiumSamuraiArmor(AbyssalCraftAPI.dreadiumSamuraiArmor, 5, EntityEquipmentSlot.FEET, "dreadiumsamuraiboots");
+		ACItems.ethaxium_helmet = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.HEAD, "ethaxiumhelmet");
+		ACItems.ethaxium_chestplate = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.CHEST, "ethaxiumplate");
+		ACItems.ethaxium_leggings = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.LEGS, "ethaxiumlegs");
+		ACItems.ethaxium_boots = new ItemEthaxiumArmor(AbyssalCraftAPI.ethaxiumArmor, 5, EntityEquipmentSlot.FEET, "ethaxiumboots");
 
 		//Food
 		ACItems.generic_meat = new ItemFood(4, 0.4f, true).setTranslationKey("generic_meat").setCreativeTab(ACTabs.tabFood);

@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.necronomicon.condition.UnlockConditions;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 
@@ -33,28 +33,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemOC extends ItemACBasic {
 
-	private final IUnlockCondition killed_bosses = new IUnlockCondition() {
-
-		@Override
-		public boolean areConditionObjectsEqual(Object stuff) {
-
-			return false;
-		}
-
-		@Override
-		public Object getConditionObject() {
-
-			return new String[] {"abyssalcraft:dragonboss", "abyssalcraft:chagaroth", "abyssalcraft:jzahar", "abyssalcraft:shadowboss"};
-		}
-
-		@Override
-		public int getType() {
-
-			return 11;
-		}
-
-	};
-
 	public ItemOC() {
 		super("oc");
 	}
@@ -70,7 +48,7 @@ public class ItemOC extends ItemACBasic {
 	{
 		if(!world.isRemote) {
 			INecroDataCapability cap = NecroDataCapability.getCap(player);
-			if(cap != null && cap.isUnlocked(killed_bosses, player)) {
+			if(cap != null && cap.isUnlocked(UnlockConditions.KILLED_ALL_BOSSES, player)) {
 				player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 600, 6, false, false));
 				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 600, 6, false, false));
 				player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 600, 6, false, false));
