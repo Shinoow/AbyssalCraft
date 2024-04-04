@@ -26,12 +26,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemScroll extends ItemMetadata implements IScroll {
+public class ItemScroll extends ItemACBasic implements IScroll {
 
-	public ItemScroll(String name, String...names) {
-		super(name, names);
-
-		if(name.equals("scroll"))
+	private ScrollType type;
+	
+	public ItemScroll(String name, ScrollType scrollType) {
+		super(name);
+		type = scrollType;
+		
+		if(scrollType != ScrollType.UNIQUE)
 			addPropertyOverride(new ResourceLocation("inscribed"), (stack, worldIn, entityIn) -> stack.hasTagCompound() && stack.getTagCompound().hasKey("Spell") ? 1.0F : 0);
 	}
 
@@ -62,28 +65,17 @@ public class ItemScroll extends ItemMetadata implements IScroll {
 	@Override
 	public ScrollType getScrollType(ItemStack stack) {
 
-		if(stack.getItem() == ACItems.scroll)
-			switch(stack.getMetadata()) {
-			case 1:
-				return ScrollType.LESSER;
-			case 2:
-				return ScrollType.MODERATE;
-			case 3:
-				return ScrollType.GREATER;
-			}
-		if(stack.getItem() == ACItems.unique_scroll)
-			return ScrollType.UNIQUE;
-		return ScrollType.BASIC;
+		return type;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
 		super.getSubItems(par2CreativeTab, par3List);
-		if(this == ACItems.scroll && par2CreativeTab == ACTabs.tabSpells) {
-			ItemStack greater_scroll = new ItemStack(ACItems.scroll, 1, 3);
-			ItemStack antimatter_scroll = new ItemStack(ACItems.unique_scroll, 1, 0);
-			ItemStack oblivion_scroll = new ItemStack(ACItems.unique_scroll, 1, 1);
+		if(this == ACItems.greater_scroll && par2CreativeTab == ACTabs.tabSpells) {
+			ItemStack greater_scroll = new ItemStack(ACItems.greater_scroll);
+			ItemStack antimatter_scroll = new ItemStack(ACItems.antimatter_scroll);
+			ItemStack oblivion_scroll = new ItemStack(ACItems.oblivion_scroll);
 			SpellRegistry.instance().getSpells().stream().forEach(s -> {
 				par3List.add(SpellRegistry.instance().inscribeSpell(s, greater_scroll.copy()));
 				par3List.add(SpellRegistry.instance().inscribeSpell(s, antimatter_scroll.copy()));

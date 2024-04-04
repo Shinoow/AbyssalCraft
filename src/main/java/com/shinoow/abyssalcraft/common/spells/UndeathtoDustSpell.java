@@ -30,7 +30,7 @@ public class UndeathtoDustSpell extends Spell {
 
 	public UndeathtoDustSpell() {
 		super("undeathtodust", 1000F, Items.BONE);
-		setParchment(new ItemStack(ACItems.scroll, 1, 2));
+		setParchment(new ItemStack(ACItems.moderate_scroll));
 		setRequiresCharging();
 		setColor(0x1a1b1c);
 	}

@@ -495,12 +495,12 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		addPages("spells", "gettingstarted", new Page(1, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconText.SPELL_TUT_1),
 				new Page(2, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconText.SPELL_TUT_2));
 		addPages("spells", "casting", new Page(1, NecronomiconText.LABEL_CASTING, 0, NecronomiconText.SPELL_TUT_3));
-		addPages("spells", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.scroll, 1, 0), NecronomiconText.WIP),
-				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.scroll, 1, 1), NecronomiconText.WIP),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.scroll, 1, 2), NecronomiconText.WIP),
-				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.scroll, 1, 3), NecronomiconText.WIP),
-				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.unique_scroll, 1, 0), NecronomiconText.WIP),
-				new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.unique_scroll, 1, 1), NecronomiconText.WIP));
+		addPages("spells", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.basic_scroll), NecronomiconText.WIP),
+				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.lesser_scroll), NecronomiconText.WIP),
+				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.moderate_scroll), NecronomiconText.WIP),
+				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.greater_scroll), NecronomiconText.WIP),
+				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.antimatter_scroll), NecronomiconText.WIP),
+				new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.oblivion_scroll), NecronomiconText.WIP));
 		setupPatreonData();
 	}
 

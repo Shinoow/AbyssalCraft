@@ -429,8 +429,6 @@ public class AbyssalCraftClientEventHooks {
 		ModelBakery.registerItemVariants(ACItems.ingot_nugget, makerl("nugget_abyssalnite", "nugget_coralium", "nugget_dreadium", "nugget_ethaxium"));
 		ModelBakery.registerItemVariants(ACItems.staff_of_rending, makerl("drainstaff", "drainstaff_aw", "drainstaff_dl", "drainstaff_omt"));
 		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
-		ModelBakery.registerItemVariants(ACItems.scroll, makerl("scroll_basic", "scroll_lesser", "scroll_moderate", "scroll_greater"));
-		ModelBakery.registerItemVariants(ACItems.unique_scroll, makerl("scroll_unique_anti", "scroll_unique_oblivion"));
 
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
 		registerFluidModel(ACBlocks.liquid_antimatter, "anti");
@@ -671,12 +669,12 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.interdimensional_cage, 0);
 		registerItemRenders(ACItems.crystal_fragment, ACLib.crystalNames.length);
 		registerItemRender(ACItems.stone_tablet, 0);
-		registerItemRender(ACItems.scroll, 0, "scroll_basic");
-		registerItemRender(ACItems.scroll, 1, "scroll_lesser");
-		registerItemRender(ACItems.scroll, 2, "scroll_moderate");
-		registerItemRender(ACItems.scroll, 3, "scroll_greater");
-		registerItemRender(ACItems.unique_scroll, 0, "scroll_unique_anti");
-		registerItemRender(ACItems.unique_scroll, 1, "scroll_unique_oblivion");
+		registerItemRender(ACItems.basic_scroll, 0);
+		registerItemRender(ACItems.lesser_scroll, 0);
+		registerItemRender(ACItems.moderate_scroll, 0);
+		registerItemRender(ACItems.greater_scroll, 0);
+		registerItemRender(ACItems.antimatter_scroll, 0);
+		registerItemRender(ACItems.oblivion_scroll, 0);
 		registerItemRender(ACItems.coralium_plague_antidote, 0);
 		registerItemRender(ACItems.dread_plague_antidote, 0);
 		registerItemRender(ACItems.darklands_oak_door, 0);

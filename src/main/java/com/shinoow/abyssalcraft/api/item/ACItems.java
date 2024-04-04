@@ -216,10 +216,12 @@ public class ACItems {
 	 * 24 = Zinc, 25 = Calcium, 26 = Beryllium, 27 = Beryl */
 	public static Item crystal_fragment;
 	public static Item stone_tablet;
-	/** Metadata Item, 0 = basic, 1 = lesser, 2 = moderate, 3 = greater */
-	public static Item scroll;
-	/** Metadata Item, 0 = Antimatter, 1 = Oblivion */
-	public static Item unique_scroll;
+	public static Item basic_scroll;
+	public static Item lesser_scroll;
+	public static Item moderate_scroll;
+	public static Item greater_scroll;
+	public static Item antimatter_scroll;
+	public static Item oblivion_scroll;
 	public static Item coralium_plague_antidote;
 	public static Item dread_plague_antidote;
 	public static Item darklands_oak_door;

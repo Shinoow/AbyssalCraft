@@ -442,15 +442,15 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, ACItems.dreadlands_necronomicon, rand, adjustProbability(0.1F));
 				if(rand.nextFloat() < adjustProbability(0.1F)) {
 					k = 3 * (rand.nextInt(10) + 1) + 1;
-					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.elder_engraved_coin, k), new ItemStack(ACItems.scroll, 1, 0)));
+					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.elder_engraved_coin, k), new ItemStack(ACItems.basic_scroll)));
 				}
 				if(rand.nextFloat() < adjustProbability(0.1F)) {
 					k = 3 * (rand.nextInt(10) + 1) + 1;
-					list.add(new MerchantRecipe(new ItemStack(ACItems.scroll, 1, 0), new ItemStack(ACItems.elder_engraved_coin, k), new ItemStack(ACItems.scroll, 1, 1)));
+					list.add(new MerchantRecipe(new ItemStack(ACItems.basic_scroll), new ItemStack(ACItems.elder_engraved_coin, k), new ItemStack(ACItems.lesser_scroll)));
 				}
 				if(rand.nextFloat() < adjustProbability(0.1F)) {
 					k = 3 * (rand.nextInt(10) + 1) + 1;
-					list.add(new MerchantRecipe(new ItemStack(ACItems.scroll, 1, 1), new ItemStack(ACItems.elder_engraved_coin, k), new ItemStack(ACItems.scroll, 1, 2)));
+					list.add(new MerchantRecipe(new ItemStack(ACItems.lesser_scroll), new ItemStack(ACItems.elder_engraved_coin, k), new ItemStack(ACItems.moderate_scroll)));
 				}
 
 				if (rand.nextFloat() < adjustProbability(0.07F))
@@ -483,9 +483,9 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.shub_niggurath_charm, 1);
 				addCoinTrade(list, ACItems.staff_of_rending, rand, adjustProbability(0.1F));
 				if(rand.nextFloat() < adjustProbability(0.1F))
-					list.add(new MerchantRecipe(new ItemStack(ACItems.scroll, 1, 3), ACItems.liquid_antimatter_bucket_stack, new ItemStack(ACItems.unique_scroll, 1, 0)));
+					list.add(new MerchantRecipe(new ItemStack(ACItems.greater_scroll), ACItems.liquid_antimatter_bucket_stack, new ItemStack(ACItems.antimatter_scroll)));
 				if(rand.nextFloat() < adjustProbability(0.1F))
-					list.add(new MerchantRecipe(new ItemStack(ACItems.scroll, 1, 3), new ItemStack(ACItems.oblivion_catalyst), new ItemStack(ACItems.unique_scroll, 1, 1)));
+					list.add(new MerchantRecipe(new ItemStack(ACItems.greater_scroll), new ItemStack(ACItems.oblivion_catalyst), new ItemStack(ACItems.oblivion_scroll)));
 				Item[] aitem = new Item[] {ACItems.ethaxium_sword, ACItems.ethaxium_chestplate, ACItems.ethaxium_axe, ACItems.ethaxium_pickaxe, ACItems.ethaxium_shovel};
 				Item[] aitem1 = aitem;
 				int j = aitem.length;

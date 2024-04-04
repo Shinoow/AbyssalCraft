@@ -86,7 +86,7 @@ public class ACTabs {
 		@Override
 		public ItemStack createIcon() {
 
-			return new ItemStack(ACItems.scroll, 1, 3);
+			return new ItemStack(ACItems.greater_scroll);
 		}
 	};
 }

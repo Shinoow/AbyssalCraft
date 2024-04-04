@@ -30,7 +30,7 @@ public class TeleportHostilesSpell extends Spell {
 
 	public TeleportHostilesSpell() {
 		super("teleporthostiles", 10000F, Items.SUGAR);
-		setParchment(new ItemStack(ACItems.scroll, 1, 3));
+		setParchment(new ItemStack(ACItems.greater_scroll));
 		setRequiresCharging();
 		setColor(0x31227c);
 	}

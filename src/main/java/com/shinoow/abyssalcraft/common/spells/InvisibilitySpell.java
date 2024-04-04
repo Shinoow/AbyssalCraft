@@ -30,7 +30,7 @@ public class InvisibilitySpell extends Spell {
 
 	public InvisibilitySpell() {
 		super("invisibility", 500F, Items.GLASS_BOTTLE);
-		setParchment(new ItemStack(ACItems.scroll, 1, 0));
+		setParchment(new ItemStack(ACItems.basic_scroll));
 		setRequiresCharging();
 		setColor(0xaeb1b7);
 	}

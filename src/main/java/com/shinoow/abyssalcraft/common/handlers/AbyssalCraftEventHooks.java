@@ -457,7 +457,7 @@ public class AbyssalCraftEventHooks {
 		if(event.getEntityLiving() instanceof EntityDragonBoss || event.getEntityLiving() instanceof EntityChagaroth ||
 				event.getEntityLiving() instanceof EntityJzahar || event.getEntityLiving() instanceof EntitySacthoth) {
 			EntityLivingBase entity = event.getEntityLiving();
-			event.getDrops().add(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, new ItemStack(ACItems.scroll, 1, 3)));
+			event.getDrops().add(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, new ItemStack(ACItems.greater_scroll)));
 		}
 	}
 

@@ -33,7 +33,7 @@ public class EntropySpell extends Spell {
 
 	public EntropySpell() {
 		super("entropy", 0, Items.COAL, new ItemStack(ACBlocks.darkstone_cobblestone));
-		setParchment(new ItemStack(ACItems.scroll, 1, 3));
+		setParchment(new ItemStack(ACItems.greater_scroll));
 		setColor(0x171f68);
 	}
 

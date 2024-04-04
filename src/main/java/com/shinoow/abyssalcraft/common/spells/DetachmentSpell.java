@@ -30,7 +30,7 @@ public class DetachmentSpell extends Spell {
 
 	public DetachmentSpell() {
 		super("detachment", 100, Items.IRON_INGOT);
-		setParchment(new ItemStack(ACItems.scroll, 1, 2));
+		setParchment(new ItemStack(ACItems.moderate_scroll));
 		setRequiresCharging();
 		setColor(0x463faa);
 	}

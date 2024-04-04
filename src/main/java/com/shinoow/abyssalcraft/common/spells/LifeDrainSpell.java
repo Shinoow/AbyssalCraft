@@ -30,7 +30,7 @@ public class LifeDrainSpell extends Spell {
 
 	public LifeDrainSpell() {
 		super("lifedrain", 100, Items.APPLE);
-		setParchment(new ItemStack(ACItems.scroll, 1, 0));
+		setParchment(new ItemStack(ACItems.basic_scroll));
 		setRequiresCharging();
 		setColor(0xa00404);
 	}
