@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib;
 
+import java.util.Random;
+
 /**
  * That one place where you keep a billion Strings representing stuff
  * @author shinoow
@@ -372,6 +374,7 @@ public class NecronomiconText {
 
 	/** Text limit */
 	public static String TEST = "Lorem ipsum dolor sit amet, nam an mutat eripuit temporibus. Eu eius luptatum similique eam. Erat euismod bonorum cu vis, malis salutatus neglegentur mea no. His et abhorreant conclusionemque, has prima movet dignissim an, vitae deleniti theophrastus ad mea. Est no offendit incorrupte, ferri illum labores qui ut. Sanctus adipisci eum ex, cu falli virtute dissentias.";
+
 	public static String TEST_95 = "Fortemne possumus dicere eundem illum Torquatum? Habes, inquam, Cato, formam eorum, de quibus loquor, philosophorum. Quis tibi ergo istud dabit praeter Pyrrhonem, Aristonem eorumve similes, quos tu non probas? Hic quoque suus est de summoque bono dissentiens dici vere Peripateticus non potest.";
 	public static String TEST_50_1 = "Ut in geometria, prima si dederis, danda sunt omnia. Nihil opus est exemplis hoc facere longius. Egone non intellego, quid sit don Graece, Latine voluptas?";
 	public static String TEST_50_2 = "Recte dicis; Ne in odium veniam, si amicum destitero tueri. Aliter homines, aliter philosophos loqui putas oportere? Non est igitur voluptas bonum.";
@@ -438,16 +441,76 @@ public class NecronomiconText {
 	public static String LABEL_DURATION_AMPLIFIER = "necronomicon.durationamplifier";
 	public static String LABEL_POWER_AMPLIFIER = "necronomicon.poweramplifier";
 
+	// Alternating texts to display for locked pages
+	// Lyric snippets of songs from the following bands (not in order):
+	// The Black Dahlia Murder
+	// Aborted
+	// Cattle Decapitation
+	// NecroticGoreBeast
+	// Analepsy
+	// Osiah
+	// At The Gates
+	public static String AKLO_FULL_1 = "I, a monolithic silver tongue will lead you to your death. I, a monolithic silver tongue will put sorrow to rest. Turn a blind eye bleeding, I know what you want best. To watch you crippled and broken. I, a monolithic silver tongue will lead you to your death. The final absolution from within.";
+	public static String AKLO_FULL_2 = "A deafening rumble, upon the solving of a puzzle. We will tear your soul apart! Oh sweet serenade of torture! As pleasure and pain unite, we become one, Cenobite! Tearing flesh from bone, desires are born. The spasms of orgasms, uncontrolled. The reaping has begun, through pain and suffering I cum! Divine serrated torment, as Heaven and Hell unite.";
+	public static String AKLO_FULL_3 = "Now for the fun part I introduce this: My new Cradle of Judas Perineal puncturing device also juices the fruit of the human As force is applied, grinding and winding intestines and Inside around it like a drill bit turns anatomy into a visceral Swill grating, excavating and making its way through the Body like a bore finding its way out the Mouth announcing the gore";
+	public static String AKLO_FULL_4 = "We rise to the slaughter... of the essence of our being We're ripe for the slaughter... but live to ruin another day A species that boasts of overdose That takes pride in deriding all other forms of life Even our own The advent of technology - beginning the disease There is no survival when we are liable for everything that is Wrong in this world The lifestalker";
+	public static String AKLO_FULL_5 = "The universe, it always finds a way to purge The sustainably inappropriate numbers that once surged Death always wins, his molten torch forever burns And to the ashes and the ground we are returned Life exists to infuriate, berate, and subjugate The hapless mortals shit-birthed on a human-altered planet Earth Fuck the future Fuck all mankind";
+	public static String AKLO_FULL_6 = "The clouds will be stained in blood, forming a grim red glow at night, from the angels with their wings torn from their backs. Man's hope, Man's hope It's sealed By my hands, Betrayed by Satan. Karma's a fucking bitch, His guilt weighs more than my fists, Like father like son, compassion is weak, my job is done. I've drank the blood of Gods. God, damned his world.";
+	public static String AKLO_FULL_7 = "I fucking hate, all of you Transcribing wrath upon your face Anthropogenic I fucking hate, all of you cleansing, this cancer Cold steel, reflections of a monster Cold steel, reflections of a monster cold steel was the canvas that revealed the face of a monster How strong I become They fear me and they should For I am The Reaper of Souls The Reaper of Souls";
+	public static String AKLO_FULL_8 = "Never again On your force fed illusions to choke You feed off my pain Feed off my life There won't be another dawn We will reap as we have sown Always the same My tired eyes have seen enough Of all your lies My hate is blind There won't be another dawn We will reap as we have sown Slaughter of the soul Suicidal final art Children - born of sin Tear your soul apart";
+	public static String AKLO_FULL_9 = "Through the impenetrable haze Through shapeless fog Scattered through these desolate plains White shine the bones: Eater of gods As if mercy were a skin of water We fall into a prior dream The number of the grains of sand Exiled from the memory of men And as the smoke shifts in black Only ashes remain And as the smoke shifts in black Eater of gods Eater of gods";
+
+	public static String AKLO_95_1 = "Into the Everblack, from where there's no coming back. Six feet below the earth, rotting food for the fetid worms. Into the harrowed grave, your mortal soul cannot be saved. Into the nether realm, dead as slate and cold as Hell.";
+	public static String AKLO_95_2 = "Obey the terrorvision Demonic manipulation Spreading hate Spreading death Fear Praise the lord Sever the whore The masses want more Bow to me Oh nephilim Emisarry of perversity Praise the whore Nu Babylon The masses need more Crawl for me oh idiocy Emisarry of stupidity";
+	public static String AKLO_95_3 = "The scriptures of the dead, satisfy my curiosity. So fascinating, so captivating! Enigmatic paths to Rigor Mortis. Necrotic manifesto! Macerated limbs are dislodged, upon tissue I viciously gorge. Celebration of flesh and bone, my fascination is far gone.";
+	public static String AKLO_95_4 = "Oh luscious torture, these little deaths I die all over. With hooks and chains torn apart. These little deaths are mere fine art. Cenobites, explorers of flesh. Cenobites, the wretched living dead. Cenobites, emissaries of Hell. Cenobites, practitioners of eternal torment.";
+	public static String AKLO_95_5 = "You alone are your disposal A lifetime of stains wasting away slowly down the drain No mercy, no reprisal No second chance From junk we have emerged Slaves willing to serve Our own damning demands from our own damning hands De-evolved man";
+	public static String AKLO_95_6 = "Deformity Rectal tissues ripped Bulging mass leaking out Blood, cum, and piss falling out Inserting fingers, in blood-dripping Rectal prolapse, gorging my lips With some sweet juice-leaking ass Dangling rectum, interconnection There's a special place in hell To fuck with myself";
+	public static String AKLO_95_7 = "Locus of Dawning, A ceaseless catastrophe Scalding fragments Amassing in clusters Thriving in darkness Ingesting the glare Gestational agony Throbbing radio waves Destruction by autolysis Imploding genesis Locus of Dawning The place where all ends... ";
+	public static String AKLO_95_8 = "As I stand upon the edge of life I look down on the shadows that I've cast in time Across the wastelands I see myself, devoid of colour A void of life, a void of life You are my fight before I kneel to eternal silence I see myself, devoid of colour A void of life, a void of life A void of life";
+	public static String AKLO_95_9 = "Blind is the mind that denies our hands We’re the champions of these sands You’re the victim You’ve lost so give up the fight L'appel du Vide. Oasis waters I now dwell my daemons saved me from my Hell And; now I rot. A safe space I now dwell, until this place was all I knew";
+
+	public static String AKLO_50_1 = "Rest in festering slime! Here burns the souls, of a thousand generations. Join the club!";
+	public static String AKLO_50_2 = "Masses of mongrels are screaming Common sense has been depleted As you wait for a miracle For a God that will never show";
+	public static String AKLO_50_3 = "Hate Fuelling the masterplan Hate Moving the pawns around Hate Our embodiment Hate Fuelling the masterplan Hate Blissfully ignorant Hate Our decadence";
+	public static String AKLO_50_4 = "Necrotic manifesto! Decrypting semiology! This book of the dead, a symposium indeed. Celebration of flesh and bone, my fascination is far gone.";
+	public static String AKLO_50_5 = "Unnatural and unclean! Lord, please forgive them as this is not what they mean Are you there and are you listening? Why would you even let this happen to me?";
+	public static String AKLO_50_6 = "...Ave Delphinus ...Selachimorpha ...Dinoflagellata ...Cheloniidae ...Cetacea Certain doom - assured destruction of finite ecosystems";
+	public static String AKLO_50_7 = "We eat our young We eat our young We eat our young We eat our young We eat our young We eat our young We eat our young We eat our young";
+	public static String AKLO_50_8 = "I held the world In my hands, betrayed by the Gods; of man. Nailed to the altar of his demise. The sharpened blades tear into his skin, where will they begin?";
+	public static String AKLO_50_9 = "The walls of a poem Like the folding of wings They burn through the base of the skull Under the eyelids The night eternal Down fell the city of words";
+
 	/**
-	 * The best way to drown an array of strings with nonsense
-	 * @param par1 How many Lorem Ipsums you would like to order
-	 * @return A bag full of free Lorem Ipsums, take it and leave!
+	 * Provides a random AKLO_xx string
+	 * @param type	<li>0 = 155~ letters</li>
+	 * <li>1 = 294~ letters</li>
+	 * <li>2 = 368~ letters</li>
+	 * @return A song lyric snippet
 	 */
-	public static String[] getIpsums(int par1){
-		String[] temp = new String[par1];
-		for(int i = 0; i < par1; i++)
-			temp[i] = TEST;
-		return temp;
+	public static String getRandomAklo(int type) {
+		Random r = new Random();
+		switch(r.nextInt(9)) {
+		case 0:
+			return type == 0 ? AKLO_50_1 : type == 1 ? AKLO_95_1 : AKLO_FULL_1;
+		case 1:
+			return type == 0 ? AKLO_50_2 : type == 1 ? AKLO_95_2 : AKLO_FULL_2;
+		case 2:
+			return type == 0 ? AKLO_50_3 : type == 1 ? AKLO_95_3 : AKLO_FULL_3;
+		case 3:
+			return type == 0 ? AKLO_50_4 : type == 1 ? AKLO_95_4 : AKLO_FULL_4;
+		case 4:
+			return type == 0 ? AKLO_50_5 : type == 1 ? AKLO_95_5 : AKLO_FULL_5;
+		case 5:
+			return type == 0 ? AKLO_50_6 : type == 1 ? AKLO_95_6 : AKLO_FULL_6;
+		case 6:
+			return type == 0 ? AKLO_50_7 : type == 1 ? AKLO_95_7 : AKLO_FULL_7;
+		case 7:
+			return type == 0 ? AKLO_50_8 : type == 1 ? AKLO_95_8 : AKLO_FULL_8;
+		case 8:
+			return type == 0 ? AKLO_50_9 : type == 1 ? AKLO_95_9 : AKLO_FULL_9;
+		}
+
+		return TEST;
 	}
 
 	public static String getSpellType(boolean requiresCharging) {

@@ -84,6 +84,7 @@ public class GuiNecronomicon extends GuiScreen {
 	public static final List<String> failcache = new ArrayList<>();
 	private static Chapter patreon;
 	private INecroDataCapability cap;
+	protected String unknown50_1, unknown50_2, unknown95, unknownFull;
 
 	public GuiNecronomicon(){
 		if(Minecraft.getMinecraft().player != null)
@@ -91,6 +92,10 @@ public class GuiNecronomicon extends GuiScreen {
 		long time = System.currentTimeMillis();
 		startTime = time - cycleTime;
 		drawTime = time;
+		unknown50_1 = NecronomiconText.getRandomAklo(0);
+		unknown50_2 = NecronomiconText.getRandomAklo(0);
+		unknown95 = NecronomiconText.getRandomAklo(1);
+		unknownFull = NecronomiconText.getRandomAklo(2);
 	}
 
 	public GuiNecronomicon(int par1){
@@ -339,7 +344,7 @@ public class GuiNecronomicon extends GuiScreen {
 			}
 			else if(currTurnup == 1) {
 				writeText(1, NecronomiconText.KNOWLEDGE_INFO_3);
-				writeText(2, NecronomiconText.TEST_95, 28, true);
+				writeText(2, unknown95, 28, true);
 			}
 	}
 

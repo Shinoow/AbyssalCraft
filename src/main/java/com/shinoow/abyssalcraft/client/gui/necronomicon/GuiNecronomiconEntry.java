@@ -376,20 +376,20 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 
 		if(icon1 != null){
 			if(icon1 instanceof ItemStack)
-				writeText(1, locked1 ? NecronomiconText.TEST_95 : text1, 50, locked1);
+				writeText(1, locked1 ? unknown95 : text1, 50, locked1);
 			if(icon1 instanceof ResourceLocation || icon1 instanceof String)
-				writeText(1, locked1 ? NecronomiconText.TEST_50_1 : text1, 100, locked1);
+				writeText(1, locked1 ? unknown50_1 : text1, 100, locked1);
 			if(icon1 instanceof CraftingStack)
-				writeText(1, locked1 ? NecronomiconText.TEST_50_2 : text1, 95, locked1);
-		} else writeText(1, locked1 ? NecronomiconText.TEST : text1, locked1);
+				writeText(1, locked1 ? unknown50_2 : text1, 95, locked1);
+		} else writeText(1, locked1 ? unknownFull : text1, locked1);
 		if(icon2 != null){
 			if(icon2 instanceof ItemStack)
-				writeText(2, locked2 ? NecronomiconText.TEST_95 : text2, 50, locked2);
+				writeText(2, locked2 ? unknown95 : text2, 50, locked2);
 			if(icon2 instanceof ResourceLocation || icon2 instanceof String)
-				writeText(2, locked2 ? NecronomiconText.TEST_50_1 : text2, 100, locked2);
+				writeText(2, locked2 ? unknown50_1 : text2, 100, locked2);
 			if(icon2 instanceof CraftingStack)
-				writeText(2, locked2 ? NecronomiconText.TEST_50_2 : text2, 95, locked2);
-		} else writeText(2, locked2 ? NecronomiconText.TEST : text2, locked2);
+				writeText(2, locked2 ? unknown50_2 : text2, 95, locked2);
+		} else writeText(2, locked2 ? unknownFull : text2, locked2);
 	}
 
 	@Override
@@ -400,6 +400,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		stuff = localize(data.getTitle());
 		boolean b = !isUnlocked(data.getCondition());
 		getFontRenderer(b).drawSplitString(b ? NecronomiconText.LABEL_TEST : stuff, k + 20, b0 + 16, 116, 0xC40000);
-		if(data.hasText()) writeText(2, b ? NecronomiconText.TEST : data.getText(), b);
+		if(data.hasText()) writeText(2, b ? unknownFull : data.getText(), b);
 	}
 }
