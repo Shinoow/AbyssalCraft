@@ -21,33 +21,34 @@ public class ModelDreadTentacles extends ModelBase {
     public ModelDreadTentacles() {
         this.textureWidth = 16;
         this.textureHeight = 16;
-        this.tentacle_1_1 = new ModelRenderer(this, 0, 9);
-        this.tentacle_1_1.setRotationPoint(0.0F, 0.0F, 5.0F);
-        this.tentacle_1_1.addBox(0.0F, 0.0F, 0.0F, 3, 3, 4, 0.0F);
-        this.tentacle_3 = new ModelRenderer(this, 6, 2);
-        this.tentacle_3.setRotationPoint(0.0F, 0.0F, 2.0F);
-        this.tentacle_3.addBox(1.0F, 1.0F, 0.0F, 1, 1, 4, 0.0F);
         this.tentacle_2_1 = new ModelRenderer(this, 4, 5);
         this.tentacle_2_1.setRotationPoint(0.0F, 0.0F, 4.0F);
         this.tentacle_2_1.addBox(0.5F, 0.5F, 0.0F, 2, 2, 3, 0.0F);
-        this.tentacle_1 = new ModelRenderer(this, 0, 8);
-        this.tentacle_1.setRotationPoint(-1.0F, -1.0F, 1.0F);
-        this.tentacle_1.addBox(0.0F, 0.0F, 0.0F, 3, 3, 5, 0.0F);
         this.tentacle_2 = new ModelRenderer(this, 4, 4);
         this.tentacle_2.setRotationPoint(0.0F, 0.0F, 3.0F);
         this.tentacle_2.addBox(0.5F, 0.5F, 0.0F, 2, 2, 4, 0.0F);
+        this.tentacle_3 = new ModelRenderer(this, 6, 2);
+        this.tentacle_3.setRotationPoint(0.0F, 0.0F, 2.0F);
+        this.tentacle_3.addBox(1.0F, 1.0F, 0.0F, 1, 1, 4, 0.0F);
         this.tentacle_3_1 = new ModelRenderer(this, 6, 2);
         this.tentacle_3_1.setRotationPoint(0.0F, 0.0F, 4.0F);
         this.tentacle_3_1.addBox(1.0F, 1.0F, 0.0F, 1, 1, 3, 0.0F);
+        this.tentacle_1 = new ModelRenderer(this, 0, 8);
+        this.tentacle_1.setRotationPoint(-1.0F, -1.0F, 1.0F);
+        this.tentacle_1.addBox(0.0F, 0.0F, 0.0F, 3, 3, 5, 0.0F);
         this.base = new ModelRenderer(this, 0, 0);
         this.base.setRotationPoint(0.0F, 10.0F, 0.0F);
         this.base.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.tentacle_1.addChild(this.tentacle_1_1);
-        this.tentacle_2_1.addChild(this.tentacle_3);
+        this.setRotateAngle(base, 0.7853981633974483F, 0.0F, 0.0F);
+        this.tentacle_1_1 = new ModelRenderer(this, 0, 9);
+        this.tentacle_1_1.setRotationPoint(0.0F, 0.0F, 5.0F);
+        this.tentacle_1_1.addBox(0.0F, 0.0F, 0.0F, 3, 3, 4, 0.0F);
         this.tentacle_2.addChild(this.tentacle_2_1);
-        this.base.addChild(this.tentacle_1);
         this.tentacle_1_1.addChild(this.tentacle_2);
+        this.tentacle_2_1.addChild(this.tentacle_3);
         this.tentacle_3.addChild(this.tentacle_3_1);
+        this.base.addChild(this.tentacle_1);
+        this.tentacle_1.addChild(this.tentacle_1_1);
     }
 
     @Override
