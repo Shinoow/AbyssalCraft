@@ -42,7 +42,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "abyssalcraft:basic_scroll",
+                    "name": "abyssalcraft:scroll_basic",
                     "functions": [
                         {
                             "function": "set_data",
