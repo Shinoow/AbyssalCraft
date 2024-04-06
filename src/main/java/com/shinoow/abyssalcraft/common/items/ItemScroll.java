@@ -15,7 +15,6 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.*;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,11 +28,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemScroll extends ItemACBasic implements IScroll {
 
 	private ScrollType type;
-	
+
 	public ItemScroll(String name, ScrollType scrollType) {
 		super(name);
 		type = scrollType;
-		
+
 		if(scrollType != ScrollType.UNIQUE)
 			addPropertyOverride(new ResourceLocation("inscribed"), (stack, worldIn, entityIn) -> stack.hasTagCompound() && stack.getTagCompound().hasKey("Spell") ? 1.0F : 0);
 	}

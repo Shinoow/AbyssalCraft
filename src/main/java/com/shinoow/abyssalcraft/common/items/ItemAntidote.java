@@ -13,8 +13,6 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +28,7 @@ import net.minecraft.world.World;
 public class ItemAntidote extends ItemACBasic {
 
 	private Potion antidote;
-	
+
 	public ItemAntidote(String translationKey) {
 		super(translationKey);
 		setMaxStackSize(1);
@@ -100,7 +98,7 @@ public class ItemAntidote extends ItemACBasic {
 	public void setCure(Potion potion) {
 		antidote = potion;
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
