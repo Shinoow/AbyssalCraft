@@ -32,6 +32,7 @@ import com.shinoow.abyssalcraft.client.render.block.RenderODB;
 import com.shinoow.abyssalcraft.client.render.block.RenderODBc;
 import com.shinoow.abyssalcraft.client.render.block.TileEntityJzaharSpawnerRenderer;
 import com.shinoow.abyssalcraft.client.render.entity.*;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerDreadTentacles;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
 import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
@@ -53,12 +54,11 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.renderer.entity.RenderEntityItem;
-import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -182,10 +182,16 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJzaharSpawner.class, new TileEntityJzaharSpawnerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRendingPedestal.class, new TileEntityPedestalBlockRenderer());
 
-		RenderPlayer render1 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
+		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
+		RenderPlayer render1 = rm.getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
-		RenderPlayer render2 = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim");
+		RenderPlayer render2 = rm.getSkinMap().get("slim");
 		render2.addLayer(new LayerStarSpawnTentacles(render2));
+		//TODO: less special-casing or some way to attach the part to the model of the mob
+//		rm.entityRenderMap.forEach((a,b)-> {
+//			if(EntityLivingBase.class.isAssignableFrom(a))
+//				((RenderLivingBase) b).addLayer(new LayerDreadTentacles((RenderLivingBase) b));
+//		});
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ((ICrystal) stack.getItem()).getColor(stack), InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ICrystal).toArray(Item[]::new));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.elder_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.hastur_engraved_coin, ACItems.jzahar_engraved_coin,
 				ACItems.azathoth_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.shub_niggurath_engraved_coin);

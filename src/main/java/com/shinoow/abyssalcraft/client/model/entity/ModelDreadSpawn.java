@@ -176,14 +176,14 @@ public class ModelDreadSpawn extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		body.render(f5);
-		head.render(f5);
-		thing.render(f5);
-		arm.render(f5);
+		super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
+		body.render(scale);
+		head.render(scale);
+		thing.render(scale);
+		arm.render(scale);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -194,16 +194,16 @@ public class ModelDreadSpawn extends ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity par7Entity)
 	{
-		arm.rotateAngleY = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F;
+		arm.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 2.0F * limbSwingAmount * 0.5F;
 
 		float f15 = 0.02F * (par7Entity.getEntityId() % 10);
 		arm1.rotateAngleY = MathHelper.sin(par7Entity.ticksExisted * f15) * 4.5F * (float)Math.PI / 180.0F;
 		arm2.rotateAngleY = MathHelper.sin(par7Entity.ticksExisted * f15) * 4.5F * (float)Math.PI / 180.0F;
 		arm3.rotateAngleY = MathHelper.sin(par7Entity.ticksExisted * f15) * 4.5F * (float)Math.PI / 180.0F;
-		thing.rotateAngleZ = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
-		head.rotateAngleY = par4 / (180F / (float)Math.PI);
+		thing.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		head.rotateAngleY = netHeadYaw / (180F / (float)Math.PI);
 
 		float f16 = 0.03F;
 		t1.rotateAngleZ = MathHelper.cos(par7Entity.ticksExisted * f16) * 4.25F * (float)Math.PI / 180.0F;
