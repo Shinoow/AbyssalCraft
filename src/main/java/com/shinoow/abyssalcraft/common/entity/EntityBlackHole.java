@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -86,8 +87,8 @@ public class EntityBlackHole extends Entity
 					double d4 = posZ + (rand.nextDouble() * 8D - 4D) - entity.posZ;
 					double d5 = d2 * d2 + d3 * d3 + d4 * d4;
 					entity.addVelocity(d2 / d5 * d1 * speed, d3 / d5 * d1 * speed, d4 / d5 * d1 * speed);
-					//					if (entity.getDistanceSq(this) <= 36D && shootingEntity != null)
-					//						entity.attackEntityFrom(DamageSource.OUT_OF_WORLD, 4.0F);
+					if (ACConfig.hardcoreMode && entity.getDistanceSq(this) <= 36D && shootingEntity != null)
+						entity.attackEntityFrom(DamageSource.OUT_OF_WORLD, 4.0F);
 					if (entity.getDistanceSq(this) <= 9D && shootingEntity != null && !world.isRemote){
 
 						EntityLivingBase livingBase = (EntityLivingBase)entity;
@@ -126,14 +127,16 @@ public class EntityBlackHole extends Entity
 							}
 						} else livingBase.timeUntilPortal = livingBase.getPortalCooldown();
 
-						//						((EntityLivingBase)entity).setHealth(((EntityLivingBase)entity).getHealth() - 20F);
-						//						entity.attackEntityFrom(DamageSource.CRAMMING.setDamageAllowedInCreativeMode().setDamageBypassesArmor().setDamageIsAbsolute(), 50F);
+						if(ACConfig.hardcoreMode) {
+							((EntityLivingBase)entity).setHealth(((EntityLivingBase)entity).getHealth() - 20F);
+							entity.attackEntityFrom(DamageSource.CRAMMING.setDamageAllowedInCreativeMode().setDamageBypassesArmor().setDamageIsAbsolute(), 50F);
 
-						//						if (!entity.isEntityAlive()){
-						//							if (entity instanceof EntityLiving)
-						//								((EntityLiving)entity).spawnExplosionParticle();
-						//							entity.setDead();
-						//						}
+							if (!entity.isEntityAlive()){
+								if (entity instanceof EntityLiving)
+									((EntityLiving)entity).spawnExplosionParticle();
+								entity.setDead();
+							}
+						}
 					}
 				} else if (!(entity instanceof EntityBlackHole) && !(entity instanceof EntityImplosion)){
 					double d1 = 7D;

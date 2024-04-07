@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 
 import net.minecraft.block.material.EnumPushReaction;
@@ -64,6 +65,7 @@ public class EntityImplosion extends Entity
 	@Override
 	public void onUpdate()
 	{
+		int multiplier = ACConfig.hardcoreMode ? 2 : 1;
 		prevPosX = posX;
 		prevPosY = posY;
 		prevPosZ = posZ;
@@ -85,11 +87,11 @@ public class EntityImplosion extends Entity
 				Vec3d dir = new Vec3d(entity.posX - posX, entity.posY - posY, entity.posZ - posZ);
 				dir = dir.normalize();
 				if (entity.isEntityAlive() && !(entity instanceof IOmotholEntity))
-					//					if (entity.getDistanceSq(this) <= 25D)
-					//					{
-					//						entity.hurtResistantTime = 0;
-					//						entity.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 100F);
-					//					}
+					if (ACConfig.hardcoreMode && entity.getDistanceSq(this) <= 25D)
+					{
+						entity.hurtResistantTime = 0;
+						entity.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 100F);
+					}
 					entity.addVelocity(dir.x * 2.5D * scale, 1.5D + rand.nextDouble(), dir.z * 2.5D * scale);
 			}
 
@@ -108,7 +110,7 @@ public class EntityImplosion extends Entity
 			{
 				entity.addVelocity(dir.x * -ticksExisted * 0.0005D * scale, dir.y * -ticksExisted * 0.0005D * scale, dir.z * -ticksExisted * 0.0005D * scale);
 				if (entity.getDistanceSq(this) <= 4D)
-					entity.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4F);
+					entity.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 4F * multiplier);
 			}
 		}
 

@@ -49,12 +49,11 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
-import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("deprecation")
-@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
+//@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
 public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
@@ -69,6 +68,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	private final BossInfoServer bossInfo = (BossInfoServer)new BossInfoServer(getDisplayName(), BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS).setDarkenSky(true);
 	private boolean that = false;
 	private boolean doShout;
+	private boolean heh;
 
 	private EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 0.35D, true);
 	private EntityAIAttackRanged aiArrowAttack = new EntityAIAttackRanged(this, 0.4D, 40, 20.0F);
@@ -154,7 +154,8 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	}
 
 	public void decrementTimer(int timer){
-		setTimer(timer, getTimer(timer)-1);
+		int decrement = ACConfig.hardcoreMode ? 2 : 1;
+		setTimer(timer, getTimer(timer)-decrement);
 	}
 
 	@Override
@@ -194,6 +195,26 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	public boolean isNonBoss()
 	{
 		return false;
+	}
+
+	@Override
+	public void setDead()
+	{
+		if(ACConfig.hardcoreMode) { //hardcore mode bs goes here
+			if(!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+				if(this.getHealth() <= 0 && deathTicks > 0) { //not auto-killed in peaceful
+					this.isDead = true;
+				} else if(!heh) {
+					SpecialTextUtil.JzaharGroup(getEntityWorld(), "Haha, no. You're not playing fair, and neither will I!");
+					SpecialTextUtil.JzaharGroup(getEntityWorld(), "Disabling 'Hardcore Mode' now will remove me, however.");
+					heh = true;
+				}
+			} else {
+				this.isDead = true;
+			}
+		} else {
+			this.isDead = true;
+		}
 	}
 
 	@Override
@@ -342,6 +363,8 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	@Override
 	public void onLivingUpdate()
 	{
+		int multiplier = ACConfig.hardcoreMode ? 2 : 1;
+		
 		if(talkTimer > 0)
 			talkTimer--;
 		if(iframes > 0)
@@ -444,7 +467,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 						if (rand.nextInt(5) == 0)
 						{
 							entity.motionY = 0.5D;
-							entity.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
+							entity.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F * multiplier);
 						}
 					}
 
@@ -486,12 +509,12 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 							dy *= velocity * 0.25D;
 							dz *= velocity;
 							entity.addVelocity(dx, dy, dz);
-							entity.attackEntityFrom(DamageSource.FLY_INTO_WALL, 2F * (float)velocity);
+							entity.attackEntityFrom(DamageSource.FLY_INTO_WALL, 2F * (float)velocity * multiplier);
 						}
 				}
 			}
 
-			if (getTimer(0) < 0 && rand.nextInt(400) == 0 && getAttackTarget() != null && getAttackTarget().onGround && getTimer(4) < 0)
+			if (getTimer(0) < 0 && rand.nextInt(400/multiplier) == 0 && getAttackTarget() != null && getAttackTarget().onGround && getTimer(4) < 0)
 			{
 				swingArm(EnumHand.MAIN_HAND);
 				setTimer(0, 1000);
