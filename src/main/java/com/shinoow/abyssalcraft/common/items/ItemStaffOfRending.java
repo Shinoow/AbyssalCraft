@@ -20,7 +20,6 @@ import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.StaffOfRendingMessage;
 import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 import net.minecraft.client.resources.I18n;
@@ -36,12 +35,15 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class ItemStaffOfRending extends ItemMetadata implements IStaffOfRending {
+public class ItemStaffOfRending extends ItemACBasic implements IStaffOfRending {
 
-	public ItemStaffOfRending(){
-		super("drainstaff", "normal", "aw", "dl", "omt");
+	private int tier;
+	
+	public ItemStaffOfRending(String name, int tier){
+		super(name);
 		setCreativeTab(ACTabs.tabTools);
 		setMaxStackSize(1);
+		this.tier = tier;
 	}
 
 	@Override
@@ -94,7 +96,7 @@ public class ItemStaffOfRending extends ItemMetadata implements IStaffOfRending 
 
 	@Override
 	public int getDrainAmount(ItemStack stack){
-		return stack.getItemDamage() + 1 + MathHelper.clamp(EnchantmentHelper.getEnchantmentLevel(AbyssalCraftAPI.sapping, stack), 0, 3);
+		return tier + 1 + MathHelper.clamp(EnchantmentHelper.getEnchantmentLevel(AbyssalCraftAPI.sapping, stack), 0, 3);
 	}
 
 	@Override
@@ -119,6 +121,6 @@ public class ItemStaffOfRending extends ItemMetadata implements IStaffOfRending 
 	@Override
 	public int getItemEnchantability(ItemStack stack)
 	{
-		return 5 * (stack.getItemDamage() + 1);
+		return 5 * (tier + 1);
 	}
 }

@@ -221,7 +221,10 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.ethaxium_shovel = new ItemACShovel(AbyssalCraftAPI.ethaxiumTool, "ethaxiumshovel", 8, TextFormatting.AQUA);
 		ACItems.ethaxium_sword = new ItemACSword(AbyssalCraftAPI.ethaxiumTool, "ethaxiumsword", TextFormatting.AQUA);
 		ACItems.ethaxium_hoe = new ItemACHoe(AbyssalCraftAPI.ethaxiumTool, "ethaxiumhoe", TextFormatting.AQUA);
-		ACItems.staff_of_rending = new ItemStaffOfRending().setUnlockCondition(new MultiEntityCondition("abyssalcraft:shadowcreature", "abyssalcraft:shadowmonster","abyssalcraft:shadowbeast"));
+		ACItems.staff_of_rending = new ItemStaffOfRending("drainstaff.normal", 0);
+		ACItems.abyssal_wasteland_staff_of_rending = new ItemStaffOfRending("drainstaff.aw", 1);
+		ACItems.dreadlands_staff_of_rending = new ItemStaffOfRending("drainstaff.dl", 2);
+		ACItems.omothol_staff_of_rending = new ItemStaffOfRending("drainstaff.omt", 3);
 		ACItems.configurator = new ItemConfigurator();
 
 		//Armor
@@ -411,6 +414,9 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.shadow_shoggoth_flesh, "shoggothflesh_shadow");
 		registerItem(ACItems.ingot_nugget, "ingotnugget");
 		registerItem(ACItems.staff_of_rending, "drainstaff");
+		registerItem(ACItems.abyssal_wasteland_staff_of_rending, "drainstaff_aw");
+		registerItem(ACItems.dreadlands_staff_of_rending, "drainstaff_dl");
+		registerItem(ACItems.omothol_staff_of_rending, "drainstaff_omt");
 		registerItem(ACItems.essence, "essence");
 		registerItem(ACItems.skin, "skin");
 		registerItem(ACItems.ritual_charm, "charm");

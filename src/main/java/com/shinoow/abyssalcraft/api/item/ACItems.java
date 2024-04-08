@@ -179,8 +179,10 @@ public class ACItems {
 	public static Item shadow_shoggoth_flesh;
 	/** Metadata Item, 0 = Abyssalnite, 1 = Refined Coralium, 2 = Dreadium, 3 = Ethaxium */
 	public static Item ingot_nugget;
-	/** Metadata Item, 0 = Normal, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
 	public static Item staff_of_rending;
+	public static Item abyssal_wasteland_staff_of_rending;
+	public static Item dreadlands_staff_of_rending;
+	public static Item omothol_staff_of_rending;
 	/** Metadata Item, 0 = Abyssal Wasteland, 1 = Dreadlands, 2 = Omothol */
 	public static Item essence;
 	/** Metadata Item, 0 = Abyssal Wasteland, 1 = Dreadlands, 2 = Omothol */

@@ -425,7 +425,6 @@ public class AbyssalCraftClientEventHooks {
 		ModelBakery.registerItemVariants(ACItems.skin, makerl("skin_abyssalwasteland", "skin_dreadlands", "skin_omothol"));
 		ModelBakery.registerItemVariants(ACItems.ritual_charm, makerl("ritualcharm_empty", "ritualcharm_range", "ritualcharm_duration", "ritualcharm_power"));
 		ModelBakery.registerItemVariants(ACItems.ingot_nugget, makerl("nugget_abyssalnite", "nugget_coralium", "nugget_dreadium", "nugget_ethaxium"));
-		ModelBakery.registerItemVariants(ACItems.staff_of_rending, makerl("drainstaff", "drainstaff_aw", "drainstaff_dl", "drainstaff_omt"));
 		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
 
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
@@ -632,10 +631,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.ingot_nugget, 1, "nugget_coralium");
 		registerItemRender(ACItems.ingot_nugget, 2, "nugget_dreadium");
 		registerItemRender(ACItems.ingot_nugget, 3, "nugget_ethaxium");
-		registerItemRender(ACItems.staff_of_rending, 0, "drainstaff");
-		registerItemRender(ACItems.staff_of_rending, 1, "drainstaff_aw");
-		registerItemRender(ACItems.staff_of_rending, 2, "drainstaff_dl");
-		registerItemRender(ACItems.staff_of_rending, 3, "drainstaff_omt");
+		registerItemRender(ACItems.staff_of_rending, 0);
+		registerItemRender(ACItems.abyssal_wasteland_staff_of_rending, 0);
+		registerItemRender(ACItems.dreadlands_staff_of_rending, 0);
+		registerItemRender(ACItems.omothol_staff_of_rending, 0);
 		registerItemRender(ACItems.essence, 0, "essence_abyssalwasteland");
 		registerItemRender(ACItems.essence, 1, "essence_dreadlands");
 		registerItemRender(ACItems.essence, 2, "essence_omothol");

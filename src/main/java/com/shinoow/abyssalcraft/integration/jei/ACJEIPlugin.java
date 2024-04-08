@@ -67,10 +67,10 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipeCatalyst(new ItemStack(ACItems.dreadlands_necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.omothol_necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.abyssalnomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
-		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_rending, 1, 0), AbyssalCraftRecipeCategoryUid.RENDING);
-		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_rending, 1, 1), AbyssalCraftRecipeCategoryUid.RENDING);
-		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_rending, 1, 2), AbyssalCraftRecipeCategoryUid.RENDING);
-		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_rending, 1, 3), AbyssalCraftRecipeCategoryUid.RENDING);
+		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_rending), AbyssalCraftRecipeCategoryUid.RENDING);
+		registry.addRecipeCatalyst(new ItemStack(ACItems.abyssal_wasteland_staff_of_rending), AbyssalCraftRecipeCategoryUid.RENDING);
+		registry.addRecipeCatalyst(new ItemStack(ACItems.dreadlands_staff_of_rending), AbyssalCraftRecipeCategoryUid.RENDING);
+		registry.addRecipeCatalyst(new ItemStack(ACItems.omothol_staff_of_rending), AbyssalCraftRecipeCategoryUid.RENDING);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_the_gatekeeper), AbyssalCraftRecipeCategoryUid.RENDING);
 		registry.addRecipeCatalyst(new ItemStack(ACBlocks.materializer), AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
 

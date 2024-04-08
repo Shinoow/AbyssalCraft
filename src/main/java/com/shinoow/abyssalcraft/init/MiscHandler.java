@@ -812,7 +812,10 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.ethaxium_shovel, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.ethaxium_sword, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.ethaxium_hoe, UnlockConditions.OMOTHOL);
-		//staff of rending go brrr?
+		addCondition(ACItems.staff_of_rending, UnlockConditions.DARKLANDS_BIOME);
+		addCondition(ACItems.abyssal_wasteland_staff_of_rending, UnlockConditions.DARKLANDS_BIOME);
+		addCondition(ACItems.dreadlands_staff_of_rending, UnlockConditions.DARKLANDS_BIOME);
+		addCondition(ACItems.omothol_staff_of_rending, UnlockConditions.DARKLANDS_BIOME);
 		addCondition(ACItems.configurator, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.abyssalnite_helmet, UnlockConditions.DARKLANDS_BIOME);
 		addCondition(ACItems.abyssalnite_chestplate, UnlockConditions.DARKLANDS_BIOME);
