@@ -6,7 +6,7 @@
             "entries": [
                 {
                     "type": "item",
-                    "name": "abyssalcraft:shoggothflesh",
+                    "name": "abyssalcraft:shoggothflesh_overworld",
                     "weight": 1,
                     "functions": [
                         {
@@ -22,11 +22,7 @@
                                 "min": 0,
                                 "max": 1
                             }
-                        },
-						{
-							"function": "set_data",
-							"data": 0
-						}
+                        }
                     ]
                 }
             ]

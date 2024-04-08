@@ -63,7 +63,11 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.tin_ingot = new ItemACBasic("tiningot");
 		ACItems.copper_ingot = new ItemACBasic("copperingot");
 		ACItems.life_crystal = new ItemACBasic("lifecrystal");
-		ACItems.shoggoth_flesh = new ItemMetadata("shoggothflesh", "overworld", "abyssalwasteland", "dreadlands", "omothol", "darkrealm");
+		ACItems.overworld_shoggoth_flesh = new ItemACBasic("shoggothflesh.overworld");
+		ACItems.abyssal_shoggoth_flesh = new ItemACBasic("shoggothflesh.abyssalwasteland");
+		ACItems.dreaded_shoggoth_flesh = new ItemACBasic("shoggothflesh.dreadlands");
+		ACItems.omothol_shoggoth_flesh = new ItemACBasic("shoggothflesh.omothol");
+		ACItems.shadow_shoggoth_flesh = new ItemACBasic("shoggothflesh.darkrealm");
 		ACItems.eldritch_scale = new ItemACBasic("eldritchscale");
 		ACItems.omothol_flesh = new ItemOmotholFlesh(3, 0.3F, false);
 		ACItems.necronomicon = new ItemNecronomicon("necronomicon", 0);
@@ -400,7 +404,11 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.medium_crystal_bag, "crystalbag_medium");
 		registerItem(ACItems.large_crystal_bag, "crystalbag_large");
 		registerItem(ACItems.huge_crystal_bag, "crystalbag_huge");
-		registerItem(ACItems.shoggoth_flesh, "shoggothflesh");
+		registerItem(ACItems.overworld_shoggoth_flesh, "shoggothflesh_overworld");
+		registerItem(ACItems.abyssal_shoggoth_flesh, "shoggothflesh_abyssal");
+		registerItem(ACItems.dreaded_shoggoth_flesh, "shoggothflesh_dreaded");
+		registerItem(ACItems.omothol_shoggoth_flesh, "shoggothflesh_omothol");
+		registerItem(ACItems.shadow_shoggoth_flesh, "shoggothflesh_shadow");
 		registerItem(ACItems.ingot_nugget, "ingotnugget");
 		registerItem(ACItems.staff_of_rending, "drainstaff");
 		registerItem(ACItems.essence, "essence");

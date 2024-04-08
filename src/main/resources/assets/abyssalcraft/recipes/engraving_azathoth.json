@@ -2,27 +2,22 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "abyssalcraft:shoggothflesh",
-      "data": 0
+      "item": "abyssalcraft:shoggothflesh_overworld"
     },
     {
       "item": "abyssalcraft:engraving_elder"
     },
     {
-      "item": "abyssalcraft:shoggothflesh",
-      "data": 1
+      "item": "abyssalcraft:shoggothflesh_abyssal"
     },
     {
-      "item": "abyssalcraft:shoggothflesh",
-      "data": 2
+      "item": "abyssalcraft:shoggothflesh_dreaded"
     },
     {
-      "item": "abyssalcraft:shoggothflesh",
-      "data": 3
+      "item": "abyssalcraft:shoggothflesh_omothol"
     },
     {
-      "item": "abyssalcraft:shoggothflesh",
-      "data": 4
+      "item": "abyssalcraft:shoggothflesh_shadow"
     }
   ],
   "result": {

@@ -9,8 +9,7 @@
       "item": "abyssalcraft:engraving_elder"
     },
     "%": {
-      "item": "abyssalcraft:shoggothflesh",
-      "data": 1
+      "item": "abyssalcraft:shoggothflesh_abyssal"
     }
   },
   "result": {

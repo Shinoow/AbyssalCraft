@@ -421,8 +421,6 @@ public class AbyssalCraftClientEventHooks {
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event){
 
-		ModelBakery.registerItemVariants(ACItems.shoggoth_flesh, makerl("shoggothflesh_overworld", "shoggothflesh_abyssalwasteland",
-				"shoggothflesh_dreadlands", "shoggothflesh_omothol", "shoggothflesh_darkrealm"));
 		ModelBakery.registerItemVariants(ACItems.essence, makerl("essence_abyssalwasteland", "essence_dreadlands", "essence_omothol"));
 		ModelBakery.registerItemVariants(ACItems.skin, makerl("skin_abyssalwasteland", "skin_dreadlands", "skin_omothol"));
 		ModelBakery.registerItemVariants(ACItems.ritual_charm, makerl("ritualcharm_empty", "ritualcharm_range", "ritualcharm_duration", "ritualcharm_power"));
@@ -625,11 +623,11 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.medium_crystal_bag, 0);
 		registerItemRender(ACItems.large_crystal_bag, 0);
 		registerItemRender(ACItems.huge_crystal_bag, 0);
-		registerItemRender(ACItems.shoggoth_flesh, 0, "shoggothflesh_overworld");
-		registerItemRender(ACItems.shoggoth_flesh, 1, "shoggothflesh_abyssalwasteland");
-		registerItemRender(ACItems.shoggoth_flesh, 2, "shoggothflesh_dreadlands");
-		registerItemRender(ACItems.shoggoth_flesh, 3, "shoggothflesh_omothol");
-		registerItemRender(ACItems.shoggoth_flesh, 4, "shoggothflesh_darkrealm");
+		registerItemRender(ACItems.overworld_shoggoth_flesh, 0, "shoggothflesh_overworld");
+		registerItemRender(ACItems.abyssal_shoggoth_flesh, 0, "shoggothflesh_abyssalwasteland");
+		registerItemRender(ACItems.dreaded_shoggoth_flesh, 0, "shoggothflesh_dreadlands");
+		registerItemRender(ACItems.omothol_shoggoth_flesh, 0, "shoggothflesh_omothol");
+		registerItemRender(ACItems.shadow_shoggoth_flesh, 0, "shoggothflesh_darkrealm");
 		registerItemRender(ACItems.ingot_nugget, 0, "nugget_abyssalnite");
 		registerItemRender(ACItems.ingot_nugget, 1, "nugget_coralium");
 		registerItemRender(ACItems.ingot_nugget, 2, "nugget_dreadium");

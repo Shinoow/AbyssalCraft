@@ -172,8 +172,11 @@ public class ACItems {
 	public static Item medium_crystal_bag;
 	public static Item large_crystal_bag;
 	public static Item huge_crystal_bag;
-	/** Metadata Item, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol, 4 = Dark Realm */
-	public static Item shoggoth_flesh;
+	public static Item overworld_shoggoth_flesh;
+	public static Item abyssal_shoggoth_flesh;
+	public static Item dreaded_shoggoth_flesh;
+	public static Item omothol_shoggoth_flesh;
+	public static Item shadow_shoggoth_flesh;
 	/** Metadata Item, 0 = Abyssalnite, 1 = Refined Coralium, 2 = Dreadium, 3 = Ethaxium */
 	public static Item ingot_nugget;
 	/** Metadata Item, 0 = Normal, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */

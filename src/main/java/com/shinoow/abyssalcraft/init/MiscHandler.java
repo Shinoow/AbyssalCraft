@@ -709,7 +709,10 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.dense_carbon_cluster, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.rlyehian_gateway_key, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.life_crystal, UnlockConditions.DREADLANDS);
-		//shoggoth flesh goes brrr?
+		addCondition(ACItems.abyssal_shoggoth_flesh, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACItems.dreaded_shoggoth_flesh, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.omothol_shoggoth_flesh, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.shadow_shoggoth_flesh, UnlockConditions.DARK_REALM);
 		addCondition(ACItems.eldritch_scale, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.omothol_flesh, UnlockConditions.OMOTHOL_GHOUL);
 		addCondition(ACItems.abyssal_wasteland_necronomicon, UnlockConditions.ABYSSAL_WASTELAND);
@@ -726,12 +729,11 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.essence_of_the_gatekeeper, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.interdimensional_cage, UnlockConditions.DREADLANDS);
 		//maybe unique scrolls will go brrr?
-		//antidotes go brrr?
 		addCondition(ACItems.configurator_shard_0, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.configurator_shard_1, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.configurator_shard_2, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.configurator_shard_3, UnlockConditions.OMOTHOL);
-		//silver key will go brrr?
+		addCondition(ACItems.silver_key, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.coralium_plague_antidote, UnlockConditions.CORALIUM_PLAGUE);
 		addCondition(ACItems.dread_plague_antidote, UnlockConditions.DREAD_PLAGUE);
 		addCondition(ACItems.book_of_many_faces, UnlockConditions.DREADLANDS);
