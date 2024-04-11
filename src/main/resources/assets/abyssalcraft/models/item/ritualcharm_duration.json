@@ -1,6 +1,6 @@
 {
-	"parent": "item/generated",
+	"parent": "abyssalcraft:item/ritualcharm_empty",
 	"textures": {
-		"layer0": "abyssalcraft:items/ritualcharm_duration"
+		"layer1": "abyssalcraft:items/charms/duration"
 	}
 }

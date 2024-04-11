@@ -1,6 +1,6 @@
 {
-	"parent": "item/generated",
+	"parent": "abyssalcraft:item/charm",
 	"textures": {
-		"layer0": "abyssalcraft:items/charm_cthulhu"
+		"layer1": "abyssalcraft:items/charms/cthulhu"
 	}
 }

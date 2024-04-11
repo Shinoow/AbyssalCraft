@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "abyssalcraft:items/ritualcharm_empty"
+		"layer0": "abyssalcraft:items/charms/ritualcharm"
 	}
 }
