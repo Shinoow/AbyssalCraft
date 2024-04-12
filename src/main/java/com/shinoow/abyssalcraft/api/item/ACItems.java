@@ -187,22 +187,38 @@ public class ACItems {
 	public static Item essence;
 	/** Metadata Item, 0 = Abyssal Wasteland, 1 = Dreadlands, 2 = Omothol */
 	public static Item skin;
-	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
 	public static Item ritual_charm;
-	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item range_ritual_charm;
+	public static Item duration_ritual_charm;
+	public static Item power_ritual_charm;
 	public static Item cthulhu_charm;
-	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item range_cthulhu_charm;
+	public static Item duration_cthulhu_charm;
+	public static Item power_cthulhu_charm;
 	public static Item hastur_charm;
-	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item range_hastur_charm;
+	public static Item duration_hastur_charm;
+	public static Item power_hastur_charm;
 	public static Item jzahar_charm;
-	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item range_jzahar_charm;
+	public static Item duration_jzahar_charm;
+	public static Item power_jzahar_charm;
 	public static Item azathoth_charm;
-	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item range_azathoth_charm;
+	public static Item duration_azathoth_charm;
+	public static Item power_azathoth_charm;
 	public static Item nyarlathotep_charm;
-	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item range_nyarlathotep_charm;
+	public static Item duration_nyarlathotep_charm;
+	public static Item power_nyarlathotep_charm;
 	public static Item yog_sothoth_charm;
-	/** Metadata Item, 0 = empty, 1 = range, 2 = duration, 3 = power */
+	public static Item range_yog_sothoth_charm;
+	public static Item duration_yog_sothoth_charm;
+	public static Item power_yog_sothoth_charm;
 	public static Item shub_niggurath_charm;
+	public static Item range_shub_niggurath_charm;
+	public static Item duration_shub_niggurath_charm;
+	public static Item power_shub_niggurath_charm;
 	public static Item hastur_engraved_coin;
 	public static Item azathoth_engraved_coin;
 	public static Item nyarlathotep_engraved_coin;

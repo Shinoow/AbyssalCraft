@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
 import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;

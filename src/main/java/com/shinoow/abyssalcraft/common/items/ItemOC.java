@@ -16,6 +16,7 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.UnlockConditions;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

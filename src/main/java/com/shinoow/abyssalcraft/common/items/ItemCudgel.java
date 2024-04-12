@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import com.google.common.collect.Multimap;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

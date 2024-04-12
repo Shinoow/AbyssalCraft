@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.items;
+package com.shinoow.abyssalcraft.lib.item;
 
 import javax.annotation.Nullable;
 
@@ -20,25 +20,30 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemACPickaxe extends ItemPickaxe implements IUnlockableItem {
+/**
+ * Simple hoe implementation
+ * @author shinoow
+ *
+ */
+public class ItemACHoe extends ItemHoe implements IUnlockableItem {
 
-	private TextFormatting format;
 	private IUnlockCondition condition = new DefaultCondition();
 
-	public ItemACPickaxe(ToolMaterial mat, String name, int harvestlevel){
-		this(mat, name, harvestlevel, null);
+	private TextFormatting format;
+
+	public ItemACHoe(ToolMaterial mat, String name){
+		this(mat, name, null);
 	}
 
-	public ItemACPickaxe(ToolMaterial mat, String name, int harvestlevel, TextFormatting format) {
+	public ItemACHoe(ToolMaterial mat, String name, TextFormatting format) {
 		super(mat);
 		setCreativeTab(ACTabs.tabTools);
-		setHarvestLevel("pickaxe", harvestlevel);
 		setTranslationKey(name);
 		this.format = format;
 	}

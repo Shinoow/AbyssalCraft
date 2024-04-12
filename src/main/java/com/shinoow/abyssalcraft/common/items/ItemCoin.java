@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 
 public class ItemCoin extends ItemACBasic {
 

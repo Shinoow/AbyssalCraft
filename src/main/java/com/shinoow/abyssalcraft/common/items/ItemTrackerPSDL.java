@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityPSDLTracker;
+import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

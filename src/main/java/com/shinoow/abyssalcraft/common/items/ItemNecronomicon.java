@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.common.network.client.ShouldSyncMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
+import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 

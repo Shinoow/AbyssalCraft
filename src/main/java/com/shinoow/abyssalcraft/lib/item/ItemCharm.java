@@ -30,34 +30,29 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
- * Basic implementation of an Amplifier Charm (based on metadata)
+ * Basic implementation of an Amplifier Charm
  * @author shinoow
  *
  */
-public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
+public class ItemCharm extends ItemACBasic implements IAmplifierCharm {
 
 	private DeityType deity;
+	private AmplifierType amplifier;
 
-	public ItemCharm(String name, DeityType deity) {
-		super(name, "empty", "range", "duration", "power");
+	public ItemCharm(String name, AmplifierType amplifier) {
+		this(name, amplifier, null);
+	}
+
+	public ItemCharm(String name, AmplifierType amplifier, DeityType deity) {
+		super(name);
+		this.amplifier = amplifier;
 		this.deity = deity;
 	}
 
 	@Override
 	public AmplifierType getAmplifier(ItemStack stack) {
 
-		switch(stack.getItemDamage()){
-		case 0:
-			return null;
-		case 1:
-			return AmplifierType.RANGE;
-		case 2:
-			return AmplifierType.DURATION;
-		case 3:
-			return AmplifierType.POWER;
-		default:
-			return null;
-		}
+		return amplifier;
 	}
 
 	@Override

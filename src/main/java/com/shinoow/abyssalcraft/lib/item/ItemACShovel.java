@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.items;
+package com.shinoow.abyssalcraft.lib.item;
 
 import javax.annotation.Nullable;
 
@@ -26,6 +26,11 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * Simple shovel implementation
+ * @author shinoow
+ *
+ */
 public class ItemACShovel extends ItemSpade implements IUnlockableItem {
 
 	private TextFormatting format;

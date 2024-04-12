@@ -587,55 +587,55 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadLeggings", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_leggings), ACItems.abyssalnite_leggings, dreadofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadBoots", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_boots), ACItems.abyssalnite_boots, dreadofferings));
 		Object[] rcoffers = new Object[]{ACItems.shadow_fragment, Items.ARROW, ACItems.shadow_fragment, Items.ARROW, ACItems.shadow_fragment, Items.ARROW, ACItems.shadow_fragment, Items.ARROW};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("rangeCharm", 0, 100F, new ItemStack(ACItems.ritual_charm, 1, 1), new ItemStack(ACItems.ritual_charm, 1, 0), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("rangeCharm", 0, 100F, new ItemStack(ACItems.range_ritual_charm), new ItemStack(ACItems.ritual_charm), rcoffers));
 		Object[] dcoffers = new Object[]{ACItems.shadow_fragment, Items.REDSTONE, ACItems.shadow_fragment, Items.REDSTONE, ACItems.shadow_fragment, Items.REDSTONE, ACItems.shadow_fragment,
 				Items.REDSTONE};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("durationCharm", 0, 100F, new ItemStack(ACItems.ritual_charm, 1, 2), new ItemStack(ACItems.ritual_charm, 1, 0), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("durationCharm", 0, 100F, new ItemStack(ACItems.duration_ritual_charm), new ItemStack(ACItems.ritual_charm), dcoffers));
 		Object[] pcoffers = new Object[]{ACItems.shadow_fragment, Items.GLOWSTONE_DUST, ACItems.shadow_fragment, Items.GLOWSTONE_DUST, ACItems.shadow_fragment, Items.GLOWSTONE_DUST,
 				ACItems.shadow_fragment, Items.GLOWSTONE_DUST};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerCharm", 0, 100F, new ItemStack(ACItems.ritual_charm, 1, 3), new ItemStack(ACItems.ritual_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("crangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.cthulhu_charm, 1, 1), new ItemStack(ACItems.cthulhu_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.cthulhu_charm, 1, 2), new ItemStack(ACItems.cthulhu_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.cthulhu_charm, 1, 3), new ItemStack(ACItems.cthulhu_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.hastur_charm, 1, 1), new ItemStack(ACItems.hastur_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.hastur_charm, 1, 2), new ItemStack(ACItems.hastur_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.hastur_charm, 1, 3), new ItemStack(ACItems.hastur_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.jzahar_charm, 1, 1), new ItemStack(ACItems.jzahar_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.jzahar_charm, 1, 2), new ItemStack(ACItems.jzahar_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.jzahar_charm, 1, 3), new ItemStack(ACItems.jzahar_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("arangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.azathoth_charm, 1, 1), new ItemStack(ACItems.azathoth_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("adurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.azathoth_charm, 1, 2), new ItemStack(ACItems.azathoth_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("apowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.azathoth_charm, 1, 3), new ItemStack(ACItems.azathoth_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.nyarlathotep_charm, 1, 1), new ItemStack(ACItems.nyarlathotep_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ndurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.nyarlathotep_charm, 1, 2), new ItemStack(ACItems.nyarlathotep_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("npowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.nyarlathotep_charm, 1, 3), new ItemStack(ACItems.nyarlathotep_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.yog_sothoth_charm, 1, 1), new ItemStack(ACItems.yog_sothoth_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ydurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.yog_sothoth_charm, 1, 2), new ItemStack(ACItems.yog_sothoth_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ypowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.yog_sothoth_charm, 1, 3), new ItemStack(ACItems.yog_sothoth_charm, 1, 0), pcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("srangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.shub_niggurath_charm, 1, 1), new ItemStack(ACItems.shub_niggurath_charm, 1, 0), rcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.shub_niggurath_charm, 1, 2), new ItemStack(ACItems.shub_niggurath_charm, 1, 0), dcoffers));
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.shub_niggurath_charm, 1, 3), new ItemStack(ACItems.shub_niggurath_charm, 1, 0), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerCharm", 0, 100F, new ItemStack(ACItems.power_ritual_charm), new ItemStack(ACItems.ritual_charm), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("crangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_cthulhu_charm), new ItemStack(ACItems.cthulhu_charm), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_cthulhu_charm), new ItemStack(ACItems.cthulhu_charm), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_cthulhu_charm), new ItemStack(ACItems.cthulhu_charm), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_hastur_charm), new ItemStack(ACItems.hastur_charm), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_hastur_charm), new ItemStack(ACItems.hastur_charm), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_hastur_charm), new ItemStack(ACItems.hastur_charm), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_jzahar_charm), new ItemStack(ACItems.jzahar_charm), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_jzahar_charm), new ItemStack(ACItems.jzahar_charm), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_jzahar_charm), new ItemStack(ACItems.jzahar_charm), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("arangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_azathoth_charm), new ItemStack(ACItems.azathoth_charm), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("adurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_azathoth_charm), new ItemStack(ACItems.azathoth_charm), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("apowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_azathoth_charm), new ItemStack(ACItems.azathoth_charm), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_nyarlathotep_charm), new ItemStack(ACItems.nyarlathotep_charm), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ndurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_nyarlathotep_charm), new ItemStack(ACItems.nyarlathotep_charm), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("npowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_nyarlathotep_charm), new ItemStack(ACItems.nyarlathotep_charm), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_yog_sothoth_charm), new ItemStack(ACItems.yog_sothoth_charm), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ydurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_yog_sothoth_charm), new ItemStack(ACItems.yog_sothoth_charm), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("ypowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_yog_sothoth_charm), new ItemStack(ACItems.yog_sothoth_charm), pcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("srangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_shub_niggurath_charm), new ItemStack(ACItems.shub_niggurath_charm), rcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("sdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_shub_niggurath_charm), new ItemStack(ACItems.shub_niggurath_charm), dcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_shub_niggurath_charm), new ItemStack(ACItems.shub_niggurath_charm), pcoffers));
 		Object[] ccoffers = new Object[]{ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin,
 				ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cthulhuCharm", 4, 2000F, new ItemStack(ACItems.cthulhu_charm, 1, 0), new ItemStack(ACItems.ritual_charm, 1, 0), ccoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cthulhuCharm", 4, 2000F, new ItemStack(ACItems.cthulhu_charm), new ItemStack(ACItems.ritual_charm), ccoffers));
 		Object[] hcoffers = new Object[]{ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin,
 				ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hasturCharm", 4, 2000F, new ItemStack(ACItems.hastur_charm, 1, 0), new ItemStack(ACItems.ritual_charm, 1, 0), hcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hasturCharm", 4, 2000F, new ItemStack(ACItems.hastur_charm), new ItemStack(ACItems.ritual_charm), hcoffers));
 		Object[] jcoffers = new Object[]{ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin,
 				ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharCharm", 4, 2000F, new ItemStack(ACItems.jzahar_charm, 1, 0), new ItemStack(ACItems.ritual_charm, 1, 0), jcoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharCharm", 4, 2000F, new ItemStack(ACItems.jzahar_charm), new ItemStack(ACItems.ritual_charm), jcoffers));
 		Object[] acoffers = new Object[]{ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin,
 				ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("azathothCharm", 4, 2000F, new ItemStack(ACItems.azathoth_charm, 1, 0), new ItemStack(ACItems.ritual_charm, 1, 0), acoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("azathothCharm", 4, 2000F, new ItemStack(ACItems.azathoth_charm), new ItemStack(ACItems.ritual_charm), acoffers));
 		Object[] ncoffers = new Object[]{ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin,
 				ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nyarlathotepCharm", 4, 2000F, new ItemStack(ACItems.nyarlathotep_charm, 1, 0), new ItemStack(ACItems.ritual_charm, 1, 0), ncoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nyarlathotepCharm", 4, 2000F, new ItemStack(ACItems.nyarlathotep_charm), new ItemStack(ACItems.ritual_charm), ncoffers));
 		Object[] ycoffers = new Object[]{ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin,
 				ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yogsothothCharm", 4, 2000F, new ItemStack(ACItems.yog_sothoth_charm, 1, 0), new ItemStack(ACItems.ritual_charm, 1, 0), ycoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yogsothothCharm", 4, 2000F, new ItemStack(ACItems.yog_sothoth_charm), new ItemStack(ACItems.ritual_charm), ycoffers));
 		Object[] scoffers = new Object[]{ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin,
 				ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathCharm", 4, 2000F, new ItemStack(ACItems.shub_niggurath_charm, 1, 0), new ItemStack(ACItems.ritual_charm, 1, 0), scoffers));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathCharm", 4, 2000F, new ItemStack(ACItems.shub_niggurath_charm), new ItemStack(ACItems.ritual_charm), scoffers));
 		Object[] owoffers = new Object[]{ACItems.shadow_shard, Blocks.COBBLESTONE, ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone), ACItems.shadow_shard, Blocks.COBBLESTONE,
 				ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone)};
 		Object[] awoffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0),

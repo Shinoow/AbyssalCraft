@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.item.ItemACSword;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;

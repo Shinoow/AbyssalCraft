@@ -16,6 +16,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.init.BlockHandler;
+import com.shinoow.abyssalcraft.lib.item.ItemACPickaxe;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
