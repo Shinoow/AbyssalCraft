@@ -136,9 +136,9 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization(ACItems.shadow_shoggoth_flesh, new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.shadow_gem, 1), 0.2F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_fragment, 1, 13), 0.2F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone), new ItemStack(ACItems.crystal_shard, 12, 7), new ItemStack(ACItems.crystal_fragment, 1, 13), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin, 1, 0), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 0), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin, 1, 1), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 1), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin, 1, 2), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 2), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin_of_the_abyssal_wasteland), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 0), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin_of_the_dreadlands), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 1), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin_of_omothol), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 2), 0.2F);
 		AbyssalCraftAPI.addCrystallization(ACItems.dreaded_shard_of_abyssalnite, new ItemStack(ACItems.crystal_shard, 1, 12), new ItemStack(ACItems.crystal_shard, 4, 14), 0.2F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.BONE, new ItemStack(ACItems.crystal_shard, 4, 25), 0.2F);
 		AbyssalCraftAPI.addCrystallization(Items.PRISMARINE_SHARD, new ItemStack(ACItems.crystal_shard, 4, 21), new ItemStack(ACItems.crystal_shard, 4, 27), 0.1F);

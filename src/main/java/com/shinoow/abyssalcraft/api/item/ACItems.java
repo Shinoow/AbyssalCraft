@@ -185,8 +185,9 @@ public class ACItems {
 	public static Item omothol_staff_of_rending;
 	/** Metadata Item, 0 = Abyssal Wasteland, 1 = Dreadlands, 2 = Omothol */
 	public static Item essence;
-	/** Metadata Item, 0 = Abyssal Wasteland, 1 = Dreadlands, 2 = Omothol */
-	public static Item skin;
+	public static Item skin_of_the_abyssal_wasteland;
+	public static Item skin_of_the_dreadlands;
+	public static Item skin_of_omothol;
 	public static Item ritual_charm;
 	public static Item range_ritual_charm;
 	public static Item duration_ritual_charm;

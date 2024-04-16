@@ -29,7 +29,7 @@ public class ItemMetadataMisc extends ItemMetadata {
 
 	@Override
 	public IUnlockCondition getUnlockCondition(ItemStack stack) {
-		if(stack.getItem() == ACItems.skin || stack.getItem() == ACItems.essence)
+		if(stack.getItem() == ACItems.essence)
 			return new DimensionCondition(getDim(stack.getMetadata()));
 		if(stack.getItem() == ACItems.ingot_nugget)
 			switch(stack.getMetadata()){

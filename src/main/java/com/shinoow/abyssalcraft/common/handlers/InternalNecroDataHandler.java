@@ -269,7 +269,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(4, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, NecronomiconText.CRAFTING_SHADOW_GEM_2),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.shard_of_oblivion), NecronomiconText.CRAFTING_SHARD_OF_OBLIVION),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.gateway_key), NecronomiconText.CRAFTING_GATEWAY_KEY),
-				new Page(7, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(new ItemStack(ACItems.skin, 1, 0)), NecronomiconText.CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND_1, UnlockConditions.ABYSSAL_WASTELAND),
+				new Page(7, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(new ItemStack(ACItems.skin_of_the_abyssal_wasteland)), NecronomiconText.CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND_1, UnlockConditions.ABYSSAL_WASTELAND),
 				new Page(8, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.abyssal_wasteland_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_C, UnlockConditions.ABYSSAL_WASTELAND));
 		addPages("overworld", "armortools", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, new CraftingStack(ACItems.staff_of_rending), NecronomiconText.CRAFTING_STAFF_OF_RENDING_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, NecronomiconText.CRAFTING_STAFF_OF_RENDING_2),
@@ -309,7 +309,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(4, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, NecronomiconText.CRAFTING_TRANSMUTATOR_2),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(ACItems.chunk_of_coralium), NecronomiconText.CRAFTING_CORALIUM_CHUNK),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(ACItems.coralium_plate), NecronomiconText.CRAFTING_CORALIUM_PLATE),
-				new Page(7, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(new ItemStack(ACItems.skin, 1, 1)), NecronomiconText.CRAFTING_SKIN_OF_THE_DREADLANDS_1, UnlockConditions.DREADLANDS),
+				new Page(7, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(new ItemStack(ACItems.skin_of_the_dreadlands)), NecronomiconText.CRAFTING_SKIN_OF_THE_DREADLANDS_1, UnlockConditions.DREADLANDS),
 				new Page(8, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(ACItems.dreadlands_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_D, UnlockConditions.DREADLANDS));
 		addPages("abyssalwasteland", "armortools", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.plated_coralium_helmet),
 				NecronomiconText.CRAFTING_PLATED_CORALIUM_HELMET),
@@ -357,7 +357,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(6, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(ACItems.dreadium_plate), NecronomiconText.CRAFTING_DREADIUM_PLATE),
 				new Page(7, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(ACItems.dreadium_katana_hilt), NecronomiconText.CRAFTING_DREADIUM_HILT),
 				new Page(8, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(ACItems.dreadium_katana_blade), NecronomiconText.CRAFTING_DREADIUM_BLADE),
-				new Page(9, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(new ItemStack(ACItems.skin, 1, 2)), NecronomiconText.CRAFTING_SKIN_OF_OMOTHOL_1, UnlockConditions.OMOTHOL),
+				new Page(9, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(new ItemStack(ACItems.skin_of_omothol)), NecronomiconText.CRAFTING_SKIN_OF_OMOTHOL_1, UnlockConditions.OMOTHOL),
 				new Page(10, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(ACItems.omothol_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_O, UnlockConditions.OMOTHOL));
 		addPages("dreadlands", "armortools", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_samurai_helmet),
 				NecronomiconText.CRAFTING_DREADIUM_SAMURAI_HELMET),

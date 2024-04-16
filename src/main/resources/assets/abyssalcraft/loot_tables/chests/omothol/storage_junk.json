@@ -137,7 +137,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "abyssalcraft:skin",
+                    "name": "abyssalcraft:skin_abyssalwasteland",
                     "functions": [
                         {
                             "function": "set_count",
@@ -145,12 +145,19 @@
                                 "min": 1,
                                 "max": 3
                             }
-                        },
+                        }
+                    ],
+                    "weight": 1
+                },
+                {
+                    "type": "item",
+                    "name": "abyssalcraft:skin_dreadlands",
+                    "functions": [
                         {
-                            "function": "set_data",
-                            "data":{
-                                "min": 0,
-                                "max": 1
+                            "function": "set_count",
+                            "count":{
+                                "min": 1,
+                                "max": 3
                             }
                         }
                     ],

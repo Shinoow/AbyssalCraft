@@ -422,7 +422,6 @@ public class AbyssalCraftClientEventHooks {
 	public void registerModels(ModelRegistryEvent event){
 
 		ModelBakery.registerItemVariants(ACItems.essence, makerl("essence_abyssalwasteland", "essence_dreadlands", "essence_omothol"));
-		ModelBakery.registerItemVariants(ACItems.skin, makerl("skin_abyssalwasteland", "skin_dreadlands", "skin_omothol"));
 		ModelBakery.registerItemVariants(ACItems.ingot_nugget, makerl("nugget_abyssalnite", "nugget_coralium", "nugget_dreadium", "nugget_ethaxium"));
 		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
 
@@ -637,9 +636,9 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.essence, 0, "essence_abyssalwasteland");
 		registerItemRender(ACItems.essence, 1, "essence_dreadlands");
 		registerItemRender(ACItems.essence, 2, "essence_omothol");
-		registerItemRender(ACItems.skin, 0, "skin_abyssalwasteland");
-		registerItemRender(ACItems.skin, 1, "skin_dreadlands");
-		registerItemRender(ACItems.skin, 2, "skin_omothol");
+		registerItemRender(ACItems.skin_of_the_abyssal_wasteland, 0);
+		registerItemRender(ACItems.skin_of_the_dreadlands, 0);
+		registerItemRender(ACItems.skin_of_omothol, 0);
 		registerItemRender(ACItems.ritual_charm, 0, "ritualcharm_empty");
 		registerItemRender(ACItems.range_ritual_charm, 0, "ritualcharm_range");
 		registerItemRender(ACItems.duration_ritual_charm, 0, "ritualcharm_duration");
