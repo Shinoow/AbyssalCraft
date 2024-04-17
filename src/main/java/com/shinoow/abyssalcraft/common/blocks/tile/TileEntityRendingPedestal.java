@@ -199,23 +199,23 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 		if(getEnergy(1) >= 100){
 			setEnergy(1, 0);
 			ItemStack output = getStackInSlot(3);
-			if(!output.isEmpty() && output.getItem() == ACItems.essence && output.getItemDamage() == 0)
+			if(!output.isEmpty() && output.getItem() == ACItems.abyssal_wasteland_essence)
 				output.grow(1);
-			else setInventorySlotContents(3, new ItemStack(ACItems.essence, 1, 0));
+			else setInventorySlotContents(3, new ItemStack(ACItems.abyssal_wasteland_essence));
 		}
 		if(getEnergy(2) >= 100){
 			setEnergy(2, 0);
 			ItemStack output = getStackInSlot(4);
-			if(!output.isEmpty() && output.getItem() == ACItems.essence && output.getItemDamage() == 1)
+			if(!output.isEmpty() && output.getItem() == ACItems.dreadlands_essence)
 				output.grow(1);
-			else setInventorySlotContents(4, new ItemStack(ACItems.essence, 1, 1));
+			else setInventorySlotContents(4, new ItemStack(ACItems.dreadlands_essence));
 		}
 		if(getEnergy(3) >= 100){
 			setEnergy(3, 0);
 			ItemStack output = getStackInSlot(5);
-			if(!output.isEmpty() && output.getItem() == ACItems.essence && output.getItemDamage() == 2)
+			if(!output.isEmpty() && output.getItem() == ACItems.omothol_essence)
 				output.grow(1);
-			else setInventorySlotContents(5, new ItemStack(ACItems.essence, 1, 2));
+			else setInventorySlotContents(5, new ItemStack(ACItems.omothol_essence));
 		}
 	}
 

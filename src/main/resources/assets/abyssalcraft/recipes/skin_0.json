@@ -10,8 +10,7 @@
       "item": "abyssalcraft:corflesh"
     },
     "%": {
-      "item": "abyssalcraft:essence",
-      "data": 0
+      "item": "abyssalcraft:essence_abyssalwasteland"
     }
   },
   "result": {

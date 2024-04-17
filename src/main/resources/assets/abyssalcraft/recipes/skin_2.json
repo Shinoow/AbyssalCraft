@@ -10,8 +10,7 @@
       "item": "abyssalcraft:omotholflesh"
     },
     "%": {
-      "item": "abyssalcraft:essence",
-      "data": 2
+      "item": "abyssalcraft:essence_omothol"
     }
   },
   "result": {

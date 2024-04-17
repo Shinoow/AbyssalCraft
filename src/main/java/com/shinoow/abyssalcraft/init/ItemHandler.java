@@ -80,7 +80,9 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.large_crystal_bag = new ItemCrystalBag("crystalbag_large");
 		ACItems.huge_crystal_bag = new ItemCrystalBag("crystalbag_huge");
 		ACItems.ingot_nugget = new ItemMetadataMisc("nugget", "abyssalnite", "coralium", "dreadium", "ethaxium");
-		ACItems.essence = new ItemMetadataMisc("essence", "abyssalwasteland", "dreadlands", "omothol");
+		ACItems.abyssal_wasteland_essence = new ItemACBasic("essence.abyssalwasteland");
+		ACItems.dreadlands_essence = new ItemACBasic("essence.dreadlands");
+		ACItems.omothol_essence = new ItemACBasic("essence.omothol");
 		ACItems.skin_of_the_abyssal_wasteland = new ItemACBasic("skin.abyssalwasteland");
 		ACItems.skin_of_the_dreadlands = new ItemACBasic("skin.dreadlands");
 		ACItems.skin_of_omothol = new ItemACBasic("skin.omothol");
@@ -443,7 +445,9 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.abyssal_wasteland_staff_of_rending, "drainstaff_aw");
 		registerItem(ACItems.dreadlands_staff_of_rending, "drainstaff_dl");
 		registerItem(ACItems.omothol_staff_of_rending, "drainstaff_omt");
-		registerItem(ACItems.essence, "essence");
+		registerItem(ACItems.abyssal_wasteland_essence, "essence_abyssalwasteland");
+		registerItem(ACItems.dreadlands_essence, "essence_dreadlands");
+		registerItem(ACItems.omothol_essence, "essence_omothol");
 		registerItem(ACItems.skin_of_the_abyssal_wasteland, "skin_abyssalwasteland");
 		registerItem(ACItems.skin_of_the_dreadlands, "skin_dreadlands");
 		registerItem(ACItems.skin_of_omothol, "skin_omothol");

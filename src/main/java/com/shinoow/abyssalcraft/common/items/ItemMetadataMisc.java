@@ -29,8 +29,6 @@ public class ItemMetadataMisc extends ItemMetadata {
 
 	@Override
 	public IUnlockCondition getUnlockCondition(ItemStack stack) {
-		if(stack.getItem() == ACItems.essence)
-			return new DimensionCondition(getDim(stack.getMetadata()));
 		if(stack.getItem() == ACItems.ingot_nugget)
 			switch(stack.getMetadata()){
 			case 0:
@@ -43,9 +41,5 @@ public class ItemMetadataMisc extends ItemMetadata {
 				return new DimensionCondition(ACLib.omothol_id);
 			}
 		return super.getUnlockCondition(stack);
-	}
-
-	private int getDim(int meta){
-		return meta == 0 ? ACLib.abyssal_wasteland_id : meta == 1 ? ACLib.dreadlands_id : meta == 2 ? ACLib.omothol_id : 0;
 	}
 }

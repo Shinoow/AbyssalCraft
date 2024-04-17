@@ -421,7 +421,6 @@ public class AbyssalCraftClientEventHooks {
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event){
 
-		ModelBakery.registerItemVariants(ACItems.essence, makerl("essence_abyssalwasteland", "essence_dreadlands", "essence_omothol"));
 		ModelBakery.registerItemVariants(ACItems.ingot_nugget, makerl("nugget_abyssalnite", "nugget_coralium", "nugget_dreadium", "nugget_ethaxium"));
 		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
 
@@ -633,9 +632,9 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.abyssal_wasteland_staff_of_rending, 0);
 		registerItemRender(ACItems.dreadlands_staff_of_rending, 0);
 		registerItemRender(ACItems.omothol_staff_of_rending, 0);
-		registerItemRender(ACItems.essence, 0, "essence_abyssalwasteland");
-		registerItemRender(ACItems.essence, 1, "essence_dreadlands");
-		registerItemRender(ACItems.essence, 2, "essence_omothol");
+		registerItemRender(ACItems.abyssal_wasteland_essence, 0);
+		registerItemRender(ACItems.dreadlands_essence, 0);
+		registerItemRender(ACItems.omothol_essence, 0);
 		registerItemRender(ACItems.skin_of_the_abyssal_wasteland, 0);
 		registerItemRender(ACItems.skin_of_the_dreadlands, 0);
 		registerItemRender(ACItems.skin_of_omothol, 0);

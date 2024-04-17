@@ -10,8 +10,7 @@
       "item": "abyssalcraft:dreadfragment"
     },
     "%": {
-      "item": "abyssalcraft:essence",
-      "data": 1
+      "item": "abyssalcraft:essence_dreadlands"
     }
   },
   "result": {

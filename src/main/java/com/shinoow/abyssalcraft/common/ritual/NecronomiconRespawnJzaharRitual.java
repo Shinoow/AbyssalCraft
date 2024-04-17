@@ -29,10 +29,10 @@ public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 
 	public NecronomiconRespawnJzaharRitual() {
 		super("respawnJzahar", 3, ACLib.omothol_id, 20000F,
-				new Object[]{new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
-						new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
-						new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion,
-						new ItemStack(ACItems.essence, 1, 2), ACItems.shard_of_oblivion});
+				new Object[]{new ItemStack(ACItems.omothol_essence), ACItems.shard_of_oblivion,
+						new ItemStack(ACItems.omothol_essence), ACItems.shard_of_oblivion,
+						new ItemStack(ACItems.omothol_essence), ACItems.shard_of_oblivion,
+						new ItemStack(ACItems.omothol_essence), ACItems.shard_of_oblivion});
 
 	}
 

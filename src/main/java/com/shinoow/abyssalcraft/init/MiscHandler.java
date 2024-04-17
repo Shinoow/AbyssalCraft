@@ -724,7 +724,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.large_crystal_bag, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.huge_crystal_bag, UnlockConditions.DREADLANDS);
 		//nuggets go brrr?
-		//essences go brrr?
+		addCondition(ACItems.abyssal_wasteland_essence, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACItems.dreadlands_essence, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.omothol_essence, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.skin_of_the_abyssal_wasteland, UnlockConditions.ABYSSAL_WASTELAND);
 		addCondition(ACItems.skin_of_the_dreadlands, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.skin_of_omothol, UnlockConditions.OMOTHOL);

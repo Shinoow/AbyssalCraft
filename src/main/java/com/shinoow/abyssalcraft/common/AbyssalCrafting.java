@@ -136,9 +136,9 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addCrystallization(ACItems.shadow_shoggoth_flesh, new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.shadow_gem, 1), 0.2F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.crystal_fragment, 1, 13), 0.2F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone), new ItemStack(ACItems.crystal_shard, 12, 7), new ItemStack(ACItems.crystal_fragment, 1, 13), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin_of_the_abyssal_wasteland), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 0), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin_of_the_dreadlands), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 1), 0.2F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin_of_omothol), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.essence, 1, 2), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin_of_the_abyssal_wasteland), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.abyssal_wasteland_essence), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin_of_the_dreadlands), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.dreadlands_essence), 0.2F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(ACItems.skin_of_omothol), new ItemStack(ACItems.crystal_shard, 8, 7), new ItemStack(ACItems.omothol_essence), 0.2F);
 		AbyssalCraftAPI.addCrystallization(ACItems.dreaded_shard_of_abyssalnite, new ItemStack(ACItems.crystal_shard, 1, 12), new ItemStack(ACItems.crystal_shard, 4, 14), 0.2F);
 		AbyssalCraftAPI.addSingleCrystallization(Items.BONE, new ItemStack(ACItems.crystal_shard, 4, 25), 0.2F);
 		AbyssalCraftAPI.addCrystallization(Items.PRISMARINE_SHARD, new ItemStack(ACItems.crystal_shard, 4, 21), new ItemStack(ACItems.crystal_shard, 4, 27), 0.1F);
@@ -548,39 +548,39 @@ public class AbyssalCrafting {
 				new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spiritTablet", 3, OreDictionary.WILDCARD_VALUE, 5000F, new ItemStack(ACItems.configurator), new ItemStack(ACItems.life_crystal), spiritTabletOfferings));
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.overworld_shoggoth_flesh),
-				new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
-				new ItemStack(ACItems.essence, 1, 2)};
+				new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.abyssal_wasteland_essence), new ItemStack(ACItems.dreadlands_essence),
+				new ItemStack(ACItems.omothol_essence)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("cthulhuStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.cthulhu_statue), new ItemStack(ACBlocks.monolith_stone), cthulhuofferings));
 		Object[] hasturofferings = new Object[]{new ItemStack(ACItems.abyssal_shoggoth_flesh), new ItemStack(ACItems.abyssal_shoggoth_flesh), new ItemStack(ACItems.abyssal_shoggoth_flesh),
-				new ItemStack(ACItems.abyssal_shoggoth_flesh), new ItemStack(ACItems.abyssal_shoggoth_flesh), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
-				new ItemStack(ACItems.essence, 1, 2)};
+				new ItemStack(ACItems.abyssal_shoggoth_flesh), new ItemStack(ACItems.abyssal_shoggoth_flesh), new ItemStack(ACItems.abyssal_wasteland_essence), new ItemStack(ACItems.dreadlands_essence),
+				new ItemStack(ACItems.omothol_essence)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("hasturStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.monolith_stone), hasturofferings));
 		Object[] jzaharofferings = new Object[]{ACItems.eldritch_scale, ACItems.eldritch_scale, ACItems.eldritch_scale, ACItems.eldritch_scale, ACItems.eldritch_scale,
-				new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 2)};
+				new ItemStack(ACItems.abyssal_wasteland_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.omothol_essence)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.monolith_stone), jzaharofferings));
 		Object[] azathothofferings = new Object[]{new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.abyssal_shoggoth_flesh), new ItemStack(ACItems.dreaded_shoggoth_flesh),
-				new ItemStack(ACItems.omothol_shoggoth_flesh), new ItemStack(ACItems.shadow_shoggoth_flesh), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
-				new ItemStack(ACItems.essence, 1, 2)};
+				new ItemStack(ACItems.omothol_shoggoth_flesh), new ItemStack(ACItems.shadow_shoggoth_flesh), new ItemStack(ACItems.abyssal_wasteland_essence), new ItemStack(ACItems.dreadlands_essence),
+				new ItemStack(ACItems.omothol_essence)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("azathothStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.monolith_stone), azathothofferings));
 		Object[] nyarlathotepofferings = new Object[]{new ItemStack(ACItems.dreaded_shoggoth_flesh), new ItemStack(ACItems.dreaded_shoggoth_flesh), new ItemStack(ACItems.dreaded_shoggoth_flesh),
-				new ItemStack(ACItems.dreaded_shoggoth_flesh), new ItemStack(ACItems.dreaded_shoggoth_flesh), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
-				new ItemStack(ACItems.essence, 1, 2)};
+				new ItemStack(ACItems.dreaded_shoggoth_flesh), new ItemStack(ACItems.dreaded_shoggoth_flesh), new ItemStack(ACItems.abyssal_wasteland_essence), new ItemStack(ACItems.dreadlands_essence),
+				new ItemStack(ACItems.omothol_essence)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("nyarlathotepStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.monolith_stone), nyarlathotepofferings));
 		Object[] yogsothothofferings = new Object[]{new ItemStack(ACItems.omothol_shoggoth_flesh), new ItemStack(ACItems.omothol_shoggoth_flesh), new ItemStack(ACItems.omothol_shoggoth_flesh),
-				new ItemStack(ACItems.omothol_shoggoth_flesh), new ItemStack(ACItems.omothol_shoggoth_flesh), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
-				new ItemStack(ACItems.essence, 1, 2)};
+				new ItemStack(ACItems.omothol_shoggoth_flesh), new ItemStack(ACItems.omothol_shoggoth_flesh), new ItemStack(ACItems.abyssal_wasteland_essence), new ItemStack(ACItems.dreadlands_essence),
+				new ItemStack(ACItems.omothol_essence)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("yogsothothStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.yog_sothoth_statue), new ItemStack(ACBlocks.monolith_stone), yogsothothofferings));
 		Object[] shubniggurathofferings = new Object[]{new ItemStack(ACItems.shadow_shoggoth_flesh), new ItemStack(ACItems.shadow_shoggoth_flesh), new ItemStack(ACItems.shadow_shoggoth_flesh),
-				new ItemStack(ACItems.shadow_shoggoth_flesh), new ItemStack(ACItems.shadow_shoggoth_flesh), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
-				new ItemStack(ACItems.essence, 1, 2)};
+				new ItemStack(ACItems.shadow_shoggoth_flesh), new ItemStack(ACItems.shadow_shoggoth_flesh), new ItemStack(ACItems.abyssal_wasteland_essence), new ItemStack(ACItems.dreadlands_essence),
+				new ItemStack(ACItems.omothol_essence)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.shub_niggurath_statue), new ItemStack(ACBlocks.monolith_stone), shubniggurathofferings));
-		Object[] psdlofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1),
-				new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1)};
+		Object[] psdlofferings = new Object[]{new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence),
+				new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerStone", 4, ACLib.dreadlands_id, 5000F, new ItemStack(ACBlocks.dreadlands_infused_powerstone), ACBlocks.coralium_infused_stone, psdlofferings));
 		Object[] ethofferings = new Object[]{ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.life_crystal, ACItems.ethaxium_brick, ACItems.ethaxium_brick};
 		RitualRegistry.instance().registerRitual(new NecronomiconPurgingRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("ethaxiumIngot", 3, ACLib.omothol_id, 1000F, new ItemStack(ACItems.ethaxium_ingot), ethofferings));
-		Object[] dreadofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite,
+		Object[] dreadofferings = new Object[]{new ItemStack(ACItems.dreadlands_essence), ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite,
 				ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadHelmet", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_helmet), ACItems.abyssalnite_helmet, dreadofferings));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("dreadChestplate", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_chestplate), ACItems.abyssalnite_chestplate, dreadofferings));
@@ -652,8 +652,8 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_sacrificial_altar), new ItemStack(ACBlocks.overworld_sacrificial_altar), awoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_sacrificial_altar), new ItemStack(ACBlocks.abyssal_wasteland_sacrificial_altar), dloffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("saOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_sacrificial_altar), new ItemStack(ACBlocks.dreadlands_sacrificial_altar), omtoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
-		Object[] staffofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 2), ACItems.eldritch_scale, ACItems.ethaxium_ingot,
-				ACItems.rlyehian_gateway_key, ACItems.ethaxium_ingot, ACItems.eldritch_scale, new ItemStack(ACItems.essence, 1, 0)};
+		Object[] staffofferings = new Object[]{new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.omothol_essence), ACItems.eldritch_scale, ACItems.ethaxium_ingot,
+				ACItems.rlyehian_gateway_key, ACItems.ethaxium_ingot, ACItems.eldritch_scale, new ItemStack(ACItems.abyssal_wasteland_essence)};
 		String[] tags = {"energyShadow", "energyAbyssal", "energyDread", "energyOmothol", "ench"};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("jzaharStaff", 4, ACLib.omothol_id, 15000F, new ItemStack(ACItems.staff_of_the_gatekeeper), new ItemStack(ACItems.omothol_staff_of_rending), staffofferings).setTags(tags));
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("silverKey", 4, ACLib.omothol_id, 20000F, true, new ItemStack(ACItems.silver_key), new ItemStack(ACItems.rlyehian_gateway_key),
@@ -752,13 +752,13 @@ public class AbyssalCrafting {
 	}
 
 	private static void addRendings() {
-		RendingRegistry.instance().registerRending(new Rending("Abyssal", 100, new ItemStack(ACItems.essence, 1, 0),
+		RendingRegistry.instance().registerRending(new Rending("Abyssal", 100, new ItemStack(ACItems.abyssal_wasteland_essence),
 				e -> e.world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(e) && e.isNonBoss(),
 				"ac.rending.essence_aw", ACLib.abyssal_wasteland_id));
-		RendingRegistry.instance().registerRending(new Rending("Dread", 100, new ItemStack(ACItems.essence, 1, 1),
+		RendingRegistry.instance().registerRending(new Rending("Dread", 100, new ItemStack(ACItems.dreadlands_essence),
 				e -> e.world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(e) && e.isNonBoss(),
 				"ac.rending.essence_dl", ACLib.dreadlands_id));
-		RendingRegistry.instance().registerRending(new Rending("Omothol", 100, new ItemStack(ACItems.essence, 1, 2),
+		RendingRegistry.instance().registerRending(new Rending("Omothol", 100, new ItemStack(ACItems.omothol_essence),
 				e -> e.world.provider.getDimension() == ACLib.omothol_id && e instanceof IOmotholEntity && e.getCreatureAttribute() != AbyssalCraftAPI.SHADOW && e.isNonBoss(),
 				"ac.rending.essence_omt", ACLib.omothol_id));
 		RendingRegistry.instance().registerRending(new Rending("Shadow", 200, new ItemStack(ACItems.shadow_gem),

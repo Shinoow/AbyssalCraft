@@ -183,8 +183,9 @@ public class ACItems {
 	public static Item abyssal_wasteland_staff_of_rending;
 	public static Item dreadlands_staff_of_rending;
 	public static Item omothol_staff_of_rending;
-	/** Metadata Item, 0 = Abyssal Wasteland, 1 = Dreadlands, 2 = Omothol */
-	public static Item essence;
+	public static Item abyssal_wasteland_essence;
+	public static Item dreadlands_essence;
+	public static Item omothol_essence;
 	public static Item skin_of_the_abyssal_wasteland;
 	public static Item skin_of_the_dreadlands;
 	public static Item skin_of_omothol;
