@@ -436,10 +436,10 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("ingotEthaxiumBrick", ACItems.ethaxium_brick);
 		OreDictionary.registerOre("ingotEthaxium", ACItems.ethaxium_ingot);
 		OreDictionary.registerOre("blockEthaxium", new ItemStack(ACBlocks.block_of_ethaxium));
-		OreDictionary.registerOre("nuggetAbyssalnite", new ItemStack(ACItems.ingot_nugget, 1, 0));
-		OreDictionary.registerOre("nuggetLiquifiedCoralium", new ItemStack(ACItems.ingot_nugget, 1, 1));
-		OreDictionary.registerOre("nuggetDreadium", new ItemStack(ACItems.ingot_nugget, 1, 2));
-		OreDictionary.registerOre("nuggetEthaxium", new ItemStack(ACItems.ingot_nugget, 1, 3));
+		OreDictionary.registerOre("nuggetAbyssalnite", new ItemStack(ACItems.abyssalnite_nugget));
+		OreDictionary.registerOre("nuggetLiquifiedCoralium", new ItemStack(ACItems.refined_coralium_nugget));
+		OreDictionary.registerOre("nuggetDreadium", new ItemStack(ACItems.dreadium_nugget));
+		OreDictionary.registerOre("nuggetEthaxium", new ItemStack(ACItems.ethaxium_nugget));
 		OreDictionary.registerOre("blockGlass", ACBlocks.abyssal_sand_glass);
 		OreDictionary.registerOre("coal", ACItems.charcoal);
 		OreDictionary.registerOre("listAllmeatraw", ACItems.generic_meat);
@@ -723,7 +723,10 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.medium_crystal_bag, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.large_crystal_bag, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.huge_crystal_bag, UnlockConditions.DREADLANDS);
-		//nuggets go brrr?
+		addCondition(ACItems.abyssalnite_nugget, UnlockConditions.DARKLANDS_BIOME);
+		addCondition(ACItems.refined_coralium_nugget, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACItems.dreadium_nugget, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.ethaxium_nugget, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.abyssal_wasteland_essence, UnlockConditions.ABYSSAL_WASTELAND);
 		addCondition(ACItems.dreadlands_essence, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.omothol_essence, UnlockConditions.OMOTHOL);

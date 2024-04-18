@@ -421,7 +421,6 @@ public class AbyssalCraftClientEventHooks {
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event){
 
-		ModelBakery.registerItemVariants(ACItems.ingot_nugget, makerl("nugget_abyssalnite", "nugget_coralium", "nugget_dreadium", "nugget_ethaxium"));
 		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
 
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
@@ -624,10 +623,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.dreaded_shoggoth_flesh, 0, "shoggothflesh_dreadlands");
 		registerItemRender(ACItems.omothol_shoggoth_flesh, 0, "shoggothflesh_omothol");
 		registerItemRender(ACItems.shadow_shoggoth_flesh, 0, "shoggothflesh_darkrealm");
-		registerItemRender(ACItems.ingot_nugget, 0, "nugget_abyssalnite");
-		registerItemRender(ACItems.ingot_nugget, 1, "nugget_coralium");
-		registerItemRender(ACItems.ingot_nugget, 2, "nugget_dreadium");
-		registerItemRender(ACItems.ingot_nugget, 3, "nugget_ethaxium");
+		registerItemRender(ACItems.abyssalnite_nugget, 0);
+		registerItemRender(ACItems.refined_coralium_nugget, 0);
+		registerItemRender(ACItems.dreadium_nugget, 0);
+		registerItemRender(ACItems.ethaxium_nugget, 0);
 		registerItemRender(ACItems.staff_of_rending, 0);
 		registerItemRender(ACItems.abyssal_wasteland_staff_of_rending, 0);
 		registerItemRender(ACItems.dreadlands_staff_of_rending, 0);

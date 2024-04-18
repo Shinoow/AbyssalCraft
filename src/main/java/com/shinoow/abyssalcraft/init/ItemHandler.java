@@ -79,7 +79,10 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.medium_crystal_bag = new ItemCrystalBag("crystalbag_medium");
 		ACItems.large_crystal_bag = new ItemCrystalBag("crystalbag_large");
 		ACItems.huge_crystal_bag = new ItemCrystalBag("crystalbag_huge");
-		ACItems.ingot_nugget = new ItemMetadataMisc("nugget", "abyssalnite", "coralium", "dreadium", "ethaxium");
+		ACItems.abyssalnite_nugget = new ItemACBasic("nugget.abyssalnite");
+		ACItems.refined_coralium_nugget = new ItemACBasic("nugget.coralium");
+		ACItems.dreadium_nugget = new ItemACBasic("nugget.dreadium");
+		ACItems.ethaxium_nugget = new ItemACBasic("nugget.ethaxium");
 		ACItems.abyssal_wasteland_essence = new ItemACBasic("essence.abyssalwasteland");
 		ACItems.dreadlands_essence = new ItemACBasic("essence.dreadlands");
 		ACItems.omothol_essence = new ItemACBasic("essence.omothol");
@@ -440,7 +443,10 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.dreaded_shoggoth_flesh, "shoggothflesh_dreaded");
 		registerItem(ACItems.omothol_shoggoth_flesh, "shoggothflesh_omothol");
 		registerItem(ACItems.shadow_shoggoth_flesh, "shoggothflesh_shadow");
-		registerItem(ACItems.ingot_nugget, "ingotnugget");
+		registerItem(ACItems.abyssalnite_nugget, "nugget_abyssalnite");
+		registerItem(ACItems.refined_coralium_nugget, "nugget_coralium");
+		registerItem(ACItems.dreadium_nugget, "nugget_dreadium");
+		registerItem(ACItems.ethaxium_nugget, "nugget_ethaxium");
 		registerItem(ACItems.staff_of_rending, "drainstaff");
 		registerItem(ACItems.abyssal_wasteland_staff_of_rending, "drainstaff_aw");
 		registerItem(ACItems.dreadlands_staff_of_rending, "drainstaff_dl");

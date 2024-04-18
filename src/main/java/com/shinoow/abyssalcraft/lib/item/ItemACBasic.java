@@ -63,12 +63,13 @@ public class ItemACBasic extends Item implements IUnlockableItem {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 		if(this.getTranslationKey().contains("dreadshard") || this.getTranslationKey().contains("dreadchunk") ||
-				this.getTranslationKey().contains("dreadiumingot") || this.getTranslationKey().contains("dreadfragment"))
+				this.getTranslationKey().contains("dreadium") || this.getTranslationKey().contains("dreadfragment"))
 			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
-		else if(this.getTranslationKey().contains("abyingot"))
+		else if(this.getTranslationKey().contains("abyingot") || this.getTranslationKey().contains("abyssalnite"))
 			return TextFormatting.DARK_AQUA + super.getItemStackDisplayName(par1ItemStack);
 		else if(this.getTranslationKey().contains("cpearl") || this.getTranslationKey().contains("cingot")
-				|| this.getTranslationKey().contains("ethaxiumingot"))
+				|| this.getTranslationKey().contains("ethaxiumingot") || this.getTranslationKey().contains("nugget.coralium")
+				|| this.getTranslationKey().contains("nugget.ethaxium"))
 			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 
 		return super.getItemStackDisplayName(par1ItemStack);

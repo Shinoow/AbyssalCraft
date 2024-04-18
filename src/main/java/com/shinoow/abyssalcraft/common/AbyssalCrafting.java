@@ -100,10 +100,10 @@ public class AbyssalCrafting {
 
 		if(ACConfig.smeltingRecipes){
 			addArmorSmelting(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS, new ItemStack(Items.LEATHER));
-			addArmorSmelting(ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots, new ItemStack(ACItems.ingot_nugget, 1, 0));
-			addArmorSmelting(ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots, new ItemStack(ACItems.ingot_nugget, 1, 1));
-			addArmorSmelting(ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots, new ItemStack(ACItems.ingot_nugget, 1, 2));
-			addArmorSmelting(ACItems.ethaxium_helmet, ACItems.ethaxium_chestplate, ACItems.ethaxium_leggings, ACItems.ethaxium_boots, new ItemStack(ACItems.ingot_nugget, 1, 3));
+			addArmorSmelting(ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots, new ItemStack(ACItems.abyssalnite_ingot));
+			addArmorSmelting(ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots, new ItemStack(ACItems.refined_coralium_ingot));
+			addArmorSmelting(ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots, new ItemStack(ACItems.dreadium_ingot));
+			addArmorSmelting(ACItems.ethaxium_helmet, ACItems.ethaxium_chestplate, ACItems.ethaxium_leggings, ACItems.ethaxium_boots, new ItemStack(ACItems.ethaxium_nugget));
 		}
 	}
 
@@ -194,9 +194,9 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addCrystallization("ingotBrass", "crystalCopper", 3, "crystalZinc", 2, 0.5F);
 			AbyssalCraftAPI.addCrystallization("oreBrass", "crystalCopper", 6, "crystalZinc", 4, 0.5F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.GOLD_NUGGET, new ItemStack(ACItems.crystal_shard, 1, 1), 0.1F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.ingot_nugget, 1, 0), new ItemStack(ACItems.crystal_shard, 1, 12), 0.1F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.ingot_nugget, 1, 1), new ItemStack(ACItems.crystal_shard, 1, 13), 0.1F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.ingot_nugget, 1, 2), new ItemStack(ACItems.crystal_shard, 1, 14), 0.1F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.abyssalnite_ingot), new ItemStack(ACItems.crystal_shard, 1, 12), 0.1F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.refined_coralium_ingot), new ItemStack(ACItems.crystal_shard, 1, 13), 0.1F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.dreadium_ingot), new ItemStack(ACItems.crystal_shard, 1, 14), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("nuggetIron", "crystalShardIron", 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("nuggetCopper", "crystalShardCopper", 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("nuggetTin", "crystalShardTin", 0.1F);
@@ -266,9 +266,9 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addCrystallization("ingotBrass", "crystalShardCopper", 12, "crystalShardZinc", 8, 0.5F);
 			AbyssalCraftAPI.addCrystallization("oreBrass", "crystalShardCopper", 12, "crystalShardZinc", 8, 0.5F);
 			AbyssalCraftAPI.addSingleCrystallization(Items.GOLD_NUGGET, new ItemStack(ACItems.crystal_shard, 1, 1), 0.1F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.ingot_nugget, 1, 0), new ItemStack(ACItems.crystal_shard, 1, 12), 0.1F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.ingot_nugget, 1, 1), new ItemStack(ACItems.crystal_shard, 1, 13), 0.1F);
-			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.ingot_nugget, 1, 2), new ItemStack(ACItems.crystal_shard, 1, 14), 0.1F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.abyssalnite_ingot), new ItemStack(ACItems.crystal_shard, 1, 12), 0.1F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.refined_coralium_ingot), new ItemStack(ACItems.crystal_shard, 1, 13), 0.1F);
+			AbyssalCraftAPI.addSingleCrystallization(new ItemStack(ACItems.dreadium_ingot), new ItemStack(ACItems.crystal_shard, 1, 14), 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("nuggetIron", "crystalShardIron", 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("nuggetCopper", "crystalShardCopper", 0.1F);
 			AbyssalCraftAPI.addSingleCrystallization("nuggetTin", "crystalShardTin", 0.1F);
@@ -337,9 +337,9 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addTransmutation("crystalClusterAluminium", "ingotAluminum", 0.2F);
 			AbyssalCraftAPI.addTransmutation("crystalClusterAluminium", "ingotAluminium", 0.2F);
 			AbyssalCraftAPI.addTransmutation("crystalClusterZinc", "ingotZinc", 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal, 1, 12), new ItemStack(ACItems.ingot_nugget, 1, 0), 0.1F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal, 1, 13), new ItemStack(ACItems.ingot_nugget, 1, 1), 0.1F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal, 1, 14), new ItemStack(ACItems.ingot_nugget, 1, 2), 0.1F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal, 1, 12), new ItemStack(ACItems.abyssalnite_ingot), 0.1F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal, 1, 13), new ItemStack(ACItems.refined_coralium_ingot), 0.1F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal, 1, 14), new ItemStack(ACItems.dreadium_ingot), 0.1F);
 			AbyssalCraftAPI.addTransmutation("crystalAluminium", "nuggetAluminum", 0.1F);
 			AbyssalCraftAPI.addTransmutation("crystalAluminium", "nuggetAluminium", 0.1F);
 			AbyssalCraftAPI.addTransmutation("crystalIron", "nuggetIron", 0.2F);
@@ -369,9 +369,9 @@ public class AbyssalCrafting {
 			AbyssalCraftAPI.addTransmutation("crystalAluminium", "ingotAluminum", 0.2F);
 			AbyssalCraftAPI.addTransmutation("crystalAluminium", "ingotAluminium", 0.2F);
 			AbyssalCraftAPI.addTransmutation("crystalZinc", "ingotZinc", 0.2F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal_shard, 1, 12), new ItemStack(ACItems.ingot_nugget, 1, 0), 0.1F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal_shard, 1, 13), new ItemStack(ACItems.ingot_nugget, 1, 1), 0.1F);
-			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal_shard, 1, 14), new ItemStack(ACItems.ingot_nugget, 1, 2), 0.1F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal_shard, 1, 12), new ItemStack(ACItems.abyssalnite_ingot), 0.1F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal_shard, 1, 13), new ItemStack(ACItems.refined_coralium_ingot), 0.1F);
+			AbyssalCraftAPI.addTransmutation(new ItemStack(ACItems.crystal_shard, 1, 14), new ItemStack(ACItems.dreadium_ingot), 0.1F);
 			AbyssalCraftAPI.addTransmutation("crystalShardAluminium", "nuggetAluminum", 0.1F);
 			AbyssalCraftAPI.addTransmutation("crystalShardAluminium", "nuggetAluminium", 0.1F);
 			AbyssalCraftAPI.addTransmutation("crystalShardIron", "nuggetIron", 0.2F);
