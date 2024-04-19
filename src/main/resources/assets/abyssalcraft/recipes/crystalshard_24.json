@@ -5,13 +5,11 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystal",
-      "data": 24
+      "item": "abyssalcraft:zinc_crystal"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 24,
+    "item": "abyssalcraft:zinc_crystal_shard",
     "count": 9
   }
 }

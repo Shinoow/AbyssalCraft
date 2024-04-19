@@ -109,16 +109,62 @@ public class ACItems {
 	public static Item methane;
 	public static Item nitre;
 	public static Item sulfur;
-	/** Metadata Item, 0 = Iron, 1 = Gold, 2 = Sulfur, 3 = Carbon, 4 = Oxygen, 5 = Hydrogen, 6 = Nitrogen, 7 = Phosphorus,
-	 * 8 = Potassium, 9 = Nitrate, 10 = Methane, 11 = Redstone, 12 = Abyssalnite, 13 = Coralium, 14 = Dreadium, 15 = Blaze,
-	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia,
-	 * 24 = Zinc, 25 = Calcium, 26 = Beryllium, 27 = Beryl */
-	public static Item crystal;
-	/** Metadata Item, 0 = Iron, 1 = Gold, 2 = Sulfur, 3 = Carbon, 4 = Oxygen, 5 = Hydrogen, 6 = Nitrogen, 7 = Phosphorus,
-	 * 8 = Potassium, 9 = Nitrate, 10 = Methane, 11 = Redstone, 12 = Abyssalnite, 13 = Coralium, 14 = Dreadium, 15 = Blaze,
-	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia,
-	 * 24 = Zinc, 25 = Calcium, 26 = Beryllium, 27 = Beryl */
-	public static Item crystal_shard;
+	public static Item crystal_iron;
+	public static Item crystal_gold;
+	public static Item crystal_sulfur;
+	public static Item crystal_carbon;
+	public static Item crystal_oxygen;
+	public static Item crystal_hydrogen;
+	public static Item crystal_nitrogen;
+	public static Item crystal_phosphorus;
+	public static Item crystal_potassium;
+	public static Item crystal_nitrate;
+	public static Item crystal_methane;
+	public static Item crystal_redstone;
+	public static Item crystal_abyssalnite;
+	public static Item crystal_coralium;
+	public static Item crystal_dreadium;
+	public static Item crystal_blaze;
+	public static Item crystal_tin;
+	public static Item crystal_copper;
+	public static Item crystal_silicon;
+	public static Item crystal_magnesium;
+	public static Item crystal_aluminium;
+	public static Item crystal_silica;
+	public static Item crystal_alumina;
+	public static Item crystal_magnesia;
+	public static Item crystal_zinc;
+	public static Item crystal_calcium;
+	public static Item crystal_beryllium;
+	public static Item crystal_beryl;
+	public static Item crystal_shard_iron;
+	public static Item crystal_shard_gold;
+	public static Item crystal_shard_sulfur;
+	public static Item crystal_shard_carbon;
+	public static Item crystal_shard_oxygen;
+	public static Item crystal_shard_hydrogen;
+	public static Item crystal_shard_nitrogen;
+	public static Item crystal_shard_phosphorus;
+	public static Item crystal_shard_potassium;
+	public static Item crystal_shard_nitrate;
+	public static Item crystal_shard_methane;
+	public static Item crystal_shard_redstone;
+	public static Item crystal_shard_abyssalnite;
+	public static Item crystal_shard_coralium;
+	public static Item crystal_shard_dreadium;
+	public static Item crystal_shard_blaze;
+	public static Item crystal_shard_tin;
+	public static Item crystal_shard_copper;
+	public static Item crystal_shard_silicon;
+	public static Item crystal_shard_magnesium;
+	public static Item crystal_shard_aluminium;
+	public static Item crystal_shard_silica;
+	public static Item crystal_shard_alumina;
+	public static Item crystal_shard_magnesia;
+	public static Item crystal_shard_zinc;
+	public static Item crystal_shard_calcium;
+	public static Item crystal_shard_beryllium;
+	public static Item crystal_shard_beryl;
 	public static Item dread_cloth;
 	public static Item dreadium_plate;
 	public static Item dreadium_katana_blade;
@@ -235,11 +281,34 @@ public class ACItems {
 	public static Item shub_niggurath_engraving;
 	public static Item essence_of_the_gatekeeper;
 	public static Item interdimensional_cage;
-	/** Metadata Item, 0 = Iron, 1 = Gold, 2 = Sulfur, 3 = Carbon, 4 = Oxygen, 5 = Hydrogen, 6 = Nitrogen, 7 = Phosphorus,
-	 * 8 = Potassium, 9 = Nitrate, 10 = Methane, 11 = Redstone, 12 = Abyssalnite, 13 = Coralium, 14 = Dreadium, 15 = Blaze,
-	 * 16 = Tin, 17 = Copper, 18 = Silicon, 19 = Magnesium, 20 = Aluminium, 21 = Silica, 22 = Alumina, 23 = Magnesia,
-	 * 24 = Zinc, 25 = Calcium, 26 = Beryllium, 27 = Beryl */
-	public static Item crystal_fragment;
+	public static Item crystal_fragment_iron;
+	public static Item crystal_fragment_gold;
+	public static Item crystal_fragment_sulfur;
+	public static Item crystal_fragment_carbon;
+	public static Item crystal_fragment_oxygen;
+	public static Item crystal_fragment_hydrogen;
+	public static Item crystal_fragment_nitrogen;
+	public static Item crystal_fragment_phosphorus;
+	public static Item crystal_fragment_potassium;
+	public static Item crystal_fragment_nitrate;
+	public static Item crystal_fragment_methane;
+	public static Item crystal_fragment_redstone;
+	public static Item crystal_fragment_abyssalnite;
+	public static Item crystal_fragment_coralium;
+	public static Item crystal_fragment_dreadium;
+	public static Item crystal_fragment_blaze;
+	public static Item crystal_fragment_tin;
+	public static Item crystal_fragment_copper;
+	public static Item crystal_fragment_silicon;
+	public static Item crystal_fragment_magnesium;
+	public static Item crystal_fragment_aluminium;
+	public static Item crystal_fragment_silica;
+	public static Item crystal_fragment_alumina;
+	public static Item crystal_fragment_magnesia;
+	public static Item crystal_fragment_zinc;
+	public static Item crystal_fragment_calcium;
+	public static Item crystal_fragment_beryllium;
+	public static Item crystal_fragment_beryl;
 	public static Item stone_tablet;
 	public static Item basic_scroll;
 	public static Item lesser_scroll;
@@ -261,5 +330,4 @@ public class ACItems {
 	public static Item book_of_many_faces;
 	public static Item generic_meat;
 	public static Item cooked_generic_meat;
-	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
 }

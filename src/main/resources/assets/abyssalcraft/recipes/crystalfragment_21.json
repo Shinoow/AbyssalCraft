@@ -5,16 +5,13 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 4
+      "item": "abyssalcraft:oxygen_crystal_fragment"
     },
     "%": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 18
+      "item": "abyssalcraft:silicon_crystal_fragment"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalfragment",
-    "data": 21
+    "item": "abyssalcraft:silica_crystal_fragment"
   }
 }

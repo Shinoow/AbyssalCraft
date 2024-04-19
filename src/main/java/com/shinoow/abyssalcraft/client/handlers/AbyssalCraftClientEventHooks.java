@@ -33,9 +33,13 @@ import com.shinoow.abyssalcraft.common.items.ItemConfigurator;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.*;
 import com.shinoow.abyssalcraft.init.BlockHandler;
+import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.item.ItemCrystal;
+import com.shinoow.abyssalcraft.lib.item.ItemCrystalFragment;
+import com.shinoow.abyssalcraft.lib.item.ItemCrystalShard;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -564,8 +568,15 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.methane, 0);
 		registerItemRender(ACItems.nitre, 0);
 		registerItemRender(ACItems.sulfur, 0);
-		registerItemRenders(ACItems.crystal, ACLib.crystalNames.length);
-		registerItemRenders(ACItems.crystal_shard, ACLib.crystalNames.length);
+		InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ItemCrystal).forEach(i -> {
+			if(i instanceof ItemCrystalFragment) {
+				registerItemRender(i, 0, "crystalfragment");
+			} else if(i instanceof ItemCrystalShard) {
+				registerItemRender(i, 0, "crystalshard");
+			} else {
+				registerItemRender(i, 0, "crystal");
+			}
+		});
 		registerItemRender(ACItems.dread_cloth, 0);
 		registerItemRender(ACItems.dreadium_plate, 0);
 		registerItemRender(ACItems.dreadium_katana_blade, 0);
@@ -681,7 +692,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.shub_niggurath_engraving, 0);
 		registerItemRender(ACItems.essence_of_the_gatekeeper, 0);
 		registerItemRender(ACItems.interdimensional_cage, 0);
-		registerItemRenders(ACItems.crystal_fragment, ACLib.crystalNames.length);
 		registerItemRender(ACItems.stone_tablet, 0);
 		registerItemRender(ACItems.basic_scroll, 0);
 		registerItemRender(ACItems.lesser_scroll, 0);

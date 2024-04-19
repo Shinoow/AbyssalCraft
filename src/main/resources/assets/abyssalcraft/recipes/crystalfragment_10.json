@@ -7,16 +7,13 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 5
+      "item": "abyssalcraft:hydrogen_crystal_fragment"
     },
     "%": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 3
+      "item": "abyssalcraft:carbon_crystal_fragment"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalfragment",
-    "data": 10
+    "item": "abyssalcraft:methane_crystal_fragment"
   }
 }

@@ -7,12 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 4
+      "item": "abyssalcraft:oxygen_crystal_shard"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystal",
-    "data": 4
+    "item": "abyssalcraft:oxygen_crystal"
   }
 }

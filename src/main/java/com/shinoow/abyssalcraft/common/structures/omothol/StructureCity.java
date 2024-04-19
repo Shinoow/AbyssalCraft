@@ -17,8 +17,8 @@ import java.util.Map.Entry;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrate;
 import com.shinoow.abyssalcraft.common.entity.EntityRemnant;
-import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.Crystals;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IEntityLivingData;
@@ -279,7 +279,7 @@ public class StructureCity extends WorldGenerator {
 	}
 
 	private IBlockState getCrystalCluster(Random rand) {
-		switch(rand.nextInt(ACLib.crystalNames.length)) {
+		switch(rand.nextInt(Crystals.crystalNames.length)) {
 		case 0:
 			return ACBlocks.iron_crystal_cluster.getDefaultState();
 		case 1:

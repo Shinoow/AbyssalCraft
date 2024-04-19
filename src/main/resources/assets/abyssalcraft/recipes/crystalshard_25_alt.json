@@ -7,12 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 25
+      "item": "abyssalcraft:calcium_crystal_fragment"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 25
+    "item": "abyssalcraft:calcium_crystal_shard"
   }
 }

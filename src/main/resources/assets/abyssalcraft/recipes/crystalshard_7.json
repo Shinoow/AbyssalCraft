@@ -5,13 +5,11 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystal",
-      "data": 7
+      "item": "abyssalcraft:phosphorus_crystal"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 7,
+    "item": "abyssalcraft:phosphorus_crystal_shard",
     "count": 9
   }
 }

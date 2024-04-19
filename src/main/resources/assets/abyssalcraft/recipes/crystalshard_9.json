@@ -6,16 +6,13 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 6
+      "item": "abyssalcraft:nitrogen_crystal_shard"
     },
     "%": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 4
+      "item": "abyssalcraft:oxygen_crystal_shard"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 9
+    "item": "abyssalcraft:nitrate_crystal_shard"
   }
 }

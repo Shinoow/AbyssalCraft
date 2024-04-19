@@ -7,12 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 23
+      "item": "abyssalcraft:magnesia_crystal_fragment"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 23
+    "item": "abyssalcraft:magnesia_crystal_shard"
   }
 }

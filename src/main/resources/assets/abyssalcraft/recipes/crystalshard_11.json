@@ -5,13 +5,11 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystal",
-      "data": 11
+      "item": "abyssalcraft:redstone_crystal"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 11,
+    "item": "abyssalcraft:redstone_crystal_shard",
     "count": 9
   }
 }

@@ -7,16 +7,13 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 5
+      "item": "abyssalcraft:hydrogen_crystal_shard"
     },
     "%": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 3
+      "item": "abyssalcraft:carbon_crystal_shard"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 10
+    "item": "abyssalcraft:methane_crystal_shard"
   }
 }

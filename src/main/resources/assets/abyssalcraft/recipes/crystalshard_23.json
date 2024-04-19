@@ -5,16 +5,13 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 19
+      "item": "abyssalcraft:magnesium_crystal_shard"
     },
     "%": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 4
+      "item": "abyssalcraft:oxygen_crystal_shard"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 23
+    "item": "abyssalcraft:magnesia_crystal_shard"
   }
 }

@@ -6,16 +6,13 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystal",
-      "data": 6
+      "item": "abyssalcraft:nitrogen_crystal"
     },
     "%": {
-      "item": "abyssalcraft:crystal",
-      "data": 4
+      "item": "abyssalcraft:oxygen_crystal"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystal",
-    "data": 9
+    "item": "abyssalcraft:nitrate_crystal"
   }
 }

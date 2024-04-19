@@ -40,11 +40,4 @@ public class ACLib {
 	public static final int configuratorGuiID = 41;
 	public static final int faceBookGuiID = 42;
 	public static final int sequentialBrewingStandGuiID = 43;
-
-	//Crystal stuff
-	public static final String[] crystalNames = new String[]{"Iron", "Gold", "Sulfur", "Carbon", "Oxygen", "Hydrogen", "Nitrogen", "Phosphorus",
-			"Potassium", "Nitrate", "Methane", "Redstone", "Abyssalnite", "Coralium", "Dreadium", "Blaze", "Tin", "Copper",
-			"Silicon", "Magnesium", "Aluminium", "Silica", "Alumina", "Magnesia", "Zinc", "Calcium", "Beryllium", "Beryl"};
-	public static final String[] crystalAtoms = new String[]{"Fe", "Au", "S", "C", "O", "H", "N", "P", "K", "NO\u2083", "CH\u2084", "none", "An",
-			"Cor", "Dr", "none", "Sn", "Cu", "Si", "Mg", "Al", "SiO\u2082", "Al\u2082O\u2083", "MgO", "Zn", "Ca", "Be", "Be\u2083Al\u2082(SiO\u2083)\u2086"};
 }

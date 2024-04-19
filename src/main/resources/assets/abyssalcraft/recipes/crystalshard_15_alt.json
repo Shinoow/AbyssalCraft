@@ -7,12 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 15
+      "item": "abyssalcraft:blaze_crystal_fragment"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 15
+    "item": "abyssalcraft:blaze_crystal_shard"
   }
 }

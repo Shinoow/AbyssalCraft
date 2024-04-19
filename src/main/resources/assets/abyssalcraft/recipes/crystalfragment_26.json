@@ -5,13 +5,11 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 26
+      "item": "abyssalcraft:beryllium_crystal_shard"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalfragment",
-    "data": 26,
+    "item": "abyssalcraft:beryllium_crystal_fragment",
     "count": 9
   }
 }

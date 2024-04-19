@@ -7,12 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 5
+      "item": "abyssalcraft:hydrogen_crystal_fragment"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 5
+    "item": "abyssalcraft:hydrogen_crystal_shard"
   }
 }

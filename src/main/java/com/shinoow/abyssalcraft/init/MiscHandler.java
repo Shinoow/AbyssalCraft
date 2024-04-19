@@ -26,6 +26,7 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.ConditionProcessorRegistry;
@@ -50,6 +51,7 @@ import com.shinoow.abyssalcraft.common.structures.pe.TotemPoleStructure;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ShapedNBTRecipe;
 import com.shinoow.abyssalcraft.lib.*;
+import com.shinoow.abyssalcraft.lib.item.ItemCrystal;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
@@ -72,7 +74,6 @@ import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.SetCount;
-import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -445,15 +446,13 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("listAllmeatraw", ACItems.generic_meat);
 		OreDictionary.registerOre("listAllmeatcooked", ACItems.cooked_generic_meat);
 
-		for(int i = 0; i < ACLib.crystalNames.length; i++) {
-			String name = ACLib.crystalNames[i];
-			OreDictionary.registerOre("crystal"+name, new ItemStack(ACItems.crystal, 1, i));
-			OreDictionary.registerOre("crystalShard"+name, new ItemStack(ACItems.crystal_shard, 1, i));
-			OreDictionary.registerOre("crystalFragment"+name, new ItemStack(ACItems.crystal_fragment, 1, i));
-		}
+		InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ItemCrystal).forEach(i -> {
+			//"item.crystalType.Element" -> crystalTypeElement
+			OreDictionary.registerOre(i.getTranslationKey().substring(5).replace(".", ""), new ItemStack(i));
+		});
 
 		InitHandler.INSTANCE.BLOCKS.stream().filter(b -> b instanceof BlockCrystalCluster).forEach(b -> {
-			String name = ACLib.crystalNames[((BlockCrystalCluster)b).index];
+			String name = Crystals.crystalNames[((BlockCrystalCluster)b).index];
 			OreDictionary.registerOre("crystalCluster"+name, new ItemStack(b));
 		});
 	}
@@ -478,7 +477,7 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
+				main.addEntry(new LootEntryItem(ACItems.crystal_zinc, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":crystallized_zinc"));
 			}
 		}
 		if(event.getName().equals(LootTableList.CHESTS_SIMPLE_DUNGEON)){
@@ -487,7 +486,7 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
+				main.addEntry(new LootEntryItem(ACItems.crystal_zinc, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":crystallized_zinc"));
 				main.addEntry(new LootEntryItem(ACItems.coralium_gem, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":coralium_gem"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_fragment, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 10))}, new LootCondition[0], modid + ":shadow_fragment"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_shard, 5, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 6))}, new LootCondition[0], modid + ":shadow_gem_shard"));
@@ -500,7 +499,7 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
+				main.addEntry(new LootEntryItem(ACItems.crystal_zinc, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":crystallized_zinc"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_fragment, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 10))}, new LootCondition[0], modid + ":shadow_fragment"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_shard, 5, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 6))}, new LootCondition[0], modid + ":shadow_gem_shard"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_gem, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":shadow_gem"));
@@ -512,7 +511,7 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
+				main.addEntry(new LootEntryItem(ACItems.crystal_zinc, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":crystallized_zinc"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_fragment, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 10))}, new LootCondition[0], modid + ":shadow_fragment"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_shard, 5, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 6))}, new LootCondition[0], modid + ":shadow_gem_shard"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_gem, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":shadow_gem"));
@@ -524,7 +523,7 @@ public class MiscHandler implements ILifeCycleHandler {
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.crystal, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5)), new SetMetadata(new LootCondition[0], new RandomValueRange(24))}, new LootCondition[0], modid + ":crystallized_zinc"));
+				main.addEntry(new LootEntryItem(ACItems.crystal_zinc, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":crystallized_zinc"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_fragment, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 10))}, new LootCondition[0], modid + ":shadow_fragment"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_shard, 5, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 6))}, new LootCondition[0], modid + ":shadow_gem_shard"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_gem, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":shadow_gem"));
@@ -735,7 +734,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.skin_of_omothol, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.essence_of_the_gatekeeper, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.interdimensional_cage, UnlockConditions.DREADLANDS);
-		//maybe unique scrolls will go brrr?
 		addCondition(ACItems.configurator_shard_0, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.configurator_shard_1, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.configurator_shard_2, UnlockConditions.OMOTHOL);
@@ -772,9 +770,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.anti_spider_eye, UnlockConditions.CORALIUM_INFESTED_SWAMP);
 		addCondition(ACItems.anti_plagued_flesh, UnlockConditions.CORALIUM_INFESTED_SWAMP);
 		addCondition(ACItems.anti_plagued_flesh_on_a_bone, UnlockConditions.CORALIUM_INFESTED_SWAMP);
-		//crystal go brrr?
-		//crystal shard go brrr?
-		//crystal fragment go brrr?
 		addCondition(ACItems.shadow_fragment, UnlockConditions.SHADOW_MOBS);
 		addCondition(ACItems.shadow_shard, UnlockConditions.SHADOW_MOBS);
 		addCondition(ACItems.shadow_gem, UnlockConditions.SHADOW_MOBS);
@@ -856,6 +851,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.ethaxium_chestplate, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.ethaxium_leggings, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.ethaxium_boots, UnlockConditions.OMOTHOL);
+		InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ICrystal).forEach(i->addCondition(i,UnlockConditions.DREADLANDS));
 
 		//Blocks
 		addCondition(ACBlocks.abyssal_stone_brick, UnlockConditions.ABYSSAL_WASTELAND);

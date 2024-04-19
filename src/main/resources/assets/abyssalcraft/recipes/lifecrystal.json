@@ -2,28 +2,22 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "abyssalcraft:crystal",
-      "data": 3
+      "item": "abyssalcraft:carbon_crystal"
     },
     {
-      "item": "abyssalcraft:crystal",
-      "data": 5
+      "item": "abyssalcraft:hydrogen_crystal"
     },
     {
-      "item": "abyssalcraft:crystal",
-      "data": 6
+      "item": "abyssalcraft:nitrogen_crystal"
     },
     {
-      "item": "abyssalcraft:crystal",
-      "data": 4
+      "item": "abyssalcraft:oxygen_crystal"
     },
     {
-      "item": "abyssalcraft:crystal",
-      "data": 7
+      "item": "abyssalcraft:phosphorus_crystal"
     },
     {
-      "item": "abyssalcraft:crystal",
-      "data": 2
+      "item": "abyssalcraft:sulfur_crystal"
     }
   ],
   "result": {

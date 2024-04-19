@@ -16,8 +16,8 @@ import java.util.Map;
 
 import com.shinoow.abyssalcraft.api.block.ICrystalBlock;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
-import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.Crystals;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -92,7 +92,7 @@ public class BlockCrystalCluster extends BlockACBasic implements ICrystalBlock {
 
 	@Override
 	public String getFormula(ItemStack stack) {
-		return ACLib.crystalAtoms[index];
+		return Crystals.crystalAtoms[index];
 	}
 
 	@Override

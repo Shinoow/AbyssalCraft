@@ -5,13 +5,11 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 13
+      "item": "abyssalcraft:coralium_crystal_shard"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalfragment",
-    "data": 13,
+    "item": "abyssalcraft:coralium_crystal_fragment",
     "count": 9
   }
 }

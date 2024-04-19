@@ -7,16 +7,13 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 20
+      "item": "abyssalcraft:aluminium_crystal_fragment"
     },
     "%": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 4
+      "item": "abyssalcraft:oxygen_crystal_fragment"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalfragment",
-    "data": 22
+    "item": "abyssalcraft:alumina_crystal_fragment"
   }
 }

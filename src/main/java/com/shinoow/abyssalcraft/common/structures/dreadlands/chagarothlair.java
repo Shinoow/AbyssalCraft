@@ -69,26 +69,26 @@ public class chagarothlair extends WorldGenerator {
 
 					tileentitychest.setInventorySlotContents(13, new ItemStack(Blocks.DIRT, 1).setStackDisplayName(TextFormatting.GOLD +"The Legendary Treasure of The Dreadlands"));
 					if(world.rand.nextInt(100) == 0){
-						tileentitychest.setInventorySlotContents(0, new ItemStack(ACItems.crystal, 1, 0));
-						tileentitychest.setInventorySlotContents(1, new ItemStack(ACItems.crystal, 1, 1));
-						tileentitychest.setInventorySlotContents(2, new ItemStack(ACItems.crystal, 1, 2));
-						tileentitychest.setInventorySlotContents(3, new ItemStack(ACItems.crystal, 1, 3));
-						tileentitychest.setInventorySlotContents(4, new ItemStack(ACItems.crystal, 1, 4));
-						tileentitychest.setInventorySlotContents(5, new ItemStack(ACItems.crystal, 1, 5));
-						tileentitychest.setInventorySlotContents(6, new ItemStack(ACItems.crystal, 1, 6));
-						tileentitychest.setInventorySlotContents(7, new ItemStack(ACItems.crystal, 1, 7));
-						tileentitychest.setInventorySlotContents(8, new ItemStack(ACItems.crystal, 1, 8));
-						tileentitychest.setInventorySlotContents(9, new ItemStack(ACItems.crystal, 1, 11));
-						tileentitychest.setInventorySlotContents(10, new ItemStack(ACItems.crystal, 1, 12));
-						tileentitychest.setInventorySlotContents(11, new ItemStack(ACItems.crystal, 1, 13));
-						tileentitychest.setInventorySlotContents(12, new ItemStack(ACItems.crystal, 1, 14));
-						tileentitychest.setInventorySlotContents(14, new ItemStack(ACItems.crystal, 1, 15));
-						tileentitychest.setInventorySlotContents(15, new ItemStack(ACItems.crystal, 1, 16));
-						tileentitychest.setInventorySlotContents(16, new ItemStack(ACItems.crystal, 1, 17));
-						tileentitychest.setInventorySlotContents(17, new ItemStack(ACItems.crystal, 1, 18));
-						tileentitychest.setInventorySlotContents(18, new ItemStack(ACItems.crystal, 1, 19));
-						tileentitychest.setInventorySlotContents(19, new ItemStack(ACItems.crystal, 1, 20));
-						tileentitychest.setInventorySlotContents(20, new ItemStack(ACItems.crystal, 1, 24));
+						tileentitychest.setInventorySlotContents(0, new ItemStack(ACItems.crystal_iron));
+						tileentitychest.setInventorySlotContents(1, new ItemStack(ACItems.crystal_gold));
+						tileentitychest.setInventorySlotContents(2, new ItemStack(ACItems.crystal_sulfur));
+						tileentitychest.setInventorySlotContents(3, new ItemStack(ACItems.crystal_carbon));
+						tileentitychest.setInventorySlotContents(4, new ItemStack(ACItems.crystal_oxygen));
+						tileentitychest.setInventorySlotContents(5, new ItemStack(ACItems.crystal_hydrogen));
+						tileentitychest.setInventorySlotContents(6, new ItemStack(ACItems.crystal_nitrogen));
+						tileentitychest.setInventorySlotContents(7, new ItemStack(ACItems.crystal_phosphorus));
+						tileentitychest.setInventorySlotContents(8, new ItemStack(ACItems.crystal_potassium));
+						tileentitychest.setInventorySlotContents(9, new ItemStack(ACItems.crystal_redstone));
+						tileentitychest.setInventorySlotContents(10, new ItemStack(ACItems.crystal_abyssalnite));
+						tileentitychest.setInventorySlotContents(11, new ItemStack(ACItems.crystal_coralium));
+						tileentitychest.setInventorySlotContents(12, new ItemStack(ACItems.crystal_dreadium));
+						tileentitychest.setInventorySlotContents(14, new ItemStack(ACItems.crystal_blaze));
+						tileentitychest.setInventorySlotContents(15, new ItemStack(ACItems.crystal_tin));
+						tileentitychest.setInventorySlotContents(16, new ItemStack(ACItems.crystal_copper));
+						tileentitychest.setInventorySlotContents(17, new ItemStack(ACItems.crystal_silicon));
+						tileentitychest.setInventorySlotContents(18, new ItemStack(ACItems.crystal_magnesium));
+						tileentitychest.setInventorySlotContents(19, new ItemStack(ACItems.crystal_aluminium));
+						tileentitychest.setInventorySlotContents(20, new ItemStack(ACItems.crystal_zinc));
 						tileentitychest.setInventorySlotContents(21, new ItemStack(ACItems.oblivion_catalyst, 1));
 					}
 				}

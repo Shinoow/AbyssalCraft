@@ -80,13 +80,13 @@ public class GuiFaceBook extends GuiScreen {
 	private ItemStack getStackForSize(int size) {
 		switch(size) {
 		case 0:
-			return new ItemStack(ACItems.crystal_shard);
+			return new ItemStack(ACItems.crystal_shard_iron);
 		case 1:
-			return new ItemStack(ACItems.crystal);
+			return new ItemStack(ACItems.crystal_iron);
 		case 2:
 			return new ItemStack(ACBlocks.iron_crystal_cluster);
 		default:
-			return new ItemStack(ACItems.crystal_shard);
+			return new ItemStack(ACItems.crystal_shard_iron);
 		}
 	}
 

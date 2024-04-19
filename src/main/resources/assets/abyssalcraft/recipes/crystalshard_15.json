@@ -5,13 +5,11 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystal",
-      "data": 15
+      "item": "abyssalcraft:blaze_crystal"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 15,
+    "item": "abyssalcraft:blaze_crystal_shard",
     "count": 9
   }
 }

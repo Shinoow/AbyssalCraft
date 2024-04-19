@@ -5,16 +5,13 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystal",
-      "data": 4
+      "item": "abyssalcraft:oxygen_crystal"
     },
     "%": {
-      "item": "abyssalcraft:crystal",
-      "data": 18
+      "item": "abyssalcraft:silicon_crystal"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystal",
-    "data": 21
+    "item": "abyssalcraft:silica_crystal"
   }
 }

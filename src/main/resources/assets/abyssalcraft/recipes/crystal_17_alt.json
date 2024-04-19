@@ -7,12 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 17
+      "item": "abyssalcraft:copper_crystal_shard"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystal",
-    "data": 17
+    "item": "abyssalcraft:copper_crystal"
   }
 }

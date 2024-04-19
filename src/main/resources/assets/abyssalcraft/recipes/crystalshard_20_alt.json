@@ -7,12 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalfragment",
-      "data": 20
+      "item": "abyssalcraft:aluminium_crystal_fragment"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 20
+    "item": "abyssalcraft:aluminium_crystal_shard"
   }
 }

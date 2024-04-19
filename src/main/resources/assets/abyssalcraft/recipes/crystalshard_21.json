@@ -5,16 +5,13 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 4
+      "item": "abyssalcraft:oxygen_crystal_shard"
     },
     "%": {
-      "item": "abyssalcraft:crystalshard",
-      "data": 18
+      "item": "abyssalcraft:silicon_crystal_shard"
     }
   },
   "result": {
-    "item": "abyssalcraft:crystalshard",
-    "data": 21
+    "item": "abyssalcraft:silica_crystal_shard"
   }
 }
