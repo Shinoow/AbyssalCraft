@@ -180,6 +180,8 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		registerEntityWithEgg(EntityGreaterShoggoth.class, "greatershoggoth", 84, 80, 3, true, 0x133133, 0x342122);
 
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "compasstentacle"), EntityCompassTentacle.class, "compasstentacle", 85, instance, 64, 10, true);
+
 		EntityUtil.addShoggothFood(EntityAnimal.class);
 		EntityUtil.addShoggothFood(EntityAmbientCreature.class);
 		EntityUtil.addShoggothFood(EntityWaterMob.class);

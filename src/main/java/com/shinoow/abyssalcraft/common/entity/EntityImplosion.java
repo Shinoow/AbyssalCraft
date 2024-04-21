@@ -92,7 +92,7 @@ public class EntityImplosion extends Entity
 						entity.hurtResistantTime = 0;
 						entity.attackEntityFrom(DamageSource.LIGHTNING_BOLT, 100F);
 					}
-					entity.addVelocity(dir.x * 2.5D * scale, 1.5D + rand.nextDouble(), dir.z * 2.5D * scale);
+				entity.addVelocity(dir.x * 2.5D * scale, 1.5D + rand.nextDouble(), dir.z * 2.5D * scale);
 			}
 
 			setDead();

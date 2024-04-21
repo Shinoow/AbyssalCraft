@@ -28,14 +28,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 /**
  * Utility class used for assembling Ritual grounds.
  * @author shinoow
  *
  */
-@SuppressWarnings("deprecation")
 public class RitualUtil {
 
 	private static Map<Supplier<IBlockState>, Integer> bookTypeMappings = new HashMap<>();
@@ -160,7 +159,7 @@ public class RitualUtil {
 	public static void modifyRitualBookType(String name, int bookType){
 		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
 			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, bookType, "bookType");
+				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, bookType, "bookType");
 				break;
 			}
 	}
@@ -168,7 +167,7 @@ public class RitualUtil {
 	public static void modifyRitualDimension(String name, int dimension){
 		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
 			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, dimension, "dimension");
+				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, dimension, "dimension");
 				break;
 			}
 	}
@@ -176,7 +175,7 @@ public class RitualUtil {
 	public static void modifyRitualSacrificeRequirement(String name, boolean requiresSacrifice){
 		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
 			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, requiresSacrifice, "requiresSacrifice");
+				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, requiresSacrifice, "requiresSacrifice");
 				break;
 			}
 	}
@@ -184,7 +183,7 @@ public class RitualUtil {
 	public static void modifyRitualEnergyRequirement(String name, float requiredEnergy){
 		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
 			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, requiredEnergy, "requiredEnergy");
+				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, requiredEnergy, "requiredEnergy");
 				break;
 			}
 	}
@@ -192,7 +191,7 @@ public class RitualUtil {
 	public static void modifyRitualSacrifice(String name, Object sacrifice){
 		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
 			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name) && r.getSacrifice() != null){
-				ReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, sacrifice, "sacrifice");
+				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, sacrifice, "sacrifice");
 				break;
 			}
 	}
@@ -200,7 +199,7 @@ public class RitualUtil {
 	public static void modifyRitualNbtSensitivity(String name, boolean nbtSensitive){
 		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
 			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, nbtSensitive, "nbtSensitive");
+				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, nbtSensitive, "nbtSensitive");
 				break;
 			}
 	}
@@ -208,7 +207,7 @@ public class RitualUtil {
 	public static void modifyRitualNbtSensitivitySacrifice(String name, boolean nbtSensitiveSacrifice){
 		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
 			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, nbtSensitiveSacrifice, "nbtSensitiveSacrifice");
+				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, nbtSensitiveSacrifice, "nbtSensitiveSacrifice");
 				break;
 			}
 	}
@@ -216,7 +215,7 @@ public class RitualUtil {
 	public static void modifyRitualOfferings(String name, Object...offerings){
 		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
 			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, offerings, "offerings");
+				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, offerings, "offerings");
 				break;
 			}
 	}
@@ -227,7 +226,7 @@ public class RitualUtil {
 				Object[] offerings = new Object[r.getOfferings().length];
 				for(int i = 0; i < offerings.length; i++)
 					offerings[i] = APIUtils.areObjectsEqual(APIUtils.convertToStack(original), r.getOfferings()[i], nbt) ? replace : r.getOfferings()[i];
-				ReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, offerings, "offerings");
+				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, offerings, "offerings");
 				break;
 			}
 	}

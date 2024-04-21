@@ -749,6 +749,8 @@ public class AbyssalCrafting {
 			SpellRegistry.instance().registerSpell(new FloatingSpell());
 		if(ACConfig.teleport_home_spell)
 			SpellRegistry.instance().registerSpell(new TeleportHomeSpell());
+		if(ACConfig.compass_spell)
+			SpellRegistry.instance().registerSpell(new CompassSpell());
 	}
 
 	private static void addRendings() {

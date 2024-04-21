@@ -67,4 +67,5 @@ public class ACSounds {
 	public static SoundEvent jzahar_earthquake;
 	public static SoundEvent jzahar_implosion;
 	public static SoundEvent jzahar_black_hole;
+	public static SoundEvent compass;
 }

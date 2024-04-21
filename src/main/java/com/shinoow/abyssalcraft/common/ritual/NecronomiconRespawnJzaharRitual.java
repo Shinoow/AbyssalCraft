@@ -17,14 +17,13 @@ import com.shinoow.abyssalcraft.common.structures.omothol.StructureJzaharTemple;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
-@SuppressWarnings("deprecation")
 public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 
 	public NecronomiconRespawnJzaharRitual() {
@@ -51,6 +50,6 @@ public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 		temple.generate(world, world.rand, new BlockPos(4, 53, 7));
 		RitualUtil.tryAltar(world, pos, 4);
 		world.getChunk(pos).markDirty();
-		SpecialTextUtil.JzaharGroup(world, I18n.translateToLocalFormatted("message.jzahar.respawn", player.getName()));
+		SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocalFormatted("message.jzahar.respawn", player.getName()));
 	}
 }

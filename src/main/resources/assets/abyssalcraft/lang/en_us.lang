@@ -870,6 +870,8 @@ ac.spell.floating=Floating
 ac.spell.floating.desc=As long as you're casting the spell, you're as light as a feather, allowing you to walk on air. Who needs gravity anyways?
 ac.spell.teleportHome=Teleport Home
 ac.spell.teleportHome.desc=When cast, teleports you back to your spawn point from wherever you are (including other dimensions).
+ac.spell.compass=Eldritch Directions
+ac.spell.compass.desc=When cast, points you in the direction of the Temple of J'zahar. Only works in Omothol.
 
 #Places of Power
 ac.structure.basic.description=A small and simple shrine. Provides a range boost to affected statues.
@@ -1540,5 +1542,6 @@ subtitle.abyssalcraft.jzahar.shouts=J'zahar tries to Fus Ro Dah
 subtitle.abyssalcraft.jzahar.earthquake=J'zahar tries to rearrange the tectonic plates
 subtitle.abyssalcraft.jzahar.implosion=J'zahar tries to replace gravity with his own version
 subtitle.abyssalcraft.jzahar.black_hole=J'zahar tries to do a cover of a Soundgarden song
+subtitle.abyssalcraft.misc.compass="J'zahar forever waits, come"
 
 #Localization done, Shin out.

@@ -37,9 +37,7 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.item.ItemCrystalFragment;
 import com.shinoow.abyssalcraft.lib.item.ItemCrystalShard;
-import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
-import com.shinoow.abyssalcraft.lib.util.Scheduler;
-import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.*;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 import net.minecraft.block.Block;
@@ -58,7 +56,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -77,7 +74,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 import net.minecraftforge.fml.relauncher.Side;
 
-@SuppressWarnings("deprecation")
 public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
@@ -343,10 +339,10 @@ public class AbyssalCraftEventHooks {
 			if(ACConfig.showBossDialogs) {
 				if(event.getRitual().getUnlocalizedName().substring(10).equals("summonSacthoth"))
 					if(!event.getWorld().isRemote)
-						SpecialTextUtil.SacthothGroup(event.getWorld(), I18n.translateToLocal("message.sacthoth.spawn.1"));
+						SpecialTextUtil.SacthothGroup(event.getWorld(), TranslationUtil.toLocal("message.sacthoth.spawn.1"));
 				if(event.getRitual().getUnlocalizedName().substring(10).equals("summonAsorah"))
 					if(!event.getWorld().isRemote)
-						SpecialTextUtil.AsorahGroup(event.getWorld(), I18n.translateToLocal("message.asorah.spawn"));
+						SpecialTextUtil.AsorahGroup(event.getWorld(), TranslationUtil.toLocal("message.asorah.spawn"));
 			}
 		//				event.getEntityPlayer().addStat(ACAchievements.summon_asorah, 1);
 	}

@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.lib.*;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 import net.minecraft.entity.*;
@@ -46,14 +47,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings("deprecation")
 @Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
 public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
@@ -202,20 +201,18 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	public void setDead()
 	{
 		if(ACConfig.hardcoreMode) { //hardcore mode bs goes here
-			if(!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-				if(this.getHealth() <= 0 && deathTicks > 0) { //not auto-killed in peaceful
-					this.isDead = true;
-				} else if(!heh) {
+			if(!world.isRemote && world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+				if(getHealth() <= 0 && deathTicks > 0)
+					isDead = true;
+				else if(!heh) {
 					SpecialTextUtil.JzaharGroup(getEntityWorld(), "Haha, no. You're not playing fair, and neither will I!");
 					SpecialTextUtil.JzaharGroup(getEntityWorld(), "Disabling 'Hardcore Mode' now will remove me, however.");
 					heh = true;
 				}
-			} else {
-				this.isDead = true;
-			}
-		} else {
-			this.isDead = true;
-		}
+			} else
+				isDead = true;
+		} else
+			isDead = true;
 	}
 
 	@Override
@@ -304,7 +301,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 					par1DamageSource.getTrueSource().attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), Integer.MAX_VALUE);
 				}
 				if(ACConfig.showBossDialogs)
-					SpecialTextUtil.JzaharGroup(getEntityWorld(), I18n.translateToLocal("message.jzahar.fourthwall"));
+					SpecialTextUtil.JzaharGroup(getEntityWorld(), TranslationUtil.toLocal("message.jzahar.fourthwall"));
 			}
 		}
 
@@ -365,7 +362,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	public void onLivingUpdate()
 	{
 		int multiplier = ACConfig.hardcoreMode ? 2 : 1;
-		
+
 		if(talkTimer > 0)
 			talkTimer--;
 		if(iframes > 0)
@@ -392,7 +389,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 				if(!world.isRemote){
 					world.removeEntity(entity);
 					if(entity.isDead && ACConfig.showBossDialogs)
-						SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.vanilla"));
+						SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.banish.vanilla"));
 				} else if(ACConfig.particleEntity)
 					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 			}
@@ -400,7 +397,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 				if(!world.isRemote){
 					world.removeEntity(entity);
 					if(entity.isDead && ACConfig.showBossDialogs)
-						SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.ac"));
+						SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.banish.ac"));
 				} else if(ACConfig.particleEntity)
 					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 			}
@@ -415,7 +412,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 					if(!that){
 						that = true;
 						if(ACConfig.showBossDialogs)
-							SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.jzh"));
+							SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.banish.jzh"));
 					}
 				} else if(ACConfig.particleEntity){
 					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
@@ -426,7 +423,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 				if(!world.isRemote){
 					world.removeEntity(entity);
 					if(entity.isDead && ACConfig.showBossDialogs)
-						SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.banish.other"));
+						SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.banish.other"));
 				} else if(ACConfig.particleEntity)
 					world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, entity.posX + f, entity.posY + 2.0D + f1, entity.posZ + f2, 0.0D, 0.0D, 0.0D);
 			}
@@ -437,8 +434,8 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 						if(EntityUtil.isPlayerCoralium((EntityPlayer)entity))
 							SpecialTextUtil.JzaharText("<insert generic text here>");
 						else if(ACConfig.jzaharBreaksFourthWall) {
-							SpecialTextUtil.JzaharText(String.format(I18n.translateToLocal("message.jzahar.creative.1"), entity.getName()));
-							SpecialTextUtil.JzaharText(I18n.translateToLocal("message.jzahar.creative.2"));
+							SpecialTextUtil.JzaharText(TranslationUtil.toLocalFormatted("message.jzahar.creative.1", entity.getName()));
+							SpecialTextUtil.JzaharText(TranslationUtil.toLocal("message.jzahar.creative.2"));
 						}
 				}
 
@@ -759,25 +756,25 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 
 		if(ACConfig.showBossDialogs) {
 			if(deathTicks == 20 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.1"));
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.1"));
 			if(deathTicks == 100 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.2"));
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.2"));
 			if(deathTicks == 180 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.3"));
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.3"));
 			if(deathTicks == 260 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.4"));
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.4"));
 			if(deathTicks == 340 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.5"));
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.5"));
 			if(deathTicks == 420 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.6"));
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.6"));
 			if(deathTicks == 500 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.7"));
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.7"));
 			if(deathTicks == 580 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.8"));
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.8"));
 			if(deathTicks == 660 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.9"));
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.9"));
 			if(deathTicks == 800 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, I18n.translateToLocal("message.jzahar.death.10"));
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.10"));
 		}
 		if(deathTicks == 800 && !world.isRemote)
 			setDead();

@@ -28,6 +28,7 @@ public class ModelDreadTentacles extends ModelBase {
 	public ModelRenderer tentacle_2_1;
 	public ModelRenderer tentacle_3;
 	public ModelRenderer tentacle_3_1;
+	public boolean pointing;
 
 	public ModelDreadTentacles() {
 		textureWidth = 16;
@@ -74,7 +75,8 @@ public class ModelDreadTentacles extends ModelBase {
 		tentacle_2.rotateAngleY = tentacle_1_1.rotateAngleY * 1.5F;
 		tentacle_3.rotateAngleY = tentacle_2_1.rotateAngleY * 1.75F;
 
-		tentacle_1.rotateAngleX = -0.13962634015954636F - flap2 * 0.1F - animation * 0.4f;
+
+		tentacle_1.rotateAngleX = pointing ? -0.63962634015954636F : -0.13962634015954636F - flap2 * 0.1F - animation * 0.4f;
 		tentacle_2.rotateAngleX = -0.41887902047863906F - flap2 * 0.75F;
 		tentacle_3.rotateAngleX = -0.13962634015954636F - flap2 * 1F;
 	}

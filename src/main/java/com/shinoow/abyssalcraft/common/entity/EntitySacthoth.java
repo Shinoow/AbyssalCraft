@@ -24,6 +24,7 @@ import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.*;
@@ -48,7 +49,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraftforge.common.MinecraftForge;
@@ -57,7 +57,6 @@ import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings("deprecation")
 @Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
 public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
@@ -284,12 +283,12 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 		}
 		else if(par1DamageSource.isExplosion()){
 			if(world.isRemote && ACConfig.showBossDialogs)
-				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.explosion"));
+				SpecialTextUtil.SacthothText(TranslationUtil.toLocal("message.sacthoth.damage.explosion"));
 			return false;
 		}
 		else if(par1DamageSource.isProjectile()){
 			if(world.isRemote && ACConfig.showBossDialogs)
-				SpecialTextUtil.SacthothText(I18n.translateToLocal("message.sacthoth.damage.projectile"));
+				SpecialTextUtil.SacthothText(TranslationUtil.toLocal("message.sacthoth.damage.projectile"));
 			return false;
 		}
 		else if(par1DamageSource == DamageSource.OUT_OF_WORLD && posY <= 0 && !getEntityWorld().isRemote) {

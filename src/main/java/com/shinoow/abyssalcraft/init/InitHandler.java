@@ -499,6 +499,7 @@ public class InitHandler implements ILifeCycleHandler {
 		toggle_state_spell = cfg.get(CATEGORY_SPELLS, "Toll The Bell", true, "Set to false to disable the Toll The Bell spell.").getBoolean();
 		floating_spell = cfg.get(CATEGORY_SPELLS, "Floating", true, "Set to false to disable the Floating spell.").getBoolean();
 		teleport_home_spell = cfg.get(CATEGORY_SPELLS, "Teleport Home", true, "Set to false to disable the Teleport Home spell.").getBoolean();
+		compass_spell = cfg.get(CATEGORY_SPELLS, "Eldritch Directions", true, "Set to false to disable the Eldritch Directions spell.").getBoolean();
 
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);

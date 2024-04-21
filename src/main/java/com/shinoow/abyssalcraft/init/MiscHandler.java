@@ -233,6 +233,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		jzahar_earthquake = registerSoundEvent("jzahar.earthquake");
 		jzahar_implosion = registerSoundEvent("jzahar.implosion");
 		jzahar_black_hole = registerSoundEvent("jzahar.black_hole");
+		compass = registerSoundEvent("misc.compass");
 
 		CapabilityManager.INSTANCE.register(INecroDataCapability.class, NecroDataCapabilityStorage.instance, NecroDataCapability::new);
 		CapabilityManager.INSTANCE.register(IItemTransferCapability.class, ItemTransferCapabilityStorage.instance, ItemTransferCapability::new);

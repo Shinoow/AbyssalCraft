@@ -569,13 +569,12 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.nitre, 0);
 		registerItemRender(ACItems.sulfur, 0);
 		InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ItemCrystal).forEach(i -> {
-			if(i instanceof ItemCrystalFragment) {
+			if(i instanceof ItemCrystalFragment)
 				registerItemRender(i, 0, "crystalfragment");
-			} else if(i instanceof ItemCrystalShard) {
+			else if(i instanceof ItemCrystalShard)
 				registerItemRender(i, 0, "crystalshard");
-			} else {
+			else
 				registerItemRender(i, 0, "crystal");
-			}
 		});
 		registerItemRender(ACItems.dread_cloth, 0);
 		registerItemRender(ACItems.dreadium_plate, 0);

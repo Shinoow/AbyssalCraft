@@ -110,7 +110,7 @@ public interface IInternalMethodHandler {
 	 * Fires a message to the client on the completion of a ritual<br>
 	 * <b><i>You should probably NEVER ever call this method at all, ever.<br>
 	 * Seriously, this method is called in NecronomiconRitual to send<br>
-	 * a the ritual to the client while completing it server-side.</i></b>
+	 * the ritual to the client while completing it server-side.</i></b>
 	 * @param pos Current position
 	 * @param player Player who completed the ritual
 	 * @param ritual Ritual name

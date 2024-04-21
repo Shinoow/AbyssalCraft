@@ -35,7 +35,6 @@ public class RenderPortal extends Render<EntityPortal> {
 		super(manager);
 	}
 
-
 	@Override
 	public void doRender(EntityPortal entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{

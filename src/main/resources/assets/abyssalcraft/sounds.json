@@ -418,5 +418,12 @@
 			"abyssalcraft:jzahar/black_hole"
 		],
 		"subtitle": "subtitle.abyssalcraft.jzahar.black_hole"
+	},
+	"misc.compass": {
+		"category": "hostile",
+		"sounds": [
+			"abyssalcraft:misc/compass"
+		],
+		"subtitle": "subtitle.abyssalcraft.misc.compass"
 	}
 }

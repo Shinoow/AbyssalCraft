@@ -39,7 +39,7 @@ import net.minecraft.world.World;
 public class ItemStaffOfRending extends ItemACBasic implements IStaffOfRending {
 
 	private int tier;
-	
+
 	public ItemStaffOfRending(String name, int tier){
 		super(name);
 		setCreativeTab(ACTabs.tabTools);
