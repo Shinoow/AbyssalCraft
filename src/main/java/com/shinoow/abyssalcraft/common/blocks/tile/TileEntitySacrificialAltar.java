@@ -17,6 +17,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -97,10 +98,8 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 		if(isCoolingDown())
 			coolDown--;
 
-		if(!item.isEmpty())
-			if(item.getItem() instanceof IEnergyContainerItem)
-				if(!world.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
-					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(20));
+		if(!world.isRemote)
+			PEUtils.transferPEFromContainer(item, this, 20);
 
 		if(entity == null){
 			List<EntityLivingBase> mobs = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(8, 3, 8));

@@ -421,4 +421,48 @@ public class PEUtils {
 			return contained;
 		}
 	}
+
+	/**
+	 * Transfers PE from an IEnergyContainerItem to a IEnergyContainer (that former likely is contained in)
+	 * @param stack ItemStack containing the PE container Item
+	 * @param container PE Container 
+	 * @param amount Amount of PE to transfer
+	 */
+	public static void transferPEToContainer(ItemStack stack, IEnergyContainer container, float amount) {
+		if(!stack.isEmpty())
+			if(stack.getItem() instanceof IEnergyContainerItem) {
+				IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+				if(containerItem.canTransferPE(stack) && container.canAcceptPE()) {
+					float consumed = containerItem.consumeEnergy(stack, amount);
+					float res = consumed + container.getContainedEnergy();
+					container.addEnergy(consumed);
+					if(res > container.getMaxEnergy()) {
+						res -= container.getMaxEnergy();
+						containerItem.addEnergy(stack, res); // returns overflow
+					}
+				}
+			}
+	}
+
+	/**
+	 * Transfers PE from an IEnergyContainer to a IEnergyContainerItem (that the former likely contains)
+	 * @param stack ItemStack containing the PE container Item
+	 * @param container PE Container 
+	 * @param amount Amount of PE to transfer
+	 */
+	public static void transferPEFromContainer(ItemStack stack, IEnergyContainer container, float amount) {
+		if(!stack.isEmpty())
+			if(stack.getItem() instanceof IEnergyContainerItem) {
+				IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+				if(containerItem.canAcceptPE(stack) && container.canTransferPE()) {
+					float consumed = container.consumeEnergy(amount);
+					float res = consumed + containerItem.getContainedEnergy(stack);
+					containerItem.addEnergy(stack, consumed);
+					if(res > containerItem.getMaxEnergy(stack)) {
+						res -= containerItem.getMaxEnergy(stack);
+						container.addEnergy(res); // returns overflow
+					}
+				}
+			}
+	}
 }

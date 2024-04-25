@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 
 import net.minecraft.item.ItemStack;
@@ -78,10 +78,8 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 			isDirty = false;
 		}
 
-		if(!item.isEmpty())
-			if(item.getItem() instanceof IEnergyContainerItem)
-				if(!world.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
-					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(20));
+		if(!world.isRemote)
+			PEUtils.transferPEFromContainer(item, this, 20);
 	}
 
 	@Override

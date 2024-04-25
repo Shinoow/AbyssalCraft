@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -79,15 +80,9 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	public void update() {
 
 		ItemStack input = getStackInSlot(0);
-		if(!input.isEmpty())
-			if(input.getItem() instanceof IEnergyContainerItem)
-				if(((IEnergyContainerItem) input.getItem()).canTransferPE(input) && canAcceptPE())
-					addEnergy(((IEnergyContainerItem) input.getItem()).consumeEnergy(input, 20));
+		PEUtils.transferPEToContainer(input, this, 20);
 		ItemStack output = getStackInSlot(1);
-		if(!output.isEmpty())
-			if(output.getItem() instanceof IEnergyContainerItem)
-				if(((IEnergyContainerItem) output.getItem()).canAcceptPE(output) && canTransferPE())
-					((IEnergyContainerItem) output.getItem()).addEnergy(output, consumeEnergy(20));
+		PEUtils.transferPEFromContainer(output, this, 20);
 	}
 
 	@Override

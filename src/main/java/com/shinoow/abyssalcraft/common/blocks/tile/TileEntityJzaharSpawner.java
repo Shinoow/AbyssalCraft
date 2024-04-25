@@ -12,42 +12,30 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
+import com.shinoow.abyssalcraft.lib.tileentity.TileEntitySingleMobSpawner;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
-public class TileEntityJzaharSpawner extends TileEntity implements ITickable {
-
-	private int activatingRangeFromPlayer = 12;
+public class TileEntityJzaharSpawner extends TileEntitySingleMobSpawner {
 
 	@Override
-	public void onLoad()
-	{
-		if(world.isRemote)
-			world.tickableTileEntities.remove(this);
+	public int getActivationRange() {
+		return 12;
 	}
 
+	@Override
+	public EntityLiving getMob(World world) {
+		return new EntityJzahar(world);
+	}
+
+	@Override
 	public boolean isActivated() {
-		return world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-				activatingRangeFromPlayer, true) != null &&
-				!world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-						activatingRangeFromPlayer, true).capabilities.isCreativeMode &&
-				world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-						activatingRangeFromPlayer, true).posY >= pos.getY() -1;
-	}
 
-	@Override
-	public void update() {
-		if (isActivated()) {
-			EntityJzahar mob = new EntityJzahar(world);
-			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
-			mob.onInitialSpawn(world.getDifficultyForLocation(pos), null);
-			world.spawnEntity(mob);
-			world.setBlockToAir(pos);
-			//			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, mob.getEntityBoundingBox().expand(64, 64, 64));
-			//			for(EntityPlayer player : players)
-			//				player.addStat(ACAchievements.locate_jzahar, 1);
-		}
+		EntityPlayer player = world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+				getActivationRange(), true);
+
+		return player != null && !player.capabilities.isCreativeMode && player.posY >= pos.getY() - 1;
 	}
 }

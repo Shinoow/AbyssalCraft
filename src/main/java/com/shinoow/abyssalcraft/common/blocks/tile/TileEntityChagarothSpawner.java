@@ -12,37 +12,20 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.common.entity.EntityChagaroth;
+import com.shinoow.abyssalcraft.lib.tileentity.TileEntitySingleMobSpawner;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.world.World;
 
-public class TileEntityChagarothSpawner extends TileEntity implements ITickable {
-
-	private int activatingRangeFromPlayer = 32;
+public class TileEntityChagarothSpawner extends TileEntitySingleMobSpawner {
 
 	@Override
-	public void onLoad()
-	{
-		if(world.isRemote)
-			world.tickableTileEntities.remove(this);
-	}
-
-	public boolean isActivated() {
-		return world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-				activatingRangeFromPlayer, true) != null &&
-				!world.getClosestPlayer(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-						activatingRangeFromPlayer, true).capabilities.isCreativeMode;
+	public int getActivationRange() {
+		return 32;
 	}
 
 	@Override
-	public void update() {
-		if (isActivated()) {
-			EntityChagaroth mob = new EntityChagaroth(world);
-			mob.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 10.0F);
-			mob.onInitialSpawn(world.getDifficultyForLocation(pos), null);
-			world.spawnEntity(mob);
-			world.setBlockToAir(pos);
-		}
+	public EntityLiving getMob(World world) {
+		return new EntityChagaroth(world);
 	}
 }

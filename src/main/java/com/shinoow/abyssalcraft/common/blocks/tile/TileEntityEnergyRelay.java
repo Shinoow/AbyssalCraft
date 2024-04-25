@@ -79,18 +79,18 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 
 		if(ticksExisted % 20 == 0)
 			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
-				PEUtils.collectNearbyPE(this, world, pos, world.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), 5);
+				PEUtils.collectNearbyPE(this, world, pos, world.getBlockState(pos).getValue(BlockEnergyRelay.FACING).getOpposite(), getDrainQuanta());
 
 		if(ticksExisted % 40 == 0 && canTransferPE())
 			if(world.getBlockState(pos).getProperties().containsKey(BlockEnergyRelay.FACING))
-				transferPE(world.getBlockState(pos).getValue(BlockEnergyRelay.FACING), 10);
+				transferPE(world.getBlockState(pos).getValue(BlockEnergyRelay.FACING), getTransferQuanta());
 	}
 
 	@Override
 	public void transferPE(EnumFacing facing, float energy) {
 
-		if(PEUtils.canTransfer(world, pos, facing, 4)){
-			IEnergyContainer container = PEUtils.getContainer(world, pos, facing, 4);
+		if(PEUtils.canTransfer(world, pos, facing, getRange())){
+			IEnergyContainer container = PEUtils.getContainer(world, pos, facing, getRange());
 			if(container != null)
 				if(container.canAcceptPE()){
 					container.addEnergy(consumeEnergy(energy));
@@ -145,5 +145,18 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 	public TileEntity getContainerTile() {
 
 		return this;
+	}
+	
+	protected int getRange(){
+
+		return 4;
+	}
+
+	protected float getDrainQuanta(){
+		return 10;
+	}
+
+	protected float getTransferQuanta(){
+		return 20;
 	}
 }
