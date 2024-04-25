@@ -255,8 +255,7 @@ public class PEUtils {
 	 * @return True if the TileEntity is a PE Collector, otherwise false
 	 */
 	public static boolean isCollector(TileEntity tile){
-		if(tile != null) return tile instanceof IEnergyCollector;
-		return false;
+		return tile instanceof IEnergyCollector;
 	}
 
 	/**
@@ -265,8 +264,7 @@ public class PEUtils {
 	 * @return True if the TileEntity is a PE Manipulator, otherwise false
 	 */
 	public static boolean isManipulator(TileEntity tile){
-		if(tile != null) return tile instanceof IEnergyManipulator;
-		return false;
+		return tile instanceof IEnergyManipulator;
 	}
 
 	/**
@@ -275,8 +273,7 @@ public class PEUtils {
 	 * @return True if the TileEntity is a PE Collector, otherwise false
 	 */
 	public static boolean isContainer(TileEntity tile){
-		if(tile != null) return tile instanceof IEnergyContainer;
-		return false;
+		return tile instanceof IEnergyContainer;
 	}
 
 	/**

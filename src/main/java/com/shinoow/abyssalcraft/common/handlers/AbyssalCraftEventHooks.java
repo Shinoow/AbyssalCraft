@@ -172,7 +172,7 @@ public class AbyssalCraftEventHooks {
 					&& ((EntityLivingBase) source.getTrueSource()).getCreatureAttribute() == AbyssalCraftAPI.SHADOW
 					|| source == AbyssalCraftAPI.shadow))
 				event.setCanceled(true);
-			if(entity instanceof IOmotholEntity && (source.getTrueSource() instanceof IOmotholEntity
+			if(EntityUtil.isEntityEldritch(entity) && ((source.getTrueSource() instanceof EntityLivingBase && EntityUtil.isEntityEldritch((EntityLivingBase) source.getTrueSource()))
 					|| source == AbyssalCraftAPI.dread || source == AbyssalCraftAPI.coralium
 					|| source == AbyssalCraftAPI.antimatter || source == AbyssalCraftAPI.acid))
 				event.setCanceled(true);

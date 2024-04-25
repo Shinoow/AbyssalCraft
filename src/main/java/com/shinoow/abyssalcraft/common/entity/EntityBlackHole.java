@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -77,7 +78,7 @@ public class EntityBlackHole extends Entity
 			setDead();
 
 		for (Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(48D)))
-			if(!(entity instanceof IOmotholEntity))
+			if(!(entity instanceof EntityLivingBase && EntityUtil.isEntityEldritch((EntityLivingBase) entity)))
 				if (entity.isEntityAlive() && entity instanceof EntityLivingBase){
 					if (entity.posY < posY)
 						entity.motionY += 0.025F;

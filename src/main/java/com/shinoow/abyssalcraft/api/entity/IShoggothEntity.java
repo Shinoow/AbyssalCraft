@@ -12,12 +12,12 @@
 package com.shinoow.abyssalcraft.api.entity;
 
 /**
- * Interface to define an entity that's immune to the Dread Plague
+ * Interface to define an entity that's a Shoggoth (same level of immunities as IOmotholEntity)
  *
  * @author shinoow
  *
- * @since 1.0
+ * @since 2.0.0
  */
-public interface IDreadEntity {
+public interface IShoggothEntity {
 
 }

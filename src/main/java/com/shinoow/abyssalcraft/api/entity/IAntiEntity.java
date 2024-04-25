@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.api.entity;
 
 /**
- * Interface to define a entity that's immune to the Antimatter potion effect
+ * Interface to define an entity that's immune to the Antimatter potion effect
  *
  * @author shinoow
  *

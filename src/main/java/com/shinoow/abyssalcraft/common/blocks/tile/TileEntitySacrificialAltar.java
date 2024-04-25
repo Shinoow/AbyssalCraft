@@ -100,7 +100,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 		if(!item.isEmpty())
 			if(item.getItem() instanceof IEnergyContainerItem)
 				if(!world.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
-					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(1));
+					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(20));
 
 		if(entity == null){
 			List<EntityLivingBase> mobs = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(8, 3, 8));
@@ -129,7 +129,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 		}
 		if(collectionLimit >= getMaxEnergy() / 5){
 			collectionLimit = 0;
-			coolDown = 1200;
+			coolDown = getCooldownStartNumber();
 		}
 
 		if(getContainedEnergy() > getMaxEnergy())
@@ -155,6 +155,10 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 		return coolDown > 0;
 	}
 
+	protected int getCooldownStartNumber() {
+		return 1200;
+	}
+	
 	@Override
 	public float getContainedEnergy() {
 

@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.api.entity;
 
 /**
- * Interface to define a entity that's immune to both plagues and the antimatter potion effect
+ * Interface to define an entity that's immune to both plagues and the antimatter potion effect
  * (and probably originates from Omothol)
  *
  * @author shinoow

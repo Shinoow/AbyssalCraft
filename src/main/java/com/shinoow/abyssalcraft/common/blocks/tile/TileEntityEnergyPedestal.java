@@ -81,7 +81,7 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 		if(!item.isEmpty())
 			if(item.getItem() instanceof IEnergyContainerItem)
 				if(!world.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
-					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(1));
+					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(20));
 	}
 
 	@Override

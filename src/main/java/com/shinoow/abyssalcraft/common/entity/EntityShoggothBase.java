@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.api.entity.IShoggothEntity;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothAttackMelee;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothBuildMonolith;
@@ -56,7 +56,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
-public abstract class EntityShoggothBase extends EntityMob implements IOmotholEntity, IEntityMultiPart, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
+public abstract class EntityShoggothBase extends EntityMob implements IShoggothEntity, IEntityMultiPart, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityShoggothBase.class, DataSerializers.BYTE);
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityShoggothBase.class, DataSerializers.VARINT);
@@ -396,7 +396,7 @@ public abstract class EntityShoggothBase extends EntityMob implements IOmotholEn
 					for(ItemStack armor : entity.getArmorInventoryList())
 						if(!(armor.getItem() instanceof ItemEthaxiumArmor))
 							armor.damageItem(getArmorAcidDamage(), entity);
-			} else if(EntityUtil.damageShield(entity, getArmorAcidDamage()))
+			} else if(EntityUtil.damageShield(entity, getShieldAcidDamage()))
 				entity.attackEntityFrom(AbyssalCraftAPI.acid, 1);
 		for(int i = (int)aabb.minX; i < aabb.maxX+1; i++)
 			for(int j = (int)aabb.minZ; j < aabb.maxZ+1; j++)

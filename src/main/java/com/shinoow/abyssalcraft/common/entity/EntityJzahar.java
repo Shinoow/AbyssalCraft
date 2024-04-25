@@ -451,7 +451,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 
 			if (getTimer(0) > 600)
 				for(Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(64D)))
-					if (entity.onGround && entity instanceof EntityLivingBase && !(entity instanceof IOmotholEntity))
+					if (entity.onGround && entity instanceof EntityLivingBase && !EntityUtil.isEntityEldritch((EntityLivingBase) entity))
 					{
 						entity.motionX += (float)(Math.random() * 0.1D - 0.05D);
 						entity.motionY += (float)(Math.random() * 0.1D - 0.05D);
@@ -491,7 +491,7 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 					double size = 64D;
 					Vec3d vector = getLookVec();
 					for(Entity entity : world.getEntitiesWithinAABB(Entity.class, getEntityBoundingBox().grow(size).offset(vector.x * 32D, vector.y * 32D, vector.z * 32D)))
-						if (!(entity instanceof EntityLivingBase) || !(entity instanceof IOmotholEntity))
+						if (!(entity instanceof EntityLivingBase) || !EntityUtil.isEntityEldritch((EntityLivingBase) entity))
 						{
 							double dx = vector.x;
 							double dy = vector.z;

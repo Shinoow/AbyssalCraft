@@ -53,7 +53,7 @@ public final class EntityUtil {
 	 * @return True if the Entity is immune, otherwise false
 	 */
 	public static boolean isEntityCoralium(EntityLivingBase par1){
-		return par1 instanceof ICoraliumEntity || par1 instanceof IOmotholEntity || par1 instanceof EntityPlayer && isPlayerCoralium((EntityPlayer)par1)
+		return par1 instanceof ICoraliumEntity || isEntityEldritch(par1) || par1 instanceof EntityPlayer && isPlayerCoralium((EntityPlayer)par1)
 				|| EntityList.getKey(par1) != null && (coralium_immunity.contains(EntityList.getKey(par1).toString())
 						|| AbyssalCraftAPI.getInternalMethodHandler().isImmuneOrCarrier(EntityList.getKey(par1).toString(), 2));
 	}
@@ -75,7 +75,7 @@ public final class EntityUtil {
 	 * @return True if the Entity is immune, otherwise false
 	 */
 	public static boolean isEntityDread(EntityLivingBase par1){
-		return par1 instanceof IDreadEntity || par1 instanceof IOmotholEntity || EntityList.getKey(par1) != null && (dread_immunity.contains(EntityList.getKey(par1).toString())
+		return par1 instanceof IDreadEntity || isEntityEldritch(par1) || EntityList.getKey(par1) != null && (dread_immunity.contains(EntityList.getKey(par1).toString())
 				|| AbyssalCraftAPI.getInternalMethodHandler().isImmuneOrCarrier(EntityList.getKey(par1).toString(), 0));
 	}
 
@@ -85,9 +85,18 @@ public final class EntityUtil {
 	 * @return True if the Entity is immune, otherwise false
 	 */
 	public static boolean isEntityAnti(EntityLivingBase par1){
-		return par1 instanceof IAntiEntity || par1 instanceof IOmotholEntity;
+		return par1 instanceof IAntiEntity || isEntityEldritch(par1);
 	}
 
+	/**
+	 * Checks if the Entity is eldritch (originates from Omothol or is a Shoggoth)
+	 * @param par1 The Entity to check
+	 * @return True if the Entity is eldritch, otherwise false
+	 */
+	public static boolean isEntityEldritch(EntityLivingBase par1) {
+		return par1 instanceof IOmotholEntity || par1 instanceof IShoggothEntity;
+	}
+	
 	/**
 	 * Checks if a Player has a Necronomicon
 	 * @param player The Player to check
