@@ -35,27 +35,42 @@ public interface IEnergyContainer {
 	/**
 	 * Adds Potential Energy to the tile entity
 	 * @param energy Energy quota to add
+	 * @return Energy overflow, if any
 	 */
-	void addEnergy(float energy);
+	default float addEnergy(float energy) {
+		return PEUtils.addEnergy(this, energy);
+	}
 
 	/**
 	 * Consumes (removes) Potential Energy from the tile entity
 	 * @param energy Energy quota to consume
 	 * @return The amount of energy consumed
 	 */
-	float consumeEnergy(float energy);
+	default float consumeEnergy(float energy) {
+		return PEUtils.consumeEnergy(this, energy);
+	}
 
+	/**
+	 * Sets the Potential Energy of the tile entity to the amount
+	 * @param energy Energy amount to set
+	 */
+	void setEnergy(float energy);
+	
 	/**
 	 * Returns whether or not this container can accept Potential Energy<br>
 	 * (eg. if it  has room for more Potential Energy, or if it accepts external input at all)
 	 */
-	boolean canAcceptPE();
+	default boolean canAcceptPE() {
+		return getContainedEnergy() < getMaxEnergy();
+	}
 
 	/**
 	 * Returns whether or not this container can transfer Potential Energy<br>
 	 * (eg. if it has any Potential Energy stored that it can transfer, or if it allows extraction at all)
 	 */
-	boolean canTransferPE();
+	default boolean canTransferPE() {
+		return getContainedEnergy() > 0;
+	}
 
 	/**
 	 * Returns the TileEntity this interface is bound to

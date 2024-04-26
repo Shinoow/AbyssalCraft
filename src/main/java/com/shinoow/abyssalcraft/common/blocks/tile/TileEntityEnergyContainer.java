@@ -98,36 +98,6 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	}
 
 	@Override
-	public void addEnergy(float energy) {
-		this.energy += energy;
-		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
-	}
-
-	@Override
-	public float consumeEnergy(float energy) {
-		if(energy < this.energy){
-			this.energy -= energy;
-			return energy;
-		} else {
-			float ret = this.energy;
-			this.energy = 0;
-			return ret;
-		}
-	}
-
-	@Override
-	public boolean canAcceptPE() {
-
-		return getContainedEnergy() < getMaxEnergy();
-	}
-
-	@Override
-	public boolean canTransferPE() {
-
-		return getContainedEnergy() > 0;
-	}
-
-	@Override
 	public TileEntity getContainerTile() {
 
 		return this;
@@ -241,5 +211,11 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 				return false;
 
 		return true;
+	}
+
+	@Override
+	public void setEnergy(float energy) {
+
+		this.energy = energy;
 	}
 }

@@ -32,7 +32,7 @@ public interface IEnergyBlock {
 	}
 
 	/**
-	 * Returns whether or nont the item representation of this block
+	 * Returns whether or not the item representation of this block
 	 * can transfer Potential Energy
 	 */
 	default boolean canTransferPE() {

@@ -161,30 +161,6 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 	}
 
 	@Override
-	public void addEnergy(float energy) {
-		this.energy += energy;
-		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
-	}
-
-	@Override
-	public float consumeEnergy(float energy) {
-		if(energy < this.energy){
-			this.energy -= energy;
-			return energy;
-		} else {
-			float ret = this.energy;
-			this.energy = 0;
-			return ret;
-		}
-	}
-
-	@Override
-	public boolean canAcceptPE() {
-
-		return getContainedEnergy() < getMaxEnergy();
-	}
-
-	@Override
 	public boolean canTransferPE() {
 
 		return false;
@@ -444,5 +420,11 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 			this.item = item;
 			this.limit = limit;
 		}
+	}
+
+	@Override
+	public void setEnergy(float energy) {
+
+		this.energy = energy;
 	}
 }

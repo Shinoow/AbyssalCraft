@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -68,38 +69,14 @@ public class TileEntityEnergyCollector extends TileEntity implements IEnergyColl
 	}
 
 	@Override
-	public void addEnergy(float energy) {
-		this.energy += energy;
-		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
-	}
-
-	@Override
-	public float consumeEnergy(float energy) {
-		if(energy < this.energy){
-			this.energy -= energy;
-			return energy;
-		} else {
-			float ret = this.energy;
-			this.energy = 0;
-			return ret;
-		}
-	}
-
-	@Override
-	public boolean canAcceptPE() {
-
-		return getContainedEnergy() < getMaxEnergy();
-	}
-
-	@Override
-	public boolean canTransferPE() {
-
-		return getContainedEnergy() > 0;
-	}
-
-	@Override
 	public TileEntity getContainerTile() {
 
 		return this;
+	}
+
+	@Override
+	public void setEnergy(float energy) {
+
+		this.energy = energy;
 	}
 }

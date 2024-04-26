@@ -366,7 +366,7 @@ public class PEUtils {
 		if(relay.canAcceptPE()){
 			IEnergyContainer container = getContainer(world, pos, face, 1);
 			if(container != null && container.canTransferPE())
-				relay.addEnergy(container.consumeEnergy(amount));
+				container.addEnergy(relay.addEnergy(container.consumeEnergy(amount)));
 
 		}
 	}
@@ -396,12 +396,17 @@ public class PEUtils {
 	 * @param container PE container Item instance
 	 * @param stack ItemStack containing the Item
 	 * @param energy Energy quanta to add
+	 * @return Energy overflow, if any
 	 */
-	public static void addEnergy(IEnergyContainerItem container, ItemStack stack, float energy){
-		float contained = container.getContainedEnergy(stack);
-		if(contained + energy >= container.getMaxEnergy(stack))
+	public static float addEnergy(IEnergyContainerItem container, ItemStack stack, float energy){
+		float total = container.getContainedEnergy(stack) + energy;
+		if(total >= container.getMaxEnergy(stack)) {
+			float ret = total - container.getMaxEnergy(stack);
 			stack.getTagCompound().setFloat("PotEnergy", container.getMaxEnergy(stack));
-		else stack.getTagCompound().setFloat("PotEnergy", contained += energy);
+			return ret; //overflow goes here
+		}
+		stack.getTagCompound().setFloat("PotEnergy", total);
+		return 0;
 	}
 
 	/**
@@ -423,25 +428,54 @@ public class PEUtils {
 	}
 
 	/**
+	 * Adds PE to the supplied Energy Container<br>
+	 * Unless you need special code, this can be called in {@link IEnergyContainer#addEnergy(float)}
+	 * @param container PE container Item instance
+	 * @param stack ItemStack containing the Item
+	 * @param energy Energy quanta to add
+	 * @return Energy overflow, if any
+	 */
+	public static float addEnergy(IEnergyContainer container, float energy){
+		float total = container.getContainedEnergy() + energy;
+		if(total >= container.getMaxEnergy()) {
+			float ret = total - container.getMaxEnergy();
+			container.setEnergy(container.getMaxEnergy());
+			return ret; //overflow goes here
+		}
+		container.setEnergy(total);
+		return 0;
+	}
+
+	/**
+	 * Consumes PE from the supplied Energy Container<br>
+	 * Unless you need special code, this can be called in {@link IEnergyContainer#consumeEnergy(float)}
+	 * @param stack ItemStack containing energy
+	 * @param energy Energy quanta to consume
+	 * @return The amount of energy consumed
+	 */
+	public static float consumeEnergy(IEnergyContainer container, float energy){
+		float contained = container.getContainedEnergy();
+		if(energy < contained){
+			container.setEnergy(contained -= energy);
+			return energy;
+		} else {
+			container.setEnergy(0);
+			return contained;
+		}
+	}
+	
+	/**
 	 * Transfers PE from an IEnergyContainerItem to a IEnergyContainer (that former likely is contained in)
 	 * @param stack ItemStack containing the PE container Item
 	 * @param container PE Container 
 	 * @param amount Amount of PE to transfer
 	 */
 	public static void transferPEToContainer(ItemStack stack, IEnergyContainer container, float amount) {
-		if(!stack.isEmpty())
-			if(stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
-				if(containerItem.canTransferPE(stack) && container.canAcceptPE()) {
-					float consumed = containerItem.consumeEnergy(stack, amount);
-					float res = consumed + container.getContainedEnergy();
-					container.addEnergy(consumed);
-					if(res > container.getMaxEnergy()) {
-						res -= container.getMaxEnergy();
-						containerItem.addEnergy(stack, res); // returns overflow
-					}
-				}
-			}
+		if(!stack.isEmpty() && stack.getItem() instanceof IEnergyContainerItem) {
+			IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+			if(containerItem.canTransferPE(stack) && container.canAcceptPE())
+				containerItem.addEnergy(stack, container.addEnergy(containerItem.consumeEnergy(stack, amount))); // returns overflow
+		}
 	}
 
 	/**
@@ -451,18 +485,10 @@ public class PEUtils {
 	 * @param amount Amount of PE to transfer
 	 */
 	public static void transferPEFromContainer(ItemStack stack, IEnergyContainer container, float amount) {
-		if(!stack.isEmpty())
-			if(stack.getItem() instanceof IEnergyContainerItem) {
-				IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
-				if(containerItem.canAcceptPE(stack) && container.canTransferPE()) {
-					float consumed = container.consumeEnergy(amount);
-					float res = consumed + containerItem.getContainedEnergy(stack);
-					containerItem.addEnergy(stack, consumed);
-					if(res > containerItem.getMaxEnergy(stack)) {
-						res -= containerItem.getMaxEnergy(stack);
-						container.addEnergy(res); // returns overflow
-					}
-				}
-			}
+		if(!stack.isEmpty() && stack.getItem() instanceof IEnergyContainerItem) {
+			IEnergyContainerItem containerItem = (IEnergyContainerItem) stack.getItem();
+			if(containerItem.canAcceptPE(stack) && container.canTransferPE())
+				container.addEnergy(containerItem.addEnergy(stack, container.consumeEnergy(amount))); // returns overflow
+		}
 	}
 }

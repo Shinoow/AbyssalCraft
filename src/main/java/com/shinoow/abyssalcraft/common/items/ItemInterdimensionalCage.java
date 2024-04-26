@@ -142,30 +142,11 @@ public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyCont
 	}
 
 	@Override
-	public float getContainedEnergy(ItemStack stack) {
-		return PEUtils.getContainedEnergy(stack);
-	}
-
-	@Override
 	public int getMaxEnergy(ItemStack stack) {
 
 		return 1000;
 	}
 
-	@Override
-	public void addEnergy(ItemStack stack, float energy) {
-		PEUtils.addEnergy(this, stack, energy);
-	}
-
-	@Override
-	public float consumeEnergy(ItemStack stack, float energy) {
-		return PEUtils.consumeEnergy(stack, energy);
-	}
-
-	@Override
-	public boolean canAcceptPE(ItemStack stack) {
-		return getContainedEnergy(stack) < getMaxEnergy(stack);
-	}
 
 	@Override
 	public boolean canTransferPE(ItemStack stack) {

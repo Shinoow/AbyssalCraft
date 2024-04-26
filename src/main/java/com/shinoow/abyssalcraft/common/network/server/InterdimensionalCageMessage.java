@@ -56,7 +56,7 @@ public class InterdimensionalCageMessage extends AbstractServerMessage<Interdime
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		if(player.getHeldItem(hand) == null) return;
+		if(player.getHeldItem(hand).isEmpty()) return;
 		ItemStack stack = player.getHeldItem(hand);
 		Entity e = player.world.getEntityByID(id);
 		if(e == null) return;

@@ -26,7 +26,9 @@ public interface IEnergyContainerItem {
 	 * Gets the Potential Energy contained within the item
 	 * @param stack ItemStack containing the item
 	 */
-	float getContainedEnergy(ItemStack stack);
+	default float getContainedEnergy(ItemStack stack) {
+		return PEUtils.getContainedEnergy(stack);
+	}
 
 	/**
 	 * Gets the maximum Potential Energy the item can hold
@@ -38,8 +40,11 @@ public interface IEnergyContainerItem {
 	 * Adds Potential Energy to the item
 	 * @param stack ItemStack containing the item
 	 * @param energy Energy quanta to add
+	 * @return Energy overflow, if any
 	 */
-	void addEnergy(ItemStack stack, float energy);
+	default float addEnergy(ItemStack stack, float energy) {
+		return PEUtils.addEnergy(this, stack, energy);
+	}
 
 	/**
 	 * Consumes (removes) Potential Energy from the item
@@ -47,19 +52,25 @@ public interface IEnergyContainerItem {
 	 * @param energy Energy quanta to consume
 	 * @return The amount of energy consumed
 	 */
-	float consumeEnergy(ItemStack stack, float energy);
+	default float consumeEnergy(ItemStack stack, float energy) {
+		return PEUtils.consumeEnergy(stack, energy);
+	}
 
 	/**
 	 * Returns Whether or not this item can accept Potential Energy<br>
 	 * (eg. if it  has room for more Potential Energy, or if it accepts input at all)
 	 * @param stack ItemStack containing the item
 	 */
-	boolean canAcceptPE(ItemStack stack);
+	default boolean canAcceptPE(ItemStack stack) {
+		return getContainedEnergy(stack) < getMaxEnergy(stack);
+	}
 
 	/**
 	 * Returns Whether or not this item can transfer Potential Energy<br>
 	 * (eg. if it has any Potential Energy stored that it can transfer, or if it allows extraction at all)
 	 * @param stack ItemStack containing the item
 	 */
-	boolean canTransferPE(ItemStack stack);
+	default boolean canTransferPE(ItemStack stack) {
+		return getContainedEnergy(stack) > 0;
+	}
 }

@@ -16,7 +16,6 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
-import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 
@@ -157,7 +156,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 	protected int getCooldownStartNumber() {
 		return 1200;
 	}
-	
+
 	@Override
 	public float getContainedEnergy() {
 
@@ -171,37 +170,19 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 	}
 
 	@Override
-	public void addEnergy(float energy) {
-		this.energy += energy;
-		if(this.energy > getMaxEnergy()) this.energy = getMaxEnergy();
-	}
-
-	@Override
-	public float consumeEnergy(float energy) {
-		if(energy < this.energy){
-			this.energy -= energy;
-			return energy;
-		} else {
-			float ret = this.energy;
-			this.energy = 0;
-			return ret;
-		}
-	}
-
-	@Override
 	public boolean canAcceptPE() {
 		return false;
-	}
-
-	@Override
-	public boolean canTransferPE() {
-
-		return getContainedEnergy() > 0;
 	}
 
 	@Override
 	public TileEntity getContainerTile() {
 
 		return this;
+	}
+
+	@Override
+	public void setEnergy(float energy) {
+
+		this.energy = energy;
 	}
 }

@@ -17,8 +17,12 @@ import com.shinoow.abyssalcraft.api.energy.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContainerItem {
 
@@ -27,15 +31,21 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
+		if(isInCreativeTab(par2CreativeTab)){
+			par3List.add(new ItemStack(this));
+			ItemStack stack = new ItemStack(this);
+			addEnergy(stack, getMaxEnergy(stack));
+			par3List.add(stack);
+		}
+	}
+	
+	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		Block block = Block.getBlockFromItem(is.getItem());
 		if(block instanceof IEnergyRelayBlock)
 			l.add(String.format("Range: %d Blocks", ((IEnergyRelayBlock) block).getRange()));
-	}
-
-	@Override
-	public float getContainedEnergy(ItemStack stack) {
-		return PEUtils.getContainedEnergy(stack);
 	}
 
 	@Override
@@ -44,16 +54,6 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 		if(block instanceof IEnergyBlock)
 			return ((IEnergyBlock) block).getMaxEnergy(stack);
 		return 0;
-	}
-
-	@Override
-	public void addEnergy(ItemStack stack, float energy) {
-		PEUtils.addEnergy(this, stack, energy);
-	}
-
-	@Override
-	public float consumeEnergy(ItemStack stack, float energy) {
-		return PEUtils.consumeEnergy(stack, energy);
 	}
 
 	@Override

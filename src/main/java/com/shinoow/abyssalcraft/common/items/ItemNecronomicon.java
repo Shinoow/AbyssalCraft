@@ -103,11 +103,6 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	}
 
 	@Override
-	public float getContainedEnergy(ItemStack stack) {
-		return PEUtils.getContainedEnergy(stack);
-	}
-
-	@Override
 	public int getMaxEnergy(ItemStack stack) {
 		if (this == ACItems.necronomicon)
 			return 5000;
@@ -120,35 +115,5 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		if (this == ACItems.abyssalnomicon)
 			return 100000;
 		return 0;
-	}
-
-	@Override
-	public void addEnergy(ItemStack stack, float energy) {
-		PEUtils.addEnergy(this, stack, energy);
-	}
-
-	@Override
-	public float consumeEnergy(ItemStack stack, float energy) {
-		return PEUtils.consumeEnergy(stack, energy);
-	}
-
-	@Override
-	public boolean canAcceptPE(ItemStack stack) {
-		return getContainedEnergy(stack) < getMaxEnergy(stack);
-	}
-
-	@Override
-	public boolean canTransferPE(ItemStack stack) {
-		return getContainedEnergy(stack) > 0;
-	}
-
-	@Override
-	public boolean canAcceptPEExternally(ItemStack stack) {
-		return getContainedEnergy(stack) < getMaxEnergy(stack);
-	}
-
-	@Override
-	public boolean canTransferPEExternally(ItemStack stack) {
-		return getContainedEnergy(stack) > 0;
 	}
 }

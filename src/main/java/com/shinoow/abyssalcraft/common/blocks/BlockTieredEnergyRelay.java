@@ -175,7 +175,9 @@ public class BlockTieredEnergyRelay extends BlockContainer implements IEnergyRel
 	@Override
 	public int getMaxEnergy(ItemStack stack) {
 
-		return 500;
+		int base = 600;
+
+		return base + 100 * TYPE.getMeta();
 	}
 
 	@Override
