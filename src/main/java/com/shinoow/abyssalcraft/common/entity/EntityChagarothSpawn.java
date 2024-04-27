@@ -39,7 +39,7 @@ import net.minecraft.world.World;
 
 public class EntityChagarothSpawn extends EntityMob implements IDreadEntity {
 
-	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityDreadSpawn.class, DataSerializers.BYTE);
+	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityChagarothSpawn.class, DataSerializers.BYTE);
 
 	public EntityChagarothSpawn(World par1World)
 	{

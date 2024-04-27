@@ -41,7 +41,7 @@ import net.minecraft.world.World;
 
 public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, IRangedAttackMob {
 
-	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityGreaterDreadSpawn.class, DataSerializers.BYTE);
+	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityLesserDreadbeast.class, DataSerializers.BYTE);
 	private EntityAIAttackRanged arrowAttack = new EntityAIAttackRanged(this, 0.4D, 20, 15.0F);
 	private EntityAIAttackMelee attackOnCollide = new EntityAIAttackMelee(this, 0.35D, true);
 
