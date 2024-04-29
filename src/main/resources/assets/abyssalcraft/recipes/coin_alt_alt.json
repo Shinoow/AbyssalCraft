@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "#INGOTTIN"
+      "item": "minecraft:flint"
     },
     "%": {
-      "item": "minecraft:flint"
+      "item": "#INGOTTIN"
     }
   },
   "result": {
