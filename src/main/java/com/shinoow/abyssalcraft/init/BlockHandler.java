@@ -175,7 +175,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.ethaxium_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 8, SoundType.STONE, MapColor.CLOTH).setHardness(100.0F).setResistance(Float.MAX_VALUE).setTranslationKey("ethaxiumbrickslab1");
 		ethaxiumslab2 = new BlockACDoubleSlab(ACBlocks.ethaxium_brick_slab, Material.ROCK, "pickaxe", 8).setHardness(100.0F).setResistance(Float.MAX_VALUE).setTranslationKey("ethaxiumbrickslab2");
 		ACBlocks.ethaxium_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 8, SoundType.STONE, MapColor.CLOTH).setHardness(100.0F).setResistance(Float.MAX_VALUE).setTranslationKey("ethaxiumfence");
-		ACBlocks.engraver = new BlockEngraver().setHardness(2.5F).setResistance(12.0F).setTranslationKey("engraver");
 		house = new BlockHouse().setHardness(1.0F).setResistance(Float.MAX_VALUE).setTranslationKey("engraver_on");
 		ACBlocks.materializer = new BlockMaterializer().setTranslationKey("materializer");
 		ACBlocks.dark_ethaxium_brick = new BlockACBrick(8, 150.0F, Float.MAX_VALUE).setTranslationKey("darkethaxiumbrick");
@@ -316,7 +315,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityTransmutator.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityTransmutator"));
 		GameRegistry.registerTileEntity(TileEntityDreadguardSpawner.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityDradguardSpawner"));
 		GameRegistry.registerTileEntity(TileEntityChagarothSpawner.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityChagarothSpawner"));
-		GameRegistry.registerTileEntity(TileEntityEngraver.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityEngraver"));
 		GameRegistry.registerTileEntity(TileEntityMaterializer.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityMaterializer"));
 		GameRegistry.registerTileEntity(TileEntityRitualAltar.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityRitualAltar"));
 		GameRegistry.registerTileEntity(TileEntityRitualPedestal.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityRitualPedestal"));
@@ -466,7 +464,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.ethaxium_brick_slab, new ItemSlabAC(ACBlocks.ethaxium_brick_slab, ACBlocks.ethaxium_brick_slab, ethaxiumslab2).setUnlockCondition(new DimensionCondition(ACLib.omothol_id)), "ethaxiumbrickslab1");
 		registerBlock(ethaxiumslab2, new ItemSlabAC(ethaxiumslab2, ACBlocks.ethaxium_brick_slab, ethaxiumslab2).setUnlockCondition(new DimensionCondition(ACLib.omothol_id)), "ethaxiumbrickslab2");
 		registerBlock(ACBlocks.ethaxium_brick_fence, new ItemBlockColorName(ACBlocks.ethaxium_brick_fence), "ethaxiumfence");
-		registerBlock(ACBlocks.engraver, "engraver");
 		registerBlock(house, "engraver_on");
 		registerBlock(ACBlocks.materializer, "materializer");
 		registerBlock(ACBlocks.dark_ethaxium_brick, new ItemBlockColorName(ACBlocks.dark_ethaxium_brick), "darkethaxiumbrick");

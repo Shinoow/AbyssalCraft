@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.api.biome.IAbyssalWastelandBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
@@ -33,7 +34,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeAbywasteland extends Biome {
+public class BiomeAbywasteland extends Biome implements IAbyssalWastelandBiome {
 
 	public BiomeAbywasteland(BiomeProperties par1){
 		super(par1);

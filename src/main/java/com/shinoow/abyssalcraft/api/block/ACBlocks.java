@@ -137,7 +137,6 @@ public class ACBlocks {
 	public static Block ethaxium_brick_stairs;
 	public static Block ethaxium_brick_slab;
 	public static Block ethaxium_brick_fence;
-	public static Block engraver;
 	public static Block materializer;
 	public static Block dark_ethaxium_brick;
 	public static Block chiseled_dark_ethaxium_brick;

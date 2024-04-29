@@ -20,7 +20,6 @@ import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
-import com.shinoow.abyssalcraft.api.recipe.EngraverRecipes;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -56,17 +55,6 @@ public class APIUtils {
 		if(item.getItem() instanceof ICrystal)
 			return true;
 		return AbyssalCraftAPI.getCrystals().stream().anyMatch(crystal -> areStacksEqual(item, crystal));
-	}
-
-	/**
-	 * Checks if the ItemStack is a Coin
-	 * @param item ItemStack to check
-	 * @return True if the ItemStack is a Coin, otherwise false
-	 *
-	 * @since 1.5
-	 */
-	public static boolean isCoin(ItemStack item){
-		return EngraverRecipes.instance().getCoinList().stream().anyMatch(coin -> areStacksEqual(item, coin));
 	}
 
 	/**

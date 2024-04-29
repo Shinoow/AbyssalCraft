@@ -23,7 +23,6 @@ import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.internal.*;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
-import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.recipe.*;
 
@@ -403,64 +402,6 @@ public class AbyssalCraftAPI {
 			for(ItemStack stack : OreDictionary.getOres(input))
 				addTransmutation(stack, o, xp);
 		}
-	}
-
-	/**
-	 * Registers a coin to the coin list (use {@link #addEngraving(ItemStack, ItemEngraving, float)}.
-	 * Both regular coins and engraved coins should be registered here
-	 * to register the engraving template and engraved coin)
-	 * @param coin The ItemStack containing a coin
-	 *
-	 * @since 1.3.5
-	 */
-	public static void addCoin(ItemStack coin){
-		if(!EngraverRecipes.instance().getCoinList().contains(coin))
-			EngraverRecipes.instance().addCoin(coin);
-		else logger.log(Level.ERROR, "This Coin is already registered!");
-	}
-
-	/**
-	 * Registers a coin to the coin list (use {@link #addEngraving(Item, ItemEngraving, float)}.
-	 * Both regular coins and engraved coins should be registered here
-	 * to register the engraving template and engraved coin)
-	 * @param coin The Item representing a coin
-	 *
-	 * @since 1.3.5
-	 */
-	public static void addCoin(Item coin){
-		if(!EngraverRecipes.instance().getCoinList().contains(new ItemStack(coin)))
-			EngraverRecipes.instance().addCoin(coin);
-		else logger.log(Level.ERROR, "This Coin is already registered!");
-	}
-
-	/**
-	 * Registers a coin engraving (use {@link #addCoin(ItemStack)} to register the coin)
-	 * @param coin The Engraved Coin
-	 * @param engraving The Engraving Template
-	 * @param xp Amount of exp given
-	 *
-	 * @since 1.3.5
-	 */
-	public static void addEngraving(ItemStack coin, ItemEngraving engraving, float xp){
-		if(!EngraverRecipes.instance().getEngravings().containsKey(engraving) &&
-				!EngraverRecipes.instance().getEngravings().containsValue(coin))
-			EngraverRecipes.instance().addEngraving(coin, engraving, xp);
-		else logger.log(Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
-	}
-
-	/**
-	 * Registers a coin engraving (use {@link #addCoin(Item)} to register the coin)
-	 * @param coin The Engraved Coin
-	 * @param engraving The Engraving Template
-	 * @param xp Amount of exp given
-	 *
-	 * @since 1.3.5
-	 */
-	public static void addEngraving(Item coin, ItemEngraving engraving, float xp){
-		if(!EngraverRecipes.instance().getEngravings().containsKey(engraving) &&
-				!EngraverRecipes.instance().getEngravings().containsValue(new ItemStack(coin)))
-			EngraverRecipes.instance().addEngraving(coin, engraving, xp);
-		else logger.log(Level.ERROR, "This Engraving Template and/or Engraved Coin is already registered!");
 	}
 
 	/**

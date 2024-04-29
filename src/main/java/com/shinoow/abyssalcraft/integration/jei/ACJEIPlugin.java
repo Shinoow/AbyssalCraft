@@ -20,8 +20,6 @@ import com.shinoow.abyssalcraft.common.inventory.*;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.integration.jei.crystallizer.*;
-import com.shinoow.abyssalcraft.integration.jei.engraver.EngraverRecipeCategory;
-import com.shinoow.abyssalcraft.integration.jei.engraver.EngravingRecipeMaker;
 import com.shinoow.abyssalcraft.integration.jei.materializer.MaterializationRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.materializer.MaterializationRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeCategory;
@@ -61,7 +59,6 @@ public class ACJEIPlugin implements IModPlugin {
 				AbyssalCraftRecipeCategoryUid.FUEL_TRANSMUTATION);
 		registry.addRecipeCatalyst(new ItemStack(ACBlocks.crystallizer_idle), AbyssalCraftRecipeCategoryUid.CRYSTALLIZATION,
 				AbyssalCraftRecipeCategoryUid.FUEL_CRYSTALLIZATION);
-		registry.addRecipeCatalyst(new ItemStack(ACBlocks.engraver), AbyssalCraftRecipeCategoryUid.ENGRAVING);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.abyssal_wasteland_necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.dreadlands_necronomicon), AbyssalCraftRecipeCategoryUid.RITUAL);
@@ -80,7 +77,6 @@ public class ACJEIPlugin implements IModPlugin {
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerTransmutator.class, AbyssalCraftRecipeCategoryUid.FUEL_TRANSMUTATION, 1, 1, 1, 36);
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerCrystallizer.class, AbyssalCraftRecipeCategoryUid.CRYSTALLIZATION, 0, 1, 1, 36);
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerCrystallizer.class, AbyssalCraftRecipeCategoryUid.FUEL_CRYSTALLIZATION, 1, 1, 1, 36);
-		recipeTransferRegistry.addRecipeTransferHandler(ContainerEngraver.class, AbyssalCraftRecipeCategoryUid.ENGRAVING, 0, 1, 1, 36);
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerMaterializer.class, AbyssalCraftRecipeCategoryUid.MATERIALIZATION, 0, 1, 1, 36);
 
 		registry.addRecipes(TransmutationRecipeMaker.getTransmutatorRecipes(jeiHelpers), AbyssalCraftRecipeCategoryUid.TRANSMUTATION);
@@ -88,7 +84,6 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(CrystallizationRecipeMaker.getCrystallizerRecipes(jeiHelpers), AbyssalCraftRecipeCategoryUid.CRYSTALLIZATION);
 		registry.addRecipes(CrystallizerFuelRecipeMaker.getFuelRecipes(utils, jeiHelpers), AbyssalCraftRecipeCategoryUid.FUEL_CRYSTALLIZATION);
 		registry.addRecipes(RitualRecipeMaker.getRituals(), AbyssalCraftRecipeCategoryUid.RITUAL);
-		registry.addRecipes(EngravingRecipeMaker.getEngraverRecipes(), AbyssalCraftRecipeCategoryUid.ENGRAVING);
 		registry.addRecipes(RendingRecipeMaker.getRending(), AbyssalCraftRecipeCategoryUid.RENDING);
 		registry.addRecipes(MaterializerRecipes.instance().getMaterializationList(), AbyssalCraftRecipeCategoryUid.MATERIALIZATION);
 
@@ -113,7 +108,6 @@ public class ACJEIPlugin implements IModPlugin {
 				new CrystallizerFuelCategory(guiHelper),
 				new CrystallizationCategory(guiHelper),
 				new RitualRecipeCategory(guiHelper),
-				new EngraverRecipeCategory(guiHelper),
 				new RendingRecipeCategory(guiHelper),
 				new MaterializationRecipeCategory(guiHelper));
 	}

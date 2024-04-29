@@ -474,7 +474,6 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_yog_sothoth_statue), 0, new ModelResourceLocation("abyssalcraft:yogsothothstatue", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.shub_niggurath_statue), 0, new ModelResourceLocation("abyssalcraft:shubniggurathstatue", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_shub_niggurath_statue), 0, new ModelResourceLocation("abyssalcraft:shubniggurathstatue", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.engraver), 0, new ModelResourceLocation("abyssalcraft:engraver", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.oblivion_deathbomb), 0, new ModelResourceLocation("abyssalcraft:odb", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.chagaroth_altar_top), 0, new ModelResourceLocation("abyssalcraft:dreadaltartop", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.chagaroth_altar_bottom), 0, new ModelResourceLocation("abyssalcraft:dreadaltarbottom", "inventory"));
@@ -608,13 +607,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.ethaxium_sword, 0);
 		registerItemRender(ACItems.ethaxium_hoe, 0);
 		registerItemRender(ACItems.coin, 0);
-		registerItemRender(ACItems.cthulhu_engraved_coin, 0);
-		registerItemRender(ACItems.elder_engraved_coin, 0);
 		registerItemRender(ACItems.jzahar_engraved_coin, 0);
-		registerItemRender(ACItems.blank_engraving, 0);
-		registerItemRender(ACItems.cthulhu_engraving, 0);
-		registerItemRender(ACItems.elder_engraving, 0);
-		registerItemRender(ACItems.jzahar_engraving, 0);
 		registerItemRender(ACItems.eldritch_scale, 0);
 		registerItemRender(ACItems.omothol_flesh, 0);
 		registerItemRender(ACItems.anti_plagued_flesh, 0);
@@ -679,16 +672,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.range_shub_niggurath_charm, 0, "shubniggurathcharm");
 		registerItemRender(ACItems.duration_shub_niggurath_charm, 0, "shubniggurathcharm");
 		registerItemRender(ACItems.power_shub_niggurath_charm, 0, "shubniggurathcharm");
-		registerItemRender(ACItems.hastur_engraved_coin, 0);
-		registerItemRender(ACItems.azathoth_engraved_coin, 0);
-		registerItemRender(ACItems.nyarlathotep_engraved_coin, 0);
-		registerItemRender(ACItems.yog_sothoth_engraved_coin, 0);
-		registerItemRender(ACItems.shub_niggurath_engraved_coin, 0);
-		registerItemRender(ACItems.hastur_engraving, 0);
-		registerItemRender(ACItems.azathoth_engraving, 0);
-		registerItemRender(ACItems.nyarlathotep_engraving, 0);
-		registerItemRender(ACItems.yog_sothoth_engraving, 0);
-		registerItemRender(ACItems.shub_niggurath_engraving, 0);
 		registerItemRender(ACItems.essence_of_the_gatekeeper, 0);
 		registerItemRender(ACItems.interdimensional_cage, 0);
 		registerItemRender(ACItems.stone_tablet, 0);

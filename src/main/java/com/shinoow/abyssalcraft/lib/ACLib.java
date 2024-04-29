@@ -28,7 +28,7 @@ public class ACLib {
 	//Gui IDs
 	public static final int crystallizerGuiID = 30;
 	public static final int transmutatorGuiID = 31;
-	public static final int engraverGuiID = 32;
+//	public static final int engraverGuiID = 32;
 	public static final int necronmiconGuiID = 33;
 	public static final int crystalbagGuiID = 34;
 	public static final int materializerGuiID = 35;

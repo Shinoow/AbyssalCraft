@@ -19,7 +19,6 @@ public class AbyssalCraftRecipeCategoryUid {
 
 	public static final String TRANSMUTATION = "abyssalcraft.transmutation";
 	public static final String CRYSTALLIZATION = "abyssalcraft.crystallization";
-	public static final String ENGRAVING = "abyssalcraft.engraving";
 	public static final String RITUAL = "abyssalcraft.ritual";
 	public static final String FUEL_TRANSMUTATION = "abyssalcraft.fuel.transmutation";
 	public static final String FUEL_CRYSTALLIZATION = "abyssalcraft.fuel.crystallization";

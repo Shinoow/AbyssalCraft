@@ -17,7 +17,6 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.common.items.*;
 import com.shinoow.abyssalcraft.common.items.armor.*;
@@ -109,23 +108,7 @@ public class ItemHandler implements ILifeCycleHandler {
 
 		//Coins
 		ACItems.coin = new ItemCoin("blankcoin");
-		ACItems.cthulhu_engraved_coin = new ItemCoin("cthulhucoin");
-		ACItems.elder_engraved_coin = new ItemCoin("eldercoin");
 		ACItems.jzahar_engraved_coin = new ItemCoin("jzaharcoin");
-		ACItems.blank_engraving = new ItemEngraving("blank", 50).setCreativeTab(ACTabs.tabCoins);
-		ACItems.cthulhu_engraving = new ItemEngraving("cthulhu", 10).setCreativeTab(ACTabs.tabCoins);
-		ACItems.elder_engraving = new ItemEngraving("elder", 10).setCreativeTab(ACTabs.tabCoins);
-		ACItems.jzahar_engraving = new ItemEngraving("jzahar", 10).setCreativeTab(ACTabs.tabCoins);
-		ACItems.hastur_engraved_coin = new ItemCoin("hasturcoin");
-		ACItems.azathoth_engraved_coin = new ItemCoin("azathothcoin");
-		ACItems.nyarlathotep_engraved_coin = new ItemCoin("nyarlathotepcoin");
-		ACItems.yog_sothoth_engraved_coin = new ItemCoin("yogsothothcoin");
-		ACItems.shub_niggurath_engraved_coin = new ItemCoin("shubniggurathcoin");
-		ACItems.hastur_engraving = new ItemEngraving("hastur", 10).setCreativeTab(ACTabs.tabCoins);
-		ACItems.azathoth_engraving = new ItemEngraving("azathoth", 10).setCreativeTab(ACTabs.tabCoins);
-		ACItems.nyarlathotep_engraving = new ItemEngraving("nyarlathotep", 10).setCreativeTab(ACTabs.tabCoins);
-		ACItems.yog_sothoth_engraving = new ItemEngraving("yogsothoth", 10).setCreativeTab(ACTabs.tabCoins);
-		ACItems.shub_niggurath_engraving = new ItemEngraving("shubniggurath", 10).setCreativeTab(ACTabs.tabCoins);
 
 		//Charms
 		ACItems.ritual_charm = new ItemCharm("ritualcharm", null);
@@ -551,13 +534,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.ethaxium_sword, "ethaxiumsword");
 		registerItem(ACItems.ethaxium_hoe, "ethaxiumhoe");
 		registerItem(ACItems.coin, "coin");
-		registerItem(ACItems.cthulhu_engraved_coin, "cthulhucoin");
-		registerItem(ACItems.elder_engraved_coin, "eldercoin");
 		registerItem(ACItems.jzahar_engraved_coin, "jzaharcoin");
-		registerItem(ACItems.blank_engraving, "engraving_blank");
-		registerItem(ACItems.cthulhu_engraving, "engraving_cthulhu");
-		registerItem(ACItems.elder_engraving, "engraving_elder");
-		registerItem(ACItems.jzahar_engraving, "engraving_jzahar");
 		registerItem(ACItems.eldritch_scale, "eldritchscale");
 		registerItem(ACItems.omothol_flesh, "omotholflesh");
 		registerItem(ACItems.anti_plagued_flesh, "anticorflesh");
@@ -622,16 +599,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.range_shub_niggurath_charm, "shubniggurathcharm_range");
 		registerItem(ACItems.duration_shub_niggurath_charm, "shubniggurathcharm_duration");
 		registerItem(ACItems.power_shub_niggurath_charm, "shubniggurathcharm_power");
-		registerItem(ACItems.hastur_engraved_coin, "hasturcoin");
-		registerItem(ACItems.azathoth_engraved_coin, "azathothcoin");
-		registerItem(ACItems.nyarlathotep_engraved_coin, "nyarlathotepcoin");
-		registerItem(ACItems.yog_sothoth_engraved_coin, "yogsothothcoin");
-		registerItem(ACItems.shub_niggurath_engraved_coin, "shubniggurathcoin");
-		registerItem(ACItems.hastur_engraving, "engraving_hastur");
-		registerItem(ACItems.azathoth_engraving, "engraving_azathoth");
-		registerItem(ACItems.nyarlathotep_engraving, "engraving_nyarlathotep");
-		registerItem(ACItems.yog_sothoth_engraving, "engraving_yogsothoth");
-		registerItem(ACItems.shub_niggurath_engraving, "engraving_shubniggurath");
 		registerItem(ACItems.essence_of_the_gatekeeper, "gatekeeperessence");
 		registerItem(ACItems.interdimensional_cage, "interdimensionalcage");
 		registerItem(ACItems.crystal_fragment_iron, "iron_crystal_fragment");

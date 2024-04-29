@@ -18,7 +18,6 @@ import com.shinoow.abyssalcraft.api.energy.disruption.*;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.ItemEngraving;
 import com.shinoow.abyssalcraft.api.rending.Rending;
 import com.shinoow.abyssalcraft.api.rending.RendingRegistry;
 import com.shinoow.abyssalcraft.api.ritual.*;
@@ -48,7 +47,6 @@ public class AbyssalCrafting {
 		addItemSmelting();
 		addCrystallization();
 		addTransmutation();
-		addEngraving();
 		addMaterialization();
 		addRitualRecipes();
 		addDisruptions();
@@ -387,28 +385,6 @@ public class AbyssalCrafting {
 		}
 	}
 
-	private static void addEngraving(){
-
-		AbyssalCraftAPI.addCoin(ACItems.coin);
-		AbyssalCraftAPI.addCoin(ACItems.cthulhu_engraved_coin);
-		AbyssalCraftAPI.addCoin(ACItems.elder_engraved_coin);
-		AbyssalCraftAPI.addCoin(ACItems.jzahar_engraved_coin);
-		AbyssalCraftAPI.addCoin(ACItems.hastur_engraved_coin);
-		AbyssalCraftAPI.addCoin(ACItems.azathoth_engraved_coin);
-		AbyssalCraftAPI.addCoin(ACItems.nyarlathotep_engraved_coin);
-		AbyssalCraftAPI.addCoin(ACItems.yog_sothoth_engraved_coin);
-		AbyssalCraftAPI.addCoin(ACItems.shub_niggurath_engraved_coin);
-		AbyssalCraftAPI.addEngraving(ACItems.coin, (ItemEngraving)ACItems.blank_engraving, 0.0F);
-		AbyssalCraftAPI.addEngraving(ACItems.cthulhu_engraved_coin, (ItemEngraving)ACItems.cthulhu_engraving, 0.5F);
-		AbyssalCraftAPI.addEngraving(ACItems.elder_engraved_coin, (ItemEngraving)ACItems.elder_engraving, 0.5F);
-		AbyssalCraftAPI.addEngraving(ACItems.jzahar_engraved_coin, (ItemEngraving)ACItems.jzahar_engraving, 0.5F);
-		AbyssalCraftAPI.addEngraving(ACItems.hastur_engraved_coin, (ItemEngraving)ACItems.hastur_engraving, 0.5F);
-		AbyssalCraftAPI.addEngraving(ACItems.azathoth_engraved_coin, (ItemEngraving)ACItems.azathoth_engraving, 0.5F);
-		AbyssalCraftAPI.addEngraving(ACItems.nyarlathotep_engraved_coin, (ItemEngraving)ACItems.nyarlathotep_engraving, 0.5F);
-		AbyssalCraftAPI.addEngraving(ACItems.yog_sothoth_engraved_coin, (ItemEngraving)ACItems.yog_sothoth_engraving, 0.5F);
-		AbyssalCraftAPI.addEngraving(ACItems.shub_niggurath_engraved_coin, (ItemEngraving)ACItems.shub_niggurath_engraving, 0.5F);
-	}
-
 	private static void addMaterialization(){
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.BONE), new ItemStack(ACItems.crystal_calcium));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(Items.ROTTEN_FLESH), new ItemStack(ACItems.crystal_phosphorus));
@@ -616,27 +592,28 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_RANGE_CHARM = new NecronomiconInfusionRitual("srangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_shub_niggurath_charm), new ItemStack(ACItems.shub_niggurath_charm), rcoffers));
 		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_DURATION_CHARM = new NecronomiconInfusionRitual("sdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_shub_niggurath_charm), new ItemStack(ACItems.shub_niggurath_charm), dcoffers));
 		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_POWER_CHARM = new NecronomiconInfusionRitual("spowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_shub_niggurath_charm), new ItemStack(ACItems.shub_niggurath_charm), pcoffers));
-		Object[] ccoffers = new Object[]{ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin,
-				ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin};
-		RitualRegistry.instance().registerRitual(Rituals.CTHULHU_CHARM = new NecronomiconInfusionRitual("cthulhuCharm", 4, 2000F, new ItemStack(ACItems.cthulhu_charm), new ItemStack(ACItems.ritual_charm), ccoffers));
-		Object[] hcoffers = new Object[]{ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin,
-				ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin};
-		RitualRegistry.instance().registerRitual(Rituals.HASTUR_CHARM = new NecronomiconInfusionRitual("hasturCharm", 4, 2000F, new ItemStack(ACItems.hastur_charm), new ItemStack(ACItems.ritual_charm), hcoffers));
-		Object[] jcoffers = new Object[]{ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin,
-				ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin};
-		RitualRegistry.instance().registerRitual(Rituals.JZAHAR_CHARM = new NecronomiconInfusionRitual("jzaharCharm", 4, 2000F, new ItemStack(ACItems.jzahar_charm), new ItemStack(ACItems.ritual_charm), jcoffers));
-		Object[] acoffers = new Object[]{ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin,
-				ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin};
-		RitualRegistry.instance().registerRitual(Rituals.AZATHOTH_CHARM = new NecronomiconInfusionRitual("azathothCharm", 4, 2000F, new ItemStack(ACItems.azathoth_charm), new ItemStack(ACItems.ritual_charm), acoffers));
-		Object[] ncoffers = new Object[]{ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin,
-				ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin};
-		RitualRegistry.instance().registerRitual(Rituals.NYARLATHOTEP_CHARM = new NecronomiconInfusionRitual("nyarlathotepCharm", 4, 2000F, new ItemStack(ACItems.nyarlathotep_charm), new ItemStack(ACItems.ritual_charm), ncoffers));
-		Object[] ycoffers = new Object[]{ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin,
-				ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin};
-		RitualRegistry.instance().registerRitual(Rituals.YOG_SOTHOTH_CHARM = new NecronomiconInfusionRitual("yogsothothCharm", 4, 2000F, new ItemStack(ACItems.yog_sothoth_charm), new ItemStack(ACItems.ritual_charm), ycoffers));
-		Object[] scoffers = new Object[]{ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin,
-				ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin};
-		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_CHARM = new NecronomiconInfusionRitual("shubniggurathCharm", 4, 2000F, new ItemStack(ACItems.shub_niggurath_charm), new ItemStack(ACItems.ritual_charm), scoffers));
+		//TODO: ritual charms!
+//		Object[] ccoffers = new Object[]{ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin,
+//				ACItems.cthulhu_engraved_coin, ACItems.cthulhu_engraved_coin};
+//		RitualRegistry.instance().registerRitual(Rituals.CTHULHU_CHARM = new NecronomiconInfusionRitual("cthulhuCharm", 4, 2000F, new ItemStack(ACItems.cthulhu_charm), new ItemStack(ACItems.ritual_charm), ccoffers));
+//		Object[] hcoffers = new Object[]{ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin,
+//				ACItems.hastur_engraved_coin, ACItems.hastur_engraved_coin};
+//		RitualRegistry.instance().registerRitual(Rituals.HASTUR_CHARM = new NecronomiconInfusionRitual("hasturCharm", 4, 2000F, new ItemStack(ACItems.hastur_charm), new ItemStack(ACItems.ritual_charm), hcoffers));
+//		Object[] jcoffers = new Object[]{ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin,
+//				ACItems.jzahar_engraved_coin, ACItems.jzahar_engraved_coin};
+//		RitualRegistry.instance().registerRitual(Rituals.JZAHAR_CHARM = new NecronomiconInfusionRitual("jzaharCharm", 4, 2000F, new ItemStack(ACItems.jzahar_charm), new ItemStack(ACItems.ritual_charm), jcoffers));
+//		Object[] acoffers = new Object[]{ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin,
+//				ACItems.azathoth_engraved_coin, ACItems.azathoth_engraved_coin};
+//		RitualRegistry.instance().registerRitual(Rituals.AZATHOTH_CHARM = new NecronomiconInfusionRitual("azathothCharm", 4, 2000F, new ItemStack(ACItems.azathoth_charm), new ItemStack(ACItems.ritual_charm), acoffers));
+//		Object[] ncoffers = new Object[]{ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin,
+//				ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin, ACItems.nyarlathotep_engraved_coin};
+//		RitualRegistry.instance().registerRitual(Rituals.NYARLATHOTEP_CHARM = new NecronomiconInfusionRitual("nyarlathotepCharm", 4, 2000F, new ItemStack(ACItems.nyarlathotep_charm), new ItemStack(ACItems.ritual_charm), ncoffers));
+//		Object[] ycoffers = new Object[]{ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin,
+//				ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin, ACItems.yog_sothoth_engraved_coin};
+//		RitualRegistry.instance().registerRitual(Rituals.YOG_SOTHOTH_CHARM = new NecronomiconInfusionRitual("yogsothothCharm", 4, 2000F, new ItemStack(ACItems.yog_sothoth_charm), new ItemStack(ACItems.ritual_charm), ycoffers));
+//		Object[] scoffers = new Object[]{ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin,
+//				ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin, ACItems.shub_niggurath_engraved_coin};
+//		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_CHARM = new NecronomiconInfusionRitual("shubniggurathCharm", 4, 2000F, new ItemStack(ACItems.shub_niggurath_charm), new ItemStack(ACItems.ritual_charm), scoffers));
 		Object[] owoffers = new Object[]{ACItems.shadow_shard, Blocks.COBBLESTONE, ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone), ACItems.shadow_shard, Blocks.COBBLESTONE,
 				ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone)};
 		Object[] awoffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0),

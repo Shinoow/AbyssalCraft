@@ -46,11 +46,6 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerTransmutator(ctx.player.inventory, (TileEntityTransmutator) ctx.getTE());
 			return null;
 		});
-		serverElements.put(ACLib.engraverGuiID, ctx -> {
-			if (ctx.getTE() instanceof TileEntityEngraver)
-				return new ContainerEngraver(ctx.player.inventory, (TileEntityEngraver) ctx.getTE());
-			return null;
-		});
 		serverElements.put(ACLib.materializerGuiID, ctx -> {
 			if (ctx.getTE() instanceof TileEntityMaterializer)
 				return new ContainerMaterializer(ctx.player.inventory, (TileEntityMaterializer) ctx.getTE());
@@ -111,11 +106,6 @@ public class GuiHandler implements IGuiHandler {
 		clientElements.put(ACLib.transmutatorGuiID, ctx -> {
 			if (ctx.getTE() instanceof TileEntityTransmutator)
 				return new GuiTransmutator(ctx.player.inventory, (TileEntityTransmutator) ctx.getTE());
-			return null;
-		});
-		clientElements.put(ACLib.engraverGuiID, ctx -> {
-			if (ctx.getTE() instanceof TileEntityEngraver)
-				return new GuiEngraver(ctx.player.inventory, (TileEntityEngraver) ctx.getTE());
 			return null;
 		});
 		clientElements.put(ACLib.materializerGuiID, ctx -> {
