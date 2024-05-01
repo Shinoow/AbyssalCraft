@@ -13,10 +13,10 @@ package com.shinoow.abyssalcraft.integration.jei.transmutator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import com.shinoow.abyssalcraft.api.recipe.Transmutation;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 
 import mezz.jei.api.IJeiHelpers;
@@ -29,13 +29,13 @@ public class TransmutationRecipeMaker {
 	public static List<TransmutationRecipe> getTransmutatorRecipes(IJeiHelpers helpers) {
 		IStackHelper stackHelper = helpers.getStackHelper();
 		TransmutatorRecipes transmutatorRecipes = TransmutatorRecipes.instance();
-		Map<ItemStack, ItemStack> transmutationMap = getTransmutationMap(transmutatorRecipes);
+		List<Transmutation> transmutationMap = getTransmutations(transmutatorRecipes);
 
 		List<TransmutationRecipe> recipes = new ArrayList<>();
 
-		for (Map.Entry<ItemStack, ItemStack> itemStackItemStackEntry : transmutationMap.entrySet()) {
-			ItemStack input = itemStackItemStackEntry.getKey();
-			ItemStack output = itemStackItemStackEntry.getValue();
+		for (Transmutation itemStackItemStackEntry : transmutationMap) {
+			ItemStack input = itemStackItemStackEntry.INPUT;
+			ItemStack output = itemStackItemStackEntry.OUTPUT;
 
 			float experience = transmutatorRecipes.getExperience(output);
 
@@ -52,7 +52,7 @@ public class TransmutationRecipeMaker {
 		return recipe.getInputs().size() != 0 && recipe.getOutputs().size() > 0;
 	}
 
-	private static Map<ItemStack, ItemStack> getTransmutationMap(@Nonnull TransmutatorRecipes transmutatorRecipes) {
+	private static List<Transmutation> getTransmutations(@Nonnull TransmutatorRecipes transmutatorRecipes) {
 		return transmutatorRecipes.getTransmutationList();
 	}
 }

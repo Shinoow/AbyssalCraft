@@ -74,13 +74,6 @@ public class ACTabs {
 			return new ItemStack(ACBlocks.crystallizer_idle);
 		}
 	};
-	public static final CreativeTabs tabCoins = new CreativeTabs("accoins"){
-
-		@Override
-		public ItemStack createIcon() {
-			return new ItemStack(ACItems.coin);
-		}
-	};
 	public static final CreativeTabs tabSpells = new CreativeTabs("acspells") {
 
 		@Override

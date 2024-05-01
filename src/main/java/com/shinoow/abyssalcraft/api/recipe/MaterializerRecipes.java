@@ -220,6 +220,14 @@ public class MaterializerRecipes {
 		return new ArrayList<>(Arrays.asList(inputTmp));
 	}
 
+	/**
+	 * Removes Materialization(s) based on the output
+	 * @param output ItemStack to check for
+	 */
+	public void removeMaterialization(ItemStack output) {
+		materializationList.removeIf(e -> APIUtils.areStacksEqual(output, e.output));
+	}
+
 	public List<Materialization> getMaterializationList()
 	{
 		return materializationList;

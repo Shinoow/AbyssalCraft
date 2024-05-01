@@ -9,14 +9,24 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.items;
+package com.shinoow.abyssalcraft.api.recipe;
 
-import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
+import net.minecraft.item.ItemStack;
 
-public class ItemCoin extends ItemACBasic {
+/**
+ * A Transmutator recipe
+ * @author shinoow
+ *
+ * @since 2.0
+ */
+public class Transmutation {
 
-	public ItemCoin(String par1) {
-		super(par1);
+	public final ItemStack INPUT, OUTPUT;
+	public final float XP;
+
+	public Transmutation(ItemStack input, ItemStack output, float xp) {
+		this.INPUT = input;
+		this.OUTPUT = output;
+		this.XP = xp;
 	}
 }

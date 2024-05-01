@@ -13,10 +13,10 @@ package com.shinoow.abyssalcraft.integration.jei.crystallizer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import com.shinoow.abyssalcraft.api.recipe.Crystallization;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 
 import mezz.jei.api.IJeiHelpers;
@@ -29,14 +29,14 @@ public class CrystallizationRecipeMaker {
 	public static List<CrystallizationRecipe> getCrystallizerRecipes(IJeiHelpers helpers) {
 		IStackHelper stackHelper = helpers.getStackHelper();
 		CrystallizerRecipes crystallizerRecipes = CrystallizerRecipes.instance();
-		Map<ItemStack, ItemStack[]> crystallizationMap = getCrystallizationMap(crystallizerRecipes);
+		List<Crystallization> crystallizationMap = getCrystallizations(crystallizerRecipes);
 
 		List<CrystallizationRecipe> recipes = new ArrayList<>();
 
-		for (Map.Entry<ItemStack, ItemStack[]> itemStackItemStackEntry : crystallizationMap.entrySet()) {
-			ItemStack input = itemStackItemStackEntry.getKey();
-			ItemStack output = itemStackItemStackEntry.getValue()[0];
-			ItemStack output2 = itemStackItemStackEntry.getValue()[1];
+		for (Crystallization itemStackItemStackEntry : crystallizationMap) {
+			ItemStack input = itemStackItemStackEntry.INPUT;
+			ItemStack output = itemStackItemStackEntry.OUTPUT1;
+			ItemStack output2 = itemStackItemStackEntry.OUTPUT2;
 
 			float experience = crystallizerRecipes.getExperience(output);
 
@@ -53,7 +53,7 @@ public class CrystallizationRecipeMaker {
 		return recipe.getInputs().size() != 0 && recipe.getOutputs().size() > 0;
 	}
 
-	private static Map<ItemStack, ItemStack[]> getCrystallizationMap(@Nonnull CrystallizerRecipes crystallizerRecipes) {
+	private static List<Crystallization> getCrystallizations(@Nonnull CrystallizerRecipes crystallizerRecipes) {
 		return crystallizerRecipes.getCrystallizationList();
 	}
 }

@@ -11,9 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.recipe;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 
@@ -26,8 +25,7 @@ public class CrystallizerRecipes {
 
 	private static final CrystallizerRecipes crystallizationBase = new CrystallizerRecipes();
 	/** The list of crystallization results. */
-	private final Map<ItemStack, ItemStack[]> crystallizationList = new HashMap<>();
-	private final Map<ItemStack, Float> experienceList = new HashMap<>();
+	private final List<Crystallization> crystallizations = new ArrayList<>();
 
 	public static CrystallizerRecipes instance()
 	{
@@ -48,8 +46,7 @@ public class CrystallizerRecipes {
 
 	public void crystallize(ItemStack input, ItemStack output1, ItemStack output2, float xp)
 	{
-		crystallizationList.put(input, new ItemStack[]{output1, output2});
-		experienceList.put(output1, xp);
+		crystallizations.add(new Crystallization(input, output1, output2, xp));
 	}
 
 	/**
@@ -57,26 +54,43 @@ public class CrystallizerRecipes {
 	 */
 	public ItemStack[] getCrystallizationResult(ItemStack stack)
 	{
-		return crystallizationList.entrySet().stream()
-				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(Entry::getValue)
+		return crystallizations.stream()
+				.filter(e -> APIUtils.areStacksEqual(stack, e.INPUT))
+				.map(e -> e.getOutputs())
 				.findFirst()
 				.orElse(new ItemStack[] {ItemStack.EMPTY, ItemStack.EMPTY});
 	}
 
-	public Map<ItemStack, ItemStack[]> getCrystallizationList()
+	public List<Crystallization> getCrystallizationList()
 	{
-		return crystallizationList;
+		return crystallizations;
+	}
+
+	/**
+	 * Removes Crystallization(s) based on the output
+	 * @param output ItemStack to check for
+	 */
+	public void removeCrystallization(ItemStack output) {
+		crystallizations.removeIf(e -> APIUtils.areObjectsEqual(output, e.getOutputs(), false));
+	}
+
+	/**
+	 * Removes a Crystallization based on the input
+	 * @param input ItemStack to check for
+	 */
+	public void removeCrystallizationInput(ItemStack input) {
+		crystallizations.removeIf(e -> APIUtils.areStacksEqual(input, e.INPUT));
 	}
 
 	public float getExperience(ItemStack stack)
 	{
+		// Vanilla gets dibs
 		float ret = stack.getItem().getSmeltingExperience(stack);
 		if (ret != -1) return ret;
 
-		return experienceList.entrySet().stream()
-				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(Entry::getValue)
+		return crystallizations.stream() // Checks both outputs
+				.filter(e -> APIUtils.areObjectsEqual(stack, e.getOutputs(), false))
+				.map(e -> e.XP)
 				.findFirst()
 				.orElse(0.0F);
 	}

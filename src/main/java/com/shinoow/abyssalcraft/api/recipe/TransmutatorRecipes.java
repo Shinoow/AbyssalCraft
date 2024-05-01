@@ -11,9 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.recipe;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 
@@ -28,8 +27,7 @@ public class TransmutatorRecipes {
 
 	private static final TransmutatorRecipes transmutationBase = new TransmutatorRecipes();
 	/** The list of transmutation results. */
-	private final Map<ItemStack, ItemStack> transmutationList = new HashMap<>();
-	private final Map<ItemStack, Float> experienceList = new HashMap<>();
+	private final List<Transmutation> transmutations = new ArrayList<>();
 
 	public static TransmutatorRecipes instance()
 	{
@@ -61,8 +59,7 @@ public class TransmutatorRecipes {
 
 	public void transmute(ItemStack input, ItemStack output, float xp)
 	{
-		transmutationList.put(input, output);
-		experienceList.put(output, xp);
+		transmutations.add(new Transmutation(input, output, xp));
 	}
 
 	/**
@@ -70,26 +67,43 @@ public class TransmutatorRecipes {
 	 */
 	public ItemStack getTransmutationResult(ItemStack stack)
 	{
-		return transmutationList.entrySet().stream()
-				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(Entry::getValue)
+		return transmutations.stream()
+				.filter(e -> APIUtils.areStacksEqual(stack, e.INPUT))
+				.map(e -> e.OUTPUT)
 				.findFirst()
 				.orElse(ItemStack.EMPTY);
 	}
 
-	public Map<ItemStack, ItemStack> getTransmutationList()
+	public List<Transmutation> getTransmutationList()
 	{
-		return transmutationList;
+		return transmutations;
+	}
+
+	/**
+	 * Removes Transmutation(s) based on the output
+	 * @param output ItemStack to check for
+	 */
+	public void removeTransmutation(ItemStack output) {
+		transmutations.removeIf(e -> APIUtils.areStacksEqual(output, e.OUTPUT));
+	}
+
+	/**
+	 * Removes a Transmutation based on the input
+	 * @param input ItemStack to check for
+	 */
+	public void removeTransmutationInput(ItemStack input) {
+		transmutations.removeIf(e -> APIUtils.areStacksEqual(input, e.INPUT));
 	}
 
 	public float getExperience(ItemStack stack)
 	{
+		// Vanilla gets dibs
 		float ret = stack.getItem().getSmeltingExperience(stack);
 		if (ret != -1) return ret;
 
-		return experienceList.entrySet().stream()
-				.filter(e -> APIUtils.areStacksEqual(stack, e.getKey()))
-				.map(Entry::getValue)
+		return transmutations.stream()
+				.filter(e -> APIUtils.areStacksEqual(stack, e.INPUT))
+				.map(e -> e.XP)
 				.findFirst()
 				.orElse(0.0F);
 	}

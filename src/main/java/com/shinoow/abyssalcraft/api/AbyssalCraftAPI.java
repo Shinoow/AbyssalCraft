@@ -254,6 +254,26 @@ public class AbyssalCraftAPI {
 	}
 
 	/**
+	 * Removes Crystallization(s) based on the output
+	 * @param input ItemStack to check for
+	 *
+	 * @since 2.0
+	 */
+	public static void removeCrystallization(ItemStack output){
+		CrystallizerRecipes.instance().removeCrystallization(output);
+	}
+
+	/**
+	 * Removes a Crystallization based on the input
+	 * @param input ItemStack to check for
+	 *
+	 * @since 2.0
+	 */
+	public static void removeCrystallizationInput(ItemStack input){
+		CrystallizerRecipes.instance().removeCrystallizationInput(input);
+	}
+
+	/**
 	 * Basic Transmutation
 	 * @param input The block to transmutate
 	 * @param output The transmutated output
@@ -287,6 +307,26 @@ public class AbyssalCraftAPI {
 	 */
 	public static void addTransmutation(ItemStack input, ItemStack output, float xp){
 		TransmutatorRecipes.instance().transmute(input, output, xp);
+	}
+
+	/**
+	 * Removes Transmutation(s) based on the output
+	 * @param input ItemStack to check for
+	 *
+	 * @since 2.0
+	 */
+	public static void removeTransmutation(ItemStack output){
+		TransmutatorRecipes.instance().removeTransmutation(output);
+	}
+
+	/**
+	 * Removes a Transmutation based on the input
+	 * @param input ItemStack to check for
+	 *
+	 * @since 2.0
+	 */
+	public static void removeTransmutationInput(ItemStack input){
+		TransmutatorRecipes.instance().removeTransmutationInput(input);
 	}
 
 	/**
@@ -449,6 +489,16 @@ public class AbyssalCraftAPI {
 			}
 			else AbyssalCraftAPI.addMaterialization(stack, input);
 		});
+	}
+
+	/**
+	 * Removes Materialization(s) based on the output
+	 * @param output ItemStack output to check for
+	 *
+	 * @since 2.0
+	 */
+	public static void removeMaterialization(ItemStack output){
+		MaterializerRecipes.instance().removeMaterialization(output);
 	}
 
 	/**
