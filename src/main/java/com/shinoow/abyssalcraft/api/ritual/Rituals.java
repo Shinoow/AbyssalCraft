@@ -127,6 +127,7 @@ public class Rituals {
 	public static NecronomiconRitual ABYSSAL_WASTELAND_STAFF_OF_RENDING;
 	public static NecronomiconRitual DREADLANDS_STAFF_OF_RENDING;
 	public static NecronomiconRitual OMOTHOL_STAFF_OF_RENDING;
+	public static NecronomiconRitual TOKEN_OF_JZAHAR;
 
 	// Misc
 	public static NecronomiconRitual BREEDING;

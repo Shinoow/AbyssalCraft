@@ -337,7 +337,7 @@ public class NecronomiconText {
 
 	public static String MACHINE_INFO_1 = "necronomicon.text.machines.1";
 	public static String MACHINE_INFO_2 = "necronomicon.text.machines.2";
-	public static String MACHINE_INFO_3 = "necronomicon.text.machines.3";
+//	public static String MACHINE_INFO_3 = "necronomicon.text.machines.3";
 	public static String MACHINE_INFO_4 = "necronomicon.text.machines.4";
 
 	public static String KNOWLEDGE_INFO_1 = "necronomicon.text.knowledge.1";
