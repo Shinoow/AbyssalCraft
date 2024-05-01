@@ -426,7 +426,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, Items.ARROW, rand, adjustProbability(0.5F));
 
 				if (rand.nextFloat() < adjustProbability(0.5F))
-					list.add(new MerchantRecipe(new ItemStack(Blocks.GRAVEL, 10), new ItemStack(ACItems.jzahar_engraved_coin), new ItemStack(Items.FLINT, 4 + rand.nextInt(2), 0)));
+					list.add(new MerchantRecipe(new ItemStack(Blocks.GRAVEL, 10), new ItemStack(ACItems.token_of_jzahar), new ItemStack(Items.FLINT, 4 + rand.nextInt(2), 0)));
 
 				break;
 			case 1:
@@ -442,15 +442,15 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, ACItems.dreadlands_necronomicon, rand, adjustProbability(0.1F));
 				if(rand.nextFloat() < adjustProbability(0.1F)) {
 					k = 3 * (rand.nextInt(10) + 1) + 1;
-					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.jzahar_engraved_coin, k), new ItemStack(ACItems.basic_scroll)));
+					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.token_of_jzahar, k), new ItemStack(ACItems.basic_scroll)));
 				}
 				if(rand.nextFloat() < adjustProbability(0.1F)) {
 					k = 3 * (rand.nextInt(10) + 1) + 1;
-					list.add(new MerchantRecipe(new ItemStack(ACItems.basic_scroll), new ItemStack(ACItems.jzahar_engraved_coin, k), new ItemStack(ACItems.lesser_scroll)));
+					list.add(new MerchantRecipe(new ItemStack(ACItems.basic_scroll), new ItemStack(ACItems.token_of_jzahar, k), new ItemStack(ACItems.lesser_scroll)));
 				}
 				if(rand.nextFloat() < adjustProbability(0.1F)) {
 					k = 3 * (rand.nextInt(10) + 1) + 1;
-					list.add(new MerchantRecipe(new ItemStack(ACItems.lesser_scroll), new ItemStack(ACItems.jzahar_engraved_coin, k), new ItemStack(ACItems.moderate_scroll)));
+					list.add(new MerchantRecipe(new ItemStack(ACItems.lesser_scroll), new ItemStack(ACItems.token_of_jzahar, k), new ItemStack(ACItems.moderate_scroll)));
 				}
 
 				if (rand.nextFloat() < adjustProbability(0.07F))
@@ -459,7 +459,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 					int i1 = MathHelper.getInt(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
 					ItemStack itemstack = ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(enchantment, i1));
 					k = 2 + rand.nextInt(5 + i1 * 10) + 3 * i1;
-					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.jzahar_engraved_coin, k), itemstack));
+					list.add(new MerchantRecipe(new ItemStack(Items.BOOK), new ItemStack(ACItems.token_of_jzahar, k), itemstack));
 				}
 
 				break;
@@ -474,13 +474,13 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addItemTrade(list, ACItems.omothol_flesh, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.rotten_anti_flesh, rand, adjustProbability(0.3F));
 				addCoinTrade(list, ACItems.ritual_charm, rand, adjustProbability(0.4F));
-				addCoinTrade(list, ACItems.jzahar_engraved_coin, 8, ACItems.cthulhu_charm, 1);
-				addCoinTrade(list, ACItems.jzahar_engraved_coin, 8, ACItems.hastur_charm, 1);
-				addCoinTrade(list, ACItems.jzahar_engraved_coin, 8, ACItems.jzahar_charm, 1);
-				addCoinTrade(list, ACItems.jzahar_engraved_coin, 8, ACItems.azathoth_charm, 1);
-				addCoinTrade(list, ACItems.jzahar_engraved_coin, 8, ACItems.nyarlathotep_charm, 1);
-				addCoinTrade(list, ACItems.jzahar_engraved_coin, 8, ACItems.yog_sothoth_charm, 1);
-				addCoinTrade(list, ACItems.jzahar_engraved_coin, 8, ACItems.shub_niggurath_charm, 1);
+				addCoinTrade(list, ACItems.token_of_jzahar, 8, ACItems.cthulhu_charm, 1);
+				addCoinTrade(list, ACItems.token_of_jzahar, 8, ACItems.hastur_charm, 1);
+				addCoinTrade(list, ACItems.token_of_jzahar, 8, ACItems.jzahar_charm, 1);
+				addCoinTrade(list, ACItems.token_of_jzahar, 8, ACItems.azathoth_charm, 1);
+				addCoinTrade(list, ACItems.token_of_jzahar, 8, ACItems.nyarlathotep_charm, 1);
+				addCoinTrade(list, ACItems.token_of_jzahar, 8, ACItems.yog_sothoth_charm, 1);
+				addCoinTrade(list, ACItems.token_of_jzahar, 8, ACItems.shub_niggurath_charm, 1);
 				addCoinTrade(list, ACItems.staff_of_rending, rand, adjustProbability(0.1F));
 				if(rand.nextFloat() < adjustProbability(0.1F))
 					list.add(new MerchantRecipe(new ItemStack(ACItems.greater_scroll), ACItems.liquid_antimatter_bucket_stack, new ItemStack(ACItems.antimatter_scroll)));
@@ -499,7 +499,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 					Item item = aitem1[k];
 
 					if (rand.nextFloat() < adjustProbability(0.05F))
-						list.add(new MerchantRecipe(new ItemStack(item, 1, 0), new ItemStack(ACItems.jzahar_engraved_coin, 2 + rand.nextInt(3), 0), EnchantmentHelper.addRandomEnchantment(rand, new ItemStack(item, 1, 0), 5 + rand.nextInt(15), true)));
+						list.add(new MerchantRecipe(new ItemStack(item, 1, 0), new ItemStack(ACItems.token_of_jzahar, 2 + rand.nextInt(3), 0), EnchantmentHelper.addRandomEnchantment(rand, new ItemStack(item, 1, 0), 5 + rand.nextInt(15), true)));
 
 					++k;
 				}
@@ -685,7 +685,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	public static void addItemTrade(MerchantRecipeList list, Item item, Random rand, float probability)
 	{
 		if (rand.nextFloat() < probability)
-			list.add(new MerchantRecipe(getItemStackWithQuantity(item, rand), ACItems.jzahar_engraved_coin));
+			list.add(new MerchantRecipe(getItemStackWithQuantity(item, rand), ACItems.token_of_jzahar));
 	}
 
 	private static ItemStack getItemStackWithQuantity(Item item, Random rand)
@@ -714,13 +714,13 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 			if (i < 0)
 			{
-				itemstack = new ItemStack(ACItems.jzahar_engraved_coin, 1, 0);
+				itemstack = new ItemStack(ACItems.token_of_jzahar, 1, 0);
 				itemstack1 = stack;
 				itemstack1.setCount(i);
 			}
 			else
 			{
-				itemstack = new ItemStack(ACItems.jzahar_engraved_coin, i, 0);
+				itemstack = new ItemStack(ACItems.token_of_jzahar, i, 0);
 				itemstack1 = stack;
 				itemstack1.setCount(1);
 			}

@@ -695,12 +695,12 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.staff_of_the_gatekeeper, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.powerstone_tracker, UnlockConditions.ABYSSAL_WASTELAND);
 		addCondition(ACItems.eye_of_the_abyss, UnlockConditions.ABYSSAL_WASTELAND);
-		addCondition(ACItems.dreaded_gateway_key, UnlockConditions.ABYSSAL_WASTELAND);
+		addCondition(ACItems.dreadedlands_infused_gateway_key, UnlockConditions.ABYSSAL_WASTELAND);
 		addCondition(ACItems.coralium_brick, UnlockConditions.CORALIUM_BIOMES);
 		addCondition(ACItems.cudgel, UnlockConditions.SKELETON_GOLIATH);
 		addCondition(ACItems.carbon_cluster, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.dense_carbon_cluster, UnlockConditions.DREADLANDS);
-		addCondition(ACItems.rlyehian_gateway_key, UnlockConditions.DREADLANDS);
+		addCondition(ACItems.omothol_forged_gateway_key, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.life_crystal, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.abyssal_shoggoth_flesh, UnlockConditions.ABYSSAL_WASTELAND);
 		addCondition(ACItems.dreaded_shoggoth_flesh, UnlockConditions.DREADLANDS);
@@ -737,7 +737,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.dread_plague_antidote, UnlockConditions.DREAD_PLAGUE);
 		addCondition(ACItems.book_of_many_faces, UnlockConditions.DREADLANDS);
 		addCondition(ACItems.coin, UnlockConditions.OMOTHOL);
-		addCondition(ACItems.jzahar_engraved_coin, UnlockConditions.OMOTHOL);
+		addCondition(ACItems.token_of_jzahar, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.ethaxium_brick, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.ethaxium_ingot, UnlockConditions.OMOTHOL);
 		addCondition(ACItems.anti_beef, UnlockConditions.CORALIUM_INFESTED_SWAMP);

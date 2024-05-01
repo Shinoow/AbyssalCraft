@@ -35,8 +35,8 @@ public class NecronomiconPortalRitual extends NecronomiconRitual {
 	public NecronomiconPortalRitual() {
 		super("portal", 0, 1000F, new Object[] {ACItems.shadow_gem, null, ACItems.shadow_gem, null,
 				ACItems.shadow_gem, null, ACItems.shadow_gem});
-		sacrifice = new ItemStack[] {new ItemStack(ACItems.gateway_key), new ItemStack(ACItems.dreaded_gateway_key),
-				new ItemStack(ACItems.rlyehian_gateway_key)};
+		sacrifice = new ItemStack[] {new ItemStack(ACItems.gateway_key), new ItemStack(ACItems.dreadedlands_infused_gateway_key),
+				new ItemStack(ACItems.omothol_forged_gateway_key)};
 		setRitualParticle(EnumRitualParticle.SMOKE_PILLARS);
 	}
 

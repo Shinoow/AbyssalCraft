@@ -122,10 +122,10 @@ advancements.abyssalcraft.findpsdlL=Now that's one odd rock
 advancements.abyssalcraft.findpsdl.description=Found a Dreadlands Infused Powerstone.
 
 advancements.abyssalcraft.gk2=The Dreaded key
-advancements.abyssalcraft.gk2.description=Crafted Asorah's Dreaded Gateway Key.
+advancements.abyssalcraft.gk2.description=Crafted Dreadlands Infused Gateway Key.
 
 advancements.abyssalcraft.gk3=The Ancient key
-advancements.abyssalcraft.gk3.description=Transmuted Cha'garoth's R'lyehian Gateway Key.
+advancements.abyssalcraft.gk3.description=Transmuted the Omothol-forged Gateway Key.
 
 advancements.abyssalcraft.maketransmutator=Break all laws of physic!
 advancements.abyssalcraft.maketransmutator.description=Crafted a Transmutator.
@@ -478,11 +478,11 @@ necronomicon.text.overworld.progression.6=For more information, you will need th
 
 necronomicon.text.abyssal.progression.1=Once you have reached the Abyssal Wasteland, your next goal is to reach the Dreadlands. You will need 3 components in order to upgrade your Gateway Key, an Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem. The first is obtained by defeating Asorah, The Fallen, summoned through the ritual "Ritual of The Sleeper" (in ritual section).
 necronomicon.text.abyssal.progression.2=Asorah uses Spectral Dragons to heal himself, so they should be taken out quickly throughout the fight. Once defeated, Asorah will drop his eye with a large quantity of exp and materials found in the dimension. The Dreadlands Infused Powerstone is located inside an Abyssal Stronghold, which can be found using Powerstone Trackers (recipe in special materials section).
-necronomicon.text.abyssal.progression.3=Once you have tracked down the Powerstone, you can mine it with a Refined Coralium Pickaxe. Lastly you can upgrade your Gateway Key by infusing it with the required components ("Asorah's Dreaded Gateway Key" ritual). Upgrading your Necronomicon to the Dreadlands Necronomicon requires 8 Skins of The Dreadlands.
+necronomicon.text.abyssal.progression.3=Once you have tracked down the Powerstone, you can mine it with a Refined Coralium Pickaxe. Lastly you can upgrade your Gateway Key by infusing it with the required components ("Dreadlands Infused Gateway Key" ritual). Upgrading your Necronomicon to the Dreadlands Necronomicon requires 8 Skins of The Dreadlands.
 
 necronomicon.text.dreadlands.progression.1=Once you have reached the Dreadlands, your next goal is to reach Omothol. You will need to own a Transmutator, and you need to defeat Cha'garoth, The Dreadbeast. In order to reach Cha'garoth, you need the Altar of Cha'garoth, made out of 2 pieces. Both pieces are created through rituals.
 necronomicon.text.dreadlands.progression.2=Once you have both Altar pieces, you need to place them at Y = 40 inside a Dreadlands Mountain biome and right-click it. Doing so will grant you entry to The Lair of Cha'garoth. After fighting through Dreadguards and eventually killing Cha'garoth, you will receive a Dread-plagued Gateway Key, along with loot. The key needs to be transmuted into a functioning one.
-necronomicon.text.dreadlands.progression.3=With the aforementioned Transmutator (recipe in Abyssal Wasteland special materials section) you can transmute the Dread-plagued Gateway Key into Cha'garoth's R'lyehian Gateway Key, granting you access to Omothol. Upgrading your Necronomicon to the Omothol Necronomicon requires 8 Skins of Omothol.
+necronomicon.text.dreadlands.progression.3=With the aforementioned Transmutator (recipe in Abyssal Wasteland special materials section) you can transmute the Dread-plagued Gateway Key into the Omothol-forged Gateway Key, granting you access to Omothol. Upgrading your Necronomicon to the Omothol Necronomicon requires 8 Skins of Omothol.
 
 necronomicon.text.omothol.progression.1=Now that you've arrived in Omothol, it's time to battle J'zahar, Gatekeeper of The Abyss. The Temple of J'zahar can be located at the heart of Omothol (coordinates X=4, Y=53, Z=7). Once you have defeated the Gatekeeper, you will be able to unlock all hidden knowledge through the Abyssalnomicon.
 necronomicon.text.omothol.progression.2=The Abyssalnomicon requires Ethaxium Ingots, Eldritch Scales and the Essence of The Gatekeeper (dropped by J'zahar).
@@ -627,8 +627,8 @@ ac.ritual.oblivionCatalyst=Oblivion Catalyst
 ac.ritual.oblivionCatalyst.desc=An Oblivion Catalyst is created by infusing an Eye of Ender with Shards of Oblivion and Redstone Dust.
 ac.ritual.transmutationGem=Transmutation Gem
 ac.ritual.transmutationGem.desc=A Transmutation Gem is created by infusing a Coralium Pearl with Diamonds, Ender Pearls and Blaze Powder.
-ac.ritual.asorahGatewayKey=Asorah's Dreaded Gateway Key
-ac.ritual.asorahGatewayKey.desc=Asorah's Dreaded Gateway Key is created by infusing a Gateway Key with an Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem.
+ac.ritual.dreadInfusedGatewayKey=Dreadlands Infused Gateway Key
+ac.ritual.dreadInfusedGatewayKey.desc=Dreadlands Infused Gateway Key is created by infusing a Gateway Key with an Eye of The Abyss, a Dreadlands Infused Powerstone and a Transmutation Gem.
 ac.ritual.summonAsorah=Ritual of The Sleeper
 ac.ritual.summonAsorah.desc=Summons Asorah, The Fallen, from the Dark Realm. The afterlife is commonly referred to as an eternal slumber, in which a sleeper is an entity beyond life and death.
 ac.ritual.summonSacthoth=Ritual of Shadows
@@ -760,7 +760,7 @@ ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing a St
 ac.ritual.respawnJzahar=Ritual of reversed time
 ac.ritual.respawnJzahar.desc=If you in some way failed to obtain an Essence of The Gatekeeper, you can revert time and fight J'zahar again. Can only be performed at the Ritual Altar inside the Temple of J'zahar (X=4, Y=54, Z=85).
 ac.ritual.altarOfChagarothBottom=Altar of Cha'garoth (bottom)
-ac.ritual.altarOfChagarothBottom.desc=An Altar of Cha'garoth (bottom) is created with Dreadstone. Dreadium Ingots, Asorah's Dreaded Gateway Key, Bones and a piece of Dread Cloth.
+ac.ritual.altarOfChagarothBottom.desc=An Altar of Cha'garoth (bottom) is created with Dreadstone. Dreadium Ingots, Dreadlands Infused Gateway Key, Bones and a piece of Dread Cloth.
 ac.ritual.altarOfChagarothTop=Altar of Cha'garoth (top)
 ac.ritual.altarOfChagarothTop.desc=An Altar of Cha'garoth (top) is created with Sticks, a Bucket, Dread Cloths and Dreadium Ingots.
 ac.ritual.corEnchantment=Coralium Infusion
@@ -826,7 +826,7 @@ ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crysta
 ac.ritual.portal=Ritual of Open Doors
 ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed, but the altar will be replaced with a block.
 ac.ritual.silverKey=The Silver Key
-ac.ritual.silverKey.desc=By infusing Cha'garoth's R'lyehian Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key. The Silver Key can open portals at will via Portal Anchors as well as closing them both by interacting with the block (right click).
+ac.ritual.silverKey.desc=By infusing a Omothol-forged Gateway Key with 8 Ethaxium Ingots and a living sacrifice, it becomes the Silver Key. The Silver Key can open portals at will via Portal Anchors as well as closing them both by interacting with the block (right click).
 ac.ritual.facebook=The Book of Many Faces
 ac.ritual.facebook.desc=By infusing a Book with crystallized compounds resembling the elements of life, an Arrow and an Ink Sac, you create a book capable of communicating with the dead and tell you the names of fallen companions.
 ac.ritual.jzaharCoin=Token of J'zahar
@@ -1195,7 +1195,7 @@ item.gatekeeperstaff.name=Staff of The Gatekeeper
 item.gatewaykey.name=Gateway Key
 item.powerstonetracker.name=Powerstone Tracker
 item.eoa.name=Eye of The Abyss
-item.gatewaykeydl.name=Asorah's Dreaded Gateway Key
+item.gatewaykeydl.name=Dreadlands Infused Gateway Key
 item.dreadshard.name=Dreaded Shard of Abyssalnite
 item.dreadchunk.name=Dreaded Chunk of Abyssalnite
 item.abychunk.name=Chunk of Abyssalnite
@@ -1301,7 +1301,7 @@ item.dreadblade.name=Dreadium Katana Blade
 item.dreadhilt.name=Dreadium Katana Hilt
 item.dreadkatana.name=Dreadium Katana
 item.dreadkey.name=Dread-plagued Gateway Key
-item.gatewaykeyjzh.name=Cha'garoth's R'lyehian Gateway Key
+item.gatewaykeyjzh.name=Omothol-forged Gateway Key
 item.dreadiumsamuraihelmet.name=Dreadium Samurai Helmet
 item.dreadiumsamuraiplate.name=Dreadium Samurai Chestplate
 item.dreadiumsamurailegs.name=Dreadium Samurai Leggings

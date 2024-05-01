@@ -24,7 +24,7 @@ public class Rituals {
 	public static NecronomiconRitual OBLIVION_CATALYST;
 	public static NecronomiconRitual PORTAL;
 	public static NecronomiconRitual SUMMON_ASORAH;
-	public static NecronomiconRitual ASORAH_GATEWAY_KEY;
+	public static NecronomiconRitual DREADLANDS_INFUSED_GATEWAY_KEY;
 	public static NecronomiconRitual ALTAR_OF_CHAGAROTH_BOTTOM;
 	public static NecronomiconRitual ALTAR_OF_CHAGAROTH_TOP;
 	public static NecronomiconRitual INTERDIMENSIONAL_CAGE;

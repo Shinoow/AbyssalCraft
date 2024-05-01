@@ -489,7 +489,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.gateway_key, 0);
 		registerItemRender(ACItems.powerstone_tracker, 0);
 		registerItemRender(ACItems.eye_of_the_abyss, 0);
-		registerItemRender(ACItems.dreaded_gateway_key, 0);
+		registerItemRender(ACItems.dreadedlands_infused_gateway_key, 0);
 		registerItemRender(ACItems.dreaded_shard_of_abyssalnite, 0);
 		registerItemRender(ACItems.dreaded_chunk_of_abyssalnite, 0);
 		registerItemRender(ACItems.chunk_of_abyssalnite, 0);
@@ -580,7 +580,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.dreadium_katana_blade, 0);
 		registerItemRender(ACItems.dreadium_katana_hilt, 0);
 		registerItemRender(ACItems.dread_plagued_gateway_key, 0);
-		registerItemRender(ACItems.rlyehian_gateway_key, 0);
+		registerItemRender(ACItems.omothol_forged_gateway_key, 0);
 		registerItemRender(ACItems.dreadium_samurai_boots, 0);
 		registerItemRender(ACItems.dreadium_samurai_helmet, 0);
 		registerItemRender(ACItems.dreadium_samurai_chestplate, 0);
@@ -607,7 +607,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.ethaxium_sword, 0);
 		registerItemRender(ACItems.ethaxium_hoe, 0);
 		registerItemRender(ACItems.coin, 0);
-		registerItemRender(ACItems.jzahar_engraved_coin, 0);
+		registerItemRender(ACItems.token_of_jzahar, 0);
 		registerItemRender(ACItems.eldritch_scale, 0);
 		registerItemRender(ACItems.omothol_flesh, 0);
 		registerItemRender(ACItems.anti_plagued_flesh, 0);

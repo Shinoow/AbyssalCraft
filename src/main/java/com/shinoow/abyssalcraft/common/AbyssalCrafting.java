@@ -306,7 +306,7 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new ItemStack(ACItems.coralium_brick, 4), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.coralium_brick, new ItemStack(ACBlocks.coralium_stone), 0.0F);
 		AbyssalCraftAPI.addTransmutation(ACItems.dense_carbon_cluster, new ItemStack(Items.DIAMOND), 0.5F);
-		AbyssalCraftAPI.addTransmutation(ACItems.dread_plagued_gateway_key, new ItemStack(ACItems.rlyehian_gateway_key), 1.0F);
+		AbyssalCraftAPI.addTransmutation(ACItems.dread_plagued_gateway_key, new ItemStack(ACItems.omothol_forged_gateway_key), 1.0F);
 
 		AbyssalCraftAPI.addTransmutation(Items.LAVA_BUCKET, new ItemStack(ACBlocks.solid_lava), 0.0F);
 		AbyssalCraftAPI.addTransmutation(Blocks.END_STONE, new ItemStack(ACBlocks.ethaxium), 0.0F);
@@ -474,10 +474,10 @@ public class AbyssalCrafting {
 				new ItemStack(Items.GOLD_INGOT), new ItemStack(Blocks.ENCHANTING_TABLE), new ItemStack(Items.GOLD_INGOT)};
 		RitualRegistry.instance().registerRitual(Rituals.SUMMON_ASORAH = new NecronomiconSummonRitual("summonAsorah", 1, ACLib.abyssal_wasteland_id, 1000F, EntityDragonBoss.class, asorahofferings).setNBTSensitive());
 		Object[] gk2offerings = new Object[]{new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), null, new ItemStack(ACBlocks.dreadlands_infused_powerstone), null, new ItemStack(ACItems.eye_of_the_abyss)};
-		RitualRegistry.instance().registerRitual(Rituals.ASORAH_GATEWAY_KEY = new NecronomiconInfusionRitual("asorahGatewayKey", 1, ACLib.abyssal_wasteland_id, 10000F, new ItemStack(ACItems.dreaded_gateway_key), new ItemStack(ACItems.gateway_key), gk2offerings));
+		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_INFUSED_GATEWAY_KEY = new NecronomiconInfusionRitual("dreadInfusedGatewayKey", 1, ACLib.abyssal_wasteland_id, 10000F, new ItemStack(ACItems.dreadedlands_infused_gateway_key), new ItemStack(ACItems.gateway_key), gk2offerings));
 
 		//Dreadlands Progression
-		Object[] dreadaltarbofferings = new Object[]{ACItems.dread_cloth, Items.BONE, ACItems.dreadium_ingot, ACBlocks.dreadstone, ACItems.dreaded_gateway_key, ACBlocks.dreadstone, ACItems.dreadium_ingot, Items.BONE};
+		Object[] dreadaltarbofferings = new Object[]{ACItems.dread_cloth, Items.BONE, ACItems.dreadium_ingot, ACBlocks.dreadstone, ACItems.dreadedlands_infused_gateway_key, ACBlocks.dreadstone, ACItems.dreadium_ingot, Items.BONE};
 		RitualRegistry.instance().registerRitual(Rituals.ALTAR_OF_CHAGAROTH_BOTTOM = new NecronomiconCreationRitual("altarOfChagarothBottom", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_bottom), dreadaltarbofferings));
 		Object[] dreadaltartofferings = new Object[]{Items.BUCKET, "stickWood", ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, "stickWood"};
 		RitualRegistry.instance().registerRitual(Rituals.ALTAR_OF_CHAGAROTH_TOP = new NecronomiconCreationRitual("altarOfChagarothTop", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_top), dreadaltartofferings));
@@ -557,7 +557,7 @@ public class AbyssalCrafting {
 		Object[] ethofferings = new Object[]{ACItems.ethaxium_brick, null, ACItems.ethaxium_brick, null, ACItems.ethaxium_brick, null, ACItems.ethaxium_brick};
 		RitualRegistry.instance().registerRitual(Rituals.PURGING = new NecronomiconPurgingRitual());
 		RitualRegistry.instance().registerRitual(Rituals.ETHAXIUM_INGOT = new NecronomiconInfusionRitual("ethaxiumIngot", 3, ACLib.omothol_id, 1000F, new ItemStack(ACItems.ethaxium_ingot), new ItemStack(ACItems.life_crystal), ethofferings));
-		RitualRegistry.instance().registerRitual(Rituals.TOKEN_OF_JZAHAR = new NecronomiconInfusionRitual("jzaharCoin", 3, 500.0F, new ItemStack(ACItems.jzahar_engraved_coin), new ItemStack(ACItems.coin), new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE)));
+		RitualRegistry.instance().registerRitual(Rituals.TOKEN_OF_JZAHAR = new NecronomiconInfusionRitual("jzaharCoin", 3, 500.0F, new ItemStack(ACItems.token_of_jzahar), new ItemStack(ACItems.coin), new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE)));
 		Object[] dreadofferings = new Object[]{new ItemStack(ACItems.dreadlands_essence), ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite,
 				ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite};
 		RitualRegistry.instance().registerRitual(Rituals.DREADED_ABYSSALNITE_HELMET = new NecronomiconInfusionRitual("dreadHelmet", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_helmet), ACItems.abyssalnite_helmet, dreadofferings));
@@ -631,10 +631,10 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_SACRIFICAL_ALTAR = new NecronomiconInfusionRitual("saDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_sacrificial_altar), new ItemStack(ACBlocks.abyssal_wasteland_sacrificial_altar), dloffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
 		RitualRegistry.instance().registerRitual(Rituals.OMOTHOL_SACRIFICAL_ALTAR = new NecronomiconInfusionRitual("saOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_sacrificial_altar), new ItemStack(ACBlocks.dreadlands_sacrificial_altar), omtoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
 		Object[] staffofferings = new Object[]{new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.omothol_essence), ACItems.eldritch_scale, ACItems.ethaxium_ingot,
-				ACItems.rlyehian_gateway_key, ACItems.ethaxium_ingot, ACItems.eldritch_scale, new ItemStack(ACItems.abyssal_wasteland_essence)};
+				ACItems.omothol_forged_gateway_key, ACItems.ethaxium_ingot, ACItems.eldritch_scale, new ItemStack(ACItems.abyssal_wasteland_essence)};
 		String[] tags = {"energyShadow", "energyAbyssal", "energyDread", "energyOmothol", "ench"};
 		RitualRegistry.instance().registerRitual(Rituals.STAFF_OF_THE_GATEKEEPER = new NecronomiconInfusionRitual("jzaharStaff", 4, ACLib.omothol_id, 15000F, new ItemStack(ACItems.staff_of_the_gatekeeper), new ItemStack(ACItems.omothol_staff_of_rending), staffofferings).setTags(tags));
-		RitualRegistry.instance().registerRitual(Rituals.SILVER_KEY = new NecronomiconInfusionRitual("silverKey", 4, ACLib.omothol_id, 20000F, true, new ItemStack(ACItems.silver_key), new ItemStack(ACItems.rlyehian_gateway_key),
+		RitualRegistry.instance().registerRitual(Rituals.SILVER_KEY = new NecronomiconInfusionRitual("silverKey", 4, ACLib.omothol_id, 20000F, true, new ItemStack(ACItems.silver_key), new ItemStack(ACItems.omothol_forged_gateway_key),
 				new Object[] {ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot, ACItems.ethaxium_ingot}));
 		RitualRegistry.instance().registerRitual(Rituals.WEATHER = new NecronomiconWeatherRitual());
 		Object[] containerofferings = new Object[]{ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector,

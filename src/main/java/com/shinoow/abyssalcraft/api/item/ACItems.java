@@ -30,7 +30,7 @@ public class ACItems {
 	public static Item staff_of_the_gatekeeper;
 	public static Item powerstone_tracker;
 	public static Item eye_of_the_abyss;
-	public static Item dreaded_gateway_key;
+	public static Item dreadedlands_infused_gateway_key;
 	public static Item dreaded_shard_of_abyssalnite;
 	public static Item dreaded_chunk_of_abyssalnite;
 	public static Item chunk_of_abyssalnite;
@@ -171,7 +171,7 @@ public class ACItems {
 	public static Item dreadium_katana_hilt;
 	public static Item dreadium_katana;
 	public static Item dread_plagued_gateway_key;
-	public static Item rlyehian_gateway_key;
+	public static Item omothol_forged_gateway_key;
 	public static Item dreadium_samurai_helmet;
 	public static Item dreadium_samurai_chestplate;
 	public static Item dreadium_samurai_leggings;
@@ -198,7 +198,7 @@ public class ACItems {
 	public static Item ethaxium_sword;
 	public static Item ethaxium_hoe;
 	public static Item coin;
-	public static Item jzahar_engraved_coin;
+	public static Item token_of_jzahar;
 	public static Item eldritch_scale;
 	public static Item omothol_flesh;
 	public static Item anti_plagued_flesh;

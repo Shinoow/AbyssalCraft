@@ -48,7 +48,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.gateway_key = new ItemGatewayKey(0, "gatewaykey");
 		ACItems.powerstone_tracker = new ItemTrackerPSDL();
 		ACItems.eye_of_the_abyss = new ItemEoA();
-		ACItems.dreaded_gateway_key = new ItemGatewayKey(1, "gatewaykeydl");
+		ACItems.dreadedlands_infused_gateway_key = new ItemGatewayKey(1, "gatewaykeydl");
 		ACItems.coralium_brick = new ItemACBasic("cbrick");
 		ACItems.cudgel = new ItemCudgel();
 		ACItems.carbon_cluster = new ItemACBasic("carboncluster");
@@ -56,7 +56,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.methane = new ItemACBasic("methane");
 		ACItems.nitre = new ItemACBasic("nitre");
 		ACItems.sulfur = new ItemACBasic("sulfur");
-		ACItems.rlyehian_gateway_key = new ItemGatewayKey(2, "gatewaykeyjzh");
+		ACItems.omothol_forged_gateway_key = new ItemGatewayKey(2, "gatewaykeyjzh");
 		ACItems.tin_ingot = new ItemACBasic("tiningot");
 		ACItems.copper_ingot = new ItemACBasic("copperingot");
 		ACItems.life_crystal = new ItemACBasic("lifecrystal");
@@ -108,7 +108,7 @@ public class ItemHandler implements ILifeCycleHandler {
 
 		//Coins
 		ACItems.coin = new ItemCoin("blankcoin");
-		ACItems.jzahar_engraved_coin = new ItemCoin("jzaharcoin");
+		ACItems.token_of_jzahar = new ItemCoin("jzaharcoin");
 
 		//Charms
 		ACItems.ritual_charm = new ItemCharm("ritualcharm", null);
@@ -366,7 +366,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.staff_of_the_gatekeeper, "staff");
 		registerItem(ACItems.powerstone_tracker, "powerstonetracker");
 		registerItem(ACItems.eye_of_the_abyss, "eoa");
-		registerItem(ACItems.dreaded_gateway_key, "gatewaykeydl");
+		registerItem(ACItems.dreadedlands_infused_gateway_key, "gatewaykeydl");
 		registerItem(ACItems.dreaded_shard_of_abyssalnite, "dreadshard");
 		registerItem(ACItems.dreaded_chunk_of_abyssalnite, "dreadchunk");
 		registerItem(ACItems.chunk_of_abyssalnite, "abychunk");
@@ -507,7 +507,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.dreadium_katana_hilt, "dreadhilt");
 		registerItem(ACItems.dreadium_katana, "dreadkatana");
 		registerItem(ACItems.dread_plagued_gateway_key, "dreadkey");
-		registerItem(ACItems.rlyehian_gateway_key, "gatewaykeyjzh");
+		registerItem(ACItems.omothol_forged_gateway_key, "gatewaykeyjzh");
 		registerItem(ACItems.dreadium_samurai_helmet, "dreadiumsamuraihelmet");
 		registerItem(ACItems.dreadium_samurai_chestplate, "dreadiumsamuraiplate");
 		registerItem(ACItems.dreadium_samurai_leggings, "dreadiumsamurailegs");
@@ -534,7 +534,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.ethaxium_sword, "ethaxiumsword");
 		registerItem(ACItems.ethaxium_hoe, "ethaxiumhoe");
 		registerItem(ACItems.coin, "coin");
-		registerItem(ACItems.jzahar_engraved_coin, "jzaharcoin");
+		registerItem(ACItems.token_of_jzahar, "jzaharcoin");
 		registerItem(ACItems.eldritch_scale, "eldritchscale");
 		registerItem(ACItems.omothol_flesh, "omotholflesh");
 		registerItem(ACItems.anti_plagued_flesh, "anticorflesh");
