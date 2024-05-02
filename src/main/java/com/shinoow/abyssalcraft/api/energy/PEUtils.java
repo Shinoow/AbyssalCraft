@@ -463,7 +463,7 @@ public class PEUtils {
 			return contained;
 		}
 	}
-	
+
 	/**
 	 * Transfers PE from an IEnergyContainerItem to a IEnergyContainer (that former likely is contained in)
 	 * @param stack ItemStack containing the PE container Item
@@ -490,5 +490,20 @@ public class PEUtils {
 			if(containerItem.canAcceptPE(stack) && container.canTransferPE())
 				container.addEnergy(containerItem.addEnergy(stack, container.consumeEnergy(amount))); // returns overflow
 		}
+	}
+
+	/**
+	 * Drains PE from an IEnergyTransporterItem
+	 * @param stack ItemStack containing the PE container Item
+	 * @param amount Amount of PE to drain
+	 * @return Amount of PE drained
+	 */
+	public static float drainPEFromItem(ItemStack stack, float amount) {
+		if(!stack.isEmpty() && stack.getItem() instanceof IEnergyTransporterItem) {
+			IEnergyTransporterItem containerItem = (IEnergyTransporterItem) stack.getItem();
+			if(containerItem.canTransferPEExternally(stack))
+				return containerItem.consumeEnergy(stack, amount);
+		}
+		return 0;
 	}
 }

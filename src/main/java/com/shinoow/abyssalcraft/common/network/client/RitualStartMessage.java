@@ -30,14 +30,15 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 
 	private BlockPos pos;
 	private String name;
-	private int sacrifice;
+	private int sacrifice, timerMax;
 
 	public RitualStartMessage(){}
 
-	public RitualStartMessage(BlockPos pos, String name, int sacrifice) {
+	public RitualStartMessage(BlockPos pos, String name, int sacrifice, int timerMax) {
 		this.pos = pos;
 		this.name = name;
 		this.sacrifice = sacrifice;
+		this.timerMax = timerMax;
 	}
 
 	@Override
@@ -46,6 +47,7 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 		pos = buffer.readBlockPos();
 		name = ByteBufUtils.readUTF8String(buffer);
 		sacrifice = buffer.readVarInt();
+		timerMax = buffer.readVarInt();
 	}
 
 	@Override
@@ -54,6 +56,7 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 		buffer.writeBlockPos(pos);
 		ByteBufUtils.writeUTF8String(buffer, name);
 		buffer.writeVarInt(sacrifice);
+		buffer.writeVarInt(timerMax);
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 		TileEntity te = player.world.getTileEntity(pos);
 		if(te instanceof IRitualAltar) {
 			IRitualAltar altar = (IRitualAltar)te;
-			altar.setRitualFields(ritual, (EntityLiving)player.world.getEntityByID(sacrifice));
+			altar.setRitualFields(ritual, (EntityLiving)player.world.getEntityByID(sacrifice), timerMax);
 		}
 	}
 }

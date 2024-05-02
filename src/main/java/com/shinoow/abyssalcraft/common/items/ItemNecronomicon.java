@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.items;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
-import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -100,6 +99,25 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 
 	public int getBookType() {
 		return bookType;
+	}
+
+	/**
+	 * Calculates how many seconds a ritual takes to perform (and how much PE per second)
+	 * <br>based on book capacity and ritual cost
+	 * @return Tuple containing PE to drain every second and ritual length (in seconds)
+	 */
+	public Tuple<Float, Integer> getPercentileAndSeconds(ItemStack stack, float pe) {
+		float max = (float)getMaxEnergy(stack);
+		float tenth = max / 10;
+		float res = tenth;
+		int res1 = 1;
+		if(pe == max) // ritual takes max capacity, therefore 10 seconds
+			return new Tuple(max, 10);
+		while(res < pe) { // increment by 10 percent
+			res += tenth;
+			res1++;
+		}
+		return new Tuple(res, res1);
 	}
 
 	@Override

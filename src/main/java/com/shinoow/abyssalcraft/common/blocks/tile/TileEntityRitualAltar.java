@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
-import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
+import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
@@ -60,12 +60,12 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class TileEntityRitualAltar extends TileEntity implements ITickable, IRitualAltar {
 
-	private int ritualTimer;
+	private int ritualTimer, timerMax;
 	private NecronomiconRitual ritual;
 	private ItemStack item = ItemStack.EMPTY;
 	private EntityPlayer user;
-	private float consumedEnergy;
-	private boolean isDirty;
+	private float consumedEnergy, energyToDrain;
+	private boolean isDirty, hasSacrifice, sacrificeIsDead;
 	private EntityLiving sacrifice;
 	private List<IRitualPedestal> pedestals = new ArrayList<>();
 
@@ -76,6 +76,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		NBTTagCompound nbtItem = nbttagcompound.getCompoundTag("Item");
 		item = new ItemStack(nbtItem);
 		ritualTimer = nbttagcompound.getInteger("Cooldown");
+		timerMax = nbttagcompound.getInteger("CooldownMax");
 	}
 
 	@Override
@@ -87,6 +88,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 			item.writeToNBT(nbtItem);
 		nbttagcompound.setTag("Item", nbtItem);
 		nbttagcompound.setInteger("Cooldown", ritualTimer);
+		nbttagcompound.setInteger("CooldownMax", timerMax);
 
 		return nbttagcompound;
 	}
@@ -125,30 +127,47 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 				if(ritual != null && sacrifice != null && sacrifice.isEntityAlive())
 					sacrifice.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 200, 0, false, false));
 			}
-			ritualTimer++;
+			if(ritualTimer < 200)
+				ritualTimer++;
 
 			if(ritual != null){
-				if(!world.isRemote && ritualTimer % 20 == 0)
+
+				if(!world.isRemote && ritualTimer % 20 == 0) {
+
 					if(user != null)
 						collectPEFromPlayer();
 					else user = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 5, true);
-				if(ritualTimer == 200)
-					if(user != null && !world.isRemote){
-						if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, world, pos))){
-							//Fixes any rounding errors from uneven numbers, but likely breaks rituals with decimal numbers for required energy. I can live with that.
-							consumedEnergy = BigDecimal.valueOf(consumedEnergy).setScale(1,BigDecimal.ROUND_HALF_UP).floatValue();
-							if(consumedEnergy == ritual.getReqEnergy() && (sacrifice == null || !sacrifice.isEntityAlive()))
-								ritual.completeRitual(world, pos, user);
-							else
+
+					boolean isReady;
+
+					if(hasSacrifice) {
+						if(sacrifice != null && !sacrifice.isEntityAlive()) {
+							sacrificeIsDead = true;
+						}
+
+						isReady = sacrificeIsDead && ritualTimer >= timerMax;
+					} else {
+						isReady = ritualTimer == timerMax;
+					}
+					if(isReady)
+						if(user != null && !world.isRemote){
+							if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, world, pos))){
+								//Fixes any rounding errors from uneven numbers, but likely breaks rituals with decimal numbers for required energy. I can live with that.
+								consumedEnergy = BigDecimal.valueOf(consumedEnergy).setScale(1,BigDecimal.ROUND_HALF_UP).floatValue();
+								if(consumedEnergy == ritual.getReqEnergy() && (sacrifice == null || sacrificeIsDead))
+									ritual.completeRitual(world, pos, user);
+								else
+									triggerDisruption();
+								reset();
+							} else
+								reset();
+						} else {
+							if(!world.isRemote)
 								triggerDisruption();
 							reset();
-						} else
-							reset();
-					} else {
-						if(!world.isRemote)
-							triggerDisruption();
-						reset();
-					}
+						}
+				}
+
 			} else ritualTimer = 0;
 
 			world.spawnParticle(EnumParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0,0,0);
@@ -162,20 +181,27 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		consumedEnergy = 0;
 		isDirty = true;
 		sacrifice = null;
+		timerMax = 0;
+		hasSacrifice = false;
+		sacrificeIsDead = false;
 	}
 
 	private void collectPEFromPlayer() {
+		if(ritualTimer > timerMax || ritualTimer > 200) // timer runs out, enough should've been drained
+			return;
 		ItemStack stack = user.getHeldItem(EnumHand.OFF_HAND);
-		if(!stack.isEmpty() && stack.getItem() instanceof IEnergyTransporterItem &&
-				((IEnergyTransporterItem) stack.getItem()).canTransferPEExternally(stack) && ((IEnergyTransporterItem) stack.getItem()).getContainedEnergy(stack) > 0)
-			consumedEnergy += ((IEnergyTransporterItem) stack.getItem()).consumeEnergy(stack, ritual.getReqEnergy()/10);
+		float drained = PEUtils.drainPEFromItem(stack, energyToDrain);
+		if(drained > 0) {
+			consumedEnergy += drained;
+		}
 		else
-			for(ItemStack stack1 : user.inventory.mainInventory)
-				if(!stack1.isEmpty() && stack1.getItem() instanceof IEnergyTransporterItem &&
-						((IEnergyTransporterItem) stack1.getItem()).canTransferPEExternally(stack1) && ((IEnergyTransporterItem) stack1.getItem()).getContainedEnergy(stack1) > 0){
-					consumedEnergy += ((IEnergyTransporterItem) stack1.getItem()).consumeEnergy(stack1, ritual.getReqEnergy()/10);
+			for(ItemStack stack1 : user.inventory.mainInventory){
+				float drained1 = PEUtils.drainPEFromItem(stack1, energyToDrain);
+				if(drained1 > 0) {
+					consumedEnergy += drained1;
 					break;
 				}
+			}
 	}
 
 	private void triggerDisruption() {
@@ -236,12 +262,20 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 													@Override
 													public void execute() {
+														Tuple<Float, Integer> data = ((ItemNecronomicon) stack.getItem()).getPercentileAndSeconds(stack, ritual.getReqEnergy());
 														sacrifice = mob;
 														ritualTimer = 1;
+														timerMax = data.getSecond() * 20;
 														user = player;
 														consumedEnergy = 0;
+														if(data.getFirst() > ritual.getReqEnergy()) {
+															energyToDrain = ritual.getReqEnergy();
+														}else {
+															energyToDrain = ritual.getReqEnergy() / data.getSecond();
+														}
+														hasSacrifice = true;
 														isDirty = true;
-														PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), sacrifice.getEntityId()), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
+														PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), sacrifice.getEntityId(), timerMax), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
 													}
 
 												});
@@ -255,11 +289,18 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 									@Override
 									public void execute() {
+										Tuple<Float, Integer> data = ((ItemNecronomicon) stack.getItem()).getPercentileAndSeconds(stack, ritual.getReqEnergy());
 										ritualTimer = 1;
+										timerMax = data.getSecond() * 20;
 										user = player;
 										consumedEnergy = 0;
+										if(data.getFirst() > ritual.getReqEnergy()) {
+											energyToDrain = ritual.getReqEnergy();
+										}else {
+											energyToDrain = ritual.getReqEnergy() / data.getSecond();
+										}
 										isDirty = true;
-										PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), 0), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
+										PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), 0, timerMax), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
 									}
 
 								});
@@ -291,7 +332,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 	@Override
 	public boolean isPerformingRitual(){
-		return ritualTimer < 200 && ritualTimer > 0;
+		return ritualTimer < (this.hasSacrifice ? 200 : timerMax) && ritualTimer > 0;
 	}
 
 	@Override
@@ -306,10 +347,11 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	}
 
 	@Override
-	public void setRitualFields(NecronomiconRitual ritual, EntityLiving sacrifice) {
+	public void setRitualFields(NecronomiconRitual ritual, EntityLiving sacrifice, int timerMax) {
 		this.ritual = ritual;
 		this.sacrifice = sacrifice;
 		ritualTimer = 1;
+		this.timerMax = timerMax;
 	}
 
 	@Override

@@ -58,8 +58,9 @@ public interface IRitualAltar extends ISingletonInventory {
 	 * Invoked on the client after a ritual has started (through a network packet). Sends over the necessary values for the visuals
 	 * @param ritual Active ritual (should never be null, but it wouldn't cause a side-effect)
 	 * @param sacrifice The animal to sacrifice (if any)
+	 * @param timerMax Length of the ritual (in ticks)
 	 */
-	void setRitualFields(@Nullable NecronomiconRitual ritual, @Nullable EntityLiving sacrifice);
+	void setRitualFields(@Nullable NecronomiconRitual ritual, @Nullable EntityLiving sacrifice, int timerMax);
 
 	/**
 	 * Adds the selected pedestal to the altar's pedestal list
