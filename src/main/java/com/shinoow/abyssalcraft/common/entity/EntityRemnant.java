@@ -538,29 +538,17 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				break;
 			case 5:
 				//TODO: give banker trades!
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.cthulhu_engraved_coin, 1);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.hastur_engraved_coin, 1);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.jzahar_engraved_coin, 1);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.azathoth_engraved_coin, 1);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.nyarlathotep_engraved_coin, 1);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.yog_sothoth_engraved_coin, 1);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 8, ACItems.shub_niggurath_engraved_coin, 1);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.cthulhu_engraved_coin, 2);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.hastur_engraved_coin, 2);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.jzahar_engraved_coin, 2);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.azathoth_engraved_coin, 2);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.nyarlathotep_engraved_coin, 2);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.yog_sothoth_engraved_coin, 2);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 16, ACItems.shub_niggurath_engraved_coin, 2);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.cthulhu_engraved_coin, 3);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.hastur_engraved_coin, 3);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.jzahar_engraved_coin, 3);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.azathoth_engraved_coin, 3);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.nyarlathotep_engraved_coin, 3);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.yog_sothoth_engraved_coin, 3);
-//				addCoinTrade(list, ACItems.elder_engraved_coin, 24, ACItems.shub_niggurath_engraved_coin, 3);
+				addCoinTrade(list, Items.IRON_INGOT, 3, ACItems.coin, 6);
+				addCoinTrade(list, Items.IRON_INGOT, 6, ACItems.coin, 12);
+				addCoinTrade(list, Items.GOLD_INGOT, 3, ACItems.coin, 12);
+				addCoinTrade(list, Items.GOLD_INGOT, 6, ACItems.coin, 24);
+				addCoinTrade(list, Items.EMERALD, 1, ACItems.coin, 8);
+				addCoinTrade(list, Items.EMERALD, 2, ACItems.coin, 16);
+				addCoinTrade(list, Items.DIAMOND, 1, ACItems.coin, 32);
+				addCoinTrade(list, Items.DIAMOND, 2, ACItems.coin, 64);
+				addCoinTrade(list, ACItems.coin, 32, ACItems.token_of_jzahar, 1);
+				addCoinTrade(list, ACItems.coin, 64, ACItems.token_of_jzahar, 2);
 				break;
-
 			case 6:
 				addItemTrade(list, Items.COAL, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.abyssalnite_ingot, rand, adjustProbability(0.5F));
