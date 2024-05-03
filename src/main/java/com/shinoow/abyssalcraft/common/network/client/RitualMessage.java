@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.network.client;
 import java.io.IOException;
 
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
-import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
+import com.shinoow.abyssalcraft.api.event.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;

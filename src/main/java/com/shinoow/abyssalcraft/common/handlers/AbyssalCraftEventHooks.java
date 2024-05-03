@@ -18,12 +18,12 @@ import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
-import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
-import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
+import com.shinoow.abyssalcraft.api.event.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
+import com.shinoow.abyssalcraft.api.ritual.Rituals;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemCrystalClusterBlock;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
@@ -42,6 +42,7 @@ import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -119,29 +120,39 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void armorStuff(LivingHurtEvent event){
-		if(!event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty()){
-			ItemStack slot = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST);
+		EntityLivingBase target = event.getEntityLiving();
+		if(!target.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty()){
+			ItemStack slot = target.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 			if(slot.getItem() == ACItems.dreaded_abyssalnite_chestplate)
-				if(event.getSource().getTrueSource() != null && event.getEntityLiving().world.rand.nextBoolean())
+				if(event.getSource().getTrueSource() != null && target.world.rand.nextBoolean())
 					event.getSource().getTrueSource().setFire(5);
 			if(slot.getItem() == ACItems.plated_coralium_chestplate)
-				if(event.getSource().getTrueSource() != null && event.getEntityLiving().world.rand.nextBoolean())
-					event.getSource().getTrueSource().attackEntityFrom(getSource(event.getEntityLiving()), 1);
+				if(event.getSource().getTrueSource() != null && target.world.rand.nextBoolean())
+					event.getSource().getTrueSource().attackEntityFrom(getSource(target), 1);
 		}
-		if(!event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty() &&
-				!event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty() &&
-				!event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.LEGS).isEmpty() &&
-				!event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET).isEmpty()){
-			ItemStack head = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-			ItemStack chest = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-			ItemStack legs = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.LEGS);
-			ItemStack feet = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET);
+		if(!target.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty() &&
+				!target.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty() &&
+				!target.getItemStackFromSlot(EntityEquipmentSlot.LEGS).isEmpty() &&
+				!target.getItemStackFromSlot(EntityEquipmentSlot.FEET).isEmpty()){
+			ItemStack head = target.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+			ItemStack chest = target.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
+			ItemStack legs = target.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
+			ItemStack feet = target.getItemStackFromSlot(EntityEquipmentSlot.FEET);
 			if(head.getItem() == ACItems.dreadium_samurai_helmet && chest.getItem() == ACItems.dreadium_samurai_chestplate &&
 					legs.getItem() == ACItems.dreadium_samurai_leggings && feet.getItem() == ACItems.dreadium_samurai_boots &&
 					event.getSource() == AbyssalCraftAPI.dread) event.setAmount(event.getAmount() * 0.5F);
 			if(head.getItem() == ACItems.ethaxium_helmet && chest.getItem() == ACItems.ethaxium_chestplate &&
 					legs.getItem() == ACItems.ethaxium_leggings && feet.getItem() == ACItems.ethaxium_boots &&
 					event.getSource() == AbyssalCraftAPI.acid) event.setAmount(0);
+		}
+		if(event.getSource() == AbyssalCraftAPI.shadow) {
+			ItemStack shield = target.getActiveItemStack();
+			if(shield.getItem().isShield(shield, target) && shield.isItemEnchanted()) {
+				if(EnchantmentHelper.getEnchantmentLevel(AbyssalCraftAPI.blinding_light, shield) > 0) {
+					shield.damageItem((int)event.getAmount() * 2, target);
+					event.setAmount(0);
+				}
+			}
 		}
 	}
 
@@ -227,12 +238,10 @@ public class AbyssalCraftEventHooks {
 				}
 				else if(k.getItem() != null && k.getItem() instanceof ItemNecronomicon){
 					NBTTagCompound compound = new NBTTagCompound();
-					String owner = "";
 					float energy = 0;
 
 					if(k.getTagCompound() == null)
 						k.setTagCompound(compound);
-					owner = k.getTagCompound().getString("owner");
 					energy = k.getTagCompound().getFloat("PotEnergy");
 
 					ItemStack l = event.crafting;
@@ -240,8 +249,6 @@ public class AbyssalCraftEventHooks {
 					if(l.getItem() instanceof ItemNecronomicon){
 						if(l.getTagCompound() == null)
 							l.setTagCompound(compound);
-						if(!owner.equals(""))
-							l.getTagCompound().setString("owner", owner);
 						if(energy != 0)
 							l.getTagCompound().setFloat("PotEnergy", energy);
 					}
@@ -337,10 +344,10 @@ public class AbyssalCraftEventHooks {
 		if(event.getRitual() instanceof NecronomiconSummonRitual)
 			//			event.getEntityPlayer().addStat(ACAchievements.summoning_ritual, 1);
 			if(ACConfig.showBossDialogs) {
-				if(event.getRitual().getUnlocalizedName().substring(10).equals("summonSacthoth"))
+				if(event.getRitual() == Rituals.SUMMON_SACTHOTH)
 					if(!event.getWorld().isRemote)
 						SpecialTextUtil.SacthothGroup(event.getWorld(), TranslationUtil.toLocal("message.sacthoth.spawn.1"));
-				if(event.getRitual().getUnlocalizedName().substring(10).equals("summonAsorah"))
+				if(event.getRitual() == Rituals.SUMMON_ASORAH)
 					if(!event.getWorld().isRemote)
 						SpecialTextUtil.AsorahGroup(event.getWorld(), TranslationUtil.toLocal("message.asorah.spawn"));
 			}

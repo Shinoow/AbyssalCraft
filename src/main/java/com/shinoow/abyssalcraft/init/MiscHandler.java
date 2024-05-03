@@ -173,11 +173,13 @@ public class MiscHandler implements ILifeCycleHandler {
 		AbyssalCraftAPI.iron_wall = new EnchantmentIronWall();
 		AbyssalCraftAPI.sapping = new EnchantmentSapping();
 		AbyssalCraftAPI.multi_rend = new EnchantmentMultiRend();
+		AbyssalCraftAPI.blinding_light = new EnchantmentBlindingLight();
 
 		registerEnchantment(new ResourceLocation("abyssalcraft", "light_pierce"), AbyssalCraftAPI.light_pierce);
 		registerEnchantment(new ResourceLocation("abyssalcraft", "iron_wall"), AbyssalCraftAPI.iron_wall);
 		registerEnchantment(new ResourceLocation("abyssalcraft", "sapping"), AbyssalCraftAPI.sapping);
 		registerEnchantment(new ResourceLocation("abyssalcraft", "multi_rend"), AbyssalCraftAPI.multi_rend);
+		registerEnchantment(new ResourceLocation("abyssalcraft", "blinding_light"), AbyssalCraftAPI.blinding_light);
 
 		InitHandler.LIQUID_CORALIUM.setBlock(ACBlocks.liquid_coralium);
 		InitHandler.LIQUID_ANTIMATTER.setBlock(ACBlocks.liquid_antimatter);

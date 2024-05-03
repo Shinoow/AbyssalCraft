@@ -65,7 +65,7 @@ public class AbyssalCraftAPI {
 	 */
 	public static final String API_VERSION = "2.0.0";
 
-	public static Enchantment light_pierce, iron_wall, sapping, multi_rend;
+	public static Enchantment light_pierce, iron_wall, sapping, multi_rend, blinding_light;
 
 	public static Potion coralium_plague, dread_plague, antimatter_potion, coralium_antidote, dread_antidote;
 

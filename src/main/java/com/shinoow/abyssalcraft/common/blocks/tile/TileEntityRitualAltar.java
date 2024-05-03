@@ -23,7 +23,7 @@ import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionHandler;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.event.ACEvents.DisruptionEvent;
-import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
+import com.shinoow.abyssalcraft.api.event.RitualEvent;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
