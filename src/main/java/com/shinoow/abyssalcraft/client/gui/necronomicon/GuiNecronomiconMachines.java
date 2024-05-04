@@ -12,8 +12,6 @@
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.lwjgl.input.Keyboard;
 
@@ -235,20 +233,20 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		if(isTra){
 			stuff = localize("container.abyssalcraft.transmutator");
 			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
-			Map<ItemStack, ItemStack> trans = TransmutatorRecipes.instance().getTransmutationList();
+			List<Transmutation> trans = TransmutatorRecipes.instance().getTransmutationList();
 			setTurnups(trans.size());
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			mc.renderEngine.bindTexture(NecronomiconResources.TRANSMUTATION);
 			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			for(int n = 0; n < trans.size(); n++){
-				Entry<ItemStack, ItemStack> entry = (Entry<ItemStack, ItemStack>) trans.entrySet().toArray()[n];
+				Transmutation entry = trans.get(n);
 				drawTItems(entry, n, currTurnup*12, currTurnup*12+6, (currTurnup+1)*12, x, y);
 			}
 		}
 		if(isCry){
 			stuff = localize("container.abyssalcraft.crystallizer");
 			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
-			Map<ItemStack, ItemStack[]> cryst = CrystallizerRecipes.instance().getCrystallizationList();
+			List<Crystallization> cryst = CrystallizerRecipes.instance().getCrystallizationList();
 			setTurnups(cryst.size());
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			mc.renderEngine.bindTexture(NecronomiconResources.TRANSMUTATION);
@@ -256,7 +254,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			mc.renderEngine.bindTexture(NecronomiconResources.CRYSTALLIZATION);
 			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
 			for(int n = 0; n < cryst.size(); n++){
-				Entry<ItemStack, ItemStack[]> entry = (Entry<ItemStack, ItemStack[]>) cryst.entrySet().toArray()[n];
+				Crystallization entry = cryst.get(n);
 				drawCItems(entry, n, currTurnup*12, currTurnup*12+6, (currTurnup+1)*12, x, y);
 			}
 		}
@@ -278,35 +276,35 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		renderTooltip(x, y);
 	}
 
-	private void drawTItems(Entry<ItemStack, ItemStack> entry, int num, int low, int mid, int high, int x, int y){
+	private void drawTItems(Transmutation entry, int num, int low, int mid, int high, int x, int y){
 		boolean unicode = fontRenderer.getUnicodeFlag();
 		fontRenderer.setUnicodeFlag(false);
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		if(num < mid && num > low-1){
-			renderItem(k + 18, b0 + 28 + (num-low)*20 + num-low, entry.getKey(), x, y);
-			renderItem(k + 62, b0 + 28 + (num-low)*20 + num-low, entry.getValue(), x, y);
+			renderItem(k + 18, b0 + 28 + (num-low)*20 + num-low, entry.INPUT, x, y);
+			renderItem(k + 62, b0 + 28 + (num-low)*20 + num-low, entry.OUTPUT, x, y);
 		} else if(num > mid-1 && num < high){
-			renderItem(k + 141, b0 + 28 + (num-mid)*20 + num-mid, entry.getKey(), x, y);
-			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue(), x, y);
+			renderItem(k + 141, b0 + 28 + (num-mid)*20 + num-mid, entry.INPUT, x, y);
+			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.OUTPUT, x, y);
 		}
 		fontRenderer.setUnicodeFlag(unicode);
 	}
 
-	private void drawCItems(Entry<ItemStack, ItemStack[]> entry, int num, int low, int mid, int high, int x, int y){
+	private void drawCItems(Crystallization entry, int num, int low, int mid, int high, int x, int y){
 		boolean unicode = fontRenderer.getUnicodeFlag();
 		fontRenderer.setUnicodeFlag(false);
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		if(num < mid && num > low-1){
-			renderItem(k + 18, b0 + 28 + (num-low)*20 + num-low, entry.getKey(), x, y);
-			renderItem(k + 62, b0 + 28 + (num-low)*20 + num-low, entry.getValue()[0], x, y);
+			renderItem(k + 18, b0 + 28 + (num-low)*20 + num-low, entry.INPUT, x, y);
+			renderItem(k + 62, b0 + 28 + (num-low)*20 + num-low, entry.OUTPUT1, x, y);
 
-			renderItem(k + 62 + 33, b0 + 28 + (num-low)*20 + num-low, entry.getValue()[1], x, y);
+			renderItem(k + 62 + 33, b0 + 28 + (num-low)*20 + num-low, entry.OUTPUT2, x, y);
 		} else if(num > mid-1 && num < high){
-			renderItem(k + 141, b0 + 28 + (num-mid)*20 + num-mid, entry.getKey(), x, y);
-			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue()[0], x, y);
-			renderItem(k + 185 + 34, b0 + 28 + (num-mid)*20 + num-mid, entry.getValue()[1], x, y);
+			renderItem(k + 141, b0 + 28 + (num-mid)*20 + num-mid, entry.INPUT, x, y);
+			renderItem(k + 185, b0 + 28 + (num-mid)*20 + num-mid, entry.OUTPUT1, x, y);
+			renderItem(k + 185 + 34, b0 + 28 + (num-mid)*20 + num-mid, entry.OUTPUT2, x, y);
 		}
 		fontRenderer.setUnicodeFlag(unicode);
 	}
