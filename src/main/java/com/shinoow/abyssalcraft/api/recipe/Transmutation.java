@@ -25,8 +25,8 @@ public class Transmutation {
 	public final float XP;
 
 	public Transmutation(ItemStack input, ItemStack output, float xp) {
-		this.INPUT = input;
-		this.OUTPUT = output;
-		this.XP = xp;
+		INPUT = input;
+		OUTPUT = output;
+		XP = xp;
 	}
 }

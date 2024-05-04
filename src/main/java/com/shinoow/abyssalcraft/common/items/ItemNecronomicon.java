@@ -107,7 +107,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	 * @return Tuple containing PE to drain every second and ritual length (in seconds)
 	 */
 	public Tuple<Float, Integer> getPercentileAndSeconds(ItemStack stack, float pe) {
-		float max = (float)getMaxEnergy(stack);
+		float max = getMaxEnergy(stack);
 		float tenth = max / 10;
 		float res = tenth;
 		int res1 = 1;

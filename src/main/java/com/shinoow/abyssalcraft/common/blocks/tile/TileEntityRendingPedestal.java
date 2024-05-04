@@ -107,37 +107,36 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 				if(ticksExisted % 40 == 0 && !world.isRemote){
 					IStaffOfRending staff = (IStaffOfRending)stack.getItem();
 
-					for(EnergyType type : EnergyType.values()) { // drain staff
+					for(EnergyType type : EnergyType.values()) // drain staff
 						if(staff.getEnergy(stack, type.name) > 0) {
 							increaseEnergy(type.index, staff.getEnergy(stack, type.name));
 							staff.setEnergy(0, stack, type.name);
 						}
-					}
 
-					for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(15, 3, 15), e -> e.isNonBoss()))
-						if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW){
+					for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(15, 3, 15), EntityLivingBase::isNonBoss))
+						if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW)
 							consumeIfApplicable(target, stack, 0);
-						} else if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(target)){
+						else if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(target))
 							consumeIfApplicable(target, stack, 1);
-						} else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(target)){
+						else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(target))
 							consumeIfApplicable(target, stack, 2);
-						} else if(world.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
+						else if(world.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
 								target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW)
 							consumeIfApplicable(target, stack, 3);
 					for(MultiPartEntityPart target : world.getEntitiesWithinAABB(MultiPartEntityPart.class, new AxisAlignedBB(pos).grow(15, 3, 15), e -> ((Entity) e.parent).isNonBoss()))
 						if(target.parent instanceof EntityLiving)
-							if(((EntityLiving) target.parent).getCreatureAttribute() == AbyssalCraftAPI.SHADOW){
+							if(((EntityLiving) target.parent).getCreatureAttribute() == AbyssalCraftAPI.SHADOW)
 								consumeIfApplicable(target, stack, 0);
-							} else if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier((EntityLiving) target.parent)){
+							else if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier((EntityLiving) target.parent))
 								consumeIfApplicable(target, stack, 1);
-							} else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier((EntityLiving) target.parent)){
+							else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier((EntityLiving) target.parent))
 								consumeIfApplicable(target, stack, 2);
-							} else if(world.provider.getDimension() == ACLib.omothol_id && target.parent instanceof IOmotholEntity &&
+							else if(world.provider.getDimension() == ACLib.omothol_id && target.parent instanceof IOmotholEntity &&
 									((EntityLiving) target.parent).getCreatureAttribute() != AbyssalCraftAPI.SHADOW)
 								consumeIfApplicable(target, stack, 3);
 				}
 
-		for(EnergyType type : EnergyType.values()) { // create items
+		for(EnergyType type : EnergyType.values())
 			if(getEnergy(type.index) >= type.limit){
 				setEnergy(type.index, 0);
 				ItemStack output = getStackInSlot(type.slot);
@@ -145,7 +144,6 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 					output.grow(1);
 				else setInventorySlotContents(type.slot, new ItemStack(type.item));
 			}
-		}
 	}
 
 	@Override

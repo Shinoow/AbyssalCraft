@@ -96,7 +96,7 @@ public final class EntityUtil {
 	public static boolean isEntityEldritch(EntityLivingBase par1) {
 		return par1 instanceof IOmotholEntity || par1 instanceof IShoggothEntity;
 	}
-	
+
 	/**
 	 * Checks if a Player has a Necronomicon
 	 * @param player The Player to check

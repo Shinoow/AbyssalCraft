@@ -141,14 +141,12 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 					boolean isReady;
 
 					if(hasSacrifice) {
-						if(sacrifice != null && !sacrifice.isEntityAlive()) {
+						if(sacrifice != null && !sacrifice.isEntityAlive())
 							sacrificeIsDead = true;
-						}
 
 						isReady = sacrificeIsDead && ritualTimer >= timerMax;
-					} else {
+					} else
 						isReady = ritualTimer == timerMax;
-					}
 					if(isReady)
 						if(user != null && !world.isRemote){
 							if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Post(user, ritual, world, pos))){
@@ -191,9 +189,8 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 			return;
 		ItemStack stack = user.getHeldItem(EnumHand.OFF_HAND);
 		float drained = PEUtils.drainPEFromItem(stack, energyToDrain);
-		if(drained > 0) {
+		if(drained > 0)
 			consumedEnergy += drained;
-		}
 		else
 			for(ItemStack stack1 : user.inventory.mainInventory){
 				float drained1 = PEUtils.drainPEFromItem(stack1, energyToDrain);
@@ -268,11 +265,10 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 														timerMax = data.getSecond() * 20;
 														user = player;
 														consumedEnergy = 0;
-														if(data.getFirst() > ritual.getReqEnergy()) {
+														if(data.getFirst() > ritual.getReqEnergy())
 															energyToDrain = ritual.getReqEnergy();
-														}else {
+														else
 															energyToDrain = ritual.getReqEnergy() / data.getSecond();
-														}
 														hasSacrifice = true;
 														isDirty = true;
 														PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), sacrifice.getEntityId(), timerMax), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
@@ -294,11 +290,10 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 										timerMax = data.getSecond() * 20;
 										user = player;
 										consumedEnergy = 0;
-										if(data.getFirst() > ritual.getReqEnergy()) {
+										if(data.getFirst() > ritual.getReqEnergy())
 											energyToDrain = ritual.getReqEnergy();
-										}else {
+										else
 											energyToDrain = ritual.getReqEnergy() / data.getSecond();
-										}
 										isDirty = true;
 										PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), 0, timerMax), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
 									}
@@ -332,7 +327,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 	@Override
 	public boolean isPerformingRitual(){
-		return ritualTimer < (this.hasSacrifice ? 200 : timerMax) && ritualTimer > 0;
+		return ritualTimer < (hasSacrifice ? 200 : timerMax) && ritualTimer > 0;
 	}
 
 	@Override

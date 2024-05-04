@@ -29,7 +29,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntitySacrificialAltar
 		int base = 1200;
 		return base - 200 * (((BlockTieredSacrificialAltar)getBlockType()).TYPE.getMeta() + 1);
 	}
-	
+
 	@Override
 	public TileEntity getContainerTile() {
 

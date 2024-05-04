@@ -467,7 +467,7 @@ public class PEUtils {
 	/**
 	 * Transfers PE from an IEnergyContainerItem to a IEnergyContainer (that former likely is contained in)
 	 * @param stack ItemStack containing the PE container Item
-	 * @param container PE Container 
+	 * @param container PE Container
 	 * @param amount Amount of PE to transfer
 	 */
 	public static void transferPEToContainer(ItemStack stack, IEnergyContainer container, float amount) {
@@ -481,7 +481,7 @@ public class PEUtils {
 	/**
 	 * Transfers PE from an IEnergyContainer to a IEnergyContainerItem (that the former likely contains)
 	 * @param stack ItemStack containing the PE container Item
-	 * @param container PE Container 
+	 * @param container PE Container
 	 * @param amount Amount of PE to transfer
 	 */
 	public static void transferPEFromContainer(ItemStack stack, IEnergyContainer container, float amount) {

@@ -147,12 +147,11 @@ public class AbyssalCraftEventHooks {
 		}
 		if(event.getSource() == AbyssalCraftAPI.shadow) {
 			ItemStack shield = target.getActiveItemStack();
-			if(shield.getItem().isShield(shield, target) && shield.isItemEnchanted()) {
+			if(shield.getItem().isShield(shield, target) && shield.isItemEnchanted())
 				if(EnchantmentHelper.getEnchantmentLevel(AbyssalCraftAPI.blinding_light, shield) > 0) {
 					shield.damageItem((int)event.getAmount() * 2, target);
 					event.setAmount(0);
 				}
-			}
 		}
 	}
 
@@ -183,7 +182,7 @@ public class AbyssalCraftEventHooks {
 					&& ((EntityLivingBase) source.getTrueSource()).getCreatureAttribute() == AbyssalCraftAPI.SHADOW
 					|| source == AbyssalCraftAPI.shadow))
 				event.setCanceled(true);
-			if(EntityUtil.isEntityEldritch(entity) && ((source.getTrueSource() instanceof EntityLivingBase && EntityUtil.isEntityEldritch((EntityLivingBase) source.getTrueSource()))
+			if(EntityUtil.isEntityEldritch(entity) && (source.getTrueSource() instanceof EntityLivingBase && EntityUtil.isEntityEldritch((EntityLivingBase) source.getTrueSource())
 					|| source == AbyssalCraftAPI.dread || source == AbyssalCraftAPI.coralium
 					|| source == AbyssalCraftAPI.antimatter || source == AbyssalCraftAPI.acid))
 				event.setCanceled(true);

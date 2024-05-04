@@ -134,10 +134,10 @@ public class NecronomiconText {
 	public static String CRAFTING_LIFE_CRYSTAL_2 = "necronomicon.text.crafting.lifecrystal.2";
 	public static String CRAFTING_ETHAXIUM_INGOT_1 = "necronomicon.text.crafting.ethaxiumingot.1";
 	public static String CRAFTING_ETHAXIUM_INGOT_2 = "necronomicon.text.crafting.ethaxiumingot.2";
-//	public static String CRAFTING_BLANK_ENGRAVING_1 = "necronomicon.text.crafting.engravingblank.1";
-//	public static String CRAFTING_BLANK_ENGRAVING_2 = "necronomicon.text.crafting.engravingblank.2";
+	//	public static String CRAFTING_BLANK_ENGRAVING_1 = "necronomicon.text.crafting.engravingblank.1";
+	//	public static String CRAFTING_BLANK_ENGRAVING_2 = "necronomicon.text.crafting.engravingblank.2";
 	public static String CRAFTING_COIN = "necronomicon.text.crafting.coin";
-//	public static String CRAFTING_ENGRAVER = "necronomicon.text.crafting.engraver";
+	//	public static String CRAFTING_ENGRAVER = "necronomicon.text.crafting.engraver";
 	public static String CRAFTING_CRYSTAL_BAG_1 = "necronomicon.text.crafting.crystalbag.1";
 	public static String CRAFTING_CRYSTAL_BAG_2 = "necronomicon.text.crafting.crystalbag.2";
 	public static String CRAFTING_MATERIALIZER_1 = "necronomicon.text.crafting.materializer.1";
@@ -338,7 +338,7 @@ public class NecronomiconText {
 
 	public static String MACHINE_INFO_1 = "necronomicon.text.machines.1";
 	public static String MACHINE_INFO_2 = "necronomicon.text.machines.2";
-//	public static String MACHINE_INFO_3 = "necronomicon.text.machines.3";
+	//	public static String MACHINE_INFO_3 = "necronomicon.text.machines.3";
 	public static String MACHINE_INFO_4 = "necronomicon.text.machines.4";
 
 	public static String KNOWLEDGE_INFO_1 = "necronomicon.text.knowledge.1";

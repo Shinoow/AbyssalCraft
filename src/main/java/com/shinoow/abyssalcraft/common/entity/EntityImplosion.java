@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 

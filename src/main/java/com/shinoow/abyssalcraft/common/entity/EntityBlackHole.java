@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;

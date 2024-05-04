@@ -56,7 +56,7 @@ public class CrystallizerRecipes {
 	{
 		return crystallizations.stream()
 				.filter(e -> APIUtils.areStacksEqual(stack, e.INPUT))
-				.map(e -> e.getOutputs())
+				.map(Crystallization::getOutputs)
 				.findFirst()
 				.orElse(new ItemStack[] {ItemStack.EMPTY, ItemStack.EMPTY});
 	}

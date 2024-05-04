@@ -26,10 +26,10 @@ public class Crystallization {
 	public final float XP;
 
 	public Crystallization(ItemStack input, ItemStack output1, ItemStack output2, float xp) {
-		this.INPUT = input;
-		this.OUTPUT1 = output1;
-		this.OUTPUT2 = output2;
-		this.XP = xp;
+		INPUT = input;
+		OUTPUT1 = output1;
+		OUTPUT2 = output2;
+		XP = xp;
 	}
 
 	public Crystallization(ItemStack input, ItemStack output, float xp) {

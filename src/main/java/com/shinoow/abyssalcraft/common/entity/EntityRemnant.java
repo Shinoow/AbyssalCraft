@@ -518,7 +518,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addCoinTrade(list, ACItems.ethaxium_helmet, rand, adjustProbability(0.1F));
 				addCoinTrade(list, ACItems.ethaxium_chestplate, rand, adjustProbability(0.1F));
 				addCoinTrade(list, ACItems.ethaxium_leggings, rand, adjustProbability(0.1F));
-//				addCoinTrade(list, ACItems.blank_engraving, rand, adjustProbability(0.2F));
+				//				addCoinTrade(list, ACItems.blank_engraving, rand, adjustProbability(0.2F));
 				addCoinTrade(list, ACItems.configurator_shard_0, rand, adjustProbability(0.2F));
 				addCoinTrade(list, ACItems.configurator_shard_1, rand, adjustProbability(0.2F));
 				addCoinTrade(list, ACItems.configurator_shard_2, rand, adjustProbability(0.2F));

@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
-import com.shinoow.abyssalcraft.api.energy.PEUtils;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

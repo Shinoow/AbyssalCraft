@@ -13,7 +13,9 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.energy.*;
+import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
+import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.energy.IEnergyRelayBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -40,7 +42,7 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 			par3List.add(stack);
 		}
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		Block block = Block.getBlockFromItem(is.getItem());

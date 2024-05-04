@@ -19,8 +19,6 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 
-	private int ticksExisted;
-
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
 	{
@@ -42,7 +40,7 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 
 		return base + 100 * ((BlockTieredEnergyRelay)getBlockType()).TYPE.getMeta();
 	}
-	
+
 	@Override
 	protected int getRange(){
 

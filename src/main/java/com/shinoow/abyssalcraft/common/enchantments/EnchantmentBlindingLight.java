@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2024 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
@@ -17,7 +28,7 @@ public class EnchantmentBlindingLight extends Enchantment {
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack)
 	{
-		return stack.getItemUseAction() == EnumAction.BLOCK 
+		return stack.getItemUseAction() == EnumAction.BLOCK
 				|| stack.getItem() == Items.SHIELD;
 	}
 

@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
-import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;

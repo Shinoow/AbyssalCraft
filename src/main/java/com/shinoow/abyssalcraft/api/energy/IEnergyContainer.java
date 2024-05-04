@@ -55,7 +55,7 @@ public interface IEnergyContainer {
 	 * @param energy Energy amount to set
 	 */
 	void setEnergy(float energy);
-	
+
 	/**
 	 * Returns whether or not this container can accept Potential Energy<br>
 	 * (eg. if it  has room for more Potential Energy, or if it accepts external input at all)
