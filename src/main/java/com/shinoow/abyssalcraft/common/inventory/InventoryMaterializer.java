@@ -63,6 +63,7 @@ public class InventoryMaterializer implements IInventory
 
 		if (!itemstack.isEmpty())
 		{
+			itemstack.setCount(count);
 			markDirty();
 			if(tile.getWorld().isRemote)
 				PacketDispatcher.sendToServer(new TransferStackMessage(index, itemstack));
