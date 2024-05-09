@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -30,6 +30,12 @@ public class TileEntityTieredSacrificialAltar extends TileEntitySacrificialAltar
 		default:
 			return base;
 		}
+	}
+
+	@Override
+	protected int getCooldownStartNumber() {
+		int base = 1200;
+		return base - 200 * (getBlockMetadata() + 1);
 	}
 
 	@Override

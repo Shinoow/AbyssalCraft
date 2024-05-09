@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -111,7 +111,7 @@ public class StructureShoggothPit extends WorldGenerator {
 							else if(te instanceof TileEntityDecorativeStatue)
 								((TileEntityDecorativeStatue) te).setFacing(EnumFacing.EAST.ordinal());
 						}
-					} else if("statue5".equals(entry.getValue())) {
+					} else if("statue5".equals(entry.getValue()) || "statue6".equals(entry.getValue()) || "statue7".equals(entry.getValue()) || "statue8".equals(entry.getValue())) {
 						if(rand.nextInt(10) < 6)
 							world.setBlockState(entry.getKey(), monolith_stone);
 						else {
@@ -122,39 +122,7 @@ public class StructureShoggothPit extends WorldGenerator {
 							else if(te instanceof TileEntityDecorativeStatue)
 								((TileEntityDecorativeStatue) te).setFacing(EnumFacing.WEST.ordinal());
 						}
-					} else if("statue6".equals(entry.getValue())) {
-						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
-							world.setBlockState(entry.getKey(), getRandomStatue(rand));
-							TileEntity te = world.getTileEntity(entry.getKey());
-							if(te instanceof TileEntityStatue)
-								((TileEntityStatue) te).setFacing(EnumFacing.WEST.ordinal());
-							else if(te instanceof TileEntityDecorativeStatue)
-								((TileEntityDecorativeStatue) te).setFacing(EnumFacing.WEST.ordinal());
-						}
-					} else if("statue7".equals(entry.getValue())) {
-						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
-							world.setBlockState(entry.getKey(), getRandomStatue(rand));
-							TileEntity te = world.getTileEntity(entry.getKey());
-							if(te instanceof TileEntityStatue)
-								((TileEntityStatue) te).setFacing(EnumFacing.WEST.ordinal());
-							else if(te instanceof TileEntityDecorativeStatue)
-								((TileEntityDecorativeStatue) te).setFacing(EnumFacing.WEST.ordinal());
-						}
-					} else if("statue8".equals(entry.getValue()))
-						if(rand.nextInt(10) < 6)
-							world.setBlockState(entry.getKey(), monolith_stone);
-						else {
-							world.setBlockState(entry.getKey(), getRandomStatue(rand));
-							TileEntity te = world.getTileEntity(entry.getKey());
-							if(te instanceof TileEntityStatue)
-								((TileEntityStatue) te).setFacing(EnumFacing.WEST.ordinal());
-							else if(te instanceof TileEntityDecorativeStatue)
-								((TileEntityDecorativeStatue) te).setFacing(EnumFacing.WEST.ordinal());
-						}
+					}
 				break;
 			case 2:
 				for (Entry<BlockPos, String> entry : map.entrySet())

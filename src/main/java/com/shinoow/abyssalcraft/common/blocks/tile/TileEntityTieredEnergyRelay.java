@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -90,6 +90,13 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 		return this;
 	}
 
+	@Override
+	public int getMaxEnergy() {
+		int base = 600;
+
+		return base + 100 * getBlockMetadata();
+	}
+
 	protected int getRange(){
 		switch(getBlockMetadata()){
 		case 0:
@@ -108,13 +115,13 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 	protected float getDrainQuanta(){
 		switch(getBlockMetadata()){
 		case 0:
-			return 15;
+			return 20;
 		case 1:
-			return 25;
+			return 30;
 		case 2:
-			return 35;
+			return 40;
 		case 3:
-			return 45;
+			return 50;
 		default:
 			return 0;
 		}
@@ -123,13 +130,13 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 	protected float getTransferQuanta(){
 		switch(getBlockMetadata()){
 		case 0:
-			return 20;
-		case 1:
 			return 30;
-		case 2:
+		case 1:
 			return 40;
-		case 3:
+		case 2:
 			return 50;
+		case 3:
+			return 60;
 		default:
 			return 0;
 		}

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -261,7 +261,7 @@ public class ClientProxy extends CommonProxy {
 			Particle var21 = null;
 			double var22 = 16.0D;
 
-			if ((var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22) || (var14 > 1))
+			if (var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22 || var14 > 1)
 				return;
 			else {
 				if (particleName.equals("CorBlood"))

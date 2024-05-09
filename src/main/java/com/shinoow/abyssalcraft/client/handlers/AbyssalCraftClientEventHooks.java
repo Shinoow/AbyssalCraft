@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -86,22 +86,22 @@ public class AbyssalCraftClientEventHooks {
 
 	@SubscribeEvent
 	public void onUpdateFOV(FOVUpdateEvent event) {
-		float fov = event.getFov();
 
-		if( event.getEntity().isHandActive() && event.getEntity().getActiveItemStack() != null
+		if(event.getEntity().isHandActive() && !event.getEntity().getActiveItemStack().isEmpty()
 				&& event.getEntity().getActiveItemStack().getItem() == ACItems.coralium_longbow) {
 			int duration = event.getEntity().getItemInUseCount();
 			float multiplier = duration / 20.0F;
+			float fov = event.getFov();
 
-			if( multiplier > 1.0F )
+			if(multiplier > 1.0F )
 				multiplier = 1.0F;
 			else
 				multiplier *= multiplier;
 
 			fov *= 1.0F - multiplier * 0.15F;
+			event.setNewfov(fov);
 		}
 
-		event.setNewfov(fov);
 	}
 
 	@SubscribeEvent
@@ -331,7 +331,7 @@ public class AbyssalCraftClientEventHooks {
 		if(!APIUtils.display_names)
 			if(stack.getItem() instanceof IUnlockableItem && event.getEntityPlayer() != null && !NecroDataCapability.getCap(event.getEntityPlayer()).isUnlocked(((IUnlockableItem)stack.getItem()).getUnlockCondition(stack), event.getEntityPlayer())){
 				event.getToolTip().remove(0);
-				event.getToolTip().add(0, "Lorem ipsum");
+				event.getToolTip().add(0, "...What's this?");
 			}
 		if(stack.getItem() instanceof IScroll) {
 			Spell spell = SpellUtils.getSpell(stack);
@@ -345,7 +345,7 @@ public class AbyssalCraftClientEventHooks {
 
 	@SubscribeEvent
 	public void tooltipFont(RenderTooltipEvent.Pre event) {
-		if(!APIUtils.display_names && event.getLines().get(0).startsWith("\u00A7fLorem ipsum"))
+		if(!APIUtils.display_names && event.getLines().get(0).startsWith("\u00A7f...What's this?"))
 			event.setFontRenderer(AbyssalCraftAPI.getAkloFont());
 	}
 

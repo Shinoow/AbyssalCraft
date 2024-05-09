@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -91,7 +91,7 @@ public class MapGenAbyStronghold extends MapGenStructure
 
 			double d1 = blockpos$mutableblockpos.distanceSq(pos);
 
-			if ((blockpos == null) || (d1 < d0))
+			if (blockpos == null || d1 < d0)
 			{
 				blockpos = new BlockPos(blockpos$mutableblockpos);
 				d0 = d1;

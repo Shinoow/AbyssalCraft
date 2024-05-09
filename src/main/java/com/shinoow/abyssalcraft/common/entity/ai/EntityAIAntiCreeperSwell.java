@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -57,7 +57,7 @@ public class EntityAIAntiCreeperSwell extends EntityAIBase
 	@Override
 	public void updateTask()
 	{
-		if ((creeperAttackTarget == null) || (swellingCreeper.getDistanceSq(creeperAttackTarget) > 49.0D) || !swellingCreeper.getEntitySenses().canSee(creeperAttackTarget))
+		if (creeperAttackTarget == null || swellingCreeper.getDistanceSq(creeperAttackTarget) > 49.0D || !swellingCreeper.getEntitySenses().canSee(creeperAttackTarget))
 			swellingCreeper.setCreeperState(-1);
 		else
 			swellingCreeper.setCreeperState(1);

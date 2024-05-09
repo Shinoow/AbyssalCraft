@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.world.biome;
 
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
@@ -27,6 +28,8 @@ public class BiomeGenDarkRealm extends Biome {
 	public BiomeGenDarkRealm(BiomeProperties par1){
 		super(par1);
 		setMobSpawns();
+		topBlock = ACBlocks.stone.getDefaultState();
+		fillerBlock = ACBlocks.stone.getDefaultState();
 	}
 
 	public final void setMobSpawns(){

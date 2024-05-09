@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -143,7 +143,7 @@ public class NecronomiconCleansingRitual extends NecronomiconRitual {
 	}
 
 	private Biome getRealBiome(Biome b){
-		if((b == ACBiomes.darklands) || (b == ACBiomes.darklands_plains))
+		if(b == ACBiomes.darklands || b == ACBiomes.darklands_plains)
 			return Biomes.PLAINS;
 		else if(b == ACBiomes.darklands_forest)
 			return Biomes.FOREST;

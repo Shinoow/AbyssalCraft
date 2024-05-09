@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -46,7 +46,7 @@ public final class GuiRenderHelper
 			int var5 = 0;
 			int var6;
 			int var7;
-			FontRenderer fontRenderer = !tooltipData.get(0).startsWith("Lorem ipsum") ? Minecraft.getMinecraft().fontRenderer : AbyssalCraftAPI.getAkloFont();
+			FontRenderer fontRenderer = !tooltipData.get(0).startsWith("...What's this?") ? Minecraft.getMinecraft().fontRenderer : AbyssalCraftAPI.getAkloFont();
 			for (var6 = 0; var6 < tooltipData.size(); ++var6) {
 				var7 = fontRenderer.getStringWidth(tooltipData.get(var6));
 				if (var7 > var5)

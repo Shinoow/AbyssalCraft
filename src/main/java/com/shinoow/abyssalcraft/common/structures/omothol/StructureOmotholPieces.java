@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -176,7 +176,7 @@ public class StructureOmotholPieces
 
 	private static StructureComponent func_176066_d(StructureOmotholPieces.Start start, List<StructureComponent> p_176066_1_, Random rand, int p_176066_3_, int p_176066_4_, int p_176066_5_, EnumFacing facing, int p_176066_7_)
 	{
-		if ((p_176066_7_ > 250) || !(Math.abs(p_176066_3_ - start.getBoundingBox().minX) <= 4000 && Math.abs(p_176066_5_ - start.getBoundingBox().minZ) <= 4000))
+		if (p_176066_7_ > 250 || !(Math.abs(p_176066_3_ - start.getBoundingBox().minX) <= 4000 && Math.abs(p_176066_5_ - start.getBoundingBox().minZ) <= 4000))
 			return null;
 		else {
 			StructureComponent structurecomponent = func_176067_c(start, p_176066_1_, rand, p_176066_3_, p_176066_4_, p_176066_5_, facing, p_176066_7_ + 1);
@@ -203,7 +203,7 @@ public class StructureOmotholPieces
 
 	private static StructureComponent func_176069_e(StructureOmotholPieces.Start start, List<StructureComponent> p_176069_1_, Random rand, int p_176069_3_, int p_176069_4_, int p_176069_5_, EnumFacing facing, int p_176069_7_)
 	{
-		if ((p_176069_7_ > 3 + start.terrainType) || !(Math.abs(p_176069_3_ - start.getBoundingBox().minX) <= 4000 && Math.abs(p_176069_5_ - start.getBoundingBox().minZ) <= 4000))
+		if (p_176069_7_ > 3 + start.terrainType || !(Math.abs(p_176069_3_ - start.getBoundingBox().minX) <= 4000 && Math.abs(p_176069_5_ - start.getBoundingBox().minZ) <= 4000))
 			return null;
 		else {
 			StructureBoundingBox structureboundingbox = StructureOmotholPieces.Path.func_175848_a(start, p_176069_1_, rand, p_176069_3_, p_176069_4_, p_176069_5_, facing);

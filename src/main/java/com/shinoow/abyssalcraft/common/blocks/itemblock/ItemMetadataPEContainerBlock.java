@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -16,8 +16,12 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMetadataPEContainerBlock extends ItemBlockAC implements IEnergyContainerItem {
 
@@ -29,6 +33,18 @@ public class ItemMetadataPEContainerBlock extends ItemBlockAC implements IEnergy
 		super(b);
 		setMaxDamage(0);
 		setHasSubtypes(true);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
+		if(isInCreativeTab(par2CreativeTab))
+			for(int i = 0; i < 4; i++) {
+				par3List.add(new ItemStack(this, 1, i));
+				ItemStack stack = new ItemStack(this, 1, i);
+				addEnergy(stack, getMaxEnergy(stack));
+				par3List.add(stack);
+			}
 	}
 
 	@Override

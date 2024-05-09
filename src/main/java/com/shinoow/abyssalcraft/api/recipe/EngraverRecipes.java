@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.api.recipe;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemEngraving;
@@ -110,7 +111,7 @@ public class EngraverRecipes {
 
 		return experienceList.entrySet().stream()
 				.filter(e -> areStacksEqual(stack, e.getKey()))
-				.map(e -> e.getValue())
+				.map(Entry::getValue)
 				.findFirst()
 				.orElse(0.0F);
 	}

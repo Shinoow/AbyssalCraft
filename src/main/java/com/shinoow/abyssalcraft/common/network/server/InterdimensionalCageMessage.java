@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -56,7 +56,7 @@ public class InterdimensionalCageMessage extends AbstractServerMessage<Interdime
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		if(player.getHeldItem(hand) == null) return;
+		if(player.getHeldItem(hand).isEmpty()) return;
 		ItemStack stack = player.getHeldItem(hand);
 		Entity e = player.world.getEntityByID(id);
 		if(e == null) return;

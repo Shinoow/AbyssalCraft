@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -81,7 +81,7 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 		if(!item.isEmpty())
 			if(item.getItem() instanceof IEnergyContainerItem)
 				if(!world.isRemote && ((IEnergyContainerItem) item.getItem()).canAcceptPE(item) && canTransferPE())
-					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(1));
+					((IEnergyContainerItem) item.getItem()).addEnergy(item, consumeEnergy(20));
 	}
 
 	@Override

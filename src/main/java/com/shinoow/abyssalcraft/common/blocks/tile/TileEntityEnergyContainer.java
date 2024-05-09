@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -82,12 +82,12 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 		if(!input.isEmpty())
 			if(input.getItem() instanceof IEnergyContainerItem)
 				if(((IEnergyContainerItem) input.getItem()).canTransferPE(input) && canAcceptPE())
-					addEnergy(((IEnergyContainerItem) input.getItem()).consumeEnergy(input, 1));
+					addEnergy(((IEnergyContainerItem) input.getItem()).consumeEnergy(input, 20));
 		ItemStack output = getStackInSlot(1);
 		if(!output.isEmpty())
 			if(output.getItem() instanceof IEnergyContainerItem)
 				if(((IEnergyContainerItem) output.getItem()).canAcceptPE(output) && canTransferPE())
-					((IEnergyContainerItem) output.getItem()).addEnergy(output, consumeEnergy(1));
+					((IEnergyContainerItem) output.getItem()).addEnergy(output, consumeEnergy(20));
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -59,7 +59,7 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 	{
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
 
-		if ((entitylivingbase == null) || !entitylivingbase.isEntityAlive())
+		if (entitylivingbase == null || !entitylivingbase.isEntityAlive())
 			return false;
 		else {
 			if (canPenalize)
@@ -87,7 +87,7 @@ public class EntityAILesserShoggothAttackMelee extends EntityAIBase
 	{
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
 
-		if ((entitylivingbase == null) || !entitylivingbase.isEntityAlive())
+		if (entitylivingbase == null || !entitylivingbase.isEntityAlive())
 			return false;
 		else if (!longMemory)
 			return !attacker.getNavigator().noPath();

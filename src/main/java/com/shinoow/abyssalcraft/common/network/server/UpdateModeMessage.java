@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -51,7 +51,7 @@ public class UpdateModeMessage extends AbstractServerMessage<UpdateModeMessage> 
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		if((container == 0 && player.openContainer instanceof ContainerStateTransformer) || (container == 1 && player.openContainer instanceof ContainerConfigurator)){
+		if(container == 0 && player.openContainer instanceof ContainerStateTransformer || container == 1 && player.openContainer instanceof ContainerConfigurator){
 			player.openContainer.enchantItem(player, mode);
 			player.openContainer.detectAndSendChanges();
 		}

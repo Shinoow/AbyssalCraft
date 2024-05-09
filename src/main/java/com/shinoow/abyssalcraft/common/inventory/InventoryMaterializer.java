@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2023 Shinoow.
+ * Copyright (c) 2012 - 2024 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -63,6 +63,7 @@ public class InventoryMaterializer implements IInventory
 
 		if (!itemstack.isEmpty())
 		{
+			itemstack.setCount(count);
 			markDirty();
 			if(tile.getWorld().isRemote)
 				PacketDispatcher.sendToServer(new TransferStackMessage(index, itemstack));
