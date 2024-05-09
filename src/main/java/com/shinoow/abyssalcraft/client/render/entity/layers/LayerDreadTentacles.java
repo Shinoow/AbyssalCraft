@@ -16,19 +16,19 @@ import com.shinoow.abyssalcraft.client.model.entity.ModelDreadTentacles;
 
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.RenderLivingBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
-public class LayerDreadTentacles<E extends EntityLivingBase> implements LayerRenderer<E> {
+public class LayerDreadTentacles<E extends EntityLiving> implements LayerRenderer<E> {
 
 	private ModelDreadTentacles model = new ModelDreadTentacles();
 	private boolean foundPart;
-	private final RenderLivingBase<E> render;
+	private final RenderLiving<E> render;
 	private final ResourceLocation TEXTURE = new ResourceLocation("abyssalcraft:textures/model/dread_tentacle.png");
 
-	public LayerDreadTentacles(RenderLivingBase<E> renderIn) {
+	public LayerDreadTentacles(RenderLiving<E> renderIn) {
 		render = renderIn;
 		alignTentacle();
 	}
@@ -50,12 +50,13 @@ public class LayerDreadTentacles<E extends EntityLivingBase> implements LayerRen
 	}
 
 	private void alignTentacle() {
-		for(ModelRenderer model1 : render.getMainModel().boxList)
-			if(!model1.cubeList.isEmpty()) {
-				ModelBox cube = model1.cubeList.get(0);
-				foundPart = true;
-				model.base.setRotationPoint(model1.rotationPointX, model1.rotationPointY + (cube.posY1 + cube.posY2) + 1.0F, model1.rotationPointZ);
-				break;
-			}
+		if(render != null && render.getMainModel() != null)
+			for(ModelRenderer model1 : render.getMainModel().boxList)
+				if(!model1.cubeList.isEmpty()) {
+					ModelBox cube = model1.cubeList.get(0);
+					foundPart = true;
+					model.base.setRotationPoint(model1.rotationPointX, model1.rotationPointY + (cube.posY1 + cube.posY2) + 1.0F, model1.rotationPointZ);
+					break;
+				}
 	}
 }

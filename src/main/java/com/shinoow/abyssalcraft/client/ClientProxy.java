@@ -58,7 +58,7 @@ import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -189,8 +189,8 @@ public class ClientProxy extends CommonProxy {
 		RenderPlayer render2 = rm.getSkinMap().get("slim");
 		render2.addLayer(new LayerStarSpawnTentacles(render2));
 		rm.entityRenderMap.forEach((a,b)-> {
-			if(EntityLivingBase.class.isAssignableFrom(a))
-				((RenderLivingBase) b).addLayer(new LayerDreadTentacles((RenderLivingBase) b));
+			if(EntityLiving.class.isAssignableFrom(a) && b instanceof RenderLiving)
+				((RenderLiving) b).addLayer(new LayerDreadTentacles((RenderLiving) b));
 		});
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ((ICrystal) stack.getItem()).getColor(stack), InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ICrystal).toArray(Item[]::new));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.token_of_jzahar);
