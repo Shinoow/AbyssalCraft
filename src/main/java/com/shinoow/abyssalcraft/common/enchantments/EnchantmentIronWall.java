@@ -45,6 +45,7 @@ public class EnchantmentIronWall extends Enchantment {
 	@Override
 	public void onUserHurt(EntityLivingBase user, Entity attacker, int level)
 	{
-		user.motionX = user.motionY = user.motionZ = 0;
+		if(user != null)
+			user.motionX = user.motionY = user.motionZ = 0;
 	}
 }
