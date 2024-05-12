@@ -52,7 +52,6 @@ public class NecronomiconResources {
 	//Omothol entities
 	public static final ResourceLocation REMNANT = res("remnant");
 	public static final ResourceLocation OMOTHOL_GHOUL = res("omothol-ghoul");
-	public static final ResourceLocation OMOTHOL_WARDEN = res("missing"); //TODO: fix
 	public static final ResourceLocation MINION_OF_THE_GATEKEEPER = res("minion-of-the-gatekeeper");
 	public static final ResourceLocation JZAHAR = res("jzahar");
 
@@ -60,7 +59,6 @@ public class NecronomiconResources {
 	public static final ResourceLocation SHADOW_CREATURE = res("shadow-creature");
 	public static final ResourceLocation SHADOW_MONSTER = res("shadow-monster");
 	public static final ResourceLocation SHADOW_BEAST = res("shadow-beast");
-	public static final ResourceLocation SHADOW_TITAN = res("missing"); //TODO: fix
 	public static final ResourceLocation SACTHOTH = res("sacthoth");
 
 	//Seals representing The Great Old Ones, no idea how many I'm going to do

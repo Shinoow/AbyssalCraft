@@ -35,7 +35,7 @@ public class ItemCrystal extends ItemACBasic implements ICrystal {
 		setMaxDamage(0);
 		this.suffix = suffix;
 		this.type = type;
-		suffix_string = name+".postfix"; //TODO correct to .suffix at some point
+		suffix_string = name+".suffix";
 	}
 
 	//	@Override

@@ -1189,11 +1189,11 @@ tile.multi_block.name=Multibloque
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
 tile.portal_anchor.name=Portal Anchor
 
-#Pre/Postfixes
+#Pre/Suffixes
 decorativestatue.prefix=Decorativo %s
-crystalcluster.postfix=%s trozo
-crystalshard.postfix=%s Shard
-crystalfragment.postfix=%s Fragment
+crystalcluster.suffix=%s trozo
+crystalshard.suffix=%s Shard
+crystalfragment.suffix=%s Fragment
 
 #Items
 item.oc.name=Catalizador del Olvido

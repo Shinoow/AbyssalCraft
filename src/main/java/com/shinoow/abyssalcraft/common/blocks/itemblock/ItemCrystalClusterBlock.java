@@ -29,7 +29,7 @@ public class ItemCrystalClusterBlock extends ItemBlockAC implements ICrystal {
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 
-		return TranslationUtil.toLocalFormatted("crystalcluster.postfix", name());
+		return TranslationUtil.toLocalFormatted("crystalcluster.suffix", name());
 	}
 
 	public String name() {

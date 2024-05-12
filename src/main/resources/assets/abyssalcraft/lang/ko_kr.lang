@@ -1182,11 +1182,11 @@ tile.multi_block.name=멀티블록
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
 tile.portal_anchor.name=Portal Anchor
 
-#Pre/Postfixes
+#Pre/Suffixes
 decorativestatue.prefix=장식 %s
-crystalcluster.postfix=%s 덩어리
-crystalshard.postfix=%s 조각
-crystalfragment.postfix=%s 파편
+crystalcluster.suffix=%s 덩어리
+crystalshard.suffix=%s 조각
+crystalfragment.suffix=%s 파편
 
 #Items
 item.devsword.name=데브 블레이드

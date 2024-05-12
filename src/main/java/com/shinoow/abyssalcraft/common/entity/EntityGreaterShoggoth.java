@@ -113,7 +113,7 @@ public class EntityGreaterShoggoth extends EntityShoggothBase {
 
 	@Override
 	protected int getArmorAcidDamage() {
-		return 12; //TODO maybe?
+		return 12;
 	}
 
 }

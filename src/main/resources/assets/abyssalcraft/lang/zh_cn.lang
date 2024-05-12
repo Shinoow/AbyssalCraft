@@ -1191,9 +1191,9 @@ tile.portal_anchor.name=传送门之锚
 
 #前缀/后缀
 decorativestatue.prefix=装饰用%s
-crystalcluster.postfix=%s簇
-crystalshard.postfix=%s碎片
-crystalfragment.postfix=%s断片
+crystalcluster.suffix=%s簇
+crystalshard.suffix=%s碎片
+crystalfragment.suffix=%s断片
 
 #物品
 item.oc.name=湮灭媒介

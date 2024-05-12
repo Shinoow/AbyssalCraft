@@ -473,9 +473,6 @@ public abstract class EntityShoggothBase extends EntityMob implements IShoggothE
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
 
-		if (isChild())
-			par1NBTTagCompound.setBoolean("IsBaby", true);
-
 		par1NBTTagCompound.setInteger("ShoggothType", getShoggothType());
 
 		par1NBTTagCompound.setInteger("FoodLevel", getFoodLevel());

@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.items;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityPSDLTracker;
+import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,9 +40,9 @@ public class ItemTrackerPSDL extends ItemACBasic {
 		if (movingobjectposition != null && movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK && par2World.getBlockState(movingobjectposition.getBlockPos()) == ACBlocks.dreadlands_infused_powerstone)
 			return new ActionResult(EnumActionResult.PASS, par1ItemStack);
 
-		if (!par2World.isRemote)
+		if (!par2World.isRemote && par2World.provider.getDimension() == ACLib.abyssal_wasteland_id)
 		{
-			BlockPos blockpos = ((WorldServer)par2World).getChunkProvider().getNearestStructurePos(par2World, "AbyStronghold", new BlockPos(par3EntityPlayer), true); //TODO change?
+			BlockPos blockpos = ((WorldServer)par2World).getChunkProvider().getNearestStructurePos(par2World, "AbyStronghold", new BlockPos(par3EntityPlayer), true);
 
 			if (blockpos != null)
 			{

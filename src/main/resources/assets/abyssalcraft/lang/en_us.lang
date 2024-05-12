@@ -1182,11 +1182,11 @@ tile.multi_block.name=Multiblock
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
 tile.portal_anchor.name=Portal Anchor
 
-#Pre/Postfixes
+#Pre/Suffixes
 decorativestatue.prefix=Decorative %s
-crystalcluster.postfix=%s Cluster
-crystalshard.postfix=%s Shard
-crystalfragment.postfix=%s Fragment
+crystalcluster.suffix=%s Cluster
+crystalshard.suffix=%s Shard
+crystalfragment.suffix=%s Fragment
 
 #Items
 item.oc.name=Oblivion Catalyst

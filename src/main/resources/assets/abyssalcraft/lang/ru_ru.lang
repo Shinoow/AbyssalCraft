@@ -1182,9 +1182,9 @@ tile.multi_block.name=Мультиблок
 
 #До/После исправления
 decorativestatue.prefix=Декоративный %s
-crystalcluster.postfix=%s скопление
-crystalshard.postfix=%s осколок
-crystalfragment.postfix=%s фрагмент
+crystalcluster.suffix=%s скопление
+crystalshard.suffix=%s осколок
+crystalfragment.suffix=%s фрагмент
 
 #Предметы
 item.devsword.name=Дэв лезвие

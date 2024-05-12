@@ -1189,11 +1189,11 @@ tile.multi_block.name=Multiblock
 tile.sequential_brewing_stand.name=Sequential Brewing 
 tile.portal_anchor.name=Portal Anchor
 
-#Pre/Postfixes
+#Pre/Suffixes
 decorativestatue.prefix=裝飾用%s
-crystalcluster.postfix=%s簇
-crystalshard.postfix=%s碎片
-crystalfragment.postfix=%s斷片
+crystalcluster.suffix=%s簇
+crystalshard.suffix=%s碎片
+crystalfragment.suffix=%s斷片
 
 #物品
 item.oc.name=湮滅媒介

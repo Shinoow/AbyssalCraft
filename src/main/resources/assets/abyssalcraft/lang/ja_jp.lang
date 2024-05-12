@@ -1178,11 +1178,11 @@ tile.door_dlt.name=ダークランドオークのドア
 tile.door_drt.name=ドレッドウッドのドア
 tile.multi_block.name=マルチブロック
 
-#修正  Pre/Postfixes
+#修正  Pre/Suffixes
 decorativestatue.prefix=装飾用の%s
-crystalcluster.postfix=%sクラスター
-crystalshard.postfix=%sシャード
-crystalfragment.postfix=%sフラグメント
+crystalcluster.suffix=%sクラスター
+crystalshard.suffix=%sシャード
+crystalfragment.suffix=%sフラグメント
 
 #アイテム名  Items
 item.devsword.name=ザ・デベロッパーブレード
