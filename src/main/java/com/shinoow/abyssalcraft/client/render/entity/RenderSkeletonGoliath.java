@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelSkeletonGoliath;
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerSkeletonGoliathHeldItem;
 import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
 
 import net.minecraft.client.renderer.GlStateManager;
@@ -31,13 +32,14 @@ public class RenderSkeletonGoliath extends RenderLiving<EntitySkeletonGoliath> {
 
 	public RenderSkeletonGoliath(RenderManager manager)
 	{
-		this(manager, new ModelSkeletonGoliath(true));
+		this(manager, new ModelSkeletonGoliath());
 	}
 
 	public RenderSkeletonGoliath(RenderManager manager, ModelSkeletonGoliath model)
 	{
 		super(manager, model, 0.5F);
 		addLayer(new LayerCustomHead(model.head));
+		addLayer(new LayerSkeletonGoliathHeldItem(this));
 	}
 
 	protected void preRenderScale(EntitySkeletonGoliath par1EntitySkeletonGoliath, float par2)
