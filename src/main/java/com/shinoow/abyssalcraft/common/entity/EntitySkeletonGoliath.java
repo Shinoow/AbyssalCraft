@@ -178,6 +178,13 @@ public class EntitySkeletonGoliath extends EntityMob {
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
+
+		float f = difficulty.getClampedAdditionalDifficulty();
+		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
+
+		setEquipmentBasedOnDifficulty(difficulty);
+		setEnchantmentBasedOnDifficulty(difficulty);
+		
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{
 			Calendar calendar = world.getCurrentDate();

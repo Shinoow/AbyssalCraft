@@ -12,8 +12,8 @@ public class ModelSkeletonGoliathArmor extends ModelSkeletonGoliath {
 	}
 
 	public ModelSkeletonGoliathArmor(float f) {
-		this.textureWidth = 128;
-		this.textureHeight = 64;
+		super(f);
+
 		this.chestplate = new ModelRenderer(this, 79, 0);
 		this.chestplate.setRotationPoint(0.0F, -11.0F, -2.0F);
 		this.chestplate.addBox(-6.0F, 0.0F, 0.0F, 13, 17, 5, f);

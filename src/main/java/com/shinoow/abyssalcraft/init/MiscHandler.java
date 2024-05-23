@@ -23,6 +23,8 @@ import javax.annotation.Nonnull;
 import com.google.common.base.Predicate;
 import com.google.gson.JsonObject;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.armor.ArmorData;
+import com.shinoow.abyssalcraft.api.armor.ArmorDataRegistry;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -63,6 +65,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.*;
@@ -352,6 +355,12 @@ public class MiscHandler implements ILifeCycleHandler {
 		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.depths_helmet, ACItems.depths_chestplate, ACItems.depths_leggings, ACItems.depths_boots, "abyssalcraft:textures/armor/ghoul/depths_1.png", "abyssalcraft:textures/armor/ghoul/depths_2.png");
 		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.plated_coralium_helmet, ACItems.plated_coralium_chestplate, ACItems.plated_coralium_leggings, ACItems.plated_coralium_boots, "abyssalcraft:textures/armor/ghoul/coraliump_1.png", "abyssalcraft:textures/armor/ghoul/coraliump_2.png");
 		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.dreadium_samurai_helmet, ACItems.dreadium_samurai_chestplate, ACItems.dreadium_samurai_leggings, ACItems.dreadium_samurai_boots, "abyssalcraft:textures/armor/ghoul/dreadiums_1.png", "abyssalcraft:textures/armor/ghoul/dreadiums_2.png");
+		
+		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.CHAIN, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/chainmail_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/chainmail_2.png")));
+		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.LEATHER, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/leather_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/leather_2.png"), true));
+		
+		ArmorDataRegistry.instance().registerColor(ArmorMaterial.GOLD, ACClientVars.getCrystalColors()[Crystals.GOLD]);
+		
 		AbyssalCraftAPI.getInternalNDHandler().registerInternalPages();
 		StructureHandler.instance().registerStructure(new BasicStructure());
 		StructureHandler.instance().registerStructure(new TotemPoleStructure());

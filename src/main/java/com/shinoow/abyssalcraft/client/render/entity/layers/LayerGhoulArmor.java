@@ -16,6 +16,7 @@ import com.shinoow.abyssalcraft.client.model.entity.ModelDGArmor;
 
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerArmorBase;
+import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -78,13 +79,7 @@ public class LayerGhoulArmor extends LayerArmorBase<ModelDGArmor>
 	}
 
 	@Override
-	protected ModelDGArmor getArmorModelHook(net.minecraft.entity.EntityLivingBase entity, net.minecraft.item.ItemStack itemStack, EntityEquipmentSlot slot, ModelDGArmor model)
-	{
-		return model;
-	}
-
-	@Override
-	public ResourceLocation getArmorResource(net.minecraft.entity.Entity entity, ItemStack stack, EntityEquipmentSlot slot, String type)
+	public ResourceLocation getArmorResource(Entity entity, ItemStack stack, EntityEquipmentSlot slot, String type)
 	{
 		ResourceLocation res = null;
 
