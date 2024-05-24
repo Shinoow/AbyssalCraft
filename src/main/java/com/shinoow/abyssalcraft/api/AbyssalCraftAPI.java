@@ -40,7 +40,6 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -78,12 +77,6 @@ public class AbyssalCraftAPI {
 	private static final List<ItemStack> crystals = new ArrayList<>();
 
 	private static final Map<NecroData, Integer> necroData = new HashMap<>();
-
-	private static final Map<Item, ResourceLocation> ghoul_helmet = new HashMap<>();
-	private static final Map<Item, ResourceLocation> ghoul_chestplate = new HashMap<>();
-	private static final Map<Item, ResourceLocation> ghoul_leggings = new HashMap<>();
-	private static final Map<Item, ResourceLocation> ghoul_boots = new HashMap<>();
-
 
 	/**
 	 *  {@link EnumCreatureAttribute} used for the Shadow mobs
@@ -577,185 +570,6 @@ public class AbyssalCraftAPI {
 	 */
 	public static Map<NecroData,Integer> getNecronomiconData(){
 		return necroData;
-	}
-
-	/**
-	 * Registers a texture for a Helmet (when worn by a Ghoul Entity)
-	 * @param helmet Helmet Item
-	 * @param res Texture ResourceLocation
-	 *
-	 * @since 1.8
-	 */
-	public static void addGhoulHelmetTexture(Item helmet, ResourceLocation res){
-		if(helmet == null || res == null) return;
-		if(ghoul_helmet.containsKey(helmet))
-			logger.log(Level.INFO, "Mod {} is overwriting the texture for Helmet {}", Loader.instance().activeModContainer().getModId(), helmet.getRegistryName());
-		ghoul_helmet.put(helmet, res);
-	}
-
-	/**
-	 * Registers a texture for a Chestplate (when worn by a Ghoul Entity)
-	 * @param chestplate Chestplate Item
-	 * @param res Texture ResourceLocation
-	 *
-	 * @since 1.8
-	 */
-	public static void addGhoulChestplateTexture(Item chestplate, ResourceLocation res){
-		if(chestplate == null || res == null) return;
-		if(ghoul_chestplate.containsKey(chestplate))
-			logger.log(Level.INFO, "Mod {} is overwriting the texture for Chestplate {}", Loader.instance().activeModContainer().getModId(), chestplate.getRegistryName());
-		ghoul_chestplate.put(chestplate, res);
-	}
-
-	/**
-	 * Registers a texture for a pair of Leggings (when worn by a Ghoul Entity)
-	 * @param leggings Leggings Item
-	 * @param res Texture ResourceLocation
-	 *
-	 * @since 1.8
-	 */
-	public static void addGhoulLeggingsTexture(Item leggings, ResourceLocation res){
-		if(leggings == null || res == null) return;
-		if(ghoul_leggings.containsKey(leggings))
-			logger.log(Level.INFO, "Mod {} is overwriting the texture for Leggings {}", Loader.instance().activeModContainer().getModId(), leggings.getRegistryName());
-		ghoul_leggings.put(leggings, res);
-	}
-
-	/**
-	 * Registers a texture for a pair of Boots (when worn by a Ghoul Entity)
-	 * @param boots Boots Item
-	 * @param res Texture ResourceLocation
-	 *
-	 * @since 1.8
-	 */
-	public static void addGhoulBootsTexture(Item boots, ResourceLocation res){
-		if(boots == null || res == null) return;
-		if(ghoul_boots.containsKey(boots))
-			logger.log(Level.INFO, "Mod {} is overwriting the texture for Boots {}", Loader.instance().activeModContainer().getModId(), boots.getRegistryName());
-		ghoul_boots.put(boots, res);
-	}
-
-	/**
-	 * Registers a texture for a Helmet (when worn by a Ghoul Entity)
-	 * @param helmet Helmet Item
-	 * @param res Texture String (should be formatted as "modid:path/to/texture.png")
-	 *
-	 * @since 1.8
-	 */
-	public static void addGhoulHelmetTexture(Item helmet, String res){
-		addGhoulHelmetTexture(helmet, new ResourceLocation(res));
-	}
-
-	/**
-	 * Registers a texture for a Chestplate (when worn by a Ghoul Entity)
-	 * @param chestplate Chestplate Item
-	 * @param res Texture String (should be formatted as "modid:path/to/texture.png")
-	 *
-	 * @since 1.8
-	 */
-	public static void addGhoulChestplateTexture(Item chestplate, String res){
-		addGhoulChestplateTexture(chestplate, new ResourceLocation(res));
-	}
-
-	/**
-	 * Registers a texture for a pair of Leggings (when worn by a Ghoul Entity)
-	 * @param leggings Leggings Item
-	 * @param res Texture String (should be formatted as "modid:path/to/texture.png")
-	 *
-	 * @since 1.8
-	 */
-	public static void addGhoulLeggingsTexture(Item leggings, String res){
-		addGhoulLeggingsTexture(leggings, new ResourceLocation(res));
-	}
-
-	/**
-	 * Registers a texture for a pair of Boots (when worn by a Ghoul Entity)
-	 * @param boots Boots Item
-	 * @param res Texture String (should be formatted as "modid:path/to/texture.png")
-	 *
-	 * @since 1.8
-	 */
-	public static void addGhoulBootsTexture(Item boots, String res){
-		addGhoulBootsTexture(boots, new ResourceLocation(res));
-	}
-
-	/**
-	 * Registers textures for a set of Armor (when worn by a Ghoul Entity)<br>
-	 * If you use different textures for each piece, register them separately.
-	 * @param helmet Helmet Item
-	 * @param chestplate Chestplate Item
-	 * @param leggings Leggings Item
-	 * @param boots Boots Item
-	 * @param res1 Texture ResourceLocation for Helmet, Chestplate and Boots
-	 * @param res2 Texture ResourceLocation for Leggings
-	 *
-	 * @since 1.8
-	 */
-	public static void addGhoulArmorTextures(Item helmet, Item chestplate, Item leggings, Item boots, ResourceLocation res1, ResourceLocation res2){
-		addGhoulHelmetTexture(helmet, res1);
-		addGhoulChestplateTexture(chestplate, res1);
-		addGhoulLeggingsTexture(leggings, res2);
-		addGhoulBootsTexture(boots, res1);
-	}
-
-	/**
-	 * Registers textures for a set of Armor (when worn by a Ghoul Entity)<br>
-	 * If you use different textures for each piece, register them separately.
-	 * @param helmet Helmet Item
-	 * @param chestplate Chestplate Item
-	 * @param leggings Leggings Item
-	 * @param boots Boots Item
-	 * @param res1 Texture String for Helmet, Chestplate and Boots (should be formatted as "modid:path/to/texture.png")
-	 * @param res2 Texture String for Leggings (should be formatted as "modid:path/to/texture.png")
-	 *
-	 * @since 1.8
-	 */
-	public static void addGhoulArmorTextures(Item helmet, Item chestplate, Item leggings, Item boots, String res1, String res2){
-		addGhoulArmorTextures(helmet, chestplate, leggings, boots, new ResourceLocation(res1), new ResourceLocation(res2));
-	}
-
-	/**
-	 * Fetches a ResourceLocation for the armor texture of a Helmet, if any
-	 * @param helmet Helmet Item
-	 * @return A ResourceLocation for the Helmet texture, if any
-	 *
-	 * @since 1.8
-	 */
-	public static ResourceLocation getGhoulHelmetTexture(Item helmet){
-		return ghoul_helmet.get(helmet);
-	}
-
-	/**
-	 * Fetches a ResourceLocation for the armor texture of a Chestplate, if any
-	 * @param chestplate Chestplate Item
-	 * @return A ResourceLocation for the Chestplate texture, if any
-	 *
-	 * @since 1.8
-	 */
-	public static ResourceLocation getGhoulChestplateTexture(Item chestplate){
-		return ghoul_chestplate.get(chestplate);
-	}
-
-	/**
-	 * Fetches a ResourceLocation for the armor texture of a pair of Leggings, if any
-	 * @param leggings Leggings Item
-	 * @return A ResourceLocation for the Leggings texture, if any
-	 *
-	 * @since 1.8
-	 */
-	public static ResourceLocation getGhoulLeggingsTexture(Item leggings){
-		return ghoul_leggings.get(leggings);
-	}
-
-	/**
-	 * Fetches a ResourceLocation for the armor texture of a pair of Boots, if any
-	 * @param boots Boots Item
-	 * @return A ResourceLocation for the Boots texture, if any
-	 *
-	 * @since 1.8
-	 */
-	public static ResourceLocation getGhoulBootsTexture(Item boots){
-		return ghoul_boots.get(boots);
 	}
 
 	/**

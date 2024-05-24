@@ -11,13 +11,16 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity.layers;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.armor.ArmorData;
+import com.shinoow.abyssalcraft.api.armor.ArmorDataRegistry;
 import com.shinoow.abyssalcraft.client.model.entity.ModelDGArmor;
 
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerArmorBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,7 +47,7 @@ public class LayerGhoulArmor extends LayerArmorBase<ModelDGArmor>
 	@Override
 	protected void setModelSlotVisible(ModelDGArmor model, EntityEquipmentSlot slot)
 	{
-		func_177194_a(model);
+		toggleVisibility(model);
 
 		switch (slot)
 		{
@@ -73,7 +76,7 @@ public class LayerGhoulArmor extends LayerArmorBase<ModelDGArmor>
 		}
 	}
 
-	protected void func_177194_a(ModelDGArmor p_177194_1_)
+	protected void toggleVisibility(ModelDGArmor p_177194_1_)
 	{
 		p_177194_1_.setInvisible(false);
 	}
@@ -81,52 +84,23 @@ public class LayerGhoulArmor extends LayerArmorBase<ModelDGArmor>
 	@Override
 	public ResourceLocation getArmorResource(Entity entity, ItemStack stack, EntityEquipmentSlot slot, String type)
 	{
-		ResourceLocation res = null;
+		ResourceLocation res = MISSING_ARMOR;
 
-		switch(slot){
-		case HEAD:
-			res = AbyssalCraftAPI.getGhoulHelmetTexture(stack.getItem());
-			if(type != null && type.equals("overlay") && res != null){
-				String domain = res.getNamespace();
-				String path = res.getPath();
-				res = new ResourceLocation(domain, path.substring(0, path.length() -4).concat("_overlay.png"));
+		if(stack.getItem() instanceof ItemArmor) {
+			ArmorMaterial material = ((ItemArmor) stack.getItem()).getArmorMaterial();
+			ArmorData data = ArmorDataRegistry.instance().getGhoulData(material);
+
+			if(slot == EntityEquipmentSlot.LEGS) {
+				res = data.getSecondTexture();
+				if(type != null && type.equals("overlay")){
+					res = data.getSecondOverlay();
+				}
+			} else {
+				res = data.getFirstTexture();
+				if(type != null && type.equals("overlay")){
+					res = data.getFirstOverlay();
+				}
 			}
-			if(res == null)
-				res = MISSING_ARMOR;
-			break;
-		case CHEST:
-			res = AbyssalCraftAPI.getGhoulChestplateTexture(stack.getItem());
-			if(type != null && type.equals("overlay") && res != null){
-				String domain = res.getNamespace();
-				String path = res.getPath();
-				res = new ResourceLocation(domain, path.substring(0, path.length() -4).concat("_overlay.png"));
-			}
-			if(res == null)
-				res = MISSING_ARMOR;
-			break;
-		case LEGS:
-			res = AbyssalCraftAPI.getGhoulLeggingsTexture(stack.getItem());
-			if(type != null && type.equals("overlay") && res != null){
-				String domain = res.getNamespace();
-				String path = res.getPath();
-				res = new ResourceLocation(domain, path.substring(0, path.length() -4).concat("_overlay.png"));
-			}
-			if(res == null)
-				res = MISSING_LEGGINGS;
-			break;
-		case FEET:
-			res = AbyssalCraftAPI.getGhoulBootsTexture(stack.getItem());
-			if(type != null && type.equals("overlay") && res != null){
-				String domain = res.getNamespace();
-				String path = res.getPath();
-				res = new ResourceLocation(domain, path.substring(0, path.length() -4).concat("_overlay.png"));
-			}
-			if(res == null)
-				res = MISSING_ARMOR;
-			break;
-		default:
-			res = MISSING_ARMOR;
-			break;
 		}
 
 		return res;

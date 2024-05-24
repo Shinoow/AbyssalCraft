@@ -13,15 +13,17 @@ public class ModelSkeletonGoliathArmor extends ModelSkeletonGoliath {
 
 	public ModelSkeletonGoliathArmor(float f) {
 		super(f);
-
+		this.textureWidth = 128;
+		this.textureHeight = 64;
 		this.chestplate = new ModelRenderer(this, 79, 0);
 		this.chestplate.setRotationPoint(0.0F, -11.0F, -2.0F);
-		this.chestplate.addBox(-6.0F, 0.0F, 0.0F, 13, 17, 5, f);
+		this.chestplate.addBox(-6.0F, -0.01F, -0.01F, 13, 17, 5, f);
 	}
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
+//		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
 		this.chestplate.render(f5);
 	}

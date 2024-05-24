@@ -20,14 +20,12 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderOmotholGhoul extends RenderLiving {
+public class RenderOmotholGhoul extends RenderLiving<EntityOmotholGhoul> {
 
 	private float scale = 1.2F;
 
@@ -59,14 +57,14 @@ public class RenderOmotholGhoul extends RenderLiving {
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+	protected void preRenderCallback(EntityOmotholGhoul par1EntityLivingBase, float par2)
 	{
-		preRenderScale((EntityOmotholGhoul)par1EntityLivingBase, par2);
+		preRenderScale(par1EntityLivingBase, par2);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(EntityOmotholGhoul entity) {
 
-		return getGhoulTexture((EntityOmotholGhoul)entity);
+		return getGhoulTexture(entity);
 	}
 }

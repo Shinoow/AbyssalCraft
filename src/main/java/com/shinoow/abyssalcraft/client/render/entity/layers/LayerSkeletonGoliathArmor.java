@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity.layers;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.armor.ArmorData;
 import com.shinoow.abyssalcraft.api.armor.ArmorDataRegistry;
 import com.shinoow.abyssalcraft.client.model.entity.ModelSkeletonGoliathArmor;
@@ -88,35 +87,17 @@ public class LayerSkeletonGoliathArmor extends LayerArmorBase<ModelSkeletonGolia
 		if(stack.getItem() instanceof ItemArmor) {
 			ArmorMaterial material = ((ItemArmor) stack.getItem()).getArmorMaterial();
 			ArmorData data = ArmorDataRegistry.instance().getSkeletonGoliathData(material);
-			
-			switch(slot){
-			case HEAD:
-				res = data.getFirstTexture();
-				if(type != null && type.equals("overlay")){
-					res = data.getFirstOverlay();
-				}
-				break;
-			case CHEST:
-				res = data.getFirstTexture();
-				if(type != null && type.equals("overlay")){
-					res = data.getFirstOverlay();
-				}
-				break;
-			case LEGS:
+
+			if(slot == EntityEquipmentSlot.LEGS) {
 				res = data.getSecondTexture();
 				if(type != null && type.equals("overlay")){
 					res = data.getSecondOverlay();
 				}
-				break;
-			case FEET:
+			} else {
 				res = data.getFirstTexture();
 				if(type != null && type.equals("overlay")){
 					res = data.getFirstOverlay();
 				}
-				break;
-			default:
-				res = MISSING_ARMOR;
-				break;
 			}
 		}
 

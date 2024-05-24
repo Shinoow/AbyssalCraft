@@ -38,10 +38,10 @@ public class RenderSkeletonGoliath extends RenderLiving<EntitySkeletonGoliath> {
 
 	public RenderSkeletonGoliath(RenderManager manager, ModelSkeletonGoliath model)
 	{
-		super(manager, model, 0.5F);
-		addLayer(new LayerCustomHead(model.head));
+		super(manager, model, 0.8F);
 		addLayer(new LayerSkeletonGoliathHeldItem(this));
 		addLayer(new LayerSkeletonGoliathArmor(this));
+		addLayer(new LayerCustomHead(model.head));
 	}
 
 	protected void preRenderScale(EntitySkeletonGoliath par1EntitySkeletonGoliath, float par2)

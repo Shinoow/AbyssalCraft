@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class ArmorDataRegistry {
 
-	private final Logger logger = LogManager.getLogger("ArmorDataRegistry");
+	private final Logger LOGGER = LogManager.getLogger("ArmorDataRegistry");
 
 	private static final ArmorDataRegistry INSTANCE = new ArmorDataRegistry();
 
@@ -30,14 +30,20 @@ public class ArmorDataRegistry {
 	}
 
 	public void registerGhoulData(ArmorMaterial material, ArmorData data) {
+		if(GHOUL_DATA.containsKey(material))
+			LOGGER.warn("Ghoul data was already registered for {}, overriding it", material.toString());
 		GHOUL_DATA.put(material, data);
 	}
 
 	public void registerSkeletonGoliathData(ArmorMaterial material, ArmorData data) {
+		if(SKELETON_GOLIATH_DATA.containsKey(material))
+			LOGGER.warn("Skeleton Goliath data was already registered for {}, overriding it", material.toString());
 		SKELETON_GOLIATH_DATA.put(material, data);
 	}
 
 	public void registerColor(ArmorMaterial material, int color) {
+		if(COLORS.containsKey(material))
+			LOGGER.warn("A color was already registered for {}, overriding it", material.toString());
 		COLORS.put(material, color);
 	}
 
@@ -49,7 +55,10 @@ public class ArmorDataRegistry {
 		return SKELETON_GOLIATH_DATA.getOrDefault(material, EMPTY_SKELETON_GOLIATH);
 	}
 
+	/**
+	 * Returns a color for a material, or -1 as "no color"
+	 */
 	public int getColor(ArmorMaterial material) {
-		return COLORS.get(material);
+		return COLORS.getOrDefault(material, -1);
 	}
 }

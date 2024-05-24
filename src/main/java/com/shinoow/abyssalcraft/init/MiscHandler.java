@@ -342,25 +342,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		setUnlockConditions();
 
 		AbyssalCrafting.addRecipes();
-		AbyssalCraftAPI.addGhoulArmorTextures(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS, "abyssalcraft:textures/armor/ghoul/leather_1.png", "abyssalcraft:textures/armor/ghoul/leather_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(Items.CHAINMAIL_HELMET, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS, "abyssalcraft:textures/armor/ghoul/chainmail_1.png", "abyssalcraft:textures/armor/ghoul/chainmail_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(Items.IRON_HELMET, Items.IRON_CHESTPLATE, Items.IRON_LEGGINGS, Items.IRON_BOOTS, "abyssalcraft:textures/armor/ghoul/iron_1.png", "abyssalcraft:textures/armor/ghoul/iron_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_LEGGINGS, Items.GOLDEN_BOOTS, "abyssalcraft:textures/armor/ghoul/gold_1.png", "abyssalcraft:textures/armor/ghoul/gold_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(Items.DIAMOND_HELMET, Items.DIAMOND_CHESTPLATE, Items.DIAMOND_LEGGINGS, Items.DIAMOND_BOOTS, "abyssalcraft:textures/armor/ghoul/diamond_1.png", "abyssalcraft:textures/armor/ghoul/diamond_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.abyssalnite_helmet, ACItems.abyssalnite_chestplate, ACItems.abyssalnite_leggings, ACItems.abyssalnite_boots, "abyssalcraft:textures/armor/ghoul/abyssalnite_1.png", "abyssalcraft:textures/armor/ghoul/abyssalnite_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.refined_coralium_helmet, ACItems.refined_coralium_chestplate, ACItems.refined_coralium_leggings, ACItems.refined_coralium_boots, "abyssalcraft:textures/armor/ghoul/coralium_1.png", "abyssalcraft:textures/armor/ghoul/coralium_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.dreadium_helmet, ACItems.dreadium_chestplate, ACItems.dreadium_leggings, ACItems.dreadium_boots, "abyssalcraft:textures/armor/ghoul/dreadium_1.png", "abyssalcraft:textures/armor/ghoul/dreadium_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.ethaxium_helmet, ACItems.ethaxium_chestplate, ACItems.ethaxium_leggings, ACItems.ethaxium_boots, "abyssalcraft:textures/armor/ghoul/ethaxium_1.png", "abyssalcraft:textures/armor/ghoul/ethaxium_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.dreaded_abyssalnite_helmet, ACItems.dreaded_abyssalnite_chestplate, ACItems.dreaded_abyssalnite_leggings, ACItems.dreaded_abyssalnite_boots, "abyssalcraft:textures/armor/ghoul/dread_1.png", "abyssalcraft:textures/armor/ghoul/dread_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.depths_helmet, ACItems.depths_chestplate, ACItems.depths_leggings, ACItems.depths_boots, "abyssalcraft:textures/armor/ghoul/depths_1.png", "abyssalcraft:textures/armor/ghoul/depths_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.plated_coralium_helmet, ACItems.plated_coralium_chestplate, ACItems.plated_coralium_leggings, ACItems.plated_coralium_boots, "abyssalcraft:textures/armor/ghoul/coraliump_1.png", "abyssalcraft:textures/armor/ghoul/coraliump_2.png");
-		AbyssalCraftAPI.addGhoulArmorTextures(ACItems.dreadium_samurai_helmet, ACItems.dreadium_samurai_chestplate, ACItems.dreadium_samurai_leggings, ACItems.dreadium_samurai_boots, "abyssalcraft:textures/armor/ghoul/dreadiums_1.png", "abyssalcraft:textures/armor/ghoul/dreadiums_2.png");
-		
-		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.CHAIN, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/chainmail_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/chainmail_2.png")));
-		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.LEATHER, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/leather_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/leather_2.png"), true));
-		
-		ArmorDataRegistry.instance().registerColor(ArmorMaterial.GOLD, ACClientVars.getCrystalColors()[Crystals.GOLD]);
-		
+
+		registerCustomArmors();
+
 		AbyssalCraftAPI.getInternalNDHandler().registerInternalPages();
 		StructureHandler.instance().registerStructure(new BasicStructure());
 		StructureHandler.instance().registerStructure(new TotemPoleStructure());
@@ -959,5 +943,35 @@ public class MiscHandler implements ILifeCycleHandler {
 
 	private void addCondition(Item item, IUnlockCondition condition){
 		((IUnlockableItem) item).setUnlockCondition(condition);
+	}
+
+	private void registerCustomArmors() {
+		ArmorDataRegistry.instance().registerGhoulData(ArmorMaterial.CHAIN, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/chainmail_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/chainmail_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(ArmorMaterial.LEATHER, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/leather_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/leather_2.png"), true));
+		ArmorDataRegistry.instance().registerGhoulData(ArmorMaterial.IRON, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/iron_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/iron_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(ArmorMaterial.GOLD, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/gold_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/gold_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(ArmorMaterial.DIAMOND, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/diamond_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/diamond_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(AbyssalCraftAPI.abyssalniteArmor, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/abyssalnite_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/abyssalnite_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(AbyssalCraftAPI.refinedCoraliumArmor, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/coralium_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/coralium_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(AbyssalCraftAPI.dreadiumArmor, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/dreadium_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/dreadium_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(AbyssalCraftAPI.ethaxiumArmor, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/ethaxium_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/ethaxium_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(AbyssalCraftAPI.dreadedAbyssalniteArmor, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/dread_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/dread_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(AbyssalCraftAPI.depthsArmor, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/depths_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/depths_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(AbyssalCraftAPI.platedCoraliumArmor, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/coraliump_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/coraliump_2.png")));
+		ArmorDataRegistry.instance().registerGhoulData(AbyssalCraftAPI.dreadiumSamuraiArmor, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/dreadiums_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/dreadiums_2.png")));
+
+		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.CHAIN, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/chainmail_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/chainmail_2.png")));
+		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.LEATHER, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/leather_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/leather_2.png"), true));
+		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.IRON, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_2.png")));
+
+		ArmorDataRegistry.instance().registerColor(ArmorMaterial.GOLD, ACClientVars.getCrystalColors()[Crystals.GOLD]);
+		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadiumArmor, ACClientVars.getCrystalColors()[Crystals.DREADIUM]);
+		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadiumSamuraiArmor, ACClientVars.getCrystalColors()[Crystals.DREADIUM]);
+		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.abyssalniteArmor, ACClientVars.getCrystalColors()[Crystals.ABYSSALNITE]);
+		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadedAbyssalniteArmor, ACClientVars.getCrystalColors()[Crystals.ABYSSALNITE]);
+		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.refinedCoraliumArmor, 0x067047);
+		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.platedCoraliumArmor, 0x067047);
+		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.depthsArmor, 0x067047);
+		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.ethaxiumArmor, 0x95a794);
 	}
 }
