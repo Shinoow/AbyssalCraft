@@ -11,14 +11,16 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.model.entity;
 
-import net.minecraft.client.model.ModelBase;
+import com.shinoow.abyssalcraft.lib.client.model.ModelArmoredBase;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelDG extends ModelBase
+public class ModelDG extends ModelArmoredBase
 {
 	public ModelRenderer Head;
 	public ModelRenderer jaw;
@@ -340,28 +342,6 @@ public class ModelDG extends ModelBase
 		larm1.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.05F;
 	}
 
-	public void setInvisible(boolean invisible)
-	{
-		Head.showModel = invisible;
-		Spine1.showModel = invisible;
-		Spine2.showModel = invisible;
-		lrib1.showModel = invisible;
-		lrib2.showModel = invisible;
-		lrib3.showModel = invisible;
-		rrib1.showModel = invisible;
-		rrib2.showModel = invisible;
-		rrib3.showModel = invisible;
-		pelvis.showModel = invisible;
-		Spine3.showModel = invisible;
-		larm1.showModel = invisible;
-		rarm1.showModel = invisible;
-		lleg.showModel = invisible;
-		rleg.showModel = invisible;
-		back.showModel = invisible;
-		lside.showModel = invisible;
-		rside.showModel = invisible;
-	}
-
 	public void postRenderArm(float scale, EnumHandSide side){
 		getArmForSide(side).postRender(scale);
 	}
@@ -369,5 +349,53 @@ public class ModelDG extends ModelBase
 	protected ModelRenderer getArmForSide(EnumHandSide side)
 	{
 		return side == EnumHandSide.LEFT ? larm1 : rarm1;
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
+		Head.showModel = visible;
+		Spine1.showModel = visible;
+		Spine2.showModel = visible;
+		lrib1.showModel = visible;
+		lrib2.showModel = visible;
+		lrib3.showModel = visible;
+		rrib1.showModel = visible;
+		rrib2.showModel = visible;
+		rrib3.showModel = visible;
+		pelvis.showModel = visible;
+		Spine3.showModel = visible;
+		larm1.showModel = visible;
+		rarm1.showModel = visible;
+		lleg.showModel = visible;
+		rleg.showModel = visible;
+		back.showModel = visible;
+		lside.showModel = visible;
+		rside.showModel = visible;
+	}
+
+	@Override
+	public void setEquipmentSlotVisible(EntityEquipmentSlot slot) {
+		switch (slot) {
+		case FEET:
+			rleg.showModel = true;
+			lleg.showModel = true;
+			break;
+		case LEGS:
+			pelvis.showModel = true;
+			rleg.showModel = true;
+			lleg.showModel = true;
+			break;
+		case CHEST:
+			Spine3.showModel = true;
+			rarm1.showModel = true;
+			larm1.showModel = true;
+			break;
+		case HEAD:
+			Head.showModel = true;
+			jaw.showModel = true;
+			break;
+		default:
+			break;
+		}
 	}
 }

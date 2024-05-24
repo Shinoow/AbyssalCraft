@@ -184,7 +184,7 @@ public class EntitySkeletonGoliath extends EntityMob {
 
 		setEquipmentBasedOnDifficulty(difficulty);
 		setEnchantmentBasedOnDifficulty(difficulty);
-		
+
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{
 			Calendar calendar = world.getCurrentDate();

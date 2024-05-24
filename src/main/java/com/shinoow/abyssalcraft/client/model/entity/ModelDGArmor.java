@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.client.model.entity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class ModelDGArmor extends ModelDG {
 
@@ -50,9 +51,16 @@ public class ModelDGArmor extends ModelDG {
 	}
 
 	@Override
-	public void setInvisible(boolean invisible)
-	{
-		super.setInvisible(invisible);
-		chestplate.showModel = invisible;
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		chestplate.showModel = visible;
+	}
+
+	@Override
+	public void setEquipmentSlotVisible(EntityEquipmentSlot slot) {
+		super.setEquipmentSlotVisible(slot);
+		if(slot == EntityEquipmentSlot.CHEST ||
+				slot == EntityEquipmentSlot.LEGS)
+			chestplate.showModel = true;
 	}
 }

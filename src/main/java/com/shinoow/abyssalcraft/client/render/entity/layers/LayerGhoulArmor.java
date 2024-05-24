@@ -14,23 +14,18 @@ package com.shinoow.abyssalcraft.client.render.entity.layers;
 import com.shinoow.abyssalcraft.api.armor.ArmorData;
 import com.shinoow.abyssalcraft.api.armor.ArmorDataRegistry;
 import com.shinoow.abyssalcraft.client.model.entity.ModelDGArmor;
+import com.shinoow.abyssalcraft.lib.client.render.entity.layers.LayerACArmorBase;
 
 import net.minecraft.client.renderer.entity.RenderLivingBase;
-import net.minecraft.client.renderer.entity.layers.LayerArmorBase;
-import net.minecraft.entity.Entity;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class LayerGhoulArmor extends LayerArmorBase<ModelDGArmor>
+public class LayerGhoulArmor extends LayerACArmorBase<ModelDGArmor>
 {
 	private final ResourceLocation MISSING_ARMOR = new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_1.png");
-	private final ResourceLocation MISSING_LEGGINGS = new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_2.png");
 
 	public LayerGhoulArmor(RenderLivingBase<?> rendererIn)
 	{
@@ -45,64 +40,14 @@ public class LayerGhoulArmor extends LayerArmorBase<ModelDGArmor>
 	}
 
 	@Override
-	protected void setModelSlotVisible(ModelDGArmor model, EntityEquipmentSlot slot)
-	{
-		toggleVisibility(model);
+	protected ArmorData getDataFor(ArmorMaterial material) {
 
-		switch (slot)
-		{
-		case FEET:
-			model.rleg.showModel = true;
-			model.lleg.showModel = true;
-			break;
-		case LEGS:
-			model.chestplate.showModel = true;
-			model.pelvis.showModel = true;
-			model.rleg.showModel = true;
-			model.lleg.showModel = true;
-			break;
-		case CHEST:
-			model.chestplate.showModel = true;
-			model.Spine3.showModel = true;
-			model.rarm1.showModel = true;
-			model.larm1.showModel = true;
-			break;
-		case HEAD:
-			model.Head.showModel = true;
-			model.jaw.showModel = true;
-			break;
-		default:
-			break;
-		}
-	}
-
-	protected void toggleVisibility(ModelDGArmor p_177194_1_)
-	{
-		p_177194_1_.setInvisible(false);
+		return ArmorDataRegistry.instance().getGhoulData(material);
 	}
 
 	@Override
-	public ResourceLocation getArmorResource(Entity entity, ItemStack stack, EntityEquipmentSlot slot, String type)
-	{
-		ResourceLocation res = MISSING_ARMOR;
+	protected ResourceLocation getMissingTexture() {
 
-		if(stack.getItem() instanceof ItemArmor) {
-			ArmorMaterial material = ((ItemArmor) stack.getItem()).getArmorMaterial();
-			ArmorData data = ArmorDataRegistry.instance().getGhoulData(material);
-
-			if(slot == EntityEquipmentSlot.LEGS) {
-				res = data.getSecondTexture();
-				if(type != null && type.equals("overlay")){
-					res = data.getSecondOverlay();
-				}
-			} else {
-				res = data.getFirstTexture();
-				if(type != null && type.equals("overlay")){
-					res = data.getFirstOverlay();
-				}
-			}
-		}
-
-		return res;
+		return MISSING_ARMOR;
 	}
 }

@@ -80,7 +80,7 @@ public class GuiFaceBook extends GuiScreen {
 		fontRenderer.drawString(s, k - fontRenderer.getStringWidth(s) + guiWidth - 22, b0 + 16, 0);
 
 		int page = 5 * currTurnup;
-		int max = (page + 5) > data.size() ? data.size() : page + 5;
+		int max = page + 5 > data.size() ? data.size() : page + 5;
 
 		for(int i = page; i < max; i++) {
 			Tuple<String, Integer> dat = data.get(i);
@@ -121,11 +121,10 @@ public class GuiFaceBook extends GuiScreen {
 	protected void actionPerformed(GuiButton button)
 	{
 		if(button.visible) {
-			if(button.id == buttonNextPage.id) {
+			if(button.id == buttonNextPage.id)
 				++currTurnup;
-			} else if(button.id == buttonPreviousPage.id) {
+			else if(button.id == buttonPreviousPage.id)
 				--currTurnup;
-			}
 			updateButtons();
 		}
 	}
@@ -133,16 +132,14 @@ public class GuiFaceBook extends GuiScreen {
 	private void updateButtons()
 	{
 		if(!data.isEmpty()) {
-			if(currTurnup == 0) {
+			if(currTurnup == 0)
 				buttonPreviousPage.visible = false;
-			} else {
+			else
 				buttonPreviousPage.visible = true;
-			}
-			if(data.size() > 5 && (currTurnup * 5 + 5) < data.size()) {
+			if(data.size() > 5 && currTurnup * 5 + 5 < data.size())
 				buttonNextPage.visible = true;
-			} else {
+			else
 				buttonNextPage.visible = false;
-			}
 		} else {
 			buttonPreviousPage.visible = false;
 			buttonNextPage.visible = false;
