@@ -965,6 +965,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.IRON, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_2.png")));
 
 		ArmorDataRegistry.instance().registerColor(ArmorMaterial.GOLD, ACClientVars.getCrystalColors()[Crystals.GOLD]);
+		ArmorDataRegistry.instance().registerColor(ArmorMaterial.DIAMOND, 0x4bfbea);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadiumArmor, ACClientVars.getCrystalColors()[Crystals.DREADIUM]);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadiumSamuraiArmor, ACClientVars.getCrystalColors()[Crystals.DREADIUM]);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.abyssalniteArmor, ACClientVars.getCrystalColors()[Crystals.ABYSSALNITE]);
@@ -972,6 +973,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.refinedCoraliumArmor, 0x067047);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.platedCoraliumArmor, 0x067047);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.depthsArmor, 0x067047);
-		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.ethaxiumArmor, 0x95a794);
+		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.ethaxiumArmor, 0xadc3ac);
 	}
 }

@@ -20,6 +20,12 @@ import org.apache.logging.log4j.Logger;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * Registry for armor textures or colors for custom models
+ * @author shinoow
+ *
+ * @since 2.0.0
+ */
 public class ArmorDataRegistry {
 
 	private final Logger LOGGER = LogManager.getLogger("ArmorDataRegistry");
@@ -31,8 +37,8 @@ public class ArmorDataRegistry {
 
 	private static final Map<ArmorMaterial, Integer> COLORS = new HashMap<>();
 
-	private ArmorData EMPTY_GHOUL = new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_2.png")).setEmpty();
-	private ArmorData EMPTY_SKELETON_GOLIATH = new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_2.png")).setEmpty();
+	private ArmorData EMPTY_GHOUL = new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_2.png"), true).setEmpty();
+	private ArmorData EMPTY_SKELETON_GOLIATH = new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_2.png"), true).setEmpty();
 
 	private ArmorDataRegistry() {}
 
