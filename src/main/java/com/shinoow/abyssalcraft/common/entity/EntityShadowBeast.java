@@ -16,6 +16,7 @@ import java.util.List;
 
 import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -40,7 +41,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityShadowBeast extends EntityMob implements IOmotholEntity {
+public class EntityShadowBeast extends EntityMob implements IOmotholEntity, IEliteEntity {
 
 	private int shadowFlameShootTimer;
 

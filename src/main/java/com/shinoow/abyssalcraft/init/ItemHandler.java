@@ -34,7 +34,7 @@ import net.minecraftforge.fml.common.event.*;
 
 public class ItemHandler implements ILifeCycleHandler {
 
-	public static Item devsword, shadowPlate, shoggoth_projectile;
+	public static Item devsword, shoggoth_projectile;
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
@@ -47,7 +47,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.staff_of_the_gatekeeper = new ItemStaff();
 		ACItems.gateway_key = new ItemGatewayKey(0, "gatewaykey");
 		ACItems.powerstone_tracker = new ItemTrackerPSDL();
-		ACItems.eye_of_the_abyss = new ItemEoA();
+		ACItems.eye_of_the_abyss = new ItemACBasic("eoa", TextFormatting.AQUA).setMaxStackSize(1);
 		ACItems.dreadedlands_infused_gateway_key = new ItemGatewayKey(1, "gatewaykeydl");
 		ACItems.coralium_brick = new ItemACBasic("cbrick");
 		ACItems.cudgel = new ItemCudgel();
@@ -249,7 +249,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.shadow_shard = new ItemACBasic("shadowshard");
 		ACItems.shadow_gem = new ItemACBasic("shadowgem");
 		ACItems.shard_of_oblivion = new ItemACBasic("oblivionshard");
-		shadowPlate = new ItemACBasic("shadowplate");
 
 		//Dread items
 		ACItems.dreaded_shard_of_abyssalnite = new ItemACBasic("dreadshard");
@@ -650,7 +649,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.book_of_many_faces, "face_book");
 		registerItem(ACItems.generic_meat, "generic_meat");
 		registerItem(ACItems.cooked_generic_meat, "cooked_generic_meat");
-		//		registerItem(shadowPlate, "shadowplate");
 	}
 
 	@Override

@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
+import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -39,7 +40,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, IRangedAttackMob {
+public class EntityLesserDreadbeast extends EntityMob implements IDreadEntity, IRangedAttackMob, IEliteEntity {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityLesserDreadbeast.class, DataSerializers.BYTE);
 	private EntityAIAttackRanged arrowAttack = new EntityAIAttackRanged(this, 0.4D, 20, 15.0F);

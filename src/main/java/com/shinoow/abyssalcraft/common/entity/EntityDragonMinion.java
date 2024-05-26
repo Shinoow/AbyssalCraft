@@ -17,6 +17,7 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
@@ -34,7 +35,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, ICoraliumEntity
+public class EntityDragonMinion extends EntityMob implements IEntityMultiPart, ICoraliumEntity, IEliteEntity
 {
 
 	public static final float innerRotation = 0;

@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.item;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
@@ -20,9 +22,12 @@ import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -34,9 +39,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemACBasic extends Item implements IUnlockableItem {
 
 	private IUnlockCondition condition = new DefaultCondition();
+	private TextFormatting formatting;
 
 	public ItemACBasic(String par1) {
+		this(par1, null);
+	}
+
+	public ItemACBasic(String par1, TextFormatting formatting) {
 		super();
+		this.formatting = formatting;
 		setTranslationKey(par1);
 		setCreativeTab(ACTabs.tabItems);
 	}
@@ -62,6 +73,8 @@ public class ItemACBasic extends Item implements IUnlockableItem {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+		if(formatting != null)
+			return formatting + super.getItemStackDisplayName(par1ItemStack);
 		if(this.getTranslationKey().contains("dreadshard") || this.getTranslationKey().contains("dreadchunk") ||
 				this.getTranslationKey().contains("dreadium") || this.getTranslationKey().contains("dreadfragment"))
 			return TextFormatting.DARK_RED + super.getItemStackDisplayName(par1ItemStack);
@@ -73,6 +86,12 @@ public class ItemACBasic extends Item implements IUnlockableItem {
 			return TextFormatting.AQUA + super.getItemStackDisplayName(par1ItemStack);
 
 		return super.getItemStackDisplayName(par1ItemStack);
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){
+		if(stack.getItem() == ACItems.eye_of_the_abyss)
+			tooltip.add(I18n.format("tooltip.eoa"));
 	}
 
 	@Override

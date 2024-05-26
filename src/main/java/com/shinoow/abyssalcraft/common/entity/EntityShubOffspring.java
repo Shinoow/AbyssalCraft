@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
+import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
@@ -27,7 +28,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityShubOffspring extends EntityMob {
+public class EntityShubOffspring extends EntityMob implements IEliteEntity {
 
 	public EntityShubOffspring(World worldIn) {
 		super(worldIn);

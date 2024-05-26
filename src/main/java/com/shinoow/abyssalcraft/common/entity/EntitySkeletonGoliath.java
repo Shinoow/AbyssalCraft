@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.Calendar;
 import java.util.UUID;
 
+import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -40,7 +41,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public class EntitySkeletonGoliath extends EntityMob {
+public class EntitySkeletonGoliath extends EntityMob implements IEliteEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 5.0D, 0);

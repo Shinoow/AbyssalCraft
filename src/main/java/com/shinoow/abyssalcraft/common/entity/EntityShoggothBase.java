@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
 import com.shinoow.abyssalcraft.api.entity.IShoggothEntity;
 import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothAttackMelee;
@@ -56,7 +57,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
-public abstract class EntityShoggothBase extends EntityMob implements IShoggothEntity, IEntityMultiPart, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
+public abstract class EntityShoggothBase extends EntityMob implements IShoggothEntity, IEntityMultiPart, IEliteEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityShoggothBase.class, DataSerializers.BYTE);
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityShoggothBase.class, DataSerializers.VARINT);
@@ -87,7 +88,6 @@ public abstract class EntityShoggothBase extends EntityMob implements IShoggothE
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDreadSpawn.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDemonPig.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDreadguard.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityOmotholWarden.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityOmotholGhoul.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityLesserShoggoth.class, 8.0F));
