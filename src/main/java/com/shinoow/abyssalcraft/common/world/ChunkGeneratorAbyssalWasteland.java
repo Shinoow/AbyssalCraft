@@ -44,7 +44,7 @@ import net.minecraft.world.gen.*;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-public class ChunkGeneratorAbyss implements IChunkGenerator
+public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 {
 
 	private Random rand;
@@ -81,7 +81,7 @@ public class ChunkGeneratorAbyss implements IChunkGenerator
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
 	}
 
-	public ChunkGeneratorAbyss(World par1World, long par2, boolean par4)
+	public ChunkGeneratorAbyssalWasteland(World par1World, long par2, boolean par4)
 	{
 		worldObj = par1World;
 		mapFeaturesEnabled = par4;
@@ -107,7 +107,7 @@ public class ChunkGeneratorAbyss implements IChunkGenerator
 
 	public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
 	{
-		byte b0 = 63;
+		byte b0 = 49;
 		biomesForGeneration = worldObj.getBiomeProvider().getBiomesForGeneration(biomesForGeneration, x * 4 - 2, z * 4 - 2, 10, 10);
 		generateNoise(x * 4, 0, z * 4);
 
@@ -179,8 +179,8 @@ public class ChunkGeneratorAbyss implements IChunkGenerator
 		for (int k = 0; k < 16; ++k)
 			for (int l = 0; l < 16; ++l)
 			{
-				Biome Biome = par5BiomeArray[l + k * 16];
-				Biome.genTerrainBlocks(worldObj, rand, primer, x * 16 + k, z * 16 + l, stoneNoise[l + k * 16]);
+				Biome biome = par5BiomeArray[l + k * 16];
+				biome.genTerrainBlocks(worldObj, rand, primer, x * 16 + k, z * 16 + l, stoneNoise[l + k * 16]);
 			}
 	}
 

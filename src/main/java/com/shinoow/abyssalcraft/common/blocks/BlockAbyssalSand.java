@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
 import net.minecraft.block.SoundType;
@@ -33,7 +34,8 @@ public class BlockAbyssalSand extends BlockACBasic {
 	@Override
 	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
 		if (!par1World.isRemote && par5Random.nextInt(10) == 0 && par1World.getLightFromNeighbors(pos.up()) >= 13
-				&& !par1World.isSideSolid(pos.up(), EnumFacing.DOWN) && !par1World.getBlockState(pos.up()).getMaterial().isLiquid())
+				&& !par1World.isSideSolid(pos.up(), EnumFacing.DOWN) && !par1World.getBlockState(pos.up()).getMaterial().isLiquid()
+				&& par1World.getBiome(pos) != ACBiomes.abyssal_desert)
 			par1World.setBlockState(pos, ACBlocks.fused_abyssal_sand.getDefaultState());
 	}
 

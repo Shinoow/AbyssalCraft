@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
-import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -22,23 +21,22 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class WorldProviderAbyss extends WorldProvider {
+public class WorldProviderAbyssalWasteland extends WorldProvider {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkGeneratorAbyss(world, world.getSeed(), true);
+		return new ChunkGeneratorAbyssalWasteland(world, world.getSeed(), true);
 	}
 
 	@Override
 	public void init() {
-		biomeProvider = new BiomeProviderSingle(ACBiomes.abyssal_wastelands);
+		biomeProvider = new BiomeProviderAbyssalWasteland(world.getSeed(), world.getWorldInfo().getTerrainType());
 		setDimension(ACLib.abyssal_wasteland_id);
 		//		hasNoSky = true;
 	}

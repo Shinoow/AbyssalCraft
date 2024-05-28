@@ -24,7 +24,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -34,9 +33,14 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeAbywasteland extends Biome implements IAbyssalWastelandBiome {
+public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelandBiome {
 
-	public BiomeAbywasteland(BiomeProperties par1){
+	protected static final IBlockState ABYSSAL_STONE = ACBlocks.abyssal_stone.getDefaultState();
+	protected static final IBlockState LIQUID_CORALIUM = ACBlocks.liquid_coralium.getDefaultState();
+	
+	protected boolean barren;
+
+	public BiomeAbyssalWastelandBase(BiomeProperties par1){
 		super(par1);
 		topBlock = ACBlocks.fused_abyssal_sand.getDefaultState();
 		fillerBlock = ACBlocks.abyssal_sand.getDefaultState();
@@ -60,8 +64,36 @@ public class BiomeAbywasteland extends Biome implements IAbyssalWastelandBiome {
 
 	@Override
 	public void decorate(World par1World, Random par2Random, BlockPos pos){
-		for (int l3 = 0; l3 < 4; ++l3)
-		{
+		
+		if(!barren) {
+			for (int l3 = 0; l3 < 4; ++l3)
+			{
+				if (par2Random.nextInt(4) == 0)
+				{
+					int i4 = par2Random.nextInt(16) + 8;
+					int k8 = par2Random.nextInt(16) + 8;
+					int j12 = par1World.getHeight(pos.add(i4, 0, k8)).getY() * 2;
+
+					if (j12 > 0)
+					{
+						int k15 = par2Random.nextInt(j12);
+						new WorldGenBush((BlockBush)ACBlocks.luminous_thistle).generate(par1World, par2Random, pos.add(i4, k15, k8));
+					}
+				}
+
+				if (par2Random.nextInt(8) == 0)
+				{
+					int j4 = par2Random.nextInt(16) + 8;
+					int l8 = par2Random.nextInt(16) + 8;
+					int k12 = par1World.getHeight(pos.add(j4, 0, l8)).getY() * 2;
+
+					if (k12 > 0)
+					{
+						int l15 = par2Random.nextInt(k12);
+						new WorldGenBush((BlockBush)ACBlocks.wastelands_thorn).generate(par1World, par2Random, pos.add(j4, l15, l8));
+					}
+				}
+			}
 			if (par2Random.nextInt(4) == 0)
 			{
 				int i4 = par2Random.nextInt(16) + 8;
@@ -74,7 +106,6 @@ public class BiomeAbywasteland extends Biome implements IAbyssalWastelandBiome {
 					new WorldGenBush((BlockBush)ACBlocks.luminous_thistle).generate(par1World, par2Random, pos.add(i4, k15, k8));
 				}
 			}
-
 			if (par2Random.nextInt(8) == 0)
 			{
 				int j4 = par2Random.nextInt(16) + 8;
@@ -86,30 +117,6 @@ public class BiomeAbywasteland extends Biome implements IAbyssalWastelandBiome {
 					int l15 = par2Random.nextInt(k12);
 					new WorldGenBush((BlockBush)ACBlocks.wastelands_thorn).generate(par1World, par2Random, pos.add(j4, l15, l8));
 				}
-			}
-		}
-		if (par2Random.nextInt(4) == 0)
-		{
-			int i4 = par2Random.nextInt(16) + 8;
-			int k8 = par2Random.nextInt(16) + 8;
-			int j12 = par1World.getHeight(pos.add(i4, 0, k8)).getY() * 2;
-
-			if (j12 > 0)
-			{
-				int k15 = par2Random.nextInt(j12);
-				new WorldGenBush((BlockBush)ACBlocks.luminous_thistle).generate(par1World, par2Random, pos.add(i4, k15, k8));
-			}
-		}
-		if (par2Random.nextInt(8) == 0)
-		{
-			int j4 = par2Random.nextInt(16) + 8;
-			int l8 = par2Random.nextInt(16) + 8;
-			int k12 = par1World.getHeight(pos.add(j4, 0, l8)).getY() * 2;
-
-			if (k12 > 0)
-			{
-				int l15 = par2Random.nextInt(k12);
-				new WorldGenBush((BlockBush)ACBlocks.wastelands_thorn).generate(par1World, par2Random, pos.add(j4, l15, l8));
 			}
 		}
 
@@ -236,7 +243,7 @@ public class BiomeAbywasteland extends Biome implements IAbyssalWastelandBiome {
 
 	public final void generateAbyssalWastelandTerrain(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180628_4_, int p_180628_5_, double p_180628_6_)
 	{
-		int i = worldIn.getSeaLevel();
+		int i = 49;
 		IBlockState iblockstate = topBlock;
 		IBlockState iblockstate1 = fillerBlock;
 		int j = -1;
@@ -248,13 +255,13 @@ public class BiomeAbywasteland extends Biome implements IAbyssalWastelandBiome {
 			if (j1 < 7)
 			{
 				if(j1 == 0)
-					chunkPrimerIn.setBlockState(i1, j1, l, Blocks.BEDROCK.getDefaultState());
+					chunkPrimerIn.setBlockState(i1, j1, l, BEDROCK);
 				else if(j1 == 6)
 					chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.darkstone_cobblestone.getDefaultState());
 				else if(j1 == 1)
 					chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.darkstone.getDefaultState());
 				else {
-					IBlockState state = Blocks.AIR.getDefaultState();
+					IBlockState state = AIR;
 
 					if(i1 % 4 == 2 && l % 4 == 2)
 						state = (j1 == 4 ? ACBlocks.chiseled_darkstone_brick : ACBlocks.darkstone_brick).getDefaultState();
@@ -267,38 +274,52 @@ public class BiomeAbywasteland extends Biome implements IAbyssalWastelandBiome {
 				IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);
 
 				if (iblockstate2.getMaterial() == Material.AIR)
+				{
 					j = -1;
-				else if (iblockstate2 == ACBlocks.abyssal_stone.getDefaultState())
+				}
+				else if (iblockstate2.getBlock() == ACBlocks.abyssal_stone)
+				{
 					if (j == -1)
 					{
 						if (k <= 0)
 						{
-							iblockstate = null;
-							iblockstate1 = ACBlocks.abyssal_stone.getDefaultState();
+							iblockstate = AIR;
+							iblockstate1 = ABYSSAL_STONE;
 						}
 						else if (j1 >= i - 4 && j1 <= i + 1)
 						{
-							iblockstate = topBlock;
-							iblockstate1 = fillerBlock;
+							iblockstate = this.topBlock;
+							iblockstate1 = this.fillerBlock;
+						}
+
+						if (j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR))
+						{
+							iblockstate = LIQUID_CORALIUM;
 						}
 
 						j = k;
 
 						if (j1 >= i - 1)
+						{
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
+						}
 						else if (j1 < i - 7 - k)
 						{
-							iblockstate = null;
-							iblockstate1 = ACBlocks.abyssal_stone.getDefaultState();
-							chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.abyssal_stone.getDefaultState());
-						} else
+							iblockstate = AIR;
+							iblockstate1 = ABYSSAL_STONE;
+							chunkPrimerIn.setBlockState(i1, j1, l, GRAVEL);
+						}
+						else
+						{
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
+						}
 					}
 					else if (j > 0)
 					{
 						--j;
 						chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
 					}
+				}
 			}
 	}
 }

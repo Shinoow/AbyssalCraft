@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.common.world.ChunkGeneratorAbyss;
+import com.shinoow.abyssalcraft.common.world.ChunkGeneratorAbyssalWasteland;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.Block;
@@ -65,8 +65,8 @@ public class BlockPSDL extends Block {
 	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
-		if(((WorldServer)world).getChunkProvider().chunkGenerator instanceof ChunkGeneratorAbyss && ((WorldServer)world).getChunkProvider().isInsideStructure(world, "AbyStronghold", pos))
-			((ChunkGeneratorAbyss) ((WorldServer)world).getChunkProvider().chunkGenerator).markStructureExplored(world, "AbyStronghold", pos);
+		if(((WorldServer)world).getChunkProvider().chunkGenerator instanceof ChunkGeneratorAbyssalWasteland && ((WorldServer)world).getChunkProvider().isInsideStructure(world, "AbyStronghold", pos))
+			((ChunkGeneratorAbyssalWasteland) ((WorldServer)world).getChunkProvider().chunkGenerator).markStructureExplored(world, "AbyStronghold", pos);
 
 		super.breakBlock(world, pos, state);
 	}

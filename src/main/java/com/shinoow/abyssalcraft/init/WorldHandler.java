@@ -42,7 +42,7 @@ public class WorldHandler implements ILifeCycleHandler {
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		ACBiomes.darklands = new BiomeDarklands(new BiomeProperties("Darklands").setWaterColor(ACClientVars.getDarklandsWaterColor()));
-		ACBiomes.abyssal_wastelands = new BiomeAbywasteland(new BiomeProperties("Abyssal Wastelands").setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
+		ACBiomes.abyssal_wastelands = new BiomeAbyssalWasteland(new BiomeProperties("Abyssal Wastelands").setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
 		ACBiomes.dreadlands = new BiomeDreadlands(new BiomeProperties("Dreadlands").setRainDisabled());
 		ACBiomes.purified_dreadlands = new BiomeAbyDreadlands(new BiomeProperties("Purified Dreadlands").setRainDisabled());
 		ACBiomes.dreadlands_forest = new BiomeForestDreadlands(new BiomeProperties("Dreadlands Forest").setRainDisabled());
@@ -55,6 +55,11 @@ public class WorldHandler implements ILifeCycleHandler {
 		ACBiomes.omothol = new BiomeOmothol(new BiomeProperties("Omothol").setWaterColor(ACClientVars.getOmotholWaterColor()).setRainDisabled());
 		ACBiomes.dark_realm = new BiomeDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(ACClientVars.getDarkRealmWaterColor()).setRainDisabled());
 		ACBiomes.purged = new BiomePurged(new BiomeProperties("Purged").setWaterColor(ACClientVars.getPurgedWaterColor()).setRainDisabled());
+		ACBiomes.abyssal_swamp = new BiomeAbyssalSwamp(new BiomeProperties("Abyssal Swamp").setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
+		ACBiomes.abyssal_desert = new BiomeAbyssalDesert(new BiomeProperties("Abyssal Desert").setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
+		ACBiomes.abyssal_plateau = new BiomeAbyssalPlateau(new BiomeProperties("Abyssal Plateau").setBaseHeight(1.5F).setHeightVariation(0.025F).setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
+		ACBiomes.coralium_ocean = new BiomeCoraliumOcean(new BiomeProperties("Coralium Ocean").setBaseHeight(-1.0F).setHeightVariation(0.1F).setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
+		ACBiomes.coralium_river = new BiomeCoraliumRiver(new BiomeProperties("Coralium River").setBaseHeight(-0.5F).setHeightVariation(0.0F).setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
 
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands.setRegistryName(new ResourceLocation(modid, "darklands")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands_forest.setRegistryName(new ResourceLocation(modid, "darklands_forest")));
@@ -71,8 +76,13 @@ public class WorldHandler implements ILifeCycleHandler {
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.omothol.setRegistryName(new ResourceLocation(modid, "omothol")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.dark_realm.setRegistryName(new ResourceLocation(modid, "dark_realm")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.purged.setRegistryName(new ResourceLocation(modid, "purged")));
+		InitHandler.INSTANCE.BIOMES.add(ACBiomes.abyssal_swamp.setRegistryName(new ResourceLocation(modid, "abyssal_swamp")));
+		InitHandler.INSTANCE.BIOMES.add(ACBiomes.abyssal_desert.setRegistryName(new ResourceLocation(modid, "abyssal_desert")));
+		InitHandler.INSTANCE.BIOMES.add(ACBiomes.abyssal_plateau.setRegistryName(new ResourceLocation(modid, "abyssal_plateau")));
+		InitHandler.INSTANCE.BIOMES.add(ACBiomes.coralium_ocean.setRegistryName(new ResourceLocation(modid, "coralium_ocean")));
+		InitHandler.INSTANCE.BIOMES.add(ACBiomes.coralium_river.setRegistryName(new ResourceLocation(modid, "coralium_river")));
 
-		ACLib.THE_ABYSSAL_WASTELAND = DimensionType.register("The Abyssal Wasteland", "_aw", ACLib.abyssal_wasteland_id, WorldProviderAbyss.class, ACConfig.keepLoaded1);
+		ACLib.THE_ABYSSAL_WASTELAND = DimensionType.register("The Abyssal Wasteland", "_aw", ACLib.abyssal_wasteland_id, WorldProviderAbyssalWasteland.class, ACConfig.keepLoaded1);
 		ACLib.THE_DREADLANDS = DimensionType.register("The Dreadlands", "_dl", ACLib.dreadlands_id, WorldProviderDreadlands.class, ACConfig.keepLoaded2);
 		ACLib.OMOTHOL = DimensionType.register("Omothol", "_omt", ACLib.omothol_id, WorldProviderOmothol.class, ACConfig.keepLoaded3);
 		ACLib.THE_DARK_REALM = DimensionType.register("The Dark Realm", "_dl", ACLib.dark_realm_id, WorldProviderDarkRealm.class, ACConfig.keepLoaded4);
@@ -125,7 +135,7 @@ public class WorldHandler implements ILifeCycleHandler {
 	@Override
 	public void loadComplete(FMLLoadCompleteEvent event) {
 		if(ACConfig.purgeMobSpawns){
-			((BiomeAbywasteland) ACBiomes.abyssal_wastelands).setMobSpawns();
+			((BiomeAbyssalWasteland) ACBiomes.abyssal_wastelands).setMobSpawns();
 			((BiomeDreadlands) ACBiomes.dreadlands).setMobSpawns();
 			((BiomeAbyDreadlands) ACBiomes.purified_dreadlands).setMobSpawns();
 			((BiomeForestDreadlands) ACBiomes.dreadlands_forest).setMobSpawns();
