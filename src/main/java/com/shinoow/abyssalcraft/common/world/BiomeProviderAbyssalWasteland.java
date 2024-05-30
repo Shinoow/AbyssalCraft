@@ -105,7 +105,7 @@ public class BiomeProviderAbyssalWasteland extends BiomeProvider
         
         for (int i = 0; i < width * height; ++i)
         {
-            biomes[i] = Biome.getBiome(aint[i], ACBiomes.coralium_ocean);
+            biomes[i] = Biome.getBiome(aint[i], ACBiomes.coralium_lake);
         }
 
         return biomes;
@@ -139,7 +139,7 @@ public class BiomeProviderAbyssalWasteland extends BiomeProvider
 
             for (int i = 0; i < width * length; ++i)
             {
-                listToReuse[i] = Biome.getBiome(aint[i], ACBiomes.coralium_ocean);
+                listToReuse[i] = Biome.getBiome(aint[i], ACBiomes.coralium_lake);
             }
 
             return listToReuse;

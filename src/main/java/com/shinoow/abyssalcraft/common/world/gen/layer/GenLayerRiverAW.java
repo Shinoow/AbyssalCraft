@@ -44,7 +44,7 @@ public class GenLayerRiverAW extends GenLayer
                 }
                 else
                 {
-                    aint1[j1 + i1 * areaWidth] = Biome.getIdForBiome(ACBiomes.coralium_river);
+                    aint1[j1 + i1 * areaWidth] = Biome.getIdForBiome(ACBiomes.coralium_lake);
                 }
             }
         }

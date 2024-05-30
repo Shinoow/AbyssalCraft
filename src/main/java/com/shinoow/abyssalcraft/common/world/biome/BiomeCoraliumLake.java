@@ -9,12 +9,13 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeCoraliumOcean extends BiomeAbyssalWastelandBase {
+public class BiomeCoraliumLake extends BiomeAbyssalWastelandBase {
 
-	public BiomeCoraliumOcean(BiomeProperties properties) {
+	public BiomeCoraliumLake(BiomeProperties properties) {
 		super(properties);
 		topBlock = ACBlocks.abyssal_sand.getDefaultState();
-		fillerBlock = ACBlocks.coralium_stone.getDefaultState();
+		fillerBlock = ACBlocks.abyssal_stone.getDefaultState();
+		barren = true;
 	}
 
     public Biome.TempCategory getTempCategory()

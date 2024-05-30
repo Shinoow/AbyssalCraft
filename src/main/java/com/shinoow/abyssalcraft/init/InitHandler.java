@@ -273,8 +273,7 @@ public class InitHandler implements ILifeCycleHandler {
 		BiomeDictionary.addTypes(ACBiomes.abyssal_swamp, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.abyssal_desert, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.abyssal_plateau, Type.DEAD);
-		BiomeDictionary.addTypes(ACBiomes.coralium_ocean, Type.DEAD);
-		BiomeDictionary.addTypes(ACBiomes.coralium_river, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.coralium_lake, Type.DEAD);
 	}
 
 	@SubscribeEvent

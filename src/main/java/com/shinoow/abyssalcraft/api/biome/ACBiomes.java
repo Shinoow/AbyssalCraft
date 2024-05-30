@@ -34,8 +34,7 @@ public class ACBiomes {
 	public static Biome abyssal_swamp;
 	public static Biome abyssal_desert;
 	public static Biome abyssal_plateau;
-	public static Biome coralium_ocean;
-	public static Biome coralium_river;
+	public static Biome coralium_lake;
 
 	// Dreadlands biomes
 	public static Biome dreadlands;

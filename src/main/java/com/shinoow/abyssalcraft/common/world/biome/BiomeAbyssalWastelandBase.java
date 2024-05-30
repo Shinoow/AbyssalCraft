@@ -235,6 +235,10 @@ public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelan
 		return ACClientVars.getAbyssalWastelandFoliageColor();
 	}
 
+	public boolean isBarren() {
+		return barren;
+	}
+	
 	@Override
 	public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
 	{

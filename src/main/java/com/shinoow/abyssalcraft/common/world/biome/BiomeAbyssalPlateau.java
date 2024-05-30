@@ -15,6 +15,7 @@ public class BiomeAbyssalPlateau extends BiomeAbyssalWastelandBase {
 		super(properties);
 		topBlock = ACBlocks.coralium_stone.getDefaultState();
 		fillerBlock = ACBlocks.coralium_stone.getDefaultState();
+		barren = true;
 	}
 
 	@Override

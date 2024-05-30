@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -64,7 +65,7 @@ public class BlockACStone extends Block {
 
 	@Override
 	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
-		if (!par1World.isRemote && TYPE == EnumStoneType.CORALIUM_STONE)
+		if (!par1World.isRemote && TYPE == EnumStoneType.CORALIUM_STONE && par1World.getBiome(pos) != ACBiomes.coralium_lake)
 			for(EnumFacing face : EnumFacing.values())
 				if (par1World.getBlockState(pos.offset(face)).getBlock() == ACBlocks.liquid_coralium && par5Random.nextFloat() < 0.3)
 					par1World.setBlockState(pos.offset(face), state);
