@@ -305,6 +305,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.multi_block = new BlockMultiblock();
 		ACBlocks.sequential_brewing_stand = new BlockSequentialBrewingStand();
 		ACBlocks.portal_anchor = new BlockPortalAnchor();
+		ACBlocks.dead_tree_log = new BlockACLog(MapColor.GREEN).setHardness(2.0F).setResistance(1.0F).setTranslationKey("dead_tree_log");
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityDGhead"));
@@ -594,6 +595,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.multi_block, "multiblock");
 		registerBlock(ACBlocks.sequential_brewing_stand, "sequential_brewing_stand");
 		registerBlock(ACBlocks.portal_anchor, "portal_anchor");
+		registerBlock(ACBlocks.dead_tree_log, "dead_tree_log");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

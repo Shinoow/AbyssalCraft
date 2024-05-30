@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"axis=y":  { "model": "abyssalcraft:dead_tree_log" },
+        "axis=z":   { "model": "abyssalcraft:dead_tree_log", "x": 90 },
+        "axis=x":   { "model": "abyssalcraft:dead_tree_log", "x": 90, "y": 90 },
+        "axis=none": { "model": "abyssalcraft:dead_tree_log_bark" }
+	}
+}

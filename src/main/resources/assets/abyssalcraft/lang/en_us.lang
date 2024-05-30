@@ -1181,6 +1181,7 @@ tile.door_drt.name=Dreadlands Wood Door
 tile.multi_block.name=Multiblock
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
 tile.portal_anchor.name=Portal Anchor
+tile.dead_tree_log.name=Dead Tree Log
 
 #Pre/Suffixes
 decorativestatue.prefix=Decorative %s

@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"side": "abyssalcraft:blocks/dead_tree",
+        "end": "abyssalcraft:blocks/dead_tree_top"
+	}
+}

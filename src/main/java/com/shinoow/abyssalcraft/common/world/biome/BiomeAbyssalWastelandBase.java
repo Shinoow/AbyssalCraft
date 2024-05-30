@@ -37,13 +37,16 @@ public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelan
 
 	protected static final IBlockState ABYSSAL_STONE = ACBlocks.abyssal_stone.getDefaultState();
 	protected static final IBlockState LIQUID_CORALIUM = ACBlocks.liquid_coralium.getDefaultState();
-	
+
 	protected boolean barren;
 
 	public BiomeAbyssalWastelandBase(BiomeProperties par1){
 		super(par1);
 		topBlock = ACBlocks.fused_abyssal_sand.getDefaultState();
 		fillerBlock = ACBlocks.abyssal_sand.getDefaultState();
+		decorator.treesPerChunk = -1;
+		decorator.flowersPerChunk= -1;
+		decorator.grassPerChunk = -1;
 		setMobSpawns();
 	}
 
@@ -64,7 +67,6 @@ public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelan
 
 	@Override
 	public void decorate(World par1World, Random par2Random, BlockPos pos){
-		
 		if(!barren) {
 			for (int l3 = 0; l3 < 4; ++l3)
 			{
@@ -238,7 +240,7 @@ public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelan
 	public boolean isBarren() {
 		return barren;
 	}
-	
+
 	@Override
 	public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)
 	{
