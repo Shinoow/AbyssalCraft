@@ -441,6 +441,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("coal", ACItems.charcoal);
 		OreDictionary.registerOre("listAllmeatraw", ACItems.generic_meat);
 		OreDictionary.registerOre("listAllmeatcooked", ACItems.cooked_generic_meat);
+		OreDictionary.registerOre("logWood", ACBlocks.dead_tree_log);
 
 		InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ItemCrystal).forEach(i -> {
 			//"item.crystalType.Element" -> crystalTypeElement

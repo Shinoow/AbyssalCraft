@@ -88,6 +88,7 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.coralium_cobblestone), new ItemStack(ACBlocks.coralium_stone), 0.1F);
 		GameRegistry.addSmelting(ACBlocks.dreadlands_log, new ItemStack(ACItems.charcoal), 1F);
 		GameRegistry.addSmelting(new ItemStack(ACItems.generic_meat), new ItemStack(ACItems.cooked_generic_meat), 0.35F);
+		GameRegistry.addSmelting(ACBlocks.dead_tree_log, new ItemStack(Items.COAL, 1, 1), 1F);
 	}
 
 	private static void addItemSmelting(){
