@@ -80,9 +80,9 @@ public abstract class LayerACArmorBase<T extends ModelArmoredBase> extends Layer
 					int i = itemarmor.getColor(itemstack);
 					if(i == 16777215 && color != -1) // override base color if color is present
 						i = color;
-					float f = (float)(i >> 16 & 255) / 255.0F;
-					float f1 = (float)(i >> 8 & 255) / 255.0F;
-					float f2 = (float)(i & 255) / 255.0F;
+					float f = (i >> 16 & 255) / 255.0F;
+					float f1 = (i >> 8 & 255) / 255.0F;
+					float f2 = (i & 255) / 255.0F;
 					GlStateManager.color(this.colorR * f, this.colorG * f1, this.colorB * f2, this.alpha);
 					t.render(entityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 					this.renderer.bindTexture(this.getArmorResource(entityLivingBaseIn, itemstack, slotIn, "overlay"));
@@ -91,9 +91,9 @@ public abstract class LayerACArmorBase<T extends ModelArmoredBase> extends Layer
 				} else {
 					if(color != -1 && data.isEmpty()) { // apply color if it should
 						int i = color;
-						float f = (float)(i >> 16 & 255) / 255.0F;
-						float f1 = (float)(i >> 8 & 255) / 255.0F;
-						float f2 = (float)(i & 255) / 255.0F;
+						float f = (i >> 16 & 255) / 255.0F;
+						float f1 = (i >> 8 & 255) / 255.0F;
+						float f2 = (i & 255) / 255.0F;
 						GlStateManager.color(this.colorR * f, this.colorG * f1, this.colorB * f2, this.alpha);
 					} else
 						GlStateManager.color(this.colorR, this.colorG, this.colorB, this.alpha);
@@ -101,9 +101,7 @@ public abstract class LayerACArmorBase<T extends ModelArmoredBase> extends Layer
 					t.render(entityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 				}
 				if (!this.skipRenderGlint && itemstack.hasEffect())
-				{
 					renderEnchantedGlint(this.renderer, entityLivingBaseIn, t, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale);
-				}
 			}
 		}
 	}

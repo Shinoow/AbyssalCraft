@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.world;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE;
 
 import java.util.List;
 import java.util.Random;
@@ -23,7 +24,6 @@ import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
 import com.shinoow.abyssalcraft.common.structures.abyss.Chains;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
-import com.shinoow.abyssalcraft.common.world.biome.BiomeAbyssalWastelandBase;
 import com.shinoow.abyssalcraft.common.world.gen.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
@@ -336,19 +336,29 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 		int l1;
 		int i2;
 
+		if(ACConfig.generateCoraliumLake && biome == ACBiomes.abyssal_swamp)
+			if (TerrainGen.populate(this, worldObj, rand, x, z, flag, LAKE) &&
+					!flag && rand.nextInt(6) == 0)
+			{
+				k1 = rand.nextInt(16) + 8;
+				l1 = rand.nextInt(128);
+				i2 = rand.nextInt(16) + 8;
+				new WorldGenAbyLake(ACBlocks.liquid_coralium).generate(worldObj, rand, pos.add(k1, l1, i2));
+			}
+
 		if(rand.nextFloat() < 0.15F) {
 			k1 = rand.nextInt(16) + 8;
 			l1 = rand.nextInt(128);
 			i2 = rand.nextInt(16) + 8;
 			new WorldGenAbyLake(ACBlocks.abyssal_stone.getDefaultState()).generate(worldObj, rand, pos.add(k1, l1, i2));
 		}
-		
+
 		if(rand.nextFloat() < 0.05F && biome != ACBiomes.abyssal_swamp && biome != ACBiomes.coralium_lake) {
 			int xPos = rand.nextInt(16) + 8;
 			int zPos = rand.nextInt(16) + 8;
 			new WorldGenAbyssalStalagmite().generate(worldObj, rand, worldObj.getHeight(pos.add(xPos, 0, zPos)));
 		}
-		
+
 		if(ACConfig.generateAbyssalWastelandPillars)
 			for(int i = 0; i < 1; i++) {
 				int Xcoord1 = rand.nextInt(16) + 8;
@@ -413,10 +423,6 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
 
 		return false;
-	}
-
-	private boolean isBarren(Biome biome) {
-		return biome instanceof BiomeAbyssalWastelandBase ? ((BiomeAbyssalWastelandBase) biome).isBarren() : false;
 	}
 
 	@Override

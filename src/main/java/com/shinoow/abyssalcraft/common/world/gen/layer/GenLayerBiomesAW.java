@@ -33,7 +33,6 @@ public class GenLayerBiomesAW extends GenLayer {
 	@Override
 	public int[] getInts(int x, int z, int width, int depth)
 	{
-		//TODO might need more custom stuff here
 		int[] dest = IntCache.getIntCache(width*depth);
 
 		for (int dz=0; dz<depth; dz++)

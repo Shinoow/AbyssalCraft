@@ -162,10 +162,6 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "acidprojectile"), EntityAcidProjectile.class, "acidprojectile", 77, instance, 64, 10, true);
 
-		//		registerEntityWithEgg(EntityShadowTitan.class, "shadowtitan", 74, 80, 3, true, 0, 0xFFFFFF);
-		//
-		//		registerEntityWithEgg(EntityOmotholWarden.class, "omotholwarden", 75, 80, 3, true, 0x133133, 0x342122);
-
 		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "blackhole"), EntityBlackHole.class, "blackhole", 78, instance, 64, 10, true);
 
 		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "implosion"), EntityImplosion.class, "implosion", 79, instance, 64, 10, true);

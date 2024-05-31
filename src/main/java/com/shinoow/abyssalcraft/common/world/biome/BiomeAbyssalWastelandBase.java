@@ -280,11 +280,8 @@ public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelan
 				IBlockState iblockstate2 = chunkPrimerIn.getBlockState(i1, j1, l);
 
 				if (iblockstate2.getMaterial() == Material.AIR)
-				{
 					j = -1;
-				}
 				else if (iblockstate2.getBlock() == ACBlocks.abyssal_stone)
-				{
 					if (j == -1)
 					{
 						if (k <= 0)
@@ -294,38 +291,30 @@ public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelan
 						}
 						else if (j1 >= i - 4 && j1 <= i + 1)
 						{
-							iblockstate = this.topBlock;
-							iblockstate1 = this.fillerBlock;
+							iblockstate = topBlock;
+							iblockstate1 = fillerBlock;
 						}
 
 						if (j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR))
-						{
 							iblockstate = LIQUID_CORALIUM;
-						}
 
 						j = k;
 
 						if (j1 >= i - 1)
-						{
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
-						}
 						else if (j1 < i - 7 - k)
 						{
 							iblockstate = AIR;
 							iblockstate1 = ABYSSAL_STONE;
 							chunkPrimerIn.setBlockState(i1, j1, l, GRAVEL);
-						}
-						else
-						{
+						} else
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
-						}
 					}
 					else if (j > 0)
 					{
 						--j;
 						chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
 					}
-				}
 			}
 	}
 }
