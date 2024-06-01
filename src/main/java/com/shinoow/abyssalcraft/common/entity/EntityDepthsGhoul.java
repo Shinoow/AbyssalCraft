@@ -339,7 +339,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		setGhoulType(type);
 
 		float f = difficulty.getClampedAdditionalDifficulty();
-		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
+		setCanPickUpLoot(ACConfig.hardcoreMode ? true : rand.nextFloat() < 0.55F * f);
 
 		if (data == null)
 			data = new EntityDepthsGhoul.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
@@ -352,8 +352,12 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 				setChild(true);
 		}
 
-		setEquipmentBasedOnDifficulty(difficulty);
-		setEnchantmentBasedOnDifficulty(difficulty);
+		if(ACConfig.hardcoreMode)
+			EntityUtil.suitUp(this, false);
+		else {
+			setEquipmentBasedOnDifficulty(difficulty);
+			setEnchantmentBasedOnDifficulty(difficulty);
+		}
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{

@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity.layers;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.model.entity.ModelSkeletonGoliath;
 import com.shinoow.abyssalcraft.client.render.entity.RenderSkeletonGoliath;
 import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
@@ -29,7 +28,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class LayerSkeletonGoliathHeldItem implements LayerRenderer<EntitySkeletonGoliath> {
 	protected final RenderSkeletonGoliath livingEntityRenderer;
-	private final ItemStack STACK = new ItemStack(ACItems.cudgel);
 
 	public LayerSkeletonGoliathHeldItem(RenderSkeletonGoliath render)
 	{
@@ -39,10 +37,16 @@ public class LayerSkeletonGoliathHeldItem implements LayerRenderer<EntitySkeleto
 	@Override
 	public void doRenderLayer(EntitySkeletonGoliath entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		if (!entitylivingbaseIn.isInvisible() && entitylivingbaseIn.isEntityAlive())
+		boolean flag = entitylivingbaseIn.getPrimaryHand() == EnumHandSide.RIGHT;
+		ItemStack itemstack = flag ? entitylivingbaseIn.getHeldItemOffhand() : entitylivingbaseIn.getHeldItemMainhand();
+		ItemStack itemstack1 = flag ? entitylivingbaseIn.getHeldItemMainhand() : entitylivingbaseIn.getHeldItemOffhand();
+
+
+		if (!itemstack.isEmpty() || !itemstack1.isEmpty())
 		{
 			GlStateManager.pushMatrix();
-			renderHeldItem(entitylivingbaseIn, STACK, ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, EnumHandSide.RIGHT);
+			renderHeldItem(entitylivingbaseIn, itemstack1, ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, EnumHandSide.RIGHT);
+			renderHeldItem(entitylivingbaseIn, itemstack, ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND, EnumHandSide.LEFT);
 			GlStateManager.popMatrix();
 		}
 	}
@@ -52,13 +56,14 @@ public class LayerSkeletonGoliathHeldItem implements LayerRenderer<EntitySkeleto
 		if (!stack.isEmpty())
 		{
 			GlStateManager.pushMatrix();
-			((ModelSkeletonGoliath)livingEntityRenderer.getMainModel()).rightarm.postRender(0.0625F);
+			((ModelSkeletonGoliath)livingEntityRenderer.getMainModel()).postRenderArm(0.0625F, handSide);
 			GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
 			GlStateManager.rotate(180F, 0.0F, 1.0F, 0.0F);
 			float scale = 0.9F;
 			GlStateManager.scale(scale, scale, scale);
-			GlStateManager.translate(0.16F, 0.14F, -1.03F);
-			Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, stack, transform, false);
+			boolean flag = handSide == EnumHandSide.LEFT;
+			GlStateManager.translate(flag ? -0.16F : 0.16F, 0.14F, -1.03F);
+			Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, stack, transform, flag);
 			GlStateManager.popMatrix();
 		}
 	}

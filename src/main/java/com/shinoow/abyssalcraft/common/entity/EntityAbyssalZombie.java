@@ -298,7 +298,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		float f = difficulty.getClampedAdditionalDifficulty();
-		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
+		setCanPickUpLoot(ACConfig.hardcoreMode ? true : rand.nextFloat() < 0.55F * f);
 
 		if (data == null)
 			data = new EntityAbyssalZombie.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
@@ -311,8 +311,12 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 				setChild(true);
 		}
 
-		setEquipmentBasedOnDifficulty(difficulty);
-		setEnchantmentBasedOnDifficulty(difficulty);
+		if(ACConfig.hardcoreMode)
+			EntityUtil.suitUp(this, false);
+		else {
+			setEquipmentBasedOnDifficulty(difficulty);
+			setEnchantmentBasedOnDifficulty(difficulty);
+		}
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{

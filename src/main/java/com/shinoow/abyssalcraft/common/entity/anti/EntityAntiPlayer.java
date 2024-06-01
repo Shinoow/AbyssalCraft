@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 
 import java.util.Calendar;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -109,10 +110,14 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		setCanPickUpLoot(ACConfig.antiPlayersPickupLoot);
+		setCanPickUpLoot(ACConfig.hardcoreMode ? true : ACConfig.antiPlayersPickupLoot);
 
-		setEquipmentBasedOnDifficulty(difficulty);
-		setEnchantmentBasedOnDifficulty(difficulty);
+		if(ACConfig.hardcoreMode)
+			EntityUtil.suitUp(this, false);
+		else {
+			setEquipmentBasedOnDifficulty(difficulty);
+			setEnchantmentBasedOnDifficulty(difficulty);
+		}
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{

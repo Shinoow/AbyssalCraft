@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 
 import java.util.Calendar;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAttackRangedBowAnti;
@@ -175,10 +176,14 @@ public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, I
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		setEquipmentBasedOnDifficulty(difficulty);
-		setEnchantmentBasedOnDifficulty(difficulty);
+		if(ACConfig.hardcoreMode)
+			EntityUtil.suitUp(this, true);
+		else {
+			setEquipmentBasedOnDifficulty(difficulty);
+			setEnchantmentBasedOnDifficulty(difficulty);
+		}
 
-		setCanPickUpLoot(rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
+		setCanPickUpLoot(ACConfig.hardcoreMode ? true : rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{

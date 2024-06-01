@@ -16,6 +16,7 @@ import com.shinoow.abyssalcraft.lib.client.model.ModelArmoredBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 
 public class ModelSkeletonGoliath extends ModelArmoredBase
@@ -423,6 +424,15 @@ public class ModelSkeletonGoliath extends ModelArmoredBase
 			rightarm.rotateAngleY += spine.rotateAngleY * 2.0F;
 			rightarm.rotateAngleZ = MathHelper.sin(swingProgress * (float)Math.PI) * -0.4F;
 		}
+	}
+
+	public void postRenderArm(float scale, EnumHandSide side){
+		getArmForSide(side).postRender(scale);
+	}
+
+	protected ModelRenderer getArmForSide(EnumHandSide side)
+	{
+		return side == EnumHandSide.LEFT ? leftarm : rightarm;
 	}
 
 	@Override

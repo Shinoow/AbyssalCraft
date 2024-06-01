@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.Calendar;
 import java.util.UUID;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.init.InitHandler;
@@ -156,10 +157,14 @@ public class EntityOmotholGhoul extends EntityMob implements IOmotholEntity {
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		float f = difficulty.getClampedAdditionalDifficulty();
-		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
+		setCanPickUpLoot(ACConfig.hardcoreMode ? true : rand.nextFloat() < 0.55F * f);
 
-		setEquipmentBasedOnDifficulty(difficulty);
-		setEnchantmentBasedOnDifficulty(difficulty);
+		if(ACConfig.hardcoreMode)
+			EntityUtil.suitUp(this, false);
+		else {
+			setEquipmentBasedOnDifficulty(difficulty);
+			setEnchantmentBasedOnDifficulty(difficulty);
+		}
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{

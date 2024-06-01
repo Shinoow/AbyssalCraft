@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 import java.util.Calendar;
 import java.util.UUID;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
@@ -251,7 +252,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
 		float f = difficulty.getClampedAdditionalDifficulty();
-		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
+		setCanPickUpLoot(ACConfig.hardcoreMode ? true : rand.nextFloat() < 0.55F * f);
 
 		if (data == null)
 			data = new EntityAntiAbyssalZombie.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, world.rand.nextFloat() < 0.05F, null);
@@ -264,8 +265,12 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 				setChild(true);
 		}
 
-		setEquipmentBasedOnDifficulty(difficulty);
-		setEnchantmentBasedOnDifficulty(difficulty);
+		if(ACConfig.hardcoreMode)
+			EntityUtil.suitUp(this, false);
+		else {
+			setEquipmentBasedOnDifficulty(difficulty);
+			setEnchantmentBasedOnDifficulty(difficulty);
+		}
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{

@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import java.util.Calendar;
 import java.util.UUID;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -73,7 +74,7 @@ public class EntitySkeletonGoliath extends EntityMob implements IEliteEntity {
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 120.0D : 60.0D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 40.0D : 20.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 20.0D : 10.0D);
 	}
 
 	@Override
@@ -119,14 +120,6 @@ public class EntitySkeletonGoliath extends EntityMob implements IEliteEntity {
 	protected Item getDropItem()
 	{
 		return Items.BONE;
-	}
-
-	@Override
-	public ItemStack getHeldItem(EnumHand hand){
-		if(hand == EnumHand.MAIN_HAND)
-			return new ItemStack(ACItems.cudgel);
-		return super.getHeldItem(hand);
-
 	}
 
 	@Override
@@ -181,10 +174,16 @@ public class EntitySkeletonGoliath extends EntityMob implements IEliteEntity {
 
 
 		float f = difficulty.getClampedAdditionalDifficulty();
-		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
+		setCanPickUpLoot(ACConfig.hardcoreMode ? true : rand.nextFloat() < 0.55F * f);
 
-		setEquipmentBasedOnDifficulty(difficulty);
-		setEnchantmentBasedOnDifficulty(difficulty);
+		if(ACConfig.hardcoreMode)
+			EntityUtil.suitUp(this, false);
+		else {
+			setEquipmentBasedOnDifficulty(difficulty);
+			setEnchantmentBasedOnDifficulty(difficulty);
+		}
+
+		setHeldItem(EnumHand.MAIN_HAND, new ItemStack(ACItems.cudgel));
 
 		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
 		{

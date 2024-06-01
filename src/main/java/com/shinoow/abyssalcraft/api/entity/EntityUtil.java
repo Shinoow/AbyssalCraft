@@ -11,17 +11,20 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.potion.Potion;
@@ -191,6 +194,62 @@ public final class EntityUtil {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Gives the EntityLiving in question enchanted armor and weapon
+	 * <br>(without checking if it can or should wear it)
+	 * @param entity Target
+	 * @param bow Give it a bow instead of a sword
+	 */
+	public static void suitUp(EntityLiving entity, boolean bow) {
+
+		Random rng = entity.getRNG();
+		int i = rng.nextInt(4);
+		float f = 0.1F;
+
+		if (rng.nextFloat() < 0.095F)
+			++i;
+		if (rng.nextFloat() < 0.095F)
+			++i;
+		if (rng.nextFloat() < 0.095F)
+			++i;
+
+		i = Math.max(i, 2); // chainmail at minimum
+		i = Math.min(i, 4); // in case RNGesus really smiles upon you
+
+		for (EntityEquipmentSlot entityequipmentslot : EntityEquipmentSlot.values())
+			if (entityequipmentslot.getSlotType() == EntityEquipmentSlot.Type.ARMOR)
+			{
+				ItemStack itemstack = entity.getItemStackFromSlot(entityequipmentslot);
+
+				if (itemstack.isEmpty())
+				{
+					Item item = EntityLiving.getArmorByChance(entityequipmentslot, i);
+
+					if (item != null)
+						entity.setItemStackToSlot(entityequipmentslot, EnchantmentHelper.addRandomEnchantment(rng, new ItemStack(item), (int)(5.0F + f * rng.nextInt(18)), false));
+				}
+			}
+
+		Item sword = Items.STONE_SWORD;
+
+		switch(i) {
+		case 2:
+			sword = Items.STONE_SWORD;
+			break;
+		case 3:
+			sword = Items.IRON_SWORD;
+			break;
+		case 4:
+			sword = Items.DIAMOND_SWORD;
+			break;
+		}
+
+		if(bow)
+			sword = Items.BOW;
+
+		entity.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, EnchantmentHelper.addRandomEnchantment(rng, new ItemStack(sword), (int)(5.0F + f * rng.nextInt(18)), false));
 	}
 
 	/**
