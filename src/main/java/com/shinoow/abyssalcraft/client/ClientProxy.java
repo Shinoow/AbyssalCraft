@@ -49,6 +49,8 @@ import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityPedestalBlockRenderer;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
+import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -204,6 +206,24 @@ public class ClientProxy extends CommonProxy {
 
 			return 16777215;
 		}, ACBlocks.portal_anchor);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
+			if(tintIndex == 1) {
+				TileEntity te = BlockUtil.getTileEntitySafely(world, pos);
+				if(te instanceof IRitualAltar && ((IRitualAltar) te).isPerformingRitual())
+					return 0x33ccff;
+			}
+			return 16777215;
+		}, ACBlocks.ritual_altar_stone, ACBlocks.ritual_altar_darkstone, ACBlocks.ritual_altar_abyssal_stone, ACBlocks.ritual_altar_coralium_stone,
+				ACBlocks.ritual_altar_dreadstone, ACBlocks.ritual_altar_abyssalnite_stone, ACBlocks.ritual_altar_ethaxium, ACBlocks.ritual_altar_dark_ethaxium);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
+			if(tintIndex == 1) {
+				TileEntity te = BlockUtil.getTileEntitySafely(world, pos);
+				if(te instanceof IRitualPedestal && ((IRitualPedestal) te).getAltar() != null && ((IRitualPedestal) te).getAltar().isPerformingRitual())
+					return 0x33ccff;
+			}
+			return 16777215;
+		}, ACBlocks.ritual_pedestal_stone, ACBlocks.ritual_pedestal_darkstone, ACBlocks.ritual_pedestal_abyssal_stone, ACBlocks.ritual_pedestal_coralium_stone,
+				ACBlocks.ritual_pedestal_dreadstone, ACBlocks.ritual_pedestal_abyssalnite_stone, ACBlocks.ritual_pedestal_ethaxium, ACBlocks.ritual_pedestal_dark_ethaxium);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, I18n.format(NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, I18n.format(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE));

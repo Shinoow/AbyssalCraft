@@ -37,6 +37,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockRitualAltar extends BlockContainer {
 
@@ -134,6 +136,13 @@ public class BlockRitualAltar extends BlockContainer {
 		BlockUtil.dropTileEntityAsItemWithExtra(world, pos, state, this);
 
 		super.breakBlock(world, pos, state);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getRenderLayer()
+	{
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	public enum EnumRitualMatType implements IStringSerializable {
