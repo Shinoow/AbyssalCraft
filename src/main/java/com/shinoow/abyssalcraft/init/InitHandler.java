@@ -413,6 +413,13 @@ public class InitHandler implements ILifeCycleHandler {
 		dreadSpawnSpawnLimit = cfg.get(CATEGORY_MOBS, "Dread Spawn Spawn Limit", 20, "Spawn limit on how many Dread Spawns can be spawned by other mobs capable of spawning them. The spawn limit for Cha'garoth is half of this.", 0, 50).getInt();
 		greaterDreadSpawnSpawnLimit = cfg.get(CATEGORY_MOBS, "Greater Dread Spawn Spawn Limit", 10, "Spawn limit on how many Greater Dread Spawns can be spawned by other mobs capable of spawning them. The spawn limit for Cha'garoth is half of this.", 0, 50).getInt();
 
+		jzaharHealingPace = cfg.get(CATEGORY_MOBS, "J'zahar Healing Pace", 200, "The pace at which J'zahar regenerates health (in ticks)", 20, 1200).getInt();
+		jzaharHealingAmount = cfg.get(CATEGORY_MOBS, "J'zahar Heal Amount", 1, "The amount of HP J'zahar heals when he regenerates health (set to 0 to disable healing)", 0, 100).getInt();
+		chagarothHealingPace = cfg.get(CATEGORY_MOBS, "Cha'garoth Healing Pace", 200, "The pace at which Cha'garoth regenerates health (in ticks)", 20, 1200).getInt();
+		chagarothHealingAmount = cfg.get(CATEGORY_MOBS, "Cha'garoth Heal Amount", 1, "The amount of HP Cha'garoth heals when he regenerates health (setto 0 to disable healing)", 0, 100).getInt();
+		sacthothHealingPace = cfg.get(CATEGORY_MOBS, "Sacthoth Healing Pace", 200, "The pace at which Sacthoth regenerates health (in ticks)", 20, 1200).getInt();
+		sacthothHealingAmount = cfg.get(CATEGORY_MOBS, "Sacthoth Heal Amount", 1, "The amount of HP Sacthoth heals when he regenerates health (setto 0 to disable healing)", 0, 100).getInt();
+
 		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_CLIENT, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
 		APIUtils.display_names = cfg.get(Configuration.CATEGORY_CLIENT, "Display Item Names", false, "Toggles whether or not to override the name locking and display item names regardless of the knowledge being obtained or not.").getBoolean();
 		particleBlock = cfg.get(Configuration.CATEGORY_CLIENT, "Block particles", true, "Toggles whether blocks that emits particles should do so.").getBoolean();
@@ -525,6 +532,12 @@ public class InitHandler implements ILifeCycleHandler {
 		odbExplosionSize = MathHelper.clamp(odbExplosionSize, 80, 800);
 		antimatterExplosionSize = MathHelper.clamp(antimatterExplosionSize, 40, 200);
 		enchantmentMaxLevel = MathHelper.clamp(enchantmentMaxLevel, 1, 100);
+		jzaharHealingPace = MathHelper.clamp(jzaharHealingPace, 20, 1200);
+		jzaharHealingAmount = MathHelper.clamp(jzaharHealingAmount, 0, 100);
+		chagarothHealingPace = MathHelper.clamp(chagarothHealingPace, 20, 1200);
+		chagarothHealingAmount = MathHelper.clamp(chagarothHealingAmount, 0, 100);
+		sacthothHealingPace = MathHelper.clamp(sacthothHealingPace, 20, 1200);
+		sacthothHealingAmount = MathHelper.clamp(sacthothHealingAmount, 0, 100);
 
 		demon_transformations.clear();
 

@@ -361,6 +361,9 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	@Override
 	public void onLivingUpdate()
 	{
+		if(ACConfig.jzaharHealingAmount > 0 && isEntityAlive() && ticksExisted % ACConfig.jzaharHealingPace == 0)
+			heal(ACConfig.jzaharHealingAmount);
+
 		int multiplier = ACConfig.hardcoreMode ? 2 : 1;
 
 		if(talkTimer > 0)

@@ -464,6 +464,9 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 	@Override
 	public void onLivingUpdate()
 	{
+		if(ACConfig.sacthothHealingAmount > 0 && isEntityAlive() && ticksExisted % ACConfig.sacthothHealingPace == 0)
+			heal(ACConfig.sacthothHealingAmount);
+
 		ParticleUtil.spawnShadowParticles(this);
 
 		for(Entity entity : world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(30.0D, 30.0D, 30.0D)))
