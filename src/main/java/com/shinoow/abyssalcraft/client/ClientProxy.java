@@ -210,7 +210,7 @@ public class ClientProxy extends CommonProxy {
 			if(tintIndex == 1) {
 				TileEntity te = BlockUtil.getTileEntitySafely(world, pos);
 				if(te instanceof IRitualAltar && ((IRitualAltar) te).isPerformingRitual())
-					return 0x33ccff;
+					return getColor(te.getWorld().rand.nextInt(3));
 			}
 			return 16777215;
 		}, ACBlocks.ritual_altar_stone, ACBlocks.ritual_altar_darkstone, ACBlocks.ritual_altar_abyssal_stone, ACBlocks.ritual_altar_coralium_stone,
@@ -219,7 +219,7 @@ public class ClientProxy extends CommonProxy {
 			if(tintIndex == 1) {
 				TileEntity te = BlockUtil.getTileEntitySafely(world, pos);
 				if(te instanceof IRitualPedestal && ((IRitualPedestal) te).getAltar() != null && ((IRitualPedestal) te).getAltar().isPerformingRitual())
-					return 0x33ccff;
+					return getColor(te.getWorld().rand.nextInt(3));
 			}
 			return 16777215;
 		}, ACBlocks.ritual_pedestal_stone, ACBlocks.ritual_pedestal_darkstone, ACBlocks.ritual_pedestal_abyssal_stone, ACBlocks.ritual_pedestal_coralium_stone,
@@ -229,6 +229,19 @@ public class ClientProxy extends CommonProxy {
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, I18n.format(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.omothol_id, 3, I18n.format(NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE));
+	}
+
+	private int getColor(int num) {
+		switch(num) {
+		case 0:
+			return 0x413faa;
+		case 1:
+			return 0x295930;
+		case 2:
+			return 0x275087;
+		default:
+			return 0x037a78;
+		}
 	}
 
 	@Override
