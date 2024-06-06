@@ -37,6 +37,8 @@ import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentac
 import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualPedestal;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
@@ -212,7 +214,7 @@ public class ClientProxy extends CommonProxy {
 				if(te instanceof IRitualAltar && ((IRitualAltar) te).isPerformingRitual())
 					return getColor(te.getWorld().rand.nextInt(3));
 			}
-			return 16777215;
+			return getColor(state.getBlock());
 		}, ACBlocks.ritual_altar_stone, ACBlocks.ritual_altar_darkstone, ACBlocks.ritual_altar_abyssal_stone, ACBlocks.ritual_altar_coralium_stone,
 				ACBlocks.ritual_altar_dreadstone, ACBlocks.ritual_altar_abyssalnite_stone, ACBlocks.ritual_altar_ethaxium, ACBlocks.ritual_altar_dark_ethaxium);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
@@ -221,7 +223,7 @@ public class ClientProxy extends CommonProxy {
 				if(te instanceof IRitualPedestal && ((IRitualPedestal) te).getAltar() != null && ((IRitualPedestal) te).getAltar().isPerformingRitual())
 					return getColor(te.getWorld().rand.nextInt(3));
 			}
-			return 16777215;
+			return getColor(state.getBlock());
 		}, ACBlocks.ritual_pedestal_stone, ACBlocks.ritual_pedestal_darkstone, ACBlocks.ritual_pedestal_abyssal_stone, ACBlocks.ritual_pedestal_coralium_stone,
 				ACBlocks.ritual_pedestal_dreadstone, ACBlocks.ritual_pedestal_abyssalnite_stone, ACBlocks.ritual_pedestal_ethaxium, ACBlocks.ritual_pedestal_dark_ethaxium);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE));
@@ -242,6 +244,14 @@ public class ClientProxy extends CommonProxy {
 		default:
 			return 0x037a78;
 		}
+	}
+
+	private int getColor(Block block) {
+		if(block instanceof BlockRitualAltar)
+			return ((BlockRitualAltar) block).getTypeColor();
+		if(block instanceof BlockRitualPedestal)
+			return ((BlockRitualPedestal) block).getTypeColor();
+		return 16777215;
 	}
 
 	@Override

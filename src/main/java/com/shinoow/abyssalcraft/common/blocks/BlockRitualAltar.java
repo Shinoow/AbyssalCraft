@@ -45,6 +45,7 @@ public class BlockRitualAltar extends BlockContainer {
 	//	public static final PropertyEnum<EnumRitualMatType> MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 	public static final Map<EnumRitualMatType, Block> VARIANTS = new HashMap<>();
 	private Supplier<IBlockState> dropState;
+	private EnumRitualMatType type;
 
 	public BlockRitualAltar(Supplier<IBlockState> dropState, int bookType, EnumRitualMatType type) {
 		super(Material.ROCK);
@@ -57,6 +58,11 @@ public class BlockRitualAltar extends BlockContainer {
 		this.dropState = dropState;
 		RitualUtil.addAltarTransformation(dropState, getDefaultState(), bookType);
 		VARIANTS.put(type, this);
+		this.type = type;
+	}
+
+	public int getTypeColor() {
+		return type.getColor();
 	}
 
 	@Override
@@ -146,23 +152,25 @@ public class BlockRitualAltar extends BlockContainer {
 	}
 
 	public enum EnumRitualMatType implements IStringSerializable {
-		COBBLESTONE(0, "cobblestone"),
-		DARKSTONE_COBBLESTONE(1, "darkstone_cobblestone"),
-		ABYSSAL_STONE_BRICK(2, "abyssal_stone_brick"),
-		CORALIUM_STONE_BRICK(3, "coralium_stone_brick"),
-		DREADSTONE_BRICK(4, "dreadstone_brick"),
-		ABYSSALNITE_STONE_BRICK(5, "abyssalnite_stone_brick"),
-		ETHAXIUM_BRICK(6, "ethaxium_brick"),
-		DARK_ETHAXIUM_BRICK(7, "dark_ethaxium_brick");
+		COBBLESTONE(0, "cobblestone", 0xb4b4b4),
+		DARKSTONE_COBBLESTONE(1, "darkstone_cobblestone", 0x36343d),
+		ABYSSAL_STONE_BRICK(2, "abyssal_stone_brick", 0x273d29),
+		CORALIUM_STONE_BRICK(3, "coralium_stone_brick", 0x5b837e),
+		DREADSTONE_BRICK(4, "dreadstone_brick", 0xb60202),
+		ABYSSALNITE_STONE_BRICK(5, "abyssalnite_stone_brick", 0x5b249c),
+		ETHAXIUM_BRICK(6, "ethaxium_brick", 0xc4c6af),
+		DARK_ETHAXIUM_BRICK(7, "dark_ethaxium_brick", 0x636353);
 
 		private static final EnumRitualMatType[] META_LOOKUP = new EnumRitualMatType[values().length];
 
 		private int meta;
 		private String name;
+		private int color;
 
-		private EnumRitualMatType(int meta, String name) {
+		private EnumRitualMatType(int meta, String name, int color) {
 			this.meta = meta;
 			this.name = name;
+			this.color = color;
 		}
 
 		public static EnumRitualMatType byMetadata(int meta)
@@ -180,6 +188,10 @@ public class BlockRitualAltar extends BlockContainer {
 
 		public int getMeta() {
 			return meta;
+		}
+
+		public int getColor() {
+			return color;
 		}
 
 		@Override

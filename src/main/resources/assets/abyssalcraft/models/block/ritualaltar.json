@@ -210,6 +210,19 @@
                 "south": { "texture": "#1", "uv": [ 0.0, 8.0, 6.0, 16.0 ], "tintindex":1 },
                 "west": { "texture": "#1", "uv": [ 0.0, 8.0, 6.0, 16.0 ], "tintindex":1 }
             }
+        },
+        {
+            "name": "overlay2",
+            "from": [ 4.5, 6.0, 4.5 ], 
+            "to": [ 11.5, 8.0, 11.5 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 6.0, 8.0, 13.0, 10.0 ], "tintindex":1 },
+                "east": { "texture": "#1", "uv": [ 6.0, 8.0, 13.0, 10.0 ], "tintindex":1 },
+                "south": { "texture": "#1", "uv": [ 6.0, 8.0, 13.0, 10.0 ], "tintindex":1 },
+                "west": { "texture": "#1", "uv": [ 6.0, 8.0, 13.0, 10.0 ], "tintindex":1 },
+                "up": { "texture": "#1", "uv": [ 6.0, 9.0, 13.0, 16.0 ], "tintindex":1 },
+                "down": { "texture": "#1", "uv": [ 6.0, 9.0, 13.0, 16.0 ], "tintindex":1 }
+            }
         }
     ]
 }

@@ -45,6 +45,7 @@ public class BlockRitualPedestal extends BlockContainer {
 	//	public static final PropertyEnum<EnumRitualMatType> MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 	public static final Map<EnumRitualMatType, Block> VARIANTS = new HashMap<>();
 	private Supplier<IBlockState> dropState;
+	private EnumRitualMatType type;
 
 	public BlockRitualPedestal(Supplier<IBlockState> dropState, int bookType, EnumRitualMatType type) {
 		super(Material.ROCK);
@@ -56,6 +57,11 @@ public class BlockRitualPedestal extends BlockContainer {
 		this.dropState = dropState;
 		RitualUtil.addPedestalTransformation(dropState, getDefaultState(), bookType);
 		VARIANTS.put(type, this);
+		this.type = type;
+	}
+
+	public int getTypeColor() {
+		return type.getColor();
 	}
 
 	@Override
