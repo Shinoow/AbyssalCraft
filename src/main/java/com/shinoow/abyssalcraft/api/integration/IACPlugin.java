@@ -14,11 +14,10 @@ package com.shinoow.abyssalcraft.api.integration;
 /**
  * Simple interface for handling integrations. Should be used together with the<br>
  * {@literal @}{@link ACPlugin} annotation.<br>
- * The integration plugins follow the standard FML lifecycle (apart from the pre-init<br>
- * method not being called by AbyssalCraft, so that you can call that yourself if<br>
- * the plugin adds any new Item/Block/Entity).
+ * The integration plugins follow the standard FML lifecycle (apart from no pre-init,<br>
+ * any new Item/Block/Entity needs to be handled by the mod adding the plugin).
  *
- * @author shinoow
+ * @author shinoow, mezz (architecture is a JEI plugin rip-off)
  *
  * @since 1.3
  */
@@ -38,12 +37,6 @@ public interface IACPlugin {
 	 * @return True if the plugin can be loaded, otherwise false.
 	 */
 	boolean canLoad();
-
-	/**
-	 * Won't be called by AbyssalCraft, allowing you to register any new Item/Block/Entity<br>
-	 * your plugin might add. Should be called at the pre-init stage.
-	 */
-	void preInit();
 
 	/**
 	 * Will be called at the end of the init stage

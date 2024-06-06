@@ -16,7 +16,7 @@ package com.shinoow.abyssalcraft.api.integration;
  * the {@link IACPlugin} interface. Any class annotated with this will be picked<br>
  * up when AbyssalCraft is scanning for integrations.
  *
- * @author shinoow
+ * @author shinoow, mezz (architecture is a JEI plugin rip-off)
  *
  * @since 1.6.5
  */
