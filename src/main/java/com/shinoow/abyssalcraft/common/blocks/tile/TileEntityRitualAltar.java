@@ -55,6 +55,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -249,7 +250,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 					ritual = RitualRegistry.instance().getRitual(world.provider.getDimension(), ((ItemNecronomicon)stack.getItem()).getBookType(), pedestals.stream().map(IRitualPedestal::getItem).toArray(ItemStack[]::new), item);
 					if(ritual != null && NecroDataCapability.getCap(player).isUnlocked(ritual.getUnlockCondition(), player))
 						if(ritual.requiresSacrifice()){
-							if(!world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)).isEmpty())
+							if(!world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)).isEmpty()) {
 								for(EntityLiving mob : world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(4, 4, 4)))
 									if(canBeSacrificed(mob))
 										if(ritual.canCompleteRitual(world, pos, player))
@@ -278,6 +279,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 
 												return;
 											}
+							} else player.sendStatusMessage(new TextComponentTranslation("message.ritual.missingsacrifice"), true);
 						} else if(ritual.canCompleteRitual(world, pos, player))
 							if(!MinecraftForge.EVENT_BUS.post(new RitualEvent.Pre(player, ritual, world, pos))){
 								pedestals.stream().forEach(IRitualPedestal::consumeItem);
