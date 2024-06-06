@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystallizer;
@@ -407,6 +408,10 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if (item == Items.BLAZE_POWDER) return 1200;
 			if (item == Items.BLAZE_ROD) return 2400;
 			if (item == ACItems.methane) return 10000;
+			if (item == ACItems.carbon_cluster) return 1600;
+			if (item == ACItems.dense_carbon_cluster) return 12800;
+			if (item == ACItems.crystal_carbon) return 200;
+			if (item == Item.getItemFromBlock(ACBlocks.carbon_crystal_cluster)) return 1800;
 			return 0;
 		}
 	}

@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
 
-import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
@@ -21,10 +20,8 @@ import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.event.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.api.ritual.Rituals;
-import com.shinoow.abyssalcraft.common.blocks.itemblock.ItemCrystalClusterBlock;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
@@ -35,8 +32,6 @@ import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.item.ItemCrystalFragment;
-import com.shinoow.abyssalcraft.lib.item.ItemCrystalShard;
 import com.shinoow.abyssalcraft.lib.util.*;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
@@ -468,19 +463,7 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void fuelBurnTime(FuelBurnTimeEvent event) {
-		if(!ACConfig.crystal_rework) {
-			ItemStack fuel = event.getItemStack();
-			if(fuel.getItem() instanceof ItemCrystalClusterBlock)
-				event.setBurnTime(12150);
-			if(fuel.getItem() instanceof ItemCrystalFragment)
-				event.setBurnTime(17);
-			if(fuel.getItem() instanceof ItemCrystalShard)
-				event.setBurnTime(150);
-			if(fuel.getItem() instanceof ICrystal)
-				event.setBurnTime(1350);
-			if(APIUtils.isCrystal(fuel))
-				event.setBurnTime(1000);
-		}
+
 	}
 
 	@SubscribeEvent

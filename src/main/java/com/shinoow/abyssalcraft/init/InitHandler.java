@@ -493,8 +493,6 @@ public class InitHandler implements ILifeCycleHandler {
 		hcdarkness_omt = cfg.get(CATEGORY_MOD_COMPAT, "Hardcore Darkness: Omothol", true, "Toggles whether or not Omothol should be darker if Hardcore Darkness is installed.").getBoolean();
 		hcdarkness_dr = cfg.get(CATEGORY_MOD_COMPAT, "Hardcore Darkness: Dark Realm", true, "Toggles whether or not the Dark Realm should be darker if Hardcore Darkness is installed.").getBoolean();
 
-		crystal_rework = cfg.get(CATEGORY_MODULES, "Crystal Rework", true, "Set to false to revert to the old crystal recipes (and them being fuels).").getBoolean();
-
 		entropy_spell = cfg.get(CATEGORY_SPELLS, "Entropy", true, "Set to false to disable the Entropy spell.").getBoolean();
 		life_drain_spell = cfg.get(CATEGORY_SPELLS, "Life Drain", true, "Set to false to disable the Life Drain spell.").getBoolean();
 		mining_spell = cfg.get(CATEGORY_SPELLS, "Mining", true, "Set to false to disable the Mining spell.").getBoolean();

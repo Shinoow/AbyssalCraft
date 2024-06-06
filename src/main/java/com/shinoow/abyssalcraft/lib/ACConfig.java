@@ -44,8 +44,6 @@ public class ACConfig {
 	public static boolean no_dreadlands_spread, no_acid_breaking_blocks, no_spectral_dragons, no_projectile_damage_immunity,
 	no_disruptions, no_black_holes, no_odb_explosions;
 
-	public static boolean crystal_rework;
-
 	public static boolean entropy_spell, life_drain_spell, mining_spell, grasp_of_cthulhu_spell, invisibility_spell,
 	detachment_spell, steal_vigor_spell, sirens_song_spell, undeath_to_dust_spell, ooze_removal_spell, teleport_hostile_spell,
 	display_routes_spell, toggle_state_spell, floating_spell, teleport_home_spell, compass_spell;
