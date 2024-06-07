@@ -1,9 +1,15 @@
 package com.shinoow.abyssalcraft.common.structures.overworld;
 
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityIdolOfFading;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -27,6 +33,16 @@ public class StructureDarkShrine extends StructureDarklandsBase {
 
 		template.addBlocksToWorld(worldIn, position, placeSettings);
 
+		Map<BlockPos, String> map = template.getDataBlocks(position, placeSettings);
+
+		for(Entry<BlockPos, String> entry : map.entrySet()) {
+			if("idol".equals(entry.getValue())) {
+				worldIn.setBlockState(entry.getKey(), ACBlocks.idol_of_fading.getDefaultState());
+				TileEntity tile = worldIn.getTileEntity(entry.getKey());
+				if(tile instanceof TileEntityIdolOfFading)
+					((TileEntityIdolOfFading)tile).addEnergy(((TileEntityIdolOfFading) tile).getMaxEnergy());
+			}
+		}
 
 		return true;
 	}

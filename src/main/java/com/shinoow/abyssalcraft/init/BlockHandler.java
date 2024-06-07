@@ -598,7 +598,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.sequential_brewing_stand, "sequential_brewing_stand");
 		registerBlock(ACBlocks.portal_anchor, "portal_anchor");
 		registerBlock(ACBlocks.dead_tree_log, "dead_tree_log");
-		registerBlock(ACBlocks.idol_of_fading, "idol_of_fading");
+		registerBlock(ACBlocks.idol_of_fading, new ItemPEContainerBlock(ACBlocks.idol_of_fading), "idol_of_fading");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);
