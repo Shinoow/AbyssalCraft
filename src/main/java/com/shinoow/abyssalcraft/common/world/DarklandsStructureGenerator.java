@@ -27,9 +27,9 @@ public class DarklandsStructureGenerator {
 
 	static List<WorldGenerator> structures = Arrays.asList(new AChouse1(), new AChouse2(), new ACscion1(), new ACscion2(),
 			new StructureRitualGrounds(), new StructureCircularShrine(), new StructureCircularShrineColumns(), new StructureRitualGroundsColumns(),
-			new StructureElevatedShrine(), new StructureElevatedShrineLarge());
+			new StructureElevatedShrine(), new StructureElevatedShrineLarge(), new StructureDarkShrine());
 	static List<WorldGenerator> shrines = Arrays.asList(new StructureCircularShrine(), new StructureCircularShrineColumns(),
-			new StructureElevatedShrine(), new StructureElevatedShrineLarge());
+			new StructureElevatedShrine(), new StructureElevatedShrineLarge(), new StructureDarkShrine());
 	static List<WorldGenerator> ritual_grounds = Arrays.asList(new StructureRitualGrounds(), new StructureRitualGroundsColumns());
 	static List<WorldGenerator> houses = Arrays.asList(new AChouse1(), new AChouse2());
 	static List<WorldGenerator> misc = Arrays.asList(new ACscion1(), new ACscion2());

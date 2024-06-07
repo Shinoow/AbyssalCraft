@@ -1,0 +1,101 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+		"0": "abyssalcraft:blocks/monolithstone",
+		"1": "abyssalcraft:blocks/ds",
+		"particle": "abyssalcraft:blocks/ds"
+    },
+    "elements": [
+        {
+            "name": "base",
+            "from": [ 4.0, 0.0, 4.0 ], 
+            "to": [ 12.0, 6.0, 12.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 8.0, 6.0 ] },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 8.0, 6.0 ] },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 8.0, 6.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 8.0, 6.0 ] },
+                "up": { "texture": "#0", "uv": [ 0.0, 0.0, 8.0, 8.0 ] },
+                "down": { "texture": "#0", "uv": [ 0.0, 0.0, 8.0, 8.0 ] }
+            }
+        },
+        {
+            "name": "obelisk",
+            "from": [ 6.0, 7.0, 6.0 ], 
+            "to": [ 10.0, 15.0, 10.0 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 0.0, 0.0, 4.0, 8.0 ] },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 4.0, 8.0 ] },
+                "south": { "texture": "#1", "uv": [ 0.0, 0.0, 4.0, 8.0 ] },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 4.0, 8.0 ] },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 4.0, 4.0 ] }
+            }
+        },
+        {
+            "name": "stand",
+            "from": [ 5.5, 6.0, 5.5 ], 
+            "to": [ 10.5, 7.0, 10.5 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 0.0, 0.0, 5.0, 1.0 ] },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 5.0, 1.0 ] },
+                "south": { "texture": "#1", "uv": [ 0.0, 0.0, 5.0, 1.0 ] },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 5.0, 1.0 ] },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 5.0, 5.0 ] }
+            }
+        },
+        {
+            "name": "candle1",
+            "from": [ 5.0, 6.0, 5.0 ], 
+            "to": [ 6.0, 10.0, 6.0 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "south": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+            }
+        },
+        {
+            "name": "candle2",
+            "from": [ 10.0, 6.0, 5.0 ], 
+            "to": [ 11.0, 10.0, 6.0 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "south": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+            }
+        },
+        {
+            "name": "candle3",
+            "from": [ 5.0, 6.0, 10.0 ], 
+            "to": [ 6.0, 10.0, 11.0 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "south": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+            }
+        },
+        {
+            "name": "candle4",
+            "from": [ 10.0, 6.0, 10.0 ], 
+            "to": [ 11.0, 10.0, 11.0 ], 
+            "faces": {
+                "north": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "east": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "south": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "west": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+            }
+        }
+    ]
+}

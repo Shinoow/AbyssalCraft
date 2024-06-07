@@ -306,6 +306,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.sequential_brewing_stand = new BlockSequentialBrewingStand();
 		ACBlocks.portal_anchor = new BlockPortalAnchor();
 		ACBlocks.dead_tree_log = new BlockACLog(MapColor.GREEN).setHardness(2.0F).setResistance(1.0F).setTranslationKey("dead_tree_log");
+		ACBlocks.idol_of_fading = new BlockIdolOfFading();
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityDGhead"));
@@ -339,6 +340,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityMultiblock.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityMultiblock"));
 		GameRegistry.registerTileEntity(TileEntitySequentialBrewingStand.class, new ResourceLocation(AbyssalCraft.modid, "tileEntitySequentialBrewingStand"));
 		GameRegistry.registerTileEntity(TileEntityPortalAnchor.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityPortalAnchor"));
+		GameRegistry.registerTileEntity(TileEntityIdolOfFading.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityIdolOfFading"));
 
 		registerBlock(ACBlocks.darkstone, "darkstone");
 		registerBlock(ACBlocks.abyssal_stone, new ItemBlockColorName(ACBlocks.abyssal_stone), "abystone");
@@ -596,6 +598,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.sequential_brewing_stand, "sequential_brewing_stand");
 		registerBlock(ACBlocks.portal_anchor, "portal_anchor");
 		registerBlock(ACBlocks.dead_tree_log, "dead_tree_log");
+		registerBlock(ACBlocks.idol_of_fading, "idol_of_fading");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

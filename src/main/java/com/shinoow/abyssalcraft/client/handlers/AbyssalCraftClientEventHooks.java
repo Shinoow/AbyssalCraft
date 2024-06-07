@@ -782,7 +782,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.abyssalnite_stone_brick_fence, 0);
 		registerItemRender(ACBlocks.abyssalnite_stone_brick_slab, 0);
 		registerItemRender(BlockHandler.abydreadbrickslab2, 0);
-
 		registerItemRender(ACBlocks.coralium_stone_brick, 0, "cstonebrick_0");
 		registerItemRender(ACBlocks.chiseled_coralium_stone_brick, 0, "cstonebrick_1");
 		registerItemRender(ACBlocks.cracked_coralium_stone_brick, 0, "cstonebrick_2");
@@ -932,6 +931,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.sequential_brewing_stand, 0);
 		registerItemRender(ACBlocks.portal_anchor, 0);
 		registerItemRender(ACBlocks.dead_tree_log, 0);
+		registerItemRender(ACBlocks.idol_of_fading, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {
