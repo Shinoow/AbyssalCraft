@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.common.base.Predicates;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
@@ -257,5 +258,24 @@ public class APIUtils {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Need an array of all statues? Well, here you go!
+	 */
+	public static final ItemStack[] getAllStatues() {
+		return new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
+				new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue),
+				new ItemStack(ACBlocks.yog_sothoth_statue), new ItemStack(ACBlocks.shub_niggurath_statue)};
+	}
+
+	/**
+	 * Oh, you want the decorative statues? Ta-da!
+	 */
+	public static final ItemStack[] getAllDecorativeStatues() {
+		return new ItemStack[]{new ItemStack(ACBlocks.decorative_jzahar_statue), new ItemStack(ACBlocks.decorative_cthulhu_statue),
+				new ItemStack(ACBlocks.decorative_hastur_statue), new ItemStack(ACBlocks.decorative_azathoth_statue),
+				new ItemStack(ACBlocks.decorative_nyarlathotep_statue), new ItemStack(ACBlocks.decorative_yog_sothoth_statue),
+				new ItemStack(ACBlocks.decorative_shub_niggurath_statue)};
 	}
 }

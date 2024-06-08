@@ -28,6 +28,9 @@ public abstract class StructureDarklandsBase extends WorldGenerator {
 		if(rand.nextFloat() < 0.3F){
 			setBlockAndNotifyAdequately(world, pos, ACBlocks.monolith_pillar.getDefaultState());
 			setBlockAndNotifyAdequately(world, pos.up(), getStatue(rand).withProperty(BlockStatue.FACING, EnumFacing.byHorizontalIndex(rand.nextInt(3))));
+		} else if(rand.nextBoolean()) {
+			setBlockAndNotifyAdequately(world, pos, ACBlocks.monolith_pillar.getDefaultState());
+			setBlockAndNotifyAdequately(world, pos.up(), getIdol(rand));
 		}
 	}
 
@@ -56,5 +59,9 @@ public abstract class StructureDarklandsBase extends WorldGenerator {
 		default:
 			return getStatue(rand);
 		}
+	}
+
+	private IBlockState getIdol(Random rand) {
+		return ACBlocks.idol_of_fading.getDefaultState();
 	}
 }

@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.energy.IEnergyRelayBlock;
@@ -48,6 +49,10 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 		Block block = Block.getBlockFromItem(is.getItem());
 		if(block instanceof IEnergyRelayBlock)
 			l.add(String.format("Range: %d Blocks", ((IEnergyRelayBlock) block).getRange()));
+		if(block == ACBlocks.idol_of_fading) {
+			l.add("It can summon beings from beyond");
+			l.add("when the sky can't reach it.");
+		}
 	}
 
 	@Override

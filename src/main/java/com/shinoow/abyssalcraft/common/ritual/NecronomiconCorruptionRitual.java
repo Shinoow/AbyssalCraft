@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.ritual;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
@@ -28,7 +29,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.*;
@@ -36,15 +36,8 @@ import net.minecraft.world.biome.*;
 public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 
 	public NecronomiconCorruptionRitual() {
-		super("corruption", 4, 0, 10000F, true, new Object[]{new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-				new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-				new ItemStack(ACBlocks.shub_niggurath_statue)}, ACBlocks.darkstone, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-						new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-						new ItemStack(ACBlocks.shub_niggurath_statue)}, ACBlocks.darkstone, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-								new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-								new ItemStack(ACBlocks.shub_niggurath_statue)}, ACBlocks.darkstone, new ItemStack[]{new ItemStack(ACBlocks.jzahar_statue), new ItemStack(ACBlocks.cthulhu_statue),
-										new ItemStack(ACBlocks.hastur_statue), new ItemStack(ACBlocks.azathoth_statue), new ItemStack(ACBlocks.nyarlathotep_statue), new ItemStack(ACBlocks.yog_sothoth_statue),
-										new ItemStack(ACBlocks.shub_niggurath_statue)}, ACBlocks.darkstone});
+		super("corruption", 3, 0, 10000F, true, new Object[]{APIUtils.getAllStatues(), ACBlocks.darkstone, APIUtils.getAllStatues(),
+				ACBlocks.darkstone, APIUtils.getAllStatues(), ACBlocks.darkstone, APIUtils.getAllStatues(), ACBlocks.darkstone});
 		setRitualParticle(EnumRitualParticle.PE_STREAM);
 	}
 
