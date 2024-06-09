@@ -19,7 +19,9 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomesDL extends GenLayer {
 
-	protected Biome[] allowedBiomes = {ACBiomes.dreadlands, ACBiomes.purified_dreadlands, ACBiomes.dreadlands_forest, ACBiomes.dreadlands_mountains};
+	protected Biome[] allowedBiomes = {ACBiomes.dreadlands, ACBiomes.purified_dreadlands,
+			ACBiomes.dreadlands_forest, ACBiomes.dreadlands_mountains,
+			ACBiomes.darklands, ACBiomes.darklands_forest};
 
 	public GenLayerBiomesDL(long seed, GenLayer genlayer) {
 		super(seed);

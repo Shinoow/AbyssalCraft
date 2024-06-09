@@ -51,7 +51,7 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 			l.add(String.format("Range: %d Blocks", ((IEnergyRelayBlock) block).getRange()));
 		if(block == ACBlocks.idol_of_fading) {
 			l.add("It can summon beings from beyond");
-			l.add("when the sky can't reach it.");
+			l.add("when shaded from the sky.");
 		}
 	}
 

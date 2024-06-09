@@ -19,7 +19,9 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomesAW extends GenLayer {
 
-	protected Biome[] allowedBiomes = {ACBiomes.abyssal_wastelands, ACBiomes.abyssal_swamp, ACBiomes.abyssal_desert, ACBiomes.abyssal_plateau, ACBiomes.coralium_lake};
+	protected Biome[] allowedBiomes = {ACBiomes.abyssal_wastelands, ACBiomes.abyssal_swamp,
+			ACBiomes.abyssal_desert, ACBiomes.abyssal_plateau, ACBiomes.coralium_lake,
+			ACBiomes.darklands, ACBiomes.darklands_forest, ACBiomes.darklands_mountains};
 
 	public GenLayerBiomesAW(long seed, GenLayer genlayer) {
 		super(seed);

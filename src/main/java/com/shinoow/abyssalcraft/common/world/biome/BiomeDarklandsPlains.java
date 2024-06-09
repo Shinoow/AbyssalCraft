@@ -29,7 +29,6 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
@@ -39,14 +38,13 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeDarklandsPlains extends Biome implements IDarklandsBiome {
+public class BiomeDarklandsPlains extends BiomeDarklandsBase {
 
 	private WorldGenTrees WorldGenDarkTrees;
 
@@ -76,7 +74,7 @@ public class BiomeDarklandsPlains extends Biome implements IDarklandsBiome {
 				int y = par2Random.nextInt(28) + 4;
 				int z = par2Random.nextInt(16);
 
-				new WorldGenMinable(ACBlocks.abyssalnite_ore.getDefaultState(), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
+				new WorldGenMinable(getAbyssalniteOre(par1World.provider.getDimension()), veinSize).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 
 		for (int rarity = 0; rarity < 7; ++rarity)

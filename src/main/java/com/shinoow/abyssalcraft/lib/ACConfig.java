@@ -49,7 +49,6 @@ public class ACConfig {
 	display_routes_spell, toggle_state_spell, floating_spell, teleport_home_spell, compass_spell;
 
 	public static final String CATEGORY_DIMENSIONS = "dimensions";
-	public static final String CATEGORY_BIOMES = "biomes";
 	public static final String CATEGORY_SHOGGOTH = "shoggoth";
 	public static final String CATEGORY_WORLDGEN = "worldgen";
 	public static final String CATEGORY_SILLY_SETTINGS = "silly_settings";

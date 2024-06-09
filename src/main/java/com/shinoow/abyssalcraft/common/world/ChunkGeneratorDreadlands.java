@@ -15,11 +15,15 @@ import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMine;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
@@ -38,6 +42,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.*;
@@ -87,6 +92,8 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 		dreadlandsCaveGenerator = TerrainGen.getModdedMapGen(dreadlandsCaveGenerator, NETHER_CAVE);
 	}
 
+	private List<SpawnListEntry> spawnList = new ArrayList<>();
+
 	public ChunkGeneratorDreadlands(World par1World, long par2, boolean par4)
 	{
 		worldObj = par1World;
@@ -108,6 +115,20 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 				float f = 10.0F / MathHelper.sqrt(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
+
+		spawnList.add(new SpawnListEntry(EntityDreadSpawn.class, 30, 1, 2));
+		spawnList.add(new SpawnListEntry(EntityDreadling.class, 40, 1, 2));
+		spawnList.add(new SpawnListEntry(EntityChagarothFist.class, 2, 1, 1));
+		spawnList.add(new SpawnListEntry(EntityDemonPig.class, 5, 1, 2));
+		spawnList.add(new SpawnListEntry(EntityDemonCow.class, 5, 1, 2));
+		spawnList.add(new SpawnListEntry(EntityDemonChicken.class, 5, 1, 2));
+		spawnList.add(new SpawnListEntry(EntityDemonSheep.class, 5, 1, 2));
+		spawnList.add(new SpawnListEntry(EntityGreaterDreadSpawn.class, 5, 1, 1));
+		spawnList.add(new SpawnListEntry(EntityDreadguard.class, 8, 1, 1));
+		spawnList.add(new SpawnListEntry(EntityLesserDreadbeast.class, 1, 0, 1));
+		spawnList.add(new SpawnListEntry(EntityShadowCreature.class, 70, 3, 3));
+		spawnList.add(new SpawnListEntry(EntityShadowMonster.class, 50, 2, 2));
+		spawnList.add(new SpawnListEntry(EntityShadowBeast.class, 20, 1, 1));
 	}
 
 	public void setBlocksInChunk(int par1, int par2, ChunkPrimer primer)
@@ -356,6 +377,8 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 		if (mapFeaturesEnabled)
 			dmGenerator.generateStructure(worldObj, rand, new ChunkPos(par2, par3));
 
+		DarklandsStructureGenerator.generateStructures(worldObj, rand, k, l);
+
 		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++) {
 				int Xcoord2 = k + rand.nextInt(16) + 8;
@@ -379,12 +402,17 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 	 * Returns a list of creatures of the specified type that can spawn at the given location.
 	 */
 	@Override
-	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, BlockPos pos)
+	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
 	{
 		if(pos.getY() <= 5)
-			return ACBiomes.dark_realm.getSpawnableList(par1EnumCreatureType);
+			return ACBiomes.dark_realm.getSpawnableList(creatureType);
 		Biome biome = worldObj.getBiome(pos);
-		return biome == null ? null : biome.getSpawnableList(par1EnumCreatureType);
+		if(biome instanceof IDarklandsBiome) {
+			if(creatureType != EnumCreatureType.MONSTER)
+				return ACBiomes.dreadlands.getSpawnableList(creatureType);
+			return spawnList;
+		}
+		return biome == null ? null : biome.getSpawnableList(creatureType);
 	}
 
 	@Override

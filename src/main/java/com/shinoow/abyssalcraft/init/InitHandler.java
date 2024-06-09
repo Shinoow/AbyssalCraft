@@ -53,10 +53,10 @@ import net.minecraft.util.Tuple;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.*;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.BiomeManager.BiomeEntry;
-import net.minecraftforge.common.BiomeManager.BiomeType;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.*;
@@ -80,10 +80,6 @@ public class InitHandler implements ILifeCycleHandler {
 	public static int[] coraliumOreGeneration;
 	private static int[] blackHoleBlacklist, oreGenDimBlacklist, structureGenDimBlacklist;
 	private int[] blackHoleDimlist;
-
-	public static boolean dark1, dark2, dark3, dark4, dark5, coralium1;
-	public static boolean darkspawn1, darkspawn2, darkspawn3, darkspawn4, darkspawn5, coraliumspawn1;
-	public static int darkWeight1, darkWeight2, darkWeight3, darkWeight4, darkWeight5, coraliumWeight;
 
 	public static final Fluid LIQUID_CORALIUM = new Fluid("liquidcoralium", new ResourceLocation("abyssalcraft", "blocks/cwater_still"),
 			new ResourceLocation("abyssalcraft", "blocks/cwater_flow")).setDensity(3000).setTemperature(350);
@@ -222,39 +218,6 @@ public class InitHandler implements ILifeCycleHandler {
 	public void registerBiomes(RegistryEvent.Register<Biome> event){
 		event.getRegistry().registerAll(BIOMES.toArray(new Biome[0]));
 
-		if(dark1){
-			BiomeManager.addBiome(BiomeType.WARM, new BiomeEntry(ACBiomes.darklands, darkWeight1));
-			BiomeManager.addVillageBiome(ACBiomes.darklands, true);
-		}
-		if(dark2){
-			BiomeManager.addBiome(BiomeType.WARM, new BiomeEntry(ACBiomes.darklands_forest, darkWeight2));
-			BiomeManager.addVillageBiome(ACBiomes.darklands_forest, true);
-		}
-		if(dark3){
-			BiomeManager.addBiome(BiomeType.WARM, new BiomeEntry(ACBiomes.darklands_plains, darkWeight3));
-			BiomeManager.addVillageBiome(ACBiomes.darklands_plains, true);
-		}
-		if(dark4)
-			BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(ACBiomes.darklands_hills, darkWeight4));
-		if(dark5){
-			BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(ACBiomes.darklands_mountains, darkWeight5));
-			BiomeManager.addStrongholdBiome(ACBiomes.darklands_mountains);
-		}
-		if(coralium1)
-			BiomeManager.addBiome(BiomeType.WARM, new BiomeEntry(ACBiomes.coralium_infested_swamp, coraliumWeight));
-		if(darkspawn1)
-			BiomeManager.addSpawnBiome(ACBiomes.darklands);
-		if(darkspawn2)
-			BiomeManager.addSpawnBiome(ACBiomes.darklands_forest);
-		if(darkspawn3)
-			BiomeManager.addSpawnBiome(ACBiomes.darklands_plains);
-		if(darkspawn4)
-			BiomeManager.addSpawnBiome(ACBiomes.darklands_hills);
-		if(darkspawn5)
-			BiomeManager.addSpawnBiome(ACBiomes.darklands_mountains);
-		if(coraliumspawn1)
-			BiomeManager.addSpawnBiome(ACBiomes.coralium_infested_swamp);
-
 		BiomeDictionary.addTypes(ACBiomes.darklands, Type.WASTELAND, Type.SPOOKY);
 		BiomeDictionary.addTypes(ACBiomes.darklands_forest, Type.FOREST, Type.SPOOKY);
 		BiomeDictionary.addTypes(ACBiomes.darklands_plains, Type.PLAINS, Type.SPOOKY);
@@ -320,7 +283,6 @@ public class InitHandler implements ILifeCycleHandler {
 	private static void syncConfig(){
 
 		cfg.setCategoryComment(CATEGORY_DIMENSIONS, "Dimension configuration (ID configuration and dimension unloading). Any changes take effect after a Minecraft restart.");
-		cfg.setCategoryComment(CATEGORY_BIOMES, "Biome configuration (biome generation, chance of a biome generating and whether or not a player ccan spawn there). Any changes take effect after a Minecraft restart.");
 		cfg.setCategoryComment(Configuration.CATEGORY_GENERAL, "General configuration (misc things). Only the spawn weights require a Minecraft restart for changes to take effect.");
 		cfg.setCategoryComment(CATEGORY_SHOGGOTH, "Shoggoth Ooze configuration (blacklist materials from turning into ooze). Any changes take effect immediately.");
 		cfg.setCategoryComment(CATEGORY_WORLDGEN, "World generation configuration (things that generate in the world). Any changes take effect immediately.");
@@ -345,27 +307,6 @@ public class InitHandler implements ILifeCycleHandler {
 
 		portalCooldown = cfg.get(CATEGORY_DIMENSIONS, "Portal cooldown", 200, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).\n[range: 10 ~ 300, default: 200]", 10, 300).getInt();
 		startDimension = cfg.get(CATEGORY_DIMENSIONS, "First Portal Dimension", 0, "The dimension ID of the dimension where you make the portal to the Abyssal Wastelands.").getInt();
-
-		dark1 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands", true, "Set true for the Darklands biome to generate.").getBoolean();
-		dark2 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands Forest", true, "Set true for the Darklands Forest biome to generate.").getBoolean();
-		dark3 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands Plains", true, "Set true for the Darklands Plains biome to generate.").getBoolean();
-		dark4 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands Highland", true, "Set true for the Darklands Highland biome to generate.").getBoolean();
-		dark5 = cfg.get(CATEGORY_BIOMES, "Generating: Darklands Mountain", true, "Set true for the Darklands Mountain biome to generate.").getBoolean();
-		coralium1 = cfg.get(CATEGORY_BIOMES, "Generating: Coralium Infested Swamp", true, "Set true for the Coralium Infested Swamp to generate.").getBoolean();
-
-		darkspawn1 = cfg.get(CATEGORY_BIOMES, "Spawning: Darklands", true, "If true, you can spawn in the Darklands biome.").getBoolean();
-		darkspawn2 = cfg.get(CATEGORY_BIOMES, "Spawning: Darklands Forest", true, "If true, you can spawn in the Darklands Forest biome.").getBoolean();
-		darkspawn3 = cfg.get(CATEGORY_BIOMES, "Spawning: Darklands Plains", true, "If true, you can spawn in the Darklands Plains biome.").getBoolean();
-		darkspawn4 = cfg.get(CATEGORY_BIOMES, "Spawning: Darklands Highland", true, "If true, you can spawn in the Darklands Highland biome.").getBoolean();
-		darkspawn5 = cfg.get(CATEGORY_BIOMES, "Spawning: Darklands Mountain", true, "If true, you can spawn in the Darklands Mountain biome.").getBoolean();
-		coraliumspawn1 = cfg.get(CATEGORY_BIOMES, "Spawning: Coralium Infested Swamp", true, "If true, you can spawn in the Coralium Infested Swamp biome.").getBoolean();
-
-		darkWeight1 = cfg.get(CATEGORY_BIOMES, "Biome Weight: Darklands", 4, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
-		darkWeight2 = cfg.get(CATEGORY_BIOMES, "Biome Weight: Darklands Forest", 4, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
-		darkWeight3 = cfg.get(CATEGORY_BIOMES, "Biome Weight: Darklands Plains", 4, "Biome weight for the Darklands Plains biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
-		darkWeight4 = cfg.get(CATEGORY_BIOMES, "Biome Weight: Darklands Highland", 4, "Biome weight for the Darklands Highland biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
-		darkWeight5 = cfg.get(CATEGORY_BIOMES, "Biome Weight: Darklands Mountain", 4, "Biome weight for the Darklands Mountain biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]").getInt();
-		coraliumWeight = cfg.get(CATEGORY_BIOMES, "Biome Weight: Coralium Infested Swamp", 6, "Biome weight for the Coralium Infested Swamp biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 
 		shouldSpread = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Coralium transmutation", true, "Set true for the Liquid Coralium to convert other liquids into itself and transmute blocks into their Abyssal Wasteland counterparts outside of the Abyssal Wasteland.").getBoolean();
 		shouldInfect = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague spreading", false, "Set true to allow the Coralium Plague to spread outside The Abyssal Wasteland.").getBoolean();
@@ -413,12 +354,12 @@ public class InitHandler implements ILifeCycleHandler {
 		dreadSpawnSpawnLimit = cfg.get(CATEGORY_MOBS, "Dread Spawn Spawn Limit", 20, "Spawn limit on how many Dread Spawns can be spawned by other mobs capable of spawning them. The spawn limit for Cha'garoth is half of this.", 0, 50).getInt();
 		greaterDreadSpawnSpawnLimit = cfg.get(CATEGORY_MOBS, "Greater Dread Spawn Spawn Limit", 10, "Spawn limit on how many Greater Dread Spawns can be spawned by other mobs capable of spawning them. The spawn limit for Cha'garoth is half of this.", 0, 50).getInt();
 
-		jzaharHealingPace = cfg.get(CATEGORY_MOBS, "J'zahar Healing Pace", 200, "The pace at which J'zahar regenerates health (in ticks)", 20, 1200).getInt();
-		jzaharHealingAmount = cfg.get(CATEGORY_MOBS, "J'zahar Heal Amount", 1, "The amount of HP J'zahar heals when he regenerates health (set to 0 to disable healing)", 0, 100).getInt();
-		chagarothHealingPace = cfg.get(CATEGORY_MOBS, "Cha'garoth Healing Pace", 200, "The pace at which Cha'garoth regenerates health (in ticks)", 20, 1200).getInt();
-		chagarothHealingAmount = cfg.get(CATEGORY_MOBS, "Cha'garoth Heal Amount", 1, "The amount of HP Cha'garoth heals when he regenerates health (setto 0 to disable healing)", 0, 100).getInt();
-		sacthothHealingPace = cfg.get(CATEGORY_MOBS, "Sacthoth Healing Pace", 200, "The pace at which Sacthoth regenerates health (in ticks)", 20, 1200).getInt();
-		sacthothHealingAmount = cfg.get(CATEGORY_MOBS, "Sacthoth Heal Amount", 1, "The amount of HP Sacthoth heals when he regenerates health (setto 0 to disable healing)", 0, 100).getInt();
+		jzaharHealingPace = cfg.get(CATEGORY_MOBS, "J'zahar Healing Pace", 200, "The pace at which J'zahar regenerates health (in ticks)\n[range: 20 ~ 1200, default: 200]", 20, 1200).getInt();
+		jzaharHealingAmount = cfg.get(CATEGORY_MOBS, "J'zahar Heal Amount", 1, "The amount of HP J'zahar heals when he regenerates health (set to 0 to disable healing)\n[range: 0 ~ 100, default: 1]", 0, 100).getInt();
+		chagarothHealingPace = cfg.get(CATEGORY_MOBS, "Cha'garoth Healing Pace", 200, "The pace at which Cha'garoth regenerates health (in ticks)\n[range: 20 ~ 1200, default: 200]", 20, 1200).getInt();
+		chagarothHealingAmount = cfg.get(CATEGORY_MOBS, "Cha'garoth Heal Amount", 1, "The amount of HP Cha'garoth heals when he regenerates health (setto 0 to disable healing)\n[range: 0 ~ 100, default: 1]", 0, 100).getInt();
+		sacthothHealingPace = cfg.get(CATEGORY_MOBS, "Sacthoth Healing Pace", 200, "The pace at which Sacthoth regenerates health (in ticks)\n[range: 20 ~ 1200, default: 200]", 20, 1200).getInt();
+		sacthothHealingAmount = cfg.get(CATEGORY_MOBS, "Sacthoth Heal Amount", 1, "The amount of HP Sacthoth heals when he regenerates health (setto 0 to disable healing)\n[range: 0 ~ 100, default: 1]", 0, 100).getInt();
 
 		depthsHelmetOverlayOpacity = cfg.get(Configuration.CATEGORY_CLIENT, "Visage of The Depths Overlay Opacity", 1.0D, "Sets the opacity for the overlay shown when wearing the Visage of The Depths, reducing the value increases the transparency on the texture. Client Side only!\n[range: 0.5 ~ 1.0, default: 1.0]", 0.5D, 1.0D).getDouble();
 		APIUtils.display_names = cfg.get(Configuration.CATEGORY_CLIENT, "Display Item Names", false, "Toggles whether or not to override the name locking and display item names regardless of the knowledge being obtained or not.").getBoolean();
@@ -514,12 +455,6 @@ public class InitHandler implements ILifeCycleHandler {
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
 		demonAnimalSpawnWeight = MathHelper.clamp(demonAnimalSpawnWeight, 0, 100);
 		shoggothLairSpawnRate = MathHelper.clamp(shoggothLairSpawnRate, 0, 1000);
-		darkWeight1 = MathHelper.clamp(darkWeight1, 0, 100);
-		darkWeight2 = MathHelper.clamp(darkWeight2, 0, 100);
-		darkWeight3 = MathHelper.clamp(darkWeight3, 0, 100);
-		darkWeight4 = MathHelper.clamp(darkWeight4, 0, 100);
-		darkWeight5 = MathHelper.clamp(darkWeight5, 0, 100);
-		coraliumWeight = MathHelper.clamp(coraliumWeight, 0, 100);
 		damageAmpl = MathHelper.clamp(damageAmpl, 1, 10);
 		depthsHelmetOverlayOpacity = MathHelper.clamp(depthsHelmetOverlayOpacity, 0.5D, 1.0D);
 		if(coraliumOreGeneration.length != 3)

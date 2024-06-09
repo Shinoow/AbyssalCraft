@@ -500,6 +500,8 @@ public class ChunkGeneratorDarkRealm implements IChunkGenerator
 
 		ForgeEventFactory.onChunkPopulate(true, this, worldObj, rand, x, z, flag);
 
+		DarklandsStructureGenerator.generateStructures(worldObj, rand, k, l);
+
 		if(ACConfig.generateShoggothLairs)
 			for(int i = 0; i < 1; i++) {
 				int Xcoord2 = k + rand.nextInt(16) + 8;

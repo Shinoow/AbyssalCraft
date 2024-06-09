@@ -80,9 +80,11 @@ public class AbyssalCraftEventHooks {
 				for (int x = 0; x < 16; ++x)
 					for (int y = 0; y < 16; ++y)
 						for (int z = 0; z < 16; ++z)
-							if(chunk.getBiome(new BlockPos(x, y, z), event.getWorld().getBiomeProvider()) == ACBiomes.darklands_mountains)
-								if (storage.get(x, y, z).getBlock() == Blocks.STONE)
+							if(chunk.getBiome(new BlockPos(x, y, z), event.getWorld().getBiomeProvider()) == ACBiomes.darklands_mountains) {
+								Block block = storage.get(x, y, z).getBlock();
+								if (block == Blocks.STONE || block == ACBlocks.abyssal_stone)
 									storage.set(x, y, z, ACBlocks.darkstone.getDefaultState());
+							}
 	}
 
 	//	@SubscribeEvent

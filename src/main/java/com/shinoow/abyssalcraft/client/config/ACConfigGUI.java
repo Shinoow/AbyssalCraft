@@ -35,7 +35,6 @@ public class ACConfigGUI extends GuiConfig {
 
 	private static List<IConfigElement> getConfigElements(){
 		List<IConfigElement> list = new ArrayList<>();
-		list.add(new DummyCategoryElement(I18n.format("ac_biomes"), "ac_biomes", BiomesEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_client"), "ac_client", ClientEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_mod_compat"), "ac_mod_compat", CompatEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_dimensions"), "ac_dimensions", DimensionEntry.class));
@@ -61,17 +60,6 @@ public class ACConfigGUI extends GuiConfig {
 		protected GuiScreen buildChildScreen(){
 			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory(ACConfig.CATEGORY_DIMENSIONS)).getChildElements(), "abyssalcraft", ACConfig.CATEGORY_DIMENSIONS, true, true, I18n.format("ac_dimensions"));
 
-		}
-	}
-	public static class BiomesEntry extends CategoryEntry{
-
-		public BiomesEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement) {
-			super(owningScreen, owningEntryList, configElement);
-		}
-
-		@Override
-		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory(ACConfig.CATEGORY_BIOMES)).getChildElements(), "abyssalcraft", ACConfig.CATEGORY_BIOMES, true, true, I18n.format("ac_biomes"));
 		}
 	}
 	public static class GeneralEntry extends CategoryEntry{

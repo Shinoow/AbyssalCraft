@@ -15,12 +15,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.collect.Lists;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.overworld.*;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class DarklandsStructureGenerator {
@@ -33,6 +39,59 @@ public class DarklandsStructureGenerator {
 	static List<WorldGenerator> ritual_grounds = Arrays.asList(new StructureRitualGrounds(), new StructureRitualGroundsColumns());
 	static List<WorldGenerator> houses = Arrays.asList(new AChouse1(), new AChouse2());
 	static List<WorldGenerator> misc = Arrays.asList(new ACscion1(), new ACscion2());
+	private static List<Biome> shrine_biomes = Lists.newArrayList(
+			Biomes.PLAINS, Biomes.FOREST, Biomes.SWAMPLAND,
+			Biomes.DESERT, Biomes.ICE_MOUNTAINS, Biomes.ICE_PLAINS,
+			Biomes.ROOFED_FOREST, Biomes.BIRCH_FOREST, Biomes.TAIGA);
+
+	/**
+	 * Executes the base generation logic, with random offsets and all
+	 * @param world Current World
+	 * @param random Random instance
+	 * @param chunkX Chunk X
+	 * @param chunkZ Chunk Z
+	 */
+	public static void generateStructures(World world, Random random, int chunkX, int chunkZ) {
+		Biome biome = world.getBiome(new BlockPos(chunkX, 0, chunkZ));
+		if(biome instanceof IDarklandsBiome || biome == ACBiomes.dark_realm) {
+			
+			IBlockState baseState = biome == ACBiomes.dark_realm ? ACBlocks.darkstone.getDefaultState() : Blocks.GRASS.getDefaultState();
+			
+			int x = chunkX + random.nextInt(16) + 8;
+			int z = chunkZ + random.nextInt(16) + 8;
+			generate(1, world, random, world.getHeight(new BlockPos(x, 0, z)), baseState);
+
+			x = chunkX + random.nextInt(16) + 8;
+			z = chunkZ + random.nextInt(16) + 8;
+			generate(2, world, random, world.getHeight(new BlockPos(x, 0, z)), baseState);
+
+			x = chunkX + random.nextInt(16) + 8;
+			z = chunkZ + random.nextInt(16) + 8;
+			generate(3, world, random, world.getHeight(new BlockPos(x, 0, z)), baseState);
+
+			x = chunkX + random.nextInt(16) + 8;
+			z = chunkZ + random.nextInt(16) + 8;
+			generate(4, world, random, world.getHeight(new BlockPos(x, 0, z)),
+					Blocks.GRASS.getDefaultState(), ACBlocks.darkstone.getDefaultState());
+
+			x = chunkX + random.nextInt(16) + 8;
+			z = chunkZ + random.nextInt(16) + 8;
+			generate(0, world, random, world.getHeight(new BlockPos(x, 0, z)), baseState);
+		}
+		else if(shrine_biomes.contains(biome)) {
+			int x = chunkX + random.nextInt(16) + 8;
+			int z = chunkZ + random.nextInt(16) + 8;
+			if(random.nextInt(10) == 0)
+				generate(1, world, random, world.getHeight(new BlockPos(x, 0, z)),
+						Blocks.GRASS.getDefaultState(), Blocks.SAND.getDefaultState(), Blocks.STONE.getDefaultState());
+
+			x = chunkX + random.nextInt(16) + 8;
+			z = chunkZ + random.nextInt(16) + 8;
+			if(random.nextInt(10) == 0)
+				generate(2, world, random, world.getHeight(new BlockPos(x, 0, z)),
+						Blocks.GRASS.getDefaultState(), Blocks.SAND.getDefaultState(), Blocks.STONE.getDefaultState());
+		}
+	}
 
 	public static void generate(int type, World world, Random random, BlockPos pos){
 		generate(type, world, random, pos, Blocks.GRASS.getDefaultState(), (IBlockState[])null);
