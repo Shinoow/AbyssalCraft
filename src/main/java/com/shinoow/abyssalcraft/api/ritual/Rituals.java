@@ -116,6 +116,7 @@ public class Rituals {
 	public static NecronomiconRitual CURING;
 	public static NecronomiconRitual PURGING;
 	public static NecronomiconRitual WEATHER;
+	public static NecronomiconRitual INFESTING;
 
 	// Items
 	public static NecronomiconRitual BOOK_OF_MANY_FACES;

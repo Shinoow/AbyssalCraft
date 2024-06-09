@@ -410,6 +410,7 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(Rituals.BOOK_OF_MANY_FACES = new NecronomiconInfusionRitual("facebook", 2, 2000F, new ItemStack(ACItems.book_of_many_faces), new ItemStack(Items.BOOK), facebookofferings));
 		RitualRegistry.instance().registerRitual(Rituals.CLEANSING = new NecronomiconCleansingRitual());
 		RitualRegistry.instance().registerRitual(Rituals.CORRUPTION = new NecronomiconCorruptionRitual());
+		RitualRegistry.instance().registerRitual(Rituals.INFESTING = new NecronomiconInfestingRitual());
 		RitualRegistry.instance().registerRitual(Rituals.CURING = new NecronomiconCuringRitual());
 		RitualRegistry.instance().registerRitual(Rituals.MASS_ENCHANTING = new NecronomiconMassEnchantRitual());
 		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}, null,

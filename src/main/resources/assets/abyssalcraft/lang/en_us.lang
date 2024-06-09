@@ -831,6 +831,8 @@ ac.ritual.facebook=The Book of Many Faces
 ac.ritual.facebook.desc=By infusing a Book with crystallized compounds resembling the elements of life, an Arrow and an Ink Sac, you create a book capable of communicating with the dead and tell you the names of fallen companions.
 ac.ritual.jzaharCoin=Token of J'zahar
 ac.ritual.jzaharCoin.desc=By infusing a Coin with a Transmutation Gem, you receive a Token of J'zahar. You also feel like someone or something is laughing at you mockingly from afar...
+ac.ritual.infesting=Ritual of Infesting
+ac.ritual.infesting.desc=By presenting 4 random statues, 4 blocks of Coralium Stone, a large amount of energy and a living sacrifice, you summon powers from the Abyss to infest the surrounding Swampland with Coralium. Re-shape the Swamp into a Coralium Infested Swamp.
 
 #Spells
 ac.spell.lifedrain=Life Drain
