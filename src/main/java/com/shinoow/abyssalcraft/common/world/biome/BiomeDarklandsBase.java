@@ -76,8 +76,8 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome {
 
 	protected IBlockState getAbyssalniteOre(int dim) {
 
-		if(dim == ACLib.abyssal_wasteland_id) //TODO replace
-			return  ACBlocks.abyssalnite_ore.getDefaultState();
+		if(dim == ACLib.abyssal_wasteland_id)
+			return  ACBlocks.abyssal_abyssalnite_ore.getDefaultState();
 		if(dim == ACLib.dreadlands_id)
 			return ACBlocks.dreadlands_abyssalnite_ore.getDefaultState();
 

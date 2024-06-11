@@ -263,4 +263,5 @@ public class ACBlocks {
 	public static Block portal_anchor;
 	public static Block dead_tree_log;
 	public static Block idol_of_fading;
+	public static Block abyssal_abyssalnite_ore;
 }

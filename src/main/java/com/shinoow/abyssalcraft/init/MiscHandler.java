@@ -442,6 +442,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("listAllmeatraw", ACItems.generic_meat);
 		OreDictionary.registerOre("listAllmeatcooked", ACItems.cooked_generic_meat);
 		OreDictionary.registerOre("logWood", ACBlocks.dead_tree_log);
+		OreDictionary.registerOre("oreAbyssalnite", ACBlocks.abyssal_abyssalnite_ore);
 
 		InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ItemCrystal).forEach(i -> {
 			//"item.crystalType.Element" -> crystalTypeElement
@@ -936,6 +937,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.abyssal_wasteland_energy_container, UnlockConditions.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.dreadlands_energy_container, UnlockConditions.DREADLANDS);
 		addCondition(ACBlocks.omothol_energy_container, UnlockConditions.OMOTHOL);
+		addCondition(ACBlocks.abyssal_abyssalnite_ore, UnlockConditions.DARKLANDS_BIOME);
 	}
 
 	private void addCondition(Block block, IUnlockCondition condition) {

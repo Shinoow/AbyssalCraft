@@ -307,6 +307,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.portal_anchor = new BlockPortalAnchor();
 		ACBlocks.dead_tree_log = new BlockACLog(MapColor.GREEN).setHardness(2.0F).setResistance(1.0F).setTranslationKey("dead_tree_log");
 		ACBlocks.idol_of_fading = new BlockIdolOfFading();
+		ACBlocks.abyssal_abyssalnite_ore = new BlockACOre(2, 3.0F, 6.0F).setTranslationKey("abyssal_abyssalnite_ore");
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityDGhead"));
@@ -599,6 +600,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.portal_anchor, "portal_anchor");
 		registerBlock(ACBlocks.dead_tree_log, "dead_tree_log");
 		registerBlock(ACBlocks.idol_of_fading, new ItemPEContainerBlock(ACBlocks.idol_of_fading), "idol_of_fading");
+		registerBlock(ACBlocks.abyssal_abyssalnite_ore, "abyssal_abyssalnite_ore");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

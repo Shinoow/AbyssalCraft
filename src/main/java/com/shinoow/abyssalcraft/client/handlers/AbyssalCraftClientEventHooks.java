@@ -932,6 +932,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.portal_anchor, 0);
 		registerItemRender(ACBlocks.dead_tree_log, 0);
 		registerItemRender(ACBlocks.idol_of_fading, 0);
+		registerItemRender(ACBlocks.abyssal_abyssalnite_ore, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {
