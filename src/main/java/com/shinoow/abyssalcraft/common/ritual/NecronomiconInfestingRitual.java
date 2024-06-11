@@ -55,7 +55,7 @@ public class NecronomiconInfestingRitual extends NecronomiconRitual {
 
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
-		int num = 1, num2 = 0, range = ACConfig.corruptionRitualRange * 8;
+		int num = 1, num2 = 0, range = ACConfig.infestingRitualRange * 8;
 		WorldGenAntimatterLake lake = new WorldGenAntimatterLake(ACBlocks.liquid_antimatter);
 		for(int x = pos.getX() - range; x < pos.getX() + range + 1; x++)
 			for(int z = pos.getZ() - range; z < pos.getZ() + range + 1; z++){
@@ -64,18 +64,17 @@ public class NecronomiconInfestingRitual extends NecronomiconRitual {
 
 				if(!isApplicable(world, pos1)) continue;
 
+				int RandPosX = world.rand.nextInt(16) + 8;
+				int RandPosY = world.rand.nextInt(40) + 40;
+				int RandPosZ = world.rand.nextInt(16) + 8;
+				if(world.rand.nextInt(3000) == 0) {
+					lake.generate(world, world.rand, pos1.add(RandPosX, RandPosY, RandPosZ));
+				}
+
 				Scheduler.schedule(new ScheduledProcess(num * 2) {
 
 					@Override
 					public void execute() {
-
-						int RandPosX = world.rand.nextInt(16) + 8;
-						int RandPosY = 80;
-						int RandPosZ = world.rand.nextInt(16) + 8;
-						if(world.rand.nextInt(1000) == 0) {
-							lake.generate(world, world.rand, pos1.add(RandPosX, RandPosY, RandPosZ));
-						}
-
 						BiomeUtil.updateBiome(world, pos1, ACBiomes.coralium_infested_swamp, true);
 					}
 

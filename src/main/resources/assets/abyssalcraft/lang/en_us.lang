@@ -204,6 +204,7 @@ message.jzahar.corrupting=Behold, as the darkness consumes the Overworld! Bit by
 message.jzahar.cleansing=Undoing my malice on your §obeloved§r world? What a shame.
 message.jzahar.fourthwall=Whoops, I slipped!
 message.ritual.missingsacrifice=This ritual requires a sacrifice
+message.ritual.massenchanttamper=One of the books has been tampered with in an anvil, replace it to perform the ritual.
 
 #Container Inventories
 container.abyssalcraft.crate=Crate

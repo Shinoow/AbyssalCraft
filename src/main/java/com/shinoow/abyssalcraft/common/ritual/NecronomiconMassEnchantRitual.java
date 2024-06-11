@@ -32,6 +32,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
@@ -60,6 +61,11 @@ public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
 				return false;
 			if(altar.getItem().isItemEnchantable()) {
 				books = altar.getPedestals().stream().map(IRitualPedestal::getItem).filter(i -> i.getItem().getForgeRarity(i) == EnumRarity.UNCOMMON).collect(Collectors.toList());
+
+				if(!ACConfig.enchantMergedBooks && books.stream().anyMatch(i -> i.hasTagCompound() && i.getTagCompound().hasKey("RepairCost"))) {
+					player.sendStatusMessage(new TextComponentTranslation("message.ritual.massenchanttamper"), true);
+					return false;
+				}
 
 				return books.size() == 8;
 			}

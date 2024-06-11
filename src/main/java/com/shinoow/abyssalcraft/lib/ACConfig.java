@@ -25,12 +25,13 @@ public class ACConfig {
 	armorPotionEffects, nuclearAntimatterExplosions, syncDataOnBookOpening, portalSpawnsNearPlayer,
 	showBossDialogs, jzaharBreaksFourthWall, lootTableContent, depthsGhoulBiomeDictSpawn, abyssalZombieBiomeDictSpawn,
 	useAmplifiedWorldType, generateStatuesInLairs, enchantBooks, nightVisionEverywhere, antiPlayersPickupLoot,
-	demonAnimalsSpawnOnDeath, evilAnimalNewMoonSpawning, darkRealmSmokeParticles;
+	demonAnimalsSpawnOnDeath, evilAnimalNewMoonSpawning, darkRealmSmokeParticles, enchantMergedBooks;
 	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate, acidSpitFrequency,
 	knowledgeSyncDelay, shoggothLairSpawnRateRivers, darkOffspringSpawnWeight, monolithBuildingCooldown, corruptionRitualRange,
 	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize, enchantmentMaxLevel, curingRitualRange,
 	shoggothLairGenerationDistance, startDimension, dreadSpawnSpawnLimit, greaterDreadSpawnSpawnLimit, jzaharHealingPace,
-	jzaharHealingAmount, chagarothHealingPace, chagarothHealingAmount, sacthothHealingPace, sacthothHealingAmount;
+	jzaharHealingAmount, chagarothHealingPace, chagarothHealingAmount, sacthothHealingPace, sacthothHealingAmount,
+	infestingRitualRange;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid, shoggothGlowingEyes;
 	public static double acidResistanceHardness;
