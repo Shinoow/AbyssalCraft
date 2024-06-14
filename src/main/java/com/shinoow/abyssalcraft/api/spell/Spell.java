@@ -11,8 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.spell;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
+import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.client.resources.I18n;
@@ -32,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  *
  * @since 1.9
  */
-public abstract class Spell {
+public abstract class Spell implements IResearchable<Spell, Spell> {
 
 	private Object[] reagents = new Object[5];
 	private ItemStack parchment = ItemStack.EMPTY;
@@ -125,14 +126,6 @@ public abstract class Spell {
 	}
 
 	/**
-	 * Sets a condition required in order to unlock this spell
-	 */
-	public Spell setUnlockCondition(IUnlockCondition condition){
-		this.condition = condition;
-		return this;
-	}
-
-	/**
 	 * Sets a Scroll Type required in order to inscribe this spell
 	 */
 	public Spell setScrollType(ScrollType scrollType) {
@@ -202,14 +195,6 @@ public abstract class Spell {
 	 */
 	public ResourceLocation getSpellGlyph(){
 		return glyph;
-	}
-
-	/**
-	 * Used to fetch the unlock condition, which determines how the spell is unlocked
-	 * @return A IUnlockCondition object, or a DefaultCondition if none was set
-	 */
-	public IUnlockCondition getUnlockCondition(){
-		return condition;
 	}
 
 	/**
@@ -289,4 +274,17 @@ public abstract class Spell {
 	 * @param player Player casting the spell
 	 */
 	protected abstract void castSpellServer(World world, BlockPos pos, EntityPlayer player);
+
+	@Override
+	public Spell setResearchItem(IUnlockCondition condition) {
+
+		this.condition = condition;
+		return this;
+	}
+
+	@Override
+	public IUnlockCondition getResearchItem(Spell object) {
+
+		return condition;
+	}
 }

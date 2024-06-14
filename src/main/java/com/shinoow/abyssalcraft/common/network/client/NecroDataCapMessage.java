@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.network.client;
 
 import java.io.IOException;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.*;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.*;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
 
 import net.minecraft.entity.player.EntityPlayer;

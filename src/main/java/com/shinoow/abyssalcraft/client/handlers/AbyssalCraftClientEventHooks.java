@@ -22,8 +22,8 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
-import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.spell.IScroll;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellUtils;
@@ -326,7 +326,7 @@ public class AbyssalCraftClientEventHooks {
 			event.getToolTip().add(1, String.format("%d/%d PE", (int)((IEnergyContainerItem)stack.getItem()).getContainedEnergy(stack), ((IEnergyContainerItem)stack.getItem()).getMaxEnergy(stack)));
 
 		if(!APIUtils.display_names)
-			if(stack.getItem() instanceof IUnlockableItem && event.getEntityPlayer() != null && !NecroDataCapability.getCap(event.getEntityPlayer()).isUnlocked(((IUnlockableItem)stack.getItem()).getUnlockCondition(stack), event.getEntityPlayer())){
+			if(stack.getItem() instanceof IResearchable && event.getEntityPlayer() != null && !NecroDataCapability.getCap(event.getEntityPlayer()).isUnlocked(((IResearchable)stack.getItem()).getResearchItem(stack), event.getEntityPlayer())){
 				event.getToolTip().remove(0);
 				event.getToolTip().add(0, "...What's this?");
 			}

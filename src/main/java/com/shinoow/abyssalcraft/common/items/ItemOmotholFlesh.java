@@ -15,9 +15,9 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemOmotholFlesh extends ItemFood implements IUnlockableItem {
+public class ItemOmotholFlesh extends ItemFood implements IResearchableItem {
 
 	private IUnlockCondition condition = new DefaultCondition();
 
@@ -61,13 +61,13 @@ public class ItemOmotholFlesh extends ItemFood implements IUnlockableItem {
 	}
 
 	@Override
-	public Item setUnlockCondition(IUnlockCondition condition) {
+	public Item setResearchItem(IUnlockCondition condition) {
 		this.condition = condition;
 		return this;
 	}
 
 	@Override
-	public IUnlockCondition getUnlockCondition(ItemStack stack) {
+	public IUnlockCondition getResearchItem(ItemStack stack) {
 
 		return condition;
 	}

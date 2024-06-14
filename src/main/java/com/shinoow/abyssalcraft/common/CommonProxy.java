@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.common;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
+import com.shinoow.abyssalcraft.api.knowledge.condition.*;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;

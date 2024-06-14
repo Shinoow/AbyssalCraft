@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
 /**
  * Base interface for locked Necronomicon information.<br>
@@ -39,4 +39,9 @@ public interface IUnlockCondition {
 	 * when adding your own Unlock Conditions
 	 */
 	int getType();
+	
+	/**
+	 * Returns a hint message for the Unlock Condition
+	 */
+	String getHint();
 }

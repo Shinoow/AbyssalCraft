@@ -191,7 +191,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		dimToString.putAll(DimensionDataRegistry.instance().getDimensionNameMappings());
 
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
-			if(ritual.getBookType() == ritualnum && isUnlocked(ritual.getUnlockCondition()) && !(ritual instanceof IHiddenRitual))
+			if(ritual.getBookType() == ritualnum && isUnlocked(ritual.getResearchItem(ritual)) && !(ritual instanceof IHiddenRitual))
 				rituals.add(ritual);
 		setTurnupLimit(rituals.size());
 	}

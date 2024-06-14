@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition.caps;
+package com.shinoow.abyssalcraft.api.knowledge.condition.caps;
 
 import net.minecraft.nbt.*;
 import net.minecraft.util.EnumFacing;

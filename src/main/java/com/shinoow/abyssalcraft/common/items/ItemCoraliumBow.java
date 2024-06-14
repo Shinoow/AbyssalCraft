@@ -17,9 +17,9 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -41,7 +41,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemCoraliumBow extends ItemBow implements IUnlockableItem {
+public class ItemCoraliumBow extends ItemBow implements IResearchableItem {
 
 	public float charge;
 
@@ -233,13 +233,13 @@ public class ItemCoraliumBow extends ItemBow implements IUnlockableItem {
 	}
 
 	@Override
-	public Item setUnlockCondition(IUnlockCondition condition) {
+	public Item setResearchItem(IUnlockCondition condition) {
 		this.condition = condition;
 		return this;
 	}
 
 	@Override
-	public IUnlockCondition getUnlockCondition(ItemStack stack) {
+	public IUnlockCondition getResearchItem(ItemStack stack) {
 
 		return condition;
 	}

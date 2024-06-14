@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.api.energy.structure;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

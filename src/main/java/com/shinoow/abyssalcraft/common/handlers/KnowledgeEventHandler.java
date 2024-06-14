@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.handlers;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabilityProvider;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapabilityProvider;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.KnowledgeUnlockMessage;
 import com.shinoow.abyssalcraft.common.network.client.NecroDataCapMessage;

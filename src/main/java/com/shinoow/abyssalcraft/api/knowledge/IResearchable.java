@@ -9,34 +9,35 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.item;
+package com.shinoow.abyssalcraft.api.knowledge;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
- * Interface to use on Items whose information is expected to be locked behind a {@link IUnlockCondition }.<br>
- * The Items getFontRenderer(ItemStack stack) should check getUnlockCondition for the INecroDataCapability capability,<br>
- * then assign the Aklo Font (accessible through AbyssalCraftAPI#getAkloFont) if the condition hasn't been unlocked.
+ * Interface to use on Objects utilizing the Knowledge system, with the expectation of being locked behind<br>
+ * a {@link IResearchItem } (with {@link IUnlockCondition }). Logic with font rendering should use the<br>
+ * INecroDataCapability in conjunction with assigning the Aklo Font (accessible through AbyssalCraftAPI#getAkloFont)<br>
+ * to obscure things haven't been unlocked knowledge-wise.
  *
  * @author Shinoow
  *
- * @since 1.12.0
+ * @since 2.0.0
  */
-public interface IUnlockableItem {
+public interface IResearchable<T extends Object, S extends Object> {
 
 	/**
 	 * Sets the unlock condition for the Item
 	 * @param condition Unlock Condition
 	 */
-	Item setUnlockCondition(IUnlockCondition condition);
+	T setResearchItem(IUnlockCondition condition);
 
 	/**
 	 * Getter for the Unlock Condition
-	 * @param stack ItemStack holding the item requesting the Unlock Condition
+	 * @param object object requesting the Unlock Condition
 	 * @return the Unlock Condition associated with the ItemStack
 	 */
-	IUnlockCondition getUnlockCondition(ItemStack stack);
+	IUnlockCondition getResearchItem(S object);
 }

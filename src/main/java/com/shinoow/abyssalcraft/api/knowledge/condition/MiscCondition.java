@@ -9,32 +9,38 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-public class NecronomiconCondition implements IUnlockCondition {
+public class MiscCondition implements IUnlockCondition {
 
-	int bookType;
+	String name;
 
-	public NecronomiconCondition(int bookType){
-		this.bookType = bookType;
+	public MiscCondition(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public boolean areConditionObjectsEqual(Object stuff) {
 
-		return Integer.valueOf(bookType).equals(stuff);
+		return name.equals(stuff);
 	}
 
 	@Override
 	public Object getConditionObject() {
 
-		return bookType;
+		return name;
 	}
 
 	@Override
 	public int getType() {
 
-		return -1;
+		return 10;
+	}
+
+	@Override
+	public String getHint() {
+
+		return null;
 	}
 
 }

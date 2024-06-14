@@ -14,9 +14,9 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -25,7 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBlockAC extends ItemBlock implements IUnlockableItem {
+public class ItemBlockAC extends ItemBlock implements IResearchableItem {
 
 	private IUnlockCondition condition = new DefaultCondition();
 
@@ -34,13 +34,13 @@ public class ItemBlockAC extends ItemBlock implements IUnlockableItem {
 	}
 
 	@Override
-	public Item setUnlockCondition(IUnlockCondition condition) {
+	public Item setResearchItem(IUnlockCondition condition) {
 		this.condition = condition;
 		return this;
 	}
 
 	@Override
-	public IUnlockCondition getUnlockCondition(ItemStack stack) {
+	public IUnlockCondition getResearchItem(ItemStack stack) {
 
 		return condition;
 	}

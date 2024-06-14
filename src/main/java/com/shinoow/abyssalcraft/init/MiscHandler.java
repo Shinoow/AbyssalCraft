@@ -29,14 +29,14 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
-import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
+import com.shinoow.abyssalcraft.api.knowledge.condition.ConditionProcessorRegistry;
+import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.UnlockConditions;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapabilityStorage;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.ConditionProcessorRegistry;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.UnlockConditions;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapabilityStorage;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityStorage;
@@ -945,7 +945,7 @@ public class MiscHandler implements ILifeCycleHandler {
 	}
 
 	private void addCondition(Item item, IUnlockCondition condition){
-		((IUnlockableItem) item).setUnlockCondition(condition);
+		((IResearchable) item).setResearchItem(condition);
 	}
 
 	private void registerCustomArmors() {

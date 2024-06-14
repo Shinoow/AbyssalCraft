@@ -9,32 +9,40 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-public class WhisperCondition implements IUnlockCondition {
+import com.google.common.base.Predicate;
 
-	String name;
+import net.minecraft.world.biome.Biome;
 
-	public WhisperCondition(String name) {
-		this.name = name;
+public class BiomePredicateCondition implements IUnlockCondition {
+
+	Predicate<Biome> predicate;
+
+	public BiomePredicateCondition(Predicate<Biome> predicate){
+		this.predicate = predicate;
 	}
 
 	@Override
 	public boolean areConditionObjectsEqual(Object stuff) {
 
-		return name.equals(stuff);
+		return predicate.equals(stuff);
 	}
 
 	@Override
 	public Object getConditionObject() {
-
-		return name;
+		return predicate;
 	}
 
 	@Override
 	public int getType() {
+		return 5;
+	}
 
-		return 9;
+	@Override
+	public String getHint() {
+
+		return null;
 	}
 
 }

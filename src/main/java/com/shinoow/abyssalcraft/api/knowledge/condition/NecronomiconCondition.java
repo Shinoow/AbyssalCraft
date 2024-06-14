@@ -9,40 +9,38 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
+public class NecronomiconCondition implements IUnlockCondition {
 
-public class MultiEntityCondition implements IUnlockCondition {
+	int bookType;
 
-	String[] names;
-
-	public MultiEntityCondition(String...names){
-		this.names = names;
-	}
-
-	public MultiEntityCondition(Class<? extends Entity>...entities){
-		names = new String[entities.length];
-		for(int i = 0; i < entities.length; i++)
-			names[i] = EntityList.getKey(entities[i]).toString();
+	public NecronomiconCondition(int bookType){
+		this.bookType = bookType;
 	}
 
 	@Override
 	public boolean areConditionObjectsEqual(Object stuff) {
-		for(String name : names)
-			if(name.equals(stuff))
-				return true;
-		return false;
+
+		return Integer.valueOf(bookType).equals(stuff);
 	}
 
 	@Override
 	public Object getConditionObject() {
-		return names;
+
+		return bookType;
 	}
 
 	@Override
 	public int getType() {
-		return 4;
+
+		return -1;
 	}
+
+	@Override
+	public String getHint() {
+
+		return null;
+	}
+
 }

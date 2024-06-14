@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
-import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -178,12 +178,12 @@ public class APIUtils {
 	 */
 	@SideOnly(Side.CLIENT)
 	public static FontRenderer getFontRenderer(ItemStack stack){
-		if(!(stack.getItem() instanceof IUnlockableItem) || display_names) return null;
+		if(!(stack.getItem() instanceof IResearchable) || display_names) return null;
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		if(player == null) return null;
 		INecroDataCapability cap = NecroDataCapability.getCap(player);
 
-		return cap.isUnlocked(((IUnlockableItem) stack.getItem()).getUnlockCondition(stack), player) ? null : AbyssalCraftAPI.getAkloFont();
+		return cap.isUnlocked(((IResearchable) stack.getItem()).getResearchItem(stack), player) ? null : AbyssalCraftAPI.getAkloFont();
 	}
 
 	/**

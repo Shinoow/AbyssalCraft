@@ -9,34 +9,38 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-import net.minecraft.world.biome.Biome;
+public class DimensionCondition implements IUnlockCondition {
 
-public class BiomeCondition implements IUnlockCondition {
+	int id;
 
-	String name;
-
-	public BiomeCondition(Biome biome){
-		name = biome.getRegistryName().toString();
+	public DimensionCondition(int id){
+		this.id = id;
 	}
 
 	@Override
 	public boolean areConditionObjectsEqual(Object stuff) {
 
-		return name.equals(stuff);
+		return Integer.valueOf(id).equals(stuff);
 	}
 
 	@Override
 	public Object getConditionObject() {
 
-		return name;
+		return id;
 	}
 
 	@Override
 	public int getType() {
 
-		return 0;
+		return 2;
+	}
+
+	@Override
+	public String getHint() {
+
+		return null;
 	}
 
 }

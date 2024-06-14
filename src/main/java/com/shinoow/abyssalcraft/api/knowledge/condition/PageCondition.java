@@ -9,35 +9,38 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-import net.minecraft.world.biome.Biome;
+public class PageCondition implements IUnlockCondition {
 
-public class MultiBiomeCondition implements IUnlockCondition {
+	String name;
 
-	String[] names;
-
-	public MultiBiomeCondition(Biome...biomes){
-		names = new String[biomes.length];
-		for(int i = 0; i < biomes.length; i++)
-			names[i] = biomes[i].getRegistryName().toString();
+	public PageCondition(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public boolean areConditionObjectsEqual(Object stuff) {
-		for(String name : names)
-			if(name.equals(stuff))
-				return true;
-		return false;
+
+		return name.equals(stuff);
 	}
 
 	@Override
 	public Object getConditionObject() {
-		return names;
+
+		return name;
 	}
 
 	@Override
 	public int getType() {
-		return 3;
+
+		return 8;
 	}
+
+	@Override
+	public String getHint() {
+
+		return null;
+	}
+
 }

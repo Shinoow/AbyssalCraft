@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.DimensionCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.DimensionCondition;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.Block;
@@ -28,7 +28,7 @@ public class ItemODB extends ItemBlockAC {
 	public ItemODB(Block p_i45328_1_)
 	{
 		super(p_i45328_1_);
-		setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
+		setResearchItem(new DimensionCondition(ACLib.abyssal_wasteland_id));
 	}
 
 	@Override

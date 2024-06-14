@@ -9,13 +9,13 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition.caps;
+package com.shinoow.abyssalcraft.api.knowledge.condition.caps;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.ConditionProcessorRegistry;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.ConditionProcessorRegistry;
+import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
 import net.minecraft.entity.player.EntityPlayer;
 

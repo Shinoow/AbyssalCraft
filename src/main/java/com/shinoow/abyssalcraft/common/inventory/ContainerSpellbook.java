@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
@@ -76,7 +76,7 @@ public class ContainerSpellbook extends Container {
 	}
 
 	public boolean isUnlocked(Spell spell){
-		return NecroDataCapability.getCap(user).isUnlocked(spell.getUnlockCondition(), user);
+		return NecroDataCapability.getCap(user).isUnlocked(spell.getResearchItem(spell), user);
 	}
 
 	@Override

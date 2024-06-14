@@ -9,38 +9,31 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-
-public class EntityCondition implements IUnlockCondition {
-
-	String name;
-
-	public EntityCondition(String str){
-		name = str;
-	}
-
-	public EntityCondition(Class<? extends Entity> clz){
-		name = EntityList.getKey(clz).toString();
-	}
+public class DefaultCondition implements IUnlockCondition {
 
 	@Override
 	public boolean areConditionObjectsEqual(Object stuff) {
 
-		return name.equals(stuff);
+		return true;
 	}
 
 	@Override
 	public Object getConditionObject() {
 
-		return name;
+		return true;
 	}
 
 	@Override
 	public int getType() {
 
-		return 1;
+		return -1;
+	}
+
+	@Override
+	public String getHint() {
+
+		return "This condition is already met";
 	}
 }

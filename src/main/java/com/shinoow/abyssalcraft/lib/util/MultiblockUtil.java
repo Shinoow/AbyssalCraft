@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.lib.util;
 
 import com.shinoow.abyssalcraft.api.energy.structure.IPlaceOfPower;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.NecroDataCapability;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;

@@ -14,9 +14,9 @@ package com.shinoow.abyssalcraft.lib.item;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.item.IUnlockableItem;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.item.Item;
@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @author shinoow
  *
  */
-public class ItemACShovel extends ItemSpade implements IUnlockableItem {
+public class ItemACShovel extends ItemSpade implements IResearchableItem {
 
 	private TextFormatting format;
 	private IUnlockCondition condition = new DefaultCondition();
@@ -55,13 +55,13 @@ public class ItemACShovel extends ItemSpade implements IUnlockableItem {
 	}
 
 	@Override
-	public Item setUnlockCondition(IUnlockCondition condition) {
+	public Item setResearchItem(IUnlockCondition condition) {
 		this.condition = condition;
 		return this;
 	}
 
 	@Override
-	public IUnlockCondition getUnlockCondition(ItemStack stack) {
+	public IUnlockCondition getResearchItem(ItemStack stack) {
 
 		return condition;
 	}

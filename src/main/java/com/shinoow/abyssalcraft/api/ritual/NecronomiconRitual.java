@@ -12,8 +12,9 @@
 package com.shinoow.abyssalcraft.api.ritual;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.necronomicon.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
+import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
+import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +31,7 @@ import net.minecraftforge.oredict.OreDictionary;
  *
  * @since 1.4
  */
-public abstract class NecronomiconRitual {
+public abstract class NecronomiconRitual implements IResearchable<NecronomiconRitual, NecronomiconRitual> {
 
 	private Object[] offerings = new Object[8];
 	protected Object sacrifice;
@@ -100,14 +101,6 @@ public abstract class NecronomiconRitual {
 	 */
 	public NecronomiconRitual setNBTSensitiveSacrifice(){
 		nbtSensitiveSacrifice = true;
-		return this;
-	}
-
-	/**
-	 * Sets the Unlock Condition required in order to perform this ritual
-	 */
-	public NecronomiconRitual setUnlockCondition(IUnlockCondition condition) {
-		this.condition = condition;
 		return this;
 	}
 
@@ -213,13 +206,6 @@ public abstract class NecronomiconRitual {
 	}
 
 	/**
-	 * Returns the assigned Unlock Condition required in order to perform this ritual
-	 */
-	public IUnlockCondition getUnlockCondition() {
-		return condition;
-	}
-
-	/**
 	 * Returns how particles are displayed on Ritual Pedestals during a ritual
 	 */
 	public EnumRitualParticle getRitualParticle() {
@@ -232,6 +218,19 @@ public abstract class NecronomiconRitual {
 	 */
 	public Object getSacrifice(){
 		return sacrifice;
+	}
+
+	@Override
+	public NecronomiconRitual setResearchItem(IUnlockCondition condition) {
+
+		this.condition = condition;
+		return this;
+	}
+
+	@Override
+	public IUnlockCondition getResearchItem(NecronomiconRitual object) {
+
+		return condition;
 	}
 
 	/**

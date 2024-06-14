@@ -9,34 +9,40 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-import com.google.common.base.Predicate;
+import net.minecraft.world.biome.Biome;
 
-import net.minecraft.entity.Entity;
+public class BiomeCondition implements IUnlockCondition {
 
-public class EntityPredicateCondition implements IUnlockCondition {
+	String name;
 
-	Predicate<Class<? extends Entity>> predicate;
-
-	public EntityPredicateCondition(Predicate<Class<? extends Entity>> predicate){
-		this.predicate = predicate;
+	public BiomeCondition(Biome biome){
+		name = biome.getRegistryName().toString();
 	}
 
 	@Override
 	public boolean areConditionObjectsEqual(Object stuff) {
 
-		return predicate.equals(stuff);
+		return name.equals(stuff);
 	}
 
 	@Override
 	public Object getConditionObject() {
-		return predicate;
+
+		return name;
 	}
 
 	@Override
 	public int getType() {
-		return 6;
+
+		return 0;
+	}
+
+	@Override
+	public String getHint() {
+
+		return null;
 	}
 
 }

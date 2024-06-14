@@ -9,13 +9,13 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-public class MiscCondition implements IUnlockCondition {
+public class ArtifactCondition implements IUnlockCondition {
 
 	String name;
 
-	public MiscCondition(String name) {
+	public ArtifactCondition(String name) {
 		this.name = name;
 	}
 
@@ -34,7 +34,13 @@ public class MiscCondition implements IUnlockCondition {
 	@Override
 	public int getType() {
 
-		return 10;
+		return 7;
+	}
+
+	@Override
+	public String getHint() {
+
+		return null;
 	}
 
 }

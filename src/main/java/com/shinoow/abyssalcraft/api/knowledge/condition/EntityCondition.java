@@ -9,14 +9,21 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-public class PageCondition implements IUnlockCondition {
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+
+public class EntityCondition implements IUnlockCondition {
 
 	String name;
 
-	public PageCondition(String name) {
-		this.name = name;
+	public EntityCondition(String str){
+		name = str;
+	}
+
+	public EntityCondition(Class<? extends Entity> clz){
+		name = EntityList.getKey(clz).toString();
 	}
 
 	@Override
@@ -34,7 +41,12 @@ public class PageCondition implements IUnlockCondition {
 	@Override
 	public int getType() {
 
-		return 8;
+		return 1;
 	}
 
+	@Override
+	public String getHint() {
+
+		return null;
+	}
 }

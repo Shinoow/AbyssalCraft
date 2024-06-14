@@ -9,9 +9,9 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.necronomicon.condition;
+package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-import com.shinoow.abyssalcraft.api.necronomicon.condition.caps.INecroDataCapability;
+import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapability;
 
 import net.minecraft.entity.player.EntityPlayer;
 
