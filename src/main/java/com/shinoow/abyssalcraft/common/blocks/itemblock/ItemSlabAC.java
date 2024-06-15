@@ -14,9 +14,9 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
-import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
@@ -28,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSlabAC extends ItemSlab implements IResearchableItem {
 
-	private IUnlockCondition condition = new DefaultCondition();
+	private IResearchItem condition = new DefaultResearchItem();
 
 	public ItemSlabAC(Block block, Block singleSlab, Block doubleSlab) {
 		super(block, (BlockSlab)singleSlab, (BlockSlab)doubleSlab);
@@ -48,13 +48,13 @@ public class ItemSlabAC extends ItemSlab implements IResearchableItem {
 	}
 
 	@Override
-	public ItemSlab setResearchItem(IUnlockCondition condition) {
+	public ItemSlab setResearchItem(IResearchItem condition) {
 		this.condition = condition;
 		return this;
 	}
 
 	@Override
-	public IUnlockCondition getResearchItem(ItemStack stack) {
+	public IResearchItem getResearchItem(ItemStack stack) {
 
 		return condition;
 	}

@@ -16,7 +16,7 @@ import net.minecraft.entity.EntityList;
 
 public class EntityCondition implements IUnlockCondition {
 
-	String name;
+	String name, hint;
 
 	public EntityCondition(String str){
 		name = str;
@@ -47,6 +47,12 @@ public class EntityCondition implements IUnlockCondition {
 	@Override
 	public String getHint() {
 
-		return null;
+		return hint;
+	}
+
+	@Override
+	public IUnlockCondition setHint(String str) {
+		hint = str;
+		return this;
 	}
 }

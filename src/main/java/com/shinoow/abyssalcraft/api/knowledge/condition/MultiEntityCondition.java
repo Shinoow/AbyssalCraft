@@ -17,6 +17,7 @@ import net.minecraft.entity.EntityList;
 public class MultiEntityCondition implements IUnlockCondition {
 
 	String[] names;
+	String hint;
 
 	public MultiEntityCondition(String...names){
 		this.names = names;
@@ -49,6 +50,12 @@ public class MultiEntityCondition implements IUnlockCondition {
 	@Override
 	public String getHint() {
 
-		return null;
+		return hint;
+	}
+
+	@Override
+	public IUnlockCondition setHint(String str) {
+		hint = str;
+		return this;
 	}
 }

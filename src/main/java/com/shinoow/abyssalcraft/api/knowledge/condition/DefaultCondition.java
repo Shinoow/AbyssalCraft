@@ -36,4 +36,10 @@ public class DefaultCondition implements IUnlockCondition {
 
 		return "This condition is already met";
 	}
+
+	@Override
+	public IUnlockCondition setHint(String str) {
+
+		return this;
+	}
 }

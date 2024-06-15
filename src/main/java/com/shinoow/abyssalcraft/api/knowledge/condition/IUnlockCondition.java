@@ -39,7 +39,12 @@ public interface IUnlockCondition {
 	 * when adding your own Unlock Conditions
 	 */
 	int getType();
-	
+
+	/**
+	 * Assigns the hint message for the Unlock Condition
+	 */
+	IUnlockCondition setHint(String str);
+
 	/**
 	 * Returns a hint message for the Unlock Condition
 	 */

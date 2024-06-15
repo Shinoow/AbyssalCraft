@@ -32,12 +32,12 @@ public interface IResearchable<T extends Object, S extends Object> {
 	 * Sets the unlock condition for the Item
 	 * @param condition Unlock Condition
 	 */
-	T setResearchItem(IUnlockCondition condition);
+	T setResearchItem(IResearchItem research);
 
 	/**
 	 * Getter for the Unlock Condition
 	 * @param object object requesting the Unlock Condition
 	 * @return the Unlock Condition associated with the ItemStack
 	 */
-	IUnlockCondition getResearchItem(S object);
+	IResearchItem getResearchItem(S object);
 }

@@ -13,9 +13,6 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.knowledge.condition.DimensionCondition;
-import com.shinoow.abyssalcraft.lib.ACLib;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -28,7 +25,6 @@ public class ItemODB extends ItemBlockAC {
 	public ItemODB(Block p_i45328_1_)
 	{
 		super(p_i45328_1_);
-		setResearchItem(new DimensionCondition(ACLib.abyssal_wasteland_id));
 	}
 
 	@Override

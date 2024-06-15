@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2024 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ * 
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.api.knowledge;
 
 import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
@@ -18,8 +29,9 @@ public class ResearchItem implements IResearchItem {
 	}
 
 	@Override
-	public void setUnlockConditions(IUnlockCondition[] conditions) {
+	public IResearchItem setUnlockConditions(IUnlockCondition... conditions) {
 		this.conditions = conditions;
+		return this;
 	}
 
 	@Override
@@ -31,6 +43,12 @@ public class ResearchItem implements IResearchItem {
 	@Override
 	public String getName() {
 		return "ac.research."+name;
+	}
+
+	@Override
+	public String getHint() {
+
+		return getName() + ".hint";
 	}
 
 	@Override

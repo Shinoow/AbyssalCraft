@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.spell;
 
+import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
-import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.client.resources.I18n;
@@ -43,7 +43,7 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	private boolean nbtSensitive, requiresCharging;
 	private Spell parent;
 	private ResourceLocation glyph;
-	private IUnlockCondition condition = new DefaultCondition();
+	private IResearchItem condition = new DefaultResearchItem();
 	private ScrollType scrollType = ScrollType.BASIC;
 
 	/**
@@ -276,14 +276,14 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	protected abstract void castSpellServer(World world, BlockPos pos, EntityPlayer player);
 
 	@Override
-	public Spell setResearchItem(IUnlockCondition condition) {
+	public Spell setResearchItem(IResearchItem condition) {
 
 		this.condition = condition;
 		return this;
 	}
 
 	@Override
-	public IUnlockCondition getResearchItem(Spell object) {
+	public IResearchItem getResearchItem(Spell object) {
 
 		return condition;
 	}

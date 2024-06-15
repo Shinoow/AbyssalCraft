@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.api.knowledge.condition;
 
 public class MiscCondition implements IUnlockCondition {
 
-	String name;
+	String name, hint;
 
 	public MiscCondition(String name) {
 		this.name = name;
@@ -40,7 +40,13 @@ public class MiscCondition implements IUnlockCondition {
 	@Override
 	public String getHint() {
 
-		return null;
+		return hint;
+	}
+
+	@Override
+	public IUnlockCondition setHint(String str) {
+		hint = str;
+		return this;
 	}
 
 }

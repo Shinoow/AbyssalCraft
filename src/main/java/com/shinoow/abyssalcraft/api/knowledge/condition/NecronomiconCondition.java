@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.api.knowledge.condition;
 public class NecronomiconCondition implements IUnlockCondition {
 
 	int bookType;
+	String hint;
 
 	public NecronomiconCondition(int bookType){
 		this.bookType = bookType;
@@ -40,7 +41,13 @@ public class NecronomiconCondition implements IUnlockCondition {
 	@Override
 	public String getHint() {
 
-		return null;
+		return hint;
+	}
+
+	@Override
+	public IUnlockCondition setHint(String str) {
+		hint = str;
+		return this;
 	}
 
 }

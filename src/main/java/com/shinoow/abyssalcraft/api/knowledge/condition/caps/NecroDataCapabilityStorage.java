@@ -63,8 +63,14 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 			if(name != null)
 				l.appendTag(new NBTTagString(name));
 		properties.setTag("miscTriggers", l);
+		l = new NBTTagList();
+		for(ResourceLocation name : instance.getCompletedResearches())
+			if(name != null)
+				l.appendTag(new NBTTagString(name.toString()));
+		properties.setTag("completedResearches", l);
 		if(instance.hasUnlockedAllKnowledge())
 			properties.setBoolean("HasAllKnowledge", true);
+		properties.setInteger("knowledgeLevel", instance.getKnowledgeLevel());
 
 		return properties;
 	}
@@ -98,7 +104,11 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 		l = properties.getTagList("miscTriggers", 8);
 		for(int i = 0; i < l.tagCount(); i++)
 			instance.triggerMiscUnlock(l.getStringTagAt(i));
+		l = properties.getTagList("completedResearches", 8);
+		for(int i = 0; i < l.tagCount(); i++)
+			instance.completeResearch(new ResourceLocation(l.getStringTagAt(i)));
 		instance.unlockAllKnowledge(properties.getBoolean("HasAllKnowledge"));
+		instance.setKnowledgeLevel(properties.getInteger("knowledgeLevel"));
 	}
 
 }

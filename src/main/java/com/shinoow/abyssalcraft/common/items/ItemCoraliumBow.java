@@ -17,9 +17,9 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
-import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumArrow;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -48,7 +48,7 @@ public class ItemCoraliumBow extends ItemBow implements IResearchableItem {
 	public int anim_0;
 	public int anim_1;
 	public int anim_2;
-	private IUnlockCondition condition = new DefaultCondition();
+	private IResearchItem condition = new DefaultResearchItem();
 	/**
 	 * @param texture is String of item texture, ie itemName.png
 	 * 		also sets the TranslationKey to avoid render issues
@@ -233,13 +233,13 @@ public class ItemCoraliumBow extends ItemBow implements IResearchableItem {
 	}
 
 	@Override
-	public Item setResearchItem(IUnlockCondition condition) {
+	public Item setResearchItem(IResearchItem condition) {
 		this.condition = condition;
 		return this;
 	}
 
 	@Override
-	public IUnlockCondition getResearchItem(ItemStack stack) {
+	public IResearchItem getResearchItem(ItemStack stack) {
 
 		return condition;
 	}

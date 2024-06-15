@@ -18,6 +18,7 @@ import net.minecraft.world.biome.Biome;
 public class BiomePredicateCondition implements IUnlockCondition {
 
 	Predicate<Biome> predicate;
+	String hint;
 
 	public BiomePredicateCondition(Predicate<Biome> predicate){
 		this.predicate = predicate;
@@ -42,7 +43,13 @@ public class BiomePredicateCondition implements IUnlockCondition {
 	@Override
 	public String getHint() {
 
-		return null;
+		return hint;
+	}
+
+	@Override
+	public IUnlockCondition setHint(String str) {
+		hint = str;
+		return this;
 	}
 
 }

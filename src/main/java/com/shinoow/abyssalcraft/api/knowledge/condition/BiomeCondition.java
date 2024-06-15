@@ -15,7 +15,7 @@ import net.minecraft.world.biome.Biome;
 
 public class BiomeCondition implements IUnlockCondition {
 
-	String name;
+	String name, hint;
 
 	public BiomeCondition(Biome biome){
 		name = biome.getRegistryName().toString();
@@ -42,7 +42,13 @@ public class BiomeCondition implements IUnlockCondition {
 	@Override
 	public String getHint() {
 
-		return null;
+		return hint;
+	}
+
+	@Override
+	public IUnlockCondition setHint(String str) {
+		hint = str;
+		return this;
 	}
 
 }

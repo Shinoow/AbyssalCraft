@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.common.network.client;
 
 import java.io.IOException;
 
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.ResearchRegistry;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.*;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
 
@@ -30,6 +32,10 @@ public class NecroDataCapMessage extends AbstractClientMessage<NecroDataCapMessa
 
 	public NecroDataCapMessage(EntityPlayer player){
 		INecroDataCapability cap = NecroDataCapability.getCap(player);
+
+		//TODO do this at a reasonable place (research table)
+		for(IResearchItem ri : ResearchRegistry.instance().getResearchItems())
+			cap.isUnlocked(ri, player);
 
 		properties = (NBTTagCompound) NecroDataCapabilityStorage.instance.writeNBT(NecroDataCapabilityProvider.NECRO_DATA_CAP, cap, null);
 	}

@@ -12,9 +12,9 @@
 package com.shinoow.abyssalcraft.api.ritual;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
-import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,7 +39,7 @@ public abstract class NecronomiconRitual implements IResearchable<NecronomiconRi
 	private int bookType, dimension;
 	private float requiredEnergy;
 	private boolean requiresSacrifice, nbtSensitive, nbtSensitiveSacrifice;
-	private IUnlockCondition condition = new DefaultCondition();
+	private IResearchItem condition = new DefaultResearchItem();
 	private EnumRitualParticle particle = EnumRitualParticle.ITEM;
 
 	/**
@@ -221,14 +221,14 @@ public abstract class NecronomiconRitual implements IResearchable<NecronomiconRi
 	}
 
 	@Override
-	public NecronomiconRitual setResearchItem(IUnlockCondition condition) {
+	public NecronomiconRitual setResearchItem(IResearchItem condition) {
 
 		this.condition = condition;
 		return this;
 	}
 
 	@Override
-	public IUnlockCondition getResearchItem(NecronomiconRitual object) {
+	public IResearchItem getResearchItem(NecronomiconRitual object) {
 
 		return condition;
 	}

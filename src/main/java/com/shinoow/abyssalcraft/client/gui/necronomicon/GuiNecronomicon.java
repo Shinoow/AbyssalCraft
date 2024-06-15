@@ -19,6 +19,7 @@ import org.lwjgl.input.Keyboard;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.knowledge.condition.NecronomiconCondition;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapability;
@@ -498,6 +499,14 @@ public class GuiNecronomicon extends GuiScreen {
 
 	protected String localize(String str, Object...parameters) {
 		return I18n.format(str, parameters);
+	}
+
+	protected boolean isUnlocked(IResearchItem ri){
+		for(IUnlockCondition cnd : ri.getUnlockConditions()) {
+			if(cnd instanceof NecronomiconCondition)
+				return getBookType() >= (int)cnd.getConditionObject();
+		}
+		return cap.isUnlocked(ri, mc.player);
 	}
 
 	protected boolean isUnlocked(IUnlockCondition cnd){

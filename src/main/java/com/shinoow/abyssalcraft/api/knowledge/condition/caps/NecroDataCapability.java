@@ -14,10 +14,12 @@ package com.shinoow.abyssalcraft.api.knowledge.condition.caps;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.condition.ConditionProcessorRegistry;
 import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class NecroDataCapability implements INecroDataCapability {
 
@@ -28,8 +30,10 @@ public class NecroDataCapability implements INecroDataCapability {
 	List<String> page_triggers = new ArrayList<>();
 	List<String> whisper_triggers = new ArrayList<>();
 	List<String> misc_triggers = new ArrayList<>();
+	List<ResourceLocation> completed_researches = new ArrayList<>();
 
 	boolean hasAllKnowledge;
+	int knowledgeLevel;
 
 	long lastSyncTime = 0;
 	int syncTimer = 0;
@@ -88,8 +92,19 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
+	public void completeResearch(ResourceLocation rel) {
+		if(rel != null && !completed_researches.contains(rel))
+			completed_researches.add(rel);
+	}
+
+	@Override
 	public void unlockAllKnowledge(boolean unlock) {
 		hasAllKnowledge = unlock;
+	}
+
+	@Override
+	public void setKnowledgeLevel(int level) {
+		knowledgeLevel = level;
 	}
 
 	@Override
@@ -140,8 +155,20 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
+	public List<ResourceLocation> getCompletedResearches() {
+
+		return completed_researches;
+	}
+
+	@Override
 	public boolean hasUnlockedAllKnowledge(){
 		return hasAllKnowledge;
+	}
+
+	@Override
+	public int getKnowledgeLevel() {
+
+		return knowledgeLevel;
 	}
 
 	@Override
@@ -178,5 +205,25 @@ public class NecroDataCapability implements INecroDataCapability {
 		misc_triggers = cap.getMiscTriggers();
 		hasAllKnowledge = cap.hasUnlockedAllKnowledge();
 		lastSyncTime = cap.getLastSyncTime();
+		completed_researches = cap.getCompletedResearches();
+		knowledgeLevel = cap.getKnowledgeLevel();
 	}
+
+	@Override
+	public boolean isUnlocked(IResearchItem research, EntityPlayer player) {
+
+		boolean unlocked = true;
+
+		if(research.getRequiredLevel() == -1 || hasAllKnowledge || completed_researches.contains(research.getID())) return true;
+
+		//TODO better handling?
+		for(IUnlockCondition cond : research.getUnlockConditions())
+			if(!isUnlocked(cond, player))
+				unlocked = false;
+		if(unlocked) // Mark as completed if completed
+			completeResearch(research.getID());
+
+		return unlocked;
+	}
+
 }

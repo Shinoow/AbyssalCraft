@@ -16,6 +16,7 @@ import net.minecraft.world.biome.Biome;
 public class MultiBiomeCondition implements IUnlockCondition {
 
 	String[] names;
+	String hint;
 
 	public MultiBiomeCondition(Biome...biomes){
 		names = new String[biomes.length];
@@ -44,6 +45,12 @@ public class MultiBiomeCondition implements IUnlockCondition {
 	@Override
 	public String getHint() {
 
-		return null;
+		return hint;
+	}
+
+	@Override
+	public IUnlockCondition setHint(String str) {
+		hint = str;
+		return this;
 	}
 }

@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.api.knowledge.condition;
 
 public class WhisperCondition implements IUnlockCondition {
 
-	String name;
+	String name, hint;
 
 	public WhisperCondition(String name) {
 		this.name = name;
@@ -40,7 +40,13 @@ public class WhisperCondition implements IUnlockCondition {
 	@Override
 	public String getHint() {
 
-		return null;
+		return hint;
+	}
+
+	@Override
+	public IUnlockCondition setHint(String str) {
+		hint = str;
+		return this;
 	}
 
 }
