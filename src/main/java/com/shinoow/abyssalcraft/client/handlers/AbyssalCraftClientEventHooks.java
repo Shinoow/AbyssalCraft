@@ -695,6 +695,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.book_of_many_faces, 0);
 		registerItemRender(ACItems.generic_meat, 0);
 		registerItemRender(ACItems.cooked_generic_meat, 0);
+		registerItemRender(ACItems.lost_page, 0);
 
 		registerItemRender(ACBlocks.darkstone, 0, "darkstone");
 		registerItemRender(ACBlocks.abyssal_stone, 0, "abystone");
@@ -933,6 +934,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.dead_tree_log, 0);
 		registerItemRender(ACBlocks.idol_of_fading, 0);
 		registerItemRender(ACBlocks.abyssal_abyssalnite_ore, 0);
+		registerItemRender(ACBlocks.mural, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

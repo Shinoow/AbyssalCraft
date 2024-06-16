@@ -40,6 +40,7 @@ public class ACItems {
 	public static Item configurator_shard_1;
 	public static Item configurator_shard_2;
 	public static Item configurator_shard_3;
+	public static Item lost_page;
 
 	// Tools/Weapons
 	public static Item darkstone_pickaxe;

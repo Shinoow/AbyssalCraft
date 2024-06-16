@@ -1,0 +1,15 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "abyssalcraft:mural"
+	},
+	"variants": {
+		"facing=north": { "model": "abyssalcraft:mural", "y": 180 },
+        "facing=south": { "model": "abyssalcraft:mural" },
+        "facing=west":  { "model": "abyssalcraft:mural", "y": 90 },
+        "facing=east":  { "model": "abyssalcraft:mural", "y": 270 },
+        "inventory": [{
+            "transform": "forge:default-block"
+        }]
+	}
+}

@@ -200,6 +200,7 @@ public class ClientProxy extends CommonProxy {
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ((ICrystal) stack.getItem()).getColor(stack), InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ICrystal).toArray(Item[]::new));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.token_of_jzahar);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? SpellUtils.getSpellColor(stack) : 16777215, ACItems.basic_scroll, ACItems.lesser_scroll, ACItems.moderate_scroll, ACItems.greater_scroll);
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xd2c9a0, ACItems.lost_page);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ((ICrystalBlock) state.getBlock()).getColor(state), InitHandler.INSTANCE.BLOCKS.stream().filter(b -> b instanceof ICrystalBlock).toArray(Block[]::new));
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
 			if(state.getValue(BlockPortalAnchor.ACTIVE) && tintIndex == 1) {

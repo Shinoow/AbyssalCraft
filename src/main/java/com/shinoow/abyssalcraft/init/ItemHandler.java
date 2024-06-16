@@ -105,6 +105,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.configurator_shard_3 = new ItemACBasic("configurator_shard_3");
 		ACItems.silver_key = new ItemGatewayKey(3, "silver_key");
 		ACItems.book_of_many_faces = new ItemFaceBook("face_book");
+		ACItems.lost_page = new ItemPage();
 
 		//Coins
 		ACItems.coin = new ItemCoin("blankcoin");
@@ -649,6 +650,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.book_of_many_faces, "face_book");
 		registerItem(ACItems.generic_meat, "generic_meat");
 		registerItem(ACItems.cooked_generic_meat, "cooked_generic_meat");
+		registerItem(ACItems.lost_page, "lost_page");
 	}
 
 	@Override

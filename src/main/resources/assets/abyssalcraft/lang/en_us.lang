@@ -1188,6 +1188,7 @@ tile.portal_anchor.name=Portal Anchor
 tile.dead_tree_log.name=Dead Tree Log
 tile.idol_of_fading.name=Idol Of Fading
 tile.abyssal_abyssalnite_ore.name=Abyssal Abyssalnite Ore
+tile.mural.name=Mural
 
 #Pre/Suffixes
 decorativestatue.prefix=Decorative %s
@@ -1399,6 +1400,7 @@ item.silver_key.name=Silver Key
 item.face_book.name=Book of Many Faces
 item.generic_meat.name=Generic Meat
 item.cooked_generic_meat.name=Cooked Generic Meat
+item.lost_page.name=Lost Page
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul
