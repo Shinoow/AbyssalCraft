@@ -206,11 +206,19 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	}
 
 	/**
-	 * Used to fetch the unlocalized name for a spell
+	 * Used to fetch the translation key for a spell
 	 * @return A string prefixed by "ac.spell."
 	 */
-	public String getUnlocalizedName(){
+	public String getTranslationKey(){
 		return "ac.spell." + unlocalizedName;
+	}
+
+	/**
+	 * Used to fetch the spell ID
+	 * @return The unlocalized Name, representing an ID
+	 */
+	public String getID() {
+		return unlocalizedName;
 	}
 
 	/**
@@ -219,7 +227,7 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	 */
 	@SideOnly(Side.CLIENT)
 	public String getLocalizedName(){
-		return I18n.format(getUnlocalizedName());
+		return I18n.format(getTranslationKey());
 	}
 
 	/**
@@ -228,7 +236,7 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	 */
 	@SideOnly(Side.CLIENT)
 	public String getDescription(){
-		return I18n.format(getUnlocalizedName() + ".desc");
+		return I18n.format(getTranslationKey() + ".desc");
 	}
 
 	/**

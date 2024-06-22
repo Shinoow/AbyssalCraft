@@ -63,12 +63,14 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -360,5 +362,11 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void resetParticleCount() {
 		particleCount = 0;
+	}
+
+	@Override
+	public RayTraceResult rayTraceEntity(float dist) {
+		RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(dist);
+		return r != null && r.entityHit instanceof EntityLivingBase ? r : null; 
 	}
 }

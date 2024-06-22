@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.DisruptionMessage;
 import com.shinoow.abyssalcraft.common.network.client.PEStreamMessage;
 import com.shinoow.abyssalcraft.common.network.client.RitualMessage;
+import com.shinoow.abyssalcraft.common.network.server.MobSpellMessage;
 import com.shinoow.abyssalcraft.common.world.DarklandsStructureGenerator;
 import com.shinoow.abyssalcraft.init.InitHandler;
 
@@ -27,6 +28,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class InternalMethodHandler extends DummyMethodHandler {
@@ -69,5 +71,15 @@ public class InternalMethodHandler extends DummyMethodHandler {
 	@Override
 	public boolean isImmuneOrCarrier(String entity, int list) {
 		return InitHandler.INSTANCE.isImmuneOrCarrier(entity, list);
+	}
+
+	@Override
+	public RayTraceResult rayTraceEntity(float dist) {
+		return AbyssalCraft.proxy.rayTraceEntity(dist); 
+	}
+
+	@Override
+	public void processEntitySpell(int id, String spell) {
+		PacketDispatcher.sendToServer(new MobSpellMessage(id, 3));
 	}
 }

@@ -51,8 +51,8 @@ public class SpellRegistry {
 	public void registerSpell(Spell spell){
 		if(spell.getBookType() <= 4 && spell.getBookType() >= 0){
 			for(Spell entry : spells)
-				if(spell.getUnlocalizedName().equals(entry.getUnlocalizedName())){
-					logger.log(Level.ERROR, "Necronomicon Spell already registered: {}", spell.getUnlocalizedName());
+				if(spell.getID().equals(entry.getID())){
+					logger.log(Level.ERROR, "Necronomicon Spell already registered: {}", spell.getID());
 					return;
 				}
 			spells.add(spell);
@@ -72,14 +72,14 @@ public class SpellRegistry {
 	}
 
 	public Spell getSpell(String name){
-		return spells.stream().filter(spell -> spell.getUnlocalizedName().equals(name)).findFirst().orElse(null);
+		return spells.stream().filter(spell -> spell.getID().equals(name)).findFirst().orElse(null);
 	}
 
 	private boolean areSpellsEqual(Spell spell, int bookType, ItemStack parchment, ItemStack[] reagents){
 		if(spell.getBookType() <= bookType)
 			if(APIUtils.areItemStackArraysEqual(spell.getReagents(), reagents, spell.isNBTSensitive()))
 				if(spell.getParent() == null && (!parchment.hasTagCompound() || !parchment.getTagCompound().hasKey("Spell")) ||
-				spell.getParent() != null && spell.getParent().getUnlocalizedName().equals(parchment.getTagCompound().getString("Spell")))
+				spell.getParent() != null && spell.getParent().getID().equals(parchment.getTagCompound().getString("Spell")))
 					if(spell.getParchment().isEmpty() || APIUtils.areStacksEqual(parchment, spell.getParchment()))
 						return parchment.getItem() instanceof IScroll && ((IScroll) parchment.getItem()).getScrollType(parchment).getQuality() >= spell.getScrollType().getQuality();
 						return false;
@@ -90,7 +90,7 @@ public class SpellRegistry {
 		if(spell != null){
 			if(!parchment.hasTagCompound())
 				parchment.setTagCompound(new NBTTagCompound());
-			parchment.getTagCompound().setString("Spell", spell.getUnlocalizedName());
+			parchment.getTagCompound().setString("Spell", spell.getID());
 			return parchment;
 		}
 

@@ -19,6 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class DummyMethodHandler implements IInternalMethodHandler {
@@ -46,4 +47,10 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 
 	@Override
 	public boolean isImmuneOrCarrier(String entity, int list) { return false; }
+
+	@Override
+	public RayTraceResult rayTraceEntity(float dist) { return null; }
+
+	@Override
+	public void processEntitySpell(int id, String spell) {}
 }

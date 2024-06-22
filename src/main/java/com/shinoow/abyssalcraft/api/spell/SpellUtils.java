@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.api.spell;
 
 import javax.annotation.Nullable;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 
 import net.minecraft.entity.Entity;
@@ -21,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class SpellUtils {
@@ -136,5 +138,27 @@ public class SpellUtils {
 	public static int getSpellColor(ItemStack stack) {
 		Spell spell = getSpell(stack);
 		return spell != null ? spell.getColor() : 16777215;
+	}
+
+	/**
+	 * Performs a ray trace call to find an Entity<br>
+	 * Target will ALWAYS be an EntityLivingBase, if found<br>
+	 * CLIENT SIDE ONLY (will always be null server-side)
+	 * @param dist Search distance
+	 * @return A target EntityLivingBase, or null
+	 */
+	@Nullable
+	public static RayTraceResult rayTraceTarget(float dist) {
+		return AbyssalCraftAPI.getInternalMethodHandler().rayTraceEntity(dist);
+	}
+	
+	/**
+	 * Sends a message to the server to run the logic for the spell<br>
+	 * on the Entity associated with the ID
+	 * @param id Entity ID
+	 * @param spell Spell ID
+	 */
+	public static void processEntitySpell(int id, String spell) {
+		AbyssalCraftAPI.getInternalMethodHandler().processEntitySpell(id, spell);
 	}
 }

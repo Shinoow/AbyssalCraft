@@ -19,6 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public interface IInternalMethodHandler {
@@ -125,4 +126,20 @@ public interface IInternalMethodHandler {
 	 * @return True whether or not the Entity either is immune or a carrier
 	 */
 	boolean isImmuneOrCarrier(String entity, int list);
+
+	/**
+	 * Performs a ray trace call to find an Entity<br>
+	 * CLIENT SIDE ONLY (will always be null server-side)
+	 * @param dist Search distance
+	 * @return A target Entity, or null
+	 */
+	RayTraceResult rayTraceEntity(float dist);
+
+	/**
+	 * Sends a message to the server to run the logic for the spell<br>
+	 * on the Entity associated with the ID
+	 * @param id Entity ID
+	 * @param spell Spell ID
+	 */
+	void processEntitySpell(int id, String spell);
 }

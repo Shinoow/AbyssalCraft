@@ -27,6 +27,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy {
@@ -102,11 +103,11 @@ public class CommonProxy {
 		ResearchItems.DREADLANDS_NECRO = new ResearchItem("dreadlands_necro", 0, rl("dreadlands_necro")).setUnlockConditions(UnlockConditions.DREADLANDS_NECRO);
 		ResearchItems.OMOTHOL_NECRO = new ResearchItem("omothol_necro", 0, rl("omothol_necro")).setUnlockConditions(UnlockConditions.OMOTHOL_NECRO);
 	}
-	
+
 	private ResourceLocation rl(String str) {
 		return new ResourceLocation("abyssalcraft", str);
 	}
-	
+
 	public ModelBiped getArmorModel(int id){
 		return null;
 	}
@@ -137,4 +138,8 @@ public class CommonProxy {
 	public void decrementParticleCount() {}
 
 	public void resetParticleCount() {}
+
+	public RayTraceResult rayTraceEntity(float dist) {
+		return null; 
+	}
 }
