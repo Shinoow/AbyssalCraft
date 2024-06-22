@@ -12,21 +12,20 @@
 package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.spell.Spell;
-import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.MobSpellMessage;
+import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
+import com.shinoow.abyssalcraft.api.spell.SpellUtils;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class InvisibilitySpell extends Spell {
+public class InvisibilitySpell extends EntityTargetSpell {
 
 	public InvisibilitySpell() {
 		super("invisibility", 500F, Items.GLASS_BOTTLE);
@@ -37,24 +36,33 @@ public class InvisibilitySpell extends Spell {
 
 	@Override
 	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
-		if(world.isRemote){
-			RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
-			if(r != null && r.entityHit instanceof EntityLivingBase && !((EntityLivingBase)r.entityHit).isPotionActive(MobEffects.INVISIBILITY))
-				return true;
-		}
-		return !player.isPotionActive(MobEffects.INVISIBILITY);
+		if(super.canCastSpell(world, pos, player))
+			return true;
+		return canCastSpellOnTarget(player);
 	}
 
 	@Override
 	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
-		RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
-		if(r != null && r.entityHit instanceof EntityLivingBase && !((EntityLivingBase)r.entityHit).isPotionActive(MobEffects.INVISIBILITY))
-			PacketDispatcher.sendToServer(new MobSpellMessage(r.entityHit.getEntityId(), 2));
-		else if(!player.isPotionActive(MobEffects.INVISIBILITY))
-			PacketDispatcher.sendToServer(new MobSpellMessage(player.getEntityId(), 2));
+		RayTraceResult r = SpellUtils.rayTraceTarget(getRange());
+		if(r != null && SpellUtils.canPlayerHurt(player, r.entityHit)
+				&& canCastSpellOnTarget((EntityLivingBase) r.entityHit))
+			SpellUtils.processEntitySpell(r.entityHit.getEntityId(), getID());
+		else if(canCastSpellOnTarget(player))
+			SpellUtils.processEntitySpell(player.getEntityId(), getID());
 	}
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {}
+	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+
+		return !target.isPotionActive(MobEffects.INVISIBILITY);
+	}
+
+	@Override
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+		if(canCastSpellOnTarget(target))
+			target.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 6000, 0, false, false));
+		else if(canCastSpellOnTarget(player))
+			player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 6000, 0, false, false));
+	}
 
 }

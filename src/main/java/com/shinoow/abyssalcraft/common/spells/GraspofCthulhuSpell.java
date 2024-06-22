@@ -12,21 +12,19 @@
 package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.spell.Spell;
-import com.shinoow.abyssalcraft.api.spell.SpellUtils;
-import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.MobSpellMessage;
+import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class GraspofCthulhuSpell extends Spell {
+public class GraspofCthulhuSpell extends EntityTargetSpell {
 
 	public GraspofCthulhuSpell() {
 		super("graspofcthulhu", 20, Items.FISH);
@@ -35,24 +33,20 @@ public class GraspofCthulhuSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
+	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
 
-		if(world.isRemote){
-			RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
-			if(r != null && r.entityHit instanceof EntityLivingBase)
-				return SpellUtils.canPlayerHurt(player, r.entityHit);
-		}
-		return false;
+		return true;
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
-		RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
-		if(r != null && r.entityHit instanceof EntityLivingBase && !r.entityHit.isDead)
-			PacketDispatcher.sendToServer(new MobSpellMessage(r.entityHit.getEntityId(), 1));
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+		target.motionX = target.motionY = target.motionZ = 0;
+		target.setSprinting(false);
+		target.isAirBorne = false;
+		target.onGround = true;
+		target.setInWeb();
+		target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 10, 14, false, false));
+		if(target.ticksExisted % 20 == 0 && target.getHealth() > 1)
+			target.attackEntityFrom(DamageSource.causePlayerDamage(player).setDamageBypassesArmor().setDamageIsAbsolute(), 1);
 	}
-
-	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {}
-
 }

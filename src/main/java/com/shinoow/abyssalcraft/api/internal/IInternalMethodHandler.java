@@ -133,7 +133,7 @@ public interface IInternalMethodHandler {
 	 * @param dist Search distance
 	 * @return A target Entity, or null
 	 */
-	RayTraceResult rayTraceEntity(float dist);
+	RayTraceResult rayTraceTarget(float dist);
 
 	/**
 	 * Sends a message to the server to run the logic for the spell<br>

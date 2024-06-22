@@ -124,6 +124,9 @@ public class SpellUtils {
 	{
 		if(!(target instanceof EntityPlayer)) return true;
 
+		// Not trying to promote self-harm
+		if(target == player) return true;
+
 		EntityPlayer player2 = (EntityPlayer) target;
 
 		if(player2.isCreative() || player2.isSpectator())
@@ -149,9 +152,9 @@ public class SpellUtils {
 	 */
 	@Nullable
 	public static RayTraceResult rayTraceTarget(float dist) {
-		return AbyssalCraftAPI.getInternalMethodHandler().rayTraceEntity(dist);
+		return AbyssalCraftAPI.getInternalMethodHandler().rayTraceTarget(dist);
 	}
-	
+
 	/**
 	 * Sends a message to the server to run the logic for the spell<br>
 	 * on the Entity associated with the ID

@@ -17,11 +17,11 @@ public abstract class EntityTargetSpell extends Spell {
 
 	private float range = 15;
 
-	public EntityTargetSpell(String unlocalizedName, int bookType, float requiredEnergy, Object[] reagents) {
+	public EntityTargetSpell(String unlocalizedName, int bookType, float requiredEnergy, Object... reagents) {
 		super(unlocalizedName, bookType, requiredEnergy, reagents);
 	}
 
-	public EntityTargetSpell(String unlocalizedName, float requiredEnergy, Object[] reagents) {
+	public EntityTargetSpell(String unlocalizedName, float requiredEnergy, Object... reagents) {
 		super(unlocalizedName, requiredEnergy, reagents);
 	}
 

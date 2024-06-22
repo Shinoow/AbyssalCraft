@@ -11,22 +11,21 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.spells;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.spell.Spell;
-import com.shinoow.abyssalcraft.api.spell.SpellUtils;
-import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.MobSpellMessage;
+import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class DetachmentSpell extends Spell {
+public class DetachmentSpell extends EntityTargetSpell {
 
 	public DetachmentSpell() {
 		super("detachment", 100, Items.IRON_INGOT);
@@ -36,35 +35,22 @@ public class DetachmentSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
-
-		if(world.isRemote){
-			RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
-			if(r != null && r.entityHit instanceof EntityLivingBase)
-				if(SpellUtils.canPlayerHurt(player, r.entityHit))
-					for(ItemStack stack : ((EntityLivingBase)r.entityHit).getArmorInventoryList())
-						if(!stack.isEmpty())
-							return true;
-		}
+	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+		for(ItemStack stack : target.getArmorInventoryList())
+			if(!stack.isEmpty())
+				return true;
 		return false;
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
-		RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
-		if(r != null && r.entityHit instanceof EntityLivingBase){
-			boolean hasInventory = false;
-			for(ItemStack stack : ((EntityLivingBase)r.entityHit).getArmorInventoryList())
-				if(!stack.isEmpty()) {
-					hasInventory = true;
-					break;
-				}
-			if(hasInventory)
-				PacketDispatcher.sendToServer(new MobSpellMessage(r.entityHit.getEntityId(), 3));
-		}
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+		List<EntityEquipmentSlot> slots = new ArrayList<>();
+		for(EntityEquipmentSlot slot : EntityEquipmentSlot.values())
+			if(target.hasItemInSlot(slot))
+				slots.add(slot);
+		EntityEquipmentSlot removeSlot = slots.get(player.world.rand.nextInt(slots.size()));
+		target.entityDropItem(target.getItemStackFromSlot(removeSlot), 0);
+		target.setItemStackToSlot(removeSlot, ItemStack.EMPTY);
 	}
-
-	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {}
 
 }

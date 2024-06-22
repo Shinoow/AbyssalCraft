@@ -12,21 +12,19 @@
 package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.spell.Spell;
-import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.MobSpellMessage;
+import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
-public class UndeathtoDustSpell extends Spell {
+public class UndeathtoDustSpell extends EntityTargetSpell {
 
 	public UndeathtoDustSpell() {
 		super("undeathtodust", 1000F, Items.BONE);
@@ -36,23 +34,18 @@ public class UndeathtoDustSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
-		if(world.isRemote){
-			RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
-			if(r != null && r.entityHit instanceof EntityLivingBase && ((EntityLivingBase)r.entityHit).getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-				return true;
+	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+
+		return target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
+	}
+
+	@Override
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+
+		if(target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD && target.isNonBoss()) {
+			player.world.removeEntity(target);
+			((WorldServer)player.world).spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, target.posX, target.posY + 2.0D, target.posZ, 0, 0.0D, 0.0D, 0.0D, 1.0);
 		}
-		return false;
 	}
-
-	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
-		RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
-		if(r != null && r.entityHit instanceof EntityLivingBase && ((EntityLivingBase)r.entityHit).getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-			PacketDispatcher.sendToServer(new MobSpellMessage(r.entityHit.getEntityId(), 6));
-	}
-
-	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {}
 
 }

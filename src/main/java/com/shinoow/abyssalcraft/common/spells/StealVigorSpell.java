@@ -11,20 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.spells;
 
-import com.shinoow.abyssalcraft.api.spell.Spell;
-import com.shinoow.abyssalcraft.api.spell.SpellUtils;
-import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.MobSpellMessage;
+import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class StealVigorSpell extends Spell {
+public class StealVigorSpell extends EntityTargetSpell {
 
 	public StealVigorSpell() {
 		super("stealvigor", 500F, Items.BEEF);
@@ -33,23 +30,20 @@ public class StealVigorSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
-		if(world.isRemote){
-			RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
-			if(r != null && r.entityHit instanceof EntityLivingBase)
-				return SpellUtils.canPlayerHurt(player, r.entityHit);
-		}
-		return false;
+	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+
+		return true;
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
-		RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
-		if(r != null && r.entityHit instanceof EntityLivingBase)
-			PacketDispatcher.sendToServer(new MobSpellMessage(r.entityHit.getEntityId(), 4));
-	}
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
 
-	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {}
+		target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1200, 1));
+		target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1200, 1));
+		target.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 1200, 1));
+		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1200, 1));
+		player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200, 1));
+		player.addPotionEffect(new PotionEffect(MobEffects.HASTE, 1200, 1));
+	}
 
 }

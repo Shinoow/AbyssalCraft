@@ -12,11 +12,10 @@
 package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.spell.Spell;
-import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
-import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.MobSpellMessage;
+import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
+import com.shinoow.abyssalcraft.api.spell.SpellUtils;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class SirensSongSpell extends Spell {
+public class SirensSongSpell extends EntityTargetSpell {
 
 	public SirensSongSpell() {
 		super("sirenssong", 1000F, Items.WHEAT);
@@ -38,7 +37,7 @@ public class SirensSongSpell extends Spell {
 	@Override
 	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
 		if(world.isRemote){
-			RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
+			RayTraceResult r = SpellUtils.rayTraceTarget(getRange());
 			if(r != null)
 				if(r.entityHit instanceof EntityTameable && !((EntityTameable)r.entityHit).isOwner(player) ||
 						r.entityHit instanceof AbstractHorse && !player.getUniqueID().equals(((AbstractHorse)r.entityHit).getOwnerUniqueId()))
@@ -49,14 +48,28 @@ public class SirensSongSpell extends Spell {
 
 	@Override
 	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
-		RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(15);
+		RayTraceResult r = SpellUtils.rayTraceTarget(getRange());
 		if(r != null)
 			if(r.entityHit instanceof EntityTameable && !((EntityTameable)r.entityHit).isOwner(player) ||
 					r.entityHit instanceof AbstractHorse && !player.getUniqueID().equals(((AbstractHorse)r.entityHit).getOwnerUniqueId()))
-				PacketDispatcher.sendToServer(new MobSpellMessage(r.entityHit.getEntityId(), 5));
+				SpellUtils.processEntitySpell(r.entityHit.getEntityId(), getID());
 	}
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {}
+	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+
+		return false;
+	}
+
+	@Override
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+		if(target instanceof EntityTameable && !((EntityTameable)target).isOwner(player)) {
+			((EntityTameable)target).setTamedBy(player);
+			target.setHealth(target.getMaxHealth());
+		} else if(target instanceof AbstractHorse && !player.getUniqueID().equals(((AbstractHorse)target).getOwnerUniqueId())) {
+			((AbstractHorse)target).setTamedBy(player);
+			target.setHealth(target.getMaxHealth());
+		}
+	}
 
 }

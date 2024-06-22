@@ -49,7 +49,7 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 	public boolean isImmuneOrCarrier(String entity, int list) { return false; }
 
 	@Override
-	public RayTraceResult rayTraceEntity(float dist) { return null; }
+	public RayTraceResult rayTraceTarget(float dist) { return null; }
 
 	@Override
 	public void processEntitySpell(int id, String spell) {}

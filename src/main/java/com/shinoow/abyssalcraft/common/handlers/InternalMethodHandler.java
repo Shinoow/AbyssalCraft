@@ -74,12 +74,12 @@ public class InternalMethodHandler extends DummyMethodHandler {
 	}
 
 	@Override
-	public RayTraceResult rayTraceEntity(float dist) {
+	public RayTraceResult rayTraceTarget(float dist) {
 		return AbyssalCraft.proxy.rayTraceEntity(dist); 
 	}
 
 	@Override
 	public void processEntitySpell(int id, String spell) {
-		PacketDispatcher.sendToServer(new MobSpellMessage(id, 3));
+		PacketDispatcher.sendToServer(new MobSpellMessage(id, spell));
 	}
 }
