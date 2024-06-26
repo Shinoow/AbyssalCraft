@@ -22,10 +22,12 @@ import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -90,7 +92,7 @@ public class RitualUtil {
 	 * @param bookType Level of the current Necronomicon held
 	 * @return True if a Ritual Altar can be constructed, otherwise false
 	 */
-	public static boolean tryAltar(World world, BlockPos pos, int bookType){
+	public static boolean tryAltar(World world, BlockPos pos, int bookType, EntityPlayer player){
 		IBlockState ritualBlock = world.getBlockState(pos);
 
 		Optional<Integer> book = bookTypeMappings.entrySet().stream()
@@ -108,7 +110,7 @@ public class RitualUtil {
 						return true;
 					}))
 						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), book.get()))
-							if(sameChunk(world, pos)) {
+							if(sameChunk(world, pos, player)) {
 								if(!world.isRemote)
 									createAltar(world, pos);
 								return true;
@@ -142,17 +144,18 @@ public class RitualUtil {
 	 * @param pos Block Position
 	 * @return True if the blocks are in the same chunk, otherwise false with particles on the affected blocks
 	 */
-	private static boolean sameChunk(World world, BlockPos pos) {
+	private static boolean sameChunk(World world, BlockPos pos, EntityPlayer player) {
 		Chunk chunk = world.getChunk(pos);
 		if(PEDESTAL_POSITIONS.stream().map(p -> world.getChunk(pos.add(p))).allMatch(c -> c == chunk))
 			return true;
 
-		if(world.isRemote)
+		if(world.isRemote) {
 			PEDESTAL_POSITIONS.stream()
 			.map(p -> pos.add(p))
 			.filter(p -> world.getChunk(p) != chunk)
 			.forEach(p -> world.spawnParticle(EnumParticleTypes.BARRIER, p.getX()+0.5, p.getY()+1.5, p.getZ()+0.5, 0, 0, 0));
-
+			player.sendStatusMessage(new TextComponentTranslation("message.ritual.notsamechunk"), true);
+		}
 		return false;
 	}
 

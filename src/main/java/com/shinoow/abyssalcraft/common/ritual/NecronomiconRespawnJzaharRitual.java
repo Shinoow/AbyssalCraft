@@ -48,7 +48,7 @@ public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
 		StructureJzaharTemple temple = new StructureJzaharTemple();
 		temple.generate(world, world.rand, new BlockPos(4, 53, 7));
-		RitualUtil.tryAltar(world, pos, 4);
+		RitualUtil.tryAltar(world, pos, 4, player);
 		world.getChunk(pos).markDirty();
 		SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocalFormatted("message.jzahar.respawn", player.getName()));
 	}

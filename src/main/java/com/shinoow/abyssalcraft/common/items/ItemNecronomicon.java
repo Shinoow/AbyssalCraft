@@ -78,7 +78,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		player.getHeldItem(hand);
 		if (player.isSneaking())
 			if (!(w.getTileEntity(pos) instanceof IRitualAltar)) {
-				if (RitualUtil.tryAltar(w, pos, bookType)
+				if (RitualUtil.tryAltar(w, pos, bookType, player)
 						|| StructureHandler.instance().tryFormStructure(w, pos, bookType, player)) {
 					w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);
 					// player.addStat(ACAchievements.ritual_altar, 1);
