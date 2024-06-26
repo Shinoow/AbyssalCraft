@@ -11,17 +11,22 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.itemblock;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -31,6 +36,13 @@ public class ItemBlockAC extends ItemBlock implements IResearchableItem {
 
 	public ItemBlockAC(Block block) {
 		super(block);
+	}
+
+	@Override
+	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
+		Block block = Block.getBlockFromItem(is.getItem());
+		if(block == ACBlocks.mural)
+			l.add("WIP");
 	}
 
 	@Override

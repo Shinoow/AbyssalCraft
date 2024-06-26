@@ -58,6 +58,7 @@ public class ItemPage extends ItemACBasic {
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		l.add("Right click to gain knowledge");
+		l.add("WIP");
 	}
 
 	public static void setKnowledge(ItemStack stack, String knowledge) {
