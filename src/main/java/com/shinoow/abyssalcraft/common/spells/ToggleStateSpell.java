@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.ToggleStateMessage;
@@ -33,7 +34,7 @@ public class ToggleStateSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
+	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		if(world.isRemote) {
 			boolean foundTe = false;
@@ -63,7 +64,7 @@ public class ToggleStateSpell extends Spell {
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 		RayTraceResult rt = player.rayTrace(16, 0);
 		if(rt != null && rt.typeOfHit == Type.BLOCK) {
 			BlockPos pos1 = rt.getBlockPos();
@@ -76,5 +77,5 @@ public class ToggleStateSpell extends Spell {
 	}
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {}
+	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {}
 }

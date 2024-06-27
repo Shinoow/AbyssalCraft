@@ -13,9 +13,6 @@ package com.shinoow.abyssalcraft.api.knowledge;
 
 import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 /**
  * Interface to use on Objects utilizing the Knowledge system, with the expectation of being locked behind<br>
  * a {@link IResearchItem } (with {@link IUnlockCondition }). Logic with font rendering should use the<br>

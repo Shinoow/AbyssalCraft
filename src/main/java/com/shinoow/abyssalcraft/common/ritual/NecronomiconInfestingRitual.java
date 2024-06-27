@@ -67,9 +67,8 @@ public class NecronomiconInfestingRitual extends NecronomiconRitual {
 				int RandPosX = world.rand.nextInt(16) + 8;
 				int RandPosY = world.rand.nextInt(40) + 40;
 				int RandPosZ = world.rand.nextInt(16) + 8;
-				if(world.rand.nextInt(3000) == 0) {
+				if(world.rand.nextInt(3000) == 0)
 					lake.generate(world, world.rand, pos1.add(RandPosX, RandPosY, RandPosZ));
-				}
 
 				Scheduler.schedule(new ScheduledProcess(num * 2) {
 

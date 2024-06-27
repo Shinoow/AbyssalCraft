@@ -33,6 +33,7 @@ public class ItemScroll extends ItemACBasic implements IScroll {
 	public ItemScroll(String name, ScrollType scrollType) {
 		super(name);
 		type = scrollType;
+		SpellRegistry.instance().addScroll(this);
 
 		if(scrollType != ScrollType.UNIQUE)
 			addPropertyOverride(new ResourceLocation("inscribed"), (stack, worldIn, entityIn) -> stack.hasTagCompound() && stack.getTagCompound().hasKey("Spell") ? 1.0F : 0);

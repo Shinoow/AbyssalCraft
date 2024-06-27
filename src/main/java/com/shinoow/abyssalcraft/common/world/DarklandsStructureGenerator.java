@@ -54,9 +54,9 @@ public class DarklandsStructureGenerator {
 	public static void generateStructures(World world, Random random, int chunkX, int chunkZ) {
 		Biome biome = world.getBiome(new BlockPos(chunkX, 0, chunkZ));
 		if(biome instanceof IDarklandsBiome || biome == ACBiomes.dark_realm) {
-			
+
 			IBlockState baseState = biome == ACBiomes.dark_realm ? ACBlocks.darkstone.getDefaultState() : Blocks.GRASS.getDefaultState();
-			
+
 			int x = chunkX + random.nextInt(16) + 8;
 			int z = chunkZ + random.nextInt(16) + 8;
 			generate(1, world, random, world.getHeight(new BlockPos(x, 0, z)), baseState);

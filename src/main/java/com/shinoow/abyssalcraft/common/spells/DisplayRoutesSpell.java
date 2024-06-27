@@ -16,6 +16,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.api.transfer.ItemTransferConfiguration;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
@@ -39,7 +40,7 @@ public class DisplayRoutesSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
+	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		MutableBlockPos pos1 = new MutableBlockPos();
 		for(int x = pos.getX() - 16; x < pos.getX() + 16; x++)
@@ -57,12 +58,12 @@ public class DisplayRoutesSpell extends Spell {
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 	}
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		List<BlockPos[]> routes = new ArrayList<>();
 

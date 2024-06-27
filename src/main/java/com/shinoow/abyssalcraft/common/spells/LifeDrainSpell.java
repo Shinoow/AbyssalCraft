@@ -11,13 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.spells;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -29,19 +28,18 @@ public class LifeDrainSpell extends EntityTargetSpell {
 
 	public LifeDrainSpell() {
 		super("lifedrain", 100, Items.APPLE);
-		setParchment(new ItemStack(ACItems.basic_scroll));
 		setRequiresCharging();
 		setColor(0xa00404);
 	}
 
 	@Override
-	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+	protected boolean canCastSpellOnTarget(EntityLivingBase target, ScrollType scrollType) {
 
 		return true;
 	}
 
 	@Override
-	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType, EntityLivingBase target) {
 		if(!target.isDead && target.attackEntityFrom(DamageSource.causePlayerDamage(player).setDamageBypassesArmor().setDamageIsAbsolute(), 5)) {
 			player.heal(5);
 			pos = pos.up();

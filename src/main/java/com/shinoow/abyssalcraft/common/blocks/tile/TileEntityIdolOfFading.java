@@ -108,9 +108,8 @@ public class TileEntityIdolOfFading extends TileEntity implements ITickable, IEn
 
 	private EntityLiving getShadow(World world) {
 
-		if(world.rand.nextInt(10) == 0) {
+		if(world.rand.nextInt(10) == 0)
 			return new EntityShadowBeast(world);
-		}
 		else if(world.rand.nextInt(3) == 0)
 			return new EntityShadowMonster(world);
 

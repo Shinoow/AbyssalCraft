@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.api.internal;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -52,5 +53,5 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 	public RayTraceResult rayTraceTarget(float dist) { return null; }
 
 	@Override
-	public void processEntitySpell(int id, String spell) {}
+	public void processEntitySpell(int id, String spell, ScrollType scrollType) {}
 }

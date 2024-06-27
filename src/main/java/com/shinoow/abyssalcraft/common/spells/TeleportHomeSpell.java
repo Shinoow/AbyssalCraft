@@ -33,16 +33,16 @@ public class TeleportHomeSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
+	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		return player.getBedLocation(player.getSpawnDimension()) != null;
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {}
+	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {}
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		BlockPos bedPos = player.getBedLocation(player.getSpawnDimension());
 

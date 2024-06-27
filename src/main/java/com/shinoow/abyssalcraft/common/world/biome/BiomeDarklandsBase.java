@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2024 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
@@ -52,13 +63,12 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome {
 			new WorldGenMinable(ACBlocks.darkstone.getDefaultState(), 32, getPredicate(par1World.provider.getDimension())).generate(par1World, par2Random, pos.add(x, y, z));
 		}
 	}
-	
+
 	@Override
 	public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
 	{
-		if(worldIn.provider.getDimension() != ACLib.abyssal_wasteland_id && worldIn.provider.getDimension() != ACLib.dreadlands_id) {
+		if(worldIn.provider.getDimension() != ACLib.abyssal_wasteland_id && worldIn.provider.getDimension() != ACLib.dreadlands_id)
 			super.genTerrainBlocks(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
-		}
 		generateDarklandsTerrain(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
 	}
 

@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -26,19 +27,19 @@ public class FloatingSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
+	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		return true;
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		player.motionY = 0.1;
 	}
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		player.fallDistance = 0;
 		player.motionY = 0.1;

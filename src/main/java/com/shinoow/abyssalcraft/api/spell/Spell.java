@@ -252,19 +252,21 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	 * @param world Current World
 	 * @param pos Current position
 	 * @param player Player casting the spell
+	 * @param scrollType Quality of the scroll being used
 	 * @return True if all conditions are met, otherwise false
 	 */
-	public abstract boolean canCastSpell(World world, BlockPos pos, EntityPlayer player);
+	public abstract boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType);
 
 	/**
 	 * Called when a spell is cast
 	 * @param world Current World
 	 * @param pos Current position
 	 * @param player Player casting the spell
+	 * @param scrollType Quality of the scroll being used
 	 */
-	public void castSpell(World world, BlockPos pos, EntityPlayer player){
-		if(!world.isRemote) castSpellServer(world, pos, player);
-		if(world.isRemote) castSpellClient(world, pos, player);
+	public void castSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType){
+		if(!world.isRemote) castSpellServer(world, pos, player, scrollType);
+		if(world.isRemote) castSpellClient(world, pos, player, scrollType);
 	}
 
 	/**
@@ -272,16 +274,18 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	 * @param world Current World
 	 * @param pos Current position
 	 * @param player Player casting the spell
+	 * @param scrollType Quality of the scroll being used
 	 */
-	protected abstract void castSpellClient(World world, BlockPos pos, EntityPlayer player);
+	protected abstract void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType);
 
 	/**
 	 * Override this to do something server-side when the spell is casted
 	 * @param world Current World
 	 * @param pos Current position
 	 * @param player Player casting the spell
+	 * @param scrollType Quality of the scroll being used
 	 */
-	protected abstract void castSpellServer(World world, BlockPos pos, EntityPlayer player);
+	protected abstract void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType);
 
 	@Override
 	public Spell setResearchItem(IResearchItem condition) {

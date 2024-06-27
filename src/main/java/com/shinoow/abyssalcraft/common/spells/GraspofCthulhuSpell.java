@@ -11,14 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.spells;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
@@ -28,18 +27,18 @@ public class GraspofCthulhuSpell extends EntityTargetSpell {
 
 	public GraspofCthulhuSpell() {
 		super("graspofcthulhu", 20, Items.FISH);
-		setParchment(new ItemStack(ACItems.lesser_scroll));
+		setScrollType(ScrollType.LESSER);
 		setColor(0x2ba2ad);
 	}
 
 	@Override
-	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+	protected boolean canCastSpellOnTarget(EntityLivingBase target, ScrollType scrollType) {
 
 		return true;
 	}
 
 	@Override
-	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType, EntityLivingBase target) {
 		target.motionX = target.motionY = target.motionZ = 0;
 		target.setSprinting(false);
 		target.isAirBorne = false;

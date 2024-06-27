@@ -140,6 +140,6 @@ public class CommonProxy {
 	public void resetParticleCount() {}
 
 	public RayTraceResult rayTraceEntity(float dist) {
-		return null; 
+		return null;
 	}
 }

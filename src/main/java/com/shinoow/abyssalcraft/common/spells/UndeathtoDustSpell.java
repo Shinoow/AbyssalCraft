@@ -11,14 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.spells;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -28,19 +27,19 @@ public class UndeathtoDustSpell extends EntityTargetSpell {
 
 	public UndeathtoDustSpell() {
 		super("undeathtodust", 1000F, Items.BONE);
-		setParchment(new ItemStack(ACItems.moderate_scroll));
+		setScrollType(ScrollType.MODERATE);
 		setRequiresCharging();
 		setColor(0x1a1b1c);
 	}
 
 	@Override
-	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+	protected boolean canCastSpellOnTarget(EntityLivingBase target, ScrollType scrollType) {
 
 		return target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
 	}
 
 	@Override
-	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType, EntityLivingBase target) {
 
 		if(target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD && target.isNonBoss()) {
 			player.world.removeEntity(target);

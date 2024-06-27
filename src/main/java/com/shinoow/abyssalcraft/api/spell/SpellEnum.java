@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.spell;
 
+import java.util.Arrays;
+
 /**
  * Collection of Enums used by various parts of the Spell system.
  *
@@ -27,7 +29,7 @@ public class SpellEnum {
 	 */
 	public enum ScrollType {
 
-		BASIC(0), LESSER(1), MODERATE(2), GREATER(3), UNIQUE(4);
+		NONE(-1),BASIC(0), LESSER(1), MODERATE(2), GREATER(3), UNIQUE(4);
 		private int quality;
 
 		private ScrollType(int quality){
@@ -36,6 +38,12 @@ public class SpellEnum {
 
 		public int getQuality() {
 			return quality;
+		}
+
+		public static ScrollType byQuality(int id) {
+			return Arrays.stream(values())
+					.filter(p -> p.quality == id)
+					.findFirst().orElse(NONE);
 		}
 	}
 }

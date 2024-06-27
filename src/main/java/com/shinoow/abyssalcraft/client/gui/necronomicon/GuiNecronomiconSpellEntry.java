@@ -38,6 +38,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 	private ButtonHome buttonHome;
 	private GuiNecronomicon parent;
 	private List<Spell> spells = new ArrayList<>();
+	private List<ItemStack> scrolls = new ArrayList<>();
 
 	public GuiNecronomiconSpellEntry(int bookType, GuiNecronomicon gui){
 		super(bookType);
@@ -85,6 +86,8 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		buttonPreviousPageLong.visible = currTurnup > 4;
 		buttonDone.visible = true;
 		buttonHome.visible = true;
+		scrolls.clear();
+		scrolls = SpellRegistry.instance().getScrolls(spells.get(currTurnup).getScrollType());
 	}
 
 	@Override
@@ -146,7 +149,9 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		renderItem(k + 45, b0 + 91, offerings[3], x, y);
 		renderItem(k + 33, b0 + 62, offerings[4], x, y);
 		//center
-		renderItem(k + 58, b0 + 66, spell.getParchment(), x, y);
+		if(!spell.getParchment().isEmpty())
+			renderItem(k + 58, b0 + 66, spell.getParchment(), x, y);
+		else renderObject(k + 58, b0 + 66, scrolls, x, y);
 
 		renderTooltip(x, y);
 	}

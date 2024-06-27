@@ -14,8 +14,8 @@ package com.shinoow.abyssalcraft.common.spells;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone;
 
 import net.minecraft.block.state.IBlockState;
@@ -33,12 +33,12 @@ public class EntropySpell extends Spell {
 
 	public EntropySpell() {
 		super("entropy", 0, Items.COAL, new ItemStack(ACBlocks.darkstone_cobblestone));
-		setParchment(new ItemStack(ACItems.greater_scroll));
+		setScrollType(ScrollType.GREATER);
 		setColor(0x171f68);
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
+	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		RayTraceResult r = rayTrace(player, world, 16, 1);
 		if(r != null && r.typeOfHit == Type.BLOCK)
@@ -77,10 +77,10 @@ public class EntropySpell extends Spell {
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {}
+	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {}
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		RayTraceResult r = rayTrace(player, world, 16, 1);
 

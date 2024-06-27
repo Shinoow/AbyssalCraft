@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.common.entity.EntityCompassTentacle;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -31,19 +32,19 @@ public class CompassSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
+	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		return world.provider.getDimension() == ACLib.omothol_id;
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		world.playSound(player, pos, ACSounds.compass, player.getSoundCategory(), 3F, 1F);
 	}
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		new BlockPos(4, 54, 85);
 		EntityCompassTentacle e = new EntityCompassTentacle(world);

@@ -1,4 +1,17 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2024 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.api.spell;
+
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,29 +47,29 @@ public abstract class EntityTargetSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
+	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		RayTraceResult r = SpellUtils.rayTraceTarget(getRange());
 		if(r != null && SpellUtils.canPlayerHurt(player, r.entityHit))
-			return canCastSpellOnTarget((EntityLivingBase) r.entityHit);
+			return canCastSpellOnTarget((EntityLivingBase) r.entityHit, scrollType);
 		return false;
 	}
 
 	/**
 	 * Checks if the spell can be cast on the target
 	 */
-	protected abstract boolean canCastSpellOnTarget(EntityLivingBase target);
+	protected abstract boolean canCastSpellOnTarget(EntityLivingBase target, ScrollType scrollType);
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		boolean canCast = false;
 		RayTraceResult r = SpellUtils.rayTraceTarget(getRange());
 		if(r != null && SpellUtils.canPlayerHurt(player, r.entityHit)
-				&& canCastSpellOnTarget((EntityLivingBase) r.entityHit))
+				&& canCastSpellOnTarget((EntityLivingBase) r.entityHit, scrollType))
 			canCast = true;
 		if(canCast)
-			SpellUtils.processEntitySpell(r.entityHit.getEntityId(), getID());
+			SpellUtils.processEntitySpell(r.entityHit.getEntityId(), getID(), scrollType);
 	}
 
 	/**
@@ -67,9 +80,9 @@ public abstract class EntityTargetSpell extends Spell {
 	 * @param player Player casting the spell
 	 * @param target Target of the spell
 	 */
-	public abstract void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target);
+	public abstract void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType, EntityLivingBase target);
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {}
+	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {}
 
 }

@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -87,10 +88,11 @@ public class SpellUtils {
 	 */
 	public static void castChargingSpell(ItemStack stack, World world, EntityPlayer player) {
 		Spell spell = getSpell(stack);
+		ScrollType scrollType = getScrollType(stack);
 		if(spell != null)
-			if(spell.requiresCharging() && spell.canCastSpell(world, player.getPosition(), player)
+			if(spell.requiresCharging() && spell.canCastSpell(world, player.getPosition(), player, scrollType)
 					&& hasEnoughPE(player, spell.getReqEnergy())){
-				spell.castSpell(world, player.getPosition(), player);
+				spell.castSpell(world, player.getPosition(), player, scrollType);
 				drainPE(player, spell.getReqEnergy());
 			}
 	}
@@ -104,10 +106,11 @@ public class SpellUtils {
 	 */
 	public static void castInstantSpell(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
 		Spell spell = getSpell(stack);
+		ScrollType scrollType = getScrollType(stack);
 		if(spell != null)
 			if(!spell.requiresCharging()){
-				if(spell.canCastSpell(world, player.getPosition(), player) && hasEnoughPE(player, spell.getReqEnergy())){
-					spell.castSpell(world, player.getPosition(), player);
+				if(spell.canCastSpell(world, player.getPosition(), player, scrollType) && hasEnoughPE(player, spell.getReqEnergy())){
+					spell.castSpell(world, player.getPosition(), player, scrollType);
 					drainPE(player, spell.getReqEnergy());
 				}
 			} else{
@@ -144,6 +147,14 @@ public class SpellUtils {
 	}
 
 	/**
+	 * Attempts to fetch the scroll type of an ItemStack
+	 */
+	public static ScrollType getScrollType(ItemStack parchment) {
+		if(!(parchment.getItem() instanceof IScroll)) return ScrollType.NONE;
+		return ((IScroll) parchment.getItem()).getScrollType(parchment);
+	}
+
+	/**
 	 * Performs a ray trace call to find an Entity<br>
 	 * Target will ALWAYS be an EntityLivingBase, if found<br>
 	 * CLIENT SIDE ONLY (will always be null server-side)
@@ -160,8 +171,9 @@ public class SpellUtils {
 	 * on the Entity associated with the ID
 	 * @param id Entity ID
 	 * @param spell Spell ID
+	 * @param scrollType Scroll Type on the scroll casting the spell
 	 */
-	public static void processEntitySpell(int id, String spell) {
-		AbyssalCraftAPI.getInternalMethodHandler().processEntitySpell(id, spell);
+	public static void processEntitySpell(int id, String spell, ScrollType scrollType) {
+		AbyssalCraftAPI.getInternalMethodHandler().processEntitySpell(id, spell, scrollType);
 	}
 }

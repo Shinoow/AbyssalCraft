@@ -14,8 +14,8 @@ package com.shinoow.abyssalcraft.common.spells;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,13 +29,13 @@ public class DetachmentSpell extends EntityTargetSpell {
 
 	public DetachmentSpell() {
 		super("detachment", 100, Items.IRON_INGOT);
-		setParchment(new ItemStack(ACItems.moderate_scroll));
+		setScrollType(ScrollType.MODERATE);
 		setRequiresCharging();
 		setColor(0x463faa);
 	}
 
 	@Override
-	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+	protected boolean canCastSpellOnTarget(EntityLivingBase target, ScrollType scrollType) {
 		for(ItemStack stack : target.getArmorInventoryList())
 			if(!stack.isEmpty())
 				return true;
@@ -43,7 +43,7 @@ public class DetachmentSpell extends EntityTargetSpell {
 	}
 
 	@Override
-	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType, EntityLivingBase target) {
 		List<EntityEquipmentSlot> slots = new ArrayList<>();
 		for(EntityEquipmentSlot slot : EntityEquipmentSlot.values())
 			if(target.hasItemInSlot(slot))

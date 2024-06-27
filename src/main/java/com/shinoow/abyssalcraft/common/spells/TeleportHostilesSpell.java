@@ -11,8 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.spells;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,7 +20,6 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
@@ -33,19 +32,19 @@ public class TeleportHostilesSpell extends EntityTargetSpell {
 
 	public TeleportHostilesSpell() {
 		super("teleporthostiles", 10000F, Items.SUGAR);
-		setParchment(new ItemStack(ACItems.greater_scroll));
+		setScrollType(ScrollType.GREATER);
 		setRequiresCharging();
 		setColor(0x31227c);
 	}
 
 	@Override
-	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+	protected boolean canCastSpellOnTarget(EntityLivingBase target, ScrollType scrollType) {
 
 		return target.isCreatureType(EnumCreatureType.CREATURE, false) && target.isChild();
 	}
 
 	@Override
-	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType, EntityLivingBase target) {
 
 		if(target.isCreatureType(EnumCreatureType.CREATURE, false) && target.isChild())
 			if(target.attackEntityFrom(DamageSource.causePlayerDamage(player).setDamageBypassesArmor().setDamageIsAbsolute(), 200F))

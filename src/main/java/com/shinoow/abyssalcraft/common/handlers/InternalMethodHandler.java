@@ -16,6 +16,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.internal.DummyMethodHandler;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.DisruptionMessage;
 import com.shinoow.abyssalcraft.common.network.client.PEStreamMessage;
@@ -75,11 +76,11 @@ public class InternalMethodHandler extends DummyMethodHandler {
 
 	@Override
 	public RayTraceResult rayTraceTarget(float dist) {
-		return AbyssalCraft.proxy.rayTraceEntity(dist); 
+		return AbyssalCraft.proxy.rayTraceEntity(dist);
 	}
 
 	@Override
-	public void processEntitySpell(int id, String spell) {
-		PacketDispatcher.sendToServer(new MobSpellMessage(id, spell));
+	public void processEntitySpell(int id, String spell, ScrollType scrollType) {
+		PacketDispatcher.sendToServer(new MobSpellMessage(id, spell, scrollType));
 	}
 }

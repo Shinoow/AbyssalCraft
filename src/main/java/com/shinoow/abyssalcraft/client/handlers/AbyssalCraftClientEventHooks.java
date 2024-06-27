@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.spell.IScroll;
@@ -325,11 +326,6 @@ public class AbyssalCraftClientEventHooks {
 		if(stack.getItem() instanceof IEnergyContainerItem)
 			event.getToolTip().add(1, String.format("%d/%d PE", (int)((IEnergyContainerItem)stack.getItem()).getContainedEnergy(stack), ((IEnergyContainerItem)stack.getItem()).getMaxEnergy(stack)));
 
-		if(!APIUtils.display_names)
-			if(stack.getItem() instanceof IResearchable && event.getEntityPlayer() != null && !NecroDataCapability.getCap(event.getEntityPlayer()).isUnlocked(((IResearchable)stack.getItem()).getResearchItem(stack), event.getEntityPlayer())){
-				event.getToolTip().remove(0);
-				event.getToolTip().add(0, "...What's this?");
-			}
 		if(stack.getItem() instanceof IScroll) {
 			Spell spell = SpellUtils.getSpell(stack);
 			if(spell != null){
@@ -340,6 +336,15 @@ public class AbyssalCraftClientEventHooks {
 		}
 		if(stack.getItem() instanceof ICrystal)
 			event.getToolTip().add(String.format("%s: %s", I18n.format("tooltip.crystal"), ((ICrystal) stack.getItem()).getFormula(stack)));
+
+		if(!APIUtils.display_names)
+			if(stack.getItem() instanceof IResearchable && event.getEntityPlayer() != null){
+				IResearchItem research = ((IResearchable)stack.getItem()).getResearchItem(stack);
+				if(!NecroDataCapability.getCap(event.getEntityPlayer()).isUnlocked(research, event.getEntityPlayer())) {
+					event.getToolTip().remove(0);
+					event.getToolTip().add(0, "...What's this?");
+				}
+			}
 	}
 
 	@SubscribeEvent

@@ -16,6 +16,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockSand;
@@ -43,7 +44,7 @@ public class MiningSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
+	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		RayTraceResult r = rayTrace(player, world, 16, 1);
 
@@ -136,10 +137,10 @@ public class MiningSpell extends Spell {
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {}
+	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {}
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		RayTraceResult r = rayTrace(player, world, 16, 1);
 

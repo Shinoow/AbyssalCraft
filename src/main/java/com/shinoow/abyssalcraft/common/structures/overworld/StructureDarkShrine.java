@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2024 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures.overworld;
 
 import java.util.Map;
@@ -35,14 +46,13 @@ public class StructureDarkShrine extends StructureDarklandsBase {
 
 		Map<BlockPos, String> map = template.getDataBlocks(position, placeSettings);
 
-		for(Entry<BlockPos, String> entry : map.entrySet()) {
+		for(Entry<BlockPos, String> entry : map.entrySet())
 			if("idol".equals(entry.getValue())) {
 				worldIn.setBlockState(entry.getKey(), ACBlocks.idol_of_fading.getDefaultState());
 				TileEntity tile = worldIn.getTileEntity(entry.getKey());
 				if(tile instanceof TileEntityIdolOfFading)
 					((TileEntityIdolOfFading)tile).addEnergy(((TileEntityIdolOfFading) tile).getMaxEnergy());
 			}
-		}
 
 		return true;
 	}

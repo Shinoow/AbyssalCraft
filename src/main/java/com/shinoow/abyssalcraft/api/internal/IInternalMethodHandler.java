@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.api.internal;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -140,6 +141,7 @@ public interface IInternalMethodHandler {
 	 * on the Entity associated with the ID
 	 * @param id Entity ID
 	 * @param spell Spell ID
+	 * @param scrollType Scroll Type on the scroll casting the spell
 	 */
-	void processEntitySpell(int id, String spell);
+	void processEntitySpell(int id, String spell, ScrollType scrollType);
 }

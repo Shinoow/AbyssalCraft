@@ -502,11 +502,10 @@ public class GuiNecronomicon extends GuiScreen {
 	}
 
 	protected boolean isUnlocked(IResearchItem ri){
-		for(IUnlockCondition cnd : ri.getUnlockConditions()) {
+		for(IUnlockCondition cnd : ri.getUnlockConditions())
 			if(cnd instanceof NecronomiconCondition)
 				return getBookType() >= (int)cnd.getConditionObject();
-		}
-		return cap.isUnlocked(ri, mc.player);
+				return cap.isUnlocked(ri, mc.player);
 	}
 
 	protected boolean isUnlocked(IUnlockCondition cnd){

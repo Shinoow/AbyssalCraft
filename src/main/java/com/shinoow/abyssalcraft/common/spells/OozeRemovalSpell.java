@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -28,7 +29,7 @@ public class OozeRemovalSpell extends Spell {
 	}
 
 	@Override
-	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player) {
+	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		for(BlockPos pos1 : BlockPos.getAllInBoxMutable(new BlockPos(player.posX - 3, player.posY - 3, player.posZ - 3),
 				new BlockPos(player.posX + 3, player.posY + 3, player.posZ + 3)))
@@ -38,10 +39,10 @@ public class OozeRemovalSpell extends Spell {
 	}
 
 	@Override
-	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player) {}
+	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {}
 
 	@Override
-	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player) {
+	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 		for(BlockPos pos1 : BlockPos.getAllInBox(new BlockPos(player.posX - 3, player.posY - 3, player.posZ - 3),
 				new BlockPos(player.posX + 3, player.posY + 3, player.posZ + 3)))
 			if(world.getBlockState(pos1).getBlock() == ACBlocks.shoggoth_ooze)

@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.spell.EntityTargetSpell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,13 +31,13 @@ public class StealVigorSpell extends EntityTargetSpell {
 	}
 
 	@Override
-	protected boolean canCastSpellOnTarget(EntityLivingBase target) {
+	protected boolean canCastSpellOnTarget(EntityLivingBase target, ScrollType scrollType) {
 
 		return true;
 	}
 
 	@Override
-	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, EntityLivingBase target) {
+	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType, EntityLivingBase target) {
 
 		target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1200, 1));
 		target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1200, 1));

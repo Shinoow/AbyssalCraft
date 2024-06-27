@@ -367,6 +367,6 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public RayTraceResult rayTraceEntity(float dist) {
 		RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(dist);
-		return r != null && r.entityHit instanceof EntityLivingBase ? r : null; 
+		return r != null && r.entityHit instanceof EntityLivingBase ? r : null;
 	}
 }
