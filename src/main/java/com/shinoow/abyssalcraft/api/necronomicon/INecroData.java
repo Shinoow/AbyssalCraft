@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
 
-import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 
 public interface INecroData {
 
@@ -26,5 +26,5 @@ public interface INecroData {
 	String getIdentifier();
 
 	//TODO use IResearchItem instead
-	IUnlockCondition getCondition();
+	IResearchItem getResearch();
 }

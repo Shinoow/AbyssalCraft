@@ -120,7 +120,6 @@ public class InitHandler implements ILifeCycleHandler {
 		MinecraftForge.EVENT_BUS.register(new PurgeEventHandler());
 		MinecraftForge.EVENT_BUS.register(new ItemTransferEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(AbyssalCraft.instance, new GuiHandler());
-		AbyssalCraftAPI.setInternalNDHandler(new InternalNecroDataHandler());
 		AbyssalCraftAPI.setInternalMethodHandler(new InternalMethodHandler());
 		ACLoot.init();
 		ACTabs.init();

@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.knowledge.condition.NecronomiconCondition;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapability;
@@ -252,7 +253,7 @@ public class GuiNecronomicon extends GuiScreen {
 						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("greatoldones"),
 						new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.INFORMATION_ABYSSALNOMICON),
 						patreon, new GuiInstance(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines"){
-					@Override public IUnlockCondition getCondition() { return new NecronomiconCondition(1); }
+					@Override public IResearchItem getResearch() { return ResearchItems.ABYSSAL_WASTELAND_NECRO; }
 					@Override public GuiScreen getOpenGui(int bookType, GuiScreen parent) { return new GuiNecronomiconMachines(bookType, (GuiNecronomicon) parent); }
 				}, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("overworld"), AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("abyssalwasteland"),
 						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("dreadlands"), AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("omothol"),
@@ -613,8 +614,8 @@ public class GuiNecronomicon extends GuiScreen {
 		}
 
 		@Override
-		public IUnlockCondition getCondition() {
-			return new NecronomiconCondition(displayIcon);
+		public IResearchItem getResearch() {
+			return ResearchItems.getBookResearch(displayIcon);
 		}
 
 		@Override

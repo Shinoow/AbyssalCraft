@@ -65,7 +65,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	@Override
 	public GuiNecronomicon withBookType(int par1){
 		super.withBookType(par1);
-		if(data != null && !isUnlocked(data.getCondition()))
+		if(data != null && !isUnlocked(data.getResearch()))
 			isInvalid = true;
 		return this;
 	}
@@ -93,7 +93,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			if(data != null)
 				for(int n = 0; n < data.getContainedData().size(); n++){
 					INecroData nd = data.getContainedData().get(n);
-					buttonList.add(buttons[n] = new ButtonCategory(6 + n, i + (n < 7 ? 14 : 132), b0 + 24 + 17* (n < 7 ? n : n - 7),this, nd.getTitle(), !isUnlocked(nd.getCondition()), getItem(nd.getDisplayIcon())));
+					buttonList.add(buttons[n] = new ButtonCategory(6 + n, i + (n < 7 ? 14 : 132), b0 + 24 + 17* (n < 7 ? n : n - 7),this, nd.getTitle(), !isUnlocked(nd.getResearch()), getItem(nd.getDisplayIcon())));
 				}
 		}
 		updateButtons();
@@ -151,7 +151,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			} else if(button.id >= 6 && data.getContainedData().size() >= button.id - 5){
 				int i = button.id - 6;
 				INecroData nd = data.getContainedData().get(i);
-				if(isUnlocked(nd.getCondition()))
+				if(isUnlocked(nd.getResearch()))
 					if(nd instanceof GuiInstance)
 						mc.displayGuiScreen(((GuiInstance)nd).getOpenGui(getBookType(), this));
 					else if(nd instanceof NecroData)
@@ -223,12 +223,12 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		if(page1 != null){
 			text1 = page1.getText();
 			icon1 = page1.getIcon();
-			locked1 = !isUnlocked(page1.getCondition());
+			locked1 = !isUnlocked(page1.getResearch());
 		}
 		if(page2 != null){
 			text2 = page2.getText();
 			icon2 = page2.getIcon();
-			locked2 = !isUnlocked(page2.getCondition());
+			locked2 = !isUnlocked(page2.getResearch());
 		}
 
 		tooltipStack = null;
@@ -398,7 +398,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		byte b0 = 2;
 		String stuff;
 		stuff = localize(data.getTitle());
-		boolean b = !isUnlocked(data.getCondition());
+		boolean b = !isUnlocked(data.getResearch());
 		getFontRenderer(b).drawSplitString(b ? NecronomiconText.LABEL_TEST : stuff, k + 20, b0 + 16, 116, 0xC40000);
 		if(data.hasText()) writeText(2, b ? unknownFull : data.getText(), b);
 	}

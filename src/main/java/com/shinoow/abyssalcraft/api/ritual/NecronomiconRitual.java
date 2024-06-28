@@ -161,6 +161,14 @@ public abstract class NecronomiconRitual implements IResearchable<NecronomiconRi
 	}
 
 	/**
+	 * Used to fetch the ritual ID
+	 * @return The unlocalized Name, representing an ID
+	 */
+	public String getID() {
+		return unlocalizedName;
+	}
+
+	/**
 	 * Used to fetch the localized name for a ritual
 	 * @return A localized string representing a name
 	 */

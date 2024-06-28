@@ -20,8 +20,8 @@ import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.ImmutableList;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureUtil;
@@ -41,10 +41,10 @@ public class NecroData implements INecroData {
 	private String title;
 	private String information;
 	private List<INecroData> containedData = new ArrayList<>();
-	private IUnlockCondition condition;
+	private IResearchItem condition;
 	private int displayIcon;
 
-	public NecroData(String identifier, String title, int displayIcon, String info, IUnlockCondition condition, INecroData...data){
+	public NecroData(String identifier, String title, int displayIcon, String info, IResearchItem condition, INecroData...data){
 		this.identifier = identifier;
 		this.title = title;
 		this.displayIcon = displayIcon;
@@ -54,16 +54,16 @@ public class NecroData implements INecroData {
 			addData(t);
 	}
 
-	public NecroData(String identifier, String title, int displayIcon, IUnlockCondition condition, INecroData...data){
+	public NecroData(String identifier, String title, int displayIcon, IResearchItem condition, INecroData...data){
 		this(identifier, title, displayIcon, null, condition, data);
 	}
 
 	public NecroData(String identifier, String title, int displayIcon, String info, INecroData...data){
-		this(identifier, title, displayIcon, info, new DefaultCondition(), data);
+		this(identifier, title, displayIcon, info, new DefaultResearchItem(), data);
 	}
 
 	public NecroData(String identifier, String title, int displayIcon, INecroData...data){
-		this(identifier, title, displayIcon, null, new DefaultCondition(), data);
+		this(identifier, title, displayIcon, null, new DefaultResearchItem(), data);
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class NecroData implements INecroData {
 	}
 
 	@Override
-	public IUnlockCondition getCondition() {
+	public IResearchItem getResearch() {
 
 		return condition;
 	}
@@ -148,7 +148,7 @@ public class NecroData implements INecroData {
 				if(!o1.equals(o2))
 					b4 = false;
 
-		return b1 && b2 && b3 && b4 && nd.condition.areConditionObjectsEqual(condition.getConditionObject());
+		return b1 && b2 && b3 && b4 && nd.condition.getID().equals(condition.getID());
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class NecroData implements INecroData {
 		private NavigableMap<Integer, Page> pages = new TreeMap<>((o1, o2) -> (o1 > o2 ? 1 : o1 < o2 ? -1 : 0));
 		private String identifier;
 		private String title;
-		private IUnlockCondition condition;
+		private IResearchItem condition;
 		private int displayIcon;
 
 		/**
@@ -169,7 +169,7 @@ public class NecroData implements INecroData {
 		 * @param identifier Identifier (used to locate the chapter, should be unique for every NecroData)
 		 * @param title Title to display on pages in the Chapter
 		 */
-		public Chapter(String identifier, String title, int displayIcon, IUnlockCondition condition){
+		public Chapter(String identifier, String title, int displayIcon, IResearchItem condition){
 			this.identifier = identifier;
 			this.title = title;
 			this.displayIcon = displayIcon;
@@ -182,7 +182,7 @@ public class NecroData implements INecroData {
 		 * @param title Title to display on pages in the Chapter
 		 */
 		public Chapter(String identifier, String title, int displayIcon){
-			this(identifier, title, displayIcon, new DefaultCondition());
+			this(identifier, title, displayIcon, new DefaultResearchItem());
 		}
 
 		/**
@@ -191,14 +191,14 @@ public class NecroData implements INecroData {
 		 * @param title Title to display on pages in the Chapter
 		 * @param pages an array of Pages (it is optional to do it this way)
 		 */
-		public Chapter(String identifier, String title, int displayIcon, IUnlockCondition condition, Page...pages){
+		public Chapter(String identifier, String title, int displayIcon, IResearchItem condition, Page...pages){
 			this(identifier, title, displayIcon, condition);
 			for(Page page : pages)
 				addPage(page);
 		}
 
 		public Chapter(String identifier, String title, int displayIcon, Page...pages){
-			this(identifier, title, displayIcon, new DefaultCondition(), pages);
+			this(identifier, title, displayIcon, new DefaultResearchItem(), pages);
 		}
 
 		/**
@@ -234,7 +234,7 @@ public class NecroData implements INecroData {
 		}
 
 		@Override
-		public IUnlockCondition getCondition() {
+		public IResearchItem getResearch() {
 			return condition;
 		}
 
@@ -337,7 +337,7 @@ public class NecroData implements INecroData {
 					if(e1.getKey() != e2.getKey() || !e1.getValue().equals(e2.getValue()))
 						b3 = false;
 
-			return b1 && b2 && b3 && c.condition.areConditionObjectsEqual(condition.getConditionObject());
+			return b1 && b2 && b3 && c.condition.getID().equals(condition.getID());
 		}
 	}
 
@@ -352,7 +352,7 @@ public class NecroData implements INecroData {
 		private String title;
 		private int pageNum;
 		private String text;
-		private IUnlockCondition condition;
+		private IResearchItem condition;
 		private int displayIcon;
 
 		/**
@@ -361,7 +361,7 @@ public class NecroData implements INecroData {
 		 * @param text Text to display on the Page
 		 */
 		public Page(int pageNum, String title, int displayIcon, String text){
-			this(pageNum, title, displayIcon, null, text, new DefaultCondition());
+			this(pageNum, title, displayIcon, null, text, new DefaultResearchItem());
 		}
 
 		/**
@@ -370,7 +370,7 @@ public class NecroData implements INecroData {
 		 * @param text Text to display on the Page
 		 * @param condition Condition to determine whether or not this page can be read
 		 */
-		public Page(int pageNum, String title, int displayIcon, String text, IUnlockCondition condition){
+		public Page(int pageNum, String title, int displayIcon, String text, IResearchItem condition){
 			this(pageNum, title, displayIcon, null, text, condition);
 		}
 
@@ -381,7 +381,7 @@ public class NecroData implements INecroData {
 		 * @param text Text to display on the Page
 		 */
 		public Page(int pageNum, String title, int displayIcon, Object icon, String text){
-			this(pageNum, title, displayIcon, icon, text, new DefaultCondition());
+			this(pageNum, title, displayIcon, icon, text, new DefaultResearchItem());
 		}
 
 		/**
@@ -390,7 +390,7 @@ public class NecroData implements INecroData {
 		 * @param icon ResourceLocation/ItemStack/CraftingStack to display on the Page
 		 * @param text Text to display on the Page
 		 */
-		public Page(int pageNum, String title, int displayIcon, Object icon, String text, IUnlockCondition condition){
+		public Page(int pageNum, String title, int displayIcon, Object icon, String text, IResearchItem condition){
 			if(pageNum == 0) throw new ArithmeticException("The Page number can't be zero");
 			this.pageNum = pageNum;
 			this.title = title;
@@ -467,7 +467,7 @@ public class NecroData implements INecroData {
 		 * Fetches the unlocking condition (determines if the page can be read)
 		 */
 		@Override
-		public IUnlockCondition getCondition(){
+		public IResearchItem getResearch(){
 			return condition;
 		}
 
@@ -481,7 +481,7 @@ public class NecroData implements INecroData {
 			boolean b2 = page.pageNum == pageNum;
 			boolean b3 = page.icon == null && icon == null || page.icon.equals(icon);
 			boolean b4 = page.text.equals(text);
-			boolean b5 = page.condition.areConditionObjectsEqual(condition.getConditionObject());
+			boolean b5 = page.condition.getID().equals(condition.getID());
 
 			return b1 && b2 && b3 && b4 && b5;
 		}

@@ -69,4 +69,20 @@ public class ResearchItems {
 	public static IResearchItem ABYSSAL_WASTELAND_NECRO;
 	public static IResearchItem DREADLANDS_NECRO;
 	public static IResearchItem OMOTHOL_NECRO;
+	public static IResearchItem ABYSSALNOMICON;
+
+	public static IResearchItem getBookResearch(int book) {
+		switch(book) {
+		case 1:
+			return ABYSSAL_WASTELAND_NECRO;
+		case 2:
+			return DREADLANDS_NECRO;
+		case 3:
+			return OMOTHOL_NECRO;
+		case 4:
+			return ABYSSALNOMICON;
+		default:
+			return new DefaultResearchItem();
+		}
+	}
 }

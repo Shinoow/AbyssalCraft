@@ -87,6 +87,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void preInit() {
+		super.preInit();
 
 		OBJLoader.INSTANCE.addDomain(AbyssalCraft.modid);
 
@@ -166,8 +167,6 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.registerKeyBinding(configurator_mode);
 		ClientRegistry.registerKeyBinding(configurator_filter);
 		ClientRegistry.registerKeyBinding(configurator_path);
-		initUnlockConditions();
-		initResearchItems();
 	}
 
 	@Override

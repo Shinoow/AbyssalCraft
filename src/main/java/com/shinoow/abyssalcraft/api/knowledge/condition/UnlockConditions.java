@@ -72,5 +72,6 @@ public class UnlockConditions {
 	public static IUnlockCondition ABYSSAL_WASTELAND_NECRO = new NecronomiconCondition(1);
 	public static IUnlockCondition DREADLANDS_NECRO = new NecronomiconCondition(2);
 	public static IUnlockCondition OMOTHOL_NECRO = new NecronomiconCondition(3);
+	public static IUnlockCondition ABYSSALNOMICON = new NecronomiconCondition(4);
 
 }

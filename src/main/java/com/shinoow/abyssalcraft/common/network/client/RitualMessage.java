@@ -65,12 +65,8 @@ public class RitualMessage extends AbstractClientMessage<RitualMessage> {
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		NecronomiconRitual ritual = null;
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)) {
-				ritual = r;
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+
 		if(ritual != null)
 			if(failed)
 				MinecraftForge.EVENT_BUS.post(new RitualEvent.Failed(player, ritual, DisruptionHandler.instance().disruptionFromName(disruption), player.world, pos));

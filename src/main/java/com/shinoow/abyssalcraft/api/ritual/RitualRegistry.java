@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.api.ritual;
 
 import java.util.*;
 
+import javax.annotation.Nullable;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -111,8 +113,8 @@ public class RitualRegistry {
 	public void registerRitual(NecronomiconRitual ritual){
 		if(ritual.getBookType() <= 4 && ritual.getBookType() >= 0){
 			for(NecronomiconRitual entry : rituals)
-				if(ritual.getUnlocalizedName().equals(entry.getUnlocalizedName())){
-					logger.log(Level.ERROR, "Necronomicon Ritual already registered: {}", ritual.getUnlocalizedName());
+				if(ritual.getID().equals(entry.getID())){
+					logger.log(Level.ERROR, "Necronomicon Ritual already registered: {}", ritual.getID());
 					return;
 				}
 			rituals.add(ritual);
@@ -127,6 +129,16 @@ public class RitualRegistry {
 	 */
 	public List<NecronomiconRitual> getRituals(){
 		return rituals;
+	}
+
+	/**
+	 * Used to fetch a ritual by ID, or null if none was found
+	 *
+	 * @since 2.0
+	 */
+	@Nullable
+	public NecronomiconRitual getRitual(String id) {
+		return rituals.stream().filter(r -> r.getID() == id).findFirst().orElse(null);
 	}
 
 	/**

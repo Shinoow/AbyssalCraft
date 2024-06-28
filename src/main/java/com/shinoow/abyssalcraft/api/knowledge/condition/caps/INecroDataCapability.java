@@ -22,7 +22,7 @@ import net.minecraft.util.ResourceLocation;
 public interface INecroDataCapability {
 
 	boolean isUnlocked(IUnlockCondition cond, EntityPlayer player);
-	
+
 	boolean isUnlocked(IResearchItem research, EntityPlayer player);
 
 	void triggerEntityUnlock(String name);
@@ -38,13 +38,13 @@ public interface INecroDataCapability {
 	void triggerWhisperUnlock(String name);
 
 	void triggerMiscUnlock(String name);
-	
+
 	void completeResearch(ResourceLocation rel);
 
 	void unlockAllKnowledge(boolean unlock);
 
 	void setKnowledgeLevel(int level);
-	
+
 	void setLastSyncTime(long time);
 
 	void incrementSyncTimer();
@@ -64,13 +64,13 @@ public interface INecroDataCapability {
 	List<String> getWhisperTriggers();
 
 	List<String> getMiscTriggers();
-	
+
 	List<ResourceLocation> getCompletedResearches();
 
 	boolean hasUnlockedAllKnowledge();
 
 	int getKnowledgeLevel();
-	
+
 	long getLastSyncTime();
 
 	int getSyncTimer();

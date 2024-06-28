@@ -61,15 +61,10 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		NecronomiconRitual ritual = null;
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().equals(name)) {
-				ritual = r;
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
 
 		TileEntity te = player.world.getTileEntity(pos);
-		if(te instanceof IRitualAltar) {
+		if(ritual != null && te instanceof IRitualAltar) {
 			IRitualAltar altar = (IRitualAltar)te;
 			altar.setRitualFields(ritual, (EntityLiving)player.world.getEntityByID(sacrifice), timerMax);
 		}

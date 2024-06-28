@@ -160,85 +160,65 @@ public class RitualUtil {
 	}
 
 	public static void modifyRitualBookType(String name, int bookType){
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, bookType, "bookType");
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		if(ritual != null)
+			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, bookType, "bookType");
 	}
 
 	public static void modifyRitualDimension(String name, int dimension){
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, dimension, "dimension");
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		if(ritual != null)
+			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, dimension, "dimension");
 	}
 
 	public static void modifyRitualSacrificeRequirement(String name, boolean requiresSacrifice){
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, requiresSacrifice, "requiresSacrifice");
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		if(ritual != null)
+			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, requiresSacrifice, "requiresSacrifice");
 	}
 
 	public static void modifyRitualEnergyRequirement(String name, float requiredEnergy){
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, requiredEnergy, "requiredEnergy");
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		if(ritual != null)ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, requiredEnergy, "requiredEnergy");
 	}
 
 	public static void modifyRitualSacrifice(String name, Object sacrifice){
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name) && r.getSacrifice() != null){
-				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, sacrifice, "sacrifice");
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		if(ritual != null && ritual.getSacrifice() != null)
+			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, sacrifice, "sacrifice");
 	}
 
 	public static void modifyRitualNbtSensitivity(String name, boolean nbtSensitive){
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, nbtSensitive, "nbtSensitive");
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		if(ritual != null)
+			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, nbtSensitive, "nbtSensitive");
 	}
 
 	public static void modifyRitualNbtSensitivitySacrifice(String name, boolean nbtSensitiveSacrifice){
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, nbtSensitiveSacrifice, "nbtSensitiveSacrifice");
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		if(ritual != null)
+			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, nbtSensitiveSacrifice, "nbtSensitiveSacrifice");
 	}
 
 	public static void modifyRitualOfferings(String name, Object...offerings){
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, offerings, "offerings");
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		if(ritual != null)
+			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, offerings, "offerings");
 	}
 
 	public static void modifyRitualReplaceOffering(String name, Object original, Object replace, boolean nbt){
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				Object[] offerings = new Object[r.getOfferings().length];
-				for(int i = 0; i < offerings.length; i++)
-					offerings[i] = APIUtils.areObjectsEqual(APIUtils.convertToStack(original), r.getOfferings()[i], nbt) ? replace : r.getOfferings()[i];
-				ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, r, offerings, "offerings");
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		if(ritual != null) {
+			Object[] offerings = new Object[ritual.getOfferings().length];
+			for(int i = 0; i < offerings.length; i++)
+				offerings[i] = APIUtils.areObjectsEqual(APIUtils.convertToStack(original), ritual.getOfferings()[i], nbt) ? replace : ritual.getOfferings()[i];
+			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, offerings, "offerings");
+		}
 	}
 
 	public static void modifyRitualParticle(String name, EnumRitualParticle particle) {
-		for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
-			if(r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name)){
-				r.setRitualParticle(particle);
-				break;
-			}
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		if(ritual != null)
+			ritual.setRitualParticle(particle);
 	}
 }

@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IAbyssalWastelandBiome;
 import com.shinoow.abyssalcraft.api.knowledge.ResearchItem;
@@ -20,6 +21,7 @@ import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilAnimal;
+import com.shinoow.abyssalcraft.common.handlers.InternalNecroDataHandler;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
@@ -35,6 +37,7 @@ public class CommonProxy {
 	public void preInit() {
 		initUnlockConditions();
 		initResearchItems();
+		AbyssalCraftAPI.setInternalNDHandler(new InternalNecroDataHandler());
 	}
 
 	public void init() {
@@ -102,6 +105,7 @@ public class CommonProxy {
 		ResearchItems.ABYSSAL_WASTELAND_NECRO = new ResearchItem("abyssal_wasteland_necro", 0, rl("abyssal_wasteland_necro")).setUnlockConditions(UnlockConditions.ABYSSAL_WASTELAND_NECRO);
 		ResearchItems.DREADLANDS_NECRO = new ResearchItem("dreadlands_necro", 0, rl("dreadlands_necro")).setUnlockConditions(UnlockConditions.DREADLANDS_NECRO);
 		ResearchItems.OMOTHOL_NECRO = new ResearchItem("omothol_necro", 0, rl("omothol_necro")).setUnlockConditions(UnlockConditions.OMOTHOL_NECRO);
+		ResearchItems.ABYSSALNOMICON = new ResearchItem("abyssalnomicon", 0, rl("abyssalnomicon")).setUnlockConditions(UnlockConditions.ABYSSALNOMICON);
 	}
 
 	private ResourceLocation rl(String str) {

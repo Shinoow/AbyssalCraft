@@ -210,7 +210,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 			RitualEvent.Failed event = new RitualEvent.Failed(user, ritual, DisruptionHandler.instance().getRandomDisruption(deity, world), world, pos);
 			if(!MinecraftForge.EVENT_BUS.post(event) && !ACConfig.no_disruptions) {
 				DisruptionEntry disruption = event.getDisruption();
-				PacketDispatcher.sendToAllAround(new RitualMessage(ritual.getUnlocalizedName().substring("ac.ritual.".length()), pos, true, disruption.getUnlocalizedName()), user, 5);
+				PacketDispatcher.sendToAllAround(new RitualMessage(ritual.getID(), pos, true, disruption.getUnlocalizedName()), user, 5);
 				if(!MinecraftForge.EVENT_BUS.post(new DisruptionEvent(deity, world, pos, players, disruption)))
 					disruption.disrupt(world, pos, players);
 				AbyssalCraftAPI.getInternalMethodHandler().sendDisruption(deity, disruption.getUnlocalizedName().substring("ac.disruption.".length()), pos, world.provider.getDimension());
@@ -272,7 +272,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 															energyToDrain = ritual.getReqEnergy() / data.getSecond();
 														hasSacrifice = true;
 														isDirty = true;
-														PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), sacrifice.getEntityId(), timerMax), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
+														PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getID(), sacrifice.getEntityId(), timerMax), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
 													}
 
 												});
@@ -297,7 +297,7 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 										else
 											energyToDrain = ritual.getReqEnergy() / data.getSecond();
 										isDirty = true;
-										PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getUnlocalizedName(), 0, timerMax), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
+										PacketDispatcher.sendToAllAround(new RitualStartMessage(pos, ritual.getID(), 0, timerMax), world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 30);
 									}
 
 								});
