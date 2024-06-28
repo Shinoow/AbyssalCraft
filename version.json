@@ -1,7 +1,7 @@
 {
   "homepage": "https://shinoow.github.io/AbyssalCraft/",
   "promos": {
-	"1.12.2-latest": "2.0.0-ALPHA-7.1",
+	"1.12.2-latest": "2.0.0-ALPHA-8",
 	"1.12.2-recommended": "1.10.6",
 	"1.12-latest": "1.9.4-pre-4",
 	"1.12-recommended": "1.9.4-pre-4",
@@ -21,6 +21,7 @@
   "1.8.9-recommended": "1.9.3.10-FINAL"
   },
   "1.12.2": {
+	"2.0.0-ALPHA-8": "- Fixed an odd crash involving the Iron Wall enchantment\n- Increased the size of dead companions stored for the resurrection ritual to 20 (previously 5)\n- Updated the model and texture of the Skeleton Goliath\n- Skeleton Goliaths can now wear armor\n- Added 4 new biomes, Abyssal Swamp, Abyssal Desert, Abyssal Plateau and Coralium Lake\n- Added dead trees, which generate in the Abyssal Swamp\n- AbyssalCraft mobs (that can) will spawn wearing enchanted armor and weapon if 'Hardore Mode' is enabled\n- Added glyphs on ritual altars and pedestals that change color during a ritual\n- Cha'garoth, Sacthoth and J'zahar now passively regenerate their health (configurable)\n- A message now displays when a ritual requires a sacrifice, and none is nearby\n- Crystallized Carbon, Carbon Clusters and Dense Carbon Clusters are now Crystallizer fuel\n- Crystal Rework is now permanent\n- Added the Idol Of Fading, a block that spawns shadows, along with a structure it spawns in\n- Darklands structures can generate with an Idol of Fading\n- Darklands structures now generate in the Dark Realm, and in some Overworld biomes as well\n- Darklands biomes now generate in the Abyssal Wasteland and Dreadlands\n- Darklands and Coralium Infested Swamp biomes no longer generate in the Overworld\n- Removed the \"Biomes\" category from the config file\n- Added a ritual that replaces Swamp biomes with Coralium Infested Swamps\n- Added a config option for the range of the Ritual of Infesting\n- Added a config option that prevents the Mass Enchantment Ritual from being performed if a book has been merged in an Anvil\n- Added Abyssal Abyssalnite Ore (generates in the Abyssal Wasteland)\n- Added Lost Pages (WIP)\n- Added Murals (WIP)\n- Added a warning message for ritual blocks not being in the same chunk\n- Spell Compendium now cycles all compatible scrolls for a Spell",
 	"2.0.0-ALPHA-7.1": "- Fixed an exploit with the Materializer\n- Really fixed startup crash with the Dread Tentacle Renderer",
 	"1.10.6": "- The FOV manipulation for the Coralium Longbow only modifies the FOV if the bow is being used\n- Set top and filler blocks for the Omothol and Dark Realm biomes\n- Now runs on Forge 14.23.5.2846\n- Improved the textures of the Gateway Keys (time for an update)\n- Replaced 'Lorem ipsum' with something else (including the longer texts)\n- Increased the amount of PE transported to/from placed items where applicable (1 -> 20)\n- The Tiered Sacrificial Altars now reduce the cooldown time by 10 second/tier\n- Increased PE storage on Tiered Energy Relays\n- All Blocks with PE storage now have a fully charged version in the Creative Tab\n- Methane texture now displays it contained in a bottle\n- Reduced the crafting cost for Shadow Gems and it's sub-items (4 instead of 9)\n- Inverted the coin recipes (4 ingots, 1 flint -> 1 ingot, 4 flints)\n- Fixed an exploit with the Materializer",
 	"2.0.0-ALPHA-7": "- Fixed startup crash with the Dread Tentacle Renderer",
