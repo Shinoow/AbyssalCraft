@@ -29,14 +29,14 @@ import net.minecraftforge.fml.relauncher.Side;
 public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage> {
 
 	private BlockPos pos;
-	private String name;
+	private String id;
 	private int sacrifice, timerMax;
 
 	public RitualStartMessage(){}
 
 	public RitualStartMessage(BlockPos pos, String name, int sacrifice, int timerMax) {
 		this.pos = pos;
-		this.name = name;
+		this.id = name;
 		this.sacrifice = sacrifice;
 		this.timerMax = timerMax;
 	}
@@ -45,7 +45,7 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 	protected void read(PacketBuffer buffer) throws IOException {
 
 		pos = buffer.readBlockPos();
-		name = ByteBufUtils.readUTF8String(buffer);
+		id = ByteBufUtils.readUTF8String(buffer);
 		sacrifice = buffer.readVarInt();
 		timerMax = buffer.readVarInt();
 	}
@@ -54,14 +54,14 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 	protected void write(PacketBuffer buffer) throws IOException {
 
 		buffer.writeBlockPos(pos);
-		ByteBufUtils.writeUTF8String(buffer, name);
+		ByteBufUtils.writeUTF8String(buffer, id);
 		buffer.writeVarInt(sacrifice);
 		buffer.writeVarInt(timerMax);
 	}
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(id);
 
 		TileEntity te = player.world.getTileEntity(pos);
 		if(ritual != null && te instanceof IRitualAltar) {

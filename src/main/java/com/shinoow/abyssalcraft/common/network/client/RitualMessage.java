@@ -28,7 +28,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class RitualMessage extends AbstractClientMessage<RitualMessage> {
 
-	private String name, disruption;
+	private String id, disruption;
 	private BlockPos pos;
 	private boolean failed;
 
@@ -39,7 +39,7 @@ public class RitualMessage extends AbstractClientMessage<RitualMessage> {
 	}
 
 	public RitualMessage(String name, BlockPos pos, boolean failed, String disruption){
-		this.name = name;
+		this.id = name;
 		this.pos = pos;
 		this.failed = failed;
 		this.disruption = disruption;
@@ -48,7 +48,7 @@ public class RitualMessage extends AbstractClientMessage<RitualMessage> {
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
 
-		name = ByteBufUtils.readUTF8String(buffer);
+		id = ByteBufUtils.readUTF8String(buffer);
 		failed = buffer.readBoolean();
 		pos = buffer.readBlockPos();
 		disruption = ByteBufUtils.readUTF8String(buffer);
@@ -57,7 +57,7 @@ public class RitualMessage extends AbstractClientMessage<RitualMessage> {
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
 
-		ByteBufUtils.writeUTF8String(buffer, name);
+		ByteBufUtils.writeUTF8String(buffer, id);
 		buffer.writeBoolean(failed);
 		buffer.writeBlockPos(pos);
 		ByteBufUtils.writeUTF8String(buffer, disruption);
@@ -65,7 +65,7 @@ public class RitualMessage extends AbstractClientMessage<RitualMessage> {
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(id);
 
 		if(ritual != null)
 			if(failed)

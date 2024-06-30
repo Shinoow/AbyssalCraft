@@ -137,7 +137,7 @@ public class RitualRegistry {
 	 * @since 2.0
 	 */
 	@Nullable
-	public NecronomiconRitual getRitual(String id) {
+	public NecronomiconRitual getRitualById(String id) {
 		return rituals.stream().filter(r -> r.getID() == id).findFirst().orElse(null);
 	}
 

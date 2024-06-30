@@ -406,12 +406,14 @@ public class InitHandler implements ILifeCycleHandler {
 		generateAbyssalCopperOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Copper Ore", true, "Toggles whether or not to generate Copper Ore in the Abyssal Wasteland.").getBoolean();
 		generatePearlescentCoraliumOre = cfg.get(CATEGORY_WORLDGEN, "Pearlescent Coralium Ore", true, "Toggles whether or not to generate Pearlescent Coralium Ore in the Abyssal Wasteland.").getBoolean();
 		generateLiquifiedCoraliumOre = cfg.get(CATEGORY_WORLDGEN, "Liquified Coralium Ore", true, "Toggles whether or not to generate Liquified Coralium Ore in the Abyssal Wasteland.").getBoolean();
-		shoggothLairSpawnRate = cfg.get(CATEGORY_WORLDGEN, "Shoggoth Lair Generation Chance: Swamps", 35, "Generation chance of a Shoggoth Lair in swamp biomes. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 30]", 0, 1000).getInt();
+		shoggothLairSpawnRate = cfg.get(CATEGORY_WORLDGEN, "Shoggoth Lair Generation Chance: Swamps", 35, "Generation chance of a Shoggoth Lair in swamp biomes. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 35]", 0, 1000).getInt();
 		coraliumOreGeneration = cfg.get(CATEGORY_WORLDGEN, "Coralium Ore Generation", new int[] {12, 8, 40}, "Coralium Ore generation. First parameter is the vein count, secound is amount of ores per vein, third is max height for it to generate at. Coralium Ore generation in swamps are half as common as oceans.").getIntList();
 		shoggothLairSpawnRateRivers = cfg.get(CATEGORY_WORLDGEN, "Shoggoth Lair Generation Chance: Rivers", 30, "Generation chance of a Shoggoth Lair in river biomes. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 30]", 0, 1000).getInt();
 		useAmplifiedWorldType = cfg.get(CATEGORY_WORLDGEN, "Use Amplified World Type", true, "Toggles whether or not the dimensions will have their terrain affected by the Amplified world type.").getBoolean();
 		generateStatuesInLairs = cfg.get(CATEGORY_WORLDGEN, "Generate Statues In Lairs", true, "Toggles whether or not statues have a chance of generating inside a Shoggoth Lair.").getBoolean();
 		shoggothLairGenerationDistance = cfg.get(CATEGORY_WORLDGEN, "Shoggoth Lair Generation Distance", 100, "The minimum distance at which two Shoggoth Lairs will generate from each other.\n[range: 40 ~ 1000, default: 100]").getInt();
+		darkShrineSpawnRate = cfg.get(CATEGORY_WORLDGEN, "Dark Shrine Generation Chance", 10, "Generation chance of a Dark Shrine in applicable biomes. Higher numbers decrease the chance of a Shrine generating, while lower numbers increase the chance.\n[range: 0 ~ 100, default: 10]", 0, 100).getInt();
+		darkRitualGroundsSpawnRate = cfg.get(CATEGORY_WORLDGEN, "Dark Ritual Grounds Generation Chance", 10, "Generation chance of Dark Ritual Grounds in applicable biomes. Higher numbers decrease the chance of a Shrine generating, while lower numbers increase the chance.\n[range: 0 ~ 100, default: 10]", 0, 100).getInt();
 
 		oreGenDimBlacklist = cfg.get(CATEGORY_WORLDGEN, "Ore Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld ores (Coralium, Nitre) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
 		structureGenDimBlacklist = cfg.get(CATEGORY_WORLDGEN, "Structure Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld structures (Darklands structures, Shoggoth lairs) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
@@ -472,6 +474,8 @@ public class InitHandler implements ILifeCycleHandler {
 		chagarothHealingAmount = MathHelper.clamp(chagarothHealingAmount, 0, 100);
 		sacthothHealingPace = MathHelper.clamp(sacthothHealingPace, 20, 1200);
 		sacthothHealingAmount = MathHelper.clamp(sacthothHealingAmount, 0, 100);
+		darkShrineSpawnRate = MathHelper.clamp(darkShrineSpawnRate, 0, 100);
+		darkRitualGroundsSpawnRate = MathHelper.clamp(darkRitualGroundsSpawnRate, 0, 100);
 
 		demon_transformations.clear();
 

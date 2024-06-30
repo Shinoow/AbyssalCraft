@@ -159,55 +159,55 @@ public class RitualUtil {
 		return false;
 	}
 
-	public static void modifyRitualBookType(String name, int bookType){
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+	public static void modifyRitualBookType(String id, int bookType){
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(id);
 		if(ritual != null)
 			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, bookType, "bookType");
 	}
 
-	public static void modifyRitualDimension(String name, int dimension){
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+	public static void modifyRitualDimension(String id, int dimension){
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(id);
 		if(ritual != null)
 			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, dimension, "dimension");
 	}
 
 	public static void modifyRitualSacrificeRequirement(String name, boolean requiresSacrifice){
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(name);
 		if(ritual != null)
 			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, requiresSacrifice, "requiresSacrifice");
 	}
 
 	public static void modifyRitualEnergyRequirement(String name, float requiredEnergy){
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(name);
 		if(ritual != null)ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, requiredEnergy, "requiredEnergy");
 	}
 
-	public static void modifyRitualSacrifice(String name, Object sacrifice){
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+	public static void modifyRitualSacrifice(String id, Object sacrifice){
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(id);
 		if(ritual != null && ritual.getSacrifice() != null)
 			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, sacrifice, "sacrifice");
 	}
 
-	public static void modifyRitualNbtSensitivity(String name, boolean nbtSensitive){
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+	public static void modifyRitualNbtSensitivity(String id, boolean nbtSensitive){
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(id);
 		if(ritual != null)
 			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, nbtSensitive, "nbtSensitive");
 	}
 
-	public static void modifyRitualNbtSensitivitySacrifice(String name, boolean nbtSensitiveSacrifice){
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+	public static void modifyRitualNbtSensitivitySacrifice(String id, boolean nbtSensitiveSacrifice){
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(id);
 		if(ritual != null)
 			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, nbtSensitiveSacrifice, "nbtSensitiveSacrifice");
 	}
 
-	public static void modifyRitualOfferings(String name, Object...offerings){
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+	public static void modifyRitualOfferings(String id, Object...offerings){
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(id);
 		if(ritual != null)
 			ObfuscationReflectionHelper.setPrivateValue(NecronomiconRitual.class, ritual, offerings, "offerings");
 	}
 
-	public static void modifyRitualReplaceOffering(String name, Object original, Object replace, boolean nbt){
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+	public static void modifyRitualReplaceOffering(String id, Object original, Object replace, boolean nbt){
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(id);
 		if(ritual != null) {
 			Object[] offerings = new Object[ritual.getOfferings().length];
 			for(int i = 0; i < offerings.length; i++)
@@ -216,8 +216,8 @@ public class RitualUtil {
 		}
 	}
 
-	public static void modifyRitualParticle(String name, EnumRitualParticle particle) {
-		NecronomiconRitual ritual = RitualRegistry.instance().getRitual(name);
+	public static void modifyRitualParticle(String id, EnumRitualParticle particle) {
+		NecronomiconRitual ritual = RitualRegistry.instance().getRitualById(id);
 		if(ritual != null)
 			ritual.setRitualParticle(particle);
 	}

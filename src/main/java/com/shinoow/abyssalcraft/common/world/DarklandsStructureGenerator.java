@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.overworld.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
@@ -81,13 +82,13 @@ public class DarklandsStructureGenerator {
 		else if(shrine_biomes.contains(biome)) {
 			int x = chunkX + random.nextInt(16) + 8;
 			int z = chunkZ + random.nextInt(16) + 8;
-			if(random.nextInt(10) == 0)
+			if(random.nextInt(ACConfig.darkShrineSpawnRate) == 0)
 				generate(1, world, random, world.getHeight(new BlockPos(x, 0, z)),
 						Blocks.GRASS.getDefaultState(), Blocks.SAND.getDefaultState(), Blocks.STONE.getDefaultState());
 
 			x = chunkX + random.nextInt(16) + 8;
 			z = chunkZ + random.nextInt(16) + 8;
-			if(random.nextInt(10) == 0)
+			if(random.nextInt(ACConfig.darkRitualGroundsSpawnRate) == 0)
 				generate(2, world, random, world.getHeight(new BlockPos(x, 0, z)),
 						Blocks.GRASS.getDefaultState(), Blocks.SAND.getDefaultState(), Blocks.STONE.getDefaultState());
 		}
