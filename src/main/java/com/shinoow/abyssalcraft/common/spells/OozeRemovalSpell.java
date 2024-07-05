@@ -31,8 +31,9 @@ public class OozeRemovalSpell extends Spell {
 	@Override
 	public boolean canCastSpell(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
-		for(BlockPos pos1 : BlockPos.getAllInBoxMutable(new BlockPos(player.posX - 3, player.posY - 3, player.posZ - 3),
-				new BlockPos(player.posX + 3, player.posY + 3, player.posZ + 3)))
+		int dist = 6 * (scrollType.getQuality() + 1);
+		for(BlockPos pos1 : BlockPos.getAllInBoxMutable(new BlockPos(player.posX - dist, player.posY - dist, player.posZ - dist),
+				new BlockPos(player.posX + dist, player.posY + dist, player.posZ + dist)))
 			if(world.getBlockState(pos1).getBlock() == ACBlocks.shoggoth_ooze)
 				return true;
 		return false;
@@ -43,8 +44,9 @@ public class OozeRemovalSpell extends Spell {
 
 	@Override
 	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
-		for(BlockPos pos1 : BlockPos.getAllInBox(new BlockPos(player.posX - 3, player.posY - 3, player.posZ - 3),
-				new BlockPos(player.posX + 3, player.posY + 3, player.posZ + 3)))
+		int dist = 6 * (scrollType.getQuality() + 1);
+		for(BlockPos pos1 : BlockPos.getAllInBox(new BlockPos(player.posX - dist, player.posY - dist, player.posZ - dist),
+				new BlockPos(player.posX + dist, player.posY + dist, player.posZ + dist)))
 			if(world.getBlockState(pos1).getBlock() == ACBlocks.shoggoth_ooze)
 				world.destroyBlock(pos1, false);
 	}

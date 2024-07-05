@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.spells;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import com.google.common.collect.Sets;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
@@ -49,7 +49,7 @@ public class MiningSpell extends Spell {
 		RayTraceResult r = rayTrace(player, world, 16, 1);
 
 		if(r != null && r.typeOfHit == Type.BLOCK)
-			for(BlockPos pos2 : getPositions(r.getBlockPos(), r.sideHit.getOpposite())){
+			for(BlockPos pos2 : getPositions(r.getBlockPos(), r.sideHit.getOpposite(), scrollType)){
 				IBlockState state = getRemains(world.getBlockState(pos2));
 				if(state != null && world.isBlockModifiable(player, pos2))
 					return true;
@@ -105,33 +105,37 @@ public class MiningSpell extends Spell {
 		return world.rayTraceBlocks(vec3d, vec3d2, true, false, true);
 	}
 
-	private Set<BlockPos> getPositions(BlockPos pos, EnumFacing facing){
-		Set<BlockPos> stuff = Sets.newHashSetWithExpectedSize(9);
+	private Set<BlockPos> getPositions(BlockPos pos, EnumFacing facing, ScrollType scrollType){
+		int min = (1 + 1 * (scrollType.getQuality() + 1)) * -1;
+		int max = 1 * (scrollType.getQuality() + 1);
+		Set<BlockPos> stuff = new HashSet<>();
 		Axis a = facing.getAxis();
 		if(a.isHorizontal())
-			for(int i = 1; i > -2; i--)
-				for(int j = 1; j > -2; j--)
+			for(int i = max; i > min; i--)
+				for(int j = max; j > min; j--)
 					stuff.add(pos.add(a == Axis.Z ? i : 0, j, a == Axis.X ? i : 0));
 		else
-			for(int i = 1; i > -2; i--)
-				for(int j = 1; j > -2; j--)
+			for(int i = max; i > min; i--)
+				for(int j = max; j > min; j--)
 					stuff.add(pos.add(i, 0, j));
 		return stuff;
 	}
 
-	private Set<BlockPos> getOuterPositions(BlockPos pos, EnumFacing facing){
-		Set<BlockPos> stuff = Sets.newHashSet();
+	private Set<BlockPos> getOuterPositions(BlockPos pos, EnumFacing facing, ScrollType scrollType){
+		int min = (2 + 1 * (scrollType.getQuality() + 1)) * -1;
+		int max = 1 + 1 * (scrollType.getQuality() + 1);
+		Set<BlockPos> stuff = new HashSet<>();
 		Axis a = facing.getAxis();
 		if(a.isHorizontal())
-			for(int i = 2; i > -3; i--)
-				for(int j = 2; j > -3; j--)
+			for(int i = max; i > min; i--)
+				for(int j = max; j > min; j--)
 					stuff.add(pos.add(a == Axis.Z ? i : 0, j, a == Axis.X ? i : 0));
 		else
-			for(int i = 2; i > -3; i--)
-				for(int j = 2; j > -3; j--)
+			for(int i = max; i > min; i--)
+				for(int j = max; j > min; j--)
 					stuff.add(pos.add(i, 0, j));
 
-		stuff.removeAll(getPositions(pos, facing));
+		stuff.removeAll(getPositions(pos, facing, scrollType));
 
 		return stuff;
 	}
@@ -145,31 +149,37 @@ public class MiningSpell extends Spell {
 		RayTraceResult r = rayTrace(player, world, 16, 1);
 
 		float f = 0;
+		float fmax = 500 * (scrollType.getQuality() + 1);
+		int imax = 128 * (scrollType.getQuality() + 1);
+		if(scrollType.getQuality() >= ScrollType.GREATER.getQuality()) {
+			fmax += 1000;
+			imax += 256;
+		}
 
 		if(r != null && r.typeOfHit == Type.BLOCK)
-			for(int i = 0; f < 500; i++){
-				if(f >= 500) break;
-				for(BlockPos pos2 : getPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite())){
+			for(int i = 0; f < fmax; i++){
+				if(f >= fmax) break;
+				for(BlockPos pos2 : getPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite(), scrollType)){
 					IBlockState state = getRemains(world.getBlockState(pos2));
 					if(state != null && world.isBlockModifiable(player, pos2)){
 						f+= world.getBlockState(pos2).getBlockHardness(world, pos2)*(world.getBlockState(pos2).getMaterial().isLiquid() ? 0.5 : 2);
 						if(i == 0)
 							world.destroyBlock(pos2, false);
 						world.setBlockState(pos2, state);
-						if(f >= 500) break;
+						if(f >= fmax) break;
 					}
 				}
-				for(BlockPos pos2 : getOuterPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite())){
+				for(BlockPos pos2 : getOuterPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite(), scrollType)){
 					IBlockState state = getResult(world.getBlockState(pos2));
 					if(state != null && world.isBlockModifiable(player, pos2)){
 						f+= world.getBlockState(pos2).getBlockHardness(world, pos2)*(world.getBlockState(pos2).getMaterial().isLiquid() ? 0.5 : 2);
 						if(i == 0)
 							world.destroyBlock(pos2, false);
 						world.setBlockState(pos2, state);
-						if(f >= 500) break;
+						if(f >= fmax) break;
 					}
 				}
-				if(i >= 128) break;
+				if(i >= imax) break;
 			}
 	}
 }

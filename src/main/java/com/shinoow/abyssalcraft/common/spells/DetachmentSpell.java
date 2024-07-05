@@ -51,6 +51,8 @@ public class DetachmentSpell extends EntityTargetSpell {
 		EntityEquipmentSlot removeSlot = slots.get(player.world.rand.nextInt(slots.size()));
 		target.entityDropItem(target.getItemStackFromSlot(removeSlot), 0);
 		target.setItemStackToSlot(removeSlot, ItemStack.EMPTY);
+		if(scrollType.getQuality() > ScrollType.MODERATE.getQuality()) // double cast for greater scroll
+			castSpellOnTarget(world, pos, player, scrollType, target);
 	}
 
 }

@@ -46,6 +46,6 @@ public class GraspofCthulhuSpell extends EntityTargetSpell {
 		target.setInWeb();
 		target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 10, 14, false, false));
 		if(target.ticksExisted % 20 == 0 && target.getHealth() > 1)
-			target.attackEntityFrom(DamageSource.causePlayerDamage(player).setDamageBypassesArmor().setDamageIsAbsolute(), 1);
+			target.attackEntityFrom(DamageSource.causePlayerDamage(player).setDamageBypassesArmor().setDamageIsAbsolute(), scrollType.getQuality());
 	}
 }

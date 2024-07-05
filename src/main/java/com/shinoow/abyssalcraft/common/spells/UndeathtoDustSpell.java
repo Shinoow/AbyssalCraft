@@ -35,7 +35,7 @@ public class UndeathtoDustSpell extends EntityTargetSpell {
 	@Override
 	protected boolean canCastSpellOnTarget(EntityLivingBase target, ScrollType scrollType) {
 
-		return target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
+		return target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD && target.isNonBoss();
 	}
 
 	@Override

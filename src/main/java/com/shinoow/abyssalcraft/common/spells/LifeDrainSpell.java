@@ -40,8 +40,9 @@ public class LifeDrainSpell extends EntityTargetSpell {
 
 	@Override
 	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType, EntityLivingBase target) {
-		if(!target.isDead && target.attackEntityFrom(DamageSource.causePlayerDamage(player).setDamageBypassesArmor().setDamageIsAbsolute(), 5)) {
-			player.heal(5);
+		float amount = 5 + 2.5f * scrollType.getQuality();
+		if(!target.isDead && target.attackEntityFrom(DamageSource.causePlayerDamage(player).setDamageBypassesArmor().setDamageIsAbsolute(), amount)) {
+			player.heal(amount);
 			pos = pos.up();
 			BlockPos pos1 = target.getPosition();
 

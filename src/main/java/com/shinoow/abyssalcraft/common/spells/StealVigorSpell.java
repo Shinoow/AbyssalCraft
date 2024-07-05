@@ -39,12 +39,15 @@ public class StealVigorSpell extends EntityTargetSpell {
 	@Override
 	public void castSpellOnTarget(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType, EntityLivingBase target) {
 
-		target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1200, 1));
-		target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1200, 1));
-		target.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 1200, 1));
-		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1200, 1));
-		player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200, 1));
-		player.addPotionEffect(new PotionEffect(MobEffects.HASTE, 1200, 1));
+		int level = scrollType.getQuality() + 1; // 1, 2, 3, 4
+		int duration = 600 + 600 * level; // 1200, 1800, 2400, 3000
+
+		target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, duration, level));
+		target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, duration, level));
+		target.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, duration, level));
+		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, duration, level));
+		player.addPotionEffect(new PotionEffect(MobEffects.SPEED, duration, level));
+		player.addPotionEffect(new PotionEffect(MobEffects.HASTE, duration, level));
 	}
 
 }
