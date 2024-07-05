@@ -35,7 +35,7 @@ import net.minecraft.world.World;
 public class DisplayRoutesSpell extends Spell {
 
 	public DisplayRoutesSpell() {
-		super("displayRoutes", 3, 100F, new Object[] {new ItemStack(Blocks.GLASS_PANE)});
+		super("displayRoutes", 3, 1F, new Object[] {new ItemStack(Blocks.GLASS_PANE)});
 
 	}
 

@@ -29,7 +29,7 @@ import net.minecraft.world.World;
 public class ToggleStateSpell extends Spell {
 
 	public ToggleStateSpell() {
-		super("toggleState", 3, 1000F, new Object[] {Blocks.LEVER});
+		super("toggleState", 3, 1F, new Object[] {Blocks.LEVER});
 
 	}
 

@@ -25,6 +25,5 @@ public interface INecroData {
 
 	String getIdentifier();
 
-	//TODO use IResearchItem instead
 	IResearchItem getResearch();
 }

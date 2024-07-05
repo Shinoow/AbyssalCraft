@@ -391,7 +391,6 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 	 * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0 if the item isn't
 	 * fuel
 	 */
-	// TODO: create new fuel types
 	public static int getCrystallizationTime(ItemStack par1ItemStack)
 	{
 		if (par1ItemStack.isEmpty())
