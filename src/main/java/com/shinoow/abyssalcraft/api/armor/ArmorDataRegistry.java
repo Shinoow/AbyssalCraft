@@ -34,8 +34,11 @@ public class ArmorDataRegistry {
 
 	private static final Map<ArmorMaterial, ArmorData> GHOUL_DATA = new HashMap<>();
 	private static final Map<ArmorMaterial, ArmorData> SKELETON_GOLIATH_DATA = new HashMap<>();
+	private static final Map<ArmorMaterial, ArmorData> INNER_GHOUL_DATA = new HashMap<>();
+	private static final Map<ArmorMaterial, ArmorData> INNER_SKELETON_GOLIATH_DATA = new HashMap<>();
 
 	private static final Map<ArmorMaterial, Integer> COLORS = new HashMap<>();
+	private static final Map<ArmorMaterial, Integer> INNER_COLORS = new HashMap<>();
 
 	private ArmorData EMPTY_GHOUL = new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_2.png"), true).setEmpty();
 	private ArmorData EMPTY_SKELETON_GOLIATH = new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_2.png"), true).setEmpty();
@@ -50,32 +53,76 @@ public class ArmorDataRegistry {
 		if(GHOUL_DATA.containsKey(material))
 			LOGGER.warn("Ghoul data was already registered for {}, overriding it", material.toString());
 		GHOUL_DATA.put(material, data);
+		INNER_GHOUL_DATA.put(material, data);
 	}
 
 	public void registerSkeletonGoliathData(ArmorMaterial material, ArmorData data) {
 		if(SKELETON_GOLIATH_DATA.containsKey(material))
 			LOGGER.warn("Skeleton Goliath data was already registered for {}, overriding it", material.toString());
 		SKELETON_GOLIATH_DATA.put(material, data);
+		INNER_SKELETON_GOLIATH_DATA.put(material, data);
 	}
 
 	public void registerColor(ArmorMaterial material, int color) {
 		if(COLORS.containsKey(material))
 			LOGGER.warn("A color was already registered for {}, overriding it", material.toString());
 		COLORS.put(material, color);
+		INNER_COLORS.put(material, color);
 	}
 
 	public ArmorData getGhoulData(ArmorMaterial material) {
-		return GHOUL_DATA.getOrDefault(material, EMPTY_GHOUL);
+		return INNER_GHOUL_DATA.getOrDefault(material, EMPTY_GHOUL);
 	}
 
 	public ArmorData getSkeletonGoliathData(ArmorMaterial material) {
-		return SKELETON_GOLIATH_DATA.getOrDefault(material, EMPTY_SKELETON_GOLIATH);
+		return INNER_SKELETON_GOLIATH_DATA.getOrDefault(material, EMPTY_SKELETON_GOLIATH);
 	}
 
 	/**
 	 * Returns a color for a material, or -1 as "no color"
 	 */
 	public int getColor(ArmorMaterial material) {
-		return COLORS.getOrDefault(material, -1);
+		return INNER_COLORS.getOrDefault(material, -1);
+	}
+
+	public void processCollection(ArmorDataCollection collection) {
+		for(ColorData cd : collection.getColors()) {
+			ArmorMaterial mat = tryGet(cd.getMaterial());
+			if(mat != null)
+				INNER_COLORS.put(mat, cd.getColor());
+			else
+				LOGGER.warn("Could not find material: {}", cd.getMaterial());
+		}
+		for(TextureData td : collection.getGhoulTextures()) {
+			ArmorMaterial mat = tryGet(td.getMaterial());
+			if(mat != null)
+				INNER_GHOUL_DATA.put(mat, td.convert());
+			else
+				LOGGER.warn("Could not find material: {}", td.getMaterial());
+		}
+		for(TextureData td : collection.getSkeletonGoliathTextures()) {
+			ArmorMaterial mat = tryGet(td.getMaterial());
+			if(mat != null)
+				INNER_SKELETON_GOLIATH_DATA.put(mat, td.convert());
+			else
+				LOGGER.warn("Could not find material: {}", td.getMaterial());
+		}
+	}
+
+	private ArmorMaterial tryGet(String name) {
+		for(ArmorMaterial mat1 : ArmorMaterial.values())
+			if(mat1.name().equalsIgnoreCase(name))
+				return mat1;
+
+		return null;
+	}
+
+	public void clearInnerCollections() {
+		INNER_GHOUL_DATA.clear();
+		INNER_SKELETON_GOLIATH_DATA.clear();
+		INNER_COLORS.clear();
+		INNER_GHOUL_DATA.putAll(GHOUL_DATA);
+		INNER_SKELETON_GOLIATH_DATA.putAll(SKELETON_GOLIATH_DATA);
+		INNER_COLORS.putAll(COLORS);
 	}
 }

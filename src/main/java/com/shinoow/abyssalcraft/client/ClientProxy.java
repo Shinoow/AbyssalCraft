@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.api.spell.SpellUtils;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
+import com.shinoow.abyssalcraft.client.handlers.ArmorDataReloadListener;
 import com.shinoow.abyssalcraft.client.handlers.ClientVarsReloadListener;
 import com.shinoow.abyssalcraft.client.lib.LovecraftFont;
 import com.shinoow.abyssalcraft.client.model.block.ModelDGhead;
@@ -175,6 +176,7 @@ public class ClientProxy extends CommonProxy {
 		if(Minecraft.getMinecraft().getResourceManager() instanceof IReloadableResourceManager) {
 			((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(AbyssalCraftAPI.getAkloFont());
 			((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ClientVarsReloadListener());
+			((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ArmorDataReloadListener());
 		}
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDGhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul.png"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/depths_ghoul_pete.png"));
