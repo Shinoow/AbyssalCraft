@@ -115,6 +115,7 @@ public class NecronomiconText {
 	public static String MATERIAL_MONOLITH_STONE_1 = "necronomicon.text.materials.monolithstone.1";
 	public static String MATERIAL_ABYSSAL_SAND = "necronomicon.text.materials.abyssalsand";
 	public static String MATERIAL_FUSED_ABYSSAL_SAND = "necronomicon.text.materials.fusedabyssalsand";
+	public static String MATERIAL_IDOL_OF_FADING = "necronomicon.text.materials.idoloffading";
 
 	public static String CRAFTING_CORALIUM_INFUSED_STONE_1 = "necronomicon.text.crafting.coraliuminfusedstone.1";
 	public static String CRAFTING_CORALIUM_INFUSED_STONE_2 = "necronomicon.text.crafting.coraliuminfusedstone.2";
@@ -134,10 +135,7 @@ public class NecronomiconText {
 	public static String CRAFTING_LIFE_CRYSTAL_2 = "necronomicon.text.crafting.lifecrystal.2";
 	public static String CRAFTING_ETHAXIUM_INGOT_1 = "necronomicon.text.crafting.ethaxiumingot.1";
 	public static String CRAFTING_ETHAXIUM_INGOT_2 = "necronomicon.text.crafting.ethaxiumingot.2";
-	//	public static String CRAFTING_BLANK_ENGRAVING_1 = "necronomicon.text.crafting.engravingblank.1";
-	//	public static String CRAFTING_BLANK_ENGRAVING_2 = "necronomicon.text.crafting.engravingblank.2";
 	public static String CRAFTING_COIN = "necronomicon.text.crafting.coin";
-	//	public static String CRAFTING_ENGRAVER = "necronomicon.text.crafting.engraver";
 	public static String CRAFTING_CRYSTAL_BAG_1 = "necronomicon.text.crafting.crystalbag.1";
 	public static String CRAFTING_CRYSTAL_BAG_2 = "necronomicon.text.crafting.crystalbag.2";
 	public static String CRAFTING_MATERIALIZER_1 = "necronomicon.text.crafting.materializer.1";
@@ -189,12 +187,6 @@ public class NecronomiconText {
 	public static String CRAFTING_SEQUENTIAL_BREWING_STAND_2 = "necronomicon.text.crafting.sequential_brewing_stand.2";
 
 	//Misc crafting
-	public static String CRAFTING_UPGRADE_KIT_1 = "necronomicon.text.crafting.upgradekit.1";
-	public static String CRAFTING_UPGRADE_KIT_2 = "necronomicon.text.crafting.upgradekit.2";
-	public static String CRAFTING_IRON_PLATE = "necronomicon.text.crafting.ironplate";
-	public static String CRAFTING_WASHCLOTH = "necronomicon.text.crafting.washcloth";
-	public static String CRAFTING_MRE = "necronomicon.text.crafting.mre";
-	public static String CRAFTING_PLATE_FOOD = "necronomicon.text.crafting.platefood";
 	public static String CRAFTING_ODB_CORE = "necronomicon.text.crafting.odbcore";
 	public static String CRAFTING_ODB = "necronomicon.text.crafting.odb";
 	public static String CRAFTING_CARBON_CLUSTER = "necronomicon.text.crafting.carboncluster";
@@ -338,7 +330,6 @@ public class NecronomiconText {
 
 	public static String MACHINE_INFO_1 = "necronomicon.text.machines.1";
 	public static String MACHINE_INFO_2 = "necronomicon.text.machines.2";
-	//	public static String MACHINE_INFO_3 = "necronomicon.text.machines.3";
 	public static String MACHINE_INFO_4 = "necronomicon.text.machines.4";
 
 	public static String KNOWLEDGE_INFO_1 = "necronomicon.text.knowledge.1";
@@ -371,6 +362,8 @@ public class NecronomiconText {
 	public static String ITEM_TRANSPORT_TUT_7 = "necronomicon.text.itemtransportsystem.7";
 	public static String ITEM_TRANSPORT_TUT_8 = "necronomicon.text.itemtransportsystem.8";
 
+	public static String IDOLS_INFO = "necronomicon.text.idols.info";
+	
 	public static String WIP = "necronomicon.text.wip";
 
 	/** Text limit */
@@ -441,6 +434,7 @@ public class NecronomiconText {
 	public static String LABEL_RANGE_AMPLIFIER = "necronomicon.rangeamplifier";
 	public static String LABEL_DURATION_AMPLIFIER = "necronomicon.durationamplifier";
 	public static String LABEL_POWER_AMPLIFIER = "necronomicon.poweramplifier";
+	public static String LABEL_INFORMATION_IDOLS = "necronomicon.information.idols";
 
 	// Alternating texts to display for locked pages
 	// Lyric snippets of songs from the following bands (not in order):

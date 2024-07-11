@@ -103,6 +103,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapter pematerials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
 		Chapter pespecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0);
 		Chapter placesOfPowerInfo = new Chapter("information", NecronomiconText.LABEL_INFO, 0);
+		Chapter idols = new Chapter("idols", NecronomiconText.LABEL_INFORMATION_IDOLS, 0);
 		GuiInstance structures = new GuiInstance(0, NecronomiconText.LABEL_STRUCTURES, "structures") {
 
 			@Override
@@ -119,7 +120,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 			}
 		};
 		NecroData placesOfPower = new NecroData("placesofpower", NecronomiconText.LABEL_PLACES_OF_POWER, 0, NecronomiconText.PLACES_OF_POWER_INFO, placesOfPowerInfo, structures);
-		internalNecroData.add(new NecroData("potentialenergy", NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, peinfo, pematerials, pespecialmaterials, placesOfPower));
+		internalNecroData.add(new NecroData("potentialenergy", NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, peinfo, pematerials, pespecialmaterials, placesOfPower, idols));
 		Chapter miscspecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0);
 		Chapter miscenchantments = new Chapter("enchantments", NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0);
 		Chapter miscstatues = new Chapter("decorativestatues", NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0);
@@ -465,6 +466,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(19, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_15, NecronomiconText.PE_TUT_19),
 				new Page(20, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconText.PE_TUT_20));
 		addInternalPages("potentialenergy", "placesofpower", "information", new Page(1, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_POWER_INFO_1), new Page(2, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_POWER_INFO_2));
+		addPages("potentialenergy", "idols", new Page(1, NecronomiconText.LABEL_INFORMATION_IDOLS, 0, NecronomiconText.IDOLS_INFO),
+				new Page(2, NecronomiconText.LABEL_INFORMATION_IDOLS, 0, new ItemStack(ACBlocks.idol_of_fading), NecronomiconText.MATERIAL_IDOL_OF_FADING));
 
 		String title = NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS;
 		List<Page> pages = new ArrayList<>();

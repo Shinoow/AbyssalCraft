@@ -11,83 +11,45 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
+import com.shinoow.abyssalcraft.lib.tileentity.TileEntityIdolBase;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class TileEntityIdolOfFading extends TileEntity implements ITickable, IEnergyCollector {
-
-	private int cooldown;
-	private float energy;
+public class TileEntityIdolOfFading extends TileEntityIdolBase {
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
-	{
-		super.readFromNBT(nbttagcompound);
-		cooldown = nbttagcompound.getInteger("Cooldown");
-		energy = nbttagcompound.getFloat("PotEnergy");
+	protected boolean isValidState() {
+		return world.getDifficulty() != EnumDifficulty.PEACEFUL && world.getGameRules().getBoolean("doMobSpawning")
+				&& !world.canBlockSeeSky(pos.up());
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
-	{
-		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setInteger("Cooldown", cooldown);
-		nbttagcompound.setFloat("PotEnergy", energy);
-
-		return nbttagcompound;
+	protected int getMaxCooldown() {
+		return 200;
 	}
 
 	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
+	protected float getPEPerActivation() {
+		return 100;
 	}
 
 	@Override
-	public NBTTagCompound getUpdateTag()
-	{
-		return writeToNBT(new NBTTagCompound());
-	}
+	protected void activate() {
 
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.getNbtCompound());
-	}
+		int num = getNum();
 
-	@Override
-	public void onLoad()
-	{
-		if(world.isRemote)
-			world.tickableTileEntities.remove(this);
-	}
-
-	@Override
-	public void update() {
-		if(world.getDifficulty() != EnumDifficulty.PEACEFUL && world.getGameRules().getBoolean("doMobSpawning")
-				&& !world.canBlockSeeSky(pos.up())){
-			cooldown++;
-			if (cooldown >= 200 && getContainedEnergy() >= 100) {
-				cooldown = 0;
-				if(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32, false) != null){
-					EntityLiving mob = getShadow(world);
-					setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
-					mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);
-					world.spawnEntity(mob);
-					consumeEnergy(100);
-				}
-			}
+		if(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32, false) != null){
+			EntityLiving mob = getShadow(num, world);
+			setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
+			mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);
+			world.spawnEntity(mob);
+			consumeEnergy(getPE(num));
 		}
 	}
 
@@ -98,45 +60,33 @@ public class TileEntityIdolOfFading extends TileEntity implements ITickable, IEn
 		}
 	}
 
-	public int getCooldown(){
-		return cooldown;
-	}
-
-	public void setCooldown(int cd){
-		cooldown = cd;
-	}
-
-	private EntityLiving getShadow(World world) {
-
+	private int getNum() {
 		if(world.rand.nextInt(10) == 0)
-			return new EntityShadowBeast(world);
+			return 2;
 		else if(world.rand.nextInt(3) == 0)
+			return 1;
+		return 0;
+	}
+
+	private EntityLiving getShadow(int num, World world) {
+		switch(num) {
+		case 1:
 			return new EntityShadowMonster(world);
-
-		return new EntityShadowCreature(world);
+		case 2:
+			return new EntityShadowBeast(world);
+		default:
+			return new EntityShadowCreature(world);
+		}
 	}
 
-	@Override
-	public float getContainedEnergy() {
-
-		return energy;
-	}
-
-	@Override
-	public int getMaxEnergy() {
-
-		return 1000;
-	}
-
-	@Override
-	public TileEntity getContainerTile() {
-
-		return this;
-	}
-
-	@Override
-	public void setEnergy(float energy) {
-
-		this.energy = energy;
+	private float getPE(int num) {
+		switch(num) {
+		case 1:
+			return 50F;
+		case 2:
+			return 100F;
+		default:
+			return 25F;
+		}
 	}
 }

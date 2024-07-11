@@ -301,6 +301,7 @@ necronomicon.durationamplifier=Duration amplifier
 necronomicon.poweramplifier=Power amplifier
 necronomicon.spell.type.charging=Charging
 necronomicon.spell.type.instant=Instant
+necronomicon.information.idols=Idols
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -383,6 +384,7 @@ necronomicon.text.materials.ritualpedestal.1=Ritual Pedestals are used to place 
 necronomicon.text.materials.monolithstone.1=Monolith Stone is a material used to some extent with Potential Energy. It's origins are unknown, other than that Shoggoths are capable of creating it. It can be obtained from Monoliths or Shoggoth Lairs scattered about.
 necronomicon.text.materials.abyssalsand=Abyssal Sand is found around the surface layers of the Abyssal Wasteland. It can be smelted into Abyssal Sand Glass, which is green.
 necronomicon.text.materials.fusedabyssalsand=Fused Abyssal Sand covers the surface of the Abyssal Wasteland. It's glassy texture is formed from the sand reacting to the atmosphere of the dimension.
+necronomicon.text.materials.idoloffading=The Idol of Fading utilizes PE to summon Living Shadows from the Dark Realm. Each summon costs 25, 50, or 100 PE depending on what it manages to summon (takes less energy to summon a Shadow Creature). It only summons if it can't see the sky (underneath a roof, for example), and a player is within 32 blocks of it.
 
 necronomicon.text.crafting.coraliuminfusedstone.1=Coralium Infused Stone is crafted with Coralium Gem Clusters and Stone. The three clusters can be of any size, but must add up to 9.
 necronomicon.text.crafting.coraliuminfusedstone.2=If you use a 9-gem cluster, surround it with Stone blocks instead of 2 rows. When this block is broken (or smelt) you get a Coralium Pearl.
@@ -621,6 +623,8 @@ necronomicon.text.itemtransportsystem.5=With a keybind (check the item tooltip),
 necronomicon.text.itemtransportsystem.6=When you're in the "Apply Configuration" mode, sneak right-click on the block you wish to transport items from. Side matters, so keep that in mind if the block only extracts from one side.
 necronomicon.text.itemtransportsystem.7=When you're in the "Remove Configuration" mode, you can remove all applied configurations from a block by sneak right-clicking them. Breaking and placing the block would do the same thing, but this saves you time in comparison.
 necronomicon.text.itemtransportsystem.8=There are two utility spells (named "Display Routes" and "Toll The Bell") which can aid you in keeping track of defined routes, and also starting/stopping them. "Display Routes" will reveal any active routes in your vicinity, and "Toll The Bell" will start or stop routes from the block you're looking at (or all nearby if not targeting one).
+
+necronomicon.text.idols.info=Idols utilize PE to perform specific actions reliably, provided they have a source of PE to tap into. You can come across them in the Darkstone Shrines where you can find statues. Each Idol comes with its own requirements in order to function (besides PE).
 
 necronomicon.text.wip=This section is incomplete.
 
