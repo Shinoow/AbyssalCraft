@@ -85,9 +85,12 @@ public abstract class LayerACArmorBase<T extends ModelArmoredBase> extends Layer
 					float f2 = (i & 255) / 255.0F;
 					GlStateManager.color(this.colorR * f, this.colorG * f1, this.colorB * f2, this.alpha);
 					t.render(entityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-					this.renderer.bindTexture(this.getArmorResource(entityLivingBaseIn, itemstack, slotIn, "overlay"));
-					GlStateManager.color(this.colorR, this.colorG, this.colorB, this.alpha);
-					t.render(entityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+					if(data.hasOverlay()) {
+						this.renderer.bindTexture(this.getArmorResource(entityLivingBaseIn, itemstack, slotIn, "overlay"));
+						GlStateManager.color(this.colorR, this.colorG, this.colorB, this.alpha);
+						t.render(entityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+					} else 
+						GlStateManager.color(this.colorR, this.colorG, this.colorB, this.alpha);
 				} else {
 					if(color != -1 && data.isEmpty()) { // apply color if it should
 						int i = color;
