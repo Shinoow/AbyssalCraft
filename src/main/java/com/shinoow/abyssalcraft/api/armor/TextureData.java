@@ -4,13 +4,13 @@ import net.minecraft.util.ResourceLocation;
 
 public class TextureData {
 
-	private boolean overlay, empty;
+	private boolean overlay, colored;
 
 	private String material, texture_1, texture_2;
 
 	public TextureData() {
 		overlay = false;
-		empty = false;
+		colored = false;
 		material = "";
 		texture_1 = "";
 		texture_2 = "";
@@ -30,8 +30,8 @@ public class TextureData {
 
 	public ArmorData convert() {
 		ArmorData data = new ArmorData(getFirstTexture(), getSecondTexture(), overlay);
-		if(empty)
-			data.setEmpty();
+		if(colored)
+			data.setColored();
 		return data;
 	}
 }

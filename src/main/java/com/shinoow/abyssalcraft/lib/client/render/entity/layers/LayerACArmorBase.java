@@ -92,7 +92,7 @@ public abstract class LayerACArmorBase<T extends ModelArmoredBase> extends Layer
 					} else 
 						GlStateManager.color(this.colorR, this.colorG, this.colorB, this.alpha);
 				} else {
-					if(color != -1 && data.isEmpty()) { // apply color if it should
+					if(color != -1 && data.isColored()) { // apply color if it should
 						int i = color;
 						float f = (i >> 16 & 255) / 255.0F;
 						float f1 = (i >> 8 & 255) / 255.0F;

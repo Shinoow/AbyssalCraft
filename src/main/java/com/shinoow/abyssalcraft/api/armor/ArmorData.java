@@ -21,7 +21,7 @@ import net.minecraft.util.ResourceLocation;
  */
 public class ArmorData {
 
-	private boolean overlay, empty;
+	private boolean overlay, colored;
 
 	private ResourceLocation texture_1, texture_2, overlay_1, overlay_2;
 
@@ -80,14 +80,14 @@ public class ArmorData {
 	}
 
 	/**
-	 * Returns if the ArmorData is empty (this is when other logic looks for colors)
+	 * Returns if the ArmorData is colored (this allows other logic to color it besides layers)
 	 */
-	public boolean isEmpty() {
-		return empty;
+	public boolean isColored() {
+		return colored;
 	}
 
-	public ArmorData setEmpty() {
-		empty = true;
+	public ArmorData setColored() {
+		colored = true;
 		return this;
 	}
 
