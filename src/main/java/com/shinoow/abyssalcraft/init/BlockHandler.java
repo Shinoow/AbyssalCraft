@@ -118,10 +118,10 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.abyssalnite_stone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.PURPLE).setTranslationKey("abydreadbrick");
 		ACBlocks.chiseled_abyssalnite_stone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.PURPLE).remap("abydreadstone", EnumBrickType.CHISELED).setTranslationKey("chiseled_abyssalnite_stone_brick");
 		ACBlocks.cracked_abyssalnite_stone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.PURPLE).remap("abydreadbrick", EnumBrickType.CRACKED).setTranslationKey("cracked_abyssalnite_stone_brick");
-		ACBlocks.dreadlands_sapling = new BlockACSapling(new WorldGenDrT(true)).setHardness(0.0F).setResistance(0.0F).setTranslationKey("dreadsapling");
-		ACBlocks.dreadlands_log = new BlockACLog(MapColor.RED).setHardness(2.0F).setResistance(12.0F).setTranslationKey("dreadlog");
-		ACBlocks.dreadlands_leaves = new BlockACLeaves(ACBlocks.dreadlands_sapling, MapColor.RED).setHardness(0.2F).setResistance(1.0F).setTranslationKey("dreadleaves");
-		ACBlocks.dreadlands_planks = new BlockACBasic(Material.WOOD, 2.0F, 5.0F, SoundType.WOOD, MapColor.RED).setTranslationKey("dreadplanks");
+		ACBlocks.dreadwood_sapling = new BlockACSapling(new WorldGenDrT(true)).setHardness(0.0F).setResistance(0.0F).setTranslationKey("dreadsapling");
+		ACBlocks.dreadwood_log = new BlockACLog(MapColor.RED).setHardness(2.0F).setResistance(12.0F).setTranslationKey("dreadlog");
+		ACBlocks.dreadwood_leaves = new BlockACLeaves(ACBlocks.dreadwood_sapling, MapColor.RED).setHardness(0.2F).setResistance(1.0F).setTranslationKey("dreadleaves");
+		ACBlocks.dreadwood_planks = new BlockACBasic(Material.WOOD, 2.0F, 5.0F, SoundType.WOOD, MapColor.RED).setTranslationKey("dreadplanks");
 		ACBlocks.depths_ghoul_head = new BlockDGhead().setTranslationKey("dghead");
 		ACBlocks.liquid_coralium = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setTranslationKey("cwater");
 		ACBlocks.dreadlands_grass = new BlockDreadGrass().setHardness(0.4F).setTranslationKey("dreadgrass");
@@ -154,7 +154,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.transmutator_active = new BlockTransmutator(true).setHardness(2.5F).setResistance(12.0F).setLightLevel(0.875F).setTranslationKey("transmutator_on");
 		ACBlocks.dreadguard_spawner = new BlockSingleMobSpawner().setTranslationKey("dreadguardspawner");
 		ACBlocks.chagaroth_spawner = new BlockSingleMobSpawner().setTranslationKey("chagarothspawner");
-		ACBlocks.dreadlands_wood_fence = new BlockACFence(Material.WOOD, SoundType.WOOD, MapColor.RED).setHardness(2.0F).setResistance(5.0F).setTranslationKey("drtfence");
+		ACBlocks.dreadwood_fence = new BlockACFence(Material.WOOD, SoundType.WOOD, MapColor.RED).setHardness(2.0F).setResistance(5.0F).setTranslationKey("drtfence");
 		ACBlocks.nitre_ore = new BlockACOre(2, 3.0F, 6.0F).setTranslationKey("nitreore");
 		ACBlocks.abyssal_iron_ore = new BlockACOre(2, 3.0F, 6.0F).setTranslationKey("abyiroore");
 		ACBlocks.abyssal_gold_ore = new BlockACOre(2, 5.0F, 10.0F).setTranslationKey("abygolore");
@@ -299,7 +299,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.energy_depositioner = new BlockEnergyDepositioner();
 		ACBlocks.calcified_stone = new BlockCalcifiedStone();
 		ACBlocks.darklands_oak_door = new BlockACDoor(Material.WOOD, 3.0F, 15.0F, SoundType.WOOD, MapColor.BROWN).setTranslationKey("door_dlt");
-		ACBlocks.dreadlands_door = new BlockACDoor(Material.WOOD, 3.0F, 15.0F, SoundType.WOOD, MapColor.RED).setTranslationKey("door_drt");
+		ACBlocks.dreadwood_door = new BlockACDoor(Material.WOOD, 3.0F, 15.0F, SoundType.WOOD, MapColor.RED).setTranslationKey("door_drt");
 		ACBlocks.multi_block = new BlockMultiblock();
 		ACBlocks.sequential_brewing_stand = new BlockSequentialBrewingStand();
 		ACBlocks.portal_anchor = new BlockPortalAnchor();
@@ -414,10 +414,10 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.chiseled_abyssalnite_stone_brick, "chiseled_abyssalnite_stone_brick");
 		registerBlock(ACBlocks.cracked_abyssalnite_stone_brick, "cracked_abyssalnite_stone_brick");
 		registerBlock(ACBlocks.dreadlands_grass, "dreadgrass");
-		registerBlock(ACBlocks.dreadlands_log, "dreadlog");
-		registerBlock(ACBlocks.dreadlands_leaves, "dreadleaves");
-		registerBlock(ACBlocks.dreadlands_sapling, "dreadsapling");
-		registerBlock(ACBlocks.dreadlands_planks, "dreadplanks");
+		registerBlock(ACBlocks.dreadwood_log, "dreadlog");
+		registerBlock(ACBlocks.dreadwood_leaves, "dreadleaves");
+		registerBlock(ACBlocks.dreadwood_sapling, "dreadsapling");
+		registerBlock(ACBlocks.dreadwood_planks, "dreadplanks");
 		registerBlock(ACBlocks.depths_ghoul_head, "dghead");
 		registerBlock(ACBlocks.pete_head, "phead");
 		registerBlock(ACBlocks.mr_wilson_head, "whead");
@@ -448,7 +448,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.transmutator_active, "transmutator_on");
 		registerBlock(ACBlocks.dreadguard_spawner, "dreadguardspawner");
 		registerBlock(ACBlocks.chagaroth_spawner, "chagarothspawner");
-		registerBlock(ACBlocks.dreadlands_wood_fence, "drtfence");
+		registerBlock(ACBlocks.dreadwood_fence, "drtfence");
 		registerBlock(ACBlocks.nitre_ore, "nitreore");
 		registerBlock(ACBlocks.abyssal_iron_ore, "abyiroore");
 		registerBlock(ACBlocks.abyssal_gold_ore, "abygolore");
@@ -593,7 +593,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.energy_depositioner, "energydepositioner");
 		registerBlock(ACBlocks.calcified_stone, "calcifiedstone");
 		registerBlock(ACBlocks.darklands_oak_door, null, "door_dlt");
-		registerBlock(ACBlocks.dreadlands_door, null, "door_drt");
+		registerBlock(ACBlocks.dreadwood_door, null, "door_drt");
 		registerBlock(ACBlocks.multi_block, "multiblock");
 		registerBlock(ACBlocks.sequential_brewing_stand, "sequential_brewing_stand");
 		registerBlock(ACBlocks.portal_anchor, "portal_anchor");
@@ -611,10 +611,10 @@ public class BlockHandler implements ILifeCycleHandler {
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_wood_2, 5, 5);
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_leaves, 30, 60);
 
-		Blocks.FIRE.setFireInfo(ACBlocks.dreadlands_planks, 5, 20);
-		Blocks.FIRE.setFireInfo(ACBlocks.dreadlands_wood_fence, 5, 20);
-		Blocks.FIRE.setFireInfo(ACBlocks.dreadlands_log, 5, 5);
-		Blocks.FIRE.setFireInfo(ACBlocks.dreadlands_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_planks, 5, 20);
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_fence, 5, 20);
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_log, 5, 5);
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_leaves, 30, 60);
 	}
 
 	@Override

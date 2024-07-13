@@ -31,7 +31,7 @@ public class BlockACWall extends BlockWall{
 	public BlockACWall(Block par2Block) {
 		super(par2Block);
 		setDefaultState(getDefaultState().withProperty(UP, true));
-		setCreativeTab(ACTabs.tabBlock);
+		setCreativeTab(ACTabs.tabDecoration);
 		mapColor = par2Block.getMapColor(par2Block.getDefaultState(), null, null);
 		setHarvestLevel("pickaxe", 0);
 	}

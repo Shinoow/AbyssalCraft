@@ -61,7 +61,7 @@ public class BlockACDoor extends BlockDoor {
 	private Item getItem() {
 		if(this == ACBlocks.darklands_oak_door)
 			return ACItems.darklands_oak_door;
-		if(this == ACBlocks.dreadlands_door)
+		if(this == ACBlocks.dreadwood_door)
 			return ACItems.dreadlands_door;
 		return null;
 	}

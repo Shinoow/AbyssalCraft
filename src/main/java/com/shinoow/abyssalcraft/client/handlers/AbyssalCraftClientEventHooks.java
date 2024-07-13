@@ -436,7 +436,7 @@ public class AbyssalCraftClientEventHooks {
 		registerFluidModel(ACBlocks.liquid_antimatter, "anti");
 
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_leaves, new StateMap.Builder().ignore(BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_leaves, new StateMap.Builder().ignore(BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.dreadwood_leaves, new StateMap.Builder().ignore(BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.oblivion_deathbomb, new StateMap.Builder().ignore(BlockTNT.EXPLODE).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.odb_core, new StateMap.Builder().ignore(BlockTNT.EXPLODE).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_brick_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
@@ -450,7 +450,7 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.ethaxium_brick_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dark_ethaxium_brick_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_sapling, new StateMap.Builder().ignore(BlockSapling.TYPE).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_sapling, new StateMap.Builder().ignore(BlockSapling.TYPE).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.dreadwood_sapling, new StateMap.Builder().ignore(BlockSapling.TYPE).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.mimic_fire, new StateMap.Builder().ignore(BlockFire.AGE).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.abyssal_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
@@ -463,7 +463,7 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.dreadlands_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.dreadwood_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
 
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.cthulhu_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_cthulhu_statue), 0, new ModelResourceLocation("abyssalcraft:cthulhustatue", "inventory"));
@@ -772,10 +772,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.chiseled_abyssalnite_stone_brick, 0, "abydreadbrick_1");
 		registerItemRender(ACBlocks.cracked_abyssalnite_stone_brick, 0, "abydreadbrick_2");
 		registerItemRender(ACBlocks.dreadlands_grass, 0);
-		registerItemRender(ACBlocks.dreadlands_log, 0);
-		registerItemRender(ACBlocks.dreadlands_leaves, 0);
-		registerItemRender(ACBlocks.dreadlands_sapling, 0);
-		registerItemRender(ACBlocks.dreadlands_planks, 0);
+		registerItemRender(ACBlocks.dreadwood_log, 0);
+		registerItemRender(ACBlocks.dreadwood_leaves, 0);
+		registerItemRender(ACBlocks.dreadwood_sapling, 0);
+		registerItemRender(ACBlocks.dreadwood_planks, 0);
 		registerItemRender(ACBlocks.depths_ghoul_head, 0);
 		registerItemRender(ACBlocks.pete_head, 0);
 		registerItemRender(ACBlocks.mr_wilson_head, 0);
@@ -804,7 +804,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.dreadguard_spawner, 0);
 		registerItemRender(ACBlocks.chagaroth_spawner, 0);
 		registerItemRender(ACBlocks.jzahar_spawner, 0);
-		registerItemRender(ACBlocks.dreadlands_wood_fence, 0);
+		registerItemRender(ACBlocks.dreadwood_fence, 0);
 		registerItemRender(ACBlocks.nitre_ore, 0);
 		registerItemRender(ACBlocks.abyssal_iron_ore, 0);
 		registerItemRender(ACBlocks.abyssal_gold_ore, 0);

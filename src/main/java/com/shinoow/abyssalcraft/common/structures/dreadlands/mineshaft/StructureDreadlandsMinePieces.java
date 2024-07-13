@@ -281,15 +281,15 @@ public class StructureDreadlandsMinePieces
 				for (j = 0; j < sectionCount; ++j)
 				{
 					k = 2 + j * 5;
-					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, k, 0, 1, k, ACBlocks.dreadlands_wood_fence.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-					fillWithBlocks(par1World, par3StructureBoundingBox, 2, 0, k, 2, 1, k, ACBlocks.dreadlands_wood_fence.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, k, 0, 1, k, ACBlocks.dreadwood_fence.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+					fillWithBlocks(par1World, par3StructureBoundingBox, 2, 0, k, 2, 1, k, ACBlocks.dreadwood_fence.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 					if (par2Random.nextInt(4) == 0)
 					{
-						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 0, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-						fillWithBlocks(par1World, par3StructureBoundingBox, 2, 2, k, 2, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 0, 2, k, ACBlocks.dreadwood_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+						fillWithBlocks(par1World, par3StructureBoundingBox, 2, 2, k, 2, 2, k, ACBlocks.dreadwood_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 					} else
-						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 2, 2, k, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+						fillWithBlocks(par1World, par3StructureBoundingBox, 0, 2, k, 2, 2, k, ACBlocks.dreadwood_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k - 1, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH));
 					randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, k + 1, Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH));
@@ -310,7 +310,7 @@ public class StructureDreadlandsMinePieces
 						if (block1.getMaterial() == Material.AIR)
 						{
 							byte b1 = -1;
-							setBlockState(par1World, ACBlocks.dreadlands_planks.getDefaultState(), j, b1, k, par3StructureBoundingBox);
+							setBlockState(par1World, ACBlocks.dreadwood_planks.getDefaultState(), j, b1, k, par3StructureBoundingBox);
 						}
 					}
 
@@ -467,15 +467,15 @@ public class StructureDreadlandsMinePieces
 					fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ - 1, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 				}
 
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.minZ + 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.maxZ - 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.minZ + 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
-				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.maxZ - 1, ACBlocks.dreadlands_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.minZ + 1, ACBlocks.dreadwood_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.minX + 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.minX + 1, boundingBox.maxY, boundingBox.maxZ - 1, ACBlocks.dreadwood_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.minZ + 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.minZ + 1, ACBlocks.dreadwood_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+				fillWithBlocks(par1World, par3StructureBoundingBox, boundingBox.maxX - 1, boundingBox.minY, boundingBox.maxZ - 1, boundingBox.maxX - 1, boundingBox.maxY, boundingBox.maxZ - 1, ACBlocks.dreadwood_planks.getDefaultState(), Blocks.AIR.getDefaultState(), false);
 
 				for (int i = boundingBox.minX; i <= boundingBox.maxX; ++i)
 					for (int j = boundingBox.minZ; j <= boundingBox.maxZ; ++j)
 						if (getBlockStateFromPos(par1World, i, boundingBox.minY - 1, j, par3StructureBoundingBox).getMaterial() == Material.AIR)
-							setBlockState(par1World, ACBlocks.dreadlands_planks.getDefaultState(), i, boundingBox.minY - 1, j, par3StructureBoundingBox);
+							setBlockState(par1World, ACBlocks.dreadwood_planks.getDefaultState(), i, boundingBox.minY - 1, j, par3StructureBoundingBox);
 
 				return true;
 			}

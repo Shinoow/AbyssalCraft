@@ -88,10 +88,10 @@ public class ACBlocks {
 	public static Block chiseled_abyssalnite_stone_brick;
 	public static Block cracked_abyssalnite_stone_brick;
 	public static Block dreadlands_grass;
-	public static Block dreadlands_log;
-	public static Block dreadlands_leaves;
-	public static Block dreadlands_sapling;
-	public static Block dreadlands_planks;
+	public static Block dreadwood_log;
+	public static Block dreadwood_leaves;
+	public static Block dreadwood_sapling;
+	public static Block dreadwood_planks;
 	public static Block depths_ghoul_head;
 	public static Block pete_head;
 	public static Block mr_wilson_head;
@@ -119,7 +119,7 @@ public class ACBlocks {
 	public static Block transmutator_active;
 	public static Block dreadguard_spawner;
 	public static Block chagaroth_spawner;
-	public static Block dreadlands_wood_fence;
+	public static Block dreadwood_fence;
 	public static Block nitre_ore;
 	public static Block abyssal_iron_ore;
 	public static Block abyssal_gold_ore;
@@ -257,7 +257,7 @@ public class ACBlocks {
 	public static Block energy_depositioner;
 	public static Block calcified_stone;
 	public static Block darklands_oak_door;
-	public static Block dreadlands_door;
+	public static Block dreadwood_door;
 	public static Block multi_block;
 	public static Block sequential_brewing_stand;
 	public static Block portal_anchor;

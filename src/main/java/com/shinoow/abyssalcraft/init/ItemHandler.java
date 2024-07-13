@@ -98,7 +98,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.coralium_plague_antidote = new ItemAntidote("antidote.coralium");
 		ACItems.dread_plague_antidote = new ItemAntidote("antidote.dread");
 		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setTranslationKey("door_dlt");
-		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadlands_door).setTranslationKey("door_drt");
+		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadwood_door).setTranslationKey("door_drt");
 		ACItems.configurator_shard_0 = new ItemACBasic("configurator_shard_0");
 		ACItems.configurator_shard_1 = new ItemACBasic("configurator_shard_1");
 		ACItems.configurator_shard_2 = new ItemACBasic("configurator_shard_2");

@@ -326,7 +326,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadlands_abyssalnite_ore), NecronomiconText.MATERIAL_DREADLANDS_ABYSSALNITE_1),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreaded_abyssalnite_ore), NecronomiconText.MATERIAL_DREADED_ABYSSALNITE_1),
 				new Page(7, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadlands_grass), NecronomiconText.MATERIAL_DREADLANDS_GRASS_1),
-				new Page(8, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadlands_sapling), NecronomiconText.MATERIAL_DREADLANDS_TREE_1));
+				new Page(8, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadwood_sapling), NecronomiconText.MATERIAL_DREADLANDS_TREE_1));
 		addPages("dreadlands", "progression", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 2, NecronomiconText.PROGRESSION_DREADLANDS_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 2, NecronomiconText.PROGRESSION_DREADLANDS_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 2, NecronomiconText.PROGRESSION_DREADLANDS_3));
