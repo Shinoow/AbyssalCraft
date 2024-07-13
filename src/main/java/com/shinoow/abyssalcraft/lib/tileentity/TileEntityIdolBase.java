@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.tileentity;
 
-import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
+import com.shinoow.abyssalcraft.api.energy.IIdol;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -25,7 +25,7 @@ import net.minecraft.util.ITickable;
  * @author shinoow
  *
  */
-public abstract class TileEntityIdolBase extends TileEntity implements ITickable, IEnergyCollector {
+public abstract class TileEntityIdolBase extends TileEntity implements ITickable, IIdol {
 
 	private int cooldown;
 	private float energy;

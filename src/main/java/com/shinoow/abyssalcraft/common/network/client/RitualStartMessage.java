@@ -34,9 +34,9 @@ public class RitualStartMessage extends AbstractClientMessage<RitualStartMessage
 
 	public RitualStartMessage(){}
 
-	public RitualStartMessage(BlockPos pos, String name, int sacrifice, int timerMax) {
+	public RitualStartMessage(BlockPos pos, String id, int sacrifice, int timerMax) {
 		this.pos = pos;
-		this.id = name;
+		this.id = id;
 		this.sacrifice = sacrifice;
 		this.timerMax = timerMax;
 	}

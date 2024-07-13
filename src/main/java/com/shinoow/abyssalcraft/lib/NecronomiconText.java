@@ -363,7 +363,7 @@ public class NecronomiconText {
 	public static String ITEM_TRANSPORT_TUT_8 = "necronomicon.text.itemtransportsystem.8";
 
 	public static String IDOLS_INFO = "necronomicon.text.idols.info";
-	
+
 	public static String WIP = "necronomicon.text.wip";
 
 	/** Text limit */

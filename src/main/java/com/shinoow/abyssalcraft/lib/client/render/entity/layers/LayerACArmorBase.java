@@ -89,7 +89,7 @@ public abstract class LayerACArmorBase<T extends ModelArmoredBase> extends Layer
 						this.renderer.bindTexture(this.getArmorResource(entityLivingBaseIn, itemstack, slotIn, "overlay"));
 						GlStateManager.color(this.colorR, this.colorG, this.colorB, this.alpha);
 						t.render(entityLivingBaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-					} else 
+					} else
 						GlStateManager.color(this.colorR, this.colorG, this.colorB, this.alpha);
 				} else {
 					if(color != -1 && data.isColored()) { // apply color if it should

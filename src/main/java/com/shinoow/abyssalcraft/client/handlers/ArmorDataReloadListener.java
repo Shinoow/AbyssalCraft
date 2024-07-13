@@ -27,7 +27,6 @@ import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.resource.IResourceType;
 import net.minecraftforge.client.resource.ISelectiveResourceReloadListener;
-import net.minecraftforge.client.resource.VanillaResourceType;
 
 public class ArmorDataReloadListener implements ISelectiveResourceReloadListener {
 
@@ -40,7 +39,7 @@ public class ArmorDataReloadListener implements ISelectiveResourceReloadListener
 		IResource iresource = null;
 
 		ArmorDataRegistry.instance().clearInnerCollections();
-		for(String str : resourceManager.getResourceDomains()) {
+		for(String str : resourceManager.getResourceDomains())
 			try {
 				resourceManager.getResourceDomains();
 				iresource = resourceManager.getResource(new ResourceLocation(str, "ac_armordata.json"));
@@ -50,17 +49,16 @@ public class ArmorDataReloadListener implements ISelectiveResourceReloadListener
 				if(data != null)
 					ArmorDataRegistry.instance().processCollection(data);
 			}
-			catch (Exception e)
-			{
-				if(!(e instanceof IOException)) {
-					ACLogger.severe("An error occurred when parsing ac_armordata.json from {}: {}", str, e);
-					e.printStackTrace();
-				}
+		catch (Exception e)
+		{
+			if(!(e instanceof IOException)) {
+				ACLogger.severe("An error occurred when parsing ac_armordata.json from {}: {}", str, e);
+				e.printStackTrace();
 			}
-			finally
-			{
-				IOUtils.closeQuietly(iresource);
-			}
+		}
+		finally
+		{
+			IOUtils.closeQuietly(iresource);
 		}
 	}
 }

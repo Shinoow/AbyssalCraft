@@ -34,12 +34,12 @@ public class RitualMessage extends AbstractClientMessage<RitualMessage> {
 
 	public RitualMessage(){}
 
-	public RitualMessage(String name, BlockPos pos){
-		this(name, pos, false, "");
+	public RitualMessage(String id, BlockPos pos){
+		this(id, pos, false, "");
 	}
 
-	public RitualMessage(String name, BlockPos pos, boolean failed, String disruption){
-		this.id = name;
+	public RitualMessage(String id, BlockPos pos, boolean failed, String disruption){
+		this.id = id;
 		this.pos = pos;
 		this.failed = failed;
 		this.disruption = disruption;

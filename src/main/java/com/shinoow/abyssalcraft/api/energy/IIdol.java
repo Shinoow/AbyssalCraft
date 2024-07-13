@@ -9,22 +9,16 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.armor;
+package com.shinoow.abyssalcraft.api.energy;
 
-public class ColorData {
+/**
+ * Interface to use on tile entities representing Idols<br>
+ * Uuuhhh... might have a use at some point...
+ *
+ * @author shinoow
+ *
+ * @since 2.0.0
+ */
+public interface IIdol extends IEnergyCollector {
 
-	private String material, color;
-
-	public ColorData() {
-		material = "";
-		color = "";
-	}
-
-	public String getMaterial() {
-		return material;
-	}
-
-	public int getColor() {
-		return Integer.decode(color);
-	}
 }
