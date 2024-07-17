@@ -1406,6 +1406,7 @@ item.face_book.name=Book of Many Faces
 item.generic_meat.name=Generic Meat
 item.cooked_generic_meat.name=Cooked Generic Meat
 item.lost_page.name=Lost Page
+item.scriptures_omniscience.name=Scriptures of Omniscience
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul

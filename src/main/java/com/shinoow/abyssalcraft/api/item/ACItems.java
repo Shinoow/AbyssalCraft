@@ -41,6 +41,7 @@ public class ACItems {
 	public static Item configurator_shard_2;
 	public static Item configurator_shard_3;
 	public static Item lost_page;
+	public static Item scriptures_of_omniscience;
 
 	// Tools/Weapons
 	public static Item darkstone_pickaxe;

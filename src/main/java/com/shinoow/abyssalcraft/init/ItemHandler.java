@@ -106,6 +106,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.silver_key = new ItemGatewayKey(3, "silver_key");
 		ACItems.book_of_many_faces = new ItemFaceBook("face_book");
 		ACItems.lost_page = new ItemPage();
+		ACItems.scriptures_of_omniscience = new ItemScriptures();
 
 		//Coins
 		ACItems.coin = new ItemCoin("blankcoin");
@@ -651,6 +652,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.generic_meat, "generic_meat");
 		registerItem(ACItems.cooked_generic_meat, "cooked_generic_meat");
 		registerItem(ACItems.lost_page, "lost_page");
+		registerItem(ACItems.scriptures_of_omniscience, "scriptures_omniscience");
 	}
 
 	@Override
