@@ -15,10 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemScriptures extends ItemACBasic {
 
@@ -31,7 +28,7 @@ public class ItemScriptures extends ItemACBasic {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
 	{
 		ItemStack stack = player.getHeldItem(hand);
-		
+
 		if(!world.isRemote){
 			INecroDataCapability cap = NecroDataCapability.getCap(player);
 			if(!cap.hasUnlockedAllKnowledge()){
@@ -43,19 +40,12 @@ public class ItemScriptures extends ItemACBasic {
 			cap.setLastSyncTime(System.currentTimeMillis());
 			PacketDispatcher.sendTo(new NecroDataCapMessage(player), (EntityPlayerMP)player);
 		}
-		
+
 		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		l.add("Everything... all in your hands...");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack)
-	{
-		return true;
 	}
 }
