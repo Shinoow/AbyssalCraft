@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.dimension.IAbyssalWorldProvider;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
@@ -377,8 +378,7 @@ public class AbyssalCraftClientEventHooks {
 	public void doVoidFogParticles(World world, Entity entity)
 	{
 		if(Minecraft.getMinecraft().isGamePaused() || !world.isRemote) return;
-		if(world.provider.getDimension() != ACLib.dark_realm_id && world.provider.getDimension() != ACLib.omothol_id
-				&& world.provider.getDimension() != ACLib.abyssal_wasteland_id && world.provider.getDimension() != ACLib.dreadlands_id) return;
+		if(!(world.provider instanceof IAbyssalWorldProvider)) return;
 		byte b0 = 16;
 		byte b1 = 14;
 		int x = MathHelper.floor(entity.posX);

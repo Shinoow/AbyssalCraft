@@ -12,8 +12,8 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.dimension.IAbyssalWorldProvider;
 import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
@@ -143,10 +143,8 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 
 	private EntityShoggothBase getShoggoth(World world) {
 		if(world.rand.nextBoolean()) {
-			int dim = world.provider.getDimension();
 			boolean greater = world.rand.nextInt(100) == 0;
-			if(dim == ACLib.abyssal_wasteland_id || dim == ACLib.dreadlands_id
-					|| dim == ACLib.omothol_id || dim == ACLib.dark_realm_id)
+			if(world.provider instanceof IAbyssalWorldProvider)
 				return greater ? new EntityGreaterShoggoth(world) : new EntityShoggoth(world);
 		}
 

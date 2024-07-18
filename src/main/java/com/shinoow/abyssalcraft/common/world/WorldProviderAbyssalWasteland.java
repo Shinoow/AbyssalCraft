@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world;
 
+import com.shinoow.abyssalcraft.api.dimension.IAbyssalWorldProvider;
 import com.shinoow.abyssalcraft.client.render.sky.ACSkyRenderer;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -27,7 +28,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class WorldProviderAbyssalWasteland extends WorldProvider {
+public class WorldProviderAbyssalWasteland extends WorldProvider implements IAbyssalWorldProvider {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {

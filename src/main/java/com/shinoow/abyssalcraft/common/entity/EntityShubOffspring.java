@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
+import com.shinoow.abyssalcraft.api.dimension.IAbyssalWorldProvider;
 import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -63,13 +64,13 @@ public class EntityShubOffspring extends EntityMob implements IEliteEntity {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return rand.nextInt(5) == 0 ? SoundEvents.ENTITY_GHAST_HURT : SoundEvents.ENTITY_SHEEP_AMBIENT;
+		return SoundEvents.ENTITY_SHEEP_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source)
 	{
-		return rand.nextBoolean() ? SoundEvents.ENTITY_GHAST_HURT : SoundEvents.ENTITY_SHEEP_HURT;
+		return SoundEvents.ENTITY_SHEEP_HURT;
 	}
 
 	@Override
@@ -113,6 +114,8 @@ public class EntityShubOffspring extends EntityMob implements IEliteEntity {
 		if(!world.isDaytime() && posY >= world.getSeaLevel())
 			if(world.getCurrentMoonPhaseFactor() == 0 || rand.nextFloat() + 0.01f > world.getCurrentMoonPhaseFactor())
 				return super.getCanSpawnHere();
+		if(world.provider instanceof IAbyssalWorldProvider && posY >= 50)
+			return super.getCanSpawnHere();
 
 		return false;
 	}
