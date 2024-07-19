@@ -1,6 +1,7 @@
 {
-	"parent": "item/generated",
+	"parent": "abyssalcraft:item/book",
 	"textures": {
-		"layer0": "abyssalcraft:items/necronomicon_dre"
+		"0": "abyssalcraft:items/necronomicon_dre",
+		"1": "abyssalcraft:items/necronomicon_dre_back"
 	}
 }

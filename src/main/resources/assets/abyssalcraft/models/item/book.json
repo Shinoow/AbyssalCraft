@@ -1,0 +1,69 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "abyssalcraft:items/necronomicon",
+		"1": "abyssalcraft:items/necronomicon_back"
+	},
+	"elements": [
+		{
+			"name": "book",
+			"from": [3, 1, 7],
+			"to": [13, 15, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [11, 8, 15]},
+			"faces": {
+				"north": {"uv": [3, 1, 13, 15], "texture": "#1"},
+				"east": {"uv": [14, 1, 15, 15], "texture": "#0"},
+				"south": {"uv": [3, 1, 13, 15], "texture": "#0"},
+				"west": {"uv": [3, 1, 4, 15], "texture": "#0"},
+				"up": {"uv": [3, 1, 13, 2], "texture": "#0"},
+				"down": {"uv": [3, 15, 13, 16], "texture": "#0"}
+			}
+		},
+		{
+			"name": "book2",
+			"from": [4, 0, 7],
+			"to": [13, 1, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [12, 8, 15]},
+			"faces": {
+				"north": {"uv": [3, 15, 12, 16], "texture": "#1"},
+				"east": {"uv": [3, 15, 4, 16], "texture": "#1"},
+				"south": {"uv": [4, 15, 13, 16], "texture": "#0"},
+				"west": {"uv": [11, 15, 12, 16], "texture": "#1"},
+				"up": {"uv": [4, 15, 13, 16], "texture": "#0"},
+				"down": {"uv": [4, 15, 13, 16], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 3, 1.25],
+			"scale": [0.55, 0.55, 0.55]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 3, 1.25],
+			"scale": [0.55, 0.55, 0.55]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -90, 25],
+			"translation": [1.13, 3.2, 0.87],
+			"scale": [0.68, 0.68, 0.68]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, -90, 25],
+			"translation": [1.13, 3.2, 0.87],
+			"scale": [0.68, 0.68, 0.68]
+		},
+		"ground": {
+			"translation": [0, 2.25, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"head": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 13, 7]
+		},
+		"fixed": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 0, -0.25]
+		}
+	}
+}
