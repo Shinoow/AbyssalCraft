@@ -33,7 +33,7 @@ public class NecroDataCapability implements INecroDataCapability {
 	List<ResourceLocation> completed_researches = new ArrayList<>();
 
 	boolean hasAllKnowledge;
-	int knowledgeLevel;
+	int knowledgeLevel, knowledgePoints;
 
 	long lastSyncTime = 0;
 	int syncTimer = 0;
@@ -108,6 +108,11 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
+	public void setKnowledgePoints(int points) {
+		knowledgePoints = points;
+	}
+
+	@Override
 	public void setLastSyncTime(long time) {
 		lastSyncTime = time;
 	}
@@ -172,6 +177,12 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
+	public int getKnowledgePoints() {
+
+		return knowledgePoints;
+	}
+
+	@Override
 	public long getLastSyncTime() {
 
 		return lastSyncTime;
@@ -225,5 +236,4 @@ public class NecroDataCapability implements INecroDataCapability {
 
 		return unlocked;
 	}
-
 }

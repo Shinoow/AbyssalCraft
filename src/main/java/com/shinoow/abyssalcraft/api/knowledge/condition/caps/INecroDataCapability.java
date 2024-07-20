@@ -45,6 +45,8 @@ public interface INecroDataCapability {
 
 	void setKnowledgeLevel(int level);
 
+	void setKnowledgePoints(int points);
+
 	void setLastSyncTime(long time);
 
 	void incrementSyncTimer();
@@ -70,6 +72,8 @@ public interface INecroDataCapability {
 	boolean hasUnlockedAllKnowledge();
 
 	int getKnowledgeLevel();
+
+	int getKnowledgePoints();
 
 	long getLastSyncTime();
 

@@ -33,6 +33,7 @@ public class ItemScriptures extends ItemACBasic {
 			INecroDataCapability cap = NecroDataCapability.getCap(player);
 			if(!cap.hasUnlockedAllKnowledge()){
 				cap.unlockAllKnowledge(true);
+				cap.setKnowledgeLevel(3);
 				if(!player.capabilities.isCreativeMode)
 					stack.shrink(1);
 			}

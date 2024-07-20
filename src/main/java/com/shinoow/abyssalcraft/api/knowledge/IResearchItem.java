@@ -23,11 +23,17 @@ public interface IResearchItem {
 
 	String getName();
 
-	String getDescription();
+	default String getDescription() {
+		return getName() + ".description";
+	}
 
-	String getHint();
+	default String getHint() {
+		return getName() + ".hint";
+	}
 
 	int getRequiredLevel();
+	
+	int getPointsCost();
 
 	ResourceLocation getID();
 }

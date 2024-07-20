@@ -71,6 +71,7 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 		if(instance.hasUnlockedAllKnowledge())
 			properties.setBoolean("HasAllKnowledge", true);
 		properties.setInteger("knowledgeLevel", instance.getKnowledgeLevel());
+		properties.setInteger("knowledgePoints", instance.getKnowledgePoints());
 
 		return properties;
 	}
@@ -109,6 +110,7 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 			instance.completeResearch(new ResourceLocation(l.getStringTagAt(i)));
 		instance.unlockAllKnowledge(properties.getBoolean("HasAllKnowledge"));
 		instance.setKnowledgeLevel(properties.getInteger("knowledgeLevel"));
+		instance.setKnowledgePoints(properties.getInteger("knowledgePoints"));
 	}
 
 }

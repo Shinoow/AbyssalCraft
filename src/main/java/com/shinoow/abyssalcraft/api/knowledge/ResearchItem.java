@@ -20,12 +20,17 @@ public class ResearchItem implements IResearchItem {
 	private IUnlockCondition[] conditions;
 	private ResourceLocation id;
 	private String name;
-	private int level;
+	private int level, cost;
 
 	public ResearchItem(String name, int level, ResourceLocation id) {
+		this(name, level, id, 0);
+	}
+
+	public ResearchItem(String name, int level, ResourceLocation id, int cost) {
 		this.name = name;
 		this.id = id;
 		this.level = level;
+		this.cost = cost;
 	}
 
 	@Override
@@ -46,17 +51,6 @@ public class ResearchItem implements IResearchItem {
 	}
 
 	@Override
-	public String getHint() {
-
-		return getName() + ".hint";
-	}
-
-	@Override
-	public String getDescription() {
-		return getName() + ".desc";
-	}
-
-	@Override
 	public ResourceLocation getID() {
 		return id;
 	}
@@ -64,6 +58,12 @@ public class ResearchItem implements IResearchItem {
 	@Override
 	public int getRequiredLevel() {
 		return level;
+	}
+
+	@Override
+	public int getPointsCost() {
+
+		return cost;
 	}
 
 }
