@@ -1194,6 +1194,11 @@ tile.dead_tree_log.name=Dead Tree Log
 tile.idol_of_fading.name=Idol Of Fading
 tile.abyssal_abyssalnite_ore.name=Abyssal Abyssalnite Ore
 tile.mural.name=Mural
+tile.dreadwood_slab1.name=Dreadwood Slab
+tile.dreadwood_slab2.name=Dreadwood Doubleslab
+tile.dreadwood_stairs.name=Dreadwood Stairs
+tile.dreadwood_button.name=Button
+tile.dreadwood_pplate.name=Dreadwood Pressure Plate
 
 #Pre/Suffixes
 decorativestatue.prefix=Decorative %s

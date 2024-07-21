@@ -265,4 +265,8 @@ public class ACBlocks {
 	public static Block idol_of_fading;
 	public static Block abyssal_abyssalnite_ore;
 	public static Block mural;
+	public static Block dreadwood_slab;
+	public static Block dreadwood_stairs;
+	public static Block dreadwood_button;
+	public static Block dreadwood_pressure_plate;
 }

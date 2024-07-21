@@ -461,6 +461,7 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.dreadwood_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadwood_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
@@ -941,6 +942,11 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.idol_of_fading, 0);
 		registerItemRender(ACBlocks.abyssal_abyssalnite_ore, 0);
 		registerItemRender(ACBlocks.mural, 0);
+		registerItemRender(ACBlocks.dreadwood_slab, 0);
+		registerItemRender(BlockHandler.dreadwoodslab2, 0);
+		registerItemRender(ACBlocks.dreadwood_stairs, 0);
+		registerItemRender(ACBlocks.dreadwood_button, 0);
+		registerItemRender(ACBlocks.dreadwood_pressure_plate, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

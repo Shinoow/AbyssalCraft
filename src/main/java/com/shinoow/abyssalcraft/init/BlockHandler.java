@@ -44,7 +44,8 @@ public class BlockHandler implements ILifeCycleHandler {
 
 	public static Block Darkbrickslab2, Darkcobbleslab2, abyslab2, Darkstoneslab2, DLTslab2,
 	Altar, dreadbrickslab2, abydreadbrickslab2, cstonebrickslab2, ethaxiumslab2, house,
-	darkethaxiumslab2, abycobbleslab2, dreadcobbleslab2, abydreadcobbleslab2, cstonecobbleslab2;
+	darkethaxiumslab2, abycobbleslab2, dreadcobbleslab2, abydreadcobbleslab2, cstonecobbleslab2,
+	dreadwoodslab2;
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
@@ -307,6 +308,11 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.idol_of_fading = new BlockIdolOfFading();
 		ACBlocks.abyssal_abyssalnite_ore = new BlockACOre(2, 3.0F, 6.0F).setTranslationKey("abyssal_abyssalnite_ore");
 		ACBlocks.mural = new BlockMural();
+		ACBlocks.dreadwood_slab = new BlockACSingleSlab(Material.WOOD, SoundType.WOOD, MapColor.RED).setHardness(2.0F).setResistance(5.0F).setTranslationKey("dreadwood_slab1");
+		ACBlocks.dreadwood_stairs = new BlockACStairs(ACBlocks.dreadwood_planks).setHardness(2.0F).setResistance(5.0F).setTranslationKey("dreadwood_stairs");
+		ACBlocks.dreadwood_button = new BlockACButton(true, "dreadplanks").setHardness(0.5F).setTranslationKey("dreadwood_button");
+		ACBlocks.dreadwood_pressure_plate = new BlockACPressureplate("dreadplanks", Material.WOOD, BlockACPressureplate.Sensitivity.EVERYTHING, SoundType.WOOD).setHardness(0.5F).setTranslationKey("dreadwood_pplate");
+		dreadwoodslab2 = new BlockACDoubleSlab(ACBlocks.dreadwood_slab, Material.WOOD).setHardness(2.0F).setResistance(5.0F).setTranslationKey("dreadwood_slab2");
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityDGhead"));
@@ -601,6 +607,11 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.idol_of_fading, new ItemPEContainerBlock(ACBlocks.idol_of_fading), "idol_of_fading");
 		registerBlock(ACBlocks.abyssal_abyssalnite_ore, "abyssal_abyssalnite_ore");
 		registerBlock(ACBlocks.mural, "mural");
+		registerBlock(ACBlocks.dreadwood_slab, new ItemSlabAC(ACBlocks.dreadwood_slab, ACBlocks.dreadwood_slab, dreadwoodslab2), "dreadwood_slab1");
+		registerBlock(dreadwoodslab2, new ItemSlabAC(dreadwoodslab2, ACBlocks.dreadwood_slab, dreadwoodslab2), "dreadwood_slab2");
+		registerBlock(ACBlocks.dreadwood_stairs, "dreadwood_stairs");
+		registerBlock(ACBlocks.dreadwood_button, "dreadwood_button");
+		registerBlock(ACBlocks.dreadwood_pressure_plate, "dreadwood_pplate");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);
@@ -612,7 +623,10 @@ public class BlockHandler implements ILifeCycleHandler {
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_leaves, 30, 60);
 
 		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_planks, 5, 20);
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_slab, 5, 20);
+		Blocks.FIRE.setFireInfo(dreadwoodslab2, 5, 20);
 		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_fence, 5, 20);
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_stairs, 5, 20);
 		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_log, 5, 5);
 		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_leaves, 30, 60);
 	}

@@ -852,6 +852,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.dreadwood_log, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.dreadwood_leaves, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.dreadwood_planks, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.dreadwood_stairs, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.dreadwood_button, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.dreadwood_pressure_plate, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.depths_ghoul_head, ResearchItems.DEPTHS_GHOUL);
 		addCondition(ACBlocks.dreadlands_grass, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.pete_head, ResearchItems.DEPTHS_GHOUL);

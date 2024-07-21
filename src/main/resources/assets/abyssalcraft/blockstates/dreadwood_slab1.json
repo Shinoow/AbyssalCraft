@@ -1,0 +1,14 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"bottom": "abyssalcraft:blocks/drtplank",
+			"top": "abyssalcraft:blocks/drtplank",
+			"side": "abyssalcraft:blocks/drtplank"
+		}
+	},
+	"variants": {
+		"half=bottom": { "model": "half_slab" },
+		"half=top": { "model": "upper_slab" }
+	}
+}

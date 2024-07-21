@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:dreadplanks"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:dreadwood_pplate"
+  }
+}
