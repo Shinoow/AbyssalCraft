@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "abyssalcraft:dltplank",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:darklands_oak_fence_gate"
+  }
+}

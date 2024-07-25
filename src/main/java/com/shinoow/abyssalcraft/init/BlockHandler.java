@@ -313,6 +313,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadwood_button = new BlockACButton(true, "dreadplanks").setHardness(0.5F).setTranslationKey("dreadwood_button");
 		ACBlocks.dreadwood_pressure_plate = new BlockACPressureplate("dreadplanks", Material.WOOD, BlockACPressureplate.Sensitivity.EVERYTHING, SoundType.WOOD).setHardness(0.5F).setTranslationKey("dreadwood_pplate");
 		dreadwoodslab2 = new BlockACDoubleSlab(ACBlocks.dreadwood_slab, Material.WOOD).setHardness(2.0F).setResistance(5.0F).setTranslationKey("dreadwood_slab2");
+		ACBlocks.darklands_oak_fence_gate = new BlockACFenceGate(MapColor.BROWN).setHardness(2.0F).setResistance(5.0F).setTranslationKey("darklands_oak_fence_gate");
+		ACBlocks.dreadwood_fence_gate = new BlockACFenceGate(MapColor.BROWN).setHardness(2.0F).setResistance(5.0F).setTranslationKey("dreadwood_fence_gate");
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityDGhead"));
@@ -612,6 +614,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.dreadwood_stairs, "dreadwood_stairs");
 		registerBlock(ACBlocks.dreadwood_button, "dreadwood_button");
 		registerBlock(ACBlocks.dreadwood_pressure_plate, "dreadwood_pplate");
+		registerBlock(ACBlocks.darklands_oak_fence_gate, "darklands_oak_fence_gate");
+		registerBlock(ACBlocks.dreadwood_fence_gate, "dreadwood_fence_gate");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);
@@ -621,6 +625,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_wood, 5, 5);
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_wood_2, 5, 5);
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_fence_gate, 5, 20);
 
 		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_slab, 5, 20);
@@ -629,6 +634,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_stairs, 5, 20);
 		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_log, 5, 5);
 		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_leaves, 30, 60);
+		Blocks.FIRE.setFireInfo(ACBlocks.dreadwood_fence_gate, 5, 20);
 	}
 
 	@Override

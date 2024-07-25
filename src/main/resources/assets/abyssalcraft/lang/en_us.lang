@@ -1199,6 +1199,8 @@ tile.dreadwood_slab2.name=Dreadwood Doubleslab
 tile.dreadwood_stairs.name=Dreadwood Stairs
 tile.dreadwood_button.name=Button
 tile.dreadwood_pplate.name=Dreadwood Pressure Plate
+tile.darklands_oak_fence_gate.name=Darklands Oak Fence Gate
+tile.dreadwood_fence_gate.name=Dreadwood Fence Gate
 
 #Pre/Suffixes
 decorativestatue.prefix=Decorative %s

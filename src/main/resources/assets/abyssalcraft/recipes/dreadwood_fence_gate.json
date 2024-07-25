@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "abyssalcraft:dreadplanks",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:dreadwood_fence_gate"
+  }
+}

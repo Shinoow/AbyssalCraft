@@ -269,4 +269,6 @@ public class ACBlocks {
 	public static Block dreadwood_stairs;
 	public static Block dreadwood_button;
 	public static Block dreadwood_pressure_plate;
+	public static Block darklands_oak_fence_gate;
+	public static Block dreadwood_fence_gate;
 }
