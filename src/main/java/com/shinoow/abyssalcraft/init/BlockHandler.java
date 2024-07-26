@@ -315,6 +315,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		dreadwoodslab2 = new BlockACDoubleSlab(ACBlocks.dreadwood_slab, Material.WOOD).setHardness(2.0F).setResistance(5.0F).setTranslationKey("dreadwood_slab2");
 		ACBlocks.darklands_oak_fence_gate = new BlockACFenceGate(MapColor.BROWN).setHardness(2.0F).setResistance(5.0F).setTranslationKey("darklands_oak_fence_gate");
 		ACBlocks.dreadwood_fence_gate = new BlockACFenceGate(MapColor.BROWN).setHardness(2.0F).setResistance(5.0F).setTranslationKey("dreadwood_fence_gate");
+		ACBlocks.research_table = new BlockResearchTable();
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityDGhead"));
@@ -616,6 +617,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.dreadwood_pressure_plate, "dreadwood_pplate");
 		registerBlock(ACBlocks.darklands_oak_fence_gate, "darklands_oak_fence_gate");
 		registerBlock(ACBlocks.dreadwood_fence_gate, "dreadwood_fence_gate");
+		registerBlock(ACBlocks.research_table, "research_table");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

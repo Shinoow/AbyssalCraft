@@ -1,0 +1,8 @@
+{
+	"variants": {
+	    "facing=north": { "model": "abyssalcraft:research_table" },
+        "facing=south": { "model": "abyssalcraft:research_table", "y": 180 },
+        "facing=west":  { "model": "abyssalcraft:research_table", "y": 270 },
+        "facing=east":  { "model": "abyssalcraft:research_table", "y": 90 }
+	}
+}
