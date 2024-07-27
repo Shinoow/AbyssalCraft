@@ -2,6 +2,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityResearchTable;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -125,7 +126,7 @@ public class BlockResearchTable extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 
-		return null;
+		return new TileEntityResearchTable();
 	}
 
 	@Override

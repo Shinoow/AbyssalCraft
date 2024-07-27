@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "#&$",
+    "%%%",
+    "% %"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:torch"
+    },
+    "%": {
+      "item": "#PLANKWOOD"
+    },
+    "$": {
+      "item": "minecraft:feather"
+    },
+    "&": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:research_table"
+  }
+}

@@ -29,9 +29,7 @@ import com.shinoow.abyssalcraft.client.model.block.ModelDGhead;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
 import com.shinoow.abyssalcraft.client.particles.ACParticleFX;
 import com.shinoow.abyssalcraft.client.particles.PEStreamParticleFX;
-import com.shinoow.abyssalcraft.client.render.block.RenderODB;
-import com.shinoow.abyssalcraft.client.render.block.RenderODBc;
-import com.shinoow.abyssalcraft.client.render.block.TileEntityJzaharSpawnerRenderer;
+import com.shinoow.abyssalcraft.client.render.block.*;
 import com.shinoow.abyssalcraft.client.render.entity.*;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerDreadTentacles;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
@@ -190,6 +188,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredSacrificialAltar.class, new TileEntityAltarBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJzaharSpawner.class, new TileEntityJzaharSpawnerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRendingPedestal.class, new TileEntityPedestalBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityResearchTable.class, new TileEntityResearchTableRenderer());
 
 		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
 		RenderPlayer render1 = rm.getSkinMap().get("default");

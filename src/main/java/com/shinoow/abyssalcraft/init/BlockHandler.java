@@ -350,6 +350,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntitySequentialBrewingStand.class, new ResourceLocation(AbyssalCraft.modid, "tileEntitySequentialBrewingStand"));
 		GameRegistry.registerTileEntity(TileEntityPortalAnchor.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityPortalAnchor"));
 		GameRegistry.registerTileEntity(TileEntityIdolOfFading.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityIdolOfFading"));
+		GameRegistry.registerTileEntity(TileEntityResearchTable.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityResearchTable"));
 
 		registerBlock(ACBlocks.darkstone, "darkstone");
 		registerBlock(ACBlocks.abyssal_stone, new ItemBlockColorName(ACBlocks.abyssal_stone), "abystone");
