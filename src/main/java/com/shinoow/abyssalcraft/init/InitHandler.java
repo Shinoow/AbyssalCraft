@@ -454,6 +454,8 @@ public class InitHandler implements ILifeCycleHandler {
 		teleport_home_spell = cfg.get(CATEGORY_SPELLS, "Teleport Home", true, "Set to false to disable the Teleport Home spell.").getBoolean();
 		compass_spell = cfg.get(CATEGORY_SPELLS, "Eldritch Directions", true, "Set to false to disable the Eldritch Directions spell.").getBoolean();
 
+		spirit_items = cfg.get(CATEGORY_MODULES, "Spirit Items", true, "Set to false to disable Spirit Items. Items/spells/rituals remain, but item transfer stops.").getBoolean();
+
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
 		demonAnimalSpawnWeight = MathHelper.clamp(demonAnimalSpawnWeight, 0, 100);

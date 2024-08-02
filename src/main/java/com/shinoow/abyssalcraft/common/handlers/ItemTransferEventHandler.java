@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityProvider;
 import com.shinoow.abyssalcraft.common.entity.EntitySpiritItem;
 import com.shinoow.abyssalcraft.init.InitHandler;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -54,6 +55,7 @@ public class ItemTransferEventHandler {
 
 	@SubscribeEvent
 	public void onTick(WorldTickEvent event) {
+		if(!ACConfig.spirit_items) return;
 		if(event.side == Side.SERVER && event.type == Type.WORLD && event.phase == Phase.END)
 		{
 			World world = event.world;

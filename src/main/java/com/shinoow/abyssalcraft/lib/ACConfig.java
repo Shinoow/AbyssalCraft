@@ -49,6 +49,8 @@ public class ACConfig {
 	detachment_spell, steal_vigor_spell, sirens_song_spell, undeath_to_dust_spell, ooze_removal_spell, teleport_hostile_spell,
 	display_routes_spell, toggle_state_spell, floating_spell, teleport_home_spell, compass_spell;
 
+	public static boolean spirit_items;
+	
 	public static final String CATEGORY_DIMENSIONS = "dimensions";
 	public static final String CATEGORY_SHOGGOTH = "shoggoth";
 	public static final String CATEGORY_WORLDGEN = "worldgen";
