@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "abyssalcraft:items/necronomicon",
-		"1": "abyssalcraft:items/necronomicon_back"
+		"1": "abyssalcraft:items/necronomicon_back",
+		"2": "abyssalcraft:items/necronomicon_back"
 	},
 	"elements": [
 		{
@@ -12,7 +13,7 @@
 			"rotation": {"angle": 0, "axis": "y", "origin": [11, 8, 15]},
 			"faces": {
 				"north": {"uv": [3, 1, 13, 15], "texture": "#1"},
-				"east": {"uv": [14, 1, 15, 15], "texture": "#0"},
+				"east": {"uv": [14, 1, 15, 15], "texture": "#2"},
 				"south": {"uv": [3, 1, 13, 15], "texture": "#0"},
 				"west": {"uv": [3, 1, 4, 15], "texture": "#0"},
 				"up": {"uv": [3, 1, 13, 2], "texture": "#0"},
