@@ -97,6 +97,11 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerSequentialBrewingStand(ctx.player.inventory, (TileEntitySequentialBrewingStand) ctx.getTE());
 			return null;
 		});
+		serverElements.put(ACLib.researchTableGuiID, ctx -> {
+			if (ctx.getTE() instanceof TileEntityResearchTable)
+				return new ContainerResearchTable(ctx.player.inventory, (TileEntityResearchTable) ctx.getTE());
+			return null;
+		});
 
 		clientElements.put(ACLib.crystallizerGuiID, ctx -> {
 			if (ctx.getTE() instanceof TileEntityCrystallizer)
@@ -169,6 +174,11 @@ public class GuiHandler implements IGuiHandler {
 		clientElements.put(ACLib.sequentialBrewingStandGuiID, ctx -> {
 			if (ctx.getTE() instanceof TileEntitySequentialBrewingStand)
 				return new GuiSequentialBrewingStand(ctx.player.inventory, (TileEntitySequentialBrewingStand) ctx.getTE());
+			return null;
+		});
+		clientElements.put(ACLib.researchTableGuiID, ctx -> {
+			if (ctx.getTE() instanceof TileEntityResearchTable)
+				return new GuiResearchTable(ctx.player.inventory, (TileEntityResearchTable) ctx.getTE());
 			return null;
 		});
 	}

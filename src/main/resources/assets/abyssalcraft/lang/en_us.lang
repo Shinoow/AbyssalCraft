@@ -218,6 +218,7 @@ container.abyssalcraft.rendingpedestal=Rending Pedestal
 container.abyssalcraft.statetransformer=State Transformer
 container.abyssalcraft.energydepositioner=Energy Depositioner
 container.abyssalcraft.sequential_brewing=Sequential Brewing Stand
+container.abyssalcraft.research_table=Research Table
 
 #Gui Labels
 gui.abyssalcraft.facebook.name=Name
