@@ -402,7 +402,6 @@ public class NecronomiconText {
 	public static String LABEL_INFORMATION_SPECIAL_MATERIALS = "necronomicon.information.specialmaterials";
 	public static String LABEL_ANYWHERE = "necronomicon.anywhere";
 	public static String LABEL_LOCATION = "necronomicon.location";
-	public static String LABEL_INFO = "necronomicon.info";
 	public static String LABEL_NORMAL = "necronomicon.normal";
 	public static String LABEL_PATRONS = "necronomicon.patrons";
 	public static String LABEL_INFORMATION_ARMOR_TOOLS = "necronomicon.information.armortools";
@@ -435,6 +434,8 @@ public class NecronomiconText {
 	public static String LABEL_DURATION_AMPLIFIER = "necronomicon.durationamplifier";
 	public static String LABEL_POWER_AMPLIFIER = "necronomicon.poweramplifier";
 	public static String LABEL_INFORMATION_IDOLS = "necronomicon.information.idols";
+	public static String LABEL_INFORMATION_DIMENSIONS = "necronomicon.information.dimensions";
+	public static String LABEL_INFORMATION_BIOMES = "necronomicon.information.biomes";
 
 	// Alternating texts to display for locked pages
 	// Lyric snippets of songs from the following bands (not in order):

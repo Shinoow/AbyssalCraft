@@ -59,50 +59,16 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapter greatoldones = new Chapter("greatoldones", NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0);
 		internalNecroData.add(new NecroData("greatoldones", NecronomiconText.LABEL_PANTHEON, 0, NecronomiconText.INFORMATION_GREAT_OLD_ONES,
 				outergods, greatoldones));
-		Chapter overworldmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
-		Chapter overworldprogression = new Chapter("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0);
-		Chapter overworldentities = new Chapter("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 0);
-		Chapter overworldspecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0);
-		Chapter overworldarmortools = new Chapter("armortools", NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0);
-		internalNecroData.add(new NecroData("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0, NecronomiconText.INFORMATION_OVERWORLD,
-				overworldmaterials, overworldprogression, overworldentities, overworldspecialmaterials, overworldarmortools));
-		Chapter abyssalwastelandmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 1);
-		Chapter abyssalwastelandprogression = new Chapter("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 1);
-		Chapter abyssalwastelandentities = new Chapter("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 1);
-		Chapter abyssalwastelandspecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1);
-		Chapter abyssalwastelandarmortools = new Chapter("armortools", NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1);
 		Chapter abyssalwastelandplague = new Chapter("coraliumplague", NecronomiconText.LABEL_CORALIUM_PLAGUE, 1, ResearchItems.CORALIUM_PLAGUE);
-		internalNecroData.add(new NecroData("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, NecronomiconText.INFORMATION_ABYSSAL_WASTELAND,
-				ResearchItems.ABYSSAL_WASTELAND_NECRO, abyssalwastelandmaterials, abyssalwastelandprogression, abyssalwastelandentities, abyssalwastelandspecialmaterials,
-				abyssalwastelandarmortools, abyssalwastelandplague));
-		Chapter dreadlandsmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 2);
-		Chapter dreadlandsprogression = new Chapter("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 2);
-		Chapter dreadlandsentities = new Chapter("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 2);
-		Chapter dreadlandsspecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2);
-		Chapter dreadlandsarmortools = new Chapter("armortools", NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2);
 		Chapter dreadlandsplague = new Chapter("dreadplague", NecronomiconText.LABEL_DREAD_PLAGUE, 2, ResearchItems.DREAD_PLAGUE);
-		internalNecroData.add(new NecroData("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, NecronomiconText.INFORMATION_DREADLANDS,
-				ResearchItems.DREADLANDS_NECRO, dreadlandsmaterials, dreadlandsprogression, dreadlandsentities, dreadlandsspecialmaterials, dreadlandsarmortools,
-				dreadlandsplague));
-		Chapter omotholmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 3);
-		Chapter omotholprogression = new Chapter("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3);
-		Chapter omotholentities = new Chapter("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 3);
-		Chapter omotholspecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3);
 		Chapter itemtransportsystem = new Chapter("itemtransportsystem", NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3);
-		internalNecroData.add(new NecroData("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, NecronomiconText.INFORMATION_OMOTHOL,
-				ResearchItems.OMOTHOL_NECRO, omotholmaterials, omotholprogression, omotholentities, omotholspecialmaterials, itemtransportsystem));
-		Chapter darkrealmmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 3);
-		Chapter darkrealmprogression = new Chapter("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3);
-		Chapter darkrealmentities = new Chapter("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 3);
-		internalNecroData.add(new NecroData("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3, NecronomiconText.INFORMATION_DARK_REALM,
-				ResearchItems.OMOTHOL_NECRO, darkrealmmaterials, darkrealmprogression, darkrealmentities));
 		Chapter ritualgettingstarted = new Chapter("gettingstarted", NecronomiconText.LABEL_GETTING_STARTED, 0);
 		Chapter ritualmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
-		internalNecroData.add(new NecroData("rituals", NecronomiconText.LABEL_INFO, 0, ritualgettingstarted, ritualmaterials));
-		Chapter peinfo = new Chapter("information", NecronomiconText.LABEL_INFO, 0);
+		internalNecroData.add(new NecroData("rituals", NecronomiconText.LABEL_INFORMATION, 0, ritualgettingstarted, ritualmaterials));
+		Chapter peinfo = new Chapter("information", NecronomiconText.LABEL_INFORMATION, 0);
 		Chapter pematerials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
 		Chapter pespecialmaterials = new Chapter("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0);
-		Chapter placesOfPowerInfo = new Chapter("information", NecronomiconText.LABEL_INFO, 0);
+		Chapter placesOfPowerInfo = new Chapter("information", NecronomiconText.LABEL_INFORMATION, 0);
 		Chapter idols = new Chapter("idols", NecronomiconText.LABEL_INFORMATION_IDOLS, 0);
 		GuiInstance structures = new GuiInstance(0, NecronomiconText.LABEL_STRUCTURES, "structures") {
 
@@ -125,11 +91,33 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapter miscenchantments = new Chapter("enchantments", NecronomiconText.LABEL_INFORMATION_ENCHANTMENTS, 0);
 		Chapter miscstatues = new Chapter("decorativestatues", NecronomiconText.LABEL_INFORMATION_DECORATIVE_STATUES, 0);
 		internalNecroData.add(new NecroData("miscinfo", NecronomiconText.LABEL_MISC_INFORMATION, 0, NecronomiconText.MISC_INFORMATION, miscspecialmaterials,
-				miscenchantments, miscstatues));
+				miscenchantments, miscstatues, abyssalwastelandplague, dreadlandsplague, itemtransportsystem));
 		Chapter spellgettingstarted = new Chapter("gettingstarted", NecronomiconText.LABEL_GETTING_STARTED, 0);
 		Chapter spellcasting = new Chapter("casting", NecronomiconText.LABEL_CASTING, 0);
 		Chapter spellmaterials = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
-		internalNecroData.add(new NecroData("spells", NecronomiconText.LABEL_INFO, 0, spellgettingstarted, spellcasting, spellmaterials));
+		internalNecroData.add(new NecroData("spells", NecronomiconText.LABEL_INFORMATION, 0, spellgettingstarted, spellcasting, spellmaterials));
+
+
+		//materials
+		//progression
+		//entities
+		//specialmaterials
+		//armorTools
+		//dimensions
+		//biomes
+		Chapter overworld = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
+		Chapter abyssalWasteland = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1);
+		Chapter dreadlands = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2);
+		Chapter omothol = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3);
+		Chapter darkRealm = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3);
+
+		internalNecroData.add(new NecroData("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, allChapters()));
+		internalNecroData.add(new NecroData("dimensions", NecronomiconText.LABEL_INFORMATION_DIMENSIONS, 0, allChapters()));
+		internalNecroData.add(new NecroData("biomes", NecronomiconText.LABEL_INFORMATION_BIOMES, 0, allChapters()));
+		internalNecroData.add(new NecroData("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, allChapters()));
+		internalNecroData.add(new NecroData("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, allChapters()));
+		internalNecroData.add(new NecroData("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, ow(), aw(), dl(), omt()));
+		internalNecroData.add(new NecroData("armortools", NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, ow(), aw(), dl()));
 	}
 
 	@Override
@@ -229,7 +217,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(4, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconText.HASTUR_2),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconResources.JZAHAR_SEAL, NecronomiconText.JZAHAR_1),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconText.JZAHAR_2));
-		addPages("overworld", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.abyssalnite_ore), NecronomiconText.MATERIAL_ABYSSALNITE_1),
+		addPages("materials", "overworld", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.abyssalnite_ore), NecronomiconText.MATERIAL_ABYSSALNITE_1),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.darkstone), NecronomiconText.MATERIAL_DARKSTONE_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_DARKSTONE_2),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.coralium_ore), NecronomiconText.MATERIAL_CORALIUM_1),
@@ -238,13 +226,13 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(8, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.nitre_ore), NecronomiconText.MATERIAL_NITRE_1),
 				new Page(9, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.liquid_antimatter), NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_1),
 				new Page(10, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_2));
-		addPages("overworld", "progression", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_1),
+		addPages("progression", "overworld", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_3),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_4),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_5),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_6));
-		addPages("overworld", "entities", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.ABYSSAL_ZOMBIE, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_1, ResearchItems.ABYSSAL_ZOMBIE),
+		addPages("entities", "overworld", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.ABYSSAL_ZOMBIE, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_1, ResearchItems.ABYSSAL_ZOMBIE),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_2, ResearchItems.ABYSSAL_ZOMBIE),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.DEPTHS_GHOUL, NecronomiconText.ENTITY_DEPTHS_GHOUL_1, ResearchItems.DEPTHS_GHOUL),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_DEPTHS_GHOUL_2, ResearchItems.DEPTHS_GHOUL),
@@ -262,7 +250,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(16, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_SHUB_OFFSPRING_2, ResearchItems.SHUB_OFFSPRING),
 				new Page(17, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.LESSER_SHOGGOTH, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, ResearchItems.SHOGGOTH),
 				new Page(18, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, ResearchItems.SHOGGOTH));
-		addPages("overworld", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACBlocks.coralium_infused_stone, Blocks.STONE, Blocks.STONE, Blocks.STONE, ACItems.coralium_gem_cluster_3,
+		addPages("specialmaterials", "overworld", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACBlocks.coralium_infused_stone, Blocks.STONE, Blocks.STONE, Blocks.STONE, ACItems.coralium_gem_cluster_3,
 				ACItems.coralium_gem_cluster_3, ACItems.coralium_gem_cluster_3, Blocks.STONE, Blocks.STONE, Blocks.STONE),
 				NecronomiconText.CRAFTING_CORALIUM_INFUSED_STONE_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, NecronomiconText.CRAFTING_CORALIUM_INFUSED_STONE_2),
@@ -272,11 +260,14 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(6, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.gateway_key), NecronomiconText.CRAFTING_GATEWAY_KEY),
 				new Page(7, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(new ItemStack(ACItems.skin_of_the_abyssal_wasteland)), NecronomiconText.CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND_1, ResearchItems.ABYSSAL_WASTELAND),
 				new Page(8, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, new CraftingStack(ACItems.abyssal_wasteland_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_C, ResearchItems.ABYSSAL_WASTELAND));
-		addPages("overworld", "armortools", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, new CraftingStack(ACItems.staff_of_rending), NecronomiconText.CRAFTING_STAFF_OF_RENDING_1),
+		addPages("armortools", "overworld", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, new CraftingStack(ACItems.staff_of_rending), NecronomiconText.CRAFTING_STAFF_OF_RENDING_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, NecronomiconText.CRAFTING_STAFF_OF_RENDING_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, new CraftingStack(ACBlocks.sequential_brewing_stand), NecronomiconText.CRAFTING_SEQUENTIAL_BREWING_STAND_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, NecronomiconText.CRAFTING_SEQUENTIAL_BREWING_STAND_2));
-		addPages("abyssalwasteland", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.abyssal_stone), NecronomiconText.MATERIAL_ABYSSAL_STONE_1),
+		//TODO dimensions
+		addPage(new Page(1, NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0, NecronomiconText.INFORMATION_OVERWORLD), "dimension", "overworld");
+		//TODO biomes
+		addPages("materials", "abyssalwasteland", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.abyssal_stone), NecronomiconText.MATERIAL_ABYSSAL_STONE_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.abyssal_sand), NecronomiconText.MATERIAL_ABYSSAL_SAND),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.fused_abyssal_sand), NecronomiconText.MATERIAL_FUSED_ABYSSAL_SAND),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.abyssal_diamond_ore), NecronomiconText.MATERIAL_ABYSSAL_ORES_1),
@@ -287,10 +278,10 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(11, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.liquid_coralium), NecronomiconText.MATERIAL_LIQUID_CORALIUM_1),
 				new Page(12, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, NecronomiconText.MATERIAL_LIQUID_CORALIUM_2),
 				new Page(13, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.dreadlands_infused_powerstone), NecronomiconText.MATERIAL_DREADLANDS_INFUSED_POWERSTONE_1));
-		addPages("abyssalwasteland", "progression", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 1, NecronomiconText.PROGRESSION_ABYSSAL_1),
+		addPages("progression", "abyssalwasteland", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 1, NecronomiconText.PROGRESSION_ABYSSAL_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 1, NecronomiconText.PROGRESSION_ABYSSAL_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 1, NecronomiconText.PROGRESSION_ABYSSAL_3));
-		addPages("abyssalwasteland", "entities", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 1, NecronomiconResources.ABYSSAL_ZOMBIE, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_1, ResearchItems.ABYSSAL_ZOMBIE),
+		addPages("entities", "abyssalwasteland", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 1, NecronomiconResources.ABYSSAL_ZOMBIE, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_1, ResearchItems.ABYSSAL_ZOMBIE),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ENTITIES, 1, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_2, ResearchItems.ABYSSAL_ZOMBIE),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ENTITIES, 1, NecronomiconResources.DEPTHS_GHOUL, NecronomiconText.ENTITY_DEPTHS_GHOUL_1, ResearchItems.DEPTHS_GHOUL),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ENTITIES, 1, NecronomiconText.ENTITY_DEPTHS_GHOUL_2, ResearchItems.DEPTHS_GHOUL),
@@ -304,7 +295,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(12, NecronomiconText.LABEL_INFORMATION_ENTITIES, 1, NecronomiconText.ENTITY_CORALIUM_INFESTED_SQUID_2, ResearchItems.CORALIUM_INFESTED_SQUID),
 				new Page(13, NecronomiconText.LABEL_INFORMATION_ENTITIES, 1, NecronomiconResources.LESSER_SHOGGOTH, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, ResearchItems.SHOGGOTH),
 				new Page(14, NecronomiconText.LABEL_INFORMATION_ENTITIES, 1, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, ResearchItems.SHOGGOTH));
-		addPages("abyssalwasteland", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(ACItems.powerstone_tracker),
+		addPages("specialmaterials", "abyssalwasteland", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(ACItems.powerstone_tracker),
 				NecronomiconText.CRAFTING_POWERSTONE_TRACKER),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(ACBlocks.transmutator_idle), NecronomiconText.CRAFTING_TRANSMUTATOR_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, NecronomiconText.CRAFTING_TRANSMUTATOR_2),
@@ -312,25 +303,28 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(6, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(ACItems.coralium_plate), NecronomiconText.CRAFTING_CORALIUM_PLATE),
 				new Page(7, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(new ItemStack(ACItems.skin_of_the_dreadlands)), NecronomiconText.CRAFTING_SKIN_OF_THE_DREADLANDS_1, ResearchItems.DREADLANDS),
 				new Page(8, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 1, new CraftingStack(ACItems.dreadlands_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_D, ResearchItems.DREADLANDS));
-		addPages("abyssalwasteland", "armortools", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.plated_coralium_helmet),
+		addPages("armortools", "abyssalwasteland", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.plated_coralium_helmet),
 				NecronomiconText.CRAFTING_PLATED_CORALIUM_HELMET),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.plated_coralium_chestplate), NecronomiconText.CRAFTING_PLATED_CORALIUM_CHESTPLATE),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.plated_coralium_leggings), NecronomiconText.CRAFTING_PLATED_CORALIUM_LEGGINGS),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.plated_coralium_boots), NecronomiconText.CRAFTING_PLATED_CORALIUM_BOOTS),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 1, new CraftingStack(ACItems.coralium_longbow), NecronomiconText.CRAFTING_CORALIUM_LONGBOW));
-		addPages("abyssalwasteland", "coraliumplague", new Page(1, NecronomiconText.LABEL_CORALIUM_PLAGUE, 1, NecronomiconText.CORALIUM_PLAGUE_INFO_1, ResearchItems.CORALIUM_PLAGUE),
+		addPages("miscinfo", "coraliumplague", new Page(1, NecronomiconText.LABEL_CORALIUM_PLAGUE, 1, NecronomiconText.CORALIUM_PLAGUE_INFO_1, ResearchItems.CORALIUM_PLAGUE),
 				new Page(2, NecronomiconText.LABEL_CORALIUM_PLAGUE, 1, new CraftingStack(new ItemStack(ACItems.coralium_plague_antidote)), NecronomiconText.CORALIUM_PLAGUE_INFO_2, ResearchItems.CORALIUM_PLAGUE));
-		addPages("dreadlands", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadstone), NecronomiconText.MATERIAL_DREADSTONE_1),
+		//TODO dimensions
+		addPage(new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, NecronomiconText.INFORMATION_ABYSSAL_WASTELAND), "dimension", "abyssalwasteland");
+		//TODO biomes
+		addPages("materials", "dreadlands", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadstone), NecronomiconText.MATERIAL_DREADSTONE_1),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.abyssalnite_stone), NecronomiconText.MATERIAL_ABYSSALNITE_STONE_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, NecronomiconText.MATERIAL_ABYSSALNITE_STONE_2),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadlands_abyssalnite_ore), NecronomiconText.MATERIAL_DREADLANDS_ABYSSALNITE_1),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreaded_abyssalnite_ore), NecronomiconText.MATERIAL_DREADED_ABYSSALNITE_1),
 				new Page(7, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadlands_grass), NecronomiconText.MATERIAL_DREADLANDS_GRASS_1),
 				new Page(8, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadwood_sapling), NecronomiconText.MATERIAL_DREADLANDS_TREE_1));
-		addPages("dreadlands", "progression", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 2, NecronomiconText.PROGRESSION_DREADLANDS_1),
+		addPages("progression", "dreadlands", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 2, NecronomiconText.PROGRESSION_DREADLANDS_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 2, NecronomiconText.PROGRESSION_DREADLANDS_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 2, NecronomiconText.PROGRESSION_DREADLANDS_3));
-		addPages("dreadlands", "entities", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconResources.ABYSSALNITE_GOLEM, NecronomiconText.ENTITY_ABYSSALNITE_GOLEM_1, ResearchItems.ABYSSALNITE_GOLEM),
+		addPages("entities", "dreadlands", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconResources.ABYSSALNITE_GOLEM, NecronomiconText.ENTITY_ABYSSALNITE_GOLEM_1, ResearchItems.ABYSSALNITE_GOLEM),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconText.ENTITY_ABYSSALNITE_GOLEM_2, ResearchItems.ABYSSALNITE_GOLEM),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconResources.DREADED_ABYSSALNITE_GOLEM, NecronomiconText.ENTITY_DREADED_ABYSSALNITE_GOLEM_1, ResearchItems.DREADED_ABYSSALNITE_GOLEM),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconText.ENTITY_DREADED_ABYSSALNITE_GOLEM_2, ResearchItems.DREADED_ABYSSALNITE_GOLEM),
@@ -350,7 +344,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(18, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconText.ENTITY_CHAGAROTH_2),
 				new Page(19, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconResources.LESSER_SHOGGOTH, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, ResearchItems.SHOGGOTH),
 				new Page(20, NecronomiconText.LABEL_INFORMATION_ENTITIES, 2, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, ResearchItems.SHOGGOTH));
-		addPages("dreadlands", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(new ItemStack(ACBlocks.block_of_dreadium)), NecronomiconText.CRAFTING_DREADIUM_1),
+		addPages("specialmaterials", "dreadlands", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(new ItemStack(ACBlocks.block_of_dreadium)), NecronomiconText.CRAFTING_DREADIUM_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, NecronomiconText.CRAFTING_DREADIUM_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(ACBlocks.crystallizer_idle), NecronomiconText.CRAFTING_CRYSTALLIZER_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, NecronomiconText.CRAFTING_CRYSTALLIZER_2),
@@ -360,21 +354,24 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(8, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(ACItems.dreadium_katana_blade), NecronomiconText.CRAFTING_DREADIUM_BLADE),
 				new Page(9, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(new ItemStack(ACItems.skin_of_omothol)), NecronomiconText.CRAFTING_SKIN_OF_OMOTHOL_1, ResearchItems.OMOTHOL),
 				new Page(10, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 2, new CraftingStack(ACItems.omothol_necronomicon), NecronomiconText.CRAFTING_NECRONOMICON_O, ResearchItems.OMOTHOL));
-		addPages("dreadlands", "armortools", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_samurai_helmet),
+		addPages("armortools", "dreadlands", new Page(1, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_samurai_helmet),
 				NecronomiconText.CRAFTING_DREADIUM_SAMURAI_HELMET),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_samurai_chestplate), NecronomiconText.CRAFTING_DREADIUM_SAMURAI_CHESTPLATE),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_samurai_leggings), NecronomiconText.CRAFTING_DREADIUM_SAMURAI_LEGGINGS),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_samurai_boots), NecronomiconText.CRAFTING_DREADIUM_SAMURAI_BOOTS),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 2, new CraftingStack(ACItems.dreadium_katana), NecronomiconText.CRAFTING_DREADIUM_KATANA));
-		addPages("dreadlands", "dreadplague", new Page(1, NecronomiconText.LABEL_DREAD_PLAGUE, 2, NecronomiconText.DREAD_PLAGUE_INFO_1, ResearchItems.DREAD_PLAGUE),
+		addPages("miscinfo", "dreadplague", new Page(1, NecronomiconText.LABEL_DREAD_PLAGUE, 2, NecronomiconText.DREAD_PLAGUE_INFO_1, ResearchItems.DREAD_PLAGUE),
 				new Page(2, NecronomiconText.LABEL_DREAD_PLAGUE, 2, new CraftingStack(new ItemStack(ACItems.dread_plague_antidote)), NecronomiconText.DREAD_PLAGUE_INFO_2, ResearchItems.DREAD_PLAGUE));
-		addPages("omothol", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.omothol_stone), NecronomiconText.MATERIAL_OMOTHOL_STONE_1),
+		//TODO dimensions
+		addPage(new Page(1, NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, NecronomiconText.INFORMATION_DREADLANDS), "dimension", "dreadlands");
+		//TODO biomes
+		addPages("materials", "omothol", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.omothol_stone), NecronomiconText.MATERIAL_OMOTHOL_STONE_1),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.ethaxium), NecronomiconText.MATERIAL_ETHAXIUM_1),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_ETHAXIUM_2),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.dark_ethaxium_brick), NecronomiconText.MATERIAL_DARK_ETHAXIUM_1));
-		addPages("omothol", "progression", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3, NecronomiconText.PROGRESSION_OMOTHOL_1),
+		addPages("progression", "omothol", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3, NecronomiconText.PROGRESSION_OMOTHOL_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3, NecronomiconText.PROGRESSION_OMOTHOL_2));
-		addPages("omothol", "entities", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.REMNANT, NecronomiconText.ENTITY_REMNANT_1),
+		addPages("entities", "omothol", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.REMNANT, NecronomiconText.ENTITY_REMNANT_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_REMNANT_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.OMOTHOL_GHOUL, NecronomiconText.ENTITY_OMOTHOL_GHOUL_1, ResearchItems.OMOTHOL_GHOUL),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_OMOTHOL_GHOUL_2, ResearchItems.OMOTHOL_GHOUL),
@@ -384,7 +381,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(8, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_JZAHAR_2),
 				new Page(9, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.LESSER_SHOGGOTH, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, ResearchItems.SHOGGOTH),
 				new Page(10, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, ResearchItems.SHOGGOTH));
-		addPages("omothol", "specialmaterials", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, new CraftingStack(ACItems.life_crystal), NecronomiconText.CRAFTING_LIFE_CRYSTAL_1),
+		addPages("specialmaterials", "omothol", new Page(1, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, new CraftingStack(ACItems.life_crystal), NecronomiconText.CRAFTING_LIFE_CRYSTAL_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, NecronomiconText.CRAFTING_LIFE_CRYSTAL_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, new CraftingStack(ACItems.ethaxium_ingot, ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.ethaxium_brick,
 						ACItems.life_crystal, ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.ethaxium_brick), NecronomiconText.CRAFTING_ETHAXIUM_INGOT_1),
@@ -398,7 +395,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(12, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, NecronomiconText.CRAFTING_MATERIALIZER_2),
 				new Page(13, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, new CraftingStack(ACItems.abyssalnomicon), NecronomiconText.CRAFTING_ABYSSALNOMICON_1),
 				new Page(14, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, NecronomiconText.CRAFTING_ABYSSALNOMICON_2));
-		addPages("omothol", "itemtransportsystem", new Page(1, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, new ItemStack(ACItems.configurator_shard_0), NecronomiconText.ITEM_TRANSPORT_TUT_1),
+		addPages("miscinfo", "itemtransportsystem", new Page(1, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, new ItemStack(ACItems.configurator_shard_0), NecronomiconText.ITEM_TRANSPORT_TUT_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, new ItemStack(ACItems.configurator), NecronomiconText.ITEM_TRANSPORT_TUT_2),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, NecronomiconResources.ITEM_TRANSPORT_TUT_1, NecronomiconText.ITEM_TRANSPORT_TUT_3),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, NecronomiconText.ITEM_TRANSPORT_TUT_4),
@@ -406,11 +403,14 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(6, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, NecronomiconResources.ITEM_TRANSPORT_TUT_2, NecronomiconText.ITEM_TRANSPORT_TUT_6),
 				new Page(7, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, NecronomiconText.ITEM_TRANSPORT_TUT_7),
 				new Page(8, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, NecronomiconText.ITEM_TRANSPORT_TUT_8));
-		addPages("darkrealm", "materials", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.darkstone), NecronomiconText.MATERIAL_DARKSTONE_1),
+		//TODO dimensions
+		addPage(new Page(1, NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, NecronomiconText.INFORMATION_OMOTHOL), "dimension", "omothol");
+		//TODO biomes
+		addPages("materials", "darkrealm", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.darkstone), NecronomiconText.MATERIAL_DARKSTONE_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_DARKSTONE_2));
-		addPages("darkrealm", "progression", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3, NecronomiconText.PROGRESSION_DARK_REALM_1),
+		addPages("progression", "darkrealm", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3, NecronomiconText.PROGRESSION_DARK_REALM_1),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 3, NecronomiconText.PROGRESSION_DARK_REALM_2));
-		addPages("darkrealm", "entities", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.SHADOW_CREATURE, NecronomiconText.ENTITY_SHADOW_CREATURE_1, ResearchItems.SHADOW_CREATURE),
+		addPages("entities", "darkrealm", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.SHADOW_CREATURE, NecronomiconText.ENTITY_SHADOW_CREATURE_1, ResearchItems.SHADOW_CREATURE),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_SHADOW_CREATURE_2, ResearchItems.SHADOW_CREATURE),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.SHADOW_MONSTER, NecronomiconText.ENTITY_SHADOW_MONSTER_1, ResearchItems.SHADOW_MONSTER),
 				new Page(4, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_SHADOW_MONSTER_2, ResearchItems.SHADOW_MONSTER),
@@ -420,6 +420,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(8, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_SACTHOTH_2),
 				new Page(9, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.LESSER_SHOGGOTH, NecronomiconText.ENTITY_LESSER_SHOGGOTH_1, ResearchItems.SHOGGOTH),
 				new Page(10, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_LESSER_SHOGGOTH_2, ResearchItems.SHOGGOTH));
+		//TODO dimensions
+		addPage(new Page(1, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3, NecronomiconText.INFORMATION_DARK_REALM), "dimension", "darkrealm");
+		//TODO biomes
 		addPages("rituals", "gettingstarted", new Page(1, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconResources.RITUAL_TUT_1, NecronomiconText.RITUAL_TUT_1),
 				new Page(2, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconText.RITUAL_TUT_2),
 				new Page(3, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconResources.RITUAL_TUT_2, NecronomiconText.RITUAL_TUT_3),
@@ -465,7 +468,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(18, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_14, NecronomiconText.PE_TUT_18),
 				new Page(19, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_15, NecronomiconText.PE_TUT_19),
 				new Page(20, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconText.PE_TUT_20));
-		addInternalPages("potentialenergy", "placesofpower", "information", new Page(1, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_POWER_INFO_1), new Page(2, NecronomiconText.LABEL_INFO, 0, NecronomiconText.PLACES_OF_POWER_INFO_2));
+		addInternalPages("potentialenergy", "placesofpower", "information", new Page(1, NecronomiconText.LABEL_INFORMATION, 0, NecronomiconText.PLACES_OF_POWER_INFO_1), new Page(2, NecronomiconText.LABEL_INFORMATION, 0, NecronomiconText.PLACES_OF_POWER_INFO_2));
 		addPages("potentialenergy", "idols", new Page(1, NecronomiconText.LABEL_INFORMATION_IDOLS, 0, NecronomiconText.IDOLS_INFO),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_IDOLS, 0, new ItemStack(ACBlocks.idol_of_fading), NecronomiconText.MATERIAL_IDOL_OF_FADING));
 
@@ -526,5 +529,29 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 					GuiNecronomicon.setPatreonInfo(chapter);
 			}
 		}.start();
+	}
+
+	private Chapter ow() {
+		return new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
+	}
+
+	private Chapter aw() {
+		return new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1);
+	}
+
+	private Chapter dl() {
+		return new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2);
+	}
+
+	private Chapter omt() {
+		return new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3);
+	}
+
+	private Chapter dr() {
+		return new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3);
+	}
+
+	private Chapter[] allChapters() {
+		return new Chapter[] {ow(), aw(), dl(), omt(), dr()};
 	}
 }

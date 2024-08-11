@@ -81,7 +81,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			buttonList.add(buttonPreviousPage = new ButtonNextPage(3, i + 18, b0 + 154, false, false));
 			buttonList.add(buttonPreviousPageLong = new ButtonNextPage(4, i + 23, b0 + 167, false, true));
 			buttonList.add(buttonHome = new ButtonHome(5, i + 118, b0 + 167));
-			buttonList.add(info = new ButtonCategory(6, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFO, false, ACItems.necronomicon));
+			buttonList.add(info = new ButtonCategory(6, i + 14, b0 + 24, this, NecronomiconText.LABEL_INFORMATION, false, ACItems.necronomicon));
 			buttonList.add(transmutator = new ButtonCategory(7, i + 14, b0 + 41, this, "container.abyssalcraft.transmutator", false, getItem(1)));
 			buttonList.add(crystallizer = new ButtonCategory(8, i + 14, b0 + 58, this, "container.abyssalcraft.crystallizer", false, getItem(2)));
 			buttonList.add(materializer = new ButtonCategory(9, i + 14, b0 + 75, this, "container.abyssalcraft.materializer", false, getItem(3)));
@@ -205,7 +205,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		tooltipStack = null;
 
 		if(isMInfo){
-			stuff = localize(NecronomiconText.LABEL_INFO);
+			stuff = localize(NecronomiconText.LABEL_INFORMATION);
 			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			setTurnupLimit(2);
 			if(currTurnup == 0){

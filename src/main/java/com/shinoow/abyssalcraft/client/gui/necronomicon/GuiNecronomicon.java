@@ -72,7 +72,7 @@ public class GuiNecronomicon extends GuiScreen {
 	/** Current turn-up, use to switch text between multiple pages */
 	protected int currTurnup;
 	private ButtonNextPage buttonNextPage, buttonPreviousPage;
-	private ButtonCategory buttonCat1, buttonCat2, buttonCat3, buttonCat4, buttonCat5, buttonCat6, buttonCat7, buttonCat8;
+	private ButtonCategory buttonCat1, buttonCat2, buttonCat3, buttonCat4, buttonCat5, buttonCat6, buttonCat7;
 	private GuiButton buttonDone;
 	private int bookType;
 	private static final int cycleTime = 1000;
@@ -162,9 +162,8 @@ public class GuiNecronomicon extends GuiScreen {
 			buttonList.add(buttonCat5 = new ButtonCategory(7, i + 14, b0 + 92, this, NecronomiconText.LABEL_HUH, false, ACItems.abyssalnomicon));
 		else buttonList.add(buttonCat5 = new ButtonCategory(7, i + 14, b0 + 92, this, NecronomiconText.LABEL_HUH, false, ACItems.necronomicon));
 		buttonList.add(buttonCat6 = new ButtonCategory(8, i + 14, b0 + 109, this, NecronomiconText.LABEL_KNOWLEDGE, false, ACItems.necronomicon));
-		buttonList.add(buttonCat7 = new ButtonCategory(9, i + 14, b0 + 126, this, NecronomiconText.LABEL_MISC_INFORMATION, false, ACItems.necronomicon));
 		if(!AbyssalCraftAPI.getNecronomiconData().isEmpty())
-			buttonList.add(buttonCat8 = new ButtonCategory(10, i + 132, b0 + 24, this, NecronomiconText.LABEL_OTHER, false, ACItems.necronomicon));
+			buttonList.add(buttonCat7 = new ButtonCategory(9, i + 132, b0 + 24, this, NecronomiconText.LABEL_OTHER, false, ACItems.necronomicon));
 		updateButtons();
 	}
 
@@ -210,9 +209,8 @@ public class GuiNecronomicon extends GuiScreen {
 		buttonCat4.visible = true;
 		buttonCat5.visible = true;
 		buttonCat6.visible = true;
-		buttonCat7.visible = true;
 		if(!AbyssalCraftAPI.getNecronomiconData().isEmpty())
-			buttonCat8.visible = true;
+			buttonCat7.visible = true;
 
 	}
 
@@ -255,10 +253,14 @@ public class GuiNecronomicon extends GuiScreen {
 						patreon, new GuiInstance(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines"){
 					@Override public IResearchItem getResearch() { return ResearchItems.ABYSSAL_WASTELAND_NECRO; }
 					@Override public GuiScreen getOpenGui(int bookType, GuiScreen parent) { return new GuiNecronomiconMachines(bookType, (GuiNecronomicon) parent); }
-				}, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("overworld"), AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("abyssalwasteland"),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("dreadlands"), AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("omothol"),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("darkrealm"));
-
+				}, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("progression"),
+						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("dimensions"),
+						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("biomes"),
+						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("entities"),
+						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("materials"),
+						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("specialmaterials"),
+						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("armortools"),
+						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("miscinfo"));
 				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, data, this));
 			} else if (button.id == 4)
 				mc.displayGuiScreen(new GuiNecronomiconSpells(bookType, Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND)));
@@ -287,8 +289,6 @@ public class GuiNecronomicon extends GuiScreen {
 				bookTotalTurnups = 2;
 				drawButtons();
 			} else if(button.id == 9)
-				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("miscinfo"), this, ACItems.necronomicon));
-			else if (button.id == 10)
 				mc.displayGuiScreen(new GuiNecronomiconOther(bookType));
 			updateButtons();
 		}

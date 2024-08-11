@@ -241,7 +241,7 @@ gui.acjei.category.fuel.crystallizer=Crystallizer Fuel
 
 #Necronomicon Labels
 necronomicon.index=Index
-necronomicon.information=Forbidden Knowledge
+necronomicon.information=Information
 necronomicon.spells=Spellbook
 necronomicon.rituals=Rituals
 necronomicon.huh=What is this book?
@@ -260,17 +260,16 @@ necronomicon.information.darkrealm=Dark Realm
 necronomicon.information.darkrealm.title=The Dark Realm
 necronomicon.information.materials=Materials
 necronomicon.information.progression=Progression
-necronomicon.information.entities=Entities
+necronomicon.information.entities=Mobs
 necronomicon.information.outergods=The Outer Gods
 necronomicon.other=Other Information
 necronomicon.locked=Locked
-necronomicon.information.specialmaterials=Special Materials
+necronomicon.information.specialmaterials=Notable Crafting
 necronomicon.anywhere=Anywhere
 necronomicon.location=Location
-necronomicon.info=Information
 necronomicon.normal=Normal
 necronomicon.patrons=Patrons
-necronomicon.information.armortools=Special Armor and Tools
+necronomicon.information.armortools=Armor and Tools
 necronomicon.information.machines=Machines
 necronomicon.reqenergy=Required Energy
 necronomicon.gettingstarted=Getting Started
@@ -303,6 +302,8 @@ necronomicon.poweramplifier=Power amplifier
 necronomicon.spell.type.charging=Charging
 necronomicon.spell.type.instant=Instant
 necronomicon.information.idols=Idols
+necronomicon.information.dimensions=Dimensions
+necronomicon.information.biomes=Biomes
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
