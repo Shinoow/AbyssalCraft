@@ -58,4 +58,13 @@ public class RendingRegistry {
 	public List<Rending> getRendings() {
 		return rendings;
 	}
+	
+	/**
+	 * Removes a Rending based on name
+	 * @param name
+	 */
+	public void removeRending(String name) {
+		if(rendings.removeIf(r -> r.getName().equalsIgnoreCase(name)))
+			logger.log(Level.ERROR, "Removed rending with name: {}", name);
+	}
 }

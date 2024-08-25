@@ -81,7 +81,6 @@ public class ItemGatewayKey extends ItemACBasic {
 			par1ItemStack.setTagCompound(new NBTTagCompound());
 		int dim = par1ItemStack.getTagCompound().getInteger("Dimension");
 		list.add(I18n.format("tooltip.portalplacer.3", DimensionDataRegistry.instance().getDimensionName(dim)));
-		DimensionDataRegistry.instance().getDataForDim(dim);
 		if(world != null) {
 			int currDim = world.provider.getDimension();
 			if(!areDimensionsCompatible(currDim, dim) || !RitualRegistry.instance().canPerformAction(currDim, 4))

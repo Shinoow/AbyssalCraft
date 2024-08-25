@@ -24,12 +24,23 @@ import com.shinoow.abyssalcraft.lib.util.IHiddenRitual;
 public class RitualRecipeMaker {
 
 	@Nonnull
-	public static List<NecronomiconCreationRitual> getRituals(){
+	public static List<NecronomiconCreationRitual> getCreationRituals(){
 		List<NecronomiconCreationRitual> recipes = new ArrayList();
 
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
 			if(ritual instanceof NecronomiconCreationRitual && !(ritual instanceof IHiddenRitual))
 				recipes.add((NecronomiconCreationRitual) ritual);
+
+		return recipes;
+	}
+
+	@Nonnull
+	public static List<NecronomiconRitual> getRituals(){
+		List<NecronomiconRitual> recipes = new ArrayList();
+
+		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
+			if(!(ritual instanceof NecronomiconCreationRitual) && !(ritual instanceof IHiddenRitual))
+				recipes.add(ritual);
 
 		return recipes;
 	}

@@ -248,7 +248,7 @@ public class GuiNecronomicon extends GuiScreen {
 						new Page(4, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_4),
 						new Page(5, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.ABYSSALCRAFT_3, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_5),
 						new Page(6, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_6)),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("greatoldones"),
+						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("pantheon"),
 						new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.INFORMATION_ABYSSALNOMICON),
 						patreon, new GuiInstance(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines"){
 					@Override public IResearchItem getResearch() { return ResearchItems.ABYSSAL_WASTELAND_NECRO; }

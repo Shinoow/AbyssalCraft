@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.api.dimension;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
@@ -175,5 +176,22 @@ public class DimensionDataRegistry {
 
 		return getGatewayKeyOverrides(key)
 				.anyMatch(t -> t.getFirst() == dim1 && t.getSecond() == dim2 || t.getFirst() == dim2 && t.getSecond() == dim1);
+	}
+
+	/**
+	 * Removes Dimension Data related to the ID presented
+	 * @param id
+	 */
+	public void removeDimensionData(int id) {
+		if(dimensions.removeIf(d -> d.getId() == id)) {
+			dimensions.stream()
+			.filter(d -> d.getConnectedDimensions().contains(id))
+			.forEach(d -> d.getConnectedDimensions().remove(id));
+			for(Entry<Integer, Set<Tuple<Integer, Integer>>> e : gateway_key_overrides.entrySet()) {
+				e.getValue().removeIf(t -> t.getFirst() == id || t.getSecond() == id);
+			}
+			logger.log(Level.ERROR, "Dimension Data for dimension {} was removed", id);
+		}
+
 	}
 }

@@ -11,13 +11,12 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.util;
 
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 
 /**
  *
  * Any {@link NecronomiconRitual} that implements this interface is<br>
- * hidden from the Necronomicon and the JEI plugin (if it's an instance of {@link NecronomiconCreationRitual})
+ * hidden from the Necronomicon and the JEI plugin
  * @author shinoow
  *
  */
