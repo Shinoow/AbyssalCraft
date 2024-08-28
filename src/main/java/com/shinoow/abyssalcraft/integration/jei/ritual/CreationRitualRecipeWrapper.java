@@ -18,7 +18,6 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -28,9 +27,9 @@ public class CreationRitualRecipeWrapper extends RitualRecipeWrapper {
 
 	private final ItemStack output;
 
-	public CreationRitualRecipeWrapper(@Nonnull NecronomiconRitual ritual){
+	public CreationRitualRecipeWrapper(@Nonnull NecronomiconCreationRitual ritual){
 		super(ritual);
-		output = ((NecronomiconCreationRitual) ritual).getItem();
+		output = ritual.getItem();
 	}
 
 	public List<ItemStack> getOutputs(){

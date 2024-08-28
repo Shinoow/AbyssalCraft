@@ -3,8 +3,8 @@
 	"textures": {
 		"particle": "abyssalcraft:blocks/dreadlandsdirt",
         "bottom": "abyssalcraft:blocks/dreadlandsdirt",
-        "top": "abyssalcraft:blocks/drgtop",
+        "top": "blocks/grass_top",
         "side": "abyssalcraft:blocks/drgsides",
-        "overlay": "abyssalcraft:blocks/drgsides"
+        "overlay": "blocks/grass_side_overlay"
 	}
 }

@@ -1,3 +1,7 @@
 {
-	"parent": "abyssalcraft:block/dreadgrass"
+	"parent": "abyssalcraft:block/dreadgrass",
+	"textures": {
+        "top": "abyssalcraft:blocks/drgtop",
+        "overlay": "abyssalcraft:blocks/drgsides"
+	}
 }

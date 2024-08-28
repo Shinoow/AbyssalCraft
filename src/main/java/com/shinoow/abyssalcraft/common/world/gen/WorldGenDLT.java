@@ -18,6 +18,7 @@ import static java.lang.Math.sin;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -49,10 +50,10 @@ public class WorldGenDLT extends WorldGenTrees {
 
 		IBlockState j1 = world.getBlockState(new BlockPos(x, y -1, z));
 
-		if (j1.getBlock() != Blocks.DIRT && j1.getMaterial() != Material.GRASS || y >= 256 - height - 1)
+		if (j1.getBlock() != Blocks.DIRT && j1.getBlock() != ACBlocks.dreadlands_dirt && j1.getMaterial() != Material.GRASS || y >= 256 - height - 1)
 			return false;
 
-		setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), Blocks.DIRT.getDefaultState());
+		setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), (world.provider.getDimension() == ACLib.dreadlands_id ? ACBlocks.dreadlands_dirt : Blocks.DIRT).getDefaultState());
 
 		for (int i = 0; i < height; i++)
 			setBlockAndNotifyAdequately(world, new BlockPos(x, y + i, z), getLogBlock(rand).getDefaultState());

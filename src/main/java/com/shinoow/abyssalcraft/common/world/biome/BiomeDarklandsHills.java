@@ -33,6 +33,7 @@ public class BiomeDarklandsHills extends BiomeDarklandsBase {
 	{
 		super(par1);
 		fillerBlock = ACBlocks.darkstone.getDefaultState();
+		staticFillerBlock = true;
 		WorldGenDarkTrees = new WorldGenDLT(false);
 		decorator.treesPerChunk = 1;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));

@@ -26,6 +26,7 @@ public class BiomeDarklandsMountains extends BiomeDarklandsBase {
 		super(par1);
 		topBlock = ACBlocks.darkstone.getDefaultState();
 		fillerBlock = ACBlocks.darkstone.getDefaultState();
+		staticTopBlock = staticFillerBlock = true;
 		decorator.treesPerChunk = 0;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 45, 1, 2));
@@ -36,7 +37,6 @@ public class BiomeDarklandsMountains extends BiomeDarklandsBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
 	public int getSkyColorByTemp(float par1)
 	{
 		return ACClientVars.getDarklandsMountainsSkyColor();

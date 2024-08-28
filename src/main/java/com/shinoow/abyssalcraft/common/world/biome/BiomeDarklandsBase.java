@@ -34,6 +34,8 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome {
 	protected static final IBlockState LIQUID_CORALIUM = ACBlocks.liquid_coralium.getDefaultState();
 	protected static final IBlockState DREADSTONE = ACBlocks.dreadstone.getDefaultState();
 
+	protected boolean staticTopBlock, staticFillerBlock;
+
 	public BiomeDarklandsBase(BiomeProperties properties) {
 		super(properties);
 	}
@@ -98,14 +100,24 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome {
 		return e -> e == getBaseBlock(dim);
 	}
 
+	protected IBlockState getTopBlock(int dim) {
+		return !staticTopBlock && dim == ACLib.dreadlands_id ? ACBlocks.dreadlands_grass.getDefaultState() : topBlock;
+	}
+
+	protected IBlockState getFillerBlock(int dim) {
+		return !staticFillerBlock && dim == ACLib.dreadlands_id ? ACBlocks.dreadlands_dirt.getDefaultState() : fillerBlock;
+	}
+
+
 	public final void generateDarklandsTerrain(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180628_4_, int p_180628_5_, double p_180628_6_)
 	{
 		int i = getSeaLevel(worldIn);
+		int dim = worldIn.provider.getDimension();
 
-		IBlockState BASE_BLOCK = getBaseBlock(worldIn.provider.getDimension());
+		IBlockState BASE_BLOCK = getBaseBlock(dim);
 
-		IBlockState iblockstate = topBlock;
-		IBlockState iblockstate1 = fillerBlock;
+		IBlockState iblockstate = getTopBlock(dim);
+		IBlockState iblockstate1 = getFillerBlock(dim);
 		int j = -1;
 		int k = (int)(p_180628_6_ / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 		int l = p_180628_4_ & 15;
@@ -145,8 +157,8 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome {
 						}
 						else if (j1 >= i - 4 && j1 <= i + 1)
 						{
-							iblockstate = topBlock;
-							iblockstate1 = fillerBlock;
+							iblockstate = getTopBlock(dim);
+							iblockstate1 = getFillerBlock(dim);
 						}
 
 						if (j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR) && i == 49)

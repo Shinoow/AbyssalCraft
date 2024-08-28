@@ -15,6 +15,8 @@ import org.lwjgl.input.Keyboard;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.block.ICrystalBlock;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -71,6 +73,8 @@ import net.minecraft.util.IThreadListener;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -230,6 +234,10 @@ public class ClientProxy extends CommonProxy {
 			return getColor(state.getBlock());
 		}, ACBlocks.ritual_pedestal_stone, ACBlocks.ritual_pedestal_darkstone, ACBlocks.ritual_pedestal_abyssal_stone, ACBlocks.ritual_pedestal_coralium_stone,
 				ACBlocks.ritual_pedestal_dreadstone, ACBlocks.ritual_pedestal_abyssalnite_stone, ACBlocks.ritual_pedestal_ethaxium, ACBlocks.ritual_pedestal_dark_ethaxium);
+		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
+			Biome biome = world.getBiome(pos);
+			return biome instanceof IDarklandsBiome ? BiomeColorHelper.getGrassColorAtPos(world, pos) : ACBiomes.dreadlands.getGrassColorAtPos(pos);
+		}, ACBlocks.dreadlands_grass);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, I18n.format(NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, I18n.format(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE));
