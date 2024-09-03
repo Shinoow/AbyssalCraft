@@ -68,6 +68,19 @@ public class DimensionData {
 	}
 
 	/**
+	 * Changes the color of the portal edge<br>
+	 * (set any value to -1 if you don't want to replace it)
+	 */
+	public void changeColor(int r, int g, int b) {
+		if(r >= 0)
+			this.r = r;
+		if(g >= 0)
+			this.g = g;
+		if(b >= 0)
+			this.b = b;
+	}
+
+	/**
 	 * Returns the dimension ID associated
 	 */
 	public int getId() {
@@ -78,13 +91,26 @@ public class DimensionData {
 	 * Returns the required Gateway Key
 	 * <ul>
 	 * <li>0 = Gateway Key</li>
-	 * <li>1 = Asorah's Dreaded Gateway Key</li>
-	 * <li>1 = Cha'garoth's R'lyehian Gateway Key</li>
+	 * <li>1 = Dreadlands Infused Gateway Key</li>
+	 * <li>2 = Omothol-forged Gateway Key</li>
 	 * <li>3 = The Silver Key</li>
 	 * </ul>
 	 */
 	public int getGatewayKey() {
 		return gatewayKey;
+	}
+
+	/**
+	 * Changes the required Gateway Key
+	 * <ul>
+	 * <li>0 = Gateway Key</li>
+	 * <li>1 = Dreadlands Infused Gateway Key</li>
+	 * <li>2 = Omothol-forged Gateway Key</li>
+	 * <li>3 = The Silver Key</li>
+	 * </ul>
+	 */
+	public void setGatewayKey(int key) {
+		gatewayKey = key;
 	}
 
 	/**
@@ -104,11 +130,25 @@ public class DimensionData {
 	}
 
 	/**
+	 * Changes which mob the portal can spawn at times
+	 */
+	public void setMobClass(Class<? extends EntityLiving> clazz) {
+		mobClass = clazz;
+	}
+
+	/**
 	 * Returns the overlay texture for the portal, if any
 	 */
 	@Nullable
 	public ResourceLocation getOverlay() {
 		return overlay;
+	}
+
+	/**
+	 * Changes the overlay textures for the portal
+	 */
+	public void setOverlay(ResourceLocation rl) {
+		overlay = rl;
 	}
 
 	public static class Builder {

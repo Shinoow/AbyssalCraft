@@ -47,11 +47,16 @@ public class DimensionDataRegistry {
 		return instance;
 	}
 
+	/**
+	 * Registers a DimensionData instance (or overrides if one already exists for the dimension)
+	 * @param data DimensionData DTO
+	 */
 	public void registerDimensionData(DimensionData data) {
-		if(dimensions.stream().anyMatch(d -> d.getId() == data.getId()))
-			logger.log(Level.ERROR, "Dimension Data for dimension {} has already been registered", data.getId());
-		else
-			dimensions.add(data);
+		if(dimensions.stream().anyMatch(d -> d.getId() == data.getId())) {
+			dimensions.removeIf(d -> d.getId() == data.getId());
+			logger.log(Level.WARN, "Dimension Data for dimension {} has already been registered, overriding", data.getId());
+		}
+		dimensions.add(data);
 	}
 
 	/**
@@ -105,8 +110,8 @@ public class DimensionDataRegistry {
 	 * @param key Minimum required Gateway Key
 	 * <ul>
 	 * <li>0 = Gateway Key</li>
-	 * <li>1 = Asorah's Dreaded Gateway Key</li>
-	 * <li>1 = Cha'garoth's R'lyehian Gateway Key</li>
+	 * <li>1 = Dreadlands Infused Gateway Key</li>
+	 * <li>2 = Omothol-forged Gateway Key</li>
 	 * <li>3 = The Silver Key</li>
 	 * </ul>
 	 * @param dim1 First dimension to connect
@@ -126,8 +131,8 @@ public class DimensionDataRegistry {
 	 * @param key The Gateway Key
 	 * <ul>
 	 * <li>0 = Gateway Key</li>
-	 * <li>1 = Asorah's Dreaded Gateway Key</li>
-	 * <li>1 = Cha'garoth's R'lyehian Gateway Key</li>
+	 * <li>1 = Dreadlands Infused Gateway Key</li>
+	 * <li>2 = Omothol-forged Gateway Key</li>
 	 * <li>3 = The Silver Key</li>
 	 * </ul>
 	 */
@@ -150,8 +155,8 @@ public class DimensionDataRegistry {
 	 * @param key Gateway Key
 	 * <ul>
 	 * <li>0 = Gateway Key</li>
-	 * <li>1 = Asorah's Dreaded Gateway Key</li>
-	 * <li>1 = Cha'garoth's R'lyehian Gateway Key</li>
+	 * <li>1 = Dreadlands Infused Gateway Key</li>
+	 * <li>2 = Omothol-forged Gateway Key</li>
 	 * <li>3 = The Silver Key</li>
 	 * </ul>
 	 */
@@ -190,7 +195,7 @@ public class DimensionDataRegistry {
 			for(Entry<Integer, Set<Tuple<Integer, Integer>>> e : gateway_key_overrides.entrySet()) {
 				e.getValue().removeIf(t -> t.getFirst() == id || t.getSecond() == id);
 			}
-			logger.log(Level.ERROR, "Dimension Data for dimension {} was removed", id);
+			logger.log(Level.INFO, "Dimension Data for dimension {} was removed", id);
 		}
 
 	}
