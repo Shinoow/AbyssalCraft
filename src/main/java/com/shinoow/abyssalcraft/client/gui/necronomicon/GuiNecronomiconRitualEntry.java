@@ -11,7 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
@@ -38,11 +39,11 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	private GuiButton buttonDone;
 	private ButtonHome buttonHome;
 	private GuiNecronomicon parent;
-	private Map<Integer, String> dimToString = new HashMap<>();
 	/** Used to separate which rituals this entry should display */
 	private int ritualnum;
 	private List<NecronomiconRitual> rituals = new ArrayList<>();
 
+	private String ANYWHERE = localize(NecronomiconText.LABEL_ANYWHERE);
 
 	public GuiNecronomiconRitualEntry(int bookType, GuiNecronomicon gui, int ritualnum){
 		super(bookType);
@@ -181,15 +182,11 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	}
 
 	private String getDimension(int dim){
-		if(!dimToString.containsKey(dim))
-			dimToString.put(dim, "DIM"+dim);
-		return dimToString.get(dim);
+
+		return dim == OreDictionary.WILDCARD_VALUE ? ANYWHERE : DimensionDataRegistry.instance().getDimensionName(dim);
 	}
 
 	private void initStuff(){
-		dimToString.put(OreDictionary.WILDCARD_VALUE, localize(NecronomiconText.LABEL_ANYWHERE));
-		dimToString.putAll(DimensionDataRegistry.instance().getDimensionNameMappings());
-
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
 			if(ritual.getBookType() == ritualnum && isUnlocked(ritual.getResearchItem(ritual)) && !(ritual instanceof IHiddenRitual))
 				rituals.add(ritual);
