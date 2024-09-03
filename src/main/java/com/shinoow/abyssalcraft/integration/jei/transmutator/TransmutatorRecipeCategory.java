@@ -13,30 +13,31 @@ package com.shinoow.abyssalcraft.integration.jei.transmutator;
 
 import javax.annotation.Nonnull;
 
+import com.shinoow.abyssalcraft.integration.jei.util.ACRecipeBackgrounds;
+import com.shinoow.abyssalcraft.integration.jei.util.ACRecipeCategoryBase;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.gui.IDrawableStatic;
-import mezz.jei.api.recipe.IRecipeCategory;
-import net.minecraft.util.ResourceLocation;
+import mezz.jei.api.recipe.IRecipeWrapper;
 
-public abstract class TransmutatorRecipeCategory implements IRecipeCategory {
+public abstract class TransmutatorRecipeCategory<T extends IRecipeWrapper> extends ACRecipeCategoryBase<T> {
 	protected static final int inputSlot = 0;
 	protected static final int fuelSlot = 1;
 	protected static final int outputSlot = 2;
 
-	protected final ResourceLocation backgroundLocation;
 	@Nonnull
 	protected final IDrawableAnimated flame;
 	@Nonnull
 	protected final IDrawableAnimated arrow;
 
-	public TransmutatorRecipeCategory(IGuiHelper guiHelper) {
-		backgroundLocation = new ResourceLocation("abyssalcraft", "textures/gui/container/transmutator_NEI.png");
+	public TransmutatorRecipeCategory(IGuiHelper guiHelper, String title, String uid) {
+		super(title, uid);
 
-		IDrawableStatic flameDrawable = guiHelper.createDrawable(backgroundLocation, 176, 0, 13, 13);
+		IDrawableStatic flameDrawable = guiHelper.createDrawable(ACRecipeBackgrounds.TRANSMUTATOR, 176, 0, 13, 13);
 		flame = guiHelper.createAnimatedDrawable(flameDrawable, 300, IDrawableAnimated.StartDirection.TOP, true);
 
-		IDrawableStatic arrowDrawable = guiHelper.createDrawable(backgroundLocation, 176, 14, 24, 17);
+		IDrawableStatic arrowDrawable = guiHelper.createDrawable(ACRecipeBackgrounds.TRANSMUTATOR, 176, 14, 24, 17);
 		arrow = guiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
 	}
 }

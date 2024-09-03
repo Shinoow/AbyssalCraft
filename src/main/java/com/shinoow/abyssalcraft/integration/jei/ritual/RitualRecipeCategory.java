@@ -11,26 +11,17 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.ritual;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
+import com.shinoow.abyssalcraft.integration.jei.util.ACRecipeBackgrounds;
+import com.shinoow.abyssalcraft.integration.jei.util.ACRecipeCategoryBase;
+import com.shinoow.abyssalcraft.integration.jei.util.ACRecipeCategoryUid;
 
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeCategory;
-import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.ResourceLocation;
 
-public class RitualRecipeCategory implements IRecipeCategory {
+public class RitualRecipeCategory extends ACRecipeCategoryBase<RitualRecipeWrapper> {
 
 	private static final int pedestal1 = 0;
 	private static final int pedestal2 = 1;
@@ -43,77 +34,27 @@ public class RitualRecipeCategory implements IRecipeCategory {
 	private static final int sacrifice = 8;
 	private static final int necronomicon = 9;
 
-	@Nonnull
-	private final IDrawable background;
-	@Nonnull
-	private final IDrawable slotDrawable;
-	@Nonnull
-	private final String localizedName;
-
 	public RitualRecipeCategory(IGuiHelper guiHelper){
-		ResourceLocation location = new ResourceLocation("abyssalcraft", "textures/gui/container/ritual_NEI.png");
-		background = guiHelper.createDrawable(location, 5, 11, 166, 140);
-		localizedName = I18n.format("container.abyssalcraft.rituals.nei");
-
-		slotDrawable = guiHelper.getSlotDrawable();
+		super(I18n.format("container.abyssalcraft.rituals.nei"), ACRecipeCategoryUid.RITUAL);
+		background = guiHelper.createDrawable(ACRecipeBackgrounds.RITUAL, 5, 11, 166, 140);
 	}
 
 	@Override
-	public String getUid() {
+	public void setRecipe(IRecipeLayout recipeLayout, RitualRecipeWrapper recipeWrapper, IIngredients ingredients) {
+		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
+		int xBoost = 14, yBoost = -25;
 
-		return AbyssalCraftRecipeCategoryUid.RITUAL;
-	}
+		itemStacks.init(pedestal1, true, 58 + xBoost, 30 + yBoost);
+		itemStacks.init(pedestal2, true, 84 + xBoost, 40 + yBoost);
+		itemStacks.init(pedestal3, true, 94 + xBoost, 66 + yBoost);
+		itemStacks.init(pedestal4, true, 84 + xBoost, 92 + yBoost);
+		itemStacks.init(pedestal5, true, 58 + xBoost, 103 + yBoost);
+		itemStacks.init(pedestal6, true, 32 + xBoost, 92 + yBoost);
+		itemStacks.init(pedestal7, true, 22 + xBoost, 66 + yBoost);
+		itemStacks.init(pedestal8, true, 32 + xBoost, 40 + yBoost);
+		itemStacks.init(sacrifice, true, 58 + xBoost, 66 + yBoost);
+		itemStacks.init(necronomicon, true, 0 + xBoost, 133 + yBoost);
 
-	@Override
-	public String getTitle() {
-
-		return localizedName;
-	}
-
-	@Override
-	public IDrawable getBackground() {
-
-		return background;
-	}
-
-	@Override
-	public void drawExtras(Minecraft minecraft) {}
-
-	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
-		if(recipeWrapper instanceof RitualRecipeWrapper){
-			IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
-			int xBoost = 14, yBoost = -25;
-
-			itemStacks.init(pedestal1, true, 58 + xBoost, 30 + yBoost);
-			itemStacks.init(pedestal2, true, 84 + xBoost, 40 + yBoost);
-			itemStacks.init(pedestal3, true, 94 + xBoost, 66 + yBoost);
-			itemStacks.init(pedestal4, true, 84 + xBoost, 92 + yBoost);
-			itemStacks.init(pedestal5, true, 58 + xBoost, 103 + yBoost);
-			itemStacks.init(pedestal6, true, 32 + xBoost, 92 + yBoost);
-			itemStacks.init(pedestal7, true, 22 + xBoost, 66 + yBoost);
-			itemStacks.init(pedestal8, true, 32 + xBoost, 40 + yBoost);
-			itemStacks.init(sacrifice, true, 58 + xBoost, 66 + yBoost);
-			itemStacks.init(necronomicon, true, 0 + xBoost, 133 + yBoost);
-
-			itemStacks.set(ingredients);
-		}
-	}
-
-	@Override
-	public IDrawable getIcon() {
-		return null;
-	}
-
-	@Override
-	public String getModName() {
-
-		return AbyssalCraft.name;
-	}
-
-	@Override
-	public List getTooltipStrings(int mouseX, int mouseY) {
-
-		return Collections.emptyList();
+		itemStacks.set(ingredients);
 	}
 }

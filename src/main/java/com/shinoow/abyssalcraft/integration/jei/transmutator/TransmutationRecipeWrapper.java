@@ -26,7 +26,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
-public class TransmutationRecipe implements IRecipeWrapper {
+public class TransmutationRecipeWrapper implements IRecipeWrapper {
 	@Nonnull
 	private final List<List<ItemStack>> input;
 	@Nonnull
@@ -35,7 +35,7 @@ public class TransmutationRecipe implements IRecipeWrapper {
 	@Nullable
 	private final String experienceString;
 
-	public TransmutationRecipe(@Nonnull List<ItemStack> input, @Nonnull ItemStack output, float experience) {
+	public TransmutationRecipeWrapper(@Nonnull List<ItemStack> input, @Nonnull ItemStack output, float experience) {
 		this.input = Collections.singletonList(input);
 		outputs = Collections.singletonList(output);
 

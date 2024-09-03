@@ -15,14 +15,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
 import com.shinoow.abyssalcraft.api.recipe.Materialization;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
 public class MaterializationRecipeWrapper implements IRecipeWrapper {
@@ -39,9 +36,6 @@ public class MaterializationRecipeWrapper implements IRecipeWrapper {
 		output = materialization.output;
 
 	}
-
-	@Override
-	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {}
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {

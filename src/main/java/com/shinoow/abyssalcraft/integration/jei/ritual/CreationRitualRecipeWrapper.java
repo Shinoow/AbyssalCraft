@@ -12,7 +12,6 @@
 package com.shinoow.abyssalcraft.integration.jei.ritual;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -30,10 +29,6 @@ public class CreationRitualRecipeWrapper extends RitualRecipeWrapper {
 	public CreationRitualRecipeWrapper(@Nonnull NecronomiconCreationRitual ritual){
 		super(ritual);
 		output = ritual.getItem();
-	}
-
-	public List<ItemStack> getOutputs(){
-		return Collections.singletonList(output);
 	}
 
 	@Override

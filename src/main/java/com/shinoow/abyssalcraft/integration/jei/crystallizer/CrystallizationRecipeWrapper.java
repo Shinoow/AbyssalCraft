@@ -27,7 +27,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
-public class CrystallizationRecipe implements IRecipeWrapper {
+public class CrystallizationRecipeWrapper implements IRecipeWrapper {
 
 	@Nonnull
 	private final List<List<ItemStack>> input;
@@ -37,7 +37,7 @@ public class CrystallizationRecipe implements IRecipeWrapper {
 	@Nullable
 	private final String experienceString;
 
-	public CrystallizationRecipe(@Nonnull List<ItemStack> input, @Nonnull ItemStack output, ItemStack output2, float experience) {
+	public CrystallizationRecipeWrapper(@Nonnull List<ItemStack> input, @Nonnull ItemStack output, ItemStack output2, float experience) {
 		this.input = Collections.singletonList(input);
 
 		outputs = new ArrayList<>();

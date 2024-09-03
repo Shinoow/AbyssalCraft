@@ -17,9 +17,8 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.integration.jei.util.JEIUtils;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -48,18 +47,6 @@ public class RitualRecipeWrapper implements IRecipeWrapper {
 		this.ritual = ritual;
 	}
 
-	public Object[] getOfferings(){
-		return offerings;
-	}
-
-	public Object getSacrifice(){
-		return sacrifice;
-	}
-
-	public int getBookType(){
-		return bookType;
-	}
-
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 
@@ -70,7 +57,7 @@ public class RitualRecipeWrapper implements IRecipeWrapper {
 
 		if(ritual.requiresSacrifice())
 			fr.drawString(I18n.format(NecronomiconText.LABEL_SACRIFICE, new Object[0]), 93, 124, 0xC40000);
-		fr.drawSplitString(I18n.format(NecronomiconText.LABEL_LOCATION, new Object[0]) + ": " + RitualJEIUtils.getDimension(ritual.getDimension()), 93, 85, 70, 0);
+		fr.drawSplitString(I18n.format(NecronomiconText.LABEL_LOCATION, new Object[0]) + ": " + JEIUtils.getDimension(ritual.getDimension()), 93, 85, 70, 0);
 		fr.drawSplitString(I18n.format(NecronomiconText.LABEL_REQUIRED_ENERGY, new Object[0]) + ": " + ritual.getReqEnergy() + " PE", 93, 108, 70, 0);
 
 		fr.setUnicodeFlag(unicode);
@@ -82,9 +69,9 @@ public class RitualRecipeWrapper implements IRecipeWrapper {
 		List<List<ItemStack>> input = new ArrayList<>();
 
 		for(Object obj : offerings)
-			input.add(RitualJEIUtils.parseAsList(obj));
-		input.add(RitualJEIUtils.parseAsList(sacrifice));
-		input.add(Collections.singletonList(RitualJEIUtils.getItem(bookType)));
+			input.add(JEIUtils.parseAsList(obj));
+		input.add(JEIUtils.parseAsList(sacrifice));
+		input.add(Collections.singletonList(JEIUtils.getItem(bookType)));
 		ingredients.setInputLists(VanillaTypes.ITEM, input);
 	}
 }

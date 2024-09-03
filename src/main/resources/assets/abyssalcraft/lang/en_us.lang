@@ -235,6 +235,7 @@ container.abyssalcraft.materializer.nei=Materialization
 container.abyssalcraft.rituals.nei=Necronomicon Ritual
 container.abyssalcraft.creationrituals.nei=Necronomicon Creation Ritual
 container.abyssalcraft.rending.nei=Staff of Rending
+container.abyssalcraft.spells.nei=Spells
 
 #JEI Integration
 gui.acjei.category.fuel.transmutator=Transmutator Fuel

@@ -11,41 +11,23 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.transmutator;
 
-import java.util.Collections;
-import java.util.List;
-
 import javax.annotation.Nonnull;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.integration.jei.AbyssalCraftRecipeCategoryUid;
+import com.shinoow.abyssalcraft.integration.jei.util.ACRecipeBackgrounds;
+import com.shinoow.abyssalcraft.integration.jei.util.ACRecipeCategoryUid;
 
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.ResourceLocation;
 
-public class TransmutationCategory extends TransmutatorRecipeCategory {
-	@Nonnull
-	private final IDrawable background;
-	@Nonnull
-	private final String localizedName;
+public class TransmutationCategory extends TransmutatorRecipeCategory<TransmutationRecipeWrapper> {
 
 	public TransmutationCategory(IGuiHelper guiHelper) {
-		super(guiHelper);
-		ResourceLocation location = new ResourceLocation("abyssalcraft", "textures/gui/container/transmutator_NEI.png");
-		background = guiHelper.createDrawable(location, 55, 16, 82, 54);
-		localizedName = I18n.format("container.abyssalcraft.transmutator.nei");
-	}
-
-	@Override
-	@Nonnull
-	public IDrawable getBackground() {
-		return background;
+		super(guiHelper, I18n.format("container.abyssalcraft.transmutator.nei"), ACRecipeCategoryUid.TRANSMUTATION);
+		background = guiHelper.createDrawable(ACRecipeBackgrounds.TRANSMUTATOR, 55, 16, 82, 54);
 	}
 
 	@Override
@@ -54,43 +36,13 @@ public class TransmutationCategory extends TransmutatorRecipeCategory {
 		arrow.draw(minecraft, 24, 18);
 	}
 
-	@Nonnull
 	@Override
-	public String getTitle() {
-		return localizedName;
-	}
-
-	@Nonnull
-	@Override
-	public String getUid() {
-		return AbyssalCraftRecipeCategoryUid.TRANSMUTATION;
-	}
-
-	@Override
-	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper, IIngredients ingredients) {
+	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull TransmutationRecipeWrapper recipeWrapper, IIngredients ingredients) {
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
 		guiItemStacks.init(inputSlot, true, 0, 0);
 		guiItemStacks.init(outputSlot, false, 60, 18);
 
 		guiItemStacks.set(ingredients);
-	}
-
-	@Override
-	public IDrawable getIcon() {
-
-		return null;
-	}
-
-	@Override
-	public String getModName() {
-
-		return AbyssalCraft.name;
-	}
-
-	@Override
-	public List getTooltipStrings(int mouseX, int mouseY) {
-
-		return Collections.emptyList();
 	}
 }

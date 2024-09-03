@@ -29,7 +29,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class CrystallizerFuelRecipe implements IRecipeWrapper {
+public class CrystallizerFuelRecipeWrapper implements IRecipeWrapper {
 	@Nonnull
 	private final List<List<ItemStack>> inputs;
 	@Nonnull
@@ -37,7 +37,7 @@ public class CrystallizerFuelRecipe implements IRecipeWrapper {
 	@Nonnull
 	private final IDrawableAnimated flame;
 
-	public CrystallizerFuelRecipe(@Nonnull IGuiHelper guiHelper, @Nonnull Collection<ItemStack> input, int burnTime) {
+	public CrystallizerFuelRecipeWrapper(@Nonnull IGuiHelper guiHelper, @Nonnull Collection<ItemStack> input, int burnTime) {
 		Preconditions.checkArgument(burnTime > 0, "burn time must be greater than 0");
 		List<ItemStack> inputList = new ArrayList<>(input);
 		inputs = Collections.singletonList(inputList);

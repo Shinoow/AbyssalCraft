@@ -9,11 +9,11 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.integration.jei;
+package com.shinoow.abyssalcraft.integration.jei.util;
 
-public class AbyssalCraftRecipeCategoryUid {
+public class ACRecipeCategoryUid {
 
-	private AbyssalCraftRecipeCategoryUid(){
+	private ACRecipeCategoryUid(){
 
 	}
 
@@ -25,4 +25,5 @@ public class AbyssalCraftRecipeCategoryUid {
 	public static final String FUEL_CRYSTALLIZATION = "abyssalcraft.fuel.crystallization";
 	public static final String RENDING = "abyssalcraft.rending";
 	public static final String MATERIALIZATION = "abyssalcraft.materialization";
+	public static final String SPELL = "abyssalcraft.spell";
 }

@@ -11,12 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.rending;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.rending.Rending;
+import com.shinoow.abyssalcraft.integration.jei.util.JEIUtils;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -34,7 +35,6 @@ public class RendingRecipeWrapper implements IRecipeWrapper {
 	private final int dimension;
 	private final String type;
 	private final String description;
-	private Map<Integer, String> dimToString = new HashMap<>();
 
 	public RendingRecipeWrapper(@Nonnull Rending entry){
 		output = entry.getOutput();
@@ -57,24 +57,17 @@ public class RendingRecipeWrapper implements IRecipeWrapper {
 
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		dimToString.putAll(DimensionDataRegistry.instance().getDimensionNameMappings());
 
 		FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
 
 		if(dimension != OreDictionary.WILDCARD_VALUE){
-			fr.drawSplitString(I18n.format(NecronomiconText.LABEL_LOCATION, new Object[0]) + ": " + getDimension(dimension), 2, 20, 180, 0);
+			fr.drawSplitString(I18n.format(NecronomiconText.LABEL_LOCATION, new Object[0]) + ": " + JEIUtils.getDimension(dimension), 2, 20, 180, 0);
 			fr.drawSplitString("Energy type: " + type, 2, 40, 180, 0);
 			fr.drawSplitString(description, 2, 70, 180, 0);
 		} else{
 			fr.drawSplitString("Energy type: " + type, 2, 20, 180, 0);
 			fr.drawSplitString(description, 2, 40, 180, 0);
 		}
-	}
-
-	private String getDimension(int dim){
-		if(!dimToString.containsKey(dim))
-			dimToString.put(dim, "DIM"+dim);
-		return dimToString.get(dim);
 	}
 
 	@Override
