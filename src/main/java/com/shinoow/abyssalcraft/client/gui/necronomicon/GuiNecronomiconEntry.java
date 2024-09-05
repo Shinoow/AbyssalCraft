@@ -44,8 +44,8 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private ButtonCategory[] buttons;
 	private GuiButton buttonDone;
 	private ButtonHome buttonHome;
-	private NecroData data;
-	private GuiNecronomicon parent;
+	protected NecroData data;
+	protected GuiNecronomicon parent;
 	private Item icon;
 	private int currentData;
 
@@ -97,6 +97,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				}
 		}
 		updateButtons();
+		updateSidebarIndex(this);
 	}
 
 	private void updateButtons()
@@ -130,8 +131,8 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					mc.displayGuiScreen(parent.withBookType(getBookType()));
 				else if(currTurnup == 0 && isInfo){
 					isInfo = false;
-					initGui();
 					currentData = -1;
+					initGui();
 					setTurnupLimit(2);
 				} else if (currTurnup > 0)
 					--currTurnup;
@@ -144,8 +145,8 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				else {
 					currTurnup = 0;
 					isInfo = false;
-					initGui();
 					currentData = -1;
+					initGui();
 					setTurnupLimit(2);
 				}
 			} else if(button.id >= 6 && data.getContainedData().size() >= button.id - 5){
@@ -191,6 +192,12 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		if(data instanceof Chapter)
 			drawChapter((Chapter)data, x, y);
 		else{
+			int k = (width - guiWidth) / 2;
+			byte b0 = 2;
+			String stuff;
+
+			stuff = I18n.format(data.getTitle(), new Object[0]);
+			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
 			setTurnupLimit(1);
 			addPage((Page)data, null, 2, x, y);
 		}
