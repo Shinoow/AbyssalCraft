@@ -31,8 +31,7 @@ import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.api.necronomicon.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconPlacesOfPower;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
@@ -73,6 +72,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.SPELL_GETTING_STARTED = new Chapter("gettingstarted", NecronomiconText.LABEL_GETTING_STARTED, 0);
 		Chapters.SPELL_CASTING = new Chapter("casting", NecronomiconText.LABEL_CASTING, 0);
 		Chapters.SPELL_MATERIALS = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
+
+		Chapters.PATRONS = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
+		Chapters.ABYSSALCRAFT_INFO = new Chapter("acinfo", NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0);
 
 		Chapters.OVERWORLD = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
 		Chapters.ABYSSAL_WASTELAND = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1);
@@ -144,6 +146,29 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		internalNecroData.add(new NecroData("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, Chapters.OVERWORLD_MATERIALS, Chapters.ABYSSAL_WASTELAMD_MATERIALS, Chapters.DREADLANDS_MATERIALS, Chapters.OMOTHOL_MATERIALS, Chapters.DARK_REALM_MATERIALS));
 		internalNecroData.add(new NecroData("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, Chapters.OVERWORLD_CRAFTING, Chapters.ABYSSAL_WASTELAND_CRAFTING, Chapters.DREADLANDS_CRAFTING, Chapters.OMOTHOL_CRAFTING));
 		internalNecroData.add(new NecroData("armortools", NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, Chapters.OVERWORLD_ARMORTOOLS, Chapters.ABYSSAL_WASTELAND_ARMORTOOLS, Chapters.DREADLANDS_ARMORTOOLS));
+
+		internalNecroData.add(new NecroData("information", NecronomiconText.LABEL_INFORMATION, 0, Chapters.ABYSSALCRAFT_INFO,
+				getInternalNecroData("pantheon"),
+				new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.INFORMATION_ABYSSALNOMICON),
+				Chapters.PATRONS, new GuiInstance(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines"){
+			@Override public IResearchItem getResearch() { return ResearchItems.ABYSSAL_WASTELAND_NECRO; }
+			@Override
+			@SideOnly(Side.CLIENT)
+			public GuiScreen getOpenGui(int bookType, GuiScreen parent) { return new GuiNecronomiconMachines(bookType, (GuiNecronomicon) parent); }
+		}, getInternalNecroData("progression"),
+				getInternalNecroData("dimensions"),
+				getInternalNecroData("biomes"),
+				getInternalNecroData("entities"),
+				getInternalNecroData("materials"),
+				getInternalNecroData("specialmaterials"),
+				getInternalNecroData("armortools"),
+				getInternalNecroData("miscinfo")));
+		internalNecroData.add(new NecroData("ritualinfo", NecronomiconText.LABEL_RITUALS, 0, NecronomiconText.RITUAL_INFO, getInternalNecroData("rituals"),
+				new RitualGuiInstance(0, NecronomiconText.LABEL_NORMAL, "ritualsoverworld"),
+				new RitualGuiInstance(1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND, "ritualsabyssalwasteland"),
+				new RitualGuiInstance(2, NecronomiconText.LABEL_INFORMATION_DREADLANDS, "ritualsdreadlands"),
+				new RitualGuiInstance(3, NecronomiconText.LABEL_INFORMATION_OMOTHOL, "ritualsomothol"),
+				new RitualGuiInstance(4, ACItems.abyssalnomicon.getTranslationKey() + ".name", "ritualsabyssalnomicon")));
 	}
 
 	@Override
@@ -527,6 +552,12 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.greater_scroll), NecronomiconText.WIP),
 				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.antimatter_scroll), NecronomiconText.WIP),
 				new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACItems.oblivion_scroll), NecronomiconText.WIP));
+		addPages("information", "acinfo", new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.ABYSSALCRAFT_1, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_1),
+				new Page(2, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_2),
+				new Page(3, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.ABYSSALCRAFT_2, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_3),
+				new Page(4, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_4),
+				new Page(5, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.ABYSSALCRAFT_3, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_5),
+				new Page(6, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_6));
 		setupPatreonData();
 	}
 
@@ -551,9 +582,30 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 					chapter.addPage(new Page(1, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/jenni_mort.png"), "Jenni Mort"));
 				}
 
-				if(chapter != null)
-					GuiNecronomicon.setPatreonInfo(chapter);
+				if(chapter != null) {
+					for(Page page : chapter.getPages().values()) {
+						addPage(page, "information", "patrons");
+					}
+				}
 			}
 		}.start();
+	}
+
+	private class RitualGuiInstance extends GuiInstance {
+
+		protected RitualGuiInstance(int displayIcon, String title, String identifier){
+			super(displayIcon, title, identifier);
+		}
+
+		@Override
+		public IResearchItem getResearch() {
+			return ResearchItems.getBookResearch(displayIcon);
+		}
+
+		@Override
+		@SideOnly(Side.CLIENT)
+		public GuiScreen getOpenGui(int bookType, GuiScreen parent) {
+			return new GuiNecronomiconRitualEntry(bookType, (GuiNecronomicon) parent, displayIcon);
+		}
 	}
 }

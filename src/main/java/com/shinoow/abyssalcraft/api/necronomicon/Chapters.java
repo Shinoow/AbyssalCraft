@@ -23,6 +23,9 @@ public class Chapters {
 	public static Chapter SPELL_CASTING;
 	public static Chapter SPELL_MATERIALS;
 
+	public static Chapter PATRONS;
+	public static Chapter ABYSSALCRAFT_INFO;
+
 	// Dimensional chapters
 	public static Chapter OVERWORLD;
 	public static Chapter ABYSSAL_WASTELAND;

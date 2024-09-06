@@ -20,19 +20,13 @@ import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 import com.shinoow.abyssalcraft.api.knowledge.condition.NecronomiconCondition;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapability;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
-import com.shinoow.abyssalcraft.api.necronomicon.GuiInstance;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
-import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.Minecraft;
@@ -84,7 +78,6 @@ public class GuiNecronomicon extends GuiScreen {
 	protected boolean isInvalid;
 	public static final Map<String, DynamicTexture> successcache = new HashMap<>();
 	public static final List<String> failcache = new ArrayList<>();
-	private static Chapter patreon;
 	private INecroDataCapability cap;
 	protected String unknown50_1, unknown50_2, unknown95, unknownFull;
 	protected static String sidebarIndex;
@@ -242,40 +235,11 @@ public class GuiNecronomicon extends GuiScreen {
 					--currTurnup;
 
 			} else if (button.id == 3){
-
-				NecroData data = new NecroData("information", NecronomiconText.LABEL_INFORMATION, 0, new Chapter("acinfo", NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0,
-						new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.ABYSSALCRAFT_1, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_1),
-						new Page(2, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_2),
-						new Page(3, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.ABYSSALCRAFT_2, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_3),
-						new Page(4, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_4),
-						new Page(5, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.ABYSSALCRAFT_3, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_5),
-						new Page(6, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_6)),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("pantheon"),
-						new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.INFORMATION_ABYSSALNOMICON),
-						patreon, new GuiInstance(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines"){
-					@Override public IResearchItem getResearch() { return ResearchItems.ABYSSAL_WASTELAND_NECRO; }
-					@Override public GuiScreen getOpenGui(int bookType, GuiScreen parent) { return new GuiNecronomiconMachines(bookType, (GuiNecronomicon) parent); }
-				}, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("progression"),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("dimensions"),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("biomes"),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("entities"),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("materials"),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("specialmaterials"),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("armortools"),
-						AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("miscinfo"));
-				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, data, this));
+				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("information"), this));
 			} else if (button.id == 4)
 				mc.displayGuiScreen(new GuiNecronomiconSpells(bookType, Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND)));
 			else if (button.id == 5){
-
-				NecroData data = new NecroData("ritualinfo", NecronomiconText.LABEL_RITUALS, 0, NecronomiconText.RITUAL_INFO, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("rituals"),
-						new RitualGuiInstance(0, NecronomiconText.LABEL_NORMAL, "ritualsoverworld"),
-						new RitualGuiInstance(1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND, "ritualsabyssalwasteland"),
-						new RitualGuiInstance(2, NecronomiconText.LABEL_INFORMATION_DREADLANDS, "ritualsdreadlands"),
-						new RitualGuiInstance(3, NecronomiconText.LABEL_INFORMATION_OMOTHOL, "ritualsomothol"),
-						new RitualGuiInstance(4, ACItems.abyssalnomicon.getTranslationKey() + ".name", "ritualsabyssalnomicon"));
-
-				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, data, this));
+				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("ritualinfo"), this));
 			} else if (button.id == 6)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("potentialenergy"), this, ACItems.necronomicon));
 			else if (button.id == 7){
@@ -314,10 +278,6 @@ public class GuiNecronomicon extends GuiScreen {
 		byte b0 = 2;
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true, false));
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(2, i + 18, b0 + 154, false, false));
-	}
-
-	public static void setPatreonInfo(Chapter info){
-		patreon = info;
 	}
 
 	/**
@@ -638,22 +598,5 @@ public class GuiNecronomicon extends GuiScreen {
 			res += " > " + str1;
 		}
 		return res;
-	}
-
-	private class RitualGuiInstance extends GuiInstance {
-
-		protected RitualGuiInstance(int displayIcon, String title, String identifier){
-			super(displayIcon, title, identifier);
-		}
-
-		@Override
-		public IResearchItem getResearch() {
-			return ResearchItems.getBookResearch(displayIcon);
-		}
-
-		@Override
-		public GuiScreen getOpenGui(int bookType, GuiScreen parent) {
-			return new GuiNecronomiconRitualEntry(bookType, (GuiNecronomicon) parent, displayIcon);
-		}
 	}
 }
