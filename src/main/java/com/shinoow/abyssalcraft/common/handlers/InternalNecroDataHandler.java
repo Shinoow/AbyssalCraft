@@ -254,35 +254,45 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 	@Override
 	public void registerInternalPages() {
-		addPages("pantheon", "outergods", new Page(1, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconResources.AZATHOTH_SEAL, NecronomiconText.AZATHOTH_1),
-				new Page(2, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconText.AZATHOTH_2),
-				new Page(3, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconResources.NYARLATHOTEP_SEAL, NecronomiconText.NYARLATHOTEP_1),
-				new Page(4, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconText.NYARLATHOTEP_2),
-				new Page(5, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconResources.YOG_SOTHOTH_SEAL, NecronomiconText.YOG_SOTHOTH_1),
-				new Page(6, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconText.YOG_SOTHOTH_2),
-				new Page(7, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconResources.SHUB_NIGGURATH_SEAL, NecronomiconText.SHUB_NIGGURATH_1),
-				new Page(8, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconText.SHUB_NIGGURATH_2));
-		addPages("pantheon", "greatoldones", new Page(1, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconResources.CTHULHU_SEAL, NecronomiconText.CTHULHU_1),
-				new Page(2, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconText.CTHULHU_2),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconResources.HASTUR_SEAL, NecronomiconText.HASTUR_1),
-				new Page(4, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconText.HASTUR_2),
-				new Page(5, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconResources.JZAHAR_SEAL, NecronomiconText.JZAHAR_1),
-				new Page(6, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconText.JZAHAR_2));
-		addPages("materials", "overworld", new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.abyssalnite_ore), NecronomiconText.MATERIAL_ABYSSALNITE_1),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.darkstone), NecronomiconText.MATERIAL_DARKSTONE_1),
-				new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_DARKSTONE_2),
-				new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.coralium_ore), NecronomiconText.MATERIAL_CORALIUM_1),
-				new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_CORALIUM_2),
-				new Page(7, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.darklands_oak_sapling), NecronomiconText.MATERIAL_DARKLANDS_OAK_1),
-				new Page(8, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.nitre_ore), NecronomiconText.MATERIAL_NITRE_1),
-				new Page(9, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.liquid_antimatter), NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_1),
-				new Page(10, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_2));
-		addPages("progression", "overworld", new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_1),
-				new Page(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_2),
-				new Page(3, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_3),
-				new Page(4, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_4),
-				new Page(5, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_5),
-				new Page(6, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_6));
+
+		Pages.AZATHOTH_1 = new Page(1, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconResources.AZATHOTH_SEAL, NecronomiconText.AZATHOTH_1);
+		Pages.AZATHOTH_2 = new Page(2, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconText.AZATHOTH_2);
+		Pages.NYARLATHOTEP_1 = new Page(3, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconResources.NYARLATHOTEP_SEAL, NecronomiconText.NYARLATHOTEP_1);
+		Pages.NYARLATHOTEP_2 = new Page(4, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconText.NYARLATHOTEP_2);
+		Pages.YOG_SOTHOTH_1 = new Page(5, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconResources.YOG_SOTHOTH_SEAL, NecronomiconText.YOG_SOTHOTH_1);
+		Pages.YOG_SOTHOTH_2 = new Page(6, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconText.YOG_SOTHOTH_2);
+		Pages.SHUB_NIGGURATH_1 = new Page(7, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconResources.SHUB_NIGGURATH_SEAL, NecronomiconText.SHUB_NIGGURATH_1);
+		Pages.SHUB_NIGGURATH_2 = new Page(8, NecronomiconText.LABEL_OUTER_GODS, 0, NecronomiconText.SHUB_NIGGURATH_2);
+
+		Pages.CTHULHU_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconResources.CTHULHU_SEAL, NecronomiconText.CTHULHU_1);
+		Pages.CTHULHU_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconText.CTHULHU_2);
+		Pages.HASTUR_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconResources.HASTUR_SEAL, NecronomiconText.HASTUR_1);
+		Pages.HASTUR_2 = new Page(4, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconText.HASTUR_2);
+		Pages.JZAHAR_1 = new Page(5, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconResources.JZAHAR_SEAL, NecronomiconText.JZAHAR_1);
+		Pages.JZAHAR_2 = new Page(6, NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0, NecronomiconText.JZAHAR_2);
+
+		Pages.MATERIAL_ABYSSALNITE_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.abyssalnite_ore), NecronomiconText.MATERIAL_ABYSSALNITE_1);
+		Pages.MATERIAL_DARKSTONE_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.darkstone), NecronomiconText.MATERIAL_DARKSTONE_1);
+		Pages.MATERIAL_DARKSTONE_2 = new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_DARKSTONE_2);
+		Pages.MATERIAL_CORALIUM_1 = new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.coralium_ore), NecronomiconText.MATERIAL_CORALIUM_1);
+		Pages.MATERIAL_CORALIUM_2 = new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_CORALIUM_2);
+		Pages.MATERIAL_DARKLANDS_OAK_1 = new Page(7, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.darklands_oak_sapling), NecronomiconText.MATERIAL_DARKLANDS_OAK_1);
+		Pages.MATERIAL_NITRE_1 = new Page(8, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.nitre_ore), NecronomiconText.MATERIAL_NITRE_1);
+		Pages.MATERIAL_LIQUID_ANTIMATTER_1 = new Page(9, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, new ItemStack(ACBlocks.liquid_antimatter), NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_1);
+		Pages.MATERIAL_LIQUID_ANTIMATTER_2 = new Page(10, NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, NecronomiconText.MATERIAL_LIQUID_ANTIMATTER_2);
+
+		Pages.PROGRESSION_OVERWORLD_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_1);
+		Pages.PROGRESSION_OVERWORLD_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_2);
+		Pages.PROGRESSION_OVERWORLD_3 = new Page(3, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_3);
+		Pages.PROGRESSION_OVERWORLD_4 = new Page(4, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_4);
+		Pages.PROGRESSION_OVERWORLD_5 = new Page(5, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_5);
+		Pages.PROGRESSION_OVERWORLD_6 = new Page(6, NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.PROGRESSION_OVERWORLD_6);
+
+		Chapters.OUTER_GODS.addPages(Pages.AZATHOTH_1, Pages.AZATHOTH_2, Pages.NYARLATHOTEP_1, Pages.NYARLATHOTEP_2, Pages.YOG_SOTHOTH_1, Pages.YOG_SOTHOTH_2, Pages.SHUB_NIGGURATH_1, Pages.SHUB_NIGGURATH_2);
+		Chapters.GREAT_OLD_ONES.addPages(Pages.CTHULHU_1, Pages.CTHULHU_2, Pages.HASTUR_1, Pages.HASTUR_2, Pages.JZAHAR_1, Pages.JZAHAR_2);
+		Chapters.OVERWORLD_MATERIALS.addPages(Pages.MATERIAL_ABYSSALNITE_1, Pages.MATERIAL_DARKSTONE_1, Pages.MATERIAL_DARKSTONE_2, Pages.MATERIAL_CORALIUM_1, Pages.MATERIAL_CORALIUM_2, Pages.MATERIAL_DARKLANDS_OAK_1, Pages.MATERIAL_NITRE_1, Pages.MATERIAL_LIQUID_ANTIMATTER_1, Pages.MATERIAL_LIQUID_ANTIMATTER_2);
+		Chapters.OVERWORLD_PROGRESSION.addPages(Pages.PROGRESSION_OVERWORLD_1, Pages.PROGRESSION_OVERWORLD_2, Pages.PROGRESSION_OVERWORLD_3, Pages.PROGRESSION_OVERWORLD_4, Pages.PROGRESSION_OVERWORLD_5, Pages.PROGRESSION_OVERWORLD_6);
+
 		addPages("entities", "overworld", new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.ABYSSAL_ZOMBIE, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_1, ResearchItems.ABYSSAL_ZOMBIE),
 				new Page(2, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_2, ResearchItems.ABYSSAL_ZOMBIE),
 				new Page(3, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.DEPTHS_GHOUL, NecronomiconText.ENTITY_DEPTHS_GHOUL_1, ResearchItems.DEPTHS_GHOUL),
@@ -583,9 +593,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				}
 
 				if(chapter != null) {
-					for(Page page : chapter.getPages().values()) {
-						addPage(page, "information", "patrons");
-					}
+					Chapters.PATRONS.addPages(chapter.getPages().values().toArray(new Page[0]));
 				}
 			}
 		}.start();

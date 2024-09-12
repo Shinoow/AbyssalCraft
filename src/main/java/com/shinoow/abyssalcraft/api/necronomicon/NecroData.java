@@ -322,6 +322,16 @@ public class NecroData implements INecroData {
 			addPage(page);
 		}
 
+		/**
+		 * Shorthand for adding multiple Pages in one go
+		 * <br>(executes {@link #addPage(Page)} on each Page, so recommended use on empty Chapters)
+		 * @param pages Pages to add
+		 */
+		public void addPages(Page...pages) {
+			for(Page page : pages)
+				addPage(page);
+		}
+		
 		@Override
 		public boolean equals(Object obj){
 
