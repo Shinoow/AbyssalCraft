@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.client.lib;
+package com.shinoow.abyssalcraft.lib.client;
 
 import java.util.HashMap;
 import java.util.Map;

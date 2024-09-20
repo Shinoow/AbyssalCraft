@@ -23,13 +23,10 @@ import net.minecraft.util.ResourceLocation;
 public class GuiResearchTable extends GuiContainer {
 
 	private static final ResourceLocation transmutatorGuiTexture = new ResourceLocation("abyssalcraft:textures/gui/container/research_table.png");
-	private TileEntityResearchTable tileTransmutator;
-
 	public GuiResearchTable(InventoryPlayer par1InventoryPlayer, TileEntityResearchTable par2TileEntityTransmutator)
 	{
 		super(new ContainerResearchTable(par1InventoryPlayer, par2TileEntityTransmutator));
-		tileTransmutator = par2TileEntityTransmutator;
-		ySize = 256;
+		ySize = 238;
 	}
 
 	@Override

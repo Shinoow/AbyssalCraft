@@ -192,9 +192,8 @@ public class DimensionDataRegistry {
 			dimensions.stream()
 			.filter(d -> d.getConnectedDimensions().contains(id))
 			.forEach(d -> d.getConnectedDimensions().remove(id));
-			for(Entry<Integer, Set<Tuple<Integer, Integer>>> e : gateway_key_overrides.entrySet()) {
+			for(Entry<Integer, Set<Tuple<Integer, Integer>>> e : gateway_key_overrides.entrySet())
 				e.getValue().removeIf(t -> t.getFirst() == id || t.getSecond() == id);
-			}
 			logger.log(Level.INFO, "Dimension Data for dimension {} was removed", id);
 		}
 

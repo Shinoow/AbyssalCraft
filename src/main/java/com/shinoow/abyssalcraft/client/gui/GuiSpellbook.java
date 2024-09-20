@@ -32,7 +32,7 @@ public class GuiSpellbook extends GuiContainer {
 	public GuiSpellbook(ContainerSpellbook spellbook) {
 		super(spellbook);
 		this.spellbook = spellbook;
-		ySize = 256;
+		ySize = 238;
 	}
 
 	@Override
@@ -48,14 +48,26 @@ public class GuiSpellbook extends GuiContainer {
 	{
 		IEnergyContainerItem container = (IEnergyContainerItem)spellbook.book.getItem();
 		String s = String.format("%d/%d PE", (int)container.getContainedEnergy(spellbook.book), container.getMaxEnergy(spellbook.book));
-		fontRenderer.drawString(s, 15, 15, 4210752);
+		fontRenderer.drawString(s, 15, 120, 4210752);
 		fontRenderer.drawString(I18n.format("container.inventory"), 6, ySize - 92, 4210752);
 
 		Spell spell = spellbook.currentSpell;
+		String s0 = I18n.format(NecronomiconText.LABEL_SPELL_NAME)+": ";
+		String s1 = "";
+		String s2 = I18n.format(NecronomiconText.LABEL_SPELL_PE)+": ";
+		String s3 = "";
+		String s4 = I18n.format(NecronomiconText.LABEL_SPELL_TYPE)+": ";
+		String s5 = "";
 
-		fontRenderer.drawString(I18n.format(NecronomiconText.LABEL_SPELL_NAME)+": "+TextFormatting.AQUA+(spell != null && spellbook.isUnlocked(spell) ? spell.getLocalizedName() : ""), 15, 30, 4210752);
-		fontRenderer.drawString(I18n.format(NecronomiconText.LABEL_SPELL_PE)+": "+(spell != null && spellbook.isUnlocked(spell) ? (int)spell.getReqEnergy() : ""), 15, 40, 4210752);
-		fontRenderer.drawString(I18n.format(NecronomiconText.LABEL_SPELL_TYPE)+": "+TextFormatting.GOLD+(spell != null && spellbook.isUnlocked(spell) ? spell.requiresCharging() ? "Charging" : "Instant" : ""), 15, 50, 4210752);
+		if(spell != null && spellbook.isUnlocked(spell)) {
+			s1 = TextFormatting.AQUA + spell.getLocalizedName();
+			s3 = "" + (int)spell.getReqEnergy();
+			s5 = TextFormatting.GOLD + (spell.requiresCharging() ? "Charging" : "Instant");
+		}
+
+		fontRenderer.drawString(s0 + s1, 15, 15, 4210752);
+		fontRenderer.drawString(s2 + s3, 15, 25, 4210752);
+		fontRenderer.drawString(s4 + s5, 15, 35, 4210752);
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public interface IResearchItem {
 	}
 
 	int getRequiredLevel();
-	
+
 	int getPointsCost();
 
 	ResourceLocation getID();

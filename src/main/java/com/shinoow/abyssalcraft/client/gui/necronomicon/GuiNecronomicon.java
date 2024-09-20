@@ -26,8 +26,8 @@ import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapabilit
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
-import com.shinoow.abyssalcraft.client.lib.GuiRenderHelper;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
+import com.shinoow.abyssalcraft.lib.client.GuiRenderHelper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -81,6 +81,7 @@ public class GuiNecronomicon extends GuiScreen {
 	private INecroDataCapability cap;
 	protected String unknown50_1, unknown50_2, unknown95, unknownFull;
 	protected static String sidebarIndex;
+	protected boolean showNote;
 
 	public GuiNecronomicon(){
 		if(Minecraft.getMinecraft().player != null)
@@ -234,13 +235,13 @@ public class GuiNecronomicon extends GuiScreen {
 				else if (currTurnup > 0)
 					--currTurnup;
 
-			} else if (button.id == 3){
+			} else if (button.id == 3)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("information"), this));
-			} else if (button.id == 4)
+			else if (button.id == 4)
 				mc.displayGuiScreen(new GuiNecronomiconSpells(bookType, Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND)));
-			else if (button.id == 5){
+			else if (button.id == 5)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("ritualinfo"), this));
-			} else if (button.id == 6)
+			else if (button.id == 6)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("potentialenergy"), this, ACItems.necronomicon));
 			else if (button.id == 7){
 				isInfo = true;
@@ -369,10 +370,8 @@ public class GuiNecronomicon extends GuiScreen {
 				fontRenderer.drawString(s, k - l + guiWidth - 22, b0 + 16, 0);
 			drawInformationText(par1, par2);
 
-			if(sidebarIndex != null && sidebarIndex.length() > 0) {
-
+			if(sidebarIndex != null && sidebarIndex.length() > 0)
 				fontRenderer.drawSplitString(sidebarIndex, k + 20, b0 + 8, 256, 0xC40000);
-			}
 		} else
 			drawIndexText();
 
@@ -572,9 +571,8 @@ public class GuiNecronomicon extends GuiScreen {
 
 	protected String buildSidebarIndex(GuiNecronomicon gui) {
 		String str = "";
-		if(gui instanceof GuiNecronomiconEntry) {
+		if(gui instanceof GuiNecronomiconEntry)
 			str = rec((GuiNecronomiconEntry) gui, "");
-		}
 		return str;
 	}
 
@@ -588,9 +586,8 @@ public class GuiNecronomicon extends GuiScreen {
 
 	private String appendTitle(String str, String str1) {
 		String res = str;
-		if(str1 != null && str1.length() > 0) {
+		if(str1 != null && str1.length() > 0)
 			res += " > " + str1;
-		}
 		return res;
 	}
 }

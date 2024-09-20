@@ -11,9 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei.ritual;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Nonnull;
 
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
@@ -34,7 +31,6 @@ public class CreationRitualRecipeWrapper extends RitualRecipeWrapper {
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 		super.getIngredients(ingredients);
-		List<List<ItemStack>> input = new ArrayList<>();
 		ingredients.setOutput(VanillaTypes.ITEM, output);
 	}
 }

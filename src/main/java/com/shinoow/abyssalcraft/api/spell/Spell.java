@@ -11,7 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.spell;
 
-import com.shinoow.abyssalcraft.api.knowledge.*;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
+import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.client.resources.I18n;

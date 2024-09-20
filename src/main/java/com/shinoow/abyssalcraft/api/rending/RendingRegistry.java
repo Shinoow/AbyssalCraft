@@ -58,7 +58,7 @@ public class RendingRegistry {
 	public List<Rending> getRendings() {
 		return rendings;
 	}
-	
+
 	/**
 	 * Removes a Rending based on name
 	 * @param name

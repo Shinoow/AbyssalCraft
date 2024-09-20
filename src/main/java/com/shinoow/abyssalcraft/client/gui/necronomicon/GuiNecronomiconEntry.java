@@ -20,9 +20,7 @@ import org.lwjgl.input.Keyboard;
 import com.shinoow.abyssalcraft.api.necronomicon.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.*;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
@@ -44,6 +42,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private ButtonCategory[] buttons;
 	private GuiButton buttonDone;
 	private ButtonHome buttonHome;
+	private ButtonInfo showNoteButton;
 	protected NecroData data;
 	protected GuiNecronomicon parent;
 	private Item icon;
@@ -90,10 +89,11 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			buttonList.add(buttonPreviousPage = new ButtonNextPage(3, i + 18, b0 + 154, false, false));
 			buttonList.add(buttonPreviousPageLong = new ButtonNextPage(4, i + 23, b0 + 167, false, true));
 			buttonList.add(buttonHome = new ButtonHome(5, i + 118, b0 + 167));
+			buttonList.add(showNoteButton = new ButtonInfo(6, i + 122, b0 + 157));
 			if(data != null)
 				for(int n = 0; n < data.getContainedData().size(); n++){
 					INecroData nd = data.getContainedData().get(n);
-					buttonList.add(buttons[n] = new ButtonCategory(6 + n, i + (n < 7 ? 14 : 132), b0 + 24 + 17* (n < 7 ? n : n - 7),this, nd.getTitle(), !isUnlocked(nd.getResearch()), getItem(nd.getDisplayIcon())));
+					buttonList.add(buttons[n] = new ButtonCategory(7 + n, i + (n < 7 ? 14 : 132), b0 + 24 + 17* (n < 7 ? n : n - 7),this, nd.getTitle(), !isUnlocked(nd.getResearch()), getItem(nd.getDisplayIcon())));
 				}
 		}
 		updateButtons();
@@ -108,6 +108,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		buttonPreviousPageLong.visible = currTurnup > 4;
 		buttonDone.visible = true;
 		buttonHome.visible = true;
+		showNoteButton.visible = false; //TODO actually check something
 		if(data != null)
 			for(int i = 0; i < data.getContainedData().size(); i++)
 				buttons[i].visible = !isInfo;
@@ -141,7 +142,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					currTurnup -= 5;
 			} else if(button.id == 5){
 				if(!isInfo)
-					mc.displayGuiScreen(new GuiNecronomicon(getBookType()));
+					mc.displayGuiScreen(parent.withBookType(getBookType()));
 				else {
 					currTurnup = 0;
 					isInfo = false;
@@ -149,8 +150,15 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					initGui();
 					setTurnupLimit(2);
 				}
-			} else if(button.id >= 6 && data.getContainedData().size() >= button.id - 5){
-				int i = button.id - 6;
+			} else if(button.id == 6) {
+				if(showNote)
+					showNote = false;
+				//TODO do something
+				else
+					showNote = true;
+				//TODO do something
+			} else if(button.id >= 7 && data.getContainedData().size() >= button.id - 6){
+				int i = button.id - 7;
 				INecroData nd = data.getContainedData().get(i);
 				if(isUnlocked(nd.getResearch()))
 					if(nd instanceof GuiInstance)
@@ -178,6 +186,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(3, i + 18, b0 + 154, false, false));
 		buttonList.add(buttonPreviousPageLong = new ButtonNextPage(4, i + 23, b0 + 167, false, true));
 		buttonList.add(buttonHome = new ButtonHome(5, i + 118, b0 + 167));
+		buttonList.add(showNoteButton = new ButtonInfo(6, i + 122, b0 + 157));
 	}
 
 	@Override
