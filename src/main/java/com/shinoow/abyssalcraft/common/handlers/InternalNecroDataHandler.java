@@ -131,9 +131,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				Chapters.MISC_ENCHANTMENTS, Chapters.MISC_STATUES, Chapters.ABYSSAL_WASTELAND_PLAGUE, Chapters.DREADLANDS_PLAGUE, Chapters.ITEM_TRANSPORT_SYSTEM));
 		internalNecroData.add(new NecroData("spells", NecronomiconText.LABEL_INFORMATION, 0, Chapters.SPELL_GETTING_STARTED, Chapters.SPELL_CASTING, Chapters.SPELL_MATERIALS));
 
-		internalNecroData.add(new NecroData("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, Chapters.OVERWORLD_PROGRESSION, Chapters.ABYSSAL_WASTELAND_PROGRESSION, Chapters.DARK_REALM_PROGRESSION, Chapters.OMOTHOL_PROGRESSION, Chapters.DARK_REALM_PROGRESSION));
-		internalNecroData.add(new NecroData("dimensions", NecronomiconText.LABEL_INFORMATION_DIMENSIONS, 0, Chapters.OVERWORLD, Chapters.ABYSSAL_WASTELAND, Chapters.DREADLANDS, Chapters.OMOTHOL, Chapters.DARK_REALM));
-		internalNecroData.add(new NecroData("biomes", NecronomiconText.LABEL_INFORMATION_BIOMES, 0, Chapters.OVERWORLD_BIOMES, Chapters.ABYSSAL_WASTELAND_BIOMES, Chapters.DREADLANDS_BIOMES, Chapters.OMOTHOL_BIOMES, Chapters.DARK_REALM_BIOMES));
+		internalNecroData.add(new NecroData("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.WIP, Chapters.OVERWORLD_PROGRESSION, Chapters.ABYSSAL_WASTELAND_PROGRESSION, Chapters.DARK_REALM_PROGRESSION, Chapters.OMOTHOL_PROGRESSION, Chapters.DARK_REALM_PROGRESSION));
+		internalNecroData.add(new NecroData("dimensions", NecronomiconText.LABEL_INFORMATION_DIMENSIONS, 0, NecronomiconText.WIP, Chapters.OVERWORLD, Chapters.ABYSSAL_WASTELAND, Chapters.DREADLANDS, Chapters.OMOTHOL, Chapters.DARK_REALM));
+		internalNecroData.add(new NecroData("biomes", NecronomiconText.LABEL_INFORMATION_BIOMES, 0, NecronomiconText.WIP, Chapters.OVERWORLD_BIOMES, Chapters.ABYSSAL_WASTELAND_BIOMES, Chapters.DREADLANDS_BIOMES, Chapters.OMOTHOL_BIOMES, Chapters.DARK_REALM_BIOMES));
 		internalNecroData.add(new NecroData("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, Chapters.OVERWORLD_MOBS, Chapters.ABYSSAL_WASTELAND_MOBS, Chapters.DREADLANDS_MOBS, Chapters.OMOTHOL_MOBS, Chapters.DARK_REALM_MOBS));
 		internalNecroData.add(new NecroData("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, Chapters.OVERWORLD_MATERIALS, Chapters.ABYSSAL_WASTELAMD_MATERIALS, Chapters.DREADLANDS_MATERIALS, Chapters.OMOTHOL_MATERIALS, Chapters.DARK_REALM_MATERIALS));
 		internalNecroData.add(new NecroData("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, Chapters.OVERWORLD_CRAFTING, Chapters.ABYSSAL_WASTELAND_CRAFTING, Chapters.DREADLANDS_CRAFTING, Chapters.OMOTHOL_CRAFTING));
@@ -211,22 +211,6 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				for(INecroData d : data.getContainedData())
 					if(d instanceof Chapter && d.getIdentifier().equals(chapteridentifier))
 						((Chapter)d).insertPage(page);
-	}
-
-	private void addPages(String necroidentifier, String chapteridentifier, Page...pages){
-		for(Page page : pages)
-			addPage(page, necroidentifier, chapteridentifier);
-	}
-
-	private void addInternalPages(String outernecroidentifier, String innernecroidentifier, String chapteridentifier, Page...pages) {
-		for(Page page : pages)
-			for(NecroData data : internalNecroData)
-				if(data.getIdentifier().equals(outernecroidentifier))
-					for(INecroData d : data.getContainedData())
-						if(d instanceof NecroData && d.getIdentifier().equals(innernecroidentifier))
-							for(INecroData d1 : ((NecroData) d).getContainedData())
-								if(d1 instanceof Chapter && d1.getIdentifier().equals(chapteridentifier))
-									((Chapter)d1).addPage(page);
 	}
 
 	@Override
@@ -575,6 +559,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_ABYSSALCRAFT_PAGE_5 = new Page(5, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.ABYSSALCRAFT_3, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_5);
 		Pages.INFORMATION_ABYSSALCRAFT_PAGE_6 = new Page(6, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_6);
 
+		Pages.PROGRESSION_OVERWORLD_1.setReference(Pages.CRAFTING_GATEWAY_KEY);
+
 		Chapters.OUTER_GODS.addPages(Pages.AZATHOTH_1, Pages.AZATHOTH_2, Pages.NYARLATHOTEP_1, Pages.NYARLATHOTEP_2, Pages.YOG_SOTHOTH_1, Pages.YOG_SOTHOTH_2, Pages.SHUB_NIGGURATH_1, Pages.SHUB_NIGGURATH_2);
 		Chapters.GREAT_OLD_ONES.addPages(Pages.CTHULHU_1, Pages.CTHULHU_2, Pages.HASTUR_1, Pages.HASTUR_2, Pages.JZAHAR_1, Pages.JZAHAR_2);
 		Chapters.OVERWORLD_MATERIALS.addPages(Pages.MATERIAL_ABYSSALNITE_1, Pages.MATERIAL_DARKSTONE_1, Pages.MATERIAL_DARKSTONE_2, Pages.MATERIAL_CORALIUM_1, Pages.MATERIAL_CORALIUM_2, Pages.MATERIAL_DARKLANDS_OAK_1, Pages.MATERIAL_NITRE_1, Pages.MATERIAL_LIQUID_ANTIMATTER_1, Pages.MATERIAL_LIQUID_ANTIMATTER_2);
@@ -651,9 +637,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 					chapter.addPage(new Page(1, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/jenni_mort.png"), "Jenni Mort"));
 				}
 
-				if(chapter != null) {
+				if(chapter != null)
 					Chapters.PATRONS.addPages(chapter.getPages().values().toArray(new Page[0]));
-				}
 			}
 		}.start();
 	}

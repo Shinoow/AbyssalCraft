@@ -14,7 +14,9 @@ package com.shinoow.abyssalcraft.common.items.armor;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.knowledge.*;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.inventory.EntityEquipmentSlot;

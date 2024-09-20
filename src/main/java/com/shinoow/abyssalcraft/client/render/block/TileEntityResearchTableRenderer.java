@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2024 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.block;
 
 import com.shinoow.abyssalcraft.common.blocks.BlockResearchTable;
@@ -42,9 +53,9 @@ public class TileEntityResearchTableRenderer extends TileEntitySpecialRenderer<T
 		default:
 			rotY = 135F;
 			break;
-		
+
 		}
-		
+
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float) x + 0.5F, (float) y + 1.4F, (float) z + 0.5F);
 		GlStateManager.pushMatrix();
@@ -54,8 +65,8 @@ public class TileEntityResearchTableRenderer extends TileEntitySpecialRenderer<T
 
 		GlStateManager.scale(0.8F, 0.8F, 0.8F);
 		GlStateManager.rotate(180F, 1F, 0F, 0F);
-		
-		
+
+
 		GlStateManager.rotate(rotY, 0F, 1F, 0F);
 		GlStateManager.rotate(45F, 0F, 0F, 1F);
 		GlStateManager.translate(-0.32F, -0.5F, -0.45F);

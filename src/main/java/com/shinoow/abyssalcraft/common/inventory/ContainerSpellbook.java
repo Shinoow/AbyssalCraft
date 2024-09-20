@@ -33,24 +33,23 @@ public class ContainerSpellbook extends Container {
 		inventory = new InventorySpellbook(this, book);
 		user = player;
 		this.book = book;
-		int i = (8 - 4) * 18 - 1;
 		int j;
 		int k;
 
-		addSlotToContainer(new Slot(inventory, 0, 51, 91));
-		addSlotToContainer(new Slot(inventory, 1, 51, 66));
-		addSlotToContainer(new Slot(inventory, 2, 76, 87));
-		addSlotToContainer(new Slot(inventory, 3, 65, 116));
-		addSlotToContainer(new Slot(inventory, 4, 37, 116));
-		addSlotToContainer(new Slot(inventory, 5, 26, 87));
-		addSlotToContainer(new SlotSpellOutput(inventory, output, 0, 134, 91));
+		addSlotToContainer(new Slot(inventory, 0, 51, 73));
+		addSlotToContainer(new Slot(inventory, 1, 51, 48));
+		addSlotToContainer(new Slot(inventory, 2, 76, 69));
+		addSlotToContainer(new Slot(inventory, 3, 65, 98));
+		addSlotToContainer(new Slot(inventory, 4, 37, 98));
+		addSlotToContainer(new Slot(inventory, 5, 26, 69));
+		addSlotToContainer(new SlotSpellOutput(inventory, output, 0, 134, 73));
 
 		for (j = 0; j < 3; ++j)
 			for (k = 0; k < 9; ++k)
-				addSlotToContainer(new Slot(player.inventory, k + j * 9 + 9, 8 + k * 18, 103 + j * 18 + i));
+				addSlotToContainer(new Slot(player.inventory, k + j * 9 + 9, 8 + k * 18, 84 + j * 18 + 72));
 
 		for (j = 0; j < 9; ++j)
-			addSlotToContainer(new Slot(player.inventory, j, 8 + j * 18, 161 + i));
+			addSlotToContainer(new Slot(player.inventory, j, 8 + j * 18, 142 + 72));
 	}
 
 	@Override

@@ -14,7 +14,9 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.knowledge.*;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;

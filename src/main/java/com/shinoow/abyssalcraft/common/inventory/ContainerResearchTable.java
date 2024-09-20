@@ -24,23 +24,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerResearchTable extends Container {
 
-	private TileEntityResearchTable tileTransmutator;
-	private int lastProcessTime;
-	private int lastBurnTime;
-	private int lastItemBurnTime;
-
 	public ContainerResearchTable(InventoryPlayer par1InventoryPlayer, TileEntityResearchTable par2TileEntityTransmutator)
 	{
-		tileTransmutator = par2TileEntityTransmutator;
 		int i;
-		int k = (8 - 4) * 18 - 1;
 
 		for (i = 0; i < 3; ++i)
 			for (int j = 0; j < 9; ++j)
-				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9, 8 + j * 18, 103 + i * 18 + k));
+				addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 + 72));
 
 		for (i = 0; i < 9; ++i)
-			addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 161 + k));
+			addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142 + 72));
 	}
 
 	@Override
