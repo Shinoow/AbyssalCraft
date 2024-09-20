@@ -14,9 +14,7 @@ package com.shinoow.abyssalcraft.lib.item;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.*;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.item.Item;
@@ -34,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemACPickaxe extends ItemPickaxe implements IResearchableItem {
 
 	private TextFormatting format;
-	private IResearchItem condition = new DefaultResearchItem();
+	private IResearchItem condition = ResearchItems.DEFAULT;
 
 	public ItemACPickaxe(ToolMaterial mat, String name, int harvestlevel){
 		this(mat, name, harvestlevel, null);

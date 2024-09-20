@@ -25,8 +25,6 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.api.necronomicon.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
@@ -121,12 +119,6 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		GuiInstance structures = new GuiInstance(0, NecronomiconText.LABEL_STRUCTURES, "structures") {
 
 			@Override
-			public IResearchItem getResearch() {
-
-				return new DefaultResearchItem();
-			}
-
-			@Override
 			@SideOnly(Side.CLIENT)
 			public GuiScreen getOpenGui(int bookType, GuiScreen parent) {
 
@@ -150,8 +142,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		internalNecroData.add(new NecroData("information", NecronomiconText.LABEL_INFORMATION, 0, Chapters.ABYSSALCRAFT_INFO,
 				getInternalNecroData("pantheon"),
 				new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.INFORMATION_ABYSSALNOMICON),
-				Chapters.PATRONS, new GuiInstance(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines"){
-			@Override public IResearchItem getResearch() { return ResearchItems.ABYSSAL_WASTELAND_NECRO; }
+				Chapters.PATRONS, new GuiInstance(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines", ResearchItems.ABYSSAL_WASTELAND_NECRO){
 			@Override
 			@SideOnly(Side.CLIENT)
 			public GuiScreen getOpenGui(int bookType, GuiScreen parent) { return new GuiNecronomiconMachines(bookType, (GuiNecronomicon) parent); }
@@ -670,12 +661,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 	private class RitualGuiInstance extends GuiInstance {
 
 		protected RitualGuiInstance(int displayIcon, String title, String identifier){
-			super(displayIcon, title, identifier);
-		}
-
-		@Override
-		public IResearchItem getResearch() {
-			return ResearchItems.getBookResearch(displayIcon);
+			super(displayIcon, title, identifier, ResearchItems.getBookResearch(displayIcon));
 		}
 
 		@Override

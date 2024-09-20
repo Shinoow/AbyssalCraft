@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
 
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -19,11 +22,17 @@ public abstract class GuiInstance implements INecroData {
 
 	protected int displayIcon;
 	protected String title, identifier;
+	private IResearchItem research;
 
 	protected GuiInstance(int displayIcon, String title, String identifier){
+		this(displayIcon, title, identifier, ResearchItems.DEFAULT);
+	}
+
+	protected GuiInstance(int displayIcon, String title, String identifier, IResearchItem research){
 		this.displayIcon = displayIcon;
 		this.title = title;
 		this.identifier = identifier;
+		this.research = research;
 	}
 
 	@Override
@@ -49,6 +58,18 @@ public abstract class GuiInstance implements INecroData {
 	@Override
 	public String getIdentifier() {
 		return identifier;
+	}
+
+	@Override
+	public GuiInstance setResearch(IResearchItem research) {
+		this.research = research;
+		return this;
+	}
+
+	@Override
+	public IResearchItem getResearch() {
+
+		return research;
 	}
 
 	/**

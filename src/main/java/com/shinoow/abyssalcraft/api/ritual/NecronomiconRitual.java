@@ -12,9 +12,7 @@
 package com.shinoow.abyssalcraft.api.ritual;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
+import com.shinoow.abyssalcraft.api.knowledge.*;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,7 +37,7 @@ public abstract class NecronomiconRitual implements IResearchable<NecronomiconRi
 	private int bookType, dimension;
 	private float requiredEnergy;
 	private boolean requiresSacrifice, nbtSensitive, nbtSensitiveSacrifice;
-	private IResearchItem condition = new DefaultResearchItem();
+	private IResearchItem condition = ResearchItems.DEFAULT;
 	private EnumRitualParticle particle = EnumRitualParticle.ITEM;
 
 	/**

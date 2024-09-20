@@ -16,8 +16,8 @@ import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.structure.IPlaceOfPower;
 import com.shinoow.abyssalcraft.api.energy.structure.IStructureBase;
 import com.shinoow.abyssalcraft.api.energy.structure.IStructureComponent;
-import com.shinoow.abyssalcraft.api.knowledge.condition.DefaultCondition;
-import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
 
 import net.minecraft.block.BlockSlab;
@@ -67,9 +67,9 @@ public class ArchwayStructure implements IPlaceOfPower {
 	}
 
 	@Override
-	public IUnlockCondition getUnlockCondition() {
+	public IResearchItem getResearchItem() {
 
-		return new DefaultCondition();
+		return ResearchItems.DEFAULT;
 	}
 
 	@Override

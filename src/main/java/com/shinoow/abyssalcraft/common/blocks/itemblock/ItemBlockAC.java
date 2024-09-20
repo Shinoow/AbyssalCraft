@@ -17,9 +17,7 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -32,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBlockAC extends ItemBlock implements IResearchableItem {
 
-	private IResearchItem condition = new DefaultResearchItem();
+	private IResearchItem condition = ResearchItems.DEFAULT;
 
 	public ItemBlockAC(Block block) {
 		super(block);

@@ -15,9 +15,7 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.*;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.item.Item;
@@ -34,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class ItemACAxe extends ItemAxe implements IResearchableItem {
 
-	private IResearchItem condition = new DefaultResearchItem();
+	private IResearchItem condition = ResearchItems.DEFAULT;
 
 	private TextFormatting format;
 

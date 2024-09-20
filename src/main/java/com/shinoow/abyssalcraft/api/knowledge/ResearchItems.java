@@ -20,19 +20,22 @@ package com.shinoow.abyssalcraft.api.knowledge;
  */
 public class ResearchItems {
 
-	//Biome conditions
+	// Default Research Item
+	public static IResearchItem DEFAULT = new DefaultResearchItem();
+
+	// Biome conditions
 	public static IResearchItem DARKLANDS_BIOME;
 	public static IResearchItem CORALIUM_INFESTED_SWAMP;
 	public static IResearchItem CORALIUM_BIOMES;
 
-	//Dimension conditions
+	// Dimension conditions
 	public static IResearchItem ABYSSAL_WASTELAND;
 	public static IResearchItem DREADLANDS;
 	public static IResearchItem OMOTHOL;
 	public static IResearchItem DARK_REALM;
 	public static IResearchItem NETHER;
 
-	//Entity conditions
+	// Entity conditions
 	public static IResearchItem ABYSSAL_ZOMBIE;
 	public static IResearchItem DEPTHS_GHOUL;
 	public static IResearchItem SACTHOTH;
@@ -61,18 +64,18 @@ public class ResearchItems {
 	public static IResearchItem DREADGUARD;
 	public static IResearchItem MINION_OF_THE_GATEKEEPER;
 
-	//Misc conditions
+	// Misc conditions
 	public static IResearchItem CORALIUM_PLAGUE;
 	public static IResearchItem DREAD_PLAGUE;
 
-	//Book conditions
+	// Book conditions
 	public static IResearchItem ABYSSAL_WASTELAND_NECRO;
 	public static IResearchItem DREADLANDS_NECRO;
 	public static IResearchItem OMOTHOL_NECRO;
 	public static IResearchItem ABYSSALNOMICON;
 
 	public static IResearchItem getBookResearch(int book) {
-		switch(book) {
+		switch (book) {
 		case 1:
 			return ABYSSAL_WASTELAND_NECRO;
 		case 2:
@@ -82,7 +85,7 @@ public class ResearchItems {
 		case 4:
 			return ABYSSALNOMICON;
 		default:
-			return new DefaultResearchItem();
+			return DEFAULT;
 		}
 	}
 }

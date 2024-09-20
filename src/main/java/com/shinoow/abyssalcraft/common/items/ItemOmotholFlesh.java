@@ -15,9 +15,7 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.*;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemOmotholFlesh extends ItemFood implements IResearchableItem {
 
-	private IResearchItem condition = new DefaultResearchItem();
+	private IResearchItem condition = ResearchItems.DEFAULT;
 
 	public ItemOmotholFlesh(int par1, float par2, boolean par3) {
 		super(par1, par2, par3);

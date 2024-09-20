@@ -25,5 +25,7 @@ public interface INecroData {
 
 	String getIdentifier();
 
+	INecroData setResearch(IResearchItem research);
+
 	IResearchItem getResearch();
 }

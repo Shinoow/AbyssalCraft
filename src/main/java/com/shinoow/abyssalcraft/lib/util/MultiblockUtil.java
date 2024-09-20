@@ -24,7 +24,7 @@ public class MultiblockUtil {
 	public static boolean tryFormMultiblock(World world, BlockPos pos, int booktype, EntityPlayer player) {
 
 		for(IPlaceOfPower place : StructureHandler.instance().getStructures())
-			if(NecroDataCapability.getCap(player).isUnlocked(place.getUnlockCondition(), player) &&
+			if(NecroDataCapability.getCap(player).isUnlocked(place.getResearchItem(), player) &&
 					booktype >= place.getBookType() && place.canConstruct(world, pos, player)) {
 				if(!world.isRemote)
 					place.construct(world, pos);

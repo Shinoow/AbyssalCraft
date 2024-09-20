@@ -11,9 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.spell;
 
-import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
+import com.shinoow.abyssalcraft.api.knowledge.*;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.client.resources.I18n;
@@ -43,7 +41,7 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	private boolean nbtSensitive, requiresCharging;
 	private Spell parent;
 	private ResourceLocation glyph;
-	private IResearchItem condition = new DefaultResearchItem();
+	private IResearchItem condition = ResearchItems.DEFAULT;
 	private ScrollType scrollType = ScrollType.BASIC;
 
 	/**

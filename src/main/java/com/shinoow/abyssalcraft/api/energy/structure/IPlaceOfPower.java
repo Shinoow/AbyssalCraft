@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.api.energy.structure;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
-import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
+import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,9 +41,9 @@ public interface IPlaceOfPower {
 	int getBookType();
 
 	/**
-	 * Returns the Unlock Condition required in order to form this Place of Power
+	 * Returns the Research Item required in order to form this Place of Power
 	 */
-	IUnlockCondition getUnlockCondition();
+	IResearchItem getResearchItem();
 
 	/**
 	 * Returns a unlocalized string representing the description of the structure when viewed in the Necronomicon

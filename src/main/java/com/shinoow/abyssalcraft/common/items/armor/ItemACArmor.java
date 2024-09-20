@@ -14,9 +14,7 @@ package com.shinoow.abyssalcraft.common.items.armor;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.*;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -28,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemACArmor extends ItemArmor implements IResearchableItem {
 
-	private IResearchItem condition = new DefaultResearchItem();
+	private IResearchItem condition = ResearchItems.DEFAULT;
 
 	public ItemACArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String name) {
 		super(materialIn, renderIndexIn, equipmentSlotIn);

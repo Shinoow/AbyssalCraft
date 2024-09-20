@@ -14,9 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks.itemblock;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
-import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
+import com.shinoow.abyssalcraft.api.knowledge.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
@@ -28,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSlabAC extends ItemSlab implements IResearchableItem {
 
-	private IResearchItem condition = new DefaultResearchItem();
+	private IResearchItem condition = ResearchItems.DEFAULT;
 
 	public ItemSlabAC(Block block, Block singleSlab, Block doubleSlab) {
 		super(block, (BlockSlab)singleSlab, (BlockSlab)doubleSlab);

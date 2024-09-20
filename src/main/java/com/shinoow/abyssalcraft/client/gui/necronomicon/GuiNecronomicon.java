@@ -474,12 +474,6 @@ public class GuiNecronomicon extends GuiScreen {
 				return cap.isUnlocked(ri, mc.player);
 	}
 
-	protected boolean isUnlocked(IUnlockCondition cnd){
-		if(cnd instanceof NecronomiconCondition)
-			return getBookType() >= (int)cnd.getConditionObject();
-			else return cap.isUnlocked(cnd, mc.player);
-	}
-
 	protected ItemStack tooltipStack;
 
 	private boolean list(Object obj){

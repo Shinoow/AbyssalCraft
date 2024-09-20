@@ -15,13 +15,15 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 
+import javax.annotation.Nullable;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.ImmutableList;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.knowledge.DefaultResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureUtil;
@@ -59,11 +61,11 @@ public class NecroData implements INecroData {
 	}
 
 	public NecroData(String identifier, String title, int displayIcon, String info, INecroData...data){
-		this(identifier, title, displayIcon, info, new DefaultResearchItem(), data);
+		this(identifier, title, displayIcon, info, ResearchItems.DEFAULT, data);
 	}
 
 	public NecroData(String identifier, String title, int displayIcon, INecroData...data){
-		this(identifier, title, displayIcon, null, new DefaultResearchItem(), data);
+		this(identifier, title, displayIcon, null, ResearchItems.DEFAULT, data);
 	}
 
 	/**
@@ -101,6 +103,12 @@ public class NecroData implements INecroData {
 	@Override
 	public String getIdentifier(){
 		return identifier;
+	}
+
+	@Override
+	public NecroData setResearch(IResearchItem research) {
+		condition = research;
+		return this;
 	}
 
 	@Override
@@ -182,7 +190,7 @@ public class NecroData implements INecroData {
 		 * @param title Title to display on pages in the Chapter
 		 */
 		public Chapter(String identifier, String title, int displayIcon){
-			this(identifier, title, displayIcon, new DefaultResearchItem());
+			this(identifier, title, displayIcon, ResearchItems.DEFAULT);
 		}
 
 		/**
@@ -198,7 +206,7 @@ public class NecroData implements INecroData {
 		}
 
 		public Chapter(String identifier, String title, int displayIcon, Page...pages){
-			this(identifier, title, displayIcon, new DefaultResearchItem(), pages);
+			this(identifier, title, displayIcon, ResearchItems.DEFAULT, pages);
 		}
 
 		/**
@@ -231,6 +239,12 @@ public class NecroData implements INecroData {
 		@Override
 		public boolean hasText() {
 			return false;
+		}
+
+		@Override
+		public Chapter setResearch(IResearchItem research) {
+			condition = research;
+			return this;
 		}
 
 		@Override
@@ -331,7 +345,7 @@ public class NecroData implements INecroData {
 			for(Page page : pages)
 				addPage(page);
 		}
-		
+
 		@Override
 		public boolean equals(Object obj){
 
@@ -364,6 +378,7 @@ public class NecroData implements INecroData {
 		private String text;
 		private IResearchItem condition;
 		private int displayIcon;
+		private INecroData reference;
 
 		/**
 		 * A Necronomicon Page
@@ -371,7 +386,7 @@ public class NecroData implements INecroData {
 		 * @param text Text to display on the Page
 		 */
 		public Page(int pageNum, String title, int displayIcon, String text){
-			this(pageNum, title, displayIcon, null, text, new DefaultResearchItem());
+			this(pageNum, title, displayIcon, null, text, ResearchItems.DEFAULT);
 		}
 
 		/**
@@ -391,7 +406,7 @@ public class NecroData implements INecroData {
 		 * @param text Text to display on the Page
 		 */
 		public Page(int pageNum, String title, int displayIcon, Object icon, String text){
-			this(pageNum, title, displayIcon, icon, text, new DefaultResearchItem());
+			this(pageNum, title, displayIcon, icon, text, ResearchItems.DEFAULT);
 		}
 
 		/**
@@ -473,12 +488,33 @@ public class NecroData implements INecroData {
 			return text;
 		}
 
+		@Override
+		public Page setResearch(IResearchItem research) {
+			condition = research;
+			return this;
+		}
+
 		/**
 		 * Fetches the unlocking condition (determines if the page can be read)
 		 */
 		@Override
 		public IResearchItem getResearch(){
 			return condition;
+		}
+
+		/**
+		 * Adds a reference to a Page (for display if the button is pressed)
+		 * <br>(Only supports Pages at the moment, might support Chapters in the future)
+		 */
+		public Page setReference(INecroData reference) {
+			if(reference instanceof Page)
+				this.reference = reference;
+			return this;
+		}
+
+		@Nullable
+		public INecroData getReference() {
+			return reference;
 		}
 
 		@Override
