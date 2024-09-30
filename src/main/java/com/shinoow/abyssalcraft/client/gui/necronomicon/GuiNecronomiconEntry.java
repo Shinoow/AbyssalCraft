@@ -31,7 +31,6 @@ import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -45,20 +44,17 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private ButtonInfo showNoteButton;
 	protected NecroData data;
 	protected GuiNecronomicon parent;
-	private Item icon;
 	private int currentData;
+	private Chapter reference1, reference2;
 
 	public GuiNecronomiconEntry(int bookType, NecroData nd, GuiNecronomicon gui){
 		super(bookType);
-		data = nd;
 		parent = gui;
-		icon = getItem(nd.getDisplayIcon());
-		buttons = new ButtonCategory[data.getContainedData().size()];
-	}
+		if(nd != null) {
 
-	public GuiNecronomiconEntry(int bookType, NecroData nd, GuiNecronomicon gui, Item item){
-		this(bookType, nd, gui);
-		icon = item;
+			data = nd;
+			buttons = new ButtonCategory[data.getContainedData().size()];
+		}
 	}
 
 	@Override
@@ -108,7 +104,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		buttonPreviousPageLong.visible = currTurnup > 4;
 		buttonDone.visible = true;
 		buttonHome.visible = true;
-		showNoteButton.visible = false; //TODO actually check something
+		showNoteButton.visible = reference1 != null || reference2 != null;
 		if(data != null)
 			for(int i = 0; i < data.getContainedData().size(); i++)
 				buttons[i].visible = !isInfo;
@@ -150,13 +146,11 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					initGui();
 					setTurnupLimit(2);
 				}
-			} else if(button.id == 6) {
-				if(showNote)
-					showNote = false;
-				//TODO do something
-				else
-					showNote = true;
-				//TODO do something
+			} else if(button.id == 6) { //TODO support for picking specific one???
+				if(reference1 != null) 
+					mc.displayGuiScreen(new GuiNecronomiconChapterEntry(getBookType(), reference1, this));
+				if(reference2 != null)
+					mc.displayGuiScreen(new GuiNecronomiconChapterEntry(getBookType(), reference2, this));
 			} else if(button.id >= 7 && data.getContainedData().size() >= button.id - 6){
 				int i = button.id - 7;
 				INecroData nd = data.getContainedData().get(i);
@@ -226,7 +220,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		addPage(chapter.getPage(num-1), chapter.getPage(num), num, x, y);
 	}
 
-	private void addPage(Page page1, Page page2, int displayNum, int x, int y){
+	protected void addPage(Page page1, Page page2, int displayNum, int x, int y){
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String text1 = "";
@@ -240,11 +234,13 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			text1 = page1.getText();
 			icon1 = page1.getIcon();
 			locked1 = !isUnlocked(page1.getResearch());
+			reference1 = page1.getReference();
 		}
 		if(page2 != null){
 			text2 = page2.getText();
 			icon2 = page2.getIcon();
 			locked2 = !isUnlocked(page2.getResearch());
+			reference2 = page2.getReference();
 		}
 
 		tooltipStack = null;
@@ -412,10 +408,14 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	protected void drawIndexText(){
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
-		String stuff;
-		stuff = localize(data.getTitle());
-		boolean b = !isUnlocked(data.getResearch());
-		getFontRenderer(b).drawSplitString(b ? NecronomiconText.LABEL_TEST : stuff, k + 20, b0 + 16, 116, 0xC40000);
-		if(data.hasText()) writeText(2, b ? unknownFull : data.getText(), b);
+		if(data != null) {
+			String stuff;
+			stuff = localize(data.getTitle());
+			boolean b = !isUnlocked(data.getResearch());
+			getFontRenderer(b).drawSplitString(b ? NecronomiconText.LABEL_TEST : stuff, k + 20, b0 + 16, 116, 0xC40000);
+			if(data.hasText()) writeText(2, b ? unknownFull : data.getText(), b);
+		} else {
+			getFontRenderer(false).drawSplitString("F in chat", k + 20, b0 + 16, 116, 0xC40000);
+		}
 	}
 }

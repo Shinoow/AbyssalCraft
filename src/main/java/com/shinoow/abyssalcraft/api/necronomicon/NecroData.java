@@ -378,7 +378,7 @@ public class NecroData implements INecroData {
 		private String text;
 		private IResearchItem condition;
 		private int displayIcon;
-		private INecroData reference;
+		private Chapter reference;
 
 		/**
 		 * A Necronomicon Page
@@ -503,17 +503,21 @@ public class NecroData implements INecroData {
 		}
 
 		/**
-		 * Adds a reference to a Page (for display if the button is pressed)
+		 * Adds a reference to a Page or two (for display if the button is pressed)
 		 * <br>(Only supports Pages at the moment, might support Chapters in the future)
 		 */
-		public Page setReference(INecroData reference) {
-			if(reference instanceof Page)
-				this.reference = reference;
+		public Page setReference(Page...pages) {
+			Page[] pages1 = pages.clone();
+			if(pages1.length > 2)
+				pages1 = new Page[]{pages[0], pages[1]};
+			for(int i = 0; i < pages1.length; i++)
+				pages1[i].pageNum = i+1; //new page number for page clones
+			this.reference = new Chapter("", "necronomicon.reference", displayIcon, pages);
 			return this;
 		}
 
 		@Nullable
-		public INecroData getReference() {
+		public Chapter getReference() {
 			return reference;
 		}
 

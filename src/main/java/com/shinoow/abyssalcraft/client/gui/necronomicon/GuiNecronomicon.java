@@ -242,7 +242,7 @@ public class GuiNecronomicon extends GuiScreen {
 			else if (button.id == 5)
 				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("ritualinfo"), this));
 			else if (button.id == 6)
-				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("potentialenergy"), this, ACItems.necronomicon));
+				mc.displayGuiScreen(new GuiNecronomiconEntry(bookType, AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("potentialenergy"), this));
 			else if (button.id == 7){
 				isInfo = true;
 				isNecroInfo = true;

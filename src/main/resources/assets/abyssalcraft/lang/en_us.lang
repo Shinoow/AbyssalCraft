@@ -306,6 +306,7 @@ necronomicon.spell.type.instant=Instant
 necronomicon.information.idols=Idols
 necronomicon.information.dimensions=Dimensions
 necronomicon.information.biomes=Biomes
+necronomicon.reference=Page Reference
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368

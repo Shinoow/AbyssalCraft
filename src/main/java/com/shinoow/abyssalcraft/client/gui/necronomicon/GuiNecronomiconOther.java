@@ -129,7 +129,7 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 					--currTurnup;
 				drawButtons();
 			} else if(button.id >= 3 && map.size() >= button.id - 2)
-				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), (NecroData)map.keySet().toArray()[button.id - 3], this, getItem((int)map.values().toArray()[button.id - 3])));
+				mc.displayGuiScreen(new GuiNecronomiconEntry(getBookType(), (NecroData)map.keySet().toArray()[button.id - 3], this));
 			updateButtons();
 		}
 	}
