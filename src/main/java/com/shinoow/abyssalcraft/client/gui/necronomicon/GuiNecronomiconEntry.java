@@ -206,7 +206,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		}
 	}
 
-	private void drawChapter(Chapter chapter, int x, int y){
+	protected void drawChapter(Chapter chapter, int x, int y){
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String stuff;
@@ -220,7 +220,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		addPage(chapter.getPage(num-1), chapter.getPage(num), num, x, y);
 	}
 
-	protected void addPage(Page page1, Page page2, int displayNum, int x, int y){
+	private void addPage(Page page1, Page page2, int displayNum, int x, int y){
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String text1 = "";

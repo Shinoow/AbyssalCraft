@@ -60,16 +60,4 @@ public class GuiNecronomiconChapterEntry extends GuiNecronomiconEntry {
 		if(chapter != null)
 			drawChapter(chapter, x, y);
 	}
-
-	private void drawChapter(Chapter chapter, int x, int y){
-		int k = (width - guiWidth) / 2;
-		byte b0 = 2;
-		String stuff;
-
-		stuff = I18n.format(chapter.getTitle(), new Object[0]);
-		fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
-		setTurnupLimit(1);
-
-		addPage(chapter.getPage(1), chapter.getPage(2), 2, x, y);
-	}
 }
