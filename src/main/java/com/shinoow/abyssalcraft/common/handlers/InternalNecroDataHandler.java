@@ -56,7 +56,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.GREAT_OLD_ONES = new Chapter("greatoldones", NecronomiconText.LABEL_INFORMATION_GREAT_OLD_ONES, 0);
 		Chapters.ABYSSAL_WASTELAND_PLAGUE = new Chapter("coraliumplague", NecronomiconText.LABEL_CORALIUM_PLAGUE, 1, ResearchItems.CORALIUM_PLAGUE);
 		Chapters.DREADLANDS_PLAGUE = new Chapter("dreadplague", NecronomiconText.LABEL_DREAD_PLAGUE, 2, ResearchItems.DREAD_PLAGUE);
-		Chapters.ITEM_TRANSPORT_SYSTEM = new Chapter("itemtransportsystem", NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3);
+		Chapters.ITEM_TRANSPORT_SYSTEM = new Chapter("itemtransportsystem", NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 3, ResearchItems.getBookResearch(3));
 		Chapters.RITUAL_GETTING_STARTED = new Chapter("gettingstarted", NecronomiconText.LABEL_GETTING_STARTED, 0);
 		Chapters.RITUAL_MATERIALS = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
 		Chapters.PE_INFO = new Chapter("information", NecronomiconText.LABEL_INFORMATION, 0);
@@ -75,43 +75,43 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.ABYSSALCRAFT_INFO = new Chapter("acinfo", NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0);
 
 		Chapters.OVERWORLD = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
-		Chapters.ABYSSAL_WASTELAND = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1);
-		Chapters.DREADLANDS = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2);
-		Chapters.OMOTHOL = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3);
-		Chapters.DARK_REALM = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3);
+		Chapters.ABYSSAL_WASTELAND = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
+		Chapters.DREADLANDS = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, ResearchItems.getBookResearch(2));
+		Chapters.OMOTHOL = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, ResearchItems.getBookResearch(3));
+		Chapters.DARK_REALM = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3, ResearchItems.getBookResearch(3));
 
 		Chapters.OVERWORLD_PROGRESSION = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
-		Chapters.ABYSSAL_WASTELAND_PROGRESSION = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1);
-		Chapters.DREADLANDS_PROGRESSION = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2);
-		Chapters.OMOTHOL_PROGRESSION = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3);
-		Chapters.DARK_REALM_PROGRESSION = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3);
+		Chapters.ABYSSAL_WASTELAND_PROGRESSION = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
+		Chapters.DREADLANDS_PROGRESSION = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, ResearchItems.getBookResearch(2));
+		Chapters.OMOTHOL_PROGRESSION = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, ResearchItems.getBookResearch(3));
+		Chapters.DARK_REALM_PROGRESSION = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3, ResearchItems.getBookResearch(3));
 
 		Chapters.OVERWORLD_BIOMES = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
-		Chapters.ABYSSAL_WASTELAND_BIOMES = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1);
-		Chapters.DREADLANDS_BIOMES = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2);
-		Chapters.OMOTHOL_BIOMES = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3);
-		Chapters.DARK_REALM_BIOMES = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3);
+		Chapters.ABYSSAL_WASTELAND_BIOMES = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
+		Chapters.DREADLANDS_BIOMES = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, ResearchItems.getBookResearch(2));
+		Chapters.OMOTHOL_BIOMES = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, ResearchItems.getBookResearch(3));
+		Chapters.DARK_REALM_BIOMES = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3, ResearchItems.getBookResearch(3));
 
 		Chapters.OVERWORLD_MOBS = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
-		Chapters.ABYSSAL_WASTELAND_MOBS = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1);
-		Chapters.DREADLANDS_MOBS = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2);
-		Chapters.OMOTHOL_MOBS = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3);
-		Chapters.DARK_REALM_MOBS = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3);
+		Chapters.ABYSSAL_WASTELAND_MOBS = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
+		Chapters.DREADLANDS_MOBS = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, ResearchItems.getBookResearch(2));
+		Chapters.OMOTHOL_MOBS = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, ResearchItems.getBookResearch(3));
+		Chapters.DARK_REALM_MOBS = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3, ResearchItems.getBookResearch(3));
 
 		Chapters.OVERWORLD_MATERIALS = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
-		Chapters.ABYSSAL_WASTELAMD_MATERIALS = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1);
-		Chapters.DREADLANDS_MATERIALS = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2);
-		Chapters.OMOTHOL_MATERIALS = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3);
-		Chapters.DARK_REALM_MATERIALS = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3);
+		Chapters.ABYSSAL_WASTELAMD_MATERIALS = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
+		Chapters.DREADLANDS_MATERIALS = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, ResearchItems.getBookResearch(2));
+		Chapters.OMOTHOL_MATERIALS = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, ResearchItems.getBookResearch(3));
+		Chapters.DARK_REALM_MATERIALS = new Chapter("darkrealm", NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3, ResearchItems.getBookResearch(3));
 
 		Chapters.OVERWORLD_CRAFTING = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
-		Chapters.ABYSSAL_WASTELAND_CRAFTING = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1);
-		Chapters.DREADLANDS_CRAFTING = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2);
-		Chapters.OMOTHOL_CRAFTING = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3);
+		Chapters.ABYSSAL_WASTELAND_CRAFTING = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
+		Chapters.DREADLANDS_CRAFTING = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, ResearchItems.getBookResearch(2));
+		Chapters.OMOTHOL_CRAFTING = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, ResearchItems.getBookResearch(3));
 
 		Chapters.OVERWORLD_ARMORTOOLS = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
-		Chapters.ABYSSAL_WASTELAND_ARMORTOOLS = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1);
-		Chapters.DREADLANDS_ARMORTOOLS = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2);
+		Chapters.ABYSSAL_WASTELAND_ARMORTOOLS = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
+		Chapters.DREADLANDS_ARMORTOOLS = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, ResearchItems.getBookResearch(2));
 
 		internalNecroData.add(new NecroData("pantheon", NecronomiconText.LABEL_PANTHEON, 0, NecronomiconText.INFORMATION_GREAT_OLD_ONES,
 				Chapters.OUTER_GODS, Chapters.GREAT_OLD_ONES));
@@ -131,7 +131,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				Chapters.MISC_ENCHANTMENTS, Chapters.MISC_STATUES, Chapters.ABYSSAL_WASTELAND_PLAGUE, Chapters.DREADLANDS_PLAGUE, Chapters.ITEM_TRANSPORT_SYSTEM));
 		internalNecroData.add(new NecroData("spells", NecronomiconText.LABEL_INFORMATION, 0, Chapters.SPELL_GETTING_STARTED, Chapters.SPELL_CASTING, Chapters.SPELL_MATERIALS));
 
-		internalNecroData.add(new NecroData("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.WIP, Chapters.OVERWORLD_PROGRESSION, Chapters.ABYSSAL_WASTELAND_PROGRESSION, Chapters.DARK_REALM_PROGRESSION, Chapters.OMOTHOL_PROGRESSION, Chapters.DARK_REALM_PROGRESSION));
+		internalNecroData.add(new NecroData("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.WIP, Chapters.OVERWORLD_PROGRESSION, Chapters.ABYSSAL_WASTELAND_PROGRESSION, Chapters.DREADLANDS_PROGRESSION, Chapters.OMOTHOL_PROGRESSION, Chapters.DARK_REALM_PROGRESSION));
 		internalNecroData.add(new NecroData("dimensions", NecronomiconText.LABEL_INFORMATION_DIMENSIONS, 0, NecronomiconText.WIP, Chapters.OVERWORLD, Chapters.ABYSSAL_WASTELAND, Chapters.DREADLANDS, Chapters.OMOTHOL, Chapters.DARK_REALM));
 		internalNecroData.add(new NecroData("biomes", NecronomiconText.LABEL_INFORMATION_BIOMES, 0, NecronomiconText.WIP, Chapters.OVERWORLD_BIOMES, Chapters.ABYSSAL_WASTELAND_BIOMES, Chapters.DREADLANDS_BIOMES, Chapters.OMOTHOL_BIOMES, Chapters.DARK_REALM_BIOMES));
 		internalNecroData.add(new NecroData("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, Chapters.OVERWORLD_MOBS, Chapters.ABYSSAL_WASTELAND_MOBS, Chapters.DREADLANDS_MOBS, Chapters.OMOTHOL_MOBS, Chapters.DARK_REALM_MOBS));
@@ -560,6 +560,15 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_ABYSSALCRAFT_PAGE_6 = new Page(6, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_6);
 
 		Pages.PROGRESSION_OVERWORLD_1.setReference(Pages.CRAFTING_GATEWAY_KEY);
+		Pages.PROGRESSION_OVERWORLD_2.setReference(Pages.CRAFTING_STAFF_OF_RENDING_1, Pages.CRAFTING_STAFF_OF_RENDING_2);
+		Pages.PROGRESSION_OVERWORLD_3.setReference(Pages.CRAFTING_SHARD_OF_OBLIVION);
+		Pages.PROGRESSION_OVERWORLD_6.setReference(Pages.CRAFTING_SKIN_OF_THE_ABYSSAL_WASTELAND);
+		Pages.PROGRESSION_ABYSSAL_1.setReference(Pages.MATERIAL_DREADLANDS_INFUSED_POWERSTONE);
+		Pages.PROGRESSION_ABYSSAL_2.setReference(Pages.CRAFTING_POWERSTONE_TRACKER);
+		Pages.PROGRESSION_ABYSSAL_3.setReference(Pages.CRAFTING_SKIN_OF_THE_DREADLANDS);
+		Pages.PROGRESSION_DREADLANDS_1.setReference(Pages.CRAFTING_TRANSMUTATOR_1, Pages.CRAFTING_TRANSMUTATOR_2);
+		Pages.PROGRESSION_DREADLANDS_3.setReference(Pages.CRAFTING_SKIN_OF_OMOTHOL);
+		Pages.PROGRESSION_OMOTHOL_2.setReference(Pages.CRAFTING_ABYSSALNOMICON_1, Pages.CRAFTING_ABYSSALNOMICON_2);
 		//TODO set all of the other references here
 
 		Chapters.OUTER_GODS.addPages(Pages.AZATHOTH_1, Pages.AZATHOTH_2, Pages.NYARLATHOTEP_1, Pages.NYARLATHOTEP_2, Pages.YOG_SOTHOTH_1, Pages.YOG_SOTHOTH_2, Pages.SHUB_NIGGURATH_1, Pages.SHUB_NIGGURATH_2);
@@ -635,7 +644,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				} catch (Exception e) {
 					ACLogger.warning("Failed to fetch the Patreon Data, using local version instead!");
 					chapter = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
-					chapter.addPage(new Page(1, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/jenni_mort.png"), "Jenni Mort"));
+					chapter.addPage(new Page(1, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/jenni_mort.png"), "Nobody :/"));
 				}
 
 				if(chapter != null)

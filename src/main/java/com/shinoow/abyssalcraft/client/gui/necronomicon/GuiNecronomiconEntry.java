@@ -41,7 +41,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private ButtonCategory[] buttons;
 	private GuiButton buttonDone;
 	private ButtonHome buttonHome;
-	private ButtonInfo showNoteButton;
+	private ButtonInfo showNoteButtonLeft, showNoteButtonRight;
 	protected NecroData data;
 	protected GuiNecronomicon parent;
 	private int currentData;
@@ -51,7 +51,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		super(bookType);
 		parent = gui;
 		if(nd != null) {
-
 			data = nd;
 			buttons = new ButtonCategory[data.getContainedData().size()];
 		}
@@ -85,11 +84,12 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			buttonList.add(buttonPreviousPage = new ButtonNextPage(3, i + 18, b0 + 154, false, false));
 			buttonList.add(buttonPreviousPageLong = new ButtonNextPage(4, i + 23, b0 + 167, false, true));
 			buttonList.add(buttonHome = new ButtonHome(5, i + 118, b0 + 167));
-			buttonList.add(showNoteButton = new ButtonInfo(6, i + 122, b0 + 157));
+			buttonList.add(showNoteButtonLeft = new ButtonInfo(6, i + 102, b0 + 168));
+			buttonList.add(showNoteButtonRight = new ButtonInfo(7, i + 142, b0 + 168));
 			if(data != null)
 				for(int n = 0; n < data.getContainedData().size(); n++){
 					INecroData nd = data.getContainedData().get(n);
-					buttonList.add(buttons[n] = new ButtonCategory(7 + n, i + (n < 7 ? 14 : 132), b0 + 24 + 17* (n < 7 ? n : n - 7),this, nd.getTitle(), !isUnlocked(nd.getResearch()), getItem(nd.getDisplayIcon())));
+					buttonList.add(buttons[n] = new ButtonCategory(8 + n, i + (n < 7 ? 14 : 132), b0 + 24 + 17* (n < 7 ? n : n - 7),this, nd.getTitle(), !isUnlocked(nd.getResearch()), getItem(nd.getDisplayIcon())));
 				}
 		}
 		updateButtons();
@@ -104,7 +104,8 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		buttonPreviousPageLong.visible = currTurnup > 4;
 		buttonDone.visible = true;
 		buttonHome.visible = true;
-		showNoteButton.visible = reference1 != null || reference2 != null;
+		showNoteButtonLeft.visible = reference1 != null && isInfo;
+		showNoteButtonRight.visible = reference2 != null && isInfo;
 		if(data != null)
 			for(int i = 0; i < data.getContainedData().size(); i++)
 				buttons[i].visible = !isInfo;
@@ -146,13 +147,14 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					initGui();
 					setTurnupLimit(2);
 				}
-			} else if(button.id == 6) { //TODO support for picking specific one???
+			} else if(button.id == 6) {
 				if(reference1 != null) 
 					mc.displayGuiScreen(new GuiNecronomiconChapterEntry(getBookType(), reference1, this));
+			} else if(button.id == 7) {
 				if(reference2 != null)
 					mc.displayGuiScreen(new GuiNecronomiconChapterEntry(getBookType(), reference2, this));
-			} else if(button.id >= 7 && data.getContainedData().size() >= button.id - 6){
-				int i = button.id - 7;
+			} else if(button.id >= 8 && data.getContainedData().size() >= button.id - 7){
+				int i = button.id - 8;
 				INecroData nd = data.getContainedData().get(i);
 				if(isUnlocked(nd.getResearch()))
 					if(nd instanceof GuiInstance)
@@ -180,7 +182,8 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		buttonList.add(buttonPreviousPage = new ButtonNextPage(3, i + 18, b0 + 154, false, false));
 		buttonList.add(buttonPreviousPageLong = new ButtonNextPage(4, i + 23, b0 + 167, false, true));
 		buttonList.add(buttonHome = new ButtonHome(5, i + 118, b0 + 167));
-		buttonList.add(showNoteButton = new ButtonInfo(6, i + 122, b0 + 157));
+		buttonList.add(showNoteButtonLeft = new ButtonInfo(6, i + 102, b0 + 168));
+		buttonList.add(showNoteButtonRight = new ButtonInfo(7, i + 142, b0 + 168));
 	}
 
 	@Override
@@ -229,6 +232,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		Object icon2 = null;
 		boolean locked1 = false;
 		boolean locked2 = false;
+		reference1 = reference2 = null;
 
 		if(page1 != null){
 			text1 = page1.getText();
@@ -414,8 +418,6 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 			boolean b = !isUnlocked(data.getResearch());
 			getFontRenderer(b).drawSplitString(b ? NecronomiconText.LABEL_TEST : stuff, k + 20, b0 + 16, 116, 0xC40000);
 			if(data.hasText()) writeText(2, b ? unknownFull : data.getText(), b);
-		} else {
-			getFontRenderer(false).drawSplitString("F in chat", k + 20, b0 + 16, 116, 0xC40000);
 		}
 	}
 }

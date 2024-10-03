@@ -507,12 +507,12 @@ public class NecroData implements INecroData {
 		 * <br>(Only supports Pages at the moment, might support Chapters in the future)
 		 */
 		public Page setReference(Page...pages) {
-			Page[] pages1 = pages.clone();
-			if(pages1.length > 2)
-				pages1 = new Page[]{pages[0], pages[1]};
-			for(int i = 0; i < pages1.length; i++)
+			Page[] pages1 = new Page[pages.length > 2 ? 2 : pages.length];
+			for(int i = 0; i < pages.length; i++) {
+				pages1[i] = pages[i].copy(); // clone each page
 				pages1[i].pageNum = i+1; //new page number for page clones
-			this.reference = new Chapter("", "necronomicon.reference", displayIcon, pages);
+			}
+			this.reference = new Chapter("", "necronomicon.reference", displayIcon, pages1);
 			return this;
 		}
 
@@ -534,6 +534,10 @@ public class NecroData implements INecroData {
 			boolean b5 = page.condition.getID().equals(condition.getID());
 
 			return b1 && b2 && b3 && b4 && b5;
+		}
+
+		public Page copy() {
+			return new Page(pageNum, title, displayIcon, icon, text, condition);
 		}
 	}
 }
