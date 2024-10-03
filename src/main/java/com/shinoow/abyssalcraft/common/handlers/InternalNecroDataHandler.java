@@ -223,6 +223,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 			DynamicTexture t = new DynamicTexture(ImageIO.read(new URL(url)));
 			GuiNecronomicon.successcache.put(url, t);
 		} catch (Exception e) {
+			ACLogger.warning("Failed to fetch image, send the following Stack Trace to Shinoow,");
+			ACLogger.warning("(or figure out the error on your own):");
+			e.printStackTrace();
 			GuiNecronomicon.failcache.add(url);
 		}
 	}
