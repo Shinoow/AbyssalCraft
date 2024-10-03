@@ -629,28 +629,23 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 	private void setupPatreonData(){
 		if(FMLCommonHandler.instance().getSide().isServer()) return;
 
-		new Thread("AbyssalCraft Necronomicon Patreon data") {
-			@Override
-			public void run() {
-				Chapter chapter = null;
-				try {
-					URL url = new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/patrons.json");
-					InputStream con = url.openStream();
-					String data = new String(ByteStreams.toByteArray(con));
-					con.close();
+		Chapter chapter = null;
+		try {
+			URL url = new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/patrons.json");
+			InputStream con = url.openStream();
+			String data = new String(ByteStreams.toByteArray(con));
+			con.close();
 
-					chapter = NecroDataJsonUtil.deserializeChapter(new Gson().fromJson(data, JsonObject.class));
+			chapter = NecroDataJsonUtil.deserializeChapter(new Gson().fromJson(data, JsonObject.class));
 
-				} catch (Exception e) {
-					ACLogger.warning("Failed to fetch the Patreon Data, using local version instead!");
-					chapter = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
-					chapter.addPage(new Page(1, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/patreon/jenni_mort.png"), "Nobody :/"));
-				}
+		} catch (Exception e) {
+			ACLogger.warning("Failed to fetch the Patreon Data, using local version instead!");
+			chapter = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
+			chapter.addPage(new Page(1, NecronomiconText.LABEL_PATRONS, 0, new ResourceLocation("abyssalcraft", "textures/gui/necronomicon/missing.png"), "Nobody :/"));
+		}
 
-				if(chapter != null)
-					Chapters.PATRONS.addPages(chapter.getPages().values().toArray(new Page[0]));
-			}
-		}.start();
+		if(chapter != null)
+			Chapters.PATRONS.addPages(chapter.getPages().values().toArray(new Page[0]));
 	}
 
 	private class RitualGuiInstance extends GuiInstance {

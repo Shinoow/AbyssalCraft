@@ -8,8 +8,8 @@
 			"type": "page",
 			"version": 1,
 			"number": 1,
-			"icontype": "url",
-			"icon": "http://shinoow.com/AbyssalCraft/images/patreon/jenni_mort.png",
+			"icontype": "resourcelocation",
+			"icon": "abyssalcraft:textures/gui/necronomicon/missing.png",
 			"text": "Nobody :/"
 		}
 	]
