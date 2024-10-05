@@ -76,4 +76,10 @@ public class Chapters {
 	public static Chapter OVERWORLD_ARMORTOOLS;
 	public static Chapter ABYSSAL_WASTELAND_ARMORTOOLS;
 	public static Chapter DREADLANDS_ARMORTOOLS;
+
+	public static Chapter OVERWORLD_STRUCTURES;
+	public static Chapter ABYSSAL_WASTELAND_STRUCTURES;
+	public static Chapter DREADLANDS_STRUCTURES;
+	public static Chapter OMOTHOL_STRUCTURES;
+	public static Chapter DARK_REALM_STRUCTURES;
 }
