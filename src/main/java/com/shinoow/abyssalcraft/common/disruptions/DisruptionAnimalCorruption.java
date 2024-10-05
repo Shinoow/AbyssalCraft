@@ -42,6 +42,9 @@ public class DisruptionAnimalCorruption extends DisruptionEntry {
 				EntityEvilCow cow = new EntityEvilCow(world);
 				cow.copyLocationAndAnglesFrom(animal);
 				cow.onInitialSpawn(world.getDifficultyForLocation(pos), null);
+				if(animal.hasCustomName())
+					cow.setCustomNameTag(animal.getCustomNameTag());
+				cow.enablePersistence();
 				world.removeEntity(animal);
 				world.spawnEntity(cow);
 			}
@@ -49,6 +52,9 @@ public class DisruptionAnimalCorruption extends DisruptionEntry {
 				EntityEvilChicken chicken = new EntityEvilChicken(world);
 				chicken.copyLocationAndAnglesFrom(animal);
 				chicken.onInitialSpawn(world.getDifficultyForLocation(pos), null);
+				if(animal.hasCustomName())
+					chicken.setCustomNameTag(animal.getCustomNameTag());
+				chicken.enablePersistence();
 				world.removeEntity(animal);
 				world.spawnEntity(chicken);
 			}
@@ -56,6 +62,9 @@ public class DisruptionAnimalCorruption extends DisruptionEntry {
 				EntityEvilpig pig = new EntityEvilpig(world);
 				pig.copyLocationAndAnglesFrom(animal);
 				pig.onInitialSpawn(world.getDifficultyForLocation(pos), null);
+				if(animal.hasCustomName())
+					pig.setCustomNameTag(animal.getCustomNameTag());
+				pig.enablePersistence();
 				world.removeEntity(animal);
 				world.spawnEntity(pig);
 			}
@@ -63,6 +72,9 @@ public class DisruptionAnimalCorruption extends DisruptionEntry {
 				EntityEvilSheep sheep = new EntityEvilSheep(world);
 				sheep.copyLocationAndAnglesFrom(animal);
 				sheep.onInitialSpawn(world.getDifficultyForLocation(pos), null);
+				if(animal.hasCustomName())
+					sheep.setCustomNameTag(animal.getCustomNameTag());
+				sheep.enablePersistence();
 				world.removeEntity(animal);
 				world.spawnEntity(sheep);
 			}
@@ -70,6 +82,9 @@ public class DisruptionAnimalCorruption extends DisruptionEntry {
 				AbstractHorse horse = world.rand.nextBoolean() ? new EntityZombieHorse(world) : new EntitySkeletonHorse(world);
 				horse.copyLocationAndAnglesFrom(animal);
 				horse.setGrowingAge(animal.getGrowingAge());
+				if(animal.hasCustomName())
+					horse.setCustomNameTag(animal.getCustomNameTag());
+				horse.enablePersistence();
 				animal.onDeath(DamageSource.GENERIC);
 				world.removeEntity(animal);
 				world.spawnEntity(horse);

@@ -40,4 +40,10 @@ public class Disruptions {
 	public static DisruptionEntry RANDOM_SWARM;
 	public static DisruptionEntry RANDOM_SPAWN;
 	public static DisruptionEntry SHUB_OFFSPRING;
+	public static DisruptionEntry INVISIBLE_SWARM_HASTUR;
+	public static DisruptionEntry INVISIBLE_SWARM_NYARLATHOTEP;
+	public static DisruptionEntry SACRIFICE_CORRUPTION_JZAHAR;
+	public static DisruptionEntry SACRIFICE_CORRUPTION_YOG_SOTHOTH;
+	public static DisruptionEntry FAMINE_AZATHOTH;
+	public static DisruptionEntry FAMINE_SHUB_NIGGURATH;
 }

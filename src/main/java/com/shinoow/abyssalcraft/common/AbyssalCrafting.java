@@ -588,6 +588,12 @@ public class AbyssalCrafting {
 		DisruptionHandler.instance().registerDisruption(Disruptions.RANDOM_SWARM = new DisruptionRandomSwarm());
 		DisruptionHandler.instance().registerDisruption(Disruptions.RANDOM_SPAWN = new DisruptionRandomSpawn());
 		DisruptionHandler.instance().registerDisruption(Disruptions.SHUB_OFFSPRING = new DisruptionSpawn("spawnShubOffspring", DeityType.SHUBNIGGURATH, EntityShubOffspring.class));
+		DisruptionHandler.instance().registerDisruption(Disruptions.INVISIBLE_SWARM_HASTUR = new DisruptionInvisibleSwarm("invisibleSwarmHastur", DeityType.HASTUR));
+		DisruptionHandler.instance().registerDisruption(Disruptions.INVISIBLE_SWARM_NYARLATHOTEP = new DisruptionInvisibleSwarm("invisibleSwarmNyarlathotep", DeityType.NYARLATHOTEP));
+		DisruptionHandler.instance().registerDisruption(Disruptions.SACRIFICE_CORRUPTION_JZAHAR = new DisruptionSacrificeCorruption("sacrificeCorruptionJzahar", DeityType.JZAHAR));
+		DisruptionHandler.instance().registerDisruption(Disruptions.SACRIFICE_CORRUPTION_YOG_SOTHOTH = new DisruptionSacrificeCorruption("sacrificeCorruptionYogSothoth", DeityType.YOGSOTHOTH));
+		DisruptionHandler.instance().registerDisruption(Disruptions.FAMINE_AZATHOTH = new DisruptionFamine("famineAzathoth", DeityType.AZATHOTH));
+		DisruptionHandler.instance().registerDisruption(Disruptions.FAMINE_SHUB_NIGGURATH = new DisruptionFamine("famineShuNiggurath", DeityType.SHUBNIGGURATH));
 	}
 
 	private static void addSpells(){
