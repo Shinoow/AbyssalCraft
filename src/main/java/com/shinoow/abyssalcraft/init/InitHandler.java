@@ -226,7 +226,6 @@ public class InitHandler implements ILifeCycleHandler {
 
 		BiomeDictionary.addTypes(ACBiomes.abyssal_wastelands, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.dreadlands, Type.DEAD);
-		BiomeDictionary.addTypes(ACBiomes.purified_dreadlands, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.dreadlands_mountains, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.dreadlands_forest, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.omothol, Type.DEAD);
@@ -236,6 +235,7 @@ public class InitHandler implements ILifeCycleHandler {
 		BiomeDictionary.addTypes(ACBiomes.abyssal_desert, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.abyssal_plateau, Type.DEAD);
 		BiomeDictionary.addTypes(ACBiomes.coralium_lake, Type.DEAD);
+		BiomeDictionary.addTypes(ACBiomes.dreadlands_ocean, Type.DEAD);
 	}
 
 	@SubscribeEvent

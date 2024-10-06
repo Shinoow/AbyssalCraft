@@ -15,13 +15,14 @@ package com.shinoow.abyssalcraft.common.world.biome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
+import com.shinoow.abyssalcraft.lib.world.biome.IControlledSpawnList;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeOmothol extends Biome {
+public class BiomeOmothol extends Biome implements IControlledSpawnList {
 
 	public BiomeOmothol(BiomeProperties par1){
 		super(par1);
@@ -30,7 +31,8 @@ public class BiomeOmothol extends Biome {
 		fillerBlock = ACBlocks.omothol_stone.getDefaultState();
 	}
 
-	public final void setMobSpawns(){
+	@Override
+	public void setMobSpawns(){
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();

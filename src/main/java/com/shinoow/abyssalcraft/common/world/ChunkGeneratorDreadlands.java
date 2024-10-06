@@ -15,21 +15,19 @@ import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMine;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesDreadlands;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenRavineAC;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.world.biome.IAlternateSpawnList;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -92,8 +90,6 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 		dreadlandsCaveGenerator = TerrainGen.getModdedMapGen(dreadlandsCaveGenerator, NETHER_CAVE);
 	}
 
-	private List<SpawnListEntry> spawnList = new ArrayList<>();
-
 	public ChunkGeneratorDreadlands(World par1World, long par2, boolean par4)
 	{
 		worldObj = par1World;
@@ -115,25 +111,11 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 				float f = 10.0F / MathHelper.sqrt(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
-
-		spawnList.add(new SpawnListEntry(EntityDreadSpawn.class, 30, 1, 2));
-		spawnList.add(new SpawnListEntry(EntityDreadling.class, 40, 1, 2));
-		spawnList.add(new SpawnListEntry(EntityChagarothFist.class, 2, 1, 1));
-		spawnList.add(new SpawnListEntry(EntityDemonPig.class, 5, 1, 2));
-		spawnList.add(new SpawnListEntry(EntityDemonCow.class, 5, 1, 2));
-		spawnList.add(new SpawnListEntry(EntityDemonChicken.class, 5, 1, 2));
-		spawnList.add(new SpawnListEntry(EntityDemonSheep.class, 5, 1, 2));
-		spawnList.add(new SpawnListEntry(EntityGreaterDreadSpawn.class, 5, 1, 1));
-		spawnList.add(new SpawnListEntry(EntityDreadguard.class, 8, 1, 1));
-		spawnList.add(new SpawnListEntry(EntityLesserDreadbeast.class, 1, 0, 1));
-		spawnList.add(new SpawnListEntry(EntityShadowCreature.class, 70, 3, 3));
-		spawnList.add(new SpawnListEntry(EntityShadowMonster.class, 50, 2, 2));
-		spawnList.add(new SpawnListEntry(EntityShadowBeast.class, 20, 1, 1));
 	}
 
 	public void setBlocksInChunk(int par1, int par2, ChunkPrimer primer)
 	{
-		byte b0 = 63;
+		byte b0 = 55;
 		biomesForGeneration = worldObj.getBiomeProvider().getBiomesForGeneration(biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, 10, 10);
 		generateNoise(par1 * 4, 0, par2 * 4);
 
@@ -407,10 +389,10 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 		if(pos.getY() <= 5)
 			return ACBiomes.dark_realm.getSpawnableList(creatureType);
 		Biome biome = worldObj.getBiome(pos);
-		if(biome instanceof IDarklandsBiome) {
+		if(biome instanceof IDarklandsBiome && biome instanceof IAlternateSpawnList) {
 			if(creatureType != EnumCreatureType.MONSTER)
 				return ACBiomes.dreadlands.getSpawnableList(creatureType);
-			return spawnList;
+			return ((IAlternateSpawnList) biome).getDreadlandsList();
 		}
 		return biome == null ? null : biome.getSpawnableList(creatureType);
 	}

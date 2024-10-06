@@ -15,7 +15,10 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -33,6 +36,15 @@ public class BiomeDarklandsMountains extends BiomeDarklandsBase {
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 100, 3, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 80, 2, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 40, 1, 1));
+		aw.clear();
+		aw.add(new SpawnListEntry(EntityZombie.class, 50, 1, 5));
+		aw.add(new SpawnListEntry(EntitySkeleton.class, 50, 1, 5));
+		aw.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 5));
+		aw.add(new SpawnListEntry(EntityAbyssalZombie.class, 45, 1, 5));
+		aw.add(new SpawnListEntry(EntitySkeletonGoliath.class, 15, 1, 1));
+		aw.add(new SpawnListEntry(EntityShadowCreature.class, 100, 3, 3));
+		aw.add(new SpawnListEntry(EntityShadowMonster.class, 80, 2, 2));
+		aw.add(new SpawnListEntry(EntityShadowBeast.class, 40, 1, 1));
 	}
 
 	@Override

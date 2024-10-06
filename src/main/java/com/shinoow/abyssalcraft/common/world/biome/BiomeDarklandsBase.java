@@ -11,33 +11,66 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.biome;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.world.biome.IAlternateSpawnList;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
-public class BiomeDarklandsBase extends Biome implements IDarklandsBiome {
+public class BiomeDarklandsBase extends Biome implements IDarklandsBiome, IAlternateSpawnList {
 
 	protected static final IBlockState ABYSSAL_STONE = ACBlocks.abyssal_stone.getDefaultState();
 	protected static final IBlockState LIQUID_CORALIUM = ACBlocks.liquid_coralium.getDefaultState();
 	protected static final IBlockState DREADSTONE = ACBlocks.dreadstone.getDefaultState();
 
 	protected boolean staticTopBlock, staticFillerBlock;
+	
+	protected List<SpawnListEntry> aw, dl;
 
 	public BiomeDarklandsBase(BiomeProperties properties) {
 		super(properties);
+		aw = new ArrayList<>();
+		dl = new ArrayList<>();
+		aw.add(new SpawnListEntry(EntityZombie.class, 50, 1, 5));
+		aw.add(new SpawnListEntry(EntitySkeleton.class, 50, 1, 5));
+		aw.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
+		aw.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
+		aw.add(new SpawnListEntry(EntitySkeletonGoliath.class, 15, 1, 1));
+		aw.add(new SpawnListEntry(EntityShadowCreature.class, 70, 3, 3));
+		aw.add(new SpawnListEntry(EntityShadowMonster.class, 50, 2, 2));
+		aw.add(new SpawnListEntry(EntityShadowBeast.class, 20, 1, 1));
+		dl.add(new SpawnListEntry(EntityDreadSpawn.class, 30, 1, 2));
+		dl.add(new SpawnListEntry(EntityDreadling.class, 40, 1, 2));
+		dl.add(new SpawnListEntry(EntityChagarothFist.class, 2, 1, 1));
+		dl.add(new SpawnListEntry(EntityDemonPig.class, 5, 1, 2));
+		dl.add(new SpawnListEntry(EntityDemonCow.class, 5, 1, 2));
+		dl.add(new SpawnListEntry(EntityDemonChicken.class, 5, 1, 2));
+		dl.add(new SpawnListEntry(EntityDemonSheep.class, 5, 1, 2));
+		dl.add(new SpawnListEntry(EntityGreaterDreadSpawn.class, 5, 1, 1));
+		dl.add(new SpawnListEntry(EntityDreadguard.class, 8, 1, 1));
+		dl.add(new SpawnListEntry(EntityLesserDreadbeast.class, 1, 0, 1));
+		dl.add(new SpawnListEntry(EntityShadowCreature.class, 70, 3, 3));
+		dl.add(new SpawnListEntry(EntityShadowMonster.class, 50, 2, 2));
+		dl.add(new SpawnListEntry(EntityShadowBeast.class, 20, 1, 1));
 	}
 
 	@Override
@@ -75,7 +108,8 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome {
 	}
 
 	private int getSeaLevel(World world) {
-		return world.provider.getDimension() == ACLib.abyssal_wasteland_id ? 49 : world.getSeaLevel();
+		return world.provider.getDimension() == ACLib.abyssal_wasteland_id ? 49 : 
+			world.provider.getDimension() == ACLib.dreadlands_id ? 49 : world.getSeaLevel();
 	}
 
 	protected IBlockState getBaseBlock(int dim) {
@@ -182,5 +216,17 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome {
 						chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
 					}
 			}
+	}
+
+	@Override
+	public List<SpawnListEntry> getAbyssalWastelandList() {
+
+		return aw;
+	}
+
+	@Override
+	public List<SpawnListEntry> getDreadlandsList() {
+
+		return dl;
 	}
 }

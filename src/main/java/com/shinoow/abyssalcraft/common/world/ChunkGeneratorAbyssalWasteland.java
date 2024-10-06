@@ -15,26 +15,23 @@ import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
 import com.shinoow.abyssalcraft.common.structures.abyss.Chains;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
 import com.shinoow.abyssalcraft.common.world.gen.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.world.biome.IAlternateSpawnList;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -85,9 +82,6 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
 	}
 
-	private List<SpawnListEntry> spawnList = new ArrayList<>();
-	private List<SpawnListEntry> spawnListMountains = new ArrayList<>();
-
 	public ChunkGeneratorAbyssalWasteland(World par1World, long par2, boolean par4)
 	{
 		worldObj = par1World;
@@ -110,24 +104,6 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 				float f = 10.0F / MathHelper.sqrt(j * j + k * k + 0.2F);
 				parabolicField[j + 2 + (k + 2) * 5] = f;
 			}
-
-		spawnList.add(new SpawnListEntry(EntityZombie.class, 50, 1, 5));
-		spawnList.add(new SpawnListEntry(EntitySkeleton.class, 50, 1, 5));
-		spawnList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
-		spawnList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
-		spawnList.add(new SpawnListEntry(EntitySkeletonGoliath.class, 15, 1, 1));
-		spawnList.add(new SpawnListEntry(EntityShadowCreature.class, 70, 3, 3));
-		spawnList.add(new SpawnListEntry(EntityShadowMonster.class, 50, 2, 2));
-		spawnList.add(new SpawnListEntry(EntityShadowBeast.class, 20, 1, 1));
-
-		spawnListMountains.add(new SpawnListEntry(EntityZombie.class, 50, 1, 5));
-		spawnListMountains.add(new SpawnListEntry(EntitySkeleton.class, 50, 1, 5));
-		spawnListMountains.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 5));
-		spawnListMountains.add(new SpawnListEntry(EntityAbyssalZombie.class, 45, 1, 5));
-		spawnListMountains.add(new SpawnListEntry(EntitySkeletonGoliath.class, 15, 1, 1));
-		spawnListMountains.add(new SpawnListEntry(EntityShadowCreature.class, 100, 3, 3));
-		spawnListMountains.add(new SpawnListEntry(EntityShadowMonster.class, 80, 2, 2));
-		spawnListMountains.add(new SpawnListEntry(EntityShadowBeast.class, 40, 1, 1));
 	}
 
 	public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
@@ -432,10 +408,10 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 		if(pos.getY() <= 5)
 			return ACBiomes.dark_realm.getSpawnableList(creatureType);
 		Biome biome = worldObj.getBiome(pos);
-		if(biome instanceof IDarklandsBiome) {
+		if(biome instanceof IDarklandsBiome && biome instanceof IAlternateSpawnList) {
 			if(creatureType != EnumCreatureType.MONSTER)
 				return ACBiomes.abyssal_wastelands.getSpawnableList(creatureType);
-			return biome == ACBiomes.darklands_mountains ? spawnListMountains : spawnList;
+			return ((IAlternateSpawnList) biome).getAbyssalWastelandList();
 		}
 		return biome == null ? null : biome.getSpawnableList(creatureType);
 	}

@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.world.biome.IControlledSpawnList;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
@@ -33,7 +34,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelandBiome {
+public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelandBiome, IControlledSpawnList {
 
 	protected static final IBlockState ABYSSAL_STONE = ACBlocks.abyssal_stone.getDefaultState();
 	protected static final IBlockState LIQUID_CORALIUM = ACBlocks.liquid_coralium.getDefaultState();
@@ -50,7 +51,8 @@ public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelan
 		setMobSpawns();
 	}
 
-	public final void setMobSpawns(){
+	@Override
+	public void setMobSpawns(){
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();

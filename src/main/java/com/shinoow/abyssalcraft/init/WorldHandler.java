@@ -28,6 +28,7 @@ import com.shinoow.abyssalcraft.common.world.biome.*;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.world.biome.IControlledSpawnList;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
@@ -44,7 +45,6 @@ public class WorldHandler implements ILifeCycleHandler {
 		ACBiomes.darklands = new BiomeDarklands(new BiomeProperties("Darklands").setWaterColor(ACClientVars.getDarklandsWaterColor()));
 		ACBiomes.abyssal_wastelands = new BiomeAbyssalWasteland(new BiomeProperties("Abyssal Wastelands").setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
 		ACBiomes.dreadlands = new BiomeDreadlands(new BiomeProperties("Dreadlands").setRainDisabled());
-		ACBiomes.purified_dreadlands = new BiomeAbyDreadlands(new BiomeProperties("Purified Dreadlands").setRainDisabled());
 		ACBiomes.dreadlands_forest = new BiomeForestDreadlands(new BiomeProperties("Dreadlands Forest").setRainDisabled());
 		ACBiomes.dreadlands_mountains = new BiomeMountainDreadlands(new BiomeProperties("Dreadlands Mountains").setBaseHeight(1.3F).setHeightVariation(0.9F).setRainDisabled());
 		ACBiomes.darklands_forest = new BiomeDarklandsForest(new BiomeProperties("Darklands Forest").setWaterColor(ACClientVars.getDarklandsForestWaterColor()));
@@ -59,6 +59,7 @@ public class WorldHandler implements ILifeCycleHandler {
 		ACBiomes.abyssal_desert = new BiomeAbyssalDesert(new BiomeProperties("Abyssal Desert").setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
 		ACBiomes.abyssal_plateau = new BiomeAbyssalPlateau(new BiomeProperties("Abyssal Plateau").setBaseHeight(1.5F).setHeightVariation(0.025F).setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
 		ACBiomes.coralium_lake = new BiomeCoraliumLake(new BiomeProperties("Coralium Lake").setBaseHeight(-1.0F).setHeightVariation(0.1F).setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
+		ACBiomes.dreadlands_ocean = new BiomeOceanDreadlands(new BiomeProperties("Dreadlands Ocean").setBaseHeight(-1.0F).setHeightVariation(0.1F).setRainDisabled());
 
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands.setRegistryName(new ResourceLocation(modid, "darklands")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands_forest.setRegistryName(new ResourceLocation(modid, "darklands_forest")));
@@ -69,7 +70,6 @@ public class WorldHandler implements ILifeCycleHandler {
 
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.abyssal_wastelands.setRegistryName(new ResourceLocation(modid, "abyssal_wastelands")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.dreadlands.setRegistryName(new ResourceLocation(modid, "dreadlands")));
-		InitHandler.INSTANCE.BIOMES.add(ACBiomes.purified_dreadlands.setRegistryName(new ResourceLocation(modid, "purified_dreadlands")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.dreadlands_forest.setRegistryName(new ResourceLocation(modid, "dreadlands_forest")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.dreadlands_mountains.setRegistryName(new ResourceLocation(modid, "dreadlands_mountains")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.omothol.setRegistryName(new ResourceLocation(modid, "omothol")));
@@ -78,7 +78,8 @@ public class WorldHandler implements ILifeCycleHandler {
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.abyssal_swamp.setRegistryName(new ResourceLocation(modid, "abyssal_swamp")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.abyssal_desert.setRegistryName(new ResourceLocation(modid, "abyssal_desert")));
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.abyssal_plateau.setRegistryName(new ResourceLocation(modid, "abyssal_plateau")));
-		InitHandler.INSTANCE.BIOMES.add(ACBiomes.coralium_lake.setRegistryName(new ResourceLocation(modid, "coralium_ocean")));
+		InitHandler.INSTANCE.BIOMES.add(ACBiomes.coralium_lake.setRegistryName(new ResourceLocation(modid, "coralium_lake")));
+		InitHandler.INSTANCE.BIOMES.add(ACBiomes.dreadlands_ocean.setRegistryName(new ResourceLocation(modid, "dreadlands_ocean")));
 
 		ACLib.THE_ABYSSAL_WASTELAND = DimensionType.register("The Abyssal Wasteland", "_aw", ACLib.abyssal_wasteland_id, WorldProviderAbyssalWasteland.class, ACConfig.keepLoaded1);
 		ACLib.THE_DREADLANDS = DimensionType.register("The Dreadlands", "_dl", ACLib.dreadlands_id, WorldProviderDreadlands.class, ACConfig.keepLoaded2);
@@ -132,18 +133,9 @@ public class WorldHandler implements ILifeCycleHandler {
 
 	@Override
 	public void loadComplete(FMLLoadCompleteEvent event) {
-		if(ACConfig.purgeMobSpawns){
-			((BiomeAbyssalWastelandBase) ACBiomes.abyssal_wastelands).setMobSpawns();
-			((BiomeAbyssalWastelandBase) ACBiomes.abyssal_swamp).setMobSpawns();
-			((BiomeAbyssalWastelandBase) ACBiomes.abyssal_desert).setMobSpawns();
-			((BiomeAbyssalWastelandBase) ACBiomes.abyssal_plateau).setMobSpawns();
-			((BiomeAbyssalWastelandBase) ACBiomes.coralium_lake).setMobSpawns();
-			((BiomeDreadlands) ACBiomes.dreadlands).setMobSpawns();
-			((BiomeAbyDreadlands) ACBiomes.purified_dreadlands).setMobSpawns();
-			((BiomeForestDreadlands) ACBiomes.dreadlands_forest).setMobSpawns();
-			((BiomeMountainDreadlands) ACBiomes.dreadlands_mountains).setMobSpawns();
-			((BiomeOmothol) ACBiomes.omothol).setMobSpawns();
-			((BiomeDarkRealm) ACBiomes.dark_realm).setMobSpawns();
-		}
+		if(ACConfig.purgeMobSpawns)
+			InitHandler.INSTANCE.BIOMES.stream()
+			.filter(b -> b instanceof IControlledSpawnList)
+			.forEach(b -> ((IControlledSpawnList) b).setMobSpawns());
 	}
 }

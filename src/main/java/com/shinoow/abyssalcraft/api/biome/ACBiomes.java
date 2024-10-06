@@ -38,9 +38,9 @@ public class ACBiomes {
 
 	// Dreadlands biomes
 	public static Biome dreadlands;
-	public static Biome purified_dreadlands;
 	public static Biome dreadlands_mountains;
 	public static Biome dreadlands_forest;
+	public static Biome dreadlands_ocean;
 
 	// Omothol
 	public static Biome omothol;

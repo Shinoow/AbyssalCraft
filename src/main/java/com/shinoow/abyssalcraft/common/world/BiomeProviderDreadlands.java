@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.common.world.gen.layer.GenLayerDL;
 
@@ -42,7 +44,6 @@ public class BiomeProviderDreadlands extends BiomeProvider
 		biomeCache = new BiomeCache(this);
 		biomesToSpawnIn = new ArrayList<>();
 		biomesToSpawnIn.add(ACBiomes.dreadlands);
-		biomesToSpawnIn.add(ACBiomes.purified_dreadlands);
 		biomesToSpawnIn.add(ACBiomes.dreadlands_forest);
 		biomesToSpawnIn.add(ACBiomes.dreadlands_mountains);
 	}
@@ -76,8 +77,6 @@ public class BiomeProviderDreadlands extends BiomeProvider
 	public Biome getBiome(BlockPos pos, Biome biomegen)
 	{
 		Biome biome = biomeCache.getBiome(pos.getX(), pos.getZ(), biomegen);
-		if (biome == null)
-			return ACBiomes.dreadlands;
 
 		return biome;
 	}
@@ -89,20 +88,19 @@ public class BiomeProviderDreadlands extends BiomeProvider
 	}
 
 	@Override
-	public Biome[] getBiomesForGeneration(Biome[] par1ArrayOfBiome, int par2, int par3, int par4, int par5)
+	public Biome[] getBiomesForGeneration(Biome[] biomes, int x, int z, int width, int height)
 	{
-		if (par1ArrayOfBiome == null || par1ArrayOfBiome.length < par4 * par5)
-			par1ArrayOfBiome = new Biome[par4 * par5];
+		IntCache.resetIntCache();
 
-		int[] aint = biomeToUse.getInts(par2, par3, par4, par5);
+		if (biomes == null || biomes.length < width * height)
+			biomes = new Biome[width * height];
 
-		for (int i = 0; i < par4 * par5; ++i)
-			if (aint[i] >= 0 && aint[i] <= Biome.REGISTRY.getKeys().size())
-				par1ArrayOfBiome[i] = Biome.getBiome(aint[i]);
-			else
-				par1ArrayOfBiome[i] = ACBiomes.dreadlands;
+		int[] aint = biomeToUse.getInts(x, z, width, height);
 
-		return par1ArrayOfBiome;
+		for (int i = 0; i < width * height; ++i)
+			biomes[i] = Biome.getBiome(aint[i], ACBiomes.dreadlands);
+
+		return biomes;
 	}
 
 	@Override
@@ -112,27 +110,27 @@ public class BiomeProviderDreadlands extends BiomeProvider
 	}
 
 	@Override
-	public Biome[] getBiomes(Biome[] par1ArrayOfBiome, int x, int y, int width, int length, boolean cacheFlag)
+	public Biome[] getBiomes(@Nullable Biome[] listToReuse, int x, int z, int width, int length, boolean cacheFlag)
 	{
 		IntCache.resetIntCache();
 
-		if (par1ArrayOfBiome == null || par1ArrayOfBiome.length < width * length)
-			par1ArrayOfBiome = new Biome[width * length];
+		if (listToReuse == null || listToReuse.length < width * length)
+			listToReuse = new Biome[width * length];
 
-		if (cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (y & 15) == 0) {
-			Biome[] aBiome1 = biomeCache.getCachedBiomes(x, y);
-			System.arraycopy(aBiome1, 0, par1ArrayOfBiome, 0, width * length);
-			return par1ArrayOfBiome;
-		} else {
-			int[] aint = biomeIndexLayer.getInts(x, y, width, length);
+		if (cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (z & 15) == 0)
+		{
+			Biome[] abiome = biomeCache.getCachedBiomes(x, z);
+			System.arraycopy(abiome, 0, listToReuse, 0, width * length);
+			return listToReuse;
+		}
+		else
+		{
+			int[] aint = biomeIndexLayer.getInts(x, z, width, length);
 
 			for (int i = 0; i < width * length; ++i)
-				if (aint[i] >= 0 && aint[i] <= Biome.REGISTRY.getKeys().size())
-					par1ArrayOfBiome[i] = Biome.getBiome(aint[i]);
-				else
-					par1ArrayOfBiome[i] = ACBiomes.dreadlands;
+				listToReuse[i] = Biome.getBiome(aint[i], ACBiomes.dreadlands);
 
-			return par1ArrayOfBiome;
+			return listToReuse;
 		}
 	}
 
@@ -140,48 +138,48 @@ public class BiomeProviderDreadlands extends BiomeProvider
 	public boolean areBiomesViable(int par1, int par2, int par3, List par4List) {
 		IntCache.resetIntCache();
 		int l = par1 - par3 >> 2;
-				int i1 = par2 - par3 >> 2;
-			int j1 = par1 + par3 >> 2;
-			int k1 = par2 + par3 >> 2;
-			int l1 = j1 - l + 1;
-			int i2 = k1 - i1 + 1;
-			int[] aint = biomeToUse.getInts(l, i1, l1, i2);
+			int i1 = par2 - par3 >> 2;
+		int j1 = par1 + par3 >> 2;
+		int k1 = par2 + par3 >> 2;
+		int l1 = j1 - l + 1;
+		int i2 = k1 - i1 + 1;
+		int[] aint = biomeToUse.getInts(l, i1, l1, i2);
 
-			for (int j2 = 0; j2 < l1 * i2; ++j2) {
-				Biome biome = Biome.getBiome(aint[j2]);
+		for (int j2 = 0; j2 < l1 * i2; ++j2) {
+			Biome biome = Biome.getBiome(aint[j2]);
 
-				if (!par4List.contains(biome))
-					return false;
-			}
+			if (!par4List.contains(biome))
+				return false;
+		}
 
-			return true;
+		return true;
 	}
 
 	@Override
 	public BlockPos findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random) {
 		IntCache.resetIntCache();
 		int l = par1 - par3 >> 2;
-			int i1 = par2 - par3 >> 2;
-			int j1 = par1 + par3 >> 2;
-			int k1 = par2 + par3 >> 2;
-			int l1 = j1 - l + 1;
-			int i2 = k1 - i1 + 1;
-			int[] aint = biomeToUse.getInts(l, i1, l1, i2);
-			BlockPos blockpos = null;
-			int j2 = 0;
+		int i1 = par2 - par3 >> 2;
+		int j1 = par1 + par3 >> 2;
+		int k1 = par2 + par3 >> 2;
+		int l1 = j1 - l + 1;
+		int i2 = k1 - i1 + 1;
+		int[] aint = biomeToUse.getInts(l, i1, l1, i2);
+		BlockPos blockpos = null;
+		int j2 = 0;
 
-			for (int k2 = 0; k2 < l1 * i2; ++k2) {
-				int l2 = l + k2 % l1 << 2;
-				int i3 = i1 + k2 / l1 << 2;
-				Biome biome = Biome.getBiome(aint[k2]);
+		for (int k2 = 0; k2 < l1 * i2; ++k2) {
+			int l2 = l + k2 % l1 << 2;
+			int i3 = i1 + k2 / l1 << 2;
+			Biome biome = Biome.getBiome(aint[k2]);
 
-				if (par4List.contains(biome) && (blockpos == null || par5Random.nextInt(j2 + 1) == 0)) {
-					blockpos = new BlockPos(l2, 0, i3);
-					++j2;
-				}
+			if (par4List.contains(biome) && (blockpos == null || par5Random.nextInt(j2 + 1) == 0)) {
+				blockpos = new BlockPos(l2, 0, i3);
+				++j2;
 			}
+		}
 
-			return blockpos;
+		return blockpos;
 	}
 
 	@Override

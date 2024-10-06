@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.world.biome.IControlledSpawnList;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -28,7 +29,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
-public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome {
+public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome, IControlledSpawnList {
 
 	public BiomeDreadlandsBase(BiomeProperties par1) {
 		super(par1);
@@ -40,6 +41,7 @@ public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome {
 		setMobSpawns();
 	}
 
+	@Override
 	public void setMobSpawns(){
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
@@ -93,7 +95,7 @@ public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome {
 
 	public final void genDreadlandsTerrain(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double d)
 	{
-		int i = worldIn.getSeaLevel();
+		int i = 49;
 		IBlockState iblockstate = topBlock;
 		IBlockState iblockstate1 = fillerBlock;
 		int j = -1;
@@ -130,7 +132,7 @@ public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome {
 					{
 						if (k <= 0)
 						{
-							iblockstate = null;
+							iblockstate = AIR;
 							iblockstate1 = ACBlocks.dreadstone.getDefaultState();
 						}
 						else if (j1 >= i - 4 && j1 <= i + 1)
@@ -145,9 +147,9 @@ public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome {
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
 						else if (j1 < i - 7 - k)
 						{
-							iblockstate = null;
+							iblockstate = AIR;
 							iblockstate1 = ACBlocks.dreadstone.getDefaultState();
-							chunkPrimerIn.setBlockState(i1, j1, l, ACBlocks.dreadstone.getDefaultState());
+							chunkPrimerIn.setBlockState(i1, j1, l, GRAVEL);
 						} else
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
 					}

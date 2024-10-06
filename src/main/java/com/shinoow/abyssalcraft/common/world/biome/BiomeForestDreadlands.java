@@ -39,7 +39,7 @@ public class BiomeForestDreadlands extends BiomeDreadlandsBase
 	}
 
 	@Override
-	public final void setMobSpawns(){
+	public void setMobSpawns(){
 		super.setMobSpawns();
 		spawnableMonsterList.add(new SpawnListEntry(EntityDemonPig.class, 40, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDemonCow.class, 40, 1, 3));

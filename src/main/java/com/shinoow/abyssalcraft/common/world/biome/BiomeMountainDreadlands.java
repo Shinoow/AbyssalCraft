@@ -26,7 +26,7 @@ public class BiomeMountainDreadlands extends BiomeDreadlandsBase {
 	}
 
 	@Override
-	public final void setMobSpawns(){
+	public void setMobSpawns(){
 		super.setMobSpawns();
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadling.class, 40, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 20, 1, 2));

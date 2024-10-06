@@ -54,30 +54,12 @@ public abstract class GenLayerAW extends GenLayer
 
 			if (k == 0)
 				genlayerhills = new GenLayerAddIsland(3L, genlayerhills);
-
-			//            if (k == 1 || i == 1)
-			//            {
-			//                genlayerhills = new GenLayerShore(1000L, genlayerhills);
-			//            }
 		}
 		GenLayer genlayersmooth1 = new GenLayerSmooth(1000L, genlayerhills);
 		GenLayer genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
 		GenLayer genlayer3 = new GenLayerVoronoiZoom(10L, genlayerrivermix);
 		genlayerrivermix.initWorldGenSeed(seed);
 		genlayer3.initWorldGenSeed(seed);
-		//		GenLayer biomes = new GenLayerBiomesAW(1L);
-		//
-		//		biomes = new GenLayerZoom(1000L, biomes);
-		//		biomes = new GenLayerZoom(1001L, biomes);
-		//		biomes = new GenLayerZoom(1002L, biomes);
-		//		biomes = new GenLayerZoom(1003L, biomes);
-		//		biomes = new GenLayerZoom(1004L, biomes);
-		//
-		//		GenLayer genlayervoronoizoom = new GenLayerVoronoiZoom(10L, biomes);
-		//
-		//		biomes.initWorldGenSeed(seed);
-		//		genlayervoronoizoom.initWorldGenSeed(seed);
-
 		return new GenLayer[] {genlayerrivermix, genlayer3, genlayerrivermix};
 	}
 }

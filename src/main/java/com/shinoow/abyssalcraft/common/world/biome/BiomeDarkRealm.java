@@ -17,13 +17,14 @@ import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
+import com.shinoow.abyssalcraft.lib.world.biome.IControlledSpawnList;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeDarkRealm extends Biome {
+public class BiomeDarkRealm extends Biome implements IControlledSpawnList {
 
 	public BiomeDarkRealm(BiomeProperties par1){
 		super(par1);
@@ -32,7 +33,8 @@ public class BiomeDarkRealm extends Biome {
 		fillerBlock = ACBlocks.darkstone.getDefaultState();
 	}
 
-	public final void setMobSpawns(){
+	@Override
+	public void setMobSpawns(){
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
