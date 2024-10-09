@@ -235,8 +235,7 @@ public class ClientProxy extends CommonProxy {
 		}, ACBlocks.ritual_pedestal_stone, ACBlocks.ritual_pedestal_darkstone, ACBlocks.ritual_pedestal_abyssal_stone, ACBlocks.ritual_pedestal_coralium_stone,
 				ACBlocks.ritual_pedestal_dreadstone, ACBlocks.ritual_pedestal_abyssalnite_stone, ACBlocks.ritual_pedestal_ethaxium, ACBlocks.ritual_pedestal_dark_ethaxium);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
-			Biome biome = world.getBiome(pos);
-			return biome instanceof IDarklandsBiome ? BiomeColorHelper.getGrassColorAtPos(world, pos) : ACBiomes.dreadlands.getGrassColorAtPos(pos);
+			return ACBiomes.dreadlands_forest.getGrassColorAtPos(pos);
 		}, ACBlocks.dreadlands_grass);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(0, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.abyssal_wasteland_id, 1, I18n.format(NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE));
