@@ -952,6 +952,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.darklands_oak_fence_gate, 0);
 		registerItemRender(ACBlocks.dreadwood_fence_gate, 0);
 		registerItemRender(ACBlocks.research_table, 0);
+		registerItemRender(ACBlocks.dreadlands_muck, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

@@ -272,4 +272,5 @@ public class ACBlocks {
 	public static Block darklands_oak_fence_gate;
 	public static Block dreadwood_fence_gate;
 	public static Block research_table;
+	public static Block dreadlands_muck;
 }
