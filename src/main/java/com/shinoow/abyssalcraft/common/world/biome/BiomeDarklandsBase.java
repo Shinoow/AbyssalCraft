@@ -32,7 +32,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
@@ -43,7 +42,7 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome, IAlter
 	protected static final IBlockState DREADSTONE = ACBlocks.dreadstone.getDefaultState();
 
 	protected boolean staticTopBlock, staticFillerBlock;
-	
+
 	protected List<SpawnListEntry> aw, dl;
 
 	public BiomeDarklandsBase(BiomeProperties properties) {
@@ -104,12 +103,12 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome, IAlter
 	{
 		if(worldIn.provider.getDimension() != ACLib.abyssal_wasteland_id && worldIn.provider.getDimension() != ACLib.dreadlands_id)
 			super.genTerrainBlocks(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
-		generateDarklandsTerrain(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+		else generateDarklandsTerrain(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
 	}
 
 	private int getSeaLevel(World world) {
 		return world.provider.getDimension() == ACLib.abyssal_wasteland_id ? 49 : 
-			world.provider.getDimension() == ACLib.dreadlands_id ? 49 : world.getSeaLevel();
+			world.provider.getDimension() == ACLib.dreadlands_id ? 50 : world.getSeaLevel();
 	}
 
 	protected IBlockState getBaseBlock(int dim) {

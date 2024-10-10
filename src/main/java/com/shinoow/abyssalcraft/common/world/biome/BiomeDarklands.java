@@ -33,6 +33,9 @@ public class BiomeDarklands extends BiomeDarklandsBase {
 		super(par1);
 		WorldGenDarkTrees = new WorldGenDLT(false);
 		decorator.treesPerChunk = 3;
+		decorator.flowersPerChunk= -1;
+		decorator.grassPerChunk = -1;
+		decorator.mushroomsPerChunk = -1;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 70, 3, 3));

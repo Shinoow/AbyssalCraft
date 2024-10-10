@@ -115,7 +115,7 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 
 	public void setBlocksInChunk(int par1, int par2, ChunkPrimer primer)
 	{
-		byte b0 = 55;
+		byte b0 = 56;
 		biomesForGeneration = worldObj.getBiomeProvider().getBiomesForGeneration(biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, 10, 10);
 		generateNoise(par1 * 4, 0, par2 * 4);
 

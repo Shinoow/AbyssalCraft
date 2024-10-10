@@ -38,6 +38,7 @@ public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome, ICon
 		decorator.treesPerChunk = -1;
 		decorator.flowersPerChunk= -1;
 		decorator.grassPerChunk = -1;
+		decorator.mushroomsPerChunk = -1;
 		setMobSpawns();
 	}
 
@@ -74,17 +75,18 @@ public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome, ICon
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.dreaded_abyssalnite_ore.getDefaultState(), veinSize,
-						state -> state != null && state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
+						state -> state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 			}
-
-		for (int rarity = 0; rarity < 3; rarity++)
-		{
-			int x = par2Random.nextInt(16);
-			int y = par2Random.nextInt(55) + 5;
-			int z = par2Random.nextInt(16);
-			new WorldGenMinable(ACBlocks.abyssalnite_stone.getDefaultState(), 16,
-					state -> state != null && state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
-		}
+		
+		if(ACConfig.generateDreadlandsAbyssalniteOre)
+			for(int rarity = 0; rarity < 6; rarity++) {
+				int veinSize =  8 + par2Random.nextInt(12);
+				int x = par2Random.nextInt(16);
+				int y = par2Random.nextInt(50) + 5;
+				int z = par2Random.nextInt(16);
+				new WorldGenMinable(ACBlocks.dreadlands_abyssalnite_ore.getDefaultState(), veinSize,
+						state -> state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
+			}
 	}
 
 	@Override
