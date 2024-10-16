@@ -62,7 +62,7 @@ public class MiningSpell extends Spell {
 
 		if(state.getBlock() == Blocks.STONE || state.getBlock() == Blocks.DIRT || state.getBlock() == ACBlocks.darkstone
 				|| state.getBlock() == ACBlocks.abyssal_stone || state.getBlock() == ACBlocks.dreadstone
-				|| state.getBlock() == ACBlocks.abyssalnite_stone || state.getBlock() == ACBlocks.omothol_stone
+				|| state.getBlock() == ACBlocks.elysian_stone || state.getBlock() == ACBlocks.omothol_stone
 				|| state.getBlock() == ACBlocks.monolith_stone || state.getBlock() == Blocks.GRAVEL
 				|| state.getBlock() == Blocks.SANDSTONE || state.getBlock() == ACBlocks.dreadlands_dirt)
 			return Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockLiquid.LEVEL, 7);
@@ -85,8 +85,8 @@ public class MiningSpell extends Spell {
 			return ACBlocks.coralium_stone.getDefaultState();
 		if(state.getBlock() == ACBlocks.dreadstone_cobblestone)
 			return ACBlocks.dreadstone.getDefaultState();
-		if(state.getBlock() == ACBlocks.abyssalnite_cobblestone)
-			return ACBlocks.abyssalnite_stone.getDefaultState();
+		if(state.getBlock() == ACBlocks.elysian_cobblestone)
+			return ACBlocks.elysian_stone.getDefaultState();
 		if(state.getBlock() == Blocks.SAND && state.getValue(BlockSand.VARIANT) == EnumType.SAND)
 			return Blocks.GLASS.getDefaultState();
 		if(state.getBlock() == Blocks.SAND && state.getValue(BlockSand.VARIANT) == EnumType.RED_SAND)

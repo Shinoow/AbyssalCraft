@@ -358,7 +358,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_ABYSSAL_WASTELAND = new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, NecronomiconText.INFORMATION_ABYSSAL_WASTELAND);
 
 		Pages.MATERIAL_DREADSTONE = new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadstone), NecronomiconText.MATERIAL_DREADSTONE_1);
-		Pages.MATERIAL_ABYSSALNITE_STONE_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.abyssalnite_stone), NecronomiconText.MATERIAL_ABYSSALNITE_STONE_1);
+		Pages.MATERIAL_ABYSSALNITE_STONE_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.elysian_stone), NecronomiconText.MATERIAL_ABYSSALNITE_STONE_1);
 		Pages.MATERIAL_ABYSSALNITE_STONE_2 = new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, NecronomiconText.MATERIAL_ABYSSALNITE_STONE_2);
 		Pages.MATERIAL_DREADLANDS_ABYSSALNITE = new Page(5, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadlands_abyssalnite_ore), NecronomiconText.MATERIAL_DREADLANDS_ABYSSALNITE_1);
 		Pages.MATERIAL_DREADED_ABYSSALNITE = new Page(6, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreaded_abyssalnite_ore), NecronomiconText.MATERIAL_DREADED_ABYSSALNITE_1);

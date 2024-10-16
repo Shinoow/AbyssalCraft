@@ -23,6 +23,7 @@ import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderSurface;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -37,7 +38,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator
 			chunkGenerator, IChunkProvider chunkProvider) {
-		if(world.provider instanceof WorldProviderSurface)
+		if(world.provider instanceof WorldProviderSurface && world.getWorldType() != WorldType.FLAT)
 			generateSurface(world, random, chunkX*16, chunkZ*16);
 	}
 

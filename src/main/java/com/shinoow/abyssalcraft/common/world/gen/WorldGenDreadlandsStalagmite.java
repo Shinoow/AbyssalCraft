@@ -32,7 +32,7 @@ public class WorldGenDreadlandsStalagmite extends WorldGenerator {
 		while(chunk.getBlockState(pos).getBlock().isAir(chunk.getBlockState(pos), world, pos))
 			pos = pos.down();
 
-		if(chunk.getBlockState(pos) != ACBlocks.abyssalnite_stone.getDefaultState() &&
+		if(chunk.getBlockState(pos) != ACBlocks.elysian_stone.getDefaultState() &&
 				chunk.getBlockState(pos) != ACBlocks.dreadstone.getDefaultState())
 			return false;
 

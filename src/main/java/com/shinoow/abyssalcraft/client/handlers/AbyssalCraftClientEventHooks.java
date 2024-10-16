@@ -445,7 +445,7 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_brick_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_stone_brick_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.elysian_stone_brick_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.coralium_stone_brick_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.ethaxium_brick_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dark_ethaxium_brick_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
@@ -455,11 +455,11 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.darkstone_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.abyssal_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.elysian_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_wall, new StateMap.Builder().ignore(BlockWall.VARIANT).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.abyssal_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadstone_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
-		ModelLoader.setCustomStateMapper(ACBlocks.abyssalnite_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.elysian_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.coralium_cobblestone_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadwood_slab, new StateMap.Builder().ignore(BlockACSlab.VARIANT_PROPERTY).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
@@ -709,7 +709,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.darkstone, 0, "darkstone");
 		registerItemRender(ACBlocks.abyssal_stone, 0, "abystone");
 		registerItemRender(ACBlocks.dreadstone, 0, "dreadstone");
-		registerItemRender(ACBlocks.abyssalnite_stone, 0, "abydreadstone");
+		registerItemRender(ACBlocks.elysian_stone, 0, "abydreadstone");
 		registerItemRender(ACBlocks.coralium_stone, 0, "cstone");
 		registerItemRender(ACBlocks.ethaxium, 0, "ethaxium");
 		registerItemRender(ACBlocks.omothol_stone, 0, "omotholstone");
@@ -717,7 +717,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.darkstone_cobblestone, 0, "darkstone_cobble");
 		registerItemRender(ACBlocks.abyssal_cobblestone, 0, "abyssalcobblestone");
 		registerItemRender(ACBlocks.dreadstone_cobblestone, 0, "dreadstonecobblestone");
-		registerItemRender(ACBlocks.abyssalnite_cobblestone, 0, "abyssalnitecobblestone");
+		registerItemRender(ACBlocks.elysian_cobblestone, 0, "abyssalnitecobblestone");
 		registerItemRender(ACBlocks.coralium_cobblestone, 0, "coraliumcobblestone");
 		registerItemRender(ACBlocks.darkstone_brick, 0, "darkstone_brick_0");
 		registerItemRender(ACBlocks.chiseled_darkstone_brick, 0, "darkstone_brick_1");
@@ -772,9 +772,9 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.dreadstone_brick, 0, "dreadbrick_0");
 		registerItemRender(ACBlocks.chiseled_dreadstone_brick, 0, "dreadbrick_1");
 		registerItemRender(ACBlocks.cracked_dreadstone_brick, 0, "dreadbrick_2");
-		registerItemRender(ACBlocks.abyssalnite_stone_brick, 0, "abydreadbrick_0");
-		registerItemRender(ACBlocks.chiseled_abyssalnite_stone_brick, 0, "abydreadbrick_1");
-		registerItemRender(ACBlocks.cracked_abyssalnite_stone_brick, 0, "abydreadbrick_2");
+		registerItemRender(ACBlocks.elysian_stone_brick, 0, "abydreadbrick_0");
+		registerItemRender(ACBlocks.chiseled_elysian_stone_brick, 0, "abydreadbrick_1");
+		registerItemRender(ACBlocks.cracked_elysian_stone_brick, 0, "abydreadbrick_2");
 		registerItemRender(ACBlocks.dreadlands_grass, 0);
 		registerItemRender(ACBlocks.dreadwood_log, 0);
 		registerItemRender(ACBlocks.dreadwood_leaves, 0);
@@ -788,9 +788,9 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.dreadstone_brick_fence, 0);
 		registerItemRender(ACBlocks.dreadstone_brick_slab, 0);
 		registerItemRender(BlockHandler.dreadbrickslab2, 0);
-		registerItemRender(ACBlocks.abyssalnite_stone_brick_stairs, 0);
-		registerItemRender(ACBlocks.abyssalnite_stone_brick_fence, 0);
-		registerItemRender(ACBlocks.abyssalnite_stone_brick_slab, 0);
+		registerItemRender(ACBlocks.elysian_stone_brick_stairs, 0);
+		registerItemRender(ACBlocks.elysian_stone_brick_fence, 0);
+		registerItemRender(ACBlocks.elysian_stone_brick_slab, 0);
 		registerItemRender(BlockHandler.abydreadbrickslab2, 0);
 		registerItemRender(ACBlocks.coralium_stone_brick, 0, "cstonebrick_0");
 		registerItemRender(ACBlocks.chiseled_coralium_stone_brick, 0, "cstonebrick_1");
@@ -842,7 +842,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.ritual_altar_abyssal_stone, 0, "ritualaltar_2");
 		registerItemRender(ACBlocks.ritual_altar_coralium_stone, 0, "ritualaltar_3");
 		registerItemRender(ACBlocks.ritual_altar_dreadstone, 0, "ritualaltar_4");
-		registerItemRender(ACBlocks.ritual_altar_abyssalnite_stone, 0, "ritualaltar_5");
+		registerItemRender(ACBlocks.ritual_altar_elysian_stone, 0, "ritualaltar_5");
 		registerItemRender(ACBlocks.ritual_altar_ethaxium, 0, "ritualaltar_6");
 		registerItemRender(ACBlocks.ritual_altar_dark_ethaxium, 0, "ritualaltar_7");
 		registerItemRender(ACBlocks.ritual_pedestal_stone, 0, "ritualpedestal_0");
@@ -850,7 +850,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.ritual_pedestal_abyssal_stone, 0, "ritualpedestal_2");
 		registerItemRender(ACBlocks.ritual_pedestal_coralium_stone, 0, "ritualpedestal_3");
 		registerItemRender(ACBlocks.ritual_pedestal_dreadstone, 0, "ritualpedestal_4");
-		registerItemRender(ACBlocks.ritual_pedestal_abyssalnite_stone, 0, "ritualpedestal_5");
+		registerItemRender(ACBlocks.ritual_pedestal_elysian_stone, 0, "ritualpedestal_5");
 		registerItemRender(ACBlocks.ritual_pedestal_ethaxium, 0, "ritualpedestal_6");
 		registerItemRender(ACBlocks.ritual_pedestal_dark_ethaxium, 0, "ritualpedestal_7");
 		registerItemRender(ACBlocks.shoggoth_ooze, 0);
@@ -923,10 +923,10 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.dreadstone_cobblestone_slab, 0);
 		registerItemRender(BlockHandler.dreadcobbleslab2, 0);
 		registerItemRender(ACBlocks.dreadstone_cobblestone_wall, 0);
-		registerItemRender(ACBlocks.abyssalnite_cobblestone_stairs, 0);
-		registerItemRender(ACBlocks.abyssalnite_cobblestone_slab, 0);
+		registerItemRender(ACBlocks.elysian_cobblestone_stairs, 0);
+		registerItemRender(ACBlocks.elysian_cobblestone_slab, 0);
 		registerItemRender(BlockHandler.abydreadcobbleslab2, 0);
-		registerItemRender(ACBlocks.abyssalnite_cobblestone_wall, 0);
+		registerItemRender(ACBlocks.elysian_cobblestone_wall, 0);
 		registerItemRender(ACBlocks.coralium_cobblestone_stairs, 0);
 		registerItemRender(ACBlocks.coralium_cobblestone_slab, 0);
 		registerItemRender(BlockHandler.cstonecobbleslab2, 0);

@@ -79,12 +79,12 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.darkstone_brick, 1, 0), new ItemStack(ACBlocks.cracked_darkstone_brick, 1), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), new ItemStack(ACBlocks.cracked_abyssal_stone_brick, 1), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.dreadstone_brick, 1, 0), new ItemStack(ACBlocks.cracked_dreadstone_brick, 1), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0), new ItemStack(ACBlocks.cracked_abyssalnite_stone_brick, 1), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.elysian_stone_brick, 1, 0), new ItemStack(ACBlocks.cracked_elysian_stone_brick, 1), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), new ItemStack(ACBlocks.cracked_coralium_stone_brick, 1), 0.1F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_sand, new ItemStack(ACBlocks.abyssal_sand_glass), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssal_cobblestone), new ItemStack(ACBlocks.abyssal_stone), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.dreadstone_cobblestone), new ItemStack(ACBlocks.dreadstone), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ACBlocks.abyssalnite_cobblestone), new ItemStack(ACBlocks.abyssalnite_stone), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ACBlocks.elysian_cobblestone), new ItemStack(ACBlocks.elysian_stone), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.coralium_cobblestone), new ItemStack(ACBlocks.coralium_stone), 0.1F);
 		GameRegistry.addSmelting(ACBlocks.dreadwood_log, new ItemStack(ACItems.charcoal), 1F);
 		GameRegistry.addSmelting(new ItemStack(ACItems.generic_meat), new ItemStack(ACItems.cooked_generic_meat), 0.35F);
@@ -512,8 +512,8 @@ public class AbyssalCrafting {
 				ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone)};
 		Object[] awoffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0),
 				ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0)};
-		Object[] dloffers = new Object[]{ACItems.shadow_shard, ACBlocks.dreadstone_brick, ACItems.coralium_gem, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.dreadstone_brick, 1, 0),
-				ACItems.coralium_gem, new ItemStack(ACBlocks.abyssalnite_stone_brick, 1, 0)};
+		Object[] dloffers = new Object[]{ACItems.shadow_shard, ACBlocks.dreadstone_brick, ACItems.coralium_gem, new ItemStack(ACBlocks.elysian_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.dreadstone_brick, 1, 0),
+				ACItems.coralium_gem, new ItemStack(ACBlocks.elysian_stone_brick, 1, 0)};
 		Object[] omtoffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0),
 				ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0)};
 		RitualRegistry.instance().registerRitual(Rituals.OVERWORLD_ENERGY_PEDESTAL = new NecronomiconInfusionRitual("epOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_energy_pedestal), ACBlocks.energy_pedestal, owoffers).setTags("PotEnergy"));

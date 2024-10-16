@@ -193,7 +193,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		stones.add(Blocks.END_STONE.getDefaultState());
 		stones.add(ACBlocks.darkstone.getDefaultState());
 		stones.add(ACBlocks.dreadstone.getDefaultState());
-		stones.add(ACBlocks.abyssalnite_stone.getDefaultState());
+		stones.add(ACBlocks.elysian_stone.getDefaultState());
 		bricks.add(Blocks.STONEBRICK.getStateFromMeta(0));
 		bricks.add(Blocks.STONEBRICK.getStateFromMeta(1));
 		bricks.add(Blocks.STONEBRICK.getStateFromMeta(2));
@@ -202,9 +202,9 @@ public class BlockCLiquid extends BlockFluidClassic {
 		bricks.add(ACBlocks.darkstone_brick.getDefaultState());
 		bricks.add(ACBlocks.cracked_darkstone_brick.getDefaultState());
 		bricks.add(ACBlocks.chiseled_darkstone_brick.getDefaultState());
-		bricks.add(ACBlocks.abyssalnite_stone_brick.getDefaultState());
-		bricks.add(ACBlocks.cracked_abyssalnite_stone_brick.getDefaultState());
-		bricks.add(ACBlocks.chiseled_abyssalnite_stone_brick.getDefaultState());
+		bricks.add(ACBlocks.elysian_stone_brick.getDefaultState());
+		bricks.add(ACBlocks.cracked_elysian_stone_brick.getDefaultState());
+		bricks.add(ACBlocks.chiseled_elysian_stone_brick.getDefaultState());
 		bricks.add(ACBlocks.dreadstone_brick.getDefaultState());
 		bricks.add(ACBlocks.cracked_dreadstone_brick.getDefaultState());
 		bricks.add(ACBlocks.chiseled_dreadstone_brick.getDefaultState());
@@ -219,7 +219,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		cobble.add(Blocks.MOSSY_COBBLESTONE.getDefaultState());
 		cobble.add(ACBlocks.darkstone_cobblestone.getDefaultState());
 		cobble.add(ACBlocks.dreadstone_cobblestone.getDefaultState());
-		cobble.add(ACBlocks.abyssalnite_cobblestone.getDefaultState());
+		cobble.add(ACBlocks.elysian_cobblestone.getDefaultState());
 		cobble.add(ACBlocks.coralium_cobblestone.getDefaultState());
 	}
 }

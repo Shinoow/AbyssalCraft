@@ -24,7 +24,7 @@ public class ACBlocks {
 	public static Block darkstone;
 	public static Block abyssal_stone;
 	public static Block dreadstone;
-	public static Block abyssalnite_stone;
+	public static Block elysian_stone;
 	public static Block coralium_stone;
 	public static Block ethaxium;
 	public static Block omothol_stone;
@@ -32,7 +32,7 @@ public class ACBlocks {
 	public static Block darkstone_cobblestone;
 	public static Block abyssal_cobblestone;
 	public static Block dreadstone_cobblestone;
-	public static Block abyssalnite_cobblestone;
+	public static Block elysian_cobblestone;
 	public static Block coralium_cobblestone;
 	public static Block darkstone_brick;
 	public static Block chiseled_darkstone_brick;
@@ -85,8 +85,9 @@ public class ACBlocks {
 	public static Block chiseled_dreadstone_brick;
 	public static Block cracked_dreadstone_brick;
 	public static Block abyssalnite_stone_brick;
-	public static Block chiseled_abyssalnite_stone_brick;
-	public static Block cracked_abyssalnite_stone_brick;
+	public static Block elysian_stone_brick;
+	public static Block chiseled_elysian_stone_brick;
+	public static Block cracked_elysian_stone_brick;
 	public static Block dreadlands_grass;
 	public static Block dreadwood_log;
 	public static Block dreadwood_leaves;
@@ -99,9 +100,9 @@ public class ACBlocks {
 	public static Block dreadstone_brick_stairs;
 	public static Block dreadstone_brick_fence;
 	public static Block dreadstone_brick_slab;
-	public static Block abyssalnite_stone_brick_stairs;
-	public static Block abyssalnite_stone_brick_fence;
-	public static Block abyssalnite_stone_brick_slab;
+	public static Block elysian_stone_brick_stairs;
+	public static Block elysian_stone_brick_fence;
+	public static Block elysian_stone_brick_slab;
 	public static Block liquid_antimatter;
 	public static Block coralium_stone_brick;
 	public static Block chiseled_coralium_stone_brick;
@@ -150,7 +151,7 @@ public class ACBlocks {
 	public static Block ritual_altar_abyssal_stone;
 	public static Block ritual_altar_coralium_stone;
 	public static Block ritual_altar_dreadstone;
-	public static Block ritual_altar_abyssalnite_stone;
+	public static Block ritual_altar_elysian_stone;
 	public static Block ritual_altar_ethaxium;
 	public static Block ritual_altar_dark_ethaxium;
 	public static Block ritual_pedestal_stone;
@@ -158,7 +159,7 @@ public class ACBlocks {
 	public static Block ritual_pedestal_abyssal_stone;
 	public static Block ritual_pedestal_coralium_stone;
 	public static Block ritual_pedestal_dreadstone;
-	public static Block ritual_pedestal_abyssalnite_stone;
+	public static Block ritual_pedestal_elysian_stone;
 	public static Block ritual_pedestal_ethaxium;
 	public static Block ritual_pedestal_dark_ethaxium;
 	public static Block shoggoth_ooze;
@@ -244,9 +245,9 @@ public class ACBlocks {
 	public static Block dreadstone_cobblestone_slab;
 	public static Block dreadstone_cobblestone_stairs;
 	public static Block dreadstone_cobblestone_wall;
-	public static Block abyssalnite_cobblestone_slab;
-	public static Block abyssalnite_cobblestone_stairs;
-	public static Block abyssalnite_cobblestone_wall;
+	public static Block elysian_cobblestone_slab;
+	public static Block elysian_cobblestone_stairs;
+	public static Block elysian_cobblestone_wall;
 	public static Block coralium_cobblestone_slab;
 	public static Block coralium_cobblestone_stairs;
 	public static Block coralium_cobblestone_wall;

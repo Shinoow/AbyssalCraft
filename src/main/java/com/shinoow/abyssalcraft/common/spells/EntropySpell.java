@@ -55,8 +55,8 @@ public class EntropySpell extends Spell {
 			return ACBlocks.coralium_cobblestone.getDefaultState();
 		else if(state.getBlock() == ACBlocks.dreadstone)
 			return ACBlocks.dreadstone_cobblestone.getDefaultState();
-		else if(state.getBlock() == ACBlocks.abyssalnite_stone)
-			return ACBlocks.abyssalnite_cobblestone.getDefaultState();
+		else if(state.getBlock() == ACBlocks.elysian_stone)
+			return ACBlocks.elysian_cobblestone.getDefaultState();
 		else if(state.getBlock() == Blocks.STONE)
 			return Blocks.COBBLESTONE.getDefaultState();
 		else if(state.getBlock() instanceof BlockACCobblestone || state.getBlock() == Blocks.COBBLESTONE)

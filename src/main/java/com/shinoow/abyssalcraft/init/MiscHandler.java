@@ -582,7 +582,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(Darkbrickslab2));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darklands_oak_slab));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(DLTslab2));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssalnite_stone_brick_slab));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.elysian_stone_brick_slab));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(abydreadbrickslab2));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreadstone_brick_slab));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(dreadbrickslab2));
@@ -598,7 +598,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_cobblestone_wall));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssal_stone_brick_fence));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darklands_oak_fence));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssalnite_stone_brick_fence));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.elysian_stone_brick_fence));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreadstone_brick_fence));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.coralium_stone_brick_fence));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ethaxium_brick_fence));
@@ -607,7 +607,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_brick_stairs));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darkstone_cobblestone_stairs));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darklands_oak_stairs));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.abyssalnite_stone_brick_stairs));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.elysian_stone_brick_stairs));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreadstone_brick_stairs));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.coralium_stone_brick_stairs));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ethaxium_brick_stairs));
@@ -639,7 +639,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_altar_abyssal_stone));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_altar_coralium_stone));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_altar_dreadstone));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_altar_abyssalnite_stone));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_altar_elysian_stone));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_altar_ethaxium));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_altar_dark_ethaxium));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal_stone));
@@ -647,7 +647,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal_abyssal_stone));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal_coralium_stone));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal_dreadstone));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal_abyssalnite_stone));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal_elysian_stone));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal_ethaxium));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.ritual_pedestal_dark_ethaxium));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.cthulhu_statue));
@@ -845,9 +845,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.dreadstone_brick, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.chiseled_dreadstone_brick, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.cracked_dreadstone_brick, ResearchItems.DREADLANDS);
-		addCondition(ACBlocks.abyssalnite_stone_brick, ResearchItems.DREADLANDS);
-		addCondition(ACBlocks.chiseled_abyssalnite_stone_brick, ResearchItems.DREADLANDS);
-		addCondition(ACBlocks.cracked_abyssalnite_stone_brick, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.elysian_stone_brick, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.chiseled_elysian_stone_brick, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.cracked_elysian_stone_brick, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.dreadwood_sapling, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.dreadwood_log, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.dreadwood_leaves, ResearchItems.DREADLANDS);
@@ -863,8 +863,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.dr_orange_head, ResearchItems.DEPTHS_GHOUL);
 		addCondition(ACBlocks.dreadstone_brick_stairs, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.dreadstone_brick_fence, ResearchItems.DREADLANDS);
-		addCondition(ACBlocks.abyssalnite_stone_brick_stairs, ResearchItems.DREADLANDS);
-		addCondition(ACBlocks.abyssalnite_stone_brick_fence, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.elysian_stone_brick_stairs, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.elysian_stone_brick_fence, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.coralium_stone_brick, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.chiseled_coralium_stone_brick, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.cracked_coralium_stone_brick, ResearchItems.ABYSSAL_WASTELAND);
@@ -905,8 +905,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.abyssal_cobblestone_wall, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.dreadstone_cobblestone_stairs, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.dreadstone_cobblestone_wall, ResearchItems.DREADLANDS);
-		addCondition(ACBlocks.abyssalnite_cobblestone_stairs, ResearchItems.DREADLANDS);
-		addCondition(ACBlocks.abyssalnite_cobblestone_wall, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.elysian_cobblestone_stairs, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.elysian_cobblestone_wall, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.coralium_cobblestone_stairs, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.coralium_cobblestone_wall, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.luminous_thistle, ResearchItems.ABYSSAL_WASTELAND);
@@ -917,9 +917,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.coralium_stone, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.coralium_cobblestone, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.dreadstone, ResearchItems.DREADLANDS);
-		addCondition(ACBlocks.abyssalnite_stone, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.elysian_stone, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.dreadstone_cobblestone, ResearchItems.DREADLANDS);
-		addCondition(ACBlocks.abyssalnite_cobblestone, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.elysian_cobblestone, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.ethaxium, ResearchItems.OMOTHOL);
 		addCondition(ACBlocks.omothol_stone, ResearchItems.OMOTHOL);
 		addCondition(ACBlocks.block_of_abyssalnite, ResearchItems.DARKLANDS_BIOME);

@@ -33,7 +33,7 @@ import net.minecraft.world.World;
 public class NecronomiconDreadSpawnRitual extends NecronomiconRitual {
 
 	public NecronomiconDreadSpawnRitual() {
-		super("dreadSpawn", 2, 500F, new Object[]{ACItems.dread_fragment, new ItemStack(ACBlocks.dreadstone), new ItemStack(ACBlocks.abyssalnite_stone), ACItems.chunk_of_abyssalnite,
+		super("dreadSpawn", 2, 500F, new Object[]{ACItems.dread_fragment, new ItemStack(ACBlocks.dreadstone), new ItemStack(ACBlocks.elysian_stone), ACItems.chunk_of_abyssalnite,
 				ACItems.dreaded_chunk_of_abyssalnite, Items.ROTTEN_FLESH, ACItems.dreaded_shard_of_abyssalnite, ACItems.abyssalnite_ingot});
 		setRitualParticle(EnumRitualParticle.SMOKE_PILLARS);
 	}

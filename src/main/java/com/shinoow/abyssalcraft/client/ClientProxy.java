@@ -224,7 +224,7 @@ public class ClientProxy extends CommonProxy {
 			}
 			return getColor(state.getBlock());
 		}, ACBlocks.ritual_altar_stone, ACBlocks.ritual_altar_darkstone, ACBlocks.ritual_altar_abyssal_stone, ACBlocks.ritual_altar_coralium_stone,
-				ACBlocks.ritual_altar_dreadstone, ACBlocks.ritual_altar_abyssalnite_stone, ACBlocks.ritual_altar_ethaxium, ACBlocks.ritual_altar_dark_ethaxium);
+				ACBlocks.ritual_altar_dreadstone, ACBlocks.ritual_altar_elysian_stone, ACBlocks.ritual_altar_ethaxium, ACBlocks.ritual_altar_dark_ethaxium);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
 			if(tintIndex == 1) {
 				TileEntity te = BlockUtil.getTileEntitySafely(world, pos);
@@ -233,7 +233,7 @@ public class ClientProxy extends CommonProxy {
 			}
 			return getColor(state.getBlock());
 		}, ACBlocks.ritual_pedestal_stone, ACBlocks.ritual_pedestal_darkstone, ACBlocks.ritual_pedestal_abyssal_stone, ACBlocks.ritual_pedestal_coralium_stone,
-				ACBlocks.ritual_pedestal_dreadstone, ACBlocks.ritual_pedestal_abyssalnite_stone, ACBlocks.ritual_pedestal_ethaxium, ACBlocks.ritual_pedestal_dark_ethaxium);
+				ACBlocks.ritual_pedestal_dreadstone, ACBlocks.ritual_pedestal_elysian_stone, ACBlocks.ritual_pedestal_ethaxium, ACBlocks.ritual_pedestal_dark_ethaxium);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
 			return ACBiomes.dreadlands_forest.getGrassColorAtPos(pos);
 		}, ACBlocks.dreadlands_grass);
