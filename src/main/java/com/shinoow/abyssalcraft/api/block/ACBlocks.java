@@ -84,7 +84,6 @@ public class ACBlocks {
 	public static Block dreadstone_brick;
 	public static Block chiseled_dreadstone_brick;
 	public static Block cracked_dreadstone_brick;
-	public static Block abyssalnite_stone_brick;
 	public static Block elysian_stone_brick;
 	public static Block chiseled_elysian_stone_brick;
 	public static Block cracked_elysian_stone_brick;
