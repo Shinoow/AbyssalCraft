@@ -53,8 +53,7 @@ import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
-public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
+public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
@@ -828,11 +827,5 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	@Override
 	public void setSwingingArms(boolean swingingArms) {
 
-	}
-
-	@Override
-	public boolean canBeTurnedToStone() {
-
-		return false;
 	}
 }

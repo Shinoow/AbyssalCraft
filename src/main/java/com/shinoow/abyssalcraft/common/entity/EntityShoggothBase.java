@@ -52,12 +52,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.*;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
-public abstract class EntityShoggothBase extends EntityMob implements IShoggothEntity, IEntityMultiPart, IEliteEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
+public abstract class EntityShoggothBase extends EntityMob implements IShoggothEntity, IEntityMultiPart, IEliteEntity {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityShoggothBase.class, DataSerializers.BYTE);
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityShoggothBase.class, DataSerializers.VARINT);
@@ -535,12 +533,6 @@ public abstract class EntityShoggothBase extends EntityMob implements IShoggothE
 	public Entity[] getParts()
 	{
 		return shoggothParts;
-	}
-
-	@Override
-	public boolean canBeTurnedToStone() {
-
-		return false;
 	}
 
 	/**

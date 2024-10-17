@@ -41,11 +41,8 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional.Interface;
 
-@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
-public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICoraliumEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues
-{
+public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICoraliumEntity {
 
 	public double targetX;
 	public double targetY;
@@ -689,11 +686,5 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.UNDEAD;
-	}
-
-	@Override
-	public boolean canBeTurnedToStone() {
-
-		return false;
 	}
 }
