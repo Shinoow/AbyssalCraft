@@ -6,12 +6,12 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:abydreadbrick",
+      "item": "abyssalcraft:elysian_stone_brick",
       "data": 0
     }
   },
   "result": {
-    "item": "abyssalcraft:abydreadbrickfence",
+    "item": "abyssalcraft:elysian_stone_brick_fence",
     "count": 6
   }
 }

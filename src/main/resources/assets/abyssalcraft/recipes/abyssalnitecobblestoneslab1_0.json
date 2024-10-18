@@ -5,11 +5,11 @@
   ],
   "key": {
     "A": {
-      "item": "abyssalcraft:abyssalnitecobblestone"
+      "item": "abyssalcraft:elysian_cobblestone"
     }
   },
   "result": {
-    "item": "abyssalcraft:abyssalnitecobblestoneslab1",
+    "item": "abyssalcraft:elysiancobblestoneslab1",
     "data": 0,
     "count": 6
   }

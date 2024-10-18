@@ -7,11 +7,11 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:abyssalnitecobblestone"
+      "item": "abyssalcraft:elysian_cobblestone"
     }
   },
   "result": {
-    "item": "abyssalcraft:abyssalnitecobblestonestairs",
+    "item": "abyssalcraft:elysiancobblestonestairs",
     "count": 4
   }
 }

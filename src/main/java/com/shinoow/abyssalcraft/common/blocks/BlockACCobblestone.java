@@ -41,7 +41,7 @@ public class BlockACCobblestone extends Block {
 		DARKSTONE(0, "darkstone", "darkstone_cobble", 0, 2.2F, 12.0F, MapColor.BLACK),
 		ABYSSAL_STONE(1, "abyssalstone", "abyssalcobblestone", 2, 2.6F, 12.0F, MapColor.GREEN),
 		DREADSTONE(2, "dreadstone", "dreadstonecobblestone", 4, 3.3F, 20.0F, MapColor.RED),
-		ABYSSALNITE_STONE(3, "abyssalnitestone", "abyssalnitecobblestone", 4, 3.3F, 20.0F, MapColor.PURPLE),
+		ELYSIAN_STONE(3, "elysianstone", "elysian_cobblestone", 4, 3.3F, 20.0F, MapColor.PURPLE),
 		CORALIUM_STONE(4, "coraliumstone", "coraliumcobblestone", 0, 2.0F, 10.0F, MapColor.CYAN);
 
 		private static final EnumCobblestoneType[] META_LOOKUP = new EnumCobblestoneType[values().length];

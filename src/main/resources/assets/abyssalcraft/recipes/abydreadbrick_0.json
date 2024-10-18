@@ -6,11 +6,11 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:abydreadstone"
+      "item": "abyssalcraft:elysian_stone"
     }
   },
   "result": {
-    "item": "abyssalcraft:abydreadbrick",
+    "item": "abyssalcraft:elysian_stone_brick",
     "data": 0,
     "count": 4
   }

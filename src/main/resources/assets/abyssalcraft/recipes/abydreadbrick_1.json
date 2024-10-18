@@ -6,12 +6,12 @@
   ],
   "key": {
     "#": {
-      "item": "abyssalcraft:abydreadbrickslab1",
+      "item": "abyssalcraft:elysian_stone_brick_slab1",
       "data": 0
     }
   },
   "result": {
-    "item": "abyssalcraft:chiseled_abyssalnite_stone_brick",
+    "item": "abyssalcraft:chiseled_elysian_stone_brick",
     "data": 0
   }
 }

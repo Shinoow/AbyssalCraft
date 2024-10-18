@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.datafix;
 import java.util.Objects;
 
 import com.google.common.collect.ImmutableList;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.*;
 
 import net.minecraft.util.EnumFacing;
@@ -162,6 +163,47 @@ public class BlockFlatteningDefinitions {
 					(block, tileEntityNBT) -> block.getDefaultState(),
 					null));
 		});
+
+		//version 5 definitions
+
+		flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("abydreadstone",
+				0,
+				ACBlocks.elysian_stone,
+				(block, tileEntityNBT) -> block.getDefaultState(),
+				null));
+		flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("abyssalnitecobblestone",
+				0,
+				ACBlocks.elysian_cobblestone,
+				(block, tileEntityNBT) -> block.getDefaultState(),
+				null));
+
+		flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("abydreadbrick",
+				0,
+				ACBlocks.elysian_stone_brick,
+				(block, tileEntityNBT) -> block.getDefaultState(),
+				null));
+		flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("chiseled_abyssalnite_stone_brick",
+				0,
+				ACBlocks.chiseled_elysian_stone_brick,
+				(block, tileEntityNBT) -> block.getDefaultState(),
+				null));
+		flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("cracked_abyssalnite_stone_brick",
+				0,
+				ACBlocks.cracked_elysian_stone_brick,
+				(block, tileEntityNBT) -> block.getDefaultState(),
+				null));
+
+		flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("abydreadbrickfence",
+				0,
+				ACBlocks.elysian_stone_brick_fence,
+				(block, tileEntityNBT) -> block.getDefaultState(),
+				null));
+
+		flatteningDefinitions.add(new BlockFlattening.FlatteningDefinition("abydreadbrickslab1",
+				0,
+				ACBlocks.elysian_stone_brick_slab,
+				(block, tileEntityNBT) -> block.getDefaultState(),
+				null));
 
 		return new BlockFlattening(flatteningDefinitions.build());
 	}
