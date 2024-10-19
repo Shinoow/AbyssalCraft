@@ -82,7 +82,7 @@ public class BlockACStone extends Block {
 		DARKSTONE(0, "darkstone", "darkstone", 0, 1.65F, 12.0F, MapColor.BLACK, () -> ACBlocks.darkstone_cobblestone),
 		ABYSSAL_STONE(1, "abyssalstone", "abystone", 2, 1.8F, 12.0F, MapColor.GREEN, () -> ACBlocks.abyssal_cobblestone),
 		DREADSTONE(2, "dreadstone", "dreadstone", 4, 2.5F, 20.0F, MapColor.RED, () -> ACBlocks.dreadstone_cobblestone),
-		ELYSIAN_STONE(3, "elysianstone", "elysian_stone", 4, 2.5F, 20.0F, MapColor.PURPLE, () -> ACBlocks.elysian_cobblestone),
+		ELYSIAN_STONE(3, "elysianstone", "elysian_stone", 4, 2.5F, 20.0F, MapColor.LIGHT_BLUE, () -> ACBlocks.elysian_cobblestone),
 		CORALIUM_STONE(4, "coraliumstone", "cstone", 0, 1.5F, 10.0F, MapColor.CYAN, () -> ACBlocks.coralium_cobblestone),
 		ETHAXIUM(5, "ethaxium", "ethaxium", 8, 100.0F, Float.MAX_VALUE, MapColor.CLOTH, () -> ACBlocks.ethaxium),
 		OMOTHOL_STONE(6, "omotholstone", "omotholstone", 6, 10.0F, 12.0F, MapColor.BLACK, () -> ACBlocks.omothol_stone),

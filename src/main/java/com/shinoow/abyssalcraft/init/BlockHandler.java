@@ -116,9 +116,9 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadstone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.RED).setTranslationKey("dreadbrick");
 		ACBlocks.chiseled_dreadstone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.RED).remap("dreadbrick", EnumBrickType.CHISELED).setTranslationKey("chiseled_dreadstone_brick");
 		ACBlocks.cracked_dreadstone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.RED).remap("dreadbrick", EnumBrickType.CRACKED).setTranslationKey("cracked_dreadstone_brick");
-		ACBlocks.elysian_stone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.PURPLE).setTranslationKey("elysian_stone_brick");
-		ACBlocks.chiseled_elysian_stone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.PURPLE).setTranslationKey("chiseled_elysian_stone_brick");
-		ACBlocks.cracked_elysian_stone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.PURPLE).setTranslationKey("cracked_elysian_stone_brick");
+		ACBlocks.elysian_stone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.LIGHT_BLUE).setTranslationKey("elysian_stone_brick");
+		ACBlocks.chiseled_elysian_stone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.LIGHT_BLUE).setTranslationKey("chiseled_elysian_stone_brick");
+		ACBlocks.cracked_elysian_stone_brick = new BlockACBrick(4, 2.5F, 20.0F, MapColor.LIGHT_BLUE).setTranslationKey("cracked_elysian_stone_brick");
 		ACBlocks.dreadwood_sapling = new BlockACSapling(new WorldGenDrT(true)).setHardness(0.0F).setResistance(0.0F).setTranslationKey("dreadsapling");
 		ACBlocks.dreadwood_log = new BlockACLog(MapColor.RED).setHardness(2.0F).setResistance(12.0F).setTranslationKey("dreadlog");
 		ACBlocks.dreadwood_leaves = new BlockACLeaves(ACBlocks.dreadwood_sapling, MapColor.RED).setHardness(0.2F).setResistance(1.0F).setTranslationKey("dreadleaves");
@@ -134,8 +134,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadstone_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.RED).setHardness(2.5F).setResistance(20.0F).setTranslationKey("dreadbrickslab1");
 		dreadbrickslab2 = new BlockACDoubleSlab(ACBlocks.dreadstone_brick_slab, Material.ROCK, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setTranslationKey("dreadbrickslab2");
 		ACBlocks.elysian_stone_brick_stairs = new BlockACStairs(ACBlocks.elysian_stone_brick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_stairs");
-		ACBlocks.elysian_stone_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.PURPLE).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_fence");
-		ACBlocks.elysian_stone_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.PURPLE).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_slab1");
+		ACBlocks.elysian_stone_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.LIGHT_BLUE).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_fence");
+		ACBlocks.elysian_stone_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.LIGHT_BLUE).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_slab1");
 		elysianbrickslab2 = new BlockACDoubleSlab(ACBlocks.elysian_stone_brick_slab, Material.ROCK, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_slab2");
 		ACBlocks.liquid_antimatter = new BlockAntiliquid().setResistance(500.0F).setLightLevel(0.5F).setTranslationKey("antiwater");
 		ACBlocks.coralium_stone_brick = new BlockACBrick(1.5F, 10.0F, MapColor.CYAN).setTranslationKey("cstonebrick");
@@ -189,7 +189,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.ritual_altar_abyssal_stone = new BlockRitualAltar(() -> ACBlocks.abyssal_cobblestone.getDefaultState(), 1, EnumRitualMatType.ABYSSAL_STONE_BRICK).setTranslationKey("ritualaltar");
 		ACBlocks.ritual_altar_coralium_stone = new BlockRitualAltar(() -> ACBlocks.coralium_cobblestone.getDefaultState(), 1, EnumRitualMatType.CORALIUM_STONE_BRICK).setTranslationKey("ritualaltar");
 		ACBlocks.ritual_altar_dreadstone = new BlockRitualAltar(() -> ACBlocks.dreadstone_cobblestone.getDefaultState(), 2, EnumRitualMatType.DREADSTONE_BRICK).setTranslationKey("ritualaltar");
-		ACBlocks.ritual_altar_elysian_stone = new BlockRitualAltar(() -> ACBlocks.elysian_cobblestone.getDefaultState(), 2, EnumRitualMatType.ABYSSALNITE_STONE_BRICK).setTranslationKey("ritualaltar");
+		ACBlocks.ritual_altar_elysian_stone = new BlockRitualAltar(() -> ACBlocks.elysian_cobblestone.getDefaultState(), 2, EnumRitualMatType.ELYSIAN_STONE_BRICK).setTranslationKey("ritualaltar");
 		ACBlocks.ritual_altar_ethaxium = new BlockRitualAltar(() -> ACBlocks.ethaxium_brick.getDefaultState(), 3, EnumRitualMatType.ETHAXIUM_BRICK).setTranslationKey("ritualaltar");
 		ACBlocks.ritual_altar_dark_ethaxium = new BlockRitualAltar(() -> ACBlocks.dark_ethaxium_brick.getDefaultState(), 3, EnumRitualMatType.DARK_ETHAXIUM_BRICK).setTranslationKey("ritualaltar");
 		ACBlocks.ritual_pedestal_stone = new BlockRitualPedestal(() -> Blocks.COBBLESTONE.getDefaultState(), 0, EnumRitualMatType.COBBLESTONE).setTranslationKey("ritualpedestal");
@@ -197,7 +197,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.ritual_pedestal_abyssal_stone = new BlockRitualPedestal(() -> ACBlocks.abyssal_cobblestone.getDefaultState(), 1, EnumRitualMatType.ABYSSAL_STONE_BRICK).setTranslationKey("ritualpedestal");
 		ACBlocks.ritual_pedestal_coralium_stone = new BlockRitualPedestal(() -> ACBlocks.coralium_cobblestone.getDefaultState(), 1, EnumRitualMatType.CORALIUM_STONE_BRICK).setTranslationKey("ritualpedestal");
 		ACBlocks.ritual_pedestal_dreadstone = new BlockRitualPedestal(() -> ACBlocks.dreadstone_cobblestone.getDefaultState(), 2, EnumRitualMatType.DREADSTONE_BRICK).setTranslationKey("ritualpedestal");
-		ACBlocks.ritual_pedestal_elysian_stone = new BlockRitualPedestal(() -> ACBlocks.elysian_cobblestone.getDefaultState(), 2, EnumRitualMatType.ABYSSALNITE_STONE_BRICK).setTranslationKey("ritualpedestal");
+		ACBlocks.ritual_pedestal_elysian_stone = new BlockRitualPedestal(() -> ACBlocks.elysian_cobblestone.getDefaultState(), 2, EnumRitualMatType.ELYSIAN_STONE_BRICK).setTranslationKey("ritualpedestal");
 		ACBlocks.ritual_pedestal_ethaxium = new BlockRitualPedestal(() -> ACBlocks.ethaxium_brick.getDefaultState(), 3, EnumRitualMatType.ETHAXIUM_BRICK).setTranslationKey("ritualpedestal");
 		ACBlocks.ritual_pedestal_dark_ethaxium = new BlockRitualPedestal(() -> ACBlocks.dark_ethaxium_brick.getDefaultState(), 3, EnumRitualMatType.DARK_ETHAXIUM_BRICK).setTranslationKey("ritualpedestal");
 		ACBlocks.shoggoth_ooze = new BlockShoggothOoze().setTranslationKey("shoggothblock");
@@ -286,7 +286,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		dreadcobbleslab2 = new BlockACDoubleSlab(ACBlocks.dreadstone_cobblestone_slab, Material.ROCK, "pickaxe", 4).setHardness(3.3F).setResistance(20.0F).setTranslationKey("dreadstonecobblestoneslab2");
 		ACBlocks.dreadstone_cobblestone_wall = new BlockACWall(ACBlocks.dreadstone_cobblestone, 4).setHardness(3.3F).setResistance(20.0F).setTranslationKey("dreadstonecobblestonewall");
 		ACBlocks.elysian_cobblestone_stairs = new BlockACStairs(ACBlocks.elysian_cobblestone, "pickaxe", 4).setTranslationKey("elysiancobblestonestairs");
-		ACBlocks.elysian_cobblestone_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.PURPLE).setHardness(3.3F).setResistance(20.0F).setTranslationKey("elysiancobblestoneslab1");
+		ACBlocks.elysian_cobblestone_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.LIGHT_BLUE).setHardness(3.3F).setResistance(20.0F).setTranslationKey("elysiancobblestoneslab1");
 		elysiancobbleslab2 = new BlockACDoubleSlab(ACBlocks.elysian_cobblestone_slab, Material.ROCK, "pickaxe", 4).setHardness(3.3F).setResistance(20.0F).setTranslationKey("elysiancobblestoneslab2");
 		ACBlocks.elysian_cobblestone_wall = new BlockACWall(ACBlocks.elysian_cobblestone, 4).setHardness(3.3F).setResistance(20.0F).setTranslationKey("elysiancobblestonewall");
 		ACBlocks.coralium_cobblestone_stairs = new BlockACStairs(ACBlocks.coralium_cobblestone).setTranslationKey("coraliumcobblestonestairs");

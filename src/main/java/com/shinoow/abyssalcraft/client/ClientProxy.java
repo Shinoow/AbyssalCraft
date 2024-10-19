@@ -11,6 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.lwjgl.input.Keyboard;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
@@ -68,6 +71,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.ResourceLocation;
@@ -207,6 +211,12 @@ public class ClientProxy extends CommonProxy {
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.token_of_jzahar);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? SpellUtils.getSpellColor(stack) : 16777215, ACItems.basic_scroll, ACItems.lesser_scroll, ACItems.moderate_scroll, ACItems.greater_scroll);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xd2c9a0, ACItems.lost_page);
+				Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+					return getColor(((ItemBlock) stack.getItem()).getBlock());
+				}, toItems(ACBlocks.ritual_altar_stone, ACBlocks.ritual_altar_darkstone, ACBlocks.ritual_altar_abyssal_stone, ACBlocks.ritual_altar_coralium_stone,
+						ACBlocks.ritual_altar_dreadstone, ACBlocks.ritual_altar_elysian_stone, ACBlocks.ritual_altar_ethaxium, ACBlocks.ritual_altar_dark_ethaxium,
+						ACBlocks.ritual_pedestal_stone, ACBlocks.ritual_pedestal_darkstone, ACBlocks.ritual_pedestal_abyssal_stone, ACBlocks.ritual_pedestal_coralium_stone,
+						ACBlocks.ritual_pedestal_dreadstone, ACBlocks.ritual_pedestal_elysian_stone, ACBlocks.ritual_pedestal_ethaxium, ACBlocks.ritual_pedestal_dark_ethaxium));
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> ((ICrystalBlock) state.getBlock()).getColor(state), InitHandler.INSTANCE.BLOCKS.stream().filter(b -> b instanceof ICrystalBlock).toArray(Block[]::new));
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
 			if(state.getValue(BlockPortalAnchor.ACTIVE) && tintIndex == 1) {
@@ -349,6 +359,13 @@ public class ClientProxy extends CommonProxy {
 				return;
 			}
 		}
+	}
+
+	private Item[] toItems(Block... blocks) {
+		return Stream.of(blocks)
+				.map(b -> Item.getItemFromBlock(b))
+				.collect(Collectors.toList())
+				.toArray(new Item[0]);
 	}
 
 	@Override
