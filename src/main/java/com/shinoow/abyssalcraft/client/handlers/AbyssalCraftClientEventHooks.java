@@ -483,8 +483,6 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.shub_niggurath_statue), 0, new ModelResourceLocation("abyssalcraft:shubniggurathstatue", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.decorative_shub_niggurath_statue), 0, new ModelResourceLocation("abyssalcraft:shubniggurathstatue", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.oblivion_deathbomb), 0, new ModelResourceLocation("abyssalcraft:odb", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.chagaroth_altar_top), 0, new ModelResourceLocation("abyssalcraft:dreadaltartop", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ACBlocks.chagaroth_altar_bottom), 0, new ModelResourceLocation("abyssalcraft:dreadaltarbottom", "inventory"));
 
 		ModelLoader.setCustomModelResourceLocation(ACItems.cudgel, 0, new ModelResourceLocation("abyssalcraft:cudgel", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ACItems.dreadium_katana, 0, new ModelResourceLocation("abyssalcraft:dreadkatana", "inventory"));
@@ -953,6 +951,8 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.dreadwood_fence_gate, 0);
 		registerItemRender(ACBlocks.research_table, 0);
 		registerItemRender(ACBlocks.dreadlands_muck, 0);
+		registerItemRender(ACBlocks.sealing_lock, 0);
+		registerItemRender(ACBlocks.unlocked_sealing_lock, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

@@ -1,0 +1,8 @@
+{
+	"parent": "abyssalcraft:block/sealing_lock",
+	"textures": {
+		"0": "abyssalcraft:blocks/drsb",
+		"1": "abyssalcraft:blocks/drsbc",
+		"particle": "abyssalcraft:blocks/drsb"
+	}
+}

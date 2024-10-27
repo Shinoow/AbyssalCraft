@@ -621,8 +621,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.darklands_oak_pressure_plate));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.coralium_stone_pressure_plate));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(Altar));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.chagaroth_altar_top));
-		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.chagaroth_altar_bottom));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.sealing_lock));
+		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.unlocked_sealing_lock));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.dreadlands_infused_powerstone));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.depths_ghoul_head));
 		FMLInterModComms.sendMessage("BuildCraft|Core", "blacklist-facade", new ItemStack(ACBlocks.pete_head));
@@ -873,8 +873,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.coralium_stone_brick_stairs, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.coralium_stone_button, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACBlocks.coralium_stone_pressure_plate, ResearchItems.ABYSSAL_WASTELAND);
-		addCondition(ACBlocks.chagaroth_altar_top, ResearchItems.DREADLANDS);
-		addCondition(ACBlocks.chagaroth_altar_bottom, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.sealing_lock, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.unlocked_sealing_lock, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.crystallizer_idle, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.crystallizer_active, ResearchItems.DREADLANDS);
 		addCondition(ACBlocks.transmutator_idle, ResearchItems.ABYSSAL_WASTELAND);

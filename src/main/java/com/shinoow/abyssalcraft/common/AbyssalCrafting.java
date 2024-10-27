@@ -370,10 +370,10 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_INFUSED_GATEWAY_KEY = new NecronomiconInfusionRitual("dreadInfusedGatewayKey", 1, ACLib.abyssal_wasteland_id, 10000F, new ItemStack(ACItems.dreadedlands_infused_gateway_key), new ItemStack(ACItems.gateway_key), gk2offerings));
 
 		//Dreadlands Progression
-		Object[] dreadaltarbofferings = new Object[]{ACItems.dread_cloth, Items.BONE, ACItems.dreadium_ingot, ACBlocks.dreadstone, ACItems.dreadedlands_infused_gateway_key, ACBlocks.dreadstone, ACItems.dreadium_ingot, Items.BONE};
-		RitualRegistry.instance().registerRitual(Rituals.ALTAR_OF_CHAGAROTH_BOTTOM = new NecronomiconCreationRitual("altarOfChagarothBottom", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_bottom), dreadaltarbofferings));
-		Object[] dreadaltartofferings = new Object[]{Items.BUCKET, "stickWood", ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, "stickWood"};
-		RitualRegistry.instance().registerRitual(Rituals.ALTAR_OF_CHAGAROTH_TOP = new NecronomiconCreationRitual("altarOfChagarothTop", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_top), dreadaltartofferings));
+//		Object[] dreadaltarbofferings = new Object[]{ACItems.dread_cloth, Items.BONE, ACItems.dreadium_ingot, ACBlocks.dreadstone, ACItems.dreadedlands_infused_gateway_key, ACBlocks.dreadstone, ACItems.dreadium_ingot, Items.BONE};
+//		RitualRegistry.instance().registerRitual(Rituals.ALTAR_OF_CHAGAROTH_BOTTOM = new NecronomiconCreationRitual("altarOfChagarothBottom", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_bottom), dreadaltarbofferings));
+//		Object[] dreadaltartofferings = new Object[]{Items.BUCKET, "stickWood", ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, ACItems.dreadium_ingot, ACItems.dread_cloth, "stickWood"};
+//		RitualRegistry.instance().registerRitual(Rituals.ALTAR_OF_CHAGAROTH_TOP = new NecronomiconCreationRitual("altarOfChagarothTop", 2, ACLib.dreadlands_id, 20000F, true, new ItemStack(ACBlocks.chagaroth_altar_top), dreadaltartofferings));
 		Object[] cageofferings = new Object[]{Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS, Blocks.IRON_BARS};
 		RitualRegistry.instance().registerRitual(Rituals.INTERDIMENSIONAL_CAGE = new NecronomiconInfusionRitual("interdimensionalcage", 2, 1000F, new ItemStack(ACItems.interdimensional_cage), ACItems.shard_of_oblivion, cageofferings));
 

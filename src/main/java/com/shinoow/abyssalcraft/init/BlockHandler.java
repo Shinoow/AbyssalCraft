@@ -147,8 +147,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.coralium_stone_brick_stairs = new BlockACStairs(ACBlocks.coralium_stone_brick, "pickaxe", 0).setHardness(1.5F).setResistance(10.0F).setTranslationKey("cstonebrickstairs");
 		ACBlocks.coralium_stone_button = new BlockACButton(false, "cstone").setHardness(0.6F).setResistance(12.0F).setTranslationKey("cstonebutton");
 		ACBlocks.coralium_stone_pressure_plate = new BlockACPressureplate("cstone", Material.ROCK, BlockACPressureplate.Sensitivity.MOBS, SoundType.STONE).setHardness(0.6F).setResistance(12.0F).setTranslationKey("cstonepplate");
-		ACBlocks.chagaroth_altar_top = new BlockDreadAltarTop().setHardness(30.0F).setResistance(300.0F).setCreativeTab(ACTabs.tabDecoration).setTranslationKey("dreadaltartop");
-		ACBlocks.chagaroth_altar_bottom = new BlockDreadAltarBottom().setHardness(30.0F).setResistance(300.0F).setCreativeTab(ACTabs.tabDecoration).setTranslationKey("dreadaltarbottom");
 		ACBlocks.crystallizer_idle = new BlockCrystallizer(false).setHardness(2.5F).setResistance(12.0F).setTranslationKey("crystallizer");
 		ACBlocks.crystallizer_active = new BlockCrystallizer(true).setHardness(2.5F).setResistance(12.0F).setLightLevel(0.875F).setTranslationKey("crystallizer_on");
 		ACBlocks.transmutator_idle = new BlockTransmutator(false).setHardness(2.5F).setResistance(12.0F).setTranslationKey("transmutator");
@@ -317,6 +315,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadwood_fence_gate = new BlockACFenceGate(MapColor.BROWN).setHardness(2.0F).setResistance(5.0F).setTranslationKey("dreadwood_fence_gate");
 		ACBlocks.research_table = new BlockResearchTable();
 		ACBlocks.dreadlands_muck = new BlockDreadlandsMuck();
+		ACBlocks.sealing_lock = new BlockSealingLock("sealing_lock");
+		ACBlocks.unlocked_sealing_lock = new BlockSealingLock("unlocked_sealing_lock");
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityDGhead"));
@@ -451,8 +451,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.coralium_stone_brick_stairs, "cstonebrickstairs");
 		registerBlock(ACBlocks.coralium_stone_button, "cstonebutton");
 		registerBlock(ACBlocks.coralium_stone_pressure_plate, "cstonepplate");
-		registerBlock(ACBlocks.chagaroth_altar_top, "dreadaltartop");
-		registerBlock(ACBlocks.chagaroth_altar_bottom, "dreadaltarbottom");
 		registerBlock(ACBlocks.crystallizer_idle, "crystallizer");
 		registerBlock(ACBlocks.crystallizer_active, "crystallizer_on");
 		registerBlock(ACBlocks.transmutator_idle, "transmutator");
@@ -621,6 +619,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.dreadwood_fence_gate, "dreadwood_fence_gate");
 		registerBlock(ACBlocks.research_table, "research_table");
 		registerBlock(ACBlocks.dreadlands_muck, "dreadlands_muck");
+		registerBlock(ACBlocks.sealing_lock, "sealing_lock");
+		registerBlock(ACBlocks.unlocked_sealing_lock, "unlocked_sealing_lock");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

@@ -111,8 +111,6 @@ public class ACBlocks {
 	public static Block coralium_stone_brick_stairs;
 	public static Block coralium_stone_button;
 	public static Block coralium_stone_pressure_plate;
-	public static Block chagaroth_altar_top;
-	public static Block chagaroth_altar_bottom;
 	public static Block crystallizer_idle;
 	public static Block crystallizer_active;
 	public static Block transmutator_idle;
@@ -273,4 +271,6 @@ public class ACBlocks {
 	public static Block dreadwood_fence_gate;
 	public static Block research_table;
 	public static Block dreadlands_muck;
+	public static Block sealing_lock;
+	public static Block unlocked_sealing_lock;
 }

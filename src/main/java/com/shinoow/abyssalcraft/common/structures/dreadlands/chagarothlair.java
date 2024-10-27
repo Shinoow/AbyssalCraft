@@ -40,6 +40,7 @@ public class chagarothlair extends WorldGenerator {
 
 		PlacementSettings placeSettings = new PlacementSettings().setReplacedBlock(Blocks.STRUCTURE_VOID);
 
+		
 		MinecraftServer server = world.getMinecraftServer();
 		TemplateManager templateManager = world.getSaveHandler().getStructureTemplateManager();
 
@@ -50,7 +51,13 @@ public class chagarothlair extends WorldGenerator {
 				return blockInfoIn;
 		};
 
-		Template template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", "chagarothlair/chagarothlair_front"));
+		Template template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", "chagarothlair/chagarothlair_top"));
+
+		template.addBlocksToWorld(world, pos.add(-6, -5, -23), processor, placeSettings, 2);
+
+		//repositioning for front
+		pos = pos.add(0, -9, -17);
+		template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", "chagarothlair/chagarothlair_front"));
 
 		template.addBlocksToWorld(world, pos.add(-8, -2, -22), processor, placeSettings, 2);
 
