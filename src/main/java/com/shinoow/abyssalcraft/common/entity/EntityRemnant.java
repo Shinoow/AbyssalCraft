@@ -48,11 +48,13 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntity {
+public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntity, IShearable {
 
 	private static final DataParameter<Integer> PROFESSION = EntityDataManager.<Integer>createKey(EntityRemnant.class, DataSerializers.VARINT);
 	private EntityPlayer tradingPlayer;
@@ -754,6 +756,27 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 	public void addCoinTrade(MerchantRecipeList list, ItemStack buy1, ItemStack buy2, ItemStack sell){
 		list.add(new MerchantRecipe(buy1, buy2, sell));
+	}
+
+	@Override
+	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos){
+		return true;
+	}
+
+	@Override
+	public List<ItemStack> onSheared(ItemStack item, IBlockAccess w, BlockPos pos, int fortune)
+	{
+		int i = 1 + rand.nextInt(3);
+
+		List<ItemStack> ret = new ArrayList<>();
+		for (int j = 0; j < i; ++j)
+			ret.add(new ItemStack(ACItems.eldritch_scale));
+
+		playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+		playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
+		item.damageItem(5, this);
+
+		return ret;
 	}
 
 	@Override
