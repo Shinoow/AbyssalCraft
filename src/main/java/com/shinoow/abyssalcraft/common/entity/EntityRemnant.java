@@ -64,6 +64,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 	private boolean needsInitilization;
 	private int wealth;
 	private int timer;
+	private boolean sheared;
 	private float field_82191_bN;
 	public static final Map<Item, Tuple<Integer, Integer>> itemSellingList = new HashMap<>();
 	public static final Map<Item, Tuple<Integer, Integer>> coinSellingList = new HashMap<>();
@@ -280,6 +281,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		par1NBTTagCompound.setInteger("Profession", getProfession());
 		par1NBTTagCompound.setInteger("Money", wealth);
 		par1NBTTagCompound.setInteger("AngerTimer", timer);
+		par1NBTTagCompound.setBoolean("Sheared", sheared);
 
 		if (tradingList != null)
 			par1NBTTagCompound.setTag("Offers", tradingList.getRecipiesAsTags());
@@ -292,6 +294,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		setProfession(par1NBTTagCompound.getInteger("Profession"));
 		wealth = par1NBTTagCompound.getInteger("Money");
 		timer = par1NBTTagCompound.getInteger("AngerTimer");
+		sheared = par1NBTTagCompound.getBoolean("Sheared");
 
 		if (par1NBTTagCompound.hasKey("Offers", 10))
 		{
@@ -760,7 +763,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos){
-		return true;
+		return !sheared;
 	}
 
 	@Override
@@ -775,6 +778,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
 		playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
 		item.damageItem(5, this);
+		sheared = true;
 
 		return ret;
 	}
