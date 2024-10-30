@@ -315,8 +315,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadwood_fence_gate = new BlockACFenceGate(MapColor.BROWN).setHardness(2.0F).setResistance(5.0F).setTranslationKey("dreadwood_fence_gate");
 		ACBlocks.research_table = new BlockResearchTable();
 		ACBlocks.dreadlands_muck = new BlockDreadlandsMuck();
-		ACBlocks.sealing_lock = new BlockSealingLock("sealing_lock");
-		ACBlocks.unlocked_sealing_lock = new BlockSealingLock("unlocked_sealing_lock");
+		ACBlocks.sealing_lock = new BlockSealingLock();
+		ACBlocks.unlocked_sealing_lock = new BlockUnlockedSealingLock();
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityDGhead"));
@@ -352,6 +352,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityPortalAnchor.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityPortalAnchor"));
 		GameRegistry.registerTileEntity(TileEntityIdolOfFading.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityIdolOfFading"));
 		GameRegistry.registerTileEntity(TileEntityResearchTable.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityResearchTable"));
+		GameRegistry.registerTileEntity(TileEntityUnlockedSealingLock.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityUnlockedSealingLock"));
 
 		registerBlock(ACBlocks.darkstone, "darkstone");
 		registerBlock(ACBlocks.abyssal_stone, new ItemBlockColorName(ACBlocks.abyssal_stone), "abystone");
