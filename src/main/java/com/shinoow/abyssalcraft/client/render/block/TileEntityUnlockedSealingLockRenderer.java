@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 
 public class TileEntityUnlockedSealingLockRenderer extends TileEntitySpecialRenderer<TileEntityUnlockedSealingLock> {
 
-	private final ItemStack KEY = new ItemStack(ACItems.dreadedlands_infused_gateway_key);
+	private final ItemStack KEY = new ItemStack(ACItems.dreadlands_infused_gateway_key);
 	
 	@Override
 	public void render(TileEntityUnlockedSealingLock te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

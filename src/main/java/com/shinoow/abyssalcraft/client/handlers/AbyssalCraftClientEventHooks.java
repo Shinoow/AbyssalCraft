@@ -495,7 +495,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.gateway_key, 0);
 		registerItemRender(ACItems.powerstone_tracker, 0);
 		registerItemRender(ACItems.eye_of_the_abyss, 0);
-		registerItemRender(ACItems.dreadedlands_infused_gateway_key, 0);
+		registerItemRender(ACItems.dreadlands_infused_gateway_key, 0);
 		registerItemRender(ACItems.dreaded_shard_of_abyssalnite, 0);
 		registerItemRender(ACItems.dreaded_chunk_of_abyssalnite, 0);
 		registerItemRender(ACItems.chunk_of_abyssalnite, 0);

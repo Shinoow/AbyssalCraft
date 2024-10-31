@@ -693,7 +693,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.staff_of_the_gatekeeper, ResearchItems.OMOTHOL);
 		addCondition(ACItems.powerstone_tracker, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.eye_of_the_abyss, ResearchItems.ABYSSAL_WASTELAND);
-		addCondition(ACItems.dreadedlands_infused_gateway_key, ResearchItems.ABYSSAL_WASTELAND);
+		addCondition(ACItems.dreadlands_infused_gateway_key, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.coralium_brick, ResearchItems.CORALIUM_BIOMES);
 		addCondition(ACItems.cudgel, ResearchItems.SKELETON_GOLIATH);
 		addCondition(ACItems.carbon_cluster, ResearchItems.DREADLANDS);

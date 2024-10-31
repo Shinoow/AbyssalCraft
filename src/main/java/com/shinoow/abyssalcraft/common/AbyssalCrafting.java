@@ -367,7 +367,7 @@ public class AbyssalCrafting {
 				new ItemStack(Items.GOLD_INGOT), new ItemStack(Blocks.ENCHANTING_TABLE), new ItemStack(Items.GOLD_INGOT)};
 		RitualRegistry.instance().registerRitual(Rituals.SUMMON_ASORAH = new NecronomiconSummonRitual("summonAsorah", 1, ACLib.abyssal_wasteland_id, 1000F, EntityDragonBoss.class, asorahofferings).setNBTSensitive());
 		Object[] gk2offerings = new Object[]{new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), null, new ItemStack(ACBlocks.dreadlands_infused_powerstone), null, new ItemStack(ACItems.eye_of_the_abyss)};
-		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_INFUSED_GATEWAY_KEY = new NecronomiconInfusionRitual("dreadInfusedGatewayKey", 1, ACLib.abyssal_wasteland_id, 10000F, new ItemStack(ACItems.dreadedlands_infused_gateway_key), new ItemStack(ACItems.gateway_key), gk2offerings));
+		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_INFUSED_GATEWAY_KEY = new NecronomiconInfusionRitual("dreadInfusedGatewayKey", 1, ACLib.abyssal_wasteland_id, 10000F, new ItemStack(ACItems.dreadlands_infused_gateway_key), new ItemStack(ACItems.gateway_key), gk2offerings));
 
 		//Dreadlands Progression
 //		Object[] dreadaltarbofferings = new Object[]{ACItems.dread_cloth, Items.BONE, ACItems.dreadium_ingot, ACBlocks.dreadstone, ACItems.dreadedlands_infused_gateway_key, ACBlocks.dreadstone, ACItems.dreadium_ingot, Items.BONE};

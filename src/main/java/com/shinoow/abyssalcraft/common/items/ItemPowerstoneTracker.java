@@ -25,9 +25,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-public class ItemTrackerPSDL extends ItemACBasic {
+public class ItemPowerstoneTracker extends ItemACBasic {
 
-	public ItemTrackerPSDL() {
+	public ItemPowerstoneTracker() {
 		super("powerstonetracker");
 	}
 

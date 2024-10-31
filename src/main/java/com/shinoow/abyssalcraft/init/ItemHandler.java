@@ -46,9 +46,9 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.oblivion_catalyst = new ItemOC();
 		ACItems.staff_of_the_gatekeeper = new ItemStaff();
 		ACItems.gateway_key = new ItemGatewayKey(0, "gatewaykey");
-		ACItems.powerstone_tracker = new ItemTrackerPSDL();
+		ACItems.powerstone_tracker = new ItemPowerstoneTracker();
 		ACItems.eye_of_the_abyss = new ItemACBasic("eoa", TextFormatting.AQUA).setMaxStackSize(1);
-		ACItems.dreadedlands_infused_gateway_key = new ItemGatewayKey(1, "gatewaykeydl");
+		ACItems.dreadlands_infused_gateway_key = new ItemGatewayKey(1, "gatewaykeydl");
 		ACItems.coralium_brick = new ItemACBasic("cbrick");
 		ACItems.cudgel = new ItemCudgel();
 		ACItems.carbon_cluster = new ItemACBasic("carboncluster");
@@ -367,7 +367,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.staff_of_the_gatekeeper, "staff");
 		registerItem(ACItems.powerstone_tracker, "powerstonetracker");
 		registerItem(ACItems.eye_of_the_abyss, "eoa");
-		registerItem(ACItems.dreadedlands_infused_gateway_key, "gatewaykeydl");
+		registerItem(ACItems.dreadlands_infused_gateway_key, "gatewaykeydl");
 		registerItem(ACItems.dreaded_shard_of_abyssalnite, "dreadshard");
 		registerItem(ACItems.dreaded_chunk_of_abyssalnite, "dreadchunk");
 		registerItem(ACItems.chunk_of_abyssalnite, "abychunk");

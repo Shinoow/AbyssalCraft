@@ -115,7 +115,7 @@ public class ACItems {
 	public static Item staff_of_the_gatekeeper;
 	public static Item powerstone_tracker;
 	public static Item transmutation_gem;
-	public static Item dreadedlands_infused_gateway_key;
+	public static Item dreadlands_infused_gateway_key;
 	public static Item dread_plagued_gateway_key;
 	public static Item omothol_forged_gateway_key;
 	public static Item staff_of_rending;
