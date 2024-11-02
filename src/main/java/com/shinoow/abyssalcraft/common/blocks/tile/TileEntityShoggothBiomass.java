@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.dimension.IAbyssalWorldProvider;
 import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
@@ -62,11 +63,11 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 	public void update() {
 		if(world.getDifficulty() != EnumDifficulty.PEACEFUL && world.getGameRules().getBoolean("doMobSpawning")){
 			cooldown++;
-			if (cooldown >= 400) {
+			if (cooldown >= ACConfig.biomassCooldown) {
 				cooldown = world.rand.nextInt(10);
 				resetNearbyBiomass(true);
-				if(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32, false) != null)
-					if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).grow(32)).size() <= 6){
+				if(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), ACConfig.biomassPlayerDistance, false) != null)
+					if(world.getEntitiesWithinAABB(EntityShoggothBase.class, new AxisAlignedBB(pos).grow(ACConfig.biomassShoggothDistance)).size() <= ACConfig.biomassMaxSpawn){
 						EntityShoggothBase mob = getShoggoth(world);
 						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
 						mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);

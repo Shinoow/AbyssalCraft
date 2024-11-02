@@ -31,7 +31,8 @@ public class ACConfig {
 	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize, enchantmentMaxLevel, curingRitualRange,
 	shoggothLairGenerationDistance, startDimension, dreadSpawnSpawnLimit, greaterDreadSpawnSpawnLimit, jzaharHealingPace,
 	jzaharHealingAmount, chagarothHealingPace, chagarothHealingAmount, sacthothHealingPace, sacthothHealingAmount,
-	infestingRitualRange, darkShrineSpawnRate, darkRitualGroundsSpawnRate;
+	infestingRitualRange, darkShrineSpawnRate, darkRitualGroundsSpawnRate, biomassPlayerDistance, biomassMaxSpawn,
+	biomassCooldown, biomassShoggothDistance;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid, shoggothGlowingEyes;
 	public static double acidResistanceHardness;
