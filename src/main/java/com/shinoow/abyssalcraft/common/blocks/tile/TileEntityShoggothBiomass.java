@@ -67,7 +67,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 				cooldown = world.rand.nextInt(10);
 				resetNearbyBiomass(true);
 				if(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), ACConfig.biomassPlayerDistance, false) != null)
-					if(world.getEntitiesWithinAABB(EntityShoggothBase.class, new AxisAlignedBB(pos).grow(ACConfig.biomassShoggothDistance)).size() <= ACConfig.biomassMaxSpawn){
+					if(world.getEntitiesWithinAABB(EntityShoggothBase.class, new AxisAlignedBB(pos).grow(ACConfig.biomassShoggothDistance)).size() < ACConfig.biomassMaxSpawn){
 						EntityShoggothBase mob = getShoggoth(world);
 						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
 						mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);
@@ -98,7 +98,7 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 
 		for(TileEntity tile : tiles)
 			if(tile instanceof TileEntityShoggothBiomass) {
-				((TileEntityShoggothBiomass) tile).setCooldown(world.rand.nextInt(10));
+				((TileEntityShoggothBiomass) tile).setCooldown(world.rand.nextInt(30));
 				if(again)
 					((TileEntityShoggothBiomass) tile).resetNearbyBiomass(false);
 			}
