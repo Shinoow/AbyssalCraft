@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.common.structures.dreadlands.StructureLairEntrance;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMine;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesDreadlands;
@@ -74,6 +75,7 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 	private MapGenBase ravineGenerator = new MapGenRavineAC();
 
 	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
+	private StructureLairEntrance lairEntrance = new StructureLairEntrance();
 
 	/** The biomes that are used to generate the chunk */
 	private Biome[] biomesForGeneration;
@@ -361,16 +363,24 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 
 		DarklandsStructureGenerator.generateStructures(worldObj, rand, k, l);
 
-		if(ACConfig.generateShoggothLairs)
-			for(int i = 0; i < 1; i++) {
-				int Xcoord2 = k + rand.nextInt(16) + 8;
-				int Zcoord2 = l + rand.nextInt(2) + 28;
-				BlockPos pos1 = worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2));
-				if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
+		if(ACConfig.generateShoggothLairs) {
+			int Xcoord2 = k + rand.nextInt(16) + 8;
+			int Zcoord2 = l + rand.nextInt(2) + 28;
+			BlockPos pos1 = worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2));
+			if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
 
-				if(rand.nextInt(200) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
-					shoggothLair.generate(worldObj, rand, pos1);
-			}
+			if(rand.nextInt(200) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
+				shoggothLair.generate(worldObj, rand, pos1);
+		}
+
+		int Xcoord2 = k + rand.nextInt(16) + 2;
+		int Zcoord2 = l + rand.nextInt(16) + 1;
+		BlockPos pos1 = worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2));
+
+		if(rand.nextInt(30) == 0 && worldObj.getBiome(pos1) != ACBiomes.dreadlands_ocean
+				&& worldObj.getBiome(pos1.east(13)) != ACBiomes.dreadlands_ocean)
+			lairEntrance.generate(worldObj, rand, pos1);
+
 
 		Biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
 
