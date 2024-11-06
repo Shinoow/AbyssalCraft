@@ -1,5 +1,8 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
+import java.util.Random;
+
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.chagarothlair;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -12,6 +15,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -43,6 +47,18 @@ public class BlockSealingLock extends BlockACBasic {
 
 	@Override
 	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random random, int j)
+	{
+		return Item.getItemFromBlock(ACBlocks.chiseled_elysian_stone_brick);
+	}
+
+	@Override
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		return false;
 	}
