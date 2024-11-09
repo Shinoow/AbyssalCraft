@@ -844,6 +844,8 @@ ac.ritual.jzaharCoin=Token of J'zahar
 ac.ritual.jzaharCoin.desc=By infusing a Coin with a Transmutation Gem, you receive a Token of J'zahar. You also feel like someone or something is laughing at you mockingly from afar...
 ac.ritual.infesting=Ritual of Infesting
 ac.ritual.infesting.desc=By presenting 4 random statues, 4 blocks of Coralium Stone, a large amount of energy and a living sacrifice, you summon powers from the Abyss to infest the surrounding Swampland with Coralium. Re-shape the Swamp into a Coralium Infested Swamp.
+ac.ritual.sealingKey=Sealing Key
+ac.ritual.sealingKey.desc=By presenting 2 Elysian Stones, 2 Crystallized Dreadium, 2 Crystallized Abyssalnite, and 2 Dread Cloths, you morph your Dreadlands Infused Gateway Key into a Sealing Key. You can feel something locked away calling.
 
 #Spells
 ac.spell.lifedrain=Life Drain
@@ -1423,6 +1425,7 @@ item.generic_meat.name=Generic Meat
 item.cooked_generic_meat.name=Cooked Generic Meat
 item.lost_page.name=Lost Page
 item.scriptures_omniscience.name=Scriptures of Omniscience
+item.sealing_key.name=Sealing Key
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul

@@ -130,6 +130,7 @@ public class ACItems {
 	public static Item medium_crystal_bag;
 	public static Item large_crystal_bag;
 	public static Item huge_crystal_bag;
+	public static Item sealing_key;
 
 	// Ritualistic Tools
 	public static Item necronomicon;

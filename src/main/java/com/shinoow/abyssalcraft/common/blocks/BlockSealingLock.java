@@ -67,7 +67,7 @@ public class BlockSealingLock extends BlockACBasic {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if(world.isRemote) return true;
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getItem() == ACItems.dreadlands_infused_gateway_key) //TODO replace
+		if(stack.getItem() == ACItems.sealing_key)
 			if(world.provider.getDimension() == ACLib.dreadlands_id){
 				world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundCategory.PLAYERS, 0.5F, 1);
 				SpecialTextUtil.ChagarothGroup(world, TranslationUtil.toLocal("message.dreadaltartop.spawn"));

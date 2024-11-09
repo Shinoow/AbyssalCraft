@@ -703,6 +703,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.cooked_generic_meat, 0);
 		registerItemRender(ACItems.lost_page, 0);
 		registerItemRender(ACItems.scriptures_of_omniscience, 0);
+		registerItemRender(ACItems.sealing_key, 0);
 
 		registerItemRender(ACBlocks.darkstone, 0, "darkstone");
 		registerItemRender(ACBlocks.abyssal_stone, 0, "abystone");

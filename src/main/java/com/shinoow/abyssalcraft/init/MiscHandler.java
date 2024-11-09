@@ -828,6 +828,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.ethaxium_leggings, ResearchItems.OMOTHOL);
 		addCondition(ACItems.ethaxium_boots, ResearchItems.OMOTHOL);
 		InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ICrystal).forEach(i->addCondition(i,ResearchItems.DREADLANDS));
+		addCondition(ACItems.sealing_key, ResearchItems.DREADLANDS);
 
 		//Blocks
 		addCondition(ACBlocks.abyssal_stone_brick, ResearchItems.ABYSSAL_WASTELAND);
@@ -944,6 +945,8 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACBlocks.omothol_energy_container, ResearchItems.OMOTHOL);
 		addCondition(ACBlocks.abyssal_abyssalnite_ore, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACBlocks.oblivion_deathbomb, ResearchItems.ABYSSAL_WASTELAND);
+		addCondition(ACBlocks.sealing_lock, ResearchItems.DREADLANDS);
+		addCondition(ACBlocks.unlocked_sealing_lock, ResearchItems.DREADLANDS);
 		//TODO Lock all slab blocks
 	}
 

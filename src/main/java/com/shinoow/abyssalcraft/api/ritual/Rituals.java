@@ -25,7 +25,7 @@ public class Rituals {
 	public static NecronomiconRitual PORTAL;
 	public static NecronomiconRitual SUMMON_ASORAH;
 	public static NecronomiconRitual DREADLANDS_INFUSED_GATEWAY_KEY;
-	//TODO add replacement ritual for Altar of Cha'garoth
+	public static NecronomiconRitual SEALING_KEY;
 	public static NecronomiconRitual INTERDIMENSIONAL_CAGE;
 	public static NecronomiconRitual RESPAWN_JZAHAR;
 
