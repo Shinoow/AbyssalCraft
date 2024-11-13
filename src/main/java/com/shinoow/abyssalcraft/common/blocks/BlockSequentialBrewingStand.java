@@ -29,6 +29,7 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -67,7 +68,7 @@ public class BlockSequentialBrewingStand extends BlockContainer
 		setTranslationKey("sequential_brewing_stand");
 		setHardness(0.5F);
 		setLightLevel(0.125F);
-		setCreativeTab(ACTabs.tabBlock);
+		setCreativeTab(CreativeTabs.BREWING);
 	}
 
 	@Override

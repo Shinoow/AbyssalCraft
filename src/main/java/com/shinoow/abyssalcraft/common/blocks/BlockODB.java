@@ -45,7 +45,7 @@ public class BlockODB extends Block {
 	public BlockODB() {
 		super(Material.IRON);
 		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, false));
-		setCreativeTab(ACTabs.tabBlock);
+		setCreativeTab(ACTabs.tabDecoration);
 		setSoundType(SoundType.METAL);
 	}
 

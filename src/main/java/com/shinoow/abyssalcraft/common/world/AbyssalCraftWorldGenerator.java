@@ -46,7 +46,7 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 		boolean blacklisted = InitHandler.INSTANCE.isDimBlacklistedFromStructureGen(world.provider.getDimension());
 		if(ACConfig.generateDarklandsStructures && !blacklisted)
-			DarklandsStructureGenerator.generateStructures(world, random, chunkX, chunkZ);
+			DarklandsStructureGenerator.generateStructures(world, random, chunkX, chunkZ, 0.03F);
 
 		if(!InitHandler.INSTANCE.isDimBlacklistedFromOreGen(world.provider.getDimension())) {
 			if(ACConfig.generateCoraliumOre){

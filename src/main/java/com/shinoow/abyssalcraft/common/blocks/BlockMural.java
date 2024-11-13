@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import com.shinoow.abyssalcraft.lib.ACTabs;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -31,6 +33,7 @@ public class BlockMural extends BlockACBasic {
 
 	public BlockMural() {
 		super(Material.ROCK, 5.0F, 10.0F, SoundType.STONE, MapColor.BLACK);
+		setCreativeTab(ACTabs.tabDecoration);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		setTranslationKey("mural");
 	}

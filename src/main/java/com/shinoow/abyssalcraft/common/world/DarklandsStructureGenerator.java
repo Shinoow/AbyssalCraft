@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.overworld.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
@@ -52,33 +53,37 @@ public class DarklandsStructureGenerator {
 	 * @param random Random instance
 	 * @param chunkX Chunk X
 	 * @param chunkZ Chunk Z
+	 * @param chance Generation chance
 	 */
-	public static void generateStructures(World world, Random random, int chunkX, int chunkZ) {
+	public static void generateStructures(World world, Random random, int chunkX, int chunkZ, float chance) {
 		Biome biome = world.getBiome(new BlockPos(chunkX, 0, chunkZ));
 		if(biome instanceof IDarklandsBiome || biome == ACBiomes.dark_realm) {
 
 			IBlockState baseState = biome == ACBiomes.dark_realm ? ACBlocks.darkstone.getDefaultState() : Blocks.GRASS.getDefaultState();
 
+			if(world.provider.getDimension() == ACLib.dreadlands_id)
+				baseState = ACBlocks.dreadlands_grass.getDefaultState();
+
 			int x = chunkX + random.nextInt(16) + 8;
 			int z = chunkZ + random.nextInt(16) + 8;
-			generate(1, world, random, world.getHeight(new BlockPos(x, 0, z)), baseState);
+			generate(1, world, random, world.getHeight(new BlockPos(x, 0, z)), chance, baseState);
 
 			x = chunkX + random.nextInt(16) + 8;
 			z = chunkZ + random.nextInt(16) + 8;
-			generate(2, world, random, world.getHeight(new BlockPos(x, 0, z)), baseState);
+			generate(2, world, random, world.getHeight(new BlockPos(x, 0, z)), chance, baseState);
 
 			x = chunkX + random.nextInt(16) + 8;
 			z = chunkZ + random.nextInt(16) + 8;
-			generate(3, world, random, world.getHeight(new BlockPos(x, 0, z)), baseState);
+			generate(3, world, random, world.getHeight(new BlockPos(x, 0, z)), chance, baseState);
 
 			x = chunkX + random.nextInt(16) + 8;
 			z = chunkZ + random.nextInt(16) + 8;
-			generate(4, world, random, world.getHeight(new BlockPos(x, 0, z)),
+			generate(4, world, random, world.getHeight(new BlockPos(x, 0, z)), chance,
 					Blocks.GRASS.getDefaultState(), ACBlocks.darkstone.getDefaultState());
 
 			x = chunkX + random.nextInt(16) + 8;
 			z = chunkZ + random.nextInt(16) + 8;
-			generate(0, world, random, world.getHeight(new BlockPos(x, 0, z)), baseState);
+			generate(0, world, random, world.getHeight(new BlockPos(x, 0, z)), chance, baseState);
 		}
 		else if(shrine_biomes.contains(biome)) {
 			IBlockState[] blocks = {Blocks.SAND.getDefaultState(), Blocks.STONE.getDefaultState()};
@@ -87,14 +92,14 @@ public class DarklandsStructureGenerator {
 			int z = chunkZ + random.nextInt(16) + 8;
 			if(random.nextInt(ACConfig.darkShrineSpawnRate) == 0)
 				if(generate(1, world, random, world.getHeight(new BlockPos(x, 0, z)),
-						Blocks.GRASS.getDefaultState(), blocks))
+						chance, Blocks.GRASS.getDefaultState(), blocks))
 					generated = true;
 
 			x = chunkX + random.nextInt(16) + 8;
 			z = chunkZ + random.nextInt(16) + 8;
 			if(random.nextInt(ACConfig.darkRitualGroundsSpawnRate) == 0)
 				if(generate(2, world, random, world.getHeight(new BlockPos(x, 0, z)),
-						Blocks.GRASS.getDefaultState(), blocks))
+						chance, Blocks.GRASS.getDefaultState(), blocks))
 					generated = true;
 
 			if(!generated && (random.nextInt(ACConfig.darkShrineSpawnRate) == 0)) {
@@ -107,34 +112,34 @@ public class DarklandsStructureGenerator {
 					pos = pos.down();
 				if(!checkBlocks(world, pos, 3, Blocks.GRASS.getDefaultState(), blocks));
 
-				if(random.nextFloat() < 0.03F)
+				if(random.nextFloat() < chance)
 					dark_shrine.generate(world, random, pos);
 			}
 		}
 	}
 
-	public static boolean generate(int type, World world, Random random, BlockPos pos){
-		return generate(type, world, random, pos, Blocks.GRASS.getDefaultState(), (IBlockState[])null);
+	public static boolean generate(int type, World world, Random random, BlockPos pos, float chance){
+		return generate(type, world, random, pos, chance, Blocks.GRASS.getDefaultState(), (IBlockState[])null);
 	}
 
-	public static boolean generate(int type, World world, Random random, BlockPos pos, IBlockState spawnBlock, IBlockState...extra){
+	public static boolean generate(int type, World world, Random random, BlockPos pos, float chance, IBlockState spawnBlock, IBlockState...extra){
 		switch(type){
 		case 0:
-			return generateRandomStructure(structures, world, random, pos, 3, spawnBlock, extra);
+			return generateRandomStructure(structures, world, random, pos, 3, chance, spawnBlock, extra);
 		case 1:
-			return generateRandomStructure(shrines, world, random, pos, 3, spawnBlock, extra);
+			return generateRandomStructure(shrines, world, random, pos, 3, chance, spawnBlock, extra);
 		case 2:
-			return generateRandomStructure(ritual_grounds, world, random, pos, 3, spawnBlock, extra);
+			return generateRandomStructure(ritual_grounds, world, random, pos, 3, chance, spawnBlock, extra);
 		case 3:
-			return generateRandomStructure(houses, world, random, pos, 5, spawnBlock, extra);
+			return generateRandomStructure(houses, world, random, pos, 5, chance, spawnBlock, extra);
 		case 4:
-			return generateRandomStructure(misc, world, random, pos, 3, spawnBlock, extra);
+			return generateRandomStructure(misc, world, random, pos, 3, chance, spawnBlock, extra);
 		default:
-			return generateRandomStructure(structures, world, random, pos, 3, spawnBlock, extra);
+			return generateRandomStructure(structures, world, random, pos, 3, chance, spawnBlock, extra);
 		}
 	}
 
-	private static boolean generateRandomStructure(List<WorldGenerator> structures, World world, Random random, BlockPos pos, int bounds, IBlockState spawnBlock, IBlockState...extra){
+	private static boolean generateRandomStructure(List<WorldGenerator> structures, World world, Random random, BlockPos pos, int bounds, float chance, IBlockState spawnBlock, IBlockState...extra){
 
 		WorldGenerator structure = structures.get(random.nextInt(structures.size()));
 
@@ -142,7 +147,7 @@ public class DarklandsStructureGenerator {
 			pos = pos.down();
 		if(!checkBlocks(world, pos, bounds, spawnBlock, extra)) return false;
 
-		if(random.nextFloat() < 0.03F)
+		if(random.nextFloat() < chance)
 			return structure.generate(world, random, pos);
 
 		return false;

@@ -15,6 +15,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;
@@ -35,6 +36,9 @@ public class ACscion1 extends StructureDarklandsBase {
 		IBlockState chiseled_brick = ACBlocks.chiseled_darkstone_brick.getDefaultState();
 		IBlockState brick_slab = ACBlocks.darkstone_brick_slab.getDefaultState();
 
+		if(world.provider.getDimension() == ACLib.dreadlands_id)
+			grass = ACBlocks.dreadlands_grass.getDefaultState();
+		
 		boolean shouldGrass = world.getBlockState(pos).getMaterial() == Material.GRASS;
 
 		for(int i = -3; i < 4; i++)

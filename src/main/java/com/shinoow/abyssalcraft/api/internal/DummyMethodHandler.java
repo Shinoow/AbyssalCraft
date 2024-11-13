@@ -38,10 +38,10 @@ public class DummyMethodHandler implements IInternalMethodHandler {
 	public void spawnPEStream(BlockPos posFrom, Entity target, int dimension) {}
 
 	@Override
-	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos) {}
+	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, float chance) {}
 
 	@Override
-	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, IBlockState spawnBlock, IBlockState... extra) {}
+	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, float chance, IBlockState spawnBlock, IBlockState... extra) {}
 
 	@Override
 	public void completeRitualClient(BlockPos pos, EntityPlayer player, String ritual) {}

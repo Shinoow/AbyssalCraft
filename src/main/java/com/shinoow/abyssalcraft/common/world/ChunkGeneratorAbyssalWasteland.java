@@ -335,7 +335,7 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 		if (mapFeaturesEnabled)
 			strongholdGenerator.generateStructure(worldObj, rand, new ChunkPos(x, z));
 
-		DarklandsStructureGenerator.generateStructures(worldObj, rand, k, l);
+		DarklandsStructureGenerator.generateStructures(worldObj, rand, k, l, 0.03F);
 
 		int k1;
 		int l1;

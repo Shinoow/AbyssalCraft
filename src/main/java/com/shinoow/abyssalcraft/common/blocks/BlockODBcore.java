@@ -48,7 +48,7 @@ public class BlockODBcore extends Block {
 	public BlockODBcore() {
 		super(Material.IRON, MapColor.PURPLE);
 		setDefaultState(blockState.getBaseState().withProperty(EXPLODE, false));
-		setCreativeTab(ACTabs.tabBlock);
+		setCreativeTab(ACTabs.tabDecoration);
 		setHarvestLevel("pickaxe", 3);
 		setSoundType(SoundType.METAL);
 	}

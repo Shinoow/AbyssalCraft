@@ -361,7 +361,7 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 		if (mapFeaturesEnabled)
 			dmGenerator.generateStructure(worldObj, rand, new ChunkPos(par2, par3));
 
-		DarklandsStructureGenerator.generateStructures(worldObj, rand, k, l);
+		DarklandsStructureGenerator.generateStructures(worldObj, rand, k, l, 0.03F);
 
 		if(ACConfig.generateShoggothLairs) {
 			int Xcoord2 = k + rand.nextInt(16) + 8;

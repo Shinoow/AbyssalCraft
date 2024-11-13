@@ -83,8 +83,9 @@ public interface IInternalMethodHandler {
 	 * <i>world.getHeight(new BlockPos(chunkX*16 + random.nextInt(16) + rand.nextInt(5) * (random.nextBoolean() ? -1 : 1),
 	 * 0, chunkZ*16 + random.nextInt(16) rand.nextInt(5) * (random.nextBoolean() ? -1 : 1))<br></i>
 	 * is what's used for the Darklands
+	 * @param chance Percentage chance of a structure generating (default is 0.03 = 3% chance)
 	 */
-	void generateDarklandsStructure(int type, World world, Random random, BlockPos pos);
+	void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, float chance);
 
 	/**
 	 * Attempts to generate a Darklands Structure.<br>
@@ -103,10 +104,11 @@ public interface IInternalMethodHandler {
 	 * <i>world.getHeight(new BlockPos(chunkX*16 + random.nextInt(16) + rand.nextInt(5) * (random.nextBoolean() ? -1 : 1),
 	 * 0, chunkZ*16 + random.nextInt(16) rand.nextInt(5) * (random.nextBoolean() ? -1 : 1))<br></i>
 	 * is what's used for the Darklands
+	 * @param chance Percentage chance of a structure generating (default is 0.03 = 3% chance)
 	 * @param spawnBlock BlockState that the structures can generate on
 	 * @param extra (OPTIONAL) Additional BlockStates the structure can generate on
 	 */
-	void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, IBlockState spawnBlock, IBlockState...extra);
+	void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, float chance, IBlockState spawnBlock, IBlockState...extra);
 
 	/**
 	 * Fires a message to the client on the completion of a ritual<br>
