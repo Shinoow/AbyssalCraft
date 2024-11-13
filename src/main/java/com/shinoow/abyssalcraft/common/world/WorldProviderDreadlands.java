@@ -67,6 +67,24 @@ public class WorldProviderDreadlands extends WorldProvider implements IAbyssalWo
 	}
 
 	@Override
+	public void calculateInitialWeather()
+	{
+		world.getWorldInfo().setRaining(false);
+		world.rainingStrength = 0;
+		world.getWorldInfo().setThundering(false);
+		world.thunderingStrength = 0;
+	}
+
+	@Override
+	public void updateWeather()
+	{
+		world.getWorldInfo().setRaining(false);
+		world.rainingStrength = 0;
+		world.getWorldInfo().setThundering(false);
+		world.thunderingStrength = 0;
+	}
+
+	@Override
 	public boolean isSurfaceWorld() {
 		return false;
 	}

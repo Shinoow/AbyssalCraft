@@ -16,6 +16,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -29,7 +30,9 @@ public class WorldGenAbyssalStalagmite extends WorldGenerator {
 
 		Chunk chunk = world.getChunk(pos);
 
-		while(chunk.getBlockState(pos).getBlock().isAir(chunk.getBlockState(pos), world, pos))
+		while(chunk.getBlockState(pos).getBlock().isAir(chunk.getBlockState(pos), world, pos) ||
+				chunk.getBlockState(pos).getBlock().isLeaves(chunk.getBlockState(pos), world, pos)
+				|| chunk.getBlockState(pos).getBlock().isWood(world, pos))
 			pos = pos.down();
 		pos = pos.down();
 

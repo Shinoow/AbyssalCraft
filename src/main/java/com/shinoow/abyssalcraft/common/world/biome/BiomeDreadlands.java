@@ -11,14 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.biome;
 
-import java.util.Random;
-
-import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
-import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -32,19 +27,6 @@ public class BiomeDreadlands extends BiomeDreadlandsBase
 	@Override
 	public final void setMobSpawns(){
 		super.setMobSpawns();
-	}
-
-	@Override
-	public void decorate(World world, Random rand, BlockPos pos)
-	{
-		super.decorate(world, rand, pos);
-
-		if(ACConfig.generateDreadlandsStalagmite)
-			for(int i = 0; i < 1; i++){
-				int xPos = rand.nextInt(16) + 8;
-				int zPos = rand.nextInt(16) + 8;
-				new WorldGenDreadlandsStalagmite().generate(world, rand, world.getHeight(pos.add(xPos, 0, zPos)));
-			}
 	}
 
 	@Override

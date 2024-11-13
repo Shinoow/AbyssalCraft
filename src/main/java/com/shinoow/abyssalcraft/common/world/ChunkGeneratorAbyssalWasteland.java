@@ -70,6 +70,7 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 	private MapGenAbyStronghold strongholdGenerator = new MapGenAbyStronghold();
 	private MapGenBase ravineGenerator = new MapGenRavineAC();
 	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
+	private WorldGenAbyssalStalagmite stalagmite = new WorldGenAbyssalStalagmite();
 	private Biome[] biomesForGeneration;
 
 	double[] doubleArray1;
@@ -359,9 +360,10 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 		}
 
 		if(rand.nextFloat() < 0.05F && biome != ACBiomes.abyssal_swamp && biome != ACBiomes.coralium_lake) {
-			int xPos = rand.nextInt(16) + 8;
-			int zPos = rand.nextInt(16) + 8;
-			new WorldGenAbyssalStalagmite().generate(worldObj, rand, worldObj.getHeight(pos.add(xPos, 0, zPos)));
+			int xPos = rand.nextInt(10) + 6;
+			int zPos = rand.nextInt(10) + 6;
+			BlockPos pos2 = new BlockPos(xPos, 0, zPos);
+			stalagmite.generate(worldObj, rand, worldObj.getHeight(pos.add(xPos, 0, zPos)));
 		}
 
 		if(ACConfig.generateAbyssalWastelandPillars)
