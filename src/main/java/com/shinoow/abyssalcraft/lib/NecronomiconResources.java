@@ -39,8 +39,6 @@ public class NecronomiconResources {
 	public static final ResourceLocation CORALIUM_INFESTED_SQUID = res("coralium-infested-squid");
 
 	//Dreadlands entities
-	public static final ResourceLocation ABYSSALNITE_GOLEM = res("abyssalnite-golem");
-	public static final ResourceLocation DREADED_ABYSSALNITE_GOLEM = res("dreaded-abyssalnite-golem");
 	public static final ResourceLocation DREADLING = res("dreadling");
 	public static final ResourceLocation DREAD_SPAWN = res("dread-spawn");
 	public static final ResourceLocation DEMON_ANIMALS = res("demon-animals");

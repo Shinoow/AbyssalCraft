@@ -48,8 +48,6 @@ public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome, ICon
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
 		spawnableCaveCreatureList.clear();
-		spawnableCreatureList.add(new SpawnListEntry(EntityAbygolem.class, 60, 1, 3));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDreadgolem.class, 60, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadSpawn.class, 30, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadling.class, 40, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothFist.class, 2, 1, 1));

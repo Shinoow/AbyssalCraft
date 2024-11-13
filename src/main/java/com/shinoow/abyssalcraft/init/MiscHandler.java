@@ -200,9 +200,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		ghoul_pete_ambient = registerSoundEvent("ghoul.pete.idle");
 		ghoul_wilson_ambient = registerSoundEvent("ghoul.wilson.idle");
 		ghoul_orange_ambient = registerSoundEvent("ghoul.orange.idle");
-		golem_death = registerSoundEvent("golem.death");
-		golem_hurt = registerSoundEvent("golem.hit");
-		golem_ambient = registerSoundEvent("golem.idle");
 		sacthoth_death = registerSoundEvent("sacthoth.death");
 		shadow_death = registerSoundEvent("shadow.death");
 		shadow_hurt = registerSoundEvent("shadow.hit");

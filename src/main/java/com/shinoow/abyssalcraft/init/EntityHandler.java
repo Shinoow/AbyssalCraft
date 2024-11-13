@@ -42,7 +42,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class EntityHandler implements ILifeCycleHandler {
 
-	static int startEntityId = 300;
+	private static int startId = 1;
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
@@ -56,127 +56,123 @@ public class EntityHandler implements ILifeCycleHandler {
 				f.set(SharedMonsterAttributes.MAX_HEALTH, Integer.MAX_VALUE);
 			} catch(Exception e){}
 
-		registerEntityWithEgg(EntityDepthsGhoul.class, "depthsghoul", 25, 80, 3, true, 0x36A880, 0x012626);
+		registerEntityWithEgg(EntityDepthsGhoul.class, "depthsghoul", 80, 3, true, 0x36A880, 0x012626);
 
-		registerEntityWithEgg(EntityEvilpig.class, "evilpig", 26, 80, 3, true, 15771042, 14377823);
+		registerEntityWithEgg(EntityEvilpig.class, "evilpig", 80, 3, true, 15771042, 14377823);
 
-		registerEntityWithEgg(EntityAbyssalZombie.class , "abyssalzombie", 27, 80, 3, true, 0x36A880, 0x052824);
+		registerEntityWithEgg(EntityAbyssalZombie.class , "abyssalzombie", 80, 3, true, 0x36A880, 0x052824);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "primedodb"), EntityODBPrimed.class, "Primed ODB", 28, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "primedodb"), EntityODBPrimed.class, "Primed ODB", startId++, instance, 80, 3, true);
 
-		registerEntityWithEgg(EntityJzahar.class, "Jzahar", 29, 80, 3, true, 0x133133, 0x342122);
+		registerEntityWithEgg(EntityJzahar.class, "Jzahar", 80, 3, true, 0x133133, 0x342122);
 
-		registerEntityWithEgg(EntityAbygolem.class, "abygolem", 30, 80, 3, true, 0x8A00E6, 0x6100A1);
+		registerEntityWithEgg(EntityDreadguard.class, "dreadguard", 80, 3, true, 0xE60000, 0xCC0000);
 
-		registerEntityWithEgg(EntityDreadgolem.class, "dreadgolem", 31, 80, 3, true, 0x1E60000, 0xCC0000);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "powerstonetracker"), EntityPSDLTracker.class, "PowerstoneTracker", startId++, instance, 64, 10, true);
 
-		registerEntityWithEgg(EntityDreadguard.class, "dreadguard", 32, 80, 3, true, 0xE60000, 0xCC0000);
+		registerEntityWithEgg(EntityDragonMinion.class, "dragonminion", 80, 3, true, 0x433434, 0x344344);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "powerstonetracker"), EntityPSDLTracker.class, "PowerstoneTracker", 33, instance, 64, 10, true);
+		registerEntityWithEgg(EntityDragonBoss.class, "dragonboss", 80, 3, true, 0x476767, 0x768833);
 
-		registerEntityWithEgg(EntityDragonMinion.class, "dragonminion", 34, 80, 3, true, 0x433434, 0x344344);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "primedodbcore"), EntityODBcPrimed.class, "Primed ODB Core", startId++, instance, 80, 3, true);
 
-		registerEntityWithEgg(EntityDragonBoss.class, "dragonboss", 35, 80, 3, true, 0x476767, 0x768833);
+		registerEntityWithEgg(EntityShadowCreature.class, "shadowcreature", 80, 3, true, 0, 0xFFFFFF);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "primedodbcore"), EntityODBcPrimed.class, "Primed ODB Core", 36, instance, 80, 3, true);
+		registerEntityWithEgg(EntityShadowMonster.class, "shadowmonster", 80, 3, true, 0, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityShadowCreature.class, "shadowcreature", 37, 80, 3, true, 0, 0xFFFFFF);
+		registerEntityWithEgg(EntityDreadling.class, "dreadling", 80, 3, true, 0xE60000, 0xCC0000);
 
-		registerEntityWithEgg(EntityShadowMonster.class, "shadowmonster", 38, 80, 3, true, 0, 0xFFFFFF);
+		registerEntityWithEgg(EntityDreadSpawn.class, "dreadspawn", 80, 3, true, 0xE60000, 0xCC0000);
 
-		registerEntityWithEgg(EntityDreadling.class, "dreadling", 39, 80, 3, true, 0xE60000, 0xCC0000);
+		registerEntityWithEgg(EntityDemonPig.class, "demonpig", 80, 3, true, 15771042, 14377823);
 
-		registerEntityWithEgg(EntityDreadSpawn.class, "dreadspawn", 40, 80, 3, true, 0xE60000, 0xCC0000);
+		registerEntityWithEgg(EntitySkeletonGoliath.class, "gskeleton", 80, 3, true, 0xD6D6C9, 0xC6C7AD);
 
-		registerEntityWithEgg(EntityDemonPig.class, "demonpig", 41, 80, 3, true, 15771042, 14377823);
+		registerEntityWithEgg(EntityChagarothSpawn.class, "chagarothspawn", 80, 3, true, 0xE60000, 0xCC0000);
 
-		registerEntityWithEgg(EntitySkeletonGoliath.class, "gskeleton", 42, 80, 3, true, 0xD6D6C9, 0xC6C7AD);
+		registerEntityWithEgg(EntityChagarothFist.class, "chagarothfist", 80, 3, true, 0xE60000, 0xCC0000);
 
-		registerEntityWithEgg(EntityChagarothSpawn.class, "chagarothspawn", 43, 80, 3, true, 0xE60000, 0xCC0000);
+		registerEntityWithEgg(EntityChagaroth.class, "chagaroth", 80, 3, true, 0xE60000, 0xCC0000);
 
-		registerEntityWithEgg(EntityChagarothFist.class, "chagarothfist", 44, 80, 3, true, 0xE60000, 0xCC0000);
+		registerEntityWithEgg(EntityShadowBeast.class, "shadowbeast", 80, 3, true, 0, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityChagaroth.class, "chagaroth", 45, 80, 3, true, 0xE60000, 0xCC0000);
+		registerEntityWithEgg(EntitySacthoth.class, "shadowboss", 80, 3, true, 0, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityShadowBeast.class, "shadowbeast", 46, 80, 3, true, 0, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiAbyssalZombie.class, "antiabyssalzombie", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntitySacthoth.class, "shadowboss", 47, 80, 3, true, 0, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiBat.class, "antibat", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityAntiAbyssalZombie.class, "antiabyssalzombie", 48, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiChicken.class, "antichicken", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityAntiBat.class, "antibat", 49, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiCow.class, "anticow", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityAntiChicken.class, "antichicken", 50, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiCreeper.class, "anticreeper", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityAntiCow.class, "anticow", 51, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiGhoul.class, "antighoul", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityAntiCreeper.class, "anticreeper", 52, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiPig.class, "antipig", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityAntiGhoul.class, "antighoul", 53, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiPlayer.class, "antiplayer", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityAntiPig.class, "antipig", 54, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiSkeleton.class, "antiskeleton", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityAntiPlayer.class, "antiplayer", 55, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiSpider.class, "antispider", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityAntiSkeleton.class, "antiskeleton", 56, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityAntiZombie.class, "antizombie", 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
-		registerEntityWithEgg(EntityAntiSpider.class, "antispider", 57, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityRemnant.class, "remnant", 80, 3, true, 0x133133, 0x342122);
 
-		registerEntityWithEgg(EntityAntiZombie.class, "antizombie", 58, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
+		registerEntityWithEgg(EntityOmotholGhoul.class, "omotholghoul", 80, 3, true, 0x133133, 0x342122);
 
-		registerEntityWithEgg(EntityRemnant.class, "remnant", 59, 80, 3, true, 0x133133, 0x342122);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "coraliumarrow"), EntityCoraliumArrow.class, "CoraliumArrow", startId++, instance, 64, 10, true);
 
-		registerEntityWithEgg(EntityOmotholGhoul.class, "omotholghoul", 60, 80, 3, true, 0x133133, 0x342122);
+		registerEntityWithEgg(EntityGatekeeperMinion.class, "jzaharminion", 80, 3, true, 0x133133, 0x342122);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "coraliumarrow"), EntityCoraliumArrow.class, "CoraliumArrow", 61, instance, 64, 10, true);
+		registerEntityWithEgg(EntityGreaterDreadSpawn.class, "greaterdreadspawn", 80, 3, true, 0xE60000, 0xCC0000);
 
-		registerEntityWithEgg(EntityGatekeeperMinion.class, "jzaharminion", 62, 80, 3, true, 0x133133, 0x342122);
+		registerEntityWithEgg(EntityLesserDreadbeast.class, "lesserdreadbeast", 80, 3, true, 0xE60000, 0xCC0000);
 
-		registerEntityWithEgg(EntityGreaterDreadSpawn.class, "greaterdreadspawn", 63, 80, 3, true, 0xE60000, 0xCC0000);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "dreadslug"), EntityDreadSlug.class, "DreadSlug", startId++, instance, 64, 10, true);
 
-		registerEntityWithEgg(EntityLesserDreadbeast.class, "lesserdreadbeast", 64, 80, 3, true, 0xE60000, 0xCC0000);
+		registerEntityWithEgg(EntityLesserShoggoth.class, "lessershoggoth", 80, 3, true, 0x133133, 0x342122);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "dreadslug"), EntityDreadSlug.class, "DreadSlug", 65, instance, 64, 10, true);
+		registerEntityWithEgg(EntityEvilCow.class, "evilcow", 80, 3, true, 4470310, 10592673);
 
-		registerEntityWithEgg(EntityLesserShoggoth.class, "lessershoggoth", 66, 80, 3, true, 0x133133, 0x342122);
+		registerEntityWithEgg(EntityEvilChicken.class, "evilchicken", 80, 3, true, 10592673, 16711680);
 
-		registerEntityWithEgg(EntityEvilCow.class, "evilcow", 67, 80, 3, true, 4470310, 10592673);
+		registerEntityWithEgg(EntityDemonCow.class, "demoncow", 80, 3, true, 4470310, 10592673);
 
-		registerEntityWithEgg(EntityEvilChicken.class, "evilchicken", 68, 80, 3, true, 10592673, 16711680);
+		registerEntityWithEgg(EntityDemonChicken.class, "demonchicken", 80, 3, true, 10592673, 16711680);
 
-		registerEntityWithEgg(EntityDemonCow.class, "demoncow", 69, 80, 3, true, 4470310, 10592673);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "gatekeeperessence"), EntityGatekeeperEssence.class, "GatekeeperEssence", startId++, instance, 64, 10, true);
 
-		registerEntityWithEgg(EntityDemonChicken.class, "demonchicken", 70, 80, 3, true, 10592673, 16711680);
+		registerEntityWithEgg(EntityEvilSheep.class, "evilsheep", 80, 3, true, 15198183, 16758197);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "gatekeeperessence"), EntityGatekeeperEssence.class, "GatekeeperEssence", 71, instance, 64, 10, true);
+		registerEntityWithEgg(EntityDemonSheep.class, "demonsheep", 80, 3, true, 15198183, 16758197);
 
-		registerEntityWithEgg(EntityEvilSheep.class, "evilsheep", 72, 80, 3, true, 15198183, 16758197);
+		registerEntityWithEgg(EntityCoraliumSquid.class, "coraliumsquid", 63, 3, true, 0x014e43, 0x148f7e);
 
-		registerEntityWithEgg(EntityDemonSheep.class, "demonsheep", 73, 80, 3, true, 15198183, 16758197);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "inkprojectile"), EntityInkProjectile.class, "inkprojectile", startId++, instance, 64, 10, true);
 
-		registerEntityWithEgg(EntityCoraliumSquid.class, "coraliumsquid", 74, 63, 3, true, 0x014e43, 0x148f7e);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "dreadedcharge"), EntityDreadedCharge.class, "dreadedcharge", startId++, instance, 64, 10, true);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "inkprojectile"), EntityInkProjectile.class, "inkprojectile", 75, instance, 64, 10, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "acidprojectile"), EntityAcidProjectile.class, "acidprojectile", startId++, instance, 64, 10, true);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "dreadedcharge"), EntityDreadedCharge.class, "dreadedcharge", 76, instance, 64, 10, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "blackhole"), EntityBlackHole.class, "blackhole", startId++, instance, 64, 10, true);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "acidprojectile"), EntityAcidProjectile.class, "acidprojectile", 77, instance, 64, 10, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "implosion"), EntityImplosion.class, "implosion", startId++, instance, 64, 10, true);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "blackhole"), EntityBlackHole.class, "blackhole", 78, instance, 64, 10, true);
+		registerEntityWithEgg(EntityShubOffspring.class, "shuboffspring", 80, 3, true, 0x2b2929, 0x211f1d);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "implosion"), EntityImplosion.class, "implosion", 79, instance, 64, 10, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "spirititem"), EntitySpiritItem.class, "spirititem", startId++, instance, 64, 10, true);
 
-		registerEntityWithEgg(EntityShubOffspring.class, "shuboffspring", 80, 80, 3, true, 0x2b2929, 0x211f1d);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "portal"), EntityPortal.class, "portal", startId++, instance, 64, 10, true);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "spirititem"), EntitySpiritItem.class, "spirititem", 81, instance, 64, 10, true);
+		registerEntityWithEgg(EntityShoggoth.class, "shoggoth", 80, 3, true, 0x133133, 0x342122);
 
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "portal"), EntityPortal.class, "portal", 82, instance, 64, 10, true);
+		registerEntityWithEgg(EntityGreaterShoggoth.class, "greatershoggoth", 80, 3, true, 0x133133, 0x342122);
 
-		registerEntityWithEgg(EntityShoggoth.class, "shoggoth", 83, 80, 3, true, 0x133133, 0x342122);
-
-		registerEntityWithEgg(EntityGreaterShoggoth.class, "greatershoggoth", 84, 80, 3, true, 0x133133, 0x342122);
-
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "compasstentacle"), EntityCompassTentacle.class, "compasstentacle", 85, instance, 64, 10, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "compasstentacle"), EntityCompassTentacle.class, "compasstentacle", startId++, instance, 64, 10, true);
 
 		EntityUtil.addShoggothFood(EntityAnimal.class);
 		EntityUtil.addShoggothFood(EntityAmbientCreature.class);
@@ -291,7 +287,7 @@ public class EntityHandler implements ILifeCycleHandler {
 		}
 	}
 
-	private static void registerEntityWithEgg(Class<? extends Entity> entity, String name, int modid, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primaryColor, int secondaryColor) {
-		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", name.toLowerCase(Locale.ENGLISH)), entity,"abyssalcraft."+ name, modid, instance, trackingRange, updateFrequency, sendsVelocityUpdates, primaryColor, secondaryColor);
+	private static void registerEntityWithEgg(Class<? extends Entity> entity, String name, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primaryColor, int secondaryColor) {
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", name.toLowerCase(Locale.ENGLISH)), entity,"abyssalcraft."+ name, startId++, instance, trackingRange, updateFrequency, sendsVelocityUpdates, primaryColor, secondaryColor);
 	}
 }

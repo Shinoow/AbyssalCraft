@@ -29,9 +29,6 @@ public class ACSounds {
 	public static SoundEvent ghoul_pete_ambient;
 	public static SoundEvent ghoul_wilson_ambient;
 	public static SoundEvent ghoul_orange_ambient;
-	public static SoundEvent golem_death;
-	public static SoundEvent golem_hurt;
-	public static SoundEvent golem_ambient;
 	public static SoundEvent sacthoth_death;
 	public static SoundEvent shadow_death;
 	public static SoundEvent shadow_hurt;

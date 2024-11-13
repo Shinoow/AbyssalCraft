@@ -96,28 +96,6 @@
 		],
 		"subtitle": "subtitle.abyssalcraft.ghoul.orange.idle"
 	},
-	"golem.death": {
-		"category": "hostile",
-		"sounds": [
-			"abyssalcraft:golem/death"
-		],
-		"subtitle": "subtitle.abyssalcraft.golem.death"
-	},
-	"golem.hit": {
-		"category": "hostile",
-		"sounds": [
-			"abyssalcraft:golem/hit1",
-			"abyssalcraft:golem/hit2"
-		],
-		"subtitle": "subtitle.abyssalcraft.golem.hit"
-	},
-	"golem.idle": {
-		"category": "hostile",
-		"sounds": [
-			"abyssalcraft:golem/idle1"
-		],
-		"subtitle": "subtitle.abyssalcraft.golem.idle"
-	},
 	"sacthoth.death": {
 		"category": "hostile",
 		"sounds": [

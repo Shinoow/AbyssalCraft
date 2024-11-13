@@ -234,10 +234,6 @@ public class NecronomiconText {
 	public static String ENTITY_SPECTRAL_DRAGON_2 = "necronomicon.text.entity.spectraldragon.2";
 	public static String ENTITY_ASORAH_1 = "necronomicon.text.entity.asorah.1";
 	public static String ENTITY_ASORAH_2 = "necronomicon.text.entity.asorah.2";
-	public static String ENTITY_ABYSSALNITE_GOLEM_1 = "necronomicon.text.entity.abyssalnitegolem.1";
-	public static String ENTITY_ABYSSALNITE_GOLEM_2 = "necronomicon.text.entity.abyssalnitegolem.2";
-	public static String ENTITY_DREADED_ABYSSALNITE_GOLEM_1 = "necronomicon.text.entity.dreadgolem.1";
-	public static String ENTITY_DREADED_ABYSSALNITE_GOLEM_2 = "necronomicon.text.entity.dreadgolem.2";
 	public static String ENTITY_DREADLING_1 = "necronomicon.text.entity.dreadling.1";
 	public static String ENTITY_DREADLING_2 = "necronomicon.text.entity.dreadling.2";
 	public static String ENTITY_DREAD_SPAWN_1 = "necronomicon.text.entity.dreadspawn.1";

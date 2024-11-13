@@ -40,7 +40,6 @@ public class ACLoot {
 	public static final ResourceLocation ENTITY_SKELETON_GOLIATH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/skeleton_goliath"));
 	public static final ResourceLocation ENTITY_ABYSSAL_ANTI_ZOMBIE = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/abyssal_anti_zombie"));
 	public static final ResourceLocation ENTITY_ABYSSAL_ZOMBIE = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/abyssal_zombie"));
-	public static final ResourceLocation ENTITY_ABYSSALNITE_GOLEM = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/abyssalnite_golem"));
 	public static final ResourceLocation ENTITY_ANTI_BAT = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/anti_bat"));
 	public static final ResourceLocation ENTITY_ANTI_CHICKEN = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/anti_chicken"));
 	public static final ResourceLocation ENTITY_ANTI_COW = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/anti_cow"));
@@ -55,7 +54,6 @@ public class ACLoot {
 	public static final ResourceLocation ENTITY_DEMON_COW = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/demon_cow"));
 	public static final ResourceLocation ENTITY_DEMON_PIG = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/demon_pig"));
 	public static final ResourceLocation ENTITY_DREAD_SPAWN = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/dread_spawn"));
-	public static final ResourceLocation ENTITY_DREADED_ABYSSALNITE_GOLEM = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/dreaded_abyssalnite_golem"));
 	public static final ResourceLocation ENTITY_DREADGUARD = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/dreadguard"));
 	public static final ResourceLocation ENTITY_DREADLING = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/dreadling"));
 	public static final ResourceLocation ENTITY_EVIL_CHICKEN = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/evil_chicken"));

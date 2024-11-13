@@ -151,10 +151,6 @@ public class Pages {
 	public static Page PROGRESSION_DREADLANDS_2;
 	public static Page PROGRESSION_DREADLANDS_3;
 
-	public static Page ENTITY_ABYSSALNITE_GOLEM_1;
-	public static Page ENTITY_ABYSSALNITE_GOLEM_2;
-	public static Page ENTITY_DREADED_ABYSSALNITE_GOLEM_1;
-	public static Page ENTITY_DREADED_ABYSSALNITE_GOLEM_2;
 	public static Page ENTITY_DREADLING_1;
 	public static Page ENTITY_DREADLING_2;
 	public static Page ENTITY_DREAD_SPAWN_1;

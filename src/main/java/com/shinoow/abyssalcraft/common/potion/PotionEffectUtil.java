@@ -268,12 +268,6 @@ public class PotionEffectUtil {
 				entityLivingBase.world.removeEntity(entityLivingBase);
 				ds.onInitialSpawn(entityLivingBase.world.getDifficultyForLocation(entityLivingBase.getPosition()),(IEntityLivingData)null);
 				entityLivingBase.world.spawnEntity(ds);
-			} else if(entityLivingBase instanceof EntityAbygolem) {
-				EntityDreadgolem sg = new EntityDreadgolem(entityLivingBase.world);
-				sg.copyLocationAndAnglesFrom(entityLivingBase);
-				entityLivingBase.world.removeEntity(entityLivingBase);
-				sg.onInitialSpawn(entityLivingBase.world.getDifficultyForLocation(entityLivingBase.getPosition()),(IEntityLivingData)null);
-				entityLivingBase.world.spawnEntity(sg);
 			} else if(!(entityLivingBase instanceof EntityPlayer)){
 				EntityDreadSpawn ds = new EntityDreadSpawn(entityLivingBase.world);
 				ds.copyLocationAndAnglesFrom(entityLivingBase);

@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.world.biome;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.common.entity.EntityDreadgolem;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDreadlandsStalagmite;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -33,7 +32,6 @@ public class BiomeDreadlands extends BiomeDreadlandsBase
 	@Override
 	public final void setMobSpawns(){
 		super.setMobSpawns();
-		spawnableMonsterList.add(new SpawnListEntry(EntityDreadgolem.class, 100, 1, 5));
 	}
 
 	@Override
