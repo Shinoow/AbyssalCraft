@@ -18,7 +18,6 @@ import com.shinoow.abyssalcraft.lib.ACClientVars;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

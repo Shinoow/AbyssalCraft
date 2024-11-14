@@ -38,7 +38,7 @@ public class ACscion1 extends StructureDarklandsBase {
 
 		if(world.provider.getDimension() == ACLib.dreadlands_id)
 			grass = ACBlocks.dreadlands_grass.getDefaultState();
-		
+
 		boolean shouldGrass = world.getBlockState(pos).getMaterial() == Material.GRASS;
 
 		for(int i = -3; i < 4; i++)

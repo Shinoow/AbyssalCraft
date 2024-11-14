@@ -135,15 +135,14 @@ public class StructureShoggothPit extends WorldGenerator {
 							world.setBlockState(entry.getKey(), getRandomStatue(rand, EnumFacing.SOUTH));
 				break;
 			}
-			
-			for(Entry<BlockPos, String> entry : map.entrySet()) {
+
+			for(Entry<BlockPos, String> entry : map.entrySet())
 				if(entry.getValue().startsWith("bm")) {
 					world.setBlockState(entry.getKey(), ACBlocks.shoggoth_biomass.getDefaultState());
 					TileEntity te = world.getTileEntity(entry.getKey());
 					if(te instanceof TileEntityShoggothBiomass)
 						((TileEntityShoggothBiomass) te).setCooldown(world.rand.nextInt(100));
 				}
-			}
 
 			return true;
 		}

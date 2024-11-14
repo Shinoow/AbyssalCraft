@@ -49,7 +49,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
-import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

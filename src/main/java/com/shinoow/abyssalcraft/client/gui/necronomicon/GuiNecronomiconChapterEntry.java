@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2024 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import org.lwjgl.input.Keyboard;
@@ -47,12 +58,10 @@ public class GuiNecronomiconChapterEntry extends GuiNecronomiconEntry {
 	protected void actionPerformed(GuiButton button)
 	{
 		if (button.enabled)
-		{
 			if (button.id == 0)
 				mc.displayGuiScreen((GuiScreen)null);
 			else if(button.id == 1)
 				mc.displayGuiScreen(parent.withBookType(getBookType()));
-		}
 	}
 
 	@Override

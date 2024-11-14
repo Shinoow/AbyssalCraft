@@ -102,7 +102,7 @@ public class DarklandsStructureGenerator {
 						chance, Blocks.GRASS.getDefaultState(), blocks))
 					generated = true;
 
-			if(!generated && (random.nextInt(ACConfig.darkShrineSpawnRate) == 0)) {
+			if(!generated && random.nextInt(ACConfig.darkShrineSpawnRate) == 0) {
 
 				x = chunkX + random.nextInt(16) + 8;
 				z = chunkZ + random.nextInt(16) + 8;

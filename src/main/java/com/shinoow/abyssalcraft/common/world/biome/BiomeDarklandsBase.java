@@ -107,7 +107,7 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome, IAlter
 	}
 
 	private int getSeaLevel(World world) {
-		return world.provider.getDimension() == ACLib.abyssal_wasteland_id ? 49 : 
+		return world.provider.getDimension() == ACLib.abyssal_wasteland_id ? 49 :
 			world.provider.getDimension() == ACLib.dreadlands_id ? 50 : world.getSeaLevel();
 	}
 

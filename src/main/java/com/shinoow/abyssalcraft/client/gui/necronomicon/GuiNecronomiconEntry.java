@@ -148,7 +148,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 					setTurnupLimit(2);
 				}
 			} else if(button.id == 6) {
-				if(reference1 != null) 
+				if(reference1 != null)
 					mc.displayGuiScreen(new GuiNecronomiconChapterEntry(getBookType(), reference1, this));
 			} else if(button.id == 7) {
 				if(reference2 != null)

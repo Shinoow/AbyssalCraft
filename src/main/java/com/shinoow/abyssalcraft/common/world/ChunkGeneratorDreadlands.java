@@ -387,8 +387,8 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 			int zPos = l + rand.nextInt(10) + 6;
 			BlockPos pos2 = new BlockPos(xPos, 0, zPos);
 			Biome b1 = worldObj.getBiome(pos2);
-			if(b1 == ACBiomes.dreadlands || (worldObj.rand.nextInt(10) == 0 && b1 == ACBiomes.darklands))
-			stalagmite.generate(worldObj, rand, worldObj.getHeight(pos2));
+			if(b1 == ACBiomes.dreadlands || worldObj.rand.nextInt(10) == 0 && b1 == ACBiomes.darklands)
+				stalagmite.generate(worldObj, rand, worldObj.getHeight(pos2));
 		}
 
 		ForgeEventFactory.onChunkPopulate(false, this, worldObj, rand, par2, par3, flag);

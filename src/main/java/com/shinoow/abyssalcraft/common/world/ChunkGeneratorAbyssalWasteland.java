@@ -362,7 +362,7 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 		if(rand.nextFloat() < 0.05F && biome != ACBiomes.abyssal_swamp && biome != ACBiomes.coralium_lake) {
 			int xPos = rand.nextInt(10) + 6;
 			int zPos = rand.nextInt(10) + 6;
-			BlockPos pos2 = new BlockPos(xPos, 0, zPos);
+			new BlockPos(xPos, 0, zPos);
 			stalagmite.generate(worldObj, rand, worldObj.getHeight(pos.add(xPos, 0, zPos)));
 		}
 

@@ -19,7 +19,6 @@ import javax.annotation.Nullable;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntitySequentialBrewingStand;
 import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.BlockContainer;

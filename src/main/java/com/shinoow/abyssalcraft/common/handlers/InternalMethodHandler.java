@@ -63,7 +63,7 @@ public class InternalMethodHandler extends DummyMethodHandler {
 	public void generateDarklandsStructure(int type, World world, Random random, BlockPos pos, float chance, IBlockState spawnBlock, IBlockState... extra) {
 		DarklandsStructureGenerator.generate(type, world, random, pos, chance, spawnBlock, extra);
 	}
-	
+
 	@Override
 	public void completeRitualClient(BlockPos pos, EntityPlayer player, String ritual) {
 		PacketDispatcher.sendToAllAround(new RitualMessage(ritual, pos), player, 5);

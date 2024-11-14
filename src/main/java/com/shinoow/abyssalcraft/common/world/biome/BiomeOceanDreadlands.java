@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2024 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.world.biome;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -12,8 +23,8 @@ public class BiomeOceanDreadlands extends BiomeDreadlandsBase {
 
 	public BiomeOceanDreadlands(BiomeProperties par1) {
 		super(par1);
-		this.topBlock = Blocks.AIR.getDefaultState();
-		this.fillerBlock = ACBlocks.dreadlands_muck.getDefaultState();
+		topBlock = Blocks.AIR.getDefaultState();
+		fillerBlock = ACBlocks.dreadlands_muck.getDefaultState();
 	}
 
 	@Override

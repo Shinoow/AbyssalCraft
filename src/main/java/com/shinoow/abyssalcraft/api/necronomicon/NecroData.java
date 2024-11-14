@@ -512,7 +512,7 @@ public class NecroData implements INecroData {
 				pages1[i] = pages[i].copy(); // clone each page
 				pages1[i].pageNum = i+1; //new page number for page clones
 			}
-			this.reference = new Chapter("", "necronomicon.reference", displayIcon, pages1);
+			reference = new Chapter("", "necronomicon.reference", displayIcon, pages1);
 			return this;
 		}
 

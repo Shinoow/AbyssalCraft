@@ -40,7 +40,7 @@ public class chagarothlair extends WorldGenerator {
 
 		PlacementSettings placeSettings = new PlacementSettings().setReplacedBlock(Blocks.STRUCTURE_VOID);
 
-		
+
 		MinecraftServer server = world.getMinecraftServer();
 		TemplateManager templateManager = world.getSaveHandler().getStructureTemplateManager();
 

@@ -75,7 +75,7 @@ public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome, ICon
 				new WorldGenMinable(ACBlocks.dreaded_abyssalnite_ore.getDefaultState(), veinSize,
 						state -> state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 			}
-		
+
 		if(ACConfig.generateDreadlandsAbyssalniteOre)
 			for(int rarity = 0; rarity < 6; rarity++) {
 				int veinSize =  8 + par2Random.nextInt(12);
@@ -85,7 +85,7 @@ public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome, ICon
 				new WorldGenMinable(ACBlocks.dreadlands_abyssalnite_ore.getDefaultState(), veinSize,
 						state -> state == ACBlocks.dreadstone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 			}
-		
+
 		for (int rarity = 0; rarity < 7; ++rarity)
 		{
 			int x = par2Random.nextInt(16);
