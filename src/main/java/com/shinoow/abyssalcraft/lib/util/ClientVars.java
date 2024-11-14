@@ -69,9 +69,6 @@ public class ClientVars {
 	private String dreadlandsMountainsGrassColor;
 	private String dreadlandsMountainsFoliageColor;
 	private String dreadlandsMountainsSkyColor;
-	private String purifiedDreadlandsGrassColor;
-	private String purifiedDreadlandsFoliageColor;
-	private String purifiedDreadlandsSkyColor;
 	private String omotholGrassColor;
 	private String omotholFoliageColor;
 	private String omotholWaterColor;
@@ -98,6 +95,25 @@ public class ClientVars {
 	private int implosionB;
 	private String coraliumAntidotePotionColor;
 	private String dreadAntidotePotionColor;
+	private String abyssalDesertGrassColor;
+	private String abyssalDesertFoliageColor;
+	private String abyssalDesertWaterColor;
+	private String abyssalDesertSkyColor;
+	private String abyssalPlateauGrassColor;
+	private String abyssalPlateauFoliageColor;
+	private String abyssalPlateauWaterColor;
+	private String abyssalPlateauSkyColor;
+	private String abyssalSwampGrassColor;
+	private String abyssalSwampFoliageColor;
+	private String abyssalSwampWaterColor;
+	private String abyssalSwampSkyColor;
+	private String coraliumLakeGrassColor;
+	private String coraliumLakeFoliageColor;
+	private String coraliumLakeWaterColor;
+	private String coraliumLakeSkyColor;
+	private String dreadlandsOceanGrassColor;
+	private String dreadlandsOceanFoliageColor;
+	private String dreadlandsOceanSkyColor;
 
 	/**
 	 * Allocation of default values in case something is left out (which could have undesired side-effects)
@@ -154,9 +170,6 @@ public class ClientVars {
 		dreadlandsMountainsGrassColor = "0x910000";
 		dreadlandsMountainsFoliageColor = "0x910000";
 		dreadlandsMountainsSkyColor = "0";
-		purifiedDreadlandsGrassColor = "0x30217A";
-		purifiedDreadlandsFoliageColor = "0x30217A";
-		purifiedDreadlandsSkyColor = "0";
 		omotholGrassColor = "0x17375c";
 		omotholFoliageColor = "0x17375c";
 		omotholWaterColor = "14745518";
@@ -183,6 +196,25 @@ public class ClientVars {
 		implosionB = 255;
 		coraliumAntidotePotionColor = "0x00ff06";
 		dreadAntidotePotionColor = "0x00ff06";
+		abyssalDesertGrassColor = "0x789455";
+		abyssalDesertFoliageColor = "0x789455";
+		abyssalDesertWaterColor = "0x24FF83";
+		abyssalDesertSkyColor = "0";
+		abyssalPlateauGrassColor = "0x2e7e67";
+		abyssalPlateauFoliageColor = "0x2e7e67";
+		abyssalPlateauWaterColor = "0x24FF83";
+		abyssalPlateauSkyColor = "0";
+		abyssalSwampGrassColor = "0x447329";
+		abyssalSwampFoliageColor = "0x447329";
+		abyssalSwampWaterColor = "0x24FF83";
+		abyssalSwampSkyColor = "0";
+		coraliumLakeGrassColor = "0x59c6b4";
+		coraliumLakeFoliageColor = "0x59c6b4";
+		coraliumLakeWaterColor = "0x24FF83";
+		coraliumLakeSkyColor = "0";
+		dreadlandsOceanGrassColor = "0x910000";
+		dreadlandsOceanFoliageColor = "0x910000";
+		dreadlandsOceanSkyColor = "0";
 	}
 
 	public int[] getCrystalColors() {
@@ -381,18 +413,6 @@ public class ClientVars {
 		return Integer.decode(dreadlandsMountainsSkyColor);
 	}
 
-	public int getPurifiedDreadlandsGrassColor() {
-		return Integer.decode(purifiedDreadlandsGrassColor);
-	}
-
-	public int getPurifiedDreadlandsFoliageColor() {
-		return Integer.decode(purifiedDreadlandsFoliageColor);
-	}
-
-	public int getPurifiedDreadlandsSkyColor() {
-		return Integer.decode(purifiedDreadlandsSkyColor);
-	}
-
 	public int getOmotholGrassColor() {
 		return Integer.decode(omotholGrassColor);
 	}
@@ -495,6 +515,82 @@ public class ClientVars {
 
 	public int getDreadAntidotePotionColor() {
 		return Integer.decode(dreadAntidotePotionColor);
+	}
+
+	public int getAbyssalDesertGrassColor() {
+		return Integer.decode(abyssalDesertGrassColor);
+	}
+
+	public int getAbyssalDesertFoliageColor() {
+		return Integer.decode(abyssalDesertFoliageColor);
+	}
+
+	public int getAbyssalDesertWaterColor() {
+		return Integer.decode(abyssalDesertWaterColor);
+	}
+
+	public int getAbyssalDesertSkyColor() {
+		return Integer.decode(abyssalDesertSkyColor);
+	}
+
+	public int getAbyssalPlateauGrassColor() {
+		return Integer.decode(abyssalPlateauGrassColor);
+	}
+
+	public int getAbyssalPlateauFoliageColor() {
+		return Integer.decode(abyssalPlateauFoliageColor);
+	}
+
+	public int getAbyssalPlateauWaterColor() {
+		return Integer.decode(abyssalPlateauWaterColor);
+	}
+
+	public int getAbyssalPlateauSkyColor() {
+		return Integer.decode(abyssalPlateauSkyColor);
+	}
+
+	public int getAbyssalSwampGrassColor() {
+		return Integer.decode(abyssalSwampGrassColor);
+	}
+
+	public int getAbyssalSwampFoliageColor() {
+		return Integer.decode(abyssalSwampFoliageColor);
+	}
+
+	public int getAbyssalSwampWaterColor() {
+		return Integer.decode(abyssalSwampWaterColor);
+	}
+
+	public int getAbyssalSwampSkyColor() {
+		return Integer.decode(abyssalSwampSkyColor);
+	}
+
+	public int getCoraliumLakeGrassColor() {
+		return Integer.decode(coraliumLakeGrassColor);
+	}
+
+	public int getCoraliumLakeFoliageColor() {
+		return Integer.decode(coraliumLakeFoliageColor);
+	}
+
+	public int getCoraliumLakeWaterColor() {
+		return Integer.decode(coraliumLakeWaterColor);
+	}
+
+	public int getCoraliumLakeSkyColor() {
+		return Integer.decode(coraliumLakeSkyColor);
+	}
+
+	public int getDreadlandsOceanGrassColor() {
+		return Integer.decode(dreadlandsOceanGrassColor);
+	}
+
+	public int getDreadlandsOceanFoliageColor() {
+		return Integer.decode(dreadlandsOceanFoliageColor);
+	}
+
+	public int getDreadlandsOceanSkyColor() {
+		return Integer.decode(dreadlandsOceanSkyColor);
 	}
 
 }

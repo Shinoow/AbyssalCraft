@@ -55,10 +55,10 @@ public class WorldHandler implements ILifeCycleHandler {
 		ACBiomes.omothol = new BiomeOmothol(new BiomeProperties("Omothol").setWaterColor(ACClientVars.getOmotholWaterColor()).setRainDisabled());
 		ACBiomes.dark_realm = new BiomeDarkRealm(new BiomeProperties("Dark Realm").setWaterColor(ACClientVars.getDarkRealmWaterColor()).setRainDisabled());
 		ACBiomes.purged = new BiomePurged(new BiomeProperties("Purged").setWaterColor(ACClientVars.getPurgedWaterColor()).setRainDisabled());
-		ACBiomes.abyssal_swamp = new BiomeAbyssalSwamp(new BiomeProperties("Abyssal Swamp").setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
-		ACBiomes.abyssal_desert = new BiomeAbyssalDesert(new BiomeProperties("Abyssal Desert").setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
-		ACBiomes.abyssal_plateau = new BiomeAbyssalPlateau(new BiomeProperties("Abyssal Plateau").setBaseHeight(1.5F).setHeightVariation(0.025F).setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
-		ACBiomes.coralium_lake = new BiomeCoraliumLake(new BiomeProperties("Coralium Lake").setBaseHeight(-1.0F).setHeightVariation(0.1F).setWaterColor(ACClientVars.getAbyssalWastelandWaterColor()).setRainDisabled());
+		ACBiomes.abyssal_swamp = new BiomeAbyssalSwamp(new BiomeProperties("Abyssal Swamp").setWaterColor(ACClientVars.getAbyssalSwampWaterColor()).setRainDisabled());
+		ACBiomes.abyssal_desert = new BiomeAbyssalDesert(new BiomeProperties("Abyssal Desert").setWaterColor(ACClientVars.getAbyssalDesertWaterColor()).setRainDisabled());
+		ACBiomes.abyssal_plateau = new BiomeAbyssalPlateau(new BiomeProperties("Abyssal Plateau").setBaseHeight(1.5F).setHeightVariation(0.025F).setWaterColor(ACClientVars.getAbyssalPlateauWaterColor()).setRainDisabled());
+		ACBiomes.coralium_lake = new BiomeCoraliumLake(new BiomeProperties("Coralium Lake").setBaseHeight(-1.0F).setHeightVariation(0.1F).setWaterColor(ACClientVars.getCoraliumLakeWaterColor()).setRainDisabled());
 		ACBiomes.dreadlands_ocean = new BiomeOceanDreadlands(new BiomeProperties("Dreadlands Ocean").setBaseHeight(-1.0F).setHeightVariation(0.1F).setRainDisabled());
 
 		InitHandler.INSTANCE.BIOMES.add(ACBiomes.darklands.setRegistryName(new ResourceLocation(modid, "darklands")));

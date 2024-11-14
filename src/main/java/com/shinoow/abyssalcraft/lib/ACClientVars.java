@@ -71,9 +71,6 @@ public class ACClientVars {
 	private static int dreadlandsMountainsGrassColor = 0x910000;
 	private static int dreadlandsMountainsFoliageColor = 0x910000;
 	private static int dreadlandsMountainsSkyColor = 0;
-	private static int purifiedDreadlandsGrassColor = 0x30217A;
-	private static int purifiedDreadlandsFoliageColor = 0x30217A;
-	private static int purifiedDreadlandsSkyColor = 0;
 	private static int omotholGrassColor = 0x17375c;
 	private static int omotholFoliageColor = 0x17375c;
 	private static int omotholWaterColor = 14745518;
@@ -100,6 +97,25 @@ public class ACClientVars {
 	private static int implosionB = 255;
 	private static int coraliumAntidotePotionColor = 0x00ff06;
 	private static int dreadAntidotePotionColor = 0x00ff06;
+	private static int abyssalDesertGrassColor = 0x789455;
+	private static int abyssalDesertFoliageColor = 0x789455;
+	private static int abyssalDesertWaterColor = 0x24FF83;
+	private static int abyssalDesertSkyColor = 0;
+	private static int abyssalPlateauGrassColor = 0x2e7e67;
+	private static int abyssalPlateauFoliageColor = 0x2e7e67;
+	private static int abyssalPlateauWaterColor = 0x24FF83;
+	private static int abyssalPlateauSkyColor = 0;
+	private static int abyssalSwampGrassColor = 0x447329;
+	private static int abyssalSwampFoliageColor = 0x447329;
+	private static int abyssalSwampWaterColor = 0x24FF83;
+	private static int abyssalSwampSkyColor = 0;
+	private static int coraliumLakeGrassColor = 0x59c6b4;
+	private static int coraliumLakeFoliageColor = 0x59c6b4;
+	private static int coraliumLakeWaterColor = 0x24FF83;
+	private static int coraliumLakeSkyColor = 0;
+	private static int dreadlandsOceanGrassColor = 0x910000;
+	private static int dreadlandsOceanFoliageColor = 0x910000;
+	private static int dreadlandsOceanSkyColor = 0;
 
 	public static void setClientVars(ClientVars data) {
 		crystalColors = data.getCrystalColors();
@@ -151,9 +167,6 @@ public class ACClientVars {
 		dreadlandsMountainsGrassColor = data.getDreadlandsMountainsGrassColor();
 		dreadlandsMountainsFoliageColor = data.getDreadlandsMountainsFoliageColor();
 		dreadlandsMountainsSkyColor = data.getDreadlandsMountainsSkyColor();
-		purifiedDreadlandsGrassColor = data.getPurifiedDreadlandsGrassColor();
-		purifiedDreadlandsFoliageColor = data.getPurifiedDreadlandsFoliageColor();
-		purifiedDreadlandsSkyColor = data.getPurifiedDreadlandsSkyColor();
 		omotholGrassColor = data.getOmotholGrassColor();
 		omotholFoliageColor = data.getOmotholFoliageColor();
 		omotholWaterColor = data.getOmotholWaterColor();
@@ -180,6 +193,25 @@ public class ACClientVars {
 		implosionB = data.getImplosionB();
 		coraliumAntidotePotionColor = data.getCoraliumAntidotePotionColor();
 		dreadAntidotePotionColor = data.getDreadAntidotePotionColor();
+		abyssalDesertGrassColor = data.getAbyssalDesertGrassColor();
+		abyssalDesertFoliageColor = data.getAbyssalDesertFoliageColor();
+		abyssalDesertWaterColor = data.getAbyssalDesertWaterColor();
+		abyssalDesertSkyColor = data.getAbyssalDesertSkyColor();
+		abyssalPlateauGrassColor = data.getAbyssalPlateauGrassColor();
+		abyssalPlateauFoliageColor = data.getAbyssalPlateauFoliageColor();
+		abyssalPlateauWaterColor = data.getAbyssalPlateauWaterColor();
+		abyssalPlateauSkyColor = data.getAbyssalPlateauSkyColor();
+		abyssalSwampGrassColor = data.getAbyssalSwampGrassColor();
+		abyssalSwampFoliageColor = data.getAbyssalSwampFoliageColor();
+		abyssalSwampWaterColor = data.getAbyssalSwampWaterColor();
+		abyssalSwampSkyColor = data.getAbyssalSwampSkyColor();
+		coraliumLakeGrassColor = data.getCoraliumLakeGrassColor();
+		coraliumLakeFoliageColor = data.getCoraliumLakeFoliageColor();
+		coraliumLakeWaterColor = data.getCoraliumLakeWaterColor();
+		coraliumLakeSkyColor = data.getCoraliumLakeSkyColor();
+		dreadlandsOceanGrassColor = data.getDreadlandsOceanGrassColor();
+		dreadlandsOceanFoliageColor = data.getDreadlandsOceanFoliageColor();
+		dreadlandsOceanSkyColor = data.getDreadlandsOceanSkyColor();
 	}
 
 	public static int[] getCrystalColors() {
@@ -378,18 +410,6 @@ public class ACClientVars {
 		return dreadlandsMountainsSkyColor;
 	}
 
-	public static int getPurifiedDreadlandsGrassColor() {
-		return purifiedDreadlandsGrassColor;
-	}
-
-	public static int getPurifiedDreadlandsFoliageColor() {
-		return purifiedDreadlandsFoliageColor;
-	}
-
-	public static int getPurifiedDreadlandsSkyColor() {
-		return purifiedDreadlandsSkyColor;
-	}
-
 	public static int getOmotholGrassColor() {
 		return omotholGrassColor;
 	}
@@ -492,5 +512,81 @@ public class ACClientVars {
 
 	public static int getDreadAntidotePotionColor() {
 		return dreadAntidotePotionColor;
+	}
+
+	public static int getAbyssalDesertGrassColor() {
+		return abyssalDesertGrassColor;
+	}
+
+	public static int getAbyssalDesertFoliageColor() {
+		return abyssalDesertFoliageColor;
+	}
+
+	public static int getAbyssalDesertWaterColor() {
+		return abyssalDesertWaterColor;
+	}
+
+	public static int getAbyssalDesertSkyColor() {
+		return abyssalDesertSkyColor;
+	}
+
+	public static int getAbyssalPlateauGrassColor() {
+		return abyssalPlateauGrassColor;
+	}
+
+	public static int getAbyssalPlateauFoliageColor() {
+		return abyssalPlateauFoliageColor;
+	}
+
+	public static int getAbyssalPlateauWaterColor() {
+		return abyssalPlateauWaterColor;
+	}
+
+	public static int getAbyssalPlateauSkyColor() {
+		return abyssalPlateauSkyColor;
+	}
+
+	public static int getAbyssalSwampGrassColor() {
+		return abyssalSwampGrassColor;
+	}
+
+	public static int getAbyssalSwampFoliageColor() {
+		return abyssalSwampFoliageColor;
+	}
+
+	public static int getAbyssalSwampWaterColor() {
+		return abyssalSwampWaterColor;
+	}
+
+	public static int getAbyssalSwampSkyColor() {
+		return abyssalSwampSkyColor;
+	}
+
+	public static int getCoraliumLakeGrassColor() {
+		return coraliumLakeGrassColor;
+	}
+
+	public static int getCoraliumLakeFoliageColor() {
+		return coraliumLakeFoliageColor;
+	}
+
+	public static int getCoraliumLakeWaterColor() {
+		return coraliumLakeWaterColor;
+	}
+
+	public static int getCoraliumLakeSkyColor() {
+		return coraliumLakeSkyColor;
+	}
+
+	public static int getDreadlandsOceanGrassColor() {
+		return dreadlandsOceanGrassColor;
+	}
+
+	public static int getDreadlandsOceanFoliageColor() {
+		return dreadlandsOceanFoliageColor;
+	}
+
+	public static int getDreadlandsOceanSkyColor() {
+		return dreadlandsOceanSkyColor;
 	}
 }

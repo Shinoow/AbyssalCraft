@@ -28,20 +28,20 @@ public class BiomeOceanDreadlands extends BiomeDreadlandsBase {
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)
 	{
-		return ACClientVars.getDreadlandsSkyColor();
+		return ACClientVars.getDreadlandsOceanSkyColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getDreadlandsGrassColor();
+		return ACClientVars.getDreadlandsOceanGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getDreadlandsFoliageColor();
+		return ACClientVars.getDreadlandsOceanFoliageColor();
 	}
 }

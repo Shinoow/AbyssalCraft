@@ -31,20 +31,20 @@ public class BiomeAbyssalDesert extends BiomeAbyssalWastelandBase {
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)
 	{
-		return ACClientVars.getAbyssalWastelandSkyColor();
+		return ACClientVars.getAbyssalDesertSkyColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getAbyssalWastelandGrassColor();
+		return ACClientVars.getAbyssalDesertGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getAbyssalWastelandFoliageColor();
+		return ACClientVars.getAbyssalDesertFoliageColor();
 	}
 }

@@ -31,20 +31,20 @@ public class BiomeAbyssalPlateau extends BiomeAbyssalWastelandBase {
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)
 	{
-		return ACClientVars.getAbyssalWastelandSkyColor();
+		return ACClientVars.getAbyssalPlateauSkyColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getAbyssalWastelandGrassColor();
+		return ACClientVars.getAbyssalPlateauGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getAbyssalWastelandFoliageColor();
+		return ACClientVars.getAbyssalPlateauFoliageColor();
 	}
 }

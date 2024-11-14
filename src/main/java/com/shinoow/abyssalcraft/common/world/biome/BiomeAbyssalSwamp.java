@@ -53,20 +53,20 @@ public class BiomeAbyssalSwamp extends BiomeAbyssalWastelandBase {
 	@SideOnly(Side.CLIENT)
 	public int getSkyColorByTemp(float par1)
 	{
-		return ACClientVars.getAbyssalWastelandSkyColor();
+		return ACClientVars.getAbyssalSwampSkyColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getGrassColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getAbyssalWastelandGrassColor();
+		return ACClientVars.getAbyssalSwampGrassColor();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getFoliageColorAtPos(BlockPos pos)
 	{
-		return ACClientVars.getAbyssalWastelandFoliageColor();
+		return ACClientVars.getAbyssalSwampFoliageColor();
 	}
 }
