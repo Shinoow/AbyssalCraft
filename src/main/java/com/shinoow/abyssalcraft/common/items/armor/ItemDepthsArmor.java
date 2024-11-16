@@ -43,7 +43,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.items.IVisDiscountGear;
 
-@Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "thaumcraft")
+@Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "thaumcraft", striprefs = true)
 public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear {
 	public ItemDepthsArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4, name);
@@ -122,19 +122,5 @@ public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear {
 	public int getVisDiscount(ItemStack stack, EntityPlayer player) {
 		return stack.getItem() == ACItems.depths_helmet ? 5 : stack.getItem() == ACItems.depths_chestplate ? 2 :
 			stack.getItem() == ACItems.depths_leggings ? 2 : stack.getItem() == ACItems.depths_boots ? 1 : 0;
-	}
-
-	@Override
-	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
-		if(Loader.isModLoaded("thaumcraft")){
-			if(is.getItem() == ACItems.depths_helmet)
-				l.add("\u00A75"+I18n.format("tc.visdiscount")+": 5%");
-			if(is.getItem() == ACItems.depths_chestplate)
-				l.add("\u00A75"+I18n.format("tc.visdiscount")+": 2%");
-			if(is.getItem() == ACItems.depths_leggings)
-				l.add("\u00A75"+I18n.format("tc.visdiscount")+": 2%");
-			if(is.getItem() == ACItems.depths_boots)
-				l.add("\u00A75"+I18n.format("tc.visdiscount")+": 1%");
-		}
 	}
 }

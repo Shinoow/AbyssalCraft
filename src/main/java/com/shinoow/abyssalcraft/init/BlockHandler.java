@@ -25,6 +25,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimT
 import com.shinoow.abyssalcraft.common.blocks.IngotBlock.EnumIngotType;
 import com.shinoow.abyssalcraft.common.blocks.itemblock.*;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
+import com.shinoow.abyssalcraft.common.util.SoftDepUtil;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -123,12 +124,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadwood_log = new BlockACLog(MapColor.RED).setHardness(2.0F).setResistance(12.0F).setTranslationKey("dreadlog");
 		ACBlocks.dreadwood_leaves = new BlockACLeaves(ACBlocks.dreadwood_sapling, MapColor.RED).setHardness(0.2F).setResistance(1.0F).setTranslationKey("dreadleaves");
 		ACBlocks.dreadwood_planks = new BlockACBasic(Material.WOOD, 2.0F, 5.0F, SoundType.WOOD, MapColor.RED).setTranslationKey("dreadplanks");
-		ACBlocks.depths_ghoul_head = new BlockDGhead().setTranslationKey("dghead");
 		ACBlocks.liquid_coralium = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setTranslationKey("cwater");
 		ACBlocks.dreadlands_grass = new BlockDreadGrass().setHardness(0.4F).setTranslationKey("dreadgrass");
-		ACBlocks.pete_head = new BlockDGhead().setTranslationKey("phead");
-		ACBlocks.mr_wilson_head = new BlockDGhead().setTranslationKey("whead");
-		ACBlocks.dr_orange_head = new BlockDGhead().setTranslationKey("ohead");
 		ACBlocks.dreadstone_brick_stairs = new BlockACStairs(ACBlocks.dreadstone_brick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setTranslationKey("dreadbrickstairs");
 		ACBlocks.dreadstone_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.RED).setHardness(2.5F).setResistance(20.0F).setTranslationKey("dreadbrickfence");
 		ACBlocks.dreadstone_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.RED).setHardness(2.5F).setResistance(20.0F).setTranslationKey("dreadbrickslab1");
@@ -317,6 +314,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadlands_muck = new BlockDreadlandsMuck();
 		ACBlocks.sealing_lock = new BlockSealingLock();
 		ACBlocks.unlocked_sealing_lock = new BlockUnlockedSealingLock();
+
+		SoftDepUtil.declareBlocks();
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));
 		GameRegistry.registerTileEntity(TileEntityDGhead.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityDGhead"));

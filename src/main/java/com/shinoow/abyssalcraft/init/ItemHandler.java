@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.common.items.*;
 import com.shinoow.abyssalcraft.common.items.armor.*;
+import com.shinoow.abyssalcraft.common.util.SoftDepUtil;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.Crystals;
 import com.shinoow.abyssalcraft.lib.item.*;
@@ -339,10 +340,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.plated_coralium_chestplate = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.CHEST, "corplatep");
 		ACItems.plated_coralium_leggings = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.LEGS, "corlegsp");
 		ACItems.plated_coralium_boots = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.FEET, "corbootsp");
-		ACItems.depths_helmet = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.HEAD, "depthshelmet");
-		ACItems.depths_chestplate = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.CHEST, "depthsplate");
-		ACItems.depths_leggings = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.LEGS, "depthslegs");
-		ACItems.depths_boots = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.FEET, "depthsboots");
 		ACItems.dreadium_helmet = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.HEAD, "dreadiumhelmet");
 		ACItems.dreadium_chestplate = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.CHEST, "dreadiumplate");
 		ACItems.dreadium_leggings = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.LEGS, "dreadiumlegs");
@@ -359,6 +356,8 @@ public class ItemHandler implements ILifeCycleHandler {
 		//Food
 		ACItems.generic_meat = new ItemFood(4, 0.4f, true).setTranslationKey("generic_meat").setCreativeTab(ACTabs.tabFood);
 		ACItems.cooked_generic_meat = new ItemFood(9, 0.9f, true).setTranslationKey("cooked_generic_meat").setCreativeTab(ACTabs.tabFood);
+
+		SoftDepUtil.declareItems();
 
 		registerItem(devsword, "devsword");
 		registerItem(shoggoth_projectile, "shoggoth_projectile");
