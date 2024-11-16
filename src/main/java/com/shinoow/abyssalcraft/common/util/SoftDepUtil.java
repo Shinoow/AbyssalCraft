@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.common.items.armor.ItemDepthsArmor;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
 /**
- * Idk why I even need this, but suddenly I do,
+ * Idk why I even need this, but suddenly I do.
  * Makes problem go away, everbody's happy
  */
 public class SoftDepUtil {
