@@ -63,6 +63,7 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -187,8 +188,33 @@ public class AbyssalCraftEventHooks {
 					source == AbyssalCraftAPI.coralium)
 				event.setCanceled(true);
 		}
+		
+		if(Loader.isModLoaded("nuclearcraft") && EntityUtil.isEntityDread(entity)) {
+			processRadiation(event);
+		}
 	}
+	
+	String[] sourceNames = {"fission_burn", "fatal_rads"};
 
+	private void processRadiation(LivingAttackEvent event) {
+		String type = event.getSource().getDamageType();
+		boolean flag = false;
+		for(String src : sourceNames) {
+			if(type.contentEquals(src)) {
+				flag = true;
+				break;
+			}
+		}
+		if(flag) {
+			event.setCanceled(true);
+			// Dread Plague carriers absorb the radiation for sustenance
+			// (but only if Hardcore Mode is enabled, because we are nice here)
+			if(ACConfig.hardcoreMode && EntityUtil.isDreadPlagueCarrier(event.getEntityLiving())) {
+				event.getEntityLiving().heal(event.getAmount());
+			}
+		}
+	}
+	
 	@SubscribeEvent
 	public void darkRealm(LivingUpdateEvent event){
 		if(event.getEntityLiving() instanceof EntityPlayerMP){
