@@ -29,9 +29,16 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 @SuppressWarnings("deprecation")
 public class WorldGenDrT extends WorldGenTrees {
 
+	private int maxHeight = -1;
+
 	public WorldGenDrT(boolean flag)
 	{
 		super(flag);
+	}
+	
+	public WorldGenDrT setMaxHeight(int height) {
+		maxHeight = height;
+		return this;
 	}
 
 	@Override
@@ -48,10 +55,13 @@ public class WorldGenDrT extends WorldGenTrees {
 
 		IBlockState j1 = world.getBlockState(new BlockPos(x, y -1, z));
 
-		if (j1.getBlock() != Blocks.DIRT && j1.getBlock() != ACBlocks.dreadlands_dirt && j1 != ACBlocks.dreadstone && j1.getMaterial() != Material.GRASS || y >= 256 - height - 1)
+		if (j1.getBlock() != Blocks.DIRT && j1.getBlock() != ACBlocks.dreadlands_dirt && j1.getBlock() != ACBlocks.dreadstone && j1.getMaterial() != Material.GRASS || y >= 256 - height - 1)
 			return false;
 
-		if(j1.getBlock() != ACBlocks.dreadlands_grass && j1 != ACBlocks.dreadstone && j1.getBlock() != ACBlocks.dreadlands_dirt)
+		if(maxHeight > -1 && y > maxHeight)
+			return false;
+		
+		if(j1.getBlock() != ACBlocks.dreadlands_grass && j1.getBlock() != ACBlocks.dreadstone && j1.getBlock() != ACBlocks.dreadlands_dirt)
 			setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), Blocks.DIRT.getDefaultState());
 		else setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), ACBlocks.dreadlands_dirt.getDefaultState());
 

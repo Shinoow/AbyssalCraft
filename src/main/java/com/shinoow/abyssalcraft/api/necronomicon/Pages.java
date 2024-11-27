@@ -189,6 +189,8 @@ public class Pages {
 	public static Page DREAD_PLAGUE_INFO_2;
 
 	public static Page INFORMATION_DREADLANDS;
+	
+	public static Page LAIR_OF_CHAGAROTH_1;
 
 	//All things Omothol
 

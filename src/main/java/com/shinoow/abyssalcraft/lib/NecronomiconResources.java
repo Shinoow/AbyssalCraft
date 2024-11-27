@@ -59,6 +59,17 @@ public class NecronomiconResources {
 	public static final ResourceLocation SHADOW_BEAST = res("shadow-beast");
 	public static final ResourceLocation SACTHOTH = res("sacthoth");
 
+	//Overworld structures
+
+	//Abyssal Wasteland structures
+
+	//Dreadlands structures
+	public static final ResourceLocation CHAGAROTH_LAIR_ENTRANCE = res("dreadlands/lair_entrance");
+
+	//Omothol structures
+
+	//Dark Realm structures
+
 	//Seals representing The Great Old Ones, no idea how many I'm going to do
 	public static final ResourceLocation AZATHOTH_SEAL = res("azathoth");
 	public static final ResourceLocation NYARLATHOTEP_SEAL = res("nyarlathotep");

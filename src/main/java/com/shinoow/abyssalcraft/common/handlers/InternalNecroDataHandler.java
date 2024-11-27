@@ -408,6 +408,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 		Pages.INFORMATION_DREADLANDS = new Page(1, NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, NecronomiconText.INFORMATION_DREADLANDS);
 
+		Pages.LAIR_OF_CHAGAROTH_1 = new Page(1, NecronomiconText.LABEL_STRUCTURES, 2, NecronomiconResources.CHAGAROTH_LAIR_ENTRANCE, NecronomiconText.WIP);
+		
 		Pages.MATERIAL_OMOTHOL_STONE = new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.omothol_stone), NecronomiconText.MATERIAL_OMOTHOL_STONE_1);
 		Pages.MATERIAL_ETHAXIUM_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.ethaxium), NecronomiconText.MATERIAL_ETHAXIUM_1);
 		Pages.MATERIAL_ETHAXIUM_2 = new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_ETHAXIUM_2);
@@ -605,7 +607,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.DREADLANDS_PLAGUE.addPages(Pages.DREAD_PLAGUE_INFO_1, Pages.DREAD_PLAGUE_INFO_2);
 		Chapters.DREADLANDS.addPage(Pages.INFORMATION_DREADLANDS); //TODO dimensions
 		Chapters.DREADLANDS_BIOMES.addPage(Pages.WIP); //TODO biomes
-		Chapters.DREADLANDS_STRUCTURES.addPage(Pages.WIP); //TODO structures
+		Chapters.DREADLANDS_STRUCTURES.addPage(Pages.LAIR_OF_CHAGAROTH_1); //TODO structures
 		Chapters.OMOTHOL_MATERIALS.addPages(Pages.MATERIAL_OMOTHOL_STONE, Pages.MATERIAL_ETHAXIUM_1, Pages.MATERIAL_ETHAXIUM_2, Pages.MATERIAL_DARK_ETHAXIUM_1);
 		Chapters.OMOTHOL_PROGRESSION.addPages(Pages.PROGRESSION_OMOTHOL_1, Pages.PROGRESSION_OMOTHOL_2);
 		Chapters.OMOTHOL_MOBS.addPages(Pages.ENTITY_REMNANT_1, Pages.ENTITY_REMNANT_2, Pages.ENTITY_OMOTHOL_GHOUL_1, Pages.ENTITY_OMOTHOL_GHOUL_2, Pages.ENTITY_MINION_OF_THE_GATEKEEPER_1, Pages.ENTITY_MINION_OF_THE_GATEKEEPER_2, Pages.ENTITY_JZAHAR_1, Pages.ENTITY_JZAHAR_2, Pages.ENTITY_OMOTHOL_SHOGGOTH_1, Pages.ENTITY_OMOTHOL_SHOGGOTH_2);

@@ -62,8 +62,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
-import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -188,12 +188,11 @@ public class AbyssalCraftEventHooks {
 					source == AbyssalCraftAPI.coralium)
 				event.setCanceled(true);
 		}
-		
-		if(Loader.isModLoaded("nuclearcraft") && EntityUtil.isEntityDread(entity)) {
+
+		if(Loader.isModLoaded("nuclearcraft") && EntityUtil.isEntityDread(entity))
 			processRadiation(event);
-		}
 	}
-	
+
 	String[] sourceNames = {"fission_burn", "fatal_rads"};
 
 	private void processRadiation(LivingAttackEvent event) {
@@ -214,7 +213,7 @@ public class AbyssalCraftEventHooks {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void darkRealm(LivingUpdateEvent event){
 		if(event.getEntityLiving() instanceof EntityPlayerMP){

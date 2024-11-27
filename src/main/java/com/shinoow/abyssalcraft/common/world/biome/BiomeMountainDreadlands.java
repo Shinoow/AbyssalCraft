@@ -12,17 +12,27 @@
 package com.shinoow.abyssalcraft.common.world.biome;
 
 
+import java.util.Random;
+
 import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.world.gen.WorldGenDrT;
+import com.shinoow.abyssalcraft.common.world.gen.WorldGenNoTree;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BiomeMountainDreadlands extends BiomeDreadlandsBase {
 
+	private WorldGenTrees worldGenDreadTrees;
+
 	public BiomeMountainDreadlands(BiomeProperties par1) {
 		super(par1);
+		worldGenDreadTrees = new WorldGenDrT(false).setMaxHeight(95);
+		decorator.treesPerChunk = 3;
 	}
 
 	@Override
@@ -32,6 +42,12 @@ public class BiomeMountainDreadlands extends BiomeDreadlandsBase {
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 20, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothFist.class, 25, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityChagarothSpawn.class, 30, 1, 2));
+	}
+
+	@Override
+	public WorldGenAbstractTree getRandomTreeFeature(Random par1Random)
+	{
+		return par1Random.nextInt(3) == 0 ? new WorldGenNoTree() : par1Random.nextInt(5) == 0 ? worldGenDreadTrees : new WorldGenNoTree();
 	}
 
 	@Override

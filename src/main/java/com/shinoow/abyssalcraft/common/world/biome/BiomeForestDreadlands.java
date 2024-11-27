@@ -25,8 +25,7 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BiomeForestDreadlands extends BiomeDreadlandsBase
-{
+public class BiomeForestDreadlands extends BiomeDreadlandsBase {
 
 	private WorldGenTrees WorldGenDreadTrees;
 
