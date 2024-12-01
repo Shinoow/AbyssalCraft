@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -40,7 +41,7 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	private final String unlocalizedName;
 	private int bookType, color;
 	private float requiredEnergy;
-	private boolean nbtSensitive, requiresCharging;
+	private boolean nbtSensitive, requiresCharging, canBeCastByOthers;
 	private Spell parent;
 	private ResourceLocation glyph;
 	private IResearchItem condition = ResearchItems.DEFAULT;
@@ -134,6 +135,15 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	}
 
 	/**
+	 * Sets if non-players (Remnants, MoTGK, J'zahar etc)
+	 * can cast this spell
+	 */
+	public Spell setCanBeCastByOthers(boolean canBeCastByOthers) {
+		this.canBeCastByOthers = canBeCastByOthers;
+		return this;
+	}
+
+	/**
 	 * Used to fetch the reagents used to inscribe this spell
 	 * @return An array of Objects representing reagents
 	 */
@@ -203,6 +213,14 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	 */
 	public ScrollType getScrollType() {
 		return scrollType;
+	}
+
+	/**
+	 * Returns if non-players (Remnants, MoTGK, J'zahar etc) can cast this spell
+	 * @return Well... CAN THEY???
+	 */
+	public boolean canOthersCast() {
+		return canBeCastByOthers;
 	}
 
 	/**
@@ -286,6 +304,17 @@ public abstract class Spell implements IResearchable<Spell, Spell> {
 	 * @param scrollType Quality of the scroll being used
 	 */
 	protected abstract void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType);
+
+	/**
+	 * Override this to do something if a non-player entity casts this spell
+	 * @param world Current World
+	 * @param pos Current position
+	 * @param caster Caster of the spell (likely a Remnant, a MoTGK or J'zahar)
+	 * @param scrollType "Skillset" of the caster
+	 */
+	public void castSpellOther(World  world, BlockPos pos, EntityLiving caster, ScrollType scrollType) {
+
+	}
 
 	@Override
 	public Spell setResearchItem(IResearchItem condition) {

@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -29,6 +30,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemScroll extends ItemACBasic implements IScroll {
 
 	private ScrollType type;
+
+	private Spell spell;
 
 	public ItemScroll(String name, ScrollType scrollType) {
 		super(name);
@@ -42,23 +45,32 @@ public class ItemScroll extends ItemACBasic implements IScroll {
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack)
 	{
-		Spell spell = SpellUtils.getSpell(stack);
-		return spell != null ? spell.requiresCharging() ? 50 : 0 : 0;
+		return spell != null && spell.requiresCharging() ? 50 : 0;
 	}
 
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
 	{
 		if(entityLiving instanceof EntityPlayer)
-			SpellUtils.castChargingSpell(stack, worldIn, (EntityPlayer)entityLiving);
+			SpellUtils.castChargingSpell(spell, type, worldIn, (EntityPlayer)entityLiving);
 		return stack;
+	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	{
+		if (!worldIn.isRemote)
+		{
+			if(spell == null)
+				spell = SpellUtils.getSpell(stack);
+		}
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
 		ItemStack stack = playerIn.getHeldItem(handIn);
-		SpellUtils.castInstantSpell(stack, worldIn, playerIn, handIn);
+		SpellUtils.castInstantSpell(spell, type, worldIn, playerIn, handIn);
 
 		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}

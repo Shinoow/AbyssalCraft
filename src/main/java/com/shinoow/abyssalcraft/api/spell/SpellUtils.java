@@ -87,8 +87,17 @@ public class SpellUtils {
 	 * @param player Player attempting to cast the spell
 	 */
 	public static void castChargingSpell(ItemStack stack, World world, EntityPlayer player) {
-		Spell spell = getSpell(stack);
-		ScrollType scrollType = getScrollType(stack);
+		castChargingSpell(getSpell(stack), getScrollType(stack), world, player);
+	}
+
+	/**
+	 * Attempts to cast a charging spell
+	 * @param spell Spell begin cast (if present)
+	 * @param scrollType Rarity of scroll casting spell
+	 * @param world Current World
+	 * @param player Player attempting to cast the spell
+	 */
+	public static void castChargingSpell(@Nullable Spell spell, ScrollType scrollType, World world, EntityPlayer player) {
 		if(spell != null)
 			if(spell.requiresCharging() && spell.canCastSpell(world, player.getPosition(), player, scrollType)
 					&& hasEnoughPE(player, spell.getReqEnergy())){
@@ -105,8 +114,18 @@ public class SpellUtils {
 	 * @param hand Current hand
 	 */
 	public static void castInstantSpell(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
-		Spell spell = getSpell(stack);
-		ScrollType scrollType = getScrollType(stack);
+		castInstantSpell(getSpell(stack), getScrollType(stack), world, player, hand);
+	}
+
+	/**
+	 * Attempts to cast an instant spell
+	 * @param spell Spell begin cast (if present)
+	 * @param scrollType Rarity of scroll casting spell
+	 * @param world Current World
+	 * @param player Player attempting to cast the spell
+	 * @param hand Current hand
+	 */
+	public static void castInstantSpell(Spell spell, ScrollType scrollType, World world, EntityPlayer player, EnumHand hand) {
 		if(spell != null)
 			if(!spell.requiresCharging()){
 				if(spell.canCastSpell(world, player.getPosition(), player, scrollType) && hasEnoughPE(player, spell.getReqEnergy())){
