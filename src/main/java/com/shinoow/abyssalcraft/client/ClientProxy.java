@@ -31,6 +31,7 @@ import com.shinoow.abyssalcraft.client.handlers.ClientVarsReloadListener;
 import com.shinoow.abyssalcraft.client.model.block.ModelDGhead;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
 import com.shinoow.abyssalcraft.client.particles.ACParticleFX;
+import com.shinoow.abyssalcraft.client.particles.ItemRitualParticle;
 import com.shinoow.abyssalcraft.client.particles.PEStreamParticleFX;
 import com.shinoow.abyssalcraft.client.render.block.*;
 import com.shinoow.abyssalcraft.client.render.entity.*;
@@ -319,6 +320,12 @@ public class ClientProxy extends CommonProxy {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public void spawnItemParticle(double posX, double posY, double posZ, double velX, double velY, double velZ, int[] data) {
+        int i = data.length > 1 ? data[1] : 0;
+		Minecraft.getMinecraft().effectRenderer.addEffect(new ItemRitualParticle(Minecraft.getMinecraft().world, posX, posY, posZ, velX, velY, velZ, Item.getItemById(data[0]), i));
 	}
 
 	public void spawnParticleLegacy(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ){

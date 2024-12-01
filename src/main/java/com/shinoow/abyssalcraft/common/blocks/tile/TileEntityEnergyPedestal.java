@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import java.util.Random;
-
 import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
@@ -28,7 +26,6 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 
 	private ItemStack item = ItemStack.EMPTY;
 	private float energy;
-	Random rand = new Random();
 	private boolean isDirty;
 
 	@Override

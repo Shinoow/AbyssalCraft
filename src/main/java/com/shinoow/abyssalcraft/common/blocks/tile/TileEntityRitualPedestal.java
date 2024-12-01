@@ -115,11 +115,11 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 			world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, pos.getX() + 0.5, pos.getY() + 2.05, pos.getZ() + 0.5, 0, .15, 0);
 			break;
 		case ITEM:
-			world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
+			AbyssalCraft.proxy.spawnItemParticle(pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX *0.2,.15,velZ*0.2, data);
 			break;
 		case ITEM_SMOKE_COMBO:
 			if(world.rand.nextBoolean())
-				world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX,.15,velZ, data);
+				AbyssalCraft.proxy.spawnItemParticle(pos.getX() + xOffset, pos.getY() + 0.95, pos.getZ() + zOffset, velX *0.2,.15,velZ*0.2, data);
 			else world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, velX/2,0,velZ/2);
 			break;
 		case NONE:
