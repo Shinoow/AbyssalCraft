@@ -35,13 +35,13 @@ public class FloatingSpell extends Spell {
 	@Override
 	protected void castSpellClient(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
-		player.motionY = 0.1;
+		player.motionY = 0.119;
 	}
 
 	@Override
 	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
 		player.fallDistance = 0;
-		player.motionY = 0.1;
+		player.motionY = 0.119;
 	}
 }
