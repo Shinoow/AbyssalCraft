@@ -144,6 +144,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityShoggoth.class, manager -> new RenderShoggoth(manager, 1, 1.0F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterShoggoth.class, manager -> new RenderShoggoth(manager, 2, 1.6F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCompassTentacle.class, RenderCompassTentacle::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityRemnantTrader.class, RenderRemnantTrader::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, RenderAntiAbyssalZombie::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, RenderAntiBat::new);

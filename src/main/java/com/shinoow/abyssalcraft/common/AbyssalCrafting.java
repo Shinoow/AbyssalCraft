@@ -402,6 +402,9 @@ public class AbyssalCrafting {
 				PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER), new ItemStack(ACItems.rotten_anti_flesh), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER),
 				new ItemStack(ACItems.rotten_anti_flesh), new ItemStack(Items.GUNPOWDER)};
 		RitualRegistry.instance().registerRitual(Rituals.ANTIMATTER_AOE = new NecronomiconPotionAoERitual("antiPotionAoE", 0, 300F, AbyssalCraftAPI.antimatter_potion, antiaoeofferings));
+		Object[] psdlofferings = new Object[]{new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence),
+				new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence)};
+		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_INFUSED_POWERSTONE = new NecronomiconInfusionRitual("powerStone", 2, ACLib.dreadlands_id, 5000F, new ItemStack(ACBlocks.dreadlands_infused_powerstone), ACBlocks.coralium_infused_stone, psdlofferings));
 		RitualRegistry.instance().registerRitual(Rituals.RESURRECTION = new NecronomiconResurrectionRitual());
 		Object[] facebookofferings = new Object[] {new ItemStack(ACItems.crystal_carbon), new ItemStack(ACItems.crystal_hydrogen), new ItemStack(ACItems.crystal_nitrogen), new ItemStack(ACItems.crystal_oxygen), new ItemStack(ACItems.crystal_phosphorus),
 				new ItemStack(ACItems.crystal_sulfur), Items.FEATHER, Items.DYE};
@@ -443,9 +446,6 @@ public class AbyssalCrafting {
 				new ItemStack(ACItems.shadow_shoggoth_flesh), new ItemStack(ACItems.shadow_shoggoth_flesh), new ItemStack(ACItems.abyssal_wasteland_essence), new ItemStack(ACItems.dreadlands_essence),
 				new ItemStack(ACItems.omothol_essence)};
 		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_STATUE = new NecronomiconInfusionRitual("shubniggurathStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.shub_niggurath_statue), new ItemStack(ACBlocks.monolith_stone), shubniggurathofferings));
-		Object[] psdlofferings = new Object[]{new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence),
-				new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence), new ItemStack(ACItems.dreadlands_essence)};
-		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_INFUSED_POWERSTONE = new NecronomiconInfusionRitual("powerStone", 4, ACLib.dreadlands_id, 5000F, new ItemStack(ACBlocks.dreadlands_infused_powerstone), ACBlocks.coralium_infused_stone, psdlofferings));
 		Object[] ethofferings = new Object[]{ACItems.ethaxium_brick, null, ACItems.ethaxium_brick, null, ACItems.ethaxium_brick, null, ACItems.ethaxium_brick};
 		RitualRegistry.instance().registerRitual(Rituals.PURGING = new NecronomiconPurgingRitual());
 		RitualRegistry.instance().registerRitual(Rituals.ETHAXIUM_INGOT = new NecronomiconInfusionRitual("ethaxiumIngot", 3, ACLib.omothol_id, 1000F, new ItemStack(ACItems.ethaxium_ingot), new ItemStack(ACItems.life_crystal), ethofferings));

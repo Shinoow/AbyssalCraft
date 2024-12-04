@@ -1479,6 +1479,8 @@ entity.abyssalcraft.coraliumsquid.name=Coralium Infested Squid
 entity.abyssalcraft.shuboffspring.name=Dark Offspring
 entity.abyssalcraft.shoggoth.name=Shoggoth
 entity.abyssalcraft.greatershoggoth.name=Greater Shoggoth
+entity.abyssalcraft.remnanttrader.name=A real Villager
+
 
 #Potions
 potion.Cplague=Coralium Plague
