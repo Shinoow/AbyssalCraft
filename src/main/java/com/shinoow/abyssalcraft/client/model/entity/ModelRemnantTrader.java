@@ -1,5 +1,7 @@
 package com.shinoow.abyssalcraft.client.model.entity;
 
+import com.shinoow.abyssalcraft.common.entity.EntityRemnantTrader;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -180,90 +182,108 @@ public class ModelRemnantTrader extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
 	{
-		head.rotateAngleY = netHeadYaw * 0.017453292F;
-		head.rotateAngleX = headPitch * 0.017453292F;
-		villagerArms0.rotationPointY = 3.0F;
-		villagerArms0.rotationPointZ = -1.0F;
-		villagerArms0.rotateAngleX = -0.75F;
-		villagerArms1.rotationPointY = 3.0F;
-		villagerArms1.rotationPointZ = -1.0F;
-		villagerArms1.rotateAngleX = -0.75F;
-		rightLegJoint.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
-		leftLegJoint.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount * 0.5F;
-		rightLegJoint.rotateAngleY = 0.0F;
-		leftLegJoint.rotateAngleY = 0.0F;
+		int timer = 0;
+		if(entityIn instanceof EntityRemnantTrader)
+			timer = ((EntityRemnantTrader) entityIn).timer;
+		if(timer > 0) {
+			if(timer % 5 == 0) {
+				villagerArms0.rotateAngleY += timer;
+				villagerArms0.rotateAngleZ = 90;
+				villagerArms1.rotateAngleY += timer;
+				villagerArms1.rotateAngleZ = -90;
+				villagerBody.rotateAngleY += timer;
+				head.rotateAngleY += timer;
+			}
+		} else {
+			villagerArms0.rotateAngleY = 0;
+			villagerArms0.rotateAngleZ = 0;
+			villagerArms1.rotateAngleY = 0;
+			villagerArms1.rotateAngleZ = 0;
+			head.rotateAngleY = netHeadYaw * 0.017453292F;
+			head.rotateAngleX = headPitch * 0.017453292F;
+			villagerBody.rotateAngleY = 0;
+			villagerArms0.rotationPointY = 3.0F;
+			villagerArms0.rotationPointZ = -1.0F;
+			villagerArms0.rotateAngleX = -0.75F;
+			villagerArms1.rotationPointY = 3.0F;
+			villagerArms1.rotationPointZ = -1.0F;
+			villagerArms1.rotateAngleX = -0.75F;
+			rightLegJoint.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
+			leftLegJoint.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount * 0.5F;
+			rightLegJoint.rotateAngleY = 0.0F;
+			leftLegJoint.rotateAngleY = 0.0F;
 
 
-		arm1.offsetX = arm1.offsetY = arm1.offsetZ = 0.0F;
-		float f16 = 0.03F * (entityIn.getEntityId() % 10);
-		arm1.rotateAngleY = MathHelper.cos(entityIn.ticksExisted * f16) * 10.5F * (float)Math.PI / 180.0F;
-		arm1.rotateAngleX = 0.0F;
-		arm1.rotateAngleZ = MathHelper.sin(entityIn.ticksExisted * f16) * 6.5F * (float)Math.PI / 180.0F;
-		arm2.offsetX = arm2.offsetY = arm2.offsetZ = 0.0F;
-		arm2.rotateAngleY = MathHelper.sin(entityIn.ticksExisted * f16) * 10.5F * (float)Math.PI / 180.0F;
-		arm2.rotateAngleX = 0.0F;
-		arm2.rotateAngleZ = MathHelper.cos(entityIn.ticksExisted * f16) * 6.5F * (float)Math.PI / 180.0F;
-		arm3.offsetX = arm3.offsetY = arm3.offsetZ = 0.0F;
-		arm3.rotateAngleY = MathHelper.sin(entityIn.ticksExisted * f16) * 10.5F * (float)Math.PI / 180.0F;
-		arm3.rotateAngleX = 0.0F;
-		arm3.rotateAngleZ = MathHelper.cos(entityIn.ticksExisted * f16) * 6.5F * (float)Math.PI / 180.0F;
-		arm4.offsetX = arm4.offsetY = arm4.offsetZ = 0.0F;
-		arm4.rotateAngleY = MathHelper.cos(entityIn.ticksExisted * f16) * 10.5F * (float)Math.PI / 180.0F;
-		arm4.rotateAngleX = 0.0F;
-		arm4.rotateAngleZ = MathHelper.sin(entityIn.ticksExisted * f16) * 6.5F * (float)Math.PI / 180.0F;
+			arm1.offsetX = arm1.offsetY = arm1.offsetZ = 0.0F;
+			float f16 = 0.03F * (entityIn.getEntityId() % 10);
+			arm1.rotateAngleY = MathHelper.cos(entityIn.ticksExisted * f16) * 10.5F * (float)Math.PI / 180.0F;
+			arm1.rotateAngleX = 0.0F;
+			arm1.rotateAngleZ = MathHelper.sin(entityIn.ticksExisted * f16) * 6.5F * (float)Math.PI / 180.0F;
+			arm2.offsetX = arm2.offsetY = arm2.offsetZ = 0.0F;
+			arm2.rotateAngleY = MathHelper.sin(entityIn.ticksExisted * f16) * 10.5F * (float)Math.PI / 180.0F;
+			arm2.rotateAngleX = 0.0F;
+			arm2.rotateAngleZ = MathHelper.cos(entityIn.ticksExisted * f16) * 6.5F * (float)Math.PI / 180.0F;
+			arm3.offsetX = arm3.offsetY = arm3.offsetZ = 0.0F;
+			arm3.rotateAngleY = MathHelper.sin(entityIn.ticksExisted * f16) * 10.5F * (float)Math.PI / 180.0F;
+			arm3.rotateAngleX = 0.0F;
+			arm3.rotateAngleZ = MathHelper.cos(entityIn.ticksExisted * f16) * 6.5F * (float)Math.PI / 180.0F;
+			arm4.offsetX = arm4.offsetY = arm4.offsetZ = 0.0F;
+			arm4.rotateAngleY = MathHelper.cos(entityIn.ticksExisted * f16) * 10.5F * (float)Math.PI / 180.0F;
+			arm4.rotateAngleX = 0.0F;
+			arm4.rotateAngleZ = MathHelper.sin(entityIn.ticksExisted * f16) * 6.5F * (float)Math.PI / 180.0F;
 
-		MathHelper.sin((limbSwing * 0.4F + 2) * 1.5F);
-		float flap = MathHelper.sin(entityIn.ticksExisted * 0.2F) * 0.3F;
-		float flap2 = MathHelper.cos(entityIn.ticksExisted * 0.2F) * 0.4F;
+			float flap = MathHelper.sin(entityIn.ticksExisted * 0.2F) * 0.3F;
+			float flap2 = MathHelper.cos(entityIn.ticksExisted * 0.2F) * 0.4F;
 
-		leftLegT1.rotateAngleY = flap * 10.5F * (float)Math.PI / 180.0F + 0.3f;
-		leftLegT1.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F;
+			leftLegT1.rotateAngleY = (flap * 10.5F * (float)Math.PI / 180.0F + 0.3f) * limbSwingAmount;
+			leftLegT1.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F * limbSwingAmount;
 
-		leftLegT3.rotateAngleY = flap * 10.5F * (float)Math.PI / 180.0F - 0.3f;
-		leftLegT3.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F;
+			leftLegT3.rotateAngleY = (flap * 10.5F * (float)Math.PI / 180.0F - 0.3f) * limbSwingAmount;
+			leftLegT3.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F * limbSwingAmount;
 
-		leftLegT4.rotateAngleY = flap * 10.5F * (float)Math.PI / 180.0F + 0.3F;
-		leftLegT4.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F;
+			leftLegT4.rotateAngleY = (flap * 10.5F * (float)Math.PI / 180.0F + 0.3F) * limbSwingAmount;
+			leftLegT4.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F * limbSwingAmount;
 
-		leftLegT2.rotateAngleY = flap * 10.5F * (float)Math.PI / 180.0F - 0.3F;
-		leftLegT2.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F;
+			leftLegT2.rotateAngleY = (flap * 10.5F * (float)Math.PI / 180.0F - 0.3F) * limbSwingAmount;
+			leftLegT2.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F * limbSwingAmount;
 
-		rightLegT1.rotateAngleY = flap * 10.5F * (float)Math.PI / 180.0F - 0.3F;
-		rightLegT1.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F;
+			rightLegT1.rotateAngleY = (flap * 10.5F * (float)Math.PI / 180.0F - 0.3F) * limbSwingAmount;
+			rightLegT1.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F * limbSwingAmount;
 
-		rightLegT3.rotateAngleY = flap * 10.5F * (float)Math.PI / 180.0F + 0.3F;
-		rightLegT3.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F;
+			rightLegT3.rotateAngleY = (flap * 10.5F * (float)Math.PI / 180.0F + 0.3F) * limbSwingAmount;
+			rightLegT3.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F * limbSwingAmount;
 
-		rightLegT4.rotateAngleY = flap * 10.5F * (float)Math.PI / 180.0F - 0.3F;
-		rightLegT4.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F;
+			rightLegT4.rotateAngleY = (flap * 10.5F * (float)Math.PI / 180.0F - 0.3F) * limbSwingAmount;
+			rightLegT4.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F * limbSwingAmount;
 
-		rightLegT2.rotateAngleY = flap * 10.5F * (float)Math.PI / 180.0F + 0.3F;
-		rightLegT2.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F;
+			rightLegT2.rotateAngleY = (flap * 10.5F * (float)Math.PI / 180.0F + 0.3F) * limbSwingAmount;
+			rightLegT2.rotateAngleX = flap2 * 6.5F * (float)Math.PI / 180.0F * limbSwingAmount;
 
-		rightLegB1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		rightLegB1.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		rightLegB1.rotateAngleY = 0.0F;
-		rightLegB2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-		rightLegB2.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-		rightLegB2.rotateAngleY = 0.0F;
-		rightLegB3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-		rightLegB3.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-		rightLegB3.rotateAngleY = 0.0F;
-		rightLegB4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		rightLegB4.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		rightLegB4.rotateAngleY = 0.0F;
+			rightLegB1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+			rightLegB1.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+			rightLegB1.rotateAngleY = 0.0F;
+			rightLegB2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+			rightLegB2.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+			rightLegB2.rotateAngleY = 0.0F;
+			rightLegB3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+			rightLegB3.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+			rightLegB3.rotateAngleY = 0.0F;
+			rightLegB4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+			rightLegB4.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+			rightLegB4.rotateAngleY = 0.0F;
 
-		leftLegB1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		leftLegB1.rotateAngleZ = -MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		leftLegB1.rotateAngleY = 0.0F;
-		leftLegB2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-		leftLegB2.rotateAngleZ = -MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-		leftLegB2.rotateAngleY = 0.0F;
-		leftLegB3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-		leftLegB3.rotateAngleZ = -MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-		leftLegB3.rotateAngleY = 0.0F;
-		leftLegB4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		leftLegB4.rotateAngleZ = -MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		leftLegB4.rotateAngleY = 0.0F;
+			leftLegB1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+			leftLegB1.rotateAngleZ = -MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+			leftLegB1.rotateAngleY = 0.0F;
+			leftLegB2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+			leftLegB2.rotateAngleZ = -MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+			leftLegB2.rotateAngleY = 0.0F;
+			leftLegB3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+			leftLegB3.rotateAngleZ = -MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+			leftLegB3.rotateAngleY = 0.0F;
+			leftLegB4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+			leftLegB4.rotateAngleZ = -MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+			leftLegB4.rotateAngleY = 0.0F;
+		}
 	}
 }
