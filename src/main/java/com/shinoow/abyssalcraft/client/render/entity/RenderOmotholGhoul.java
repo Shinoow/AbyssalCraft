@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
+import com.shinoow.abyssalcraft.client.model.entity.ModelGhoul;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulHeldItem;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
@@ -29,18 +29,18 @@ public class RenderOmotholGhoul extends RenderLiving<EntityOmotholGhoul> {
 
 	private float scale = 1.2F;
 
-	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/omothol_ghoul.png");
+	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/omothol_ghoul.png");
 
 	public RenderOmotholGhoul(RenderManager manager)
 	{
-		this(manager, new ModelDG());
+		this(manager, new ModelGhoul());
 	}
 
-	public RenderOmotholGhoul(RenderManager manager, ModelDG model){
+	public RenderOmotholGhoul(RenderManager manager, ModelGhoul model){
 		super(manager, model, 0.8F);
 		addLayer(new LayerGhoulHeldItem(this));
 		addLayer(new LayerGhoulArmor(this));
-		addLayer(new LayerCustomHead(model.Head));
+		addLayer(new LayerCustomHead(model.head));
 	}
 
 	/**

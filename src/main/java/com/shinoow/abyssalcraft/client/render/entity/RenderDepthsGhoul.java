@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
+import com.shinoow.abyssalcraft.client.model.entity.ModelGhoul;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulHeldItem;
@@ -27,22 +27,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderDepthsGhoul extends RenderLiving<EntityDepthsGhoul> {
 
-	private static final ResourceLocation peteResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_pete.png");
-	private static final ResourceLocation wilsonResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_wilson.png");
-	private static final ResourceLocation orangeResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul_orange.png");
-	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/depths_ghoul.png");
+	private static final ResourceLocation peteResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/depths_ghoul_pete.png");
+	private static final ResourceLocation wilsonResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/depths_ghoul_wilson.png");
+	private static final ResourceLocation orangeResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/depths_ghoul_orange.png");
+	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/depths_ghoul.png");
 
 	public RenderDepthsGhoul(RenderManager manager)
 	{
-		this(manager, new ModelDG());
-		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft", "textures/model/depths_ghoul_eyes.png")));
+		this(manager, new ModelGhoul());
+		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft", "textures/model/ghoul/depths_ghoul_eyes.png")));
 	}
 
-	public RenderDepthsGhoul(RenderManager manager, ModelDG model){
+	public RenderDepthsGhoul(RenderManager manager, ModelGhoul model){
 		super(manager, model, 0.8F);
 		addLayer(new LayerGhoulHeldItem(this));
 		addLayer(new LayerGhoulArmor(this));
-		addLayer(new LayerCustomHead(model.Head));
+		addLayer(new LayerCustomHead(model.head));
 	}
 
 	@Override

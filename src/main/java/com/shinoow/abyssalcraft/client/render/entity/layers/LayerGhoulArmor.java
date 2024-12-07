@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.client.render.entity.layers;
 import com.shinoow.abyssalcraft.api.armor.ArmorData;
 import com.shinoow.abyssalcraft.api.armor.ArmorDataRegistry;
 import com.shinoow.abyssalcraft.client.model.entity.ModelDGArmor;
+import com.shinoow.abyssalcraft.client.model.entity.ModelGhoulArmor;
 import com.shinoow.abyssalcraft.lib.client.render.entity.layers.LayerACArmorBase;
 
 import net.minecraft.client.renderer.entity.RenderLivingBase;
@@ -23,20 +24,21 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class LayerGhoulArmor extends LayerACArmorBase<ModelDGArmor>
+public class LayerGhoulArmor extends LayerACArmorBase<ModelGhoulArmor>
 {
 	private final ResourceLocation MISSING_ARMOR = new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_1.png");
 
 	public LayerGhoulArmor(RenderLivingBase<?> rendererIn)
 	{
 		super(rendererIn);
+		//TODO re-do textures where needed
 	}
 
 	@Override
 	protected void initArmor()
 	{
-		modelLeggings = new ModelDGArmor(0.5F);
-		modelArmor = new ModelDGArmor(1.0F);
+		modelLeggings = new ModelGhoulArmor(0.5F);
+		modelArmor = new ModelGhoulArmor(1.0F);
 	}
 
 	@Override

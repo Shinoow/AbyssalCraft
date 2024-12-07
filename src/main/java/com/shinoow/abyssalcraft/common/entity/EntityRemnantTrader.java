@@ -1,6 +1,7 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -9,7 +10,10 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class EntityRemnantTrader extends EntityMob implements IOmotholEntity {
@@ -23,12 +27,13 @@ public class EntityRemnantTrader extends EntityMob implements IOmotholEntity {
 		tasks.addTask(4, new EntityAIOpenDoor(this, true));
 		tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 0.35D));
 		tasks.addTask(6, new EntityAIWander(this, 0.35D));
-		tasks.addTask(7, new EntityAILookIdle(this));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnantTrader.class, 8.0F));
-		tasks.addTask(8, new EntityAIWorship(this));
+		tasks.addTask(7, new EntityAITempt(this, 0.5D, ACItems.token_of_jzahar, false));
+		tasks.addTask(8, new EntityAILookIdle(this));
+		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(8, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
+		tasks.addTask(8, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
+		tasks.addTask(8, new EntityAIWatchClosest(this, EntityRemnantTrader.class, 8.0F));
+		tasks.addTask(9, new EntityAIWorship(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		//		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 20, true, false, entity -> entity.getClass() == target));
 		setSize(0.6F, 1.95F);
@@ -57,9 +62,34 @@ public class EntityRemnantTrader extends EntityMob implements IOmotholEntity {
 	}
 
 	@Override
+	protected float getSoundPitch()
+	{
+		return rand.nextInt(10) == 0 ? 0.2F : super.getSoundPitch();
+	}
+
+
+	@Override
+	public String getName()
+	{
+		return TextFormatting.ITALIC + super.getName() + TextFormatting.RESET;
+	}
+	
+	@Override
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
 		if(timer > 0)
 			timer--;
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound()
+	{
+		return SoundEvents.ENTITY_VILLAGER_AMBIENT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound()
+	{
+		return ACSounds.shadow_death;
 	}
 }
