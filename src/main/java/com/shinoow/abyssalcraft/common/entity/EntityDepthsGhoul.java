@@ -76,7 +76,7 @@ public class EntityDepthsGhoul extends EntityMob implements ICoraliumEntity {
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		setSize(1.0F, 3.0F);
+		setSize(1.0F, 2.0F);
 	}
 
 	@Override

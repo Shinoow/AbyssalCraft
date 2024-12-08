@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderOmotholGhoul extends RenderLiving<EntityOmotholGhoul> {
 
-	private float scale = 1.2F;
+	private float scale = 1.1F;
 
 	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/omothol_ghoul.png");
 
@@ -43,28 +43,15 @@ public class RenderOmotholGhoul extends RenderLiving<EntityOmotholGhoul> {
 		addLayer(new LayerCustomHead(model.head));
 	}
 
-	/**
-	 * Applies the scale to the transform matrix
-	 */
-	protected void preRenderScale(EntityOmotholGhoul par1EntityOmotholGhoul, float par2)
-	{
-		GlStateManager.scale(scale, scale, scale);
-	}
-
-	protected ResourceLocation getGhoulTexture(EntityOmotholGhoul par1EntityLiving)
-	{
-		return ghoulResource;
-	}
-
 	@Override
 	protected void preRenderCallback(EntityOmotholGhoul par1EntityLivingBase, float par2)
 	{
-		preRenderScale(par1EntityLivingBase, par2);
+		GlStateManager.scale(scale, scale, scale);
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityOmotholGhoul entity) {
 
-		return getGhoulTexture(entity);
+		return ghoulResource;
 	}
 }

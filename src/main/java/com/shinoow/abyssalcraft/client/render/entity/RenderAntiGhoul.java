@@ -16,16 +16,16 @@ import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulHeldItem;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderAntiGhoul extends RenderLiving {
+public class RenderAntiGhoul extends RenderLiving<EntityAntiGhoul> {
 
 	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/anti/depths_ghoul.png");
 
@@ -35,20 +35,21 @@ public class RenderAntiGhoul extends RenderLiving {
 	}
 
 	public RenderAntiGhoul(RenderManager manager, ModelGhoul model){
-		super(manager, model, 0.8F);
+		super(manager, model, 0.6F);
 		addLayer(new LayerGhoulHeldItem(this));
 		addLayer(new LayerGhoulArmor(this));
 		addLayer(new LayerCustomHead(model.head));
 	}
 
-	protected ResourceLocation getGhoulTexture(EntityAntiGhoul par1EntityLiving)
+	@Override
+	protected void preRenderCallback(EntityAntiGhoul par1EntityLivingBase, float par2)
 	{
-		return ghoulResource;
+		GlStateManager.scale(0.7F, 0.7F, 0.7F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(EntityAntiGhoul entity) {
 
-		return getGhoulTexture((EntityAntiGhoul)entity);
+		return ghoulResource;
 	}
 }

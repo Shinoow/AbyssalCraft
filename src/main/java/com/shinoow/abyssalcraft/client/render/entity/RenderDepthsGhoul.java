@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulHeldItem;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
@@ -39,10 +40,16 @@ public class RenderDepthsGhoul extends RenderLiving<EntityDepthsGhoul> {
 	}
 
 	public RenderDepthsGhoul(RenderManager manager, ModelGhoul model){
-		super(manager, model, 0.8F);
+		super(manager, model, 0.6F);
 		addLayer(new LayerGhoulHeldItem(this));
 		addLayer(new LayerGhoulArmor(this));
 		addLayer(new LayerCustomHead(model.head));
+	}
+
+	@Override
+	protected void preRenderCallback(EntityDepthsGhoul par1EntityLivingBase, float par2)
+	{
+		GlStateManager.scale(0.7F, 0.7F, 0.7F);
 	}
 
 	@Override
