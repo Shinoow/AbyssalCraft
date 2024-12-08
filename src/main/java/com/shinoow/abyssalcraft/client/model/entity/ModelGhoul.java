@@ -68,7 +68,7 @@ public class ModelGhoul extends ModelArmoredBase {
 		lleg.addBox(-3.0F, -1.1F, -3.0F, 5, 12, 5, f);
 		setRotateAngle(lleg, -0.8726646259971648F, -0.7853981633974483F, 0.0F);
 		rarm1 = new ModelRenderer(this, 56, 22);
-		rarm1.setRotationPoint(-9.0F, 0.8F, -0.8F);
+		rarm1.setRotationPoint(-9.0F, 0.1F, -0.3F);
 		rarm1.addBox(-4.0F, -2.0F, -2.0F, 4, 12, 4, f);
 		setRotateAngle(rarm1, -1.2217304763960306F, 0.0F, 0.0F);
 		larm2 = new ModelRenderer(this, 72, 26);
@@ -78,7 +78,7 @@ public class ModelGhoul extends ModelArmoredBase {
 		headJoint = new ModelRenderer(this, 0, 0);
 		headJoint.setRotationPoint(0.0F, -3.0F, 0.0F);
 		headJoint.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, f);
-		setRotateAngle(headJoint, -0.8726646259971648F, 0.0F, 0.0F);
+		setRotateAngle(headJoint, -1.0471975511965976F, 0.0F, 0.0F);
 		rfinger2 = new ModelRenderer(this, 12, 34);
 		rfinger2.setRotationPoint(1.0F, 8.0F, 3.0F);
 		rfinger2.addBox(-0.5F, -0.5F, -1.0F, 1, 5, 1, f);
@@ -116,7 +116,7 @@ public class ModelGhoul extends ModelArmoredBase {
 		back.setRotationPoint(0.0F, -1.5F, 3.01F);
 		back.addBox(-6.0F, -7.5F, 0.0F, 12, 15, 0, f);
 		larm1 = new ModelRenderer(this, 56, 22);
-		larm1.setRotationPoint(9.0F, 0.8F, -0.8F);
+		larm1.setRotationPoint(9.0F, 0.1F, -0.3F);
 		larm1.addBox(0.0F, -2.0F, -2.0F, 4, 12, 4, f);
 		setRotateAngle(larm1, -1.2217304763960306F, 0.0F, 0.0F);
 		jaw = new ModelRenderer(this, 36, 0);
@@ -128,7 +128,7 @@ public class ModelGhoul extends ModelArmoredBase {
 		rleg.addBox(-3.0F, -1.1F, -3.0F, 5, 12, 5, f);
 		setRotateAngle(rleg, -0.8726646259971648F, 0.7853981633974483F, 0.0F);
 		head = new ModelRenderer(this, 0, 0);
-		head.setRotationPoint(0.0F, 0.0F, -0.4F);
+		head.setRotationPoint(0.0F, -10.0F, -14.0F);
 		head.addBox(-4.5F, -9.5F, -4.5F, 9, 9, 9, f);
 		rside = new ModelRenderer(this, 42, 12);
 		rside.setRotationPoint(-6.0F, -1.5F, 0.01F);
@@ -153,9 +153,9 @@ public class ModelGhoul extends ModelArmoredBase {
 		lrib3.setRotationPoint(4.0F, 2.82F, -0.5F);
 		lrib3.addBox(-1.5F, -1.0F, -1.0F, 3, 2, 2, f);
 		shoulders = new ModelRenderer(this, 56, 12);
-		shoulders.setRotationPoint(0.0F, -8.4F, -0.13F);
+		shoulders.setRotationPoint(0.0F, -7.2F, -9.03F);
 		shoulders.addBox(-9.0F, -2.0F, -2.0F, 18, 4, 4, f);
-		setRotateAngle(shoulders, 0.12897983172238095F, 0.0F, 0.0F);
+		setRotateAngle(shoulders, 0.9143779951198293F, 0.0F, 0.0F);
 		lfinger2 = new ModelRenderer(this, 12, 34);
 		lfinger2.setRotationPoint(1.0F, 8.0F, 3.0F);
 		lfinger2.addBox(-0.5F, -0.5F, -1.0F, 1, 5, 1, f);
@@ -201,7 +201,6 @@ public class ModelGhoul extends ModelArmoredBase {
 		spine.addChild(back);
 		shoulders.addChild(larm1);
 		head.addChild(jaw);
-		headJoint.addChild(head);
 		spine.addChild(rside);
 		jaw.addChild(tooth3);
 		spine.addChild(lside);
@@ -209,7 +208,6 @@ public class ModelGhoul extends ModelArmoredBase {
 		jaw.addChild(tooth2);
 		lleg.addChild(lleg2);
 		spine.addChild(lrib3);
-		spine.addChild(shoulders);
 		larm2.addChild(lfinger2);
 		spine.addChild(rrib1);
 		spine.addChild(rrib3);
@@ -223,21 +221,29 @@ public class ModelGhoul extends ModelArmoredBase {
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		if (isChild)
 		{
 			float f6 = 2.0F;
-
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(1.5F / f6, 1.5F / f6, 1.5F / f6);
+			GlStateManager.translate(0.0F, 21.0F * f5, 0.0F);
+			head.render(f5);
+			GlStateManager.popMatrix();
 			GlStateManager.pushMatrix();
 			GlStateManager.scale(1.0F / f6, 1.0F / f6, 1.0F / f6);
 			GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
 			lleg.render(f5);
 			rleg.render(f5);
 			pelvis.render(f5);
+			shoulders.render(f5);
 			GlStateManager.popMatrix();
 		} else{
 			lleg.render(f5);
 			rleg.render(f5);
 			pelvis.render(f5);
+			head.render(f5);
+			shoulders.render(f5);
 		}
 	}
 
@@ -253,6 +259,15 @@ public class ModelGhoul extends ModelArmoredBase {
 		if(par7Entity.posX == par7Entity.prevPosX && par7Entity.posY == par7Entity.prevPosY && par7Entity.posZ == par7Entity.prevPosZ)
 			f = 0;
 
+		head.rotationPointY = -17.4F + 7.4F*f;
+		head.rotationPointZ = -1.4F - 12.6F*f;
+		head.offsetY = f == 0 ? 0.2f : 0.0f;
+
+		shoulders.rotationPointY = -11.90F + 4.7F*f;
+		shoulders.rotationPointZ = 1.27F - 10.3F*f;
+		shoulders.offsetY = f == 0 ? 0.2f : 0.0f;
+		shoulders.rotateAngleX = f == 0 ? 0.12897983172238095F : 0.9143779951198293F;
+
 		rleg.rotateAngleX = -0.8726646259971648F + MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
 		rleg.rotateAngleY = 0.7853981633974483F;
 		lleg.rotateAngleX = -0.8726646259971648F + MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
@@ -262,12 +277,14 @@ public class ModelGhoul extends ModelArmoredBase {
 		lleg.rotateAngleX = f == 0 ? -1.4726646259971648F : lleg.rotateAngleX;
 
 		pelvis.rotateAngleX = 0.7853981633974483F * f;
-		headJoint.rotateAngleX = -0.8726646259971648F * f;
+		headJoint.rotateAngleX = f == 0 ? -0.2617993877991494F : -1.0471975511965976F * f;
 
 		pelvis.offsetY = f == 0 ? 0.2f : 0.0f;
 
 		lleg.offsetY = f == 0 ? 0.2F : 0.0f;
+		lleg.offsetZ = f == 0 ? -0.05F : 0.0f;
 		rleg.offsetY = f == 0 ? 0.2F : 0.0f;
+		rleg.offsetZ = f == 0 ? -0.05F : 0.0f;
 
 		lleg2.rotateAngleX = 0.8726646259971648F + (f == 0 ? 1.3f : 0);
 		rleg2.rotateAngleX = 0.8726646259971648F + (f == 0 ? 1.3f : 0);
@@ -288,8 +305,8 @@ public class ModelGhoul extends ModelArmoredBase {
 		float f7 = MathHelper.sin((1.0F - (1.0F - swingProgress) * (1.0F - swingProgress)) * (float)Math.PI);
 		rarm1.rotateAngleZ = 0.0F;
 		larm1.rotateAngleZ = 0.0F;
-		rarm1.rotateAngleY = -(0.1F - f6 * 0.6F);
-		larm1.rotateAngleY = 0.1F - f6 * 0.6F;
+		rarm1.rotateAngleY = (0.1F - f6);
+		larm1.rotateAngleY = -(0.1F - f6);
 		rarm1.rotateAngleX = -1.2217304763960306F * f;
 		larm1.rotateAngleX = -1.2217304763960306F * f;
 		rarm1.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
@@ -323,10 +340,21 @@ public class ModelGhoul extends ModelArmoredBase {
 		lleg.showModel = visible;
 		rleg.showModel = visible;
 		pelvis.showModel = visible;
+		head.showModel = visible;
+		shoulders.showModel = visible;
 	}
 
 	@Override
 	public void setEquipmentSlotVisible(EntityEquipmentSlot slot) {
+		lfinger1.showModel = false;
+		lfinger2.showModel = false;
+		lfinger3.showModel = false;
+		lfinger4.showModel = false;
+		rfinger1.showModel = false;
+		rfinger2.showModel = false;
+		rfinger3.showModel = false;
+		rfinger4.showModel = false;
+		spine.showModel = false;
 		switch (slot) {
 		case FEET:
 			rleg.showModel = true;
@@ -339,12 +367,9 @@ public class ModelGhoul extends ModelArmoredBase {
 			break;
 		case CHEST:
 			shoulders.showModel = true;
-			rarm1.showModel = true;
-			larm1.showModel = true;
 			break;
 		case HEAD:
 			head.showModel = true;
-			jaw.showModel = true;
 			break;
 		default:
 			break;

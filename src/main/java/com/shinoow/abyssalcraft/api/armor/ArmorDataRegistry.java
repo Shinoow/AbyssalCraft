@@ -40,7 +40,7 @@ public class ArmorDataRegistry {
 	private static final Map<ArmorMaterial, Integer> COLORS = new HashMap<>();
 	private static final Map<ArmorMaterial, Integer> INNER_COLORS = new HashMap<>();
 
-	private ArmorData EMPTY_GHOUL = new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_2.png"), true).setColored();
+	private ArmorData EMPTY_GHOUL = new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/base_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/base_2.png"), true).setColored();
 	private ArmorData EMPTY_SKELETON_GOLIATH = new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_2.png"), true).setColored();
 
 	private ArmorDataRegistry() {}

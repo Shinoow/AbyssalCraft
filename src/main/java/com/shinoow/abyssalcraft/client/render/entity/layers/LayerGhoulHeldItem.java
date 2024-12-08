@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity.layers;
 
-import com.shinoow.abyssalcraft.client.model.entity.ModelDG;
+import com.shinoow.abyssalcraft.client.model.entity.ModelGhoul;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -64,7 +64,7 @@ public class LayerGhoulHeldItem implements LayerRenderer<EntityLivingBase> {
 		if (!stack.isEmpty())
 		{
 			GlStateManager.pushMatrix();
-			((ModelDG)livingEntityRenderer.getMainModel()).postRenderArm(0.0625F, hand);
+			((ModelGhoul)livingEntityRenderer.getMainModel()).postRenderArm(0.0625F, hand);
 			if(!livingEntityRenderer.getMainModel().isChild){
 				GlStateManager.translate(-0.08F, 0.55F, -0.16F);
 				GlStateManager.rotate(-45, 1, 0, 0);
@@ -76,10 +76,16 @@ public class LayerGhoulHeldItem implements LayerRenderer<EntityLivingBase> {
 			if (entity.isSneaking())
 				GlStateManager.translate(0.0F, 0.2F, 0.0F);
 
-			GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
+			float f = 1.0f;
+
+			// We're currently standing still if all of these conditions are true
+			if(entity.posX == entity.prevPosX && entity.posY == entity.prevPosY && entity.posZ == entity.prevPosZ)
+				f = 0;
+			
+			GlStateManager.rotate(-90.0F + 50*f, 1.0F, 0.0F, 0.0F);
 			GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
 			boolean flag = hand == EnumHandSide.LEFT;
-			GlStateManager.translate(flag ? -0.0625F : 0.0625F, 0.125F, -0.625F);
+			GlStateManager.translate((flag ? -0.23F + 0.1f*f : 0.0625F - 0.1f*f), 0.225F + -0.1f * f, -0.025F - 0.8f * f);
 			Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, stack, transform, flag);
 			GlStateManager.popMatrix();
 		}

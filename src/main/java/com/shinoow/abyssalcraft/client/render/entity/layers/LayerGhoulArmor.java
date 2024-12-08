@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.client.render.entity.layers;
 
 import com.shinoow.abyssalcraft.api.armor.ArmorData;
 import com.shinoow.abyssalcraft.api.armor.ArmorDataRegistry;
-import com.shinoow.abyssalcraft.client.model.entity.ModelDGArmor;
 import com.shinoow.abyssalcraft.client.model.entity.ModelGhoulArmor;
 import com.shinoow.abyssalcraft.lib.client.render.entity.layers.LayerACArmorBase;
 
@@ -26,12 +25,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class LayerGhoulArmor extends LayerACArmorBase<ModelGhoulArmor>
 {
-	private final ResourceLocation MISSING_ARMOR = new ResourceLocation("abyssalcraft:textures/armor/ghoul/missing_1.png");
+	private final ResourceLocation MISSING_ARMOR = new ResourceLocation("abyssalcraft:textures/armor/ghoul/base_1.png");
 
 	public LayerGhoulArmor(RenderLivingBase<?> rendererIn)
 	{
 		super(rendererIn);
-		//TODO re-do textures where needed
 	}
 
 	@Override
