@@ -61,9 +61,11 @@ public class ModelGhoul extends ModelArmoredBase {
 		textureWidth = 128;
 		textureHeight = 64;
 		lrib2 = new ModelRenderer(this, 0, 36);
+		lrib2.mirror = true;
 		lrib2.setRotationPoint(4.0F, -0.38F, -0.5F);
 		lrib2.addBox(-1.5F, -1.0F, -1.0F, 3, 2, 2, f);
 		lleg = new ModelRenderer(this, 22, 40);
+		lleg.mirror = true;
 		lleg.setRotationPoint(4.5F, 7.3F, 3.7F);
 		lleg.addBox(-3.0F, -1.1F, -3.0F, 5, 12, 5, f);
 		setRotateAngle(lleg, -0.8726646259971648F, -0.7853981633974483F, 0.0F);
@@ -72,6 +74,7 @@ public class ModelGhoul extends ModelArmoredBase {
 		rarm1.addBox(-4.0F, -2.0F, -2.0F, 4, 12, 4, f);
 		setRotateAngle(rarm1, -1.2217304763960306F, 0.0F, 0.0F);
 		larm2 = new ModelRenderer(this, 72, 26);
+		larm2.mirror = true;
 		larm2.setRotationPoint(2.0F, 4.0F, -2.0F);
 		larm2.addBox(-2.0F, 1.0F, 3.0F, 4, 8, 4, f);
 		setRotateAngle(larm2, -0.8290313946973066F, 0.0F, 0.0F);
@@ -100,11 +103,13 @@ public class ModelGhoul extends ModelArmoredBase {
 		rleg2.addBox(-3.0F, -1.0F, -3.0F, 5, 12, 5, f);
 		setRotateAngle(rleg2, 0.8726646259971648F, 0.0F, 0.0F);
 		lrib1 = new ModelRenderer(this, 0, 36);
+		lrib1.mirror = true;
 		lrib1.setRotationPoint(4.0F, -3.58F, -0.5F);
 		lrib1.addBox(-1.5F, -1.0F, -1.0F, 3, 2, 2, f);
 		lfinger1 = new ModelRenderer(this, 12, 34);
 		lfinger1.setRotationPoint(-1.0F, 8.0F, 3.0F);
 		lfinger1.addBox(-0.5F, -0.5F, -1.0F, 1, 5, 1, f);
+		lfinger1.mirror = true;
 		rarm2 = new ModelRenderer(this, 72, 26);
 		rarm2.setRotationPoint(-2.0F, 4.0F, -2.0F);
 		rarm2.addBox(-2.0F, 1.0F, 3.0F, 4, 8, 4, f);
@@ -116,6 +121,7 @@ public class ModelGhoul extends ModelArmoredBase {
 		back.setRotationPoint(0.0F, -1.5F, 3.01F);
 		back.addBox(-6.0F, -7.5F, 0.0F, 12, 15, 0, f);
 		larm1 = new ModelRenderer(this, 56, 22);
+		larm1.mirror = true;
 		larm1.setRotationPoint(9.0F, 0.1F, -0.3F);
 		larm1.addBox(0.0F, -2.0F, -2.0F, 4, 12, 4, f);
 		setRotateAngle(larm1, -1.2217304763960306F, 0.0F, 0.0F);
@@ -146,10 +152,12 @@ public class ModelGhoul extends ModelArmoredBase {
 		tooth2.setRotationPoint(-2.0F, -1.5F, -4.0F);
 		tooth2.addBox(-0.5F, -1.0F, -0.5F, 1, 2, 1, f);
 		lleg2 = new ModelRenderer(this, 42, 40);
+		lleg2.mirror = true;
 		lleg2.setRotationPoint(0.0F, 9.4F, -0.2F);
 		lleg2.addBox(-3.0F, -1.0F, -3.0F, 5, 12, 5, f);
 		setRotateAngle(lleg2, 0.8726646259971648F, 0.0F, 0.0F);
 		lrib3 = new ModelRenderer(this, 0, 36);
+		lrib3.mirror = true;
 		lrib3.setRotationPoint(4.0F, 2.82F, -0.5F);
 		lrib3.addBox(-1.5F, -1.0F, -1.0F, 3, 2, 2, f);
 		shoulders = new ModelRenderer(this, 56, 12);
@@ -157,6 +165,7 @@ public class ModelGhoul extends ModelArmoredBase {
 		shoulders.addBox(-9.0F, -2.0F, -2.0F, 18, 4, 4, f);
 		setRotateAngle(shoulders, 0.9143779951198293F, 0.0F, 0.0F);
 		lfinger2 = new ModelRenderer(this, 12, 34);
+		lfinger2.mirror = true;
 		lfinger2.setRotationPoint(1.0F, 8.0F, 3.0F);
 		lfinger2.addBox(-0.5F, -0.5F, -1.0F, 1, 5, 1, f);
 		rrib1 = new ModelRenderer(this, 0, 36);
@@ -175,9 +184,11 @@ public class ModelGhoul extends ModelArmoredBase {
 		rrib2.setRotationPoint(-4.0F, -0.38F, -0.5F);
 		rrib2.addBox(-1.5F, -1.0F, -1.0F, 3, 2, 2, f);
 		lfinger3 = new ModelRenderer(this, 12, 34);
+		lfinger3.mirror = true;
 		lfinger3.setRotationPoint(-2.0F, 8.0F, 5.0F);
 		lfinger3.addBox(-1.0F, -0.5F, -1.0F, 1, 5, 1, f);
 		lfinger4 = new ModelRenderer(this, 12, 34);
+		lfinger4.mirror = true;
 		lfinger4.setRotationPoint(2.0F, 8.0F, 5.0F);
 		lfinger4.addBox(0.0F, -0.5F, -1.0F, 1, 5, 1, f);
 		pelvis = new ModelRenderer(this, 72, 0);
@@ -265,7 +276,7 @@ public class ModelGhoul extends ModelArmoredBase {
 
 		shoulders.rotationPointY = -11.90F + 4.7F*f;
 		shoulders.rotationPointZ = 0.87F - 3.9F*f;
-		shoulders.offsetY = f == 0 ? 0.2f : 0.0f;
+		shoulders.offsetY = f == 0 ? 0.35f : 0.0f;
 		shoulders.rotateAngleX = f == 0 ? 0.12897983172238095F : 0.9143779951198293F;
 
 		rleg.rotateAngleX = -0.8726646259971648F + MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
