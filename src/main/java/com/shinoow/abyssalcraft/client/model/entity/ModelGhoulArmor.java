@@ -18,8 +18,8 @@ public class ModelGhoulArmor extends ModelGhoul {
 
 		chestplate = new ModelRenderer(this, 0, 18);
 		chestplate.setTextureSize(128, 64);
-		chestplate.addBox(-6.0F, -15.9F, -3.0F, 12, 15, 6, f);
-		chestplate.setRotationPoint(0.0F, 3.59F, 1.0F);
+		chestplate.addBox(-5.0F, -13.9F, -3.0F, 10, 13, 5, f);
+		chestplate.setRotationPoint(0.0F, 2.59F, 2.0F);
 		setRotateAngle(chestplate, 0.7853981633974483F, 0.0F, 0.0F);
 	}
 
@@ -52,8 +52,8 @@ public class ModelGhoulArmor extends ModelGhoul {
 
 		chestplate.rotateAngleX = pelvis.rotateAngleX;
 		chestplate.offsetY = pelvis.offsetY;
-		
-		chestplate.rotationPointZ = f == 1 ? 7.0F : 1.0F;
+
+		chestplate.rotationPointZ = f == 1 ? 7.0F : 1.0F;//TODO check
 	}
 
 	@Override
