@@ -57,7 +57,7 @@ public class EntityOmotholGhoul extends EntityMob implements IOmotholEntity {
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		setSize(1.3F, 3.2F);
+		setSize(1.3F, 2.7F);
 		isImmuneToFire = true;
 	}
 

@@ -64,7 +64,7 @@ public class ModelGhoul extends ModelArmoredBase {
 		rarm1 = new ModelRenderer(this, 56, 22);
 		rarm1.setRotationPoint(-8.0F, 0.8F, -0.8F);
 		rarm1.addBox(-4.0F, -2.0F, -2.0F, 4, 12, 4, f);
-		setRotateAngle(rarm1, -1.2217304763960306F, 0.0F, 0.0F);
+		setRotateAngle(rarm1, -1.48352986419518F, 0.0F, 0.0F);
 		rleg = new ModelRenderer(this, 16, 40);
 		rleg.setRotationPoint(-3.3F, 6.4F, 4.1F);
 		rleg.addBox(-2.1F, 0.0F, -2.2F, 4, 12, 4, f);
@@ -73,9 +73,9 @@ public class ModelGhoul extends ModelArmoredBase {
 		rfinger2.setRotationPoint(1.0F, 8.0F, 3.0F);
 		rfinger2.addBox(-0.5F, -0.5F, -1.0F, 1, 5, 1, 0.0F);
 		shoulders = new ModelRenderer(this, 54, 12);
-		shoulders.setRotationPoint(0.0F, -6.9F, -9.33F);
+		shoulders.setRotationPoint(0.0F, 5.5F, -14.53F);
 		shoulders.addBox(-8.0F, -2.0F, -2.0F, 16, 4, 4, f);
-		setRotateAngle(shoulders, 0.9143779951198293F, 0.0F, 0.0F);
+		setRotateAngle(shoulders, 1.6997761585172775F, 0.0F, 0.0F);
 		back = new ModelRenderer(this, 0, 18);
 		back.setRotationPoint(0.0F, -1.5F, 2.51F);
 		back.addBox(-5.0F, -5.5F, -1.0F, 10, 13, 0, f);
@@ -133,11 +133,11 @@ public class ModelGhoul extends ModelArmoredBase {
 		neck.addBox(-2.0F, -4.0F, -3.0F, 4, 8, 4, f);
 		setRotateAngle(neck, 0.2617993877991494F, 0.0F, 0.0F);
 		pelvis = new ModelRenderer(this, 72, 0);
-		pelvis.setRotationPoint(0.0F, 3.59F, 2.0F);
+		pelvis.setRotationPoint(0.0F, 4.69F, 1.0F);
 		pelvis.addBox(-5.0F, -1.0F, -3.0F, 10, 6, 5, f);
-		setRotateAngle(pelvis, 0.7853981633974483F, 0.0F, 0.0F);
+		setRotateAngle(pelvis, 1.5707963267948966F, 0.0F, 0.0F);
 		head = new ModelRenderer(this, 0, 0);
-		head.setRotationPoint(0.0F, -10.2F, -13.8F);
+		head.setRotationPoint(0.0F, 6.5F, -20.2F);
 		head.addBox(-4.5F, -9.5F, -4.5F, 9, 9, 9, f);
 		spine = new ModelRenderer(this, 0, 44);
 		spine.setRotationPoint(0.0F, -7.0F, 0.5F);
@@ -146,7 +146,7 @@ public class ModelGhoul extends ModelArmoredBase {
 		larm1.mirror = true;
 		larm1.setRotationPoint(8.0F, 0.8F, -0.8F);
 		larm1.addBox(0.0F, -2.0F, -2.0F, 4, 12, 4, f);
-		setRotateAngle(larm1, -1.2217304763960306F, 0.0F, 0.0F);
+		setRotateAngle(larm1, -1.48352986419518F, 0.0F, 0.0F);
 		lrib3 = new ModelRenderer(this, 39, 35);
 		lrib3.mirror = true;
 		lrib3.setRotationPoint(4.0F, 2.82F, -0.5F);
@@ -266,14 +266,14 @@ public class ModelGhoul extends ModelArmoredBase {
 		if(par7Entity.posX == par7Entity.prevPosX && par7Entity.posY == par7Entity.prevPosY && par7Entity.posZ == par7Entity.prevPosZ)
 			f = 0;
 
-		head.rotationPointY = -17.4F + 7.4F*f;
-		head.rotationPointZ = -1.1F - 6.9F*f;
+		head.rotationPointY = f == 0 ? -10F : 6.5F;
+		head.rotationPointZ = f == 0 ? -9.20F : -14.2F;
 		head.offsetY = f == 0 ? 0.35f : 0.0f;
 
-		shoulders.rotationPointY = -11.90F + 4.7F*f;
-		shoulders.rotationPointZ = 0.47F - 4.9F*f;
+		shoulders.rotationPointY = f == 0 ? -7.5F : 5.50F;
+		shoulders.rotationPointZ = f == 0 ? -4.7F : -8.53F;
 		shoulders.offsetY = f == 0 ? 0.35f : 0.0f;
-		shoulders.rotateAngleX = f == 0 ? 0.12897983172238095F : 0.9143779951198293F;
+		shoulders.rotateAngleX = f == 0 ? 0.9143779951198293F : 1.6997761585172775F;
 
 		rleg.rotateAngleX = -0.8726646259971648F + MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
 		rleg.rotateAngleY = 0.7853981633974483F;
@@ -283,22 +283,19 @@ public class ModelGhoul extends ModelArmoredBase {
 		rleg.rotateAngleX = f == 0 ? -1.4726646259971648F : rleg.rotateAngleX;
 		lleg.rotateAngleX = f == 0 ? -1.4726646259971648F : lleg.rotateAngleX;
 
-		pelvis.rotateAngleX = 0.7853981633974483F * f;
-		headJoint.rotateAngleX = f == 0 ? -0.2617993877991494F : -1.0471975511965976F * f;
+		pelvis.rotateAngleX = f == 0 ? 0.7853981633974483F : 1.5707963267948966F;
 
-		pelvis.offsetY = f == 0 ? 0.35f : 0.0f;
+		pelvis.offsetY = f == 0 ? 0.25f : 0.0f;
 
-		lleg.offsetY = f == 0 ? 0.35F : 0.0f;
-		lleg.offsetZ = f == 0 ? -0.05F : 0.0f;
-		rleg.offsetY = f == 0 ? 0.35F : 0.0f;
-		rleg.offsetZ = f == 0 ? -0.05F : 0.0f;
+		lleg.offsetY = f == 0 ? 0.25F : 0.0f;
+		rleg.offsetY = f == 0 ? 0.25F : 0.0f;
 
 		lleg2.rotateAngleX = 0.8726646259971648F + (f == 0 ? 1.3f : 0);
 		rleg2.rotateAngleX = 0.8726646259971648F + (f == 0 ? 1.3f : 0);
 
-		pelvis.rotationPointZ = f == 1 ? 7.0F : 1.0F;
-		lleg.rotationPointZ = f == 1 ? 8.5F : 2.5F;
-		rleg.rotationPointZ = f == 1 ? 8.5F : 2.5F;
+		pelvis.rotationPointZ = f == 1 ? 5.0F : 7.0F;
+		lleg.rotationPointZ = f == 1 ? 8.5F : 9.5F;
+		rleg.rotationPointZ = f == 1 ? 8.5F : 9.5F;
 
 		if (isRiding){
 
@@ -318,8 +315,8 @@ public class ModelGhoul extends ModelArmoredBase {
 		larm1.rotateAngleZ = 0.0F;
 		rarm1.rotateAngleY = 0.1F - f6;
 		larm1.rotateAngleY = -(0.1F - f6);
-		rarm1.rotateAngleX = -1.2217304763960306F * f;
-		larm1.rotateAngleX = -1.2217304763960306F * f;
+		rarm1.rotateAngleX = (f == 0 ? -0.5F : -1.48352986419518F) + MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 2.0F * par2 * 0.5F;
+		larm1.rotateAngleX = (f == 0 ? -0.5F : -1.48352986419518F) + MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
 		rarm1.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
 		larm1.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
 		rarm1.rotateAngleZ += MathHelper.cos(par3 * 0.09F) * 0.05F + 0.05F;

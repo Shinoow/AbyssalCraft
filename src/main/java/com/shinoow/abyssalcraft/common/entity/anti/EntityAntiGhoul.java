@@ -51,7 +51,7 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 
 	public EntityAntiGhoul(World par1World) {
 		super(par1World);
-		setSize(1.0F, 2.0F);
+		setSize(1.0F, 1.7F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
 		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 1.0D));
