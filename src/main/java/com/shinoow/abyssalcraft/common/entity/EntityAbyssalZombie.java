@@ -32,7 +32,6 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -318,16 +317,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			setEnchantmentBasedOnDifficulty(difficulty);
 		}
 
-		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
-		{
-			Calendar calendar = world.getCurrentDate();
-
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-			{
-				setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
-				inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
-			}
-		}
+		EntityUtil.hahaPumpkinGoesBrrr(this, rand);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 		Calendar calendar = world.getCurrentDate();

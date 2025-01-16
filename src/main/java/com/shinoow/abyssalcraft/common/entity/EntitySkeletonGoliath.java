@@ -30,7 +30,6 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -172,7 +171,6 @@ public class EntitySkeletonGoliath extends EntityMob implements IEliteEntity {
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-
 		float f = difficulty.getClampedAdditionalDifficulty();
 		setCanPickUpLoot(ACConfig.hardcoreMode ? true : rand.nextFloat() < 0.55F * f);
 
@@ -185,16 +183,7 @@ public class EntitySkeletonGoliath extends EntityMob implements IEliteEntity {
 
 		setHeldItem(EnumHand.MAIN_HAND, new ItemStack(ACItems.cudgel));
 
-		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
-		{
-			Calendar calendar = world.getCurrentDate();
-
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-			{
-				setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
-				inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
-			}
-		}
+		EntityUtil.hahaPumpkinGoesBrrr(this, rand);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 		Calendar calendar = world.getCurrentDate();

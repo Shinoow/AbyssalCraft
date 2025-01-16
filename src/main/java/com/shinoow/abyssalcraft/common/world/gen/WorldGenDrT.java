@@ -35,7 +35,7 @@ public class WorldGenDrT extends WorldGenTrees {
 	{
 		super(flag);
 	}
-	
+
 	public WorldGenDrT setMaxHeight(int height) {
 		maxHeight = height;
 		return this;
@@ -60,7 +60,7 @@ public class WorldGenDrT extends WorldGenTrees {
 
 		if(maxHeight > -1 && y > maxHeight)
 			return false;
-		
+
 		if(j1.getBlock() != ACBlocks.dreadlands_grass && j1.getBlock() != ACBlocks.dreadstone && j1.getBlock() != ACBlocks.dreadlands_dirt)
 			setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), Blocks.DIRT.getDefaultState());
 		else setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), ACBlocks.dreadlands_dirt.getDefaultState());

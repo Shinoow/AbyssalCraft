@@ -34,7 +34,6 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.*;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -788,16 +787,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		data = super.onInitialSpawn(difficulty, data);
 		applyRandomTrade(world.rand);
 
-		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
-		{
-			Calendar calendar = world.getCurrentDate();
-
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-			{
-				setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
-				inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
-			}
-		}
+		EntityUtil.hahaPumpkinGoesBrrr(this, rand);
 
 		return data;
 	}

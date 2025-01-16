@@ -409,7 +409,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_DREADLANDS = new Page(1, NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, NecronomiconText.INFORMATION_DREADLANDS);
 
 		Pages.LAIR_OF_CHAGAROTH_1 = new Page(1, NecronomiconText.LABEL_STRUCTURES, 2, NecronomiconResources.CHAGAROTH_LAIR_ENTRANCE, NecronomiconText.WIP);
-		
+
 		Pages.MATERIAL_OMOTHOL_STONE = new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.omothol_stone), NecronomiconText.MATERIAL_OMOTHOL_STONE_1);
 		Pages.MATERIAL_ETHAXIUM_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.ethaxium), NecronomiconText.MATERIAL_ETHAXIUM_1);
 		Pages.MATERIAL_ETHAXIUM_2 = new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_ETHAXIUM_2);

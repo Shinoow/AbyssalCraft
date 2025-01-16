@@ -325,7 +325,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void spawnItemParticle(double posX, double posY, double posZ, double velX, double velY, double velZ, int[] data) {
-        int i = data.length > 1 ? data[1] : 0;
+		int i = data.length > 1 ? data[1] : 0;
 		Minecraft.getMinecraft().effectRenderer.addEffect(new ItemRitualParticle(Minecraft.getMinecraft().world, posX, posY, posZ, velX, velY, velZ, Item.getItemById(data[0]), i));
 	}
 

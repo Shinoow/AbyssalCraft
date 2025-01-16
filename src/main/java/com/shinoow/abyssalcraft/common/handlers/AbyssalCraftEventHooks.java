@@ -198,19 +198,17 @@ public class AbyssalCraftEventHooks {
 	private void processRadiation(LivingAttackEvent event) {
 		String type = event.getSource().getDamageType();
 		boolean flag = false;
-		for(String src : sourceNames) {
+		for(String src : sourceNames)
 			if(type.contentEquals(src)) {
 				flag = true;
 				break;
 			}
-		}
 		if(flag) {
 			event.setCanceled(true);
 			// Dread Plague carriers absorb the radiation for sustenance
 			// (but only if Hardcore Mode is enabled, because we are nice here)
-			if(ACConfig.hardcoreMode && EntityUtil.isDreadPlagueCarrier(event.getEntityLiving())) {
+			if(ACConfig.hardcoreMode && EntityUtil.isDreadPlagueCarrier(event.getEntityLiving()))
 				event.getEntityLiving().heal(event.getAmount());
-			}
 		}
 	}
 

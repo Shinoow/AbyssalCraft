@@ -11,112 +11,46 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity.anti;
 
-import java.util.Calendar;
-import java.util.UUID;
-
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.EntityGhoulBase;
 import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
-import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
-import com.shinoow.abyssalcraft.lib.ACSounds;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
-
-	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
-	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3.0D, 0);
+public class EntityAntiGhoul extends EntityGhoulBase implements IAntiEntity {
 
 	public EntityAntiGhoul(World par1World) {
 		super(par1World);
 		setSize(1.0F, 1.7F);
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
-		tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 1.0D));
-		tasks.addTask(4, new EntityAIWander(this, 1.0D));
-		tasks.addTask(6, new EntityAILookIdle(this));
-		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiGhoul.class, 8.0F));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiAbyssalZombie.class, 8.0F));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiZombie.class, 8.0F));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiSkeleton.class, 8.0F));
-		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityDepthsGhoul.class, true));
-		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(42.0D);
-		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 90.0D : 45.0D);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 10.0D : 5.0D);
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
-		swingArm(EnumHand.MAIN_HAND);
-		swingArm(EnumHand.OFF_HAND);
-		boolean flag = super.attackEntityAsMob(par1Entity);
-
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
-
-		return flag;
-	}
-
-	@Override
-	protected SoundEvent getAmbientSound()
-	{
-		return ACSounds.ghoul_normal_ambient;
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource source)
-	{
-		return ACSounds.ghoul_hurt;
-	}
-
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
-	@Override
-	protected SoundEvent getDeathSound()
-	{
-		return ACSounds.ghoul_death;
-	}
-
-	@Override
-	protected void playStepSound(BlockPos pos, Block par4)
-	{
-		playSound(SoundEvents.ENTITY_ZOMBIE_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -131,12 +65,6 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
-		return EnumCreatureAttribute.UNDEAD;
-	}
-
-	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if(!world.isRemote && par1Entity instanceof EntityDepthsGhoul){
@@ -147,13 +75,6 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
-	}
-
-	@Override
-	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
-	{
-		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getItem()))
-			super.updateEquipmentIfNeeded(itemEntity);
 	}
 
 	@Override
@@ -171,39 +92,10 @@ public class EntityAntiGhoul extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
-	{
-		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
+	public void onAttacking(Entity entity) {}
 
-		float f = difficulty.getClampedAdditionalDifficulty();
-		setCanPickUpLoot(ACConfig.hardcoreMode ? true : rand.nextFloat() < 0.55F * f);
-
-		if(ACConfig.hardcoreMode)
-			EntityUtil.suitUp(this, false);
-		else {
-			setEquipmentBasedOnDifficulty(difficulty);
-			setEnchantmentBasedOnDifficulty(difficulty);
-		}
-
-		if (getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
-		{
-			Calendar calendar = world.getCurrentDate();
-
-			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
-			{
-				setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
-				inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
-			}
-		}
-
-		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		Calendar calendar = world.getCurrentDate();
-
-		attribute.removeModifier(attackDamageBoost);
-
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
-			attribute.applyModifier(attackDamageBoost);
-
-		return par1EntityLivingData;
+	@Override
+	public float getBonusDamage() {
+		return 1.5F;
 	}
 }

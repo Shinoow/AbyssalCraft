@@ -503,17 +503,6 @@ public abstract class EntityShoggothBase extends EntityMob implements IShoggothE
 		if(world.provider.getDimension() == ACLib.dark_realm_id)
 			setShoggothType(4);
 
-		//		if (data == null)
-		//			data = new EntityLesserShoggoth.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, null);
-		//
-		//		if (data instanceof EntityLesserShoggoth.GroupData)
-		//		{
-		//			EntityLesserShoggoth.GroupData groupdata = (EntityLesserShoggoth.GroupData)data;
-		//
-		//			if (groupdata.isBaby)
-		//				setChild(true);
-		//		}
-
 		return (IEntityLivingData)data;
 	}
 

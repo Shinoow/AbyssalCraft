@@ -959,7 +959,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		ArmorDataRegistry.instance().registerGhoulData(ArmorMaterial.CHAIN, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/chainmail_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/chainmail_2.png")));
 		ArmorDataRegistry.instance().registerGhoulData(ArmorMaterial.LEATHER, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/leather_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/leather_2.png"), true));
 		ArmorDataRegistry.instance().registerGhoulData(ArmorMaterial.IRON, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/ghoul/base_1.png"), new ResourceLocation("abyssalcraft:textures/armor/ghoul/base_2.png")));
-		
+
 		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.CHAIN, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/chainmail_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/chainmail_2.png")));
 		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.LEATHER, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/leather_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/leather_2.png"), true));
 		ArmorDataRegistry.instance().registerSkeletonGoliathData(ArmorMaterial.IRON, new ArmorData(new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_1.png"), new ResourceLocation("abyssalcraft:textures/armor/skeleton_goliath/base_2.png")));

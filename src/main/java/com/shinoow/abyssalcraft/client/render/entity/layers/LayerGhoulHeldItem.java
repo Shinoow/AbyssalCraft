@@ -89,7 +89,7 @@ public class LayerGhoulHeldItem implements LayerRenderer<EntityLivingBase> {
 			GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
 			boolean flag = hand == EnumHandSide.LEFT;
 			float f7 = -(0.2F - f6) * f;
-			GlStateManager.translate((flag ? -0.23F + 0.1f*f : 0.0625F - 0.1f*f), -0.225F + -0.5f * f + f7, -0.425F - 0.8f * f);
+			GlStateManager.translate(flag ? -0.23F + 0.1f*f : 0.0625F - 0.1f*f, -0.225F + -0.5f * f + f7, -0.425F - 0.8f * f);
 			Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, stack, transform, flag);
 			GlStateManager.popMatrix();
 		}

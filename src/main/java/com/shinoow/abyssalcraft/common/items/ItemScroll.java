@@ -60,10 +60,8 @@ public class ItemScroll extends ItemACBasic implements IScroll {
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
 		if (!worldIn.isRemote)
-		{
 			if(spell == null)
 				spell = SpellUtils.getSpell(stack);
-		}
 	}
 
 	@Override

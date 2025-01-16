@@ -73,7 +73,7 @@ public class EntityRemnantTrader extends EntityMob implements IOmotholEntity {
 	{
 		return TextFormatting.ITALIC + super.getName() + TextFormatting.RESET;
 	}
-	
+
 	@Override
 	public void onLivingUpdate(){
 		super.onLivingUpdate();

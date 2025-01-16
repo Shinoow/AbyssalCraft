@@ -22,6 +22,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -250,6 +251,22 @@ public final class EntityUtil {
 			sword = Items.BOW;
 
 		entity.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, EnchantmentHelper.addRandomEnchantment(rng, new ItemStack(sword), (int)(5.0F + f * rng.nextInt(18)), false));
+	}
+
+	/**
+	 * If it's time, pumpkin goes on head
+	 */
+	public static void hahaPumpkinGoesBrrr(EntityLiving entity, Random rand) {
+		if (entity.getItemStackFromSlot(EntityEquipmentSlot.HEAD).isEmpty())
+		{
+			Calendar calendar = entity.world.getCurrentDate();
+
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && rand.nextFloat() < 0.25F)
+			{
+				entity.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
+				entity.setDropChance(EntityEquipmentSlot.HEAD, 0);
+			}
+		}
 	}
 
 	/**
