@@ -273,4 +273,13 @@ public class ACBlocks {
 	public static Block dreadlands_muck;
 	public static Block sealing_lock;
 	public static Block unlocked_sealing_lock;
+	public static Block tombstone_stone;
+	public static Block tombstone_abyssal_stone;
+	public static Block tombstone_coralium_stone;
+	public static Block tombstone_darkstone;
+	public static Block tombstone_dreadstone;
+	public static Block tombstone_elysian_stone;
+	public static Block tombstone_ethaxium;
+	public static Block tombstone_monolith_stone;
+	public static Block tombstone_omothol_stone;
 }

@@ -1,0 +1,8 @@
+{
+	"variants": {
+	    "facing=north": { "model": "abyssalcraft:tombstone_dreadstone" },
+        "facing=south": { "model": "abyssalcraft:tombstone_dreadstone", "y": 180 },
+        "facing=west":  { "model": "abyssalcraft:tombstone_dreadstone", "y": 270 },
+        "facing=east":  { "model": "abyssalcraft:tombstone_dreadstone", "y": 90 }
+	}
+}

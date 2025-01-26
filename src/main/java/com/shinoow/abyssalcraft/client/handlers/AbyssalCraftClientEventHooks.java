@@ -954,6 +954,15 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.dreadlands_muck, 0);
 		registerItemRender(ACBlocks.sealing_lock, 0);
 		registerItemRender(ACBlocks.unlocked_sealing_lock, 0);
+		registerItemRender(ACBlocks.tombstone_stone, 0);
+		registerItemRender(ACBlocks.tombstone_abyssal_stone, 0);
+		registerItemRender(ACBlocks.tombstone_coralium_stone, 0);
+		registerItemRender(ACBlocks.tombstone_darkstone, 0);
+		registerItemRender(ACBlocks.tombstone_dreadstone, 0);
+		registerItemRender(ACBlocks.tombstone_elysian_stone, 0);
+		registerItemRender(ACBlocks.tombstone_ethaxium, 0);
+		registerItemRender(ACBlocks.tombstone_monolith_stone, 0);
+		registerItemRender(ACBlocks.tombstone_omothol_stone, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

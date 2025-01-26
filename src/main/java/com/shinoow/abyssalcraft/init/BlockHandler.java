@@ -314,6 +314,15 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadlands_muck = new BlockDreadlandsMuck();
 		ACBlocks.sealing_lock = new BlockSealingLock();
 		ACBlocks.unlocked_sealing_lock = new BlockUnlockedSealingLock();
+		ACBlocks.tombstone_stone = new BlockTombstone("stone");
+		ACBlocks.tombstone_abyssal_stone = new BlockTombstone("abyssal_stone");
+		ACBlocks.tombstone_coralium_stone = new BlockTombstone("coralium_stone");
+		ACBlocks.tombstone_darkstone = new BlockTombstone("darkstone");
+		ACBlocks.tombstone_dreadstone = new BlockTombstone("dreadstone");
+		ACBlocks.tombstone_elysian_stone = new BlockTombstone("elysian_stone");
+		ACBlocks.tombstone_ethaxium = new BlockTombstone("ethaxium");
+		ACBlocks.tombstone_monolith_stone = new BlockTombstone("monolith_stone");
+		ACBlocks.tombstone_omothol_stone = new BlockTombstone("omothol_stone");
 
 		SoftDepUtil.declareBlocks();
 
@@ -352,6 +361,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityIdolOfFading.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityIdolOfFading"));
 		GameRegistry.registerTileEntity(TileEntityResearchTable.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityResearchTable"));
 		GameRegistry.registerTileEntity(TileEntityUnlockedSealingLock.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityUnlockedSealingLock"));
+		GameRegistry.registerTileEntity(TileEntityTombstone.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityTombstone"));
 
 		registerBlock(ACBlocks.darkstone, "darkstone");
 		registerBlock(ACBlocks.abyssal_stone, new ItemBlockColorName(ACBlocks.abyssal_stone), "abystone");
@@ -621,6 +631,15 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.dreadlands_muck, "dreadlands_muck");
 		registerBlock(ACBlocks.sealing_lock, "sealing_lock");
 		registerBlock(ACBlocks.unlocked_sealing_lock, "unlocked_sealing_lock");
+		registerBlock(ACBlocks.tombstone_stone, "tombstone_stone");
+		registerBlock(ACBlocks.tombstone_abyssal_stone, "tombstone_abyssal_stone");
+		registerBlock(ACBlocks.tombstone_coralium_stone, "tombstone_coralium_stone");
+		registerBlock(ACBlocks.tombstone_darkstone, "tombstone_darkstone");
+		registerBlock(ACBlocks.tombstone_dreadstone, "tombstone_dreadstone");
+		registerBlock(ACBlocks.tombstone_elysian_stone, "tombstone_elysian_stone");
+		registerBlock(ACBlocks.tombstone_ethaxium, "tombstone_ethaxium");
+		registerBlock(ACBlocks.tombstone_monolith_stone, "tombstone_monolith_stone");
+		registerBlock(ACBlocks.tombstone_omothol_stone, "tombstone_omothol_stone");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

@@ -1,0 +1,8 @@
+{
+	"parent": "abyssalcraft:block/tombstone",
+	"textures": {
+		"0": "abyssalcraft:blocks/abydrs",
+		"1": "abyssalcraft:blocks/abyssalnitecobblestone",
+		"particle": "abyssalcraft:blocks/abydrs"
+	}
+}

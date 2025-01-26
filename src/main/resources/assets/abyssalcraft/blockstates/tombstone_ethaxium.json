@@ -1,0 +1,8 @@
+{
+	"variants": {
+	    "facing=north": { "model": "abyssalcraft:tombstone_ethaxium" },
+        "facing=south": { "model": "abyssalcraft:tombstone_ethaxium", "y": 180 },
+        "facing=west":  { "model": "abyssalcraft:tombstone_ethaxium", "y": 270 },
+        "facing=east":  { "model": "abyssalcraft:tombstone_ethaxium", "y": 90 }
+	}
+}

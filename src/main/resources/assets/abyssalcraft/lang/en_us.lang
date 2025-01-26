@@ -1212,6 +1212,15 @@ tile.research_table.name=Research Table
 tile.dreadlands_muck.name=Dreadlands Muck
 tile.sealing_lock.name=Sealing Lock
 tile.unlocked_sealing_lock.name=Unlocked Sealing Lock
+tile.tombstone_stone.name=Stone Tombstone
+tile.tombstone_abyssal_stone.name=Abyssal Stone Tombstone
+tile.tombstone_coralium_stone.name=Coralium Stone Tombstone
+tile.tombstone_darkstone.name=Darkstone Tombstone
+tile.tombstone_dreadstone.name=Dreadstone Tombstone
+tile.tombstone_elysian_stone.name=Elysian Stone Tombstone
+tile.tombstone_ethaxium.name=Ethaxium Tombstone
+tile.tombstone_monolith_stone.name= Monolith Stone Tombstone
+tile.tombstone_omothol_stone.name=Omothol Stone Tombstone
 
 #Pre/Suffixes
 decorativestatue.prefix=Decorative %s

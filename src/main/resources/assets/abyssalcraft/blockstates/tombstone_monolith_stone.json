@@ -1,0 +1,8 @@
+{
+	"variants": {
+	    "facing=north": { "model": "abyssalcraft:tombstone_monolith_stone" },
+        "facing=south": { "model": "abyssalcraft:tombstone_monolith_stone", "y": 180 },
+        "facing=west":  { "model": "abyssalcraft:tombstone_monolith_stone", "y": 270 },
+        "facing=east":  { "model": "abyssalcraft:tombstone_monolith_stone", "y": 90 }
+	}
+}
