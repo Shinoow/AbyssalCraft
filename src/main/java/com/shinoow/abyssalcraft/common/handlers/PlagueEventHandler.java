@@ -42,7 +42,7 @@ public class PlagueEventHandler {
 
 		EntityLivingBase entity = event.getEntityLiving();
 		if(entity.isPotionActive(AbyssalCraftAPI.coralium_plague))
-			if(entity.getRNG().nextFloat() > 0.1F) {
+			if(entity.getRNG().nextFloat() > 0.1F && !ACConfig.no_potion_clouds) {
 				createCloud(entity, AbyssalCraftAPI.coralium_plague);
 			} else {
 
@@ -71,7 +71,7 @@ public class PlagueEventHandler {
 
 			}
 		if(entity.isPotionActive(AbyssalCraftAPI.dread_plague)) {
-			if(entity.getRNG().nextFloat() > 0.1F) {
+			if(entity.getRNG().nextFloat() > 0.1F && !ACConfig.no_potion_clouds) {
 				createCloud(entity, AbyssalCraftAPI.dread_plague);
 
 			} else {
