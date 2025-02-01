@@ -92,7 +92,6 @@ public class AbyssalCraftAPI {
 	public static final ArmorMaterial dreadiumSamuraiArmor = EnumHelper.addArmorMaterial("DreadiumS", "abyssalcraft:dreadiums", 45, new int[]{3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.5F);
 	public static final ArmorMaterial ethaxiumArmor = EnumHelper.addArmorMaterial("Ethaxium", "abyssalcraft:ethaxium", 50, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F);
 
-	public static final ToolMaterial darkstoneTool = EnumHelper.addToolMaterial("DARKSTONE", 1, 180, 5.0F, 1, 5);
 	public static final ToolMaterial abyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE", 4, 1261, 10.0F, 4, 12);
 	public static final ToolMaterial refinedCoraliumTool = EnumHelper.addToolMaterial("CORALIUM", 5, 1800, 12.0F, 5, 13);
 	public static final ToolMaterial dreadiumTool = EnumHelper.addToolMaterial("DREADIUM", 6, 2300, 14.0F, 6, 14);
@@ -164,7 +163,6 @@ public class AbyssalCraftAPI {
 		dreadiumSamuraiArmor.setRepairItem(new ItemStack(ACItems.dreadium_plate));
 		ethaxiumArmor.setRepairItem(new ItemStack(ACItems.ethaxium_ingot));
 
-		darkstoneTool.setRepairItem(new ItemStack(ACBlocks.darkstone_cobblestone));
 		abyssalniteTool.setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));
 		refinedCoraliumTool.setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
 		dreadiumTool.setRepairItem(new ItemStack(ACItems.dreadium_ingot));

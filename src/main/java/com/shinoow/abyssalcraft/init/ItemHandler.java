@@ -289,11 +289,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.coralium_longbow = new ItemCoraliumBow(20.0F, 0, 8, 16);
 
 		//Tools
-		ACItems.darkstone_pickaxe = new ItemACPickaxe(AbyssalCraftAPI.darkstoneTool, "dpick", 1);
-		ACItems.darkstone_axe = new ItemACAxe(AbyssalCraftAPI.darkstoneTool, "daxe", 1);
-		ACItems.darkstone_shovel = new ItemACShovel(AbyssalCraftAPI.darkstoneTool, "dshovel", 1);
-		ACItems.darkstone_sword = new ItemACSword(AbyssalCraftAPI.darkstoneTool, "dsword");
-		ACItems.darkstone_hoe = new ItemACHoe(AbyssalCraftAPI.darkstoneTool, "dhoe");
 		ACItems.abyssalnite_pickaxe = new ItemACPickaxe(AbyssalCraftAPI.abyssalniteTool, "apick", 4, TextFormatting.DARK_AQUA);
 		ACItems.abyssalnite_axe = new ItemACAxe(AbyssalCraftAPI.abyssalniteTool, "aaxe", 4, TextFormatting.DARK_AQUA);
 		ACItems.abyssalnite_shovel = new ItemACShovel(AbyssalCraftAPI.abyssalniteTool, "ashovel", 4, TextFormatting.DARK_AQUA);
@@ -388,11 +383,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.transmutation_gem, "transmutationgem");
 		registerItem(ACItems.coralium_plagued_flesh, "corflesh");
 		registerItem(ACItems.coralium_plagued_flesh_on_a_bone, "corbone");
-		registerItem(ACItems.darkstone_pickaxe, "dpick");
-		registerItem(ACItems.darkstone_axe, "daxe");
-		registerItem(ACItems.darkstone_shovel, "dshovel");
-		registerItem(ACItems.darkstone_sword, "dsword");
-		registerItem(ACItems.darkstone_hoe, "dhoe");
 		registerItem(ACItems.abyssalnite_pickaxe, "apick");
 		registerItem(ACItems.abyssalnite_axe, "aaxe");
 		registerItem(ACItems.abyssalnite_shovel, "ashovel");

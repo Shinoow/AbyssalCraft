@@ -43,7 +43,7 @@ public class ItemACAxe extends ItemAxe implements IResearchableItem {
 	}
 
 	public ItemACAxe(ToolMaterial mat, String name, int harvestlevel, TextFormatting format) {
-		super(mat, mat == AbyssalCraftAPI.darkstoneTool ? 8 : mat.getAttackDamage() + 5, -3.0F);
+		super(mat, mat.getAttackDamage() + 5, -3.0F);
 		setCreativeTab(ACTabs.tabTools);
 		setHarvestLevel("axe", harvestlevel);
 		setTranslationKey(name);

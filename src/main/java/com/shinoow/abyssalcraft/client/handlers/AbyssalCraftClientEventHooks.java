@@ -516,11 +516,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.transmutation_gem, 0);
 		registerItemRender(ACItems.coralium_plagued_flesh, 0);
 		registerItemRender(ACItems.coralium_plagued_flesh_on_a_bone, 0);
-		registerItemRender(ACItems.darkstone_pickaxe, 0);
-		registerItemRender(ACItems.darkstone_axe, 0);
-		registerItemRender(ACItems.darkstone_shovel, 0);
-		registerItemRender(ACItems.darkstone_sword, 0);
-		registerItemRender(ACItems.darkstone_hoe, 0);
 		registerItemRender(ACItems.abyssalnite_pickaxe, 0);
 		registerItemRender(ACItems.abyssalnite_axe, 0);
 		registerItemRender(ACItems.abyssalnite_shovel, 0);

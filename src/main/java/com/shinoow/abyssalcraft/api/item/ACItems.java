@@ -44,11 +44,6 @@ public class ACItems {
 	public static Item scriptures_of_omniscience;
 
 	// Tools/Weapons
-	public static Item darkstone_pickaxe;
-	public static Item darkstone_axe;
-	public static Item darkstone_shovel;
-	public static Item darkstone_sword;
-	public static Item darkstone_hoe;
 	public static Item abyssalnite_pickaxe;
 	public static Item abyssalnite_axe;
 	public static Item abyssalnite_shovel;

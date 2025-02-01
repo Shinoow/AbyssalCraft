@@ -43,14 +43,14 @@ public class ACTabs {
 
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ACItems.darkstone_axe);
+			return new ItemStack(ACItems.abyssalnite_axe);
 		}
 	};
 	public static final CreativeTabs tabCombat = new CreativeTabs("acctools"){
 
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ACItems.darkstone_sword);
+			return new ItemStack(ACItems.abyssalnite_sword);
 		}
 	};
 	public static final CreativeTabs tabFood = new CreativeTabs("acfood"){
