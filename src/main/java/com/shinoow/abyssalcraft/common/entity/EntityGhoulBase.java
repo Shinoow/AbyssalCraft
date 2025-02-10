@@ -34,11 +34,16 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class EntityGhoulBase extends EntityMob {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static AttributeModifier ghoulHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3.0D, 0);
+
+	public int fadeInTimer;
+	public boolean doFadeIn;
 
 	public EntityGhoulBase(World worldIn) {
 		super(worldIn);
@@ -116,6 +121,18 @@ public abstract class EntityGhoulBase extends EntityMob {
 	}
 
 	@Override
+	public void onLivingUpdate()
+	{
+		//		if(ticksExisted == 0)
+		//			fadeInTimer = 20;
+		//		if(world.isRemote && fadeInTimer > 0) {
+		//			fadeInTimer--;
+		//		}
+
+		super.onLivingUpdate();
+	}
+
+	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
@@ -143,6 +160,17 @@ public abstract class EntityGhoulBase extends EntityMob {
 			attribute.applyModifier(ghoulHDamageBoost);
 
 		return par1EntityLivingData;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void handleStatusUpdate(byte id)
+	{
+		if (id == 23) {
+			doFadeIn = true;
+		}
+		else
+			super.handleStatusUpdate(id);
 	}
 
 	/**
