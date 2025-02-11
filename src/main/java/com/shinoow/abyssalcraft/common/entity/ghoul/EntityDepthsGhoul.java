@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.entity;
+package com.shinoow.abyssalcraft.common.entity.ghoul;
 
 import java.util.UUID;
 
@@ -17,6 +17,8 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
 import com.shinoow.abyssalcraft.lib.*;
 
 import net.minecraft.entity.*;

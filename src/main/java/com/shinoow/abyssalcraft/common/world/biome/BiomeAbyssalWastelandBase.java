@@ -16,6 +16,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.biome.IAbyssalWastelandBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.world.biome.IControlledSpawnList;

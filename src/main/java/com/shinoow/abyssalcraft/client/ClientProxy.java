@@ -46,6 +46,9 @@ import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityOmotholGhoul;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -145,6 +148,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterShoggoth.class, manager -> new RenderShoggoth(manager, 2, 1.6F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCompassTentacle.class, RenderCompassTentacle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityRemnantTrader.class, RenderRemnantTrader::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGhoul.class, RenderGhoul::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, RenderAntiAbyssalZombie::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, RenderAntiBat::new);

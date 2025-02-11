@@ -16,7 +16,7 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityVillager;

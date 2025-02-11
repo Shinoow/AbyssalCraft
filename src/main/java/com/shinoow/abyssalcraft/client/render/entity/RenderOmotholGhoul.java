@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 import com.shinoow.abyssalcraft.client.model.entity.ModelGhoul;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulHeldItem;
-import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityOmotholGhoul;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;

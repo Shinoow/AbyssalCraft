@@ -12,17 +12,13 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
-import com.shinoow.abyssalcraft.common.entity.EntityGhoulBase;
-import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -115,7 +111,7 @@ public class TileEntityTombstone extends TileEntity implements ITickable {
 
 		if(block == ACBlocks.tombstone_abyssal_stone
 				|| block == ACBlocks.tombstone_coralium_stone) {
-			// Depths Ghoul
+			return new EntityDepthsGhoul(world);
 		}
 		if(block == ACBlocks.tombstone_stone) {
 			// Ghoul
@@ -136,6 +132,6 @@ public class TileEntityTombstone extends TileEntity implements ITickable {
 			// atrocity goes here
 		}
 
-		return new EntityDepthsGhoul(world);
+		return new EntityGhoul(world);
 	}
 }

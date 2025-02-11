@@ -15,6 +15,7 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

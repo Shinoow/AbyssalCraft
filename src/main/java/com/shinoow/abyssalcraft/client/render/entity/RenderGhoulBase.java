@@ -1,7 +1,7 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
-import com.shinoow.abyssalcraft.common.entity.EntityGhoulBase;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityGhoulBase;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;

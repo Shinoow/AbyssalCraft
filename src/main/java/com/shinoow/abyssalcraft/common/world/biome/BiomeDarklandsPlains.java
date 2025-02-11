@@ -31,6 +31,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenNoTree;
 import com.shinoow.abyssalcraft.lib.ACClientVars;

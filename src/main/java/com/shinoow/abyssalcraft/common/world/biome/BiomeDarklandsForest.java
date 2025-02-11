@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.world.biome;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.world.gen.WorldGenDLT;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 

@@ -15,7 +15,7 @@ import com.shinoow.abyssalcraft.client.model.entity.ModelGhoul;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerEyes;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulArmor;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerGhoulHeldItem;
-import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityGhoul;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -25,20 +25,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderDepthsGhoul extends RenderGhoulBase<EntityDepthsGhoul> {
+public class RenderGhoul extends RenderGhoulBase<EntityGhoul> {
 
-	private static final ResourceLocation peteResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/depths_ghoul_pete.png");
-	private static final ResourceLocation wilsonResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/depths_ghoul_wilson.png");
-	private static final ResourceLocation orangeResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/depths_ghoul_orange.png");
-	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/depths_ghoul.png");
+	private static final ResourceLocation ghoulResource = new ResourceLocation("abyssalcraft:textures/model/ghoul/ghoul.png");
 
-	public RenderDepthsGhoul(RenderManager manager)
+	public RenderGhoul(RenderManager manager)
 	{
 		this(manager, new ModelGhoul());
-		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft", "textures/model/ghoul/depths_ghoul_eyes.png")));
+		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft", "textures/model/ghoul/ghoul_eyes.png")));
 	}
 
-	public RenderDepthsGhoul(RenderManager manager, ModelGhoul model){
+	public RenderGhoul(RenderManager manager, ModelGhoul model){
 		super(manager, model, 0.6F);
 		addLayer(new LayerGhoulHeldItem(this));
 		addLayer(new LayerGhoulArmor(this));
@@ -46,26 +43,14 @@ public class RenderDepthsGhoul extends RenderGhoulBase<EntityDepthsGhoul> {
 	}
 
 	@Override
-	protected void preRenderCallback(EntityDepthsGhoul par1EntityLivingBase, float par2)
+	protected void preRenderCallback(EntityGhoul par1EntityLivingBase, float par2)
 	{
 		GlStateManager.scale(0.7F, 0.7F, 0.7F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityDepthsGhoul par1EntityLiving)
+	protected ResourceLocation getEntityTexture(EntityGhoul par1EntityLiving)
 	{
-		switch (par1EntityLiving.getGhoulType())
-		{
-		case 0:
-			return ghoulResource;
-		case 1:
-			return peteResource;
-		case 2:
-			return wilsonResource;
-		case 3:
-			return orangeResource;
-		default:
-			return ghoulResource;
-		}
+		return ghoulResource;
 	}
 }

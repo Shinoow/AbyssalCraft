@@ -21,6 +21,8 @@ import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothAttackMelee;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothBuildMonolith;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityOmotholGhoul;
 import com.shinoow.abyssalcraft.common.items.armor.ItemEthaxiumArmor;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;

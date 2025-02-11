@@ -23,6 +23,9 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityOmotholGhoul;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
@@ -175,6 +178,8 @@ public class EntityHandler implements ILifeCycleHandler {
 		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "compasstentacle"), EntityCompassTentacle.class, "compasstentacle", startId++, instance, 64, 10, true);
 
 		registerEntityWithEgg(EntityRemnantTrader.class, "remnanttrader", 80, 3, true, 0x133133, 0x342122);
+
+		registerEntityWithEgg(EntityGhoul.class, "ghoul", 80, 3, true, 0xa1a766, 0x40460c);
 
 		EntityUtil.addShoggothFood(EntityAnimal.class);
 		EntityUtil.addShoggothFood(EntityAmbientCreature.class);
