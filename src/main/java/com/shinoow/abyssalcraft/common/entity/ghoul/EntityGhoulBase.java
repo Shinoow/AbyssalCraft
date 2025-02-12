@@ -116,7 +116,7 @@ public abstract class EntityGhoulBase extends EntityMob {
 	@Override
 	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
 	{
-		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getItem()))
+		if(!InitHandler.INSTANCE.isBlacklistedFromPickup(itemEntity.getItem()))
 			super.updateEquipmentIfNeeded(itemEntity);
 	}
 

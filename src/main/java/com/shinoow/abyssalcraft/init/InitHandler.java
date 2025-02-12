@@ -73,9 +73,8 @@ public class InitHandler implements ILifeCycleHandler {
 
 	public static Configuration cfg;
 
-	private static String[] abyssalZombieBlacklist, depthsGhoulBlacklist, antiAbyssalZombieBlacklist, antiGhoulBlacklist,
-	omotholGhoulBlacklist, interdimensionalCageBlacklist, dreadPlagueImmunityList, dreadPlagueCarrierList,
-	coraliumPlagueImmunityList, coraliumPlagueCarrierList, itemTransportBlacklist;
+	private static String[] interdimensionalCageBlacklist, dreadPlagueImmunityList, dreadPlagueCarrierList,
+	coraliumPlagueImmunityList, coraliumPlagueCarrierList, itemTransportBlacklist, mobItemPickupBlacklist;
 
 	public static int[] coraliumOreGeneration;
 	private static int[] blackHoleBlacklist, oreGenDimBlacklist, structureGenDimBlacklist;
@@ -86,11 +85,7 @@ public class InitHandler implements ILifeCycleHandler {
 	public static final Fluid LIQUID_ANTIMATTER = new Fluid("liquidantimatter", new ResourceLocation("abyssalcraft", "blocks/anti_still"),
 			new ResourceLocation("abyssalcraft", "blocks/anti_flow")).setDensity(4000).setViscosity(1500).setTemperature(100);
 
-	private static final List<ItemStack> abyssal_zombie_blacklist = new ArrayList<>();
-	private static final List<ItemStack> depths_ghoul_blacklist = new ArrayList<>();
-	private static final List<ItemStack> anti_abyssal_zombie_blacklist = new ArrayList<>();
-	private static final List<ItemStack> anti_ghoul_blacklist = new ArrayList<>();
-	private static final List<ItemStack> omothol_ghoul_blacklist = new ArrayList<>();
+	private static final List<ItemStack> mob_pickup_blacklist = new ArrayList<>();
 
 	private static final List<String> dread_carriers = new ArrayList<>();
 	private static final List<String> dread_immunity = new ArrayList<>();
@@ -345,14 +340,10 @@ public class InitHandler implements ILifeCycleHandler {
 				+ "\nFormat: entityid;demonanimal;chance \nwhere entityid is the String used in the /summon command\n demonanimal is a Integer representing the Demon Animal to spawn (0 = Demon Pig, 1 = Demon Cow, 2 = Demon Chicken, 3 = Demon Sheep)"
 				+ "\nchance is a decimal number representing the chance (optional, can be left out) of the Demon Animal being spawned (0.2 would mean a 20% chance, defaults to 100% if not set");
 
-		abyssalZombieBlacklist = cfg.get(CATEGORY_MOBS, "Abyssal Zombie Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Abyssal Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
-		depthsGhoulBlacklist = cfg.get(CATEGORY_MOBS, "Depths Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Depths Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
-		antiAbyssalZombieBlacklist = cfg.get(CATEGORY_MOBS, "Abyssal Anti-Zombie Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Abyssal Anti-Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
-		antiGhoulBlacklist = cfg.get(CATEGORY_MOBS, "Anti-Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Anti-Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
-		omotholGhoulBlacklist = cfg.get(CATEGORY_MOBS, "Omothol Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Omothol Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
 		antiPlayersPickupLoot = cfg.get(CATEGORY_MOBS, "Anti-Players Can Pick Up Loot", true, "Toggles whether or not Anti-Players can pick up loot. You really should just blacklist them in whatever mob spawner/duplicator instead.").getBoolean();
 		dreadSpawnSpawnLimit = cfg.get(CATEGORY_MOBS, "Dread Spawn Spawn Limit", 20, "Spawn limit on how many Dread Spawns can be spawned by other mobs capable of spawning them. The spawn limit for Cha'garoth is half of this.", 0, 50).getInt();
 		greaterDreadSpawnSpawnLimit = cfg.get(CATEGORY_MOBS, "Greater Dread Spawn Spawn Limit", 10, "Spawn limit on how many Greater Dread Spawns can be spawned by other mobs capable of spawning them. The spawn limit for Cha'garoth is half of this.", 0, 50).getInt();
+		mobItemPickupBlacklist = cfg.get(CATEGORY_MOBS, "Mob Pickup Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by AbyssalCraft mobs that can pick up stuff. Format: modid:name:meta, where meta is optional.").getStringList();
 
 		jzaharHealingPace = cfg.get(CATEGORY_MOBS, "J'zahar Healing Pace", 200, "The pace at which J'zahar regenerates health (in ticks)\n[range: 20 ~ 1200, default: 200]", 20, 1200).getInt();
 		jzaharHealingAmount = cfg.get(CATEGORY_MOBS, "J'zahar Heal Amount", 1, "The amount of HP J'zahar heals when he regenerates health (set to 0 to disable healing)\n[range: 0 ~ 100, default: 1]", 0, 100).getInt();
@@ -528,33 +519,18 @@ public class InitHandler implements ILifeCycleHandler {
 			.forEach(s -> insert.accept(s, l));
 		};
 
-		construct.accept(abyssalZombieBlacklist, abyssal_zombie_blacklist);
-		construct.accept(depthsGhoulBlacklist, depths_ghoul_blacklist);
-		construct.accept(antiAbyssalZombieBlacklist, anti_abyssal_zombie_blacklist);
-		construct.accept(antiGhoulBlacklist, anti_ghoul_blacklist);
-		construct.accept(omotholGhoulBlacklist, omothol_ghoul_blacklist);
+		construct.accept(mobItemPickupBlacklist, mob_pickup_blacklist);
 	}
 
 	/**
-	 * Checks whether or not an Item is blacklisted for the specified Entity
-	 * @param entity Entity to check
+	 * Checks whether or not an Item is blacklisted from being picked up
 	 * @param stack ItemStack to check
 	 * @return True if the Item is blacklisted, otherwise false
 	 */
-	public boolean isItemBlacklisted(Entity entity, ItemStack stack){
-		if(entity instanceof EntityAbyssalZombie)
-			return abyssal_zombie_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
-		if(entity instanceof EntityDepthsGhoul)
-			return depths_ghoul_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
-		if(entity instanceof EntityAntiAbyssalZombie)
-			return anti_abyssal_zombie_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
-		if(entity instanceof EntityAntiGhoul)
-			return anti_ghoul_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
-		if(entity instanceof EntityOmotholGhoul)
-			return omothol_ghoul_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
-		return false;
+	public boolean isBlacklistedFromPickup(ItemStack stack) {
+		return mob_pickup_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
 	}
-
+	
 	/**
 	 * Checks if an Entity is blacklisted from being captured with a Interdimensional Cage
 	 * @param entity Entity to check
