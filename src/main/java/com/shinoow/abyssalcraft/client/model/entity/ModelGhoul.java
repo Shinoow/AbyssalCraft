@@ -67,6 +67,9 @@ public class ModelGhoul extends ModelArmoredBase {
 	public ModelGhoul(float f) {
 		textureWidth = 128;
 		textureHeight = 64;
+		head = new ModelRenderer(this, 0, 0);
+		head.setRotationPoint(0.0F, 6.5F, -20.2F);
+		head.addBox(-4.5F, -9.5F, -4.5F, 9, 9, 9, f);
 		lleg = new ModelRenderer(this, 16, 40);
 		lleg.mirror = true;
 		lleg.setRotationPoint(3.5F, 6.4F, 4.0F);
@@ -147,9 +150,6 @@ public class ModelGhoul extends ModelArmoredBase {
 		pelvis.setRotationPoint(0.0F, 4.69F, 1.0F);
 		pelvis.addBox(-5.0F, -1.0F, -3.0F, 10, 6, 5, f);
 		setRotateAngle(pelvis, 1.5707963267948966F, 0.0F, 0.0F);
-		head = new ModelRenderer(this, 0, 0);
-		head.setRotationPoint(0.0F, 6.5F, -20.2F);
-		head.addBox(-4.5F, -9.5F, -4.5F, 9, 9, 9, f);
 		spine = new ModelRenderer(this, 0, 44);
 		spine.setRotationPoint(0.0F, -7.0F, 0.5F);
 		spine.addBox(-2.0F, -8.0F, -3.0F, 4, 14, 4, f);

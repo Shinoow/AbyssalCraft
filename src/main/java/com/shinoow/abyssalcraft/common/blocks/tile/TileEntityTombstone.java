@@ -122,7 +122,7 @@ public class TileEntityTombstone extends TileEntity implements ITickable {
 		}
 		if(block == ACBlocks.tombstone_dreadstone
 				|| block == ACBlocks.tombstone_elysian_stone) {
-			// Dread-plagued Ghoul
+			return new EntityDreadedGhoul(world);
 		}
 		if(block == ACBlocks.tombstone_ethaxium
 				|| block == ACBlocks.tombstone_omothol_stone) {
