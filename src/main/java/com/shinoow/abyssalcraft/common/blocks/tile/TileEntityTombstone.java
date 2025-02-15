@@ -31,7 +31,6 @@ public class TileEntityTombstone extends TileEntity implements ITickable {
 	private int timer;
 	private int timerMax = 200;
 
-
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
@@ -118,7 +117,7 @@ public class TileEntityTombstone extends TileEntity implements ITickable {
 		}
 		if(block == ACBlocks.tombstone_darkstone) {
 			// Shadow Ghoul
-			// maybe different depending on dimension???
+			return new EntityShadowGhoul(world);
 		}
 		if(block == ACBlocks.tombstone_dreadstone
 				|| block == ACBlocks.tombstone_elysian_stone) {

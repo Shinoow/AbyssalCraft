@@ -1485,8 +1485,8 @@ entity.abyssalcraft.shoggoth.name=Shoggoth
 entity.abyssalcraft.greatershoggoth.name=Greater Shoggoth
 entity.abyssalcraft.remnanttrader.name=A real Villager
 entity.abyssalcraft.ghoul.name=Ghoul
-entity.abyssalcraft.dreaded_ghoul.name=Dread-plagued Ghoul
-
+entity.abyssalcraft.dreadedghoul.name=Dread-plagued Ghoul
+entity.abyssalcraft.shadowghoul.name=Shadow Ghoul
 
 #Potions
 potion.Cplague=Coralium Plague
