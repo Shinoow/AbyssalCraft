@@ -288,6 +288,7 @@ public class InitHandler implements ILifeCycleHandler {
 		cfg.setCategoryComment(CATEGORY_RITUALS, "Ritual configuration (options regarding rituals). Any changes take effect immediately.");
 		cfg.setCategoryComment(Configuration.CATEGORY_CLIENT, "Client configuration (options that only affect the client). Any changes take effect immediately.");
 		cfg.setCategoryComment(CATEGORY_MOBS, "Mob configuration (spawn weights, plague immunities and more).");
+		cfg.setCategoryComment(CATEGORY_GHOUL, "Ghouls configuration (tombstone spawn limits, burning from sunlight). Any changes take effect immediately.");
 
 		ACLib.abyssal_wasteland_id = cfg.get(CATEGORY_DIMENSIONS, "The Abyssal Wasteland", 50, "The first dimension, full of undead monsters.").getInt();
 		ACLib.dreadlands_id = cfg.get(CATEGORY_DIMENSIONS, "The Dreadlands", 51, "The second dimension, infested with mutated monsters.").getInt();
@@ -452,6 +453,8 @@ public class InitHandler implements ILifeCycleHandler {
 
 		spirit_items = cfg.get(CATEGORY_MODULES, "Spirit Items", true, "Set to false to disable Spirit Items. Items/spells/rituals remain, but item transfer stops.").getBoolean();
 
+		ghouls_burn = cfg.get(CATEGORY_GHOUL, "Ghouls Burn", false, "Set to toggle if Ghouls and Depths Ghouls should burn in sunlight.").getBoolean();
+		
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
 		demonAnimalSpawnWeight = MathHelper.clamp(demonAnimalSpawnWeight, 0, 100);

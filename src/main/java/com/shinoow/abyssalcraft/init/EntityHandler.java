@@ -181,7 +181,7 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		registerEntityWithEgg(EntityDreadedGhoul.class, "dreadedghoul", 80, 3, true, 0xE60000, 0xCC0000);
 
-		registerEntityWithEgg(EntityShadowGhoul.class, "shadowghoul", 80, 3, true, 0xE60000, 0xCC0000);
+		registerEntityWithEgg(EntityShadowGhoul.class, "shadowghoul", 80, 3, true, 0, 0xFFFFFF);
 
 		EntityUtil.addShoggothFood(EntityAnimal.class);
 		EntityUtil.addShoggothFood(EntityAmbientCreature.class);

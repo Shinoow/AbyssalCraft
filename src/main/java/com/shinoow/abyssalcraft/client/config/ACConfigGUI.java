@@ -43,6 +43,7 @@ public class ACConfigGUI extends GuiConfig {
 		list.add(new DummyCategoryElement(I18n.format("ac_modules"), "ac_modules", ModuleEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_rituals"), "ac_rituals", RitualsEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_shoggoth"), "ac_shoggoth", ShoggothEntry.class));
+		list.add(new DummyCategoryElement(I18n.format("ac_ghoul"), "ac_ghoul", GhoulEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_silly_settings"), "ac_silly_settings", SillySettingsEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_spells"), "ac_spells", SpellEntry.class));
 		list.add(new DummyCategoryElement(I18n.format("ac_wet_noodle"), "ac_wet_noodle", WetNoodleEntry.class));
@@ -191,6 +192,18 @@ public class ACConfigGUI extends GuiConfig {
 		@Override
 		protected GuiScreen buildChildScreen(){
 			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory(ACConfig.CATEGORY_MOBS)).getChildElements(), "abyssalcraft", ACConfig.CATEGORY_MOBS, true, true, I18n.format("ac_mobs"));
+
+		}
+	}
+	public static class GhoulEntry extends CategoryEntry{
+
+		public GhoulEntry(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement configElement) {
+			super(owningScreen, owningEntryList, configElement);
+		}
+
+		@Override
+		protected GuiScreen buildChildScreen(){
+			return new GuiConfig(owningScreen, new ConfigElement(InitHandler.cfg.getCategory(ACConfig.CATEGORY_GHOUL)).getChildElements(), "abyssalcraft", ACConfig.CATEGORY_GHOUL, true, true, I18n.format("ac_ghoul"));
 
 		}
 	}

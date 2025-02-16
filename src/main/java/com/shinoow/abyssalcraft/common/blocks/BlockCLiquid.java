@@ -98,7 +98,10 @@ public class BlockCLiquid extends BlockFluidClassic {
 						world.setBlockState(pos, ACBlocks.abyssal_tin_ore.getDefaultState());
 					else if(oresToBlocks(OreDictionary.getOres("oreCopper")).contains(world.getBlockState(pos)))
 						world.setBlockState(pos, ACBlocks.abyssal_copper_ore.getDefaultState());
-					else world.setBlockState(pos, ACBlocks.liquified_coralium_ore.getDefaultState());
+					else if(oresToBlocks(OreDictionary.getOres("oreAbyssalnite")).contains(world.getBlockState(pos)) ||
+							oresToBlocks(OreDictionary.getOres("oreDreadedAbyssalnite")).contains(world.getBlockState(pos)))
+						world.setBlockState(pos, ACBlocks.abyssal_abyssalnite_ore.getDefaultState());
+					else world.setBlockState(pos, ACBlocks.abyssal_coralium_ore.getDefaultState());
 				else if(gems.contains(world.getBlockState(pos)) && world.getBlockState(pos) != ACBlocks.abyssal_diamond_ore.getDefaultState())
 					if(oresToBlocks(OreDictionary.getOres("oreDiamond")).contains(world.getBlockState(pos)))
 						world.setBlockState(pos, ACBlocks.abyssal_diamond_ore.getDefaultState());
@@ -215,6 +218,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 		metals.add(ACBlocks.abyssal_copper_ore.getDefaultState());
 		metals.add(ACBlocks.abyssal_tin_ore.getDefaultState());
 		metals.add(ACBlocks.liquified_coralium_ore.getDefaultState());
+		metals.add(ACBlocks.abyssal_abyssalnite_ore.getDefaultState());
 		cobble.addAll(oresToBlocks(OreDictionary.getOres("cobblestone")));
 		cobble.add(Blocks.MOSSY_COBBLESTONE.getDefaultState());
 		cobble.add(ACBlocks.darkstone_cobblestone.getDefaultState());

@@ -922,6 +922,8 @@ ac_rituals=Rituals
 ac_rituals.tooltip=Ritual Configuration
 ac_mobs=Mobs
 ac_mobs.tooltip=Mob Configuration
+ac_ghoul=Ghoul
+ac_ghoul.tooltip=Ghoul Configuration
 
 #Keybinds
 key.abyssalcraft.category=AbyssalCraft

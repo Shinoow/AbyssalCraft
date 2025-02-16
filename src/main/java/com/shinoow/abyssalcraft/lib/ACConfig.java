@@ -26,7 +26,7 @@ public class ACConfig {
 	showBossDialogs, jzaharBreaksFourthWall, lootTableContent, depthsGhoulBiomeDictSpawn, abyssalZombieBiomeDictSpawn,
 	useAmplifiedWorldType, generateStatuesInLairs, enchantBooks, nightVisionEverywhere, antiPlayersPickupLoot,
 	demonAnimalsSpawnOnDeath, evilAnimalNewMoonSpawning, darkRealmSmokeParticles, enchantMergedBooks,
-	no_potion_clouds;
+	no_potion_clouds, ghouls_burn;
 	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate, acidSpitFrequency,
 	knowledgeSyncDelay, shoggothLairSpawnRateRivers, darkOffspringSpawnWeight, monolithBuildingCooldown, corruptionRitualRange,
 	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize, enchantmentMaxLevel, curingRitualRange,
@@ -63,4 +63,5 @@ public class ACConfig {
 	public static final String CATEGORY_SPELLS = "spells";
 	public static final String CATEGORY_MOBS = "mobs";
 	public static final String CATEGORY_RITUALS = "rituals";
+	public static final String CATEGORY_GHOUL = "ghoul";
 }

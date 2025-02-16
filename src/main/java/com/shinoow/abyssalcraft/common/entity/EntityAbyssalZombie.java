@@ -146,35 +146,7 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 	@Override
 	public void onLivingUpdate()
 	{
-		if (world.isDaytime() && !world.isRemote && !isChild() && world.provider.getDimension() != ACLib.abyssal_wasteland_id)
-		{
-			float var1 = getBrightness();
-
-			if (var1 > 0.5F && rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F && world.canSeeSky(new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ))))
-			{
-				boolean var2 = true;
-				ItemStack var3 = getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-
-				if (!var3.isEmpty())
-				{
-					if (var3.isItemStackDamageable())
-					{
-						var3.setItemDamage(var3.getItemDamage() + rand.nextInt(2));
-
-						if (var3.getItemDamage() >= var3.getMaxDamage())
-						{
-							renderBrokenItemStack(var3);
-							setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
-						}
-					}
-
-					var2 = false;
-				}
-
-				if (var2)
-					setFire(16);
-			}
-		}
+		EntityUtil.burnFromSunlight(this);
 
 		if(world.isRemote)
 			setChildSize(isChild());
