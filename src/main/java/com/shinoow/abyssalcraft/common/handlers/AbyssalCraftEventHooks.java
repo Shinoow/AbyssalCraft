@@ -189,21 +189,37 @@ public class AbyssalCraftEventHooks {
 				event.setCanceled(true);
 		}
 
-		if(Loader.isModLoaded("nuclearcraft") && EntityUtil.isEntityDread(entity))
+		if(EntityUtil.isEntityDread(entity))
 			processRadiation(event);
 	}
 
-	String[] sourceNames = {"fission_burn", "fatal_rads"};
+	private static String[] sourceNames = {"fission_burn", "fatal_rads"};
+	private static String[] sourceNames2 = {"nuclearBlast", "digamma", "radiation"};
 
-	private void processRadiation(LivingAttackEvent event) {
-		String type = event.getSource().getDamageType();
+	public static boolean isRadiationDamage(DamageSource source) {
+		
+		String type = source.getDamageType();
+		
 		boolean flag = false;
-		for(String src : sourceNames)
-			if(type.contentEquals(src)) {
-				flag = true;
-				break;
-			}
-		if(flag) {
+		
+		if(Loader.isModLoaded("nuclearcraft")) {
+			for(String src : sourceNames)
+				if(type.contentEquals(src)) {
+					return true;
+				}
+		}
+		if(Loader.isModLoaded("hbm")) {
+			for(String src : sourceNames2)
+				if(type.contentEquals(src)) {
+					return true;
+				}
+		}
+		
+		return false;
+	}
+	
+	private void processRadiation(LivingAttackEvent event) {
+		if(isRadiationDamage(event.getSource())) {
 			event.setCanceled(true);
 			// Dread Plague carriers absorb the radiation for sustenance
 			// (but only if Hardcore Mode is enabled, because we are nice here)

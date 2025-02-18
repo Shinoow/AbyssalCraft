@@ -15,6 +15,7 @@ import java.util.*;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.common.handlers.AbyssalCraftEventHooks;
 import com.shinoow.abyssalcraft.lib.*;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
@@ -279,6 +280,9 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			return false;
 
 		if (par1DamageSource.isMagicDamage())
+			return false;
+
+		if(AbyssalCraftEventHooks.isRadiationDamage(par1DamageSource))
 			return false;
 
 		if(par1DamageSource == DamageSource.OUT_OF_WORLD && posY <= 0 && !getEntityWorld().isRemote) {
