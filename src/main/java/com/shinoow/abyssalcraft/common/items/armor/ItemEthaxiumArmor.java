@@ -51,15 +51,19 @@ public class ItemEthaxiumArmor extends ItemACArmor {
 		if (itemstack.getItem() == ACItems.ethaxium_helmet) {
 			if(world.provider.isSurfaceWorld() && !world.provider.isDaytime())
 				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0, false, false));
-			if(player.getActivePotionEffect(MobEffects.HUNGER) !=null)
+			if(player.isPotionActive(MobEffects.HUNGER))
 				player.removePotionEffect(MobEffects.HUNGER);
-			if(player.getActivePotionEffect(MobEffects.POISON) !=null)
+			if(player.isPotionActive(MobEffects.POISON))
 				player.removePotionEffect(MobEffects.POISON);
+			if(player.isPotionActive(AbyssalCraftAPI.coralium_plague))
+				player.removePotionEffect(AbyssalCraftAPI.coralium_plague);
+			if(player.isPotionActive(AbyssalCraftAPI.dread_plague))
+				player.removePotionEffect(AbyssalCraftAPI.dread_plague);
 		}
 		if(itemstack.getItem() == ACItems.ethaxium_chestplate){
 			if(player.isBurning() || world.provider.doesWaterVaporize())
 				player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 2, false, false));
-			if(player.getActivePotionEffect(AbyssalCraftAPI.antimatter_potion) !=null)
+			if(player.isPotionActive(AbyssalCraftAPI.antimatter_potion))
 				player.removePotionEffect(AbyssalCraftAPI.antimatter_potion);
 			if(world.rand.nextInt(200) == 0)
 				player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 60, 0, false, false));

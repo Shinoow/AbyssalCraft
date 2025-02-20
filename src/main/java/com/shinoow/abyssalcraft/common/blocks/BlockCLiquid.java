@@ -131,7 +131,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 	public void onEntityCollision(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
 		super.onEntityCollision(par1World, pos, state, par5Entity);
 
-		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity) && ((EntityLivingBase)par5Entity).getActivePotionEffect(AbyssalCraftAPI.coralium_plague) == null)
+		if(par5Entity instanceof EntityLivingBase && !EntityUtil.isEntityCoralium((EntityLivingBase)par5Entity) && ((EntityLivingBase)par5Entity).isPotionActive(AbyssalCraftAPI.coralium_plague))
 			((EntityLivingBase)par5Entity).addPotionEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 200));
 	}
 

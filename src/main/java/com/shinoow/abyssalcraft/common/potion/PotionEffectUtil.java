@@ -17,12 +17,14 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.handlers.PlagueEventHandler;
+import com.shinoow.abyssalcraft.common.util.ArmorUtil;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -32,6 +34,7 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
@@ -40,6 +43,9 @@ public class PotionEffectUtil {
 
 	public static void applyAntimatterEffect(EntityLivingBase entityLivingBase, int amplifier) {
 		if(EntityUtil.isEntityAnti(entityLivingBase)) return;
+
+		if(entityLivingBase.hasItemInSlot(EntityEquipmentSlot.CHEST) && entityLivingBase.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ACItems.ethaxium_chestplate)
+			return;
 
 		entityLivingBase.attackEntityFrom(AbyssalCraftAPI.antimatter, 5);
 
@@ -143,6 +149,8 @@ public class PotionEffectUtil {
 
 		if(EntityUtil.isEntityCoralium(entityLivingBase)) return;
 
+		if(ArmorUtil.hasHelmetWithResistance(entityLivingBase, AbyssalCraftAPI.coralium)) return;
+
 		if(entityLivingBase.ticksExisted % 40 >> amplifier == 0)
 			entityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);
 
@@ -214,6 +222,8 @@ public class PotionEffectUtil {
 			NecroDataCapability.getCap((EntityPlayer) entityLivingBase).triggerMiscUnlock("dread_plague");
 
 		if(EntityUtil.isEntityDread(entityLivingBase)) return;
+
+		if(ArmorUtil.hasHelmetWithResistance(entityLivingBase, AbyssalCraftAPI.dread)) return;
 
 		if(entityLivingBase.ticksExisted % 25 >> amplifier == 0)
 			entityLivingBase.attackEntityFrom(AbyssalCraftAPI.dread, 1);

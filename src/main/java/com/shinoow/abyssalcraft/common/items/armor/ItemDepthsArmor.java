@@ -69,7 +69,7 @@ public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear {
 			player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 20, 0, false, false));
 			if(world.provider.isSurfaceWorld())
 				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0, false, false));
-			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
+			if(player.isPotionActive(AbyssalCraftAPI.coralium_plague))
 				player.removePotionEffect(AbyssalCraftAPI.coralium_plague);
 		}
 		if (itemstack.getItem() == ACItems.depths_chestplate)

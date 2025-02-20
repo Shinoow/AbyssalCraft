@@ -51,7 +51,7 @@ public class ItemCoraliumPArmor extends ItemACArmor {
 		if (itemstack.getItem() == ACItems.plated_coralium_helmet) {
 			if(world.provider.isSurfaceWorld() || ACConfig.nightVisionEverywhere)
 				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0, false, false));
-			if(player.getActivePotionEffect(AbyssalCraftAPI.coralium_plague) !=null)
+			if(player.isPotionActive(AbyssalCraftAPI.coralium_plague))
 				player.removePotionEffect(AbyssalCraftAPI.coralium_plague);
 		}
 		if (itemstack.getItem() == ACItems.plated_coralium_boots)
