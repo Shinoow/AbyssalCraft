@@ -13,6 +13,8 @@ package com.shinoow.abyssalcraft.integration.jei;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.client.gui.GuiCrystallizer;
+import com.shinoow.abyssalcraft.client.gui.GuiTransmutator;
 import com.shinoow.abyssalcraft.common.inventory.ContainerCrystallizer;
 import com.shinoow.abyssalcraft.common.inventory.ContainerMaterializer;
 import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
@@ -33,7 +35,9 @@ import com.shinoow.abyssalcraft.integration.jei.util.JEIUtils;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
+import net.minecraft.client.gui.inventory.GuiFurnace;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
@@ -80,6 +84,9 @@ public class ACJEIPlugin implements IModPlugin {
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.antimatter_scroll), ACRecipeCategoryUid.SPELL);
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.oblivion_scroll), ACRecipeCategoryUid.SPELL);
 
+		registry.addRecipeClickArea(GuiTransmutator.class, 78, 32, 28, 23, ACRecipeCategoryUid.TRANSMUTATION, ACRecipeCategoryUid.FUEL_TRANSMUTATION);
+		registry.addRecipeClickArea(GuiCrystallizer.class, 78, 32, 28, 23, ACRecipeCategoryUid.CRYSTALLIZATION, ACRecipeCategoryUid.FUEL_CRYSTALLIZATION);
+		
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
 
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerTransmutator.class, ACRecipeCategoryUid.TRANSMUTATION, 0, 1, 1, 36);
