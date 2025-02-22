@@ -62,11 +62,17 @@ public class ShapedFluidContainerRecipe extends ShapedRecipes {
 
 				ItemStack itemstack1 = inventory.getStackInRowAndColumn(i, j);
 
-				if(!ingredient.apply(itemstack1))
-					return false;
+				boolean flag = false;
 
-				for(ItemStack itemstack : ingredient.getMatchingStacks())
-					if (!areFluidStacksEqual(itemstack, itemstack1))
+				if(FluidUtil.getFluidContained(itemstack1) != null) {
+					for(ItemStack itemstack : ingredient.getMatchingStacks())
+						if (!areFluidStacksEqual(itemstack, itemstack1))
+							return false;
+						else flag = true;
+				}
+
+				if(!flag)
+					if(!ingredient.apply(itemstack1))
 						return false;
 			}
 
