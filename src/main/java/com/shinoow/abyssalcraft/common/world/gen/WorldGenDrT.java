@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
 @SuppressWarnings("deprecation")
-public class WorldGenDrT extends WorldGenTrees {
+public class WorldGenDrT extends WorldGenTreeAC {
 
 	private int maxHeight = -1;
 
@@ -52,6 +52,11 @@ public class WorldGenDrT extends WorldGenTrees {
 		int leaveheight = rand.nextInt(3);
 		int branches = rand.nextInt(8) + 4;
 		int branchLenght = 6;
+
+		if(fixed) {
+			height = 6;
+			branches = 6;
+		}
 
 		IBlockState j1 = world.getBlockState(new BlockPos(x, y -1, z));
 
@@ -92,14 +97,23 @@ public class WorldGenDrT extends WorldGenTrees {
 	}
 
 	private void createTrunk(World world, Random rand, int x, int y, int z) {
-		int[] pos = new int[] {1, 0, 0, 1, -1, 0, 0, -1};
-		int sh;
-		for (int t = 0; t < 4; t++) {
-			sh = rand.nextInt(3) + y;
-			int i = sh;
-			while (sh > y - 1) {
-				setBlockAndNotifyAdequately(world, new BlockPos(x + pos[t * 2], sh, z + pos[t * 2 + 1]), i == sh ? ACBlocks.dreadwood_log.getStateFromMeta(12) : ACBlocks.dreadwood_log.getDefaultState());
-				sh--;
+
+		if(fixed) {
+			setBlockAndNotifyAdequately(world, new BlockPos(x,y,z),ACBlocks.dreadwood_log.getDefaultState());
+			setBlockAndNotifyAdequately(world, new BlockPos(x-1,y,z),ACBlocks.dreadwood_log.getStateFromMeta(12));
+			setBlockAndNotifyAdequately(world, new BlockPos(x+1,y,z),ACBlocks.dreadwood_log.getStateFromMeta(12));
+			setBlockAndNotifyAdequately(world, new BlockPos(x,y,z-1),ACBlocks.dreadwood_log.getStateFromMeta(12));
+			setBlockAndNotifyAdequately(world, new BlockPos(x,y,z+1),ACBlocks.dreadwood_log.getStateFromMeta(12));
+		} else {
+			int[] pos = new int[] {1, 0, 0, 1, -1, 0, 0, -1};
+			int sh;
+			for (int t = 0; t < 4; t++) {
+				sh = rand.nextInt(3) + y;
+				int i = sh;
+				while (sh > y - 1) {
+					setBlockAndNotifyAdequately(world, new BlockPos(x + pos[t * 2], sh, z + pos[t * 2 + 1]), i == sh ? ACBlocks.dreadwood_log.getStateFromMeta(12) : ACBlocks.dreadwood_log.getDefaultState());
+					sh--;
+				}
 			}
 		}
 	}

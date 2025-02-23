@@ -56,13 +56,14 @@ public class TileEntityTombstone extends TileEntity implements ITickable {
 
 	@Override
 	public void update() {
-		if(world.getDifficulty() != EnumDifficulty.PEACEFUL && world.getGameRules().getBoolean("doMobSpawning")) {
+		if(world.getDifficulty() != EnumDifficulty.PEACEFUL && world.getGameRules().getBoolean("doMobSpawning")
+				&& !world.isDaytime()) {
 			timer++;
 			if(timer >= timerMax) {
 				timer = 0;
 
-				int size = 15;
-				int maxAmount = 5;
+				int size = 15; //TODO config
+				int maxAmount = 5; //TODO config
 
 				if(world.getEntitiesWithinAABB(EntityGhoulBase.class, new AxisAlignedBB(pos).grow(size)).size() < maxAmount) {
 					EntityGhoulBase ghoul = getGhoul(world.getBlockState(pos).getBlock());
@@ -112,11 +113,7 @@ public class TileEntityTombstone extends TileEntity implements ITickable {
 				|| block == ACBlocks.tombstone_coralium_stone) {
 			return new EntityDepthsGhoul(world);
 		}
-		if(block == ACBlocks.tombstone_stone) {
-			// Ghoul
-		}
 		if(block == ACBlocks.tombstone_darkstone) {
-			// Shadow Ghoul
 			return new EntityShadowGhoul(world);
 		}
 		if(block == ACBlocks.tombstone_dreadstone

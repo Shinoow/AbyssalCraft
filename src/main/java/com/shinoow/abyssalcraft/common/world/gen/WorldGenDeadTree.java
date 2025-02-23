@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
 @SuppressWarnings("deprecation")
-public class WorldGenDeadTree extends WorldGenTrees {
+public class WorldGenDeadTree extends WorldGenTreeAC {
 
 	public WorldGenDeadTree(boolean flag)
 	{
@@ -44,9 +44,14 @@ public class WorldGenDeadTree extends WorldGenTrees {
 		int branches = rand.nextInt(4) + 4;
 		int branchLenght = 4;
 
+		if(fixed) {
+			height = 6;
+			branches = 6;
+		}
+
 		IBlockState j1 = world.getBlockState(new BlockPos(x, y -1, z));
 
-		if (j1.getBlock() != ACBlocks.fused_abyssal_sand || y >= 256 - height - 1)
+		if ((j1.getBlock() != ACBlocks.fused_abyssal_sand && j1.getBlock() != ACBlocks.abyssal_sand) || y >= 256 - height - 1)
 			return false;
 
 		setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), ACBlocks.abyssal_sand.getDefaultState());
@@ -75,14 +80,23 @@ public class WorldGenDeadTree extends WorldGenTrees {
 	}
 
 	private void createTrunk(World world, Random rand, int x, int y, int z) {
-		int[] pos = new int[] {1, 0, 0, 1, -1, 0, 0, -1};
-		int sh;
-		for (int t = 0; t < 4; t++) {
-			sh = rand.nextInt(3) + y;
-			int i = sh;
-			while (sh > y - 1) {
-				setBlockAndNotifyAdequately(world, new BlockPos(x + pos[t * 2], sh, z + pos[t * 2 + 1]), i == sh ? ACBlocks.dead_tree_log.getStateFromMeta(12) : ACBlocks.dead_tree_log.getDefaultState());
-				sh--;
+
+		if(fixed) {
+			setBlockAndNotifyAdequately(world, new BlockPos(x,y,z),ACBlocks.dead_tree_log.getDefaultState());
+			setBlockAndNotifyAdequately(world, new BlockPos(x-1,y,z),ACBlocks.dead_tree_log.getStateFromMeta(12));
+			setBlockAndNotifyAdequately(world, new BlockPos(x+1,y,z),ACBlocks.dead_tree_log.getStateFromMeta(12));
+			setBlockAndNotifyAdequately(world, new BlockPos(x,y,z-1),ACBlocks.dead_tree_log.getStateFromMeta(12));
+			setBlockAndNotifyAdequately(world, new BlockPos(x,y,z+1),ACBlocks.dead_tree_log.getStateFromMeta(12));
+		} else {
+			int[] pos = new int[] {1, 0, 0, 1, -1, 0, 0, -1};
+			int sh;
+			for (int t = 0; t < 4; t++) {
+				sh = rand.nextInt(3) + y;
+				int i = sh;
+				while (sh > y - 1) {
+					setBlockAndNotifyAdequately(world, new BlockPos(x + pos[t * 2], sh, z + pos[t * 2 + 1]), i == sh ? ACBlocks.dead_tree_log.getStateFromMeta(12) : ACBlocks.dead_tree_log.getDefaultState());
+					sh--;
+				}
 			}
 		}
 	}

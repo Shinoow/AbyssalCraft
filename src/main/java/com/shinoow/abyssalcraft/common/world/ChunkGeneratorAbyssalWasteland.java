@@ -21,6 +21,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.structures.StructureGraveyard;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
 import com.shinoow.abyssalcraft.common.structures.abyss.Chains;
@@ -31,6 +32,7 @@ import com.shinoow.abyssalcraft.lib.world.biome.IAlternateSpawnList;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -71,6 +73,7 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 	private MapGenBase ravineGenerator = new MapGenRavineAC();
 	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
 	private WorldGenAbyssalStalagmite stalagmite = new WorldGenAbyssalStalagmite();
+	private StructureGraveyard graveyard = new StructureGraveyard();
 	private Biome[] biomesForGeneration;
 
 	double[] doubleArray1;
@@ -394,6 +397,20 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 					shoggothLair.generate(worldObj, rand, pos1);
 			}
 
+		int x2 =  rand.nextInt(16) + 8;
+		int z2 = rand.nextInt(16) + 8;
+		BlockPos posGrave = worldObj.getHeight(pos.add(x2, 0, z2));
+
+		while(worldObj.isAirBlock(posGrave) && posGrave.getY() > 2)
+			posGrave = posGrave.down();
+		
+		IBlockState state = worldObj.getBlockState(posGrave);
+		if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
+				&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
+				&& state.getMaterial() != Material.CACTUS) {
+			graveyard.generate(worldObj, rand, posGrave);
+		}
+		
 		biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
 
 		ForgeEventFactory.onChunkPopulate(false, this, worldObj, rand, x, z, flag);

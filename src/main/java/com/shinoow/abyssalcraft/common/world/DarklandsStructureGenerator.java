@@ -110,7 +110,7 @@ public class DarklandsStructureGenerator {
 
 				while(world.isAirBlock(pos) && pos.getY() > 2)
 					pos = pos.down();
-				if(!checkBlocks(world, pos, 3, Blocks.GRASS.getDefaultState(), blocks));
+				if(!checkBlocks(world, pos, 3, Blocks.GRASS.getDefaultState(), blocks)) return;
 
 				if(random.nextFloat() < chance)
 					dark_shrine.generate(world, random, pos);

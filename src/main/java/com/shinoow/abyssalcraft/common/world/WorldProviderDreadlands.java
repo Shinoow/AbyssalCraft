@@ -96,7 +96,7 @@ public class WorldProviderDreadlands extends WorldProvider implements IAbyssalWo
 
 	@Override
 	public float calculateCelestialAngle(long par1, float par3) {
-		return 0.0F;
+		return 0.5F;
 	}
 
 	@Override

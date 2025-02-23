@@ -65,7 +65,7 @@ public class WorldProviderOmothol extends WorldProvider implements IAbyssalWorld
 	@Override
 	public float calculateCelestialAngle(long par1, float par3)
 	{
-		return 0.0F;
+		return 0.5F;
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.structures.StructureGraveyard;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenRavineAC;
@@ -65,6 +66,7 @@ public class ChunkGeneratorDarkRealm implements IChunkGenerator
 	private MapGenBase ravineGenerator = new MapGenRavineAC();
 
 	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
+	private StructureGraveyard graveyard = new StructureGraveyard();
 
 	double[] doubleArray1;
 	double[] doubleArray2;
@@ -512,6 +514,20 @@ public class ChunkGeneratorDarkRealm implements IChunkGenerator
 				if(rand.nextInt(200) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
 					shoggothLair.generate(worldObj, rand, pos1);
 			}
+
+		int x2 = k + rand.nextInt(16) + 8;
+		int z2 = l + rand.nextInt(16) + 8;
+		BlockPos posGrave = worldObj.getHeight(new BlockPos(x2, 0, z2));
+
+		while(worldObj.isAirBlock(posGrave) && posGrave.getY() > 2)
+			posGrave = posGrave.down();
+		
+		IBlockState state = worldObj.getBlockState(posGrave);
+		if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
+				&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
+				&& state.getMaterial() != Material.CACTUS) {
+			graveyard.generate(worldObj, rand, posGrave);
+		}
 
 		Biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
 

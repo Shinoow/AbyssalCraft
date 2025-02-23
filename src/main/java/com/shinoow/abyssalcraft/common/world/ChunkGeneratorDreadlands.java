@@ -21,6 +21,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.structures.StructureGraveyard;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.StructureLairEntrance;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.MapGenDreadlandsMine;
@@ -75,6 +76,7 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
 	private StructureLairEntrance lairEntrance = new StructureLairEntrance();
 	private WorldGenDreadlandsStalagmite stalagmite = new WorldGenDreadlandsStalagmite();
+	private StructureGraveyard graveyard = new StructureGraveyard();
 
 	/** The biomes that are used to generate the chunk */
 	private Biome[] biomesForGeneration;
@@ -362,6 +364,15 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 
 		DarklandsStructureGenerator.generateStructures(worldObj, rand, k, l, 0.03F);
 
+		if(ACConfig.generateDreadlandsStalagmite){
+			int xPos = k + rand.nextInt(10) + 6;
+			int zPos = l + rand.nextInt(10) + 6;
+			BlockPos pos2 = new BlockPos(xPos, 0, zPos);
+			Biome b1 = worldObj.getBiome(pos2);
+			if(b1 == ACBiomes.dreadlands || worldObj.rand.nextInt(10) == 0 && b1 == ACBiomes.darklands)
+				stalagmite.generate(worldObj, rand, worldObj.getHeight(pos2));
+		}
+
 		if(ACConfig.generateShoggothLairs) {
 			int Xcoord2 = k + rand.nextInt(16) + 8;
 			int Zcoord2 = l + rand.nextInt(2) + 28;
@@ -380,16 +391,21 @@ public class ChunkGeneratorDreadlands implements IChunkGenerator {
 				&& worldObj.getBiome(pos1.east(13)) != ACBiomes.dreadlands_ocean)
 			lairEntrance.generate(worldObj, rand, pos1);
 
-		biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
+		int x2 = k + rand.nextInt(16) + 8;
+		int z2 = l + rand.nextInt(16) + 8;
+		BlockPos posGrave = worldObj.getHeight(new BlockPos(x2, 0, z2));
 
-		if(ACConfig.generateDreadlandsStalagmite){
-			int xPos = k + rand.nextInt(10) + 6;
-			int zPos = l + rand.nextInt(10) + 6;
-			BlockPos pos2 = new BlockPos(xPos, 0, zPos);
-			Biome b1 = worldObj.getBiome(pos2);
-			if(b1 == ACBiomes.dreadlands || worldObj.rand.nextInt(10) == 0 && b1 == ACBiomes.darklands)
-				stalagmite.generate(worldObj, rand, worldObj.getHeight(pos2));
+		while(worldObj.isAirBlock(posGrave) && posGrave.getY() > 2)
+			posGrave = posGrave.down();
+		
+		IBlockState state = worldObj.getBlockState(posGrave);
+		if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
+				&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
+				&& state.getMaterial() != Material.CACTUS) {
+			graveyard.generate(worldObj, rand, posGrave);
 		}
+
+		biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
 
 		ForgeEventFactory.onChunkPopulate(false, this, worldObj, rand, par2, par3, flag);
 

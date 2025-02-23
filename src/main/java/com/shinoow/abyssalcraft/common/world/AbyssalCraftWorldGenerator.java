@@ -14,11 +14,13 @@ package com.shinoow.abyssalcraft.common.world;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.structures.StructureGraveyard;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -34,6 +36,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 
 	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
+	private StructureGraveyard graveyard = new StructureGraveyard();
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator
@@ -97,5 +100,20 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 						if(!world.isAirBlock(pos1.north(13)) && !world.isAirBlock(pos1.north(20)) && !world.isAirBlock(pos1.north(27)))
 							shoggothLair.generate(world, random, pos1);
 			}
+		
+
+		int x = chunkX + random.nextInt(16) + 8;
+		int z = chunkZ + random.nextInt(16) + 8;
+		BlockPos pos = world.getHeight(new BlockPos(x, 0, z));
+
+		while(world.isAirBlock(pos) && pos.getY() > 2)
+			pos = pos.down();
+		
+		IBlockState state = world.getBlockState(pos);
+		if(random.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
+				&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
+				&& state.getMaterial() != Material.CACTUS) {
+			graveyard.generate(world, random, pos);
+		}
 	}
 }
