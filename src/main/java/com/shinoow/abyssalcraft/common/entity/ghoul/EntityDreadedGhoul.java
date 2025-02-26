@@ -15,8 +15,8 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
-import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
+import com.shinoow.abyssalcraft.common.entity.*;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
@@ -24,6 +24,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFleeSun;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
@@ -36,13 +37,13 @@ public class EntityDreadedGhoul extends EntityGhoulBase implements IDreadEntity 
 
 	public EntityDreadedGhoul(World par1World) {
 		super(par1World);
-		setSize(1.0F, 1.7F);
 		tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDreadedGhoul.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityAbyssalZombie.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityZombie.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDreadling.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDreadSpawn.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDemonAnimal.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDreadguard.class, 8.0F));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityGhoul.class, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityDepthsGhoul.class, true));
 		isImmuneToFire = true;
 	}
 
@@ -51,8 +52,8 @@ public class EntityDreadedGhoul extends EntityGhoulBase implements IDreadEntity 
 	{
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 60.0D : 30.0D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 10.0D : 5.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 70.0D : 35.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 12.0D : 6.0D);
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public class EntityDreadedGhoul extends EntityGhoulBase implements IDreadEntity 
 
 	@Override
 	protected ResourceLocation getLootTable(){
-		return ACLoot.ENTITY_DEPTHS_GHOUL; //TODO: change
+		return ACLoot.ENTITY_DREADED_GHOUL;
 	}
 
 	@Override

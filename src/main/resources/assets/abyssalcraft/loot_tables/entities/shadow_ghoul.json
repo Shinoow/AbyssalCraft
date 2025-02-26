@@ -2,16 +2,11 @@
     "pools": [
         {
 			"name": "main",
-			"conditions": [
-                {
-                    "condition": "killed_by_player"
-                }
-            ],
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
-                    "name": "abyssalcraft:dreadchunk",
+                    "name": "abyssalcraft:shadowshard",
                     "weight": 1,
                     "functions": [
                         {

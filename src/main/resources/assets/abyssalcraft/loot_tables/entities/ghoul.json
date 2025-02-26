@@ -1,17 +1,12 @@
 {
     "pools": [
-        {
+	    {
 			"name": "main",
-			"conditions": [
-                {
-                    "condition": "killed_by_player"
-                }
-            ],
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
-                    "name": "abyssalcraft:abychunk",
+                    "name": "minecraft:rotten_flesh",
                     "weight": 1,
                     "functions": [
                         {
@@ -32,5 +27,5 @@
                 }
             ]
         }
-    ]
+	]
 }

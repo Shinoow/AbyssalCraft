@@ -32,13 +32,8 @@ public class EntityGhoul extends EntityGhoulBase {
 
 	public EntityGhoul(World par1World) {
 		super(par1World);
-		setSize(1.0F, 1.7F);
-		tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGhoul.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityAbyssalZombie.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityZombie.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
+		if(ACConfig.ghouls_burn)
+			tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
 	}
 
 	@Override
@@ -66,7 +61,7 @@ public class EntityGhoul extends EntityGhoulBase {
 
 	@Override
 	protected ResourceLocation getLootTable(){
-		return ACLoot.ENTITY_DEPTHS_GHOUL; //TODO: change
+		return ACLoot.ENTITY_GHOUL;
 	}
 
 	@Override

@@ -15,6 +15,9 @@ import java.util.Calendar;
 import java.util.UUID;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
+import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -26,6 +29,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
@@ -47,12 +52,17 @@ public abstract class EntityGhoulBase extends EntityMob {
 
 	public EntityGhoulBase(World worldIn) {
 		super(worldIn);
+		setSize(0.9F, 1.7F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
 		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
-		tasks.addTask(5, new EntityAIWander(this, 1.0D));
+		tasks.addTask(6, new EntityAIWander(this, 1.0D));
 		tasks.addTask(7, new EntityAILookIdle(this));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGhoulBase.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityZombie.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityShoggothBase.class, 8.0F));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		//TODO: ghoul AI stuff
@@ -63,7 +73,6 @@ public abstract class EntityGhoulBase extends EntityMob {
 		super.applyEntityAttributes();
 
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(42.0D);
-		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3D);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 	}
 

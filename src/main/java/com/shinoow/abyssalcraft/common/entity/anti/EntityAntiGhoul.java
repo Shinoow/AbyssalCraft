@@ -12,18 +12,15 @@
 package com.shinoow.abyssalcraft.common.entity.anti;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
-import com.shinoow.abyssalcraft.common.entity.ghoul.EntityGhoulBase;
-import com.shinoow.abyssalcraft.common.entity.ghoul.EntityOmotholGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.*;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.item.Item;
@@ -36,13 +33,14 @@ public class EntityAntiGhoul extends EntityGhoulBase implements IAntiEntity {
 
 	public EntityAntiGhoul(World par1World) {
 		super(par1World);
-		setSize(1.0F, 1.7F);
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiGhoul.class, 8.0F));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiAbyssalZombie.class, 8.0F));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiZombie.class, 8.0F));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityAntiSkeleton.class, 8.0F));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityDepthsGhoul.class, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGhoul.class, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityDreadedGhoul.class, true));
 	}
 
 	@Override
@@ -67,7 +65,7 @@ public class EntityAntiGhoul extends EntityGhoulBase implements IAntiEntity {
 	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
-		if(!world.isRemote && par1Entity instanceof EntityDepthsGhoul){
+		if(!world.isRemote && par1Entity instanceof EntityGhoulBase && !EntityUtil.isEntityAnti((EntityLivingBase) par1Entity)){
 			boolean flag = world.getGameRules().getBoolean("mobGriefing");
 			if(ACConfig.nuclearAntimatterExplosions)
 				ExplosionUtil.newODBExplosion(world, this, posX, posY, posZ, ACConfig.antimatterExplosionSize, true, flag);

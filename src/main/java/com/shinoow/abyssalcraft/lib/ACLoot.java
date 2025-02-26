@@ -99,5 +99,8 @@ public class ACLoot {
 	public static final ResourceLocation ENTITY_GREATER_OMOTHOL_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/greater_omothol_shoggoth"));
 	public static final ResourceLocation ENTITY_GREATER_SHADOW_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/greater_shadow_shoggoth"));
 	public static final ResourceLocation ENTITY_GREATER_SHOGGOTH = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/greater_shoggoth"));
+	public static final ResourceLocation ENTITY_GHOUL = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/ghoul"));
+	public static final ResourceLocation ENTITY_DREADED_GHOUL = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/dread_ghoul"));
+	public static final ResourceLocation ENTITY_SHADOW_GHOUL = LootTableList.register(new ResourceLocation("abyssalcraft", "entities/shadow_ghoul"));
 
 }

@@ -23,11 +23,13 @@ import com.shinoow.abyssalcraft.lib.*;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIFleeSun;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -56,21 +58,20 @@ public class EntityDepthsGhoul extends EntityGhoulBase implements ICoraliumEntit
 
 	public EntityDepthsGhoul(World par1World) {
 		super(par1World);
-		setSize(1.0F, 1.7F);
-		tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityDepthsGhoul.class, 8.0F));
+		if(ACConfig.ghouls_burn)
+			tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityAbyssalZombie.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityZombie.class, 8.0F));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeleton.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntitySkeletonGoliath.class, 8.0F));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityGhoul.class, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityDreadedGhoul.class, true));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 60.0D : 30.0D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 10.0D : 5.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 70.0D : 35.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 12.0D : 6.0D);
 	}
 
 	@Override

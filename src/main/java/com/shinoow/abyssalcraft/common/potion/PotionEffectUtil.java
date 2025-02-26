@@ -23,6 +23,8 @@ import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDreadedGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityGhoulBase;
 import com.shinoow.abyssalcraft.common.handlers.PlagueEventHandler;
 import com.shinoow.abyssalcraft.common.util.ArmorUtil;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
@@ -62,7 +64,7 @@ public class PotionEffectUtil {
 				entityLivingBase.world.removeEntity(entityLivingBase);
 				entity.onInitialSpawn(entityLivingBase.world.getDifficultyForLocation(entityLivingBase.getPosition()),(IEntityLivingData)null);
 				entityLivingBase.world.spawnEntity(entity);
-			} else if(entityLivingBase instanceof EntityDepthsGhoul){
+			} else if(entityLivingBase instanceof EntityGhoulBase && !EntityUtil.isEntityAnti(entityLivingBase)){
 				EntityAntiGhoul entity = new EntityAntiGhoul(entityLivingBase.world);
 				entity.copyLocationAndAnglesFrom(entityLivingBase);
 				entityLivingBase.world.removeEntity(entityLivingBase);
@@ -186,13 +188,23 @@ public class PotionEffectUtil {
 					entityLivingBase.world.spawnEntity(entityzombie);
 				}
 				entityLivingBase.removePotionEffect(AbyssalCraftAPI.coralium_plague);
-			} else if(entityLivingBase instanceof EntitySquid)
+			} else if(entityLivingBase instanceof EntitySquid) {
 				if(entityLivingBase.world.rand.nextBoolean()){
 					EntityCoraliumSquid squid = new EntityCoraliumSquid(entityLivingBase.world);
 					squid.copyLocationAndAnglesFrom(entityLivingBase);
 					squid.onInitialSpawn(entityLivingBase.world.getDifficultyForLocation(entityLivingBase.getPosition()),(IEntityLivingData)null);
 					entityLivingBase.world.removeEntity(entityLivingBase);
 					entityLivingBase.world.spawnEntity(squid);
+				}
+			} else if(entityLivingBase instanceof EntityGhoulBase && !EntityUtil.isEntityCoralium(entityLivingBase))
+				if(entityLivingBase.world.getDifficulty() == EnumDifficulty.HARD && entityLivingBase.world.rand.nextBoolean()
+				|| entityLivingBase.world.rand.nextInt(8) == 0) {
+					EntityDepthsGhoul ghoul = new EntityDepthsGhoul(entityLivingBase.world);
+					ghoul.copyLocationAndAnglesFrom(entityLivingBase);
+					ghoul.onInitialSpawn(entityLivingBase.world.getDifficultyForLocation(entityLivingBase.getPosition()),(IEntityLivingData)null);
+					entityLivingBase.world.removeEntity(entityLivingBase);
+					ghoul.setGhoulType(0);
+					entityLivingBase.world.spawnEntity(ghoul);
 				}
 	}
 
@@ -279,6 +291,12 @@ public class PotionEffectUtil {
 				entityLivingBase.world.removeEntity(entityLivingBase);
 				ds.onInitialSpawn(entityLivingBase.world.getDifficultyForLocation(entityLivingBase.getPosition()),(IEntityLivingData)null);
 				entityLivingBase.world.spawnEntity(ds);
+			} else if(entityLivingBase instanceof EntityGhoulBase && !EntityUtil.isEntityDread(entityLivingBase)) {
+				EntityDreadedGhoul ghoul = new EntityDreadedGhoul(entityLivingBase.world);
+				ghoul.copyLocationAndAnglesFrom(entityLivingBase);
+				ghoul.onInitialSpawn(entityLivingBase.world.getDifficultyForLocation(entityLivingBase.getPosition()),(IEntityLivingData)null);
+				entityLivingBase.world.removeEntity(entityLivingBase);
+				entityLivingBase.world.spawnEntity(ghoul);
 			} else if(!(entityLivingBase instanceof EntityPlayer)){
 				EntityDreadSpawn ds = new EntityDreadSpawn(entityLivingBase.world);
 				ds.copyLocationAndAnglesFrom(entityLivingBase);

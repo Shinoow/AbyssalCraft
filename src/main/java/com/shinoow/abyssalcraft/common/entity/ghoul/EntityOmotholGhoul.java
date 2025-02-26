@@ -33,7 +33,6 @@ public class EntityOmotholGhoul extends EntityGhoulBase implements IOmotholEntit
 	public EntityOmotholGhoul(World par1World) {
 		super(par1World);
 		setSize(1.3F, 2.7F);
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityOmotholGhoul.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityRemnant.class, 8.0F));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityGatekeeperMinion.class, 8.0F));
 		isImmuneToFire = true;
