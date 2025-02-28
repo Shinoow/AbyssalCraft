@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.*;
 
-import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntitySpiritAltar;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -86,7 +86,7 @@ public class EntitySpiritItem extends EntityItem {
 				//journey is complete!
 				TileEntity te = world.getTileEntity(target);
 				if(te != null) {
-					IItemHandler inventory = ItemTransferEventHandler.getInventory(te, facing);
+					IItemHandler inventory = TileEntitySpiritAltar.getInventory(te, facing);
 					if(inventory != null) {
 						ItemStack res = ItemStack.EMPTY;
 						ItemStack stack = getItem().copy();

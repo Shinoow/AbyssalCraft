@@ -323,6 +323,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.tombstone_ethaxium = new BlockTombstone("ethaxium");
 		ACBlocks.tombstone_monolith_stone = new BlockTombstone("monolith_stone");
 		ACBlocks.tombstone_omothol_stone = new BlockTombstone("omothol_stone");
+		ACBlocks.spirit_altar = new BlockSpiritAltar();
 
 		SoftDepUtil.declareBlocks();
 
@@ -362,6 +363,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		GameRegistry.registerTileEntity(TileEntityResearchTable.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityResearchTable"));
 		GameRegistry.registerTileEntity(TileEntityUnlockedSealingLock.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityUnlockedSealingLock"));
 		GameRegistry.registerTileEntity(TileEntityTombstone.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityTombstone"));
+		GameRegistry.registerTileEntity(TileEntitySpiritAltar.class, new ResourceLocation(AbyssalCraft.modid, "tileEntitySpiritAltar"));
 
 		registerBlock(ACBlocks.darkstone, "darkstone");
 		registerBlock(ACBlocks.abyssal_stone, new ItemBlockColorName(ACBlocks.abyssal_stone), "abystone");
@@ -640,6 +642,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.tombstone_ethaxium, "tombstone_ethaxium");
 		registerBlock(ACBlocks.tombstone_monolith_stone, "tombstone_monolith_stone");
 		registerBlock(ACBlocks.tombstone_omothol_stone, "tombstone_omothol_stone");
+		registerBlock(ACBlocks.spirit_altar, "spirit_altar");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

@@ -282,4 +282,5 @@ public class ACBlocks {
 	public static Block tombstone_ethaxium;
 	public static Block tombstone_monolith_stone;
 	public static Block tombstone_omothol_stone;
+	public static Block spirit_altar;
 }

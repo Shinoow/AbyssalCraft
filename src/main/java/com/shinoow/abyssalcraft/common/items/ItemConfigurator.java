@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.api.transfer.ItemTransferConfiguration;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.client.ClientProxy;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntitySpiritAltar;
 import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
@@ -102,7 +103,7 @@ public class ItemConfigurator extends ItemACBasic {
 
 				TileEntity te = w.getTileEntity(pos);
 
-				if(te != null && ItemTransferEventHandler.hasInventory(te)) {
+				if(te != null && TileEntitySpiritAltar.hasInventory(te)) {
 					path.appendTag(new NBTTagLong(pos.toLong()));
 					nbt.setInteger("EntryFacing", side.getIndex());
 					player.sendMessage(new TextComponentTranslation("message.configurator.1"));
@@ -128,7 +129,7 @@ public class ItemConfigurator extends ItemACBasic {
 						}
 						EnumFacing facing = EnumFacing.byIndex(nbt.getInteger("EntryFacing"));
 						TileEntity res = w.getTileEntity(positions.get(positions.size()-1));
-						if(res == null || ItemTransferEventHandler.getInventory(res, facing) == null) {
+						if(res == null || TileEntitySpiritAltar.getInventory(res, facing) == null) {
 							player.sendMessage(new TextComponentTranslation("message.configurator.error.2"));
 							return EnumActionResult.FAIL;
 						}

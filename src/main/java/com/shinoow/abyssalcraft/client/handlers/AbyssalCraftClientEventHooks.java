@@ -958,6 +958,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.tombstone_ethaxium, 0);
 		registerItemRender(ACBlocks.tombstone_monolith_stone, 0);
 		registerItemRender(ACBlocks.tombstone_omothol_stone, 0);
+		registerItemRender(ACBlocks.spirit_altar, 0);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {
