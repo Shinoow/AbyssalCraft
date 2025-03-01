@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.*;
 
+import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.util.SpiritItemUtil;
 
 import net.minecraft.entity.item.EntityItem;
@@ -21,6 +22,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.items.IItemHandler;
@@ -80,7 +82,11 @@ public class EntitySpiritItem extends EntityItem {
 		collided = collidedHorizontally = collidedVertically = false;
 		if(world.isRemote) return;
 		target = route[pathIndex];
-		if(getPosition().distanceSq(target) < 1.0D) {
+		double d0 = posX - target.getX();
+        double d1 = posY - target.getY();
+        double d2 = posZ - target.getZ();
+        double d = d0 * d0 + d1 * d1 + d2 * d2; // more precise distanceSq
+		if(MathHelper.floor(d) <= 1D) { // makes the item "enter" at a closer proximity
 			//we're here?
 			if(pathIndex == route.length - 1) {
 				//journey is complete!
