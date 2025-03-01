@@ -1,49 +1,86 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
+import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.transfer.ItemTransferConfiguration;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
-import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityProvider;
 import com.shinoow.abyssalcraft.common.entity.EntitySpiritItem;
+import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
+import com.shinoow.abyssalcraft.common.network.client.DisplayRoutesMessage;
+import com.shinoow.abyssalcraft.lib.util.SpiritItemUtil;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.wrapper.InvWrapper;
-import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 
-	private Set<BlockPos> positions = new HashSet<>();
+	Set<BlockPos> positions = new HashSet<>();
 	List<TileEntity> tileEntites = new ArrayList<>();
+
+	boolean enabled;
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbttagcompound)
+	{
+		super.readFromNBT(nbttagcompound);
+		enabled = nbttagcompound.getBoolean("Enabled");
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound)
+	{
+		super.writeToNBT(nbttagcompound);
+		nbttagcompound.setBoolean("Enabled", enabled);
+
+		return nbttagcompound;
+	}
+	
+	@Override
+	public void onLoad() {
+
+		if(world.isRemote)
+			world.tickableTileEntities.remove(this);
+
+		calculatePositions();
+	}
 
 	@Override
 	public void update() {
-		if(world.getTotalWorldTime() % 200 == 0)
-			calculatePositions();
+		if(world.getTotalWorldTime() % 400 == 0) {
+			positions.removeIf(p -> !SpiritItemUtil.validPos(p, world));
+
+			if(positions.size() != tileEntites.size()) {
+				tileEntites = positions.stream().map(p -> world.getTileEntity(p))
+						.collect(Collectors.toList());
+			}
+		}
 		if(world.getTotalWorldTime() % 20 != 0) return;
 		if(tileEntites.isEmpty()) return;
-		List<TileEntity> list = tileEntites;
-		list.stream()
-		.filter(t -> world.isBlockLoaded(t.getPos()))
-		.filter(this::hasCap)
-		.filter(TileEntitySpiritAltar::hasInventory)//maybe remove
-		.forEach(tile -> {
+
+		for(TileEntity tile : tileEntites) {
+			if(!world.isBlockLoaded(tile.getPos())) continue;
 			IItemTransferCapability cap = ItemTransferCapability.getCap(tile);
+			if(cap == null || !cap.isRunning()) continue;
+
 			for(ItemTransferConfiguration cfg : cap.getTransferConfigurations()) {
-				IItemHandler inventory = getInventory(tile, cfg.getExitFacing());
+				IItemHandler inventory = SpiritItemUtil.getInventory(tile, cfg.getExitFacing());
 				if(inventory != null) {//sided inventories, you never know
 					boolean hasFilter = !cfg.getFilter().isEmpty() && cfg.getFilter().stream().anyMatch(i -> !i.isEmpty());
 					ItemStack stack = ItemStack.EMPTY;
@@ -61,7 +98,7 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 						BlockPos exitPos = cfg.getRoute()[cfg.getRoute().length-1];
 						TileEntity te = world.getTileEntity(exitPos);
 						if(te != null) {
-							IItemHandler exitInv = getInventory(te, cfg.getEntryFacing());
+							IItemHandler exitInv = SpiritItemUtil.getInventory(te, cfg.getEntryFacing());
 							if(exitInv != null && ItemHandlerHelper.insertItem(exitInv, stack, true).isEmpty()) {//insertion worked
 								stack = inventory.extractItem(slot, 1, false);
 								BlockPos pos = tile.getPos();
@@ -74,7 +111,7 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 					}
 				}
 			}
-		});
+		}
 	}
 
 	private void calculatePositions() {
@@ -83,41 +120,69 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 
 		MutableBlockPos pos1 = new MutableBlockPos();
 
-		for(int x = -15; x <= 15; x++)
-			for(int y = -15; y <= 15; y++)
-				for(int z = -15; z <= 15; z++){
-					pos1.setPos(pos.getX() + x, pos.getY() - y, pos.getZ() + z);
+		for(int x = pos.getX() - 16; x < pos.getX() + 16; x++)
+			for(int y = pos.getY() - 16; y < pos.getY() + 16; y++)
+				for(int z = pos.getZ() - 16; z < pos.getZ() + 16; z++) {
+					pos1.setPos(x, y, z);
 					if(!world.isBlockLoaded(pos1)) continue;
 					TileEntity te = world.getTileEntity(pos1);
-					if(hasCap(te) && hasInventory(te)) {
+					if(te != null && SpiritItemUtil.hasInventory(te)) {
 						positions.add(pos1.toImmutable());
 						tileEntites.add(te);
 					}
 				}
 	}
 
-	public static IItemHandler getInventory(TileEntity te, EnumFacing face) {
+	public void spiritTabletToggle(EntityPlayer player, int mode) {
+		if(world.isRemote) return;
+		if(player.isSneaking()) {
 
-		if(te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, face))
-			return te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, face);
-		else if(te instanceof ISidedInventory)
-			return new SidedInvWrapper((ISidedInventory)te, face);
-		else if(te instanceof IInventory)
-			return new InvWrapper((IInventory)te);
+			List<BlockPos[]> routes = new ArrayList<>();
 
-		return null;
-	}
+			for(TileEntity tile : tileEntites) {
+				if(!world.isBlockLoaded(tile.getPos())) continue;
+				IItemTransferCapability cap = ItemTransferCapability.getCap(tile);
+				if(cap == null) continue;
+				for(ItemTransferConfiguration cfg : cap.getTransferConfigurations()) {
+					List<BlockPos> route = Lists.asList(tile.getPos(), cfg.getRoute());
+					routes.add(route.toArray(new BlockPos[0]));
+				}
+			}
+			PacketDispatcher.sendTo(new DisplayRoutesMessage(routes), (EntityPlayerMP)player);
 
-	public static boolean hasInventory(TileEntity te) {
-		return getInventory(te, EnumFacing.DOWN) != null;
-	}
-
-	private boolean hasCap(TileEntity te) {
-		if(te.hasCapability(ItemTransferCapabilityProvider.ITEM_TRANSFER_CAP, null)) {
-			IItemTransferCapability cap = ItemTransferCapability.getCap(te);
-			return cap != null && cap.isRunning();
 		}
-		return false;
+		if(mode == 0) {
+			calculatePositions();
+			player.sendStatusMessage(new TextComponentString("Scanned for nearby containers"), true);
+		}
+		else if(mode == 1) {
+			enabled = enabled ? false : true;
+			toggleSpirits(enabled);
+			((WorldServer)world).spawnParticle(enabled? EnumParticleTypes.VILLAGER_HAPPY : EnumParticleTypes.VILLAGER_ANGRY, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 1, 0, 0, 0, 1.0);
+			player.sendStatusMessage(new TextComponentString(enabled ? "Enabled Spirits" : "Disabled Spirits"), true);
+		}
+		else if(mode == 2) {
+			clearSpirits();
+			player.sendMessage(new TextComponentTranslation("message.configurator.4"));
+		}
+	}
+
+	private void toggleSpirits(boolean enable) {
+		for(TileEntity tile : tileEntites) {
+			if(!world.isBlockLoaded(tile.getPos())) continue;
+			IItemTransferCapability cap = ItemTransferCapability.getCap(tile);
+			if(cap == null) continue;
+			cap.setRunning(enable);
+		}
+	}
+
+	private void clearSpirits() {
+		for(TileEntity tile : tileEntites) {
+			if(!world.isBlockLoaded(tile.getPos())) continue;
+			IItemTransferCapability cap = ItemTransferCapability.getCap(tile);
+			if(cap == null) continue;
+			cap.clearConfigurations();
+		}
 	}
 
 	private boolean isInFilter(NonNullList<ItemStack> filter, ItemStack stack, boolean nbt) {
@@ -128,4 +193,5 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 
 		return false;
 	}
+
 }

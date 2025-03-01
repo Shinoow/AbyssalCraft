@@ -14,6 +14,8 @@ package com.shinoow.abyssalcraft.api.transfer.caps;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.shinoow.abyssalcraft.api.transfer.ItemTransferConfiguration;
 
 import net.minecraft.tileentity.TileEntity;
@@ -23,6 +25,7 @@ public class ItemTransferCapability implements IItemTransferCapability {
 	private List<ItemTransferConfiguration> configurations = new ArrayList<>();
 	private boolean isRunning;
 
+	@Nullable
 	public static IItemTransferCapability getCap(TileEntity tile) {
 		return tile.getCapability(ItemTransferCapabilityProvider.ITEM_TRANSFER_CAP, null);
 	}

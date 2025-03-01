@@ -20,10 +20,10 @@ import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntitySpiritAltar;
-import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
+import com.shinoow.abyssalcraft.lib.util.SpiritItemUtil;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -94,68 +94,70 @@ public class ItemConfigurator extends ItemACBasic {
 			NBTTagCompound nbt = stack.getTagCompound();
 			int mode = nbt.getInteger("Mode");
 
-			if(mode == 0) {
-				NBTTagList path = null;
-				if(nbt.hasKey("Path"))
-					path = nbt.getTagList("Path", NBT.TAG_LONG);
-				else
-					path = new NBTTagList();
+			TileEntity te = w.getTileEntity(pos);
+			
+			if(te instanceof TileEntitySpiritAltar) {
+				((TileEntitySpiritAltar) te).spiritTabletToggle(player, mode);
+			} else {
+				if(mode == 0) {
+					NBTTagList path = null;
+					if(nbt.hasKey("Path"))
+						path = nbt.getTagList("Path", NBT.TAG_LONG);
+					else
+						path = new NBTTagList();
 
-				TileEntity te = w.getTileEntity(pos);
+					if(te != null && SpiritItemUtil.hasInventory(te)) {
+						path.appendTag(new NBTTagLong(pos.toLong()));
+						nbt.setInteger("EntryFacing", side.getIndex());
+						player.sendMessage(new TextComponentTranslation("message.configurator.1"));
+					} else {
+						path.appendTag(new NBTTagLong(pos.up().toLong()));
+						player.sendMessage(new TextComponentTranslation("message.configurator.2"));
+					}
+					nbt.setTag("Path", path);
+				} else if(mode == 1) {
+					if(player.canPlayerEdit(pos.offset(side), side, stack)) {
+						if(te != null && ItemTransferCapability.getCap(te) != null) {
+							IItemTransferCapability cap = ItemTransferCapability.getCap(te);
+							NonNullList<ItemStack> filter = NonNullList.withSize(5, ItemStack.EMPTY);
+							ItemStackHelper.loadAllItems(nbt, filter);
+							NBTTagList path = nbt.getTagList("Path", NBT.TAG_LONG);
+							List<BlockPos> positions = new ArrayList<>();
+							for(Iterator<NBTBase> i = path.iterator(); i.hasNext();)
+								positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
+							if(positions.isEmpty()) {
+								player.sendMessage(new TextComponentTranslation("message.configurator.error.1"));
+								return EnumActionResult.FAIL;
+							}
+							EnumFacing facing = EnumFacing.byIndex(nbt.getInteger("EntryFacing"));
+							TileEntity res = w.getTileEntity(positions.get(positions.size()-1));
+							if(res == null || SpiritItemUtil.getInventory(res, facing) == null) {
+								player.sendMessage(new TextComponentTranslation("message.configurator.error.2"));
+								return EnumActionResult.FAIL;
+							}
+							ItemTransferConfiguration cfg = new ItemTransferConfiguration(positions.toArray(new BlockPos[0]))
+									.setExitFacing(side)
+									.setEntryFacing(facing)
+									.setFilter(filter)
+									.setFilterSubtypes(nbt.getBoolean("FilterSubtype"))
+									.setFilterNBT(nbt.getBoolean("FilterNBT"));
+							cfg.setupSubtypeFilter();
 
-				if(te != null && TileEntitySpiritAltar.hasInventory(te)) {
-					path.appendTag(new NBTTagLong(pos.toLong()));
-					nbt.setInteger("EntryFacing", side.getIndex());
-					player.sendMessage(new TextComponentTranslation("message.configurator.1"));
-				} else {
-					path.appendTag(new NBTTagLong(pos.up().toLong()));
-					player.sendMessage(new TextComponentTranslation("message.configurator.2"));
-				}
-				nbt.setTag("Path", path);
-			} else if(mode == 1) {
-				if(player.canPlayerEdit(pos.offset(side), side, stack)) {
-					TileEntity te = w.getTileEntity(pos);
-					if(te != null && ItemTransferCapability.getCap(te) != null) {
-						IItemTransferCapability cap = ItemTransferCapability.getCap(te);
-						NonNullList<ItemStack> filter = NonNullList.withSize(5, ItemStack.EMPTY);
-						ItemStackHelper.loadAllItems(nbt, filter);
-						NBTTagList path = nbt.getTagList("Path", NBT.TAG_LONG);
-						List<BlockPos> positions = new ArrayList<>();
-						for(Iterator<NBTBase> i = path.iterator(); i.hasNext();)
-							positions.add(BlockPos.fromLong(((NBTTagLong)i.next()).getLong()));
-						if(positions.isEmpty()) {
-							player.sendMessage(new TextComponentTranslation("message.configurator.error.1"));
-							return EnumActionResult.FAIL;
-						}
-						EnumFacing facing = EnumFacing.byIndex(nbt.getInteger("EntryFacing"));
-						TileEntity res = w.getTileEntity(positions.get(positions.size()-1));
-						if(res == null || TileEntitySpiritAltar.getInventory(res, facing) == null) {
-							player.sendMessage(new TextComponentTranslation("message.configurator.error.2"));
-							return EnumActionResult.FAIL;
-						}
-						ItemTransferConfiguration cfg = new ItemTransferConfiguration(positions.toArray(new BlockPos[0]))
-								.setExitFacing(side)
-								.setEntryFacing(facing)
-								.setFilter(filter)
-								.setFilterSubtypes(nbt.getBoolean("FilterSubtype"))
-								.setFilterNBT(nbt.getBoolean("FilterNBT"));
-						cfg.setupSubtypeFilter();
-
-						cap.addTransferConfiguration(cfg);
-						cap.setRunning(true);
-						player.sendMessage(new TextComponentTranslation("message.configurator.3"));
-					} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
-				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.4"));
-			} else if(mode == 2)
-				if(player.canPlayerEdit(pos.offset(side), side, stack)) {
-					TileEntity te = w.getTileEntity(pos);
-					if(te != null && ItemTransferCapability.getCap(te) != null) {
-						IItemTransferCapability cap = ItemTransferCapability.getCap(te);
-						cap.clearConfigurations();
-						player.sendMessage(new TextComponentTranslation("message.configurator.4"));
-					} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
-				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.4"));
-
+							cap.addTransferConfiguration(cfg);
+							cap.setRunning(true);
+							player.sendMessage(new TextComponentTranslation("message.configurator.3"));
+						} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
+					} else player.sendMessage(new TextComponentTranslation("message.configurator.error.4"));
+				} else if(mode == 2)
+					if(player.canPlayerEdit(pos.offset(side), side, stack)) {
+						if(te != null && ItemTransferCapability.getCap(te) != null) {
+							IItemTransferCapability cap = ItemTransferCapability.getCap(te);
+							cap.clearConfigurations();
+							player.sendMessage(new TextComponentTranslation("message.configurator.4"));
+						} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
+					} else player.sendMessage(new TextComponentTranslation("message.configurator.error.4"));
+			}
+			
 			return EnumActionResult.PASS;
 		}
 
