@@ -51,7 +51,7 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 
 		return nbttagcompound;
 	}
-	
+
 	@Override
 	public void onLoad() {
 
@@ -149,9 +149,10 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 				}
 			}
 			PacketDispatcher.sendTo(new DisplayRoutesMessage(routes), (EntityPlayerMP)player);
+			player.sendStatusMessage(new TextComponentString("Current paths"), true);
 
 		}
-		if(mode == 0) {
+		else if(mode == 0) {
 			calculatePositions();
 			player.sendStatusMessage(new TextComponentString("Scanned for nearby containers"), true);
 		}

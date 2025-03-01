@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.api.event.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.api.ritual.Rituals;
+import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityProvider;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
@@ -48,14 +49,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.Tuple;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
@@ -197,11 +198,11 @@ public class AbyssalCraftEventHooks {
 	private static String[] sourceNames2 = {"nuclearBlast", "digamma", "radiation"};
 
 	public static boolean isRadiationDamage(DamageSource source) {
-		
+
 		String type = source.getDamageType();
-		
+
 		boolean flag = false;
-		
+
 		if(Loader.isModLoaded("nuclearcraft")) {
 			for(String src : sourceNames)
 				if(type.contentEquals(src)) {
@@ -214,10 +215,10 @@ public class AbyssalCraftEventHooks {
 					return true;
 				}
 		}
-		
+
 		return false;
 	}
-	
+
 	private void processRadiation(LivingAttackEvent event) {
 		if(isRadiationDamage(event.getSource())) {
 			event.setCanceled(true);
@@ -505,6 +506,13 @@ public class AbyssalCraftEventHooks {
 	@SubscribeEvent
 	public void fuelBurnTime(FuelBurnTimeEvent event) {
 
+	}
+
+	@SubscribeEvent
+	public void attachCapability(AttachCapabilitiesEvent<TileEntity> event) {
+		ResourceLocation rl = TileEntity.getKey(event.getObject().getClass());
+		if(rl != null && !InitHandler.INSTANCE.isTileBlackListed(rl.toString()))
+			event.addCapability(new ResourceLocation("abyssalcraft", "itemtransfer"), new ItemTransferCapabilityProvider());
 	}
 
 	@SubscribeEvent

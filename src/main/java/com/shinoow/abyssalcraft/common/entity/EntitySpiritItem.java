@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.*;
 
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.util.SpiritItemUtil;
 
 import net.minecraft.entity.item.EntityItem;
@@ -83,9 +82,9 @@ public class EntitySpiritItem extends EntityItem {
 		if(world.isRemote) return;
 		target = route[pathIndex];
 		double d0 = posX - target.getX();
-        double d1 = posY - target.getY();
-        double d2 = posZ - target.getZ();
-        double d = d0 * d0 + d1 * d1 + d2 * d2; // more precise distanceSq
+		double d1 = posY - target.getY();
+		double d2 = posZ - target.getZ();
+		double d = d0 * d0 + d1 * d1 + d2 * d2; // more precise distanceSq
 		if(MathHelper.floor(d) <= 1D) { // makes the item "enter" at a closer proximity
 			//we're here?
 			if(pathIndex == route.length - 1) {
@@ -112,19 +111,36 @@ public class EntitySpiritItem extends EntityItem {
 				pathIndex++;
 				dX = dY = dZ = 0;
 			}
-		} else {
-			if(target.getX() + 0.5D > posX)
-				dX = 0.1;
-			else if(target.getX() + 0.5D < posX)
-				dX = -0.1;
-			if(target.getY() + 0.3D > posY)
-				dY = 0.1;
-			else if(target.getY() + 0.3D < posY)
-				dY = -0.1;
-			if(target.getZ() + 0.5D > posZ)
-				dZ = 0.1;
-			else if(target.getZ() + 0.5D < posZ)
-				dZ = -0.1;
+		} else {// try to align the position to the middle of a block while moving
+
+			if(target.getX() != getPosition().getX()) {
+				if(target.getX() + 0.5D > posX)
+					dX = 0.1;
+				else if(target.getX() + 0.5D < posX)
+					dX = -0.1;
+			} else {
+				posX = getPosition().getX() + 0.5D;
+				dX = 0;
+			}
+			if(target.getY() != getPosition().getY()) {
+
+				if(target.getY() + 0.3D > posY)
+					dY = 0.05;
+				else if(target.getY() + 0.3D < posY)
+					dY = -0.05;
+			} else {
+				posY = getPosition().getY() + 0.2D;
+				dY = 0;
+			}
+			if(target.getZ() != getPosition().getZ()) {
+				if(target.getZ() + 0.5D > posZ)
+					dZ = 0.1;
+				else if(target.getZ() + 0.5D < posZ)
+					dZ = -0.1;
+			} else {
+				posZ = getPosition().getZ() + 0.5D;
+				dZ = 0;
+			}
 
 			motionX = dX;
 			if(target.getY() > posY || target.getY() < posY)

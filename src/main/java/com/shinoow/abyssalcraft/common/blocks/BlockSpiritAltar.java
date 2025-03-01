@@ -19,7 +19,7 @@ public class BlockSpiritAltar extends BlockContainer {
 		setResistance(20.0F);
 		setSoundType(SoundType.METAL);
 		setCreativeTab(ACTabs.tabDecoration);
-		setTranslationKey("unlocked_sealing_lock");
+		setTranslationKey("spirit_altar");
 	}
 
 	@Override
