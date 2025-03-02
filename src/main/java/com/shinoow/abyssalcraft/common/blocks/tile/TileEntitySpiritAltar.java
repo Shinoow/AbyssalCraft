@@ -17,6 +17,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
@@ -52,13 +54,30 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 		return nbttagcompound;
 	}
 
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		return new SPacketUpdateTileEntity(pos, 1, getUpdateTag());
+	}
+
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		return writeToNBT(new NBTTagCompound());
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
+	{
+		readFromNBT(packet.getNbtCompound());
+	}
+
 	/*
 	 * Controls particle rendering client-side
 	 */
 	public boolean isEnabled() {
 		return enabled;
 	}
-	
+
 	@Override
 	public void onLoad() {
 
@@ -166,6 +185,7 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 		else if(mode == 1) {
 			enabled = enabled ? false : true;
 			toggleSpirits(enabled);
+			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			((WorldServer)world).spawnParticle(enabled? EnumParticleTypes.VILLAGER_HAPPY : EnumParticleTypes.VILLAGER_ANGRY, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 1, 0, 0, 0, 1.0);
 			player.sendStatusMessage(new TextComponentString(enabled ? "Enabled Spirits" : "Disabled Spirits"), true);
 		}
