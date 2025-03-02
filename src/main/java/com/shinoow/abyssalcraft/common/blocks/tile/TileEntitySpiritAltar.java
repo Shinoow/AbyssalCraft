@@ -52,6 +52,13 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 		return nbttagcompound;
 	}
 
+	/*
+	 * Controls particle rendering client-side
+	 */
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
 	@Override
 	public void onLoad() {
 

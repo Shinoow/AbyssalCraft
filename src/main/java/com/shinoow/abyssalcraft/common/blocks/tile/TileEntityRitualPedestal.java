@@ -188,7 +188,7 @@ public class TileEntityRitualPedestal extends TileEntity implements ITickable, I
 		default:
 			break;
 		}
-		world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
+		AbyssalCraft.proxy.spawnParticle("BlueFlame", pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
 		world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + xOffset, pos.getY() + 1.05, pos.getZ() + zOffset, 0,0,0);
 	}
 

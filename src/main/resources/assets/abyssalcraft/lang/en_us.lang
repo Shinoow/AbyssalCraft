@@ -1223,6 +1223,7 @@ tile.tombstone_elysian_stone.name=Elysian Stone Tombstone
 tile.tombstone_ethaxium.name=Ethaxium Tombstone
 tile.tombstone_monolith_stone.name= Monolith Stone Tombstone
 tile.tombstone_omothol_stone.name=Omothol Stone Tombstone
+tile.spirit_altar.name=Spirit Altar
 
 #Pre/Suffixes
 decorativestatue.prefix=Decorative %s

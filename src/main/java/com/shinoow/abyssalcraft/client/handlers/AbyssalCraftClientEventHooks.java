@@ -961,6 +961,12 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.spirit_altar, 0);
 	}
 
+	@SubscribeEvent
+	public void onTextureStitch(TextureStitchEvent event){
+		ResourceLocation blueflame = new ResourceLocation("abyssalcraft","particles/blueflame");
+		event.getMap().registerSprite(blueflame);
+	}
+	
 	private void registerFluidModel(Block fluidBlock, String name) {
 		Item item = Item.getItemFromBlock(fluidBlock);
 

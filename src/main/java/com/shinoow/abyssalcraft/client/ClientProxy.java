@@ -30,12 +30,9 @@ import com.shinoow.abyssalcraft.client.handlers.ArmorDataReloadListener;
 import com.shinoow.abyssalcraft.client.handlers.ClientVarsReloadListener;
 import com.shinoow.abyssalcraft.client.model.block.ModelDGhead;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
-import com.shinoow.abyssalcraft.client.particles.ACParticleFX;
-import com.shinoow.abyssalcraft.client.particles.ItemRitualParticle;
-import com.shinoow.abyssalcraft.client.particles.PEStreamParticleFX;
+import com.shinoow.abyssalcraft.client.particles.*;
 import com.shinoow.abyssalcraft.client.render.block.*;
 import com.shinoow.abyssalcraft.client.render.entity.*;
-import com.shinoow.abyssalcraft.client.render.entity.layers.LayerDreadTentacles;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
 import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
@@ -67,7 +64,6 @@ import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -324,6 +320,9 @@ public class ClientProxy extends CommonProxy {
 				Minecraft.getMinecraft().effectRenderer.addEffect(new PEStreamParticleFX(world, posX, posY, posZ, velX, velY, velZ, 3, 122, 120));
 				break;
 			}
+		}
+		if(particleName.equals("BlueFlame")) {
+			Minecraft.getMinecraft().effectRenderer.addEffect(new BlueFlameParticle(Minecraft.getMinecraft().world, posX, posY, posZ, velX, velY, velZ));
 		}
 	}
 
