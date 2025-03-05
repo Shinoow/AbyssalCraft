@@ -63,6 +63,9 @@ public class ResearchItems {
 	public static IResearchItem FIST_OF_CHAGAROTH;
 	public static IResearchItem DREADGUARD;
 	public static IResearchItem MINION_OF_THE_GATEKEEPER;
+	public static IResearchItem GHOUL;
+	public static IResearchItem DREADED_GHOUL;
+	public static IResearchItem SHADOW_GHOUL;
 
 	// Misc conditions
 	public static IResearchItem CORALIUM_PLAGUE;

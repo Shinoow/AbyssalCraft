@@ -59,6 +59,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation SHADOW_MONSTER = res("shadow-monster");
 	public static final ResourceLocation SHADOW_BEAST = res("shadow-beast");
 	public static final ResourceLocation SACTHOTH = res("sacthoth");
+	public static final ResourceLocation SHADOW_GHOUL = GHOUL; //TODO actual picture
 
 	//Overworld structures
 

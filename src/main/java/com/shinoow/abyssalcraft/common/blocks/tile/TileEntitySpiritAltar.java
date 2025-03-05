@@ -175,23 +175,23 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 				}
 			}
 			PacketDispatcher.sendTo(new DisplayRoutesMessage(routes), (EntityPlayerMP)player);
-			player.sendStatusMessage(new TextComponentString("Current paths"), true);
+			player.sendStatusMessage(new TextComponentTranslation("message.spiritaltar.1"), true);
 
 		}
 		else if(mode == 0) {
 			calculatePositions();
-			player.sendStatusMessage(new TextComponentString("Scanned for nearby containers"), true);
+			player.sendStatusMessage(new TextComponentTranslation("message.spiritaltar.2"), true);
 		}
 		else if(mode == 1) {
 			enabled = enabled ? false : true;
 			toggleSpirits(enabled);
 			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			((WorldServer)world).spawnParticle(enabled? EnumParticleTypes.VILLAGER_HAPPY : EnumParticleTypes.VILLAGER_ANGRY, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 1, 0, 0, 0, 1.0);
-			player.sendStatusMessage(new TextComponentString(enabled ? "Enabled Spirits" : "Disabled Spirits"), true);
+			player.sendStatusMessage(new TextComponentTranslation(enabled ? "message.spiritaltar.3" : "message.spiritaltar.4"), true);
 		}
 		else if(mode == 2) {
 			clearSpirits();
-			player.sendMessage(new TextComponentTranslation("message.configurator.4"));
+			player.sendStatusMessage(new TextComponentTranslation("message.spiritaltar.5"), true);
 		}
 	}
 

@@ -63,6 +63,9 @@ public class UnlockConditions {
 	public static IUnlockCondition FIST_OF_CHAGAROTH = new EntityCondition("abyssalcraft:chagarothfist");
 	public static IUnlockCondition DREADGUARD = new EntityCondition("abyssalcraft:dreadguard");
 	public static IUnlockCondition MINION_OF_THE_GATEKEEPER = new EntityCondition("abyssalcraft:jzaharminion");
+	public static IUnlockCondition GHOUL = new EntityCondition("abyssalcraft:ghoul");
+	public static IUnlockCondition DREADED_GHOUL = new EntityCondition("abyssalcraft:dreadedghoul");
+	public static IUnlockCondition SHADOW_GHOUL = new EntityCondition("abyssalcraft:shadowghoul");
 
 	//Misc conditions
 	public static IUnlockCondition CORALIUM_PLAGUE = new MiscCondition("coralium_plague");

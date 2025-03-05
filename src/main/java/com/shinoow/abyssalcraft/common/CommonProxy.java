@@ -106,6 +106,9 @@ public class CommonProxy {
 		ResearchItems.DREADLANDS_NECRO = new ResearchItem("dreadlands_necro", 0, rl("dreadlands_necro")).setUnlockConditions(UnlockConditions.DREADLANDS_NECRO);
 		ResearchItems.OMOTHOL_NECRO = new ResearchItem("omothol_necro", 0, rl("omothol_necro")).setUnlockConditions(UnlockConditions.OMOTHOL_NECRO);
 		ResearchItems.ABYSSALNOMICON = new ResearchItem("abyssalnomicon", 0, rl("abyssalnomicon")).setUnlockConditions(UnlockConditions.ABYSSALNOMICON);
+		ResearchItems.GHOUL = new ResearchItem("ghoul", 0, rl("ghoul")).setUnlockConditions(UnlockConditions.GHOUL);
+		ResearchItems.DREADED_GHOUL = new ResearchItem("dreaded_ghoul", 0, rl("dreaded_ghoul")).setUnlockConditions(UnlockConditions.DREADED_GHOUL);
+		ResearchItems.SHADOW_GHOUL = new ResearchItem("shadow_ghoul", 0, rl("shadow_ghoul")).setUnlockConditions(UnlockConditions.SHADOW_GHOUL);
 	}
 
 	private ResourceLocation rl(String str) {

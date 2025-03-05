@@ -206,6 +206,11 @@ message.jzahar.fourthwall=Whoops, I slipped!
 message.ritual.missingsacrifice=This ritual requires a sacrifice
 message.ritual.massenchanttamper=One of the books has been tampered with in an anvil, replace it to perform the ritual.
 message.ritual.notsamechunk=All blocks need to be in the same chunk. The highlighted are not.
+message.spiritaltar.1=These are the current paths
+message.spiritaltar.2=Searching for nearby containers
+message.spiritaltar.3=Summoned spirits
+message.spiritaltar.4=Banished spirits
+message.spiritaltar.5=Cleared all paths
 
 #Container Inventories
 container.abyssalcraft.crate=Crate
@@ -561,6 +566,12 @@ necronomicon.text.entity.coraliumsquid.1=Coralium Infested Squids are found in p
 necronomicon.text.entity.coraliumsquid.2=These Squids have been transformed by the Coralium Plague, enabling them to transfer it to victims touched by them, or the ink they squirt on their targets.
 necronomicon.text.entity.shuboffspring.1=Dark Offspring are vile beasts resembling a goat mixed with a dead tree, and are the offspring of Shub-Niggurath.
 necronomicon.text.entity.shuboffspring.2=These beasts can rarely be found in forests (most common in Roofed Forests and Darklands Forests). You know you're getting close to one if you start hearing sheep out of nowhere. You're most likely to encounter one at night during a new moon.
+necronomicon.text.entity.ghoul.1=Information about Ghouls
+necronomicon.text.entity.ghoul.2=More information about Ghouls
+necronomicon.text.entity.dreadedghoul.1=Information about Dread-plagued Ghouls
+necronomicon.text.entity.dreadedghoul.2=More information about Dread-plagued Ghouls
+necronomicon.text.entity.shadowghoul.1=Information about Shadow Ghouls
+necronomicon.text.entity.shadowghoul.2=More information about Shadow Ghouls
 
 necronomicon.text.rituals.info=Check the information section for information regarding rituals, or the other sections for information about available rituals. "Location" specifies where the ritual can be performed.
 
@@ -833,7 +844,7 @@ ac.ritual.massEnchantment.desc=By presesenting 8 Enchanted Books and an Item on 
 ac.ritual.curing=Ritual of Curing
 ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area of the Dread Plague and the Dreadlands, restoring what was there before. The closest non-dreadlands biome will take the place of the Dreadlands.
 ac.ritual.spiritTablet=Spirit Tablet
-ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crystal with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
+ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Shadow Gem with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
 ac.ritual.portal=Ritual of Open Doors
 ac.ritual.portal.desc=By presenting 4 Shadow Gems and a Gateway Key, you tear a hole through the fabric of space, opening a portal to another dimension. The portal will lead to the dimension the Gateway Key is set to. Gateway Key is not consumed, but the altar will be replaced with a block.
 ac.ritual.silverKey=The Silver Key
@@ -846,6 +857,8 @@ ac.ritual.infesting=Ritual of Infesting
 ac.ritual.infesting.desc=By presenting 4 random statues, 4 blocks of Coralium Stone, a large amount of energy and a living sacrifice, you summon powers from the Abyss to infest the surrounding Swampland with Coralium. Re-shape the Swamp into a Coralium Infested Swamp.
 ac.ritual.sealingKey=Sealing Key
 ac.ritual.sealingKey.desc=By presenting 2 Elysian Stones, 2 Crystallized Dreadium, 2 Crystallized Abyssalnite, and 2 Dread Cloths, you morph your Dreadlands Infused Gateway Key into a Sealing Key. You can feel something locked away calling.
+ac.ritual.spiritAltar=Spirit Altar
+ac.ritual.spiritAltar.desc=By infusing a Shadow Gem with 3 Gold Ingots and 5 Blocks of Darkstone Cobblestone, you force the soul of a sacrifice into controlling a network of Spirit Items. The Spirit Tablet gives commands to the Spirit Altar.
 
 #Spells
 ac.spell.lifedrain=Life Drain

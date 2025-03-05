@@ -72,6 +72,8 @@ public class Pages {
 	public static Page ENTITY_SHUB_OFFSPRING_2;
 	public static Page ENTITY_SHOGGOTH_1;
 	public static Page ENTITY_SHOGGOTH_2;
+	public static Page ENTITY_GHOUL_1;
+	public static Page ENTITY_GHOUL_2;
 
 	public static Page CRAFTING_CORALIUM_INFUSED_STONE_1;
 	public static Page CRAFTING_CORALIUM_INFUSED_STONE_2;
@@ -167,6 +169,8 @@ public class Pages {
 	public static Page ENTITY_CHAGAROTH_2;
 	public static Page ENTITY_DREADLANDS_SHOGGOTH_1;
 	public static Page ENTITY_DREADLANDS_SHOGGOTH_2;
+	public static Page ENTITY_DREADED_GHOUL_1;
+	public static Page ENTITY_DREADED_GHOUL_2;
 
 	public static Page CRAFTING_DREADIUM_1;
 	public static Page CRAFTING_DREADIUM_2;
@@ -256,6 +260,8 @@ public class Pages {
 	public static Page ENTITY_SACTHOTH_2;
 	public static Page ENTITY_SHADOW_SHOGGOTH_1;
 	public static Page ENTITY_SHADOW_SHOGGOTH_2;
+	public static Page ENTITY_SHADOW_GHOUL_1;
+	public static Page ENTITY_SHADOW_GHOUL_2;
 
 	public static Page INFORMATION_DARK_REALM;
 

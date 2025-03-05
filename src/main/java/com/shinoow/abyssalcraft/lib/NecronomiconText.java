@@ -274,6 +274,12 @@ public class NecronomiconText {
 	public static String ENTITY_CORALIUM_INFESTED_SQUID_2 = "necronomicon.text.entity.coraliumsquid.2";
 	public static String ENTITY_SHUB_OFFSPRING_1 = "necronomicon.text.entity.shuboffspring.1";
 	public static String ENTITY_SHUB_OFFSPRING_2 = "necronomicon.text.entity.shuboffspring.2";
+	public static String ENTITY_GHOUL_1 = "necronomicon.text.entity.ghoul.1";
+	public static String ENTITY_GHOUL_2 = "necronomicon.text.entity.ghoul.2";
+	public static String ENTITY_DREADED_GHOUL_1 = "necronomicon.text.entity.dreadedghoul.1";
+	public static String ENTITY_DREADED_GHOUL_2 = "necronomicon.text.entity.dreadedghoul.2";
+	public static String ENTITY_SHADOW_GHOUL_1 = "necronomicon.text.entity.shadowghoul.1";
+	public static String ENTITY_SHADOW_GHOUL_2 = "necronomicon.text.entity.shadowghoul.2";
 
 	public static String RITUAL_INFO = "necronomicon.text.rituals.info";
 

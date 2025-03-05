@@ -117,7 +117,7 @@ public class Rituals {
 	public static NecronomiconRitual WEATHER;
 	public static NecronomiconRitual INFESTING;
 
-	// Items
+	// Items/Blocks
 	public static NecronomiconRitual BOOK_OF_MANY_FACES;
 	public static NecronomiconRitual SPIRIT_TABLET;
 	public static NecronomiconRitual DREADLANDS_INFUSED_POWERSTONE;
@@ -128,6 +128,7 @@ public class Rituals {
 	public static NecronomiconRitual DREADLANDS_STAFF_OF_RENDING;
 	public static NecronomiconRitual OMOTHOL_STAFF_OF_RENDING;
 	public static NecronomiconRitual TOKEN_OF_JZAHAR;
+	public static NecronomiconRitual SPIRIT_ALTAR;
 
 	// Misc
 	public static NecronomiconRitual BREEDING;

@@ -719,10 +719,10 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.skin_of_omothol, ResearchItems.OMOTHOL);
 		addCondition(ACItems.essence_of_the_gatekeeper, ResearchItems.OMOTHOL);
 		addCondition(ACItems.interdimensional_cage, ResearchItems.DREADLANDS);
-		addCondition(ACItems.configurator_shard_0, ResearchItems.OMOTHOL);
-		addCondition(ACItems.configurator_shard_1, ResearchItems.OMOTHOL);
-		addCondition(ACItems.configurator_shard_2, ResearchItems.OMOTHOL);
-		addCondition(ACItems.configurator_shard_3, ResearchItems.OMOTHOL);
+		addCondition(ACItems.configurator_shard_0, ResearchItems.ABYSSAL_WASTELAND);
+		addCondition(ACItems.configurator_shard_1, ResearchItems.ABYSSAL_WASTELAND);
+		addCondition(ACItems.configurator_shard_2, ResearchItems.ABYSSAL_WASTELAND);
+		addCondition(ACItems.configurator_shard_3, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.silver_key, ResearchItems.OMOTHOL);
 		addCondition(ACItems.coralium_plague_antidote, ResearchItems.CORALIUM_PLAGUE);
 		addCondition(ACItems.dread_plague_antidote, ResearchItems.DREAD_PLAGUE);
@@ -787,7 +787,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.abyssal_wasteland_staff_of_rending, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACItems.dreadlands_staff_of_rending, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACItems.omothol_staff_of_rending, ResearchItems.DARKLANDS_BIOME);
-		addCondition(ACItems.configurator, ResearchItems.OMOTHOL);
+		addCondition(ACItems.configurator, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.abyssalnite_helmet, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACItems.abyssalnite_chestplate, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACItems.abyssalnite_leggings, ResearchItems.DARKLANDS_BIOME);
