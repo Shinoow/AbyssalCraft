@@ -29,10 +29,12 @@ public class NecronomiconResources {
 	public static final ResourceLocation EVIL_ANIMALS = res("evil-animals");
 	public static final ResourceLocation LESSER_SHOGGOTH = res("lesser-shoggoth");
 	public static final ResourceLocation SHUB_OFFSPRING = res("shub-offspring");
+	
+	//One Ghoul picture for all, because few detail differences
+	public static final ResourceLocation GHOUL = res("ghoul");
 
 	//Abyssal Wasteland entities (making entries for vanilla mobs is lethally hipster)
 	public static final ResourceLocation ABYSSAL_ZOMBIE = res("abyssal-zombie");
-	public static final ResourceLocation DEPTHS_GHOUL = res("depths-ghoul");
 	public static final ResourceLocation SKELETON_GOLIATH = res("skeleton-goliath");
 	public static final ResourceLocation SPECTRAL_DRAGON = res("spectral-dragon");
 	public static final ResourceLocation ASORAH = res("asorah");
@@ -49,7 +51,6 @@ public class NecronomiconResources {
 
 	//Omothol entities
 	public static final ResourceLocation REMNANT = res("remnant");
-	public static final ResourceLocation OMOTHOL_GHOUL = res("omothol-ghoul");
 	public static final ResourceLocation MINION_OF_THE_GATEKEEPER = res("minion-of-the-gatekeeper");
 	public static final ResourceLocation JZAHAR = res("jzahar");
 

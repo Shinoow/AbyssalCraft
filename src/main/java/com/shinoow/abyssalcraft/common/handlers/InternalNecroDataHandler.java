@@ -278,7 +278,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 		Pages.ENTITY_ABYSSAL_ZOMBIE_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.ABYSSAL_ZOMBIE, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_1, ResearchItems.ABYSSAL_ZOMBIE);
 		Pages.ENTITY_ABYSSAL_ZOMBIE_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_ABYSSAL_ZOMBIE_2, ResearchItems.ABYSSAL_ZOMBIE);
-		Pages.ENTITY_DEPTHS_GHOUL_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.DEPTHS_GHOUL, NecronomiconText.ENTITY_DEPTHS_GHOUL_1, ResearchItems.DEPTHS_GHOUL);
+		Pages.ENTITY_DEPTHS_GHOUL_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.GHOUL, NecronomiconText.ENTITY_DEPTHS_GHOUL_1, ResearchItems.DEPTHS_GHOUL);
 		Pages.ENTITY_DEPTHS_GHOUL_2 = new Page(4, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_DEPTHS_GHOUL_2, ResearchItems.DEPTHS_GHOUL);
 		Pages.ENTITY_SHADOW_CREATURE_1 = new Page(5, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconResources.SHADOW_CREATURE, NecronomiconText.ENTITY_SHADOW_CREATURE_1, ResearchItems.SHADOW_CREATURE);
 		Pages.ENTITY_SHADOW_CREATURE_2 = new Page(6, NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, NecronomiconText.ENTITY_SHADOW_CREATURE_2, ResearchItems.SHADOW_CREATURE);
@@ -420,7 +420,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 		Pages.ENTITY_REMNANT_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.REMNANT, NecronomiconText.ENTITY_REMNANT_1);
 		Pages.ENTITY_REMNANT_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_REMNANT_2);
-		Pages.ENTITY_OMOTHOL_GHOUL_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.OMOTHOL_GHOUL, NecronomiconText.ENTITY_OMOTHOL_GHOUL_1, ResearchItems.OMOTHOL_GHOUL);
+		Pages.ENTITY_OMOTHOL_GHOUL_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.GHOUL, NecronomiconText.ENTITY_OMOTHOL_GHOUL_1, ResearchItems.OMOTHOL_GHOUL);
 		Pages.ENTITY_OMOTHOL_GHOUL_2 = new Page(4, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_OMOTHOL_GHOUL_2, ResearchItems.OMOTHOL_GHOUL);
 		Pages.ENTITY_MINION_OF_THE_GATEKEEPER_1 = new Page(5, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconResources.MINION_OF_THE_GATEKEEPER, NecronomiconText.ENTITY_MINION_OF_THE_GATEKEEPER_1, ResearchItems.MINION_OF_THE_GATEKEEPER);
 		Pages.ENTITY_MINION_OF_THE_GATEKEEPER_2 = new Page(6, NecronomiconText.LABEL_INFORMATION_ENTITIES, 3, NecronomiconText.ENTITY_MINION_OF_THE_GATEKEEPER_2, ResearchItems.MINION_OF_THE_GATEKEEPER);
