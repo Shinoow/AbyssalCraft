@@ -129,6 +129,7 @@ public class Rituals {
 	public static NecronomiconRitual OMOTHOL_STAFF_OF_RENDING;
 	public static NecronomiconRitual TOKEN_OF_JZAHAR;
 	public static NecronomiconRitual SPIRIT_ALTAR;
+	public static NecronomiconRitual ETHAXIUM;
 
 	// Misc
 	public static NecronomiconRitual BREEDING;
