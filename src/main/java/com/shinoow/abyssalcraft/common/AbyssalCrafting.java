@@ -449,7 +449,7 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_STATUE = new NecronomiconInfusionRitual("shubniggurathStatue", 4, OreDictionary.WILDCARD_VALUE, 20000F, true, new ItemStack(ACBlocks.shub_niggurath_statue), new ItemStack(ACBlocks.monolith_stone), shubniggurathofferings));
 		Object[] ethofferings = new Object[]{ACItems.ethaxium_brick, null, ACItems.ethaxium_brick, null, ACItems.ethaxium_brick, null, ACItems.ethaxium_brick};
 		RitualRegistry.instance().registerRitual(Rituals.PURGING = new NecronomiconPurgingRitual());
-		RitualRegistry.instance().registerRitual(Rituals.ETHAXIUM = new NecronomiconTransformationRitual("ethaxium", 3, ACLib.omothol_id, 1000.0F, new ItemStack(Blocks.END_STONE), new ItemStack(ACBlocks.ethaxium)));
+		RitualRegistry.instance().registerRitual(Rituals.ETHAXIUM = new NecronomiconTransformationRitual("ethaxium", 3, ACLib.omothol_id, 1000.0F, new ItemStack(Blocks.SOUL_SAND), new ItemStack(ACBlocks.ethaxium)));
 		RitualRegistry.instance().registerRitual(Rituals.ETHAXIUM_INGOT = new NecronomiconInfusionRitual("ethaxiumIngot", 3, ACLib.omothol_id, 1000F, new ItemStack(ACItems.ethaxium_ingot), new ItemStack(ACItems.life_crystal), ethofferings));
 		RitualRegistry.instance().registerRitual(Rituals.TOKEN_OF_JZAHAR = new NecronomiconInfusionRitual("jzaharCoin", 3, 500.0F, new ItemStack(ACItems.token_of_jzahar), new ItemStack(ACItems.coin), new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE)));
 		Object[] dreadofferings = new Object[]{new ItemStack(ACItems.dreadlands_essence), ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite,

@@ -860,7 +860,7 @@ ac.ritual.sealingKey.desc=By presenting 2 Elysian Stones, 2 Crystallized Dreadiu
 ac.ritual.spiritAltar=Spirit Altar
 ac.ritual.spiritAltar.desc=By infusing a Shadow Gem with 3 Gold Ingots and 5 Blocks of Darkstone Cobblestone, you force the soul of a sacrifice into controlling a network of Spirit Items. The Spirit Tablet gives commands to the Spirit Altar.
 ac.ritual.ethaxium=Ethaxium
-ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you transform the essence of the presented End Stone into Ethaxium
+ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you tear out the souls of the Soul Sand, shaping them into Ethaxium.
 
 #Spells
 ac.spell.lifedrain=Life Drain
