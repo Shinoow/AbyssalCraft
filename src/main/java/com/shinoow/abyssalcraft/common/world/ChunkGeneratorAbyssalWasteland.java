@@ -397,20 +397,22 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 					shoggothLair.generate(worldObj, rand, pos1);
 			}
 
-		int x2 =  rand.nextInt(16) + 8;
-		int z2 = rand.nextInt(16) + 8;
-		BlockPos posGrave = worldObj.getHeight(pos.add(x2, 0, z2));
+		if(ACConfig.generateGraveyards) {
+			int x2 =  rand.nextInt(16) + 8;
+			int z2 = rand.nextInt(16) + 8;
+			BlockPos posGrave = worldObj.getHeight(pos.add(x2, 0, z2));
 
-		while(worldObj.isAirBlock(posGrave) && posGrave.getY() > 2)
-			posGrave = posGrave.down();
-		
-		IBlockState state = worldObj.getBlockState(posGrave);
-		if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
-				&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
-				&& state.getMaterial() != Material.CACTUS) {
-			graveyard.generate(worldObj, rand, posGrave);
+			while(worldObj.isAirBlock(posGrave) && posGrave.getY() > 2)
+				posGrave = posGrave.down();
+
+			IBlockState state = worldObj.getBlockState(posGrave);
+			if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
+					&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
+					&& state.getMaterial() != Material.CACTUS) {
+				graveyard.generate(worldObj, rand, posGrave);
+			}
 		}
-		
+
 		biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
 
 		ForgeEventFactory.onChunkPopulate(false, this, worldObj, rand, x, z, flag);

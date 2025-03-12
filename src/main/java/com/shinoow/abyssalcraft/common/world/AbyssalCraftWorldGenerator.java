@@ -100,20 +100,22 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 						if(!world.isAirBlock(pos1.north(13)) && !world.isAirBlock(pos1.north(20)) && !world.isAirBlock(pos1.north(27)))
 							shoggothLair.generate(world, random, pos1);
 			}
-		
 
-		int x = chunkX + random.nextInt(16) + 8;
-		int z = chunkZ + random.nextInt(16) + 8;
-		BlockPos pos = world.getHeight(new BlockPos(x, 0, z));
+		if(ACConfig.generateGraveyards && !blacklisted) {
+			int x = chunkX + random.nextInt(16) + 8;
+			int z = chunkZ + random.nextInt(16) + 8;
+			BlockPos pos = world.getHeight(new BlockPos(x, 0, z));
 
-		while(world.isAirBlock(pos) && pos.getY() > 2)
-			pos = pos.down();
-		
-		IBlockState state = world.getBlockState(pos);
-		if(random.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
-				&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
-				&& state.getMaterial() != Material.CACTUS) {
-			graveyard.generate(world, random, pos);
+			while(world.isAirBlock(pos) && pos.getY() > 2)
+				pos = pos.down();
+
+			IBlockState state = world.getBlockState(pos);
+			if(ACConfig.graveyardGenerationChance > 0 && random.nextInt(ACConfig.graveyardGenerationChance) == 0
+					&& !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
+					&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
+					&& state.getMaterial() != Material.CACTUS) {
+				graveyard.generate(world, random, pos);
+			}
 		}
 	}
 }

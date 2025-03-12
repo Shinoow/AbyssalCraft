@@ -26,14 +26,15 @@ public class ACConfig {
 	showBossDialogs, jzaharBreaksFourthWall, lootTableContent, depthsGhoulBiomeDictSpawn, abyssalZombieBiomeDictSpawn,
 	useAmplifiedWorldType, generateStatuesInLairs, enchantBooks, nightVisionEverywhere, antiPlayersPickupLoot,
 	demonAnimalsSpawnOnDeath, evilAnimalNewMoonSpawning, darkRealmSmokeParticles, enchantMergedBooks,
-	no_potion_clouds, ghouls_burn;
+	no_potion_clouds, ghouls_burn, generateGraveyards;
 	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate, acidSpitFrequency,
 	knowledgeSyncDelay, shoggothLairSpawnRateRivers, darkOffspringSpawnWeight, monolithBuildingCooldown, corruptionRitualRange,
 	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize, enchantmentMaxLevel, curingRitualRange,
 	shoggothLairGenerationDistance, startDimension, dreadSpawnSpawnLimit, greaterDreadSpawnSpawnLimit, jzaharHealingPace,
 	jzaharHealingAmount, chagarothHealingPace, chagarothHealingAmount, sacthothHealingPace, sacthothHealingAmount,
 	infestingRitualRange, darkShrineSpawnRate, darkRitualGroundsSpawnRate, biomassPlayerDistance, biomassMaxSpawn,
-	biomassCooldown, biomassShoggothDistance;
+	biomassCooldown, biomassShoggothDistance, graveyardGenerationDistance, tombstoneMaxSpawn, tombstoneGhoulDistance,
+	tombstoneCooldown, graveyardGenerationChance;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid, shoggothGlowingEyes;
 	public static double acidResistanceHardness;

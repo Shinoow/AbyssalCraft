@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.ghoul.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -29,7 +30,6 @@ import net.minecraft.world.EnumDifficulty;
 public class TileEntityTombstone extends TileEntity implements ITickable {
 
 	private int timer;
-	private int timerMax = 200;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -59,13 +59,11 @@ public class TileEntityTombstone extends TileEntity implements ITickable {
 		if(world.getDifficulty() != EnumDifficulty.PEACEFUL && world.getGameRules().getBoolean("doMobSpawning")
 				&& !world.isDaytime()) {
 			timer++;
-			if(timer >= timerMax) {
+			if(timer >= ACConfig.tombstoneCooldown) {
 				timer = 0;
 
-				int size = 15; //TODO config
-				int maxAmount = 5; //TODO config
-
-				if(world.getEntitiesWithinAABB(EntityGhoulBase.class, new AxisAlignedBB(pos).grow(size)).size() < maxAmount) {
+				if(world.getEntitiesWithinAABB(EntityGhoulBase.class,
+						new AxisAlignedBB(pos).grow(ACConfig.tombstoneGhoulDistance)).size() < ACConfig.tombstoneMaxSpawn) {
 					EntityGhoulBase ghoul = getGhoul(world.getBlockState(pos).getBlock());
 					setPosition(ghoul, pos.getX(), pos.getY(), pos.getZ());
 					ghoul.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);

@@ -9,6 +9,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.BlockTombstone;
 import com.shinoow.abyssalcraft.common.world.gen.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.state.IBlockState;
@@ -33,8 +34,8 @@ public class StructureGraveyard extends WorldGenerator {
 
 	private boolean tooClose(int dim, BlockPos pos) {
 		positions.putIfAbsent(dim, new HashSet<BlockPos>());
-		return positions.get(dim).stream().anyMatch(b -> b.getDistance(pos.getX(), b.getY(), pos.getZ()) <= 150);
-	} //TODO config option
+		return positions.get(dim).stream().anyMatch(b -> b.getDistance(pos.getX(), b.getY(), pos.getZ()) <= ACConfig.graveyardGenerationDistance);
+	}
 
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position) {

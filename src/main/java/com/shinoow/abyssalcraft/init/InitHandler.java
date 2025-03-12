@@ -382,6 +382,7 @@ public class InitHandler implements ILifeCycleHandler {
 		generateAntimatterLake = cfg.get(CATEGORY_WORLDGEN, "Liquid Antimatter Lakes", true, "Toggles whether or not to generate Liquid Antimatter Lakes in Coralium Infested Swamps.").getBoolean();
 		generateCoraliumLake = cfg.get(CATEGORY_WORLDGEN, "Liquid Coralium Lakes", true, "Toggles whether or not to generate Liquid Coralium Lakes in the Abyssal Wasteland.").getBoolean();
 		generateDreadlandsStalagmite = cfg.get(CATEGORY_WORLDGEN, "Dreadlands Stalagmites", true, "Toggles whether or not to generate Stalagmites in Dreadlands and Purified Dreadlands biomes.").getBoolean();
+		generateGraveyards = cfg.get(CATEGORY_WORLDGEN, "Generate Graveyards", true, "Toggles whether or not Graveyards should generate.").getBoolean();
 
 		generateCoraliumOre = cfg.get(CATEGORY_WORLDGEN, "Coralium Ore", true, "Toggles whether or not to generate Coralium Ore in the Overworld.").getBoolean();
 		generateNitreOre = cfg.get(CATEGORY_WORLDGEN, "Nitre Ore", true, "Toggles whether or not to generate Nitre Ore in the Overworld.").getBoolean();
@@ -405,6 +406,8 @@ public class InitHandler implements ILifeCycleHandler {
 		shoggothLairGenerationDistance = cfg.get(CATEGORY_WORLDGEN, "Shoggoth Lair Generation Distance", 100, "The minimum distance at which two Shoggoth Lairs will generate from each other.\n[range: 40 ~ 1000, default: 100]").getInt();
 		darkShrineSpawnRate = cfg.get(CATEGORY_WORLDGEN, "Dark Shrine Generation Chance", 10, "Generation chance of a Dark Shrine in applicable biomes. Higher numbers decrease the chance of a Shrine generating, while lower numbers increase the chance.\n[range: 0 ~ 100, default: 10]", 0, 100).getInt();
 		darkRitualGroundsSpawnRate = cfg.get(CATEGORY_WORLDGEN, "Dark Ritual Grounds Generation Chance", 10, "Generation chance of Dark Ritual Grounds in applicable biomes. Higher numbers decrease the chance of a Shrine generating, while lower numbers increase the chance.\n[range: 0 ~ 100, default: 10]", 0, 100).getInt();
+		graveyardGenerationDistance = cfg.get(CATEGORY_WORLDGEN, "Graveyard Generation Distance", 150, "The minimum distance from another Graveyard that a new one will generate.\n[range: 40 ~ 1000, default: 150]", 40, 1000).getInt();
+		graveyardGenerationChance = cfg.get(CATEGORY_WORLDGEN, "Graveyard Generation Chance", 50, "Generation chance of a Graveyard. Higher numbers decrease the chance of a Graveyard generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 50]", 0, 1000).getInt();
 
 		oreGenDimBlacklist = cfg.get(CATEGORY_WORLDGEN, "Ore Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld ores (Coralium, Nitre) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
 		structureGenDimBlacklist = cfg.get(CATEGORY_WORLDGEN, "Structure Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld structures (Darklands structures, Shoggoth lairs) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
@@ -448,6 +451,9 @@ public class InitHandler implements ILifeCycleHandler {
 		spirit_items = cfg.get(CATEGORY_MODULES, "Spirit Items", true, "Set to false to disable Spirit Items. Items/spells/rituals remain, but item transfer stops.").getBoolean();
 
 		ghouls_burn = cfg.get(CATEGORY_GHOUL, "Ghouls Burn", false, "Set to toggle if Ghouls and Depths Ghouls should burn in sunlight.").getBoolean();
+		tombstoneMaxSpawn = cfg.get(CATEGORY_GHOUL, "Tombstone: Spawn Limit", 5, "The amount of nearby Ghouls (within 15 blocks) at which the Tombstone will halt spawning any new ones.\n[range: 1 ~ 10, default: 5]", 1, 10).getInt();
+		tombstoneCooldown = cfg.get(CATEGORY_GHOUL, "Tombstone: Cooldown Time", 200, "The amount of time (in ticks) it takes between every attempt to spawn a Ghoul.\n[range: 40 ~ 1200, default: 200]", 40, 1200).getInt();
+		tombstoneGhoulDistance = cfg.get(CATEGORY_GHOUL, "Tombstone: Ghoul Distance", 15, "Max distance to check for nearby Ghouls before spawning more.\n[range: 5 ~ 48, default: 15]", 5, 48).getInt();
 		
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
@@ -475,6 +481,9 @@ public class InitHandler implements ILifeCycleHandler {
 		biomassMaxSpawn = MathHelper.clamp(biomassMaxSpawn, 1, 10);
 		biomassCooldown = MathHelper.clamp(biomassCooldown, 20, 1200);
 		biomassShoggothDistance = MathHelper.clamp(biomassShoggothDistance, 5, 48);
+		graveyardGenerationDistance = MathHelper.clamp(graveyardGenerationDistance, 40, 1000);
+		shoggothLairGenerationDistance = MathHelper.clamp(shoggothLairGenerationDistance, 40, 1000);
+		graveyardGenerationChance = MathHelper.clamp(graveyardGenerationChance, 0, 1000);
 
 		demon_transformations.clear();
 

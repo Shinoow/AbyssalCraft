@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureGraveyard;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.omothol.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -304,19 +305,21 @@ public class ChunkGeneratorOmothol implements IChunkGenerator
 				shoggothLair.generate(worldObj, rand, pos1);
 		}
 
-		int x2 = k + rand.nextInt(16) + 8;
-		int z2 = l + rand.nextInt(16) + 8;
-		BlockPos posGrave = worldObj.getHeight(new BlockPos(x2, 0, z2));
+		if(ACConfig.generateGraveyards) {
+			int x2 = k + rand.nextInt(16) + 8;
+			int z2 = l + rand.nextInt(16) + 8;
+			BlockPos posGrave = worldObj.getHeight(new BlockPos(x2, 0, z2));
 
-		while(worldObj.isAirBlock(posGrave) && posGrave.getY() > 2)
-			posGrave = posGrave.down();
-		
-		if(posGrave.getY() > 10) {
-			IBlockState state = worldObj.getBlockState(posGrave);
-			if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
-					&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
-					&& state.getMaterial() != Material.CACTUS) {
-				graveyard.generate(worldObj, rand, posGrave);
+			while(worldObj.isAirBlock(posGrave) && posGrave.getY() > 2)
+				posGrave = posGrave.down();
+
+			if(posGrave.getY() > 10) {
+				IBlockState state = worldObj.getBlockState(posGrave);
+				if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
+						&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
+						&& state.getMaterial() != Material.CACTUS) {
+					graveyard.generate(worldObj, rand, posGrave);
+				}
 			}
 		}
 
