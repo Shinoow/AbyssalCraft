@@ -72,21 +72,21 @@ public class NecronomiconTransformationRitual extends NecronomiconRitual {
 	public Object[] getCombinedContent() {
 		return APIUtils.makeArrayOf(new ItemStack[] {input, output}, 8);
 	}
-	
+
 	/**
 	 * Returns the input ItemStack
 	 */
 	public ItemStack getInput() {
 		return input;
 	}
-	
+
 	/**
 	 * Returns the output ItemStack
 	 */
 	public ItemStack getOutput() {
 		return output;
 	}
-	
+
 	@Override
 	public boolean canCompleteRitual(World world, BlockPos pos, EntityPlayer player) {
 
@@ -98,8 +98,6 @@ public class NecronomiconTransformationRitual extends NecronomiconRitual {
 
 		world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
 
-		TileEntity altar = world.getTileEntity(pos);
-
 		List<BlockPos> PEDESTAL_POSITIONS = Arrays.asList(
 				new BlockPos(-3, 0, 0), new BlockPos(0, 0, -3),
 				new BlockPos(3, 0, 0), new BlockPos(0, 0, 3),
@@ -107,25 +105,20 @@ public class NecronomiconTransformationRitual extends NecronomiconRitual {
 				new BlockPos(2, 0, 2), new BlockPos(2, 0, -2)
 				);
 
-		// Takes each pedestal and replaces the input with output if it matches
-		// (which it should already do)
+		// Takes each pedestal and placed the output Item on them
 		for(BlockPos pos1 : PEDESTAL_POSITIONS) {
+			BlockPos pedPos = pos.add(pos1);
 			TileEntity pedestal = world.getTileEntity(pos.add(pos1));
 			if(pedestal != null) {
 				NBTTagCompound compound = new NBTTagCompound();
 				NBTTagCompound newItem = new NBTTagCompound();
 				pedestal.writeToNBT(compound);
-				NBTTagCompound nbtItem = compound.getCompoundTag("Item");
-				ItemStack stack = new ItemStack(nbtItem);
-
-				if(APIUtils.areStacksEqual(stack, input, true)){
-					output.writeToNBT(newItem);
-					compound.setTag("Item", newItem);
-				}
+				output.writeToNBT(newItem);
+				compound.setTag("Item", newItem);
 				pedestal.readFromNBT(compound);
+				world.notifyBlockUpdate(pedPos, world.getBlockState(pedPos), world.getBlockState(pedPos), 2);
 			}
 		}
-		
 	}
 
 	@Override

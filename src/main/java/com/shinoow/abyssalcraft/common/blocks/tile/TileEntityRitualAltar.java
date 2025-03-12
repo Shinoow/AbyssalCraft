@@ -188,7 +188,12 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 	private void collectPEFromPlayer() {
 		if(ritualTimer > timerMax || ritualTimer > 200) // timer runs out, enough should've been drained
 			return;
-		ItemStack stack = user.getHeldItem(EnumHand.OFF_HAND);
+		// Failsafe to avoid overdraining
+		float temp = BigDecimal.valueOf(consumedEnergy).setScale(1,BigDecimal.ROUND_HALF_UP).floatValue();
+		if(temp == ritual.getReqEnergy())
+			return;
+
+		ItemStack stack = user.getHeldItem(EnumHand.MAIN_HAND);
 		float drained = PEUtils.drainPEFromItem(stack, energyToDrain);
 		if(drained > 0)
 			consumedEnergy += drained;
