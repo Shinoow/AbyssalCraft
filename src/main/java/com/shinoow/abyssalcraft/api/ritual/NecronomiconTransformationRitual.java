@@ -70,11 +70,21 @@ public class NecronomiconTransformationRitual extends NecronomiconRitual {
 	 * Creates a combined multi-dimensional array of the input and output ItemStacks
 	 */
 	public Object[] getCombinedContent() {
-		Object[] res = new Object[8];
-		for(int i = 0; i < 8; i++) {
-			res[i] = new Object[] {input, output};
-		}
-		return res;
+		return APIUtils.makeArrayOf(new ItemStack[] {input, output}, 8);
+	}
+	
+	/**
+	 * Returns the input ItemStack
+	 */
+	public ItemStack getInput() {
+		return input;
+	}
+	
+	/**
+	 * Returns the output ItemStack
+	 */
+	public ItemStack getOutput() {
+		return output;
 	}
 	
 	@Override

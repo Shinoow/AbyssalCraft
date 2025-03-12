@@ -125,7 +125,7 @@ public class APIUtils {
 		}
 		return array;
 	}
-	
+
 	/**
 	 * Compares an ItemStack to an Object
 	 * @param stack ItemStack to compare

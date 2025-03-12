@@ -26,6 +26,7 @@ import com.shinoow.abyssalcraft.integration.jei.materializer.MaterializationReci
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.ritual.CreationRitualRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeCategory;
+import com.shinoow.abyssalcraft.integration.jei.ritual.TransformationRitualRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.transmutator.TransmutationCategory;
 import com.shinoow.abyssalcraft.integration.jei.transmutator.TransmutatorFuelCategory;
 import com.shinoow.abyssalcraft.integration.jei.util.ACRecipeCategoryUid;
@@ -35,9 +36,7 @@ import com.shinoow.abyssalcraft.integration.jei.util.JEIUtils;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-import net.minecraft.client.gui.inventory.GuiFurnace;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
@@ -60,7 +59,7 @@ public class ACJEIPlugin implements IModPlugin {
 		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(BlockHandler.Altar));
 		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(ACBlocks.multi_block));
 
-		String[] rituals = {ACRecipeCategoryUid.CREATION_RITUAL, ACRecipeCategoryUid.RITUAL};
+		String[] rituals = {ACRecipeCategoryUid.CREATION_RITUAL, ACRecipeCategoryUid.RITUAL, ACRecipeCategoryUid.TRANSFORMATION_RITUAL};
 
 		registry.addRecipeCatalyst(new ItemStack(ACBlocks.transmutator_idle), ACRecipeCategoryUid.TRANSMUTATION,
 				ACRecipeCategoryUid.FUEL_TRANSMUTATION);
@@ -103,6 +102,7 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(ACRecipeMaker.getRituals(), ACRecipeCategoryUid.RITUAL);
 		registry.addRecipes(ACRecipeMaker.getRending(), ACRecipeCategoryUid.RENDING);
 		registry.addRecipes(ACRecipeMaker.getMaterializerRecipes(), ACRecipeCategoryUid.MATERIALIZATION);
+		registry.addRecipes(ACRecipeMaker.getTransformationRituals(), ACRecipeCategoryUid.TRANSFORMATION_RITUAL);
 		//		registry.addRecipes(ACRecipeMaker.getSpells(), ACRecipeCategoryUid.SPELL);
 	}
 
@@ -125,6 +125,7 @@ public class ACJEIPlugin implements IModPlugin {
 				new CreationRitualRecipeCategory(guiHelper),
 				new RitualRecipeCategory(guiHelper),
 				new RendingRecipeCategory(guiHelper),
-				new MaterializationRecipeCategory(guiHelper));
+				new MaterializationRecipeCategory(guiHelper),
+				new TransformationRitualRecipeCategory(guiHelper));
 	}
 }

@@ -17,9 +17,7 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.api.ritual.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
@@ -155,6 +153,9 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 			for(int i = 0; i < ritual.getOfferings().length; i++)
 				offerings[i] = ritual.getOfferings()[i];
 		else offerings = ritual.getOfferings();
+
+		if(ritual instanceof NecronomiconTransformationRitual)
+			offerings = ((NecronomiconTransformationRitual) ritual).getCombinedContent();
 
 		//north
 		renderObject(k + 58, b0 + 30, offerings[0], x, y);

@@ -233,14 +233,15 @@ gui.abyssalcraft.facebook.crystalsize=Crystal Size
 gui.abyssalcraft.statetransformer.insert=Insert
 gui.abyssalcraft.statetransformer.extract=Extract
 
-#NEI Integration
+#JEI Integration
 container.abyssalcraft.crystallizer.nei=Crystallization
 container.abyssalcraft.transmutator.nei=Transmutation
 container.abyssalcraft.materializer.nei=Materialization
 container.abyssalcraft.rituals.nei=Necronomicon Ritual
-container.abyssalcraft.creationrituals.nei=Necronomicon Creation Ritual
+container.abyssalcraft.creationrituals.nei=Creation Ritual
 container.abyssalcraft.rending.nei=Staff of Rending
 container.abyssalcraft.spells.nei=Spells
+container.abyssalcraft.transformationrituals.jei=Transformation Ritual
 
 #JEI Integration
 gui.acjei.category.fuel.transmutator=Transmutator Fuel

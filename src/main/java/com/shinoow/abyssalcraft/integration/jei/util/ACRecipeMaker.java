@@ -18,9 +18,7 @@ import javax.annotation.Nonnull;
 
 import com.shinoow.abyssalcraft.api.recipe.*;
 import com.shinoow.abyssalcraft.api.rending.RendingRegistry;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.api.ritual.*;
 import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
@@ -30,6 +28,7 @@ import com.shinoow.abyssalcraft.integration.jei.materializer.MaterializationReci
 import com.shinoow.abyssalcraft.integration.jei.rending.RendingRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.ritual.CreationRitualRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.ritual.RitualRecipeWrapper;
+import com.shinoow.abyssalcraft.integration.jei.ritual.TransformationRitualRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.spell.SpellRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.transmutator.TransmutationRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.transmutator.TransmutatorFuelRecipeWrapper;
@@ -151,8 +150,20 @@ public class ACRecipeMaker {
 		List<RitualRecipeWrapper> recipes = new ArrayList();
 
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
-			if(!(ritual instanceof NecronomiconCreationRitual) && !(ritual instanceof IHiddenRitual))
+			if(!(ritual instanceof NecronomiconCreationRitual)
+					&& !(ritual instanceof NecronomiconTransformationRitual)&& !(ritual instanceof IHiddenRitual))
 				recipes.add(new RitualRecipeWrapper(ritual));
+
+		return recipes;
+	}
+
+	@Nonnull
+	public static List<TransformationRitualRecipeWrapper> getTransformationRituals(){
+		List<TransformationRitualRecipeWrapper> recipes = new ArrayList();
+
+		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
+			if(ritual instanceof NecronomiconTransformationRitual && !(ritual instanceof IHiddenRitual))
+				recipes.add(new TransformationRitualRecipeWrapper((NecronomiconTransformationRitual) ritual));
 
 		return recipes;
 	}
