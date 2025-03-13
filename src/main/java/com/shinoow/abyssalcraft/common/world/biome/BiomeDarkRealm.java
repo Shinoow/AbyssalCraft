@@ -16,6 +16,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowCreature;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowMonster;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityShadowGhoul;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.world.biome.IControlledSpawnList;
 
@@ -42,6 +43,7 @@ public class BiomeDarkRealm extends Biome implements IControlledSpawnList {
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 40, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowBeast.class, 10, 1, 1));
+		spawnableMonsterList.add(new SpawnListEntry(EntityShadowGhoul.class, 1, 1, 1));
 	}
 
 	@Override

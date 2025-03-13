@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDreadedGhoul;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.world.biome.IAlternateSpawnList;
@@ -52,7 +53,7 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome, IAlter
 		dl = new ArrayList<>();
 		aw.add(new SpawnListEntry(EntityZombie.class, 50, 1, 5));
 		aw.add(new SpawnListEntry(EntitySkeleton.class, 50, 1, 5));
-		aw.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
+		aw.add(new SpawnListEntry(EntityDepthsGhoul.class, 1, 1, 3));
 		aw.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
 		aw.add(new SpawnListEntry(EntitySkeletonGoliath.class, 15, 1, 1));
 		aw.add(new SpawnListEntry(EntityShadowCreature.class, 70, 3, 3));
@@ -71,6 +72,7 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome, IAlter
 		dl.add(new SpawnListEntry(EntityShadowCreature.class, 70, 3, 3));
 		dl.add(new SpawnListEntry(EntityShadowMonster.class, 50, 2, 2));
 		dl.add(new SpawnListEntry(EntityShadowBeast.class, 20, 1, 1));
+		dl.add(new SpawnListEntry(EntityDreadedGhoul.class, 1, 1, 3));
 	}
 
 	@Override

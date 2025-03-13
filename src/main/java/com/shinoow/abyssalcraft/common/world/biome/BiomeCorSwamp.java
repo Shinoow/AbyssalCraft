@@ -47,7 +47,7 @@ public class BiomeCorSwamp extends Biome {
 		decorator.sandPatchesPerChunk = 0;
 		decorator.gravelPatchesPerChunk = 0;
 		decorator.grassPerChunk = 5;
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 1, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
 		spawnableCreatureList.add(new SpawnListEntry(EntityAntiPig.class, 5, 1, 2));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityAntiBat.class, 10, 1, 2));
@@ -55,7 +55,7 @@ public class BiomeCorSwamp extends Biome {
 		spawnableCreatureList.add(new SpawnListEntry(EntityAntiCow.class, 5, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAntiAbyssalZombie.class, 5, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAntiCreeper.class, 5, 1, 2));
-		spawnableMonsterList.add(new SpawnListEntry(EntityAntiGhoul.class, 5, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityAntiGhoul.class, 1, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAntiPlayer.class, 5, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAntiSkeleton.class, 5, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAntiSpider.class, 5, 1, 2));

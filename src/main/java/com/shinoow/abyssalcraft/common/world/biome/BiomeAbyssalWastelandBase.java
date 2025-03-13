@@ -61,7 +61,7 @@ public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelan
 		spawnableWaterCreatureList.add(new SpawnListEntry(EntityCoraliumSquid.class, 10, 4, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 50, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 50, 1, 5));
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 60, 1, 5));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 1, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 5));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySkeletonGoliath.class, 15, 1, 1));
 		if(!ACConfig.no_spectral_dragons)

@@ -197,12 +197,12 @@ public class EntityHandler implements ILifeCycleHandler {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		if(depthsGhoulBiomeDictSpawn) {
-			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.WATER).toArray(new Biome[0]));
-			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.BEACH).toArray(new Biome[0]));
-			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.SWAMP).toArray(new Biome[0]));
+			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 1, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.WATER).toArray(new Biome[0]));
+			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 1, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.BEACH).toArray(new Biome[0]));
+			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 1, 1, 3, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(Type.SWAMP).toArray(new Biome[0]));
 			EntityRegistry.removeSpawn(EntityDepthsGhoul.class, EnumCreatureType.MONSTER, Biomes.MUSHROOM_ISLAND_SHORE );
 		} else
-			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 10, 1, 3, EnumCreatureType.MONSTER, Biomes.OCEAN, Biomes.DEEP_OCEAN,
+			EntityRegistry.addSpawn(EntityDepthsGhoul.class, 1, 1, 3, EnumCreatureType.MONSTER, Biomes.OCEAN, Biomes.DEEP_OCEAN,
 					Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER, Biomes.BEACH, Biomes.COLD_BEACH, Biomes.STONE_BEACH,
 					Biomes.SWAMPLAND, Biomes.MUTATED_SWAMPLAND);
 

@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.biome.IDreadlandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDreadedGhoul;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.world.biome.IControlledSpawnList;
 
@@ -58,6 +59,7 @@ public class BiomeDreadlandsBase extends Biome implements IDreadlandsBiome, ICon
 		spawnableMonsterList.add(new SpawnListEntry(EntityGreaterDreadSpawn.class, 5, 1, 1));
 		spawnableMonsterList.add(new SpawnListEntry(EntityDreadguard.class, 8, 1, 1));
 		spawnableMonsterList.add(new SpawnListEntry(EntityLesserDreadbeast.class, 1, 0, 1));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDreadedGhoul.class, 1, 1, 2));
 	}
 
 	@Override

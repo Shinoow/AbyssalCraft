@@ -31,7 +31,7 @@ public class BiomeDarklandsMountains extends BiomeDarklandsBase {
 		fillerBlock = ACBlocks.darkstone.getDefaultState();
 		staticTopBlock = staticFillerBlock = true;
 		decorator.treesPerChunk = 0;
-		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 2));
+		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 1, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 45, 1, 2));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowCreature.class, 100, 3, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityShadowMonster.class, 80, 2, 2));
@@ -39,7 +39,7 @@ public class BiomeDarklandsMountains extends BiomeDarklandsBase {
 		aw.clear();
 		aw.add(new SpawnListEntry(EntityZombie.class, 50, 1, 5));
 		aw.add(new SpawnListEntry(EntitySkeleton.class, 50, 1, 5));
-		aw.add(new SpawnListEntry(EntityDepthsGhoul.class, 45, 1, 5));
+		aw.add(new SpawnListEntry(EntityDepthsGhoul.class, 1, 1, 3));
 		aw.add(new SpawnListEntry(EntityAbyssalZombie.class, 45, 1, 5));
 		aw.add(new SpawnListEntry(EntitySkeletonGoliath.class, 15, 1, 1));
 		aw.add(new SpawnListEntry(EntityShadowCreature.class, 100, 3, 3));
