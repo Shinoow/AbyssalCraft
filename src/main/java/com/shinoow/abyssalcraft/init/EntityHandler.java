@@ -206,6 +206,8 @@ public class EntityHandler implements ILifeCycleHandler {
 					Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER, Biomes.BEACH, Biomes.COLD_BEACH, Biomes.STONE_BEACH,
 					Biomes.SWAMPLAND, Biomes.MUTATED_SWAMPLAND);
 
+		EntityRegistry.addSpawn(EntityGhoul.class, 1, 1, 3, EnumCreatureType.MONSTER, Biomes.PLAINS, Biomes.DESERT, Biomes.TAIGA, Biomes.SAVANNA);
+		
 		if(evilAnimalSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER,
 					Biomes.TAIGA, Biomes.PLAINS, Biomes.FOREST, Biomes.SAVANNA, Biomes.BEACH,
