@@ -14,13 +14,10 @@ package com.shinoow.abyssalcraft.common.world;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.structures.StructureGraveyard;
-import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.common.util.StructureUtil;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -34,9 +31,6 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class AbyssalCraftWorldGenerator implements IWorldGenerator {
-
-	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
-	private StructureGraveyard graveyard = new StructureGraveyard();
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator
@@ -87,34 +81,9 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 		}
 
 		if(ACConfig.generateShoggothLairs && !blacklisted)
-			for(int i = 0; i < 1; i++){
-				int x = chunkX + random.nextInt(16) + 8;
-				int z = chunkZ + random.nextInt(2) + 28;
-				BlockPos pos1 = world.getHeight(new BlockPos(x, 0, z));
-				boolean swamp = BiomeDictionary.hasType(world.getBiome(pos1), Type.SWAMP);
-				if(world.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
-				if(swamp || BiomeDictionary.hasType(world.getBiome(pos1), Type.RIVER) &&
-						!BiomeDictionary.hasType(world.getBiome(pos1), Type.OCEAN))
-					if(swamp ? ACConfig.shoggothLairSpawnRate > 0 && random.nextInt(ACConfig.shoggothLairSpawnRate) == 0 :
-						ACConfig.shoggothLairSpawnRateRivers > 0 && random.nextInt(ACConfig.shoggothLairSpawnRateRivers) == 0)
-						if(!world.isAirBlock(pos1.north(13)) && !world.isAirBlock(pos1.north(20)) && !world.isAirBlock(pos1.north(27)))
-							shoggothLair.generate(world, random, pos1);
-			}
+			StructureUtil.INSTANCE.generateShoggothLair(world, random, chunkX, chunkZ, false);
 
-		if(ACConfig.generateGraveyards && !blacklisted) {
-			int x = chunkX + random.nextInt(16) + 8;
-			int z = chunkZ + random.nextInt(16) + 8;
-			BlockPos pos = world.getHeight(new BlockPos(x, 0, z));
-
-			while(world.isAirBlock(pos) && pos.getY() > 2)
-				pos = pos.down();
-
-			IBlockState state = world.getBlockState(pos);
-			if(ACConfig.graveyardGenerationChance > 0 && random.nextInt(ACConfig.graveyardGenerationChance) == 0
-					&& !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
-					&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
-					&& state.getMaterial() != Material.CACTUS)
-				graveyard.generate(world, random, pos);
-		}
+		if(ACConfig.generateGraveyards && !blacklisted)
+			StructureUtil.INSTANCE.generateGraveyard(world, random, chunkX, chunkZ, false);
 	}
 }

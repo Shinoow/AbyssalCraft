@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.structures.StructureGraveyard;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.omothol.*;
+import com.shinoow.abyssalcraft.common.util.StructureUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.BlockFalling;
@@ -286,52 +287,31 @@ public class ChunkGeneratorOmothol implements IChunkGenerator
 	{
 		BlockFalling.fallInstantly = true;
 
-		int k = x * 16;
-		int l = z * 16;
-		Biome Biome = worldObj.getBiome(new BlockPos(k + 16, 0, l + 16));
+		int chunkX = x * 16;
+		int chunkZ = z * 16;
+		Biome Biome = worldObj.getBiome(new BlockPos(chunkX + 16, 0, chunkZ + 16));
 
 		if(x == 0 && z == 0) { //TODO revise this to something close to no cascading chunkgen
 			StructureJzaharTemple temple = new StructureJzaharTemple();
 			temple.generate(worldObj, rand, new BlockPos(4, worldObj.getHeight(4, 7), 7));
 		}
 
-		for(int i = 0; i < 1; i++) {
-			int Xcoord2 = k + rand.nextInt(16) + 8;
-			int Zcoord2 = l + rand.nextInt(2) + 28;
-			BlockPos pos1 = worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2));
-			if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
+		if(ACConfig.generateShoggothLairs)
+			StructureUtil.INSTANCE.generateShoggothLair(worldObj, rand, chunkX, chunkZ, true);
 
-			if(rand.nextInt(100) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
-				shoggothLair.generate(worldObj, rand, pos1);
-		}
-
-		if(ACConfig.generateGraveyards) {
-			int x2 = k + rand.nextInt(16) + 8;
-			int z2 = l + rand.nextInt(16) + 8;
-			BlockPos posGrave = worldObj.getHeight(new BlockPos(x2, 0, z2));
-
-			while(worldObj.isAirBlock(posGrave) && posGrave.getY() > 2)
-				posGrave = posGrave.down();
-
-			if(posGrave.getY() > 10) {
-				IBlockState state = worldObj.getBlockState(posGrave);
-				if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
-						&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
-						&& state.getMaterial() != Material.CACTUS)
-					graveyard.generate(worldObj, rand, posGrave);
-			}
-		}
+		if(ACConfig.generateGraveyards)
+			StructureUtil.INSTANCE.generateGraveyard(worldObj, rand, chunkX, chunkZ, true);
 
 		if((x > -2 || x < 2) && (z > 6 || z < -1)) {
 
-			BlockPos pos2 = worldObj.getHeight(new BlockPos(k, 0, l));
+			BlockPos pos2 = worldObj.getHeight(new BlockPos(chunkX, 0, chunkZ));
 
 			//adding RNG to the coords to give a more accurate picture of the actual position
 			if(!cityGen.tooClose(pos2.add(rand.nextInt(8) + 8, 0, rand.nextInt(8) + 8)))
 				cityGen.generate(worldObj, rand, pos2);
 
-			int randX = k + rand.nextInt(2) + 1;
-			int randZ = l + rand.nextInt(2) + 1;
+			int randX = chunkX + rand.nextInt(2) + 1;
+			int randZ = chunkZ + rand.nextInt(2) + 1;
 
 			pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
 
@@ -339,16 +319,16 @@ public class ChunkGeneratorOmothol implements IChunkGenerator
 				templeGen.generate(worldObj, rand, pos2);
 
 
-			randX = k + rand.nextInt(8) + 8;
-			randZ = l + rand.nextInt(8) + 8;
+			randX = chunkX + rand.nextInt(8) + 8;
+			randZ = chunkZ + rand.nextInt(8) + 8;
 
 			pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
 
 			if(rand.nextBoolean() && !towerGen.tooClose(pos2) && !cityGen.tooClose(pos2))
 				towerGen.generate(worldObj, rand, pos2);
 
-			randX = k + rand.nextInt(7) + 7;
-			randZ = l + rand.nextInt(7) + 7;
+			randX = chunkX + rand.nextInt(7) + 7;
+			randZ = chunkZ + rand.nextInt(7) + 7;
 
 			pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
 
@@ -356,7 +336,7 @@ public class ChunkGeneratorOmothol implements IChunkGenerator
 				storageGen.generate(worldObj, rand, pos2);
 		}
 
-		Biome.decorate(worldObj, worldObj.rand, new BlockPos(k, 0, l));
+		Biome.decorate(worldObj, worldObj.rand, new BlockPos(chunkX, 0, chunkZ));
 
 		BlockFalling.fallInstantly = false;
 	}

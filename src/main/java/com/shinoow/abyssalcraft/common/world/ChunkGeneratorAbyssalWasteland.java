@@ -21,18 +21,15 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.structures.StructureGraveyard;
-import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.abyss.Abyruin;
 import com.shinoow.abyssalcraft.common.structures.abyss.Chains;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
+import com.shinoow.abyssalcraft.common.util.StructureUtil;
 import com.shinoow.abyssalcraft.common.world.gen.*;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.world.biome.IAlternateSpawnList;
 
 import net.minecraft.block.BlockFalling;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -71,9 +68,7 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 
 	private MapGenAbyStronghold strongholdGenerator = new MapGenAbyStronghold();
 	private MapGenBase ravineGenerator = new MapGenRavineAC();
-	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
 	private WorldGenAbyssalStalagmite stalagmite = new WorldGenAbyssalStalagmite();
-	private StructureGraveyard graveyard = new StructureGraveyard();
 	private Biome[] biomesForGeneration;
 
 	double[] doubleArray1;
@@ -324,9 +319,9 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 	public void populate(int x, int z)
 	{
 		BlockFalling.fallInstantly = true;
-		int k = x * 16;
-		int l = z * 16;
-		BlockPos pos = new BlockPos(k, 0, l);
+		int chunkX = x * 16;
+		int chunkZ = z * 16;
+		BlockPos pos = new BlockPos(chunkX, 0, chunkZ);
 		Biome biome = worldObj.getBiome(pos.add(16, 0, 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
@@ -339,7 +334,7 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 		if (mapFeaturesEnabled)
 			strongholdGenerator.generateStructure(worldObj, rand, new ChunkPos(x, z));
 
-		DarklandsStructureGenerator.generateStructures(worldObj, rand, k, l, 0.03F);
+		DarklandsStructureGenerator.generateStructures(worldObj, rand, chunkX, chunkZ, 0.03F);
 
 		int k1;
 		int l1;
@@ -369,50 +364,29 @@ public class ChunkGeneratorAbyssalWasteland implements IChunkGenerator
 			stalagmite.generate(worldObj, rand, worldObj.getHeight(pos.add(xPos, 0, zPos)));
 		}
 
-		if(ACConfig.generateAbyssalWastelandPillars)
-			for(int i = 0; i < 1; i++) {
-				int Xcoord1 = rand.nextInt(16) + 8;
-				int Zcoord1 = rand.nextInt(16) + 8;
+		if(ACConfig.generateAbyssalWastelandPillars) {
+			int Xcoord1 = rand.nextInt(16) + 8;
+			int Zcoord1 = rand.nextInt(16) + 8;
 
-				if(rand.nextFloat() < 0.01F)
-					new Chains().generate(worldObj, rand, pos.add(Xcoord1, 0, Zcoord1));
-			}
-		if(ACConfig.generateAbyssalWastelandRuins)
-			for(int i = 0; i < 1; i++) {
-				int Xcoord2 = rand.nextInt(16) + 8;
-				int Zcoord2 = rand.nextInt(16) + 8;
-				BlockPos pos1 = worldObj.getHeight(pos.add(Xcoord2, 0, Zcoord2));
+			if(rand.nextFloat() < 0.01F)
+				new Chains().generate(worldObj, rand, pos.add(Xcoord1, 0, Zcoord1));
+		}
+		if(ACConfig.generateAbyssalWastelandRuins) {
+			int Xcoord2 = rand.nextInt(16) + 8;
+			int Zcoord2 = rand.nextInt(16) + 8;
+			BlockPos pos1 = worldObj.getHeight(pos.add(Xcoord2, 0, Zcoord2));
 
-				if(rand.nextInt(200) == 0)
-					new Abyruin().generate(worldObj, rand, pos1);
-			}
-		if(ACConfig.generateShoggothLairs && biome != ACBiomes.coralium_lake)
-			for(int i = 0; i < 1; i++) {
-				int Xcoord2 = rand.nextInt(16) + 8;
-				int Zcoord2 = rand.nextInt(2) + 28;
-				BlockPos pos1 = worldObj.getHeight(pos.add(Xcoord2, 0, Zcoord2));
-				if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
-
-				if(rand.nextInt(200) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
-					shoggothLair.generate(worldObj, rand, pos1);
-			}
-
-		if(ACConfig.generateGraveyards) {
-			int x2 =  rand.nextInt(16) + 8;
-			int z2 = rand.nextInt(16) + 8;
-			BlockPos posGrave = worldObj.getHeight(pos.add(x2, 0, z2));
-
-			while(worldObj.isAirBlock(posGrave) && posGrave.getY() > 2)
-				posGrave = posGrave.down();
-
-			IBlockState state = worldObj.getBlockState(posGrave);
-			if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
-					&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
-					&& state.getMaterial() != Material.CACTUS)
-				graveyard.generate(worldObj, rand, posGrave);
+			if(rand.nextInt(200) == 0)
+				new Abyruin().generate(worldObj, rand, pos1);
 		}
 
-		biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
+		if(ACConfig.generateShoggothLairs && biome != ACBiomes.coralium_lake)
+			StructureUtil.INSTANCE.generateShoggothLair(worldObj, rand, chunkX, chunkZ, true);
+
+		if(ACConfig.generateGraveyards)
+			StructureUtil.INSTANCE.generateGraveyard(worldObj, rand, chunkX, chunkZ, true);
+
+		biome.decorate(worldObj, rand, new BlockPos(chunkX, 0, chunkZ));
 
 		ForgeEventFactory.onChunkPopulate(false, this, worldObj, rand, x, z, flag);
 

@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.structures.StructureGraveyard;
-import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
+import com.shinoow.abyssalcraft.common.util.StructureUtil;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenCavesAC;
 import com.shinoow.abyssalcraft.common.world.gen.MapGenRavineAC;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -64,9 +63,6 @@ public class ChunkGeneratorDarkRealm implements IChunkGenerator
 	private MapGenBase caveGenerator = new MapGenCavesAC();
 
 	private MapGenBase ravineGenerator = new MapGenRavineAC();
-
-	private StructureShoggothPit shoggothLair = new StructureShoggothPit();
-	private StructureGraveyard graveyard = new StructureGraveyard();
 
 	double[] doubleArray1;
 	double[] doubleArray2;
@@ -491,9 +487,9 @@ public class ChunkGeneratorDarkRealm implements IChunkGenerator
 	public void populate(int x, int z)
 	{
 		BlockFalling.fallInstantly = true;
-		int k = x * 16;
-		int l = z * 16;
-		Biome Biome = worldObj.getBiome(new BlockPos(k + 16, 0, l + 16));
+		int chunkX = x * 16;
+		int chunkZ = z * 16;
+		Biome Biome = worldObj.getBiome(new BlockPos(chunkX + 16, 0, chunkZ + 16));
 		rand.setSeed(worldObj.getSeed());
 		long i1 = rand.nextLong() / 2L * 2L + 1L;
 		long j1 = rand.nextLong() / 2L * 2L + 1L;
@@ -502,35 +498,15 @@ public class ChunkGeneratorDarkRealm implements IChunkGenerator
 
 		ForgeEventFactory.onChunkPopulate(true, this, worldObj, rand, x, z, flag);
 
-		DarklandsStructureGenerator.generateStructures(worldObj, rand, k, l, 0.03F);
+		DarklandsStructureGenerator.generateStructures(worldObj, rand, chunkX, chunkZ, 0.03F);
 
 		if(ACConfig.generateShoggothLairs)
-			for(int i = 0; i < 1; i++) {
-				int Xcoord2 = k + rand.nextInt(16) + 8;
-				int Zcoord2 = l + rand.nextInt(2) + 28;
-				BlockPos pos1 = worldObj.getHeight(new BlockPos(Xcoord2, 0, Zcoord2));
-				if(worldObj.getBlockState(pos1).getMaterial() == Material.PLANTS) pos1 = pos1.down();
+			StructureUtil.INSTANCE.generateShoggothLair(worldObj, rand, chunkX, chunkZ, true);
 
-				if(rand.nextInt(200) == 0 && !worldObj.isAirBlock(pos1.north(13)) && !worldObj.isAirBlock(pos1.north(20)) && !worldObj.isAirBlock(pos1.north(27)))
-					shoggothLair.generate(worldObj, rand, pos1);
-			}
+		if(ACConfig.generateGraveyards)
+			StructureUtil.INSTANCE.generateGraveyard(worldObj, rand, chunkX, chunkZ, true);
 
-		if(ACConfig.generateGraveyards) {
-			int x2 = k + rand.nextInt(16) + 8;
-			int z2 = l + rand.nextInt(16) + 8;
-			BlockPos posGrave = worldObj.getHeight(new BlockPos(x2, 0, z2));
-
-			while(worldObj.isAirBlock(posGrave) && posGrave.getY() > 2)
-				posGrave = posGrave.down();
-
-			IBlockState state = worldObj.getBlockState(posGrave);
-			if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
-					&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
-					&& state.getMaterial() != Material.CACTUS)
-				graveyard.generate(worldObj, rand, posGrave);
-		}
-
-		Biome.decorate(worldObj, rand, new BlockPos(k, 0, l));
+		Biome.decorate(worldObj, rand, new BlockPos(chunkX, 0, chunkZ));
 
 		ForgeEventFactory.onChunkPopulate(false, this, worldObj, rand, x, z, flag);
 

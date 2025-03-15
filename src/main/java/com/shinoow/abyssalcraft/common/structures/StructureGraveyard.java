@@ -42,10 +42,15 @@ import net.minecraft.world.gen.structure.template.Template.BlockInfo;
 public class StructureGraveyard extends WorldGenerator {
 
 	private Map<Integer, Set<BlockPos>> positions = new HashMap<>();
+	private int size;
 
 	private boolean tooClose(int dim, BlockPos pos) {
 		positions.putIfAbsent(dim, new HashSet<BlockPos>());
 		return positions.get(dim).stream().anyMatch(b -> b.getDistance(pos.getX(), b.getY(), pos.getZ()) <= ACConfig.graveyardGenerationDistance);
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	@Override
@@ -76,21 +81,28 @@ public class StructureGraveyard extends WorldGenerator {
 		MinecraftServer server = worldIn.getMinecraftServer();
 		TemplateManager templateManager = worldIn.getSaveHandler().getStructureTemplateManager();
 
-		String size = "small";
+		String templateSize = "small";
 
-		switch(rand.nextInt(3)) {
+		switch(size) {
 		case 0:
-			size = "small";
+			templateSize = "small";
 			break;
 		case 1:
-			size = "medium";
+			templateSize = "medium";
 			break;
 		case 2:
-			size = "large";
+			templateSize = "large";
 			break;
 		}
 
-		Template template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", "graveyard/graveyard_"+size));
+		// extra offsets to prevent cascading chunkgen
+		if(size == 1)
+			position = position.north(5).west(4);
+
+		if(size == 2)
+			position = position.north(8).west(6);
+
+		Template template = templateManager.getTemplate(server, new ResourceLocation("abyssalcraft", "graveyard/graveyard_"+templateSize));
 
 		template.addBlocksToWorld(worldIn, position, processor, placeSettings, 2);
 
@@ -160,7 +172,7 @@ public class StructureGraveyard extends WorldGenerator {
 
 	private ItemStack getRandomShard(Random rand) {
 
-		switch(rand.nextInt(3)) {
+		switch(rand.nextInt(4)) {
 		case 0:
 			return new ItemStack(ACItems.spirit_tablet_shard_0);
 		case 1:
