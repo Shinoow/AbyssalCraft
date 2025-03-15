@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.lib.item;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
 import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;

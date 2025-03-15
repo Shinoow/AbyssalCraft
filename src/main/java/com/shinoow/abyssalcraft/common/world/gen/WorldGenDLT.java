@@ -26,7 +26,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenTrees;
 
 @SuppressWarnings("deprecation")
 public class WorldGenDLT extends WorldGenTreeAC {
@@ -87,7 +86,7 @@ public class WorldGenDLT extends WorldGenTreeAC {
 	}
 
 	private void createTrunk(World world, Random rand, int x, int y, int z) {
-		
+
 		if(fixed) {
 			setBlockAndNotifyAdequately(world, new BlockPos(x,y,z),getLogBlock(rand).getDefaultState());
 			setBlockAndNotifyAdequately(world, new BlockPos(x-1,y,z),getLogBlock(rand).getStateFromMeta(12));

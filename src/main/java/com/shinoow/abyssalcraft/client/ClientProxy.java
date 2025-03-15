@@ -141,7 +141,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityShoggoth.class, manager -> new RenderShoggoth(manager, 1, 1.0F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterShoggoth.class, manager -> new RenderShoggoth(manager, 2, 1.6F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCompassTentacle.class, RenderCompassTentacle::new);
-//		RenderingRegistry.registerEntityRenderingHandler(EntityRemnantTrader.class, RenderRemnantTrader::new);
+		//		RenderingRegistry.registerEntityRenderingHandler(EntityRemnantTrader.class, RenderRemnantTrader::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGhoul.class, RenderGhoul::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDreadedGhoul.class, RenderDreadedGhoul::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityShadowGhoul.class, RenderShadowGhoul::new);
@@ -201,10 +201,10 @@ public class ClientProxy extends CommonProxy {
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
 		RenderPlayer render2 = rm.getSkinMap().get("slim");
 		render2.addLayer(new LayerStarSpawnTentacles(render2));
-//		rm.entityRenderMap.forEach((a,b)-> {
-//			if(EntityLiving.class.isAssignableFrom(a) && b instanceof RenderLiving)
-//				((RenderLiving) b).addLayer(new LayerDreadTentacles((RenderLiving) b));
-//		});
+		//		rm.entityRenderMap.forEach((a,b)-> {
+		//			if(EntityLiving.class.isAssignableFrom(a) && b instanceof RenderLiving)
+		//				((RenderLiving) b).addLayer(new LayerDreadTentacles((RenderLiving) b));
+		//		});
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ((ICrystal) stack.getItem()).getColor(stack), InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ICrystal).toArray(Item[]::new));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.token_of_jzahar);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? SpellUtils.getSpellColor(stack) : 16777215, ACItems.basic_scroll, ACItems.lesser_scroll, ACItems.moderate_scroll, ACItems.greater_scroll);
@@ -321,9 +321,8 @@ public class ClientProxy extends CommonProxy {
 				break;
 			}
 		}
-		if(particleName.equals("BlueFlame")) {
+		if(particleName.equals("BlueFlame"))
 			Minecraft.getMinecraft().effectRenderer.addEffect(new BlueFlameParticle(Minecraft.getMinecraft().world, posX, posY, posZ, velX, velY, velZ));
-		}
 	}
 
 	@Override

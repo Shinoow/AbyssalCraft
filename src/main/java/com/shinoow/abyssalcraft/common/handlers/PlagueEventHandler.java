@@ -42,9 +42,9 @@ public class PlagueEventHandler {
 
 		EntityLivingBase entity = event.getEntityLiving();
 		if(entity.isPotionActive(AbyssalCraftAPI.coralium_plague))
-			if(entity.getRNG().nextFloat() > 0.1F && !ACConfig.no_potion_clouds) {
+			if(entity.getRNG().nextFloat() > 0.1F && !ACConfig.no_potion_clouds)
 				createCloud(entity, AbyssalCraftAPI.coralium_plague);
-			} else {
+			else {
 
 				AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(6.0D, 2.0D, 6.0D);
 				List<EntityLivingBase> list = entity.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
@@ -71,10 +71,9 @@ public class PlagueEventHandler {
 
 			}
 		if(entity.isPotionActive(AbyssalCraftAPI.dread_plague)) {
-			if(entity.getRNG().nextFloat() > 0.1F && !ACConfig.no_potion_clouds) {
+			if(entity.getRNG().nextFloat() > 0.1F && !ACConfig.no_potion_clouds)
 				createCloud(entity, AbyssalCraftAPI.dread_plague);
-
-			} else {
+			else {
 
 				AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(6.0D, 2.0D, 6.0D);
 				List<EntityLivingBase> list = entity.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
@@ -101,9 +100,8 @@ public class PlagueEventHandler {
 
 			}
 		} else if(EntityUtil.isDreadPlagueCarrier(entity) && !(entity instanceof EntityDemonAnimal) && entity.dimension != ACLib.dreadlands_id &&
-				entity.dimension != ACLib.omothol_id && entity.dimension != ACLib.dark_realm_id) {
+				entity.dimension != ACLib.omothol_id && entity.dimension != ACLib.dark_realm_id)
 			createCloud(entity, AbyssalCraftAPI.dread_plague);
-		}
 	}
 
 	@SubscribeEvent

@@ -201,20 +201,14 @@ public class AbyssalCraftEventHooks {
 
 		String type = source.getDamageType();
 
-		boolean flag = false;
-
-		if(Loader.isModLoaded("nuclearcraft")) {
+		if(Loader.isModLoaded("nuclearcraft"))
 			for(String src : sourceNames)
-				if(type.contentEquals(src)) {
+				if(type.contentEquals(src))
 					return true;
-				}
-		}
-		if(Loader.isModLoaded("hbm")) {
+		if(Loader.isModLoaded("hbm"))
 			for(String src : sourceNames2)
-				if(type.contentEquals(src)) {
+				if(type.contentEquals(src))
 					return true;
-				}
-		}
 
 		return false;
 	}

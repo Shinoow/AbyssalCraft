@@ -966,7 +966,7 @@ public class AbyssalCraftClientEventHooks {
 		ResourceLocation blueflame = new ResourceLocation("abyssalcraft","particles/blueflame");
 		event.getMap().registerSprite(blueflame);
 	}
-	
+
 	private void registerFluidModel(Block fluidBlock, String name) {
 		Item item = Item.getItemFromBlock(fluidBlock);
 

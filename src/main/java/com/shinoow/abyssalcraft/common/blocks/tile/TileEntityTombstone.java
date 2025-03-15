@@ -108,20 +108,16 @@ public class TileEntityTombstone extends TileEntity implements ITickable {
 	private EntityGhoulBase getGhoul(Block block) {
 
 		if(block == ACBlocks.tombstone_abyssal_stone
-				|| block == ACBlocks.tombstone_coralium_stone) {
+				|| block == ACBlocks.tombstone_coralium_stone)
 			return new EntityDepthsGhoul(world);
-		}
-		if(block == ACBlocks.tombstone_darkstone) {
+		if(block == ACBlocks.tombstone_darkstone)
 			return new EntityShadowGhoul(world);
-		}
 		if(block == ACBlocks.tombstone_dreadstone
-				|| block == ACBlocks.tombstone_elysian_stone) {
+				|| block == ACBlocks.tombstone_elysian_stone)
 			return new EntityDreadedGhoul(world);
-		}
 		if(block == ACBlocks.tombstone_ethaxium
-				|| block == ACBlocks.tombstone_omothol_stone) {
+				|| block == ACBlocks.tombstone_omothol_stone)
 			return new EntityOmotholGhoul(world);
-		}
 		if(block == ACBlocks.tombstone_monolith_stone) {
 			// atrocity goes here
 		}

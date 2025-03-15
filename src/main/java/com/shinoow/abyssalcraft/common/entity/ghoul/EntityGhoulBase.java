@@ -15,9 +15,7 @@ import java.util.Calendar;
 import java.util.UUID;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
-import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
-import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -175,9 +173,8 @@ public abstract class EntityGhoulBase extends EntityMob {
 	@SideOnly(Side.CLIENT)
 	public void handleStatusUpdate(byte id)
 	{
-		if (id == 23) {
+		if (id == 23)
 			doFadeIn = true;
-		}
 		else
 			super.handleStatusUpdate(id);
 	}

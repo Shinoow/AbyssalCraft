@@ -317,9 +317,8 @@ public class ChunkGeneratorOmothol implements IChunkGenerator
 				IBlockState state = worldObj.getBlockState(posGrave);
 				if(rand.nextInt(50) == 0 && !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
 						&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
-						&& state.getMaterial() != Material.CACTUS) {
+						&& state.getMaterial() != Material.CACTUS)
 					graveyard.generate(worldObj, rand, posGrave);
-				}
 			}
 		}
 

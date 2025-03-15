@@ -306,7 +306,7 @@ public final class EntityUtil {
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds the entity to a list of entities considered immune to the Dread Plague
 	 * @param entity Entity ID string

@@ -21,9 +21,7 @@ import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothAttackMelee;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothBuildMonolith;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
-import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
 import com.shinoow.abyssalcraft.common.entity.ghoul.EntityGhoulBase;
-import com.shinoow.abyssalcraft.common.entity.ghoul.EntityOmotholGhoul;
 import com.shinoow.abyssalcraft.common.handlers.AbyssalCraftEventHooks;
 import com.shinoow.abyssalcraft.common.items.armor.ItemEthaxiumArmor;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -338,7 +336,7 @@ public abstract class EntityShoggothBase extends EntityMob implements IShoggothE
 				sprayAcid(true);
 			else return false;
 		if(par1DamageSource == DamageSource.CACTUS) return false;
-		
+
 		if(AbyssalCraftEventHooks.isRadiationDamage(par1DamageSource))
 			return false;
 

@@ -113,9 +113,8 @@ public class AbyssalCraftWorldGenerator implements IWorldGenerator {
 			if(ACConfig.graveyardGenerationChance > 0 && random.nextInt(ACConfig.graveyardGenerationChance) == 0
 					&& !state.getMaterial().isLiquid() && state.getMaterial() != Material.LEAVES
 					&& state.getMaterial() != Material.PLANTS && state.getMaterial() != Material.VINE
-					&& state.getMaterial() != Material.CACTUS) {
+					&& state.getMaterial() != Material.CACTUS)
 				graveyard.generate(world, random, pos);
-			}
 		}
 	}
 }

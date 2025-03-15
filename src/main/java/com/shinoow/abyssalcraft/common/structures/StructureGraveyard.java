@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2025 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.structures;
 
 import java.util.*;
@@ -95,22 +106,20 @@ public class StructureGraveyard extends WorldGenerator {
 				worldIn.setBlockToAir(entry.getKey());
 				if(rand.nextInt(3) == 0) {
 					WorldGenTreeAC tree = new WorldGenDLT(false);
-					if(worldIn.provider.getDimension() == ACLib.dreadlands_id && worldIn.getBiome(entry.getKey()) instanceof IDreadlandsBiome) {
+					if(worldIn.provider.getDimension() == ACLib.dreadlands_id && worldIn.getBiome(entry.getKey()) instanceof IDreadlandsBiome)
 						tree = new WorldGenDrT(false);
-					}
-					if(worldIn.provider.getDimension() == ACLib.abyssal_wasteland_id) {
+					if(worldIn.provider.getDimension() == ACLib.abyssal_wasteland_id)
 						tree = new WorldGenDeadTree(false);
-					}
 					tree.setFixed();
 					tree.generate(worldIn, rand, entry.getKey());
 				} else worldIn.setBlockState(entry.getKey().down(), topBlock);
-			} else if("treasure".equals(entry.getValue())) {
+			} else if("treasure".equals(entry.getValue()))
 				if(rand.nextBoolean()) {
 					worldIn.setBlockState(entry.getKey(), Blocks.CHEST.getDefaultState());
 
 					TileEntity tile = worldIn.getTileEntity(entry.getKey());
 
-					if(tile instanceof TileEntityChest) {
+					if(tile instanceof TileEntityChest)
 						if(rand.nextInt(10) == 0 && worldIn.provider.getDimension() == ACLib.abyssal_wasteland_id) {
 
 							int num = rand.nextInt(((TileEntityChest) tile).getSizeInventory());
@@ -122,9 +131,8 @@ public class StructureGraveyard extends WorldGenerator {
 							// dumb random-loot logic
 							int num = rand.nextInt(10);
 							List<Tuple<Integer, Integer>> randList = new ArrayList<>();
-							for(int i = 0; i < num; i++) {
+							for(int i = 0; i < num; i++)
 								randList.add(new Tuple<>(rand.nextInt(((TileEntityChest) tile).getSizeInventory()), rand.nextInt(16)+1));
-							}
 							Collections.shuffle(randList, rand); // fairly pointless shuffle
 
 							List<ItemStack> loot = getLoot(worldIn.provider.getDimension());
@@ -144,10 +152,8 @@ public class StructureGraveyard extends WorldGenerator {
 							if(!anyLoot)
 								worldIn.setBlockState(entry.getKey(), fillerBlock);
 						}
-					}
 
 				} else worldIn.setBlockState(entry.getKey(), fillerBlock);
-			}
 
 		return true;
 	}
@@ -259,10 +265,9 @@ public class StructureGraveyard extends WorldGenerator {
 
 		int id = world.provider.getDimension();
 
-		if(id == 0) {
+		if(id == 0)
 			if(rand.nextInt(10) == 0)
 				state = ACBlocks.tombstone_darkstone.getDefaultState();
-		}
 		if(id == ACLib.abyssal_wasteland_id) {
 			state = ACBlocks.tombstone_abyssal_stone.getDefaultState();
 			if(rand.nextBoolean())
@@ -280,9 +285,8 @@ public class StructureGraveyard extends WorldGenerator {
 		}
 
 		if(id == ACLib.dark_realm_id || world.getBiome(pos) instanceof IDarklandsBiome ||
-				rand.nextInt(10) == 0) {
+				rand.nextInt(10) == 0)
 			state = ACBlocks.tombstone_darkstone.getDefaultState();
-		}
 
 		return state.withProperty(BlockTombstone.FACING, EnumFacing.NORTH);
 	}

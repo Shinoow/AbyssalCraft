@@ -29,7 +29,7 @@ public class NecronomiconResources {
 	public static final ResourceLocation EVIL_ANIMALS = res("evil-animals");
 	public static final ResourceLocation LESSER_SHOGGOTH = res("lesser-shoggoth");
 	public static final ResourceLocation SHUB_OFFSPRING = res("shub-offspring");
-	
+
 	//One Ghoul picture for all, because few detail differences
 	public static final ResourceLocation GHOUL = res("ghoul");
 

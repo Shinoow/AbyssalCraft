@@ -15,13 +15,9 @@ import static com.shinoow.abyssalcraft.AbyssalCraft.modid;
 import static com.shinoow.abyssalcraft.init.BlockHandler.*;
 import static com.shinoow.abyssalcraft.lib.ACSounds.*;
 
-import java.io.File;
-import java.util.Stack;
-
 import javax.annotation.Nonnull;
 
 import com.google.common.base.Predicate;
-import com.google.gson.JsonObject;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.armor.ArmorData;
 import com.shinoow.abyssalcraft.api.armor.ArmorDataRegistry;
@@ -36,7 +32,6 @@ import com.shinoow.abyssalcraft.api.knowledge.condition.ConditionProcessorRegist
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapability;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapabilityStorage;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityStorage;
@@ -50,11 +45,9 @@ import com.shinoow.abyssalcraft.common.potion.PotionEffectUtil;
 import com.shinoow.abyssalcraft.common.structures.pe.ArchwayStructure;
 import com.shinoow.abyssalcraft.common.structures.pe.BasicStructure;
 import com.shinoow.abyssalcraft.common.structures.pe.TotemPoleStructure;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.common.util.ShapedFluidContainerRecipe;
 import com.shinoow.abyssalcraft.lib.*;
 import com.shinoow.abyssalcraft.lib.item.ItemCrystal;
-import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 import net.minecraft.block.Block;
@@ -354,26 +347,26 @@ public class MiscHandler implements ILifeCycleHandler {
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
-//		File folder = new File("config/abyssalcraft/");
-//		folder.mkdirs();
-//		Stack<File> folders = new Stack<>();
-//		folders.add(folder);
-//		while(!folders.isEmpty()){
-//			File dir = folders.pop();
-//			File[] listOfFiles = dir.listFiles();
-//			for(File file : listOfFiles != null ? listOfFiles : new File[0])
-//				if(file.isFile()){
-//					JsonObject json = NecroDataJsonUtil.readNecroDataJsonFromFile(file);
-//					if(json != null){
-//						NecroData nd = NecroDataJsonUtil.deserializeNecroData(json);
-//						int book = NecroDataJsonUtil.getInteger(json, "booktype");
-//						if(nd != null){
-//							ACLogger.info("Successfully deserialized JSON file for NecroData {}", nd.getIdentifier());
-//							AbyssalCraftAPI.registerNecronomiconData(nd, book);
-//						}
-//					}
-//				}
-//		}
+		//		File folder = new File("config/abyssalcraft/");
+		//		folder.mkdirs();
+		//		Stack<File> folders = new Stack<>();
+		//		folders.add(folder);
+		//		while(!folders.isEmpty()){
+		//			File dir = folders.pop();
+		//			File[] listOfFiles = dir.listFiles();
+		//			for(File file : listOfFiles != null ? listOfFiles : new File[0])
+		//				if(file.isFile()){
+		//					JsonObject json = NecroDataJsonUtil.readNecroDataJsonFromFile(file);
+		//					if(json != null){
+		//						NecroData nd = NecroDataJsonUtil.deserializeNecroData(json);
+		//						int book = NecroDataJsonUtil.getInteger(json, "booktype");
+		//						if(nd != null){
+		//							ACLogger.info("Successfully deserialized JSON file for NecroData {}", nd.getIdentifier());
+		//							AbyssalCraftAPI.registerNecronomiconData(nd, book);
+		//						}
+		//					}
+		//				}
+		//		}
 	}
 
 	@Override

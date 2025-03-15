@@ -22,7 +22,6 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenTrees;
 
 @SuppressWarnings("deprecation")
 public class WorldGenDeadTree extends WorldGenTreeAC {
@@ -51,7 +50,7 @@ public class WorldGenDeadTree extends WorldGenTreeAC {
 
 		IBlockState j1 = world.getBlockState(new BlockPos(x, y -1, z));
 
-		if ((j1.getBlock() != ACBlocks.fused_abyssal_sand && j1.getBlock() != ACBlocks.abyssal_sand) || y >= 256 - height - 1)
+		if (j1.getBlock() != ACBlocks.fused_abyssal_sand && j1.getBlock() != ACBlocks.abyssal_sand || y >= 256 - height - 1)
 			return false;
 
 		setBlockAndNotifyAdequately(world, new BlockPos(x, y -1, z), ACBlocks.abyssal_sand.getDefaultState());

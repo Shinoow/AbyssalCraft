@@ -30,7 +30,7 @@ public class LayerDreadTentacles<E extends EntityLiving> implements LayerRendere
 	private final ResourceLocation TEXTURE = new ResourceLocation("abyssalcraft:textures/model/dread_tentacle.png");
 
 	private ModelRenderer part;
-	
+
 	public LayerDreadTentacles(RenderLiving<E> renderIn) {
 		render = renderIn;
 		alignTentacle();
@@ -64,15 +64,15 @@ public class LayerDreadTentacles<E extends EntityLiving> implements LayerRendere
 					break;
 				}
 	}
-	
+
 	private void reAlignTentacle(E entity) {
 
 		ModelBox cube = part.cubeList.get(0);
-		float y = (cube.posY1 + cube.posY2) + 1.0F;
+		float y = cube.posY1 + cube.posY2 + 1.0F;
 		if(entity instanceof EntityGhoulBase && entity.posX == entity.prevPosX
-				 && entity.posZ == entity.prevPosZ && entity.posZ == entity.prevPosZ)
+				&& entity.posZ == entity.prevPosZ && entity.posZ == entity.prevPosZ)
 			y = 0;
-		
+
 		model.base.setRotationPoint(part.rotationPointX, part.rotationPointY + y, part.rotationPointZ);
 	}
 }

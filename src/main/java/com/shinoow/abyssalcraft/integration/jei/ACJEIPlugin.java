@@ -85,7 +85,7 @@ public class ACJEIPlugin implements IModPlugin {
 
 		registry.addRecipeClickArea(GuiTransmutator.class, 78, 32, 28, 23, ACRecipeCategoryUid.TRANSMUTATION, ACRecipeCategoryUid.FUEL_TRANSMUTATION);
 		registry.addRecipeClickArea(GuiCrystallizer.class, 78, 32, 28, 23, ACRecipeCategoryUid.CRYSTALLIZATION, ACRecipeCategoryUid.FUEL_CRYSTALLIZATION);
-		
+
 		IRecipeTransferRegistry recipeTransferRegistry = registry.getRecipeTransferRegistry();
 
 		recipeTransferRegistry.addRecipeTransferHandler(ContainerTransmutator.class, ACRecipeCategoryUid.TRANSMUTATION, 0, 1, 1, 36);

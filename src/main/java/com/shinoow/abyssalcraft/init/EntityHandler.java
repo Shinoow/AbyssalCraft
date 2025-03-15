@@ -175,7 +175,7 @@ public class EntityHandler implements ILifeCycleHandler {
 
 		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "compasstentacle"), EntityCompassTentacle.class, "compasstentacle", startId++, instance, 64, 10, true);
 
-//		registerEntityWithEgg(EntityRemnantTrader.class, "remnanttrader", 80, 3, true, 0x133133, 0x342122);
+		//		registerEntityWithEgg(EntityRemnantTrader.class, "remnanttrader", 80, 3, true, 0x133133, 0x342122);
 
 		registerEntityWithEgg(EntityGhoul.class, "ghoul", 80, 3, true, 0xa1a766, 0x40460c);
 
@@ -207,7 +207,7 @@ public class EntityHandler implements ILifeCycleHandler {
 					Biomes.SWAMPLAND, Biomes.MUTATED_SWAMPLAND);
 
 		EntityRegistry.addSpawn(EntityGhoul.class, 1, 1, 3, EnumCreatureType.MONSTER, Biomes.PLAINS, Biomes.DESERT, Biomes.TAIGA, Biomes.SAVANNA);
-		
+
 		if(evilAnimalSpawnWeight > 0)
 			EntityRegistry.addSpawn(EntityEvilpig.class, evilAnimalSpawnWeight, 1, 3, EnumCreatureType.MONSTER,
 					Biomes.TAIGA, Biomes.PLAINS, Biomes.FOREST, Biomes.SAVANNA, Biomes.BEACH,

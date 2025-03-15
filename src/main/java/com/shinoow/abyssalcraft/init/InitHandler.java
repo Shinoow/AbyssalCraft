@@ -452,7 +452,7 @@ public class InitHandler implements ILifeCycleHandler {
 		tombstoneMaxSpawn = cfg.get(CATEGORY_GHOUL, "Tombstone: Spawn Limit", 5, "The amount of nearby Ghouls (within 15 blocks) at which the Tombstone will halt spawning any new ones.\n[range: 1 ~ 10, default: 5]", 1, 10).getInt();
 		tombstoneCooldown = cfg.get(CATEGORY_GHOUL, "Tombstone: Cooldown Time", 200, "The amount of time (in ticks) it takes between every attempt to spawn a Ghoul.\n[range: 40 ~ 1200, default: 200]", 40, 1200).getInt();
 		tombstoneGhoulDistance = cfg.get(CATEGORY_GHOUL, "Tombstone: Ghoul Distance", 15, "Max distance to check for nearby Ghouls before spawning more.\n[range: 5 ~ 48, default: 15]", 5, 48).getInt();
-		
+
 		evilAnimalSpawnWeight = MathHelper.clamp(evilAnimalSpawnWeight, 0, 100);
 		portalCooldown = MathHelper.clamp(portalCooldown, 10, 300);
 		demonAnimalSpawnWeight = MathHelper.clamp(demonAnimalSpawnWeight, 0, 100);
@@ -534,7 +534,7 @@ public class InitHandler implements ILifeCycleHandler {
 	public boolean isBlacklistedFromPickup(ItemStack stack) {
 		return mob_pickup_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
 	}
-	
+
 	/**
 	 * Checks if an Entity is blacklisted from being captured with a Interdimensional Cage
 	 * @param entity Entity to check

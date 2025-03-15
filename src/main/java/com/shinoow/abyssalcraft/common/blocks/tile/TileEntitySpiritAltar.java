@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2025 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import java.util.*;
@@ -25,7 +36,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.items.IItemHandler;
@@ -92,10 +102,9 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 		if(world.getTotalWorldTime() % 400 == 0) {
 			positions.removeIf(p -> !SpiritItemUtil.validPos(p, world));
 
-			if(positions.size() != tileEntites.size()) {
+			if(positions.size() != tileEntites.size())
 				tileEntites = positions.stream().map(p -> world.getTileEntity(p))
-						.collect(Collectors.toList());
-			}
+				.collect(Collectors.toList());
 		}
 		if(world.getTotalWorldTime() % 20 != 0) return;
 		if(tileEntites.isEmpty()) return;

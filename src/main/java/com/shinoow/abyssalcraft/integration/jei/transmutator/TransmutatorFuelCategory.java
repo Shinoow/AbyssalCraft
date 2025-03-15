@@ -32,8 +32,8 @@ public class TransmutatorFuelCategory extends TransmutatorRecipeCategory<Transmu
 
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-//		flame.draw(minecraft, 3, 20);
-		
+		//		flame.draw(minecraft, 3, 20);
+
 	}
 
 	@Override

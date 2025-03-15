@@ -64,12 +64,11 @@ public class ShapedFluidContainerRecipe extends ShapedRecipes {
 
 				boolean flag = false;
 
-				if(FluidUtil.getFluidContained(itemstack1) != null) {
+				if(FluidUtil.getFluidContained(itemstack1) != null)
 					for(ItemStack itemstack : ingredient.getMatchingStacks())
 						if (!areFluidStacksEqual(itemstack, itemstack1))
 							return false;
 						else flag = true;
-				}
 
 				if(!flag)
 					if(!ingredient.apply(itemstack1))
@@ -84,9 +83,8 @@ public class ShapedFluidContainerRecipe extends ShapedRecipes {
 		FluidStack fs = FluidUtil.getFluidContained(stack);
 		FluidStack fs1 = FluidUtil.getFluidContained(stack1);
 
-		if(fs != null && fs1 != null) {
+		if(fs != null && fs1 != null)
 			return fs.getFluid() == fs1.getFluid() && fs.amount == fs1.amount;
-		}
 
 		return true;
 	}
