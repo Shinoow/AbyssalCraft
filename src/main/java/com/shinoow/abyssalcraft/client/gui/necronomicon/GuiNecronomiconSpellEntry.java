@@ -126,7 +126,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String title = spell.getLocalizedName();
-		fontRenderer.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
+		fontRenderer.drawSplitString(title, k + 17, b0 + 16, 116, 0xC40000);
 
 		writeText(1, localize(NecronomiconText.LABEL_SPELL_PE)+": " + spell.getReqEnergy() + " PE", 125);
 		writeText(1, localize(NecronomiconText.LABEL_SPELL_TYPE)+": "+ localize(NecronomiconText.getSpellType(spell.requiresCharging())), 135);

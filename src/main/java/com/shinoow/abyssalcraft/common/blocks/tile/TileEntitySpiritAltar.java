@@ -161,7 +161,7 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 
 	public void spiritTabletToggle(EntityPlayer player, int mode) {
 		if(world.isRemote) return;
-		if(player.isSneaking()) {
+		if(player.isSneaking()) { // show connected routes
 
 			List<BlockPos[]> routes = new ArrayList<>();
 
@@ -178,18 +178,18 @@ public class TileEntitySpiritAltar extends TileEntity implements ITickable {
 			player.sendStatusMessage(new TextComponentTranslation("message.spiritaltar.1"), true);
 
 		}
-		else if(mode == 0) {
+		else if(mode == 0) { // calculate nearby routes to connected
 			calculatePositions();
 			player.sendStatusMessage(new TextComponentTranslation("message.spiritaltar.2"), true);
 		}
-		else if(mode == 1) {
+		else if(mode == 1) { // toggle transportation of connected routes
 			enabled = enabled ? false : true;
 			toggleSpirits(enabled);
 			world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 2);
 			((WorldServer)world).spawnParticle(enabled? EnumParticleTypes.VILLAGER_HAPPY : EnumParticleTypes.VILLAGER_ANGRY, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 1, 0, 0, 0, 1.0);
 			player.sendStatusMessage(new TextComponentTranslation(enabled ? "message.spiritaltar.3" : "message.spiritaltar.4"), true);
 		}
-		else if(mode == 2) {
+		else if(mode == 2) { // clear connected routes
 			clearSpirits();
 			player.sendStatusMessage(new TextComponentTranslation("message.spiritaltar.5"), true);
 		}

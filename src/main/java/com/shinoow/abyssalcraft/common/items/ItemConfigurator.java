@@ -99,7 +99,7 @@ public class ItemConfigurator extends ItemACBasic {
 			if(te instanceof TileEntitySpiritAltar) {
 				((TileEntitySpiritAltar) te).spiritTabletToggle(player, mode);
 			} else {
-				if(mode == 0) {
+				if(mode == 0) { // set path
 					NBTTagList path = null;
 					if(nbt.hasKey("Path"))
 						path = nbt.getTagList("Path", NBT.TAG_LONG);
@@ -115,7 +115,7 @@ public class ItemConfigurator extends ItemACBasic {
 						player.sendMessage(new TextComponentTranslation("message.configurator.2"));
 					}
 					nbt.setTag("Path", path);
-				} else if(mode == 1) {
+				} else if(mode == 1) { // apply configuration
 					if(player.canPlayerEdit(pos.offset(side), side, stack)) {
 						if(te != null && ItemTransferCapability.getCap(te) != null) {
 							IItemTransferCapability cap = ItemTransferCapability.getCap(te);
@@ -144,11 +144,11 @@ public class ItemConfigurator extends ItemACBasic {
 							cfg.setupSubtypeFilter();
 
 							cap.addTransferConfiguration(cfg);
-							cap.setRunning(true);
+//							cap.setRunning(true);
 							player.sendMessage(new TextComponentTranslation("message.configurator.3"));
 						} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
 					} else player.sendMessage(new TextComponentTranslation("message.configurator.error.4"));
-				} else if(mode == 2)
+				} else if(mode == 2) // clear configuration
 					if(player.canPlayerEdit(pos.offset(side), side, stack)) {
 						if(te != null && ItemTransferCapability.getCap(te) != null) {
 							IItemTransferCapability cap = ItemTransferCapability.getCap(te);

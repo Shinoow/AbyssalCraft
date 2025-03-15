@@ -127,7 +127,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String title = ritual.getLocalizedName();
-		fontRenderer.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
+		fontRenderer.drawSplitString(title, k + 17, b0 + 16, 116, 0xC40000);
 
 		if(ritual.requiresSacrifice())
 			fontRenderer.drawSplitString(localize(NecronomiconText.LABEL_SACRIFICE), k + 138, 164, 107, 0xC40000);

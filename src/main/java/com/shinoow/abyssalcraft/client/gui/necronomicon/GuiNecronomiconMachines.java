@@ -183,7 +183,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		byte b0 = 2;
 		String stuff;
 		stuff = localize(NecronomiconText.LABEL_INFORMATION_MACHINES);
-		fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+		fontRenderer.drawSplitString(stuff, k + 17, b0 + 16, 116, 0xC40000);
 		writeText(2, NecronomiconText.MACHINES_INFO);
 	}
 
@@ -206,7 +206,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 
 		if(isMInfo){
 			stuff = localize(NecronomiconText.LABEL_INFORMATION);
-			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+			fontRenderer.drawSplitString(stuff, k + 17, b0 + 16, 116, 0xC40000);
 			setTurnupLimit(2);
 			if(currTurnup == 0){
 				writeText(1, NecronomiconText.MACHINE_INFO_1, 50);
@@ -232,7 +232,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		}
 		if(isTra){
 			stuff = localize("container.abyssalcraft.transmutator");
-			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+			fontRenderer.drawSplitString(stuff, k + 17, b0 + 16, 116, 0xC40000);
 			List<Transmutation> trans = TransmutatorRecipes.instance().getTransmutationList();
 			setTurnups(trans.size());
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -245,7 +245,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		}
 		if(isCry){
 			stuff = localize("container.abyssalcraft.crystallizer");
-			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+			fontRenderer.drawSplitString(stuff, k + 17, b0 + 16, 116, 0xC40000);
 			List<Crystallization> cryst = CrystallizerRecipes.instance().getCrystallizationList();
 			setTurnups(cryst.size());
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -260,7 +260,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		}
 		if(isMat){
 			stuff = localize("container.abyssalcraft.materializer");
-			fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+			fontRenderer.drawSplitString(stuff, k + 17, b0 + 16, 116, 0xC40000);
 			List<Materialization> mat = MaterializerRecipes.instance().getMaterializationList();
 			setTurnups(mat.size(), true);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

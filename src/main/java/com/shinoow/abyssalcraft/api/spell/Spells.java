@@ -31,8 +31,6 @@ public class Spells {
 	public static Spell UNDEATH_TO_DUST;
 	public static Spell OOZE_REMOVAL;
 	public static Spell TELEPORT_HOSOTILES;
-	public static Spell DISPLAY_ROUTES;
-	public static Spell TOGGLE_STATE;
 	public static Spell FLOATING;
 	public static Spell TELEPORT_HOME;
 	public static Spell COMPASS;

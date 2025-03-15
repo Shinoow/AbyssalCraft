@@ -239,6 +239,8 @@ public class Pages {
 	public static Page ITEM_TRANSPORT_TUT_6;
 	public static Page ITEM_TRANSPORT_TUT_7;
 	public static Page ITEM_TRANSPORT_TUT_8;
+	public static Page ITEM_TRANSPORT_TUT_9;
+	public static Page ITEM_TRANSPORT_TUT_10;
 
 	public static Page INFORMATION_OMOTHOL;
 

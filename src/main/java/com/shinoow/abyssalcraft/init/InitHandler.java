@@ -442,8 +442,6 @@ public class InitHandler implements ILifeCycleHandler {
 		undeath_to_dust_spell = cfg.get(CATEGORY_SPELLS, "Undeath to Dust", true, "Set to false to disable the Undeath to Dust spell.").getBoolean();
 		ooze_removal_spell = cfg.get(CATEGORY_SPELLS, "Ooze Removal", true, "Set to false to disable the Ooze Removal spell.").getBoolean();
 		teleport_hostile_spell = cfg.get(CATEGORY_SPELLS, "Sacrificial Interdiction", true, "Set to false to disable the Sacrificial Interdiction spell.").getBoolean();
-		display_routes_spell = cfg.get(CATEGORY_SPELLS, "Display Routes", true, "Set to false to disable the Display Routes spell.").getBoolean();
-		toggle_state_spell = cfg.get(CATEGORY_SPELLS, "Toll The Bell", true, "Set to false to disable the Toll The Bell spell.").getBoolean();
 		floating_spell = cfg.get(CATEGORY_SPELLS, "Floating", true, "Set to false to disable the Floating spell.").getBoolean();
 		teleport_home_spell = cfg.get(CATEGORY_SPELLS, "Teleport Home", true, "Set to false to disable the Teleport Home spell.").getBoolean();
 		compass_spell = cfg.get(CATEGORY_SPELLS, "Eldritch Directions", true, "Set to false to disable the Eldritch Directions spell.").getBoolean();

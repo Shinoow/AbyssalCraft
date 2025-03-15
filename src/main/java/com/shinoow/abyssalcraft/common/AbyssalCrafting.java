@@ -413,13 +413,13 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(Rituals.INFESTING = new NecronomiconInfestingRitual());
 		RitualRegistry.instance().registerRitual(Rituals.CURING = new NecronomiconCuringRitual());
 		RitualRegistry.instance().registerRitual(Rituals.MASS_ENCHANTING = new NecronomiconMassEnchantRitual());
-		Object[] spiritAltarOfferings= new Object[] {Items.GOLD_INGOT, Items.GOLD_INGOT, Items.GOLD_INGOT, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone};
-		RitualRegistry.instance().registerRitual(Rituals.SPIRIT_ALTAR = new NecronomiconInfusionRitual("spiritAltar", 1, OreDictionary.WILDCARD_VALUE, 1000F, true, new ItemStack(ACItems.shadow_gem), new ItemStack(ACBlocks.spirit_altar), spiritAltarOfferings));
 		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}, null,
 				new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)},
 				null, new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}, null,
 				new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}};
 		RitualRegistry.instance().registerRitual(Rituals.SPIRIT_TABLET = new NecronomiconInfusionRitual("spiritTablet", 1, OreDictionary.WILDCARD_VALUE, 5000F, new ItemStack(ACItems.configurator), new ItemStack(ACItems.shadow_gem), spiritTabletOfferings));
+		Object[] spiritAltarOfferings= new Object[] {Items.GOLD_INGOT, Items.GOLD_INGOT, Items.GOLD_INGOT, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone};
+		RitualRegistry.instance().registerRitual(Rituals.SPIRIT_ALTAR = new NecronomiconInfusionRitual("spiritAltar", 1, OreDictionary.WILDCARD_VALUE, 1000F, true, new ItemStack(ACBlocks.spirit_altar), new ItemStack(ACItems.shadow_gem), spiritAltarOfferings));
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.overworld_shoggoth_flesh),
 				new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.abyssal_wasteland_essence), new ItemStack(ACItems.dreadlands_essence),
 				new ItemStack(ACItems.omothol_essence)};
@@ -619,10 +619,6 @@ public class AbyssalCrafting {
 			SpellRegistry.instance().registerSpell(Spells.OOZE_REMOVAL = new OozeRemovalSpell());
 		if(ACConfig.teleport_hostile_spell)
 			SpellRegistry.instance().registerSpell(Spells.TELEPORT_HOSOTILES = new TeleportHostilesSpell());
-		if(ACConfig.display_routes_spell)
-			SpellRegistry.instance().registerSpell(Spells.DISPLAY_ROUTES = new DisplayRoutesSpell());
-		if(ACConfig.toggle_state_spell)
-			SpellRegistry.instance().registerSpell(Spells.TOGGLE_STATE = new ToggleStateSpell());
 		if(ACConfig.floating_spell)
 			SpellRegistry.instance().registerSpell(Spells.FLOATING = new FloatingSpell());
 		if(ACConfig.teleport_home_spell)
