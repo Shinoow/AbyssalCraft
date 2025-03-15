@@ -42,9 +42,9 @@ import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemConfigurator extends ItemACBasic {
+public class ItemSpiritTablet extends ItemACBasic {
 
-	public ItemConfigurator() {
+	public ItemSpiritTablet() {
 		super("configurator");
 		setCreativeTab(ACTabs.tabTools);
 		addPropertyOverride(new ResourceLocation("mode"), (stack, worldIn, entityIn) -> stack.hasTagCompound() ? intToFloat(stack.getTagCompound().getInteger("Mode")) : 0 );
@@ -190,8 +190,8 @@ public class ItemConfigurator extends ItemACBasic {
 			is.setTagCompound(new NBTTagCompound());
 		int mode = is.getTagCompound().getInteger("Mode");
 		l.add(String.format("%s: %s", I18n.format("tooltip.staff.mode.1"), TextFormatting.GOLD+getMode(mode)+TextFormatting.GRAY));
-		l.add(I18n.format("tooltip.staff.mode.2", TextFormatting.GOLD+ClientProxy.configurator_mode.getDisplayName()+TextFormatting.GRAY));
-		l.add(I18n.format("tooltip.configurator.1", TextFormatting.GOLD+ClientProxy.configurator_filter.getDisplayName()+TextFormatting.GRAY));
-		l.add(I18n.format("tooltip.configurator.2", TextFormatting.GOLD+ClientProxy.configurator_path.getDisplayName()+TextFormatting.GRAY));
+		l.add(I18n.format("tooltip.staff.mode.2", TextFormatting.GOLD+ClientProxy.spirit_tablet_mode.getDisplayName()+TextFormatting.GRAY));
+		l.add(I18n.format("tooltip.configurator.1", TextFormatting.GOLD+ClientProxy.spirit_tablet_filter.getDisplayName()+TextFormatting.GRAY));
+		l.add(I18n.format("tooltip.configurator.2", TextFormatting.GOLD+ClientProxy.spirit_tablet_path.getDisplayName()+TextFormatting.GRAY));
 	}
 }

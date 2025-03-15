@@ -413,11 +413,11 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(Rituals.INFESTING = new NecronomiconInfestingRitual());
 		RitualRegistry.instance().registerRitual(Rituals.CURING = new NecronomiconCuringRitual());
 		RitualRegistry.instance().registerRitual(Rituals.MASS_ENCHANTING = new NecronomiconMassEnchantRitual());
-		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}, null,
-				new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)},
-				null, new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}, null,
-				new ItemStack[] {new ItemStack(ACItems.configurator_shard_0), new ItemStack(ACItems.configurator_shard_1), new ItemStack(ACItems.configurator_shard_2), new ItemStack(ACItems.configurator_shard_3)}};
-		RitualRegistry.instance().registerRitual(Rituals.SPIRIT_TABLET = new NecronomiconInfusionRitual("spiritTablet", 1, OreDictionary.WILDCARD_VALUE, 5000F, new ItemStack(ACItems.configurator), new ItemStack(ACItems.shadow_gem), spiritTabletOfferings));
+		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack[] {new ItemStack(ACItems.spirit_tablet_shard_0), new ItemStack(ACItems.spirit_tablet_shard_1), new ItemStack(ACItems.spirit_tablet_shard_2), new ItemStack(ACItems.spirit_tablet_shard_3)}, null,
+				new ItemStack[] {new ItemStack(ACItems.spirit_tablet_shard_0), new ItemStack(ACItems.spirit_tablet_shard_1), new ItemStack(ACItems.spirit_tablet_shard_2), new ItemStack(ACItems.spirit_tablet_shard_3)},
+				null, new ItemStack[] {new ItemStack(ACItems.spirit_tablet_shard_0), new ItemStack(ACItems.spirit_tablet_shard_1), new ItemStack(ACItems.spirit_tablet_shard_2), new ItemStack(ACItems.spirit_tablet_shard_3)}, null,
+				new ItemStack[] {new ItemStack(ACItems.spirit_tablet_shard_0), new ItemStack(ACItems.spirit_tablet_shard_1), new ItemStack(ACItems.spirit_tablet_shard_2), new ItemStack(ACItems.spirit_tablet_shard_3)}};
+		RitualRegistry.instance().registerRitual(Rituals.SPIRIT_TABLET = new NecronomiconInfusionRitual("spiritTablet", 1, OreDictionary.WILDCARD_VALUE, 5000F, new ItemStack(ACItems.spirit_tablet), new ItemStack(ACItems.shadow_gem), spiritTabletOfferings));
 		Object[] spiritAltarOfferings= new Object[] {Items.GOLD_INGOT, Items.GOLD_INGOT, Items.GOLD_INGOT, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone};
 		RitualRegistry.instance().registerRitual(Rituals.SPIRIT_ALTAR = new NecronomiconInfusionRitual("spiritAltar", 1, OreDictionary.WILDCARD_VALUE, 1000F, true, new ItemStack(ACBlocks.spirit_altar), new ItemStack(ACItems.shadow_gem), spiritAltarOfferings));
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.overworld_shoggoth_flesh), new ItemStack(ACItems.overworld_shoggoth_flesh),

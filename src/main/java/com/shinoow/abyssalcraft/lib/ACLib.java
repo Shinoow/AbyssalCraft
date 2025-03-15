@@ -37,7 +37,7 @@ public class ACLib {
 	public static final int rendingPedestalGuiID = 38;
 	public static final int stateTransformerGuiID = 39;
 	public static final int energyDepositionerGuiID = 40;
-	public static final int configuratorGuiID = 41;
+	public static final int spiritTabletGuiID = 41;
 	public static final int faceBookGuiID = 42;
 	public static final int sequentialBrewingStandGuiID = 43;
 }

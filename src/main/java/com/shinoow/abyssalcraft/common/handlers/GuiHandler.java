@@ -85,11 +85,11 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerSpellbook(ctx.player, ctx.getOffHand());
 			return null;
 		});
-		serverElements.put(ACLib.configuratorGuiID, ctx -> {
-			if(ctx.getMainHand().getItem() instanceof ItemConfigurator)
-				return new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getMainHand(), EnumHand.MAIN_HAND));
-			if(ctx.getOffHand().getItem() instanceof ItemConfigurator)
-				return new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getOffHand(), EnumHand.OFF_HAND));
+		serverElements.put(ACLib.spiritTabletGuiID, ctx -> {
+			if(ctx.getMainHand().getItem() instanceof ItemSpiritTablet)
+				return new ContainerSpiritTablet(ctx.player.inventory, new InventorySpiritTablet(ctx.getMainHand(), EnumHand.MAIN_HAND));
+			if(ctx.getOffHand().getItem() instanceof ItemSpiritTablet)
+				return new ContainerSpiritTablet(ctx.player.inventory, new InventorySpiritTablet(ctx.getOffHand(), EnumHand.OFF_HAND));
 			return null;
 		});
 		serverElements.put(ACLib.sequentialBrewingStandGuiID, ctx -> {
@@ -157,11 +157,11 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiSpellbook(new ContainerSpellbook(ctx.player, ctx.getMainHand()));
 			return null;
 		});
-		clientElements.put(ACLib.configuratorGuiID, ctx -> {
-			if(ctx.getMainHand().getItem() instanceof ItemConfigurator)
-				return new GuiConfigurator(new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getMainHand(), EnumHand.MAIN_HAND)));
-			if(ctx.getOffHand().getItem() instanceof ItemConfigurator)
-				return new GuiConfigurator(new ContainerConfigurator(ctx.player.inventory, new InventoryConfigurator(ctx.getOffHand(), EnumHand.OFF_HAND)));
+		clientElements.put(ACLib.spiritTabletGuiID, ctx -> {
+			if(ctx.getMainHand().getItem() instanceof ItemSpiritTablet)
+				return new GuiSpiritTablet(new ContainerSpiritTablet(ctx.player.inventory, new InventorySpiritTablet(ctx.getMainHand(), EnumHand.MAIN_HAND)));
+			if(ctx.getOffHand().getItem() instanceof ItemSpiritTablet)
+				return new GuiSpiritTablet(new ContainerSpiritTablet(ctx.player.inventory, new InventorySpiritTablet(ctx.getOffHand(), EnumHand.OFF_HAND)));
 			return null;
 		});
 		clientElements.put(ACLib.faceBookGuiID, ctx -> {

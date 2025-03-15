@@ -11,8 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui;
 
-import com.shinoow.abyssalcraft.common.inventory.ContainerConfigurator;
-import com.shinoow.abyssalcraft.common.inventory.InventoryConfigurator;
+import com.shinoow.abyssalcraft.common.inventory.ContainerSpiritTablet;
+import com.shinoow.abyssalcraft.common.inventory.InventorySpiritTablet;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.UpdateModeMessage;
 
@@ -22,17 +22,17 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiConfigurator extends GuiContainer
+public class GuiSpiritTablet extends GuiContainer
 {
 
-	private static final ResourceLocation iconLocation = new ResourceLocation("abyssalcraft:textures/gui/container/configurator.png");
+	private static final ResourceLocation iconLocation = new ResourceLocation("abyssalcraft:textures/gui/container/spirit_tablet.png");
 
-	private final InventoryConfigurator inventory;
+	private final InventorySpiritTablet inventory;
 
-	public GuiConfigurator(ContainerConfigurator container)
+	public GuiSpiritTablet(ContainerSpiritTablet container)
 	{
 		super(container);
-		inventory = container.getConfiguratorInventory();
+		inventory = container.getSpiritTabletInventory();
 	}
 
 	@Override

@@ -447,8 +447,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.CRAFTING_ABYSSALNOMICON_1 = new Page(13, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, new CraftingStack(ACItems.abyssalnomicon), NecronomiconText.CRAFTING_ABYSSALNOMICON_1);
 		Pages.CRAFTING_ABYSSALNOMICON_2 = new Page(14, NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 3, NecronomiconText.CRAFTING_ABYSSALNOMICON_2);
 
-		Pages.ITEM_TRANSPORT_TUT_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 1, new ItemStack(ACItems.configurator_shard_0), NecronomiconText.ITEM_TRANSPORT_TUT_1);
-		Pages.ITEM_TRANSPORT_TUT_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 1, new ItemStack(ACItems.configurator), NecronomiconText.ITEM_TRANSPORT_TUT_2);
+		Pages.ITEM_TRANSPORT_TUT_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 1, new ItemStack(ACItems.spirit_tablet_shard_0), NecronomiconText.ITEM_TRANSPORT_TUT_1);
+		Pages.ITEM_TRANSPORT_TUT_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 1, new ItemStack(ACItems.spirit_tablet), NecronomiconText.ITEM_TRANSPORT_TUT_2);
 		Pages.ITEM_TRANSPORT_TUT_3 = new Page(3, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 1, NecronomiconResources.ITEM_TRANSPORT_TUT_1, NecronomiconText.ITEM_TRANSPORT_TUT_3);
 		Pages.ITEM_TRANSPORT_TUT_4 = new Page(4, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 1, NecronomiconText.ITEM_TRANSPORT_TUT_4);
 		Pages.ITEM_TRANSPORT_TUT_5 = new Page(5, NecronomiconText.LABEL_INFORMATION_ITEM_TRANSPORT_SYSTEM, 1, NecronomiconText.ITEM_TRANSPORT_TUT_5);

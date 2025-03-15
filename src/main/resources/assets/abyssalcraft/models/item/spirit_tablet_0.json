@@ -1,0 +1,6 @@
+{
+	"parent": "abyssalcraft:item/spirit_tablet",
+	"textures": {
+		"layer1": "abyssalcraft:items/spirit_tablet/glyph_0"
+	}
+}

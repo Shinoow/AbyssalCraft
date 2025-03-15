@@ -22,7 +22,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 
-public class InventoryConfigurator implements IInventory
+public class InventorySpiritTablet implements IInventory
 {
 	private String name;
 
@@ -34,7 +34,7 @@ public class InventoryConfigurator implements IInventory
 	/**
 	 * @param itemstack - the ItemStack to which this inventory belongs
 	 */
-	public InventoryConfigurator(ItemStack stack, EnumHand hand)
+	public InventorySpiritTablet(ItemStack stack, EnumHand hand)
 	{
 		invItem = stack;
 		if (!stack.hasTagCompound())

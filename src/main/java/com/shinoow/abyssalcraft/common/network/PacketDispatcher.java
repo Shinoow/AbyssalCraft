@@ -78,7 +78,7 @@ public class PacketDispatcher
 		registerMessage(PrepareSyncMessage.class);
 		registerMessage(WindowPropertyMessage.class);
 		registerMessage(RitualStartMessage.class);
-		registerMessage(ConfiguratorMessage.class);
+		registerMessage(SpiritTabletMessage.class);
 		registerMessage(DisplayRoutesMessage.class);
 		registerMessage(ToggleStateMessage.class);
 		registerMessage(SyncNecromancyDataMessage.class);

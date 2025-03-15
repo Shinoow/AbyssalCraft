@@ -36,10 +36,10 @@ public class ACItems {
 	public static Item dreadlands_door;
 	public static Item coin;
 	public static Item token_of_jzahar;
-	public static Item configurator_shard_0;
-	public static Item configurator_shard_1;
-	public static Item configurator_shard_2;
-	public static Item configurator_shard_3;
+	public static Item spirit_tablet_shard_0;
+	public static Item spirit_tablet_shard_1;
+	public static Item spirit_tablet_shard_2;
+	public static Item spirit_tablet_shard_3;
 	public static Item lost_page;
 	public static Item scriptures_of_omniscience;
 
@@ -119,7 +119,7 @@ public class ACItems {
 	public static Item omothol_staff_of_rending;
 	public static Item interdimensional_cage;
 	public static Item silver_key;
-	public static Item configurator;
+	public static Item spirit_tablet;
 	public static Item book_of_many_faces;
 	public static Item small_crystal_bag;
 	public static Item medium_crystal_bag;

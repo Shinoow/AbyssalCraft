@@ -100,10 +100,10 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.dread_plague_antidote = new ItemAntidote("antidote.dread");
 		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setTranslationKey("door_dlt");
 		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadwood_door).setTranslationKey("door_drt");
-		ACItems.configurator_shard_0 = new ItemACBasic("configurator_shard_0");
-		ACItems.configurator_shard_1 = new ItemACBasic("configurator_shard_1");
-		ACItems.configurator_shard_2 = new ItemACBasic("configurator_shard_2");
-		ACItems.configurator_shard_3 = new ItemACBasic("configurator_shard_3");
+		ACItems.spirit_tablet_shard_0 = new ItemACBasic("configurator_shard_0");
+		ACItems.spirit_tablet_shard_1 = new ItemACBasic("configurator_shard_1");
+		ACItems.spirit_tablet_shard_2 = new ItemACBasic("configurator_shard_2");
+		ACItems.spirit_tablet_shard_3 = new ItemACBasic("configurator_shard_3");
 		ACItems.silver_key = new ItemGatewayKey(3, "silver_key");
 		ACItems.book_of_many_faces = new ItemFaceBook("face_book");
 		ACItems.lost_page = new ItemPage();
@@ -316,7 +316,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.abyssal_wasteland_staff_of_rending = new ItemStaffOfRending("drainstaff.aw", 1);
 		ACItems.dreadlands_staff_of_rending = new ItemStaffOfRending("drainstaff.dl", 2);
 		ACItems.omothol_staff_of_rending = new ItemStaffOfRending("drainstaff.omt", 3);
-		ACItems.configurator = new ItemConfigurator();
+		ACItems.spirit_tablet = new ItemSpiritTablet();
 
 		//Armor
 		ACItems.abyssalnite_helmet = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.HEAD, "ahelmet");
@@ -632,11 +632,11 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.darklands_oak_door, "door_dlt");
 		registerItem(ACItems.dreadlands_door, "door_drt");
 		registerItem(ACItems.charcoal, "charcoal");
-		registerItem(ACItems.configurator, "configurator");
-		registerItem(ACItems.configurator_shard_0, "configurator_shard_0");
-		registerItem(ACItems.configurator_shard_1, "configurator_shard_1");
-		registerItem(ACItems.configurator_shard_2, "configurator_shard_2");
-		registerItem(ACItems.configurator_shard_3, "configurator_shard_3");
+		registerItem(ACItems.spirit_tablet, "spirit_tablet");
+		registerItem(ACItems.spirit_tablet_shard_0, "spirit_tablet_shard_0");
+		registerItem(ACItems.spirit_tablet_shard_1, "spirit_tablet_shard_1");
+		registerItem(ACItems.spirit_tablet_shard_2, "spirit_tablet_shard_2");
+		registerItem(ACItems.spirit_tablet_shard_3, "spirit_tablet_shard_3");
 		registerItem(ACItems.silver_key, "silver_key");
 		registerItem(ACItems.book_of_many_faces, "face_book");
 		registerItem(ACItems.generic_meat, "generic_meat");

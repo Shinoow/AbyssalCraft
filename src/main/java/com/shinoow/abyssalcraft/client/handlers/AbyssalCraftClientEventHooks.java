@@ -31,7 +31,7 @@ import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellUtils;
 import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.blocks.BlockACSlab;
-import com.shinoow.abyssalcraft.common.items.ItemConfigurator;
+import com.shinoow.abyssalcraft.common.items.ItemSpiritTablet;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.*;
 import com.shinoow.abyssalcraft.init.BlockHandler;
@@ -275,46 +275,46 @@ public class AbyssalCraftClientEventHooks {
 				}
 			}
 		}
-		if(ClientProxy.configurator_mode.isPressed()) {
+		if(ClientProxy.spirit_tablet_mode.isPressed()) {
 			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
 			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
 			int mode1 = -1, mode2 = -1;
 
-			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator){
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.spirit_tablet){
 				if(!mainStack.hasTagCompound())
 					mainStack.setTagCompound(new NBTTagCompound());
 				mode1 = mainStack.getTagCompound().getInteger("Mode");
 				if(mode1 > -1){
 					mode1 = mode1 == 0 ? 1 : mode1 == 1 ? 2 : 0;
-					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + ItemConfigurator.getMode(mode1)));
+					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + ItemSpiritTablet.getMode(mode1)));
 				}
 			}
-			if(!offStack.isEmpty() && offStack.getItem() == ACItems.configurator){
+			if(!offStack.isEmpty() && offStack.getItem() == ACItems.spirit_tablet){
 				if(!offStack.hasTagCompound())
 					offStack.setTagCompound(new NBTTagCompound());
 				mode2 = offStack.getTagCompound().getInteger("Mode");
 				if(mode2 > -1){
 					mode2 = mode2 == 0 ? 1 : mode2 == 1 ? 2 : 0;
-					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + ItemConfigurator.getMode(mode2)));
+					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + ItemSpiritTablet.getMode(mode2)));
 				}
 			}
 
 			if(mode1 > -1 || mode2 > -1)
-				PacketDispatcher.sendToServer(new ConfiguratorMessage(mode1, mode2));
+				PacketDispatcher.sendToServer(new SpiritTabletMessage(mode1, mode2));
 		}
-		if(ClientProxy.configurator_filter.isPressed()) {
+		if(ClientProxy.spirit_tablet_filter.isPressed()) {
 			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
 			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
-			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator ||
-					!offStack.isEmpty() && offStack.getItem() == ACItems.configurator)
-				PacketDispatcher.sendToServer(new ConfiguratorMessage(true));
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.spirit_tablet ||
+					!offStack.isEmpty() && offStack.getItem() == ACItems.spirit_tablet)
+				PacketDispatcher.sendToServer(new SpiritTabletMessage(true));
 		}
-		if(ClientProxy.configurator_path.isPressed()) {
+		if(ClientProxy.spirit_tablet_path.isPressed()) {
 			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
 			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
-			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator ||
-					!offStack.isEmpty() && offStack.getItem() == ACItems.configurator) {
-				PacketDispatcher.sendToServer(new ConfiguratorMessage(true, 0));
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.spirit_tablet ||
+					!offStack.isEmpty() && offStack.getItem() == ACItems.spirit_tablet) {
+				PacketDispatcher.sendToServer(new SpiritTabletMessage(true, 0));
 				Minecraft.getMinecraft().player.sendMessage(new TextComponentTranslation("message.configurator.5"));
 			}
 		}
@@ -687,11 +687,11 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.darklands_oak_door, 0);
 		registerItemRender(ACItems.dreadlands_door, 0);
 		registerItemRender(ACItems.charcoal, 0);
-		registerItemRender(ACItems.configurator, 0);
-		registerItemRender(ACItems.configurator_shard_0, 0);
-		registerItemRender(ACItems.configurator_shard_1, 0);
-		registerItemRender(ACItems.configurator_shard_2, 0);
-		registerItemRender(ACItems.configurator_shard_3, 0);
+		registerItemRender(ACItems.spirit_tablet, 0);
+		registerItemRender(ACItems.spirit_tablet_shard_0, 0);
+		registerItemRender(ACItems.spirit_tablet_shard_1, 0);
+		registerItemRender(ACItems.spirit_tablet_shard_2, 0);
+		registerItemRender(ACItems.spirit_tablet_shard_3, 0);
 		registerItemRender(ACItems.silver_key, 0);
 		registerItemRender(ACItems.book_of_many_faces, 0);
 		registerItemRender(ACItems.generic_meat, 0);

@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.network.server;
 
 import java.io.IOException;
 
-import com.shinoow.abyssalcraft.common.inventory.ContainerConfigurator;
+import com.shinoow.abyssalcraft.common.inventory.ContainerSpiritTablet;
 import com.shinoow.abyssalcraft.common.inventory.ContainerStateTransformer;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractServerMessage;
 
@@ -51,7 +51,7 @@ public class UpdateModeMessage extends AbstractServerMessage<UpdateModeMessage> 
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		if(container == 0 && player.openContainer instanceof ContainerStateTransformer || container == 1 && player.openContainer instanceof ContainerConfigurator){
+		if(container == 0 && player.openContainer instanceof ContainerStateTransformer || container == 1 && player.openContainer instanceof ContainerSpiritTablet){
 			player.openContainer.enchantItem(player, mode);
 			player.openContainer.detectAndSendChanges();
 		}

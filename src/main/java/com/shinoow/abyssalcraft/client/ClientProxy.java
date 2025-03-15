@@ -84,7 +84,7 @@ public class ClientProxy extends CommonProxy {
 
 	private static final ModelDreadiumSamuraiArmor chestPlate = new ModelDreadiumSamuraiArmor(1.0f);
 	private static final ModelDreadiumSamuraiArmor leggings = new ModelDreadiumSamuraiArmor(0.5f);
-	public static KeyBinding staff_mode, use_cage, configurator_mode, configurator_filter, configurator_path;
+	public static KeyBinding staff_mode, use_cage, spirit_tablet_mode, spirit_tablet_filter, spirit_tablet_path;
 	private int particleCount;
 
 	@Override
@@ -162,15 +162,15 @@ public class ClientProxy extends CommonProxy {
 
 		staff_mode = new KeyBinding("key.staff_mode.desc", Keyboard.KEY_M, "key.abyssalcraft.category");
 		use_cage = new KeyBinding("key.use_cage.desc", Keyboard.KEY_N, "key.abyssalcraft.category");
-		configurator_mode = new KeyBinding("key.configurator_mode.desc", Keyboard.KEY_V, "key.abyssalcraft.category");
-		configurator_filter = new KeyBinding("key.configurator_filter.desc", Keyboard.KEY_B, "key.abyssalcraft.category");
-		configurator_path = new KeyBinding("key.configurator_path.desc", Keyboard.KEY_G, "key.abyssalcraft.category");
+		spirit_tablet_mode = new KeyBinding("key.configurator_mode.desc", Keyboard.KEY_V, "key.abyssalcraft.category");
+		spirit_tablet_filter = new KeyBinding("key.configurator_filter.desc", Keyboard.KEY_B, "key.abyssalcraft.category");
+		spirit_tablet_path = new KeyBinding("key.configurator_path.desc", Keyboard.KEY_G, "key.abyssalcraft.category");
 
 		ClientRegistry.registerKeyBinding(staff_mode);
 		ClientRegistry.registerKeyBinding(use_cage);
-		ClientRegistry.registerKeyBinding(configurator_mode);
-		ClientRegistry.registerKeyBinding(configurator_filter);
-		ClientRegistry.registerKeyBinding(configurator_path);
+		ClientRegistry.registerKeyBinding(spirit_tablet_mode);
+		ClientRegistry.registerKeyBinding(spirit_tablet_filter);
+		ClientRegistry.registerKeyBinding(spirit_tablet_path);
 	}
 
 	@Override

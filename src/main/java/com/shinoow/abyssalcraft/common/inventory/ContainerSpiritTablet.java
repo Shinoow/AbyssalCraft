@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
-import com.shinoow.abyssalcraft.common.items.ItemConfigurator;
+import com.shinoow.abyssalcraft.common.items.ItemSpiritTablet;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -20,14 +20,14 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerConfigurator extends Container
+public class ContainerSpiritTablet extends Container
 {
 	/** The Item Inventory for this Container */
-	private final InventoryConfigurator inventory;
+	private final InventorySpiritTablet inventory;
 
 	private int rows;
 
-	public ContainerConfigurator(InventoryPlayer inventoryPlayer, InventoryConfigurator inventoryItem)
+	public ContainerSpiritTablet(InventoryPlayer inventoryPlayer, InventorySpiritTablet inventoryItem)
 	{
 		inventory = inventoryItem;
 		rows = inventoryItem.getSizeInventory() / 9;
@@ -110,12 +110,12 @@ public class ContainerConfigurator extends Container
 	public ItemStack slotClick(int slot, int dragType, ClickType clickType, EntityPlayer player) {
 
 		if (slot >= 0 && getSlot(slot) != null && !getSlot(slot).getStack().isEmpty())
-			if(getSlot(slot).getStack().getItem() instanceof ItemConfigurator)
+			if(getSlot(slot).getStack().getItem() instanceof ItemSpiritTablet)
 				return ItemStack.EMPTY;
 		return super.slotClick(slot, dragType, clickType, player);
 	}
 
-	public InventoryConfigurator getConfiguratorInventory(){
+	public InventorySpiritTablet getSpiritTabletInventory(){
 		return inventory;
 	}
 }

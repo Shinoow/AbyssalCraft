@@ -137,7 +137,7 @@ public class StructureGraveyard extends WorldGenerator {
 								if(stack.isEmpty()) continue; // oh no!
 								anyLoot = true;
 								// fixed lower quantity for dimensional skins
-								if(!isConfiguratorShard(stack))
+								if(!isSpiritTabletShard(stack))
 									stack.setCount(!isSkin(stack) ? t.getSecond() : rand.nextInt(2) + 1);
 								((TileEntityChest) tile).setInventorySlotContents(t.getFirst(), stack);
 							}
@@ -156,15 +156,15 @@ public class StructureGraveyard extends WorldGenerator {
 
 		switch(rand.nextInt(3)) {
 		case 0:
-			return new ItemStack(ACItems.configurator_shard_0);
+			return new ItemStack(ACItems.spirit_tablet_shard_0);
 		case 1:
-			return new ItemStack(ACItems.configurator_shard_1);
+			return new ItemStack(ACItems.spirit_tablet_shard_1);
 		case 2:
-			return new ItemStack(ACItems.configurator_shard_2);
+			return new ItemStack(ACItems.spirit_tablet_shard_2);
 		case 3:
-			return new ItemStack(ACItems.configurator_shard_3);
+			return new ItemStack(ACItems.spirit_tablet_shard_3);
 		default:
-			return new ItemStack(ACItems.configurator_shard_0);
+			return new ItemStack(ACItems.spirit_tablet_shard_0);
 		}
 	}
 
@@ -174,9 +174,9 @@ public class StructureGraveyard extends WorldGenerator {
 				|| stack.getItem() == ACItems.skin_of_omothol;
 	}
 
-	private static boolean isConfiguratorShard(ItemStack stack) {
-		return stack.getItem() == ACItems.configurator_shard_0 || stack.getItem() == ACItems.configurator_shard_1
-				|| stack.getItem() == ACItems.configurator_shard_2 || stack.getItem() == ACItems.configurator_shard_3;
+	private static boolean isSpiritTabletShard(ItemStack stack) {
+		return stack.getItem() == ACItems.spirit_tablet_shard_0 || stack.getItem() == ACItems.spirit_tablet_shard_1
+				|| stack.getItem() == ACItems.spirit_tablet_shard_2 || stack.getItem() == ACItems.spirit_tablet_shard_3;
 	}
 
 	private List<ItemStack> getLoot(int dim) {

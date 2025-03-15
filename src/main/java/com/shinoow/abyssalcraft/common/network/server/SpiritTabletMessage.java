@@ -26,21 +26,21 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class ConfiguratorMessage extends AbstractServerMessage<ConfiguratorMessage> {
+public class SpiritTabletMessage extends AbstractServerMessage<SpiritTabletMessage> {
 
 	private int mode1, mode2;
 	private boolean openFilter, clearPath;
 
-	public ConfiguratorMessage(){}
+	public SpiritTabletMessage(){}
 
-	public ConfiguratorMessage(int mode1, int mode2) {
+	public SpiritTabletMessage(int mode1, int mode2) {
 		this.mode1 = mode1;
 		this.mode2 = mode2;
 		openFilter = false;
 		clearPath = false;
 	}
 
-	public ConfiguratorMessage(boolean openFilter) {
+	public SpiritTabletMessage(boolean openFilter) {
 		this.openFilter = openFilter;
 		clearPath = false;
 		mode1 = -1;
@@ -51,7 +51,7 @@ public class ConfiguratorMessage extends AbstractServerMessage<ConfiguratorMessa
 	 *
 	 * @param n Yes, this parameter does nothing
 	 */
-	public ConfiguratorMessage(boolean clearPath, int n) {
+	public SpiritTabletMessage(boolean clearPath, int n) {
 		this.clearPath = clearPath;
 		openFilter = false;
 		mode1 = -1;
@@ -80,28 +80,28 @@ public class ConfiguratorMessage extends AbstractServerMessage<ConfiguratorMessa
 		if(clearPath) {
 			ItemStack mainStack = player.getHeldItem(EnumHand.MAIN_HAND);
 			ItemStack offStack = player.getHeldItem(EnumHand.OFF_HAND);
-			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator) {
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.spirit_tablet) {
 				if(!mainStack.hasTagCompound())
 					mainStack.setTagCompound(new NBTTagCompound());
 				mainStack.getTagCompound().removeTag("Path");
 			}
-			if(!offStack.isEmpty() && offStack.getItem() == ACItems.configurator) {
+			if(!offStack.isEmpty() && offStack.getItem() == ACItems.spirit_tablet) {
 				if(!offStack.hasTagCompound())
 					offStack.setTagCompound(new NBTTagCompound());
 				offStack.getTagCompound().removeTag("Path");
 			}
 		}
 		else if(openFilter)
-			player.openGui(AbyssalCraft.instance, ACLib.configuratorGuiID, player.world, (int) player.posX, (int) player.posY, (int) player.posZ);
+			player.openGui(AbyssalCraft.instance, ACLib.spiritTabletGuiID, player.world, (int) player.posX, (int) player.posY, (int) player.posZ);
 		else {
 			ItemStack mainStack = player.getHeldItem(EnumHand.MAIN_HAND);
 			ItemStack offStack = player.getHeldItem(EnumHand.OFF_HAND);
-			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.configurator && mode1 > -1) {
+			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.spirit_tablet && mode1 > -1) {
 				if(!mainStack.hasTagCompound())
 					mainStack.setTagCompound(new NBTTagCompound());
 				mainStack.getTagCompound().setInteger("Mode", mode1);
 			}
-			if(!offStack.isEmpty() && offStack.getItem() == ACItems.configurator && mode2 > -1) {
+			if(!offStack.isEmpty() && offStack.getItem() == ACItems.spirit_tablet && mode2 > -1) {
 				if(!offStack.hasTagCompound())
 					offStack.setTagCompound(new NBTTagCompound());
 				offStack.getTagCompound().setInteger("Mode", mode2);

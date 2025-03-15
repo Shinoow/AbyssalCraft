@@ -1,6 +1,0 @@
-{
-	"parent": "abyssalcraft:item/configurator",
-	"textures": {
-		"layer1": "abyssalcraft:items/configurator/glyph_1"
-	}
-}
