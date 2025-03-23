@@ -203,6 +203,14 @@ message.configurator.error.1=You can't create a configuration without a path!
 message.configurator.error.2=Desination block doesn't have an inventory!
 message.configurator.error.3=This Block doesn't support configurations!
 message.configurator.error.4=You're not allowed to interact with this block!
+message.ritual.missingsacrifice=This ritual requires a sacrifice
+message.ritual.massenchanttamper=One of the books has been tampered with in an anvil, replace it to perform the ritual.
+message.ritual.notsamechunk=All blocks need to be in the same chunk. The highlighted are not.
+message.spiritaltar.1=These are the current paths
+message.spiritaltar.2=Searching for nearby containers
+message.spiritaltar.3=Summoned spirits
+message.spiritaltar.4=Banished spirits
+message.spiritaltar.5=Cleared all paths
 
 #容器物品欄
 container.abyssalcraft.crate=板條箱

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystallizer;
@@ -407,6 +408,10 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 			if (item == Items.BLAZE_POWDER) return 1200;
 			if (item == Items.BLAZE_ROD) return 2400;
 			if (item == ACItems.methane) return 10000;
+			if (item == ACItems.carbon_cluster) return 1600;
+			if (item == ACItems.dense_carbon_cluster) return 12800;
+			if (item == ACItems.crystal && par1ItemStack.getMetadata() == 3) return 200;
+			if (item == Item.getItemFromBlock(ACBlocks.crystal_cluster) && par1ItemStack.getMetadata() == 3) return 1800;
 			return 0;
 		}
 	}

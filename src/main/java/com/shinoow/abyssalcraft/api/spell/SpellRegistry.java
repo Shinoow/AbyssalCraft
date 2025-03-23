@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -13,13 +13,16 @@ package com.shinoow.abyssalcraft.api.spell;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -33,6 +36,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class SpellRegistry {
 
 	private final List<Spell> spells = new ArrayList<>();
+	private final List<ItemStack> scrolls = new ArrayList<>();
 
 	private final Logger logger = LogManager.getLogger("SpellRegistry");
 
@@ -81,7 +85,7 @@ public class SpellRegistry {
 				if(spell.getParent() == null && (!parchment.hasTagCompound() || !parchment.getTagCompound().hasKey("Spell")) ||
 				spell.getParent() != null && spell.getParent().getUnlocalizedName().equals(parchment.getTagCompound().getString("Spell")))
 					if(spell.getParchment().isEmpty() || APIUtils.areStacksEqual(parchment, spell.getParchment()))
-						return parchment.getItem() instanceof IScroll && ((IScroll) parchment.getItem()).getScrollType(parchment).getQuality() >= spell.getScrollType().getQuality();
+						return SpellUtils.getScrollType(parchment).getQuality() >= spell.getScrollType().getQuality();
 						return false;
 	}
 
@@ -95,5 +99,32 @@ public class SpellRegistry {
 		}
 
 		return ItemStack.EMPTY;
+	}
+
+	/**
+	 * Add a scroll to the list of scrolls to display<br>
+	 * in the Necronomicon for compatible spells
+	 * @param scroll Item implementing IScroll
+	 */
+	public void addScroll(Item scroll) {
+		addScroll(new ItemStack(scroll));
+	}
+
+	/**
+	 * Add a scroll to the list of scrolls to display<br>
+	 * in the Necronomicon for compatible spells
+	 * @param scroll ItemStack implementing IScroll
+	 */
+	public void addScroll(ItemStack scroll) {
+		if(scroll.getItem() instanceof IScroll)
+			scrolls.add(scroll);
+	}
+
+	/**
+	 * Grabs a list of all scroll items
+	 */
+	public List<ItemStack> getScrolls(ScrollType scrollType){
+		return scrolls.stream().filter(s -> SpellUtils.getScrollType(s).getQuality() >= scrollType.getQuality())
+				.collect(Collectors.toList());
 	}
 }

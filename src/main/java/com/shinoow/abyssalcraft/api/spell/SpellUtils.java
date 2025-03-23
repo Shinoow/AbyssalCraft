@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.api.spell;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -84,7 +85,16 @@ public class SpellUtils {
 	 * @param player Player attempting to cast the spell
 	 */
 	public static void castChargingSpell(ItemStack stack, World world, EntityPlayer player) {
-		Spell spell = getSpell(stack);
+		castChargingSpell(getSpell(stack), world, player);
+	}
+
+	/**
+	 * Attempts to cast a charging spell
+	 * @param spell Spell begin cast (if present)
+	 * @param world Current World
+	 * @param player Player attempting to cast the spell
+	 */
+	public static void castChargingSpell(@Nullable Spell spell, World world, EntityPlayer player) {
 		if(spell != null)
 			if(spell.requiresCharging() && spell.canCastSpell(world, player.getPosition(), player)
 					&& hasEnoughPE(player, spell.getReqEnergy())){
@@ -101,7 +111,18 @@ public class SpellUtils {
 	 * @param hand Current hand
 	 */
 	public static void castInstantSpell(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
-		Spell spell = getSpell(stack);
+		castInstantSpell(getSpell(stack), world, player, hand);
+	}
+
+	/**
+	 * Attempts to cast an instant spell
+	 * @param spell Spell begin cast (if present)
+	 * @param scrollType Rarity of scroll casting spell
+	 * @param world Current World
+	 * @param player Player attempting to cast the spell
+	 * @param hand Current hand
+	 */
+	public static void castInstantSpell(Spell spell, World world, EntityPlayer player, EnumHand hand) {
 		if(spell != null)
 			if(!spell.requiresCharging()){
 				if(spell.canCastSpell(world, player.getPosition(), player) && hasEnoughPE(player, spell.getReqEnergy())){
@@ -136,5 +157,13 @@ public class SpellUtils {
 	public static int getSpellColor(ItemStack stack) {
 		Spell spell = getSpell(stack);
 		return spell != null ? spell.getColor() : 16777215;
+	}
+
+	/**
+	 * Attempts to fetch the scroll type of an ItemStack
+	 */
+	public static ScrollType getScrollType(ItemStack parchment) {
+		if(!(parchment.getItem() instanceof IScroll)) return ScrollType.NONE;
+		return ((IScroll) parchment.getItem()).getScrollType(parchment);
 	}
 }

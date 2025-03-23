@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,8 +14,8 @@ package com.shinoow.abyssalcraft.common.spells;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
-import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.Spell;
+import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone.EnumCobblestoneType;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
@@ -35,7 +35,7 @@ public class EntropySpell extends Spell {
 
 	public EntropySpell() {
 		super("entropy", 0, Items.COAL, new ItemStack(ACBlocks.cobblestone, 1, 0));
-		setParchment(new ItemStack(ACItems.scroll, 1, 3));
+		setScrollType(ScrollType.GREATER);
 		setColor(0x171f68);
 	}
 

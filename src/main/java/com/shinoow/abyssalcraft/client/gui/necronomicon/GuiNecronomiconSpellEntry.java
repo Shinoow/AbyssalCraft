@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -37,6 +37,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 	private ButtonHome buttonHome;
 	private GuiNecronomicon parent;
 	private List<Spell> spells = new ArrayList<>();
+	private List<ItemStack> scrolls = new ArrayList<>();
 
 	public GuiNecronomiconSpellEntry(int bookType, GuiNecronomicon gui){
 		super(bookType);
@@ -84,6 +85,8 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		buttonPreviousPageLong.visible = currTurnup > 4;
 		buttonDone.visible = true;
 		buttonHome.visible = true;
+		scrolls.clear();
+		scrolls = SpellRegistry.instance().getScrolls(spells.get(currTurnup).getScrollType());
 	}
 
 	@Override
@@ -122,7 +125,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String title = spell.getLocalizedName();
-		fontRenderer.drawSplitString(title, k + 20, b0 + 16, 116, 0xC40000);
+		fontRenderer.drawSplitString(title, k + 17, b0 + 16, 116, 0xC40000);
 
 		writeText(1, "PE per cast: " + spell.getReqEnergy() + " PE", 125);
 		writeText(1, "Spell Type: "+ (spell.requiresCharging() ? "Charging" : "Instant"), 135);
@@ -145,7 +148,9 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 		renderItem(k + 45, b0 + 91, offerings[3], x, y);
 		renderItem(k + 33, b0 + 62, offerings[4], x, y);
 		//center
-		renderItem(k + 58, b0 + 66, spell.getParchment(), x, y);
+		if(!spell.getParchment().isEmpty())
+			renderItem(k + 58, b0 + 66, spell.getParchment(), x, y);
+		else renderObject(k + 58, b0 + 66, scrolls, x, y);
 
 		renderTooltip(x, y);
 	}

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -55,11 +55,12 @@ public class UpgradeKitRecipes {
 	}
 
 	public ItemStack getUpgrade(ItemUpgradeKit kit, ItemStack input){
-		return upgrades.get(kit).entrySet().stream()
+		ItemStack upgrade = upgrades.get(kit).entrySet().stream()
 				.filter(e -> APIUtils.areStacksEqual(input, e.getKey()))
 				.map(Entry::getValue)
 				.findFirst()
 				.orElse(ItemStack.EMPTY);
+		return upgrade.copy();
 	}
 
 	public Map<ItemUpgradeKit, Map<ItemStack, ItemStack>> getAllUpgrades(){

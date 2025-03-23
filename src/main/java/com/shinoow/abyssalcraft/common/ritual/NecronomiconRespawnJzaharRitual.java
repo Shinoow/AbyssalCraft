@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -48,7 +48,7 @@ public class NecronomiconRespawnJzaharRitual extends NecronomiconRitual {
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
 		StructureJzaharTemple temple = new StructureJzaharTemple();
 		temple.generate(world, world.rand, new BlockPos(4, 53, 7));
-		RitualUtil.tryAltar(world, pos, 4);
+		RitualUtil.tryAltar(world, pos, 4, player);
 		world.getChunk(pos).markDirty();
 		SpecialTextUtil.JzaharGroup(world, I18n.translateToLocalFormatted("message.jzahar.respawn", player.getName()));
 	}

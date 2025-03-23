@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -27,7 +27,7 @@ public class SpellEnum {
 	 */
 	public enum ScrollType {
 
-		BASIC(0), LESSER(1), MODERATE(2), GREATER(3), UNIQUE(4);
+		NONE(-1),BASIC(0), LESSER(1), MODERATE(2), GREATER(3), UNIQUE(4);
 		private int quality;
 
 		private ScrollType(int quality){

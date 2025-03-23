@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -94,7 +94,7 @@ public class NecromancyWorldSavedData extends WorldSavedData {
 
 	private void storeDataInternal(String name, NBTTagCompound data)
 	{
-		if(this.data.size() == 5)//TODO considering the list is shared, maybe remove this limitation?
+		if(this.data.size() == 20)
 			this.data.remove(0);
 		this.data.add(new Tuple(name, data));
 	}

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -32,6 +32,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
@@ -59,7 +60,12 @@ public class NecronomiconMassEnchantRitual extends NecronomiconRitual {
 			if(altar.getItem().getItem() == Items.BOOK && !ACConfig.enchantBooks)
 				return false;
 			if(altar.getItem().isItemEnchantable()) {
-				books = altar.getPedestals().stream().map(IRitualPedestal::getItem).filter(i -> i.getRarity() == EnumRarity.UNCOMMON).collect(Collectors.toList());
+				books = altar.getPedestals().stream().map(IRitualPedestal::getItem).filter(i -> i.getItem().getForgeRarity(i) == EnumRarity.UNCOMMON).collect(Collectors.toList());
+
+				if(!ACConfig.enchantMergedBooks && books.stream().anyMatch(i -> i.hasTagCompound() && i.getTagCompound().hasKey("RepairCost"))) {
+					player.sendStatusMessage(new TextComponentTranslation("message.ritual.massenchanttamper"), true);
+					return false;
+				}
 
 				return books.size() == 8;
 			}

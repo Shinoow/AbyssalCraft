@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -62,13 +62,13 @@ public class EntityShubOffspring extends EntityMob {
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return rand.nextInt(5) == 0 ? SoundEvents.ENTITY_GHAST_HURT : SoundEvents.ENTITY_SHEEP_AMBIENT;
+		return SoundEvents.ENTITY_SHEEP_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source)
 	{
-		return rand.nextBoolean() ? SoundEvents.ENTITY_GHAST_HURT : SoundEvents.ENTITY_SHEEP_HURT;
+		return SoundEvents.ENTITY_SHEEP_HURT;
 	}
 
 	@Override

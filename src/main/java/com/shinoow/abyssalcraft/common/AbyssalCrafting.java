@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -649,7 +649,7 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("shubniggurathStatue", 4, -1, 20000F, true, new ItemStack(ACBlocks.statue, 1, 6), new ItemStack(ACBlocks.stone, 1, 7), shubniggurathofferings));
 		Object[] psdlofferings = new Object[]{new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1), new ItemStack(ACItems.essence, 1, 1)};
-		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerStone", 4, ACLib.dreadlands_id, 5000F, new ItemStack(ACBlocks.dreadlands_infused_powerstone), ACBlocks.coralium_infused_stone, psdlofferings));
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("powerStone", 2, ACLib.dreadlands_id, 5000F, new ItemStack(ACBlocks.dreadlands_infused_powerstone), ACBlocks.coralium_infused_stone, psdlofferings));
 		Object[] ethofferings = new Object[]{ACItems.ethaxium_brick, ACItems.ethaxium_brick, ACItems.life_crystal, ACItems.ethaxium_brick, ACItems.ethaxium_brick};
 		RitualRegistry.instance().registerRitual(new NecronomiconPurgingRitual());
 		RitualRegistry.instance().registerRitual(new NecronomiconCreationRitual("ethaxiumIngot", 3, ACLib.omothol_id, 1000F, new ItemStack(ACItems.ethaxium_ingot), ethofferings));
@@ -812,10 +812,6 @@ public class AbyssalCrafting {
 			SpellRegistry.instance().registerSpell(new OozeRemovalSpell());
 		if(ACConfig.teleport_hostile_spell)
 			SpellRegistry.instance().registerSpell(new TeleportHostilesSpell());
-		if(ACConfig.display_routes_spell)
-			SpellRegistry.instance().registerSpell(new DisplayRoutesSpell());
-		if(ACConfig.toggle_state_spell)
-			SpellRegistry.instance().registerSpell(new ToggleStateSpell());
 		if(ACConfig.floating_spell)
 			SpellRegistry.instance().registerSpell(new FloatingSpell());
 		if(ACConfig.teleport_home_spell)

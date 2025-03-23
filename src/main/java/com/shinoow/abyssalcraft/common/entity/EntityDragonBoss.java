@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -41,10 +41,8 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional.Interface;
 
-@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
-public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICoraliumEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues
+public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICoraliumEntity
 {
 
 	public double targetX;
@@ -689,11 +687,5 @@ public class EntityDragonBoss extends EntityMob implements IEntityMultiPart, ICo
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.UNDEAD;
-	}
-
-	@Override
-	public boolean canBeTurnedToStone() {
-
-		return false;
 	}
 }

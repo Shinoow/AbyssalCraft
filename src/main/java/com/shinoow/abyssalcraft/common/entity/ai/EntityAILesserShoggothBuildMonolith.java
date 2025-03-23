@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -51,7 +51,7 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 
 		if(ACConfig.monolithBuildingCooldown == 0 || shoggoth.isChild() || shoggoth.isAssisting || shoggoth.isBuilding)
 			return false;
-		else if((shoggoth.getMonolithTimer() < ACConfig.monolithBuildingCooldown) || (world.getEntitiesWithinAABB(shoggoth.getClass(), shoggoth.getEntityBoundingBox().grow(16D, 16D, 16D), e -> !e.equals(shoggoth) && !e.isAssisting && !e.isBuilding).size() < 3))
+		else if(shoggoth.getMonolithTimer() < ACConfig.monolithBuildingCooldown || world.getEntitiesWithinAABB(shoggoth.getClass(), shoggoth.getEntityBoundingBox().grow(16D, 16D, 16D), e -> !e.equals(shoggoth) && !e.isAssisting && !e.isBuilding).size() < 3)
 			return false;
 		else {
 

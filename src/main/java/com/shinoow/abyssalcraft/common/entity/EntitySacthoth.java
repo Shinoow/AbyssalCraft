@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -52,12 +52,10 @@ import net.minecraft.world.*;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
-public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
+public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(EntitySacthoth.class, DataSerializers.BYTE);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
@@ -641,11 +639,5 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity, com.git
 			attribute.applyModifier(attackDamageBoost);
 
 		return par1EntityLivingData;
-	}
-
-	@Override
-	public boolean canBeTurnedToStone() {
-
-		return false;
 	}
 }

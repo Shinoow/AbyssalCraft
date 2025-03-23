@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -54,12 +54,10 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
-import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Interface(iface = "com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues", modid = "iceandfire")
-public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, IEntityMultiPart, com.github.alexthe666.iceandfire.entity.IBlacklistedFromStatues {
+public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, IEntityMultiPart {
 
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityLesserShoggoth.class, DataSerializers.BYTE);
 	private static final DataParameter<Boolean> CHILD = EntityDataManager.createKey(EntityLesserShoggoth.class, DataSerializers.BOOLEAN);
@@ -706,11 +704,5 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 		{
 			this(par2);
 		}
-	}
-
-	@Override
-	public boolean canBeTurnedToStone() {
-
-		return false;
 	}
 }

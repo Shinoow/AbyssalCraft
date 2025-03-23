@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -376,6 +376,7 @@ public class InitHandler implements ILifeCycleHandler {
 		evilAnimalNewMoonSpawning = cfg.get(Configuration.CATEGORY_GENERAL, "Evil Animal New Moon Spawning", true, "Toggles whether or not Evil Animals only spawn at night during a new moon.").getBoolean();
 		curingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		itemTransportBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Item Transportation System Blacklist", new String[0], "Tile Entities added to this list will not be usable with the Item Transportation System (eg. you can't move Items from them). Format: modid:name").getStringList();
+		enchantMergedBooks = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Merged Books", true, "Toggles whether or not you can use Enchanted Books that have been merged on an Anvil in the Mass Enchantment ritual.").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 4, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 4, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -502,8 +503,6 @@ public class InitHandler implements ILifeCycleHandler {
 		undeath_to_dust_spell = cfg.get("spells", "Undeath to Dust", true, "Set to false to disable the Undeath to Dust spell.").getBoolean();
 		ooze_removal_spell = cfg.get("spells", "Ooze Removal", true, "Set to false to disable the Ooze Removal spell.").getBoolean();
 		teleport_hostile_spell = cfg.get("spells", "Sacrificial Interdiction", true, "Set to false to disable the Sacrificial Interdiction spell.").getBoolean();
-		display_routes_spell = cfg.get("spells", "Display Routes", true, "Set to false to disable the Display Routes spell.").getBoolean();
-		toggle_state_spell = cfg.get("spells", "Toll The Bell", true, "Set to false to disable the Toll The Bell spell.").getBoolean();
 		floating_spell = cfg.get("spells", "Floating", true, "Set to false to disable the Floating spell.").getBoolean();
 		teleport_home_spell = cfg.get("spells", "Teleport Home", true, "Set to false to disable the Teleport Home spell.").getBoolean();
 

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2024 Shinoow.
+ * Copyright (c) 2012 - 2025 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -77,7 +77,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	public EnumActionResult onItemUse(EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(player.isSneaking())
 			if(!(w.getTileEntity(pos) instanceof IRitualAltar)){
-				if(RitualUtil.tryAltar(w, pos, bookType) || StructureHandler.instance().tryFormStructure(w, pos, bookType, player)){
+				if(RitualUtil.tryAltar(w, pos, bookType, player) || StructureHandler.instance().tryFormStructure(w, pos, bookType, player)){
 					w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);
 					//						player.addStat(ACAchievements.ritual_altar, 1);
 					return EnumActionResult.SUCCESS;
