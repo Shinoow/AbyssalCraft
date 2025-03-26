@@ -31,7 +31,7 @@ public class GuiSpellbook extends GuiContainer {
 	public GuiSpellbook(ContainerSpellbook spellbook) {
 		super(spellbook);
 		this.spellbook = spellbook;
-		ySize = 256;
+		ySize = 238;
 	}
 
 	@Override
@@ -47,14 +47,14 @@ public class GuiSpellbook extends GuiContainer {
 	{
 		IEnergyContainerItem container = (IEnergyContainerItem)spellbook.book.getItem();
 		String s = String.format("%d/%d PE", (int)container.getContainedEnergy(spellbook.book), container.getMaxEnergy(spellbook.book));
-		fontRenderer.drawString(s, 15, 15, 4210752);
+		fontRenderer.drawString(s, 15, 120, 4210752);
 		fontRenderer.drawString(I18n.format("container.inventory"), 6, ySize - 92, 4210752);
 
 		Spell spell = spellbook.currentSpell;
 
-		fontRenderer.drawString("Spell name: "+TextFormatting.AQUA+(spell != null && spellbook.isUnlocked(spell) ? spell.getLocalizedName() : ""), 15, 30, 4210752);
-		fontRenderer.drawString("PE per cast: "+(spell != null && spellbook.isUnlocked(spell) ? (int)spell.getReqEnergy() : ""), 15, 40, 4210752);
-		fontRenderer.drawString("Spell type: "+TextFormatting.GOLD+(spell != null && spellbook.isUnlocked(spell) ? spell.requiresCharging() ? "Charging" : "Instant" : ""), 15, 50, 4210752);
+		fontRenderer.drawString("Spell name: "+TextFormatting.AQUA+(spell != null && spellbook.isUnlocked(spell) ? spell.getLocalizedName() : ""), 15, 15, 4210752);
+		fontRenderer.drawString("PE per cast: "+(spell != null && spellbook.isUnlocked(spell) ? (int)spell.getReqEnergy() : ""), 15, 25, 4210752);
+		fontRenderer.drawString("Spell type: "+TextFormatting.GOLD+(spell != null && spellbook.isUnlocked(spell) ? spell.requiresCharging() ? "Charging" : "Instant" : ""), 15, 35, 4210752);
 	}
 
 	@Override

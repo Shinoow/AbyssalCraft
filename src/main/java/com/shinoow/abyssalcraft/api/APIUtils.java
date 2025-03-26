@@ -127,6 +127,16 @@ public class APIUtils {
 	}
 
 	/**
+	 * Create an array of a specific size containing a specific Object
+	 */
+	public static Object[] makeArrayOf(Object stack, int size) {
+		Object[] array = new Object[size];
+		for(int i = 0; i < size; i++)
+			array[i] = stack;
+		return array;
+	}
+
+	/**
 	 * Compares an ItemStack to an Object
 	 * @param stack ItemStack to compare
 	 * @param obj Object to compare

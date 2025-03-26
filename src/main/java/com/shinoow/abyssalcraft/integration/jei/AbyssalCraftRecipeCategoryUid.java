@@ -26,4 +26,6 @@ public class AbyssalCraftRecipeCategoryUid {
 	public static final String RENDING = "abyssalcraft.rending";
 	public static final String UPGRADE = "abyssalcraft.upgrade";
 	public static final String MATERIALIZATION = "abyssalcraft.materialization";
+	public static final String CREATION_RITUAL = "abyssalcraft.creationritual";
+	public static final String TRANSFORMATION_RITUAL = "abyssalcraft.transformationritual";
 }

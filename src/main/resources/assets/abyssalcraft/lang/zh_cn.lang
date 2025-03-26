@@ -234,8 +234,10 @@ container.abyssalcraft.transmutator.nei=嬗变化
 container.abyssalcraft.engraver.nei=铸币雕版
 container.abyssalcraft.materializer.nei=物质化
 container.abyssalcraft.rituals.nei=死灵之书仪式
+container.abyssalcraft.creationrituals.nei=Creation Ritual
 container.abyssalcraft.rending.nei=撕裂法杖
 container.abyssalcraft.upgrade.nei=升级套件
+container.abyssalcraft.transformationrituals.jei=Transformation Ritual
 
 #JEI整合
 gui.acjei.category.fuel.transmutator=嬗变器燃料
@@ -823,6 +825,8 @@ ac.ritual.curing=治愈仪式
 ac.ritual.curing.desc=通过放置4瓶恐惧瘟疫解药，你治愈了一片区域的恐惧瘟疫和恐惧之地，恢复了它们原来的面貌。地形最接近的非恐惧之地生物群系将会取代恐惧之地的位置。
 ac.ritual.spiritTablet=灵魂石板
 ac.ritual.spiritTablet.desc=一块灵魂石板可通过将4个灵魂石板碎片注入生命结晶来制作。它是一种工具，允许你使物品自主移动，以在方块间转移物品。阅读死灵之书奥穆索章节的相关内容以获取更多信息。
+ac.ritual.ethaxium=Ethaxium
+ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you transform the essence of the presented End Stone into Ethaxium
 
 #Spells
 ac.spell.lifedrain=生命吸取

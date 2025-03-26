@@ -16,56 +16,36 @@ import java.util.*;
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.api.APIUtils;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.integration.jei.JEIUtils;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class RitualRecipeWrapper implements IRecipeWrapper {
 
 	private final Object[] offerings;
 	private final Object sacrifice;
-	private final ItemStack output;
 	private final int bookType;
 	private final NecronomiconRitual ritual;
 	private Map<Integer, String> dimToString = Maps.newHashMap();
 
-	public RitualRecipeWrapper(@Nonnull NecronomiconCreationRitual ritual){
+	public RitualRecipeWrapper(@Nonnull NecronomiconRitual ritual){
 		if(ritual.getOfferings().length < 8){
 			offerings = new Object[8];
 			for(int i = 0; i < ritual.getOfferings().length; i++)
 				offerings[i] = ritual.getOfferings()[i];
 		}else offerings = ritual.getOfferings();
 		sacrifice = ritual.getSacrifice();
-		output = ritual.getItem();
 		bookType = ritual.getBookType();
 		this.ritual = ritual;
-	}
-
-	public Object[] getOfferings(){
-		return offerings;
-	}
-
-	public Object getSacrifice(){
-		return sacrifice;
-	}
-
-	public int getBookType(){
-		return bookType;
-	}
-
-	public List<ItemStack> getOutputs(){
-		return Collections.singletonList(output);
 	}
 
 	@Override
@@ -92,47 +72,15 @@ public class RitualRecipeWrapper implements IRecipeWrapper {
 		return dimToString.get(dim);
 	}
 
-	private ItemStack getItem(int par1){
-		switch(par1){
-		case 0:
-			return new ItemStack(ACItems.necronomicon);
-		case 1:
-			return new ItemStack(ACItems.abyssal_wasteland_necronomicon);
-		case 2:
-			return new ItemStack(ACItems.dreadlands_necronomicon);
-		case 3:
-			return new ItemStack(ACItems.omothol_necronomicon);
-		case 4:
-			return new ItemStack(ACItems.abyssalnomicon);
-		default:
-			return new ItemStack(ACItems.necronomicon);
-		}
-	}
-
-	private boolean list(Object obj){
-		return obj == null ? false : obj instanceof ItemStack[] || obj instanceof String || obj instanceof List;
-	}
-
-	private List<ItemStack> getList(Object obj){
-		if(obj instanceof ItemStack[])
-			return Arrays.asList((ItemStack[])obj);
-		if(obj instanceof String)
-			return OreDictionary.getOres((String)obj);
-		if(obj instanceof List)
-			return (List)obj;
-		return Collections.emptyList();
-	}
-
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 
 		List<List<ItemStack>> input = new ArrayList<>();
 
 		for(Object obj : offerings)
-			input.add(list(obj) ? getList(obj) : Collections.singletonList(APIUtils.convertToStack(obj)));
-		input.add(Collections.singletonList(APIUtils.convertToStack(sacrifice)));
-		input.add(Collections.singletonList(getItem(bookType)));
-		ingredients.setInputLists(ItemStack.class, input);
-		ingredients.setOutput(ItemStack.class, output);
+			input.add(JEIUtils.parseAsList(obj));
+		input.add(JEIUtils.parseAsList(sacrifice));
+		input.add(Collections.singletonList(JEIUtils.getItem(bookType)));
+		ingredients.setInputLists(VanillaTypes.ITEM, input);
 	}
 }

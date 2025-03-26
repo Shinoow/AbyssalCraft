@@ -11,18 +11,21 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.integration.jei;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.ImmutableList;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
 
 import mezz.jei.api.ingredients.IIngredientRegistry;
+import mezz.jei.api.ingredients.VanillaTypes;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Utility class for handling some stuff in regards to JEI.<br>
@@ -52,7 +55,7 @@ public class JEIUtils {
 		List<ItemStack> fuelsTMutable = new ArrayList<>();
 		List<ItemStack> fuelsCMutable = new ArrayList<>();
 
-		for(ItemStack stack : registry.getAllIngredients(ItemStack.class)){
+		for(ItemStack stack : registry.getAllIngredients(VanillaTypes.ITEM)){
 			addItemStack(stack, FuelType.TRANSMUTATOR, fuelsTMutable);
 			addItemStack(stack, FuelType.CRYSTALLIZER, fuelsCMutable);
 		}
@@ -87,5 +90,45 @@ public class JEIUtils {
 		default:
 			break;
 		}
+	}
+//
+//	public static String getDimension(int dim){
+//
+//		return dim == OreDictionary.WILDCARD_VALUE ? ANYWHERE : DimensionDataRegistry.instance().getDimensionName(dim);
+//	}
+
+	public static ItemStack getItem(int par1){
+		switch(par1){
+		case 0:
+			return new ItemStack(ACItems.necronomicon);
+		case 1:
+			return new ItemStack(ACItems.abyssal_wasteland_necronomicon);
+		case 2:
+			return new ItemStack(ACItems.dreadlands_necronomicon);
+		case 3:
+			return new ItemStack(ACItems.omothol_necronomicon);
+		case 4:
+			return new ItemStack(ACItems.abyssalnomicon);
+		default:
+			return new ItemStack(ACItems.necronomicon);
+		}
+	}
+
+	public static boolean list(Object obj){
+		return obj == null ? false : obj instanceof ItemStack[] || obj instanceof String || obj instanceof List;
+	}
+
+	public static List<ItemStack> getList(Object obj){
+		if(obj instanceof ItemStack[])
+			return Arrays.asList((ItemStack[])obj);
+		if(obj instanceof String)
+			return OreDictionary.getOres((String)obj);
+		if(obj instanceof List)
+			return (List)obj;
+		return Collections.emptyList();
+	}
+
+	public static List<ItemStack> parseAsList(Object obj){
+		return list(obj) ? getList(obj) : Collections.singletonList(APIUtils.convertToStack(obj));
 	}
 }

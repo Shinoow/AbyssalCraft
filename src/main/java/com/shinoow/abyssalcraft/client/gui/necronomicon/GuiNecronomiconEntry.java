@@ -44,8 +44,8 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	private ButtonCategory[] buttons;
 	private GuiButton buttonDone;
 	private ButtonHome buttonHome;
-	private NecroData data;
-	private GuiNecronomicon parent;
+	protected NecroData data;
+	protected GuiNecronomicon parent;
 	private Item icon;
 	private int currentData;
 
@@ -97,6 +97,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 				}
 		}
 		updateButtons();
+		updateSidebarIndex(this);
 	}
 
 	private void updateButtons()
@@ -202,7 +203,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		String stuff;
 
 		stuff = I18n.format(chapter.getTitle(), new Object[0]);
-		fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+		fontRenderer.drawSplitString(stuff, k + 17, b0 + 16, 116, 0xC40000);
 		setTurnupLimit(chapter.getTurnupAmount());
 
 		int num = (currTurnup + 1)*2;
@@ -399,7 +400,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 		String stuff;
 		stuff = localize(data.getTitle());
 		boolean b = !isUnlocked(data.getCondition());
-		getFontRenderer(b).drawSplitString(b ? NecronomiconText.LABEL_TEST : stuff, k + 20, b0 + 16, 116, 0xC40000);
+		getFontRenderer(b).drawSplitString(b ? NecronomiconText.LABEL_TEST : stuff, k + 17, b0 + 16, 116, 0xC40000);
 		if(data.hasText()) writeText(2, b ? unknownFull : data.getText(), b);
 	}
 }

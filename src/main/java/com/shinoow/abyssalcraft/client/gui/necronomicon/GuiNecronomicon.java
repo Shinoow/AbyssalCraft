@@ -85,6 +85,7 @@ public class GuiNecronomicon extends GuiScreen {
 	private static Chapter patreon;
 	private INecroDataCapability cap;
 	protected String unknown50_1, unknown50_2, unknown95, unknownFull;
+	protected static String sidebarIndex;
 
 	public GuiNecronomicon(){
 		if(Minecraft.getMinecraft().player != null)
@@ -164,6 +165,7 @@ public class GuiNecronomicon extends GuiScreen {
 		if(!AbyssalCraftAPI.getNecronomiconData().isEmpty())
 			buttonList.add(buttonCat8 = new ButtonCategory(10, i + 132, b0 + 24, this, NecronomiconText.LABEL_OTHER, false, ACItems.necronomicon));
 		updateButtons();
+		sidebarIndex = "";
 	}
 
 	protected Item getItem(int par1){
@@ -355,10 +357,8 @@ public class GuiNecronomicon extends GuiScreen {
 		int k = (width - guiWidth) / 2;
 		byte b0 = 2;
 		String stuff;
-		int length;
 		stuff = localize(NecronomiconText.LABEL_INDEX);
-		length = fontRenderer.getStringWidth(stuff);
-		fontRenderer.drawString(stuff, k + 50 - length, b0 + 16, 0);
+		fontRenderer.drawString(stuff, k + 17, b0 + 16, 0);
 	}
 
 	public int getBookType(){
@@ -398,7 +398,7 @@ public class GuiNecronomicon extends GuiScreen {
 		if(isInfo){
 			if(isNecroInfo || isKnowledgeInfo){
 				stuff = localize(isNecroInfo ? NecronomiconText.LABEL_HUH : NecronomiconText.LABEL_KNOWLEDGE);
-				fontRenderer.drawSplitString(stuff, k + 20, b0 + 16, 116, 0xC40000);
+				fontRenderer.drawSplitString(stuff, k + 17, b0 + 16, 116, 0xC40000);
 			}
 			s = I18n.format("necronomicon.turnupindicator", Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups));
 
@@ -406,6 +406,9 @@ public class GuiNecronomicon extends GuiScreen {
 			if(getTurnupLimit() > 1)
 				fontRenderer.drawString(s, k - l + guiWidth - 22, b0 + 16, 0);
 			drawInformationText(par1, par2);
+
+			if(sidebarIndex != null && sidebarIndex.length() > 0)
+				fontRenderer.drawSplitString(sidebarIndex, k + 17, b0 + 8, 256, 0xC40000);
 		} else
 			drawIndexText();
 
@@ -480,9 +483,9 @@ public class GuiNecronomicon extends GuiScreen {
 			throw new IndexOutOfBoundsException("Text is longer than 368 characters ("+text.length()+")!");
 		else{
 			if(page == 1)
-				getFontRenderer(aklo).drawSplitString(localize(text), k + 20 + width, height, 107, 0);
+				getFontRenderer(aklo).drawSplitString(localize(text), k + 17 + width, height, 107, 0);
 			if(page == 2)
-				getFontRenderer(aklo).drawSplitString(localize(text), k + 138 + width, height, 107, 0);
+				getFontRenderer(aklo).drawSplitString(localize(text), k + 135 + width, height, 107, 0);
 		}
 	}
 
@@ -592,6 +595,32 @@ public class GuiNecronomicon extends GuiScreen {
 			}
 			GuiRenderHelper.renderTooltip(x, y, parsedTooltip);
 		}
+	}
+
+	protected void updateSidebarIndex(GuiNecronomicon gui) {
+		sidebarIndex = buildSidebarIndex(gui);
+	}
+
+	protected String buildSidebarIndex(GuiNecronomicon gui) {
+		String str = "";
+		if(gui instanceof GuiNecronomiconEntry)
+			str = rec((GuiNecronomiconEntry) gui, "");
+		return str;
+	}
+
+	private String rec(GuiNecronomiconEntry gui, String str) {
+		if(gui.data != null)
+			str = appendTitle(localize(gui.data.getTitle()), str);
+		if(gui.parent instanceof GuiNecronomiconEntry)
+			return rec((GuiNecronomiconEntry) gui.parent, str);
+		return str;
+	}
+
+	private String appendTitle(String str, String str1) {
+		String res = str;
+		if(str1 != null && str1.length() > 0)
+			res += " > " + str1;
+		return res;
 	}
 
 	private class RitualGuiInstance extends GuiInstance {

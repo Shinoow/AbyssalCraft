@@ -234,8 +234,10 @@ container.abyssalcraft.transmutator.nei=변형화
 container.abyssalcraft.engraver.nei=판화
 container.abyssalcraft.materializer.nei=물질화
 container.abyssalcraft.rituals.nei=네크로노미콘 의식
+container.abyssalcraft.creationrituals.nei=Creation Ritual
 container.abyssalcraft.rending.nei=분열의 지팡이
 container.abyssalcraft.upgrade.nei=업그레이드 키트
+container.abyssalcraft.transformationrituals.jei=Transformation Ritual
 
 #JEI Integration
 gui.acjei.category.fuel.transmutator=변형화 연료
@@ -821,6 +823,8 @@ ac.ritual.curing=치유 의식
 ac.ritual.curing.desc=4개의 공포 역병 해독제로 공포 역병과 공포의 땅 지역을 치유할 수 있습니다. 이전에 있던 것을 복원합니다. 가장 가까운 공포의 땅 바이옴이 공포의 땅을 대신할 것입니다.
 ac.ritual.spiritTablet=영혼 태블릿
 ac.ritual.spiritTablet.desc=영혼 태블릿은 4개의 영혼 태블릿 조각에 생명 결정을 넣어 만듭니다. 아이템을 스스로 이동하도록 하여 블록 간에 아이템을 이동할 수 있는 도구입니다. 책의 오모톨 섹션에서 자세한 정보를 읽어보세요.
+ac.ritual.ethaxium=Ethaxium
+ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you transform the essence of the presented End Stone into Ethaxium
 
 #Spells
 ac.spell.lifedrain=생명력 흡수

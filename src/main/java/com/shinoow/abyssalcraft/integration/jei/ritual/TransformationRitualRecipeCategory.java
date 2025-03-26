@@ -30,7 +30,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
-public class RitualRecipeCategory implements IRecipeCategory {
+public class TransformationRitualRecipeCategory implements IRecipeCategory {
 
 	private static final int pedestal1 = 0;
 	private static final int pedestal2 = 1;
@@ -41,7 +41,8 @@ public class RitualRecipeCategory implements IRecipeCategory {
 	private static final int pedestal7 = 6;
 	private static final int pedestal8 = 7;
 	private static final int sacrifice = 8;
-	private static final int necronomicon = 9;
+	private static final int reward = 9;
+	private static final int necronomicon = 10;
 
 	@Nonnull
 	private final IDrawable background;
@@ -50,10 +51,10 @@ public class RitualRecipeCategory implements IRecipeCategory {
 	@Nonnull
 	private final String localizedName;
 
-	public RitualRecipeCategory(IGuiHelper guiHelper){
-		ResourceLocation location = new ResourceLocation("abyssalcraft", "textures/gui/container/ritual_NEI.png");
+	public TransformationRitualRecipeCategory(IGuiHelper guiHelper){
+		ResourceLocation location = new ResourceLocation("abyssalcraft", "textures/gui/container/transformation_ritual_jei.png");
 		background = guiHelper.createDrawable(location, 5, 11, 166, 140);
-		localizedName = I18n.format("container.abyssalcraft.rituals.nei");
+		localizedName = I18n.format("container.abyssalcraft.transformationrituals.jei");
 
 		slotDrawable = guiHelper.getSlotDrawable();
 	}
@@ -61,7 +62,7 @@ public class RitualRecipeCategory implements IRecipeCategory {
 	@Override
 	public String getUid() {
 
-		return AbyssalCraftRecipeCategoryUid.RITUAL;
+		return AbyssalCraftRecipeCategoryUid.TRANSFORMATION_RITUAL;
 	}
 
 	@Override
@@ -95,6 +96,7 @@ public class RitualRecipeCategory implements IRecipeCategory {
 			itemStacks.init(pedestal8, true, 32 + xBoost, 40 + yBoost);
 			itemStacks.init(sacrifice, true, 58 + xBoost, 66 + yBoost);
 			itemStacks.init(necronomicon, true, 0 + xBoost, 133 + yBoost);
+			itemStacks.init(reward, false, 58 + xBoost, 139 + yBoost);
 
 			itemStacks.set(ingredients);
 		}

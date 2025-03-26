@@ -16,20 +16,41 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.api.ritual.*;
 import com.shinoow.abyssalcraft.lib.util.IHiddenRitual;
 
 public class RitualRecipeMaker {
 
 	@Nonnull
-	public static List<NecronomiconCreationRitual> getRituals(){
-		List<NecronomiconCreationRitual> recipes = new ArrayList();
+	public static List<CreationRitualRecipeWrapper> getCreationRituals(){
+		List<CreationRitualRecipeWrapper> recipes = new ArrayList();
 
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
 			if(ritual instanceof NecronomiconCreationRitual && !(ritual instanceof IHiddenRitual))
-				recipes.add((NecronomiconCreationRitual) ritual);
+				recipes.add(new CreationRitualRecipeWrapper((NecronomiconCreationRitual) ritual));
+
+		return recipes;
+	}
+
+	@Nonnull
+	public static List<RitualRecipeWrapper> getRituals(){
+		List<RitualRecipeWrapper> recipes = new ArrayList();
+
+		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
+			if(!(ritual instanceof NecronomiconCreationRitual)
+					&& !(ritual instanceof NecronomiconTransformationRitual)&& !(ritual instanceof IHiddenRitual))
+				recipes.add(new RitualRecipeWrapper(ritual));
+
+		return recipes;
+	}
+
+	@Nonnull
+	public static List<TransformationRitualRecipeWrapper> getTransformationRituals(){
+		List<TransformationRitualRecipeWrapper> recipes = new ArrayList();
+
+		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
+			if(ritual instanceof NecronomiconTransformationRitual && !(ritual instanceof IHiddenRitual))
+				recipes.add(new TransformationRitualRecipeWrapper((NecronomiconTransformationRitual) ritual));
 
 		return recipes;
 	}

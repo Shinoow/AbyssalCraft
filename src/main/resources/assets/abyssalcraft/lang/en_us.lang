@@ -234,8 +234,10 @@ container.abyssalcraft.transmutator.nei=Transmutation
 container.abyssalcraft.engraver.nei=Coin Engraving
 container.abyssalcraft.materializer.nei=Materialization
 container.abyssalcraft.rituals.nei=Necronomicon Ritual
+container.abyssalcraft.creationrituals.nei=Creation Ritual
 container.abyssalcraft.rending.nei=Staff of Rending
 container.abyssalcraft.upgrade.nei=Upgrade Kit
+container.abyssalcraft.transformationrituals.jei=Transformation Ritual
 
 #JEI Integration
 gui.acjei.category.fuel.transmutator=Transmutator Fuel
@@ -823,6 +825,8 @@ ac.ritual.curing=Ritual of Curing
 ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area of the Dread Plague and the Dreadlands, restoring what was there before. The closest non-dreadlands biome will take the place of the Dreadlands.
 ac.ritual.spiritTablet=Spirit Tablet
 ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crystal with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
+ac.ritual.ethaxium=Ethaxium
+ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you transform the essence of the presented End Stone into Ethaxium
 
 #Spells
 ac.spell.lifedrain=Life Drain

@@ -234,8 +234,10 @@ container.abyssalcraft.transmutator.nei=変換
 container.abyssalcraft.engraver.nei=コイン彫刻
 container.abyssalcraft.materializer.nei=物質生成
 container.abyssalcraft.rituals.nei=儀式
+container.abyssalcraft.creationrituals.nei=Creation Ritual
 container.abyssalcraft.rending.nei=エネルギー吸収
 container.abyssalcraft.upgrade.nei=アップグレードキット
+container.abyssalcraft.transformationrituals.jei=Transformation Ritual
 
 #JEI:燃料  JEI Integration
 gui.acjei.category.fuel.transmutator=トランスミューターの燃料
@@ -822,6 +824,8 @@ ac.ritual.curing=治癒の儀式
 ac.ritual.curing.desc=ドレッド毒の解毒剤を4個使い、ドレッド毒と汚染された場所を治療して元に戻します。場所を治療する際には最も近いドレッドランド以外のバイオームが代わりに生成されます。
 ac.ritual.spiritTablet=スピリットタブレット
 ac.ritual.spiritTablet.desc=スピリットタブレットは、ライフクリスタルとスピリットタブレットの欠片4つを使い作成できるアイテムで、ブロック間でアイテムを移動させるために使います。詳しくは[オモソル]の項をご覧ください。
+ac.ritual.ethaxium=Ethaxium
+ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you transform the essence of the presented End Stone into Ethaxium
 
 #スペル  Spells
 ac.spell.lifedrain=ライフドレイン
