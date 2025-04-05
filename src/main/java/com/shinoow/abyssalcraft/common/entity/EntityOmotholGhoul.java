@@ -152,7 +152,7 @@ public class EntityOmotholGhoul extends EntityMob implements IOmotholEntity {
 	@Override
 	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
 	{
-		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getItem()))
+		if(!InitHandler.INSTANCE.isBlacklistedFromPickup((itemEntity.getItem())))
 			super.updateEquipmentIfNeeded(itemEntity);
 	}
 

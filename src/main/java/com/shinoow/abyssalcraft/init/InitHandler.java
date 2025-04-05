@@ -18,18 +18,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
+import java.util.function.BiConsumer;
 
+import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.handlers.ClientVarsReloadListener;
-import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
-import com.shinoow.abyssalcraft.common.entity.EntityOmotholGhoul;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiAbyssalZombie;
-import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiGhoul;
 import com.shinoow.abyssalcraft.common.handlers.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -72,9 +69,8 @@ public class InitHandler implements ILifeCycleHandler {
 
 	public static Configuration cfg;
 
-	private static String[] abyssalZombieBlacklist, depthsGhoulBlacklist, antiAbyssalZombieBlacklist, antiGhoulBlacklist,
-	omotholGhoulBlacklist, interdimensionalCageBlacklist, dreadPlagueImmunityList, dreadPlagueCarrierList,
-	coraliumPlagueImmunityList, coraliumPlagueCarrierList, itemTransportBlacklist;
+	private static String[] interdimensionalCageBlacklist, dreadPlagueImmunityList, dreadPlagueCarrierList,
+	coraliumPlagueImmunityList, coraliumPlagueCarrierList, itemTransportBlacklist, mobItemPickupBlacklist;
 
 	public static int[] coraliumOreGeneration;
 	private static int[] blackHoleBlacklist, oreGenDimBlacklist, structureGenDimBlacklist;
@@ -89,11 +85,7 @@ public class InitHandler implements ILifeCycleHandler {
 	public static final Fluid LIQUID_ANTIMATTER = new Fluid("liquidantimatter", new ResourceLocation("abyssalcraft", "blocks/anti_still"),
 			new ResourceLocation("abyssalcraft", "blocks/anti_flow")).setDensity(4000).setViscosity(1500).setTemperature(100);
 
-	private static final List<ItemStack> abyssal_zombie_blacklist = new ArrayList<>();
-	private static final List<ItemStack> depths_ghoul_blacklist = new ArrayList<>();
-	private static final List<ItemStack> anti_abyssal_zombie_blacklist = new ArrayList<>();
-	private static final List<ItemStack> anti_ghoul_blacklist = new ArrayList<>();
-	private static final List<ItemStack> omothol_ghoul_blacklist = new ArrayList<>();
+	private static final List<ItemStack> mob_pickup_blacklist = new ArrayList<>();
 
 	private static final List<String> dread_carriers = new ArrayList<>();
 	private static final List<String> dread_immunity = new ArrayList<>();
@@ -377,6 +369,7 @@ public class InitHandler implements ILifeCycleHandler {
 		curingRitualRange = cfg.get(Configuration.CATEGORY_GENERAL, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Purging (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		itemTransportBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Item Transportation System Blacklist", new String[0], "Tile Entities added to this list will not be usable with the Item Transportation System (eg. you can't move Items from them). Format: modid:name").getStringList();
 		enchantMergedBooks = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Merged Books", true, "Toggles whether or not you can use Enchanted Books that have been merged on an Anvil in the Mass Enchantment ritual.").getBoolean();
+		no_potion_clouds = cfg.get(Configuration.CATEGORY_GENERAL, "No plague Potion Clouds", false, "Toggles whether or not victims dying to the Coralium Plague and Dread Plague create potion clouds on death (can save performance if disabled).").getBoolean();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 4, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 4, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -393,6 +386,10 @@ public class InitHandler implements ILifeCycleHandler {
 		acidSpitFrequency = cfg.get("shoggoth", "Acid Spit Frequency", 120, "The frequency (in ticks) at which a Lesser Shoggoth can spit acid. Higher values increase the time between each spit attack, while lower values descrease the time (and 0 disables it).\n[range: 0 ~ 300, default: 100]", 0, 300).getInt();
 		monolithBuildingCooldown = cfg.get("shoggoth", "Monolith Building Cooldown", 1500, "The cooldown (in ticks) between each attempt by a Lesser Shoggoth to construct a monolith. Higher values increase the time, while lower values decrease it (and 0 disables it).\n[range: 0 ~ 2400, default: 1800]", 0, 2400).getInt();
 		shoggothGlowingEyes = cfg.get("shoggoth", "Glowing Eyes", true, "Toggles whether or not the eyes of Lesser Shoggoths should glow. The glowing can be heavy on performance, so if you're dropping FPS noticeably while looking at Lesser Shoggoths, consider turning this off. Client Side only!").getBoolean();
+		biomassPlayerDistance = cfg.get("shoggoth", "Biomass: Player Distance", 16, "Max distance a player has to be from a Biomass for it to trigger Shoggoth spawning. Lower means you have to be closer.\n[range: 5 ~ 48, default: 16]", 5, 48).getInt();
+		biomassMaxSpawn = cfg.get("shoggoth", "Biomass: Spawn Limit", 6, "The amount of nearby Shoggoths (within 32 blocks) at which the Biomass will halt spawning any new ones.\n[range: 1 ~ 10, default: 6]", 1, 10).getInt();
+		biomassCooldown = cfg.get("shoggoth", "Biomass: Cooldown Time", 400, "The amount of time (in ticks) it takes between every attempt to spawn a Shogggoth.\n[range: 40 ~ 1200, default: 400]", 40, 1200).getInt();
+		biomassShoggothDistance = cfg.get("shoggoth", "Biomass: Shoggoth Distance", 32, "Max distance to check for nearby Shoggoths before spawning more.\n[range: 5 ~ 48, default: 32]", 5, 48).getInt();
 
 		generateDarklandsStructures = cfg.get("worldgen", "Darklands Structures", true, "Toggles whether or not to generate random Darklands structures.").getBoolean();
 		generateShoggothLairs = cfg.get("worldgen", "Shoggoth Lairs", true, "Toggles whether or not to generate Shoggoth Lairs (however, they will still generate in Omothol).").getBoolean();
@@ -426,12 +423,8 @@ public class InitHandler implements ILifeCycleHandler {
 		oreGenDimBlacklist = cfg.get("worldgen", "Ore Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld ores (Coralium, Nitre) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
 		structureGenDimBlacklist = cfg.get("worldgen", "Structure Generation Dimension Blacklist", new int[0], "Dimension IDs added to this list won't have any of AbyssalCraft's Overworld structures (Darklands structures, Shoggoth lairs) generating in them. This only affects surface worlds (dimensions that handle world generation like the Overworld does).").getIntList();
 
-		abyssalZombieBlacklist = cfg.get("item_blacklist", "Abyssal Zombie Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Abyssal Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
-		depthsGhoulBlacklist = cfg.get("item_blacklist", "Depths Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Depths Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
-		antiAbyssalZombieBlacklist = cfg.get("item_blacklist", "Abyssal Anti-Zombie Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Abyssal Anti-Zombies. Format: modid:name:meta, where meta is optional.").getStringList();
-		antiGhoulBlacklist = cfg.get("item_blacklist", "Anti-Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Anti-Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
-		omotholGhoulBlacklist = cfg.get("item_blacklist", "Omothol Ghoul Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by Omothol Ghouls. Format: modid:name:meta, where meta is optional.").getStringList();
 		antiPlayersPickupLoot = cfg.get("item_blacklist", "Anti-Players Can Pick Up Loot", true, "Toggles whether or not Anti-Players can pick up loot. You really should just blacklist them in whatever mob spawner/duplicator instead.").getBoolean();
+		mobItemPickupBlacklist = cfg.get("item_blacklist", "Mob Pickup Item Blacklist", new String[]{"minecraft:rotten_flesh","minecraft:bone","abyssalcraft:antiflesh","abyssalcraft:corflesh","abyssalcraft:anticorflesh"}, "Items/Blocks added to this list won't be picked up by AbyssalCraft mobs that can pick up stuff. Format: modid:name:meta, where meta is optional.").getStringList();
 
 		breakLogic = cfg.get("silly_settings", "Liquid Coralium Physics", false, "Set true to allow the Liquid Coralium to break the laws of physics in terms of movement").getBoolean();
 		nuclearAntimatterExplosions = cfg.get("silly_settings", "Nuclear Antimatter Explosions", false, "Take a wild guess what this does... Done guessing? Yeah, makes the antimatter explosions more genuine by making them go all nuclear. Recommended to not enable unless you want chaos and destruction.").getBoolean();
@@ -526,6 +519,10 @@ public class InitHandler implements ILifeCycleHandler {
 		odbExplosionSize = MathHelper.clamp(odbExplosionSize, 80, 800);
 		antimatterExplosionSize = MathHelper.clamp(antimatterExplosionSize, 40, 200);
 		enchantmentMaxLevel = MathHelper.clamp(enchantmentMaxLevel, 1, 100);
+		biomassPlayerDistance = MathHelper.clamp(biomassPlayerDistance, 5, 48);
+		biomassMaxSpawn = MathHelper.clamp(biomassMaxSpawn, 1, 10);
+		biomassCooldown = MathHelper.clamp(biomassCooldown, 20, 1200);
+		biomassShoggothDistance = MathHelper.clamp(biomassShoggothDistance, 5, 48);
 
 		demon_transformations.clear();
 
@@ -553,88 +550,30 @@ public class InitHandler implements ILifeCycleHandler {
 	}
 
 	private void constructBlacklists(){
-		if(abyssalZombieBlacklist.length > 0)
-			for(String str : abyssalZombieBlacklist)
-				if(str.length() > 0){
-					String[] stuff = str.split(":");
-					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-					if(item != null)
-						abyssal_zombie_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("{} is not a valid Item!", str);
-				}
-		if(depthsGhoulBlacklist.length > 0)
-			for(String str : depthsGhoulBlacklist)
-				if(str.length() > 0){
-					String[] stuff = str.split(":");
-					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-					if(item != null)
-						depths_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("{} is not a valid Item!", str);
-				}
-		if(antiAbyssalZombieBlacklist.length > 0)
-			for(String str : antiAbyssalZombieBlacklist)
-				if(str.length() > 0){
-					String[] stuff = str.split(":");
-					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-					if(item != null)
-						anti_abyssal_zombie_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("{} is not a valid Item!", str);
-				}
-		if(antiGhoulBlacklist.length > 0)
-			for(String str : antiGhoulBlacklist)
-				if(str.length() > 0){
-					String[] stuff = str.split(":");
-					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-					if(item != null)
-						anti_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("{} is not a valid Item!", str);
-				}
-		if(omotholGhoulBlacklist.length > 0)
-			for(String str : omotholGhoulBlacklist)
-				if(str.length() > 0){
-					String[] stuff = str.split(":");
-					Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
-					if(item != null)
-						omothol_ghoul_blacklist.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
-					else ACLogger.severe("{} is not a valid Item!", str);
-				}
+
+		BiConsumer<String, List<ItemStack>> insert = (s, l) -> {
+			String[] stuff = s.split(":");
+			Item item = Item.REGISTRY.getObject(new ResourceLocation(stuff[0], stuff[1]));
+			if(item != null)
+				l.add(new ItemStack(item, 1, stuff.length == 3 ? Integer.valueOf(stuff[2]) : OreDictionary.WILDCARD_VALUE));
+			else ACLogger.severe("{} is not a valid Item!", s);
+		};
+		BiConsumer<String[], List<ItemStack>> construct = (a, l) -> {
+			Arrays.stream(a)
+			.filter(Predicates.not(String::isEmpty))
+			.forEach(s -> insert.accept(s, l));
+		};
+
+		construct.accept(mobItemPickupBlacklist, mob_pickup_blacklist);
 	}
 
 	/**
-	 * Checks whether or not an Item is blacklisted for the specified Entity
-	 * @param entity Entity to check
+	 * Checks whether or not an Item is blacklisted from being picked up
 	 * @param stack ItemStack to check
 	 * @return True if the Item is blacklisted, otherwise false
 	 */
-	public boolean isItemBlacklisted(Entity entity, ItemStack stack){
-		if(entity instanceof EntityAbyssalZombie)
-			if(!abyssal_zombie_blacklist.isEmpty())
-				for(ItemStack stack2 : abyssal_zombie_blacklist)
-					if(areStacksEqual(stack2, stack)) return true;
-		if(entity instanceof EntityDepthsGhoul)
-			if(!depths_ghoul_blacklist.isEmpty())
-				for(ItemStack stack2 : depths_ghoul_blacklist)
-					if(areStacksEqual(stack2, stack)) return true;
-		if(entity instanceof EntityAntiAbyssalZombie)
-			if(!anti_abyssal_zombie_blacklist.isEmpty())
-				for(ItemStack stack2 : anti_abyssal_zombie_blacklist)
-					if(areStacksEqual(stack2, stack)) return true;
-		if(entity instanceof EntityAntiGhoul)
-			if(!anti_ghoul_blacklist.isEmpty())
-				for(ItemStack stack2 : anti_ghoul_blacklist)
-					if(areStacksEqual(stack2, stack)) return true;
-		if(entity instanceof EntityOmotholGhoul)
-			if(!omothol_ghoul_blacklist.isEmpty())
-				for(ItemStack stack2 : omothol_ghoul_blacklist)
-					if(areStacksEqual(stack2, stack)) return true;
-		return false;
-	}
-
-	private boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
-	{
-		if (stack1 == null || stack2 == null) return false;
-		return stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE
-				|| stack1.getItemDamage() == stack2.getItemDamage());
+	public boolean isBlacklistedFromPickup(ItemStack stack) {
+		return mob_pickup_blacklist.stream().anyMatch(is -> APIUtils.areStacksEqual(stack, is));
 	}
 
 	/**

@@ -25,11 +25,13 @@ public class ACConfig {
 	armorPotionEffects, nuclearAntimatterExplosions, syncDataOnBookOpening, dreadGrassSpread, portalSpawnsNearPlayer,
 	showBossDialogs, jzaharBreaksFourthWall, lootTableContent, depthsGhoulBiomeDictSpawn, abyssalZombieBiomeDictSpawn,
 	useAmplifiedWorldType, generateStatuesInLairs, enchantBooks, nightVisionEverywhere, antiPlayersPickupLoot,
-	demonAnimalsSpawnOnDeath, evilAnimalNewMoonSpawning, enchantMergedBooks;
+	demonAnimalsSpawnOnDeath, evilAnimalNewMoonSpawning, enchantMergedBooks,
+	no_potion_clouds;
 	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate, acidSpitFrequency,
 	knowledgeSyncDelay, shoggothLairSpawnRateRivers, darkOffspringSpawnWeight, monolithBuildingCooldown, corruptionRitualRange,
 	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize, enchantmentMaxLevel, curingRitualRange,
-	shoggothLairGenerationDistance;
+	shoggothLairGenerationDistance, biomassPlayerDistance, biomassMaxSpawn,
+	biomassCooldown, biomassShoggothDistance;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid, shoggothGlowingEyes;
 	public static double acidResistanceHardness;

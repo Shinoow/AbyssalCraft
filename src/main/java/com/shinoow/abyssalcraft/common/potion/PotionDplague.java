@@ -24,6 +24,7 @@ import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.handlers.PlagueEventHandler;
+import com.shinoow.abyssalcraft.common.util.ArmorUtil;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -85,6 +86,8 @@ public class PotionDplague extends Potion{
 			NecroDataCapability.getCap((EntityPlayer) par1EntityLivingBase).triggerMiscUnlock("dread_plague");
 
 		if(EntityUtil.isEntityDread(par1EntityLivingBase)) return;
+
+		if(ArmorUtil.hasHelmetWithResistance(par1EntityLivingBase, AbyssalCraftAPI.dread)) return;
 
 		if(par1EntityLivingBase.ticksExisted % 25 >> par2 == 0)
 			par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.dread, 1);

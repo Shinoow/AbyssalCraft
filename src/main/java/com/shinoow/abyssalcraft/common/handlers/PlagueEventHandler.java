@@ -18,10 +18,12 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.DamageSource;
@@ -40,15 +42,9 @@ public class PlagueEventHandler {
 
 		EntityLivingBase entity = event.getEntityLiving();
 		if(entity.isPotionActive(AbyssalCraftAPI.coralium_plague))
-			if(entity.getRNG().nextFloat() > 0.1F) {
-				EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
-				entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.coralium_plague, 600));
-				entityareaeffectcloud.setRadius(entity.width);
-				entityareaeffectcloud.setDuration(100 + entity.getRNG().nextInt(100));
-				entityareaeffectcloud.setRadiusPerTick((3F - entityareaeffectcloud.getRadius()) / entityareaeffectcloud.getDuration());
-
-				entity.world.spawnEntity(entityareaeffectcloud);
-			} else {
+			if(entity.getRNG().nextFloat() > 0.1F && !ACConfig.no_potion_clouds)
+				createCloud(entity, AbyssalCraftAPI.coralium_plague);
+			else {
 
 				AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(6.0D, 2.0D, 6.0D);
 				List<EntityLivingBase> list = entity.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
@@ -75,15 +71,9 @@ public class PlagueEventHandler {
 
 			}
 		if(entity.isPotionActive(AbyssalCraftAPI.dread_plague)) {
-			if(entity.getRNG().nextFloat() > 0.1F) {
-				EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
-				entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 600));
-				entityareaeffectcloud.setRadius(entity.width);
-				entityareaeffectcloud.setDuration(100 + entity.getRNG().nextInt(100));
-				entityareaeffectcloud.setRadiusPerTick((3F - entityareaeffectcloud.getRadius()) / entityareaeffectcloud.getDuration());
-
-				entity.world.spawnEntity(entityareaeffectcloud);
-			} else {
+			if(entity.getRNG().nextFloat() > 0.1F && !ACConfig.no_potion_clouds)
+				createCloud(entity, AbyssalCraftAPI.dread_plague);
+			else {
 
 				AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(6.0D, 2.0D, 6.0D);
 				List<EntityLivingBase> list = entity.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
@@ -110,15 +100,8 @@ public class PlagueEventHandler {
 
 			}
 		} else if(EntityUtil.isDreadPlagueCarrier(entity) && !(entity instanceof EntityDemonAnimal) && entity.dimension != ACLib.dreadlands_id &&
-				entity.dimension != ACLib.omothol_id && entity.dimension != ACLib.dark_realm_id) {
-			EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
-			entityareaeffectcloud.addEffect(new PotionEffect(AbyssalCraftAPI.dread_plague, 600));
-			entityareaeffectcloud.setRadius(entity.width);
-			entityareaeffectcloud.setDuration(100 + entity.getRNG().nextInt(100));
-			entityareaeffectcloud.setRadiusPerTick((3F - entityareaeffectcloud.getRadius()) / entityareaeffectcloud.getDuration());
-
-			entity.world.spawnEntity(entityareaeffectcloud);
-		}
+				entity.dimension != ACLib.omothol_id && entity.dimension != ACLib.dark_realm_id)
+			createCloud(entity, AbyssalCraftAPI.dread_plague);
 	}
 
 	@SubscribeEvent
@@ -148,5 +131,19 @@ public class PlagueEventHandler {
 		int duration = effect.getDuration() >= 600 ? effect.getDuration() : 600;
 
 		return new PotionEffect(effect.getPotion(), duration, amplifier);
+	}
+
+	public void createCloud(EntityLivingBase entity, Potion potion) {
+		AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(3.0D, 3.0D, 3.0D);
+		List<EntityAreaEffectCloud> list = entity.world.<EntityAreaEffectCloud>getEntitiesWithinAABB(EntityAreaEffectCloud.class, axisalignedbb);
+		if(list.isEmpty() && !ACConfig.no_potion_clouds) {
+			EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(entity.world, entity.posX, entity.posY, entity.posZ);
+			entityareaeffectcloud.addEffect(new PotionEffect(potion, 600));
+			entityareaeffectcloud.setRadius(entity.width);
+			entityareaeffectcloud.setDuration(100 + entity.getRNG().nextInt(100));
+			entityareaeffectcloud.setRadiusPerTick((3F - entityareaeffectcloud.getRadius()) / entityareaeffectcloud.getDuration());
+
+			entity.world.spawnEntity(entityareaeffectcloud);
+		}
 	}
 }

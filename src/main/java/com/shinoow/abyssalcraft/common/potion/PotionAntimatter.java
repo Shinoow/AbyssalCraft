@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.potion;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
@@ -26,6 +27,7 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -49,6 +51,9 @@ public class PotionAntimatter extends Potion{
 	public void performEffect(EntityLivingBase par1EntityLivingBase, int par2){
 
 		if(EntityUtil.isEntityAnti(par1EntityLivingBase)) return;
+
+		if(par1EntityLivingBase.hasItemInSlot(EntityEquipmentSlot.CHEST) && par1EntityLivingBase.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == ACItems.ethaxium_chestplate)
+			return;
 
 		par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.antimatter, 5);
 

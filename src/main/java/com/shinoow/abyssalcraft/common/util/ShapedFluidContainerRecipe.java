@@ -11,18 +11,18 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.util;
 
-import com.shinoow.abyssalcraft.api.APIUtils;
-
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 
-public class ShapedNBTRecipe extends ShapedRecipes {
+public class ShapedFluidContainerRecipe extends ShapedRecipes {
 
-	public ShapedNBTRecipe(String name, int width, int height, NonNullList<Ingredient> p_i1917_3_, ItemStack output) {
+	public ShapedFluidContainerRecipe(String name, int width, int height, NonNullList<Ingredient> p_i1917_3_, ItemStack output) {
 		super(name, width, height, p_i1917_3_, output);
 	}
 
@@ -62,13 +62,29 @@ public class ShapedNBTRecipe extends ShapedRecipes {
 
 				ItemStack itemstack1 = inventory.getStackInRowAndColumn(i, j);
 
-				if(!ingredient.apply(itemstack1))
-					return false;
+				boolean flag = false;
 
-				for(ItemStack itemstack : ingredient.getMatchingStacks())
-					if (!APIUtils.areItemStackTagsEqual(itemstack, itemstack1, 0))
+				if(FluidUtil.getFluidContained(itemstack1) != null)
+					for(ItemStack itemstack : ingredient.getMatchingStacks())
+						if (!areFluidStacksEqual(itemstack, itemstack1))
+							return false;
+						else flag = true;
+
+				if(!flag)
+					if(!ingredient.apply(itemstack1))
 						return false;
 			}
+
+		return true;
+	}
+
+	private boolean areFluidStacksEqual(ItemStack stack, ItemStack stack1) {
+
+		FluidStack fs = FluidUtil.getFluidContained(stack);
+		FluidStack fs1 = FluidUtil.getFluidContained(stack1);
+
+		if(fs != null && fs1 != null)
+			return fs.getFluid() == fs1.getFluid() && fs.amount == fs1.amount;
 
 		return true;
 	}

@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import javax.annotation.Nullable;
 
-import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.FuelType;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -35,6 +34,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -371,11 +372,18 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			if (item == ACItems.coralium_pearl) return 2000;
 			if (item == ACItems.transmutation_gem) return 10000;
 			if (item == ACItems.chunk_of_coralium) return 16200;
-			if (ItemStack.areItemStacksEqual(par1ItemStack, ACItems.liquid_coralium_bucket_stack)
-					&& APIUtils.areItemStackTagsEqual(par1ItemStack, ACItems.liquid_coralium_bucket_stack, 0)) return 20000;
+			//			if (ItemStack.areItemStacksEqual(par1ItemStack, ACItems.liquid_coralium_bucket_stack)
+			//					&& APIUtils.areItemStackTagsEqual(par1ItemStack, ACItems.liquid_coralium_bucket_stack, 0)) return 20000;
 			if (item == Items.BLAZE_POWDER) return 1200;
 			if (item == Items.BLAZE_ROD) return 2400;
 			if (item == ACItems.methane) return 10000;
+
+			FluidStack fs = FluidUtil.getFluidContained(par1ItemStack);
+			if(fs != null && fs.getFluid() == AbyssalCraftAPI.liquid_coralium_fluid) {
+				float res = fs.amount / 1000F * 20000F;
+				return (int)res; // No rounding, don't need that
+			}
+
 			return 0;
 		}
 	}

@@ -71,6 +71,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -184,6 +185,38 @@ public class AbyssalCraftEventHooks {
 			if(entity instanceof EntityPlayer && EntityUtil.isEntityCoralium(entity) &&
 					source == AbyssalCraftAPI.coralium)
 				event.setCanceled(true);
+		}
+
+		if(EntityUtil.isEntityDread(entity))
+			processRadiation(event);
+	}
+
+	private static String[] sourceNames = {"fission_burn", "fatal_rads"};
+	private static String[] sourceNames2 = {"nuclearBlast", "digamma", "radiation"};
+
+	public static boolean isRadiationDamage(DamageSource source) {
+
+		String type = source.getDamageType();
+
+		if(Loader.isModLoaded("nuclearcraft"))
+			for(String src : sourceNames)
+				if(type.contentEquals(src))
+					return true;
+		if(Loader.isModLoaded("hbm"))
+			for(String src : sourceNames2)
+				if(type.contentEquals(src))
+					return true;
+
+		return false;
+	}
+
+	private void processRadiation(LivingAttackEvent event) {
+		if(isRadiationDamage(event.getSource())) {
+			event.setCanceled(true);
+			// Dread Plague carriers absorb the radiation for sustenance
+			// (but only if Hardcore Mode is enabled, because we are nice here)
+			if(ACConfig.hardcoreMode && EntityUtil.isDreadPlagueCarrier(event.getEntityLiving()))
+				event.getEntityLiving().heal(event.getAmount());
 		}
 	}
 

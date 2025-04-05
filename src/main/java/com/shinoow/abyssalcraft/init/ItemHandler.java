@@ -24,6 +24,7 @@ import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.necronomicon.condition.*;
 import com.shinoow.abyssalcraft.common.items.*;
 import com.shinoow.abyssalcraft.common.items.armor.*;
+import com.shinoow.abyssalcraft.common.util.SoftDepUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -230,10 +231,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.plated_coralium_chestplate = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.CHEST, "corplatep").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 		ACItems.plated_coralium_leggings = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.LEGS, "corlegsp").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 		ACItems.plated_coralium_boots = new ItemCoraliumPArmor(AbyssalCraftAPI.platedCoraliumArmor, 5, EntityEquipmentSlot.FEET, "corbootsp").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.depths_helmet = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.HEAD, "depthshelmet").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.depths_chestplate = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.CHEST, "depthsplate").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.depths_leggings = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.LEGS, "depthslegs").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
-		ACItems.depths_boots = new ItemDepthsArmor(AbyssalCraftAPI.depthsArmor, 5, EntityEquipmentSlot.FEET, "depthsboots").setUnlockCondition(new DimensionCondition(ACLib.abyssal_wasteland_id));
 		ACItems.dreadium_helmet = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.HEAD, "dreadiumhelmet").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 		ACItems.dreadium_chestplate = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.CHEST, "dreadiumplate").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
 		ACItems.dreadium_leggings = new ItemDreadiumArmor(AbyssalCraftAPI.dreadiumArmor, 5, EntityEquipmentSlot.LEGS, "dreadiumlegs").setUnlockCondition(new DimensionCondition(ACLib.dreadlands_id));
@@ -272,6 +269,8 @@ public class ItemHandler implements ILifeCycleHandler {
 			ACItems.fried_egg_on_a_plate = new ItemPlatefood(8, 0.9F, false, "eggp");
 			ACItems.washcloth = new ItemWashCloth();
 		}
+
+		SoftDepUtil.declareItems();
 
 		registerItem(devsword, "devsword");
 		registerItem(shoggoth_projectile, "shoggoth_projectile");

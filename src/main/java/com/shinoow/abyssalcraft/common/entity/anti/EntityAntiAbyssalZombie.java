@@ -217,7 +217,7 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 	@Override
 	protected void updateEquipmentIfNeeded(EntityItem itemEntity)
 	{
-		if(!InitHandler.INSTANCE.isItemBlacklisted(this, itemEntity.getItem()))
+		if(!InitHandler.INSTANCE.isBlacklistedFromPickup((itemEntity.getItem())))
 			super.updateEquipmentIfNeeded(itemEntity);
 	}
 

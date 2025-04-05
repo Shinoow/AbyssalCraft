@@ -15,6 +15,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserShoggoth;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
@@ -62,11 +63,11 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 	public void update() {
 		if(world.getDifficulty() != EnumDifficulty.PEACEFUL && world.getGameRules().getBoolean("doMobSpawning")){
 			cooldown++;
-			if (cooldown >= 400) {
+			if (cooldown >= ACConfig.biomassCooldown) {
 				cooldown = world.rand.nextInt(10);
 				resetNearbyBiomass(true);
-				if(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32, false) != null)
-					if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).grow(32)).size() <= 6){
+				if(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), ACConfig.biomassPlayerDistance, false) != null)
+					if(world.getEntitiesWithinAABB(EntityLesserShoggoth.class, new AxisAlignedBB(pos).grow(ACConfig.biomassShoggothDistance)).size() < ACConfig.biomassMaxSpawn){
 						EntityLesserShoggoth mob = new EntityLesserShoggoth(world);
 						setPosition(mob, pos.getX(), pos.getY(), pos.getZ());
 						mob.onInitialSpawn(world.getDifficultyForLocation(pos), (IEntityLivingData)null);
@@ -84,60 +85,23 @@ public class TileEntityShoggothBiomass extends TileEntity implements ITickable {
 		int y = pos.getY();
 		int z = pos.getZ();
 		world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, x, y, z, 0, 0, 0);
-		TileEntity tile1 = world.getTileEntity(new BlockPos(x - 1, y, z));
-		TileEntity tile2 = world.getTileEntity(new BlockPos(x, y, z - 1));
-		TileEntity tile3 = world.getTileEntity(new BlockPos(x - 1, y, z - 1));
-		TileEntity tile4 = world.getTileEntity(new BlockPos(x + 1, y, z));
-		TileEntity tile5 = world.getTileEntity(new BlockPos(x, y, z + 1));
-		TileEntity tile6 = world.getTileEntity(new BlockPos(x + 1, y, z + 1));
-		TileEntity tile7 = world.getTileEntity(new BlockPos(x - 1, y, z + 1));
-		TileEntity tile8 = world.getTileEntity(new BlockPos(x + 1, y, z - 1));
-		if(again){
-			if(tile1 instanceof TileEntityShoggothBiomass){
-				((TileEntityShoggothBiomass) tile1).setCooldown(world.rand.nextInt(10));
-				((TileEntityShoggothBiomass) tile1).resetNearbyBiomass(false);
-			} if(tile2 instanceof TileEntityShoggothBiomass){
-				((TileEntityShoggothBiomass) tile2).setCooldown(world.rand.nextInt(10));
-				((TileEntityShoggothBiomass) tile2).resetNearbyBiomass(false);
-			} if(tile3 instanceof TileEntityShoggothBiomass){
-				((TileEntityShoggothBiomass) tile3).setCooldown(world.rand.nextInt(10));
-				((TileEntityShoggothBiomass) tile3).resetNearbyBiomass(false);
-			} if(tile4 instanceof TileEntityShoggothBiomass){
-				((TileEntityShoggothBiomass) tile4).setCooldown(world.rand.nextInt(10));
-				((TileEntityShoggothBiomass) tile4).resetNearbyBiomass(false);
-			} if(tile5 instanceof TileEntityShoggothBiomass){
-				((TileEntityShoggothBiomass) tile5).setCooldown(world.rand.nextInt(10));
-				((TileEntityShoggothBiomass) tile5).resetNearbyBiomass(false);
-			} if(tile6 instanceof TileEntityShoggothBiomass){
-				((TileEntityShoggothBiomass) tile6).setCooldown(world.rand.nextInt(10));
-				((TileEntityShoggothBiomass) tile6).resetNearbyBiomass(false);
-			} if(tile7 instanceof TileEntityShoggothBiomass){
-				((TileEntityShoggothBiomass) tile7).setCooldown(world.rand.nextInt(10));
-				((TileEntityShoggothBiomass) tile7).resetNearbyBiomass(false);
-			} if(tile8 instanceof TileEntityShoggothBiomass){
-				((TileEntityShoggothBiomass) tile8).setCooldown(world.rand.nextInt(10));
-				((TileEntityShoggothBiomass) tile8).resetNearbyBiomass(false);
-			}
-		}
-		else {
-			if(tile1 instanceof TileEntityShoggothBiomass)
-				((TileEntityShoggothBiomass) tile1).setCooldown(world.rand.nextInt(10));
-			if(tile2 instanceof TileEntityShoggothBiomass)
-				((TileEntityShoggothBiomass) tile2).setCooldown(world.rand.nextInt(10));
-			if(tile3 instanceof TileEntityShoggothBiomass)
-				((TileEntityShoggothBiomass) tile3).setCooldown(world.rand.nextInt(10));
-			if(tile4 instanceof TileEntityShoggothBiomass)
-				((TileEntityShoggothBiomass) tile4).setCooldown(world.rand.nextInt(10));
-			if(tile5 instanceof TileEntityShoggothBiomass)
-				((TileEntityShoggothBiomass) tile5).setCooldown(world.rand.nextInt(10));
-			if(tile6 instanceof TileEntityShoggothBiomass)
-				((TileEntityShoggothBiomass) tile6).setCooldown(world.rand.nextInt(10));
-			if(tile7 instanceof TileEntityShoggothBiomass)
-				((TileEntityShoggothBiomass) tile7).setCooldown(world.rand.nextInt(10));
-			if(tile8 instanceof TileEntityShoggothBiomass)
-				((TileEntityShoggothBiomass) tile8).setCooldown(world.rand.nextInt(10));
+		TileEntity[] tiles = {
+				world.getTileEntity(new BlockPos(x - 1, y, z)),
+				world.getTileEntity(new BlockPos(x, y, z - 1)),
+				world.getTileEntity(new BlockPos(x - 1, y, z - 1)),
+				world.getTileEntity(new BlockPos(x + 1, y, z)),
+				world.getTileEntity(new BlockPos(x, y, z + 1)),
+				world.getTileEntity(new BlockPos(x + 1, y, z + 1)),
+				world.getTileEntity(new BlockPos(x - 1, y, z + 1)),
+				world.getTileEntity(new BlockPos(x + 1, y, z - 1))
+		};
 
-		}
+		for(TileEntity tile : tiles)
+			if(tile instanceof TileEntityShoggothBiomass) {
+				((TileEntityShoggothBiomass) tile).setCooldown(world.rand.nextInt(30));
+				if(again)
+					((TileEntityShoggothBiomass) tile).resetNearbyBiomass(false);
+			}
 	}
 
 	private void setPosition(EntityLiving entity, int x, int y, int z){

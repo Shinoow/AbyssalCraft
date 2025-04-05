@@ -60,7 +60,7 @@ public class GuiTransmutator extends GuiContainer {
 		if (tileTransmutator.isTransmuting())
 		{
 			i1 = tileTransmutator.getBurnTimeRemainingScaled(12);
-			drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2);
+			drawTexturedModalRect(k + 57, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 2);
 		}
 
 		i1 = tileTransmutator.getProcessProgressScaled(24);

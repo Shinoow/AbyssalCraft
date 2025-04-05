@@ -25,6 +25,7 @@ import com.shinoow.abyssalcraft.common.entity.ai.EntityAILesserShoggothAttackMel
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAILesserShoggothBuildMonolith;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonPig;
+import com.shinoow.abyssalcraft.common.handlers.AbyssalCraftEventHooks;
 import com.shinoow.abyssalcraft.common.items.armor.ItemEthaxiumArmor;
 import com.shinoow.abyssalcraft.lib.*;
 
@@ -432,6 +433,9 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 				sprayAcid(true);
 			else return false;
 		if(par1DamageSource == DamageSource.CACTUS) return false;
+
+		if(AbyssalCraftEventHooks.isRadiationDamage(par1DamageSource))
+			return false;
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}

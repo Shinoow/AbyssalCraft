@@ -23,6 +23,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
 import com.shinoow.abyssalcraft.common.entity.EntityCoraliumSquid;
 import com.shinoow.abyssalcraft.common.entity.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.common.handlers.PlagueEventHandler;
+import com.shinoow.abyssalcraft.common.util.ArmorUtil;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -68,6 +69,8 @@ public class PotionCplague extends Potion {
 			NecroDataCapability.getCap((EntityPlayer) par1EntityLivingBase).triggerMiscUnlock("coralium_plague");
 
 		if(EntityUtil.isEntityCoralium(par1EntityLivingBase)) return;
+
+		if(ArmorUtil.hasHelmetWithResistance(par1EntityLivingBase, AbyssalCraftAPI.coralium)) return;
 
 		if(par1EntityLivingBase.ticksExisted % 40 >> par2 == 0)
 			par1EntityLivingBase.attackEntityFrom(AbyssalCraftAPI.coralium, 2);

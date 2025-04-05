@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue.EnumDeityType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityDecorativeStatue;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityShoggothBiomass;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
@@ -174,6 +175,14 @@ public class StructureShoggothPit extends WorldGenerator {
 						}
 				break;
 			}
+
+			for(Entry<BlockPos, String> entry : map.entrySet())
+				if(entry.getValue().startsWith("bm")) {
+					world.setBlockState(entry.getKey(), ACBlocks.shoggoth_biomass.getDefaultState());
+					TileEntity te = world.getTileEntity(entry.getKey());
+					if(te instanceof TileEntityShoggothBiomass)
+						((TileEntityShoggothBiomass) te).setCooldown(world.rand.nextInt(100));
+				}
 
 			return true;
 		}

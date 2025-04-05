@@ -51,7 +51,7 @@ public class ItemDreadArmor extends ItemACArmor {
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_helmet){
 			if(world.provider.isSurfaceWorld())
 				player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 260, 0, false, false));
-			if(player.getActivePotionEffect(AbyssalCraftAPI.dread_plague) !=null)
+			if(player.isPotionActive(AbyssalCraftAPI.dread_plague))
 				player.removePotionEffect(AbyssalCraftAPI.dread_plague);
 		}
 		if (itemstack.getItem() == ACItems.dreaded_abyssalnite_chestplate)
