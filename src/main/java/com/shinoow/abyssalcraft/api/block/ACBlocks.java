@@ -188,4 +188,5 @@ public class ACBlocks {
 	public static Block darklands_oak_door;
 	public static Block dreadlands_door;
 	public static Block multi_block;
+	public static Block spirit_altar;
 }

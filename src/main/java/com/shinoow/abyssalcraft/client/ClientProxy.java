@@ -25,6 +25,7 @@ import com.shinoow.abyssalcraft.client.lib.LovecraftFont;
 import com.shinoow.abyssalcraft.client.model.block.ModelDGhead;
 import com.shinoow.abyssalcraft.client.model.item.ModelDreadiumSamuraiArmor;
 import com.shinoow.abyssalcraft.client.particles.ACParticleFX;
+import com.shinoow.abyssalcraft.client.particles.BlueFlameParticle;
 import com.shinoow.abyssalcraft.client.particles.PEStreamParticleFX;
 import com.shinoow.abyssalcraft.client.render.block.RenderODB;
 import com.shinoow.abyssalcraft.client.render.block.RenderODBc;
@@ -242,6 +243,8 @@ public class ClientProxy extends CommonProxy {
 				break;
 			}
 		}
+		if(particleName.equals("BlueFlame"))
+			Minecraft.getMinecraft().effectRenderer.addEffect(new BlueFlameParticle(Minecraft.getMinecraft().world, posX, posY, posZ, velX, velY, velZ));
 	}
 
 	public void spawnParticleLegacy(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ){

@@ -1081,6 +1081,13 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.energy_depositioner, 0);
 		registerItemRender(ACBlocks.calcified_stone, 0);
 		registerItemRender(ACBlocks.multi_block, 0);
+		registerItemRender(ACBlocks.spirit_altar, 0);
+	}
+
+	@SubscribeEvent
+	public void onTextureStitch(TextureStitchEvent event){
+		ResourceLocation blueflame = new ResourceLocation("abyssalcraft","particles/blueflame");
+		event.getMap().registerSprite(blueflame);
 	}
 
 	private void registerFluidModel(Block fluidBlock, String name) {

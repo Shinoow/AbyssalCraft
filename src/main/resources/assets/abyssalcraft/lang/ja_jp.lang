@@ -619,7 +619,9 @@ necronomicon.text.itemtransportsystem.4=必ずしもルートを指定する必�
 necronomicon.text.itemtransportsystem.5=配属キー(アイテム説明に書いてあります)を押すことによって、インベントリを開きフィルタの設定をすることができます。このフィルタは、最大5種のアイテム、サブタイプ、NBTに対応しています。フィルターは任意の設定です。
 necronomicon.text.itemtransportsystem.6=『設定の適応』モードでは、アイテムを転送したいブロックの側面をシフト右クリックします。片側しか取り出せないブロックの場合、その点に気を付けてください。
 necronomicon.text.itemtransportsystem.7=『設定の削除』モードでは、ブロックに適応されている設定をシフト右クリックで削除することができます。ブロックを置きなおしても同じことができますが、それよりも時短になります。
-necronomicon.text.itemtransportsystem.8=2つのスペル(ディスプレイルート と トール・ザ・ベル)は、ルートを表示したり停止/開始するのに役に立ちます。『ディスプレイルート』は自分の周辺にある機能しているルートを表示し、『トール・ザ・ベル』は視点を合わせたブロック(ターゲットがない場合は周辺のすべてのブロック)のアイテム運搬を開始/停止させます。
+necronomicon.text.itemtransportsystem.8=The Spirit Altar is the Block that manages the spirits that will move along the paths set by the Spirit Tablet. The altar is created through a ritual involving Gold Ingots, Darkstone Cobblestone and a Shadow Gem.
+necronomicon.text.itemtransportsystem.9=The presence of a blue flame in the golden bowl indicates if the altar is active. You can interact with the Spirit Altar through the Spirit Tablet.
+necronomicon.text.itemtransportsystem.10=If you shift right-click, it displays all connected routes. Right-clicking in "Set Path" mode, the Spirit Altar searches for nearby routes to monitor. Right-clicking in "Apply Configuration" mode starts/stops all connected routes. Right-clicking in "Remove Configuration" mode clears all connected routes.
 
 necronomicon.text.wip=この項は未完成です。
 
@@ -824,6 +826,8 @@ ac.ritual.curing=治癒の儀式
 ac.ritual.curing.desc=ドレッド毒の解毒剤を4個使い、ドレッド毒と汚染された場所を治療して元に戻します。場所を治療する際には最も近いドレッドランド以外のバイオームが代わりに生成されます。
 ac.ritual.spiritTablet=スピリットタブレット
 ac.ritual.spiritTablet.desc=スピリットタブレットは、ライフクリスタルとスピリットタブレットの欠片4つを使い作成できるアイテムで、ブロック間でアイテムを移動させるために使います。詳しくは[オモソル]の項をご覧ください。
+ac.ritual.spiritAltar=Spirit Altar
+ac.ritual.spiritAltar.desc=By infusing a Shadow Gem with 3 Gold Ingots and 5 Blocks of Darkstone Cobblestone, you force the soul of a sacrifice into controlling a network of Spirit Items. The Spirit Tablet gives commands to the Spirit Altar.
 ac.ritual.ethaxium=Ethaxium
 ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you transform the essence of the presented End Stone into Ethaxium
 
@@ -1188,6 +1192,7 @@ tile.calcifiedstone.name=石灰化した石
 tile.door_dlt.name=ダークランドオークのドア
 tile.door_drt.name=ドレッドウッドのドア
 tile.multi_block.name=マルチブロック
+tile.spirit_altar.name=Spirit Altar
 
 #修正  Pre/Postfixes
 decorativestatue.prefix=装飾用の%s

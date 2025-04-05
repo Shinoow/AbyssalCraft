@@ -620,7 +620,9 @@ necronomicon.text.itemtransportsystem.4=如果你不想在地面设置路径，�
 necronomicon.text.itemtransportsystem.5=通过使用绑定按键（检查物品的悬浮提示可知），你可以打开过滤面板，过滤器最多支持5个物品，允许对子类型（放入石头同样会过滤安山岩，花岗岩等）和NBT（一件附魔盔甲将只允许其他的附魔盔甲）进行过滤。过滤器是可选的，如果没有设置，那么任何物品都会被接受。
 necronomicon.text.itemtransportsystem.6=当你正在使用“应用配置”模式时，潜行并右击你想输出物品的方块。方块的面很重要，所以请记住方块是否仅从一面输出物品。
 necronomicon.text.itemtransportsystem.7=当你正在使用“清除配置”模式时，你可以通过潜行并右击方块来移除其上的配置。破坏或放置方块能达到相同效果，但这一操作相比之下能为你节省时间。
-necronomicon.text.itemtransportsystem.8=有两个实用咒语（名为“魂径现形”和“鸣钟”），可以帮助你追踪已确定的路线，以及启动或停止它们。“魂径现形”会显示你附近活动中的路线，“鸣钟”会启动或停止你正在注视的方块所连接的路线（或者若没有对准单个方块，会直接对附近的所有路线起作用）。
+necronomicon.text.itemtransportsystem.8=The Spirit Altar is the Block that manages the spirits that will move along the paths set by the Spirit Tablet. The altar is created through a ritual involving Gold Ingots, Darkstone Cobblestone and a Shadow Gem.
+necronomicon.text.itemtransportsystem.9=The presence of a blue flame in the golden bowl indicates if the altar is active. You can interact with the Spirit Altar through the Spirit Tablet.
+necronomicon.text.itemtransportsystem.10=If you shift right-click, it displays all connected routes. Right-clicking in "Set Path" mode, the Spirit Altar searches for nearby routes to monitor. Right-clicking in "Apply Configuration" mode starts/stops all connected routes. Right-clicking in "Remove Configuration" mode clears all connected routes.
 
 necronomicon.text.wip=这一章节还未完成。
 
@@ -825,6 +827,8 @@ ac.ritual.curing=治愈仪式
 ac.ritual.curing.desc=通过放置4瓶恐惧瘟疫解药，你治愈了一片区域的恐惧瘟疫和恐惧之地，恢复了它们原来的面貌。地形最接近的非恐惧之地生物群系将会取代恐惧之地的位置。
 ac.ritual.spiritTablet=灵魂石板
 ac.ritual.spiritTablet.desc=一块灵魂石板可通过将4个灵魂石板碎片注入生命结晶来制作。它是一种工具，允许你使物品自主移动，以在方块间转移物品。阅读死灵之书奥穆索章节的相关内容以获取更多信息。
+ac.ritual.spiritAltar=Spirit Altar
+ac.ritual.spiritAltar.desc=By infusing a Shadow Gem with 3 Gold Ingots and 5 Blocks of Darkstone Cobblestone, you force the soul of a sacrifice into controlling a network of Spirit Items. The Spirit Tablet gives commands to the Spirit Altar.
 ac.ritual.ethaxium=Ethaxium
 ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you transform the essence of the presented End Stone into Ethaxium
 
@@ -1189,6 +1193,7 @@ tile.calcifiedstone.name=钙化石
 tile.door_dlt.name=黑暗之地橡木门
 tile.door_drt.name=恐惧之地木门
 tile.multi_block.name=多方块
+tile.spirit_altar.name=Spirit Altar
 
 #Pre/Postfixes
 decorativestatue.prefix=装饰用%s

@@ -19,9 +19,10 @@ import com.shinoow.abyssalcraft.api.transfer.ItemTransferConfiguration;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.client.ClientProxy;
-import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
+import com.shinoow.abyssalcraft.common.blocks.tile.TileEntitySpiritAltar;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
+import com.shinoow.abyssalcraft.lib.util.SpiritItemUtil;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -93,16 +94,14 @@ public class ItemConfigurator extends ItemACBasic {
 			NBTTagCompound nbt = stack.getTagCompound();
 			int mode = nbt.getInteger("Mode");
 
-			if(mode == 0) {
-				NBTTagList path = null;
-				if(nbt.hasKey("Path"))
-					path = nbt.getTagList("Path", NBT.TAG_LONG);
-				else
-					path = new NBTTagList();
+			TileEntity te = w.getTileEntity(pos);
 
-				TileEntity te = w.getTileEntity(pos);
+			if(te instanceof TileEntitySpiritAltar)
+				((TileEntitySpiritAltar) te).spiritTabletToggle(player, mode);
+			else if(mode == 0) { // set path
+				NBTTagList path = nbt.hasKey("Path") ? nbt.getTagList("Path", NBT.TAG_LONG) : new NBTTagList();
 
-				if(te != null && ItemTransferEventHandler.hasInventory(te)) {
+				if(te != null && SpiritItemUtil.hasInventory(te)) {
 					path.appendTag(new NBTTagLong(pos.toLong()));
 					nbt.setInteger("EntryFacing", side.getIndex());
 					player.sendMessage(new TextComponentTranslation("message.configurator.1"));
@@ -111,9 +110,8 @@ public class ItemConfigurator extends ItemACBasic {
 					player.sendMessage(new TextComponentTranslation("message.configurator.2"));
 				}
 				nbt.setTag("Path", path);
-			} else if(mode == 1) {
+			} else if(mode == 1) { // apply configuration
 				if(player.canPlayerEdit(pos.offset(side), side, stack)) {
-					TileEntity te = w.getTileEntity(pos);
 					if(te != null && ItemTransferCapability.getCap(te) != null) {
 						IItemTransferCapability cap = ItemTransferCapability.getCap(te);
 						NonNullList<ItemStack> filter = NonNullList.withSize(5, ItemStack.EMPTY);
@@ -128,7 +126,7 @@ public class ItemConfigurator extends ItemACBasic {
 						}
 						EnumFacing facing = EnumFacing.byIndex(nbt.getInteger("EntryFacing"));
 						TileEntity res = w.getTileEntity(positions.get(positions.size()-1));
-						if(res == null || ItemTransferEventHandler.getInventory(res, facing) == null) {
+						if(res == null || SpiritItemUtil.getInventory(res, facing) == null) {
 							player.sendMessage(new TextComponentTranslation("message.configurator.error.2"));
 							return EnumActionResult.FAIL;
 						}
@@ -141,13 +139,11 @@ public class ItemConfigurator extends ItemACBasic {
 						cfg.setupSubtypeFilter();
 
 						cap.addTransferConfiguration(cfg);
-						cap.setRunning(true);
 						player.sendMessage(new TextComponentTranslation("message.configurator.3"));
 					} else player.sendMessage(new TextComponentTranslation("message.configurator.error.3"));
 				} else player.sendMessage(new TextComponentTranslation("message.configurator.error.4"));
-			} else if(mode == 2)
+			} else if(mode == 2) // clear configuration
 				if(player.canPlayerEdit(pos.offset(side), side, stack)) {
-					TileEntity te = w.getTileEntity(pos);
 					if(te != null && ItemTransferCapability.getCap(te) != null) {
 						IItemTransferCapability cap = ItemTransferCapability.getCap(te);
 						cap.clearConfigurations();

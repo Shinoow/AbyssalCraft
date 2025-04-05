@@ -619,6 +619,9 @@ public class AbyssalCrafting {
 		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE), null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE),
 				null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE), null, new ItemStack(ACItems.configurator_shard, 1, OreDictionary.WILDCARD_VALUE)};
 		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spiritTablet", 3, -1, 5000F, new ItemStack(ACItems.configurator), new ItemStack(ACItems.life_crystal), spiritTabletOfferings));
+		Object[] spiritAltarOfferings= new Object[] {Items.GOLD_INGOT, Items.GOLD_INGOT, Items.GOLD_INGOT, new ItemStack(ACBlocks.cobblestone, 1, 0), new ItemStack(ACBlocks.cobblestone, 1, 0),
+				new ItemStack(ACBlocks.cobblestone, 1, 0), new ItemStack(ACBlocks.cobblestone, 1, 0), new ItemStack(ACBlocks.cobblestone, 1, 0)};
+		RitualRegistry.instance().registerRitual(new NecronomiconInfusionRitual("spiritAltar", 1, OreDictionary.WILDCARD_VALUE, 1000F, true, new ItemStack(ACBlocks.spirit_altar), new ItemStack(ACItems.shadow_gem), spiritAltarOfferings));
 		Object[] cthulhuofferings = new Object[]{new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0),
 				new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.shoggoth_flesh, 1, 0), new ItemStack(ACItems.essence, 1, 0), new ItemStack(ACItems.essence, 1, 1),
 				new ItemStack(ACItems.essence, 1, 2)};

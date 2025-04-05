@@ -620,7 +620,9 @@ necronomicon.text.itemtransportsystem.4=You don't necessarily have to lay out a 
 necronomicon.text.itemtransportsystem.5=With a keybind (check the item tooltip), you can open an inventory to set a filter, which support up to 5 Items, subtypes (a Block of Stone would also filter for Andesite, Granite, etc), NBT (a piece of enchanted armor would only allow for other pieces of enchanted armor). The filter is optional, and if not set anything is accepted.
 necronomicon.text.itemtransportsystem.6=When you're in the "Apply Configuration" mode, sneak right-click on the block you wish to transport items from. Side matters, so keep that in mind if the block only extracts from one side.
 necronomicon.text.itemtransportsystem.7=When you're in the "Remove Configuration" mode, you can remove all applied configurations from a block by sneak right-clicking them. Breaking and placing the block would do the same thing, but this saves you time in comparison.
-necronomicon.text.itemtransportsystem.8=There are two utility spells (named "Display Routes" and "Toll The Bell") which can aid you in keeping track of defined routes, and also starting/stopping them. "Display Routes" will reveal any active routes in your vicinity, and "Toll The Bell" will start or stop routes from the block you're looking at (or all nearby if not targeting one).
+necronomicon.text.itemtransportsystem.8=The Spirit Altar is the Block that manages the spirits that will move along the paths set by the Spirit Tablet. The altar is created through a ritual involving Gold Ingots, Darkstone Cobblestone and a Shadow Gem.
+necronomicon.text.itemtransportsystem.9=The presence of a blue flame in the golden bowl indicates if the altar is active. You can interact with the Spirit Altar through the Spirit Tablet.
+necronomicon.text.itemtransportsystem.10=If you shift right-click, it displays all connected routes. Right-clicking in "Set Path" mode, the Spirit Altar searches for nearby routes to monitor. Right-clicking in "Apply Configuration" mode starts/stops all connected routes. Right-clicking in "Remove Configuration" mode clears all connected routes.
 
 necronomicon.text.wip=This section is incomplete.
 
@@ -825,6 +827,8 @@ ac.ritual.curing=Ritual of Curing
 ac.ritual.curing.desc=By presenting 4 Dread Plague Antidotes, you cure the area of the Dread Plague and the Dreadlands, restoring what was there before. The closest non-dreadlands biome will take the place of the Dreadlands.
 ac.ritual.spiritTablet=Spirit Tablet
 ac.ritual.spiritTablet.desc=A Spirit Tablet is created by infusing a Life Crystal with 4 Spirit Tablet Shards. It's a tool that allows you to move Items between Blocks by having the Items move on their own. Read more about it in the Omothol section of the book.
+ac.ritual.spiritAltar=Spirit Altar
+ac.ritual.spiritAltar.desc=By infusing a Shadow Gem with 3 Gold Ingots and 5 Blocks of Darkstone Cobblestone, you force the soul of a sacrifice into controlling a network of Spirit Items. The Spirit Tablet gives commands to the Spirit Altar.
 ac.ritual.ethaxium=Ethaxium
 ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you transform the essence of the presented End Stone into Ethaxium
 
@@ -1189,6 +1193,7 @@ tile.calcifiedstone.name=Calcified Stone
 tile.door_dlt.name=Porte en Bois de Platane de l'Ombre
 tile.door_drt.name=porte en Bois de Platane Effroyable
 tile.multi_block.name=Multi-bloc
+tile.spirit_altar.name=Spirit Altar
 
 #Pre/Postfixes
 decorativestatue.prefix=%s Décorative

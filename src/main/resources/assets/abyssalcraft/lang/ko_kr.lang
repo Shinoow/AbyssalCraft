@@ -618,7 +618,9 @@ necronomicon.text.itemtransportsystem.4=굳이 원하지 않으면 항로를 정
 necronomicon.text.itemtransportsystem.5=키 바인딩(아이템 툴팁 확인)을 사용하여 인벤토리를 열어 필터를 설정할 수 있으며, 필터는 최대 5개의 항목, 하위 유형(돌 블럭에서도 안산암, 화강암 등을 필터링 할 수 있음), NBT(마법부여된 방어구 하나는 마법부여된 방어구 하나의 종류만 허용함)를 지원한다. 필터는 선택 사항이며, 설정되지 않은 경우 허용된다.
 necronomicon.text.itemtransportsystem.6="설정 적용" 모드인 경우 항목을 전송할 블록을 마우스 오른쪽 버튼으로 누르십시오. 측면 문제가 있으므로 블록이 한쪽에서만 추출되는 경우 이 점을 명심하십시오.
 necronomicon.text.itemtransportsystem.7="설정 제거" 모드에서는 적용된 모든 설정을 웅크리기 + 마우스 오른쪽 버튼으로 클릭하여 블록에서 제거할 수 있다. 블록을 부수고 놓는 것도 마찬가지지만, 이렇게 하면 시간을 절약할 수 있다.
-necronomicon.text.itemtransportsystem.8=정의된 경로를 추적하고 시작/중지하는 데 도움이 되는 두 가지 유틸리티 주문("경로 표시"와 "톨 더 벨")이 있다. "경로 표시"는 주변의 모든 활성 경로를 표시하며, "톨 더 벨"은 여러분이 보고 있는 블록(또는 한 블록을 대상으로 하지 않을 경우 인근 모든 경로)에서 경로를 시작하거나 중지할 것이다.
+necronomicon.text.itemtransportsystem.8=The Spirit Altar is the Block that manages the spirits that will move along the paths set by the Spirit Tablet. The altar is created through a ritual involving Gold Ingots, Darkstone Cobblestone and a Shadow Gem.
+necronomicon.text.itemtransportsystem.9=The presence of a blue flame in the golden bowl indicates if the altar is active. You can interact with the Spirit Altar through the Spirit Tablet.
+necronomicon.text.itemtransportsystem.10=If you shift right-click, it displays all connected routes. Right-clicking in "Set Path" mode, the Spirit Altar searches for nearby routes to monitor. Right-clicking in "Apply Configuration" mode starts/stops all connected routes. Right-clicking in "Remove Configuration" mode clears all connected routes.
 
 necronomicon.text.wip=이 섹션은 불완전합니다.
 
@@ -823,6 +825,8 @@ ac.ritual.curing=치유 의식
 ac.ritual.curing.desc=4개의 공포 역병 해독제로 공포 역병과 공포의 땅 지역을 치유할 수 있습니다. 이전에 있던 것을 복원합니다. 가장 가까운 공포의 땅 바이옴이 공포의 땅을 대신할 것입니다.
 ac.ritual.spiritTablet=영혼 태블릿
 ac.ritual.spiritTablet.desc=영혼 태블릿은 4개의 영혼 태블릿 조각에 생명 결정을 넣어 만듭니다. 아이템을 스스로 이동하도록 하여 블록 간에 아이템을 이동할 수 있는 도구입니다. 책의 오모톨 섹션에서 자세한 정보를 읽어보세요.
+ac.ritual.spiritAltar=Spirit Altar
+ac.ritual.spiritAltar.desc=By infusing a Shadow Gem with 3 Gold Ingots and 5 Blocks of Darkstone Cobblestone, you force the soul of a sacrifice into controlling a network of Spirit Items. The Spirit Tablet gives commands to the Spirit Altar.
 ac.ritual.ethaxium=Ethaxium
 ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you transform the essence of the presented End Stone into Ethaxium
 
@@ -1187,6 +1191,7 @@ tile.calcifiedstone.name=석회석
 tile.door_dlt.name=다크랜드 참나무 문
 tile.door_drt.name=공포나무 문
 tile.multi_block.name=멀티블록
+tile.spirit_altar.name=Spirit Altar
 
 #Pre/Postfixes
 decorativestatue.prefix=장식 %s

@@ -27,6 +27,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
+import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityProvider;
 import com.shinoow.abyssalcraft.common.enchantments.EnchantmentWeaponInfusion;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
@@ -57,6 +58,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
@@ -65,6 +67,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
@@ -587,6 +590,13 @@ public class AbyssalCraftEventHooks {
 			if(APIUtils.isCrystal(fuel))
 				event.setBurnTime(1000);
 		}
+	}
+
+	@SubscribeEvent
+	public void attachCapability(AttachCapabilitiesEvent<TileEntity> event) {
+		ResourceLocation rl = TileEntity.getKey(event.getObject().getClass());
+		if(rl != null && !InitHandler.INSTANCE.isTileBlackListed(rl.toString()))
+			event.addCapability(new ResourceLocation("abyssalcraft", "itemtransfer"), new ItemTransferCapabilityProvider());
 	}
 
 	@SubscribeEvent

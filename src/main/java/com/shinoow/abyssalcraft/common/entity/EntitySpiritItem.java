@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import java.util.*;
 
-import com.shinoow.abyssalcraft.common.handlers.ItemTransferEventHandler;
+import com.shinoow.abyssalcraft.lib.util.SpiritItemUtil;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -21,6 +21,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.items.IItemHandler;
@@ -80,13 +81,17 @@ public class EntitySpiritItem extends EntityItem {
 		collided = collidedHorizontally = collidedVertically = false;
 		if(world.isRemote) return;
 		target = route[pathIndex];
-		if(getPosition().distanceSq(target) < 1.0D) {
+		double d0 = posX - target.getX();
+		double d1 = posY - target.getY();
+		double d2 = posZ - target.getZ();
+		double d = d0 * d0 + d1 * d1 + d2 * d2; // more precise distanceSq
+		if(MathHelper.floor(d) <= 1D) { // makes the item "enter" at a closer proximity
 			//we're here?
 			if(pathIndex == route.length - 1) {
 				//journey is complete!
 				TileEntity te = world.getTileEntity(target);
 				if(te != null) {
-					IItemHandler inventory = ItemTransferEventHandler.getInventory(te, facing);
+					IItemHandler inventory = SpiritItemUtil.getInventory(te, facing);
 					if(inventory != null) {
 						ItemStack res = ItemStack.EMPTY;
 						ItemStack stack = getItem().copy();
@@ -106,19 +111,36 @@ public class EntitySpiritItem extends EntityItem {
 				pathIndex++;
 				dX = dY = dZ = 0;
 			}
-		} else {
-			if(target.getX() + 0.5D > posX)
-				dX = 0.1;
-			else if(target.getX() + 0.5D < posX)
-				dX = -0.1;
-			if(target.getY() + 0.3D > posY)
-				dY = 0.1;
-			else if(target.getY() + 0.3D < posY)
-				dY = -0.1;
-			if(target.getZ() + 0.5D > posZ)
-				dZ = 0.1;
-			else if(target.getZ() + 0.5D < posZ)
-				dZ = -0.1;
+		} else {// try to align the position to the middle of a block while moving
+
+			if(target.getX() != getPosition().getX()) {
+				if(target.getX() + 0.5D > posX)
+					dX = 0.1;
+				else if(target.getX() + 0.5D < posX)
+					dX = -0.1;
+			} else {
+				posX = getPosition().getX() + 0.5D;
+				dX = 0;
+			}
+			if(target.getY() != getPosition().getY()) {
+
+				if(target.getY() + 0.3D > posY)
+					dY = 0.05;
+				else if(target.getY() + 0.3D < posY)
+					dY = -0.05;
+			} else {
+				posY = getPosition().getY() + 0.2D;
+				dY = 0;
+			}
+			if(target.getZ() != getPosition().getZ()) {
+				if(target.getZ() + 0.5D > posZ)
+					dZ = 0.1;
+				else if(target.getZ() + 0.5D < posZ)
+					dZ = -0.1;
+			} else {
+				posZ = getPosition().getZ() + 0.5D;
+				dZ = 0;
+			}
 
 			motionX = dX;
 			if(target.getY() > posY || target.getY() < posY)

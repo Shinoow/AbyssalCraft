@@ -366,6 +366,8 @@ public class NecronomiconText {
 	public static String ITEM_TRANSPORT_TUT_6 = "necronomicon.text.itemtransportsystem.6";
 	public static String ITEM_TRANSPORT_TUT_7 = "necronomicon.text.itemtransportsystem.7";
 	public static String ITEM_TRANSPORT_TUT_8 = "necronomicon.text.itemtransportsystem.8";
+	public static String ITEM_TRANSPORT_TUT_9 = "necronomicon.text.itemtransportsystem.9";
+	public static String ITEM_TRANSPORT_TUT_10 = "necronomicon.text.itemtransportsystem.10";
 
 	public static String WIP = "necronomicon.text.wip";
 
