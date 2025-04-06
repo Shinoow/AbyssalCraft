@@ -461,6 +461,9 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	@Override
 	public void onLivingUpdate()
 	{
+		if(ACConfig.sacthothHealingAmount > 0 && isEntityAlive() && ticksExisted % ACConfig.sacthothHealingPace == 0)
+			heal(ACConfig.sacthothHealingAmount);
+
 		for (int i = 0; i < 2 * (getBrightness() > 0.1f ? getBrightness() : 0) && ACConfig.particleEntity; ++i)
 			world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
 

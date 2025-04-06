@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 import java.util.Calendar;
 import java.util.UUID;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
@@ -255,10 +256,14 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 	{
 		Object entity = super.onInitialSpawn(difficulty, par1EntityLivingData);
 		float f = difficulty.getClampedAdditionalDifficulty();
-		setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
+		setCanPickUpLoot(ACConfig.hardcoreMode ? true : rand.nextFloat() < 0.55F * f);
 
-		setEquipmentBasedOnDifficulty(difficulty);
-		setEnchantmentBasedOnDifficulty(difficulty);
+		if(ACConfig.hardcoreMode)
+			EntityUtil.suitUp(this, false);
+		else {
+			setEquipmentBasedOnDifficulty(difficulty);
+			setEnchantmentBasedOnDifficulty(difficulty);
+		}
 
 		if (entity == null)
 			entity = new EntityAntiZombie.GroupData(world.rand.nextFloat() < ForgeModContainer.zombieBabyChance, world.rand.nextFloat() < 0.05F, null);

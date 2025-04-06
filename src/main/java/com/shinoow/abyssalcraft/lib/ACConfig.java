@@ -30,8 +30,8 @@ public class ACConfig {
 	public static int evilAnimalSpawnWeight, portalCooldown, demonAnimalSpawnWeight, shoggothLairSpawnRate, acidSpitFrequency,
 	knowledgeSyncDelay, shoggothLairSpawnRateRivers, darkOffspringSpawnWeight, monolithBuildingCooldown, corruptionRitualRange,
 	cleansingRitualRange, purgingRitualRange, odbExplosionSize, antimatterExplosionSize, enchantmentMaxLevel, curingRitualRange,
-	shoggothLairGenerationDistance, biomassPlayerDistance, biomassMaxSpawn,
-	biomassCooldown, biomassShoggothDistance;
+	shoggothLairGenerationDistance, jzaharHealingPace, jzaharHealingAmount, chagarothHealingPace, chagarothHealingAmount,
+	sacthothHealingPace, sacthothHealingAmount, biomassPlayerDistance, biomassMaxSpawn, biomassCooldown, biomassShoggothDistance;
 	public static double damageAmpl, depthsHelmetOverlayOpacity;
 	public static boolean shoggothOoze, oozeExpire, consumeItems, shieldsBlockAcid, shoggothGlowingEyes;
 	public static double acidResistanceHardness;

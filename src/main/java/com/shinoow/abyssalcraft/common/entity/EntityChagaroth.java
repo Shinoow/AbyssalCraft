@@ -454,6 +454,9 @@ public class EntityChagaroth extends EntityMob implements IDreadEntity {
 	@Override
 	public void onLivingUpdate()
 	{
+		if(ACConfig.chagarothHealingAmount > 0 && isEntityAlive() && ticksExisted % ACConfig.chagarothHealingPace == 0)
+			heal(ACConfig.chagarothHealingAmount);
+
 		setSize(2.25F, 4.5F);
 
 		if (ticksExisted % 40 == 0 && !world.isRemote)

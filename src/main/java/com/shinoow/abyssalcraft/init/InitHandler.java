@@ -369,6 +369,12 @@ public class InitHandler implements ILifeCycleHandler {
 		itemTransportBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Item Transportation System Blacklist", new String[0], "Tile Entities added to this list will not be usable with the Item Transportation System (eg. you can't move Items from them). Format: modid:name").getStringList();
 		enchantMergedBooks = cfg.get(Configuration.CATEGORY_GENERAL, "Mass Enchantment Merged Books", true, "Toggles whether or not you can use Enchanted Books that have been merged on an Anvil in the Mass Enchantment ritual.").getBoolean();
 		no_potion_clouds = cfg.get(Configuration.CATEGORY_GENERAL, "No plague Potion Clouds", false, "Toggles whether or not victims dying to the Coralium Plague and Dread Plague create potion clouds on death (can save performance if disabled).").getBoolean();
+		jzaharHealingPace = cfg.get(Configuration.CATEGORY_GENERAL, "J'zahar Healing Pace", 200, "The pace at which J'zahar regenerates health (in ticks)", 20, 1200).getInt();
+		jzaharHealingAmount = cfg.get(Configuration.CATEGORY_GENERAL, "J'zahar Heal Amount", 1, "The amount of HP J'zahar heals when he regenerates health (set to 0 to disable healing)", 0, 100).getInt();
+		chagarothHealingPace = cfg.get(Configuration.CATEGORY_GENERAL, "Cha'garoth Healing Pace", 200, "The pace at which Cha'garoth regenerates health (in ticks)", 20, 1200).getInt();
+		chagarothHealingAmount = cfg.get(Configuration.CATEGORY_GENERAL, "Cha'garoth Heal Amount", 1, "The amount of HP Cha'garoth heals when he regenerates health (setto 0 to disable healing)", 0, 100).getInt();
+		sacthothHealingPace = cfg.get(Configuration.CATEGORY_GENERAL, "Sacthoth Healing Pace", 200, "The pace at which Sacthoth regenerates health (in ticks)", 20, 1200).getInt();
+		sacthothHealingAmount = cfg.get(Configuration.CATEGORY_GENERAL, "Sacthoth Heal Amount", 1, "The amount of HP Sacthoth heals when he regenerates health (setto 0 to disable healing)", 0, 100).getInt();
 
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 4, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 4, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -522,6 +528,12 @@ public class InitHandler implements ILifeCycleHandler {
 		biomassMaxSpawn = MathHelper.clamp(biomassMaxSpawn, 1, 10);
 		biomassCooldown = MathHelper.clamp(biomassCooldown, 20, 1200);
 		biomassShoggothDistance = MathHelper.clamp(biomassShoggothDistance, 5, 48);
+		jzaharHealingPace = MathHelper.clamp(jzaharHealingPace, 20, 1200);
+		jzaharHealingAmount = MathHelper.clamp(jzaharHealingAmount, 0, 100);
+		chagarothHealingPace = MathHelper.clamp(chagarothHealingPace, 20, 1200);
+		chagarothHealingAmount = MathHelper.clamp(chagarothHealingAmount, 0, 100);
+		sacthothHealingPace = MathHelper.clamp(sacthothHealingPace, 20, 1200);
+		sacthothHealingAmount = MathHelper.clamp(sacthothHealingAmount, 0, 100);
 
 		demon_transformations.clear();
 

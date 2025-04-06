@@ -54,6 +54,8 @@ public class CommonProxy {
 
 	public void spawnParticle(String particleName, double posX, double posY, double posZ, double velX, double velY, double velZ) {}
 
+	public void spawnItemParticle(double posX, double posY, double posZ, double velX, double velY, double velZ, int[] data) {}
+
 	public int getParticleCount() {
 		return 0;
 	}
