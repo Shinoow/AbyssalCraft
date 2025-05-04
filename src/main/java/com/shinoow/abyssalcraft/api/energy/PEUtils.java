@@ -506,4 +506,19 @@ public class PEUtils {
 		}
 		return 0;
 	}
+
+	/**
+	 * Sets PE stored in the ItemStack to the IEnergyContainer it corresponds to<br>
+	 * (Call in onBlockPlacedBy() in your Block)
+	 * @param world Current world
+	 * @param pos Position of the IEnergyContainer
+	 * @param stack ItemStack representation of the IEnergyContainer
+	 */
+	public static void setPEOnPlacement(World world, BlockPos pos, ItemStack stack) {
+		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("PotEnergy")){
+			TileEntity te = world.getTileEntity(pos);
+			if(te instanceof IEnergyContainer)
+				((IEnergyContainer) te).setEnergy(getContainedEnergy(stack));
+		}
+	}
 }

@@ -11,15 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.ritual;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
+import com.shinoow.abyssalcraft.api.block.IRitualPedestal;
 
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -109,26 +107,11 @@ public class NecronomiconTransformationRitual extends NecronomiconRitual {
 
 		world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
 
-		List<BlockPos> PEDESTAL_POSITIONS = Arrays.asList(
-				new BlockPos(-3, 0, 0), new BlockPos(0, 0, -3),
-				new BlockPos(3, 0, 0), new BlockPos(0, 0, 3),
-				new BlockPos(-2, 0, 2), new BlockPos(-2, 0, -2),
-				new BlockPos(2, 0, 2), new BlockPos(2, 0, -2)
-				);
-
-		// Takes each pedestal and placed the output Item on them
-		for(BlockPos pos1 : PEDESTAL_POSITIONS) {
-			BlockPos pedPos = pos.add(pos1);
-			TileEntity pedestal = world.getTileEntity(pos.add(pos1));
-			if(pedestal != null) {
-				NBTTagCompound compound = new NBTTagCompound();
-				NBTTagCompound newItem = new NBTTagCompound();
-				pedestal.writeToNBT(compound);
-				output.writeToNBT(newItem);
-				compound.setTag("Item", newItem);
-				pedestal.readFromNBT(compound);
-				world.notifyBlockUpdate(pedPos, world.getBlockState(pedPos), world.getBlockState(pedPos), 2);
-			}
+		TileEntity altarTile = world.getTileEntity(pos);
+		if(altarTile instanceof IRitualAltar) {
+			IRitualAltar altar = (IRitualAltar) altarTile;
+			for(IRitualPedestal pedestal : altar.getPedestals())
+				pedestal.setItem(output.copy());
 		}
 	}
 

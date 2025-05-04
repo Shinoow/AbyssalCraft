@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.lib.util.blocks;
+package com.shinoow.abyssalcraft.api.block;
 
 import java.util.List;
 
@@ -25,7 +25,8 @@ import net.minecraft.world.World;
 
 /**
  * Internal interface for Ritual Altar TE's<br>
- * This shouldn't be used by other mods.
+ * This shouldn't be implemented by other mods.<br>
+ * You can use this to access data from an altar
  * @author shinoow
  *
  */

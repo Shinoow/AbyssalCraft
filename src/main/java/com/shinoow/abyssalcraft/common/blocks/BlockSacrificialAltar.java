@@ -14,10 +14,10 @@ package com.shinoow.abyssalcraft.common.blocks;
 import java.util.List;
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.api.block.SingletonInventoryUtil;
 import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntitySacrificialAltar;
 import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.util.blocks.SingletonInventoryUtil;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;

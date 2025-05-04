@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ISingletonInventory;
 import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
-import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;

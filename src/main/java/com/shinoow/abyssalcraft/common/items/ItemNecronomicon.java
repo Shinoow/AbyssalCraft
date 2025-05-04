@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -22,7 +23,6 @@ import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

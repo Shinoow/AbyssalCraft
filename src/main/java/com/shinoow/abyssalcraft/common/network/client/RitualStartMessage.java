@@ -13,10 +13,10 @@ package com.shinoow.abyssalcraft.common.network.client;
 
 import java.io.IOException;
 
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.network.AbstractMessage.AbstractClientMessage;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;

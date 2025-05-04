@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.ritual;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
@@ -19,7 +20,6 @@ import com.shinoow.abyssalcraft.common.entity.EntityDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityGreaterDreadSpawn;
 import com.shinoow.abyssalcraft.common.entity.EntityLesserDreadbeast;
 import com.shinoow.abyssalcraft.common.world.data.NecromancyWorldSavedData;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

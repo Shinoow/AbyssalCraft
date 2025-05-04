@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 import javax.annotation.Nullable;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.ISingletonInventory;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
@@ -21,7 +22,6 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 import net.minecraft.entity.*;

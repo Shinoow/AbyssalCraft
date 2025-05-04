@@ -13,11 +13,11 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.*;
 
+import com.shinoow.abyssalcraft.api.block.SingletonInventoryUtil;
 import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredSacrificialAltar;
 import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.util.blocks.SingletonInventoryUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

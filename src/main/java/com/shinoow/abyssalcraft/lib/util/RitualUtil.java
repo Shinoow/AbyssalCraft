@@ -16,10 +16,10 @@ import java.util.Map.Entry;
 import java.util.function.Supplier;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.block.IRitualPedestal;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

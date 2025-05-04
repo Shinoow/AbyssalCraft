@@ -17,15 +17,13 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualAltar;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.block.BlockSingletonInventory;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
-import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
-import com.shinoow.abyssalcraft.lib.util.blocks.SingletonInventoryUtil;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -42,7 +40,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRitualAltar extends BlockContainer {
+public class BlockRitualAltar extends BlockSingletonInventory {
 
 	//	public static final PropertyEnum<EnumRitualMatType> MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 	public static final Map<EnumRitualMatType, Block> VARIANTS = new HashMap<>();
@@ -61,6 +59,7 @@ public class BlockRitualAltar extends BlockContainer {
 		RitualUtil.addAltarTransformation(dropState, getDefaultState(), bookType);
 		VARIANTS.put(type, this);
 		this.type = type;
+		dropNormally = true;
 	}
 
 	public int getTypeColor() {
@@ -143,19 +142,6 @@ public class BlockRitualAltar extends BlockContainer {
 				par1World.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.75, pos.getY() + 1.05, pos.getZ() + 0.25, 0.0D, 0.0D, 0.0D);
 			}
 		}
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		return SingletonInventoryUtil.handleBlockActivation(world, pos, player, player.getHeldItem(hand));
-	}
-
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
-	{
-		BlockUtil.dropTileEntityAsItemWithExtra(world, pos, state, this);
-
-		super.breakBlock(world, pos, state);
 	}
 
 	@Override

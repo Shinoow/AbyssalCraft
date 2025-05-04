@@ -13,12 +13,13 @@ package com.shinoow.abyssalcraft.api.ritual;
 
 import java.util.Map;
 
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -93,11 +94,11 @@ public class NecronomiconEnchantmentRitual extends NecronomiconRitual {
 
 		TileEntity altar = world.getTileEntity(pos);
 
-		NBTTagCompound compound = new NBTTagCompound();
-		altar.writeToNBT(compound);
-		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
+		ItemStack stack = ItemStack.EMPTY;
+		if(altar instanceof IRitualAltar)
+			stack = ((IRitualAltar) altar).getItem();
 
-		return canEnchant(new ItemStack(nbtItem));
+		return canEnchant(stack);
 	}
 
 	private boolean canEnchant(ItemStack stack){
@@ -119,16 +120,13 @@ public class NecronomiconEnchantmentRitual extends NecronomiconRitual {
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player) {
 		TileEntity altar = world.getTileEntity(pos);
 
-		NBTTagCompound compound = new NBTTagCompound();
-		altar.writeToNBT(compound);
-		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
+		ItemStack stack = ItemStack.EMPTY;
+		if(altar instanceof IRitualAltar)
+			stack = ((IRitualAltar) altar).getItem();
 
-		if(canEnchant(new ItemStack(nbtItem))){
-			ItemStack item = new ItemStack(nbtItem);
-			item.addEnchantment(enchantment.enchantment, enchantment.enchantmentLevel);
-			item.writeToNBT(nbtItem);
-			compound.setTag("Item", nbtItem);
+		if(canEnchant(stack)){
+			stack.addEnchantment(enchantment.enchantment, enchantment.enchantmentLevel);
+			((IRitualAltar) altar).setItem(stack);
 		}
-		altar.readFromNBT(compound);
 	}
 }

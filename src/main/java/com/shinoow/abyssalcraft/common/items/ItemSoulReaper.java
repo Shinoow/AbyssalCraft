@@ -50,9 +50,9 @@ public class ItemSoulReaper extends ItemACSword {
 
 			int souls = getSouls(stack);
 
-			if(isWithin(souls, 60, 125)) {
+			if(isWithin(souls, 60, 125))
 				holder.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 0, false, false));
-			} else if(isWithin(souls, 125, 250)) {
+			else if(isWithin(souls, 125, 250)) {
 				holder.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 1, false, false));
 				holder.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 0, false, false));
 			} else if(isWithin(souls, 250, 500)) {

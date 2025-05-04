@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.ritual;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -21,7 +22,6 @@ import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
 import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import com.shinoow.abyssalcraft.common.items.ItemGatewayKey;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

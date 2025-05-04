@@ -12,9 +12,9 @@
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
+import com.shinoow.abyssalcraft.api.block.IRitualPedestal;
 import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;

@@ -12,11 +12,11 @@
 package com.shinoow.abyssalcraft.api.ritual;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
 
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -93,19 +93,13 @@ public class NecronomiconCreationRitual extends NecronomiconRitual {
 
 		world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY() + 1, pos.getZ(), false));
 
-		TileEntity altar = world.getTileEntity(pos);
+		TileEntity altarTile = world.getTileEntity(pos);
 
-		NBTTagCompound compound = new NBTTagCompound();
-		NBTTagCompound newItem = new NBTTagCompound();
-		altar.writeToNBT(compound);
-		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
-		ItemStack stack = new ItemStack(nbtItem);
-
-		if(!APIUtils.areStacksEqual(stack, item, true)){
-			item.writeToNBT(newItem);
-			compound.setTag("Item", newItem);
+		if(altarTile instanceof IRitualAltar) {
+			IRitualAltar altar = (IRitualAltar) altarTile;
+			if(!APIUtils.areStacksEqual(altar.getItem(), item, true))
+				altar.setItem(item.copy());
 		}
-		altar.readFromNBT(compound);
 	}
 
 	@Override

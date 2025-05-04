@@ -15,11 +15,11 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
+import com.shinoow.abyssalcraft.api.block.IRitualPedestal;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.lib.ACConfig;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;

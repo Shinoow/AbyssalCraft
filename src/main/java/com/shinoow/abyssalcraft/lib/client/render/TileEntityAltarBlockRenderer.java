@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.client.render;
 
-import com.shinoow.abyssalcraft.lib.util.blocks.ISingletonInventory;
+import com.shinoow.abyssalcraft.api.block.ISingletonInventory;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

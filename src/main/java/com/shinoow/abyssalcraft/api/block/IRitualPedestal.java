@@ -9,13 +9,14 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.lib.util.blocks;
+package com.shinoow.abyssalcraft.api.block;
 
 import net.minecraft.util.math.BlockPos;
 
 /**
  * Internal interface for Ritual Pedestals TE's<br>
- * This shouldn't be used by other mods.<br>
+ * This shouldn't be implemented by other mods.<br>
+ * You can use this to access data from a pedestal<br>
  * This interface exists in case I add more methods to the pedestals
  * @author shinoow
  *

@@ -19,8 +19,7 @@ import org.lwjgl.input.Keyboard;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
-import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.api.block.ICrystalBlock;
+import com.shinoow.abyssalcraft.api.block.*;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
@@ -53,8 +52,6 @@ import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityPedestalBlockRenderer;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

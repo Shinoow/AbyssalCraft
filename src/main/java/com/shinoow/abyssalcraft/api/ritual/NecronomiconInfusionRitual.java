@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.api.ritual;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -88,11 +89,11 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 
 		TileEntity altar = world.getTileEntity(pos);
 
-		NBTTagCompound compound = new NBTTagCompound();
-		altar.writeToNBT(compound);
-		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
+		ItemStack stack = ItemStack.EMPTY;
+		if(altar instanceof IRitualAltar)
+			stack = ((IRitualAltar) altar).getItem();
 
-		return APIUtils.areObjectsEqual(new ItemStack(nbtItem), sacrifice, false);
+		return APIUtils.areObjectsEqual(stack, sacrifice, false);
 	}
 
 	@Override
@@ -100,33 +101,35 @@ public class NecronomiconInfusionRitual extends NecronomiconCreationRitual {
 		if(canCompleteRitual(world, pos, player)){
 			NBTTagCompound data = new NBTTagCompound();
 			if(tags != null && tags.length > 0){
-				TileEntity altar = world.getTileEntity(pos);
+				TileEntity altarTile = world.getTileEntity(pos);
 
-				NBTTagCompound compound = new NBTTagCompound();
-				altar.writeToNBT(compound);
-				ItemStack stack = new ItemStack(compound.getCompoundTag("Item"));
-				if(!stack.hasTagCompound())
-					stack.setTagCompound(new NBTTagCompound());
-				for(String s : tags)
-					if(stack.getTagCompound().hasKey(s))
-						data.setTag(s, stack.getTagCompound().getTag(s));
+				if(altarTile instanceof IRitualAltar) {
+					IRitualAltar altar = (IRitualAltar) altarTile;
+
+					ItemStack stack = altar.getItem();
+					if(!stack.hasTagCompound())
+						stack.setTagCompound(new NBTTagCompound());
+					for(String s : tags)
+						if(stack.getTagCompound().hasKey(s))
+							data.setTag(s, stack.getTagCompound().getTag(s));
+				}
+
 			}
 			super.completeRitualServer(world, pos, player);
 			if(!data.isEmpty()){
-				TileEntity altar = world.getTileEntity(pos);
+				TileEntity altarTile = world.getTileEntity(pos);
 
-				NBTTagCompound compound = new NBTTagCompound();
-				altar.writeToNBT(compound);
-				ItemStack stack = new ItemStack(compound.getCompoundTag("Item"));
-				if(!stack.hasTagCompound())
-					stack.setTagCompound(new NBTTagCompound());
-				for(String e : tags)
-					if(data.hasKey(e))
-						stack.getTagCompound().setTag(e, data.getTag(e));
-				NBTTagCompound item = new NBTTagCompound();
-				stack.writeToNBT(item);
-				compound.setTag("Item", item);
-				altar.readFromNBT(compound);
+				if(altarTile instanceof IRitualAltar) {
+					IRitualAltar altar = (IRitualAltar) altarTile;
+
+					ItemStack stack = altar.getItem();
+					if(!stack.hasTagCompound())
+						stack.setTagCompound(new NBTTagCompound());
+					for(String e : tags)
+						if(data.hasKey(e))
+							stack.getTagCompound().setTag(e, data.getTag(e));
+					altar.setItem(stack);
+				}
 			}
 		}
 	}

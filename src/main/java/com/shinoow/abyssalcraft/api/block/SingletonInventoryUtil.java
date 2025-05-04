@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.lib.util.blocks;
+package com.shinoow.abyssalcraft.api.block;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

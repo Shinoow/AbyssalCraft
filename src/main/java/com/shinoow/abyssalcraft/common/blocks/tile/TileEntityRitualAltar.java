@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.block.IRitualAltar;
+import com.shinoow.abyssalcraft.api.block.IRitualPedestal;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.api.energy.disruption.DisruptionEntry;
@@ -37,8 +39,6 @@ import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualAltar;
-import com.shinoow.abyssalcraft.lib.util.blocks.IRitualPedestal;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
