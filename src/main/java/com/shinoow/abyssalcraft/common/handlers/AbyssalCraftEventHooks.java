@@ -51,7 +51,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -78,15 +78,19 @@ public class AbyssalCraftEventHooks {
 	public void populateChunk(PopulateChunkEvent.Pre event) {
 		Chunk chunk = event.getWorld().getChunk(event.getChunkX(), event.getChunkZ());
 		for (ExtendedBlockStorage storage : chunk.getBlockStorageArray())
-			if (storage != null && storage.getYLocation() >= 60)
+			if (storage != null && storage.getYLocation() >= 60) {
+				MutableBlockPos pos = new MutableBlockPos();
 				for (int x = 0; x < 16; ++x)
 					for (int y = 0; y < 16; ++y)
-						for (int z = 0; z < 16; ++z)
-							if(chunk.getBiome(new BlockPos(x, y, z), event.getWorld().getBiomeProvider()) == ACBiomes.darklands_mountains) {
+						for (int z = 0; z < 16; ++z) {
+							pos.setPos((event.getChunkX() << 4) + x, y, (event.getChunkZ() << 4) + z);
+							if(chunk.getBiome(pos, event.getWorld().getBiomeProvider()) == ACBiomes.darklands_mountains) {
 								Block block = storage.get(x, y, z).getBlock();
 								if (block == Blocks.STONE || block == ACBlocks.abyssal_stone)
 									storage.set(x, y, z, ACBlocks.darkstone.getDefaultState());
 							}
+						}
+			}
 	}
 
 	//	@SubscribeEvent
