@@ -12,6 +12,8 @@
 package com.shinoow.abyssalcraft.common.entity;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualPedestal;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
@@ -153,24 +155,31 @@ public class EntityBlackHole extends Entity
 
 		speed += 0.0005;
 
-		int i = MathHelper.floor(posY);
-		int i1 = MathHelper.floor(posX);
-		int j1 = MathHelper.floor(posZ);
-		for (int l1 = -6; l1 <= 6; l1++)
-			for (int i2 = -6; i2 <= 6; i2++)
-				for (int j = -6; j <= 6; j++)
-				{
-					int j2 = i1 + l1;
-					int k = i + j;
-					int l = j1 + i2;
-					BlockPos pos = new BlockPos(j2, k, l);
-					IBlockState state = world.getBlockState(pos);
-					if (!state.getBlock().isAir(state, world, pos) && rand.nextInt(10) == 0 && !world.isRemote && world.isAreaLoaded(getPosition().add(-32, -32, -32), getPosition().add(32, 32, 32)) && state.getBlockHardness(world, pos) != -1)
-						if (state.getMaterial().isLiquid())
-							world.setBlockToAir(new BlockPos(j2, k, l));
-						else
-							world.spawnEntity(new EntityFallingBlock(world, j2, k + 0.5D, l, state));
-				}
+		if(!world.isRemote) {
+			int i = MathHelper.floor(posY);
+			int i1 = MathHelper.floor(posX);
+			int j1 = MathHelper.floor(posZ);
+			for (int l1 = -6; l1 <= 6; l1++)
+				for (int i2 = -6; i2 <= 6; i2++)
+					for (int j = -6; j <= 6; j++)
+					{
+						int j2 = i1 + l1;
+						int k = i + j;
+						int l = j1 + i2;
+						BlockPos pos = new BlockPos(j2, k, l);
+						IBlockState state = world.getBlockState(pos);
+						if (!state.getBlock().isAir(state, world, pos)
+								&& rand.nextInt(10) == 0
+								&& world.isAreaLoaded(getPosition().add(-32, -32, -32), getPosition().add(32, 32, 32))
+								&& state.getBlock().getExplosionResistance(world, pos, this, null) < 600000
+								&& !(state.getBlock() instanceof BlockRitualAltar)
+								&& !(state.getBlock() instanceof BlockRitualPedestal))
+							if (state.getMaterial().isLiquid())
+								world.setBlockToAir(new BlockPos(j2, k, l));
+							else
+								world.spawnEntity(new EntityFallingBlock(world, j2, k + 0.5D, l, state));
+					}
+		}
 	}
 
 	@Override
