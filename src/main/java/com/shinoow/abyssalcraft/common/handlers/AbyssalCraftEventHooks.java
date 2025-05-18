@@ -390,37 +390,65 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent event){
-		if(event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().world.isRemote){
-			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-			if(event.getSource().getTrueSource() instanceof EntityEvilSheep)
-				((EntityEvilSheep)event.getSource().getTrueSource()).setKilledPlayer(player);
-			else if(event.getSource().getTrueSource() instanceof EntityAntiPlayer && player.getRNG().nextBoolean()) {
-				EntityAntiPlayer antiPlayer = new EntityAntiPlayer(player.world);
-				antiPlayer.copyLocationAndAnglesFrom(player);
-				antiPlayer.onInitialSpawn(player.world.getDifficultyForLocation(event.getSource().getTrueSource().getPosition()), (IEntityLivingData)null);
-				antiPlayer.setCustomNameTag(invert(player.getName()));
-				antiPlayer.enablePersistence();
-				player.world.spawnEntity(antiPlayer);
-				player.world.playEvent((EntityPlayer)null, 1016, event.getSource().getTrueSource().getPosition(), 0);
+		if(!event.getEntityLiving().world.isRemote) {
+			EntityLivingBase e = event.getEntityLiving();
+			boolean alreadySpawned = false;
+			if(e instanceof EntityPlayer){
+				EntityPlayer player = (EntityPlayer)e;
+				if(event.getSource().getTrueSource() instanceof EntityEvilSheep)
+					((EntityEvilSheep)event.getSource().getTrueSource()).setKilledPlayer(player);
+				else if(event.getSource().getTrueSource() instanceof EntityAntiPlayer && player.getRNG().nextBoolean()) {
+					EntityAntiPlayer antiPlayer = new EntityAntiPlayer(player.world);
+					antiPlayer.copyLocationAndAnglesFrom(player);
+					antiPlayer.onInitialSpawn(player.world.getDifficultyForLocation(event.getSource().getTrueSource().getPosition()), (IEntityLivingData)null);
+					antiPlayer.setCustomNameTag(invert(player.getName()));
+					antiPlayer.enablePersistence();
+					player.world.spawnEntity(antiPlayer);
+					player.world.playEvent((EntityPlayer)null, 1016, event.getSource().getTrueSource().getPosition(), 0);
+					alreadySpawned = true;
+				}
+			} else if(e instanceof EntityLiving && e.hasCustomName() && e.isNonBoss()) {
+				NecromancyWorldSavedData.get(e.world).storeData(e.getName(), e.serializeNBT(), calculateSize(e.height));
+			} else if(EntityList.getKey(e) != null){
+				if(!(e instanceof EntityEvilAnimal) && !(e instanceof EntityDemonAnimal)){
+					Tuple<Integer, Float> data = InitHandler.demon_transformations.get(EntityList.getKey(e));
+					World world = e.world;
+					if(data != null && world.rand.nextFloat() < data.getSecond()){
+						EntityLiving demon = getDemon(data.getFirst(), world);
+						demon.copyLocationAndAnglesFrom(e);
+						world.removeEntity(e);
+						demon.onInitialSpawn(world.getDifficultyForLocation(e.getPosition()), (IEntityLivingData)null);
+						world.spawnEntity(demon);
+						alreadySpawned = true;
+					}
+				}
 			}
-		} else if(event.getEntityLiving() instanceof EntityLiving && event.getEntityLiving().hasCustomName() &&
-				event.getEntityLiving().isNonBoss() && !event.getEntityLiving().world.isRemote) {
-			EntityLivingBase e = event.getEntityLiving();
-			NecromancyWorldSavedData.get(e.world).storeData(e.getName(), e.serializeNBT(), calculateSize(e.height));
-		} else if(EntityList.getKey(event.getEntityLiving()) != null){
-			EntityLivingBase e = event.getEntityLiving();
-			if(!(e instanceof EntityEvilAnimal) && !(e instanceof EntityDemonAnimal)){
-				Tuple<Integer, Float> data = InitHandler.demon_transformations.get(EntityList.getKey(e));
-				World world = event.getEntityLiving().world;
-				if(data != null && world.rand.nextFloat() < data.getSecond() && !world.isRemote){
-					EntityLiving demon = getDemon(data.getFirst(), world);
-					demon.copyLocationAndAnglesFrom(e);
+			if(e.dimension == ACLib.dark_realm_id || (event.getSource().getTrueSource() instanceof EntityLiving
+					&& ((EntityLivingBase) event.getSource().getTrueSource()).getCreatureAttribute() == AbyssalCraftAPI.SHADOW)
+					|| event.getSource() == AbyssalCraftAPI.shadow) {
+				World world = e.getEntityWorld();
+				if(e instanceof EntityPlayer && !alreadySpawned) {
+					EntityShadowMonster monster = new EntityShadowMonster(world);
+					monster.copyLocationAndAnglesFrom(e);
+					monster.onInitialSpawn(world.getDifficultyForLocation(e.getPosition()), null);
+					monster.setCustomNameTag(e.getName());
+					monster.enablePersistence();
+					world.spawnEntity(monster);
+					world.playEvent(null, 1016, e.getPosition(), 0);
+					//TODO could have some soul mechanic stuff here, eg. "Soul of X", with something hooked up to that
+				} else if(e.getCreatureAttribute() != AbyssalCraftAPI.SHADOW
+						&& world.rand.nextBoolean() && !alreadySpawned) {
+					EntityShadowCreature crreature = new EntityShadowCreature(world);
+					crreature.copyLocationAndAnglesFrom(e);
+					if(e.hasCustomName())
+						crreature.setCustomNameTag(e.getCustomNameTag());
 					world.removeEntity(e);
-					demon.onInitialSpawn(world.getDifficultyForLocation(e.getPosition()), (IEntityLivingData)null);
-					world.spawnEntity(demon);
+					crreature.onInitialSpawn(world.getDifficultyForLocation(e.getPosition()), null);
+					world.spawnEntity(crreature);
 				}
 			}
 		}
+
 	}
 
 	private int calculateSize(float height){
