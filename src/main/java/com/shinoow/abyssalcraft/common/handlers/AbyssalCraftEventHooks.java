@@ -26,6 +26,8 @@ import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityProvider
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.EntityAntiPlayer;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityGhoulBase;
+import com.shinoow.abyssalcraft.common.entity.ghoul.EntityShadowGhoul;
 import com.shinoow.abyssalcraft.common.items.ItemCrystalBag;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.common.world.data.NecromancyWorldSavedData;
@@ -438,13 +440,20 @@ public class AbyssalCraftEventHooks {
 					//TODO could have some soul mechanic stuff here, eg. "Soul of X", with something hooked up to that
 				} else if(e.getCreatureAttribute() != AbyssalCraftAPI.SHADOW
 						&& world.rand.nextBoolean() && !alreadySpawned) {
-					EntityShadowCreature crreature = new EntityShadowCreature(world);
-					crreature.copyLocationAndAnglesFrom(e);
+					EntityLiving shadow = new EntityShadowCreature(world);
+					if(e instanceof EntityGhoulBase) {
+						shadow = new EntityShadowGhoul(world);
+					} else if(e.height >= 2.2F) {
+						shadow = new EntityShadowBeast(world);
+					} else if(e.height >= 1.2F) {
+						shadow = new EntityShadowMonster(world);
+					}
+					shadow.copyLocationAndAnglesFrom(e);
 					if(e.hasCustomName())
-						crreature.setCustomNameTag(e.getCustomNameTag());
+						shadow.setCustomNameTag(e.getCustomNameTag());
 					world.removeEntity(e);
-					crreature.onInitialSpawn(world.getDifficultyForLocation(e.getPosition()), null);
-					world.spawnEntity(crreature);
+					shadow.onInitialSpawn(world.getDifficultyForLocation(e.getPosition()), null);
+					world.spawnEntity(shadow);
 				}
 			}
 		}
