@@ -749,31 +749,37 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 					else if(entity instanceof EntityLivingBase || entity instanceof EntityItem)
 						entity.setDead();
 			}
-			if(world.getClosestPlayerToEntity(this, 48) != null)
+			if(world.getClosestPlayerToEntity(this, 64) != null)
 				world.spawnEntity(new EntityGatekeeperEssence(world, posX, posY, posZ));
 		}
 
-		if(ACConfig.showBossDialogs) {
-			if(deathTicks == 20 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.1"));
-			if(deathTicks == 100 && !world.isRemote)
+		if(ACConfig.showBossDialogs && !world.isRemote) {
+			if(deathTicks == 20)
+				SpecialTextUtil.SimulacraGroup(world, TranslationUtil.toLocal("message.jzahar.death.1"));
+			if(deathTicks == 80)
 				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.2"));
-			if(deathTicks == 180 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.3"));
-			if(deathTicks == 260 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.4"));
-			if(deathTicks == 340 && !world.isRemote)
+			if(deathTicks == 140)
+				SpecialTextUtil.YogSothothGroup(world, TranslationUtil.toLocal("message.jzahar.death.3"));
+			if(deathTicks == 200)
+				SpecialTextUtil.SimulacraGroup(world, TranslationUtil.toLocal("message.jzahar.death.4"));
+			if(deathTicks == 280)
 				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.5"));
-			if(deathTicks == 420 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.6"));
-			if(deathTicks == 500 && !world.isRemote)
+			if(deathTicks == 360)
+				SpecialTextUtil.YogSothothGroup(world, TranslationUtil.toLocal("message.jzahar.death.6"));
+			if(deathTicks == 420)
 				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.7"));
-			if(deathTicks == 580 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.8"));
-			if(deathTicks == 660 && !world.isRemote)
+			if(deathTicks == 480)
+				SpecialTextUtil.SimulacraGroup(world, TranslationUtil.toLocal("message.jzahar.death.8"));
+			if(deathTicks == 540)
 				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.9"));
-			if(deathTicks == 800 && !world.isRemote)
-				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.10"));
+			if(deathTicks == 600)
+				SpecialTextUtil.JzaharGroup(world, true, TranslationUtil.toLocal("message.jzahar.death.10"));
+			if(deathTicks == 660)
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.11"));
+			if(deathTicks == 760)
+				SpecialTextUtil.YogSothothGroup(world, TranslationUtil.toLocal("message.jzahar.death.12"));
+			if(deathTicks == 800)
+				SpecialTextUtil.JzaharGroup(world, TranslationUtil.toLocal("message.jzahar.death.13"));
 		}
 		if(deathTicks == 800 && !world.isRemote)
 			setDead();
