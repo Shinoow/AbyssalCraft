@@ -24,7 +24,7 @@ public class LayerOuterBipedArmor extends LayerBipedArmor {
 	private float colorB = 1.0F;
 	private boolean skipRenderGlint;
 	private static final Map<String, ResourceLocation> ARMOR_TEXTURE_RES_MAP = Maps.<String, ResourceLocation>newHashMap();
-	private static final ResourceLocation DEFAULT = new ResourceLocation("");
+	private static final ResourceLocation DEFAULT = new ResourceLocation("abyssalcraft:textures/armor/default.png");
 
 	public LayerOuterBipedArmor(RenderLivingBase<?> rendererIn) {
 		super(rendererIn);
@@ -33,8 +33,8 @@ public class LayerOuterBipedArmor extends LayerBipedArmor {
 
 	protected void initArmor()
 	{
-		this.modelLeggings = new ModelBiped(0.7F);
-		this.modelArmor = new ModelBiped(1.2F);
+		this.modelLeggings = new ModelBiped(0.8F);
+		this.modelArmor = new ModelBiped(1.4F);
 	}
 
 	@Override
@@ -107,6 +107,8 @@ public class LayerOuterBipedArmor extends LayerBipedArmor {
 					resourcelocation = new ResourceLocation(s1);
 					ARMOR_TEXTURE_RES_MAP.put(s1, resourcelocation);
 				}
+				
+				return resourcelocation;
 			}
 		}
 

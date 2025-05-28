@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.items.armor;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.util.items.IOuterArmor;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -39,7 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.items.IVisDiscountGear;
 
 @Interface(iface = "thaumcraft.api.items.IVisDiscountGear", modid = "thaumcraft", striprefs = true)
-public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear {
+public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear, IOuterArmor {
 	public ItemDepthsArmor(ArmorMaterial par2EnumArmorMaterial, int par3, EntityEquipmentSlot par4, String name){
 		super(par2EnumArmorMaterial, par3, par4, name);
 	}
@@ -54,10 +55,10 @@ public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear {
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String layer)
 	{
 		if(stack.getItem() == ACItems.depths_helmet || stack.getItem() == ACItems.depths_chestplate || stack.getItem() == ACItems.depths_boots)
-			return "abyssalcraft:textures/armor/depths_1.png";
+			return "abyssalcraft:textures/armor/depths_1_inner.png";
 
 		if(stack.getItem() == ACItems.depths_leggings)
-			return "abyssalcraft:textures/armor/depths_2.png";
+			return "abyssalcraft:textures/armor/depths_2_inner.png";
 		else return null;
 	}
 
@@ -117,5 +118,15 @@ public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear {
 	public int getVisDiscount(ItemStack stack, EntityPlayer player) {
 		return stack.getItem() == ACItems.depths_helmet ? 5 : stack.getItem() == ACItems.depths_chestplate ? 2 :
 			stack.getItem() == ACItems.depths_leggings ? 2 : stack.getItem() == ACItems.depths_boots ? 1 : 0;
+	}
+
+	@Override
+	public String getOuterArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+		if(stack.getItem() == ACItems.depths_helmet || stack.getItem() == ACItems.depths_chestplate || stack.getItem() == ACItems.depths_boots)
+			return "abyssalcraft:textures/armor/depths_1_outer.png";
+
+//		if(stack.getItem() == ACItems.depths_leggings)
+//			return "abyssalcraft:textures/armor/depths_2.png";
+		else return null;
 	}
 }

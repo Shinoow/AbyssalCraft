@@ -51,17 +51,21 @@ import com.shinoow.abyssalcraft.lib.client.LovecraftFont;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityPedestalBlockRenderer;
+import com.shinoow.abyssalcraft.lib.client.render.entity.layers.LayerOuterBipedArmor;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelArmorStandArmor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -196,8 +200,22 @@ public class ClientProxy extends CommonProxy {
 		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
 		RenderPlayer render1 = rm.getSkinMap().get("default");
 		render1.addLayer(new LayerStarSpawnTentacles(render1));
+		render1.addLayer(new LayerOuterBipedArmor(render1));
 		RenderPlayer render2 = rm.getSkinMap().get("slim");
 		render2.addLayer(new LayerStarSpawnTentacles(render2));
+		render2.addLayer(new LayerOuterBipedArmor(render2));
+		Render<EntityArmorStand> rs = rm.getEntityClassRenderObject(EntityArmorStand.class);
+		if(rs instanceof RenderArmorStand) {
+			((RenderArmorStand) rs).addLayer(new LayerOuterBipedArmor((RenderArmorStand) rs) {
+
+				protected void initArmor()
+				{
+					this.modelLeggings = new ModelArmorStandArmor(0.8F);
+					this.modelArmor = new ModelArmorStandArmor(1.4F);
+				}
+			});
+		}
+		//		rm.entityRenderMap.
 		//		rm.entityRenderMap.forEach((a,b)-> {
 		//			if(EntityLiving.class.isAssignableFrom(a) && b instanceof RenderLiving)
 		//				((RenderLiving) b).addLayer(new LayerDreadTentacles((RenderLiving) b));
