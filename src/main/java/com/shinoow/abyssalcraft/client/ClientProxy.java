@@ -56,14 +56,13 @@ import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelArmorStandArmor;
-import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.*;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.player.EntityPlayer;
@@ -210,16 +209,40 @@ public class ClientProxy extends CommonProxy {
 
 				protected void initArmor()
 				{
-					this.modelLeggings = new ModelArmorStandArmor(0.8F);
-					this.modelArmor = new ModelArmorStandArmor(1.4F);
+					this.modelLeggings = new ModelArmorStandArmor(0.75F);
+					this.modelArmor = new ModelArmorStandArmor(1.25F);
 				}
 			});
 		}
-		//		rm.entityRenderMap.
-		//		rm.entityRenderMap.forEach((a,b)-> {
-		//			if(EntityLiving.class.isAssignableFrom(a) && b instanceof RenderLiving)
-		//				((RenderLiving) b).addLayer(new LayerDreadTentacles((RenderLiving) b));
-		//		});
+		rm.entityRenderMap.forEach((a,b)-> {
+			if(EntityLiving.class.isAssignableFrom(a) && b instanceof RenderBiped) {
+				ModelBase model = ((RenderBiped) b).getMainModel();
+				if(model instanceof ModelBiped && !(model instanceof ModelZombieVillager)) {
+					if(model instanceof ModelZombie) {
+						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) rs) {
+
+							protected void initArmor()
+							{
+								this.modelLeggings = new ModelZombie(0.75F, true);
+								this.modelArmor = new ModelZombie(1.25F, true);
+							}
+						});
+					} else if(model instanceof ModelSkeleton) {
+						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) rs) {
+
+							protected void initArmor()
+							{
+								this.modelLeggings = new ModelSkeleton(0.75F, true);
+								this.modelArmor = new ModelSkeleton(1.25F, true);
+							}
+						});
+					} else { // if no other submodel is found, assume ModelBiped I guess
+						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) rs));
+					}
+				}
+			}
+		});
+
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> ((ICrystal) stack.getItem()).getColor(stack), InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ICrystal).toArray(Item[]::new));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> 0xE8E8E8, ACItems.coin, ACItems.token_of_jzahar);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 ? SpellUtils.getSpellColor(stack) : 16777215, ACItems.basic_scroll, ACItems.lesser_scroll, ACItems.moderate_scroll, ACItems.greater_scroll);

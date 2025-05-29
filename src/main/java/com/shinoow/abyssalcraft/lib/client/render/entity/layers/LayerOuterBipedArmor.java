@@ -33,8 +33,8 @@ public class LayerOuterBipedArmor extends LayerBipedArmor {
 
 	protected void initArmor()
 	{
-		this.modelLeggings = new ModelBiped(0.8F);
-		this.modelArmor = new ModelBiped(1.4F);
+		this.modelLeggings = new ModelBiped(0.75F);
+		this.modelArmor = new ModelBiped(1.25F);
 	}
 
 	@Override
