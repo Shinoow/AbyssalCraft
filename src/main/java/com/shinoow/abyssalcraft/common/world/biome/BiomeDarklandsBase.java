@@ -73,6 +73,7 @@ public class BiomeDarklandsBase extends Biome implements IDarklandsBiome, IAlter
 		dl.add(new SpawnListEntry(EntityShadowMonster.class, 50, 2, 2));
 		dl.add(new SpawnListEntry(EntityShadowBeast.class, 20, 1, 1));
 		dl.add(new SpawnListEntry(EntityDreadedGhoul.class, 1, 1, 3));
+		decorator.sandPatchesPerChunk = -1; // no sand in Darklands biomes
 	}
 
 	@Override

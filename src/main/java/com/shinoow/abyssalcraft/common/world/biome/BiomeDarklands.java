@@ -32,7 +32,7 @@ public class BiomeDarklands extends BiomeDarklandsBase {
 	public BiomeDarklands(BiomeProperties par1)
 	{
 		super(par1);
-		WorldGenDarkTrees = new WorldGenDLT(false);
+		WorldGenDarkTrees = new WorldGenDLT(false).setIsWorldGen();
 		decorator.treesPerChunk = 3;
 		decorator.flowersPerChunk= -1;
 		decorator.grassPerChunk = -1;

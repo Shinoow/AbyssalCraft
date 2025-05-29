@@ -16,11 +16,16 @@ import net.minecraft.world.gen.feature.WorldGenTrees;
 public class WorldGenTreeAC extends WorldGenTrees {
 
 	protected boolean fixed;
+	protected boolean isWorldGen;
 
 	public WorldGenTreeAC(boolean p_i2027_1_) {
 		super(p_i2027_1_);
 	}
 
+	public WorldGenTreeAC setIsWorldGen() {
+		isWorldGen = true;
+		return this;
+	}
 	/**
 	 * Sets a fixed height and fixed trunk height
 	 */

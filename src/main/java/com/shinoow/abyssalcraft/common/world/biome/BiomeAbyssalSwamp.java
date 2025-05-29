@@ -32,7 +32,7 @@ public class BiomeAbyssalSwamp extends BiomeAbyssalWastelandBase {
 		super(properties);
 		topBlock = ACBlocks.fused_abyssal_sand.getDefaultState();
 		fillerBlock = ACBlocks.abyssal_sand.getDefaultState();
-		tree = new WorldGenDeadTree(false);
+		tree = new WorldGenDeadTree(false).setIsWorldGen();
 		decorator.treesPerChunk = 1;
 	}
 

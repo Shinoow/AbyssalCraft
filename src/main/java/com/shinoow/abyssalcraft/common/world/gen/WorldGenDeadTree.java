@@ -18,6 +18,7 @@ import static java.lang.Math.sin;
 import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -37,6 +38,10 @@ public class WorldGenDeadTree extends WorldGenTreeAC {
 	}
 
 	public boolean generate(World world, Random rand, int x, int y, int z) {
+
+		// Stops trees from generating into Coralium Lakes at biome edges
+		if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && y <= 54 && isWorldGen)
+			return false;
 
 		int height = rand.nextInt(3) + 7;
 		int leaveheight = rand.nextInt(3);

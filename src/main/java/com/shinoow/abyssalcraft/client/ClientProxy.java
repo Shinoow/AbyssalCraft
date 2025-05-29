@@ -219,7 +219,7 @@ public class ClientProxy extends CommonProxy {
 				ModelBase model = ((RenderBiped) b).getMainModel();
 				if(model instanceof ModelBiped && !(model instanceof ModelZombieVillager)) {
 					if(model instanceof ModelZombie) {
-						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) rs) {
+						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) b) {
 
 							protected void initArmor()
 							{
@@ -228,7 +228,7 @@ public class ClientProxy extends CommonProxy {
 							}
 						});
 					} else if(model instanceof ModelSkeleton) {
-						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) rs) {
+						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) b) {
 
 							protected void initArmor()
 							{
@@ -237,7 +237,7 @@ public class ClientProxy extends CommonProxy {
 							}
 						});
 					} else { // if no other submodel is found, assume ModelBiped I guess
-						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) rs));
+						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) b));
 					}
 				}
 			}

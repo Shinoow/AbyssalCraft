@@ -52,7 +52,7 @@ public class BiomeDarklandsPlains extends BiomeDarklandsBase {
 	public BiomeDarklandsPlains(BiomeProperties par1)
 	{
 		super(par1);
-		WorldGenDarkTrees = new WorldGenDLT(false);
+		WorldGenDarkTrees = new WorldGenDLT(false).setIsWorldGen();
 		decorator.treesPerChunk = 1;
 		spawnableMonsterList.add(new SpawnListEntry(EntityDepthsGhoul.class, 1, 1, 3));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAbyssalZombie.class, 60, 1, 3));

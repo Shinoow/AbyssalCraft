@@ -42,6 +42,10 @@ public class WorldGenDLT extends WorldGenTreeAC {
 
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 
+		// Stops trees from generating into Coralium Lakes at biome edges
+		if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && y <= 54 && isWorldGen)
+			return false;
+
 		int height = rand.nextInt(3) + 9;
 		int leaveheight = rand.nextInt(3);
 		int branches = rand.nextInt(8) + 4;
