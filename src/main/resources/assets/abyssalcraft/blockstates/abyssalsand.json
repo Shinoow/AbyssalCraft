@@ -6,6 +6,9 @@
 		}
 	},
 	"variants": {
-		"normal": { "model": "cube_all" }
+		"normal": [
+			{ "model": "cube_all" },
+			{ "model": "cube_all", "y": 180 }
+		]
 	}
 }
