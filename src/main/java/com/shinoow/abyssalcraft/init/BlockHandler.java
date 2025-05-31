@@ -124,7 +124,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadwood_log = new BlockACLog(MapColor.RED).setHardness(2.0F).setResistance(12.0F).setTranslationKey("dreadlog");
 		ACBlocks.dreadwood_leaves = new BlockACLeaves(ACBlocks.dreadwood_sapling, MapColor.RED).setHardness(0.2F).setResistance(1.0F).setTranslationKey("dreadleaves");
 		ACBlocks.dreadwood_planks = new BlockACBasic(Material.WOOD, 2.0F, 5.0F, SoundType.WOOD, MapColor.RED).setTranslationKey("dreadplanks");
-		ACBlocks.liquid_coralium = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setTranslationKey("cwater");
+		ACBlocks.liquid_coralium = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setLightOpacity(3).setTranslationKey("cwater");
 		ACBlocks.dreadlands_grass = new BlockDreadGrass().setHardness(0.4F).setTranslationKey("dreadgrass");
 		ACBlocks.dreadstone_brick_stairs = new BlockACStairs(ACBlocks.dreadstone_brick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setTranslationKey("dreadbrickstairs");
 		ACBlocks.dreadstone_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.RED).setHardness(2.5F).setResistance(20.0F).setTranslationKey("dreadbrickfence");
@@ -134,7 +134,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.elysian_stone_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.LIGHT_BLUE).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_fence");
 		ACBlocks.elysian_stone_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.LIGHT_BLUE).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_slab1");
 		elysianbrickslab2 = new BlockACDoubleSlab(ACBlocks.elysian_stone_brick_slab, Material.ROCK, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_slab2");
-		ACBlocks.liquid_antimatter = new BlockAntiliquid().setResistance(500.0F).setLightLevel(0.5F).setTranslationKey("antiwater");
+		ACBlocks.liquid_antimatter = new BlockAntiliquid().setResistance(500.0F).setLightLevel(0.5F).setLightOpacity(3).setTranslationKey("antiwater");
 		ACBlocks.coralium_stone_brick = new BlockACBrick(1.5F, 10.0F, MapColor.CYAN).setTranslationKey("cstonebrick");
 		ACBlocks.chiseled_coralium_stone_brick = new BlockACBrick(1.5F, 10.0F, MapColor.CYAN).remap("cstonebrick", EnumBrickType.CHISELED).setTranslationKey("chiseled_coralium_stone_brick");
 		ACBlocks.cracked_coralium_stone_brick = new BlockACBrick(1.5F, 10.0F, MapColor.CYAN).remap("cstonebrick", EnumBrickType.CRACKED).setTranslationKey("cracked_coralium_stone_brick");
