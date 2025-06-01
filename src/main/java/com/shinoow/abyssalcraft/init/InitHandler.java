@@ -394,8 +394,6 @@ public class InitHandler implements ILifeCycleHandler {
 		generateAbyssalGoldOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Gold Ore", true, "Toggles whether or not to generate Gold Ore in the Abyssal Wasteland.").getBoolean();
 		generateAbyssalDiamondOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Diamond Ore", true, "Toggles whether or not to generate Diamond Ore in the Abyssal Wasteland").getBoolean();
 		generateAbyssalNitreOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Nitre Ore", true, "Toggles whether or not to generate Nitre Ore in the Abyssal Wasteland.").getBoolean();
-		generateAbyssalTinOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Tin Ore", true, "Toggles whether or not to generate Tin Ore in the Abyssal Wasteland").getBoolean();
-		generateAbyssalCopperOre = cfg.get(CATEGORY_WORLDGEN, "Abyssal Copper Ore", true, "Toggles whether or not to generate Copper Ore in the Abyssal Wasteland.").getBoolean();
 		generatePearlescentCoraliumOre = cfg.get(CATEGORY_WORLDGEN, "Pearlescent Coralium Ore", true, "Toggles whether or not to generate Pearlescent Coralium Ore in the Abyssal Wasteland.").getBoolean();
 		generateLiquifiedCoraliumOre = cfg.get(CATEGORY_WORLDGEN, "Liquified Coralium Ore", true, "Toggles whether or not to generate Liquified Coralium Ore in the Abyssal Wasteland.").getBoolean();
 		shoggothLairSpawnRate = cfg.get(CATEGORY_WORLDGEN, "Shoggoth Lair Generation Chance: Swamps", 35, "Generation chance of a Shoggoth Lair in swamp biomes. Higher numbers decrease the chance of a Lair generating, while lower numbers increase the chance.\n[range: 0 ~ 1000, default: 35]", 0, 1000).getInt();

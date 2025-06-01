@@ -30,11 +30,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -75,6 +72,8 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity, IEliteE
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 120.0D : 60.0D);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 20.0D : 10.0D);
+		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(20.0D);
+		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(4.0D);
 	}
 
 	@Override
@@ -318,23 +317,15 @@ public class EntityDreadguard extends EntityMob implements IDreadEntity, IEliteE
 	{
 		par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
 
-		setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ACItems.dreaded_abyssalnite_helmet));
-		setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ACItems.dreaded_abyssalnite_chestplate));
-		setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ACItems.dreaded_abyssalnite_leggings));
-		setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ACItems.dreaded_abyssalnite_boots));
+		EntityUtil.hahaPumpkinGoesBrrr(this, rand);
 
 		IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 		Calendar calendar = world.getCurrentDate();
 
 		attribute.removeModifier(attackDamageBoost);
 
-		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31){
+		if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31)
 			attribute.applyModifier(attackDamageBoost);
-			if(rand.nextFloat() < 0.25F){
-				setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(rand.nextFloat() < 0.1F ? Blocks.LIT_PUMPKIN : Blocks.PUMPKIN));
-				inventoryArmorDropChances[EntityEquipmentSlot.HEAD.getIndex()] = 0.0F;
-			}
-		}
 
 		return par1EntityLivingData;
 	}

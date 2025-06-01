@@ -71,8 +71,6 @@ public class AbyssalCrafting {
 		GameRegistry.addSmelting(ACBlocks.abyssal_gold_ore, new ItemStack(Items.GOLD_INGOT, 1), 1F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_diamond_ore, new ItemStack(Items.DIAMOND, 1), 1F);
 		GameRegistry.addSmelting(ACBlocks.abyssal_nitre_ore, new ItemStack(ACItems.nitre, 1), 1F);
-		GameRegistry.addSmelting(ACBlocks.abyssal_tin_ore, new ItemStack(ACItems.tin_ingot, 1), 0.7F);
-		GameRegistry.addSmelting(ACBlocks.abyssal_copper_ore, new ItemStack(ACItems.copper_ingot, 1), 0.7F);
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.ethaxium), new ItemStack(ACItems.ethaxium_brick), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.ethaxium_brick, 1, 0), new ItemStack(ACBlocks.cracked_ethaxium_brick, 1), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0), new ItemStack(ACBlocks.cracked_dark_ethaxium_brick, 1), 0.1F);
@@ -143,7 +141,7 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addSingleCrystallization(Items.BONE, new ItemStack(ACItems.crystal_shard_calcium, 4), 0.2F);
 		AbyssalCraftAPI.addCrystallization(Items.PRISMARINE_SHARD, new ItemStack(ACItems.crystal_shard_silica, 4), new ItemStack(ACItems.crystal_shard_beryl, 4), 0.1F);
 		AbyssalCraftAPI.addCrystallization(Items.PRISMARINE_CRYSTALS, new ItemStack(ACItems.crystal_shard_silica, 4), new ItemStack(ACItems.crystal_shard_beryl, 4), 0.1F);
-		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 0), new ItemStack(ACItems.crystal_shard_silica, 16), new ItemStack(ACItems.crystal_shard_tin, 27), 0.1F);
+		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 0), new ItemStack(ACItems.crystal_shard_silica, 16), new ItemStack(ACItems.crystal_shard_beryl, 27), 0.1F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 1), new ItemStack(ACItems.crystal_silica, 4), new ItemStack(ACItems.crystal_beryl, 4), 0.1F);
 		AbyssalCraftAPI.addCrystallization(new ItemStack(Blocks.PRISMARINE, 1, 2), new ItemStack(ACItems.crystal_shard_silica, 32), new ItemStack(ACItems.crystal_shard_beryl, 32), 0.1F);
 		AbyssalCraftAPI.addCrystallization(Items.EGG, new ItemStack(ACItems.crystal_shard_calcium, 4), new ItemStack(ACItems.crystal_shard_phosphorus, 4), 0.1F);
@@ -256,8 +254,6 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.blaze_crystal_cluster), new ItemStack(Items.BLAZE_POWDER, 1), 0.2F);
 		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.redstone_crystal_cluster), new ItemStack(Items.REDSTONE, 1), 0.2F);
 		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.methane_crystal_cluster), new ItemStack(ACItems.methane, 1), 0.2F);
-		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.tin_crystal_cluster), new ItemStack(ACItems.tin_ingot, 1), 0.2F);
-		AbyssalCraftAPI.addTransmutation(new ItemStack(ACBlocks.copper_crystal_cluster), new ItemStack(ACItems.copper_ingot, 1), 0.2F);
 		AbyssalCraftAPI.addTransmutation("crystalClusterAluminium", "ingotAluminum", 0.2F);
 		AbyssalCraftAPI.addTransmutation("crystalClusterAluminium", "ingotAluminium", 0.2F);
 		AbyssalCraftAPI.addTransmutation("crystalClusterZinc", "ingotZinc", 0.2F);
@@ -291,8 +287,6 @@ public class AbyssalCrafting {
 		AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.abyssalnite_ingot), new ItemStack(ACItems.crystal_abyssalnite));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.refined_coralium_ingot), new ItemStack(ACItems.crystal_coralium));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.dreadium_ingot), new ItemStack(ACItems.crystal_dreadium));
-		AbyssalCraftAPI.addMaterialization("ingotTin", new ItemStack(ACItems.crystal_tin));
-		AbyssalCraftAPI.addMaterialization("ingotCopper", new ItemStack(ACItems.crystal_copper));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.methane), new ItemStack(ACItems.crystal_methane));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.nitre), new ItemStack(ACItems.crystal_potassium), new ItemStack(ACItems.crystal_nitrate));
 		AbyssalCraftAPI.addMaterialization(new ItemStack(ACItems.sulfur), new ItemStack(ACItems.crystal_sulfur));
@@ -452,12 +446,6 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(Rituals.ETHAXIUM = new NecronomiconTransformationRitual("ethaxium", 3, ACLib.omothol_id, 10000.0F, new ItemStack(Blocks.SOUL_SAND), new ItemStack(ACBlocks.ethaxium)));
 		RitualRegistry.instance().registerRitual(Rituals.ETHAXIUM_INGOT = new NecronomiconInfusionRitual("ethaxiumIngot", 3, ACLib.omothol_id, 1000F, new ItemStack(ACItems.ethaxium_ingot), new ItemStack(ACItems.life_crystal), ethofferings));
 		RitualRegistry.instance().registerRitual(Rituals.TOKEN_OF_JZAHAR = new NecronomiconInfusionRitual("jzaharCoin", 3, 500.0F, new ItemStack(ACItems.token_of_jzahar), new ItemStack(ACItems.coin), new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE)));
-		Object[] dreadofferings = new Object[]{new ItemStack(ACItems.dreadlands_essence), ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite,
-				ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite, ACItems.dreaded_shard_of_abyssalnite};
-		RitualRegistry.instance().registerRitual(Rituals.DREADED_ABYSSALNITE_HELMET = new NecronomiconInfusionRitual("dreadHelmet", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_helmet), ACItems.abyssalnite_helmet, dreadofferings));
-		RitualRegistry.instance().registerRitual(Rituals.DREADED_ABYSSALNITE_CHESTPLATE = new NecronomiconInfusionRitual("dreadChestplate", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_chestplate), ACItems.abyssalnite_chestplate, dreadofferings));
-		RitualRegistry.instance().registerRitual(Rituals.DREADED_ABYSSALNITE_LEGGINGS = new NecronomiconInfusionRitual("dreadLeggings", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_leggings), ACItems.abyssalnite_leggings, dreadofferings));
-		RitualRegistry.instance().registerRitual(Rituals.DREADED_ABYSSALNITE_BOOTS = new NecronomiconInfusionRitual("dreadBoots", 2, ACLib.dreadlands_id, 500F, new ItemStack(ACItems.dreaded_abyssalnite_boots), ACItems.abyssalnite_boots, dreadofferings));
 		Object[] rcoffers = new Object[]{ACItems.shadow_fragment, Items.ARROW, ACItems.shadow_fragment, Items.ARROW, ACItems.shadow_fragment, Items.ARROW, ACItems.shadow_fragment, Items.ARROW};
 		RitualRegistry.instance().registerRitual(Rituals.RANGE_CHARM = new NecronomiconInfusionRitual("rangeCharm", 0, 100F, new ItemStack(ACItems.range_ritual_charm), new ItemStack(ACItems.ritual_charm), rcoffers));
 		Object[] dcoffers = new Object[]{ACItems.shadow_fragment, Items.REDSTONE, ACItems.shadow_fragment, Items.REDSTONE, ACItems.shadow_fragment, Items.REDSTONE, ACItems.shadow_fragment,

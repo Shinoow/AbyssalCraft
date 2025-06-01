@@ -11,13 +11,13 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
+import com.shinoow.abyssalcraft.client.render.entity.layers.LayerDreadguardArmor;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
 
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,21 +28,15 @@ public class RenderDreadguard extends RenderBiped<EntityDreadguard>
 	/** Scale of the model to use */
 	private float scale = 1.5F;
 
-	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/elite/dread_guard.png");
+	private static final ResourceLocation texture = new ResourceLocation("abyssalcraft:textures/model/elite/dreadguard.png");
+	private static final ResourceLocation overlayTexture = new ResourceLocation("abyssalcraft:textures/model/elite/dreadguard_overlay.png");
+	public ModelZombie armorModel = new ModelZombie(0.3F, true);
 
 	public RenderDreadguard(RenderManager manager)
 	{
-		super(manager, new ModelZombie(), 0.5F);
-		LayerBipedArmor layerbipedarmor = new LayerBipedArmor(this)
-		{
-			@Override
-			protected void initArmor()
-			{
-				modelLeggings = new ModelZombie(0.5F, true);
-				modelArmor = new ModelZombie(1.0F, true);
-			}
-		};
-		this.addLayer(layerbipedarmor);
+		super(manager, new ModelZombie(0.0F, true), 0.5F);
+		armorModel.isChild = false;
+		this.addLayer(new LayerDreadguardArmor(this, overlayTexture));
 	}
 
 	/**

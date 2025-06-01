@@ -38,7 +38,7 @@ public class BlockACOre extends BlockACBasic {
 	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_)
 	{
 		return this == ACBlocks.abyssal_coralium_ore || this == ACBlocks.pearlescent_coralium_ore || this == ACBlocks.liquified_coralium_ore || this == ACBlocks.abyssal_iron_ore || this == ACBlocks.abyssal_gold_ore || this == ACBlocks.abyssal_diamond_ore
-				|| this == ACBlocks.abyssal_nitre_ore || this == ACBlocks.abyssal_tin_ore || this == ACBlocks.abyssal_copper_ore ? MapColor.GREEN : this == ACBlocks.dreaded_abyssalnite_ore || this == ACBlocks.dreadlands_abyssalnite_ore ? MapColor.RED : super.getMapColor(state, p_180659_2_, p_180659_3_);
+				|| this == ACBlocks.abyssal_nitre_ore ? MapColor.GREEN : this == ACBlocks.dreaded_abyssalnite_ore || this == ACBlocks.dreadlands_abyssalnite_ore ? MapColor.RED : super.getMapColor(state, p_180659_2_, p_180659_3_);
 	}
 
 	@Override

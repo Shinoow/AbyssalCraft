@@ -58,8 +58,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.nitre = new ItemACBasic("nitre");
 		ACItems.sulfur = new ItemACBasic("sulfur");
 		ACItems.omothol_forged_gateway_key = new ItemGatewayKey(2, "gatewaykeyjzh");
-		ACItems.tin_ingot = new ItemACBasic("tiningot");
-		ACItems.copper_ingot = new ItemACBasic("copperingot");
 		ACItems.life_crystal = new ItemACBasic("lifecrystal");
 		ACItems.overworld_shoggoth_flesh = new ItemACBasic("shoggothflesh.overworld");
 		ACItems.abyssal_shoggoth_flesh = new ItemACBasic("shoggothflesh.abyssalwasteland");
@@ -179,8 +177,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.crystal_coralium = new ItemCrystal("crystal", Crystals.CORALIUM);
 		ACItems.crystal_dreadium = new ItemCrystal("crystal", Crystals.DREADIUM);
 		ACItems.crystal_blaze = new ItemCrystal("crystal", Crystals.BLAZE);
-		ACItems.crystal_tin = new ItemCrystal("crystal", Crystals.TIN);
-		ACItems.crystal_copper = new ItemCrystal("crystal", Crystals.COPPER);
 		ACItems.crystal_silicon = new ItemCrystal("crystal", Crystals.SILICON);
 		ACItems.crystal_magnesium = new ItemCrystal("crystal", Crystals.MAGNESIUM);
 		ACItems.crystal_aluminium = new ItemCrystal("crystal", Crystals.ALUMINIUM);
@@ -207,8 +203,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.crystal_shard_coralium = new ItemCrystalShard("crystalshard", Crystals.CORALIUM);
 		ACItems.crystal_shard_dreadium = new ItemCrystalShard("crystalshard", Crystals.DREADIUM);
 		ACItems.crystal_shard_blaze = new ItemCrystalShard("crystalshard", Crystals.BLAZE);
-		ACItems.crystal_shard_tin = new ItemCrystalShard("crystalshard", Crystals.TIN);
-		ACItems.crystal_shard_copper = new ItemCrystalShard("crystalshard", Crystals.COPPER);
 		ACItems.crystal_shard_silicon = new ItemCrystalShard("crystalshard", Crystals.SILICON);
 		ACItems.crystal_shard_magnesium = new ItemCrystalShard("crystalshard", Crystals.MAGNESIUM);
 		ACItems.crystal_shard_aluminium = new ItemCrystalShard("crystalshard", Crystals.ALUMINIUM);
@@ -235,8 +229,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.crystal_fragment_coralium = new ItemCrystalFragment("crystalfragment", Crystals.CORALIUM);
 		ACItems.crystal_fragment_dreadium = new ItemCrystalFragment("crystalfragment", Crystals.DREADIUM);
 		ACItems.crystal_fragment_blaze = new ItemCrystalFragment("crystalfragment", Crystals.BLAZE);
-		ACItems.crystal_fragment_tin = new ItemCrystalFragment("crystalfragment", Crystals.TIN);
-		ACItems.crystal_fragment_copper = new ItemCrystalFragment("crystalfragment", Crystals.COPPER);
 		ACItems.crystal_fragment_silicon = new ItemCrystalFragment("crystalfragment", Crystals.SILICON);
 		ACItems.crystal_fragment_magnesium = new ItemCrystalFragment("crystalfragment", Crystals.MAGNESIUM);
 		ACItems.crystal_fragment_aluminium = new ItemCrystalFragment("crystalfragment", Crystals.ALUMINIUM);
@@ -323,10 +315,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.abyssalnite_chestplate = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.CHEST, "aplate");
 		ACItems.abyssalnite_leggings = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.LEGS, "alegs");
 		ACItems.abyssalnite_boots = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.FEET, "aboots");
-		ACItems.dreaded_abyssalnite_helmet = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.HEAD, "dhelmet");
-		ACItems.dreaded_abyssalnite_chestplate = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.CHEST, "dplate");
-		ACItems.dreaded_abyssalnite_leggings = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.LEGS, "dlegs");
-		ACItems.dreaded_abyssalnite_boots = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.FEET, "dboots");
 		ACItems.refined_coralium_helmet = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.HEAD, "corhelmet");
 		ACItems.refined_coralium_chestplate = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.CHEST, "corplate");
 		ACItems.refined_coralium_leggings = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.LEGS, "corlegs");
@@ -397,10 +385,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.abyssalnite_chestplate, "aplate");
 		registerItem(ACItems.abyssalnite_leggings, "alegs");
 		registerItem(ACItems.abyssalnite_boots, "aboots");
-		registerItem(ACItems.dreaded_abyssalnite_helmet, "dhelmet");
-		registerItem(ACItems.dreaded_abyssalnite_chestplate, "dplate");
-		registerItem(ACItems.dreaded_abyssalnite_leggings, "dlegs");
-		registerItem(ACItems.dreaded_abyssalnite_boots, "dboots");
 		registerItem(ACItems.refined_coralium_helmet, "corhelmet");
 		registerItem(ACItems.refined_coralium_chestplate, "corplate");
 		registerItem(ACItems.refined_coralium_leggings, "corlegs");
@@ -452,8 +436,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.crystal_coralium, "coralium_crystal");
 		registerItem(ACItems.crystal_dreadium, "dreadium_crystal");
 		registerItem(ACItems.crystal_blaze, "blaze_crystal");
-		registerItem(ACItems.crystal_tin, "tin_crystal");
-		registerItem(ACItems.crystal_copper, "copper_crystal");
 		registerItem(ACItems.crystal_silicon, "silicon_crystal");
 		registerItem(ACItems.crystal_magnesium, "magnesium_crystal");
 		registerItem(ACItems.crystal_aluminium, "aluminium_crystal");
@@ -480,8 +462,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.crystal_shard_coralium, "coralium_crystal_shard");
 		registerItem(ACItems.crystal_shard_dreadium, "dreadium_crystal_shard");
 		registerItem(ACItems.crystal_shard_blaze, "blaze_crystal_shard");
-		registerItem(ACItems.crystal_shard_tin, "tin_crystal_shard");
-		registerItem(ACItems.crystal_shard_copper, "copper_crystal_shard");
 		registerItem(ACItems.crystal_shard_silicon, "silicon_crystal_shard");
 		registerItem(ACItems.crystal_shard_magnesium, "magnesium_crystal_shard");
 		registerItem(ACItems.crystal_shard_aluminium, "aluminium_crystal_shard");
@@ -503,8 +483,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.dreadium_samurai_chestplate, "dreadiumsamuraiplate");
 		registerItem(ACItems.dreadium_samurai_leggings, "dreadiumsamurailegs");
 		registerItem(ACItems.dreadium_samurai_boots, "dreadiumsamuraiboots");
-		registerItem(ACItems.tin_ingot, "tiningot");
-		registerItem(ACItems.copper_ingot, "copperingot");
 		registerItem(ACItems.anti_beef, "antibeef");
 		registerItem(ACItems.anti_chicken, "antichicken");
 		registerItem(ACItems.anti_pork, "antipork");
@@ -608,8 +586,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.crystal_fragment_coralium, "coralium_crystal_fragment");
 		registerItem(ACItems.crystal_fragment_dreadium, "dreadium_crystal_fragment");
 		registerItem(ACItems.crystal_fragment_blaze, "blaze_crystal_fragment");
-		registerItem(ACItems.crystal_fragment_tin, "tin_crystal_fragment");
-		registerItem(ACItems.crystal_fragment_copper, "copper_crystal_fragment");
 		registerItem(ACItems.crystal_fragment_silicon, "silicon_crystal_fragment");
 		registerItem(ACItems.crystal_fragment_magnesium, "magnesium_crystal_fragment");
 		registerItem(ACItems.crystal_fragment_aluminium, "aluminium_crystal_fragment");

@@ -530,10 +530,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.abyssalnite_helmet, 0);
 		registerItemRender(ACItems.abyssalnite_chestplate, 0);
 		registerItemRender(ACItems.abyssalnite_leggings, 0);
-		registerItemRender(ACItems.dreaded_abyssalnite_boots, 0);
-		registerItemRender(ACItems.dreaded_abyssalnite_helmet, 0);
-		registerItemRender(ACItems.dreaded_abyssalnite_chestplate, 0);
-		registerItemRender(ACItems.dreaded_abyssalnite_leggings, 0);
 		registerItemRender(ACItems.refined_coralium_boots, 0);
 		registerItemRender(ACItems.refined_coralium_helmet, 0);
 		registerItemRender(ACItems.refined_coralium_chestplate, 0);
@@ -586,8 +582,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.dreadium_samurai_helmet, 0);
 		registerItemRender(ACItems.dreadium_samurai_chestplate, 0);
 		registerItemRender(ACItems.dreadium_samurai_leggings, 0);
-		registerItemRender(ACItems.tin_ingot, 0);
-		registerItemRender(ACItems.copper_ingot, 0);
 		registerItemRender(ACItems.anti_beef, 0);
 		registerItemRender(ACItems.anti_chicken, 0);
 		registerItemRender(ACItems.anti_pork, 0);
@@ -808,8 +802,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.abyssal_gold_ore, 0);
 		registerItemRender(ACBlocks.abyssal_diamond_ore, 0);
 		registerItemRender(ACBlocks.abyssal_nitre_ore, 0);
-		registerItemRender(ACBlocks.abyssal_tin_ore, 0);
-		registerItemRender(ACBlocks.abyssal_copper_ore, 0);
 		registerItemRender(ACBlocks.pearlescent_coralium_ore, 0);
 		registerItemRender(ACBlocks.liquified_coralium_ore, 0);
 		registerItemRender(ACBlocks.solid_lava, 0);
@@ -878,8 +870,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.coralium_crystal_cluster, 0, "crystalcluster");
 		registerItemRender(ACBlocks.dreadium_crystal_cluster, 0, "crystalcluster");
 		registerItemRender(ACBlocks.blaze_crystal_cluster, 0, "crystalcluster");
-		registerItemRender(ACBlocks.tin_crystal_cluster, 0, "crystalcluster");
-		registerItemRender(ACBlocks.copper_crystal_cluster, 0, "crystalcluster");
 		registerItemRender(ACBlocks.silicon_crystal_cluster, 0, "crystalcluster");
 		registerItemRender(ACBlocks.magnesium_crystal_cluster, 0, "crystalcluster");
 		registerItemRender(ACBlocks.aluminium_crystal_cluster, 0, "crystalcluster");

@@ -124,7 +124,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.dreadwood_log = new BlockACLog(MapColor.RED).setHardness(2.0F).setResistance(12.0F).setTranslationKey("dreadlog");
 		ACBlocks.dreadwood_leaves = new BlockACLeaves(ACBlocks.dreadwood_sapling, MapColor.RED).setHardness(0.2F).setResistance(1.0F).setTranslationKey("dreadleaves");
 		ACBlocks.dreadwood_planks = new BlockACBasic(Material.WOOD, 2.0F, 5.0F, SoundType.WOOD, MapColor.RED).setTranslationKey("dreadplanks");
-		ACBlocks.liquid_coralium = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setTranslationKey("cwater");
+		ACBlocks.liquid_coralium = new BlockCLiquid().setResistance(500.0F).setLightLevel(1.0F).setLightOpacity(3).setTranslationKey("cwater");
 		ACBlocks.dreadlands_grass = new BlockDreadGrass().setHardness(0.4F).setTranslationKey("dreadgrass");
 		ACBlocks.dreadstone_brick_stairs = new BlockACStairs(ACBlocks.dreadstone_brick, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setTranslationKey("dreadbrickstairs");
 		ACBlocks.dreadstone_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.RED).setHardness(2.5F).setResistance(20.0F).setTranslationKey("dreadbrickfence");
@@ -134,7 +134,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.elysian_stone_brick_fence = new BlockACFence(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.LIGHT_BLUE).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_fence");
 		ACBlocks.elysian_stone_brick_slab = new BlockACSingleSlab(Material.ROCK, "pickaxe", 4, SoundType.STONE, MapColor.LIGHT_BLUE).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_slab1");
 		elysianbrickslab2 = new BlockACDoubleSlab(ACBlocks.elysian_stone_brick_slab, Material.ROCK, "pickaxe", 4).setHardness(2.5F).setResistance(20.0F).setTranslationKey("elysian_stone_brick_slab2");
-		ACBlocks.liquid_antimatter = new BlockAntiliquid().setResistance(500.0F).setLightLevel(0.5F).setTranslationKey("antiwater");
+		ACBlocks.liquid_antimatter = new BlockAntiliquid().setResistance(500.0F).setLightLevel(0.5F).setLightOpacity(3).setTranslationKey("antiwater");
 		ACBlocks.coralium_stone_brick = new BlockACBrick(1.5F, 10.0F, MapColor.CYAN).setTranslationKey("cstonebrick");
 		ACBlocks.chiseled_coralium_stone_brick = new BlockACBrick(1.5F, 10.0F, MapColor.CYAN).remap("cstonebrick", EnumBrickType.CHISELED).setTranslationKey("chiseled_coralium_stone_brick");
 		ACBlocks.cracked_coralium_stone_brick = new BlockACBrick(1.5F, 10.0F, MapColor.CYAN).remap("cstonebrick", EnumBrickType.CRACKED).setTranslationKey("cracked_coralium_stone_brick");
@@ -156,8 +156,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.abyssal_gold_ore = new BlockACOre(2, 5.0F, 10.0F).setTranslationKey("abygolore");
 		ACBlocks.abyssal_diamond_ore = new BlockACOre(2, 5.0F, 10.0F).setTranslationKey("abydiaore");
 		ACBlocks.abyssal_nitre_ore = new BlockACOre(2, 3.0F, 6.0F).setTranslationKey("abynitore");
-		ACBlocks.abyssal_tin_ore = new BlockACOre(2, 3.0F, 6.0F).setTranslationKey("abytinore");
-		ACBlocks.abyssal_copper_ore = new BlockACOre(2, 3.0F, 6.0F).setTranslationKey("abycopore");
 		ACBlocks.pearlescent_coralium_ore = new BlockACOre(5, 8.0F, 10.0F).setTranslationKey("abypcorore");
 		ACBlocks.liquified_coralium_ore = new BlockACOre(4, 10.0F, 12.0F).setTranslationKey("abylcorore");
 		ACBlocks.solid_lava = new BlockSolidLava("solidlava");
@@ -241,8 +239,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.coralium_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.CORALIUM);
 		ACBlocks.dreadium_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.DREADIUM);
 		ACBlocks.blaze_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.BLAZE);
-		ACBlocks.tin_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.TIN);
-		ACBlocks.copper_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.COPPER);
 		ACBlocks.silicon_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.SILICON);
 		ACBlocks.magnesium_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.MAGNESIUM);
 		ACBlocks.aluminium_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.ALUMINIUM);
@@ -475,8 +471,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.abyssal_gold_ore, "abygolore");
 		registerBlock(ACBlocks.abyssal_diamond_ore, "abydiaore");
 		registerBlock(ACBlocks.abyssal_nitre_ore, "abynitore");
-		registerBlock(ACBlocks.abyssal_tin_ore, "abytinore");
-		registerBlock(ACBlocks.abyssal_copper_ore, "abycopore");
 		registerBlock(ACBlocks.pearlescent_coralium_ore, "abypcorore");
 		registerBlock(ACBlocks.liquified_coralium_ore, "abylcorore");
 		registerBlock(ACBlocks.solid_lava, "solidlava");
@@ -560,8 +554,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.coralium_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.coralium_crystal_cluster), "coralium_crystal_cluster");
 		registerBlock(ACBlocks.dreadium_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.dreadium_crystal_cluster), "dreadium_crystal_cluster");
 		registerBlock(ACBlocks.blaze_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.blaze_crystal_cluster), "blaze_crystal_cluster");
-		registerBlock(ACBlocks.tin_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.tin_crystal_cluster), "tin_crystal_cluster");
-		registerBlock(ACBlocks.copper_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.copper_crystal_cluster), "copper_crystal_cluster");
 		registerBlock(ACBlocks.silicon_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.silicon_crystal_cluster), "silicon_crystal_cluster");
 		registerBlock(ACBlocks.magnesium_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.magnesium_crystal_cluster), "magnesium_crystal_cluster");
 		registerBlock(ACBlocks.aluminium_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.aluminium_crystal_cluster), "aluminium_crystal_cluster");

@@ -39,8 +39,7 @@ public class ArmorUtil {
 					return true;
 			}
 			else if(source == AbyssalCraftAPI.dread)
-				if(helmet.getItem() == ACItems.dreaded_abyssalnite_helmet
-				|| helmet.getItem() == ACItems.dreadium_samurai_helmet
+				if(helmet.getItem() == ACItems.dreadium_samurai_helmet
 				|| helmet.getItem() == ACItems.ethaxium_helmet)
 					return true;
 

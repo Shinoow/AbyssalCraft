@@ -415,10 +415,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		OreDictionary.registerOre("oreGold", ACBlocks.abyssal_gold_ore);
 		OreDictionary.registerOre("oreDiamond", ACBlocks.abyssal_diamond_ore);
 		OreDictionary.registerOre("oreSaltpeter", ACBlocks.abyssal_nitre_ore);
-		OreDictionary.registerOre("oreTin", ACBlocks.abyssal_tin_ore);
-		OreDictionary.registerOre("oreCopper", ACBlocks.abyssal_copper_ore);
-		OreDictionary.registerOre("ingotTin", ACItems.tin_ingot);
-		OreDictionary.registerOre("ingotCopper", ACItems.copper_ingot);
 		OreDictionary.registerOre("orePearlescentCoralium", ACBlocks.pearlescent_coralium_ore);
 		OreDictionary.registerOre("oreLiquifiedCoralium", ACBlocks.liquified_coralium_ore);
 		OreDictionary.registerOre("ingotEthaxiumBrick", ACItems.ethaxium_brick);
@@ -460,8 +456,6 @@ public class MiscHandler implements ILifeCycleHandler {
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal_zinc, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":crystallized_zinc"));
 			}
 		}
@@ -469,8 +463,6 @@ public class MiscHandler implements ILifeCycleHandler {
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal_zinc, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":crystallized_zinc"));
 				main.addEntry(new LootEntryItem(ACItems.coralium_gem, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":coralium_gem"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_fragment, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 10))}, new LootCondition[0], modid + ":shadow_fragment"));
@@ -482,8 +474,6 @@ public class MiscHandler implements ILifeCycleHandler {
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal_zinc, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":crystallized_zinc"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_fragment, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 10))}, new LootCondition[0], modid + ":shadow_fragment"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_shard, 5, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 6))}, new LootCondition[0], modid + ":shadow_gem_shard"));
@@ -494,8 +484,6 @@ public class MiscHandler implements ILifeCycleHandler {
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal_zinc, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":crystallized_zinc"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_fragment, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 10))}, new LootCondition[0], modid + ":shadow_fragment"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_shard, 5, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 6))}, new LootCondition[0], modid + ":shadow_gem_shard"));
@@ -506,8 +494,6 @@ public class MiscHandler implements ILifeCycleHandler {
 			LootPool main = event.getTable().getPool("main");
 			if(main != null){
 				main.addEntry(new LootEntryItem(ACItems.abyssalnite_ingot, 3, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 3))}, new LootCondition[0], modid + ":abyssalnite_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.copper_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":copper_ingot"));
-				main.addEntry(new LootEntryItem(ACItems.tin_ingot, 7, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":tin_ingot"));
 				main.addEntry(new LootEntryItem(ACItems.crystal_zinc, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 5))}, new LootCondition[0], modid + ":crystallized_zinc"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_fragment, 8, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 10))}, new LootCondition[0], modid + ":shadow_fragment"));
 				main.addEntry(new LootEntryItem(ACItems.shadow_shard, 5, 0 , new LootFunction[]{new SetCount(new LootCondition[0], new RandomValueRange(1, 6))}, new LootCondition[0], modid + ":shadow_gem_shard"));
@@ -785,10 +771,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.abyssalnite_chestplate, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACItems.abyssalnite_leggings, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACItems.abyssalnite_boots, ResearchItems.DARKLANDS_BIOME);
-		addCondition(ACItems.dreaded_abyssalnite_helmet, ResearchItems.DREADLANDS);
-		addCondition(ACItems.dreaded_abyssalnite_chestplate, ResearchItems.DREADLANDS);
-		addCondition(ACItems.dreaded_abyssalnite_leggings, ResearchItems.DREADLANDS);
-		addCondition(ACItems.dreaded_abyssalnite_boots, ResearchItems.DREADLANDS);
 		addCondition(ACItems.refined_coralium_helmet, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.refined_coralium_chestplate, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.refined_coralium_leggings, ResearchItems.ABYSSAL_WASTELAND);
@@ -958,7 +940,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadiumArmor, ACClientVars.getCrystalColors()[Crystals.DREADIUM]);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadiumSamuraiArmor, ACClientVars.getCrystalColors()[Crystals.DREADIUM]);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.abyssalniteArmor, ACClientVars.getCrystalColors()[Crystals.ABYSSALNITE]);
-		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadedAbyssalniteArmor, ACClientVars.getCrystalColors()[Crystals.ABYSSALNITE]);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.refinedCoraliumArmor, 0x067047);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.platedCoraliumArmor, 0x067047);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.depthsArmor, 0x067047);
