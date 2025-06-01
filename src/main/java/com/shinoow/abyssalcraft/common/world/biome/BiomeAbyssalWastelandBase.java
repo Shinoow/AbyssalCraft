@@ -167,16 +167,6 @@ public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelan
 				new WorldGenMinable(ACBlocks.abyssal_iron_ore.getDefaultState(), veinSize,
 						state -> state != null && state == ACBlocks.abyssal_stone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 			}
-		if(ACConfig.generateAbyssalCopperOre)
-			for(int rarity = 0; rarity < 8; rarity++) {
-				int veinSize = 2 + par2Random.nextInt(6);
-				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(60) + 5;
-				int z = par2Random.nextInt(16);
-
-				new WorldGenMinable(ACBlocks.abyssal_copper_ore.getDefaultState(), veinSize,
-						state -> state != null && state == ACBlocks.abyssal_stone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
-			}
 		if(ACConfig.generateAbyssalGoldOre)
 			for(int rarity = 0; rarity < 5; rarity++) {
 				int veinSize = 2 + par2Random.nextInt(3);
@@ -205,16 +195,6 @@ public class BiomeAbyssalWastelandBase extends Biome implements IAbyssalWastelan
 				int z = par2Random.nextInt(16);
 
 				new WorldGenMinable(ACBlocks.pearlescent_coralium_ore.getDefaultState(), veinSize,
-						state -> state != null && state == ACBlocks.abyssal_stone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
-			}
-		if(ACConfig.generateAbyssalTinOre)
-			for(int rarity = 0; rarity < 8; rarity++) {
-				int veinSize = 2 + par2Random.nextInt(6);
-				int x = par2Random.nextInt(16);
-				int y = par2Random.nextInt(60) + 5;
-				int z = par2Random.nextInt(16);
-
-				new WorldGenMinable(ACBlocks.abyssal_tin_ore.getDefaultState(), veinSize,
 						state -> state != null && state == ACBlocks.abyssal_stone.getDefaultState()).generate(par1World, par2Random, pos.add(x, y, z));
 			}
 	}

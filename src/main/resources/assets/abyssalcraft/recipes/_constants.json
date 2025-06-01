@@ -23,23 +23,9 @@
   {
     "ingredient": {
       "type": "forge:ore_dict",
-      "ore": "ingotCopper"
-    },
-    "name": "INGOTCOPPER"
-  },
-  {
-    "ingredient": {
-      "type": "forge:ore_dict",
       "ore": "ingotIron"
     },
     "name": "INGOTIRON"
-  },
-  {
-    "ingredient": {
-      "type": "forge:ore_dict",
-      "ore": "ingotTin"
-    },
-    "name": "INGOTTIN"
   },
   {
     "ingredient": {

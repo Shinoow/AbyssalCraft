@@ -34,22 +34,20 @@ public class Crystals {
 	public static final int CORALIUM = 13;
 	public static final int DREADIUM = 14;
 	public static final int BLAZE = 15;
-	public static final int TIN = 16;
-	public static final int COPPER = 17;
-	public static final int SILICON = 18;
-	public static final int MAGNESIUM = 19;
-	public static final int ALUMINIUM = 20;
-	public static final int SILICA = 21;
-	public static final int ALUMINA = 22;
-	public static final int MAGNESIA = 23;
-	public static final int ZINC = 24;
-	public static final int CALCIUM = 25;
-	public static final int BERYLLIUM = 26;
-	public static final int BERYL = 27;
+	public static final int SILICON = 16;
+	public static final int MAGNESIUM = 17;
+	public static final int ALUMINIUM = 18;
+	public static final int SILICA = 19;
+	public static final int ALUMINA = 20;
+	public static final int MAGNESIA = 21;
+	public static final int ZINC = 22;
+	public static final int CALCIUM = 23;
+	public static final int BERYLLIUM = 24;
+	public static final int BERYL = 25;
 
 	public static final String[] crystalNames = new String[]{"Iron", "Gold", "Sulfur", "Carbon", "Oxygen", "Hydrogen", "Nitrogen", "Phosphorus",
-			"Potassium", "Nitrate", "Methane", "Redstone", "Abyssalnite", "Coralium", "Dreadium", "Blaze", "Tin", "Copper",
-			"Silicon", "Magnesium", "Aluminium", "Silica", "Alumina", "Magnesia", "Zinc", "Calcium", "Beryllium", "Beryl"};
+			"Potassium", "Nitrate", "Methane", "Redstone", "Abyssalnite", "Coralium", "Dreadium", "Blaze", "Silicon", "Magnesium",
+			"Aluminium", "Silica", "Alumina", "Magnesia", "Zinc", "Calcium", "Beryllium", "Beryl"};
 	public static final String[] crystalAtoms = new String[]{"Fe", "Au", "S", "C", "O", "H", "N", "P", "K", "NO\u2083", "CH\u2084", "none", "An",
-			"Cor", "Dr", "none", "Sn", "Cu", "Si", "Mg", "Al", "SiO\u2082", "Al\u2082O\u2083", "MgO", "Zn", "Ca", "Be", "Be\u2083Al\u2082(SiO\u2083)\u2086"};
+			"Cor", "Dr", "none", "Si", "Mg", "Al", "SiO\u2082", "Al\u2082O\u2083", "MgO", "Zn", "Ca", "Be", "Be\u2083Al\u2082(SiO\u2083)\u2086"};
 }

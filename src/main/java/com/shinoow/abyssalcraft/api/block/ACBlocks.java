@@ -123,8 +123,6 @@ public class ACBlocks {
 	public static Block abyssal_gold_ore;
 	public static Block abyssal_diamond_ore;
 	public static Block abyssal_nitre_ore;
-	public static Block abyssal_tin_ore;
-	public static Block abyssal_copper_ore;
 	public static Block pearlescent_coralium_ore;
 	public static Block liquified_coralium_ore;
 	public static Block solid_lava;
@@ -205,8 +203,6 @@ public class ACBlocks {
 	public static Block coralium_crystal_cluster;
 	public static Block dreadium_crystal_cluster;
 	public static Block blaze_crystal_cluster;
-	public static Block tin_crystal_cluster;
-	public static Block copper_crystal_cluster;
 	public static Block silicon_crystal_cluster;
 	public static Block magnesium_crystal_cluster;
 	public static Block aluminium_crystal_cluster;

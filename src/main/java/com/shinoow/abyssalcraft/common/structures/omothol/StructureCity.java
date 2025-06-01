@@ -313,28 +313,24 @@ public class StructureCity extends WorldGenerator {
 		case 15:
 			return ACBlocks.blaze_crystal_cluster.getDefaultState();
 		case 16:
-			return ACBlocks.tin_crystal_cluster.getDefaultState();
-		case 17:
-			return ACBlocks.copper_crystal_cluster.getDefaultState();
-		case 18:
 			return ACBlocks.silicon_crystal_cluster.getDefaultState();
-		case 19:
+		case 17:
 			return ACBlocks.magnesium_crystal_cluster.getDefaultState();
-		case 20:
+		case 18:
 			return ACBlocks.aluminium_crystal_cluster.getDefaultState();
-		case 21:
+		case 19:
 			return ACBlocks.silica_crystal_cluster.getDefaultState();
-		case 22:
+		case 20:
 			return ACBlocks.alumina_crystal_cluster.getDefaultState();
-		case 23:
+		case 21:
 			return ACBlocks.magnesia_crystal_cluster.getDefaultState();
-		case 24:
+		case 22:
 			return ACBlocks.zinc_crystal_cluster.getDefaultState();
-		case 25:
+		case 23:
 			return ACBlocks.calcium_crystal_cluster.getDefaultState();
-		case 26:
+		case 24:
 			return ACBlocks.beryllium_crystal_cluster.getDefaultState();
-		case 27:
+		case 25:
 			return ACBlocks.beryl_crystal_cluster.getDefaultState();
 		default:
 			return getCrystalCluster(rand);

@@ -190,8 +190,6 @@ public class ACItems {
 	public static Item refined_coralium_ingot;
 	public static Item coralium_brick;
 	public static Item dreadium_ingot;
-	public static Item tin_ingot;
-	public static Item copper_ingot;
 	public static Item ethaxium_brick;
 	public static Item ethaxium_ingot;
 	public static Item abyssalnite_nugget;
@@ -259,8 +257,6 @@ public class ACItems {
 	public static Item crystal_coralium;
 	public static Item crystal_dreadium;
 	public static Item crystal_blaze;
-	public static Item crystal_tin;
-	public static Item crystal_copper;
 	public static Item crystal_silicon;
 	public static Item crystal_magnesium;
 	public static Item crystal_aluminium;
@@ -287,8 +283,6 @@ public class ACItems {
 	public static Item crystal_shard_coralium;
 	public static Item crystal_shard_dreadium;
 	public static Item crystal_shard_blaze;
-	public static Item crystal_shard_tin;
-	public static Item crystal_shard_copper;
 	public static Item crystal_shard_silicon;
 	public static Item crystal_shard_magnesium;
 	public static Item crystal_shard_aluminium;
@@ -315,8 +309,6 @@ public class ACItems {
 	public static Item crystal_fragment_coralium;
 	public static Item crystal_fragment_dreadium;
 	public static Item crystal_fragment_blaze;
-	public static Item crystal_fragment_tin;
-	public static Item crystal_fragment_copper;
 	public static Item crystal_fragment_silicon;
 	public static Item crystal_fragment_magnesium;
 	public static Item crystal_fragment_aluminium;

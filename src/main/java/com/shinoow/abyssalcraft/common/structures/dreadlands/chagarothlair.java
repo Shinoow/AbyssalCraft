@@ -90,13 +90,14 @@ public class chagarothlair extends WorldGenerator {
 						tileentitychest.setInventorySlotContents(11, new ItemStack(ACItems.crystal_coralium));
 						tileentitychest.setInventorySlotContents(12, new ItemStack(ACItems.crystal_dreadium));
 						tileentitychest.setInventorySlotContents(14, new ItemStack(ACItems.crystal_blaze));
-						tileentitychest.setInventorySlotContents(15, new ItemStack(ACItems.crystal_tin));
-						tileentitychest.setInventorySlotContents(16, new ItemStack(ACItems.crystal_copper));
-						tileentitychest.setInventorySlotContents(17, new ItemStack(ACItems.crystal_silicon));
-						tileentitychest.setInventorySlotContents(18, new ItemStack(ACItems.crystal_magnesium));
-						tileentitychest.setInventorySlotContents(19, new ItemStack(ACItems.crystal_aluminium));
-						tileentitychest.setInventorySlotContents(20, new ItemStack(ACItems.crystal_zinc));
-						tileentitychest.setInventorySlotContents(21, new ItemStack(ACItems.oblivion_catalyst, 1));
+						tileentitychest.setInventorySlotContents(15, new ItemStack(ACItems.crystal_silicon));
+						tileentitychest.setInventorySlotContents(16, new ItemStack(ACItems.crystal_magnesium));
+						tileentitychest.setInventorySlotContents(17, new ItemStack(ACItems.crystal_aluminium));
+						tileentitychest.setInventorySlotContents(18, new ItemStack(ACItems.crystal_zinc));
+						tileentitychest.setInventorySlotContents(19, new ItemStack(ACItems.crystal_calcium));
+						tileentitychest.setInventorySlotContents(20, new ItemStack(ACItems.crystal_beryllium));
+						tileentitychest.setInventorySlotContents(21, new ItemStack(ACItems.crystal_beryl));
+						tileentitychest.setInventorySlotContents(22, new ItemStack(ACItems.oblivion_catalyst, 1));
 					}
 				}
 			}

@@ -42,26 +42,6 @@
 		]
 	  }
 	},
-	"copper": {
-	  "trigger": "minecraft:inventory_changed",
-	  "conditions": {
-	    "items": [
-		  {
-		    "item": "abyssalcraft:abycopore"
-		  }
-		]
-	  }
-	},
-	"tin": {
-	  "trigger": "minecraft:inventory_changed",
-	  "conditions": {
-	    "items": [
-		  {
-		    "item": "abyssalcraft:abytinore"
-		  }
-		]
-	  }
-	},
 	"nitre": {
 	  "trigger": "minecraft:inventory_changed",
 	  "conditions": {
@@ -73,5 +53,5 @@
 	  }
 	}
   },
-  "requirements": [["diamond", "gold", "iron", "copper", "tin", "nitre"]]
+  "requirements": [["diamond", "gold", "iron", "nitre"]]
 }

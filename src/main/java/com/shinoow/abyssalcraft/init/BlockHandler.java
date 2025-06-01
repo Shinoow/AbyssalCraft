@@ -156,8 +156,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.abyssal_gold_ore = new BlockACOre(2, 5.0F, 10.0F).setTranslationKey("abygolore");
 		ACBlocks.abyssal_diamond_ore = new BlockACOre(2, 5.0F, 10.0F).setTranslationKey("abydiaore");
 		ACBlocks.abyssal_nitre_ore = new BlockACOre(2, 3.0F, 6.0F).setTranslationKey("abynitore");
-		ACBlocks.abyssal_tin_ore = new BlockACOre(2, 3.0F, 6.0F).setTranslationKey("abytinore");
-		ACBlocks.abyssal_copper_ore = new BlockACOre(2, 3.0F, 6.0F).setTranslationKey("abycopore");
 		ACBlocks.pearlescent_coralium_ore = new BlockACOre(5, 8.0F, 10.0F).setTranslationKey("abypcorore");
 		ACBlocks.liquified_coralium_ore = new BlockACOre(4, 10.0F, 12.0F).setTranslationKey("abylcorore");
 		ACBlocks.solid_lava = new BlockSolidLava("solidlava");
@@ -241,8 +239,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.coralium_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.CORALIUM);
 		ACBlocks.dreadium_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.DREADIUM);
 		ACBlocks.blaze_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType.BLAZE);
-		ACBlocks.tin_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.TIN);
-		ACBlocks.copper_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.COPPER);
 		ACBlocks.silicon_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.SILICON);
 		ACBlocks.magnesium_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.MAGNESIUM);
 		ACBlocks.aluminium_crystal_cluster = new BlockCrystalCluster().remap(EnumCrystalType2.ALUMINIUM);
@@ -475,8 +471,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.abyssal_gold_ore, "abygolore");
 		registerBlock(ACBlocks.abyssal_diamond_ore, "abydiaore");
 		registerBlock(ACBlocks.abyssal_nitre_ore, "abynitore");
-		registerBlock(ACBlocks.abyssal_tin_ore, "abytinore");
-		registerBlock(ACBlocks.abyssal_copper_ore, "abycopore");
 		registerBlock(ACBlocks.pearlescent_coralium_ore, "abypcorore");
 		registerBlock(ACBlocks.liquified_coralium_ore, "abylcorore");
 		registerBlock(ACBlocks.solid_lava, "solidlava");
@@ -560,8 +554,6 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.coralium_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.coralium_crystal_cluster), "coralium_crystal_cluster");
 		registerBlock(ACBlocks.dreadium_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.dreadium_crystal_cluster), "dreadium_crystal_cluster");
 		registerBlock(ACBlocks.blaze_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.blaze_crystal_cluster), "blaze_crystal_cluster");
-		registerBlock(ACBlocks.tin_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.tin_crystal_cluster), "tin_crystal_cluster");
-		registerBlock(ACBlocks.copper_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.copper_crystal_cluster), "copper_crystal_cluster");
 		registerBlock(ACBlocks.silicon_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.silicon_crystal_cluster), "silicon_crystal_cluster");
 		registerBlock(ACBlocks.magnesium_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.magnesium_crystal_cluster), "magnesium_crystal_cluster");
 		registerBlock(ACBlocks.aluminium_crystal_cluster, new ItemCrystalClusterBlock(ACBlocks.aluminium_crystal_cluster), "aluminium_crystal_cluster");

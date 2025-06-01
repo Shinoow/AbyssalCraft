@@ -163,18 +163,16 @@ public class BlockCrystalCluster extends BlockACBasic implements ICrystalBlock {
 
 	public enum EnumCrystalType2 implements IStringSerializable
 	{
-		TIN(0, "tin"),
-		COPPER(1, "copper"),
-		SILICON(2, "silicon"),
-		MAGNESIUM(3, "magnesium"),
-		ALUMINIUM(4, "aluminium"),
-		SILICA(5, "silica"),
-		ALUMINA(6, "alumina"),
-		MAGNESIA(7, "magnesia"),
-		ZINC(8, "zinc"),
-		CALCIUM(9, "calcium"),
-		BERYLLIUM(10, "beryllium"),
-		BERYL(11, "beryl");
+		SILICON(0, "silicon"),
+		MAGNESIUM(1, "magnesium"),
+		ALUMINIUM(2, "aluminium"),
+		SILICA(3, "silica"),
+		ALUMINA(4, "alumina"),
+		MAGNESIA(5, "magnesia"),
+		ZINC(6, "zinc"),
+		CALCIUM(7, "calcium"),
+		BERYLLIUM(8, "beryllium"),
+		BERYL(9, "beryl");
 
 		private static final EnumCrystalType2[] META_LOOKUP = new EnumCrystalType2[values().length];
 		private final int meta;
