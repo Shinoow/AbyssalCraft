@@ -24,6 +24,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -33,6 +34,7 @@ public class ItemSoulReaper extends ItemACSword {
 
 	public ItemSoulReaper(String par1Str){
 		super(sword, par1Str);
+		addPropertyOverride(new ResourceLocation("level"), (stack, worldIn, entityIn) -> stack.hasTagCompound() ? intToFloat(getSouls(stack)) : 0 );
 	}
 
 	@Override
@@ -64,15 +66,30 @@ public class ItemSoulReaper extends ItemACSword {
 				holder.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1, false, false));
 				holder.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0, false, false));
 				holder.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 0, false, false));
-			} else if(souls == 1000) {
+			} else if(souls >= 1000) {
 				holder.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 2, false, false));
 				holder.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 2, false, false));
 				holder.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0, false, false));
 				holder.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 0, false, false));
 				holder.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 20, 0, false, false));
-				holder.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 20, 2, false, false));
+				if(!holder.isPotionActive(MobEffects.HEALTH_BOOST)) // It resets instantly if added every tick
+					holder.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 1200, 2, false, false));
 			}
 		}
+	}
+
+	private float intToFloat(int i) {
+		if(isWithin(i, 60, 125))
+			return 0.2f;
+		else if(isWithin(i, 125, 250))
+			return 0.4f;
+		else if(isWithin(i, 250, 500))
+			return 0.6f;
+		else if(isWithin(i, 500, 1000))
+			return 0.8f;
+		else if(i >= 1000)
+			return 1.0f;
+		return 0;
 	}
 
 	@Override

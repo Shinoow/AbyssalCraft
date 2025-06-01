@@ -2,5 +2,43 @@
 	"parent": "item/handheld",
 	"textures": {
 		"layer0": "abyssalcraft:items/soulreaper"
-	}
+	},
+    "overrides": [
+        {
+            "predicate": {
+                "level": 0
+            },
+            "model": "abyssalcraft:item/soulreaper_0"
+        },
+        {
+            "predicate": {
+                "level": 0.2
+            },
+            "model": "abyssalcraft:item/soulreaper_1"
+        },
+        {
+            "predicate": {
+                "level": 0.4
+            },
+            "model": "abyssalcraft:item/soulreaper_2"
+        },
+        {
+            "predicate": {
+                "level": 0.6
+            },
+            "model": "abyssalcraft:item/soulreaper_3"
+        },
+        {
+            "predicate": {
+                "level": 0.8
+            },
+            "model": "abyssalcraft:item/soulreaper_4"
+        },
+        {
+            "predicate": {
+                "level": 1.0
+            },
+            "model": "abyssalcraft:item/soulreaper_5"
+        }
+    ]
 }
