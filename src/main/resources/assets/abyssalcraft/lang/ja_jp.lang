@@ -664,14 +664,6 @@ ac.ritual.powerStone=ドレッドランド入りのパワーストーン
 ac.ritual.powerStone.desc=ドレッドランド入りのパワーストーンは、コラリウム入りの石とドレッドランドのエッセンスで作成できます。
 ac.ritual.ethaxiumIngot=エタクシウムインゴット
 ac.ritual.ethaxiumIngot.desc=エタクシウムインゴットはエタクシウムレンガとライフクリスタルで作成できます。
-ac.ritual.dreadHelmet=ドレッドアビサルナイトヘルメット
-ac.ritual.dreadHelmet.desc=ドレッドアビサルナイトヘルメットは、アビサルナイトのヘルメットとドレッドアビサルナイトシャード、ドレッドランドのエッセンスで作成できます。
-ac.ritual.dreadChestplate=ドレッドアビサルナイトチェストプレート
-ac.ritual.dreadChestplate.desc==ドレッドアビサルナイトチェストプレートは、アビサルナイトのチェストプレートとドレッドアビサルナイトシャード、ドレッドランドのエッセンスで作成できます。
-ac.ritual.dreadLeggings=ドレッドアビサルナイトレギンス
-ac.ritual.dreadLeggings.desc==ドレッドアビサルナイトレギンスは、アビサルナイトのレギンスとドレッドアビサルナイトシャード、ドレッドランドのエッセンスで作成できます。
-ac.ritual.dreadBoots=ドレッドアビサルナイトブーツ
-ac.ritual.dreadBoots.desc=ドレッドアビサルナイトブーツは、アビサルナイトのブーツとドレッドアビサルナイトシャード、ドレッドランドのエッセンスで作成できます。
 ac.ritual.rangeCharm=儀式チャーム(範囲上昇)
 ac.ritual.rangeCharm.desc=範囲効果付きの儀式チャームは、儀式チャームと矢、シャドウフラグメントで作成できます。
 ac.ritual.durationCharm=儀式チャーム(継続強化)
@@ -1227,10 +1219,6 @@ item.ahelmet.name=アビサルナイトのヘルメット
 item.aplate.name=アビサルナイトのチェストプレート
 item.alegs.name=アビサルナイトのレギンス
 item.aboots.name=アビサルナイトのブーツ
-item.dhelmet.name=ドレッドアビサルナイトのヘルメット
-item.dplate.name=ドレッドアビサルナイトのチェストプレート
-item.dlegs.name=ドレッドアビサルナイトのレギンス
-item.dboots.name=ドレッドアビサルナイトのブーツ
 item.corhelmet.name=製錬コラリウムのヘルメット
 item.corplate.name=製錬コラリウムのチェストプレート
 item.corlegs.name=製錬コラリウムのレギンス

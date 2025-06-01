@@ -530,10 +530,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.abyssalnite_helmet, 0);
 		registerItemRender(ACItems.abyssalnite_chestplate, 0);
 		registerItemRender(ACItems.abyssalnite_leggings, 0);
-		registerItemRender(ACItems.dreaded_abyssalnite_boots, 0);
-		registerItemRender(ACItems.dreaded_abyssalnite_helmet, 0);
-		registerItemRender(ACItems.dreaded_abyssalnite_chestplate, 0);
-		registerItemRender(ACItems.dreaded_abyssalnite_leggings, 0);
 		registerItemRender(ACItems.refined_coralium_boots, 0);
 		registerItemRender(ACItems.refined_coralium_helmet, 0);
 		registerItemRender(ACItems.refined_coralium_chestplate, 0);

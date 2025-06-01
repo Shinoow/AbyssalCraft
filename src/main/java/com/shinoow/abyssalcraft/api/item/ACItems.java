@@ -76,10 +76,6 @@ public class ACItems {
 	public static Item abyssalnite_chestplate;
 	public static Item abyssalnite_leggings;
 	public static Item abyssalnite_boots;
-	public static Item dreaded_abyssalnite_helmet;
-	public static Item dreaded_abyssalnite_chestplate;
-	public static Item dreaded_abyssalnite_leggings;
-	public static Item dreaded_abyssalnite_boots;
 	public static Item refined_coralium_helmet;
 	public static Item refined_coralium_chestplate;
 	public static Item refined_coralium_leggings;

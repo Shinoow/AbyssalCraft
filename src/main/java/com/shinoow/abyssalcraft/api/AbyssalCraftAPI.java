@@ -83,7 +83,6 @@ public class AbyssalCraftAPI {
 	public static final EnumCreatureAttribute SHADOW = EnumHelper.addCreatureAttribute("SHADOW");
 
 	public static final ArmorMaterial abyssalniteArmor = EnumHelper.addArmorMaterial("Abyssalnite", "abyssalcraft:abyssalnite", 35, new int[]{3, 6, 8, 3}, 13, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
-	public static final ArmorMaterial dreadedAbyssalniteArmor = EnumHelper.addArmorMaterial("Dread", "abyssalcraft:dread", 36, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
 	public static final ArmorMaterial refinedCoraliumArmor = EnumHelper.addArmorMaterial("Coralium", "abyssalcraft:coralium", 37, new int[]{3, 6, 8, 3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
 	public static final ArmorMaterial platedCoraliumArmor = EnumHelper.addArmorMaterial("CoraliumP", "abyssalcraft:coraliump", 55, new int[]{4, 7, 9, 4}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F);
 	public static final ArmorMaterial depthsArmor = EnumHelper.addArmorMaterial("Depths", "abyssalcraft:depths", 33, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.5F);
@@ -154,7 +153,6 @@ public class AbyssalCraftAPI {
 	public static void setRepairItems(){
 
 		abyssalniteArmor.setRepairItem(new ItemStack(ACItems.abyssalnite_ingot));
-		dreadedAbyssalniteArmor.setRepairItem(new ItemStack(ACItems.dreaded_shard_of_abyssalnite));
 		refinedCoraliumArmor.setRepairItem(new ItemStack(ACItems.refined_coralium_ingot));
 		platedCoraliumArmor.setRepairItem(new ItemStack(ACItems.coralium_plate));
 		depthsArmor.setRepairItem(new ItemStack(ACItems.coralium_gem_cluster_9));

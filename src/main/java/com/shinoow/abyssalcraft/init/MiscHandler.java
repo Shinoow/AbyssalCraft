@@ -785,10 +785,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.abyssalnite_chestplate, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACItems.abyssalnite_leggings, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACItems.abyssalnite_boots, ResearchItems.DARKLANDS_BIOME);
-		addCondition(ACItems.dreaded_abyssalnite_helmet, ResearchItems.DREADLANDS);
-		addCondition(ACItems.dreaded_abyssalnite_chestplate, ResearchItems.DREADLANDS);
-		addCondition(ACItems.dreaded_abyssalnite_leggings, ResearchItems.DREADLANDS);
-		addCondition(ACItems.dreaded_abyssalnite_boots, ResearchItems.DREADLANDS);
 		addCondition(ACItems.refined_coralium_helmet, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.refined_coralium_chestplate, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.refined_coralium_leggings, ResearchItems.ABYSSAL_WASTELAND);
@@ -958,7 +954,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadiumArmor, ACClientVars.getCrystalColors()[Crystals.DREADIUM]);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadiumSamuraiArmor, ACClientVars.getCrystalColors()[Crystals.DREADIUM]);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.abyssalniteArmor, ACClientVars.getCrystalColors()[Crystals.ABYSSALNITE]);
-		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.dreadedAbyssalniteArmor, ACClientVars.getCrystalColors()[Crystals.ABYSSALNITE]);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.refinedCoraliumArmor, 0x067047);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.platedCoraliumArmor, 0x067047);
 		ArmorDataRegistry.instance().registerColor(AbyssalCraftAPI.depthsArmor, 0x067047);

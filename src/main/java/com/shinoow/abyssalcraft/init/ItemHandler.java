@@ -323,10 +323,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.abyssalnite_chestplate = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.CHEST, "aplate");
 		ACItems.abyssalnite_leggings = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.LEGS, "alegs");
 		ACItems.abyssalnite_boots = new ItemAbyssalniteArmor(AbyssalCraftAPI.abyssalniteArmor, 5, EntityEquipmentSlot.FEET, "aboots");
-		ACItems.dreaded_abyssalnite_helmet = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.HEAD, "dhelmet");
-		ACItems.dreaded_abyssalnite_chestplate = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.CHEST, "dplate");
-		ACItems.dreaded_abyssalnite_leggings = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.LEGS, "dlegs");
-		ACItems.dreaded_abyssalnite_boots = new ItemDreadArmor(AbyssalCraftAPI.dreadedAbyssalniteArmor, 5, EntityEquipmentSlot.FEET, "dboots");
 		ACItems.refined_coralium_helmet = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.HEAD, "corhelmet");
 		ACItems.refined_coralium_chestplate = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.CHEST, "corplate");
 		ACItems.refined_coralium_leggings = new ItemCoraliumArmor(AbyssalCraftAPI.refinedCoraliumArmor, 5, EntityEquipmentSlot.LEGS, "corlegs");
@@ -397,10 +393,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.abyssalnite_chestplate, "aplate");
 		registerItem(ACItems.abyssalnite_leggings, "alegs");
 		registerItem(ACItems.abyssalnite_boots, "aboots");
-		registerItem(ACItems.dreaded_abyssalnite_helmet, "dhelmet");
-		registerItem(ACItems.dreaded_abyssalnite_chestplate, "dplate");
-		registerItem(ACItems.dreaded_abyssalnite_leggings, "dlegs");
-		registerItem(ACItems.dreaded_abyssalnite_boots, "dboots");
 		registerItem(ACItems.refined_coralium_helmet, "corhelmet");
 		registerItem(ACItems.refined_coralium_chestplate, "corplate");
 		registerItem(ACItems.refined_coralium_leggings, "corlegs");

@@ -34,10 +34,6 @@ public class Rituals {
 	public static NecronomiconRitual DEPTHS_CHESTPLATE;
 	public static NecronomiconRitual DEPTHS_LEGGINGS;
 	public static NecronomiconRitual DEPTHS_BOOTS;
-	public static NecronomiconRitual DREADED_ABYSSALNITE_HELMET;
-	public static NecronomiconRitual DREADED_ABYSSALNITE_CHESTPLATE;
-	public static NecronomiconRitual DREADED_ABYSSALNITE_LEGGINGS;
-	public static NecronomiconRitual DREADED_ABYSSALNITE_BOOTS;
 
 	// Charms
 	public static NecronomiconRitual RANGE_CHARM;
