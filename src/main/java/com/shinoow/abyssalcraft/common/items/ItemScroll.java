@@ -31,8 +31,6 @@ public class ItemScroll extends ItemACBasic implements IScroll {
 
 	private ScrollType type;
 
-	private Spell spell;
-
 	public ItemScroll(String name, ScrollType scrollType) {
 		super(name);
 		type = scrollType;
@@ -45,30 +43,23 @@ public class ItemScroll extends ItemACBasic implements IScroll {
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack)
 	{
-		return spell != null && spell.requiresCharging() ? 50 : 0;
+		Spell spell = SpellUtils.getSpell(stack);
+		return spell != null ? spell.requiresCharging() ? 50 : 0 : 0;
 	}
 
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
 	{
 		if(entityLiving instanceof EntityPlayer)
-			SpellUtils.castChargingSpell(spell, type, worldIn, (EntityPlayer)entityLiving);
+			SpellUtils.castChargingSpell(stack, worldIn, (EntityPlayer)entityLiving);
 		return stack;
-	}
-
-	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
-	{
-		if (!worldIn.isRemote)
-			if(spell == null)
-				spell = SpellUtils.getSpell(stack);
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
 		ItemStack stack = playerIn.getHeldItem(handIn);
-		SpellUtils.castInstantSpell(spell, type, worldIn, playerIn, handIn);
+		SpellUtils.castInstantSpell(stack, worldIn, playerIn, handIn);
 
 		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}

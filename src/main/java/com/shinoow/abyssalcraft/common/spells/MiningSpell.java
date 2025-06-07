@@ -65,7 +65,7 @@ public class MiningSpell extends Spell {
 				|| state.getBlock() == ACBlocks.elysian_stone || state.getBlock() == ACBlocks.omothol_stone
 				|| state.getBlock() == ACBlocks.monolith_stone || state.getBlock() == Blocks.GRAVEL
 				|| state.getBlock() == Blocks.SANDSTONE || state.getBlock() == ACBlocks.dreadlands_dirt)
-			return Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockLiquid.LEVEL, 7);
+			return ACBlocks.solid_lava.getDefaultState();
 		if(state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER)
 			return Blocks.AIR.getDefaultState();
 		if(state == ACBlocks.coralium_stone.getDefaultState())
@@ -166,6 +166,10 @@ public class MiningSpell extends Spell {
 						if(i == 0)
 							world.destroyBlock(pos2, false);
 						world.setBlockState(pos2, state);
+						if(state.getBlock() == ACBlocks.solid_lava) {
+							state.getBlock().onBlockPlacedBy(world, pos2, state, player, null);
+						}
+						
 						if(f >= fmax) break;
 					}
 				}
