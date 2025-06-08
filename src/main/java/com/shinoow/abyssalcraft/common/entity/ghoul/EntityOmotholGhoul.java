@@ -81,6 +81,13 @@ public class EntityOmotholGhoul extends EntityGhoulBase implements IOmotholEntit
 	}
 
 	@Override
+	public boolean isPotionApplicable(PotionEffect potioneffectIn) {
+		if(potioneffectIn.getPotion() == MobEffects.POISON)
+			return false;
+		return super.isPotionApplicable(potioneffectIn);
+	}
+
+	@Override
 	public float getBonusDamage() {
 		return 3;
 	}

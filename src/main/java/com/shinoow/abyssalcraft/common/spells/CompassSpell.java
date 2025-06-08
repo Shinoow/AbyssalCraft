@@ -46,7 +46,6 @@ public class CompassSpell extends Spell {
 	@Override
 	protected void castSpellServer(World world, BlockPos pos, EntityPlayer player, ScrollType scrollType) {
 
-		new BlockPos(4, 54, 85);
 		EntityCompassTentacle e = new EntityCompassTentacle(world);
 		e.setPosition(pos.getX(),pos.getY(), pos.getZ());
 		world.spawnEntity(e);
