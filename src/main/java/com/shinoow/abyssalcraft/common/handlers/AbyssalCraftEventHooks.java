@@ -186,7 +186,8 @@ public class AbyssalCraftEventHooks {
 				event.setCanceled(true);
 			if(EntityUtil.isEntityEldritch(entity) && (source.getTrueSource() instanceof EntityLivingBase && EntityUtil.isEntityEldritch((EntityLivingBase) source.getTrueSource())
 					|| source == AbyssalCraftAPI.dread || source == AbyssalCraftAPI.coralium
-					|| source == AbyssalCraftAPI.antimatter || source == AbyssalCraftAPI.acid))
+					|| source == AbyssalCraftAPI.antimatter || source == AbyssalCraftAPI.acid
+					|| source == DamageSource.MAGIC))
 				event.setCanceled(true);
 			if(entity instanceof EntityPlayer && EntityUtil.isEntityCoralium(entity) &&
 					source == AbyssalCraftAPI.coralium)
