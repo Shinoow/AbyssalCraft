@@ -407,9 +407,9 @@ public class AbyssalCraftEventHooks {
 					player.world.playEvent((EntityPlayer)null, 1016, event.getSource().getTrueSource().getPosition(), 0);
 					alreadySpawned = true;
 				}
-			} else if(e instanceof EntityLiving && e.hasCustomName() && e.isNonBoss()) {
+			} else if(e instanceof EntityLiving && e.hasCustomName() && e.isNonBoss())
 				NecromancyWorldSavedData.get(e.world).storeData(e.getName(), e.serializeNBT(), calculateSize(e.height));
-			} else if(EntityList.getKey(e) != null){
+			else if(EntityList.getKey(e) != null)
 				if(!(e instanceof EntityEvilAnimal) && !(e instanceof EntityDemonAnimal)){
 					Tuple<Integer, Float> data = InitHandler.demon_transformations.get(EntityList.getKey(e));
 					World world = e.world;
@@ -422,9 +422,8 @@ public class AbyssalCraftEventHooks {
 						alreadySpawned = true;
 					}
 				}
-			}
-			if(e.dimension == ACLib.dark_realm_id || (event.getSource().getTrueSource() instanceof EntityLiving
-					&& ((EntityLivingBase) event.getSource().getTrueSource()).getCreatureAttribute() == AbyssalCraftAPI.SHADOW)
+			if(e.dimension == ACLib.dark_realm_id || event.getSource().getTrueSource() instanceof EntityLiving
+					&& ((EntityLivingBase) event.getSource().getTrueSource()).getCreatureAttribute() == AbyssalCraftAPI.SHADOW
 					|| event.getSource() == AbyssalCraftAPI.shadow) {
 				World world = e.getEntityWorld();
 				if(e instanceof EntityPlayer && !alreadySpawned) {
@@ -439,13 +438,12 @@ public class AbyssalCraftEventHooks {
 				} else if(e.getCreatureAttribute() != AbyssalCraftAPI.SHADOW
 						&& world.rand.nextBoolean() && !alreadySpawned) {
 					EntityLiving shadow = new EntityShadowCreature(world);
-					if(e instanceof EntityGhoulBase) {
+					if(e instanceof EntityGhoulBase)
 						shadow = new EntityShadowGhoul(world);
-					} else if(e.height >= 2.2F) {
+					else if(e.height >= 2.2F)
 						shadow = new EntityShadowBeast(world);
-					} else if(e.height >= 1.2F) {
+					else if(e.height >= 1.2F)
 						shadow = new EntityShadowMonster(world);
-					}
 					shadow.copyLocationAndAnglesFrom(e);
 					if(e.hasCustomName())
 						shadow.setCustomNameTag(e.getCustomNameTag());

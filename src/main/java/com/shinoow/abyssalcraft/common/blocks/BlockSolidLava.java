@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import java.util.Random;
-
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
@@ -55,9 +53,9 @@ public class BlockSolidLava extends BlockACBasic {
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 			ItemStack stack) {
 
-        worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F + worldIn.rand.nextFloat() * 0.2F, 0.9F + worldIn.rand.nextFloat() * 0.15F, false);
+		worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F + worldIn.rand.nextFloat() * 0.2F, 0.9F + worldIn.rand.nextFloat() * 0.15F, false);
 		Scheduler.schedule(new ScheduledProcess(10) {
-			
+
 			@Override
 			public void execute() {
 				worldIn.setBlockToAir(pos);

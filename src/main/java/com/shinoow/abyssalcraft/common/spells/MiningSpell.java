@@ -18,7 +18,6 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockSand.EnumType;
 import net.minecraft.block.BlockStainedGlass;
@@ -166,10 +165,9 @@ public class MiningSpell extends Spell {
 						if(i == 0)
 							world.destroyBlock(pos2, false);
 						world.setBlockState(pos2, state);
-						if(state.getBlock() == ACBlocks.solid_lava) {
+						if(state.getBlock() == ACBlocks.solid_lava)
 							state.getBlock().onBlockPlacedBy(world, pos2, state, player, null);
-						}
-						
+
 						if(f >= fmax) break;
 					}
 				}

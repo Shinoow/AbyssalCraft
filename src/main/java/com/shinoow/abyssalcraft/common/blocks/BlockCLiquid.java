@@ -69,9 +69,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 			return false;
 		if(state.getMaterial().isLiquid() && state.getBlock() != this && state.getBlock() != ACBlocks.liquid_antimatter)
 			return true;
-		if(state.getBlock() == Blocks.LAVA)
-			return true;
-		else if(canBeTramsuted(state))
+		if((state.getBlock() == Blocks.LAVA) || canBeTramsuted(state))
 			return true;
 		return super.canDisplace(world, pos);
 	}
@@ -81,7 +79,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 
 		//TODO Completely rewrite this trash, maybe registry for custom transmutations???
 		IBlockState state = world.getBlockState(pos);
-		if(!world.isRemote && !isBlacklisted(state)) {
+		if(!world.isRemote && !isBlacklisted(state))
 			if(ACConfig.shouldSpread || world.provider.getDimension() == ACLib.abyssal_wasteland_id){
 				if(state.getMaterial().isLiquid() && state.getBlock() != this && state.getBlock() != ACBlocks.liquid_antimatter)
 					world.setBlockState(pos, getDefaultState());
@@ -115,7 +113,6 @@ public class BlockCLiquid extends BlockFluidClassic {
 							world.setBlockState(pos, ACBlocks.abyssal_cobblestone.getDefaultState());
 					}else world.setBlockState(pos, ACBlocks.abyssal_cobblestone.getDefaultState());
 			}
-		}
 
 		return super.displaceIfPossible(world, pos);
 	}

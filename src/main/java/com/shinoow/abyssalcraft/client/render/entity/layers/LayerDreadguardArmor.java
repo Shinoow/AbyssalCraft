@@ -11,13 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity.layers;
 
-import java.util.function.Function;
-
 import com.shinoow.abyssalcraft.client.render.entity.RenderDreadguard;
 import com.shinoow.abyssalcraft.common.entity.EntityDreadguard;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;

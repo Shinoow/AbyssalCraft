@@ -204,42 +204,42 @@ public class ClientProxy extends CommonProxy {
 		render2.addLayer(new LayerStarSpawnTentacles(render2));
 		render2.addLayer(new LayerOuterBipedArmor(render2));
 		Render<EntityArmorStand> rs = rm.getEntityClassRenderObject(EntityArmorStand.class);
-		if(rs instanceof RenderArmorStand) {
+		if(rs instanceof RenderArmorStand)
 			((RenderArmorStand) rs).addLayer(new LayerOuterBipedArmor((RenderArmorStand) rs) {
 
+				@Override
 				protected void initArmor()
 				{
-					this.modelLeggings = new ModelArmorStandArmor(0.75F);
-					this.modelArmor = new ModelArmorStandArmor(1.25F);
+					modelLeggings = new ModelArmorStandArmor(0.75F);
+					modelArmor = new ModelArmorStandArmor(1.25F);
 				}
 			});
-		}
 		rm.entityRenderMap.forEach((a,b)-> {
 			if(EntityLiving.class.isAssignableFrom(a) && b instanceof RenderBiped) {
 				ModelBase model = ((RenderBiped) b).getMainModel();
-				if(model instanceof ModelBiped && !(model instanceof ModelZombieVillager)) {
-					if(model instanceof ModelZombie) {
+				if(model instanceof ModelBiped && !(model instanceof ModelZombieVillager))
+					if(model instanceof ModelZombie)
 						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) b) {
 
+							@Override
 							protected void initArmor()
 							{
-								this.modelLeggings = new ModelZombie(0.75F, true);
-								this.modelArmor = new ModelZombie(1.25F, true);
+								modelLeggings = new ModelZombie(0.75F, true);
+								modelArmor = new ModelZombie(1.25F, true);
 							}
 						});
-					} else if(model instanceof ModelSkeleton) {
+					else if(model instanceof ModelSkeleton)
 						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) b) {
 
+							@Override
 							protected void initArmor()
 							{
-								this.modelLeggings = new ModelSkeleton(0.75F, true);
-								this.modelArmor = new ModelSkeleton(1.25F, true);
+								modelLeggings = new ModelSkeleton(0.75F, true);
+								modelArmor = new ModelSkeleton(1.25F, true);
 							}
 						});
-					} else { // if no other submodel is found, assume ModelBiped I guess
+					else
 						((RenderBiped) b).addLayer(new LayerOuterBipedArmor((RenderBiped) b));
-					}
-				}
 			}
 		});
 
