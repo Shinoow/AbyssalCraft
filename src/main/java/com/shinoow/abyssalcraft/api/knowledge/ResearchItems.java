@@ -46,8 +46,6 @@ public class ResearchItems {
 	public static IResearchItem SKELETON_GOLIATH;
 	public static IResearchItem SPECTRAL_DRAGON;
 	public static IResearchItem OMOTHOL_GHOUL;
-	public static IResearchItem DREADED_ABYSSALNITE_GOLEM;
-	public static IResearchItem ABYSSALNITE_GOLEM;
 	public static IResearchItem ELITE_DREAD_MOB;
 	public static IResearchItem DREAD_MOB;
 	public static IResearchItem KILLED_ALL_BOSSES;

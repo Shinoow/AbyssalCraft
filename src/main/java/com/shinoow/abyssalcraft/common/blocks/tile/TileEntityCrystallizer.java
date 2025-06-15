@@ -403,7 +403,6 @@ public class TileEntityCrystallizer extends TileEntity implements ISidedInventor
 
 			if (item == ACItems.dread_fragment) return 100;
 			if (item == ACItems.dreaded_shard_of_abyssalnite) return 1000;
-			if (item == ACItems.dreaded_chunk_of_abyssalnite) return 1600;
 			if (item == Items.BLAZE_POWDER) return 1200;
 			if (item == Items.BLAZE_ROD) return 2400;
 			if (item == ACItems.methane) return 10000;

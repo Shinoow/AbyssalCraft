@@ -46,8 +46,6 @@ public class UnlockConditions {
 	public static IUnlockCondition SKELETON_GOLIATH = new EntityCondition("abyssalcraft:gskeleton");
 	public static IUnlockCondition SPECTRAL_DRAGON = new EntityCondition("abyssalcraft:dragonminion");
 	public static IUnlockCondition OMOTHOL_GHOUL = new EntityCondition("abyssalcraft:omotholghoul");
-	public static IUnlockCondition DREADED_ABYSSALNITE_GOLEM = new EntityCondition("abyssalcraft:dreadgolem");
-	public static IUnlockCondition ABYSSALNITE_GOLEM = new EntityCondition("abyssalcraft:abygolem");
 	public static IUnlockCondition ELITE_DREAD_MOB = new MultiEntityCondition("abyssalcraft:dreadguard", "abyssalcraft:greaterdreadspawn", "abyssalcraft:lesserdreadbeast");
 	public static IUnlockCondition DREAD_MOB = new EntityPredicateCondition(e -> IDreadEntity.class.isAssignableFrom(e));
 	public static IUnlockCondition KILLED_ALL_BOSSES = new MandatoryMultiEntityCondition("abyssalcraft:dragonboss", "abyssalcraft:chagaroth", "abyssalcraft:jzahar", "abyssalcraft:shadowboss");

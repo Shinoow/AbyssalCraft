@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockSand.EnumType;
 import net.minecraft.block.BlockStainedGlass;
@@ -68,7 +69,7 @@ public class MiningSpell extends Spell {
 		if(state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER)
 			return Blocks.AIR.getDefaultState();
 		if(state == ACBlocks.coralium_stone.getDefaultState())
-			return ACBlocks.liquid_coralium.getDefaultState();
+			return ACBlocks.liquid_coralium.getDefaultState().withProperty(BlockLiquid.LEVEL, 7);
 		return null;
 	}
 

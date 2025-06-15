@@ -723,7 +723,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.shadow_gem, ResearchItems.SHADOW_MOBS);
 		addCondition(ACItems.shard_of_oblivion, ResearchItems.SHADOW_MOBS);
 		addCondition(ACItems.dreaded_shard_of_abyssalnite, ResearchItems.ELITE_DREAD_MOB);
-		addCondition(ACItems.dreaded_chunk_of_abyssalnite, ResearchItems.DREADED_ABYSSALNITE_GOLEM);
 		addCondition(ACItems.dreadium_ingot, ResearchItems.DREADLANDS);
 		addCondition(ACItems.dread_fragment, ResearchItems.DREAD_MOB);
 		addCondition(ACItems.dread_cloth, ResearchItems.DREADLANDS);
@@ -731,7 +730,6 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.dreadium_katana_blade, ResearchItems.DREADLANDS);
 		addCondition(ACItems.dread_plagued_gateway_key, ResearchItems.DREADLANDS);
 		addCondition(ACItems.charcoal, ResearchItems.DREADLANDS);
-		addCondition(ACItems.chunk_of_abyssalnite, ResearchItems.ABYSSALNITE_GOLEM);
 		addCondition(ACItems.abyssalnite_ingot, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACItems.chunk_of_coralium, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.refined_coralium_ingot, ResearchItems.ABYSSAL_WASTELAND);

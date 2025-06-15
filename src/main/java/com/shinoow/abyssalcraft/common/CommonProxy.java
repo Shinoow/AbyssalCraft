@@ -83,8 +83,6 @@ public class CommonProxy {
 		ResearchItems.SKELETON_GOLIATH = new ResearchItem("skeleton_goliath", 0, rl("skeleton_goliath")).setUnlockConditions(UnlockConditions.SKELETON_GOLIATH);
 		ResearchItems.SPECTRAL_DRAGON = new ResearchItem("spectral_dragon", 0, rl("spectral_dragon")).setUnlockConditions(UnlockConditions.SPECTRAL_DRAGON);
 		ResearchItems.OMOTHOL_GHOUL = new ResearchItem("omothol_ghoul", 0, rl("omothol_ghoul")).setUnlockConditions(UnlockConditions.OMOTHOL_GHOUL);
-		ResearchItems.DREADED_ABYSSALNITE_GOLEM = new ResearchItem("dreaded_abyssalnite_golem", 0, rl("dreaded_abyssalnite_golem")).setUnlockConditions(UnlockConditions.DREADED_ABYSSALNITE_GOLEM);
-		ResearchItems.ABYSSALNITE_GOLEM = new ResearchItem("abyssalnite_golem", 0, rl("abyssalnite_golem")).setUnlockConditions(UnlockConditions.ABYSSALNITE_GOLEM);
 		ResearchItems.ELITE_DREAD_MOB = new ResearchItem("elite_dread_mob", 0, rl("elite_dread_mob")).setUnlockConditions(UnlockConditions.ELITE_DREAD_MOB);
 		ResearchItems.DREAD_MOB = new ResearchItem("dread_mob", 0, rl("dread_mob")).setUnlockConditions(UnlockConditions.DREAD_MOB);
 		ResearchItems.KILLED_ALL_BOSSES = new ResearchItem("kill_all_bosses", 0, rl("kill_all_bosses")).setUnlockConditions(UnlockConditions.KILLED_ALL_BOSSES);

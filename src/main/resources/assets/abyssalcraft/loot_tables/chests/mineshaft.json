@@ -204,34 +204,6 @@
                         }
                     ],
                     "weight": 15
-                },
-                {
-                    "type": "item",
-                    "name": "abyssalcraft:abychunk",
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 2,
-                                "max": 4
-                            }
-                        }
-                    ],
-                    "weight": 10
-                },
-                {
-                    "type": "item",
-                    "name": "abyssalcraft:dreadchunk",
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 2,
-                                "max": 4
-                            }
-                        }
-                    ],
-                    "weight": 10
                 }
             ]
         },

@@ -248,7 +248,6 @@ public class ItemHandler implements ILifeCycleHandler {
 
 		//Dread items
 		ACItems.dreaded_shard_of_abyssalnite = new ItemACBasic("dreadshard");
-		ACItems.dreaded_chunk_of_abyssalnite = new ItemACBasic("dreadchunk");
 		ACItems.dreadium_ingot = new ItemACBasic("dreadiumingot");
 		ACItems.dread_fragment = new ItemACBasic("dreadfragment");
 		ACItems.dread_cloth = new ItemACBasic("dreadcloth");
@@ -258,7 +257,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.charcoal = new ItemACBasic("cha_rcoal");
 
 		//Abyssalnite items
-		ACItems.chunk_of_abyssalnite = new ItemACBasic("abychunk");
 		ACItems.abyssalnite_ingot = new ItemACBasic("abyingot");
 
 		//Coralium items
@@ -352,8 +350,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.eye_of_the_abyss, "eoa");
 		registerItem(ACItems.dreadlands_infused_gateway_key, "gatewaykeydl");
 		registerItem(ACItems.dreaded_shard_of_abyssalnite, "dreadshard");
-		registerItem(ACItems.dreaded_chunk_of_abyssalnite, "dreadchunk");
-		registerItem(ACItems.chunk_of_abyssalnite, "abychunk");
 		registerItem(ACItems.abyssalnite_ingot, "abyingot");
 		registerItem(ACItems.coralium_gem, "coralium");
 		registerItem(ACItems.coralium_gem_cluster_2, "ccluster2");

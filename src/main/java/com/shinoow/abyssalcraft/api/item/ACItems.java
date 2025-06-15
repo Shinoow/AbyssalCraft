@@ -173,8 +173,6 @@ public class ACItems {
 
 	// Materials
 	public static Item dreaded_shard_of_abyssalnite;
-	public static Item dreaded_chunk_of_abyssalnite;
-	public static Item chunk_of_abyssalnite;
 	public static Item abyssalnite_ingot;
 	public static Item coralium_gem;
 	public static Item coralium_gem_cluster_2;
