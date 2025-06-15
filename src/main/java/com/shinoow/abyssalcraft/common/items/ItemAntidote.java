@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
-
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -93,8 +93,8 @@ public class ItemAntidote extends ItemACBasic {
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		if(is.hasTagCompound() && is.getTagCompound().hasKey("content"))
-			l.add(is.getTagCompound().getInteger("content")+" uses left");
-		else l.add("10 uses left");
+			l.add(I18n.format("tooltip.antidote.contents",is.getTagCompound().getInteger("content")));
+		else l.add(I18n.format("tooltip.antidote.contents",10));
 	}
 
 	public void setCure(Potion potion) {

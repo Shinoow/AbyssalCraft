@@ -993,6 +993,7 @@ tooltip.configurator.filter.0=根据子类型过滤
 tooltip.configurator.filter.1=根据NBT过滤
 tooltip.face_book.1=如果你侧耳倾听，你会听到
 tooltip.face_book.2=失落的灵魂在呼喊它们的姓名
+tooltip.antidote.contents=剩余使用次数：%d
 
 #创造模式物品栏
 itemGroup.acblocks=深渊国度丨方块

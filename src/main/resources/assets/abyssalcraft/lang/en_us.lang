@@ -993,6 +993,7 @@ tooltip.configurator.filter.0=Filter by subtype
 tooltip.configurator.filter.1=Filter by NBT
 tooltip.face_book.1=If you listen closely, you can hear the
 tooltip.face_book.2=voices of lost souls calling out their names
+tooltip.antidote.contents=%d uses left
 
 #Creative Tabs
 itemGroup.acblocks=AbyssalCraft Blocks
