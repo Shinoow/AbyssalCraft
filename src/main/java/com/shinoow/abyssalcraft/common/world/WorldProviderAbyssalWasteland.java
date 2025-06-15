@@ -70,15 +70,6 @@ public class WorldProviderAbyssalWasteland extends WorldProvider implements IAby
 	}
 
 	@Override
-	public void calculateInitialWeather()
-	{
-		world.getWorldInfo().setRaining(false);
-		world.rainingStrength = 0;
-		world.getWorldInfo().setThundering(false);
-		world.thunderingStrength = 0;
-	}
-
-	@Override
 	public void updateWeather()
 	{
 		world.getWorldInfo().setRaining(false);
