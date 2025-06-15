@@ -16,9 +16,7 @@ import static com.shinoow.abyssalcraft.AbyssalCraft.modid;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
-import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
-import com.shinoow.abyssalcraft.common.entity.EntityDreadling;
-import com.shinoow.abyssalcraft.common.entity.EntityGatekeeperMinion;
+import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.MapGenAbyStronghold;
 import com.shinoow.abyssalcraft.common.structures.abyss.stronghold.StructureAbyStrongholdPieces;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.mineshaft.StructureDreadlandsMinePieces;
@@ -112,6 +110,12 @@ public class WorldHandler implements ILifeCycleHandler {
 				.setGatewayKey(2)
 				.setMob(EntityGatekeeperMinion.class)
 				.setOverlay(new ResourceLocation("abyssalcraft", "textures/model/omothol_portal.png"))
+				.build());
+		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACLib.dark_realm_id)
+				.addConnectedDimension(ACLib.omothol_id)
+				.setColor(0, 0, 0)
+				.setGatewayKey(2)
+				.setMob(EntityShadowMonster.class)
 				.build());
 		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(0)
 				.setColor(0, 0, 255)

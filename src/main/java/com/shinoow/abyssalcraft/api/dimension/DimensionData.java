@@ -184,8 +184,8 @@ public class DimensionData {
 		 * Sets the required gateway key
 		 * <ul>
 		 * <li>0 = Gateway Key</li>
-		 * <li>1 = Asorah's Dreaded Gateway Key</li>
-		 * <li>1 = Cha'garoth's R'lyehian Gateway Key</li>
+		 * <li>1 = Dreadlands Infused Gateway Key</li>
+		 * <li>2 = Omothol-forged Gateway Key</li>
 		 * <li>3 = The Silver Key</li>
 		 * </ul>
 		 * @param gatewayKey Integer representing the key in question

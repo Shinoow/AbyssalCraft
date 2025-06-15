@@ -168,8 +168,8 @@ public class DimensionDataRegistry {
 		if(data1 == null && data2 == null)
 			return false;
 
-		boolean bool1 = true;
-		boolean bool2 = true;
+		boolean bool1 = false;
+		boolean bool2 = false;
 
 		if(data1 != null)
 			bool1 = data1.getConnectedDimensions().isEmpty() || data1.getConnectedDimensions().contains(dim2);

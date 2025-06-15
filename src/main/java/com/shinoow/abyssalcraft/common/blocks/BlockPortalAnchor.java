@@ -85,7 +85,7 @@ public class BlockPortalAnchor extends BlockACBasic {
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 
 		if(!worldIn.isRemote && state.getValue(ACTIVE))
-			worldIn.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(pos).grow(2))
+			worldIn.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(pos.up()))
 			.stream().forEach(e -> worldIn.removeEntity(e));
 
 		super.breakBlock(worldIn, pos, state);

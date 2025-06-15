@@ -74,7 +74,7 @@ public class EntityPortal extends Entity {
 	public void onUpdate() {
 		if(!world.isRemote && ticksExisted % 10 == 0 && data != null && data.getMobClass() != null) {
 			boolean playerNearby = ACConfig.portalSpawnsNearPlayer ? world.getClosestPlayer(posX, posY, posZ, 32, false) != null : true;
-			boolean nearbyMobs = world.getEntitiesWithinAABB(EntityAbyssalZombie.class, new AxisAlignedBB(getPosition()).grow(16)).size() < 10;
+			boolean nearbyMobs = world.getEntitiesWithinAABB(data.getMobClass(), new AxisAlignedBB(getPosition()).grow(16)).size() < 10;
 
 			if (world.provider.getDimension() != dataManager.get(DIMENSION) && world.getGameRules().getBoolean("doMobSpawning") && rand.nextInt(2000) < world.getDifficulty().getId()
 					&& playerNearby && nearbyMobs)
