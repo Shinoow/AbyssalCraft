@@ -1,6 +1,4 @@
-# Blender MTL File: 'None'
-# Material Count: 2
-
-newmtl None
-Ka 1.000000 1.000000 1.000000
+# Made in Blockbench 4.12.5
+newmtl m_36290df2-7cc6-01a0-645c-2c59a90ec1fc
 map_Kd abyssalcraft:model/staff
+newmtl none
