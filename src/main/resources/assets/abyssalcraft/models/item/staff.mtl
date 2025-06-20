@@ -1,4 +1,8 @@
 # Made in Blockbench 4.12.5
-newmtl m_36290df2-7cc6-01a0-645c-2c59a90ec1fc
-map_Kd abyssalcraft:model/staff
+newmtl m_4876dd57-4de4-0335-6936-bd5fb1154e8b
+map_Kd abyssalcraft:model/staff_handle
+newmtl m_8baac8e3-e2c4-9655-b9a1-ec75b427e9b0
+map_Kd abyssalcraft:model/staff_head
+newmtl m_02ba5f05-074b-f9f4-ef62-67570f3d244e
+map_Kd abyssalcraft:model/staff_light_key
 newmtl none
