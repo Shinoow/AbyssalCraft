@@ -116,29 +116,31 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 					for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(15, 3, 15), EntityLivingBase::isNonBoss))
 						if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW)
 							consumeIfApplicable(target, stack, 0);
-						else if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(target))
-							consumeIfApplicable(target, stack, 1);
-						else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(target))
-							consumeIfApplicable(target, stack, 2);
-						else if(world.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity &&
-								target.getCreatureAttribute() != AbyssalCraftAPI.SHADOW)
-							consumeIfApplicable(target, stack, 3);
+						else {
+							if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(target))
+								consumeIfApplicable(target, stack, 1);
+							else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(target))
+								consumeIfApplicable(target, stack, 2);
+							else if(world.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity)
+								consumeIfApplicable(target, stack, 3);
+						}
 					for(MultiPartEntityPart target : world.getEntitiesWithinAABB(MultiPartEntityPart.class, new AxisAlignedBB(pos).grow(15, 3, 15), e -> ((Entity) e.parent).isNonBoss()))
 						if(target.parent instanceof EntityLiving)
 							if(((EntityLiving) target.parent).getCreatureAttribute() == AbyssalCraftAPI.SHADOW)
 								consumeIfApplicable(target, stack, 0);
-							else if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier((EntityLiving) target.parent))
-								consumeIfApplicable(target, stack, 1);
-							else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier((EntityLiving) target.parent))
-								consumeIfApplicable(target, stack, 2);
-							else if(world.provider.getDimension() == ACLib.omothol_id && target.parent instanceof IOmotholEntity &&
-									((EntityLiving) target.parent).getCreatureAttribute() != AbyssalCraftAPI.SHADOW)
-								consumeIfApplicable(target, stack, 3);
+							else {
+								if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier((EntityLiving) target.parent))
+									consumeIfApplicable(target, stack, 1);
+								else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier((EntityLiving) target.parent))
+									consumeIfApplicable(target, stack, 2);
+								else if(world.provider.getDimension() == ACLib.omothol_id && target.parent instanceof IOmotholEntity)
+									consumeIfApplicable(target, stack, 3);
+							}
 				}
 
 		for(EnergyType type : EnergyType.values())
 			if(getEnergy(type.index) >= type.limit){
-				setEnergy(type.index, 0);
+				setEnergy(type.index, getEnergy(type.index) - type.limit); // save overflow
 				ItemStack output = getStackInSlot(type.slot);
 				if(!output.isEmpty() && output.getItem() == type.item)
 					output.grow(1);
@@ -209,7 +211,7 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 	public void consumeIfApplicable(EntityLivingBase target, ItemStack stack, int type) {
 		IStaffOfRending staff = (IStaffOfRending)stack.getItem();
 		if(!target.isDead && getContainedEnergy() >= target.getMaxHealth()/2)
-			if(target.attackEntityFrom(DamageSource.MAGIC, staff.getDrainAmount(stack))){
+			if(target.attackEntityFrom(DamageSource.GENERIC, staff.getDrainAmount(stack))){
 				consumeEnergy(target.getMaxHealth()/2);
 				increaseEnergy(type, staff.getDrainAmount(stack));
 			}
@@ -218,7 +220,7 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 	public void consumeIfApplicable(MultiPartEntityPart target, ItemStack stack, int type) {
 		IStaffOfRending staff = (IStaffOfRending)stack.getItem();
 		if(!target.isDead && getContainedEnergy() >= ((EntityLivingBase) target.parent).getMaxHealth()/2)
-			if(target.attackEntityFrom(DamageSource.MAGIC, staff.getDrainAmount(stack))){
+			if(target.attackEntityFrom(DamageSource.GENERIC, staff.getDrainAmount(stack))){
 				consumeEnergy(((EntityLivingBase) target.parent).getMaxHealth()/2);
 				increaseEnergy(type, staff.getDrainAmount(stack));
 			}
@@ -404,7 +406,7 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 
 		SHADOW(0, "Shadow", 2, ACItems.shadow_gem, 200),
 		ABYSSAL(1, "Abyssal", 3, ACItems.abyssal_wasteland_essence, 100),
-		DREAD(2, "Dread", 4, ACItems.omothol_essence, 100),
+		DREAD(2, "Dread", 4, ACItems.dreadlands_essence, 100),
 		OMOTHOL(3, "Omothol", 5, ACItems.omothol_essence, 100);
 
 		public final int index, slot, limit;

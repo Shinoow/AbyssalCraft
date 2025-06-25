@@ -87,7 +87,7 @@ public class ItemStaffOfRending extends ItemACBasic implements IStaffOfRending {
 		RendingRegistry.instance().getRendings().stream()
 		.filter(r -> getEnergy(stack, r.getName()) >= r.getMaxEnergy())
 		.forEach(r -> {
-			setEnergy(0, stack, r.getName());
+			setEnergy(getEnergy(stack, r.getName()) - r.getMaxEnergy(), stack, r.getName());
 			if(!player.inventory.addItemStackToInventory(r.getOutput()))
 				player.dropItem(r.getOutput(), true);
 		});

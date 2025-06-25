@@ -91,6 +91,7 @@ public class StructureUtil {
 
 		while(world.isAirBlock(pos) && pos.getY() > 2)
 			pos = pos.down();
+		if(pos.getY() <= 1) return;
 
 		// Overworld et al uses the config option for generation chance, AC dims don't
 		boolean flag = internal ? random.nextInt(50) == 0 : ACConfig.graveyardGenerationChance > 0 && random.nextInt(ACConfig.graveyardGenerationChance) == 0;
