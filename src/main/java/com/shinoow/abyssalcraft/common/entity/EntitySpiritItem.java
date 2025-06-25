@@ -15,6 +15,7 @@ import java.util.*;
 
 import com.shinoow.abyssalcraft.lib.util.SpiritItemUtil;
 
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.*;
@@ -80,6 +81,8 @@ public class EntitySpiritItem extends EntityItem {
 		super.onUpdate();
 		collided = collidedHorizontally = collidedVertically = false;
 		if(world.isRemote) return;
+		if(pathIndex > route.length - 1)
+			pathIndex = route.length - 1;
 		target = route[pathIndex];
 		double d0 = posX - target.getX();
 		double d1 = posY - target.getY();
@@ -87,7 +90,7 @@ public class EntitySpiritItem extends EntityItem {
 		double d = d0 * d0 + d1 * d1 + d2 * d2; // more precise distanceSq
 		if(MathHelper.floor(d) <= 1D) { // makes the item "enter" at a closer proximity
 			//we're here?
-			if(pathIndex == route.length - 1) {
+			if(pathIndex == route.length - 1 && getPosition().equals(target)) {
 				//journey is complete!
 				TileEntity te = world.getTileEntity(target);
 				if(te != null) {
@@ -105,11 +108,19 @@ public class EntitySpiritItem extends EntityItem {
 							entityDropItem(res, 1);//drop it on the ground because we failed?
 							setDead();
 						}
+					} else { // block doesn't have an inventory, drop item
+						entityDropItem(getItem().copy(), 1);
+						setDead();
 					}
+				} else { // block doesn't exist (or doesn't have a TE), drop item
+					entityDropItem(getItem().copy(), 1);
+					setDead();
 				}
 			} else {
-				pathIndex++;
-				dX = dY = dZ = 0;
+				if(pathIndex < route.length - 1) {
+					pathIndex++;
+					dX = dY = dZ = 0;
+				}
 			}
 		} else {// try to align the position to the middle of a block while moving
 
@@ -147,6 +158,20 @@ public class EntitySpiritItem extends EntityItem {
 				motionY = dY;
 			motionZ = dZ;
 		}
+
+		// preemptive self-destruction if target isn't valid
+		BlockPos pos = route[route.length - 1];
+		if(!SpiritItemUtil.validPos(pos, world, facing)) {
+			entityDropItem(getItem().copy(), 1);
+			setDead();
+		}
+	}
+
+	@Override
+	public void move(MoverType type, double x, double y, double z)
+	{
+		this.setEntityBoundingBox(this.getEntityBoundingBox().offset(x, y, z));
+		this.resetPositionToBB();
 	}
 
 	@Override
