@@ -124,6 +124,8 @@ public class ItemDepthsArmor extends ItemACArmor implements IVisDiscountGear, IO
 	public String getOuterArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
 		if(stack.getItem() == ACItems.depths_helmet || stack.getItem() == ACItems.depths_chestplate || stack.getItem() == ACItems.depths_boots)
 			return "abyssalcraft:textures/armor/depths_1_outer.png";
+		if(stack.getItem() == ACItems.depths_leggings)
+			return "abyssalcraft:textures/armor/depths_2_outer.png";
 		return null;
 	}
 }
