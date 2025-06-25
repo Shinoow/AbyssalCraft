@@ -13,8 +13,11 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
-import net.minecraft.client.resources.I18n;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -69,7 +72,6 @@ public class ItemAntidote extends ItemACBasic {
 			stack.getTagCompound().setInteger("content", stack.getTagCompound().getInteger("content") - 1);
 		else
 			stack.getTagCompound().setInteger("content", 9);
-
 	}
 
 	@Override
@@ -91,10 +93,11 @@ public class ItemAntidote extends ItemACBasic {
 	}
 
 	@Override
-	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
-		if(is.hasTagCompound() && is.getTagCompound().hasKey("content"))
-			l.add(I18n.format("tooltip.antidote.contents",is.getTagCompound().getInteger("content")));
-		else l.add(I18n.format("tooltip.antidote.contents",10));
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){
+		int uses = 10;
+		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("content"))
+			uses = stack.getTagCompound().getInteger("content");
+		tooltip.add(TranslationUtil.toLocalFormatted("tooltip.antidote.contents", uses));
 	}
 
 	public void setCure(Potion potion) {

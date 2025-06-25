@@ -950,6 +950,7 @@ tooltip.configurator.mode.1=Применить конфигурацию.
 tooltip.configurator.mode.2=Очистить конфигурацию.
 tooltip.configurator.filter.0=Фильтровать по подтипу
 tooltip.configurator.filter.1=Фильтровать по NBT
+tooltip.antidote.contents=%d uses left
 
 #Творческие вкладки
 itemGroup.acblocks=Блоки: AbyssalCraft

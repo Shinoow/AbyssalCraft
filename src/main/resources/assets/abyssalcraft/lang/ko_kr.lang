@@ -950,6 +950,7 @@ tooltip.configurator.mode.1=설정 적용
 tooltip.configurator.mode.2=설정 지우기
 tooltip.configurator.filter.0=하위 유형별 필터
 tooltip.configurator.filter.1=NBT 필터
+tooltip.antidote.contents=%d uses left
 
 #Creative Tabs
 itemGroup.acblocks=어비셜크래프트 블록

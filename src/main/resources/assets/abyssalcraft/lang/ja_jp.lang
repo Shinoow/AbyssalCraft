@@ -948,6 +948,7 @@ tooltip.configurator.mode.1=設定の適用
 tooltip.configurator.mode.2=設定のリセット
 tooltip.configurator.filter.0=フィルター:サブタイプ
 tooltip.configurator.filter.1=フィルター:NBT
+tooltip.antidote.contents=%d uses left
 
 #クリエイティブインベントリ  Creative Tabs
 itemGroup.acblocks=Abyssalcraft: ブロック
