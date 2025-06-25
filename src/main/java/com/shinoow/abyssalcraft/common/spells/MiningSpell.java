@@ -105,6 +105,7 @@ public class MiningSpell extends Spell {
 		return world.rayTraceBlocks(vec3d, vec3d2, true, false, true);
 	}
 
+	//TODO rewrite this atrocity to support MutableBlockPos
 	private Set<BlockPos> getPositions(BlockPos pos, EnumFacing facing, ScrollType scrollType){
 		int min = (1 + 1 * (scrollType.getQuality() + 1)) * -1;
 		int max = 1 * (scrollType.getQuality() + 1);
@@ -121,6 +122,7 @@ public class MiningSpell extends Spell {
 		return stuff;
 	}
 
+	//TODO rewrite this atrocity to support MutableBlockPos
 	private Set<BlockPos> getOuterPositions(BlockPos pos, EnumFacing facing, ScrollType scrollType){
 		int min = (2 + 1 * (scrollType.getQuality() + 1)) * -1;
 		int max = 1 + 1 * (scrollType.getQuality() + 1);
@@ -156,20 +158,31 @@ public class MiningSpell extends Spell {
 			imax += 256;
 		}
 
+		//TODO make this more readable so not only past me really knows how it works
 		if(r != null && r.typeOfHit == Type.BLOCK)
 			for(int i = 0; f < fmax; i++){
 				if(f >= fmax) break;
 				for(BlockPos pos2 : getPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite(), scrollType)){
-					IBlockState state = getRemains(world.getBlockState(pos2));
-					if(state != null && world.isBlockModifiable(player, pos2)){
-						f+= world.getBlockState(pos2).getBlockHardness(world, pos2)*(world.getBlockState(pos2).getMaterial().isLiquid() ? 0.5 : 2);
-						if(i == 0)
-							world.destroyBlock(pos2, false);
-						world.setBlockState(pos2, state);
-						if(state.getBlock() == ACBlocks.solid_lava)
-							state.getBlock().onBlockPlacedBy(world, pos2, state, player, null);
-
-						if(f >= fmax) break;
+					if(world.isBlockModifiable(player, pos2)){
+						IBlockState state = getRemains(world.getBlockState(pos2));
+						if(state != null) {
+							f+= world.getBlockState(pos2).getBlockHardness(world, pos2)*(world.getBlockState(pos2).getMaterial().isLiquid() ? 0.5 : 2);
+							if(i == 0)
+								world.destroyBlock(pos2, false);
+							world.setBlockState(pos2, state);
+							if(state.getBlock() == ACBlocks.solid_lava)
+								state.getBlock().onBlockPlacedBy(world, pos2, state, player, null);
+							if(f >= fmax) break;
+						} else {
+							state = getResult(world.getBlockState(pos2));
+							if(state != null) {
+								f+= world.getBlockState(pos2).getBlockHardness(world, pos2)*(world.getBlockState(pos2).getMaterial().isLiquid() ? 0.5 : 2);
+								if(i == 0)
+									world.destroyBlock(pos2, false);
+								world.destroyBlock(pos2, false);
+								if(f >= fmax) break;
+							}
+						}
 					}
 				}
 				for(BlockPos pos2 : getOuterPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite(), scrollType)){
