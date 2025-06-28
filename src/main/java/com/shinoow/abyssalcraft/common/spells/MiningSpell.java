@@ -162,7 +162,7 @@ public class MiningSpell extends Spell {
 		if(r != null && r.typeOfHit == Type.BLOCK)
 			for(int i = 0; f < fmax; i++){
 				if(f >= fmax) break;
-				for(BlockPos pos2 : getPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite(), scrollType)){
+				for(BlockPos pos2 : getPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite(), scrollType))
 					if(world.isBlockModifiable(player, pos2)){
 						IBlockState state = getRemains(world.getBlockState(pos2));
 						if(state != null) {
@@ -184,7 +184,6 @@ public class MiningSpell extends Spell {
 							}
 						}
 					}
-				}
 				for(BlockPos pos2 : getOuterPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite(), scrollType)){
 					IBlockState state = getResult(world.getBlockState(pos2));
 					if(state != null && world.isBlockModifiable(player, pos2)){

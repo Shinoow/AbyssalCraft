@@ -69,7 +69,7 @@ public class BlockCLiquid extends BlockFluidClassic {
 			return false;
 		if(state.getMaterial().isLiquid() && state.getBlock() != this && state.getBlock() != ACBlocks.liquid_antimatter)
 			return true;
-		if((state.getBlock() == Blocks.LAVA) || canBeTramsuted(state))
+		if(state.getBlock() == Blocks.LAVA || canBeTramsuted(state))
 			return true;
 		return super.canDisplace(world, pos);
 	}

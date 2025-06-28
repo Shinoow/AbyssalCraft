@@ -116,26 +116,22 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 					for(EntityLivingBase target : world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(15, 3, 15), EntityLivingBase::isNonBoss))
 						if(target.getCreatureAttribute() == AbyssalCraftAPI.SHADOW)
 							consumeIfApplicable(target, stack, 0);
-						else {
-							if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(target))
-								consumeIfApplicable(target, stack, 1);
-							else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(target))
-								consumeIfApplicable(target, stack, 2);
-							else if(world.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity)
-								consumeIfApplicable(target, stack, 3);
-						}
+						else if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier(target))
+							consumeIfApplicable(target, stack, 1);
+						else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier(target))
+							consumeIfApplicable(target, stack, 2);
+						else if(world.provider.getDimension() == ACLib.omothol_id && target instanceof IOmotholEntity)
+							consumeIfApplicable(target, stack, 3);
 					for(MultiPartEntityPart target : world.getEntitiesWithinAABB(MultiPartEntityPart.class, new AxisAlignedBB(pos).grow(15, 3, 15), e -> ((Entity) e.parent).isNonBoss()))
 						if(target.parent instanceof EntityLiving)
 							if(((EntityLiving) target.parent).getCreatureAttribute() == AbyssalCraftAPI.SHADOW)
 								consumeIfApplicable(target, stack, 0);
-							else {
-								if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier((EntityLiving) target.parent))
-									consumeIfApplicable(target, stack, 1);
-								else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier((EntityLiving) target.parent))
-									consumeIfApplicable(target, stack, 2);
-								else if(world.provider.getDimension() == ACLib.omothol_id && target.parent instanceof IOmotholEntity)
-									consumeIfApplicable(target, stack, 3);
-							}
+							else if(world.provider.getDimension() == ACLib.abyssal_wasteland_id && EntityUtil.isCoraliumPlagueCarrier((EntityLiving) target.parent))
+								consumeIfApplicable(target, stack, 1);
+							else if(world.provider.getDimension() == ACLib.dreadlands_id && EntityUtil.isDreadPlagueCarrier((EntityLiving) target.parent))
+								consumeIfApplicable(target, stack, 2);
+							else if(world.provider.getDimension() == ACLib.omothol_id && target.parent instanceof IOmotholEntity)
+								consumeIfApplicable(target, stack, 3);
 				}
 
 		for(EnergyType type : EnergyType.values())

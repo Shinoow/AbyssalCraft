@@ -116,11 +116,9 @@ public class EntitySpiritItem extends EntityItem {
 					entityDropItem(getItem().copy(), 1);
 					setDead();
 				}
-			} else {
-				if(pathIndex < route.length - 1) {
-					pathIndex++;
-					dX = dY = dZ = 0;
-				}
+			} else if(pathIndex < route.length - 1) {
+				pathIndex++;
+				dX = dY = dZ = 0;
 			}
 		} else {// try to align the position to the middle of a block while moving
 
@@ -170,8 +168,8 @@ public class EntitySpiritItem extends EntityItem {
 	@Override
 	public void move(MoverType type, double x, double y, double z)
 	{
-		this.setEntityBoundingBox(this.getEntityBoundingBox().offset(x, y, z));
-		this.resetPositionToBB();
+		setEntityBoundingBox(getEntityBoundingBox().offset(x, y, z));
+		resetPositionToBB();
 	}
 
 	@Override
