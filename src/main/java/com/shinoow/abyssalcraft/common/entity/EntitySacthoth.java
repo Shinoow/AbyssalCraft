@@ -296,6 +296,13 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	}
 
 	@Override
+	public boolean isPotionApplicable(PotionEffect potioneffectIn) {
+		if(potioneffectIn.getPotion() == MobEffects.POISON)
+			return false;
+		return super.isPotionApplicable(potioneffectIn);
+	}
+
+	@Override
 	public void onKillCommand()
 	{
 		super.attackEntityFrom(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);

@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -39,77 +40,78 @@ public class ItemSoulReaper extends ItemACSword {
 		return false;
 	}
 
-	/** Increases the amount of souls by 1 */
-	public int increaseSouls(ItemStack par1ItemStack){
-		if(!par1ItemStack.hasTagCompound())
-			par1ItemStack.setTagCompound(new NBTTagCompound());
-		par1ItemStack.getTagCompound().setInteger("souls", getSouls(par1ItemStack) + 1);
-		return getSouls(par1ItemStack);
-	}
-
-	/** Sets the amount of souls */
-	public int setSouls(int par1, ItemStack par2ItemStack){
-		par2ItemStack.getTagCompound().setInteger("souls", par1);
-		return getSouls(par2ItemStack);
-	}
-
-	public int getSouls(ItemStack par1ItemStack)
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
-		return par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("souls") ? (int)par1ItemStack.getTagCompound().getInteger("souls") : 0;
+		if(!worldIn.isRemote && isSelected && entityIn instanceof EntityLivingBase) {
+
+			EntityLivingBase holder = (EntityLivingBase)entityIn;
+
+			int souls = getSouls(stack);
+
+			if(isWithin(souls, 60, 125))
+				holder.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 0, false, false));
+			else if(isWithin(souls, 125, 250)) {
+				holder.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 1, false, false));
+				holder.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 0, false, false));
+			} else if(isWithin(souls, 250, 500)) {
+				holder.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 1, false, false));
+				holder.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 0, false, false));
+				holder.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0, false, false));
+			} else if(isWithin(souls, 500, 1000)) {
+				holder.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 2, false, false));
+				holder.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 1, false, false));
+				holder.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0, false, false));
+				holder.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 0, false, false));
+			} else if(souls >= 1000) {
+				holder.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 20, 2, false, false));
+				holder.addPotionEffect(new PotionEffect(MobEffects.SPEED, 20, 2, false, false));
+				holder.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20, 0, false, false));
+				holder.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 20, 0, false, false));
+				holder.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 20, 0, false, false));
+				if(!holder.isPotionActive(MobEffects.HEALTH_BOOST)) // It resets instantly if added every tick
+					holder.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 1200, 2, false, false));
+			}
+		}
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 	{
-		par1ItemStack.damageItem(1, par3EntityLivingBase);
-		if(par2EntityLivingBase.getHealth() == 0){
-			increaseSouls(par1ItemStack);
-			switch(getSouls(par1ItemStack)){
-			case 32:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 600));
-				par3EntityLivingBase.heal(20.0F);
-				break;
-			case 64:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1200));
-				par3EntityLivingBase.heal(20.0F);
-				break;
-			case 128:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1200, 1));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SPEED, 600));
-				par3EntityLivingBase.heal(20.0F);
-				break;
-			case 256:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 2400, 1));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 300));
-				par3EntityLivingBase.heal(20.0F);
-				break;
-			case 512:
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1200, 2));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200, 1));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 600));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300));
-				par3EntityLivingBase.heal(20.0F);
-				break;
-			case 1024:
-				setSouls(0, par1ItemStack);
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 2400, 2));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SPEED, 2400, 2));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 1200));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 600));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 300));
-				par3EntityLivingBase.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 2400, 2));
-				par3EntityLivingBase.heal(20.0F);
-				break;
-			}
-			return true;
-		}
+		// Increases souls on kill, but stops increasing at max
+		if(target.getHealth() == 0 && getSouls(stack) < 1000)
+			increaseSouls(stack);
+		stack.damageItem(1, attacker);
 		return true;
 	}
 
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
 		int souls = getSouls(is);
-		l.add(I18n.format("tooltip.soulreaper") + ": " + souls + "/1024");
+		l.add(I18n.format("tooltip.soulreaper") + ": " + souls + "/1000");
+	}
+
+	/**
+	 * Num is greater or equal to min and less than max
+	 */
+	private boolean isWithin(int num, int min, int max) {
+		return num >= min && num < max;
+	}
+
+	/** Increases the amount of souls by 1 */
+	public void increaseSouls(ItemStack stack){
+		setSouls(getSouls(stack) + 1, stack);
+	}
+
+	/** Sets the amount of souls */
+	public void setSouls(int par1, ItemStack stack){
+		if(!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+		stack.getTagCompound().setInteger("souls", par1);
+	}
+
+	public int getSouls(ItemStack stack)
+	{
+		return stack.hasTagCompound() ? (int)stack.getTagCompound().getInteger("souls") : 0;
 	}
 }

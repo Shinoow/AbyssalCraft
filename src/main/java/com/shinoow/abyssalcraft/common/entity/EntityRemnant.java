@@ -268,6 +268,13 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
+	
+	@Override
+	public boolean isPotionApplicable(PotionEffect potioneffectIn) {
+		if(potioneffectIn.getPotion() == MobEffects.POISON)
+			return false;
+		return super.isPotionApplicable(potioneffectIn);
+	}
 
 	@Override
 	public void onLivingUpdate(){

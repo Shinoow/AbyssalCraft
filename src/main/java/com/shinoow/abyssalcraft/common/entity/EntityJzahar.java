@@ -11,15 +11,20 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.entity;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualPedestal;
 import com.shinoow.abyssalcraft.common.handlers.AbyssalCraftEventHooks;
 import com.shinoow.abyssalcraft.lib.*;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.world.TeleporterDarkRealm;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -32,7 +37,6 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityWitherSkull;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -44,6 +48,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
@@ -687,30 +692,19 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 			}
 		if(deathTicks == 790 && !world.isRemote){
 			if(world.getGameRules().getBoolean("mobGriefing")) {
-				List<BlockPos> blocks = new ArrayList<>();
-				for(int x = 0; x < 10; x++)
-					for(int y = 0; y < 10; y++)
-						for(int z = 0; z < 10; z++){
-							if(!world.isAirBlock(new BlockPos(posX + x, posY + y, posZ + z)))
-								blocks.add(new BlockPos(posX + x, posY + y, posZ + z));
-							if(!world.isAirBlock(new BlockPos(posX - x, posY + y, posZ + z)))
-								blocks.add(new BlockPos(posX - x, posY + y, posZ + z));
-							if(!world.isAirBlock(new BlockPos(posX + x, posY + y, posZ - z)))
-								blocks.add(new BlockPos(posX + x, posY + y, posZ - z));
-							if(!world.isAirBlock(new BlockPos(posX - x, posY + y, posZ - z)))
-								blocks.add(new BlockPos(posX - x, posY + y, posZ - z));
-							if(!world.isAirBlock(new BlockPos(posX + x, posY - y, posZ + z)))
-								blocks.add(new BlockPos(posX + x, posY - y, posZ + z));
-							if(!world.isAirBlock(new BlockPos(posX - x, posY - y, posZ + z)))
-								blocks.add(new BlockPos(posX - x, posY - y, posZ + z));
-							if(!world.isAirBlock(new BlockPos(posX + x, posY - y, posZ - z)))
-								blocks.add(new BlockPos(posX + x, posY - y, posZ - z));
-							if(!world.isAirBlock(new BlockPos(posX - x, posY - y, posZ - z)))
-								blocks.add(new BlockPos(posX - x, posY - y, posZ - z));
+				MutableBlockPos pos = new MutableBlockPos();
+				for(int x = -9; x < 10; x++)
+					for(int y = -9; y < 10; y++)
+						for(int z = -9; z < 10; z++){
+							pos.setPos(posX + x, posY + y, posZ + z);
+							if(!world.isAirBlock(pos)){
+								Block block = world.getBlockState(pos).getBlock();
+								if(block.getExplosionResistance(world, pos, null, null) < 600000
+										&& !(block instanceof BlockRitualPedestal)
+										&& !(block instanceof BlockRitualAltar))
+									world.setBlockToAir(pos);
+							}
 						}
-				for(BlockPos pos : blocks)
-					if(world.getBlockState(pos).getBlock() != Blocks.BEDROCK)
-						world.setBlockToAir(pos);
 			}
 
 			if(!world.getEntitiesWithinAABB(Entity.class, getEntityBoundingBox().grow(3,1,3)).isEmpty()){

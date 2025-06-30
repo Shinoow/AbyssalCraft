@@ -66,11 +66,11 @@ public class MiningSpell extends Spell {
 				&& state.getValue(BlockACStone.TYPE) != EnumStoneType.CORALIUM_STONE
 				&& state.getValue(BlockACStone.TYPE) != EnumStoneType.ETHAXIUM || state.getBlock() == Blocks.GRAVEL
 				|| state.getBlock() == Blocks.SANDSTONE || state.getBlock() == ACBlocks.dreadlands_dirt)
-			return Blocks.FLOWING_LAVA.getDefaultState().withProperty(BlockLiquid.LEVEL, 7);
+			return ACBlocks.solid_lava.getDefaultState();
 		if(state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER)
 			return Blocks.AIR.getDefaultState();
 		if(state == ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.CORALIUM_STONE))
-			return ACBlocks.liquid_coralium.getDefaultState();
+			return ACBlocks.liquid_coralium.getDefaultState().withProperty(BlockLiquid.LEVEL, 7);
 		return null;
 	}
 
@@ -143,13 +143,26 @@ public class MiningSpell extends Spell {
 			for(int i = 0; f < 500; i++){
 				if(f >= 500) break;
 				for(BlockPos pos2 : getPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite())){
-					IBlockState state = getRemains(world.getBlockState(pos2));
-					if(state != null && world.isBlockModifiable(player, pos2)){
-						f+= world.getBlockState(pos2).getBlockHardness(world, pos2)*(world.getBlockState(pos2).getMaterial().isLiquid() ? 0.5 : 2);
-						if(i == 0)
-							world.destroyBlock(pos2, false);
-						world.setBlockState(pos2, state);
-						if(f >= 500) break;
+					if(world.isBlockModifiable(player, pos2)) {
+						IBlockState state = getRemains(world.getBlockState(pos2));
+						if(state != null){
+							f+= world.getBlockState(pos2).getBlockHardness(world, pos2)*(world.getBlockState(pos2).getMaterial().isLiquid() ? 0.5 : 2);
+							if(i == 0)
+								world.destroyBlock(pos2, false);
+							world.setBlockState(pos2, state);
+							if(state.getBlock() == ACBlocks.solid_lava)
+								state.getBlock().onBlockPlacedBy(world, pos2, state, player, null);
+							if(f >= 500) break;
+						} else {
+							state = getResult(world.getBlockState(pos2));
+							if(state != null){
+								f+= world.getBlockState(pos2).getBlockHardness(world, pos2)*(world.getBlockState(pos2).getMaterial().isLiquid() ? 0.5 : 2);
+								if(i == 0)
+									world.destroyBlock(pos2, false);
+								world.destroyBlock(pos2, false);
+								if(f >= 500) break;
+							}
+						}
 					}
 				}
 				for(BlockPos pos2 : getOuterPositions(r.getBlockPos().offset(r.sideHit.getOpposite(), i), r.sideHit.getOpposite())){

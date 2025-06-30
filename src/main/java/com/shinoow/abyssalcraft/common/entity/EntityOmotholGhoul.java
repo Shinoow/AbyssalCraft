@@ -104,6 +104,13 @@ public class EntityOmotholGhoul extends EntityMob implements IOmotholEntity {
 	}
 
 	@Override
+	public boolean isPotionApplicable(PotionEffect potioneffectIn) {
+		if(potioneffectIn.getPotion() == MobEffects.POISON)
+			return false;
+		return super.isPotionApplicable(potioneffectIn);
+	}
+
+	@Override
 	protected float getSoundPitch()
 	{
 		return rand.nextFloat() - rand.nextFloat() * 0.2F + 0.6F;

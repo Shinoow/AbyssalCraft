@@ -12,14 +12,21 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
+import com.shinoow.abyssalcraft.lib.util.Scheduler;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockSolidLava extends BlockACBasic {
 
@@ -40,5 +47,20 @@ public class BlockSolidLava extends BlockACBasic {
 	public boolean isBurning(IBlockAccess world, BlockPos pos)
 	{
 		return true;
+	}
+
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
+			ItemStack stack) {
+
+		worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F + worldIn.rand.nextFloat() * 0.2F, 0.9F + worldIn.rand.nextFloat() * 0.15F, false);
+		Scheduler.schedule(new ScheduledProcess(10) {
+
+			@Override
+			public void execute() {
+				worldIn.setBlockToAir(pos);
+			}
+		});
+
 	}
 }

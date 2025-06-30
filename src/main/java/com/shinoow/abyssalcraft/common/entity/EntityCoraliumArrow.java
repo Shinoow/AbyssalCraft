@@ -86,7 +86,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 		if (iblockstate.getMaterial() != Material.AIR)
 		{
 			//			block.setBlockBoundsBasedOnState(worldObj, blockpos);
-			AxisAlignedBB axisalignedbb = iblockstate.getBoundingBox(world, blockpos);
+			AxisAlignedBB axisalignedbb = iblockstate.getCollisionBoundingBox(world, blockpos);
 
 			if (axisalignedbb != null && axisalignedbb.offset(blockpos).contains(new Vec3d(posX, posY, posZ)))
 				inGround = true;
@@ -99,14 +99,7 @@ public class EntityCoraliumArrow extends EntityArrow {
 		{
 			int j = block.getMetaFromState(iblockstate);
 
-			if (block == inTile && j == inData)
-			{
-				++ticksInGround;
-
-				if (ticksInGround >= 1200)
-					setDead();
-			}
-			else
+			if ((block != inTile || j != inData) && !world.collidesWithAnyBlock(getEntityBoundingBox().grow(0.05D)))
 			{
 				inGround = false;
 				motionX *= rand.nextFloat() * 0.2F;
@@ -115,6 +108,15 @@ public class EntityCoraliumArrow extends EntityArrow {
 				ticksInGround = 0;
 				ticksInAir = 0;
 			}
+			else
+			{
+				++ticksInGround;
+
+				if (ticksInGround >= 1200)
+					setDead();
+			}
+
+			++timeInGround;
 		}
 		else
 		{
@@ -297,8 +299,6 @@ public class EntityCoraliumArrow extends EntityArrow {
 			rotationPitch = prevRotationPitch + (rotationPitch - prevRotationPitch) * 0.2F;
 			rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw) * 0.2F;
 			float f4 = 0.99F;
-			float f6 = 0.05F;
-
 			if (isInWater())
 			{
 				for (int i1 = 0; i1 < 4; ++i1)
@@ -316,7 +316,10 @@ public class EntityCoraliumArrow extends EntityArrow {
 			motionX *= f4;
 			motionY *= f4;
 			motionZ *= f4;
-			motionY -= f6;
+
+			if (!hasNoGravity())
+				motionY -= 0.05000000074505806D;
+
 			setPosition(posX, posY, posZ);
 			doBlockCollisions();
 		}

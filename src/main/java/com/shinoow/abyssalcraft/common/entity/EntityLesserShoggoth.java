@@ -627,6 +627,13 @@ public class EntityLesserShoggoth extends EntityMob implements IOmotholEntity, I
 	}
 
 	@Override
+	public boolean isPotionApplicable(PotionEffect potioneffectIn) {
+		if(potioneffectIn.getPotion() == MobEffects.POISON)
+			return false;
+		return super.isPotionApplicable(potioneffectIn);
+	}
+
+	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData)
 	{
 		Object data = super.onInitialSpawn(difficulty, par1EntityLivingData);

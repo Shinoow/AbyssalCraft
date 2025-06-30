@@ -25,9 +25,11 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
@@ -77,6 +79,13 @@ public class EntityShadowMonster extends EntityMob implements IOmotholEntity {
 			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return super.attackEntityAsMob(par1Entity);
+	}
+
+	@Override
+	public boolean isPotionApplicable(PotionEffect potioneffectIn) {
+		if(potioneffectIn.getPotion() == MobEffects.POISON)
+			return false;
+		return super.isPotionApplicable(potioneffectIn);
 	}
 
 	@Override

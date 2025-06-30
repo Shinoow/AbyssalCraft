@@ -34,16 +34,24 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 public class SpiritItemUtil {
 
 	public static boolean validPos(BlockPos pos, World world) {
+		return validPos(pos, world, EnumFacing.DOWN);
+	}
+
+	public static boolean validPos(BlockPos pos, World world, EnumFacing face) {
 		if(world.isBlockLoaded(pos))
-			return validTE(world.getTileEntity(pos));
+			return validTE(world.getTileEntity(pos), face);
 		return false;
 	}
 
 	public static boolean validTE(TileEntity te) {
+		return validTE(te, EnumFacing.DOWN);
+	}
+
+	public static boolean validTE(TileEntity te, EnumFacing face) {
 
 		if(te == null) return false;
 
-		return hasCap(te) && hasInventory(te);
+		return hasCap(te) && hasInventory(te, face);
 	}
 
 	public static IItemHandler getInventory(TileEntity te, EnumFacing face) {
@@ -59,7 +67,11 @@ public class SpiritItemUtil {
 	}
 
 	public static boolean hasInventory(TileEntity te) {
-		return getInventory(te, EnumFacing.DOWN) != null;
+		return hasInventory(te, EnumFacing.DOWN);
+	}
+
+	public static boolean hasInventory(TileEntity te, EnumFacing face) {
+		return getInventory(te, face) != null;
 	}
 
 	private static boolean hasCap(TileEntity te) {

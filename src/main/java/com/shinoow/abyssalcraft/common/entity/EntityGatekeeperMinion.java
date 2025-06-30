@@ -27,9 +27,11 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
@@ -145,7 +147,14 @@ public class EntityGatekeeperMinion extends EntityMob implements IOmotholEntity 
 				entityDropItem(item, 0);
 		}
 	}
-
+	
+	@Override
+	public boolean isPotionApplicable(PotionEffect potioneffectIn) {
+		if(potioneffectIn.getPotion() == MobEffects.POISON)
+			return false;
+		return super.isPotionApplicable(potioneffectIn);
+	}
+	
 	@Override
 	protected ResourceLocation getLootTable(){
 		return ACLoot.ENTITY_MINION_OF_THE_GATEKEEPER;
