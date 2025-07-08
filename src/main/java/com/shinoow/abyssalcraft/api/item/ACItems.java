@@ -226,17 +226,20 @@ public class ACItems {
 
 	// Food (maybe don't eat all of them)
 	public static Item coralium_plagued_flesh;
-	public static Item coralium_plagued_flesh_on_a_bone;
 	public static Item anti_beef;
 	public static Item anti_chicken;
 	public static Item anti_pork;
 	public static Item rotten_anti_flesh;
 	public static Item anti_spider_eye;
-	public static Item omothol_flesh;
 	public static Item anti_plagued_flesh;
-	public static Item anti_plagued_flesh_on_a_bone;
 	public static Item generic_meat;
 	public static Item cooked_generic_meat;
+	public static Item ghoul_flesh;
+	public static Item abyssal_ghoul_flesh;
+	public static Item dreaded_ghoul_flesh;
+	public static Item omothol_ghoul_flesh;
+	public static Item shadow_ghoul_flesh;
+	public static Item anti_ghoul_flesh;
 
 	// Crystals
 	public static Item crystal_iron;

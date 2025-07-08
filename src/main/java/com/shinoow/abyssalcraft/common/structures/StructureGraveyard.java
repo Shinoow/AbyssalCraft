@@ -207,17 +207,18 @@ public class StructureGraveyard extends WorldGenerator {
 
 		if(dim == ACLib.abyssal_wasteland_id) {
 			res.add(new ItemStack(ACItems.coralium_plagued_flesh));
-			res.add(new ItemStack(ACItems.coralium_plagued_flesh_on_a_bone));
+			res.add(new ItemStack(ACItems.abyssal_ghoul_flesh));
 			res.add(new ItemStack(ACItems.abyssal_shoggoth_flesh));
 			res.add(new ItemStack(ACItems.skin_of_the_abyssal_wasteland));
 		}
 		else if(dim == ACLib.dreadlands_id) {
 			res.add(new ItemStack(ACItems.dread_fragment));
+			res.add(new ItemStack(ACItems.dreaded_ghoul_flesh));
 			res.add(new ItemStack(ACItems.dreaded_shoggoth_flesh));
 			res.add(new ItemStack(ACItems.skin_of_the_dreadlands));
 		}
 		else if(dim == ACLib.omothol_id) {
-			res.add(new ItemStack(ACItems.omothol_flesh));
+			res.add(new ItemStack(ACItems.omothol_ghoul_flesh));
 			res.add(new ItemStack(ACItems.omothol_shoggoth_flesh));
 			res.add(new ItemStack(ACItems.skin_of_omothol));
 		}
@@ -225,9 +226,11 @@ public class StructureGraveyard extends WorldGenerator {
 			res.add(new ItemStack(ACItems.shadow_shard));
 			res.add(new ItemStack(ACItems.shadow_shoggoth_flesh));
 			res.add(new ItemStack(ACItems.shadow_fragment));
+			res.add(new ItemStack(ACItems.shadow_ghoul_flesh));
 		}
 		else {
 			res.add(new ItemStack(Items.ROTTEN_FLESH));
+			res.add(new ItemStack(ACItems.ghoul_flesh));
 			res.add(new ItemStack(ACItems.overworld_shoggoth_flesh));
 		}
 

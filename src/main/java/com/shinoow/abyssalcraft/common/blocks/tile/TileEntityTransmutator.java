@@ -358,7 +358,7 @@ public class TileEntityTransmutator extends TileEntity implements ISidedInventor
 			Item item = par1ItemStack.getItem();
 
 			if (item == ACItems.coralium_plagued_flesh) return 100;
-			if (item == ACItems.coralium_plagued_flesh_on_a_bone) return 100;
+			if (item == ACItems.abyssal_ghoul_flesh) return 100;
 			if (item == ACItems.coralium_brick) return 200;
 			if (item == ACItems.coralium_gem) return 200;
 			if (item == ACItems.coralium_gem_cluster_2) return 400;

@@ -54,7 +54,7 @@ public class EntityAntiGhoul extends EntityGhoulBase implements IAntiEntity {
 	@Override
 	protected Item getDropItem()
 	{
-		return ACItems.anti_plagued_flesh_on_a_bone;
+		return ACItems.anti_ghoul_flesh;
 	}
 
 	@Override

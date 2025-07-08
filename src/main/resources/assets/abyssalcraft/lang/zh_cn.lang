@@ -1260,7 +1260,6 @@ item.platec.name=珊瑚板
 item.coralium.name=珊瑚宝石
 item.transmutationgem.name=嬗变宝石
 item.corflesh.name=珊瑚疫染腐肉
-item.corbone.name=珊瑚疫染带骨腐肉
 item.apick.name=渊素镐
 item.aaxe.name=渊素斧
 item.ashovel.name=渊素锹
@@ -1371,7 +1370,6 @@ item.jzaharcoin.name=扎哈尔的铸币
 item.eldritchscale.name=邪术鳞片
 item.omotholflesh.name=奥穆索食尸鬼腐肉
 item.anticorflesh.name=反物质疫染腐肉
-item.anticorbone.name=反物质带骨腐肉
 item.shoggothflesh.overworld.name=修格斯腐肉
 item.shoggothflesh.abyssalwasteland.name=深渊修格斯腐肉
 item.shoggothflesh.dreadlands.name=恐惧修格斯腐肉
@@ -1435,6 +1433,11 @@ item.cooked_generic_meat.name=熟泛制肉
 item.lost_page.name=散失书页
 item.scriptures_omniscience.name=全知经文
 item.sealing_key.name=封印钥匙
+item.ghoul_flesh.name=Ghoul Flesh
+item.abyssal_ghoul_flesh.name=Abyssal Ghoul Flesh
+item.dreaded_ghoul_flesh.name=Dreaded Ghoul Flesh
+item.shadow_ghoul_flesh.name=Shadow Ghoul Flesh
+item.anti_ghoul_flesh.name=Ghoul Anti-Flesh
 
 #实体
 entity.abyssalcraft.depthsghoul.name=深渊食尸鬼

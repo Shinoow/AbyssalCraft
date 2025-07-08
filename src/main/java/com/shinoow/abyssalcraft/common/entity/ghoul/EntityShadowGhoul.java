@@ -60,7 +60,7 @@ public class EntityShadowGhoul extends EntityGhoulBase implements IOmotholEntity
 	@Override
 	protected Item getDropItem()
 	{
-		return ACItems.shadow_shard; //TODO: change
+		return ACItems.shadow_ghoul_flesh;
 	}
 
 	@Override

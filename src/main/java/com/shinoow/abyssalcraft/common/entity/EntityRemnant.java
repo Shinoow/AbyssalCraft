@@ -482,7 +482,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 				addItemTrade(list, Items.ROTTEN_FLESH, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.coralium_plagued_flesh, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.dread_fragment, rand, adjustProbability(0.7F));
-				addItemTrade(list, ACItems.omothol_flesh, rand, adjustProbability(0.7F));
+				addItemTrade(list, ACItems.omothol_ghoul_flesh, rand, adjustProbability(0.7F));
 				addItemTrade(list, ACItems.rotten_anti_flesh, rand, adjustProbability(0.3F));
 				addCoinTrade(list, ACItems.ritual_charm, rand, adjustProbability(0.4F));
 				addCoinTrade(list, ACItems.token_of_jzahar, 8, ACItems.cthulhu_charm, 1);
@@ -829,7 +829,7 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		itemSellingList.put(Items.ROTTEN_FLESH, new Tuple(Integer.valueOf(16), Integer.valueOf(28)));
 		itemSellingList.put(ACItems.coralium_plagued_flesh, new Tuple(Integer.valueOf(16), Integer.valueOf(28)));
 		itemSellingList.put(ACItems.dread_fragment, new Tuple(Integer.valueOf(16), Integer.valueOf(28)));
-		itemSellingList.put(ACItems.omothol_flesh, new Tuple(Integer.valueOf(32), Integer.valueOf(60)));
+		itemSellingList.put(ACItems.omothol_ghoul_flesh, new Tuple(Integer.valueOf(32), Integer.valueOf(60)));
 		itemSellingList.put(ACItems.rotten_anti_flesh, new Tuple(Integer.valueOf(8), Integer.valueOf(14)));
 		coinSellingList.put(Items.FLINT_AND_STEEL, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
 		coinSellingList.put(Items.SHEARS, new Tuple(Integer.valueOf(3), Integer.valueOf(4)));

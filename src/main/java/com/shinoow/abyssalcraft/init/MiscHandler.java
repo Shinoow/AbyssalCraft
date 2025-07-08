@@ -157,7 +157,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		registerPotionType(new ResourceLocation("abyssalcraft", "antimatter_long"), antiMatter_long);
 
 		addBrewing(PotionTypes.AWKWARD, ACItems.coralium_plagued_flesh, Cplague_normal);
-		addBrewing(PotionTypes.AWKWARD, ACItems.coralium_plagued_flesh_on_a_bone, Cplague_normal);
+		addBrewing(PotionTypes.AWKWARD, ACItems.abyssal_ghoul_flesh, Cplague_normal);
 		addBrewing(Cplague_normal, Items.REDSTONE, Cplague_long);
 		addBrewing(PotionTypes.AWKWARD, ACItems.dread_fragment, Dplague_normal);
 		addBrewing(Dplague_normal, Items.REDSTONE, Dplague_long);
@@ -677,7 +677,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.omothol_shoggoth_flesh, ResearchItems.OMOTHOL);
 		addCondition(ACItems.shadow_shoggoth_flesh, ResearchItems.DARK_REALM);
 		addCondition(ACItems.eldritch_scale, ResearchItems.OMOTHOL);
-		addCondition(ACItems.omothol_flesh, ResearchItems.OMOTHOL_GHOUL);
+		addCondition(ACItems.omothol_ghoul_flesh, ResearchItems.OMOTHOL_GHOUL);
 		addCondition(ACItems.abyssal_wasteland_necronomicon, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.dreadlands_necronomicon, ResearchItems.DREADLANDS);
 		addCondition(ACItems.omothol_necronomicon, ResearchItems.OMOTHOL);
@@ -717,7 +717,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.anti_bone, ResearchItems.CORALIUM_INFESTED_SWAMP);
 		addCondition(ACItems.anti_spider_eye, ResearchItems.CORALIUM_INFESTED_SWAMP);
 		addCondition(ACItems.anti_plagued_flesh, ResearchItems.CORALIUM_INFESTED_SWAMP);
-		addCondition(ACItems.anti_plagued_flesh_on_a_bone, ResearchItems.CORALIUM_INFESTED_SWAMP);
+		addCondition(ACItems.anti_ghoul_flesh, ResearchItems.CORALIUM_INFESTED_SWAMP);
 		addCondition(ACItems.shadow_fragment, ResearchItems.SHADOW_MOBS);
 		addCondition(ACItems.shadow_shard, ResearchItems.SHADOW_MOBS);
 		addCondition(ACItems.shadow_gem, ResearchItems.SHADOW_MOBS);
@@ -735,7 +735,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.refined_coralium_ingot, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.coralium_plate, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.coralium_plagued_flesh, ResearchItems.ABYSSAL_ZOMBIE);
-		addCondition(ACItems.coralium_plagued_flesh_on_a_bone, ResearchItems.DEPTHS_GHOUL);
+		addCondition(ACItems.abyssal_ghoul_flesh, ResearchItems.DEPTHS_GHOUL);
 		addCondition(ACItems.coralium_longbow, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.abyssalnite_pickaxe, ResearchItems.DARKLANDS_BIOME);
 		addCondition(ACItems.abyssalnite_axe, ResearchItems.DARKLANDS_BIOME);
@@ -795,6 +795,9 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.ethaxium_boots, ResearchItems.OMOTHOL);
 		InitHandler.INSTANCE.ITEMS.stream().filter(i -> i instanceof ICrystal).forEach(i->addCondition(i,ResearchItems.DREADLANDS));
 		addCondition(ACItems.sealing_key, ResearchItems.DREADLANDS);
+		addCondition(ACItems.ghoul_flesh, ResearchItems.GHOUL);
+		addCondition(ACItems.dreaded_ghoul_flesh, ResearchItems.DREADED_GHOUL);
+		addCondition(ACItems.shadow_ghoul_flesh, ResearchItems.SHADOW_GHOUL);
 
 		//Blocks
 		addCondition(ACBlocks.abyssal_stone_brick, ResearchItems.ABYSSAL_WASTELAND);

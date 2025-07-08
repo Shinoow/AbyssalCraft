@@ -6,7 +6,7 @@
             "entries": [
                 {
                     "type": "item",
-                    "name": "minecraft:rotten_flesh",
+                    "name": "abyssalcraft:ghoul_flesh",
                     "weight": 1,
                     "functions": [
                         {

@@ -59,7 +59,7 @@ public class EntityDreadedGhoul extends EntityGhoulBase implements IDreadEntity 
 	@Override
 	protected Item getDropItem()
 	{
-		return ACItems.dread_fragment; //TODO: change
+		return ACItems.dreaded_ghoul_flesh;
 	}
 
 	@Override

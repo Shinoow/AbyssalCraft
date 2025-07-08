@@ -163,7 +163,7 @@ public class EntityDepthsGhoul extends EntityGhoulBase implements ICoraliumEntit
 	@Override
 	protected Item getDropItem()
 	{
-		return ACItems.coralium_plagued_flesh_on_a_bone;
+		return ACItems.abyssal_ghoul_flesh;
 	}
 
 	@Override

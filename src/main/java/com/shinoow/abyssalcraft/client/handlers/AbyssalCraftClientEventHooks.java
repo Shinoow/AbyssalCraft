@@ -513,7 +513,6 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.coralium_plate, 0);
 		registerItemRender(ACItems.transmutation_gem, 0);
 		registerItemRender(ACItems.coralium_plagued_flesh, 0);
-		registerItemRender(ACItems.coralium_plagued_flesh_on_a_bone, 0);
 		registerItemRender(ACItems.abyssalnite_pickaxe, 0);
 		registerItemRender(ACItems.abyssalnite_axe, 0);
 		registerItemRender(ACItems.abyssalnite_shovel, 0);
@@ -602,9 +601,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.coin, 0);
 		registerItemRender(ACItems.token_of_jzahar, 0);
 		registerItemRender(ACItems.eldritch_scale, 0);
-		registerItemRender(ACItems.omothol_flesh, 0);
 		registerItemRender(ACItems.anti_plagued_flesh, 0);
-		registerItemRender(ACItems.anti_plagued_flesh_on_a_bone, 0);
 		registerItemRender(ACItems.necronomicon, 0);
 		registerItemRender(ACItems.abyssal_wasteland_necronomicon, 0);
 		registerItemRender(ACItems.dreadlands_necronomicon, 0);
@@ -691,6 +688,12 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.lost_page, 0);
 		registerItemRender(ACItems.scriptures_of_omniscience, 0);
 		registerItemRender(ACItems.sealing_key, 0);
+		registerItemRender(ACItems.ghoul_flesh, 0);
+		registerItemRender(ACItems.abyssal_ghoul_flesh, 0);
+		registerItemRender(ACItems.dreaded_ghoul_flesh, 0);
+		registerItemRender(ACItems.omothol_ghoul_flesh, 0);
+		registerItemRender(ACItems.shadow_ghoul_flesh, 0);
+		registerItemRender(ACItems.anti_ghoul_flesh, 0);
 
 		registerItemRender(ACBlocks.darkstone, 0, "darkstone");
 		registerItemRender(ACBlocks.abyssal_stone, 0, "abystone");

@@ -63,7 +63,7 @@ public class EntityOmotholGhoul extends EntityGhoulBase implements IOmotholEntit
 	@Override
 	protected Item getDropItem()
 	{
-		return ACItems.omothol_flesh;
+		return ACItems.omothol_ghoul_flesh;
 	}
 
 	@Override

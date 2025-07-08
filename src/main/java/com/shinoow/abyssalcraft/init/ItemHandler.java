@@ -65,7 +65,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.omothol_shoggoth_flesh = new ItemACBasic("shoggothflesh.omothol");
 		ACItems.shadow_shoggoth_flesh = new ItemACBasic("shoggothflesh.darkrealm");
 		ACItems.eldritch_scale = new ItemACBasic("eldritchscale");
-		ACItems.omothol_flesh = new ItemOmotholFlesh(3, 0.3F, false);
 		ACItems.necronomicon = new ItemNecronomicon("necronomicon", 0);
 		ACItems.abyssal_wasteland_necronomicon = new ItemNecronomicon("necronomicon_cor", 1);
 		ACItems.dreadlands_necronomicon = new ItemNecronomicon("necronomicon_dre", 2);
@@ -158,7 +157,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.anti_bone = new ItemACBasic("antibone");
 		ACItems.anti_spider_eye = new ItemAntiFood("antispidereye", false);
 		ACItems.anti_plagued_flesh = new ItemCorflesh(0, 0, false, "anticorflesh");
-		ACItems.anti_plagued_flesh_on_a_bone = new ItemCorbone(0, 0, false, "anticorbone");
 
 		//crystals
 		ACItems.crystal_iron = new ItemCrystal("crystal", Crystals.IRON);
@@ -275,7 +273,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.coralium_gem = new ItemACBasic("coralium");
 		ACItems.transmutation_gem = new ItemCorb();
 		ACItems.coralium_plagued_flesh = new ItemCorflesh(2, 0.1F, false, "corflesh");
-		ACItems.coralium_plagued_flesh_on_a_bone = new ItemCorbone(2, 0.1F, false, "corbone");
 		ACItems.coralium_longbow = new ItemCoraliumBow(20.0F, 0, 8, 16);
 
 		//Tools
@@ -338,6 +335,14 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.generic_meat = new ItemFood(4, 0.4f, true).setTranslationKey("generic_meat").setCreativeTab(ACTabs.tabFood);
 		ACItems.cooked_generic_meat = new ItemFood(9, 0.9f, true).setTranslationKey("cooked_generic_meat").setCreativeTab(ACTabs.tabFood);
 
+		//Ghoul items
+		ACItems.ghoul_flesh = new ItemGhoulFlesh(2, 0.1F, false).setTranslationKey("ghoul_flesh");
+		ACItems.abyssal_ghoul_flesh = new ItemGhoulFlesh(2, 0.1F, false).setTranslationKey("abyssal_ghoul_flesh");
+		ACItems.dreaded_ghoul_flesh = new ItemGhoulFlesh(2, 0.1F, false).setTranslationKey("dreaded_ghoul_flesh");
+		ACItems.omothol_ghoul_flesh = new ItemGhoulFlesh(3, 0.3F, false).setTranslationKey("omotholflesh"); // Orphaned in
+		ACItems.shadow_ghoul_flesh = new ItemGhoulFlesh(2, 0.1F, false).setTranslationKey("shadow_ghoul_flesh");
+		ACItems.anti_ghoul_flesh = new ItemGhoulFlesh(0, 0, false).setTranslationKey("anti_ghoul_flesh");
+
 		SoftDepUtil.declareItems();
 
 		registerItem(devsword, "devsword");
@@ -366,7 +371,6 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.coralium_plate, "platec");
 		registerItem(ACItems.transmutation_gem, "transmutationgem");
 		registerItem(ACItems.coralium_plagued_flesh, "corflesh");
-		registerItem(ACItems.coralium_plagued_flesh_on_a_bone, "corbone");
 		registerItem(ACItems.abyssalnite_pickaxe, "apick");
 		registerItem(ACItems.abyssalnite_axe, "aaxe");
 		registerItem(ACItems.abyssalnite_shovel, "ashovel");
@@ -501,9 +505,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.coin, "coin");
 		registerItem(ACItems.token_of_jzahar, "jzaharcoin");
 		registerItem(ACItems.eldritch_scale, "eldritchscale");
-		registerItem(ACItems.omothol_flesh, "omotholflesh");
 		registerItem(ACItems.anti_plagued_flesh, "anticorflesh");
-		registerItem(ACItems.anti_plagued_flesh_on_a_bone, "anticorbone");
 		registerItem(ACItems.necronomicon, "necronomicon");
 		registerItem(ACItems.abyssal_wasteland_necronomicon, "necronomicon_cor");
 		registerItem(ACItems.dreadlands_necronomicon, "necronomicon_dre");
@@ -616,6 +618,12 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.lost_page, "lost_page");
 		registerItem(ACItems.scriptures_of_omniscience, "scriptures_omniscience");
 		registerItem(ACItems.sealing_key, "sealing_key");
+		registerItem(ACItems.ghoul_flesh, "ghoul_flesh");
+		registerItem(ACItems.abyssal_ghoul_flesh, "abyssal_ghoul_flesh");
+		registerItem(ACItems.dreaded_ghoul_flesh, "dreaded_ghoul_flesh");
+		registerItem(ACItems.omothol_ghoul_flesh, "omotholflesh");
+		registerItem(ACItems.shadow_ghoul_flesh, "shadow_ghoul_flesh");
+		registerItem(ACItems.anti_ghoul_flesh, "anti_ghoul_flesh");
 	}
 
 	@Override

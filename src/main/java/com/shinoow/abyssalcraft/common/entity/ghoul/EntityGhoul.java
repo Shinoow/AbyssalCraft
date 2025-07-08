@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.entity.ghoul;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
@@ -51,7 +52,7 @@ public class EntityGhoul extends EntityGhoulBase {
 	@Override
 	protected Item getDropItem()
 	{
-		return Items.ROTTEN_FLESH; //TODO: change
+		return ACItems.ghoul_flesh;
 	}
 
 	@Override

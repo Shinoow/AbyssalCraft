@@ -1260,7 +1260,6 @@ item.platec.name=Coralium Plate
 item.coralium.name=Coralium Gem
 item.transmutationgem.name=Transmutation Gem
 item.corflesh.name=Coralium-plagued Flesh
-item.corbone.name=Coralium-plagued Flesh on a Bone
 item.apick.name=Abyssalnite Pickaxe
 item.aaxe.name=Abyssalnite Axe
 item.ashovel.name=Abyssalnite Shovel
@@ -1371,7 +1370,6 @@ item.jzaharcoin.name=Token of J'zahar
 item.eldritchscale.name=Eldritch Scale
 item.omotholflesh.name=Omothol Ghoul Flesh
 item.anticorflesh.name=Anti-plagued Flesh
-item.anticorbone.name=Anti-plagued Flesh on A Bone
 item.shoggothflesh.overworld.name=Shoggoth Flesh
 item.shoggothflesh.abyssalwasteland.name=Abyssal Shoggoth Flesh
 item.shoggothflesh.dreadlands.name=Dreaded Shoggoth Flesh
@@ -1435,6 +1433,11 @@ item.cooked_generic_meat.name=Cooked Generic Meat
 item.lost_page.name=Lost Page
 item.scriptures_omniscience.name=Scriptures of Omniscience
 item.sealing_key.name=Sealing Key
+item.ghoul_flesh.name=Ghoul Flesh
+item.abyssal_ghoul_flesh.name=Abyssal Ghoul Flesh
+item.dreaded_ghoul_flesh.name=Dreaded Ghoul Flesh
+item.shadow_ghoul_flesh.name=Shadow Ghoul Flesh
+item.anti_ghoul_flesh.name=Ghoul Anti-Flesh
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul
