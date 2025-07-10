@@ -13,31 +13,42 @@ package com.shinoow.abyssalcraft.common.blocks.tile;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-public class TileEntityMaterializer extends TileEntity implements IInventory, ITickable {
+public class TileEntityMaterializer extends TileEntity implements ISidedInventory, ITickable {
 
 	/**
 	 * The ItemStacks that hold the items currently being used in the materializer
 	 */
 	private NonNullList<ItemStack> materializerItemStacks = NonNullList.<ItemStack>withSize(550, ItemStack.EMPTY);
 
+	private static final int[] slots = ThisIsDumb();
+
 	private String containerName, invName;
 
 	public boolean isDirty;
+
+	private ItemStack processingStack = ItemStack.EMPTY;
 
 	/**
 	 * Returns the number of slots in the inventory.
@@ -71,31 +82,19 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 		{
 			ItemStack itemstack;
 
-			if (materializerItemStacks.get(par1).getCount() <= par2)
-			{
-				if(par1 > 1) {
-					itemstack = materializerItemStacks.get(par1).copy();
-					if(canMaterialize(itemstack, getStackInSlot(0)))
-						MaterializerRecipes.instance().processMaterialization(itemstack, getStackInSlot(0));
-					else itemstack = ItemStack.EMPTY;
-				} else {
-					itemstack = materializerItemStacks.get(par1);
+			if(par1 > 1) {
+				itemstack = materializerItemStacks.get(par1);
+				if(canMaterialize(itemstack, getStackInSlot(0))) {
+					processingStack = itemstack.copy();
 					materializerItemStacks.set(par1, ItemStack.EMPTY);
-				}
-				return itemstack;
+					isDirty = false;
+				} else itemstack = ItemStack.EMPTY;
+			} else {
+				itemstack = materializerItemStacks.get(par1);
+				materializerItemStacks.set(par1, ItemStack.EMPTY);
 			}
-			else
-			{
-				if(par1 > 1) {
-					itemstack = materializerItemStacks.get(par1).copy();
-					if(canMaterialize(itemstack, getStackInSlot(0)))
-						MaterializerRecipes.instance().processMaterialization(itemstack, getStackInSlot(0));
-					else itemstack = ItemStack.EMPTY;
-				}else
-					itemstack = materializerItemStacks.get(par1).splitStack(par2);
+			return itemstack;
 
-				return itemstack;
-			}
 		} else
 			return ItemStack.EMPTY;
 	}
@@ -127,6 +126,11 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 
 			if (!par2ItemStack.isEmpty() && par2ItemStack.getCount() > getInventoryStackLimit())
 				par2ItemStack.setCount(getInventoryStackLimit());
+		}
+		else {
+			// If a hopper fails to pull out an ItemStack, it does a callback here
+			// When that happens, kill processingStack
+			processingStack = ItemStack.EMPTY;
 		}
 	}
 
@@ -238,6 +242,11 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 			refreshRecipes();
 			isDirty = false;
 		}
+		if(!processingStack.isEmpty()) {
+			MaterializerRecipes.instance().processMaterialization(processingStack, getStackInSlot(0));
+			processingStack = ItemStack.EMPTY;
+			refreshRecipes();
+		}
 	}
 
 	private void refreshRecipes()
@@ -312,10 +321,65 @@ public class TileEntityMaterializer extends TileEntity implements IInventory, IT
 
 	private boolean canMaterialize(ItemStack stack, ItemStack bag){
 
+		if(stack.isEmpty()) return false;
+
 		for(ItemStack stack1 : MaterializerRecipes.instance().getMaterializationResult(bag))
 			if(APIUtils.areStacksEqual(stack, stack1))
 				return true;
 
 		return false;
+	}
+
+	// Cursed code is cursed
+	private static final int[] ThisIsDumb() {
+		int[] f = new int[548];
+		for(int i = 0; i < f.length; i++) {
+			f[i] = i+2; // slot 0 and 1 are the only inaccessible slots
+		}
+		return f;
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) {
+
+		if(side == EnumFacing.DOWN) {
+			return slots;
+		}
+
+		return new int[0];
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+
+		if(direction == EnumFacing.DOWN && index > 1) {
+			// Automatic extraction from bottom of block
+			return canMaterialize(getStackInSlot(index), getStackInSlot(0));
+		}
+
+		return false;
+	}
+
+	IItemHandler handlerBottom = new SidedInvWrapper(this, EnumFacing.DOWN);
+
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+	{
+		if (facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			if (facing == EnumFacing.DOWN)
+				return (T) handlerBottom;
+		return super.getCapability(capability, facing);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
+	{
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing != EnumFacing.DOWN || super.hasCapability(capability, facing);
 	}
 }
