@@ -11,21 +11,27 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.common.items.ItemStoneTablet;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotStateTransformer extends Slot {
+/**
+ * A inventory slots where the content can't have an inventory
+ * @author shinoow
+ *
+ */
+public class SlotNoInventory extends Slot {
 
-	public SlotStateTransformer(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+	public SlotNoInventory(IInventory inventoryIn, int index, int xPosition, int yPosition) {
 		super(inventoryIn, index, xPosition, yPosition);
 	}
 
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack)
 	{
-		return !(par1ItemStack.getItem() instanceof ItemStoneTablet);
+		return !APIUtils.hasAnInventory(par1ItemStack);
 	}
 }

@@ -32,7 +32,7 @@ public class ContainerStateTransformer extends Container {
 		int i;
 		for(i = 0; i < 7; i++)
 			for(int j = 0; j < 7; j++)
-				addSlotToContainer(new SlotStateTransformer(par2TileEntityEnergyContainer, j + i * 7 + 1, 44 + j * 18, 17 + i * 18));
+				addSlotToContainer(new SlotNoInventory(par2TileEntityEnergyContainer, j + i * 7 + 1, 44 + j * 18, 17 + i * 18));
 
 		for(i = 0; i < 3; i++)
 			for (int j = 0; j < 9; ++j)

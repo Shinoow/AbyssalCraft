@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.common.items.ItemSpiritTablet;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,11 +33,11 @@ public class ContainerSpiritTablet extends Container
 		inventory = inventoryItem;
 		rows = inventoryItem.getSizeInventory() / 9;
 
-		addSlotToContainer(new Slot(inventoryItem, 0, 44, 17));
-		addSlotToContainer(new Slot(inventoryItem, 1, 62, 17));
-		addSlotToContainer(new Slot(inventoryItem, 2, 80, 17));
-		addSlotToContainer(new Slot(inventoryItem, 3, 98, 17));
-		addSlotToContainer(new Slot(inventoryItem, 4, 116, 17));
+		addSlotToContainer(new SlotNoInventory(inventoryItem, 0, 44, 17));
+		addSlotToContainer(new SlotNoInventory(inventoryItem, 1, 62, 17));
+		addSlotToContainer(new SlotNoInventory(inventoryItem, 2, 80, 17));
+		addSlotToContainer(new SlotNoInventory(inventoryItem, 3, 98, 17));
+		addSlotToContainer(new SlotNoInventory(inventoryItem, 4, 116, 17));
 		int i;
 
 		for(i = 0; i < 3; i++)

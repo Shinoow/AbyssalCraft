@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapability;
@@ -27,6 +28,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemShulkerBox;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTBase;
@@ -287,5 +289,25 @@ public class APIUtils {
 				new ItemStack(ACBlocks.decorative_hastur_statue), new ItemStack(ACBlocks.decorative_azathoth_statue),
 				new ItemStack(ACBlocks.decorative_nyarlathotep_statue), new ItemStack(ACBlocks.decorative_yog_sothoth_statue),
 				new ItemStack(ACBlocks.decorative_shub_niggurath_statue)};
+	}
+
+	/**
+	 * Checks if the ItemStack contains an Item or Block that can have an inventory
+	 * @param stack ItemStack to check
+	 * @return True if the ItemStack has an inventory
+	 */
+	public static boolean hasAnInventory(ItemStack stack) {
+
+		if(stack.getItem() == ACItems.spirit_tablet
+				|| stack.getItem() instanceof ItemShulkerBox
+				|| stack.getItem() == ACItems.small_crystal_bag
+				|| stack.getItem() == ACItems.medium_crystal_bag
+				|| stack.getItem() == ACItems.large_crystal_bag
+				|| stack.getItem() == ACItems.huge_crystal_bag
+				|| stack.getItem() == ACItems.stone_tablet)
+			return true;
+
+		// Maybe add a config option to blacklist more things with inventories???
+		return false;
 	}
 }
