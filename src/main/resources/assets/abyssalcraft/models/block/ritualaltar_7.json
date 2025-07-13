@@ -1,6 +1,7 @@
 {
 	"parent": "abyssalcraft:block/ritualaltar",
 	"textures": {
-		"0": "abyssalcraft:blocks/deb"
+		"0": "abyssalcraft:blocks/deb",
+		"3": "abyssalcraft:blocks/ritualaltar/cloth4"
 	}
 }
