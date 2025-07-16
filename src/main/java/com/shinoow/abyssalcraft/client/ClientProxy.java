@@ -195,6 +195,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRendingPedestal.class, new TileEntityPedestalBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityResearchTable.class, new TileEntityResearchTableRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityUnlockedSealingLock.class, new TileEntityUnlockedSealingLockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRitualPedestal.class, new TileEntityRitualPedestalRenderer());
 
 		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
 		RenderPlayer render1 = rm.getSkinMap().get("default");

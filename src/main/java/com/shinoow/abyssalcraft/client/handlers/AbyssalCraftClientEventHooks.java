@@ -31,6 +31,7 @@ import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellUtils;
 import com.shinoow.abyssalcraft.client.ClientProxy;
 import com.shinoow.abyssalcraft.common.blocks.BlockACSlab;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualPedestal;
 import com.shinoow.abyssalcraft.common.items.ItemSpiritTablet;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.*;
@@ -465,6 +466,15 @@ public class AbyssalCraftClientEventHooks {
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadwood_fence_gate, new StateMap.Builder().ignore(BlockFenceGate.POWERED).build());
 
+		ModelLoader.setCustomStateMapper(ACBlocks.ritual_pedestal_stone, new StateMap.Builder().ignore(BlockRitualPedestal.TILTED).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.ritual_pedestal_darkstone, new StateMap.Builder().ignore(BlockRitualPedestal.TILTED).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.ritual_pedestal_abyssal_stone, new StateMap.Builder().ignore(BlockRitualPedestal.TILTED).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.ritual_pedestal_coralium_stone, new StateMap.Builder().ignore(BlockRitualPedestal.TILTED).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.ritual_pedestal_dreadstone, new StateMap.Builder().ignore(BlockRitualPedestal.TILTED).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.ritual_pedestal_elysian_stone, new StateMap.Builder().ignore(BlockRitualPedestal.TILTED).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.ritual_pedestal_ethaxium, new StateMap.Builder().ignore(BlockRitualPedestal.TILTED).build());
+		ModelLoader.setCustomStateMapper(ACBlocks.ritual_pedestal_dark_ethaxium, new StateMap.Builder().ignore(BlockRitualPedestal.TILTED).build());
+		
 		ModelLoader.setCustomStateMapper(ACBlocks.darklands_oak_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
 		ModelLoader.setCustomStateMapper(ACBlocks.dreadwood_door, new StateMap.Builder().ignore(BlockDoor.POWERED).build());
 
