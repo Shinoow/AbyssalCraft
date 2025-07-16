@@ -1,7 +1,6 @@
 {
 	"parent": "abyssalcraft:block/ritualpedestal",
 	"textures": {
-		"0": "abyssalcraft:blocks/coraliumcobblestone",
-		"1": "abyssalcraft:blocks/ritualpedestal/overlay_3"
+		"0": "abyssalcraft:blocks/coraliumcobblestone"
 	}
 }
