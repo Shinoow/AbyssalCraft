@@ -1,0 +1,6 @@
+{
+	"parent": "abyssalcraft:block/ritualpedestal_tilted",
+	"textures": {
+		"0": "minecraft:blocks/cobblestone"
+	}
+}

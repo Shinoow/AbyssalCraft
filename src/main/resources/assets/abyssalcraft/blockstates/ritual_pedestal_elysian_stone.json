@@ -1,5 +1,10 @@
 {
 	"variants": {
-		"normal": { "model": "abyssalcraft:ritualpedestal_5" }
+		"tilted=true": {
+			"model": "abyssalcraft:ritualpedestal_tilted_5"
+		},
+		"tilted=false": {
+			"model": "abyssalcraft:ritualpedestal_5"
+		}
 	}
 }

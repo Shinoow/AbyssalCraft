@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.block.IRitualPedestal;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -130,10 +131,11 @@ public class RitualUtil {
 		world.setBlockState(pos, getAltar(altar), 2);
 
 		for(BlockPos pos1 : PEDESTAL_POSITIONS) {
+			boolean corner = pos1.getX() < 3 && pos1.getX() > -3 && pos1.getZ() < 3 && pos1.getZ() > -3;
 			BlockPos pos2 = pos.add(pos1);
 			IBlockState pedestal = world.getBlockState(pos2);
 			world.destroyBlock(pos2, false);
-			world.setBlockState(pos2, getPedestal(pedestal), 2);
+			world.setBlockState(pos2, getPedestal(pedestal).withProperty(BlockUtil.TILTED, corner), 2);
 			((IRitualPedestal) world.getTileEntity(pos2)).setAltar(pos);
 		}
 	}

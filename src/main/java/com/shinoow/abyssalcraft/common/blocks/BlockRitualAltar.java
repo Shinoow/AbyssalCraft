@@ -154,7 +154,7 @@ public class BlockRitualAltar extends BlockSingletonInventory {
 	public enum EnumRitualMatType implements IStringSerializable {
 		COBBLESTONE(0, "cobblestone", 0xb4b4b4),
 		DARKSTONE_COBBLESTONE(1, "darkstone_cobblestone", 0x36343d),
-		ABYSSAL_STONE_BRICK(2, "abyssal_stone_brick", 0x273d29),
+		ABYSSAL_STONE_BRICK(2, "abyssal_stone_brick", 0x38603b),
 		CORALIUM_STONE_BRICK(3, "coralium_stone_brick", 0x6e8984),
 		DREADSTONE_BRICK(4, "dreadstone_brick", 0xb51414),
 		ELYSIAN_STONE_BRICK(5, "elysian_stone_brick", 0x6d789b),

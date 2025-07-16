@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualPedestal;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.block.BlockSingletonInventory;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -42,8 +43,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockRitualPedestal extends BlockSingletonInventory {
 
-	public static final PropertyBool TILTED = PropertyBool.create("tilted");
-
 	//	public static final PropertyEnum<EnumRitualMatType> MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 	public static final Map<EnumRitualMatType, Block> VARIANTS = new HashMap<>();
 	private Supplier<IBlockState> dropState;
@@ -61,7 +60,7 @@ public class BlockRitualPedestal extends BlockSingletonInventory {
 		VARIANTS.put(type, this);
 		this.type = type;
 		dropNormally = true;
-		setDefaultState(blockState.getBaseState().withProperty(TILTED, false));
+		setDefaultState(blockState.getBaseState().withProperty(BlockUtil.TILTED, false));
 	}
 
 	public int getTypeColor() {
@@ -116,7 +115,7 @@ public class BlockRitualPedestal extends BlockSingletonInventory {
 
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return state.getValue(TILTED) ? EnumBlockRenderType.ENTITYBLOCK_ANIMATED : EnumBlockRenderType.MODEL;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
@@ -133,24 +132,24 @@ public class BlockRitualPedestal extends BlockSingletonInventory {
 
 		// mod 4 gives a decent enough "looking at a straight angle"
 		// thereby not tilted
-		return getDefaultState().withProperty(TILTED, i % 4 != 0);	
+		return getDefaultState().withProperty(BlockUtil.TILTED, i % 4 != 0);	
 	}
-	
+
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(TILTED, (meta & 1) > 0);
+		return getDefaultState().withProperty(BlockUtil.TILTED, (meta & 1) > 0);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return state.getValue(TILTED) ? 1 : 0;
+		return state.getValue(BlockUtil.TILTED) ? 1 : 0;
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer.Builder(this).add(TILTED).build();
+		return new BlockStateContainer.Builder(this).add(BlockUtil.TILTED).build();
 	}
 }

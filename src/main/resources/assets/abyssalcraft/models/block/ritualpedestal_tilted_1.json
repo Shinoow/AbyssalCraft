@@ -1,0 +1,7 @@
+{
+	"parent": "abyssalcraft:block/ritualpedestal_tilted",
+	"textures": {
+		"0": "abyssalcraft:blocks/dsc",
+		"1": "abyssalcraft:blocks/ritualpedestal/overlay_1"
+	}
+}
