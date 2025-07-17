@@ -35,8 +35,6 @@ import net.minecraft.world.chunk.Chunk;
 
 public class BlockUtil {
 
-	public static final PropertyBool TILTED = PropertyBool.create("tilted");
-
 	public static TileEntity getTileEntitySafely(IBlockAccess blockAccess, BlockPos pos) {
 		if (blockAccess instanceof ChunkCache)
 			return ((ChunkCache) blockAccess).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK);

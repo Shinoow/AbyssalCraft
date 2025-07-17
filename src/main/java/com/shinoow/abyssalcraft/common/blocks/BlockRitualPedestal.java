@@ -18,30 +18,28 @@ import java.util.function.Supplier;
 
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar.EnumRitualMatType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityRitualPedestal;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
-import com.shinoow.abyssalcraft.lib.block.BlockSingletonInventory;
+import com.shinoow.abyssalcraft.lib.block.BlockTiltablePedestal;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
-import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
-import net.minecraft.util.math.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRitualPedestal extends BlockSingletonInventory {
+public class BlockRitualPedestal extends BlockTiltablePedestal {
 
 	//	public static final PropertyEnum<EnumRitualMatType> MATERIAL = PropertyEnum.create("material", EnumRitualMatType.class);
 	public static final Map<EnumRitualMatType, Block> VARIANTS = new HashMap<>();
@@ -60,7 +58,6 @@ public class BlockRitualPedestal extends BlockSingletonInventory {
 		VARIANTS.put(type, this);
 		this.type = type;
 		dropNormally = true;
-		setDefaultState(blockState.getBaseState().withProperty(BlockUtil.TILTED, false));
 	}
 
 	public int getTypeColor() {
@@ -123,33 +120,5 @@ public class BlockRitualPedestal extends BlockSingletonInventory {
 	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
-	}
-
-	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
-	{
-		int i = MathHelper.floor((double)(placer.rotationYaw * 16.0F / 360.0F) + 0.5D) & 15;
-
-		// mod 4 gives a decent enough "looking at a straight angle"
-		// thereby not tilted
-		return getDefaultState().withProperty(BlockUtil.TILTED, i % 4 != 0);	
-	}
-
-	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
-		return getDefaultState().withProperty(BlockUtil.TILTED, (meta & 1) > 0);
-	}
-
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		return state.getValue(BlockUtil.TILTED) ? 1 : 0;
-	}
-
-	@Override
-	protected BlockStateContainer createBlockState()
-	{
-		return new BlockStateContainer.Builder(this).add(BlockUtil.TILTED).build();
 	}
 }

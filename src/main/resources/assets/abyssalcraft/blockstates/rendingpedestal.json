@@ -1,5 +1,10 @@
 {
 	"variants": {
-		"normal": { "model": "abyssalcraft:rendingpedestal" }
+		"tilted=true": {
+			"model": "abyssalcraft:rendingpedestal_tilted"
+		},
+		"tilted=false": {
+			"model": "abyssalcraft:rendingpedestal"
+		}
 	}
 }

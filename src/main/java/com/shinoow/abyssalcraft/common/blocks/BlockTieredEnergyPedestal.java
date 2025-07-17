@@ -18,7 +18,7 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredEnergyPedestal;
 import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.block.BlockSingletonInventory;
+import com.shinoow.abyssalcraft.lib.block.BlockTiltablePedestal;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -37,7 +37,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockTieredEnergyPedestal extends BlockSingletonInventory implements IEnergyBlock {
+public class BlockTieredEnergyPedestal extends BlockTiltablePedestal implements IEnergyBlock {
 
 	public static final Map<EnumDimType, Block> VARIANTS = new HashMap<>();
 

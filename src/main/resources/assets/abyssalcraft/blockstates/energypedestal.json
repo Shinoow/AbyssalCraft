@@ -1,5 +1,10 @@
 {
 	"variants": {
-		"normal": { "model": "abyssalcraft:energypedestal" }
+		"tilted=true": {
+			"model": "abyssalcraft:energypedestal_tilted"
+		},
+		"tilted=false": {
+			"model": "abyssalcraft:energypedestal"
+		}
 	}
 }
