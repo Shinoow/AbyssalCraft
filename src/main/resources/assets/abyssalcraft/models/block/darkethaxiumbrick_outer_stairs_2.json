@@ -1,0 +1,8 @@
+{
+	"parent": "block/outer_stairs",
+	"textures": {
+		"bottom": "abyssalcraft:blocks/deb2",
+        "top": "abyssalcraft:blocks/deb2",
+        "side": "abyssalcraft:blocks/deb2"
+	}
+}

@@ -1,5 +1,9 @@
 {
 	"variants": {
-		"normal": { "model": "abyssalcraft:darkethaxiumbrick_0" }
+		"normal": [
+			{ "model": "abyssalcraft:darkethaxiumbrick_0","weight":2},
+			{ "model": "abyssalcraft:darkethaxiumbrick_0_1","weight":1},
+			{ "model": "abyssalcraft:darkethaxiumbrick_0_2","weight":1}
+		]
 	}
 }

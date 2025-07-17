@@ -1,12 +1,14 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"textures" : {
-			"all": "abyssalcraft:blocks/deb"
-		}
-	},
 	"variants": {
-		"variant=false": { "model": "cube_all" },
-		"variant=true": { "model": "cube_all" }
+		"variant=false":  [
+			{ "model": "abyssalcraft:darkethaxiumbrick_0","weight":2},
+			{ "model": "abyssalcraft:darkethaxiumbrick_0_1","weight":1},
+			{ "model": "abyssalcraft:darkethaxiumbrick_0_2","weight":1}
+		],
+		"variant=true":  [
+			{ "model": "abyssalcraft:darkethaxiumbrick_0","weight":2},
+			{ "model": "abyssalcraft:darkethaxiumbrick_0_1","weight":1},
+			{ "model": "abyssalcraft:darkethaxiumbrick_0_2","weight":1}
+		]
 	}
 }

@@ -1,12 +1,14 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"textures" : {
-			"all": "abyssalcraft:blocks/eb"
-		}
-	},
 	"variants": {
-		"variant=false": { "model": "cube_all" },
-		"variant=true": { "model": "cube_all" }
+		"variant=false":  [
+			{ "model": "abyssalcraft:ethaxiumbrick_0","weight":2},
+			{ "model": "abyssalcraft:ethaxiumbrick_0_1","weight":1},
+			{ "model": "abyssalcraft:ethaxiumbrick_0_2","weight":1}
+		],
+		"variant=true":  [
+			{ "model": "abyssalcraft:ethaxiumbrick_0","weight":2},
+			{ "model": "abyssalcraft:ethaxiumbrick_0_1","weight":1},
+			{ "model": "abyssalcraft:ethaxiumbrick_0_2","weight":1}
+		]
 	}
 }

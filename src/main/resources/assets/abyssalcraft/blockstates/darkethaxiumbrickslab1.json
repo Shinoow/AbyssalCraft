@@ -1,14 +1,10 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"textures" : {
-			"bottom": "abyssalcraft:blocks/deb",
-			"top": "abyssalcraft:blocks/deb",
-			"side": "abyssalcraft:blocks/deb"
-		}
-	},
 	"variants": {
-		"half=bottom": { "model": "half_slab" },
-		"half=top": { "model": "upper_slab" }
+		"half=bottom": [{"model": "abyssalcraft:darkethaxiumbrick_half_slab","weight": 2},
+			{"model": "abyssalcraft:darkethaxiumbrick_half_slab_1","weight": 1},
+			{"model": "abyssalcraft:darkethaxiumbrick_half_slab_2","weight": 1}],
+		"half=top": [{"model": "abyssalcraft:darkethaxiumbrick_upper_slab","weight": 2},
+			{"model": "abyssalcraft:darkethaxiumbrick_upper_slab_1","weight": 1},
+			{"model": "abyssalcraft:darkethaxiumbrick_upper_slab_2","weight": 1}]
 	}
 }
