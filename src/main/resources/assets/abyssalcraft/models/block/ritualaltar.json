@@ -3,7 +3,6 @@
 	"textures": {
 		"1": "abyssalcraft:blocks/ritualaltar/parts",
 		"3": "abyssalcraft:blocks/ritualaltar/cloth",
-		"4": "abyssalcraft:blocks/monolithstone",
 		"particle": "#0"
 	},
 	"elements": [
@@ -142,12 +141,12 @@
 			"from": [5, 13, 5],
 			"to": [11, 14, 11],
 			"faces": {
-				"north": {"uv": [6, 7, 12, 8], "texture": "#4"},
-				"east": {"uv": [0, 7, 6, 8], "texture": "#4"},
-				"south": {"uv": [6, 6, 12, 7], "texture": "#4"},
-				"west": {"uv": [0, 6, 6, 7], "texture": "#4"},
-				"up": {"uv": [0, 0, 6, 6], "texture": "#4"},
-				"down": {"uv": [6, 0, 12, 6], "texture": "#4"}
+				"north": {"uv": [6, 7, 12, 8], "texture": "#1"},
+				"east": {"uv": [0, 7, 6, 8], "texture": "#1"},
+				"south": {"uv": [6, 6, 12, 7], "texture": "#1"},
+				"west": {"uv": [0, 6, 6, 7], "texture": "#1"},
+				"up": {"uv": [0, 0, 6, 6], "texture": "#1"},
+				"down": {"uv": [6, 0, 12, 6], "texture": "#1"}
 			}
 		},
 		{
