@@ -1,5 +1,32 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"model": "abyssalcraft:double_layered_cube",
+		"textures" : {
+			"all": "abyssalcraft:blocks/ethaxium_bricks/bricks_base",
+			"overlay2": "abyssalcraft:blocks/ethaxium_bricks/sigil"
+		}
+	},
 	"variants": {
-		"normal": { "model": "abyssalcraft:ethaxiumbrick_1" }
+		"normal": [
+			{
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/faces_1"
+				},
+				"weight": 2
+			},
+			{
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/faces_2"
+				},
+				"weight": 1
+			},
+			{
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/faces_3"
+				},
+				"weight": 1
+			}
+		]
 	}
 }

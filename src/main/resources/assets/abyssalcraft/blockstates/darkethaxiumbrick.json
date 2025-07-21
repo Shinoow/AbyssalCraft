@@ -1,5 +1,31 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"model": "abyssalcraft:layered_cube",
+		"textures" : {
+			"all": "abyssalcraft:blocks/ethaxium_bricks/dark_bricks_base"
+		}
+	},
 	"variants": {
-		"normal": { "model": "abyssalcraft:darkethaxiumbrick_0" }
+		"normal": [
+			{
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_1"
+				},
+				"weight": 2
+			},
+			{
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_2"
+				},
+				"weight": 1
+			},
+			{
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_3"
+				},
+				"weight": 1
+			}
+		]
 	}
 }

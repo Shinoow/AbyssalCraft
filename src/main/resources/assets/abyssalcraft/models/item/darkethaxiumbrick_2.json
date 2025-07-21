@@ -1,3 +1,8 @@
 {
-	"parent": "abyssalcraft:block/darkethaxiumbrick_2"
+	"parent": "abyssalcraft:block/double_layered_cube",
+	"textures": {
+		"all": "abyssalcraft:blocks/ethaxium_bricks/dark_bricks_base",
+		"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_1",
+		"overlay2": "abyssalcraft:blocks/ethaxium_bricks/dark_cracks"
+	}
 }

@@ -1,8 +1,9 @@
 {
-	"parent": "block/stairs",
-	"textures": {
-		"bottom": "abyssalcraft:blocks/deb",
-        "top": "abyssalcraft:blocks/deb",
-        "side": "abyssalcraft:blocks/deb"
+	"parent": "abyssalcraft:block/layered_stairs",
+	"textures" : {
+		"bottom": "abyssalcraft:blocks/ethaxium_bricks/dark_bricks_base",
+		"top": "abyssalcraft:blocks/ethaxium_bricks/dark_bricks_base",
+		"side": "abyssalcraft:blocks/ethaxium_bricks/dark_bricks_base",
+		"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_1"
 	}
 }

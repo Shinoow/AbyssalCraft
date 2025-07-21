@@ -25,6 +25,7 @@ import com.shinoow.abyssalcraft.common.handlers.InternalNecroDataHandler;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
@@ -149,4 +150,6 @@ public class CommonProxy {
 	public RayTraceResult rayTraceEntity(float dist) {
 		return null;
 	}
+
+	public void setRenderLayer(Block block) {}
 }

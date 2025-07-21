@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -31,6 +32,7 @@ import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -92,6 +94,27 @@ public abstract class BlockACSlab extends BlockSlab {
 			else if(par3Material == Material.GROUND || par3Material == Material.GRASS || par3Material == Material.SAND ||
 					par3Material == Material.SNOW || par3Material == Material.CRAFTED_SNOW)
 				setHarvestLevel("shovel", 0);
+	}
+
+	public BlockACSlab mipp() {
+
+		// Too much? Maybe, but fuck it
+		AbyssalCraft.proxy.setRenderLayer(this);
+
+		return this;
+	}
+
+	@SideOnly(Side.CLIENT)
+	private BlockRenderLayer layer = super.getRenderLayer();
+
+	@SideOnly(Side.CLIENT)
+	public void setRenderLayer() {
+		layer = BlockRenderLayer.CUTOUT_MIPPED;
+	}
+
+	@Override
+	public BlockRenderLayer getRenderLayer() {
+		return layer;
 	}
 
 	@Override

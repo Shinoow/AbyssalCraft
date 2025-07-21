@@ -35,9 +35,7 @@ import com.shinoow.abyssalcraft.client.render.entity.*;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
 import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
-import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
-import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
-import com.shinoow.abyssalcraft.common.blocks.BlockRitualPedestal;
+import com.shinoow.abyssalcraft.common.blocks.*;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
@@ -432,5 +430,14 @@ public class ClientProxy extends CommonProxy {
 	public RayTraceResult rayTraceEntity(float dist) {
 		RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(dist);
 		return r != null && r.entityHit instanceof EntityLivingBase ? r : null;
+	}
+
+	public void setRenderLayer(Block block) {
+		if(block instanceof BlockACBasic)
+			((BlockACBasic) block).setRenderLayer();
+		if(block instanceof BlockACStairs)
+			((BlockACStairs) block).setRenderLayer();
+		if(block instanceof BlockACSlab)
+			((BlockACSlab) block).setRenderLayer();
 	}
 }

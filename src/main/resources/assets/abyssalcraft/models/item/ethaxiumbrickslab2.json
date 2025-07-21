@@ -1,6 +1,7 @@
 {
-	"parent": "block/cube_all",
-	"textures" : {
-		"all": "abyssalcraft:blocks/eb"
+	"parent": "abyssalcraft:block/layered_cube",
+	"textures": {
+		"all": "abyssalcraft:blocks/ethaxium_bricks/bricks_base",
+		"overlay": "abyssalcraft:blocks/ethaxium_bricks/faces_1"
 	}
 }

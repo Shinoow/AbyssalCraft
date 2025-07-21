@@ -1,8 +1,9 @@
 {
-	"parent": "block/half_slab",
+	"parent": "abyssalcraft:block/layered_half_slab",
 	"textures": {
-		"bottom": "abyssalcraft:blocks/eb",
-		"top": "abyssalcraft:blocks/eb",
-		"side": "abyssalcraft:blocks/eb"
+		"bottom": "abyssalcraft:blocks/ethaxium_bricks/bricks_base",
+		"top": "abyssalcraft:blocks/ethaxium_bricks/bricks_base",
+		"side": "abyssalcraft:blocks/ethaxium_bricks/bricks_base",
+		"overlay": "abyssalcraft:blocks/ethaxium_bricks/faces_1"
 	}
 }

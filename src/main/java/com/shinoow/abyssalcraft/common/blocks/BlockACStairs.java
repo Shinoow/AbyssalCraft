@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -22,8 +23,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.projectile.EntityWitherSkull;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockACStairs extends BlockStairs {
 
@@ -45,6 +49,27 @@ public class BlockACStairs extends BlockStairs {
 			else if(material == Material.GROUND || material == Material.GRASS || material == Material.SAND ||
 					material == Material.SNOW || material == Material.CRAFTED_SNOW)
 				setHarvestLevel("shovel", 0);
+	}
+
+	public BlockACStairs mipp() {
+
+		// Too much? Maybe, but fuck it
+		AbyssalCraft.proxy.setRenderLayer(this);
+
+		return this;
+	}
+
+	@SideOnly(Side.CLIENT)
+	private BlockRenderLayer layer = super.getRenderLayer();
+
+	@SideOnly(Side.CLIENT)
+	public void setRenderLayer() {
+		layer = BlockRenderLayer.CUTOUT_MIPPED;
+	}
+
+	@Override
+	public BlockRenderLayer getRenderLayer() {
+		return layer;
 	}
 
 	@Override

@@ -2,13 +2,57 @@
 	"forge_marker": 1,
 	"defaults": {
 		"textures" : {
-			"bottom": "abyssalcraft:blocks/deb",
-			"top": "abyssalcraft:blocks/deb",
-			"side": "abyssalcraft:blocks/deb"
+			"bottom": "abyssalcraft:blocks/ethaxium_bricks/dark_bricks_base",
+			"top": "abyssalcraft:blocks/ethaxium_bricks/dark_bricks_base",
+			"side": "abyssalcraft:blocks/ethaxium_bricks/dark_bricks_base"
 		}
 	},
 	"variants": {
-		"half=bottom": { "model": "half_slab" },
-		"half=top": { "model": "upper_slab" }
+		"half=bottom": [
+			{
+				"model": "abyssalcraft:layered_half_slab",
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_1"
+				},
+				"weight": 2
+			},
+			{
+				"model": "abyssalcraft:layered_half_slab",
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_2"
+				},
+				"weight": 1
+			},
+			{
+				"model": "abyssalcraft:layered_half_slab",
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_3"
+				},
+				"weight": 1
+			}
+		],
+		"half=top": [
+			{
+				"model": "abyssalcraft:layered_upper_slab",
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_1"
+				},
+				"weight": 2
+			},
+			{
+				"model": "abyssalcraft:layered_upper_slab",
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_2"
+				},
+				"weight": 1
+			},
+			{
+				"model": "abyssalcraft:layered_upper_slab",
+				"textures": {
+					"overlay": "abyssalcraft:blocks/ethaxium_bricks/dark_faces_3"
+				},
+				"weight": 1
+			}
+		]
 	}
 }
