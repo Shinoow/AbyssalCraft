@@ -1,5 +1,8 @@
 {
-	"parent": "abyssalcraft:block/tieredenergypedestal_2",
+	"parent": "abyssalcraft:block/energypedestal",
+    "textures": {
+        "0": "abyssalcraft:blocks/drs"
+    },
     "display": {
         "gui": {
             "rotation": [ 30, 45, 0 ],
