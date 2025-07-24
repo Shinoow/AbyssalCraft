@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.shinoow.abyssalcraft.api.block.ICrystalBlock;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACBasic;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.Crystals;

@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.blocks;
+package com.shinoow.abyssalcraft.common.blocks.baseblocks;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;

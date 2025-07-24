@@ -1,3 +1,7 @@
 {
-	"parent": "abyssalcraft:block/cstonebrick_1"
+	"parent": "abyssalcraft:block/layered_cube",
+	"textures": {
+		"all": "abyssalcraft:blocks/coralium_bricks/bricks_base",
+		"overlay": "abyssalcraft:blocks/coralium_bricks/sigil"
+	}
 }

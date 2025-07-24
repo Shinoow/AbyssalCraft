@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACBasic;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.SoundType;

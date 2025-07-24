@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACBasic;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStateTransformer;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;

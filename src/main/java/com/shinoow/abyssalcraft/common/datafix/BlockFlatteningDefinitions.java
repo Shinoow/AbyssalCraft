@@ -16,6 +16,9 @@ import java.util.Objects;
 import com.google.common.collect.ImmutableList;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.*;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACBrick;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACCobblestone;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACStone;
 
 import net.minecraft.util.EnumFacing;
 

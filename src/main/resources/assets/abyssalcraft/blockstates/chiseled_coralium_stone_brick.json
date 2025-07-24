@@ -1,5 +1,12 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"all": "abyssalcraft:blocks/coralium_bricks/bricks_base",
+			"overlay": "abyssalcraft:blocks/coralium_bricks/sigil"
+		}
+	},
 	"variants": {
-		"normal": { "model": "abyssalcraft:cstonebrick_1" }
+		"normal": { "model": "abyssalcraft:layered_cube" }
 	}
 }

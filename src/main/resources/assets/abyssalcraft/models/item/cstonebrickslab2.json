@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures" : {
-		"all": "abyssalcraft:blocks/cstonebrick"
+		"all": "abyssalcraft:blocks/coralium_bricks/bricks_base"
 	}
 }

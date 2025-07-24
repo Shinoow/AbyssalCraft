@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACBasic;
 import com.shinoow.abyssalcraft.api.energy.IEnergyAmplifier;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 

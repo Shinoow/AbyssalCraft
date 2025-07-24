@@ -1,8 +1,8 @@
 {
 	"parent": "block/stairs",
 	"textures": {
-		"bottom": "abyssalcraft:blocks/cstonebrick",
-        "top": "abyssalcraft:blocks/cstonebrick",
-        "side": "abyssalcraft:blocks/cstonebrick"
+		"bottom": "abyssalcraft:blocks/coralium_bricks/bricks_base",
+        "top": "abyssalcraft:blocks/coralium_bricks/bricks_base",
+        "side": "abyssalcraft:blocks/coralium_bricks/bricks_base"
 	}
 }

@@ -36,6 +36,9 @@ import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentac
 import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.blocks.*;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACBasic;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACSlab;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACStairs;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;

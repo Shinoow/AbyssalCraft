@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACBasic;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;

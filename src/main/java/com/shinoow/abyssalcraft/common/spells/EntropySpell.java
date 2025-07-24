@@ -16,7 +16,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
-import com.shinoow.abyssalcraft.common.blocks.BlockACCobblestone;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACCobblestone;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

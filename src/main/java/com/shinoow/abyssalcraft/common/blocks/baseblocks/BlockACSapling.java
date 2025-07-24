@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.blocks;
+package com.shinoow.abyssalcraft.common.blocks.baseblocks;
 
 import java.util.Random;
 
