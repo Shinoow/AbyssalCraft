@@ -62,9 +62,4 @@ public class ItemCorb extends ItemACBasic {
 		if(!B.isAdvanced())
 			l.add(String.format("%d/%d", getMaxDamage(is) - getDamage(is), getMaxDamage(is)));
 	}
-
-	@Override
-	public boolean hasEffect(ItemStack is){
-		return true;
-	}
 }
