@@ -30,6 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
+import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -40,17 +41,23 @@ public class TeleporterAC extends Teleporter
 	private final Random random;
 	private final Long2ObjectMap<Teleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap(4096);
 	private int prevDimension;
+	private double movementFactor;
 
-	public TeleporterAC(WorldServer par1WorldServer, int prevDimension)
+	public TeleporterAC(WorldServer par1WorldServer, int prevDimension, WorldProvider provider)
 	{
 		super(par1WorldServer);
 		worldServerInstance = par1WorldServer;
 		this.prevDimension = prevDimension;
 		random = new Random(par1WorldServer.getSeed());
+		// movementFactor might place you 100 - 200 blocks away from the initial portal
+		// when returning from the Nether, but without anything for it,
+		// that can be 900 blocks away, so better than nothing
+		movementFactor = provider.getMovementFactor() / worldServerInstance.provider.getMovementFactor();
+
 	}
 
 	public static void changeDimension(Entity entity, int dimension) {
-		Teleporter teleporter = new TeleporterAC(entity.getServer().getWorld(dimension), entity.dimension);
+		Teleporter teleporter = new TeleporterAC(entity.getServer().getWorld(dimension), entity.dimension, entity.world.provider);
 		if(entity instanceof EntityPlayerMP) {
 			if(!ForgeHooks.onTravelToDimension(entity, dimension)) return;
 			if(!((EntityPlayerMP)entity).capabilities.isCreativeMode) {
@@ -77,8 +84,8 @@ public class TeleporterAC extends Teleporter
 	@Override
 	public boolean placeInExistingPortal(Entity entityIn, float p_180620_2_) {
 		double d0 = -1.0D;
-		int i = MathHelper.floor(entityIn.posX);
-		int j = MathHelper.floor(entityIn.posZ);
+		int i = MathHelper.floor(entityIn.posX * movementFactor);
+		int j = MathHelper.floor(entityIn.posZ * movementFactor);
 		boolean flag1 = true;
 		Object object = BlockPos.ORIGIN;
 		long k = ChunkPos.asLong(i, j);
@@ -91,7 +98,7 @@ public class TeleporterAC extends Teleporter
 			flag1 = false;
 		}
 		else {
-			BlockPos blockpos4 = new BlockPos(entityIn);
+			BlockPos blockpos4 = new BlockPos(entityIn.posX * movementFactor, entityIn.posY, entityIn.posZ * movementFactor);
 
 			for (int l = -128; l <= 128; ++l) {
 				BlockPos blockpos1;
@@ -127,21 +134,27 @@ public class TeleporterAC extends Teleporter
 			double d6 = ((BlockPos) object).getZ() + 0.5D;
 
 			entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
+			if (entityIn instanceof EntityPlayerMP)
+				((EntityPlayerMP)entityIn).connection.setPlayerLocation(d4, d5, d6, entityIn.rotationYaw, entityIn.rotationPitch);
+			else 
+				entityIn.setLocationAndAngles(d4, d5, d6, entityIn.rotationYaw, entityIn.rotationPitch);
 
-			entityIn.setLocationAndAngles(d4, d5, d6, entityIn.rotationYaw, entityIn.rotationPitch);
 			return true;
 		} else
 			return false;
 	}
 
 	@Override
-	public boolean makePortal(Entity p_85188_1_)
+	public boolean makePortal(Entity entityIn)
 	{
+		double posX = entityIn.posX * movementFactor;
+		double posZ = entityIn.posZ * movementFactor;
+
 		int i = 16;
 		double d0 = -1.0D;
-		int j = MathHelper.floor(p_85188_1_.posX);
-		int k = MathHelper.floor(p_85188_1_.posY);
-		int l = MathHelper.floor(p_85188_1_.posZ);
+		int j = MathHelper.floor(posX);
+		int k = MathHelper.floor(entityIn.posY);
+		int l = MathHelper.floor(posZ);
 		int i1 = j;
 		int j1 = k;
 		int k1 = l;
@@ -151,11 +164,11 @@ public class TeleporterAC extends Teleporter
 
 		for (int j2 = j - i; j2 <= j + i; ++j2)
 		{
-			double d1 = j2 + 0.5D - p_85188_1_.posX;
+			double d1 = j2 + 0.5D - posX;
 
 			for (int l2 = l - i; l2 <= l + i; ++l2)
 			{
-				double d2 = l2 + 0.5D - p_85188_1_.posZ;
+				double d2 = l2 + 0.5D - posZ;
 				label142:
 
 					for (int j3 = worldServerInstance.getActualHeight() - 1; j3 >= 6; --j3)
@@ -188,7 +201,7 @@ public class TeleporterAC extends Teleporter
 												continue label142;
 										}
 
-								double d5 = j3 + 0.5D - p_85188_1_.posY;
+								double d5 = j3 + 0.5D - entityIn.posY;
 								double d7 = d1 * d1 + d5 * d5 + d2 * d2;
 
 								if (d0 < 0.0D || d7 < d0)
@@ -207,11 +220,11 @@ public class TeleporterAC extends Teleporter
 		if (d0 < 0.0D)
 			for (int l5 = j - i; l5 <= j + i; ++l5)
 			{
-				double d3 = l5 + 0.5D - p_85188_1_.posX;
+				double d3 = l5 + 0.5D - posX;
 
 				for (int j6 = l - i; j6 <= l + i; ++j6)
 				{
-					double d4 = j6 + 0.5D - p_85188_1_.posZ;
+					double d4 = j6 + 0.5D - posZ;
 					label562:
 
 						for (int i7 = worldServerInstance.getActualHeight() - 1; i7 >= 6; --i7)
@@ -237,7 +250,7 @@ public class TeleporterAC extends Teleporter
 												continue label562;
 										}
 
-									double d6 = i7 + 0.5D - p_85188_1_.posY;
+									double d6 = i7 + 0.5D - entityIn.posY;
 									double d8 = d3 * d3 + d6 * d6 + d4 * d4;
 
 									if (d0 < 0.0D || d8 < d0)

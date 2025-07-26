@@ -118,9 +118,22 @@ public class WorldHandler implements ILifeCycleHandler {
 				.setMob(EntityShadowMonster.class)
 				.build());
 		DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(0)
+				.addConnectedDimension(-1)
+				.addConnectedDimension(1)
+				.addConnectedDimension(ACLib.abyssal_wasteland_id)
 				.setColor(0, 0, 255)
 				.setGatewayKey(0)
 				.build());
+		if(ACConfig.vanilla_portals) {
+			DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(-1)
+					.setColor(252, 87, 0)
+					.setGatewayKey(0)
+					.build());
+			DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(1)
+					.setColor(204, 0, 250)
+					.setGatewayKey(0)
+					.build());
+		}
 	}
 
 	@Override

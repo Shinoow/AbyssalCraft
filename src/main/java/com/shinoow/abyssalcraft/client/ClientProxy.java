@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.*;
+import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
@@ -35,7 +36,9 @@ import com.shinoow.abyssalcraft.client.render.entity.*;
 import com.shinoow.abyssalcraft.client.render.entity.layers.LayerStarSpawnTentacles;
 import com.shinoow.abyssalcraft.client.render.item.RenderCoraliumArrow;
 import com.shinoow.abyssalcraft.common.CommonProxy;
-import com.shinoow.abyssalcraft.common.blocks.*;
+import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
+import com.shinoow.abyssalcraft.common.blocks.BlockRitualPedestal;
 import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACBasic;
 import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACSlab;
 import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACStairs;
@@ -285,6 +288,9 @@ public class ClientProxy extends CommonProxy {
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, I18n.format(NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.omothol_id, 3, I18n.format(NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE));
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 0, I18n.format(NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE));
+		RitualRegistry.instance().addDimensionToBookTypeAndName(-1, 0, I18n.format("label.misc.nether"));
+		// Use lines from Vanilla localization
+		RitualRegistry.instance().addDimensionToBookTypeAndName(1, 0, I18n.format("advancements.end.root.title"));
 	}
 
 	private int getColor(int num) {

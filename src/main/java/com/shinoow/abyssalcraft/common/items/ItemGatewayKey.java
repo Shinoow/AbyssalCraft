@@ -74,7 +74,7 @@ public class ItemGatewayKey extends ItemACBasic {
 	}
 
 	@Override
-	public void addInformation(ItemStack par1ItemStack, World world, List list, ITooltipFlag is){
+	public void addInformation(ItemStack par1ItemStack, World world, List<String> list, ITooltipFlag is){
 		list.add(I18n.format("tooltip.portalplacer.1"));
 		list.add(I18n.format("tooltip.portalplacer.2"));
 		if(!par1ItemStack.hasTagCompound())
@@ -107,7 +107,7 @@ public class ItemGatewayKey extends ItemACBasic {
 				int newDim = 0;
 				List<DimensionData> dims = DimensionDataRegistry.instance().getDimensions().stream().filter(d -> d.getGatewayKey() <= key).collect(Collectors.toList());
 				if(playerIn.isSneaking())
-					for(int i = dims.size()-1; i > 0; i--) {
+					for(int i = dims.size()-1; i > -1; i--) {
 						DimensionData data = dims.get(i);
 						if(data.getId() == dim) {
 							if(i == 0)

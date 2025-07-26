@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IAbyssalWastelandBiome;
+import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.knowledge.ResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.api.knowledge.condition.*;
@@ -47,6 +48,8 @@ public class CommonProxy {
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dreadlands_id, 2, NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.omothol_id, 3, NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 0, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE);
+		RitualRegistry.instance().addDimensionToBookTypeAndName(-1, 0, "label.misc.nether");
+		RitualRegistry.instance().addDimensionToBookTypeAndName(1, 0, "advancements.end.root.title");
 	}
 
 	public void postInit() {}
