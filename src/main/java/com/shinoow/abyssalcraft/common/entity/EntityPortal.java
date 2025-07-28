@@ -36,6 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EntityPortal extends Entity {
 
 	private static final DataParameter<Integer> DIMENSION = EntityDataManager.createKey(EntityPortal.class, DataSerializers.VARINT);
+	private static final DataParameter<Boolean> UNCHAINED = EntityDataManager.createKey(EntityPortal.class, DataSerializers.BOOLEAN);
 
 	private DimensionData data;
 	private boolean triedFetch;
@@ -64,10 +65,20 @@ public class EntityPortal extends Entity {
 		return data;
 	}
 
+	public EntityPortal setUnchained() {
+		dataManager.set(UNCHAINED, true);
+		return this;
+	}
+
+	public boolean isUnchained() {
+		return dataManager.get(UNCHAINED);
+	}
+
 	@Override
 	protected void entityInit()
 	{
 		dataManager.register(DIMENSION, 0);
+		dataManager.register(UNCHAINED, false);
 	}
 
 	@Override
@@ -102,7 +113,7 @@ public class EntityPortal extends Entity {
 							entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
 						else {
 							entity.timeUntilPortal = entity instanceof EntityPlayerMP ? ACConfig.portalCooldown :  entity.getPortalCooldown();
-							TeleporterAC.changeDimension(entity, dataManager.get(DIMENSION));
+							TeleporterAC.changeDimension(entity, dataManager.get(DIMENSION), dataManager.get(UNCHAINED));
 						}
 				} else entity.setDead();
 	}
@@ -142,10 +153,12 @@ public class EntityPortal extends Entity {
 	protected void readEntityFromNBT(NBTTagCompound compound) {
 		dataManager.set(DIMENSION, compound.getInteger("Dimension"));
 		data = DimensionDataRegistry.instance().getDataForDim(dataManager.get(DIMENSION));
+		dataManager.set(UNCHAINED, compound.getBoolean("unchained"));
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound compound) {
 		compound.setInteger("Dimension", dataManager.get(DIMENSION));
+		compound.setBoolean("unchained", dataManager.get(UNCHAINED));
 	}
 }

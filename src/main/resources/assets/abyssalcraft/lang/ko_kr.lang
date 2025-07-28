@@ -1179,6 +1179,7 @@ tile.door_drt.name=공포나무 문
 tile.multi_block.name=멀티블록
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
 tile.portal_anchor.name=Portal Anchor
+tile.unchained_portal_anchor.name=Unchained Portal Anchor
 
 #Pre/Suffixes
 decorativestatue.prefix=장식 %s

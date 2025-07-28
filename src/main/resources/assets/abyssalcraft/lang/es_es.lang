@@ -1186,6 +1186,7 @@ tile.door_drt.name=Puerta de Madera de las Dreadlands
 tile.multi_block.name=Multibloque
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
 tile.portal_anchor.name=Portal Anchor
+tile.unchained_portal_anchor.name=Unchained Portal Anchor
 
 #Pre/Suffixes
 decorativestatue.prefix=Decorativo %s

@@ -1177,6 +1177,7 @@ tile.calcifiedstone.name=Кальцинированный камень
 tile.door_dlt.name=Дубовая дверь Тёмных земель
 tile.door_drt.name=Деревянная дверь Ужасных земель
 tile.multi_block.name=Мультиблок
+tile.unchained_portal_anchor.name=Unchained Portal Anchor
 
 #До/После исправления
 decorativestatue.prefix=Декоративный %s

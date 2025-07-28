@@ -1186,6 +1186,7 @@ tile.door_drt.name=Dreadlands Wood Door
 tile.multi_block.name=Multiblock
 tile.sequential_brewing_stand.name=Sequential Brewing 
 tile.portal_anchor.name=Portal Anchor
+tile.unchained_portal_anchor.name=Unchained Portal Anchor
 
 #Pre/Suffixes
 decorativestatue.prefix=裝飾用%s

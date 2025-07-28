@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -42,19 +43,20 @@ public class TeleporterAC extends Teleporter
 	private final Long2ObjectMap<Teleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap(4096);
 	private int prevDimension;
 	private double movementFactor;
+	private boolean unchained;
 
-	public TeleporterAC(WorldServer par1WorldServer, int prevDimension, WorldProvider provider)
+	public TeleporterAC(WorldServer par1WorldServer, int prevDimension, WorldProvider provider, boolean unchained)
 	{
 		super(par1WorldServer);
 		worldServerInstance = par1WorldServer;
 		this.prevDimension = prevDimension;
 		random = new Random(par1WorldServer.getSeed());
 		movementFactor = provider.getMovementFactor() / worldServerInstance.provider.getMovementFactor();
-
+		this.unchained = unchained;
 	}
 
-	public static void changeDimension(Entity entity, int dimension) {
-		Teleporter teleporter = new TeleporterAC(entity.getServer().getWorld(dimension), entity.dimension, entity.world.provider);
+	public static void changeDimension(Entity entity, int dimension, boolean unchained) {
+		Teleporter teleporter = new TeleporterAC(entity.getServer().getWorld(dimension), entity.dimension, entity.world.provider, unchained);
 		if(entity instanceof EntityPlayerMP) {
 			if(!ForgeHooks.onTravelToDimension(entity, dimension)) return;
 			if(!((EntityPlayerMP)entity).capabilities.isCreativeMode) {
@@ -68,6 +70,10 @@ public class TeleporterAC extends Teleporter
 			entity.changeDimension(dimension, teleporter);
 	}
 
+	private IBlockState getAnchor() {
+		return (unchained ? ACBlocks.unchained_portal_anchor : ACBlocks.portal_anchor).getDefaultState();
+	}
+	
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw)
 	{
@@ -115,7 +121,7 @@ public class TeleporterAC extends Teleporter
 					for (BlockPos blockpos = blockpos4.add(l, worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 6; blockpos = blockpos1) {
 						blockpos1 = blockpos.down();
 
-						if (worldServerInstance.getBlockState(blockpos) == ACBlocks.portal_anchor.getDefaultState().withProperty(BlockPortalAnchor.ACTIVE, true)) {
+						if (worldServerInstance.getBlockState(blockpos) == getAnchor().withProperty(BlockPortalAnchor.ACTIVE, true)) {
 							TileEntity te = worldServerInstance.getTileEntity(blockpos);
 
 							if(te instanceof TileEntityPortalAnchor && ((TileEntityPortalAnchor) te).getDestination() == prevDimension) {
@@ -307,9 +313,11 @@ public class TeleporterAC extends Teleporter
 		EntityPortal portal = new EntityPortal(worldServerInstance);
 		portal.setDestination(prevDimension);
 		portal.setLocationAndAngles(i6 + 0.5, k2 + 1, k6 + 0.5, 0, 0);
+		if(unchained)
+			portal.setUnchained();
 		worldServerInstance.spawnEntity(portal);
 
-		world.setBlockState(new BlockPos(i6, k2, k6), ACBlocks.portal_anchor.getDefaultState().withProperty(BlockPortalAnchor.ACTIVE, true));
+		world.setBlockState(new BlockPos(i6, k2, k6), getAnchor().withProperty(BlockPortalAnchor.ACTIVE, true));
 
 		TileEntity te = world.getTileEntity(new BlockPos(i6, k2, k6));
 

@@ -321,7 +321,8 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.tombstone_monolith_stone = new BlockTombstone("monolith_stone");
 		ACBlocks.tombstone_omothol_stone = new BlockTombstone("omothol_stone");
 		ACBlocks.spirit_altar = new BlockSpiritAltar();
-
+		ACBlocks.unchained_portal_anchor = new BlockUnchainedPortalAnchor();
+		
 		SoftDepUtil.declareBlocks();
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));
@@ -636,6 +637,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.tombstone_monolith_stone, "tombstone_monolith_stone");
 		registerBlock(ACBlocks.tombstone_omothol_stone, "tombstone_omothol_stone");
 		registerBlock(ACBlocks.spirit_altar, "spirit_altar");
+		registerBlock(ACBlocks.unchained_portal_anchor, "unchained_portal_anchor");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

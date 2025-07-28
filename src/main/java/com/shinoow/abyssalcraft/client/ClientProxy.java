@@ -265,7 +265,7 @@ public class ClientProxy extends CommonProxy {
 			}
 
 			return 16777215;
-		}, ACBlocks.portal_anchor);
+		}, ACBlocks.portal_anchor, ACBlocks.unchained_portal_anchor);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
 			if(tintIndex == 1) {
 				TileEntity te = BlockUtil.getTileEntitySafely(world, pos);

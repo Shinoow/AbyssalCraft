@@ -1240,6 +1240,7 @@ tile.tombstone_ethaxium.name=魂素墓碑
 tile.tombstone_monolith_stone.name=巨石墓碑
 tile.tombstone_omothol_stone.name=奥穆索石质墓碑
 tile.spirit_altar.name=灵魂祭坛
+tile.unchained_portal_anchor.name=Unchained Portal Anchor
 
 #前缀/后缀
 decorativestatue.prefix=装饰用%s

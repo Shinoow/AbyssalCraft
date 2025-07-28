@@ -1240,6 +1240,7 @@ tile.tombstone_ethaxium.name=Ethaxium Tombstone
 tile.tombstone_monolith_stone.name=Monolith Stone Tombstone
 tile.tombstone_omothol_stone.name=Omothol Stone Tombstone
 tile.spirit_altar.name=Spirit Altar
+tile.unchained_portal_anchor.name=Unchained Portal Anchor
 
 #Pre/Suffixes
 decorativestatue.prefix=Decorative %s

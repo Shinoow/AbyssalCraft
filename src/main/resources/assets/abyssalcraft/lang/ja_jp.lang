@@ -1175,6 +1175,7 @@ tile.calcifiedstone.name=石灰化した石
 tile.door_dlt.name=ダークランドオークのドア
 tile.door_drt.name=ドレッドウッドのドア
 tile.multi_block.name=マルチブロック
+tile.unchained_portal_anchor.name=Unchained Portal Anchor
 
 #修正  Pre/Suffixes
 decorativestatue.prefix=装飾用の%s

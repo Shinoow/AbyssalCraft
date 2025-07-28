@@ -1186,6 +1186,7 @@ tile.door_drt.name=porte en Bois de Platane Effroyable
 tile.multi_block.name=Multi-bloc
 tile.sequential_brewing_stand.name=Sequential Brewing Stand
 tile.portal_anchor.name=Portal Anchor
+tile.unchained_portal_anchor.name=Unchained Portal Anchor
 
 #Pre/Suffixes
 decorativestatue.prefix=%s Décorative

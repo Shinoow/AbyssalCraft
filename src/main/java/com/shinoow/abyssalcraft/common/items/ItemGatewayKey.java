@@ -141,8 +141,9 @@ public class ItemGatewayKey extends ItemACBasic {
 
 		if(getKeyType() == 3) {
 			IBlockState state = worldIn.getBlockState(pos);
-			if(state.getBlock() == ACBlocks.portal_anchor) {
+			if(state.getBlock() == ACBlocks.portal_anchor || state.getBlock() == ACBlocks.unchained_portal_anchor) {
 				isUsing = true;
+				boolean unchained = state.getBlock() == ACBlocks.unchained_portal_anchor;
 				boolean active = state.getValue(BlockPortalAnchor.ACTIVE);
 
 				if(active) {
@@ -156,13 +157,16 @@ public class ItemGatewayKey extends ItemACBasic {
 
 					int dimension = stack.getTagCompound().getInteger("Dimension");
 
-					if(areDimensionsCompatible(worldIn.provider.getDimension(), dimension)) {
+					if(areDimensionsCompatible(worldIn.provider.getDimension(), dimension)
+							|| (unchained && worldIn.provider.getDimension() != dimension)) {
 						worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(BlockPortalAnchor.ACTIVE), 2);
 						TileEntity tile = worldIn.getTileEntity(pos);
 						((TileEntityPortalAnchor) tile).setDestination(dimension);
 						if(!worldIn.isRemote) {
 							EntityPortal portal = new EntityPortal(worldIn);
 							portal.setDestination(dimension);
+							if(unchained)
+								portal.setUnchained();
 							portal.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, 0, 0);
 							worldIn.spawnEntity(portal);
 						}
