@@ -28,6 +28,7 @@ import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.world.biome.IControlledSpawnList;
 
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome.BiomeProperties;
@@ -128,6 +129,7 @@ public class WorldHandler implements ILifeCycleHandler {
 			DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(-1)
 					.setColor(252, 87, 0)
 					.setGatewayKey(0)
+					.setMob(EntityPigZombie.class)
 					.build());
 			DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(1)
 					.setColor(204, 0, 250)
