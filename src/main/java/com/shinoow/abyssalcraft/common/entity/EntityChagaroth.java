@@ -23,6 +23,8 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIChagarothAttackMelee;
+import com.shinoow.abyssalcraft.common.entity.projectile.EntityDreadSlug;
+import com.shinoow.abyssalcraft.common.entity.projectile.EntityDreadedCharge;
 import com.shinoow.abyssalcraft.common.util.BiomeUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;

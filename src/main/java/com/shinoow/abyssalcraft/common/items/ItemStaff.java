@@ -13,47 +13,30 @@ package com.shinoow.abyssalcraft.common.items;
 
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.client.ClientProxy;
+import com.shinoow.abyssalcraft.api.dimension.DimensionData;
+import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+import com.shinoow.abyssalcraft.common.entity.EntitySinglePortal;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
-import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemStaff extends ItemACBasic implements IStaffOfRending{
+public class ItemStaff extends ItemACBasic {
 
 	public ItemStaff() {
 		super("gatekeeperstaff");
 		setCreativeTab(ACTabs.tabTools);
-		setFull3D();
 		setMaxStackSize(1);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
-		if(isInCreativeTab(par2CreativeTab)){
-			par3List.add(new ItemStack(this));
-			ItemStack stack = new ItemStack(this);
-			stack.setTagCompound(new NBTTagCompound());
-			stack.getTagCompound().setInteger("Mode", 1);
-			par3List.add(stack);
-		}
 	}
 
 	@Override
@@ -63,51 +46,63 @@ public class ItemStaff extends ItemACBasic implements IStaffOfRending{
 	}
 
 	@Override
-	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
-		l.add(I18n.format("tooltip.staff"));
-		if(!is.hasTagCompound())
-			is.setTagCompound(new NBTTagCompound());
-		l.add(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD+I18n.format(is.getTagCompound().getInteger("Mode") == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name"));
-		l.add(I18n.format("tooltip.staff.mode.2", TextFormatting.GOLD+ClientProxy.staff_mode.getDisplayName()+TextFormatting.GRAY));
-		if(is.getTagCompound().getInteger("Mode") == 1)
-			ACItems.staff_of_rending.addInformation(is, player, l, B);
-		else if(is.getTagCompound().getInteger("Mode") == 0)
-			ACItems.omothol_forged_gateway_key.addInformation(is, player, l, B);
+	public void addInformation(ItemStack stack, World world, List<String> list, ITooltipFlag is){
+		list.add(I18n.format("tooltip.staff.1"));
+		list.add(I18n.format("tooltip.staff.2"));
+		list.add(I18n.format("tooltip.staff.3"));
+		list.add(I18n.format("tooltip.staff.4"));
+		list.add(I18n.format("tooltip.staff.5"));
+		if(!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+		int dim = stack.getTagCompound().getInteger("Dimension");
+		list.add(I18n.format("tooltip.portalplacer.3", DimensionDataRegistry.instance().getDimensionName(dim)));
+		if(world != null) {
+			int currDim = world.provider.getDimension();
+			if(currDim == dim || !RitualRegistry.instance().canPerformAction(currDim, 4))
+				list.add(TextFormatting.DARK_RED+""+TextFormatting.ITALIC+I18n.format("tooltip.portalplacer.4"));
+		}
+		// More abilities in the future or something?
+		//		l.add(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD+I18n.format(is.getTagCompound().getInteger("Mode") == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name"));
+		//		l.add(I18n.format("tooltip.staff.mode.2", TextFormatting.GOLD+ClientProxy.staff_mode.getDisplayName()+TextFormatting.GRAY));
+
+	}
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	{
+		ItemStack stack = playerIn.getHeldItem(handIn);
+
+		if(!worldIn.isRemote)
+		{
+			if(!stack.hasTagCompound())
+				stack.setTagCompound(new NBTTagCompound());
+
+			if(playerIn.isSneaking()) {
+				int dim = stack.getTagCompound().getInteger("Dimension");
+				int newDim = 0;
+				List<DimensionData> dims = DimensionDataRegistry.instance().getDimensions();
+				for(int i = 0; i < dims.size(); i++) {
+					DimensionData data = dims.get(i);
+					if(data.getId() == dim) {
+						if(i == dims.size() -1)
+							newDim = dims.get(0).getId();
+						else
+							newDim = dims.get(i+1).getId();
+						break;
+					}
+				}
+
+				stack.getTagCompound().setInteger("Dimension", newDim);
+				playerIn.sendStatusMessage(new TextComponentTranslation(DimensionDataRegistry.instance().getDimensionName(newDim)), true);
+			}
+		}
+
+		return new ActionResult<>(EnumActionResult.PASS, stack);
 	}
 
 	@Override
 	public boolean isFull3D(){
 		return true;
-	}
-
-	@Override
-	public void increaseEnergy(ItemStack stack, String type){
-		if(!stack.hasTagCompound())
-			stack.setTagCompound(new NBTTagCompound());
-		stack.getTagCompound().setInteger("energy"+type, getEnergy(stack, type) + getDrainAmount(stack));
-	}
-
-	@Override
-	public void setEnergy(int amount, ItemStack stack, String type){
-		stack.getTagCompound().setInteger("energy"+type, amount);
-	}
-
-	@Override
-	public int getEnergy(ItemStack par1ItemStack, String type)
-	{
-		return par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("energy"+type) ? (int)par1ItemStack.getTagCompound().getInteger("energy"+type) : 0;
-	}
-
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-
-		ItemStack stack = player.getHeldItem(hand);
-
-		if(!stack.hasTagCompound())
-			stack.setTagCompound(new NBTTagCompound());
-
-		if(stack.getTagCompound().getInteger("Mode") != 1) return new ActionResult(EnumActionResult.PASS, stack);
-		else return ACItems.staff_of_rending.onItemRightClick(world, player, hand);
 	}
 
 	@Override
@@ -118,30 +113,28 @@ public class ItemStaff extends ItemACBasic implements IStaffOfRending{
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
 
-		if(stack.getTagCompound().getInteger("Mode") != 0) return EnumActionResult.PASS;
-		else return ACItems.omothol_forged_gateway_key.onItemUse(player, world, pos, hand, side, hitX, hitY, hitZ);
-	}
 
-	@Override
-	public int getDrainAmount(ItemStack stack){
-		return 5 + MathHelper.clamp(EnchantmentHelper.getEnchantmentLevel(AbyssalCraftAPI.sapping, stack), 0, 3);
+		if(!world.isRemote) {
+
+			int dim = stack.getTagCompound().getInteger("Dimension");
+
+			if(dim != world.provider.getDimension()) {
+
+				EntitySinglePortal portal = new EntitySinglePortal(world);
+				portal.setPosition(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
+				portal.setDestination(dim);
+				world.spawnEntity(portal);
+			} else
+				player.sendStatusMessage(new TextComponentTranslation("message.portalplacer.error.2"), true);
+
+		}
+
+		return EnumActionResult.PASS;
 	}
 
 	@Override
 	public boolean getShareTag()
 	{
 		return true;
-	}
-
-	@Override
-	public boolean isEnchantable(ItemStack stack)
-	{
-		return getItemStackLimit(stack) == 1;
-	}
-
-	@Override
-	public int getItemEnchantability(ItemStack stack)
-	{
-		return 25;
 	}
 }

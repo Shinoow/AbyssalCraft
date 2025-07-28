@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
+import com.shinoow.abyssalcraft.common.entity.projectile.EntityInkProjectile;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.entity.Entity;

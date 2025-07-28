@@ -11,7 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.render.entity;
 
-import com.shinoow.abyssalcraft.common.entity.EntityDreadedCharge;
+import com.shinoow.abyssalcraft.common.entity.projectile.EntityDreadedCharge;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

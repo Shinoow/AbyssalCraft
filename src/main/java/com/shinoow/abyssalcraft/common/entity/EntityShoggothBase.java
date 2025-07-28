@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothBuildMonolith;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
 import com.shinoow.abyssalcraft.common.entity.ghoul.EntityGhoulBase;
+import com.shinoow.abyssalcraft.common.entity.projectile.EntityAcidProjectile;
 import com.shinoow.abyssalcraft.common.handlers.AbyssalCraftEventHooks;
 import com.shinoow.abyssalcraft.common.items.armor.ItemEthaxiumArmor;
 import com.shinoow.abyssalcraft.lib.ACConfig;

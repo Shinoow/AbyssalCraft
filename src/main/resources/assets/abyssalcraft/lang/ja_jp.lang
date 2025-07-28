@@ -743,7 +743,7 @@ ac.ritual.saDLupgrade.desc=ドレッドランドの生贄の祭壇は、アビ�
 ac.ritual.saOMTupgrade=オモソルの生贄の祭壇
 ac.ritual.saOMTupgrade.desc=オモソルの生贄の祭壇は、ドレッドランドの生贄の祭壇とエタクシウムレンガとダークエタクシウムレンガ、シャドウジェムシャード、コラリウムジェムで作成できます。
 ac.ritual.jzaharStaff=ゲートキーパーの杖
-ac.ritual.jzaharStaff.desc=ゲートキーパーの杖は、オモソルの切り裂きの杖に各種エッセンス(アビス荒野、ドレッドランド、オモソル)とエルドリッチの鱗、エタクシウムインゴット(必要ならチャガロスのリェヒアンゲートウェイキーも)を使い作成できます。
+ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing any Gateway Key with an Abyssal Wasteland Essence, a Dreadlands Essence, an Omothol Essence, Eldritch Scales and Ethaxium Ingots.
 ac.ritual.respawnJzahar=遡りの儀式
 ac.ritual.respawnJzahar.desc=もし何らかの原因でゲートキーパーのエッセンスを入手できなかった場合は、時を戻してジャ・ザールと再戦することができます。この儀式はジャ・ザールの神殿内にある祭壇でのみ行えます(X=4、Y=54、Z=85付近)。
 ac.ritual.altarOfChagarothBottom=チャガロスの祭壇(下)
@@ -915,7 +915,6 @@ tooltip.portalplacer.2=無限に使用できます。
 tooltip.portalplacer.3=シフト右クリックで帰還用のポータルを作り出します。
 tooltip.portalplacer.4=ですが、あなたはここではこのキーを使うことはできません！
 tooltip.oc=強大な力が秘められている...
-tooltip.staff=アビスの門番ジャ・ザールが持っている杖。
 tooltip.eoa=堕落したアソラの目玉。
 tooltip.devblade.1=この剣は持っているだけで手が腐ってしまうほど
 tooltip.devblade.2=邪悪で忌まわしいもののようだ...
@@ -949,6 +948,11 @@ tooltip.configurator.mode.2=設定のリセット
 tooltip.configurator.filter.0=フィルター:サブタイプ
 tooltip.configurator.filter.1=フィルター:NBT
 tooltip.antidote.contents=%d uses left
+tooltip.staff.1=アビスの門番ジャ・ザールが持っている杖。
+tooltip.staff.2=You can create temporarily portals by
+tooltip.staff.3=Right-clicking on the ground
+tooltip.staff.4=Shift Right-click to cycle between
+tooltip.staff.5=available dimensions
 
 #クリエイティブインベントリ  Creative Tabs
 itemGroup.acblocks=Abyssalcraft: ブロック

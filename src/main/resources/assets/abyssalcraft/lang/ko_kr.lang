@@ -747,7 +747,7 @@ ac.ritual.saOMTupgrade.desc=오모톨 에너지 희생 제단은는 공포의 �
 ac.ritual.jzaharStaff=문지기의 지팡이
 ac.ritual.jzaharStaff.desc=문지기의 지팡이는 분열의 지팡이에게 심연의 황무지 정수, 공포의 땅 정수, 오모톨 정수, 엘드리치 비늘, 에탁시움 주괴를 주입하여 만들어집니다.
 ac.ritual.respawnJzahar=시간 역행 의식
-ac.ritual.respawnJzahar.desc=문지기의 정수를 얻는 것에 실패했다면, 시간을 되돌리고 자’하르와 다시 싸울 수 있습니다. 자’하르 신전 내부의 제단에서만 수행될 수 있습니다(X=4, Y=54, Z=85)
+ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing any Gateway Key with an Abyssal Wasteland Essence, a Dreadlands Essence, an Omothol Essence, Eldritch Scales and Ethaxium Ingots.
 ac.ritual.altarOfChagarothBottom=차가’로스의 제단(하단)
 ac.ritual.altarOfChagarothBottom.desc=차가’로스의 제단(하단)은 공포석, 죽음광물 주괴, 아소라의 공포화 게이트웨이 열쇠, 뼈 그리고 공포의 천으로 만들어집니다.
 ac.ritual.altarOfChagarothTop=차가’로스의 제단(상단)
@@ -917,7 +917,6 @@ tooltip.portalplacer.2=포탈을 생성합니다. (무한 사용)
 tooltip.portalplacer.3=웅크리기 + 오른쪽 클릭하여 대체 포털 만들기.
 tooltip.portalplacer.4=이 차원에서는 이 아이템을 사용할 수 없습니다.
 tooltip.oc=이 아이템은 믿을 수 없는 힘을 가지고 있습니다
-tooltip.staff=심연의 문지기, 자'하르의 지팡이
 tooltip.eoa=타락한 자, 아소라의 눈
 tooltip.devblade.1=이 칼은 매우 불경스럽기 떄문에
 tooltip.devblade.2=잡고있는 동안 당신의 손이 부패하기 시작합니다.
@@ -951,6 +950,11 @@ tooltip.configurator.mode.2=설정 지우기
 tooltip.configurator.filter.0=하위 유형별 필터
 tooltip.configurator.filter.1=NBT 필터
 tooltip.antidote.contents=%d uses left
+tooltip.staff.1=심연의 문지기, 자'하르의 지팡이
+tooltip.staff.2=You can create temporarily portals by
+tooltip.staff.3=Right-clicking on the ground
+tooltip.staff.4=Shift Right-click to cycle between
+tooltip.staff.5=available dimensions
 
 #Creative Tabs
 itemGroup.acblocks=어비셜크래프트 블록

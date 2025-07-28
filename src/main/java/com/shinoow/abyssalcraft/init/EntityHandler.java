@@ -24,6 +24,7 @@ import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.entity.ghoul.*;
+import com.shinoow.abyssalcraft.common.entity.projectile.*;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
@@ -182,6 +183,8 @@ public class EntityHandler implements ILifeCycleHandler {
 		registerEntityWithEgg(EntityDreadedGhoul.class, "dreadedghoul", 80, 3, true, 0xE60000, 0xCC0000);
 
 		registerEntityWithEgg(EntityShadowGhoul.class, "shadowghoul", 80, 3, true, 0, 0xFFFFFF);
+
+		EntityRegistry.registerModEntity(new ResourceLocation("abyssalcraft", "singleportal"), EntitySinglePortal.class, "portal", startId++, instance, 64, 10, true);
 
 		EntityUtil.addShoggothFood(EntityAnimal.class);
 		EntityUtil.addShoggothFood(EntityAmbientCreature.class);

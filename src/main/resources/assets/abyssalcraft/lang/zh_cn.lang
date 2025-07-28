@@ -776,7 +776,7 @@ ac.ritual.saDLupgrade.desc=恐惧之地献祭祭坛可通过将恐惧石砖、�
 ac.ritual.saOMTupgrade=奥穆索献祭祭坛
 ac.ritual.saOMTupgrade.desc=奥穆索献祭祭坛可通过将魂素砖块、黑暗魂素砖块、阴影宝石碎片和珊瑚宝石注入到一个恐惧之地献祭祭坛里制成。
 ac.ritual.jzaharStaff=守门者之杖
-ac.ritual.jzaharStaff.desc=守门者之杖可通过将深渊荒原精华、恐惧之地精华、奥穆索精华、邪术鳞片和魂素锭注入到撕裂法杖中制成。
+ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing any Gateway Key with an Abyssal Wasteland Essence, a Dreadlands Essence, an Omothol Essence, Eldritch Scales and Ethaxium Ingots.
 ac.ritual.respawnJzahar=时光倒流仪式
 ac.ritual.respawnJzahar.desc=如果你没能制成守门者的精华，你可以逆转时间再战扎哈尔。只能在扎哈尔神殿内的祭坛上进行（X=4，Y=54，Z=85）。
 ac.ritual.altarOfChagarothBottom=查伽洛斯祭坛（底部）
@@ -964,7 +964,6 @@ tooltip.portalplacer.2=以在可用维度间循环切换
 tooltip.portalplacer.3=维度： %s
 tooltip.portalplacer.4=你不能在这里创建那个维度的传送门！
 tooltip.oc=这个物品蕴藏不可思议的力量。
-tooltip.staff=深渊守门者扎哈尔的权杖。
 tooltip.eoa=堕落者阿索拉之眼。
 tooltip.corbow.1=弓箭在命中时会
 tooltip.corbow.2=附加珊瑚瘟疫
@@ -994,6 +993,11 @@ tooltip.configurator.filter.1=根据NBT过滤
 tooltip.face_book.1=如果你侧耳倾听，你会听到
 tooltip.face_book.2=失落的灵魂在呼喊它们的姓名
 tooltip.antidote.contents=剩余使用次数：%d
+tooltip.staff.1=深渊守门者扎哈尔的权杖。
+tooltip.staff.2=You can create temporarily portals by
+tooltip.staff.3=Right-clicking on the ground
+tooltip.staff.4=Shift Right-click to cycle between
+tooltip.staff.5=available dimensions
 
 #创造模式物品栏
 itemGroup.acblocks=深渊国度丨方块

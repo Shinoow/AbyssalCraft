@@ -760,7 +760,7 @@ ac.ritual.saDLupgrade.desc=A Dreadlands Sacrificial Altar is created by infusing
 ac.ritual.saOMTupgrade=Omothol Sacrificial Altar
 ac.ritual.saOMTupgrade.desc=A Omothol Sacrificial is created by infusing a Dreadlands Sacrificial Altar with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.jzaharStaff=Staff of The Gatekeeper
-ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing a Staff of Rending with a Abyssal Wasteland Essence, a Dreadlands Essence, a Omothol Essence, Eldritch Scales and Ethaxium Ingots.
+ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing any Gateway Key with an Abyssal Wasteland Essence, a Dreadlands Essence, an Omothol Essence, Eldritch Scales and Ethaxium Ingots.
 ac.ritual.respawnJzahar=Ritual of reversed time
 ac.ritual.respawnJzahar.desc=If you in some way failed to obtain a Essence of The Gatekeeper, you can revert time and fight J'zahar again. Can only be performed at the Ritual Altar inside the Temple of J'zahar (X=4, Y=54, Z=85).
 ac.ritual.altarOfChagarothBottom=Altar of Cha'garoth (bottom)
@@ -934,7 +934,6 @@ tooltip.portalplacer.2=back and forth between available dimensions
 tooltip.portalplacer.3=Dimension: %s
 tooltip.portalplacer.4=You can't create a portal for that dimension here!
 tooltip.oc=Cet artéfact regorge d'un pouvoir obscur.
-tooltip.staff=Le bâton de J'zahar, Gardien de La porte des Abysses.
 tooltip.eoa=L'oeil d'Asorah, Dragon Déchu.
 tooltip.corbow.1=Les flèches propagent
 tooltip.corbow.2=la Pandémie Coralium.
@@ -964,6 +963,11 @@ tooltip.configurator.filter.1=Filtrer par NBT
 tooltip.face_book.1=If you listen closely, you can hear the
 tooltip.face_book.2=voices of lost souls calling out their names
 tooltip.antidote.contents=%d uses left
+tooltip.staff.1=Le bâton de J'zahar, Gardien de La porte des Abysses.
+tooltip.staff.2=You can create temporarily portals by
+tooltip.staff.3=Right-clicking on the ground
+tooltip.staff.4=Shift Right-click to cycle between
+tooltip.staff.5=available dimensions
 
 #Creative Tabs
 itemGroup.acblocks=AbyssalCraft - Blocs

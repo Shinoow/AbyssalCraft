@@ -760,7 +760,7 @@ ac.ritual.saDLupgrade.desc=恐懼之地獻祭祭壇能通過將恐懼石磚、�
 ac.ritual.saOMTupgrade=奧穆索獻祭祭壇
 ac.ritual.saOMTupgrade.desc=奧穆索獻祭祭壇能通過將伊桑斯磚塊、深色伊桑斯磚塊、陰影寶石碎片和珊瑚寶石注入到一個恐懼之地獻祭祭壇裏獲得。
 ac.ritual.jzaharStaff=守門者之杖
-ac.ritual.jzaharStaff.desc=守門者之杖能通過將深淵荒蕪之地精髓、恐懼之地精髓、奧穆索精髓、邪術鱗片和伊桑斯錠注入到撕裂法杖中獲得。
+ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing any Gateway Key with an Abyssal Wasteland Essence, a Dreadlands Essence, an Omothol Essence, Eldritch Scales and Ethaxium Ingots.
 ac.ritual.respawnJzahar=時光倒流儀式
 ac.ritual.respawnJzahar.desc=如果你沒能獲得守門者的精華，你可以逆轉時間再戰紮哈爾。只能在紮哈爾神廟內的祭壇上進行（X=4，Y=54，Z=85）。
 ac.ritual.altarOfChagarothBottom=查加羅特祭壇（底部）
@@ -934,7 +934,6 @@ tooltip.portalplacer.2=back and forth between available dimensions
 tooltip.portalplacer.3=Dimension: %s
 tooltip.portalplacer.4=You can't create a portal for that dimension here!
 tooltip.oc=這個物品蘊藏不可思議的力量。
-tooltip.staff=紮哈爾的權杖，深淵之門的守衛者。
 tooltip.eoa=墮落者阿索拉之眼。
 tooltip.corbow.1=弓箭在攻擊時會
 tooltip.corbow.2=導致珊瑚侵染
@@ -964,6 +963,11 @@ tooltip.configurator.filter.1=Filter by NBT
 tooltip.face_book.1=If you listen closely, you can hear the
 tooltip.face_book.2=voices of lost souls calling out their names
 tooltip.antidote.contents=%d uses left
+tooltip.staff.1=紮哈爾的權杖，深淵之門的守衛者。
+tooltip.staff.2=You can create temporarily portals by
+tooltip.staff.3=Right-clicking on the ground
+tooltip.staff.4=Shift Right-click to cycle between
+tooltip.staff.5=available dimensions
 
 #創造模式物品欄
 itemGroup.acblocks=深淵國度方塊
