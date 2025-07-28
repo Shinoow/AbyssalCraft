@@ -49,9 +49,6 @@ public class TeleporterAC extends Teleporter
 		worldServerInstance = par1WorldServer;
 		this.prevDimension = prevDimension;
 		random = new Random(par1WorldServer.getSeed());
-		// movementFactor might place you 100 - 200 blocks away from the initial portal
-		// when returning from the Nether, but without anything for it,
-		// that can be 900 blocks away, so better than nothing
 		movementFactor = provider.getMovementFactor() / worldServerInstance.provider.getMovementFactor();
 
 	}
@@ -100,10 +97,21 @@ public class TeleporterAC extends Teleporter
 		else {
 			BlockPos blockpos4 = new BlockPos(entityIn.posX * movementFactor, entityIn.posY, entityIn.posZ * movementFactor);
 
-			for (int l = -128; l <= 128; ++l) {
+			int min = -128;
+			int max = 128;
+			// Boost up searching range to take into account
+			// larger coordinate changes when converting
+			// back from a larger movement factor
+			// Multiplying with 2 works for the Nether
+			if(movementFactor > 1) {
+				min *= 2;
+				max *= 2;
+			}
+
+			for (int l = min; l <= max; ++l) {
 				BlockPos blockpos1;
 
-				for (int i1 = -128; i1 <= 128; ++i1)
+				for (int i1 = min; i1 <= max; ++i1)
 					for (BlockPos blockpos = blockpos4.add(l, worldServerInstance.getActualHeight() - 1 - blockpos4.getY(), i1); blockpos.getY() >= 6; blockpos = blockpos1) {
 						blockpos1 = blockpos.down();
 
