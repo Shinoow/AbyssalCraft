@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-public class MiscCondition implements IUnlockCondition {
+public class MiscCondition extends BaseUnlockCondition {
 
-	String name, hint;
+	String name;
 
 	public MiscCondition(String name) {
 		this.name = name;
@@ -36,17 +36,4 @@ public class MiscCondition implements IUnlockCondition {
 
 		return 10;
 	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
-	}
-
 }

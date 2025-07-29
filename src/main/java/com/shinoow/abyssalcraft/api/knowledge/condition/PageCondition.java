@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-public class PageCondition implements IUnlockCondition {
+public class PageCondition extends BaseUnlockCondition {
 
-	String name, hint;
+	String name;
 
 	public PageCondition(String name) {
 		this.name = name;
@@ -36,17 +36,4 @@ public class PageCondition implements IUnlockCondition {
 
 		return 8;
 	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
-	}
-
 }

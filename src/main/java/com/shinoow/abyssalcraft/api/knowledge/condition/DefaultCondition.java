@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.knowledge.condition;
 
+import com.shinoow.abyssalcraft.api.knowledge.KnowledgeType;
+
 public class DefaultCondition implements IUnlockCondition {
 
 	@Override
@@ -39,6 +41,30 @@ public class DefaultCondition implements IUnlockCondition {
 
 	@Override
 	public IUnlockCondition setHint(String str) {
+
+		return this;
+	}
+
+	@Override
+	public int getPointsCost() {
+
+		return 0;
+	}
+
+	@Override
+	public IUnlockCondition setPointsCost(int i) {
+
+		return this;
+	}
+
+	@Override
+	public KnowledgeType getKnowledgeType() {
+
+		return KnowledgeType.BASE;
+	}
+
+	@Override
+	public IUnlockCondition setKnowledgeType(KnowledgeType type) {
 
 		return this;
 	}

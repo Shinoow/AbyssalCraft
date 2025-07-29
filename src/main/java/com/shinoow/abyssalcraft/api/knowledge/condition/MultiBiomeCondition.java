@@ -13,10 +13,9 @@ package com.shinoow.abyssalcraft.api.knowledge.condition;
 
 import net.minecraft.world.biome.Biome;
 
-public class MultiBiomeCondition implements IUnlockCondition {
+public class MultiBiomeCondition extends BaseUnlockCondition {
 
 	String[] names;
-	String hint;
 
 	public MultiBiomeCondition(Biome...biomes){
 		names = new String[biomes.length];
@@ -40,17 +39,5 @@ public class MultiBiomeCondition implements IUnlockCondition {
 	@Override
 	public int getType() {
 		return 3;
-	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
 	}
 }

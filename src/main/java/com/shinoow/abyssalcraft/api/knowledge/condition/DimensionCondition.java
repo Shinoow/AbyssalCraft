@@ -11,10 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-public class DimensionCondition implements IUnlockCondition {
+public class DimensionCondition extends BaseUnlockCondition {
 
 	int id;
-	String hint;
 
 	public DimensionCondition(int id){
 		this.id = id;
@@ -37,17 +36,4 @@ public class DimensionCondition implements IUnlockCondition {
 
 		return 2;
 	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
-	}
-
 }

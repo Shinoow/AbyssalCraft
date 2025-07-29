@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.api.knowledge.condition.caps;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.KnowledgeType;
 import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,10 +44,18 @@ public interface INecroDataCapability {
 
 	void unlockAllKnowledge(boolean unlock);
 
+	/**
+	 * Internal use only
+	 */
 	void setKnowledgeLevel(int level);
 
-	void setKnowledgePoints(int points);
+	/**
+	 * Internal use only
+	 */
+	void setKnowledgePoints(KnowledgeType type, int points);
 
+	void increaseKnowledgePoints(KnowledgeType type, int points);
+	
 	void setLastSyncTime(long time);
 
 	void incrementSyncTimer();
@@ -73,7 +82,7 @@ public interface INecroDataCapability {
 
 	int getKnowledgeLevel();
 
-	int getKnowledgePoints();
+	int getKnowledgePoints(KnowledgeType type);
 
 	long getLastSyncTime();
 

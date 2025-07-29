@@ -14,9 +14,9 @@ package com.shinoow.abyssalcraft.api.knowledge.condition;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 
-public class EntityCondition implements IUnlockCondition {
+public class EntityCondition extends BaseUnlockCondition {
 
-	String name, hint;
+	String name;
 
 	public EntityCondition(String str){
 		name = str;
@@ -42,17 +42,5 @@ public class EntityCondition implements IUnlockCondition {
 	public int getType() {
 
 		return 1;
-	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
 	}
 }

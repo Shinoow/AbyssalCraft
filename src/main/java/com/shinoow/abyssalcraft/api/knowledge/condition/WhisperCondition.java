@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-public class WhisperCondition implements IUnlockCondition {
+public class WhisperCondition extends BaseUnlockCondition {
 
-	String name, hint;
+	String name;
 
 	public WhisperCondition(String name) {
 		this.name = name;
@@ -36,17 +36,4 @@ public class WhisperCondition implements IUnlockCondition {
 
 		return 9;
 	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
-	}
-
 }

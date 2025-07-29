@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
+import com.shinoow.abyssalcraft.api.knowledge.KnowledgeType;
 import com.shinoow.abyssalcraft.api.knowledge.condition.ConditionProcessorRegistry;
 import com.shinoow.abyssalcraft.api.knowledge.condition.IUnlockCondition;
 
@@ -33,7 +34,9 @@ public class NecroDataCapability implements INecroDataCapability {
 	List<ResourceLocation> completed_researches = new ArrayList<>();
 
 	boolean hasAllKnowledge;
-	int knowledgeLevel, knowledgePoints;
+	int knowledgeLevel;
+	int baseKnowledgePoints, abyssalKnowledgePoints, dreadKnowledgePoints,
+	omotholKnowledgePoints, shadowKnowledgePoints;
 
 	long lastSyncTime = 0;
 	int syncTimer = 0;
@@ -108,8 +111,31 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
-	public void setKnowledgePoints(int points) {
-		knowledgePoints = points;
+	public void setKnowledgePoints(KnowledgeType type, int points) {
+		switch(type) {
+		case ABYSSAL:
+			abyssalKnowledgePoints = points;
+			break;
+		case BASE:
+			baseKnowledgePoints = points;
+			break;
+		case DREAD:
+			dreadKnowledgePoints = points;
+			break;
+		case OMOTHOL:
+			omotholKnowledgePoints = points;
+			break;
+		case SHADOW:
+			shadowKnowledgePoints = points;
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public void increaseKnowledgePoints(KnowledgeType type, int points) {
+		setKnowledgePoints(type, getKnowledgePoints(type) + points);
 	}
 
 	@Override
@@ -177,9 +203,23 @@ public class NecroDataCapability implements INecroDataCapability {
 	}
 
 	@Override
-	public int getKnowledgePoints() {
+	public int getKnowledgePoints(KnowledgeType type) {
 
-		return knowledgePoints;
+		switch(type) {
+		case ABYSSAL:
+			return abyssalKnowledgePoints;
+		case BASE:
+			return baseKnowledgePoints;
+		case DREAD:
+			return dreadKnowledgePoints;
+		case OMOTHOL:
+			return omotholKnowledgePoints;
+		case SHADOW:
+			return shadowKnowledgePoints;
+		default:
+			return 0;
+		
+		}
 	}
 
 	@Override
@@ -218,6 +258,9 @@ public class NecroDataCapability implements INecroDataCapability {
 		lastSyncTime = cap.getLastSyncTime();
 		completed_researches = cap.getCompletedResearches();
 		knowledgeLevel = cap.getKnowledgeLevel();
+		for(KnowledgeType type : KnowledgeType.values()) {
+			setKnowledgePoints(type, cap.getKnowledgePoints(type));
+		}
 	}
 
 	@Override

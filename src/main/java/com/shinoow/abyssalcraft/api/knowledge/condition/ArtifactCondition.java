@@ -11,9 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-public class ArtifactCondition implements IUnlockCondition {
+public class ArtifactCondition extends BaseUnlockCondition {
 
-	String name, hint;
+	String name;
 
 	public ArtifactCondition(String name) {
 		this.name = name;
@@ -36,17 +36,4 @@ public class ArtifactCondition implements IUnlockCondition {
 
 		return 7;
 	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
-	}
-
 }

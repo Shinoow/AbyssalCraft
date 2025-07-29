@@ -13,9 +13,9 @@ package com.shinoow.abyssalcraft.api.knowledge.condition;
 
 import net.minecraft.world.biome.Biome;
 
-public class BiomeCondition implements IUnlockCondition {
+public class BiomeCondition extends BaseUnlockCondition {
 
-	String name, hint;
+	String name;
 
 	public BiomeCondition(Biome biome){
 		name = biome.getRegistryName().toString();
@@ -38,17 +38,4 @@ public class BiomeCondition implements IUnlockCondition {
 
 		return 0;
 	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
-	}
-
 }

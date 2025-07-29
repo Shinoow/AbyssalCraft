@@ -15,10 +15,9 @@ import com.google.common.base.Predicate;
 
 import net.minecraft.entity.Entity;
 
-public class EntityPredicateCondition implements IUnlockCondition {
+public class EntityPredicateCondition extends BaseUnlockCondition {
 
 	Predicate<Class<? extends Entity>> predicate;
-	String hint;
 
 	public EntityPredicateCondition(Predicate<Class<? extends Entity>> predicate){
 		this.predicate = predicate;
@@ -39,17 +38,4 @@ public class EntityPredicateCondition implements IUnlockCondition {
 	public int getType() {
 		return 6;
 	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
-	}
-
 }

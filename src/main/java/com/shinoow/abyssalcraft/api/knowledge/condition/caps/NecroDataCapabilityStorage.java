@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.knowledge.condition.caps;
 
+import com.shinoow.abyssalcraft.api.knowledge.KnowledgeType;
+
 import net.minecraft.nbt.*;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -71,7 +73,10 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 		if(instance.hasUnlockedAllKnowledge())
 			properties.setBoolean("HasAllKnowledge", true);
 		properties.setInteger("knowledgeLevel", instance.getKnowledgeLevel());
-		properties.setInteger("knowledgePoints", instance.getKnowledgePoints());
+		l = new NBTTagList();
+		for(KnowledgeType type : KnowledgeType.values())
+			l.appendTag(new NBTTagString(type.name() + "|" + String.valueOf(instance.getKnowledgePoints(type))));
+		properties.setTag("knowledgePoints", l);
 
 		return properties;
 	}
@@ -110,7 +115,15 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 			instance.completeResearch(new ResourceLocation(l.getStringTagAt(i)));
 		instance.unlockAllKnowledge(properties.getBoolean("HasAllKnowledge"));
 		instance.setKnowledgeLevel(properties.getInteger("knowledgeLevel"));
-		instance.setKnowledgePoints(properties.getInteger("knowledgePoints"));
+		if(properties.getTagId("knowledgePoints") == 9) { // Failsafe for field initially being an int
+			l = properties.getTagList("knowledgePoints", 8);
+			for(int i = 0; i < l.tagCount(); i++) {
+				String str = l.getStringTagAt(i);
+				String[] values = str.split("|");
+				KnowledgeType type = KnowledgeType.valueOf(values[0]);
+				instance.setKnowledgePoints(type, Integer.parseInt(values[1]));
+			}
+		}
 	}
 
 }

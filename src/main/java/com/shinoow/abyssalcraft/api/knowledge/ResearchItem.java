@@ -21,16 +21,22 @@ public class ResearchItem implements IResearchItem {
 	private ResourceLocation id;
 	private String name;
 	private int level, cost;
+	private KnowledgeType knowledgeType;
 
 	public ResearchItem(String name, int level, ResourceLocation id) {
 		this(name, level, id, 0);
 	}
 
 	public ResearchItem(String name, int level, ResourceLocation id, int cost) {
+		this(name, level, id, cost, KnowledgeType.BASE);
+	}
+
+	public ResearchItem(String name, int level, ResourceLocation id, int cost, KnowledgeType knowledgeType) {
 		this.name = name;
 		this.id = id;
 		this.level = level;
 		this.cost = cost;
+		this.knowledgeType = knowledgeType;
 	}
 
 	@Override
@@ -64,6 +70,12 @@ public class ResearchItem implements IResearchItem {
 	public int getPointsCost() {
 
 		return cost;
+	}
+
+	@Override
+	public KnowledgeType getType() {
+
+		return knowledgeType;
 	}
 
 }

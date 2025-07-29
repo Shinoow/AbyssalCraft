@@ -15,10 +15,9 @@ import com.google.common.base.Predicate;
 
 import net.minecraft.world.biome.Biome;
 
-public class BiomePredicateCondition implements IUnlockCondition {
+public class BiomePredicateCondition extends BaseUnlockCondition {
 
 	Predicate<Biome> predicate;
-	String hint;
 
 	public BiomePredicateCondition(Predicate<Biome> predicate){
 		this.predicate = predicate;
@@ -39,17 +38,4 @@ public class BiomePredicateCondition implements IUnlockCondition {
 	public int getType() {
 		return 5;
 	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
-	}
-
 }

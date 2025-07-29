@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.knowledge.condition;
 
+import com.shinoow.abyssalcraft.api.knowledge.KnowledgeType;
+
 /**
  * Base interface for locked Necronomicon information.<br>
  * Use any of the supplied implementations of this.
@@ -39,14 +41,34 @@ public interface IUnlockCondition {
 	 * when adding your own Unlock Conditions
 	 */
 	int getType();
-
+	
 	/**
-	 * Assigns the hint message for the Unlock Condition
+	 * Assigns the hint message for this Unlock Condition
 	 */
 	IUnlockCondition setHint(String str);
 
 	/**
-	 * Returns a hint message for the Unlock Condition
+	 * Returns a hint message for this Unlock Condition
 	 */
 	String getHint();
+
+	/**
+	 * Returns amount of Knowledge Points it takes to skip this Unlock Condition
+	 */
+	int getPointsCost();
+	
+	/**
+	 * Assigns the Knowledge Point cost for this Unlock Condition
+	 */
+	IUnlockCondition setPointsCost(int i);
+	
+	/**
+	 * Returns Knowledge Type for this Unlock Condition
+	 */
+	KnowledgeType getKnowledgeType();
+	
+	/**
+	 * Assigns the Knowledge Type for this Unlock Condition
+	 */
+	IUnlockCondition setKnowledgeType(KnowledgeType type);
 }

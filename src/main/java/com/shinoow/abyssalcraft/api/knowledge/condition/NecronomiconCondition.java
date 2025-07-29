@@ -11,10 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.knowledge.condition;
 
-public class NecronomiconCondition implements IUnlockCondition {
+public class NecronomiconCondition extends BaseUnlockCondition {
 
 	int bookType;
-	String hint;
 
 	public NecronomiconCondition(int bookType){
 		this.bookType = bookType;
@@ -37,17 +36,4 @@ public class NecronomiconCondition implements IUnlockCondition {
 
 		return -1;
 	}
-
-	@Override
-	public String getHint() {
-
-		return hint;
-	}
-
-	@Override
-	public IUnlockCondition setHint(String str) {
-		hint = str;
-		return this;
-	}
-
 }
