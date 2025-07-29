@@ -108,6 +108,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.ABYSSAL_WASTELAND_CRAFTING = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
 		Chapters.DREADLANDS_CRAFTING = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, ResearchItems.getBookResearch(2));
 		Chapters.OMOTHOL_CRAFTING = new Chapter("omothol", NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, ResearchItems.getBookResearch(3));
+		Chapters.ABYSSALNOMICON_CRAFTING = new Chapter("abyssalnomicon", NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, ResearchItems.getBookResearch(4));
 
 		Chapters.OVERWORLD_ARMORTOOLS = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
 		Chapters.ABYSSAL_WASTELAND_ARMORTOOLS = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
@@ -142,7 +143,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		internalNecroData.add(new NecroData("biomes", NecronomiconText.LABEL_INFORMATION_BIOMES, 0, NecronomiconText.WIP, Chapters.OVERWORLD_BIOMES, Chapters.ABYSSAL_WASTELAND_BIOMES, Chapters.DREADLANDS_BIOMES, Chapters.OMOTHOL_BIOMES, Chapters.DARK_REALM_BIOMES));
 		internalNecroData.add(new NecroData("entities", NecronomiconText.LABEL_INFORMATION_ENTITIES, 0, Chapters.OVERWORLD_MOBS, Chapters.ABYSSAL_WASTELAND_MOBS, Chapters.DREADLANDS_MOBS, Chapters.OMOTHOL_MOBS, Chapters.DARK_REALM_MOBS));
 		internalNecroData.add(new NecroData("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0, Chapters.OVERWORLD_MATERIALS, Chapters.ABYSSAL_WASTELAMD_MATERIALS, Chapters.DREADLANDS_MATERIALS, Chapters.OMOTHOL_MATERIALS, Chapters.DARK_REALM_MATERIALS));
-		internalNecroData.add(new NecroData("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, Chapters.OVERWORLD_CRAFTING, Chapters.ABYSSAL_WASTELAND_CRAFTING, Chapters.DREADLANDS_CRAFTING, Chapters.OMOTHOL_CRAFTING));
+		internalNecroData.add(new NecroData("specialmaterials", NecronomiconText.LABEL_INFORMATION_SPECIAL_MATERIALS, 0, Chapters.OVERWORLD_CRAFTING, Chapters.ABYSSAL_WASTELAND_CRAFTING, Chapters.DREADLANDS_CRAFTING, Chapters.OMOTHOL_CRAFTING, Chapters.ABYSSALNOMICON_CRAFTING));
 		internalNecroData.add(new NecroData("armortools", NecronomiconText.LABEL_INFORMATION_ARMOR_TOOLS, 0, Chapters.OVERWORLD_ARMORTOOLS, Chapters.ABYSSAL_WASTELAND_ARMORTOOLS, Chapters.DREADLANDS_ARMORTOOLS));
 		internalNecroData.add(new NecroData("structures", NecronomiconText.LABEL_STRUCTURES, 0, NecronomiconText.WIP, Chapters.OVERWORLD_STRUCTURES, Chapters.ABYSSAL_WASTELAND_STRUCTURES, Chapters.DREADLANDS_STRUCTURES, Chapters.OMOTHOL_STRUCTURES, Chapters.DARK_REALM_STRUCTURES));
 
@@ -481,6 +482,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 		Pages.INFORMATION_DARK_REALM = new Page(1, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3, NecronomiconText.INFORMATION_DARK_REALM);
 
+		Pages.CRAFTING_PORTAL_ANCHOR_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, new CraftingStack(ACBlocks.portal_anchor), NecronomiconText.CRAFTING_PORTAL_ANCHOR_1);
+		Pages.CRAFTING_PORTAL_ANCHOR_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.CRAFTING_PORTAL_ANCHOR_2);
+		
 		Pages.RITUAL_TUT_1 = new Page(1, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconResources.RITUAL_TUT_1, NecronomiconText.RITUAL_TUT_1);
 		Pages.RITUAL_TUT_2 = new Page(2, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconText.RITUAL_TUT_2);
 		Pages.RITUAL_TUT_3 = new Page(3, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconResources.RITUAL_TUT_2, NecronomiconText.RITUAL_TUT_3);
@@ -630,6 +634,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.DARK_REALM.addPage(Pages.INFORMATION_DARK_REALM); //TODO dimensions
 		Chapters.DARK_REALM_BIOMES.addPage(Pages.WIP); //TODO biomes
 		Chapters.DARK_REALM_STRUCTURES.addPage(Pages.WIP); //TODO structures
+		Chapters.ABYSSALNOMICON_CRAFTING.addPages(Pages.CRAFTING_PORTAL_ANCHOR_1, Pages.CRAFTING_PORTAL_ANCHOR_2);
 		Chapters.RITUAL_GETTING_STARTED.addPages(Pages.RITUAL_TUT_1, Pages.RITUAL_TUT_2, Pages.RITUAL_TUT_3, Pages.RITUAL_TUT_4, Pages.RITUAL_TUT_5, Pages.RITUAL_TUT_6, Pages.RITUAL_TUT_7);
 		Chapters.RITUAL_MATERIALS.addPages(Pages.MATERIAL_RITUAL_ALTAR, Pages.MATERIAL_RITUAL_PEDESTAL, Pages.MATERIAL_MONOLITH_STONE_1);
 		Chapters.PE_MATERIALS.addPage(Pages.MATERIAL_MONOLITH_STONE_2);

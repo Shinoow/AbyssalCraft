@@ -72,6 +72,7 @@ public class Chapters {
 	public static Chapter ABYSSAL_WASTELAND_CRAFTING;
 	public static Chapter DREADLANDS_CRAFTING;
 	public static Chapter OMOTHOL_CRAFTING;
+	public static Chapter ABYSSALNOMICON_CRAFTING;
 
 	public static Chapter OVERWORLD_ARMORTOOLS;
 	public static Chapter ABYSSAL_WASTELAND_ARMORTOOLS;

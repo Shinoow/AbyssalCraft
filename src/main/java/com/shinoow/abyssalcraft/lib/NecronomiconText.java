@@ -169,6 +169,8 @@ public class NecronomiconText {
 	public static String CRAFTING_DARK_ETHAXIUM_PILLAR = "necronomicon.text.crafting.darkethaxiumpillar";
 	public static String CRAFTING_SEQUENTIAL_BREWING_STAND_1 = "necronomicon.text.crafting.sequential_brewing_stand.1";
 	public static String CRAFTING_SEQUENTIAL_BREWING_STAND_2 = "necronomicon.text.crafting.sequential_brewing_stand.2";
+	public static String CRAFTING_PORTAL_ANCHOR_1 = "necronomicon.text.crafting.portalanchor.1";
+	public static String CRAFTING_PORTAL_ANCHOR_2 = "necronomicon.text.crafting.portalanchor.2";
 
 	//Misc crafting
 	public static String CRAFTING_ODB_CORE = "necronomicon.text.crafting.odbcore";

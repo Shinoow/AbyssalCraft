@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#@#"
+  ],
+  "key": {
+    "#": {
+      "item": "abyssalcraft:monolithstone"
+    },
+    "@": {
+      "item": "abyssalcraft:omotholstone"
+    }
+  },
+  "result": {
+    "item": "abyssalcraft:portal_anchor"
+  }
+}

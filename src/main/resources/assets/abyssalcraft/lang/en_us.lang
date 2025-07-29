@@ -466,7 +466,8 @@ necronomicon.text.crafting.ethaxiumpillar=Ethaxium Pillars are crafted with Etha
 necronomicon.text.crafting.darkethaxiumpillar=Dark Ethaxium Pillars are crafted with Dark Ethaxium Bricks and Omothol Stone
 necronomicon.text.crafting.sequential_brewing_stand.1=A Sequential Brewing Stand is crafted using Blaze Rods, a Hopper and Brewing Stands. Sequential Brewing Stands can be chained, allowing one to transfer its output to the next one.
 necronomicon.text.crafting.sequential_brewing_stand.2=A pipe indicates the direction of transfer, and the pipes will connect on two connected Brewing Stands. Automation exists for ingredient input on the top, fuel and bottle input on the sides and output of the output slots on the bottom.
-
+necronomicon.text.crafting.portalanchor.1=With the Silver Key, you no longer need to perform Ritual of Open Doors to open portals. Craft Portal Anchors instead, and place them wherever you want to.
+necronomicon.text.crafting.portalanchor.2=You also have access to a ritual now that can create unrestricted Portal Anchor, breaking the etheral chains that force them to only open portals between connected dimensions.
 necronomicon.text.crafting.odbcore=An ODB Core is crafted with Abyssalnite Ingots, Iron Ingots, Iron Blocks and a Coralium Pearl. Can be used as an explosive.
 necronomicon.text.crafting.odb=An Oblivion Deathbomb is crafted with Obsidian, An ODB Core, An Oblivion Catalyst, a Liquid Coralium Bucket and a Liquid Antimatter Bucket. Heavy explosive.
 necronomicon.text.crafting.carboncluster=A Carbon Cluster is crafted with Crystallized Carbon. They are used in order to craft Dense Carbon Clusters.
@@ -776,7 +777,7 @@ ac.ritual.saDLupgrade.desc=A Dreadlands Sacrificial Altar is created by infusing
 ac.ritual.saOMTupgrade=Omothol Sacrificial Altar
 ac.ritual.saOMTupgrade.desc=An Omothol Sacrificial is created by infusing a Dreadlands Sacrificial Altar with Ethaxium Bricks, Dark Ethaxium Bricks, Shadow Gem Shards and Coralium Gems.
 ac.ritual.jzaharStaff=Staff of The Gatekeeper
-ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing any Gateway Key with an Abyssal Wasteland Essence, a Dreadlands Essence, an Omothol Essence, Eldritch Scales and Ethaxium Ingots.
+ac.ritual.jzaharStaff.desc=A Staff of The Gatekeeper is created by infusing any Gateway Key with an Abyssal Wasteland Essence, a Dreadlands Essence, an Omothol Essence, Eldritch Scales and Ethaxium Ingots. It can open single use portals to any dimension.
 ac.ritual.respawnJzahar=Ritual of reversed time
 ac.ritual.respawnJzahar.desc=If you in some way failed to obtain an Essence of The Gatekeeper, you can revert time and fight J'zahar again. Can only be performed at the Ritual Altar inside the Temple of J'zahar (X=4, Y=54, Z=85).
 ac.ritual.altarOfChagarothBottom=Altar of Cha'garoth (bottom)
@@ -859,6 +860,8 @@ ac.ritual.spiritAltar=Spirit Altar
 ac.ritual.spiritAltar.desc=By infusing a Shadow Gem with 3 Gold Ingots and 5 Blocks of Darkstone Cobblestone, you force the soul of a sacrifice into controlling a network of Spirit Items. The Spirit Tablet gives commands to the Spirit Altar.
 ac.ritual.ethaxium=Ethaxium
 ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you tear out the souls of the Soul Sand, shaping them into Ethaxium.
+ac.ritual.unchainedPortalAnchor=Unchained Portal Anchor
+ac.ritual.unchainedPortalAnchor.desc=By infusing a Portal Anchor with Ethaxium, you break the ethereal chains forcing it to only open portals between connected dimensions. Now it can open portals to any dimension with the Silver Key.
 
 #Spells
 ac.spell.lifedrain=Life Drain
