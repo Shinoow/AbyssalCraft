@@ -148,7 +148,7 @@ public class ItemGatewayKey extends ItemACBasic {
 
 				if(active) {
 					worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(BlockPortalAnchor.ACTIVE), 2);
-					worldIn.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(pos).grow(2))
+					worldIn.getEntitiesWithinAABB(EntityPortal.class, new AxisAlignedBB(pos.up()))
 					.stream().forEach(e -> worldIn.removeEntity(e));
 				} else {
 					ItemStack stack = player.getHeldItem(hand);
