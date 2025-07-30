@@ -17,6 +17,8 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.knowledge.KnowledgeType;
+import com.shinoow.abyssalcraft.api.knowledge.ResearchRegistry;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.common.items.*;
 import com.shinoow.abyssalcraft.common.items.armor.*;
@@ -25,10 +27,9 @@ import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.Crystals;
 import com.shinoow.abyssalcraft.lib.item.*;
 
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemFood;
+import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.event.*;
@@ -624,6 +625,18 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.omothol_ghoul_flesh, "omotholflesh");
 		registerItem(ACItems.shadow_ghoul_flesh, "shadow_ghoul_flesh");
 		registerItem(ACItems.anti_ghoul_flesh, "anti_ghoul_flesh");
+
+		ResearchRegistry.instance().addOffering(KnowledgeType.BASE, new ItemStack(ACItems.ghoul_flesh));
+		ResearchRegistry.instance().addOffering(KnowledgeType.BASE, new ItemStack(Items.ROTTEN_FLESH));
+		ResearchRegistry.instance().addOffering(KnowledgeType.ABYSSAL, new ItemStack(ACItems.abyssal_ghoul_flesh));
+		ResearchRegistry.instance().addOffering(KnowledgeType.ABYSSAL, new ItemStack(ACItems.coralium_plagued_flesh));
+		ResearchRegistry.instance().addOffering(KnowledgeType.ABYSSAL, new ItemStack(ACItems.skin_of_the_abyssal_wasteland));
+		ResearchRegistry.instance().addOffering(KnowledgeType.DREAD, new ItemStack(ACItems.dreaded_ghoul_flesh));
+		ResearchRegistry.instance().addOffering(KnowledgeType.DREAD, new ItemStack(ACItems.skin_of_the_dreadlands));
+		ResearchRegistry.instance().addOffering(KnowledgeType.DREAD, new ItemStack(ACItems.dread_fragment));
+		ResearchRegistry.instance().addOffering(KnowledgeType.OMOTHOL, new ItemStack(ACItems.omothol_ghoul_flesh));
+		ResearchRegistry.instance().addOffering(KnowledgeType.OMOTHOL, new ItemStack(ACItems.skin_of_omothol));
+		ResearchRegistry.instance().addOffering(KnowledgeType.SHADOW, new ItemStack(ACItems.shadow_ghoul_flesh));
 	}
 
 	@Override

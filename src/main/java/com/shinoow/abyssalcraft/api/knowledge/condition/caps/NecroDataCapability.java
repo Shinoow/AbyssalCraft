@@ -218,7 +218,7 @@ public class NecroDataCapability implements INecroDataCapability {
 			return shadowKnowledgePoints;
 		default:
 			return 0;
-		
+
 		}
 	}
 
@@ -258,9 +258,8 @@ public class NecroDataCapability implements INecroDataCapability {
 		lastSyncTime = cap.getLastSyncTime();
 		completed_researches = cap.getCompletedResearches();
 		knowledgeLevel = cap.getKnowledgeLevel();
-		for(KnowledgeType type : KnowledgeType.values()) {
+		for(KnowledgeType type : KnowledgeType.values())
 			setKnowledgePoints(type, cap.getKnowledgePoints(type));
-		}
 	}
 
 	@Override

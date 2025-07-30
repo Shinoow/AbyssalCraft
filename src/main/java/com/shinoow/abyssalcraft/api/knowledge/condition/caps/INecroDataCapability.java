@@ -55,7 +55,7 @@ public interface INecroDataCapability {
 	void setKnowledgePoints(KnowledgeType type, int points);
 
 	void increaseKnowledgePoints(KnowledgeType type, int points);
-	
+
 	void setLastSyncTime(long time);
 
 	void incrementSyncTimer();
