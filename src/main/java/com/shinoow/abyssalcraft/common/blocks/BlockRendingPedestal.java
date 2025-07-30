@@ -166,11 +166,11 @@ public class BlockRendingPedestal extends BlockContainer implements IEnergyBlock
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
 	{
-		int i = MathHelper.floor((double)(placer.rotationYaw * 16.0F / 360.0F) + 0.5D) & 15;
+		int i = MathHelper.floor(placer.rotationYaw * 16.0F / 360.0F + 0.5D) & 15;
 
 		// mod 4 gives a decent enough "looking at a straight angle"
 		// thereby not tilted
-		return getDefaultState().withProperty(BlockTiltablePedestal.TILTED, i % 4 != 0);	
+		return getDefaultState().withProperty(BlockTiltablePedestal.TILTED, i % 4 != 0);
 	}
 
 	@Override

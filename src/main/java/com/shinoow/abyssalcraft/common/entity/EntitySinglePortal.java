@@ -78,7 +78,7 @@ public class EntitySinglePortal extends Entity {
 						break;
 					}
 				} else entity.setDead();
-			if(toTeleport != null) {
+			if(toTeleport != null)
 				if(toTeleport.timeUntilPortal > 0)
 					toTeleport.timeUntilPortal = toTeleport instanceof EntityPlayerMP ? ACConfig.portalCooldown :  toTeleport.getPortalCooldown();
 				else {
@@ -97,7 +97,6 @@ public class EntitySinglePortal extends Entity {
 
 					setDead();
 				}
-			}
 		}
 
 	}

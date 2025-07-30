@@ -322,7 +322,7 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.tombstone_omothol_stone = new BlockTombstone("omothol_stone");
 		ACBlocks.spirit_altar = new BlockSpiritAltar();
 		ACBlocks.unchained_portal_anchor = new BlockUnchainedPortalAnchor();
-		
+
 		SoftDepUtil.declareBlocks();
 
 		GameRegistry.registerTileEntity(TileEntityCrate.class, new ResourceLocation(AbyssalCraft.modid, "tileEntityCrate"));

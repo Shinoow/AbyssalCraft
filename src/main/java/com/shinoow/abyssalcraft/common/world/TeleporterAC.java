@@ -21,7 +21,6 @@ import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -73,7 +72,7 @@ public class TeleporterAC extends Teleporter
 	private IBlockState getAnchor() {
 		return (unchained ? ACBlocks.unchained_portal_anchor : ACBlocks.portal_anchor).getDefaultState();
 	}
-	
+
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw)
 	{
@@ -150,7 +149,7 @@ public class TeleporterAC extends Teleporter
 			entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
 			if (entityIn instanceof EntityPlayerMP)
 				((EntityPlayerMP)entityIn).connection.setPlayerLocation(d4, d5, d6, entityIn.rotationYaw, entityIn.rotationPitch);
-			else 
+			else
 				entityIn.setLocationAndAngles(d4, d5, d6, entityIn.rotationYaw, entityIn.rotationPitch);
 
 			return true;

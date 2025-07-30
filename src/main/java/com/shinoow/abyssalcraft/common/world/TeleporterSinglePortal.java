@@ -215,7 +215,7 @@ public class TeleporterSinglePortal extends Teleporter
 
 		if (entityIn instanceof EntityPlayerMP)
 			((EntityPlayerMP)entityIn).connection.setPlayerLocation(i6, k2, k6, entityIn.rotationYaw, entityIn.rotationPitch);
-		else 
+		else
 			entityIn.setLocationAndAngles(i6, k2, k6, entityIn.rotationYaw, entityIn.rotationPitch);
 
 		return true;

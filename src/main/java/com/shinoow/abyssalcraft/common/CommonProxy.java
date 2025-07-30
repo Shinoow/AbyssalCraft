@@ -14,7 +14,6 @@ package com.shinoow.abyssalcraft.common;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IAbyssalWastelandBiome;
-import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.knowledge.ResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.api.knowledge.condition.*;

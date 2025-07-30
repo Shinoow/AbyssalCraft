@@ -268,10 +268,10 @@ public class Pages {
 	public static Page INFORMATION_DARK_REALM;
 
 	//All things Abyssalnomicon
-	
+
 	public static Page CRAFTING_PORTAL_ANCHOR_1;
 	public static Page CRAFTING_PORTAL_ANCHOR_2;
-	
+
 	//Rituals
 
 	public static Page RITUAL_TUT_1;

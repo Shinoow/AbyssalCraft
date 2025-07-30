@@ -19,7 +19,6 @@ import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;

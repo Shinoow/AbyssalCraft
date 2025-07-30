@@ -74,7 +74,7 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipeCatalyst(new ItemStack(ACItems.abyssal_wasteland_staff_of_rending), ACRecipeCategoryUid.RENDING);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.dreadlands_staff_of_rending), ACRecipeCategoryUid.RENDING);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.omothol_staff_of_rending), ACRecipeCategoryUid.RENDING);
-		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_the_gatekeeper), ACRecipeCategoryUid.RENDING);
+		//		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_the_gatekeeper), ACRecipeCategoryUid.RENDING);
 		registry.addRecipeCatalyst(new ItemStack(ACBlocks.materializer), ACRecipeCategoryUid.MATERIALIZATION);
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.basic_scroll), ACRecipeCategoryUid.SPELL);
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.lesser_scroll), ACRecipeCategoryUid.SPELL);

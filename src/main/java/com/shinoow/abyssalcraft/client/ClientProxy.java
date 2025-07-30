@@ -20,7 +20,6 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.*;
-import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.item.ICrystal;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
@@ -151,7 +150,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityDreadedGhoul.class, RenderDreadedGhoul::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityShadowGhoul.class, RenderShadowGhoul::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySinglePortal.class, RenderSinglePortal::new);
-		
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiAbyssalZombie.class, RenderAntiAbyssalZombie::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiBat.class, RenderAntiBat::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntiChicken.class, RenderAntiChicken::new);
@@ -443,6 +442,7 @@ public class ClientProxy extends CommonProxy {
 		return r != null && r.entityHit instanceof EntityLivingBase ? r : null;
 	}
 
+	@Override
 	public void setRenderLayer(Block block) {
 		if(block instanceof BlockACBasic)
 			((BlockACBasic) block).setRenderLayer();

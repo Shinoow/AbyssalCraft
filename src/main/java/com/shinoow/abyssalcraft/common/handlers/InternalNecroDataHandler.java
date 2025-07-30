@@ -484,7 +484,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 		Pages.CRAFTING_PORTAL_ANCHOR_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, new CraftingStack(ACBlocks.portal_anchor), NecronomiconText.CRAFTING_PORTAL_ANCHOR_1);
 		Pages.CRAFTING_PORTAL_ANCHOR_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.CRAFTING_PORTAL_ANCHOR_2);
-		
+
 		Pages.RITUAL_TUT_1 = new Page(1, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconResources.RITUAL_TUT_1, NecronomiconText.RITUAL_TUT_1);
 		Pages.RITUAL_TUT_2 = new Page(2, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconText.RITUAL_TUT_2);
 		Pages.RITUAL_TUT_3 = new Page(3, NecronomiconText.LABEL_GETTING_STARTED, 0, NecronomiconResources.RITUAL_TUT_2, NecronomiconText.RITUAL_TUT_3);

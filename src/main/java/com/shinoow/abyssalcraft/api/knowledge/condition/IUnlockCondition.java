@@ -41,7 +41,7 @@ public interface IUnlockCondition {
 	 * when adding your own Unlock Conditions
 	 */
 	int getType();
-	
+
 	/**
 	 * Assigns the hint message for this Unlock Condition
 	 */
@@ -56,17 +56,17 @@ public interface IUnlockCondition {
 	 * Returns amount of Knowledge Points it takes to skip this Unlock Condition
 	 */
 	int getPointsCost();
-	
+
 	/**
 	 * Assigns the Knowledge Point cost for this Unlock Condition
 	 */
 	IUnlockCondition setPointsCost(int i);
-	
+
 	/**
 	 * Returns Knowledge Type for this Unlock Condition
 	 */
 	KnowledgeType getKnowledgeType();
-	
+
 	/**
 	 * Assigns the Knowledge Type for this Unlock Condition
 	 */

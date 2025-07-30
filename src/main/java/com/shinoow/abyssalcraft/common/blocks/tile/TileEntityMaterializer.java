@@ -126,12 +126,10 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 
 			if (!par2ItemStack.isEmpty() && par2ItemStack.getCount() > getInventoryStackLimit())
 				par2ItemStack.setCount(getInventoryStackLimit());
-		}
-		else {
+		} else
 			// If a hopper fails to pull out an ItemStack, it does a callback here
 			// When that happens, kill processingStack
 			processingStack = ItemStack.EMPTY;
-		}
 	}
 
 	private void clippyQuote(){
@@ -333,18 +331,16 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	// Cursed code is cursed
 	private static final int[] ThisIsDumb() {
 		int[] f = new int[548];
-		for(int i = 0; i < f.length; i++) {
+		for(int i = 0; i < f.length; i++)
 			f[i] = i+2; // slot 0 and 1 are the only inaccessible slots
-		}
 		return f;
 	}
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
 
-		if(side == EnumFacing.DOWN) {
+		if(side == EnumFacing.DOWN)
 			return slots;
-		}
 
 		return new int[0];
 	}
@@ -358,10 +354,9 @@ public class TileEntityMaterializer extends TileEntity implements ISidedInventor
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
 
-		if(direction == EnumFacing.DOWN && index > 1) {
+		if(direction == EnumFacing.DOWN && index > 1)
 			// Automatic extraction from bottom of block
 			return canMaterialize(getStackInSlot(index), getStackInSlot(0));
-		}
 
 		return false;
 	}

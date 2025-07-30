@@ -34,7 +34,7 @@ public interface IResearchItem {
 	int getRequiredLevel();
 
 	int getPointsCost();
-	
+
 	KnowledgeType getType();
 
 	ResourceLocation getID();

@@ -158,7 +158,7 @@ public class ItemGatewayKey extends ItemACBasic {
 					int dimension = stack.getTagCompound().getInteger("Dimension");
 
 					if(areDimensionsCompatible(worldIn.provider.getDimension(), dimension)
-							|| (unchained && worldIn.provider.getDimension() != dimension)) {
+							|| unchained && worldIn.provider.getDimension() != dimension) {
 						worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(BlockPortalAnchor.ACTIVE), 2);
 						TileEntity tile = worldIn.getTileEntity(pos);
 						((TileEntityPortalAnchor) tile).setDestination(dimension);

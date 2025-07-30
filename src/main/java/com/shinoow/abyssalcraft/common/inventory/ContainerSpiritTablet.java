@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.inventory;
 
-import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.common.items.ItemSpiritTablet;
 
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,6 +1,15 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2025 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.lib.block;
-
-import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -37,11 +46,11 @@ public abstract class BlockTiltablePedestal extends BlockSingletonInventory {
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
 	{
-		int i = MathHelper.floor((double)(placer.rotationYaw * 16.0F / 360.0F) + 0.5D) & 15;
+		int i = MathHelper.floor(placer.rotationYaw * 16.0F / 360.0F + 0.5D) & 15;
 
 		// mod 4 gives a decent enough "looking at a straight angle"
 		// thereby not tilted
-		return getDefaultState().withProperty(TILTED, i % 4 != 0);	
+		return getDefaultState().withProperty(TILTED, i % 4 != 0);
 	}
 
 	@Override

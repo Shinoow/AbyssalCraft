@@ -30,11 +30,12 @@ import com.shinoow.abyssalcraft.api.spell.IScroll;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellUtils;
 import com.shinoow.abyssalcraft.client.ClientProxy;
-import com.shinoow.abyssalcraft.common.blocks.BlockRitualPedestal;
 import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACSlab;
 import com.shinoow.abyssalcraft.common.items.ItemSpiritTablet;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
-import com.shinoow.abyssalcraft.common.network.server.*;
+import com.shinoow.abyssalcraft.common.network.server.FireMessage;
+import com.shinoow.abyssalcraft.common.network.server.InterdimensionalCageMessage;
+import com.shinoow.abyssalcraft.common.network.server.SpiritTabletMessage;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
@@ -216,37 +217,37 @@ public class AbyssalCraftClientEventHooks {
 	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
 	public void onKeyPressed(KeyInputEvent event){
 
-		if(ClientProxy.staff_mode.isPressed()){
-			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
-			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
-			int mode1 = -1, mode2 = -1;
-
-			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.staff_of_the_gatekeeper){
-				if(!mainStack.hasTagCompound())
-					mainStack.setTagCompound(new NBTTagCompound());
-				mode1 = mainStack.getTagCompound().getInteger("Mode");
-				if(mode1 > -1){
-					if(mode1 == 0)
-						mode1 = 1;
-					else mode1 = 0;
-					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + I18n.format(mode1 == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name")));
-				}
-			}
-			if(!offStack.isEmpty() && offStack.getItem() == ACItems.staff_of_the_gatekeeper){
-				if(!offStack.hasTagCompound())
-					offStack.setTagCompound(new NBTTagCompound());
-				mode2 = offStack.getTagCompound().getInteger("Mode");
-				if(mode2 > -1){
-					if(mode2 == 0)
-						mode2 = 1;
-					else mode2 = 0;
-					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + I18n.format(mode2 == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name")));
-				}
-			}
-
-			if(mode1 > -1 || mode2 > -1)
-				PacketDispatcher.sendToServer(new StaffModeMessage());
-		}
+		//		if(ClientProxy.staff_mode.isPressed()){
+		//			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
+		//			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
+		//			int mode1 = -1, mode2 = -1;
+		//
+		//			if(!mainStack.isEmpty() && mainStack.getItem() == ACItems.staff_of_the_gatekeeper){
+		//				if(!mainStack.hasTagCompound())
+		//					mainStack.setTagCompound(new NBTTagCompound());
+		//				mode1 = mainStack.getTagCompound().getInteger("Mode");
+		//				if(mode1 > -1){
+		//					if(mode1 == 0)
+		//						mode1 = 1;
+		//					else mode1 = 0;
+		//					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + I18n.format(mode1 == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name")));
+		//				}
+		//			}
+		//			if(!offStack.isEmpty() && offStack.getItem() == ACItems.staff_of_the_gatekeeper){
+		//				if(!offStack.hasTagCompound())
+		//					offStack.setTagCompound(new NBTTagCompound());
+		//				mode2 = offStack.getTagCompound().getInteger("Mode");
+		//				if(mode2 > -1){
+		//					if(mode2 == 0)
+		//						mode2 = 1;
+		//					else mode2 = 0;
+		//					Minecraft.getMinecraft().player.sendMessage(new TextComponentString(I18n.format("tooltip.staff.mode.1")+": "+TextFormatting.GOLD + I18n.format(mode2 == 1 ? "item.drainstaff.normal.name" : "item.gatewaykey.name")));
+		//				}
+		//			}
+		//
+		//			if(mode1 > -1 || mode2 > -1)
+		//				PacketDispatcher.sendToServer(new StaffModeMessage());
+		//		}
 		if(ClientProxy.use_cage.isPressed()) {
 			ItemStack mainStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND);
 			ItemStack offStack = Minecraft.getMinecraft().player.getHeldItem(EnumHand.OFF_HAND);
@@ -431,7 +432,7 @@ public class AbyssalCraftClientEventHooks {
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event){
 
-		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
+		//		ModelBakery.registerItemVariants(ACItems.staff_of_the_gatekeeper, makerl("staff", "staff2"));
 
 		registerFluidModel(ACBlocks.liquid_coralium, "cor");
 		registerFluidModel(ACBlocks.liquid_antimatter, "anti");
@@ -487,8 +488,9 @@ public class AbyssalCraftClientEventHooks {
 
 		ModelLoader.setCustomModelResourceLocation(ACItems.cudgel, 0, new ModelResourceLocation("abyssalcraft:cudgel", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ACItems.dreadium_katana, 0, new ModelResourceLocation("abyssalcraft:dreadkatana", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(ACItems.staff_of_the_gatekeeper, 0, new ModelResourceLocation("abyssalcraft:staff", "inventory"));
 
-		ModelLoader.setCustomMeshDefinition(ACItems.staff_of_the_gatekeeper, stack -> stack.hasTagCompound() && stack.getTagCompound().getInteger("Mode") == 1 ? new ModelResourceLocation("abyssalcraft:staff2", "inventory") : new ModelResourceLocation("abyssalcraft:staff", "inventory"));
+		//		ModelLoader.setCustomMeshDefinition(ACItems.staff_of_the_gatekeeper, stack -> stack.hasTagCompound() && stack.getTagCompound().getInteger("Mode") == 1 ? new ModelResourceLocation("abyssalcraft:staff2", "inventory") : new ModelResourceLocation("abyssalcraft:staff", "inventory"));
 
 		registerItemRender(ItemHandler.devsword, 0);
 		registerItemRender(ItemHandler.shoggoth_projectile, 0);
@@ -1001,12 +1003,5 @@ public class AbyssalCraftClientEventHooks {
 	protected void registerItemRenders(Block block, int metas){
 		for(int i = 0; i < metas; i++)
 			registerItemRender(block, i);
-	}
-
-	private ResourceLocation[] makerl(String...strings){
-		ResourceLocation[] res = new ResourceLocation[strings.length];
-		for(int i = 0; i < strings.length; i++)
-			res[i] = new ResourceLocation("abyssalcraft", strings[i]);
-		return res;
 	}
 }
