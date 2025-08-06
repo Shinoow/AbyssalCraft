@@ -75,7 +75,7 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 		properties.setInteger("knowledgeLevel", instance.getKnowledgeLevel());
 		l = new NBTTagList();
 		for(KnowledgeType type : KnowledgeType.values())
-			l.appendTag(new NBTTagString(type.name() + "|" + String.valueOf(instance.getKnowledgePoints(type))));
+			l.appendTag(new NBTTagString(type.name() + ";" + String.valueOf(instance.getKnowledgePoints(type))));
 		properties.setTag("knowledgePoints", l);
 
 		return properties;
@@ -119,7 +119,7 @@ public class NecroDataCapabilityStorage implements IStorage<INecroDataCapability
 			l = properties.getTagList("knowledgePoints", 8);
 			for(int i = 0; i < l.tagCount(); i++) {
 				String str = l.getStringTagAt(i);
-				String[] values = str.split("|");
+				String[] values = str.split(";");
 				KnowledgeType type = KnowledgeType.valueOf(values[0]);
 				instance.setKnowledgePoints(type, Integer.parseInt(values[1]));
 			}

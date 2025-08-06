@@ -38,7 +38,7 @@ public class BlockAntiliquid extends BlockFluidClassic {
 
 	@Override
 	public MapColor getMapColor(IBlockState state, IBlockAccess p_180659_2_, BlockPos p_180659_3_){
-		return MapColor.SILVER;
+		return MapColor.LAPIS;
 	}
 
 	@Override
