@@ -40,6 +40,7 @@ import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.Crystals;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.lib.item.ItemCrystal;
 import com.shinoow.abyssalcraft.lib.item.ItemCrystalFragment;
@@ -570,7 +571,7 @@ public class AbyssalCraftClientEventHooks {
 			else if(i instanceof ItemCrystalShard)
 				registerItemRender(i, 0, "crystalshard");
 			else
-				registerItemRender(i, 0, "crystal");
+				registerItemRender(i, 0, Crystals.getCrystalType(((ItemCrystal)i).type));
 		});
 		registerItemRender(ACItems.dread_cloth, 0);
 		registerItemRender(ACItems.dreadium_plate, 0);

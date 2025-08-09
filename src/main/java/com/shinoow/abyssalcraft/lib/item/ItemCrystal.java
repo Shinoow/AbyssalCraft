@@ -23,7 +23,7 @@ public class ItemCrystal extends ItemACBasic implements ICrystal {
 
 	boolean suffix;
 	String suffix_string;
-	int type;
+	public int type;
 
 	public ItemCrystal(String name, int type){
 		this(name, type, false);
