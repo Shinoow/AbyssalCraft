@@ -569,9 +569,9 @@ public class AbyssalCraftClientEventHooks {
 			if(i instanceof ItemCrystalFragment)
 				registerItemRender(i, 0, "crystalfragment");
 			else if(i instanceof ItemCrystalShard)
-				registerItemRender(i, 0, "crystalshard");
+				registerItemRender(i, 0, "crystalshard"+Crystals.getCrystalTypeSuffix(((ItemCrystalShard)i).type));
 			else
-				registerItemRender(i, 0, Crystals.getCrystalType(((ItemCrystal)i).type));
+				registerItemRender(i, 0, "crystal"+Crystals.getCrystalTypeSuffix(((ItemCrystal)i).type));
 		});
 		registerItemRender(ACItems.dread_cloth, 0);
 		registerItemRender(ACItems.dreadium_plate, 0);

@@ -51,13 +51,15 @@ public class Crystals {
 	public static final String[] crystalAtoms = new String[]{"Fe", "Au", "S", "C", "O", "H", "N", "P", "K", "NO\u2083", "CH\u2084", "none", "An",
 			"Cor", "Dr", "none", "Si", "Mg", "Al", "SiO\u2082", "Al\u2082O\u2083", "MgO", "Zn", "Ca", "Be", "Be\u2083Al\u2082(SiO\u2083)\u2086"};
 
-	public static String getCrystalType(int i) {
+	public static String getCrystalTypeSuffix(int i) {
 		if(i == IRON || i == GOLD || i == POTASSIUM || i == ABYSSALNITE || i == CORALIUM
 				|| i == DREADIUM || i == SILICON || i == MAGNESIUM || i == ALUMINIUM
 				|| i == ZINC || i == CALCIUM || i == BERYLLIUM)
-			return "crystal_metal";
+			return "_metal";
 		if(i == OXYGEN || i == HYDROGEN || i == NITROGEN || i == NITRATE || i == METHANE)
-			return "crystal_gas";
-		return "crystal";
+			return "_gas";
+		if(i == SILICA || i == MAGNESIA || i == ALUMINA || i == BERYL)
+			return "_alloy";
+		return "";
 	}
 }
