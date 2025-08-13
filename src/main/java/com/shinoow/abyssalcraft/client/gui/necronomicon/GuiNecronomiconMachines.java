@@ -58,11 +58,11 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		if(isInvalid)
 			mc.displayGuiScreen(parent.withBookType(getBookType()));
 		currentNecro = this;
-		if(isCry && getBookType() == 1){
+		if(isCry && getKnowledgeLevel() == 1){
 			isInfo = isMInfo = isTra = isCry = isMat = false;
 			currTurnup = 0;
 		}
-		if(isMat && getBookType() <= 2){
+		if(isMat && getKnowledgeLevel() <= 2){
 			isInfo = isMInfo = isTra = isCry = isMat = false;
 			currTurnup = 0;
 		}
@@ -139,26 +139,18 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 					initGui();
 					setTurnupLimit(2);
 				}
-			} else if(button.id == 6){
+			} else if(button.id > 5) {
+				if(button.id == 6){
+					isMInfo = true;
+				} else if(button.id == 7 && getKnowledgeLevel() >= 1){
+					isTra = true;
+				} else if(button.id == 8 && getKnowledgeLevel() >= 2){
+					isCry = true;
+				} else if(button.id == 9 && getKnowledgeLevel() >= 3){
+					isMat = true;
+				}
 				isInfo = true;
-				isMInfo = true;
 				drawButtons();
-			} else if(button.id == 7 && getBookType() >= 1){
-				isInfo = true;
-				isTra = true;
-				drawButtons();
-			} else if(button.id == 8 && getBookType() >= 2){
-				isInfo = true;
-				isCry = true;
-				drawButtons();
-			} else if(button.id == 9 && getBookType() >= 3){
-				isInfo = true;
-				isMat = true;
-				drawButtons();
-				//	} else if(button.id == 6 && getBookType() >= 3){
-				//	isInfo = true;
-				//	isEng = true;
-				//	drawButtons();
 			}
 			updateButtons();
 		}

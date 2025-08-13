@@ -164,7 +164,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 	}
 	private void initStuff(){
 		for(Spell spell : SpellRegistry.instance().getSpells())
-			if(isUnlocked(spell.getResearchItem(spell)) && spell.getBookType() <= getBookType())
+			if(isUnlocked(spell.getResearchItem(spell)) && spell.getBookType() <= getKnowledgeLevel())
 				spells.add(spell);
 		setTurnupLimit(spells.size());
 	}

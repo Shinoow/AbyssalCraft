@@ -95,20 +95,20 @@ public class GuiNecronomiconOther extends GuiNecronomicon {
 
 		if(!map.isEmpty())
 			for(int i = 0; i < map.size(); i++)
-				buttons[i].visible = equalsOrLower((int)map.values().toArray()[i], getBookType());
+				buttons[i].visible = equalsOrLower((int)map.values().toArray()[i], getKnowledgeLevel());
 	}
 
-	private boolean equalsOrLower(int par1, int par2){
-		boolean t1 = par1 == par2;
-		boolean t2 = par1 == par2 - 1 && par2 - 1 >= 0;
-		boolean t3 = par1 == par2 - 2 && par2 - 2 >= 0;
-		boolean t4 = par1 == par2 - 3 && par2 - 3 >= 0;
-		boolean t5 = par1 == par2 - 4 && par2 - 4 >= 0;
+	private boolean equalsOrLower(int index, int knowledgeLevel){
+		boolean t1 = index == knowledgeLevel;
+		boolean t2 = index == knowledgeLevel - 1 && knowledgeLevel - 1 >= 0;
+		boolean t3 = index == knowledgeLevel - 2 && knowledgeLevel - 2 >= 0;
+		boolean t4 = index == knowledgeLevel - 3 && knowledgeLevel - 3 >= 0;
+		boolean t5 = index == knowledgeLevel - 4 && knowledgeLevel - 4 >= 0;
 		return t1 || t2 || t3 || t4 || t5;
 	}
 
 	private String getTitle(String par1, int par2){
-		return par2 > getBookType() ? NecronomiconText.LABEL_LOCKED : par1;
+		return par2 > getKnowledgeLevel() ? NecronomiconText.LABEL_LOCKED : par1;
 	}
 
 	@Override

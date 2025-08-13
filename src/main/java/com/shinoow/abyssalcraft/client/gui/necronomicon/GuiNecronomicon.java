@@ -324,8 +324,22 @@ public class GuiNecronomicon extends GuiScreen {
 		fontRenderer.drawString(stuff, k + 17, b0 + 16, 0);
 	}
 
+	/**
+	 * 0 = Necronomicon<br>
+	 * 1 = Abyssal Wasteland Necronomicon<br>
+	 * 2 = Dreadlands Necronomicon<br>
+	 * 3 = Omothol Necronomicon<br>
+	 * 4 = Abyssalnomicon
+	 */
 	public int getBookType(){
 		return bookType;
+	}
+	
+	/**
+	 * Highest Book Type or Knowledge Level
+	 */
+	public int getKnowledgeLevel() {
+		return Math.max(bookType, cap != null ? cap.getKnowledgeLevel() : 0); // Shouldn't be null, but eh
 	}
 
 	public ResourceLocation getGuiTexture(){
@@ -468,8 +482,8 @@ public class GuiNecronomicon extends GuiScreen {
 
 	protected boolean isUnlocked(IResearchItem ri){
 		for(IUnlockCondition cnd : ri.getUnlockConditions())
-			if(cnd instanceof NecronomiconCondition)
-				return getBookType() >= (int)cnd.getConditionObject();
+			if(cnd instanceof NecronomiconCondition) // Re-name???
+				return getKnowledgeLevel() >= (int)cnd.getConditionObject();
 				return cap.isUnlocked(ri, mc.player);
 	}
 

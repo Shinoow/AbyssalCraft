@@ -52,7 +52,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 
 	@Override
 	public GuiNecronomicon withBookType(int par1){
-		if(getBookType() > par1)
+		if(getKnowledgeLevel() > par1)
 			isInvalid = true;
 		return super.withBookType(par1);
 	}

@@ -364,7 +364,7 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 
 	private void initStuff(){
 		for(IPlaceOfPower place : StructureHandler.instance().getStructures())
-			if(isUnlocked(place.getResearchItem()) && place.getBookType() <= getBookType())
+			if(isUnlocked(place.getResearchItem()) && place.getBookType() <= getKnowledgeLevel())
 				places.add(place);
 		setTurnupLimit(places.size());
 	}

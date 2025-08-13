@@ -75,8 +75,7 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 	}
 
 	private boolean hasSpells(){
-		//		if(book.hasTagCompound())
-		//			return book.getTagCompound().hasKey("Knowledge");
+		// TODO add logic that checks if any spells are unlocked
 		return true;
 	}
 
