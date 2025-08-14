@@ -25,7 +25,7 @@ public class ACConfig {
 	antiItemDisintegration, smeltingRecipes, purgeMobSpawns, mimicFire,
 	armorPotionEffects, syncDataOnBookOpening, portalSpawnsNearPlayer,
 	showBossDialogs, lootTableContent, nightVisionEverywhere,
-	no_potion_clouds, vanilla_portals;
+	no_potion_clouds, vanilla_handling;
 
 	public static double damageAmpl;
 

@@ -22,6 +22,8 @@ import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilAnimal;
 import com.shinoow.abyssalcraft.common.handlers.InternalNecroDataHandler;
+import com.shinoow.abyssalcraft.init.InitHandler;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
@@ -49,6 +51,8 @@ public class CommonProxy {
 		RitualRegistry.instance().addDimensionToBookTypeAndName(ACLib.dark_realm_id, 0, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE);
 		RitualRegistry.instance().addDimensionToBookTypeAndName(-1, 0, "label.misc.nether");
 		RitualRegistry.instance().addDimensionToBookTypeAndName(1, 0, "advancements.end.root.title");
+		if(ACConfig.startDimension != 0)
+			RitualRegistry.instance().addDimensionToBookTypeAndName(ACConfig.startDimension, 0, InitHandler.startDimensionName);
 	}
 
 	public void postInit() {}

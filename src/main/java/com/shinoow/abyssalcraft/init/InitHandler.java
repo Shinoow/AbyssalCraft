@@ -25,7 +25,9 @@ import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
+import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.client.handlers.ClientVarsReloadListener;
 import com.shinoow.abyssalcraft.common.handlers.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
@@ -71,9 +73,12 @@ public class InitHandler implements ILifeCycleHandler {
 	private static String[] interdimensionalCageBlacklist, dreadPlagueImmunityList, dreadPlagueCarrierList,
 	coraliumPlagueImmunityList, coraliumPlagueCarrierList, itemTransportBlacklist, mobItemPickupBlacklist;
 
+	public static String startDimensionName;
+
 	public static int[] coraliumOreGeneration;
 	private static int[] blackHoleBlacklist, oreGenDimBlacklist, structureGenDimBlacklist;
 	private int[] blackHoleDimlist;
+	public static int[] startDimensionColors;
 
 	public static final Fluid LIQUID_CORALIUM = new Fluid("liquidcoralium", new ResourceLocation("abyssalcraft", "blocks/cwater_still"),
 			new ResourceLocation("abyssalcraft", "blocks/cwater_flow")).setDensity(3000).setTemperature(350);
@@ -297,6 +302,10 @@ public class InitHandler implements ILifeCycleHandler {
 		portalCooldown = cfg.get(CATEGORY_DIMENSIONS, "Portal cooldown", 200, "Cooldown after using a portal, increasing the value increases the delay until you can teleport again. Measured in ticks (20 ticks = 1 second).\n[range: 10 ~ 300, default: 200]", 10, 300).getInt();
 		startDimension = cfg.get(CATEGORY_DIMENSIONS, "First Portal Dimension", 0, "The dimension ID of the dimension where you make the portal to the Abyssal Wastelands.").getInt();
 
+		startDimensionColors = cfg.get(CATEGORY_DIMENSIONS, "First Portal Dimension color", new int[] {255, 255, 255}, "Portal color for the first portal dimension (used if 'First Portal Dimension' isn't 0). Format is RGB, where each can be a number between 0 and 255.").getIntList();
+
+		startDimensionName = cfg.get(CATEGORY_DIMENSIONS, "First Portal Dimension name", "[INSERT NAME HERE]", "Name of the first portal dimension (used if 'First Portal Dimension' isn't 0). No 'DIMn', I DEMAND A NAME!!! >:(").getString();
+
 		shouldSpread = cfg.get(Configuration.CATEGORY_GENERAL, "Liquid Coralium transmutation", true, "Set true for the Liquid Coralium to convert other liquids into itself and transmute blocks into their Abyssal Wasteland counterparts outside of the Abyssal Wasteland.").getBoolean();
 		shouldInfect = cfg.get(Configuration.CATEGORY_GENERAL, "Coralium Plague spreading", false, "Set true to allow the Coralium Plague to spread outside The Abyssal Wasteland.").getBoolean();
 		destroyOcean = cfg.get(Configuration.CATEGORY_GENERAL, "Oceanic Coralium Pollution", false, "Set true to allow the Liquid Coralium to spread across oceans. WARNING: The game can crash from this.").getBoolean();
@@ -317,7 +326,7 @@ public class InitHandler implements ILifeCycleHandler {
 		nightVisionEverywhere = cfg.get(Configuration.CATEGORY_GENERAL, "Plated Coralium Helmet Night Vision Everywhere", true, "Toggles whether or not the Night Vision buff from the Plated Coralium Helmet should be applied in all dimensions, rather than only Surface Worlds.").getBoolean();
 		itemTransportBlacklist = cfg.get(Configuration.CATEGORY_GENERAL, "Item Transportation System Blacklist", new String[0], "Tile Entities added to this list will not be usable with the Item Transportation System (eg. you can't move Items from them). Format: modid:name").getStringList();
 		no_potion_clouds = cfg.get(Configuration.CATEGORY_GENERAL, "No plague Potion Clouds", false, "Toggles whether or not victims dying to the Coralium Plague and Dread Plague create potion clouds on death (can save performance if disabled).").getBoolean();
-		vanilla_portals = cfg.get(Configuration.CATEGORY_GENERAL, "Gateway Key support for Vanilla dimensions", true, "Toggles if the Gateway Key should support creating portals to The Nether and The End.\n[Changes take effect after a Minecraft restart]").getBoolean();
+		vanilla_handling = cfg.get(Configuration.CATEGORY_GENERAL, "Gateway Key and Ritual support for Vanilla dimensions", true, "Toggles if the Gateway Key should support creating portals to The Nether and The End along with performing rituals there.\n[Changes take effect after a Minecraft restart]").getBoolean();
 
 		demonAnimalFire = cfg.get(CATEGORY_MOBS, "Demon Animal burning", false, "Set to false to prevent Demon Animals (Pigs, Cows, Chickens) from burning in the overworld.").getBoolean();
 		evilAnimalSpawnWeight = cfg.get(CATEGORY_MOBS, "Evil Animal spawn weight", 15, "Spawn weight for the Evil Animals (Pigs, Cows, Chickens), keep under 35 to avoid complete annihilation.\n[range: 0 ~ 100, default: 20]", 0, 100).getInt();
@@ -362,6 +371,12 @@ public class InitHandler implements ILifeCycleHandler {
 		curingRitualRange = cfg.get(CATEGORY_RITUALS, "Curing Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Curing (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		infestingRitualRange = cfg.get(CATEGORY_RITUALS, "Infesting Ritual Range", 32, "The range (in chunks) that will be affected by the Ritual of Infesting (on the x and z axis)\n[range: 3 ~ 100, default: 32]", 3, 100).getInt();
 		enchantMergedBooks = cfg.get(CATEGORY_RITUALS, "Mass Enchantment Merged Books", true, "Toggles whether or not you can use Enchanted Books that have been merged on an Anvil in the Mass Enchantment ritual.").getBoolean();
+
+		String[] dimensionMappings = cfg.get(CATEGORY_RITUALS, "Dimension Book Type Mappings", new String[0], "Dimension IDs added to this list enables rituals being performed in them."
+				+ "\nFormat: dimensionID;bookType;name\n where dimensionID is an Integer representing the ID of the dimension you want to enable rituals in"
+				+ "\nbookType is the required Necronomicon to create the altar (0 = normal, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol, 4 = Abyssalnomicon)"
+				+ "\nThis also determines the material you can make the ritual and pedestals from (Cobblestone, Abyssal Cobblestone etc)\n"
+				+ "name optionally sets a name to display when applicable (dimension-specific rituals, among things)").getStringList();
 
 		shoggothOoze = cfg.get(CATEGORY_SHOGGOTH, "Shoggoth Ooze Spread", true, "Toggles whether or not Lesser Shoggoths should spread their ooze when walking around.").getBoolean();
 		oozeExpire = cfg.get(CATEGORY_SHOGGOTH, "Ooze expiration", true, "Toggles whether or not Shoggoth Ooze slowly reverts to dirt after constant light exposure. Ooze blocks that aren't full blocks will shrink instead.").getBoolean();
@@ -482,6 +497,9 @@ public class InitHandler implements ILifeCycleHandler {
 		shoggothLairGenerationDistance = MathHelper.clamp(shoggothLairGenerationDistance, 40, 1000);
 		graveyardGenerationChance = MathHelper.clamp(graveyardGenerationChance, 0, 1000);
 
+		if(startDimensionColors.length != 3)
+			startDimensionColors = new int[]{255, 255, 255};
+
 		demon_transformations.clear();
 
 		for(String str : transformations)
@@ -502,6 +520,19 @@ public class InitHandler implements ILifeCycleHandler {
 			addCoraliumPlagueImmunity(str);
 		for(String str : coraliumPlagueCarrierList)
 			addCoraliumPlagueCarrier(str);
+
+		DimensionDataRegistry.instance().wipeConfig();
+		RitualRegistry.instance().wipeConfig();
+
+		for(String str : dimensionMappings)
+			if(str.length() > 0) {
+				String[] stuff = str.split(";");
+				if(stuff.length > 2)
+					RitualRegistry.instance().addDimensionToBookTypeConfig(Integer.parseInt(stuff[0]), Integer.parseInt(stuff[1]), stuff[2]);
+				else if(stuff.length == 2)
+					RitualRegistry.instance().addDimensionToBookTypeConfig(Integer.parseInt(stuff[0]), Integer.parseInt(stuff[1]));
+				else ACLogger.severe("Dimension Book Type Mapping: {}", str);
+			}
 
 		if(cfg.hasChanged())
 			cfg.save();

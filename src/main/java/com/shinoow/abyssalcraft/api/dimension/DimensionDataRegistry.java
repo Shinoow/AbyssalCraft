@@ -37,6 +37,8 @@ public class DimensionDataRegistry {
 	private final Map<Integer, String> dimToName = new HashMap<>();
 	private final Map<Integer, Set<Tuple<Integer, Integer>>> gateway_key_overrides = new HashMap<>();
 
+	private final Map<Integer, String> configDimToName = new HashMap<>();
+
 	private final Logger logger = LogManager.getLogger("DimensionDataRegistry");
 
 	private static final DimensionDataRegistry instance = new DimensionDataRegistry();
@@ -78,6 +80,22 @@ public class DimensionDataRegistry {
 	}
 
 	/**
+	 * Temporary config version, gets wiped
+	 */
+	public void addDimensionToNameConfig(int dim, String name) {
+		if(dim != OreDictionary.WILDCARD_VALUE)
+			configDimToName.put(dim, name);
+		else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: {}", dim);
+	}
+
+	/**
+	 * Clears the temporary list
+	 */
+	public void wipeConfig() {
+		configDimToName.clear();
+	}
+
+	/**
 	 * Attempts to fetch Dimension Data tied to a dimension ID, if present
 	 * @param dim Dimension ID to check for
 	 * @return Dimension Data if found, otherwise null
@@ -92,7 +110,10 @@ public class DimensionDataRegistry {
 	 * @return A HashMap containing Dimension IDs and Strings associated with them
 	 */
 	public Map<Integer, String> getDimensionNameMappings(){
-		return dimToName;
+		Map<Integer, String> res = new HashMap<>(dimToName);
+		if(!configDimToName.isEmpty())
+			res.putAll(configDimToName);
+		return res;
 	}
 
 	/**
@@ -100,6 +121,8 @@ public class DimensionDataRegistry {
 	 * @param dim ID of dimension
 	 */
 	public String getDimensionName(int dim) {
+		if(configDimToName.containsKey(dim))
+			return configDimToName.get(dim);
 		if(!dimToName.containsKey(dim))
 			dimToName.put(dim, "DIM"+dim);
 		return dimToName.get(dim);
