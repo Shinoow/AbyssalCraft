@@ -73,11 +73,4 @@ public class ItemOC extends ItemACBasic {
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		l.add(I18n.format("tooltip.oc"));
 	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack)
-	{
-		return true;
-	}
 }

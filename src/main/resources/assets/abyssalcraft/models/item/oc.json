@@ -1,6 +1,8 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "abyssalcraft:items/oc"
+		"layer0": "abyssalcraft:items/oblivion_catalyst/container",
+		"layer1": "abyssalcraft:items/oblivion_catalyst/circle",
+		"layer2": "abyssalcraft:items/oblivion_catalyst/eye"
 	}
 }
