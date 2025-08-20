@@ -1,5 +1,12 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"all": "abyssalcraft:blocks/as",
+			"overlay": "abyssalcraft:blocks/ores/gold"
+		}
+	},
 	"variants": {
-		"normal": { "model": "abyssalcraft:abygolore" }
+		"normal": { "model": "abyssalcraft:layered_cube" }
 	}
 }

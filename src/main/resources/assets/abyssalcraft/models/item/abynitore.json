@@ -1,3 +1,7 @@
 {
-	"parent": "abyssalcraft:block/abynitore"
+	"parent": "abyssalcraft:block/layered_cube",
+	"textures": {
+		"all": "abyssalcraft:blocks/as",
+		"overlay": "abyssalcraft:blocks/ores/nitre"
+	}
 }

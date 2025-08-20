@@ -31,6 +31,7 @@ public class BlockACOre extends BlockACBasic {
 
 	public BlockACOre(int harvestlevel, float hardness, float resistance) {
 		super(Material.ROCK, "pickaxe", harvestlevel, hardness, resistance, SoundType.STONE);
+		mipp();
 	}
 
 	@SuppressWarnings("deprecation")

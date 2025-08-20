@@ -1,5 +1,12 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"all": "blocks/stone",
+			"overlay": "abyssalcraft:blocks/ores/infused_coralium"
+		}
+	},
 	"variants": {
-		"normal": { "model": "abyssalcraft:coraliumstone" }
+		"normal": { "model": "abyssalcraft:layered_cube" }
 	}
 }
