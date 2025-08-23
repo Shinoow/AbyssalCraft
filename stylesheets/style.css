@@ -4,16 +4,18 @@ body {
     margin-left: 20%;
     margin-right: 20%;
 }
-p, li, h3 {
+p, li, h3, h2 {
     color: #FFF;
 }
 h3 {
     text-align: center;
 }
-p {
+p, h2 {
     font-weight: 700;
 }
-
+.anchor {
+    padding-right: 5px;
+}
 .content {
     background: rgba(128, 128, 128, 0.5);
     padding: 5px 20px;
