@@ -47,7 +47,7 @@ public class EntityAIShoggothBuildMonolith extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 
-		if(ACConfig.monolithBuildingCooldown == 0 || shoggoth.isChild() || shoggoth.isAssisting || shoggoth.isBuilding)
+		if(ACConfig.monolithBuildingCooldown == 0 || shoggoth.isAssisting || shoggoth.isBuilding)
 			return false;
 		else if(shoggoth.getMonolithTimer() < ACConfig.monolithBuildingCooldown || world.getEntitiesWithinAABB(shoggoth.getClass(), shoggoth.getEntityBoundingBox().grow(16D, 16D, 16D), e -> !e.equals(shoggoth) && !e.isAssisting && !e.isBuilding).size() < 3)
 			return false;
@@ -69,8 +69,11 @@ public class EntityAIShoggothBuildMonolith extends EntityAIBase {
 					}
 				}
 
-				if(shoggoths.size() != 3)
+				if(shoggoths.size() != 3) {
+					for(EntityShoggothBase shoggoth : shoggoths)
+						shoggoth.isAssisting = false;
 					return false;
+				}
 
 				shoggoth.isBuilding = true;
 				locationX = vec3d.x;
@@ -102,9 +105,9 @@ public class EntityAIShoggothBuildMonolith extends EntityAIBase {
 	{
 		attemptTimer = 400;
 		shoggoth.getNavigator().tryMoveToXYZ(locationX + (shoggoth.getRNG().nextBoolean() ? 3 : -3), locationY, locationZ + (shoggoth.getRNG().nextBoolean() ? 3 : -3), 0.38D);
-		shoggoths.get(0).getNavigator().tryMoveToXYZ(locationX - 3, locationY, locationZ - 3, 0.38D);
-		shoggoths.get(1).getNavigator().tryMoveToXYZ(locationX + 3, locationY, locationZ + 3, 0.38D);
-		shoggoths.get(2).getNavigator().tryMoveToXYZ(locationX + 3, locationY, locationZ - 3, 0.38D);
+		shoggoths.get(0).getNavigator().tryMoveToEntityLiving(shoggoth, 0.38D);
+		shoggoths.get(1).getNavigator().tryMoveToEntityLiving(shoggoth, 0.38D);
+		shoggoths.get(2).getNavigator().tryMoveToEntityLiving(shoggoth, 0.38D);
 	}
 
 	@Override
@@ -157,7 +160,8 @@ public class EntityAIShoggothBuildMonolith extends EntityAIBase {
 		{
 			BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
-			if (world.isAirBlock(blockpos1.up()) && world.isAirBlock(blockpos1.up(1)) && world.getBlockState(blockpos1).getBlock().isReplaceable(world, blockpos1)
+			if (world.isAirBlock(blockpos1.up())
+					&& (world.getBlockState(blockpos1).getBlock().isReplaceable(world, blockpos1) || world.isAirBlock(blockpos1))
 					&& world.getBlockState(blockpos1.down()) != ACBlocks.monolith_stone.getDefaultState()
 					&& !world.isAirBlock(blockpos1.down()) && world.getBlockState(blockpos1.down()).isSideSolid(world, blockpos1.down(), EnumFacing.UP)
 					&& world.getBlockState(blockpos1.down()) != ACBlocks.shoggoth_biomass.getDefaultState()) {
