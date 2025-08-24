@@ -134,7 +134,7 @@ public class InventoryConfigurator implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 	{
-		return true;
+		return !APIUtils.hasAnInventory(itemstack);
 	}
 
 	public void readFromNBT(NBTTagCompound tagcompound)

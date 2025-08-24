@@ -71,8 +71,11 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 					}
 				}
 
-				if(shoggoths.size() != 3)
+				if(shoggoths.size() != 3) {
+					for(EntityLesserShoggoth shoggoth : shoggoths)
+						shoggoth.isAssisting = false;
 					return false;
+				}
 
 				shoggoth.isBuilding = true;
 				locationX = vec3d.x;
@@ -104,9 +107,9 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 	{
 		attemptTimer = 400;
 		shoggoth.getNavigator().tryMoveToXYZ(locationX + (shoggoth.getRNG().nextBoolean() ? 3 : -3), locationY, locationZ + (shoggoth.getRNG().nextBoolean() ? 3 : -3), 0.38D);
-		shoggoths.get(0).getNavigator().tryMoveToXYZ(locationX - 3, locationY, locationZ - 3, 0.38D);
-		shoggoths.get(1).getNavigator().tryMoveToXYZ(locationX + 3, locationY, locationZ + 3, 0.38D);
-		shoggoths.get(2).getNavigator().tryMoveToXYZ(locationX + 3, locationY, locationZ - 3, 0.38D);
+		shoggoths.get(0).getNavigator().tryMoveToEntityLiving(shoggoth, 0.38D);
+		shoggoths.get(1).getNavigator().tryMoveToEntityLiving(shoggoth, 0.38D);
+		shoggoths.get(2).getNavigator().tryMoveToEntityLiving(shoggoth, 0.38D);
 	}
 
 	@Override
@@ -159,7 +162,8 @@ public class EntityAILesserShoggothBuildMonolith extends EntityAIBase {
 		{
 			BlockPos blockpos1 = blockpos.add(random.nextInt(20) - 10, random.nextInt(6) - 3, random.nextInt(20) - 10);
 
-			if (world.isAirBlock(blockpos1.up()) && world.isAirBlock(blockpos1.up(1)) && world.getBlockState(blockpos1).getBlock().isReplaceable(world, blockpos1)
+			if (world.isAirBlock(blockpos1.up())
+					&& (world.getBlockState(blockpos1).getBlock().isReplaceable(world, blockpos1) || world.isAirBlock(blockpos1))
 					&& world.getBlockState(blockpos1.down()) != ACBlocks.stone.getDefaultState().withProperty(BlockACStone.TYPE, EnumStoneType.MONOLITH_STONE)
 					&& !world.isAirBlock(blockpos1.down()) && world.getBlockState(blockpos1.down()).isSideSolid(world, blockpos1.down(), EnumFacing.UP)
 					&& world.getBlockState(blockpos1.down()) != ACBlocks.shoggoth_biomass.getDefaultState()) {

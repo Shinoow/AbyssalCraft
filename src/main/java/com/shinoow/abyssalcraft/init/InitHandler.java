@@ -26,6 +26,7 @@ import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.client.handlers.ClientVarsReloadListener;
 import com.shinoow.abyssalcraft.common.handlers.*;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
@@ -376,6 +377,12 @@ public class InitHandler implements ILifeCycleHandler {
 		sacthothHealingPace = cfg.get(Configuration.CATEGORY_GENERAL, "Sacthoth Healing Pace", 200, "The pace at which Sacthoth regenerates health (in ticks)", 20, 1200).getInt();
 		sacthothHealingAmount = cfg.get(Configuration.CATEGORY_GENERAL, "Sacthoth Heal Amount", 1, "The amount of HP Sacthoth heals when he regenerates health (setto 0 to disable healing)", 0, 100).getInt();
 
+		String[] dimensionMappings = cfg.get(Configuration.CATEGORY_GENERAL, "Dimension Book Type Mappings", new String[0], "Dimension IDs added to this list enables rituals being performed in them."
+				+ "\nFormat: dimensionID;bookType;name\n where dimensionID is an Integer representing the ID of the dimension you want to enable rituals in"
+				+ "\nbookType is the required Necronomicon to create the altar (0 = normal, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol, 4 = Abyssalnomicon)"
+				+ "\nThis also determines the material you can make the ritual and pedestals from (Cobblestone, Abyssal Cobblestone etc)\n"
+				+ "name optionally sets a name to display when applicable (dimension-specific rituals, among things)").getStringList();
+
 		darkWeight1 = cfg.get("biome_weight", "Darklands", 4, "Biome weight for the Darklands biome, controls the chance of it generating (n out of 100).\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight2 = cfg.get("biome_weight", "Darklands Forest", 4, "Biome weight for the Darklands Forest biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
 		darkWeight3 = cfg.get("biome_weight", "Darklands Plains", 4, "Biome weight for the Darklands Plains biome, controls the chance of it generating (n out of 100)\n[range: 0 ~ 100, default: 5]", 0, 100).getInt();
@@ -555,6 +562,18 @@ public class InitHandler implements ILifeCycleHandler {
 			addCoraliumPlagueImmunity(str);
 		for(String str : coraliumPlagueCarrierList)
 			addCoraliumPlagueCarrier(str);
+
+		RitualRegistry.instance().wipeConfig();
+
+		for(String str : dimensionMappings)
+			if(str.length() > 0) {
+				String[] stuff = str.split(";");
+				if(stuff.length > 2)
+					RitualRegistry.instance().addDimensionToBookTypeConfig(Integer.parseInt(stuff[0]), Integer.parseInt(stuff[1]), stuff[2]);
+				else if(stuff.length == 2)
+					RitualRegistry.instance().addDimensionToBookTypeConfig(Integer.parseInt(stuff[0]), Integer.parseInt(stuff[1]));
+				else ACLogger.severe("Invalid Dimension Book Type Mapping: {}", str);
+			}
 
 		if(cfg.hasChanged())
 			cfg.save();

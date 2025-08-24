@@ -20,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 import com.shinoow.abyssalcraft.api.APIUtils;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Registry class for Necronomicon Rituals
@@ -33,6 +34,9 @@ public class RitualRegistry {
 	private final Map<Integer, String> dimToName = new HashMap<>();
 	private final Map<NecronomiconRitual, Integer> ritualToBookType = new HashMap<>();
 	private final List<NecronomiconRitual> rituals = new ArrayList<>();
+
+	private final Map<Integer, Integer> configDimToBookType = new HashMap<>();
+	private final Map<Integer, String> configDimToName = new HashMap<>();
 
 	private final Logger logger = LogManager.getLogger("RitualRegistry");
 
@@ -87,6 +91,42 @@ public class RitualRegistry {
 	}
 
 	/**
+	 * Temporary config version, gets wiped
+	 */
+	public void addDimensionToBookTypeConfig(int dim, int bookType) {
+		if(bookType <= 4 && bookType >= 0)
+			if(dim != -1 || dim != 1)
+				configDimToBookType.put(dim, bookType);
+			else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: {}", dim);
+		else logger.log(Level.ERROR, "Necronomicon book type does not exist: {}", bookType);
+	}
+
+	/**
+	 * Temporary config version, gets wiped
+	 */
+	public void addDimensionToNameConfig(int dim, String name) {
+		if(dim != OreDictionary.WILDCARD_VALUE)
+			configDimToName.put(dim, name);
+		else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: {}", dim);
+	}
+
+	/**
+	 * Temporary config version, gets wiped
+	 */
+	public void addDimensionToBookTypeConfig(int dim, int bookType, String name){
+		addDimensionToBookTypeConfig(dim, bookType);
+		addDimensionToNameConfig(dim, name);
+	}
+
+	/**
+	 * Clears the temporary list
+	 */
+	public void wipeConfig() {
+		configDimToBookType.clear();
+		configDimToName.clear();
+	}
+
+	/**
 	 * Checks if any Ritual-related action can be performed in this dimension with the current Necronomicon
 	 * @param dim The dimension ID
 	 * @param bookType The Necronomicon book type
@@ -95,8 +135,8 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public boolean canPerformAction(int dim, int bookType){
-		if(!dimToBookType.containsKey(dim)) return false;
-		return bookType >= dimToBookType.get(dim);
+		if(!dimToBookType.containsKey(dim) && !configDimToBookType.containsKey(dim)) return false;
+		return bookType >= dimToBookType.get(dim) || bookType >= configDimToBookType.get(dim);
 	}
 
 	/**
@@ -108,8 +148,8 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public boolean sameBookType(int dim, int bookType){
-		if(!dimToBookType.containsKey(dim)) return false;
-		return bookType == dimToBookType.get(dim);
+		if(!dimToBookType.containsKey(dim) && !configDimToBookType.containsKey(dim)) return false;
+		return bookType == dimToBookType.get(dim) || bookType == configDimToBookType.get(dim);
 	}
 
 	/**

@@ -33,7 +33,9 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 		while(world.isAirBlock(pos) && pos.getY() > 2)
 			pos = pos.down();
 
-		if(world.getBlockState(pos).getBlock() != ACBlocks.shoggoth_ooze)
+		// Instead of "only if block is Shoggoth Ooze", block can't be air,
+		// and block underneath must be solid
+		if(world.isAirBlock(pos) || !world.isSideSolid(pos.down(), EnumFacing.UP))
 			return false;
 		else {
 
