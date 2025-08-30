@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.api.energy.structure;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 
 /**
- * Interface to be used on Tile Entities that can be used as mater blocks in a Place of Power multiblock structure
+ * Interface to be used on Tile Entities that can be used as master blocks in a Place of Power multiblock structure
  *
  * @author shinoow
  *

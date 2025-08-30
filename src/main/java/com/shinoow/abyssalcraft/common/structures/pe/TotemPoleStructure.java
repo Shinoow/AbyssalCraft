@@ -115,4 +115,13 @@ public class TotemPoleStructure implements IPlaceOfPower {
 		return new BlockPos(0, 0, 0);
 	}
 
+	@Override
+	public int getAmbientEffectCooldown() {
+		return 0;
+	}
+
+	@Override
+	public void triggermAmbientEffect(World world, BlockPos pos) {
+
+	}
 }

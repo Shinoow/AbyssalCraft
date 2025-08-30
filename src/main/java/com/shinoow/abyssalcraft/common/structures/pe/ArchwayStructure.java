@@ -165,4 +165,14 @@ public class ArchwayStructure implements IPlaceOfPower {
 
 		return new BlockPos(2, 0, 0);
 	}
+
+	@Override
+	public int getAmbientEffectCooldown() {
+		return 0;
+	}
+
+	@Override
+	public void triggermAmbientEffect(World world, BlockPos pos) {
+
+	}
 }

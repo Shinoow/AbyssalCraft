@@ -81,17 +81,13 @@ public class BlockUtil {
 
 		if(tile instanceof IEnergyManipulator && !(tile instanceof IEnergyContainer)){
 			ItemStack stack = new ItemStack(block.getItemDropped(state, rand, 1), 1, block.damageDropped(state));
-			if(!stack.hasTagCompound())
-				stack.setTagCompound(new NBTTagCompound());
 			NBTTagCompound data = new NBTTagCompound();
 			tile.writeToNBT(data);
-			stack.getTagCompound().setInteger("Timer", data.getInteger("Timer"));
 			if(data.hasKey("PotEnergy")) {
-				stack.getTagCompound().setInteger("Tolerance", data.getInteger("Tolerance"));
+				if(!stack.hasTagCompound())
+					stack.setTagCompound(new NBTTagCompound());
 				stack.getTagCompound().setFloat("PotEnergy", data.getFloat("PotEnergy"));
-			} else
-				stack.getTagCompound().setInteger("Tolerance", data.getInteger("Tolerance") + 10);
-			PEUtils.writeManipulatorNBT((IEnergyManipulator)tile, stack.getTagCompound());
+			}
 			float f = rand.nextFloat() * 0.8F + 0.1F;
 			float f1 = rand.nextFloat() * 0.8F + 0.1F;
 			float f2 = rand.nextFloat() * 0.8F + 0.1F;

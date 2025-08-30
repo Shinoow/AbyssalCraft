@@ -184,4 +184,14 @@ public class BasicStructure implements IPlaceOfPower {
 
 		return new BlockPos(1, 2, 1);
 	}
+
+	@Override
+	public int getAmbientEffectCooldown() {
+		return 0;
+	}
+
+	@Override
+	public void triggermAmbientEffect(World world, BlockPos pos) {
+
+	}
 }

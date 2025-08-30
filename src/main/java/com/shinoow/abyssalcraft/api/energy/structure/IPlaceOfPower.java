@@ -99,4 +99,16 @@ public interface IPlaceOfPower {
 	default String getRequiredBlockNames(){
 		return "ac.structure."+getIdentifier()+".blocks";
 	}
+
+	/**
+	 * Getter for the cooldown (in ticks) between each trigger of the Ambient Effect
+	 */
+	int getAmbientEffectCooldown();
+
+	/**
+	 * Triggers the Ambient Effect of the Place of Power
+	 * @param world Current World
+	 * @param pos Position of the base block
+	 */
+	void triggermAmbientEffect(World world, BlockPos pos);
 }

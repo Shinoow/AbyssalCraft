@@ -12,13 +12,11 @@
 package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.shinoow.abyssalcraft.api.energy.PEUtils;
+import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.lib.ACTabs;
-import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -41,7 +39,6 @@ import net.minecraftforge.client.model.obj.OBJModel;
 public class BlockStatue extends BlockContainer {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	//	public static final PropertyEnum<EnumDeityType> TYPE = PropertyEnum.create("type", EnumDeityType.class);
 	public EnumDeityType TYPE;
 	public static final Map<EnumDeityType, Block> VARIANTS = new HashMap<>();
 
@@ -63,18 +60,6 @@ public class BlockStatue extends BlockContainer {
 		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
-	//	@Override
-	//	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-	//	{
-	//		EnumFacing facing = EnumFacing.NORTH;
-	//
-	//		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
-	//		if(tile instanceof TileEntityStatue)
-	//			facing = EnumFacing.getFront(((TileEntityStatue) tile).getFacing());
-	//
-	//		return state.withProperty(FACING, facing);
-	//	}
-
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -86,17 +71,6 @@ public class BlockStatue extends BlockContainer {
 	{
 		return state.getValue(FACING).getIndex();
 	}
-
-	//	@Override
-	//	public int damageDropped (IBlockState state) {
-	//		return state.getValue(TYPE).getMeta();
-	//	}
-
-	//	@Override
-	//	public void getSubBlocks(CreativeTabs par2CreativeTabs, NonNullList<ItemStack> par3List) {
-	//		for(int i = 0; i < EnumDeityType.values().length; i++)
-	//			par3List.add(new ItemStack(this, 1, i));
-	//	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -122,34 +96,17 @@ public class BlockStatue extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
-	{
-		BlockUtil.dropTileEntityAsItemWithExtra(world, pos, state, this);
-
-		super.breakBlock(world, pos, state);
-	}
-
-	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		if(stack.hasTagCompound()){
 			TileEntity tile = worldIn.getTileEntity(pos);
 			if(tile instanceof TileEntityStatue){
-				//			((TileEntityStatue) tile).setFacing(state.getValue(FACING).getIndex());
 				NBTTagCompound data = new NBTTagCompound();
 				tile.writeToNBT(data);
-				data.setInteger("Timer", stack.getTagCompound().getInteger("Timer"));
-				data.setInteger("Tolerance", stack.getTagCompound().getInteger("Tolerance") + 10);
+				data.setInteger("Tolerance", 10);
 				tile.readFromNBT(data);
-				PEUtils.readManipulatorNBT((TileEntityStatue)tile, stack.getTagCompound());
 			}
 		}
-	}
-
-	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-	{
-		return new java.util.ArrayList<>();
 	}
 
 	@Override
@@ -166,22 +123,24 @@ public class BlockStatue extends BlockContainer {
 	}
 
 	public enum EnumDeityType implements IStringSerializable {
-		CTHULHU(0, "cthulhu"),
-		HASTUR(1, "hastur"),
-		JZAHAR(2, "jzahar"),
-		AZATHOTH(3, "azathoth"),
-		NYARLATHOTEP(4, "nyarlathotep"),
-		YOGSOTHOTH(5, "yogsothoth"),
-		SHUBNIGGURATH(6, "shubniggurath");
+		CTHULHU(0, "cthulhu", DeityType.CTHULHU),
+		HASTUR(1, "hastur", DeityType.HASTUR),
+		JZAHAR(2, "jzahar", DeityType.JZAHAR),
+		AZATHOTH(3, "azathoth", DeityType.AZATHOTH),
+		NYARLATHOTEP(4, "nyarlathotep", DeityType.NYARLATHOTEP),
+		YOGSOTHOTH(5, "yogsothoth", DeityType.YOGSOTHOTH),
+		SHUBNIGGURATH(6, "shubniggurath", DeityType.SHUBNIGGURATH);
 
 		private static final EnumDeityType[] META_LOOKUP = new EnumDeityType[values().length];
 
 		private int meta;
 		private String name;
+		private DeityType deity;
 
-		private EnumDeityType(int meta, String name) {
+		private EnumDeityType(int meta, String name, DeityType deity) {
 			this.meta = meta;
 			this.name = name;
+			this.deity = deity;
 		}
 
 		public static EnumDeityType byMetadata(int meta)
@@ -199,6 +158,10 @@ public class BlockStatue extends BlockContainer {
 
 		public int getMeta() {
 			return meta;
+		}
+
+		public DeityType getDeity() {
+			return deity;
 		}
 
 		@Override
