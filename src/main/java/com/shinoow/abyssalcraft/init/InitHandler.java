@@ -531,7 +531,7 @@ public class InitHandler implements ILifeCycleHandler {
 					RitualRegistry.instance().addDimensionToBookTypeConfig(Integer.parseInt(stuff[0]), Integer.parseInt(stuff[1]), stuff[2]);
 				else if(stuff.length == 2)
 					RitualRegistry.instance().addDimensionToBookTypeConfig(Integer.parseInt(stuff[0]), Integer.parseInt(stuff[1]));
-				else ACLogger.severe("Dimension Book Type Mapping: {}", str);
+				else ACLogger.severe("Invalid Dimension Book Type Mapping: {}", str);
 			}
 
 		if(cfg.hasChanged())
