@@ -80,6 +80,7 @@ public class ItemCharm extends ItemACBasic implements IAmplifierCharm {
 				} else if(((IEnergyManipulator) tile).isActive() && getAmplifier(stack) == null) {
 					((IEnergyManipulator) tile).setActiveAmplifier(null);
 					((IEnergyManipulator) tile).setActiveDeity(null);
+					world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
 				}
 			return EnumActionResult.SUCCESS;
 		}

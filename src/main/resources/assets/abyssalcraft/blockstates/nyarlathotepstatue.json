@@ -2,7 +2,6 @@
     "forge_marker": 1,
     "defaults": {
         "textures": {
-          //  "#statue": "abyssalcraft:model/blocks/PSDL" //the identifier must be a name of a material defined by the "model" obj's .mtl file
         },
         "model": "abyssalcraft:nyarlathotepstatue.obj",
 		"custom": {"flip-v":true}
@@ -11,16 +10,6 @@
         "normal": [{}],
         "inventory": [{
 			"transform": "forge:default-block"
-         /*   "transform": {
-				"thirdperson": {
-					"rotation": [ {"x":20}, {"y":45}, {"z":170} ],
-					"translation": [ 0, 0.09375, -0.171875 ],
-					"scale": 0.375
-				},
-				"firstperson": {
-					"rotation": [ {"x":0}, {"y":-90}, {"z":0} ]
-				}
-			}*/
         }],
 		"facing": {
             "down": { "model": "abyssalcraft:nyarlathotepstatue.obj" },
@@ -29,6 +18,39 @@
             "south": { "model": "abyssalcraft:nyarlathotepstatue.obj", "y": 270 },
             "west": { "model": "abyssalcraft:nyarlathotepstatue.obj" },
             "east": { "model": "abyssalcraft:nyarlathotepstatue.obj", "y": 180 }
+        },
+        "amplifier": {
+            "0": {},
+            "1": {
+				"submodel": {
+					"sigil": {
+                        "model": "abyssalcraft:statue_sigil",
+                        "textures" : {
+		                    "0": "abyssalcraft:items/charms/duration_alt"
+                        }
+                    }
+				}
+            },
+            "2": {
+                "submodel": {
+					"sigil": {
+                        "model": "abyssalcraft:statue_sigil",
+                        "textures" : {
+		                    "0": "abyssalcraft:items/charms/power_alt"
+                        }
+                    }
+                }
+            },
+            "3": {
+				"submodel": {
+					"sigil": {
+                        "model": "abyssalcraft:statue_sigil",
+                        "textures" : {
+		                    "0": "abyssalcraft:items/charms/range_alt"
+                        }
+                    }
+				}
+            }
         }
     }
 }

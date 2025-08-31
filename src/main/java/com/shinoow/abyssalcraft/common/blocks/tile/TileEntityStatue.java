@@ -51,6 +51,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	private boolean isMultiblock;
 	private BlockPos basePos;
 	private Set<BlockPos> positions = new HashSet<>();
+	private boolean flag;
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
@@ -164,6 +165,8 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public void setActiveAmplifier(AmplifierType amplifier) {
 
+		//TODO trigger flag that updates blockState with amplifier value
+		flag = true;
 		currentAmplifier = amplifier;
 	}
 
@@ -202,9 +205,7 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 	@Override
 	public void update(){
 
-		if(isActive())
-			((WorldServer)world).spawnParticle(EnumParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5, 0, 0, 0, 0, 1.0);
-		else PEUtils.clearManipulatorData(this);
+		if(!isActive()) PEUtils.clearManipulatorData(this);
 
 		int range = (int) (7 + PEUtils.getRangeAmplifiers(world, pos, this)*4 + getAmplifier(AmplifierType.RANGE));
 
@@ -232,6 +233,23 @@ public class TileEntityStatue extends TileEntity implements IEnergyManipulator, 
 			}
 		if(tolerance >= 100)
 			disrupt();
+
+		if(flag) {
+			IBlockState state = world.getBlockState(getPos());
+			int amplifier = BlockStatue.getAmplifierNumber(this);
+			if(state.getValue(BlockStatue.AMPLIFIER) != amplifier) {
+
+				TileEntity te = world.getTileEntity(pos);
+
+				world.setBlockState(pos, state.withProperty(BlockStatue.AMPLIFIER, amplifier));
+
+				if(te != null){
+					te.validate();
+					world.setTileEntity(pos, te);
+				}
+			}
+			flag = false;
+		}
 	}
 
 	@Override

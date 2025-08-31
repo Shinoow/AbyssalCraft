@@ -17,12 +17,14 @@ import java.util.Map;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.DeityType;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -39,19 +41,33 @@ import net.minecraftforge.client.model.obj.OBJModel;
 public class BlockStatue extends BlockContainer {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
+	public static final PropertyInteger AMPLIFIER = PropertyInteger.create("amplifier", 0, 3);
 	public EnumDeityType TYPE;
 	public static final Map<EnumDeityType, Block> VARIANTS = new HashMap<>();
 
 	public BlockStatue(EnumDeityType type) {
 		super(Material.ROCK);
 		TYPE = type;
-		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(AMPLIFIER, 0));
 		setHardness(6.0F);
 		setResistance(12.0F);
 		setSoundType(SoundType.STONE);
 		setCreativeTab(ACTabs.tabDecoration);
 		setHarvestLevel("pickaxe", 0);
 		VARIANTS.put(TYPE, this);
+	}
+
+
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	{
+		int amplifier = 0;
+		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
+		if(tile instanceof TileEntityStatue) {
+			amplifier = getAmplifierNumber((TileEntityStatue) tile);
+		}
+
+		return state.withProperty(AMPLIFIER, amplifier);
 	}
 
 	@Override
@@ -96,6 +112,11 @@ public class BlockStatue extends BlockContainer {
 	}
 
 	@Override
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT_MIPPED;
+	}
+
+	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		if(stack.hasTagCompound()){
@@ -115,11 +136,27 @@ public class BlockStatue extends BlockContainer {
 		return new TileEntityStatue();
 	}
 
+	public static int getAmplifierNumber(TileEntityStatue statue) {
+		if(statue.isActive()) {
+			switch(statue.getActiveAmplifier()) {
+			case DURATION:
+				return 1;
+			case POWER:
+				return 2;
+			case RANGE:
+				return 3;
+			default:
+				return 0;
+			}
+		}
+		return 0;
+	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer.Builder(this).add(FACING).add(OBJModel.OBJProperty.INSTANCE).build();
+		return new BlockStateContainer.Builder(this).add(FACING).add(OBJModel.OBJProperty.INSTANCE).add(AMPLIFIER).build();
 	}
 
 	public enum EnumDeityType implements IStringSerializable {
