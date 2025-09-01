@@ -139,6 +139,14 @@ public class Pages {
 
 	public static Page INFORMATION_ABYSSAL_WASTELAND;
 
+	public static Page CHAINS;
+
+	public static Page BIOME_ABYSSAL_WASTELAND;
+	public static Page BIOME_ABYSSAL_DESERT;
+	public static Page BIOME_ABYSSAL_PLATEAU;
+	public static Page BIOME_ABYSSAL_SWAMP;
+	public static Page BIOME_CORALIUM_LAKE;
+
 	//All things Dreadlands
 
 	public static Page MATERIAL_DREADSTONE;
@@ -196,6 +204,11 @@ public class Pages {
 
 	public static Page LAIR_OF_CHAGAROTH_1;
 
+	public static Page BIOME_DREADLANDS;
+	public static Page BIOME_DREADLANDS_MOUNTAINS;
+	public static Page BIOME_DREADLANDS_FOREST;
+	public static Page BIOME_DREADLANDS_OCEAN;
+
 	//All things Omothol
 
 	public static Page MATERIAL_OMOTHOL_STONE;
@@ -244,6 +257,8 @@ public class Pages {
 
 	public static Page INFORMATION_OMOTHOL;
 
+	public static Page BIOME_OMOTHOL;
+
 	//All things Dark Realm
 
 	public static Page MATERIAL_DARKSTONE_DR_1;
@@ -266,6 +281,8 @@ public class Pages {
 	public static Page ENTITY_SHADOW_GHOUL_2;
 
 	public static Page INFORMATION_DARK_REALM;
+
+	public static Page BIOME_DARK_REALM;
 
 	//All things Abyssalnomicon
 

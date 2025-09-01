@@ -64,13 +64,33 @@ public class NecronomiconResources {
 	//Overworld structures
 
 	//Abyssal Wasteland structures
+	public static final ResourceLocation CHAINS = res("structures/chains");
 
 	//Dreadlands structures
-	public static final ResourceLocation CHAGAROTH_LAIR_ENTRANCE = res("dreadlands/lair_entrance");
+	public static final ResourceLocation CHAGAROTH_LAIR_ENTRANCE = res("structures/lair_entrance");
 
 	//Omothol structures
 
 	//Dark Realm structures
+
+	//Abyssal Wasteland biomes
+	public static final ResourceLocation BIOME_ABYSSAL_WASTELAND = res("biomes/abyssal_wasteland");
+	public static final ResourceLocation BIOME_ABYSSAL_DESERT = res("biomes/abyssal_desert");
+	public static final ResourceLocation BIOME_ABYSSAL_PLATEAU = res("biomes/abyssal_plateau");
+	public static final ResourceLocation BIOME_ABYSSAL_SWAMP = res("biomes/abyssal_swamp");
+	public static final ResourceLocation BIOME_CORALIUM_LAKE = res("biomes/coralium_lake");
+
+	//Dreadlands biomes
+	public static final ResourceLocation BIOME_DREADLANDS = res("biomes/dreadlands");
+	public static final ResourceLocation BIOME_DREADLANDS_MOUNTAINS = res("biomes/dreadlands_mountains");
+	public static final ResourceLocation BIOME_DREADLANDS_FOREST = res("biomes/dreadlands_forest");
+	public static final ResourceLocation BIOME_DREADLANDS_OCEAN = res("biomes/dreadlands_ocean");
+
+	//Omothol biomes
+	public static final ResourceLocation BIOME_OMOTHOL = res("biomes/omothol");
+
+	//Dark Realm biomes
+	public static final ResourceLocation BIOME_DARK_REALM = res("biomes/dark_realm");
 
 	//Seals representing The Great Old Ones, no idea how many I'm going to do
 	public static final ResourceLocation AZATHOTH_SEAL = res("azathoth");
