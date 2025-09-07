@@ -314,6 +314,11 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 		Pages.INFORMATION_OVERWORLD = new Page(1, NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0, NecronomiconText.INFORMATION_OVERWORLD);
 
+		Pages.SHOGGOTH_LAIR = new Page(1, NecronomiconText.LABEL_STRUCTURES, 0, NecronomiconResources.SHOGGOTH_LAIR, NecronomiconText.WIP);
+		Pages.GRAVEYARD = new Page(2, NecronomiconText.LABEL_STRUCTURES, 0, NecronomiconResources.GRAVEYARD, NecronomiconText.WIP);
+		Pages.DARK_SHRINE = new Page(3, NecronomiconText.LABEL_STRUCTURES, 0, NecronomiconResources.DARK_SHRINE, NecronomiconText.WIP);
+		Pages.DARK_STRUCTURE = new Page(4, NecronomiconText.LABEL_STRUCTURES, 0, NecronomiconResources.DARK_STRUCTURE, NecronomiconText.WIP);
+
 		Pages.MATERIAL_ABYSSAL_STONE = new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.abyssal_stone), NecronomiconText.MATERIAL_ABYSSAL_STONE_1);
 		Pages.MATERIAL_ABYSSAL_SAND = new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.abyssal_sand), NecronomiconText.MATERIAL_ABYSSAL_SAND);
 		Pages.MATERIAL_FUSED_ABYSSAL_SAND = new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 1, new ItemStack(ACBlocks.fused_abyssal_sand), NecronomiconText.MATERIAL_FUSED_ABYSSAL_SAND);
@@ -361,13 +366,13 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_ABYSSAL_WASTELAND = new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, NecronomiconText.INFORMATION_ABYSSAL_WASTELAND);
 
 		Pages.CHAINS = new Page(1, NecronomiconText.LABEL_STRUCTURES, 1, NecronomiconResources.CHAINS, NecronomiconText.WIP);
-		
+
 		Pages.BIOME_ABYSSAL_WASTELAND = new Page(1, NecronomiconText.LABEL_INFORMATION_BIOMES, 1, NecronomiconResources.BIOME_ABYSSAL_WASTELAND, NecronomiconText.WIP);
 		Pages.BIOME_ABYSSAL_DESERT = new Page(2, NecronomiconText.LABEL_INFORMATION_BIOMES, 1, NecronomiconResources.BIOME_ABYSSAL_DESERT, NecronomiconText.WIP);
 		Pages.BIOME_ABYSSAL_PLATEAU = new Page(3, NecronomiconText.LABEL_INFORMATION_BIOMES, 1, NecronomiconResources.BIOME_ABYSSAL_PLATEAU, NecronomiconText.WIP);
 		Pages.BIOME_ABYSSAL_SWAMP = new Page(4, NecronomiconText.LABEL_INFORMATION_BIOMES, 1, NecronomiconResources.BIOME_ABYSSAL_SWAMP, NecronomiconText.WIP);
 		Pages.BIOME_CORALIUM_LAKE = new Page(5, NecronomiconText.LABEL_INFORMATION_BIOMES, 1, NecronomiconResources.BIOME_CORALIUM_LAKE, NecronomiconText.WIP);
-		
+
 		Pages.MATERIAL_DREADSTONE = new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.dreadstone), NecronomiconText.MATERIAL_DREADSTONE_1);
 		Pages.MATERIAL_ABYSSALNITE_STONE_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, new ItemStack(ACBlocks.elysian_stone), NecronomiconText.MATERIAL_ABYSSALNITE_STONE_1);
 		Pages.MATERIAL_ABYSSALNITE_STONE_2 = new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 2, NecronomiconText.MATERIAL_ABYSSALNITE_STONE_2);
@@ -427,7 +432,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.BIOME_DREADLANDS_MOUNTAINS = new Page(2, NecronomiconText.LABEL_INFORMATION_BIOMES, 2, NecronomiconResources.BIOME_DREADLANDS_MOUNTAINS, NecronomiconText.WIP);
 		Pages.BIOME_DREADLANDS_FOREST = new Page(3, NecronomiconText.LABEL_INFORMATION_BIOMES, 2, NecronomiconResources.BIOME_DREADLANDS_FOREST, NecronomiconText.WIP);
 		Pages.BIOME_DREADLANDS_OCEAN = new Page(4, NecronomiconText.LABEL_INFORMATION_BIOMES, 2, NecronomiconResources.BIOME_DREADLANDS_OCEAN, NecronomiconText.WIP);
-		
+
 		Pages.MATERIAL_OMOTHOL_STONE = new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.omothol_stone), NecronomiconText.MATERIAL_OMOTHOL_STONE_1);
 		Pages.MATERIAL_ETHAXIUM_1 = new Page(3, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.ethaxium), NecronomiconText.MATERIAL_ETHAXIUM_1);
 		Pages.MATERIAL_ETHAXIUM_2 = new Page(4, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_ETHAXIUM_2);
@@ -475,7 +480,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_OMOTHOL = new Page(1, NecronomiconText.LABEL_INFORMATION_OMOTHOL_TITLE, 3, NecronomiconText.INFORMATION_OMOTHOL);
 
 		Pages.BIOME_OMOTHOL = new Page(1, NecronomiconText.LABEL_INFORMATION_BIOMES, 3, NecronomiconResources.BIOME_OMOTHOL, NecronomiconText.WIP);
-		
+
 		Pages.MATERIAL_DARKSTONE_DR_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, new ItemStack(ACBlocks.darkstone), NecronomiconText.MATERIAL_DARKSTONE_1);
 		Pages.MATERIAL_DARKSTONE_DR_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_MATERIALS, 3, NecronomiconText.MATERIAL_DARKSTONE_2);
 
@@ -498,7 +503,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_DARK_REALM = new Page(1, NecronomiconText.LABEL_INFORMATION_DARK_REALM_TITLE, 3, NecronomiconText.INFORMATION_DARK_REALM);
 
 		Pages.BIOME_DARK_REALM = new Page(1, NecronomiconText.LABEL_INFORMATION_BIOMES, 3, NecronomiconResources.BIOME_DARK_REALM, NecronomiconText.WIP);
-		
+
 		Pages.CRAFTING_PORTAL_ANCHOR_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, new CraftingStack(ACBlocks.portal_anchor), NecronomiconText.CRAFTING_PORTAL_ANCHOR_1);
 		Pages.CRAFTING_PORTAL_ANCHOR_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.CRAFTING_PORTAL_ANCHOR_2);
 
@@ -618,7 +623,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.OVERWORLD_ARMORTOOLS.addPages(Pages.CRAFTING_STAFF_OF_RENDING_1, Pages.CRAFTING_STAFF_OF_RENDING_2, Pages.CRAFTING_SEQUENTIAL_BREWING_STAND_1, Pages.CRAFTING_SEQUENTIAL_BREWING_STAND_2);
 		Chapters.OVERWORLD.addPage(Pages.INFORMATION_OVERWORLD); //TODO dimensions
 		Chapters.OVERWORLD_BIOMES.addPage(Pages.WIP); //TODO biomes
-		Chapters.OVERWORLD_STRUCTURES.addPage(Pages.WIP); //TODO structures
+		Chapters.OVERWORLD_STRUCTURES.addPages(Pages.SHOGGOTH_LAIR, Pages.GRAVEYARD, Pages.DARK_SHRINE, Pages.DARK_STRUCTURE); //TODO structures
 		Chapters.ABYSSAL_WASTELAMD_MATERIALS.addPages(Pages.MATERIAL_ABYSSAL_STONE, Pages.MATERIAL_ABYSSAL_SAND, Pages.MATERIAL_FUSED_ABYSSAL_SAND, Pages.MATERIAL_ABYSSAL_ORES_1, Pages.MATERIAL_ABYSSAL_ORES_2, Pages.MATERIAL_ABYSSAL_CORALIUM, Pages.MATERIAL_LIQUIFIED_CORALIUM, Pages.MATERIAL_PEARLESCENT_CORALIUM, Pages.MATERIAL_LIQUID_CORALIUM_1, Pages.MATERIAL_LIQUID_CORALIUM_2, Pages.MATERIAL_DREADLANDS_INFUSED_POWERSTONE);
 		Chapters.ABYSSAL_WASTELAND_PROGRESSION.addPages(Pages.PROGRESSION_ABYSSAL_1, Pages.PROGRESSION_ABYSSAL_2, Pages.PROGRESSION_ABYSSAL_3);
 		Chapters.ABYSSAL_WASTELAND_MOBS.addPages(Pages.ENTITY_ABYSSAL_ZOMBIE_1, Pages.ENTITY_ABYSSAL_ZOMBIE_2, Pages.ENTITY_DEPTHS_GHOUL_1, Pages.ENTITY_DEPTHS_GHOUL_2, Pages.ENTITY_SKELETON_GOLIATH_1, Pages.ENTITY_SKELETON_GOLIATH_2, Pages.ENTITY_SPECTRAL_DRAGON_1, Pages.ENTITY_SPECTRAL_DRAGON_2, Pages.ENTITY_ASORAH_1, Pages.ENTITY_ASORAH_2, Pages.ENTITY_CORALIUM_INFESTED_SQUID_1, Pages.ENTITY_CORALIUM_INFESTED_SQUID_2, Pages.ENTITY_ABYSSAL_SHOGGOTH_1, Pages.ENTITY_ABYSSAL_SHOGGOTH_2);

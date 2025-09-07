@@ -62,6 +62,10 @@ public class NecronomiconResources {
 	public static final ResourceLocation SHADOW_GHOUL = GHOUL; //TODO actual picture
 
 	//Overworld structures
+	public static final ResourceLocation SHOGGOTH_LAIR = res("structures/shoggoth_lair");
+	public static final ResourceLocation GRAVEYARD = res("structures/graveyard");
+	public static final ResourceLocation DARK_SHRINE = res("structures/dark_shrine");
+	public static final ResourceLocation DARK_STRUCTURE = res("structures/dark_structure");
 
 	//Abyssal Wasteland structures
 	public static final ResourceLocation CHAINS = res("structures/chains");

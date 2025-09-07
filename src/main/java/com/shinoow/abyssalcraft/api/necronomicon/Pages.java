@@ -91,6 +91,11 @@ public class Pages {
 
 	public static Page INFORMATION_OVERWORLD;
 
+	public static Page SHOGGOTH_LAIR;
+	public static Page GRAVEYARD;
+	public static Page DARK_SHRINE;
+	public static Page DARK_STRUCTURE;
+	
 	//All things Abyssal Wasteland
 
 	public static Page MATERIAL_ABYSSAL_STONE;
