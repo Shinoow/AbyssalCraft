@@ -73,7 +73,8 @@ public class ACConfig {
 	// Structures, lakes etc
 	public static boolean generateDarklandsStructures, generateShoggothLairs, useAmplifiedWorldType,
 	generateAbyssalWastelandPillars, generateAbyssalWastelandRuins, generateAntimatterLake,
-	generateCoraliumLake, generateDreadlandsStalagmite, generateStatuesInLairs, generateGraveyards;
+	generateCoraliumLake, generateDreadlandsStalagmite, generateStatuesInLairs, generateGraveyards,
+	generateOmotholStructures;
 
 	// Ores
 	public static boolean generateCoraliumOre, generateNitreOre, generateAbyssalniteOre, generateAbyssalCoraliumOre,

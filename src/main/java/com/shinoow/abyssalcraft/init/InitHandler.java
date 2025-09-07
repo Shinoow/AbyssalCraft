@@ -399,6 +399,7 @@ public class InitHandler implements ILifeCycleHandler {
 		generateCoraliumLake = cfg.get(CATEGORY_WORLDGEN, "Liquid Coralium Lakes", true, "Toggles whether or not to generate Liquid Coralium Lakes in the Abyssal Wasteland.").getBoolean();
 		generateDreadlandsStalagmite = cfg.get(CATEGORY_WORLDGEN, "Dreadlands Stalagmites", true, "Toggles whether or not to generate Stalagmites in Dreadlands and Purified Dreadlands biomes.").getBoolean();
 		generateGraveyards = cfg.get(CATEGORY_WORLDGEN, "Generate Graveyards", true, "Toggles whether or not Graveyards should generate.").getBoolean();
+		generateOmotholStructures = cfg.get(CATEGORY_WORLDGEN, "Generate Omothol City", true, "Toggles whether or not to generate the 'Temple City of Omothol' (Except the Temple of J'zahar).").getBoolean();
 
 		generateCoraliumOre = cfg.get(CATEGORY_WORLDGEN, "Coralium Ore", true, "Toggles whether or not to generate Coralium Ore in the Overworld.").getBoolean();
 		generateNitreOre = cfg.get(CATEGORY_WORLDGEN, "Nitre Ore", true, "Toggles whether or not to generate Nitre Ore in the Overworld.").getBoolean();
