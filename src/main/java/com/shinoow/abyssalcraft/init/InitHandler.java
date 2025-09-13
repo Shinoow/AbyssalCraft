@@ -543,8 +543,12 @@ public class InitHandler implements ILifeCycleHandler {
 		for(String str : transformationList)
 			if(str.length() > 0){
 				String[] stuff = str.split(";");
-				if(stuff.length >= 2)
-					demon_transformations.put(new ResourceLocation(stuff[0]), new Tuple(Integer.valueOf(stuff[1]), stuff.length == 3 ? Float.valueOf(stuff[2]) : 1));
+				if(stuff.length >= 2) {
+					ResourceLocation mob = new ResourceLocation(stuff[0]);
+					if(EntityList.isRegistered(mob))
+						demon_transformations.put(mob, new Tuple(Integer.valueOf(stuff[1]), stuff.length == 3 ? Float.valueOf(stuff[2]) : 1));
+					else ACLogger.severe("[Demon Animal Transforrmation] Invalid Mob: {}", stuff[0]);
+				}
 				else ACLogger.severe("Invalid Demon Animal Transformation: {}", str);
 			}
 
@@ -627,6 +631,7 @@ public class InitHandler implements ILifeCycleHandler {
 	private static void addDreadPlagueImmunity(String entity) {
 		if(EntityList.isRegistered(new ResourceLocation(entity)))
 			dread_immunity.add(entity);
+		else ACLogger.severe("[Dread Plague Immunity] invalid Mob: {}", entity);
 	}
 
 	/**
@@ -635,9 +640,11 @@ public class InitHandler implements ILifeCycleHandler {
 	 * @param entity Entity ID string
 	 */
 	private static void addDreadPlagueCarrier(String entity) {
-		addDreadPlagueImmunity(entity);
-		if(EntityList.isRegistered(new ResourceLocation(entity)))
+		if(EntityList.isRegistered(new ResourceLocation(entity))) {
+			addDreadPlagueImmunity(entity);
 			dread_carriers.add(entity);
+		}
+		else ACLogger.severe("[Dread Plague Carrier] invalid Mob: {}", entity);
 	}
 
 	/**
@@ -647,6 +654,7 @@ public class InitHandler implements ILifeCycleHandler {
 	private static void addCoraliumPlagueImmunity(String entity) {
 		if(EntityList.isRegistered(new ResourceLocation(entity)))
 			coralium_immunity.add(entity);
+		else ACLogger.severe("[Coralium Plague Immunity] invalid Mob: {}", entity);
 	}
 
 	/**
@@ -655,9 +663,11 @@ public class InitHandler implements ILifeCycleHandler {
 	 * @param entity Entity ID string
 	 */
 	private static void addCoraliumPlagueCarrier(String entity) {
-		addCoraliumPlagueImmunity(entity);
-		if(EntityList.isRegistered(new ResourceLocation(entity)))
+		if(EntityList.isRegistered(new ResourceLocation(entity))) {
+			addCoraliumPlagueImmunity(entity);
 			coralium_carriers.add(entity);
+		}
+		else ACLogger.severe("[Coralium Plague Carrier] invalid Mob: {}", entity);
 	}
 
 	public boolean isImmuneOrCarrier(String entity, int list) {
