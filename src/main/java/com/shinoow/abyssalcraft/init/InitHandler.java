@@ -71,7 +71,8 @@ public class InitHandler implements ILifeCycleHandler {
 	public static Configuration cfg;
 
 	private static String[] interdimensionalCageBlacklist, dreadPlagueImmunityList, dreadPlagueCarrierList,
-	coraliumPlagueImmunityList, coraliumPlagueCarrierList, itemTransportBlacklist, mobItemPickupBlacklist;
+	coraliumPlagueImmunityList, coraliumPlagueCarrierList, itemTransportBlacklist, mobItemPickupBlacklist,
+	transformationList;
 
 	public static String startDimensionName;
 
@@ -158,6 +159,7 @@ public class InitHandler implements ILifeCycleHandler {
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
 		constructBlacklists();
+		constructMobLists();
 		DimensionType[] dims = DimensionManager.getRegisteredDimensions().keySet().toArray(new DimensionType[0]);
 		blackHoleDimlist = new int[dims.length];
 		for(int i = 0; i < dims.length; i++)
@@ -341,7 +343,7 @@ public class InitHandler implements ILifeCycleHandler {
 		demonAnimalsSpawnOnDeath = cfg.get(CATEGORY_MOBS, "Demon Animals Spawn on Death", true, "Toggles whether or not an Evil Animal spawns a Demon Animal on death.").getBoolean();
 		evilAnimalNewMoonSpawning = cfg.get(CATEGORY_MOBS, "Evil Animal New Moon Spawning", true, "Toggles whether or not Evil Animals only spawn at night during a new moon.").getBoolean();
 
-		String[] transformations = cfg.getStringList("Demon Animal Transformations", CATEGORY_MOBS, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
+		transformationList = cfg.getStringList("Demon Animal Transformations", CATEGORY_MOBS, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
 				+ "\nFormat: entityid;demonanimal;chance \nwhere entityid is the String used in the /summon command\n demonanimal is a Integer representing the Demon Animal to spawn (0 = Demon Pig, 1 = Demon Cow, 2 = Demon Chicken, 3 = Demon Sheep)"
 				+ "\nchance is a decimal number representing the chance (optional, can be left out) of the Demon Animal being spawned (0.2 would mean a 20% chance, defaults to 100% if not set");
 
@@ -501,27 +503,6 @@ public class InitHandler implements ILifeCycleHandler {
 		if(startDimensionColors.length != 3)
 			startDimensionColors = new int[]{255, 255, 255};
 
-		demon_transformations.clear();
-
-		for(String str : transformations)
-			if(str.length() > 0){
-				String[] stuff = str.split(";");
-				if(stuff.length >= 2)
-					demon_transformations.put(new ResourceLocation(stuff[0]), new Tuple(Integer.valueOf(stuff[1]), stuff.length == 3 ? Float.valueOf(stuff[2]) : 1));
-				else ACLogger.severe("Invalid Demon Animal Transformation: {}", str);
-			}
-
-		clearImmunityLists();
-
-		for(String str : dreadPlagueImmunityList)
-			addDreadPlagueImmunity(str);
-		for(String str : dreadPlagueCarrierList)
-			addDreadPlagueCarrier(str);
-		for(String str : coraliumPlagueImmunityList)
-			addCoraliumPlagueImmunity(str);
-		for(String str : coraliumPlagueCarrierList)
-			addCoraliumPlagueCarrier(str);
-
 		DimensionDataRegistry.instance().wipeConfig();
 		RitualRegistry.instance().wipeConfig();
 
@@ -555,6 +536,26 @@ public class InitHandler implements ILifeCycleHandler {
 		};
 
 		construct.accept(mobItemPickupBlacklist, mob_pickup_blacklist);
+	}
+
+	private void constructMobLists() {
+
+		for(String str : transformationList)
+			if(str.length() > 0){
+				String[] stuff = str.split(";");
+				if(stuff.length >= 2)
+					demon_transformations.put(new ResourceLocation(stuff[0]), new Tuple(Integer.valueOf(stuff[1]), stuff.length == 3 ? Float.valueOf(stuff[2]) : 1));
+				else ACLogger.severe("Invalid Demon Animal Transformation: {}", str);
+			}
+
+		for(String str : dreadPlagueImmunityList)
+			addDreadPlagueImmunity(str);
+		for(String str : dreadPlagueCarrierList)
+			addDreadPlagueCarrier(str);
+		for(String str : coraliumPlagueImmunityList)
+			addCoraliumPlagueImmunity(str);
+		for(String str : coraliumPlagueCarrierList)
+			addCoraliumPlagueCarrier(str);
 	}
 
 	/**
@@ -657,13 +658,6 @@ public class InitHandler implements ILifeCycleHandler {
 		addCoraliumPlagueImmunity(entity);
 		if(EntityList.isRegistered(new ResourceLocation(entity)))
 			coralium_carriers.add(entity);
-	}
-
-	private static void clearImmunityLists() {
-		dread_immunity.clear();
-		dread_carriers.clear();
-		coralium_immunity.clear();
-		coralium_carriers.clear();
 	}
 
 	public boolean isImmuneOrCarrier(String entity, int list) {
