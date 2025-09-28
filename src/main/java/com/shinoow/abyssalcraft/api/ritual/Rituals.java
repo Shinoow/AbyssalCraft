@@ -35,39 +35,6 @@ public class Rituals {
 	public static NecronomiconRitual DEPTHS_LEGGINGS;
 	public static NecronomiconRitual DEPTHS_BOOTS;
 
-	// Charms
-	public static NecronomiconRitual RANGE_CHARM;
-	public static NecronomiconRitual DURATION_CHARM;
-	public static NecronomiconRitual POWER_CHARM;
-	public static NecronomiconRitual CTHULHU_RANGE_CHARM;
-	public static NecronomiconRitual CTHULHU_DURATION_CHARM;
-	public static NecronomiconRitual CTHULHU_POWER_CHARM;
-	public static NecronomiconRitual HASTUR_RANGE_CHARM;
-	public static NecronomiconRitual HASTUR_DURATION_CHARM;
-	public static NecronomiconRitual HASTUR_POWER_CHARM;
-	public static NecronomiconRitual JZAHAR_RANGE_CHARM;
-	public static NecronomiconRitual JZAHAR_DURATION_CHARM;
-	public static NecronomiconRitual JZAHAR_POWER_CHARM;
-	public static NecronomiconRitual AZATHOTH_RANGE_CHARM;
-	public static NecronomiconRitual AZATHOTH_DURATION_CHARM;
-	public static NecronomiconRitual AZATHOTH_POWER_CHARM;
-	public static NecronomiconRitual NYARLATHOTEP_RANGE_CHARM;
-	public static NecronomiconRitual NYARLATHOTEP_DURATION_CHARM;
-	public static NecronomiconRitual NYARLATHOTEP_POWER_CHARM;
-	public static NecronomiconRitual YOG_SOTHOTH_RANGE_CHARM;
-	public static NecronomiconRitual YOG_SOTHOTH_DURATION_CHARM;
-	public static NecronomiconRitual YOG_SOTHOTH_POWER_CHARM;
-	public static NecronomiconRitual SHUB_NIGGURATH_RANGE_CHARM;
-	public static NecronomiconRitual SHUB_NIGGURATH_DURATION_CHARM;
-	public static NecronomiconRitual SHUB_NIGGURATH_POWER_CHARM;
-	public static NecronomiconRitual CTHULHU_CHARM;
-	public static NecronomiconRitual HASTUR_CHARM;
-	public static NecronomiconRitual JZAHAR_CHARM;
-	public static NecronomiconRitual AZATHOTH_CHARM;
-	public static NecronomiconRitual NYARLATHOTEP_CHARM;
-	public static NecronomiconRitual YOG_SOTHOTH_CHARM;
-	public static NecronomiconRitual SHUB_NIGGURATH_CHARM;
-
 	// Statues
 	public static NecronomiconRitual CTHULHU_STATUE;
 	public static NecronomiconRitual HASTUR_STATUE;

@@ -18,6 +18,9 @@ import com.shinoow.abyssalcraft.api.energy.disruption.*;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.recipe.AnvilForging;
+import com.shinoow.abyssalcraft.api.recipe.AnvilForgingRecipes;
+import com.shinoow.abyssalcraft.api.recipe.AnvilForgingType;
 import com.shinoow.abyssalcraft.api.rending.Rending;
 import com.shinoow.abyssalcraft.api.rending.RendingRegistry;
 import com.shinoow.abyssalcraft.api.ritual.*;
@@ -52,6 +55,7 @@ public class AbyssalCrafting {
 		addDisruptions();
 		addSpells();
 		addRendings();
+		addForgings();
 	}
 
 	private static void addBlockSmelting(){
@@ -479,58 +483,6 @@ public class AbyssalCrafting {
 		//Token of J'zahar
 		RitualRegistry.instance().registerRitual(Rituals.TOKEN_OF_JZAHAR = new NecronomiconInfusionRitual("jzaharCoin", 3, 500.0F, new ItemStack(ACItems.token_of_jzahar), new ItemStack(ACItems.coin), new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE)));
 
-		//Charms
-		Object[] rcoffers = new Object[]{ACItems.shadow_fragment, Items.ARROW, ACItems.shadow_fragment, Items.ARROW, ACItems.shadow_fragment, Items.ARROW, ACItems.shadow_fragment, Items.ARROW};
-		RitualRegistry.instance().registerRitual(Rituals.RANGE_CHARM = new NecronomiconInfusionRitual("rangeCharm", 0, 100F, new ItemStack(ACItems.range_ritual_charm), new ItemStack(ACItems.ritual_charm), rcoffers));
-		Object[] dcoffers = new Object[]{ACItems.shadow_fragment, Items.REDSTONE, ACItems.shadow_fragment, Items.REDSTONE, ACItems.shadow_fragment, Items.REDSTONE, ACItems.shadow_fragment,
-				Items.REDSTONE};
-		RitualRegistry.instance().registerRitual(Rituals.DURATION_CHARM = new NecronomiconInfusionRitual("durationCharm", 0, 100F, new ItemStack(ACItems.duration_ritual_charm), new ItemStack(ACItems.ritual_charm), dcoffers));
-		Object[] pcoffers = new Object[]{ACItems.shadow_fragment, Items.GLOWSTONE_DUST, ACItems.shadow_fragment, Items.GLOWSTONE_DUST, ACItems.shadow_fragment, Items.GLOWSTONE_DUST,
-				ACItems.shadow_fragment, Items.GLOWSTONE_DUST};
-		RitualRegistry.instance().registerRitual(Rituals.POWER_CHARM = new NecronomiconInfusionRitual("powerCharm", 0, 100F, new ItemStack(ACItems.power_ritual_charm), new ItemStack(ACItems.ritual_charm), pcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.CTHULHU_RANGE_CHARM = new NecronomiconInfusionRitual("crangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_cthulhu_charm), new ItemStack(ACItems.cthulhu_charm), rcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.CTHULHU_DURATION_CHARM = new NecronomiconInfusionRitual("cdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_cthulhu_charm), new ItemStack(ACItems.cthulhu_charm), dcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.CTHULHU_POWER_CHARM = new NecronomiconInfusionRitual("cpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_cthulhu_charm), new ItemStack(ACItems.cthulhu_charm), pcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.HASTUR_RANGE_CHARM = new NecronomiconInfusionRitual("hrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_hastur_charm), new ItemStack(ACItems.hastur_charm), rcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.HASTUR_DURATION_CHARM = new NecronomiconInfusionRitual("hdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_hastur_charm), new ItemStack(ACItems.hastur_charm), dcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.HASTUR_POWER_CHARM = new NecronomiconInfusionRitual("hpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_hastur_charm), new ItemStack(ACItems.hastur_charm), pcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.JZAHAR_RANGE_CHARM = new NecronomiconInfusionRitual("jrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_jzahar_charm), new ItemStack(ACItems.jzahar_charm), rcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.JZAHAR_DURATION_CHARM = new NecronomiconInfusionRitual("jdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_jzahar_charm), new ItemStack(ACItems.jzahar_charm), dcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.JZAHAR_POWER_CHARM = new NecronomiconInfusionRitual("jpowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_jzahar_charm), new ItemStack(ACItems.jzahar_charm), pcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.AZATHOTH_RANGE_CHARM = new NecronomiconInfusionRitual("arangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_azathoth_charm), new ItemStack(ACItems.azathoth_charm), rcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.AZATHOTH_DURATION_CHARM = new NecronomiconInfusionRitual("adurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_azathoth_charm), new ItemStack(ACItems.azathoth_charm), dcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.AZATHOTH_POWER_CHARM = new NecronomiconInfusionRitual("apowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_azathoth_charm), new ItemStack(ACItems.azathoth_charm), pcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.NYARLATHOTEP_RANGE_CHARM = new NecronomiconInfusionRitual("nrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_nyarlathotep_charm), new ItemStack(ACItems.nyarlathotep_charm), rcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.NYARLATHOTEP_DURATION_CHARM = new NecronomiconInfusionRitual("ndurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_nyarlathotep_charm), new ItemStack(ACItems.nyarlathotep_charm), dcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.NYARLATHOTEP_POWER_CHARM = new NecronomiconInfusionRitual("npowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_nyarlathotep_charm), new ItemStack(ACItems.nyarlathotep_charm), pcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.YOG_SOTHOTH_RANGE_CHARM = new NecronomiconInfusionRitual("yrangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_yog_sothoth_charm), new ItemStack(ACItems.yog_sothoth_charm), rcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.YOG_SOTHOTH_DURATION_CHARM = new NecronomiconInfusionRitual("ydurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_yog_sothoth_charm), new ItemStack(ACItems.yog_sothoth_charm), dcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.YOG_SOTHOTH_POWER_CHARM = new NecronomiconInfusionRitual("ypowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_yog_sothoth_charm), new ItemStack(ACItems.yog_sothoth_charm), pcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_RANGE_CHARM = new NecronomiconInfusionRitual("srangeCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.range_shub_niggurath_charm), new ItemStack(ACItems.shub_niggurath_charm), rcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_DURATION_CHARM = new NecronomiconInfusionRitual("sdurationCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.duration_shub_niggurath_charm), new ItemStack(ACItems.shub_niggurath_charm), dcoffers));
-		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_POWER_CHARM = new NecronomiconInfusionRitual("spowerCharm", 3, ACLib.omothol_id, 200F, new ItemStack(ACItems.power_shub_niggurath_charm), new ItemStack(ACItems.shub_niggurath_charm), pcoffers));
-		Object[] ccoffers = new Object[]{new ItemStack(Items.DYE, 1, 6), new ItemStack(Items.DYE, 1, 6), new ItemStack(Items.DYE, 1, 6), new ItemStack(Items.DYE, 1, 6), new ItemStack(Items.DYE, 1, 6), new ItemStack(Items.DYE, 1, 6),
-				new ItemStack(Items.DYE, 1, 6), new ItemStack(Items.DYE, 1, 6)};
-		RitualRegistry.instance().registerRitual(Rituals.CTHULHU_CHARM = new NecronomiconInfusionRitual("cthulhuCharm", 4, 2000F, new ItemStack(ACItems.cthulhu_charm), new ItemStack(ACItems.ritual_charm), ccoffers));
-		Object[] hcoffers = new Object[]{new ItemStack(Items.DYE, 1, 11), new ItemStack(Items.DYE, 1, 11), new ItemStack(Items.DYE, 1, 11), new ItemStack(Items.DYE, 1, 11), new ItemStack(Items.DYE, 1, 11), new ItemStack(Items.DYE, 1, 11),
-				new ItemStack(Items.DYE, 1, 11), new ItemStack(Items.DYE, 1, 11)};
-		RitualRegistry.instance().registerRitual(Rituals.HASTUR_CHARM = new NecronomiconInfusionRitual("hasturCharm", 4, 2000F, new ItemStack(ACItems.hastur_charm), new ItemStack(ACItems.ritual_charm), hcoffers));
-		Object[] jcoffers = new Object[]{new ItemStack(Items.DYE, 1, 8), new ItemStack(Items.DYE, 1, 8), new ItemStack(Items.DYE, 1, 8), new ItemStack(Items.DYE, 1, 8), new ItemStack(Items.DYE, 1, 8), new ItemStack(Items.DYE, 1, 8),
-				new ItemStack(Items.DYE, 1, 8), new ItemStack(Items.DYE, 1, 8)};
-		RitualRegistry.instance().registerRitual(Rituals.JZAHAR_CHARM = new NecronomiconInfusionRitual("jzaharCharm", 4, 2000F, new ItemStack(ACItems.jzahar_charm), new ItemStack(ACItems.ritual_charm), jcoffers));
-		Object[] acoffers = new Object[]{new ItemStack(Items.DYE, 1, 5), new ItemStack(Items.DYE, 1, 5), new ItemStack(Items.DYE, 1, 5), new ItemStack(Items.DYE, 1, 5), new ItemStack(Items.DYE, 1, 5), new ItemStack(Items.DYE, 1, 5),
-				new ItemStack(Items.DYE, 1, 5), new ItemStack(Items.DYE, 1, 5)};
-		RitualRegistry.instance().registerRitual(Rituals.AZATHOTH_CHARM = new NecronomiconInfusionRitual("azathothCharm", 4, 2000F, new ItemStack(ACItems.azathoth_charm), new ItemStack(ACItems.ritual_charm), acoffers));
-		Object[] ncoffers = new Object[]{new ItemStack(Items.DYE, 1, 4), new ItemStack(Items.DYE, 1, 4), new ItemStack(Items.DYE, 1, 4), new ItemStack(Items.DYE, 1, 4), new ItemStack(Items.DYE, 1, 4),
-				new ItemStack(Items.DYE, 1, 4), new ItemStack(Items.DYE, 1, 4), new ItemStack(Items.DYE, 1, 4)};
-		RitualRegistry.instance().registerRitual(Rituals.NYARLATHOTEP_CHARM = new NecronomiconInfusionRitual("nyarlathotepCharm", 4, 2000F, new ItemStack(ACItems.nyarlathotep_charm), new ItemStack(ACItems.ritual_charm), ncoffers));
-		Object[] ycoffers = new Object[]{new ItemStack(Items.DYE, 1, 14), new ItemStack(Items.DYE, 1, 14), new ItemStack(Items.DYE, 1, 14), new ItemStack(Items.DYE, 1, 14), new ItemStack(Items.DYE, 1, 14),
-				new ItemStack(Items.DYE, 1, 14), new ItemStack(Items.DYE, 1, 14), new ItemStack(Items.DYE, 1, 14)};
-		RitualRegistry.instance().registerRitual(Rituals.YOG_SOTHOTH_CHARM = new NecronomiconInfusionRitual("yogsothothCharm", 4, 2000F, new ItemStack(ACItems.yog_sothoth_charm), new ItemStack(ACItems.ritual_charm), ycoffers));
-		Object[] scoffers = new Object[]{new ItemStack(Items.DYE, 1, 0), new ItemStack(Items.DYE, 1, 0), new ItemStack(Items.DYE, 1, 0), new ItemStack(Items.DYE, 1, 0), new ItemStack(Items.DYE, 1, 0),
-				new ItemStack(Items.DYE, 1, 0), new ItemStack(Items.DYE, 1, 0), new ItemStack(Items.DYE, 1, 0)};
-		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_CHARM = new NecronomiconInfusionRitual("shubniggurathCharm", 4, 2000F, new ItemStack(ACItems.shub_niggurath_charm), new ItemStack(ACItems.ritual_charm), scoffers));
-
 		//Tiered PE blocks
 		Object[] owoffers = new Object[]{ACItems.shadow_shard, Blocks.COBBLESTONE, ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone), ACItems.shadow_shard, Blocks.COBBLESTONE,
 				ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone)};
@@ -663,6 +615,42 @@ public class AbyssalCrafting {
 		RendingRegistry.instance().registerRending(new Rending("Shadow", 200, new ItemStack(ACItems.shadow_gem),
 				e -> e.getCreatureAttribute() == AbyssalCraftAPI.SHADOW && e.isNonBoss(),
 				"ac.rending.shadowgem", OreDictionary.WILDCARD_VALUE));
+	}
+
+	private static void addForgings() {
+
+		ItemStack base_charm = new ItemStack(ACItems.ritual_charm);
+
+		// Base charms
+		addForgingsFor(base_charm, new ItemStack(ACItems.range_ritual_charm), new ItemStack(ACItems.power_ritual_charm), new ItemStack(ACItems.duration_ritual_charm));
+
+		// Conversions
+		AnvilForgingRecipes.instance().forge(new AnvilForging(base_charm, new ItemStack(Items.DYE, 1, 6), new ItemStack(ACItems.cthulhu_charm)).setType(AnvilForgingType.RITUAL_CHARM));
+		AnvilForgingRecipes.instance().forge(new AnvilForging(base_charm, new ItemStack(Items.DYE, 1, 11), new ItemStack(ACItems.hastur_charm)).setType(AnvilForgingType.RITUAL_CHARM));
+		AnvilForgingRecipes.instance().forge(new AnvilForging(base_charm, new ItemStack(Items.DYE, 1, 8), new ItemStack(ACItems.jzahar_charm)).setType(AnvilForgingType.RITUAL_CHARM));
+		AnvilForgingRecipes.instance().forge(new AnvilForging(base_charm, new ItemStack(Items.DYE, 1, 5), new ItemStack(ACItems.azathoth_charm)).setType(AnvilForgingType.RITUAL_CHARM));
+		AnvilForgingRecipes.instance().forge(new AnvilForging(base_charm, new ItemStack(Items.DYE, 1, 4), new ItemStack(ACItems.nyarlathotep_charm)).setType(AnvilForgingType.RITUAL_CHARM));
+		AnvilForgingRecipes.instance().forge(new AnvilForging(base_charm, new ItemStack(Items.DYE, 1, 14), new ItemStack(ACItems.yog_sothoth_charm)).setType(AnvilForgingType.RITUAL_CHARM));
+		AnvilForgingRecipes.instance().forge(new AnvilForging(base_charm, new ItemStack(Items.DYE, 1, 0), new ItemStack(ACItems.shub_niggurath_charm)).setType(AnvilForgingType.RITUAL_CHARM));
+
+		// Deity charms
+		addForgingsFor(new ItemStack(ACItems.cthulhu_charm), new ItemStack(ACItems.range_cthulhu_charm), new ItemStack(ACItems.power_cthulhu_charm), new ItemStack(ACItems.duration_cthulhu_charm));
+		addForgingsFor(new ItemStack(ACItems.hastur_charm), new ItemStack(ACItems.range_hastur_charm), new ItemStack(ACItems.power_hastur_charm), new ItemStack(ACItems.duration_hastur_charm));
+		addForgingsFor(new ItemStack(ACItems.jzahar_charm), new ItemStack(ACItems.range_jzahar_charm), new ItemStack(ACItems.power_jzahar_charm), new ItemStack(ACItems.duration_jzahar_charm));
+		addForgingsFor(new ItemStack(ACItems.azathoth_charm), new ItemStack(ACItems.range_azathoth_charm), new ItemStack(ACItems.power_azathoth_charm), new ItemStack(ACItems.duration_azathoth_charm));
+		addForgingsFor(new ItemStack(ACItems.nyarlathotep_charm), new ItemStack(ACItems.range_nyarlathotep_charm), new ItemStack(ACItems.power_nyarlathotep_charm), new ItemStack(ACItems.duration_nyarlathotep_charm));
+		addForgingsFor(new ItemStack(ACItems.yog_sothoth_charm), new ItemStack(ACItems.range_yog_sothoth_charm), new ItemStack(ACItems.power_yog_sothoth_charm), new ItemStack(ACItems.duration_yog_sothoth_charm));
+		addForgingsFor(new ItemStack(ACItems.shub_niggurath_charm), new ItemStack(ACItems.range_shub_niggurath_charm), new ItemStack(ACItems.power_shub_niggurath_charm), new ItemStack(ACItems.duration_shub_niggurath_charm));
+	}
+
+	private static void addForgingsFor(ItemStack base_charm, ItemStack range_charm, ItemStack power_charm, ItemStack duration_charm) {
+		ItemStack range = new ItemStack(Items.ARROW);
+		ItemStack power = new ItemStack(Items.GUNPOWDER);
+		ItemStack duration = new ItemStack(Items.REDSTONE);
+
+		AnvilForgingRecipes.instance().forge(new AnvilForging(base_charm, range, range_charm).setType(AnvilForgingType.RITUAL_CHARM));
+		AnvilForgingRecipes.instance().forge(new AnvilForging(base_charm, power, power_charm).setType(AnvilForgingType.RITUAL_CHARM));
+		AnvilForgingRecipes.instance().forge(new AnvilForging(base_charm, duration, duration_charm).setType(AnvilForgingType.RITUAL_CHARM));
 	}
 
 	private static void addArmorSmelting(Item helmet, Item chestplate, Item pants, Item boots, ItemStack nugget){

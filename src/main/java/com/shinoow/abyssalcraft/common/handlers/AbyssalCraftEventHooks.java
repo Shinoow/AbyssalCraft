@@ -20,6 +20,8 @@ import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.event.FuelBurnTimeEvent;
 import com.shinoow.abyssalcraft.api.event.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.recipe.AnvilForging;
+import com.shinoow.abyssalcraft.api.recipe.AnvilForgingRecipes;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconSummonRitual;
 import com.shinoow.abyssalcraft.api.ritual.Rituals;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityProvider;
@@ -58,6 +60,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -550,5 +553,19 @@ public class AbyssalCraftEventHooks {
 	public void onTick(ServerTickEvent event) {
 		if(event.side == Side.SERVER && event.type == Type.SERVER && event.phase == Phase.START)
 			Scheduler.tick();
+	}
+
+	@SubscribeEvent
+	public void anvilForging(AnvilUpdateEvent event) {
+		ItemStack left = event.getLeft();
+		ItemStack right = event.getRight();
+
+		AnvilForging result = AnvilForgingRecipes.instance().getAnvilForgingResult(left, right);
+
+		if(result != null) { // If there's a recipe for the input, set the output
+			event.setOutput(result.getOutput());
+			event.setMaterialCost(1);
+			event.setCost(result.getPrice());
+		}
 	}
 }
