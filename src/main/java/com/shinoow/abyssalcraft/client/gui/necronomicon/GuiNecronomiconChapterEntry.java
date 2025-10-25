@@ -39,7 +39,6 @@ public class GuiNecronomiconChapterEntry extends GuiNecronomiconEntry {
 		return this;
 	}
 
-
 	@Override
 	public void initGui(){
 		buttonList.clear();

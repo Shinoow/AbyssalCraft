@@ -150,7 +150,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		internalNecroData.add(new NecroData("information", NecronomiconText.LABEL_INFORMATION, 0, Chapters.ABYSSALCRAFT_INFO,
 				getInternalNecroData("pantheon"),
 				new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.INFORMATION_ABYSSALNOMICON),
-				Chapters.PATRONS, new GuiInstance(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines", ResearchItems.ABYSSAL_WASTELAND_NECRO){
+				Chapters.PATRONS, new GuiInstance(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines"){
 			@Override
 			@SideOnly(Side.CLIENT)
 			public GuiScreen getOpenGui(int bookType, GuiScreen parent) { return new GuiNecronomiconMachines(bookType, (GuiNecronomicon) parent); }

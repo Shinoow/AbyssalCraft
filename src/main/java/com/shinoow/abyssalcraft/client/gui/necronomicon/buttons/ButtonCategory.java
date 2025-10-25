@@ -29,11 +29,19 @@ public class ButtonCategory extends GuiButton {
 	private Item icon;
 	private boolean locked;
 
-	public ButtonCategory(int par1, int par2, int par3, GuiNecronomicon gui, String label, boolean locked, Item icon) {
+	public ButtonCategory(int par1, int par2, int par3, GuiNecronomicon gui, String label, Item icon) {
 		super(par1, par2, par3, 110, 16, I18n.format(label, new Object[0]));
 		this.gui = gui;
 		this.icon = icon;
+	}
+
+	public ButtonCategory(int par1, int par2, int par3, GuiNecronomicon gui, String label) {
+		this(par1, par2, par3, gui, label, ACItems.necronomicon);
+	}
+	
+	public ButtonCategory setLocked(boolean locked) {
 		this.locked = locked;
+		return this;
 	}
 
 	@Override

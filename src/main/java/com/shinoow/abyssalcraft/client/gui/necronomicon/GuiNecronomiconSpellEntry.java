@@ -26,7 +26,6 @@ import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
@@ -124,18 +123,15 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 
 	private void drawPage(Spell spell, int x, int y){
 		int k = (width - guiWidth) / 2;
-		byte b0 = 2;
-		String title = spell.getLocalizedName();
-		fontRenderer.drawSplitString(title, k + 17, b0 + 16, 116, 0xC40000);
+		//		byte b0 = 2;
+		drawTitle(spell.getLocalizedName());
 
 		writeText(1, localize(NecronomiconText.LABEL_SPELL_PE)+": " + spell.getReqEnergy() + " PE", 125);
 		writeText(1, localize(NecronomiconText.LABEL_SPELL_TYPE)+": "+ localize(NecronomiconText.getSpellType(spell.requiresCharging())), 135);
 		writeText(2, spell.getDescription());
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(NecronomiconResources.SPELL);
-		drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+		drawTexture(NecronomiconResources.SPELL);
 
-		tooltipStack = null;
+		getHelper().clearTooltipStack();
 
 		ItemStack[] offerings = new ItemStack[5];
 		if(spell.getReagents().length < 5)
@@ -143,15 +139,15 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 				offerings[i] = APIUtils.convertToStack(spell.getReagents()[i]);
 		else offerings = getStacks(spell.getReagents());
 
-		renderItem(k + 58, b0 + 41, offerings[0], x, y);
-		renderItem(k + 83, b0 + 62, offerings[1], x, y);
-		renderItem(k + 72, b0 + 91, offerings[2], x, y);
-		renderItem(k + 45, b0 + 91, offerings[3], x, y);
-		renderItem(k + 33, b0 + 62, offerings[4], x, y);
+		renderItem(k + 58, 43, offerings[0], x, y);
+		renderItem(k + 83, 64, offerings[1], x, y);
+		renderItem(k + 72, 93, offerings[2], x, y);
+		renderItem(k + 45, 93, offerings[3], x, y);
+		renderItem(k + 33, 64, offerings[4], x, y);
 		//center
 		if(!spell.getParchment().isEmpty())
-			renderItem(k + 58, b0 + 66, spell.getParchment(), x, y);
-		else renderObject(k + 58, b0 + 66, scrolls, x, y);
+			renderItem(k + 58, 68, spell.getParchment(), x, y);
+		else renderObject(k + 58, 68, scrolls, x, y);
 
 		renderTooltip(x, y);
 	}

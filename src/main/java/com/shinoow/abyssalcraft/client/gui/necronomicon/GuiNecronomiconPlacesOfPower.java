@@ -155,15 +155,11 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 
 	private void drawPage(IPlaceOfPower place, int x, int y){
 		int k = (width - guiWidth) / 2;
-		byte b0 = 2;
-		String title = localize(NecronomiconText.LABEL_STRUCTURES);
-		fontRenderer.drawSplitString(title, k + 17, b0 + 16, 116, 0xC40000);
+		drawTitle(localize(NecronomiconText.LABEL_STRUCTURES));
 
 		tooltipObj = null;
 
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(NecronomiconResources.PLACE_OF_POWER);
-		drawTexturedModalRect(k, b0, 0, 0, 256, 256);
+		drawTexture(NecronomiconResources.PLACE_OF_POWER);
 
 		multiblockObj.calculateData(place.getRenderData());
 		writeText(1, localize(NecronomiconText.LABEL_HEIGHT, Integer.valueOf(multiblockObj.sizeY)), 127);

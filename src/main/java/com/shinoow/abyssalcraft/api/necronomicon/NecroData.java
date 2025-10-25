@@ -304,6 +304,7 @@ public class NecroData implements INecroData {
 		 * Fetches a page (if it exists)
 		 * @param pageNum Page number
 		 */
+		@Nullable
 		public Page getPage(int pageNum){
 			return pages.get(pageNum);
 		}

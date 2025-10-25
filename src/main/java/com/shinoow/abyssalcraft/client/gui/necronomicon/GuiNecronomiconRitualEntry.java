@@ -26,7 +26,6 @@ import com.shinoow.abyssalcraft.lib.util.IHiddenRitual;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -125,9 +124,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 
 	private void drawPage(NecronomiconRitual ritual, int x, int y){
 		int k = (width - guiWidth) / 2;
-		byte b0 = 2;
-		String title = ritual.getLocalizedName();
-		fontRenderer.drawSplitString(title, k + 17, b0 + 16, 116, 0xC40000);
+		drawTitle(ritual.getLocalizedName());
 
 		if(ritual.requiresSacrifice())
 			fontRenderer.drawSplitString(localize(NecronomiconText.LABEL_SACRIFICE), k + 138, 164, 107, 0xC40000);
@@ -135,18 +132,14 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 		writeText(2, localize(NecronomiconText.LABEL_LOCATION) + ": " + getDimension(ritual.getDimension()));
 		if(!ritual.getDescription().startsWith("ac.ritual."))
 			writeText(2, ritual.getDescription(), 48);
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(NecronomiconResources.RITUAL);
-		drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-		if(ritual.getSacrifice() != null){
-			mc.renderEngine.bindTexture(NecronomiconResources.RITUAL_INFUSION);
-			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-		} if(ritual instanceof NecronomiconCreationRitual){
-			mc.renderEngine.bindTexture(NecronomiconResources.RITUAL_CREATION);
-			drawTexturedModalRect(k, b0, 0, 0, 256, 256);
-		}
+		drawTexture(NecronomiconResources.RITUAL);
+		if(ritual.getSacrifice() != null)
+			drawTexture(NecronomiconResources.RITUAL_INFUSION);
+		if(ritual instanceof NecronomiconCreationRitual)
+			drawTexture(NecronomiconResources.RITUAL_CREATION);
 
-		tooltipStack = null;
+
+		getHelper().clearTooltipStack();
 
 		Object[] offerings = new Object[8];
 		if(ritual.getOfferings().length < 8)
@@ -158,26 +151,26 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 			offerings = ((NecronomiconTransformationRitual) ritual).getCombinedContent();
 
 		//north
-		renderObject(k + 58, b0 + 30, offerings[0], x, y);
+		renderObject(k + 58, 32, offerings[0], x, y);
 		//north-east
-		renderObject(k + 84, b0 + 40, offerings[1], x, y);
+		renderObject(k + 84, 42, offerings[1], x, y);
 		//east
-		renderObject(k + 94, b0 + 66, offerings[2], x, y);
+		renderObject(k + 94, 68, offerings[2], x, y);
 		//south-east
-		renderObject(k + 84, b0 + 92, offerings[3], x, y);
+		renderObject(k + 84, 94, offerings[3], x, y);
 		//south
-		renderObject(k + 58, b0 + 103, offerings[4], x, y);
+		renderObject(k + 58, 105, offerings[4], x, y);
 		//south-west
-		renderObject(k + 32, b0 + 92, offerings[5], x, y);
+		renderObject(k + 32, 94, offerings[5], x, y);
 		//west
-		renderObject(k + 22, b0 + 66, offerings[6], x, y);
+		renderObject(k + 22, 68, offerings[6], x, y);
 		//north-west
-		renderObject(k + 32, b0 + 40, offerings[7], x, y);
+		renderObject(k + 32, 42, offerings[7], x, y);
 		//center
-		renderObject(k + 58, b0 + 66, ritual.getSacrifice(), x, y);
+		renderObject(k + 58, 68, ritual.getSacrifice(), x, y);
 
 		if(ritual instanceof NecronomiconCreationRitual)
-			renderItem(k + 58, b0 + 139, ((NecronomiconCreationRitual) ritual).getItem(), x, y);
+			renderItem(k + 58, 141, ((NecronomiconCreationRitual) ritual).getItem(), x, y);
 
 		renderTooltip(x, y);
 	}
