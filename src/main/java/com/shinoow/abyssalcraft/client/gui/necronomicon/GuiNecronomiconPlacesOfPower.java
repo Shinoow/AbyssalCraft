@@ -85,52 +85,7 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 		buttonList.clear();
 		Keyboard.enableRepeatEvents(true);
 
-		buttonList.add(buttonDone = new GuiButton(0, width / 2 - 100, 4 + guiHeight, 200, 20, I18n.format("gui.done", new Object[0])));
-
-		int i = (width - guiWidth) / 2;
-		byte b0 = 2;
-		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true, false));
-		buttonList.add(buttonNextPageLong = new ButtonNextPage(2, i + 203, b0 + 167, true, true));
-		buttonList.add(buttonPreviousPage = new ButtonNextPage(3, i + 18, b0 + 154, false, false));
-		buttonList.add(buttonPreviousPageLong = new ButtonNextPage(4, i + 23, b0 + 167, false, true));
-		buttonList.add(buttonHome = new ButtonHome(5, i + 118, b0 + 167));
-
-		updateButtons();
-	}
-
-	private void updateButtons()
-	{
-		buttonNextPage.visible = currTurnup < getTurnupLimit() - 1;
-		buttonNextPageLong.visible = currTurnup < getTurnupLimit() -5;
-		buttonPreviousPage.visible = true;
-		buttonPreviousPageLong.visible = currTurnup > 4;
-		buttonDone.visible = true;
-		buttonHome.visible = true;
-	}
-
-	@Override
-	protected void actionPerformed(GuiButton button)
-	{
-		if (button.enabled)
-			if (button.id == 0)
-				mc.displayGuiScreen((GuiScreen)null);
-			else if(button.id == 1){
-				if(currTurnup < getTurnupLimit() -1)
-					++currTurnup;
-			} else if(button.id == 2){
-				if(currTurnup < getTurnupLimit() -5)
-					currTurnup += 5;
-			} else if(button.id == 3){
-				if(currTurnup == 0){
-					isInfo = false;
-					mc.displayGuiScreen(parent.withBookType(getBookType()));
-				} else if(currTurnup > 0)
-					--currTurnup;
-			} else if(button.id == 4){
-				if(currTurnup > 4)
-					currTurnup -= 5;
-			} else if(button.id == 5)
-				mc.displayGuiScreen(new GuiNecronomicon(getBookType()));
+		initBaseButtons();
 
 		updateButtons();
 	}

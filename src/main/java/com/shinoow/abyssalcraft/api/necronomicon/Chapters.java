@@ -37,6 +37,10 @@ public class Chapters {
 	public static Chapter PATRONS;
 	public static Chapter ABYSSALCRAFT_INFO;
 
+	public static Chapter NECRONOMICON_INFO;
+	public static Chapter ABYSSALNOMICON_INFO;
+	public static Chapter KNOWLEDGE_INFO;
+
 	// Dimensional chapters
 	public static Chapter OVERWORLD;
 	public static Chapter ABYSSAL_WASTELAND;

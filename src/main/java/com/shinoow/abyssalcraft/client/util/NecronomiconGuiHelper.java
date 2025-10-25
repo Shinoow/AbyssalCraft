@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconEntry;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.entries.GuiNecronomiconEntry;
 import com.shinoow.abyssalcraft.lib.client.GuiRenderHelper;
 import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 

@@ -9,11 +9,12 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.client.gui.necronomicon;
+package com.shinoow.abyssalcraft.client.gui.necronomicon.entries;
 
 import org.lwjgl.input.Keyboard;
 
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 
 import net.minecraft.client.gui.GuiButton;

@@ -30,11 +30,13 @@ import com.shinoow.abyssalcraft.api.necronomicon.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.*;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.entries.GuiNecronomiconRitualEntry;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.enchantment.EnchantmentData;
@@ -42,6 +44,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -73,7 +76,10 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 		Chapters.PATRONS = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
 		Chapters.ABYSSALCRAFT_INFO = new Chapter("acinfo", NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0);
-
+		Chapters.NECRONOMICON_INFO = new Chapter("necronomiconinfo", NecronomiconText.LABEL_HUH, 0);
+		Chapters.ABYSSALNOMICON_INFO = new Chapter("abyssalnomiconinfo", NecronomiconText.LABEL_HUH, 4);
+		Chapters.KNOWLEDGE_INFO = new Chapter("knowledgeinfo", NecronomiconText.LABEL_KNOWLEDGE, 0);
+		
 		Chapters.OVERWORLD = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
 		Chapters.ABYSSAL_WASTELAND = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
 		Chapters.DREADLANDS = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, ResearchItems.getBookResearch(2));
@@ -169,6 +175,17 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new RitualGuiInstance(2, NecronomiconText.LABEL_INFORMATION_DREADLANDS, "ritualsdreadlands"),
 				new RitualGuiInstance(3, NecronomiconText.LABEL_INFORMATION_OMOTHOL, "ritualsomothol"),
 				new RitualGuiInstance(4, ACItems.abyssalnomicon.getTranslationKey() + ".name", "ritualsabyssalnomicon")));
+		internalNecroData.add(new NecroData("root", NecronomiconText.LABEL_HUH, 0, NecronomiconText.LABEL_INDEX, 
+				getInternalNecroData("information"),
+				new GuiInstance(0, NecronomiconText.LABEL_SPELL_NAME, "spells") {
+					@Override
+					@SideOnly(Side.CLIENT)
+					public GuiScreen getOpenGui(int bookType, GuiScreen parent) { return new GuiNecronomiconSpells(bookType, Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND)); }},
+				getInternalNecroData("ritualinfo"),
+				getInternalNecroData("potentialenergy"),
+				Chapters.NECRONOMICON_INFO,
+				Chapters.ABYSSALNOMICON_INFO,
+				Chapters.KNOWLEDGE_INFO));
 	}
 
 	@Override
@@ -602,6 +619,19 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_ABYSSALCRAFT_PAGE_5 = new Page(5, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.ABYSSALCRAFT_3, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_5);
 		Pages.INFORMATION_ABYSSALCRAFT_PAGE_6 = new Page(6, NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0, NecronomiconResources.BLANK, NecronomiconText.INFORMATION_ABYSSALCRAFT_PAGE_6);
 
+		Pages.INFORMATION_NECRONOMICON_PAGE_1 = new Page(1, NecronomiconText.LABEL_HUH, 0, NecronomiconText.NECRONOMICON_PAGE_1);
+		Pages.INFORMATION_NECRONOMICON_PAGE_2 = new Page(2, NecronomiconText.LABEL_HUH, 0, NecronomiconText.NECRONOMICON_PAGE_2);
+		Pages.INFORMATION_NECRONOMICON_PAGE_3 = new Page(3, NecronomiconText.LABEL_HUH, 0, NecronomiconText.NECRONOMICON_PAGE_3);
+		Pages.INFORMATION_NECRONOMICON_PAGE_4 = new Page(4, NecronomiconText.LABEL_HUH, 0, NecronomiconText.NECRONOMICON_PAGE_4);
+
+		Pages.INFORMATION_ABYSSALNOMICON_PAGE_1 = new Page(1, NecronomiconText.LABEL_HUH, 4, NecronomiconText.ABYSSALNOMICON_PAGE_1);
+		Pages.INFORMATION_ABYSSALNOMICON_PAGE_2 = new Page(2, NecronomiconText.LABEL_HUH, 4, NecronomiconText.ABYSSALNOMICON_PAGE_2);
+
+		Pages.INFORMATION_KNOWLEDGE_PAGE_1 = new Page(1, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.KNOWLEDGE_INFO_1);
+		Pages.INFORMATION_KNOWLEDGE_PAGE_2 = new Page(1, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.KNOWLEDGE_INFO_2);
+		Pages.INFORMATION_KNOWLEDGE_PAGE_3 = new Page(1, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.KNOWLEDGE_INFO_3);
+		Pages.INFORMATION_KNOWLEDGE_PAGE_4 = new Page(1, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.getRandomAklo(1)).setResearch(ResearchItems.ALWAYS_LOCKED);
+		
 		Pages.PROGRESSION_OVERWORLD_1.setReference(Pages.CRAFTING_GATEWAY_KEY);
 		Pages.PROGRESSION_OVERWORLD_2.setReference(Pages.CRAFTING_STAFF_OF_RENDING_1, Pages.CRAFTING_STAFF_OF_RENDING_2);
 		Pages.PROGRESSION_OVERWORLD_3.setReference(Pages.CRAFTING_SHARD_OF_OBLIVION);
@@ -671,6 +701,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.SPELL_CASTING.addPage(Pages.SPELL_TUT_3);
 		Chapters.SPELL_MATERIALS.addPages(Pages.MATERIAL_BASIC_SCROLL, Pages.MATERIAL_LESSER_SCROLL, Pages.MATERIAL_MODERATE_SCROLL, Pages.MATERIAL_GREATER_SCROLL, Pages.MATERIAL_ANTIMATTER_SCROLL, Pages.MATERIAL_OBLIVION_SCROLL);
 		Chapters.ABYSSALCRAFT_INFO.addPages(Pages.INFORMATION_ABYSSALCRAFT_PAGE_1, Pages.INFORMATION_ABYSSALCRAFT_PAGE_2, Pages.INFORMATION_ABYSSALCRAFT_PAGE_3, Pages.INFORMATION_ABYSSALCRAFT_PAGE_4, Pages.INFORMATION_ABYSSALCRAFT_PAGE_5, Pages.INFORMATION_ABYSSALCRAFT_PAGE_6);
+		Chapters.NECRONOMICON_INFO.addPages(Pages.INFORMATION_NECRONOMICON_PAGE_1, Pages.INFORMATION_NECRONOMICON_PAGE_2, Pages.INFORMATION_NECRONOMICON_PAGE_3, Pages.INFORMATION_NECRONOMICON_PAGE_4);
+		Chapters.ABYSSALNOMICON_INFO.addPages(Pages.INFORMATION_ABYSSALNOMICON_PAGE_1, Pages.INFORMATION_ABYSSALNOMICON_PAGE_2);
+		Chapters.KNOWLEDGE_INFO.addPages(Pages.INFORMATION_KNOWLEDGE_PAGE_1, Pages.INFORMATION_KNOWLEDGE_PAGE_2, Pages.INFORMATION_KNOWLEDGE_PAGE_3, Pages.INFORMATION_KNOWLEDGE_PAGE_4);
 
 		//TODO set up a section about charms, how they work and a listing of all anvil recipes
 		

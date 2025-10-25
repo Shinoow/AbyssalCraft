@@ -22,6 +22,9 @@ public class ResearchItems {
 
 	// Default Research Item
 	public static IResearchItem DEFAULT = new DefaultResearchItem();
+	
+	// Always locked Research Item
+	public static IResearchItem ALWAYS_LOCKED = new AlwaysLockedResearchItem();
 
 	// Biome conditions
 	public static IResearchItem DARKLANDS_BIOME;

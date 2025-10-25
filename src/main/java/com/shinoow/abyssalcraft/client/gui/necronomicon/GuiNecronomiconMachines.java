@@ -14,10 +14,7 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
@@ -29,10 +26,6 @@ import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class GuiNecronomiconMachines extends GuiNecronomicon {
@@ -55,13 +48,6 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	}
 
 	@Override
-	public GuiNecronomicon withBookType(int par1){
-//		if(par1 < 1)
-//			isInvalid = true;
-		return super.withBookType(par1);
-	}
-	
-	@Override
 	public void initGui()
 	{
 		if(isInvalid)
@@ -78,109 +64,51 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			isInfo = isMInfo = isTra = isCry = isMat = isAnv = false;
 			currTurnup = 0;
 		}
-		if(isInfo)
-			drawButtons();
-		else {
-			buttonList.clear();
-			Keyboard.enableRepeatEvents(true);
 
-			buttonList.add(buttonDone = new GuiButton(0, width / 2 - 100, 4 + guiHeight, 200, 20, I18n.format("gui.done", new Object[0])));
+		initBaseButtons();
 
-			int i = (width - guiWidth) / 2;
-			byte b0 = 2;
-			buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 220, b0 + 154, true, false));
-			buttonList.add(buttonNextPageLong = new ButtonNextPage(2, i + 203, b0 + 167, true, true));
-			buttonList.add(buttonPreviousPage = new ButtonNextPage(3, i + 18, b0 + 154, false, false));
-			buttonList.add(buttonPreviousPageLong = new ButtonNextPage(4, i + 23, b0 + 167, false, true));
-			buttonList.add(buttonHome = new ButtonHome(5, i + 118, b0 + 167));
-			buttonList.add(info = new ButtonCategory(6, i + 14, getButtonHeight(0), this, NecronomiconText.LABEL_INFORMATION, ACItems.necronomicon));
-			buttonList.add(anvil = new ButtonCategory(7, i + 14, getButtonHeight(1), this, "tile.anvil.name"));
-			buttonList.add(transmutator = new ButtonCategory(8, i + 14, getButtonHeight(2), this, "container.abyssalcraft.transmutator", getItem(1)).setLocked(!isUnlocked(ResearchItems.getBookResearch(1))));
-			buttonList.add(crystallizer = new ButtonCategory(9, i + 14, getButtonHeight(3), this, "container.abyssalcraft.crystallizer", getItem(2)).setLocked(!isUnlocked(ResearchItems.getBookResearch(2))));
-			buttonList.add(materializer = new ButtonCategory(10, i + 14, getButtonHeight(4), this, "container.abyssalcraft.materializer", getItem(3)).setLocked(!isUnlocked(ResearchItems.getBookResearch(3))));
-		}
 		updateButtons();
 	}
 
-	private void updateButtons()
-	{
-		buttonNextPage.visible = currTurnup < getTurnupLimit() - 1 && isInfo;
-		buttonNextPageLong.visible = currTurnup < getTurnupLimit() -5;
-		buttonPreviousPage.visible = true;
-		buttonPreviousPageLong.visible = currTurnup > 4;
-		buttonDone.visible = true;
-		buttonHome.visible = true;
-		info.visible = true;
-		anvil.visible = true;
-		transmutator.visible = true;
-		crystallizer.visible = true;
-		materializer.visible = true;
-
+	@Override
+	protected void initButtonsInner() {
+		int i = (width - guiWidth) / 2;
+		buttonList.add(info = new ButtonCategory(8, i + 14, getButtonHeight(0), this, NecronomiconText.LABEL_INFORMATION, ACItems.necronomicon));
+		buttonList.add(anvil = new ButtonCategory(9, i + 14, getButtonHeight(1), this, "tile.anvil.name"));
+		buttonList.add(transmutator = new ButtonCategory(10, i + 14, getButtonHeight(2), this, "container.abyssalcraft.transmutator", getItem(1)).setLocked(!isUnlocked(ResearchItems.getBookResearch(1))));
+		buttonList.add(crystallizer = new ButtonCategory(11, i + 14, getButtonHeight(3), this, "container.abyssalcraft.crystallizer", getItem(2)).setLocked(!isUnlocked(ResearchItems.getBookResearch(2))));
+		buttonList.add(materializer = new ButtonCategory(12, i + 14, getButtonHeight(4), this, "container.abyssalcraft.materializer", getItem(3)).setLocked(!isUnlocked(ResearchItems.getBookResearch(3))));
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button)
-	{
-		if (button.enabled){
-			if(button.id == 0)
-				mc.displayGuiScreen((GuiScreen)null);
-			else if(button.id == 1){
-				if (currTurnup < getTurnupLimit() -1)
-					++currTurnup;
-			} else if(button.id == 2){
-				if(currTurnup < getTurnupLimit() -5)
-					currTurnup += 5;
-			} else if(button.id == 3){
-				if(currTurnup == 0 && !isInfo)
-					mc.displayGuiScreen(parent.withBookType(getBookType()));
-				else if(currTurnup == 0 && isInfo){
-					isInfo = isMInfo = isTra = isCry = isMat = isAnv = false;
-					initGui();
-					setTurnupLimit(2);
-				} else if (currTurnup > 0)
-					--currTurnup;
-			} else if(button.id == 4){
-				if(currTurnup > 4)
-					currTurnup -= 5;
-			} else if(button.id == 5){
-				if(!isInfo)
-					mc.displayGuiScreen(new GuiNecronomicon(getBookType()));
-				else {
-					currTurnup = 0;
-					isInfo = isMInfo = isTra = isCry = isMat = isAnv = false;
-					initGui();
-					setTurnupLimit(2);
-				}
-			} else if(button.id > 5) {
-				if(button.id == 6){
-					isMInfo = true;
-				} else if(button.id == 7) {
-					isAnv = true;
-				} else if(button.id == 8 && getKnowledgeLevel() >= 1){
-					isTra = true;
-				} else if(button.id == 9 && getKnowledgeLevel() >= 2){
-					isCry = true;
-				} else if(button.id == 10 && getKnowledgeLevel() >= 3){
-					isMat = true;
-				}
-				isInfo = true;
-				drawButtons();
-			}
-			updateButtons();
-		}
+	protected void updateButtonsInner() {
+
+		if(!isInfo)
+			isMInfo = isTra = isCry = isMat = isAnv = false;
+
+		info.visible = !isInfo;
+		anvil.visible = !isInfo;
+		transmutator.visible = !isInfo;
+		crystallizer.visible = !isInfo;
+		materializer.visible = !isInfo;
 	}
 
-	private void drawButtons(){
-		buttonList.clear();
-		buttonList.add(buttonDone = new GuiButton(0, width / 2 - 100, 4 + guiHeight, 200, 20, I18n.format("gui.done", new Object[0])));
-
-		int i = (width - guiWidth) / 2;
-		byte b0 = 2;
-		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, b0 + 154, true, false));
-		buttonList.add(buttonNextPageLong = new ButtonNextPage(2, i + 203, b0 + 167, true, true));
-		buttonList.add(buttonPreviousPage = new ButtonNextPage(3, i + 18, b0 + 154, false, false));
-		buttonList.add(buttonPreviousPageLong = new ButtonNextPage(4, i + 23, b0 + 167, false, true));
-		buttonList.add(buttonHome = new ButtonHome(5, i + 118, b0 + 167));
+	@Override
+	protected void actionPerformedInner(GuiButton button) {
+		if(button.id > 7) {
+			if(button.id == 8){
+				isMInfo = true;
+			} else if(button.id == 9) {
+				isAnv = true;
+			} else if(button.id == 10 && getKnowledgeLevel() >= 1){
+				isTra = true;
+			} else if(button.id == 11 && getKnowledgeLevel() >= 2){
+				isCry = true;
+			} else if(button.id == 12 && getKnowledgeLevel() >= 3){
+				isMat = true;
+			}
+			isInfo = true;
+		}
 	}
 
 	@Override
@@ -281,7 +209,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 		}
 		fontRenderer.setUnicodeFlag(unicode);
 	}
-	
+
 	private void drawTItems(Transmutation entry, int num, int low, int mid, int high, int x, int y){
 		boolean unicode = fontRenderer.getUnicodeFlag();
 		fontRenderer.setUnicodeFlag(false);

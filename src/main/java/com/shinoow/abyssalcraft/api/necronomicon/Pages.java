@@ -376,6 +376,19 @@ public class Pages {
 	public static Page CRAFTING_DECORATIVE_YOG_SOTHOTH_STATUE;
 	public static Page CRAFTING_DECORATIVE_SHUB_NIGGURATH_STATUE;
 
+	public static Page INFORMATION_NECRONOMICON_PAGE_1;
+	public static Page INFORMATION_NECRONOMICON_PAGE_2;
+	public static Page INFORMATION_NECRONOMICON_PAGE_3;
+	public static Page INFORMATION_NECRONOMICON_PAGE_4;
+
+	public static Page INFORMATION_ABYSSALNOMICON_PAGE_1;
+	public static Page INFORMATION_ABYSSALNOMICON_PAGE_2;
+
+	public static Page INFORMATION_KNOWLEDGE_PAGE_1;
+	public static Page INFORMATION_KNOWLEDGE_PAGE_2;
+	public static Page INFORMATION_KNOWLEDGE_PAGE_3;
+	public static Page INFORMATION_KNOWLEDGE_PAGE_4;
+	
 	//Spells
 
 	public static Page SPELL_TUT_1;

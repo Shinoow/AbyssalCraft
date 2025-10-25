@@ -48,6 +48,7 @@ public class NecroDataCapability implements INecroDataCapability {
 	@Override
 	public boolean isUnlocked(IUnlockCondition cond, EntityPlayer player) {
 
+		if(cond.getType() == -2) return false; // The "haha, get fucked" condition
 		if(cond.getType() == -1 || hasAllKnowledge && cond.getType() != 11) return true;
 		else return ConditionProcessorRegistry.instance().getProcessor(cond.getType()).processUnlock(cond, this, player);
 	}
