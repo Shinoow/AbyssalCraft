@@ -38,7 +38,7 @@ public class ButtonCategory extends GuiButton {
 	public ButtonCategory(int par1, int par2, int par3, GuiNecronomicon gui, String label) {
 		this(par1, par2, par3, gui, label, ACItems.necronomicon);
 	}
-	
+
 	public ButtonCategory setLocked(boolean locked) {
 		this.locked = locked;
 		return this;
@@ -46,6 +46,8 @@ public class ButtonCategory extends GuiButton {
 
 	@Override
 	public void drawButton(Minecraft mc, int mx, int my, float f) {
+		if(!visible) return;
+
 		boolean inside = mx >= x && my >= y && mx < x + width && my < y + height;
 
 		ResourceLocation res = locked ? getTexture(ACItems.oblivion_catalyst) : getTexture(icon);

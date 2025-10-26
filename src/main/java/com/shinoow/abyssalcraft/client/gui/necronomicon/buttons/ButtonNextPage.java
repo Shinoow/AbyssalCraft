@@ -36,23 +36,22 @@ public class ButtonNextPage extends GuiButton
 	@Override
 	public void drawButton(Minecraft mc, int mx, int mz, float f)
 	{
-		if (visible)
-		{
-			boolean flag = mx >= x && mz >= y && mx < x + width && mz < y + height;
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			mc.getTextureManager().bindTexture(new ResourceLocation("abyssalcraft:textures/gui/necronomicon.png"));
-			int k = 0;
-			int l = 192;
+		if(!visible) return;
 
-			if(isLong)
-				k += 46;
-			if (flag)
-				k += isLong ? 30 : 23;
+		boolean flag = mx >= x && mz >= y && mx < x + width && mz < y + height;
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		mc.getTextureManager().bindTexture(new ResourceLocation("abyssalcraft:textures/gui/necronomicon.png"));
+		int k = 0;
+		int l = 192;
 
-			if (!invert)
-				l += 13;
+		if(isLong)
+			k += 46;
+		if (flag)
+			k += isLong ? 30 : 23;
 
-			drawTexturedModalRect(x, y, k, l, isLong ? 30 : 23, 13);
-		}
+		if (!invert)
+			l += 13;
+
+		drawTexturedModalRect(x, y, k, l, isLong ? 30 : 23, 13);
 	}
 }

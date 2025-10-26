@@ -30,13 +30,8 @@ import net.minecraft.item.ItemStack;
 
 public class GuiNecronomiconMachines extends GuiNecronomicon {
 
-	private ButtonNextPage buttonNextPage, buttonNextPageLong;
-	private ButtonNextPage buttonPreviousPage, buttonPreviousPageLong;
-	private GuiButton buttonDone;
-	private ButtonHome buttonHome;
 	private ButtonCategory info, transmutator, crystallizer, materializer, anvil;
 	private boolean isMInfo, isTra, isCry, isMat, isAnv;
-	private GuiNecronomicon parent;
 	private List<Transmutation> transmutations = new ArrayList<>();
 	private List<Crystallization> crystallizations = new ArrayList<>();
 	private List<Materialization> materalizations = new ArrayList<>();
@@ -52,11 +47,10 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 	{
 		if(isInvalid)
 			mc.displayGuiScreen(parent.withBookType(getBookType()));
-		currentNecro = this;
 		if(transmutations.isEmpty() || crystallizations.isEmpty()
 				|| materalizations.isEmpty() || anvilForgings.isEmpty())
 			initStuff();
-		if(isCry && getKnowledgeLevel() == 1){
+		if(isCry && getKnowledgeLevel() <= 1){
 			isInfo = isMInfo = isTra = isCry = isMat = isAnv = false;
 			currTurnup = 0;
 		}
@@ -65,9 +59,7 @@ public class GuiNecronomiconMachines extends GuiNecronomicon {
 			currTurnup = 0;
 		}
 
-		initBaseButtons();
-
-		updateButtons();
+		initCommon();
 	}
 
 	@Override

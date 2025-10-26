@@ -17,22 +17,15 @@ import com.shinoow.abyssalcraft.api.necronomicon.GuiInstance;
 import com.shinoow.abyssalcraft.api.necronomicon.INecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.*;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
 
 public class GuiNecronomiconEntry extends GuiNecronomicon {
 
-	private ButtonNextPage buttonNextPage, buttonNextPageLong;
-	private ButtonNextPage buttonPreviousPage, buttonPreviousPageLong;
 	private ButtonCategory[] buttons;
-	private GuiButton buttonDone;
-	private ButtonHome buttonHome;
-	private ButtonInfo showNoteButtonLeft, showNoteButtonRight;
 	public NecroData data;
-	public GuiNecronomicon parent;
 	private int currentData;
 
 	public GuiNecronomiconEntry(int bookType, NecroData nd, GuiNecronomicon gui){
@@ -56,13 +49,7 @@ public class GuiNecronomiconEntry extends GuiNecronomicon {
 	public void initGui(){
 		if(isInvalid)
 			mc.displayGuiScreen(parent.withBookType(getBookType()));
-
-		currentNecro = this;
-		buttonList.clear();
-		Keyboard.enableRepeatEvents(true);
-
-		initBaseButtons();
-		updateButtons();
+		initCommon();
 		getHelper().updateSidebarIndex(this);
 	}
 

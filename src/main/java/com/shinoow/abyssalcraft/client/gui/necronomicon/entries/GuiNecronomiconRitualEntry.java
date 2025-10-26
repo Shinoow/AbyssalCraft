@@ -32,11 +32,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 
-	private ButtonNextPage buttonNextPage, buttonNextPageLong;
-	private ButtonNextPage buttonPreviousPage, buttonPreviousPageLong;
-	private GuiButton buttonDone;
-	private ButtonHome buttonHome;
-	private GuiNecronomicon parent;
 	/** Used to separate which rituals this entry should display */
 	private int ritualnum;
 	private List<NecronomiconRitual> rituals = new ArrayList<>();
@@ -61,15 +56,9 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	public void initGui(){
 		if(isInvalid)
 			mc.displayGuiScreen(parent.withBookType(getBookType()));
-		currentNecro = this;
 		if(rituals.isEmpty())
 			initStuff();
-		buttonList.clear();
-		Keyboard.enableRepeatEvents(true);
-
-		initBaseButtons();
-
-		updateButtons();
+		initCommon();
 	}
 
 	@Override

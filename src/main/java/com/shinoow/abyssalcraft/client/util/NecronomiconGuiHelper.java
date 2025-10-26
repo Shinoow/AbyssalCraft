@@ -24,6 +24,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Logic stripped from GuiNecronomicon for slightly cleaner code
+ * 
+ * @author shinoow
+ * 
  */
 public class NecronomiconGuiHelper {
 

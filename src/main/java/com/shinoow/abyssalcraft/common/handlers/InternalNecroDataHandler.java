@@ -29,26 +29,21 @@ import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.api.necronomicon.*;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.*;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.entries.GuiNecronomiconRitualEntry;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
+import com.shinoow.abyssalcraft.common.util.GuiInstanceBase;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.lib.util.NecroDataJsonUtil;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
@@ -77,9 +72,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.PATRONS = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
 		Chapters.ABYSSALCRAFT_INFO = new Chapter("acinfo", NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0);
 		Chapters.NECRONOMICON_INFO = new Chapter("necronomiconinfo", NecronomiconText.LABEL_HUH, 0);
-		Chapters.ABYSSALNOMICON_INFO = new Chapter("abyssalnomiconinfo", NecronomiconText.LABEL_HUH, 4);
+		Chapters.ABYSSALNOMICON_INFO = new Chapter("abyssalnomiconinfo", NecronomiconText.LABEL_HUH, 4, ResearchItems.getBookResearch(4));
 		Chapters.KNOWLEDGE_INFO = new Chapter("knowledgeinfo", NecronomiconText.LABEL_KNOWLEDGE, 0);
-		
+
 		Chapters.OVERWORLD = new Chapter("overworld", NecronomiconText.LABEL_INFORMATION_OVERWORLD_TITLE, 0);
 		Chapters.ABYSSAL_WASTELAND = new Chapter("abyssalwasteland", NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND_TITLE, 1, ResearchItems.getBookResearch(1));
 		Chapters.DREADLANDS = new Chapter("dreadlands", NecronomiconText.LABEL_INFORMATION_DREADLANDS_TITLE, 2, ResearchItems.getBookResearch(2));
@@ -129,16 +124,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		internalNecroData.add(new NecroData("pantheon", NecronomiconText.LABEL_PANTHEON, 0, NecronomiconText.INFORMATION_GREAT_OLD_ONES,
 				Chapters.OUTER_GODS, Chapters.GREAT_OLD_ONES));
 		internalNecroData.add(new NecroData("rituals", NecronomiconText.LABEL_INFORMATION, 0, Chapters.RITUAL_GETTING_STARTED, Chapters.RITUAL_MATERIALS));
-		GuiInstance structures = new GuiInstance(0, NecronomiconText.LABEL_STRUCTURES, "structures") {
-
-			@Override
-			@SideOnly(Side.CLIENT)
-			public GuiScreen getOpenGui(int bookType, GuiScreen parent) {
-
-				return new GuiNecronomiconPlacesOfPower(bookType, (GuiNecronomicon) parent);
-			}
-		};
-		NecroData placesOfPower = new NecroData("placesofpower", NecronomiconText.LABEL_PLACES_OF_POWER, 0, NecronomiconText.PLACES_OF_POWER_INFO, Chapters.PLACES_OF_POWER_INFO, structures);
+		NecroData placesOfPower = new NecroData("placesofpower", NecronomiconText.LABEL_PLACES_OF_POWER, 0, NecronomiconText.PLACES_OF_POWER_INFO, Chapters.PLACES_OF_POWER_INFO, new GuiInstanceBase(0, NecronomiconText.LABEL_STRUCTURES, "structures", 0));
 		internalNecroData.add(new NecroData("potentialenergy", NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, Chapters.PE_INFO, Chapters.PE_MATERIALS, Chapters.PE_CRAFTING, placesOfPower, Chapters.IDOLS));
 		internalNecroData.add(new NecroData("miscinfo", NecronomiconText.LABEL_MISC_INFORMATION, 0, NecronomiconText.MISC_INFORMATION, Chapters.MISC_CRAFTING,
 				Chapters.MISC_ENCHANTMENTS, Chapters.MISC_STATUES, Chapters.ITEM_TRANSPORT_SYSTEM, Chapters.ABYSSAL_WASTELAND_PLAGUE, Chapters.DREADLANDS_PLAGUE));
@@ -156,11 +142,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		internalNecroData.add(new NecroData("information", NecronomiconText.LABEL_INFORMATION, 0, Chapters.ABYSSALCRAFT_INFO,
 				getInternalNecroData("pantheon"),
 				new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.INFORMATION_ABYSSALNOMICON),
-				Chapters.PATRONS, new GuiInstance(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines"){
-			@Override
-			@SideOnly(Side.CLIENT)
-			public GuiScreen getOpenGui(int bookType, GuiScreen parent) { return new GuiNecronomiconMachines(bookType, (GuiNecronomicon) parent); }
-		}, getInternalNecroData("progression"),
+				Chapters.PATRONS, new GuiInstanceBase(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines", 1), getInternalNecroData("progression"),
 				getInternalNecroData("dimensions"),
 				getInternalNecroData("biomes"),
 				getInternalNecroData("entities"),
@@ -170,17 +152,14 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				getInternalNecroData("structures"),
 				getInternalNecroData("miscinfo")));
 		internalNecroData.add(new NecroData("ritualinfo", NecronomiconText.LABEL_RITUALS, 0, NecronomiconText.RITUAL_INFO, getInternalNecroData("rituals"),
-				new RitualGuiInstance(0, NecronomiconText.LABEL_NORMAL, "ritualsoverworld"),
-				new RitualGuiInstance(1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND, "ritualsabyssalwasteland"),
-				new RitualGuiInstance(2, NecronomiconText.LABEL_INFORMATION_DREADLANDS, "ritualsdreadlands"),
-				new RitualGuiInstance(3, NecronomiconText.LABEL_INFORMATION_OMOTHOL, "ritualsomothol"),
-				new RitualGuiInstance(4, ACItems.abyssalnomicon.getTranslationKey() + ".name", "ritualsabyssalnomicon")));
+				new GuiInstanceBase(0, NecronomiconText.LABEL_NORMAL, "ritualsoverworld", ResearchItems.getBookResearch(0), 3),
+				new GuiInstanceBase(1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND, "ritualsabyssalwasteland", ResearchItems.getBookResearch(1), 3),
+				new GuiInstanceBase(2, NecronomiconText.LABEL_INFORMATION_DREADLANDS, "ritualsdreadlands", ResearchItems.getBookResearch(2), 3),
+				new GuiInstanceBase(3, NecronomiconText.LABEL_INFORMATION_OMOTHOL, "ritualsomothol", ResearchItems.getBookResearch(3), 3),
+				new GuiInstanceBase(4, ACItems.abyssalnomicon.getTranslationKey() + ".name", "ritualsabyssalnomicon", ResearchItems.getBookResearch(4), 3)));
 		internalNecroData.add(new NecroData("root", NecronomiconText.LABEL_HUH, 0, NecronomiconText.LABEL_INDEX, 
 				getInternalNecroData("information"),
-				new GuiInstance(0, NecronomiconText.LABEL_SPELL_NAME, "spells") {
-					@Override
-					@SideOnly(Side.CLIENT)
-					public GuiScreen getOpenGui(int bookType, GuiScreen parent) { return new GuiNecronomiconSpells(bookType, Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND)); }},
+				new GuiInstanceBase(0, NecronomiconText.LABEL_SPELLBOOK, "spells", 2),
 				getInternalNecroData("ritualinfo"),
 				getInternalNecroData("potentialenergy"),
 				Chapters.NECRONOMICON_INFO,
@@ -628,10 +607,10 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_ABYSSALNOMICON_PAGE_2 = new Page(2, NecronomiconText.LABEL_HUH, 4, NecronomiconText.ABYSSALNOMICON_PAGE_2);
 
 		Pages.INFORMATION_KNOWLEDGE_PAGE_1 = new Page(1, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.KNOWLEDGE_INFO_1);
-		Pages.INFORMATION_KNOWLEDGE_PAGE_2 = new Page(1, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.KNOWLEDGE_INFO_2);
-		Pages.INFORMATION_KNOWLEDGE_PAGE_3 = new Page(1, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.KNOWLEDGE_INFO_3);
-		Pages.INFORMATION_KNOWLEDGE_PAGE_4 = new Page(1, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.getRandomAklo(1)).setResearch(ResearchItems.ALWAYS_LOCKED);
-		
+		Pages.INFORMATION_KNOWLEDGE_PAGE_2 = new Page(2, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.KNOWLEDGE_INFO_2);
+		Pages.INFORMATION_KNOWLEDGE_PAGE_3 = new Page(3, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.KNOWLEDGE_INFO_3);
+		Pages.INFORMATION_KNOWLEDGE_PAGE_4 = new Page(4, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.getRandomAklo(1), ResearchItems.ALWAYS_LOCKED);
+
 		Pages.PROGRESSION_OVERWORLD_1.setReference(Pages.CRAFTING_GATEWAY_KEY);
 		Pages.PROGRESSION_OVERWORLD_2.setReference(Pages.CRAFTING_STAFF_OF_RENDING_1, Pages.CRAFTING_STAFF_OF_RENDING_2);
 		Pages.PROGRESSION_OVERWORLD_3.setReference(Pages.CRAFTING_SHARD_OF_OBLIVION);
@@ -706,7 +685,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.KNOWLEDGE_INFO.addPages(Pages.INFORMATION_KNOWLEDGE_PAGE_1, Pages.INFORMATION_KNOWLEDGE_PAGE_2, Pages.INFORMATION_KNOWLEDGE_PAGE_3, Pages.INFORMATION_KNOWLEDGE_PAGE_4);
 
 		//TODO set up a section about charms, how they work and a listing of all anvil recipes
-		
+
 		setupPatreonData();
 	}
 
@@ -730,18 +709,5 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 
 		if(chapter != null)
 			Chapters.PATRONS.addPages(chapter.getPages().values().toArray(new Page[0]));
-	}
-
-	private class RitualGuiInstance extends GuiInstance {
-
-		protected RitualGuiInstance(int displayIcon, String title, String identifier){
-			super(displayIcon, title, identifier, ResearchItems.getBookResearch(displayIcon));
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public GuiScreen getOpenGui(int bookType, GuiScreen parent) {
-			return new GuiNecronomiconRitualEntry(bookType, (GuiNecronomicon) parent, displayIcon);
-		}
 	}
 }

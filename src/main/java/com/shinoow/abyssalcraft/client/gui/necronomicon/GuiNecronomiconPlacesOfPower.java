@@ -53,11 +53,6 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 
-	private ButtonNextPage buttonNextPage, buttonNextPageLong;
-	private ButtonNextPage buttonPreviousPage, buttonPreviousPageLong;
-	private GuiButton buttonDone;
-	private ButtonHome buttonHome;
-	private GuiNecronomicon parent;
 	private List<IPlaceOfPower> places = new ArrayList<>();
 	private int ticksInBook;
 	private boolean showMultiblock = false;
@@ -79,15 +74,9 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 	public void initGui(){
 		if(isInvalid)
 			mc.displayGuiScreen(parent.withBookType(getBookType()));
-		currentNecro = this;
 		if(places.isEmpty())
 			initStuff();
-		buttonList.clear();
-		Keyboard.enableRepeatEvents(true);
-
-		initBaseButtons();
-
-		updateButtons();
+		initCommon();
 	}
 
 	@Override

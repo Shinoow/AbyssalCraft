@@ -28,26 +28,19 @@ import net.minecraft.item.ItemStack;
 
 public class GuiNecronomiconSpells extends GuiNecronomicon {
 
-	private ButtonNextPage buttonNextPage, buttonPreviousPage;
 	private ButtonCategory buttonCat1, buttonCat2, buttonCat3;
-	private GuiButton buttonDone;
 	private ItemStack book;
 
-	public GuiNecronomiconSpells(int bookType, ItemStack book){
+	public GuiNecronomiconSpells(int bookType, ItemStack book, GuiNecronomicon gui){
 		super(bookType);
 		this.book = book;
+		parent = gui;
 	}
 
 	@Override
 	public void initGui()
 	{
-		currentNecro = this;
-		buttonList.clear();
-		Keyboard.enableRepeatEvents(true);
-
-		initBaseButtons();
-
-		updateButtons();
+		initCommon();
 	}
 
 	@Override
@@ -62,6 +55,7 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 	@Override
 	protected void updateButtonsInner() {
 		buttonCat2.visible = hasSpells();
+		buttonPreviousPage.visible = true;
 	}
 
 	private boolean hasSpells(){

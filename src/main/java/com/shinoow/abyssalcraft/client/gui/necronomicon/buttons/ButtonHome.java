@@ -33,19 +33,17 @@ public class ButtonHome extends GuiButton
 	@Override
 	public void drawButton(Minecraft mc, int mx, int mz, float f)
 	{
-		if (visible)
-		{
-			boolean flag = mx >= x && mz >= y && mx < x + width && mz < y + height;
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			mc.getTextureManager().bindTexture(new ResourceLocation("abyssalcraft:textures/gui/necronomicon.png"));
-			int k = 106;
-			int l = 192;
+		if(!visible) return;
 
-			if (flag)
-				k += 18;
+		boolean flag = mx >= x && mz >= y && mx < x + width && mz < y + height;
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		mc.getTextureManager().bindTexture(new ResourceLocation("abyssalcraft:textures/gui/necronomicon.png"));
+		int k = 106;
+		int l = 192;
 
+		if (flag)
+			k += 18;
 
-			drawTexturedModalRect(x, y, k, l, 18, 10);
-		}
+		drawTexturedModalRect(x, y, k, l, 18, 10);
 	}
 }

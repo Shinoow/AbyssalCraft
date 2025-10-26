@@ -32,11 +32,6 @@ import net.minecraft.item.ItemStack;
 
 public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 
-	private ButtonNextPage buttonNextPage, buttonNextPageLong;
-	private ButtonNextPage buttonPreviousPage, buttonPreviousPageLong;
-	private GuiButton buttonDone;
-	private ButtonHome buttonHome;
-	private GuiNecronomicon parent;
 	private List<Spell> spells = new ArrayList<>();
 	private List<ItemStack> scrolls = new ArrayList<>();
 
@@ -59,15 +54,9 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 	public void initGui(){
 		if(isInvalid)
 			spells.clear();
-		currentNecro = this;
 		if(spells.isEmpty())
 			initStuff();
-		buttonList.clear();
-		Keyboard.enableRepeatEvents(true);
-
-		initBaseButtons();
-		
-		updateButtons();
+		initCommon();
 	}
 
 	@Override

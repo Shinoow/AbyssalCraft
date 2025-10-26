@@ -104,6 +104,8 @@ public class GuiNecronomicon extends GuiScreen {
 		unknownFull = NecronomiconText.getRandomAklo(2);
 
 		rootData = AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData("root");
+		if(rootData != null)
+			buttons = new ButtonCategory[rootData.getContainedData().size()];
 	}
 
 	public GuiNecronomicon(int par1){
@@ -150,17 +152,23 @@ public class GuiNecronomicon extends GuiScreen {
 	@Override
 	public void initGui()
 	{
+		initCommon();
+		getHelper().clearSidebar();
+	}
+
+	/**
+	 * Initializes all base stuff for the Gui (along with *Inner methods)
+	 */
+	protected void initCommon() {
 		currentNecro = this;
 		buttonList.clear();
 		Keyboard.enableRepeatEvents(true);
 
 		initBaseButtons();
-
 		updateButtons();
-		getHelper().clearSidebar();
 	}
 
-	protected void initBaseButtons() {
+	private void initBaseButtons() {
 		int i = (width - guiWidth) / 2;
 		buttonList.add(buttonDone = new GuiButton(0, width / 2 - 100, 4 + guiHeight, 200, 20, I18n.format("gui.done", new Object[0])));
 		buttonList.add(buttonNextPage = new ButtonNextPage(1, i + 215, 156, true, false));
@@ -255,7 +263,6 @@ public class GuiNecronomicon extends GuiScreen {
 				} else if(currTurnup == 0 && isInfo){
 					isInfo = false;
 					currentData = -1;
-					initGui();
 					setTurnupLimit(2);
 				} else if (currTurnup > 0)
 					--currTurnup;
@@ -272,7 +279,6 @@ public class GuiNecronomicon extends GuiScreen {
 					currTurnup = 0;
 					isInfo = false;
 					currentData = -1;
-					initGui();
 					setTurnupLimit(2);
 				}
 			} else if(button.id == 6) {
@@ -378,19 +384,17 @@ public class GuiNecronomicon extends GuiScreen {
 		mc.getTextureManager().bindTexture(bookGuiTextures);
 		int k = (width - guiWidth) / 2;
 		drawTexturedModalRect(k, 2, 0, 0, guiWidth, guiHeight);
-		String s;
-		int l;
 		super.drawScreen(par1, par2, par3);
 
 		if(isInfo){
 			if(isNecroInfo || isKnowledgeInfo){
 				drawTitle(localize(isNecroInfo ? NecronomiconText.LABEL_HUH : NecronomiconText.LABEL_KNOWLEDGE));
 			}
-			s = localize("necronomicon.turnupindicator", Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups));
+			String turnupStr = localize("necronomicon.turnupindicator", Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups));
 
-			l = fontRenderer.getStringWidth(s);
+			int turnupStrLen = fontRenderer.getStringWidth(turnupStr);
 			if(getTurnupLimit() > 1)
-				fontRenderer.drawString(s, k - l + guiWidth - 22, 18, 0);
+				fontRenderer.drawString(turnupStr, k - turnupStrLen + guiWidth - 22, 18, 0);
 			drawInformationText(par1, par2);
 
 			renderSidebarIndex();

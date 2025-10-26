@@ -268,6 +268,7 @@ public class NecroDataCapability implements INecroDataCapability {
 
 		boolean unlocked = true;
 
+		if(research.getRequiredLevel() == -2) return false; // The "haha, get fucked" research item
 		if(research.getRequiredLevel() == -1 || hasAllKnowledge || completed_researches.contains(research.getID())) return true;
 
 		//TODO better handling?

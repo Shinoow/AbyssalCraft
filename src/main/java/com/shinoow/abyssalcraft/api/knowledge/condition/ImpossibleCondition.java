@@ -12,7 +12,7 @@ public class ImpossibleCondition implements IUnlockCondition {
 	@Override
 	public Object getConditionObject() {
 
-		return true;
+		return false;
 	}
 
 	@Override
