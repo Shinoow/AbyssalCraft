@@ -1,5 +1,11 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"2": "abyssalcraft:blocks/os"
+		}
+	},
 	"variants": {
-		"normal": { "model": "abyssalcraft:tieredsacrificialaltar_3" }
+		"normal": { "model": "abyssalcraft:tiered_sacrificialaltar" }
 	}
 }

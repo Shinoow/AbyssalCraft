@@ -1,5 +1,11 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"2": "abyssalcraft:blocks/drs"
+		}
+	},
 	"variants": {
-		"normal": { "model": "abyssalcraft:tieredsacrificialaltar_2" }
+		"normal": { "model": "abyssalcraft:tiered_sacrificialaltar" }
 	}
 }

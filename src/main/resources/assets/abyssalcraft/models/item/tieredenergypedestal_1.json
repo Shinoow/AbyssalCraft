@@ -1,7 +1,7 @@
 {
-	"parent": "abyssalcraft:block/energypedestal",
+	"parent": "abyssalcraft:block/tiered_energypedestal",
     "textures": {
-        "0": "abyssalcraft:blocks/as"
+        "2": "abyssalcraft:blocks/as"
     },
     "display": {
         "gui": {

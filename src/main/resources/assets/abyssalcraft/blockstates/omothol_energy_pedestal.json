@@ -2,16 +2,15 @@
 	"forge_marker": 1,
 	"defaults": {
 		"textures" : {
-			"0": "abyssalcraft:blocks/os",
-			"particle": "abyssalcraft:blocks/os"
+			"2": "abyssalcraft:blocks/os"
 		}
 	},
 	"variants": {
 		"tilted=true": {
-			"model": "abyssalcraft:energypedestal_tilted"
+			"model": "abyssalcraft:tiered_energypedestal_tilted"
 		},
 		"tilted=false": {
-			"model": "abyssalcraft:energypedestal"
+			"model": "abyssalcraft:tiered_energypedestal"
 		}
 	}
 }
