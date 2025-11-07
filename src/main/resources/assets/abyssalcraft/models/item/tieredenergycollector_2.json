@@ -1,5 +1,8 @@
 {
-	"parent": "abyssalcraft:block/tieredenergycollector_2",
+	"parent": "abyssalcraft:block/tiered_energycollector",
+    "textures": {
+        "4": "abyssalcraft:blocks/drs"
+    },
     "display": {
         "gui": {
             "rotation": [ 30, 45, 0 ],

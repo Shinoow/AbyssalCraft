@@ -3,7 +3,8 @@
     "textures": {
 		"0": "abyssalcraft:blocks/monolithstone",
 		"particle": "abyssalcraft:blocks/monolithstone",
-		"1": "abyssalcraft:blocks/ritualpedestal/overlay2"
+		"1": "abyssalcraft:blocks/ritualpedestal/overlay2",
+		"2": "abyssalcraft:blocks/pe/tinted_green"
     },
     "elements": [
         {
@@ -37,10 +38,10 @@
             "from": [ 5.5, 3.0, 5.5 ], 
             "to": [ 10.5, 13.0, 10.5 ], 
             "faces": {
-                "north": { "texture": "#0", "uv": [ 0.0, 6.0, 5.0, 16.0 ] },
-                "east": { "texture": "#0", "uv": [ 10.0, 6.0, 15.0, 16.0 ] },
-                "south": { "texture": "#0", "uv": [ 5.0, 6.0, 10.0, 16.0 ] },
-                "west": { "texture": "#0", "uv": [ 1.0, 6.0, 6.0, 16.0 ] },
+                "north": { "texture": "#2", "uv": [ 0.0, 6.0, 5.0, 16.0 ] },
+                "east": { "texture": "#2", "uv": [ 10.0, 6.0, 15.0, 16.0 ] },
+                "south": { "texture": "#2", "uv": [ 5.0, 6.0, 10.0, 16.0 ] },
+                "west": { "texture": "#2", "uv": [ 1.0, 6.0, 6.0, 16.0 ] },
                 "up": { "texture": "#-1", "uv": [ 0.0, 0.0, 5.0, 5.0 ] },
                 "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 5.0, 5.0 ] }
             }

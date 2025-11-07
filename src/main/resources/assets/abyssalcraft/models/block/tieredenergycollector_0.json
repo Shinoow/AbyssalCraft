@@ -1,7 +1,0 @@
-{
-	"parent": "abyssalcraft:block/energycollector",
-	"textures": {
-		"side": "minecraft:blocks/stone",
-		"particle": "minecraft:blocks/stone"
-	}
-}
