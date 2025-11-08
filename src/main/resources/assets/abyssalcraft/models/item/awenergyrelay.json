@@ -1,7 +1,7 @@
 {
-	"parent": "abyssalcraft:block/energyrelay",
+	"parent": "abyssalcraft:block/tiered_energyrelay",
 	"textures" : {
-		"0": "abyssalcraft:blocks/as"
+		"4": "abyssalcraft:blocks/as"
 	},
     "display": {
         "gui": {

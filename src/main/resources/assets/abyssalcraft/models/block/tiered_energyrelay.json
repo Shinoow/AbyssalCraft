@@ -4,6 +4,8 @@
 	"textures": {
 		"0": "abyssalcraft:blocks/monolithstone",
 		"2": "abyssalcraft:blocks/pe/tinted_green",
+		"3": "abyssalcraft:blocks/pe/extra",
+		"4": "blocks/stone",
 		"particle": "abyssalcraft:blocks/monolithstone"
 	},
 	"elements": [
@@ -292,6 +294,42 @@
 				"west": {"uv": [1, 5, 2, 7], "texture": "#0"},
 				"up": {"uv": [1, 5, 2, 6], "texture": "#0"},
 				"down": {"uv": [1, 5, 2, 6], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Bling1",
+			"from": [5.5, 5.5, 12],
+			"to": [10.5, 10.5, 13],
+			"faces": {
+				"north": {"uv": [5, 6, 10, 11], "texture": "#3"},
+				"east": {"uv": [4, 6, 5, 11], "texture": "#3"},
+				"south": {"uv": [5, 6, 10, 11], "texture": "#3"},
+				"west": {"uv": [9, 11, 10, 16], "texture": "#3"},
+				"up": {"uv": [4, 5, 9, 6], "texture": "#3"},
+				"down": {"uv": [4, 11, 9, 12], "texture": "#3"}
+			}
+		},
+		{
+			"name": "Bling2",
+			"from": [5.5, 5.5, 9],
+			"to": [10.5, 10.5, 10],
+			"faces": {
+				"north": {"uv": [5, 6, 10, 11], "texture": "#3"},
+				"east": {"uv": [13, 11, 14, 16], "texture": "#3"},
+				"west": {"uv": [6, 6, 7, 11], "texture": "#3"},
+				"up": {"uv": [4, 5, 9, 6], "texture": "#3"},
+				"down": {"uv": [4, 11, 9, 12], "texture": "#3"}
+			}
+		},
+		{
+			"name": "Belt",
+			"from": [5.5, 5.5, 10],
+			"to": [10.5, 10.5, 12],
+			"faces": {
+				"east": {"uv": [7, 10, 9, 15], "texture": "#4"},
+				"west": {"uv": [7, 0, 9, 5], "texture": "#4"},
+				"up": {"uv": [0, 6, 5, 8], "texture": "#4"},
+				"down": {"uv": [10, 6, 15, 8], "texture": "#4"}
 			}
 		}
 	]
