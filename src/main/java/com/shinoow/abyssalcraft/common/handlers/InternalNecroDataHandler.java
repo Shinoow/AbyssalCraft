@@ -68,6 +68,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.SPELL_GETTING_STARTED = new Chapter("gettingstarted", NecronomiconText.LABEL_GETTING_STARTED, 0);
 		Chapters.SPELL_CASTING = new Chapter("casting", NecronomiconText.LABEL_CASTING, 0);
 		Chapters.SPELL_MATERIALS = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
+		Chapters.MACHINES = new Chapter("machines", NecronomiconText.LABEL_INFORMATION_MACHINES, 0);
 
 		Chapters.PATRONS = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
 		Chapters.ABYSSALCRAFT_INFO = new Chapter("acinfo", NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0);
@@ -130,6 +131,12 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				Chapters.MISC_ENCHANTMENTS, Chapters.MISC_STATUES, Chapters.ITEM_TRANSPORT_SYSTEM, Chapters.ABYSSAL_WASTELAND_PLAGUE, Chapters.DREADLANDS_PLAGUE));
 		internalNecroData.add(new NecroData("spells", NecronomiconText.LABEL_INFORMATION, 0, Chapters.SPELL_GETTING_STARTED, Chapters.SPELL_CASTING, Chapters.SPELL_MATERIALS));
 
+		internalNecroData.add(new NecroData("machines", NecronomiconText.LABEL_INFORMATION_MACHINES, 0, NecronomiconText.MACHINES_INFO, Chapters.MACHINES,
+				new GuiInstanceBase(0, "tile.anvil.name", "anvil", 3),
+				new GuiInstanceBase(1, "container.abyssalcraft.transmutator", "transmutator", ResearchItems.getBookResearch(1), 4),
+				new GuiInstanceBase(2, "container.abyssalcraft.crystallizer", "crystallizer", ResearchItems.getBookResearch(2), 5),
+				new GuiInstanceBase(3, "container.abyssalcraft.materializer", "materializer", ResearchItems.getBookResearch(3), 6)));
+
 		internalNecroData.add(new NecroData("progression", NecronomiconText.LABEL_INFORMATION_PROGRESSION, 0, NecronomiconText.WIP, Chapters.OVERWORLD_PROGRESSION, Chapters.ABYSSAL_WASTELAND_PROGRESSION, Chapters.DREADLANDS_PROGRESSION, Chapters.OMOTHOL_PROGRESSION, Chapters.DARK_REALM_PROGRESSION));
 		internalNecroData.add(new NecroData("dimensions", NecronomiconText.LABEL_INFORMATION_DIMENSIONS, 0, NecronomiconText.WIP, Chapters.OVERWORLD, Chapters.ABYSSAL_WASTELAND, Chapters.DREADLANDS, Chapters.OMOTHOL, Chapters.DARK_REALM));
 		internalNecroData.add(new NecroData("biomes", NecronomiconText.LABEL_INFORMATION_BIOMES, 0, NecronomiconText.WIP, Chapters.OVERWORLD_BIOMES, Chapters.ABYSSAL_WASTELAND_BIOMES, Chapters.DREADLANDS_BIOMES, Chapters.OMOTHOL_BIOMES, Chapters.DARK_REALM_BIOMES));
@@ -142,7 +149,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		internalNecroData.add(new NecroData("information", NecronomiconText.LABEL_INFORMATION, 0, Chapters.ABYSSALCRAFT_INFO,
 				getInternalNecroData("pantheon"),
 				new Page(1, NecronomiconText.LABEL_INFORMATION_ABYSSALNOMICON, 4, NecronomiconText.INFORMATION_ABYSSALNOMICON),
-				Chapters.PATRONS, new GuiInstanceBase(0, NecronomiconText.LABEL_INFORMATION_MACHINES, "machines", 1), getInternalNecroData("progression"),
+				Chapters.PATRONS, getInternalNecroData("machines"), getInternalNecroData("progression"),
 				getInternalNecroData("dimensions"),
 				getInternalNecroData("biomes"),
 				getInternalNecroData("entities"),
@@ -152,14 +159,14 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				getInternalNecroData("structures"),
 				getInternalNecroData("miscinfo")));
 		internalNecroData.add(new NecroData("ritualinfo", NecronomiconText.LABEL_RITUALS, 0, NecronomiconText.RITUAL_INFO, getInternalNecroData("rituals"),
-				new GuiInstanceBase(0, NecronomiconText.LABEL_NORMAL, "ritualsoverworld", ResearchItems.getBookResearch(0), 3),
-				new GuiInstanceBase(1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND, "ritualsabyssalwasteland", ResearchItems.getBookResearch(1), 3),
-				new GuiInstanceBase(2, NecronomiconText.LABEL_INFORMATION_DREADLANDS, "ritualsdreadlands", ResearchItems.getBookResearch(2), 3),
-				new GuiInstanceBase(3, NecronomiconText.LABEL_INFORMATION_OMOTHOL, "ritualsomothol", ResearchItems.getBookResearch(3), 3),
-				new GuiInstanceBase(4, ACItems.abyssalnomicon.getTranslationKey() + ".name", "ritualsabyssalnomicon", ResearchItems.getBookResearch(4), 3)));
+				new GuiInstanceBase(0, NecronomiconText.LABEL_NORMAL, "ritualsoverworld", ResearchItems.getBookResearch(0), 2),
+				new GuiInstanceBase(1, NecronomiconText.LABEL_INFORMATION_ABYSSAL_WASTELAND, "ritualsabyssalwasteland", ResearchItems.getBookResearch(1), 2),
+				new GuiInstanceBase(2, NecronomiconText.LABEL_INFORMATION_DREADLANDS, "ritualsdreadlands", ResearchItems.getBookResearch(2), 2),
+				new GuiInstanceBase(3, NecronomiconText.LABEL_INFORMATION_OMOTHOL, "ritualsomothol", ResearchItems.getBookResearch(3), 2),
+				new GuiInstanceBase(4, ACItems.abyssalnomicon.getTranslationKey() + ".name", "ritualsabyssalnomicon", ResearchItems.getBookResearch(4), 2)));
 		internalNecroData.add(new NecroData("root", NecronomiconText.LABEL_HUH, 0, NecronomiconText.LABEL_INDEX, 
 				getInternalNecroData("information"),
-				new GuiInstanceBase(0, NecronomiconText.LABEL_SPELLBOOK, "spells", 2),
+				new GuiInstanceBase(0, NecronomiconText.LABEL_SPELLBOOK, "spells", 1),
 				getInternalNecroData("ritualinfo"),
 				getInternalNecroData("potentialenergy"),
 				Chapters.NECRONOMICON_INFO,
@@ -611,6 +618,11 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_KNOWLEDGE_PAGE_3 = new Page(3, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.KNOWLEDGE_INFO_3);
 		Pages.INFORMATION_KNOWLEDGE_PAGE_4 = new Page(4, NecronomiconText.LABEL_KNOWLEDGE, 0, NecronomiconText.getRandomAklo(1), ResearchItems.ALWAYS_LOCKED);
 
+		Pages.INFORMATION_MACHINE_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_MACHINES, 0, new ItemStack(Blocks.ANVIL), NecronomiconText.MACHINE_INFO_1);
+		Pages.INFORMATION_MACHINE_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_MACHINES, 1, new ItemStack(ACBlocks.transmutator_idle), NecronomiconText.MACHINE_INFO_2, ResearchItems.getBookResearch(1));
+		Pages.INFORMATION_MACHINE_3 = new Page(3, NecronomiconText.LABEL_INFORMATION_MACHINES, 2, new ItemStack(ACBlocks.crystallizer_idle), NecronomiconText.MACHINE_INFO_3, ResearchItems.getBookResearch(2));
+		Pages.INFORMATION_MACHINE_4 = new Page(4, NecronomiconText.LABEL_INFORMATION_MACHINES, 3, new ItemStack(ACBlocks.materializer), NecronomiconText.MACHINE_INFO_4, ResearchItems.getBookResearch(3));
+
 		Pages.PROGRESSION_OVERWORLD_1.setReference(Pages.CRAFTING_GATEWAY_KEY);
 		Pages.PROGRESSION_OVERWORLD_2.setReference(Pages.CRAFTING_STAFF_OF_RENDING_1, Pages.CRAFTING_STAFF_OF_RENDING_2);
 		Pages.PROGRESSION_OVERWORLD_3.setReference(Pages.CRAFTING_SHARD_OF_OBLIVION);
@@ -683,6 +695,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.NECRONOMICON_INFO.addPages(Pages.INFORMATION_NECRONOMICON_PAGE_1, Pages.INFORMATION_NECRONOMICON_PAGE_2, Pages.INFORMATION_NECRONOMICON_PAGE_3, Pages.INFORMATION_NECRONOMICON_PAGE_4);
 		Chapters.ABYSSALNOMICON_INFO.addPages(Pages.INFORMATION_ABYSSALNOMICON_PAGE_1, Pages.INFORMATION_ABYSSALNOMICON_PAGE_2);
 		Chapters.KNOWLEDGE_INFO.addPages(Pages.INFORMATION_KNOWLEDGE_PAGE_1, Pages.INFORMATION_KNOWLEDGE_PAGE_2, Pages.INFORMATION_KNOWLEDGE_PAGE_3, Pages.INFORMATION_KNOWLEDGE_PAGE_4);
+		Chapters.MACHINES.addPages(Pages.INFORMATION_MACHINE_1, Pages.INFORMATION_MACHINE_2, Pages.INFORMATION_MACHINE_3, Pages.INFORMATION_MACHINE_4);
 
 		//TODO set up a section about charms, how they work and a listing of all anvil recipes
 

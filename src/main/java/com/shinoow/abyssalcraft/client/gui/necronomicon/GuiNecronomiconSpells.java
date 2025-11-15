@@ -56,6 +56,7 @@ public class GuiNecronomiconSpells extends GuiNecronomicon {
 	protected void updateButtonsInner() {
 		buttonCat2.visible = hasSpells();
 		buttonPreviousPage.visible = true;
+		buttonHome.visible = true;
 	}
 
 	private boolean hasSpells(){

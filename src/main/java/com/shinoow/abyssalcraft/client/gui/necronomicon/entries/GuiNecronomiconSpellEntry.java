@@ -61,6 +61,7 @@ public class GuiNecronomiconSpellEntry extends GuiNecronomicon {
 
 	@Override
 	protected void updateButtonsInner() {
+		buttonHome.visible = true;
 
 		scrolls.clear();
 		scrolls = SpellRegistry.instance().getScrolls(spells.get(currTurnup).getScrollType());

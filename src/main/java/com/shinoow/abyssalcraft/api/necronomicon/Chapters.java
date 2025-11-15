@@ -33,6 +33,7 @@ public class Chapters {
 	public static Chapter SPELL_GETTING_STARTED;
 	public static Chapter SPELL_CASTING;
 	public static Chapter SPELL_MATERIALS;
+	public static Chapter MACHINES;
 
 	public static Chapter PATRONS;
 	public static Chapter ABYSSALCRAFT_INFO;

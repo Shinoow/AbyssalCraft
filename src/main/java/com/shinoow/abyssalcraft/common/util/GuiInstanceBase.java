@@ -2,8 +2,10 @@ package com.shinoow.abyssalcraft.common.util;
 
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.necronomicon.GuiInstance;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.*;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.entries.GuiNecronomiconRitualEntry;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconPlacesOfPower;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconSpells;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.entries.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -39,11 +41,17 @@ public class GuiInstanceBase extends GuiInstance {
 		case 0:
 			return new GuiNecronomiconPlacesOfPower(bookType, (GuiNecronomicon) parent);
 		case 1:
-			return new GuiNecronomiconMachines(bookType, (GuiNecronomicon) parent);
-		case 2:
 			return new GuiNecronomiconSpells(bookType, Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND), (GuiNecronomicon) parent);
-		case 3:
+		case 2:
 			return new GuiNecronomiconRitualEntry(bookType, (GuiNecronomicon) parent, displayIcon);
+		case 3:
+			return new GuiNecronomiconAnvilEntry(bookType, (GuiNecronomicon) parent);
+		case 4:
+			return new GuiNecronomiconTransmutatorEntry(bookType, (GuiNecronomicon) parent);
+		case 5:
+			return new GuiNecronomiconCrystallizerEntry(bookType, (GuiNecronomicon) parent);
+		case 6:
+			return new GuiNecronomiconMaterializerEntry(bookType, (GuiNecronomicon) parent);
 		default:
 			return null;
 		}

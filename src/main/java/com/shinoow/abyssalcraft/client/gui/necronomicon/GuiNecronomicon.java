@@ -87,8 +87,22 @@ public class GuiNecronomicon extends GuiScreen {
 	private NecronomiconGuiHelper helper;
 	protected Chapter reference1, reference2;
 	public GuiNecronomicon parent;
+
+	/**
+	 * Pointer variable to keep track of position in rootData
+	 * (only used in root 'nomicon ND)
+	 */
 	private int currentData;
 
+	// Base button IDs
+	public static final int DONE = 0;
+	public static final int NEXT = 1;
+	public static final int NEXT_LONG = 2;
+	public static final int PREVIOUS = 3;
+	public static final int PREVIOUS_LONG = 4;
+	public static final int HOME = 5;
+	public static final int NOTE_LEFT = 6;
+	public static final int NOTE_RIGHT = 7;
 
 	private NecroData rootData;
 
@@ -225,7 +239,7 @@ public class GuiNecronomicon extends GuiScreen {
 	protected void updateButtons()
 	{
 		buttonNextPage.visible = currTurnup < getTurnupLimit() - 1 && isInfo;
-		buttonNextPageLong.visible = currTurnup < getTurnupLimit() -5;
+		buttonNextPageLong.visible = currTurnup < getTurnupLimit() -5 && isInfo;
 		buttonPreviousPage.visible = isInfo;
 		buttonPreviousPageLong.visible = currTurnup > 4;
 		buttonDone.visible = true;
@@ -233,13 +247,18 @@ public class GuiNecronomicon extends GuiScreen {
 		showNoteButtonLeft.visible = reference1 != null && isInfo;
 		showNoteButtonRight.visible = reference2 != null && isInfo;
 
+		// Hide root index buttons
+		if(buttons != null) {
+			for(ButtonCategory button : buttons)
+				if(button != null)
+					button.visible = !isInfo;
+		}
+
 		updateButtonsInner();
 	}
 
 	protected void updateButtonsInner() {
-		if(rootData != null)
-			for(int i = 0; i < rootData.getContainedData().size(); i++)
-				buttons[i].visible = !isInfo;
+		// Sub-GUI button logic goes here
 	}
 
 	@Override
@@ -247,44 +266,50 @@ public class GuiNecronomicon extends GuiScreen {
 	{
 		if (button.enabled)
 		{
-			if (button.id == 0)
+			if (button.id == DONE)
 				mc.displayGuiScreen((GuiScreen)null);
-			else if(button.id == 1){
+			else if(button.id == NEXT){
 				if (currTurnup < getTurnupLimit() -1)
 					++currTurnup;
-			} else if(button.id == 2){
+			} else if(button.id == NEXT_LONG){
 				if(currTurnup < getTurnupLimit() -5)
 					currTurnup += 5;
-			} else if (button.id == 3){
+			} else if (button.id == PREVIOUS){
 				if(currTurnup == 0 && !isInfo) {
 					if(this.getClass() != GuiNecronomicon.class)
 						mc.displayGuiScreen(parent.withBookType(getBookType()));
 					else mc.displayGuiScreen((GuiScreen)null);
 				} else if(currTurnup == 0 && isInfo){
+					if(this.getClass() != GuiNecronomicon.class
+							&& this.getClass() != GuiNecronomiconEntry.class)
+						mc.displayGuiScreen(parent.withBookType(getBookType()));
 					isInfo = false;
 					currentData = -1;
 					setTurnupLimit(2);
 				} else if (currTurnup > 0)
 					--currTurnup;
-			} else if(button.id == 4){
+			} else if(button.id == PREVIOUS_LONG){
 				if(currTurnup > 4)
 					currTurnup -= 5;
-			} else if(button.id == 5){
+			} else if(button.id == HOME){
 				if(!isInfo) {
 					if(this.getClass() != GuiNecronomicon.class)
 						mc.displayGuiScreen(parent.withBookType(getBookType()));
 					else mc.displayGuiScreen((GuiScreen)null);
 				}
 				else {
+					if(this.getClass() != GuiNecronomicon.class
+							&& this.getClass() != GuiNecronomiconEntry.class)
+						mc.displayGuiScreen(parent.withBookType(getBookType()));
 					currTurnup = 0;
 					isInfo = false;
 					currentData = -1;
 					setTurnupLimit(2);
 				}
-			} else if(button.id == 6) {
+			} else if(button.id == NOTE_LEFT) {
 				if(reference1 != null)
 					mc.displayGuiScreen(new GuiNecronomiconChapterEntry(getBookType(), reference1, this));
-			} else if(button.id == 7) {
+			} else if(button.id == NOTE_RIGHT) {
 				if(reference2 != null)
 					mc.displayGuiScreen(new GuiNecronomiconChapterEntry(getBookType(), reference2, this));
 			} else actionPerformedInner(button);
@@ -474,7 +499,7 @@ public class GuiNecronomicon extends GuiScreen {
 			if(page == 1)
 				getFontRenderer(aklo).drawSplitString(localize(text), k + 17 + width, height, 107, 0);
 			if(page == 2)
-				getFontRenderer(aklo).drawSplitString(localize(text), k + 135 + width, height, 107, 0);
+				getFontRenderer(aklo).drawSplitString(localize(text), k + 137 + width, height, 107, 0);
 		}
 	}
 
@@ -560,14 +585,24 @@ public class GuiNecronomicon extends GuiScreen {
 		int offset = right ? 123 : 0;
 		int pageNum = right ? 2 : 1;
 
-		// Write text based on what the 'icon' Object is
-		if(icon instanceof ItemStack)	
-			writeText(pageNum, locked ? unknown95 : text, 50, locked);
-		if(icon instanceof ResourceLocation || icon instanceof String)
-			writeText(pageNum, locked ? unknown50_1 : text, 100, locked);
-		if(icon instanceof CraftingStack)
-			writeText(pageNum, locked ? unknown50_2 : text, 95, locked);
-		else writeText(pageNum, locked ? unknownFull : text, locked);
+		// Default values
+		String lockedText = unknownFull;
+		int height = 28;
+
+		// Calculate text height based on what the 'icon' Object is
+		if(icon instanceof ItemStack) {
+			lockedText = unknown95;
+			height = 50;
+		} else if(icon instanceof ResourceLocation || icon instanceof String) {
+			lockedText = unknown50_1;
+			height = 100;
+		} else if(icon instanceof CraftingStack) {
+			lockedText = unknown50_2;
+			height = 100;
+		}
+
+		// Write text
+		writeText(pageNum, locked ? lockedText : text, height, locked);
 
 		writeText(pageNum, String.valueOf(displayNum), 165, 50);
 

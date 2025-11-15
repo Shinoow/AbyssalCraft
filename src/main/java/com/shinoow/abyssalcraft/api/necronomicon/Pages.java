@@ -389,6 +389,11 @@ public class Pages {
 	public static Page INFORMATION_KNOWLEDGE_PAGE_3;
 	public static Page INFORMATION_KNOWLEDGE_PAGE_4;
 	
+	public static Page INFORMATION_MACHINE_1;
+	public static Page INFORMATION_MACHINE_2;
+	public static Page INFORMATION_MACHINE_3;
+	public static Page INFORMATION_MACHINE_4;
+	
 	//Spells
 
 	public static Page SPELL_TUT_1;

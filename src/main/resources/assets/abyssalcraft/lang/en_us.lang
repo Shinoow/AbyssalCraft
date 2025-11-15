@@ -611,8 +611,9 @@ necronomicon.text.pe.20=Upon reaching Omothol, you will be able to create deity-
 
 necronomicon.text.machines.info=Check the information section for information regarding the different machines, or the other sections for all recipes for the specified machine. The recipes aren't sorted in any way.
 
-necronomicon.text.machines.1=The Transmutator is used to transmute objects into other objects, which can revert a process or simply convert an object into it's opposite. It's fueled by any Coralium materials, Coralium-plagued Flesh and any Crystallized element (full crystal or shard).
-necronomicon.text.machines.2=The Crystallizer is used to crystallize elements, isolating the base elements (or molecules) they're made from. It's fueled by any Dreaded material, Dread Fragments and any Crystallized element (full crystal or shard).
+necronomicon.text.machines.1=The Anvil has gotten some new use, where you can process certain objects through an anvil, instead of rituals or other means.
+necronomicon.text.machines.2=The Transmutator is used to transmute objects into other objects, which can revert a process or simply convert an object into it's opposite. It's fueled by any Coralium materials, Coralium-plagued Flesh and any Crystallized element (full crystal or shard).
+necronomicon.text.machines.3=The Crystallizer is used to crystallize elements, isolating the base elements (or molecules) they're made from. It's fueled by any Dreaded material, Dread Fragments and any Crystallized element (full crystal or shard).
 necronomicon.text.machines.4=The Materializer is used to create objects by combining base elements (obtained through crystallization). The Materializer uses no fuel, but requires a Necronomicon to function, and a Crystal Bag with crystals to materialize objects from.
 
 necronomicon.text.knowledge.1=Some information in this book is incomprehensible to your puny, regular, untwisted mortal mind. By studying artifacts, listening to the whispers from statues, defeat monsters and explore the surroundings, you can expand your mind with new knowledge, enabling you to comprehend the information. Some Items and Blocks also require knowledge in order to be comprehended.
