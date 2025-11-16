@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.client.gui.necronomicon;
+package com.shinoow.abyssalcraft.client.gui.necronomicon.entries;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,15 +18,13 @@ import javax.annotation.Nonnull;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector4f;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.EnergyEnum.AmplifierType;
 import com.shinoow.abyssalcraft.api.energy.structure.IPlaceOfPower;
 import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
+import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.client.handlers.AbyssalCraftClientEventHooks;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
@@ -35,14 +33,12 @@ import com.shinoow.abyssalcraft.lib.client.MultiblockRenderData;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -51,7 +47,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.MinecraftForgeClient;
 
-public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
+public class GuiNecronomiconPlacesOfPowerEntry extends GuiNecronomicon {
 
 	private List<IPlaceOfPower> places = new ArrayList<>();
 	private int ticksInBook;
@@ -59,7 +55,7 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 	private MultiblockRenderData multiblockObj = new MultiblockRenderData();
 	private IPlaceOfPower tooltipObj;
 
-	public GuiNecronomiconPlacesOfPower(int bookType, GuiNecronomicon gui){
+	public GuiNecronomiconPlacesOfPowerEntry(int bookType, GuiNecronomicon gui){
 		super(bookType);
 		parent = gui;
 		isInfo = true;
@@ -77,6 +73,11 @@ public class GuiNecronomiconPlacesOfPower extends GuiNecronomicon {
 		if(places.isEmpty())
 			initStuff();
 		initCommon();
+	}
+
+	@Override
+	protected void updateButtonsInner() {
+		buttonHome.visible = true;
 	}
 
 	@Override

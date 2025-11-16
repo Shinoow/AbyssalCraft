@@ -144,6 +144,8 @@ public class NecronomiconResources {
 	public static final ResourceLocation ITEM_TRANSPORT_TUT_2 = res("transport/transport_2");
 	public static final ResourceLocation ITEM_TRANSPORT_TUT_3 = res("transport/transport_3");
 
+	public static final ResourceLocation RITUAL_CHARMS_1 = res("pe/amplified_statues");
+
 	//Transmutation grid
 	public static final ResourceLocation TRANSMUTATION = res("transmutation");
 

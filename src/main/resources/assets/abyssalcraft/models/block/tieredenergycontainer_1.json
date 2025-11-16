@@ -1,7 +1,0 @@
-{
-	"parent": "abyssalcraft:block/energycontainer",
-	"textures": {
-		"0": "abyssalcraft:blocks/as",
-		"particle": "abyssalcraft:blocks/as"
-	}
-}

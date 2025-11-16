@@ -14,20 +14,13 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon.entries;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.ritual.*;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.lib.util.IHiddenRitual;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
@@ -65,7 +58,7 @@ public class GuiNecronomiconRitualEntry extends GuiNecronomicon {
 	protected void updateButtonsInner() {
 		buttonHome.visible = true;
 	}
-	
+
 	@Override
 	protected void drawInformationText(int x, int y){
 

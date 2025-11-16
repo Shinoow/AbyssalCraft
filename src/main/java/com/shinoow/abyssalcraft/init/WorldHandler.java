@@ -126,16 +126,15 @@ public class WorldHandler implements ILifeCycleHandler {
 		if(ACConfig.startDimension == 0) // You know, actually support this if it's set
 			overworld.addConnectedDimension(ACLib.abyssal_wasteland_id);
 		DimensionDataRegistry.instance().registerDimensionData(overworld.build());
-		
-		if(ACConfig.startDimension != 0) {
+
+		if(ACConfig.startDimension != 0)
 			DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(ACConfig.startDimension)
 					.setColor(InitHandler.startDimensionColors[0],
 							InitHandler.startDimensionColors[1],
 							InitHandler.startDimensionColors[2])
 					.setGatewayKey(0)
 					.build());
-		}
-		
+
 		if(ACConfig.vanilla_handling) {
 			DimensionDataRegistry.instance().registerDimensionData(new DimensionData.Builder(-1)
 					.setColor(252, 87, 0)

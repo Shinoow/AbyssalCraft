@@ -35,6 +35,15 @@ public class Rituals {
 	public static NecronomiconRitual DEPTHS_LEGGINGS;
 	public static NecronomiconRitual DEPTHS_BOOTS;
 
+	// Charms
+	public static NecronomiconRitual CTHULHU_CHARM;
+	public static NecronomiconRitual HASTUR_CHARM;
+	public static NecronomiconRitual JZAHAR_CHARM;
+	public static NecronomiconRitual AZATHOTH_CHARM;
+	public static NecronomiconRitual NYARLATHOTEP_CHARM;
+	public static NecronomiconRitual YOG_SOTHOTH_CHARM;
+	public static NecronomiconRitual SHUB_NIGGURATH_CHARM;
+
 	// Statues
 	public static NecronomiconRitual CTHULHU_STATUE;
 	public static NecronomiconRitual HASTUR_STATUE;

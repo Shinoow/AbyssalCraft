@@ -69,6 +69,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.SPELL_CASTING = new Chapter("casting", NecronomiconText.LABEL_CASTING, 0);
 		Chapters.SPELL_MATERIALS = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
 		Chapters.MACHINES = new Chapter("machines", NecronomiconText.LABEL_INFORMATION_MACHINES, 0);
+		Chapters.RITUAL_CHARMS_INFO = new Chapter("ritualcharminfo", NecronomiconText.LABEL_INFORMATION_RITUAL_CHARMS, 0);
 
 		Chapters.PATRONS = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
 		Chapters.ABYSSALCRAFT_INFO = new Chapter("acinfo", NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0);
@@ -126,7 +127,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				Chapters.OUTER_GODS, Chapters.GREAT_OLD_ONES));
 		internalNecroData.add(new NecroData("rituals", NecronomiconText.LABEL_INFORMATION, 0, Chapters.RITUAL_GETTING_STARTED, Chapters.RITUAL_MATERIALS));
 		NecroData placesOfPower = new NecroData("placesofpower", NecronomiconText.LABEL_PLACES_OF_POWER, 0, NecronomiconText.PLACES_OF_POWER_INFO, Chapters.PLACES_OF_POWER_INFO, new GuiInstanceBase(0, NecronomiconText.LABEL_STRUCTURES, "structures", 0));
-		internalNecroData.add(new NecroData("potentialenergy", NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, Chapters.PE_INFO, Chapters.PE_MATERIALS, Chapters.PE_CRAFTING, placesOfPower, Chapters.IDOLS));
+		internalNecroData.add(new NecroData("potentialenergy", NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, Chapters.PE_INFO, Chapters.PE_MATERIALS, Chapters.PE_CRAFTING, placesOfPower, Chapters.IDOLS, Chapters.RITUAL_CHARMS_INFO, new GuiInstanceBase(0, NecronomiconText.LABEL_INFORMATION_CRAFTING_RITUAL_CHARMS, "crafingritualcharms", 7)));
 		internalNecroData.add(new NecroData("miscinfo", NecronomiconText.LABEL_MISC_INFORMATION, 0, NecronomiconText.MISC_INFORMATION, Chapters.MISC_CRAFTING,
 				Chapters.MISC_ENCHANTMENTS, Chapters.MISC_STATUES, Chapters.ITEM_TRANSPORT_SYSTEM, Chapters.ABYSSAL_WASTELAND_PLAGUE, Chapters.DREADLANDS_PLAGUE));
 		internalNecroData.add(new NecroData("spells", NecronomiconText.LABEL_INFORMATION, 0, Chapters.SPELL_GETTING_STARTED, Chapters.SPELL_CASTING, Chapters.SPELL_MATERIALS));
@@ -164,7 +165,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				new GuiInstanceBase(2, NecronomiconText.LABEL_INFORMATION_DREADLANDS, "ritualsdreadlands", ResearchItems.getBookResearch(2), 2),
 				new GuiInstanceBase(3, NecronomiconText.LABEL_INFORMATION_OMOTHOL, "ritualsomothol", ResearchItems.getBookResearch(3), 2),
 				new GuiInstanceBase(4, ACItems.abyssalnomicon.getTranslationKey() + ".name", "ritualsabyssalnomicon", ResearchItems.getBookResearch(4), 2)));
-		internalNecroData.add(new NecroData("root", NecronomiconText.LABEL_HUH, 0, NecronomiconText.LABEL_INDEX, 
+		internalNecroData.add(new NecroData("root", NecronomiconText.LABEL_HUH, 0, NecronomiconText.LABEL_INDEX,
 				getInternalNecroData("information"),
 				new GuiInstanceBase(0, NecronomiconText.LABEL_SPELLBOOK, "spells", 1),
 				getInternalNecroData("ritualinfo"),
@@ -623,6 +624,9 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_MACHINE_3 = new Page(3, NecronomiconText.LABEL_INFORMATION_MACHINES, 2, new ItemStack(ACBlocks.crystallizer_idle), NecronomiconText.MACHINE_INFO_3, ResearchItems.getBookResearch(2));
 		Pages.INFORMATION_MACHINE_4 = new Page(4, NecronomiconText.LABEL_INFORMATION_MACHINES, 3, new ItemStack(ACBlocks.materializer), NecronomiconText.MACHINE_INFO_4, ResearchItems.getBookResearch(3));
 
+		Pages.INFORMATION_RITUAL_CHARMS_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_RITUAL_CHARMS, 0, NecronomiconText.RITUAL_CHARMS_INFO_1);
+		Pages.INFORMATION_RITUAL_CHARMS_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_RITUAL_CHARMS, 0, NecronomiconResources.RITUAL_CHARMS_1, NecronomiconText.RITUAL_CHARMS_INFO_2);
+
 		Pages.PROGRESSION_OVERWORLD_1.setReference(Pages.CRAFTING_GATEWAY_KEY);
 		Pages.PROGRESSION_OVERWORLD_2.setReference(Pages.CRAFTING_STAFF_OF_RENDING_1, Pages.CRAFTING_STAFF_OF_RENDING_2);
 		Pages.PROGRESSION_OVERWORLD_3.setReference(Pages.CRAFTING_SHARD_OF_OBLIVION);
@@ -633,6 +637,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.PROGRESSION_DREADLANDS_1.setReference(Pages.CRAFTING_TRANSMUTATOR_1, Pages.CRAFTING_TRANSMUTATOR_2);
 		Pages.PROGRESSION_DREADLANDS_3.setReference(Pages.CRAFTING_SKIN_OF_OMOTHOL);
 		Pages.PROGRESSION_OMOTHOL_2.setReference(Pages.CRAFTING_ABYSSALNOMICON_1, Pages.CRAFTING_ABYSSALNOMICON_2);
+		Pages.INFORMATION_RITUAL_CHARMS_1.setReference(Pages.CRAFTING_RITUAL_CHARM, Pages.PE_TUT_20);
 		//TODO set all of the other references here
 
 		Chapters.OUTER_GODS.addPages(Pages.AZATHOTH_1, Pages.AZATHOTH_2, Pages.NYARLATHOTEP_1, Pages.NYARLATHOTEP_2, Pages.YOG_SOTHOTH_1, Pages.YOG_SOTHOTH_2, Pages.SHUB_NIGGURATH_1, Pages.SHUB_NIGGURATH_2);
@@ -696,8 +701,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.ABYSSALNOMICON_INFO.addPages(Pages.INFORMATION_ABYSSALNOMICON_PAGE_1, Pages.INFORMATION_ABYSSALNOMICON_PAGE_2);
 		Chapters.KNOWLEDGE_INFO.addPages(Pages.INFORMATION_KNOWLEDGE_PAGE_1, Pages.INFORMATION_KNOWLEDGE_PAGE_2, Pages.INFORMATION_KNOWLEDGE_PAGE_3, Pages.INFORMATION_KNOWLEDGE_PAGE_4);
 		Chapters.MACHINES.addPages(Pages.INFORMATION_MACHINE_1, Pages.INFORMATION_MACHINE_2, Pages.INFORMATION_MACHINE_3, Pages.INFORMATION_MACHINE_4);
-
-		//TODO set up a section about charms, how they work and a listing of all anvil recipes
+		Chapters.RITUAL_CHARMS_INFO.addPages(Pages.INFORMATION_RITUAL_CHARMS_1, Pages.INFORMATION_RITUAL_CHARMS_2);
 
 		setupPatreonData();
 	}

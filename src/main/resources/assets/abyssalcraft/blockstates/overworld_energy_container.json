@@ -1,5 +1,11 @@
 {
+	"forge_marker": 1,
+	"defaults": {
+		"textures" : {
+			"5": "blocks/stone"
+		}
+	},
 	"variants": {
-		"normal": { "model": "abyssalcraft:tieredenergycontainer_0" }
+		"normal": { "model": "abyssalcraft:tiered_energycontainer" }
 	}
 }

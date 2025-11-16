@@ -316,6 +316,8 @@ necronomicon.information.idols=Idols
 necronomicon.information.dimensions=Dimensions
 necronomicon.information.biomes=Biomes
 necronomicon.reference=Page Reference
+necronomicon.information.ritualcharms=Ritual Charms
+necronomicon.information.craftingritualcharms=Crafting Ritual Charms
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -451,7 +453,7 @@ necronomicon.text.crafting.energypedestal.2=This block serves as a method for ob
 necronomicon.text.crafting.dreadium.1=Dreadium can be obtained in numerous ways. One method is to transmute Dreaded Shards of Abyssalnite (dropped by Dreadguards, Greater Dread Spawns and Lesser Dreadbeasts).
 necronomicon.text.crafting.dreadium.2=When you have enough Dreadium Ingots to craft a Crystallizer, you can crystallize Dreaded materials to obtain Dreadium Crystals (mostly shards which you can combine into crystals that can be transmuted for Dreadium Ingots).
 necronomicon.text.crafting.monolithpillar.1=A Monolith Stone Pillar is crafted with Monolith Stone. It's primary use is to amplify the range of Potential Energy Manipulators (statues for example).
-necronomicon.text.crafting.ritualcharm.1=A Ritual Charm is crafted with Gold Ingots and a Diamond. By itself it has no effect, but through rituals it can amplify various stats of Potential Energy Manipulators.
+necronomicon.text.crafting.ritualcharm.1=A Ritual Charm is crafted with Gold Ingots and a Diamond. When modified through an Anvil, it can amplify stats on Potential Energy Manipulators.
 necronomicon.text.crafting.sacrificialaltar.1=A Sacrificial Altar is crafted with Shadow Fragments, Monolith Stone, A Shadow Gem and a Coralium Pearl. They convert life-force into Potential Energy.
 necronomicon.text.crafting.sacrificialaltar.2=When an mob is targeted, it will start glowing. Once the mob dies, an amount of PE equal to it's max health will be collected. It only targets non-undead adult mobs that aren't players. It should be noted that the altar goes on a cooldown after collecting a fifth of it's max capacity, preventing collection for a minute.
 necronomicon.text.crafting.energycollector=An Energy Collector is crafted with Monolith Stone and a Shadow Gem. They can collect PE, but require an Energy Relay to transport it.
@@ -650,6 +652,9 @@ necronomicon.text.itemtransportsystem.10=If you shift right-click, it displays a
 
 necronomicon.text.idols.info=Idols utilize PE to perform specific actions reliably, provided they have a source of PE to tap into. You can come across them in the Darkstone Shrines where you can find statues. Each Idol comes with its own requirements in order to function (besides PE).
 
+necronomicon.text.ritualcharms.1=With Ritual Charms, you can temporarily apply boosts to certain stats on Potential Energy Manipulators. The base charm can clear existing amplifiers from an amplified manipulator (or you can break the block). Adding an amplifier (of any type) increases the base PE generation of the manipulator (and the power amplifier increases it further).
+necronomicon.text.ritualcharms.2=When a Statue is amplified, a symbol representing the amplifier (same one that's on the charm) is displayed on the plinth.
+
 necronomicon.text.wip=This section is incomplete.
 
 #Rituals
@@ -699,6 +704,20 @@ ac.ritual.powerStone=Dreadlands Infused Powerstone
 ac.ritual.powerStone.desc=A Dreadlands Infused Powerstone is created by infusing Coralium Infused Stone with Dreadlands Essences.
 ac.ritual.ethaxiumIngot=Ethaxium Ingot
 ac.ritual.ethaxiumIngot.desc=An Ethaxium Ingot is created by Infusing a Life Crystal with Ethaxium Bricks.
+ac.ritual.cthulhuCharm=Cthulhu Charm
+ac.ritual.cthulhuCharm.desc=A Cthulhu Charm is made by infusing a Ritual Charm with Cthulhu Engraved Coins.
+ac.ritual.hasturCharm=Hastur Charm
+ac.ritual.hasturCharm.desc=A Hastur Charm is made by infusing a Ritual Charm with Hastur Engraved Coins.
+ac.ritual.jzaharCharm=J'zahar Charm
+ac.ritual.jzaharCharm.desc=A J'zahar Charm is made by infusing a Ritual Charm with J'zahar Engraved Coins.
+ac.ritual.azathothCharm=Azathoth Charm
+ac.ritual.azathothCharm.desc=An Azathoth Charm is made by infusing a Ritual Charm with Azathoth Engraved Coins.
+ac.ritual.nyarlathotepCharm=Nyarlathotep Charm
+ac.ritual.nyarlathotepCharm.desc=A Nyarlathotep Charm is made by infusing a Ritual Charm with Nyarlathotep Engraved Coins.
+ac.ritual.yogsothothCharm=Yog-Sothoth Charm
+ac.ritual.yogsothothCharm.desc=A Yog-Sothoth Charm is made by infusing a Ritual Charm with Yog-Sothoth Engraved Coins.
+ac.ritual.shubniggurathCharm=Shub-Niggurath Charm
+ac.ritual.shubniggurathCharm.desc=A Shub-Niggurath Charm is made by infusing a Ritual Charm with Shub-Niggurath Engraved Coins.
 ac.ritual.epOWupgrade=Overworld Energy Pedestal
 ac.ritual.epOWupgrade.desc=An Overworld Energy Pedestal is created by infusing an Energy Pedestal with Cobblestone, Darkstone Cobblestone, Shadow Gem Shards and Coralium Gems.
 ac.ritual.epAWupgrade=Abyssal Wasteland Energy Pedestal
@@ -905,7 +924,8 @@ tooltip.portalplacer.1=Right-click or Shift Right-click to cycle
 tooltip.portalplacer.2=back and forth between available dimensions
 tooltip.portalplacer.3=Dimension: %s
 tooltip.portalplacer.4=You can't create a portal for that dimension here!
-tooltip.oc=This item contains incredible powers.
+tooltip.oc.1=If you stare int... Oh, it's looking around,
+tooltip.oc.2=trying to figure out where you are
 tooltip.eoa=Eye of Asorah, The Fallen.
 tooltip.corbow.1=Arrows will apply
 tooltip.corbow.2=Coralium Plague on hit

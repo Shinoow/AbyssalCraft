@@ -1,5 +1,8 @@
 {
-	"parent": "abyssalcraft:block/tieredenergycontainer_3",
+	"parent": "abyssalcraft:block/tiered_energycontainer",
+    "textures": {
+        "5": "abyssalcraft:blocks/os"
+    },
     "display": {
         "gui": {
             "rotation": [ 30, 45, 0 ],

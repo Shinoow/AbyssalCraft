@@ -84,7 +84,7 @@ public class ACJEIPlugin implements IModPlugin {
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.oblivion_scroll), ACRecipeCategoryUid.SPELL);
 
 		//TODO create category for Anvil Forging recipes
-		
+
 		registry.addRecipeClickArea(GuiTransmutator.class, 78, 32, 28, 23, ACRecipeCategoryUid.TRANSMUTATION, ACRecipeCategoryUid.FUEL_TRANSMUTATION);
 		registry.addRecipeClickArea(GuiCrystallizer.class, 78, 32, 28, 23, ACRecipeCategoryUid.CRYSTALLIZATION, ACRecipeCategoryUid.FUEL_CRYSTALLIZATION);
 

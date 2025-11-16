@@ -15,6 +15,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockStatue;
+import com.shinoow.abyssalcraft.lib.util.SoundUtil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
@@ -57,7 +58,7 @@ public class WorldGenShoggothMonolith extends WorldGenerator {
 			setBlockAndNotifyAdequately(world, pos, ACBlocks.shoggoth_biomass.getDefaultState());
 			setBlockAndNotifyAdequately(world, new BlockPos(x, y + max, z), getStatue(rand).withProperty(BlockStatue.FACING, EnumFacing.byIndex(rand.nextInt(3))));
 
-			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 2, world.rand.nextFloat() * 0.1F * 0.9F);
+			SoundUtil.playSound(world, pos, SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 2, world.rand.nextFloat() * 0.1F * 0.9F);
 
 			return true;
 		}

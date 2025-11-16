@@ -11,12 +11,9 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
-import org.lwjgl.input.Keyboard;
-
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonCategory;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.entries.GuiNecronomiconEntry;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.entries.GuiNecronomiconSpellEntry;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
@@ -26,6 +23,7 @@ import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.item.ItemStack;
 
+//TODO replace with IGuiInstance
 public class GuiNecronomiconSpells extends GuiNecronomicon {
 
 	private ButtonCategory buttonCat1, buttonCat2, buttonCat3;

@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.common.entity.demon;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.IDreadEntity;
 import com.shinoow.abyssalcraft.lib.ACConfig;
+import com.shinoow.abyssalcraft.lib.util.SoundUtil;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -82,7 +83,7 @@ public class EntityDemonAnimal extends EntityMob implements IDreadEntity {
 		if(ACConfig.demonAnimalFire || ACConfig.hardcoreMode)
 			if (!stack.isEmpty() && stack.getItem() == Items.FLINT_AND_STEEL && !canBurn)
 			{
-				world.playSound(par1EntityPlayer, posX, posY, posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+				SoundUtil.playSound(world, par1EntityPlayer, getPosition(), 0, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1, rand.nextFloat() * 0.4F + 0.8F);
 				par1EntityPlayer.swingArm(hand);
 				canBurn = true;
 

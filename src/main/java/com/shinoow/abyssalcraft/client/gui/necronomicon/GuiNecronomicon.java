@@ -248,11 +248,10 @@ public class GuiNecronomicon extends GuiScreen {
 		showNoteButtonRight.visible = reference2 != null && isInfo;
 
 		// Hide root index buttons
-		if(buttons != null) {
+		if(buttons != null)
 			for(ButtonCategory button : buttons)
 				if(button != null)
 					button.visible = !isInfo;
-		}
 
 		updateButtonsInner();
 	}
@@ -412,9 +411,8 @@ public class GuiNecronomicon extends GuiScreen {
 		super.drawScreen(par1, par2, par3);
 
 		if(isInfo){
-			if(isNecroInfo || isKnowledgeInfo){
+			if(isNecroInfo || isKnowledgeInfo)
 				drawTitle(localize(isNecroInfo ? NecronomiconText.LABEL_HUH : NecronomiconText.LABEL_KNOWLEDGE));
-			}
 			String turnupStr = localize("necronomicon.turnupindicator", Integer.valueOf(currTurnup + 1), Integer.valueOf(bookTotalTurnups));
 
 			int turnupStrLen = fontRenderer.getStringWidth(turnupStr);
@@ -578,7 +576,6 @@ public class GuiNecronomicon extends GuiScreen {
 
 	protected void drawPage(Page page, boolean right, int displayNum, int x, int y) {
 		if(page == null) return;
-		int k = (width - guiWidth) / 2;
 		String text = page.getText();
 		Object icon = page.getIcon();
 		boolean locked = !isUnlocked(page.getResearch());
@@ -613,21 +610,19 @@ public class GuiNecronomicon extends GuiScreen {
 
 	protected void drawIcon(Object icon, boolean locked, int offset, int x, int y) {
 		int k = (width - guiWidth) / 2;
-		if(icon instanceof ItemStack){
-			if(locked){
+		if(icon instanceof ItemStack)
+			if(locked)
 				drawTexture(MISSING_ITEM, offset);
-			} else {
+			else {
 				drawTexture(NecronomiconResources.ITEM, offset);
 				renderItem(k + 60 + offset, 30,(ItemStack)icon, x, y);
 			}
-		}
-		if(icon instanceof ResourceLocation){
+		if(icon instanceof ResourceLocation)
 			drawTexture(locked ? MISSING_PICTURE : (ResourceLocation)icon, offset);
-		}
-		if(icon instanceof CraftingStack){
-			if(locked){
+		if(icon instanceof CraftingStack)
+			if(locked)
 				drawTexture(MISSING_RECIPE, offset);
-			} else {
+			else {
 				drawTexture(NecronomiconResources.CRAFTING, offset);
 				boolean unicode = fontRenderer.getUnicodeFlag();
 				fontRenderer.setUnicodeFlag(false);
@@ -639,21 +634,19 @@ public class GuiNecronomicon extends GuiScreen {
 					renderObject(k + 24 + offset +i*21, 75,((CraftingStack)icon).getRecipe()[6+i], x, y);
 				}
 			}
-		}
 		if(icon instanceof String)
-			if(locked || failcache.contains(icon)){
+			if(locked || failcache.contains(icon))
 				drawTexture(MISSING_PICTURE, offset);
-			} else if(successcache.get(icon) != null){
+			else if(successcache.get(icon) != null){
 				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				GlStateManager.bindTexture(successcache.get(icon).getGlTextureId());
 				drawTexturedModalRect(k + offset, 2, 0, 0, 256, 256);
-			} else {
+			} else
 				drawTextureString((String)icon, offset);
-			}
 	}
 
 	protected int getButtonHeight(int n) {
-		return 26 + 17 * (n);
+		return 26 + 17 * n;
 	}
 
 	protected void drawTitle(String title) {

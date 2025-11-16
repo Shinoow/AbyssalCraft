@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
 import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 import com.shinoow.abyssalcraft.common.entity.projectile.EntityCoraliumArrow;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.SoundUtil;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -161,7 +162,7 @@ public class ItemCoraliumBow extends ItemBow implements IResearchableItem {
 						par2World.spawnEntity(entityarrow);
 					}
 
-					par2World.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+					SoundUtil.playSound(par2World, player.getPosition(), 0, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
 					if (!flag1)
 					{

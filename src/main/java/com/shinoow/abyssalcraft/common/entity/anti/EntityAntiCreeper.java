@@ -16,6 +16,7 @@ import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAntiCreeperSwell;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
+import com.shinoow.abyssalcraft.lib.util.SoundUtil;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -263,7 +264,7 @@ public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
 		ItemStack stack = player.getHeldItem(p_184645_2_);
 		if (!stack.isEmpty() && stack.getItem() == Items.FLINT_AND_STEEL)
 		{
-			world.playSound(player, posX, posY, posZ, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+			SoundUtil.playSound(world, player, getPosition(), 0, SoundEvents.ITEM_FLINTANDSTEEL_USE, getSoundCategory(), 1, rand.nextFloat() * 0.4F + 0.8F);
 			player.swingArm(p_184645_2_);
 
 			if (!world.isRemote)

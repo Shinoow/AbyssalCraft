@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACBasic;
 import com.shinoow.abyssalcraft.common.structures.dreadlands.chagarothlair;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.SoundUtil;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
 import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
@@ -81,7 +82,7 @@ public class BlockSealingLock extends BlockACBasic {
 		ItemStack stack = player.getHeldItem(hand);
 		if(stack.getItem() == ACItems.sealing_key)
 			if(world.provider.getDimension() == ACLib.dreadlands_id){
-				world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundCategory.PLAYERS, 0.5F, 1);
+				SoundUtil.playSound(world, pos, SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundCategory.PLAYERS, 0.5f, 1);
 				SpecialTextUtil.ChagarothGroup(world, TranslationUtil.toLocal("message.dreadaltartop.spawn"));
 				chagarothlair lair = new chagarothlair();
 				world.destroyBlock(pos, false);

@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2025 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon.entries;
 
 import com.google.common.collect.ImmutableList;
@@ -19,7 +30,7 @@ public class GuiNecronomiconMaterializerEntry extends GuiNecronomiconRecipeBase<
 		drawTitle(localize("container.abyssalcraft.materializer"));
 
 		drawTexture(NecronomiconResources.MATERIALIZATION);
-		
+
 		for(int n = 0; n < recipes.size(); n++){
 			Materialization m = recipes.get(n);
 			if((currTurnup+1)*6 > n && n > currTurnup*6-1)

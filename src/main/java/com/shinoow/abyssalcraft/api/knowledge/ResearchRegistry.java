@@ -68,11 +68,8 @@ public class ResearchRegistry {
 
 	public boolean isOffering(ItemStack stack) {
 		for(KnowledgeType type : KnowledgeType.values())
-		{
-			if(isOfferingOfType(type, stack)) {
+			if(isOfferingOfType(type, stack))
 				return true;
-			}
-		}
 		return false;
 	}
 

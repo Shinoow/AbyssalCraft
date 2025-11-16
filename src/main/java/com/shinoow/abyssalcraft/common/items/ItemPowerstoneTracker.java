@@ -15,6 +15,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.entity.EntityPSDLTracker;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
+import com.shinoow.abyssalcraft.lib.util.SoundUtil;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -49,8 +50,8 @@ public class ItemPowerstoneTracker extends ItemACBasic {
 				EntityPSDLTracker entitypsdltracker = new EntityPSDLTracker(par2World, par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ);
 				entitypsdltracker.moveTowards(blockpos);
 				par2World.spawnEntity(entitypsdltracker);
-				par2World.playSound((EntityPlayer)null, par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ, SoundEvents.ENTITY_ENDEREYE_LAUNCH, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-				par2World.playEvent((EntityPlayer)null, 1003, new BlockPos(par3EntityPlayer), 0);
+				SoundUtil.playSound(par2World, par3EntityPlayer.getPosition(), SoundEvents.ENTITY_ENDEREYE_LAUNCH, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+				par2World.playEvent(null, 1003, par3EntityPlayer.getPosition(), 0);
 
 				if (!par3EntityPlayer.capabilities.isCreativeMode)
 					par1ItemStack.shrink(1);

@@ -16,7 +16,6 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.block.ISingletonInventory;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainer;
 import com.shinoow.abyssalcraft.api.energy.IEnergyManipulator;
-import com.shinoow.abyssalcraft.api.energy.PEUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

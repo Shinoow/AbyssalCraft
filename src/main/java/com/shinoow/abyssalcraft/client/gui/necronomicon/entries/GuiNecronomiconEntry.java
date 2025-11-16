@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon.entries;
 
-import org.lwjgl.input.Keyboard;
-
 import com.shinoow.abyssalcraft.api.necronomicon.GuiInstance;
 import com.shinoow.abyssalcraft.api.necronomicon.INecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;

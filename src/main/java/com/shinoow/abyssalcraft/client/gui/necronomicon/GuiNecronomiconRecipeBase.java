@@ -1,9 +1,18 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2025 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.shinoow.abyssalcraft.api.recipe.AnvilForging;
 
 /**
  * Base class for pages displaying recipes
@@ -63,6 +72,6 @@ public abstract class GuiNecronomiconRecipeBase<T extends Object> extends GuiNec
 	protected abstract void drawRecipes(int x, int y);
 
 	protected abstract void drawItem(T entry, int num, int low, int mid, int high, int x, int y);
-	
+
 	protected abstract void initStuff();
 }

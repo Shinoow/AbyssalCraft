@@ -355,6 +355,9 @@ public class NecronomiconText {
 
 	public static String IDOLS_INFO = "necronomicon.text.idols.info";
 
+	public static String RITUAL_CHARMS_INFO_1 = "necronomicon.text.ritualcharms.1";
+	public static String RITUAL_CHARMS_INFO_2 = "necronomicon.text.ritualcharms.2";
+
 	public static String WIP = "necronomicon.text.wip";
 
 	/** Text limit */
@@ -427,6 +430,8 @@ public class NecronomiconText {
 	public static String LABEL_INFORMATION_IDOLS = "necronomicon.information.idols";
 	public static String LABEL_INFORMATION_DIMENSIONS = "necronomicon.information.dimensions";
 	public static String LABEL_INFORMATION_BIOMES = "necronomicon.information.biomes";
+	public static String LABEL_INFORMATION_RITUAL_CHARMS = "necronomicon.information.ritualcharms";
+	public static String LABEL_INFORMATION_CRAFTING_RITUAL_CHARMS = "necronomicon.information.craftingritualcharms";
 
 	// Alternating texts to display for locked pages
 	// Lyric snippets of songs from the following bands (not in order):

@@ -1,9 +1,20 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2025 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.common.util;
 
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.necronomicon.GuiInstance;
+import com.shinoow.abyssalcraft.api.recipe.AnvilForgingType;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconPlacesOfPower;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconSpells;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.entries.*;
 
@@ -15,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Put all GUiInstance stuff in one place
- * 
+ *
  * @author shinoow
  *
  */
@@ -39,7 +50,7 @@ public class GuiInstanceBase extends GuiInstance {
 
 		switch(id) {
 		case 0:
-			return new GuiNecronomiconPlacesOfPower(bookType, (GuiNecronomicon) parent);
+			return new GuiNecronomiconPlacesOfPowerEntry(bookType, (GuiNecronomicon) parent);
 		case 1:
 			return new GuiNecronomiconSpells(bookType, Minecraft.getMinecraft().player.getHeldItem(EnumHand.MAIN_HAND), (GuiNecronomicon) parent);
 		case 2:
@@ -52,9 +63,10 @@ public class GuiInstanceBase extends GuiInstance {
 			return new GuiNecronomiconCrystallizerEntry(bookType, (GuiNecronomicon) parent);
 		case 6:
 			return new GuiNecronomiconMaterializerEntry(bookType, (GuiNecronomicon) parent);
+		case 7:
+			return new GuiNecronomiconAnvilEntry(bookType, (GuiNecronomicon) parent).withFilter(AnvilForgingType.RITUAL_CHARM);
 		default:
 			return null;
 		}
 	}
-
 }

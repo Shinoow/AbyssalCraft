@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.common.entity.EntityODBPrimed;
 import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
 import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
+import com.shinoow.abyssalcraft.lib.util.SoundUtil;
 
 import gnu.trove.set.hash.THashSet;
 import net.minecraft.block.material.Material;
@@ -237,7 +238,7 @@ public class ACExplosion extends Explosion
 	@Override
 	public void doExplosionB(boolean par1)
 	{
-		worldObj.playSound(null, explosionX, explosionY, explosionZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
+		SoundUtil.playSound(worldObj, explosionX, explosionY, explosionZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
 
 		if (explosionSize >= 2.0F && isSmoking)
 			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, explosionX, explosionY, explosionZ, 1.0D, 0.0D, 0.0D);

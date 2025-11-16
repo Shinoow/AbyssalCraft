@@ -14,20 +14,13 @@ package com.shinoow.abyssalcraft.client.gui.necronomicon.entries;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonHome;
-import com.shinoow.abyssalcraft.client.gui.necronomicon.buttons.ButtonNextPage;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
 public class GuiNecronomiconSpellEntry extends GuiNecronomicon {

@@ -36,9 +36,7 @@ import com.shinoow.abyssalcraft.common.network.client.RitualMessage;
 import com.shinoow.abyssalcraft.common.network.client.RitualStartMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
-import com.shinoow.abyssalcraft.lib.util.RitualUtil;
-import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
-import com.shinoow.abyssalcraft.lib.util.Scheduler;
+import com.shinoow.abyssalcraft.lib.util.*;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -122,9 +120,9 @@ public class TileEntityRitualAltar extends TileEntity implements ITickable, IRit
 		if(isPerformingRitual()){
 			if(ritualTimer == 1 && !world.isRemote){
 				SoundEvent chant = getRandomChant();
-				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
-				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
-				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), chant, SoundCategory.PLAYERS, 1, 1);
+				SoundUtil.playSound(world, pos, chant, SoundCategory.PLAYERS, 1, 1);
+				SoundUtil.playSound(world, pos, chant, SoundCategory.PLAYERS, 1, 1);
+				SoundUtil.playSound(world, pos, chant, SoundCategory.PLAYERS, 1, 1);
 				if(ritual != null && sacrifice != null && sacrifice.isEntityAlive())
 					sacrifice.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 200, 0, false, false));
 			}

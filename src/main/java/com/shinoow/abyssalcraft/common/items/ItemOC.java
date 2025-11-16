@@ -29,8 +29,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemOC extends ItemACBasic {
 
@@ -71,6 +69,7 @@ public class ItemOC extends ItemACBasic {
 
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
-		l.add(I18n.format("tooltip.oc"));
+		l.add(I18n.format("tooltip.oc.1"));
+		l.add(I18n.format("tooltip.oc.2"));
 	}
 }

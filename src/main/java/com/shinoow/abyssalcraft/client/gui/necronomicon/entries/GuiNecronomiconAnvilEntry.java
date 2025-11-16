@@ -1,22 +1,46 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2025 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.client.gui.necronomicon.entries;
+
+import java.util.stream.Collectors;
+
+import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
 import com.shinoow.abyssalcraft.api.recipe.AnvilForging;
 import com.shinoow.abyssalcraft.api.recipe.AnvilForgingRecipes;
+import com.shinoow.abyssalcraft.api.recipe.AnvilForgingType;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomicon;
 import com.shinoow.abyssalcraft.client.gui.necronomicon.GuiNecronomiconRecipeBase;
 import com.shinoow.abyssalcraft.lib.NecronomiconResources;
 
 public class GuiNecronomiconAnvilEntry extends GuiNecronomiconRecipeBase<AnvilForging> {
 
+	@Nullable
+	private AnvilForgingType filter;
+
 	public GuiNecronomiconAnvilEntry(int bookType, GuiNecronomicon parent) {
 		super(bookType);
 		this.parent = parent;
 	}
 
+	public GuiNecronomiconAnvilEntry withFilter(AnvilForgingType filter) {
+		this.filter = filter;
+		return this;
+	}
+
 	@Override
 	protected void drawRecipes(int x, int y) {
-		drawTitle(localize("tile.anvil.name"));
+		drawTitle(localize("tile.anvil.name") + " " + (recipes.size() + 12) / 12);
 
 		drawTexture(NecronomiconResources.TRANSMUTATION, 28);
 		drawTexture(NecronomiconResources.CRYSTALLIZATION, -77);
@@ -27,6 +51,7 @@ public class GuiNecronomiconAnvilEntry extends GuiNecronomiconRecipeBase<AnvilFo
 		}
 	}
 
+	@Override
 	protected void drawItem(AnvilForging entry, int num, int low, int mid, int high, int x, int y){
 		boolean unicode = fontRenderer.getUnicodeFlag();
 		fontRenderer.setUnicodeFlag(false);
@@ -44,8 +69,14 @@ public class GuiNecronomiconAnvilEntry extends GuiNecronomiconRecipeBase<AnvilFo
 		fontRenderer.setUnicodeFlag(unicode);
 	}
 
+	@Override
 	protected void initStuff() {
-		recipes = ImmutableList.copyOf(AnvilForgingRecipes.instance().getForgingList());
+		if(filter != null)
+			recipes = ImmutableList.copyOf(AnvilForgingRecipes.instance().getForgingList()
+					.stream()
+					.filter(x -> x.TYPE == filter)
+					.collect(Collectors.toList()));
+		else recipes = ImmutableList.copyOf(AnvilForgingRecipes.instance().getForgingList());
 		setTurnups(recipes.size());
 	}
 }

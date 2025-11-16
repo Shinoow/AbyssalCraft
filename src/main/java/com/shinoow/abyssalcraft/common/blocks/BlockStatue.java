@@ -63,9 +63,8 @@ public class BlockStatue extends BlockContainer {
 	{
 		int amplifier = 0;
 		TileEntity tile = BlockUtil.getTileEntitySafely(worldIn, pos);
-		if(tile instanceof TileEntityStatue) {
+		if(tile instanceof TileEntityStatue)
 			amplifier = getAmplifierNumber((TileEntityStatue) tile);
-		}
 
 		return state.withProperty(AMPLIFIER, amplifier);
 	}
@@ -137,7 +136,7 @@ public class BlockStatue extends BlockContainer {
 	}
 
 	public static int getAmplifierNumber(TileEntityStatue statue) {
-		if(statue.isActive()) {
+		if(statue.isActive())
 			switch(statue.getActiveAmplifier()) {
 			case DURATION:
 				return 1;
@@ -148,7 +147,6 @@ public class BlockStatue extends BlockContainer {
 			default:
 				return 0;
 			}
-		}
 		return 0;
 	}
 

@@ -16,6 +16,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.SoundUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -122,7 +123,7 @@ public class BlockODBcore extends Block {
 			{
 				EntityODBcPrimed var7 = new EntityODBcPrimed(par1World, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, par6);
 				par1World.spawnEntity(var7);
-				par1World.playSound(null, var7.posX, var7.posY, var7.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				SoundUtil.playSound(par1World, pos, 0.5, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1, 1);
 			}
 	}
 

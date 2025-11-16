@@ -95,7 +95,7 @@ public class Pages {
 	public static Page GRAVEYARD;
 	public static Page DARK_SHRINE;
 	public static Page DARK_STRUCTURE;
-	
+
 	//All things Abyssal Wasteland
 
 	public static Page MATERIAL_ABYSSAL_STONE;
@@ -388,12 +388,15 @@ public class Pages {
 	public static Page INFORMATION_KNOWLEDGE_PAGE_2;
 	public static Page INFORMATION_KNOWLEDGE_PAGE_3;
 	public static Page INFORMATION_KNOWLEDGE_PAGE_4;
-	
+
 	public static Page INFORMATION_MACHINE_1;
 	public static Page INFORMATION_MACHINE_2;
 	public static Page INFORMATION_MACHINE_3;
 	public static Page INFORMATION_MACHINE_4;
-	
+
+	public static Page INFORMATION_RITUAL_CHARMS_1;
+	public static Page INFORMATION_RITUAL_CHARMS_2;
+
 	//Spells
 
 	public static Page SPELL_TUT_1;
