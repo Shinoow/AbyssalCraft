@@ -54,27 +54,11 @@ public class Rituals {
 	public static NecronomiconRitual SHUB_NIGGURATH_STATUE;
 
 	// PE blocks
-	public static NecronomiconRitual OVERWORLD_ENERGY_PEDESTAL;
-	public static NecronomiconRitual ABYSSAL_WASTELAND_ENERGY_PEDESTAL;
-	public static NecronomiconRitual DREADLANDS_ENERGY_PEDESTAL;
-	public static NecronomiconRitual OMOTHOL_ENERGY_PEDESTAL;
-	public static NecronomiconRitual OVERWORLD_SACRIFICAL_ALTAR;
-	public static NecronomiconRitual ABYSSAL_WASTELAND_SACRIFICAL_ALTAR;
-	public static NecronomiconRitual DREADLANDS_SACRIFICAL_ALTAR;
-	public static NecronomiconRitual OMOTHOL_SACRIFICAL_ALTAR;
 	public static NecronomiconRitual ENERGY_CONTAINER;
-	public static NecronomiconRitual OVERWORLD_ENERGY_COLLECTOR;
-	public static NecronomiconRitual ABYSSAL_WASTELAND_ENERGY_COLLECTOR;
-	public static NecronomiconRitual DREADLANDS_ENERGY_COLLECTOR;
-	public static NecronomiconRitual OMOTHOL_ENERGY_COLLECTOR;
-	public static NecronomiconRitual OVERWORLD_ENERGY_RELAY;
-	public static NecronomiconRitual ABYSSAL_WASTELAND_ENERGY_RELAY;
-	public static NecronomiconRitual DREADLANDS_ENERGY_RELAY;
-	public static NecronomiconRitual OMOTHOL_ENERGY_RELAY;
-	public static NecronomiconRitual OVERWORLD_ENERGY_CONTAINER;
-	public static NecronomiconRitual ABYSSAL_WASTELAND_ENERGY_CONTAINER;
-	public static NecronomiconRitual DREADLANDS_ENERGY_CONTAINER;
-	public static NecronomiconRitual OMOTHOL_ENERGY_CONTAINER;
+	public static NecronomiconRitual OVERWORLD_RING;
+	public static NecronomiconRitual ABYSSAL_WASTELAND_RING;
+	public static NecronomiconRitual DREADLANDS_RING;
+	public static NecronomiconRitual OMOTHOL_RING;
 
 	// Scrolls
 	public static NecronomiconRitual BASIC_SCROLL;

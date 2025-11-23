@@ -437,6 +437,7 @@ public class AbyssalCrafting {
 
 		//Misc
 		RitualRegistry.instance().registerRitual(Rituals.MASS_ENCHANTING = new NecronomiconMassEnchantRitual());
+		RitualRegistry.instance().registerRitual(Rituals.WEATHER = new NecronomiconWeatherRitual());
 
 		//Spirit Items
 		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack[] {new ItemStack(ACItems.spirit_tablet_shard_0), new ItemStack(ACItems.spirit_tablet_shard_1), new ItemStack(ACItems.spirit_tablet_shard_2), new ItemStack(ACItems.spirit_tablet_shard_3)}, null,
@@ -500,39 +501,22 @@ public class AbyssalCrafting {
 		Object[] scoffers = APIUtils.makeArrayOf(new ItemStack(Items.DYE, 1, 0), 8);
 		RitualRegistry.instance().registerRitual(Rituals.SHUB_NIGGURATH_CHARM = new NecronomiconInfusionRitual("shubniggurathCharm", 4, 2000F, new ItemStack(ACItems.shub_niggurath_charm), new ItemStack(ACItems.ritual_charm), scoffers));
 
-		//Tiered PE blocks
-		Object[] owoffers = new Object[]{ACItems.shadow_shard, Blocks.COBBLESTONE, ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone), ACItems.shadow_shard, Blocks.COBBLESTONE,
-				ACItems.coralium_gem, new ItemStack(ACBlocks.darkstone_cobblestone)};
-		Object[] awoffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0),
+		//Tiered PE blocks (and rings)
+		Object[] owoffers = {ACItems.shadow_shard, Blocks.COBBLESTONE, ACItems.coralium_gem, Blocks.COBBLESTONE, ACItems.shadow_shard, Blocks.COBBLESTONE,
+				ACItems.coralium_gem, Blocks.COBBLESTONE};
+		Object[] awoffers = {ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0),
 				ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0)};
-		Object[] dloffers = new Object[]{ACItems.shadow_shard, ACBlocks.dreadstone_brick, ACItems.coralium_gem, new ItemStack(ACBlocks.elysian_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.dreadstone_brick, 1, 0),
+		Object[] dloffers = {ACItems.shadow_shard, ACBlocks.dreadstone_brick, ACItems.coralium_gem, new ItemStack(ACBlocks.elysian_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.dreadstone_brick, 1, 0),
 				ACItems.coralium_gem, new ItemStack(ACBlocks.elysian_stone_brick, 1, 0)};
-		Object[] omtoffers = new Object[]{ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0),
+		Object[] omtoffers = {ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0),
 				ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0)};
-		RitualRegistry.instance().registerRitual(Rituals.OVERWORLD_ENERGY_PEDESTAL = new NecronomiconInfusionRitual("epOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_energy_pedestal), ACBlocks.energy_pedestal, owoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.ABYSSAL_WASTELAND_ENERGY_PEDESTAL = new NecronomiconInfusionRitual("epAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_energy_pedestal), new ItemStack(ACBlocks.overworld_energy_pedestal), awoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_ENERGY_PEDESTAL = new NecronomiconInfusionRitual("epDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_energy_pedestal), new ItemStack(ACBlocks.abyssal_wasteland_energy_pedestal), dloffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.OMOTHOL_ENERGY_PEDESTAL = new NecronomiconInfusionRitual("epOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_energy_pedestal), new ItemStack(ACBlocks.dreadlands_energy_pedestal), omtoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.OVERWORLD_SACRIFICAL_ALTAR = new NecronomiconInfusionRitual("saOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_sacrificial_altar), ACBlocks.sacrificial_altar, owoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
-		RitualRegistry.instance().registerRitual(Rituals.ABYSSAL_WASTELAND_SACRIFICAL_ALTAR = new NecronomiconInfusionRitual("saAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_sacrificial_altar), new ItemStack(ACBlocks.overworld_sacrificial_altar), awoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
-		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_SACRIFICAL_ALTAR = new NecronomiconInfusionRitual("saDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_sacrificial_altar), new ItemStack(ACBlocks.abyssal_wasteland_sacrificial_altar), dloffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
-		RitualRegistry.instance().registerRitual(Rituals.OMOTHOL_SACRIFICAL_ALTAR = new NecronomiconInfusionRitual("saOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_sacrificial_altar), new ItemStack(ACBlocks.dreadlands_sacrificial_altar), omtoffers).setTags("PotEnergy", "CollectionLimit", "CoolDown"));
-		RitualRegistry.instance().registerRitual(Rituals.WEATHER = new NecronomiconWeatherRitual());
-		Object[] containerofferings = new Object[]{ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector,
+		Object[] containerofferings = {ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector,
 				ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard};
 		RitualRegistry.instance().registerRitual(Rituals.ENERGY_CONTAINER = new NecronomiconInfusionRitual("energyContainer", 0, 100F, new ItemStack(ACBlocks.energy_container), ACBlocks.energy_pedestal, containerofferings).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.OVERWORLD_ENERGY_COLLECTOR = new NecronomiconInfusionRitual("ecolOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_energy_collector), ACBlocks.energy_collector, owoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.ABYSSAL_WASTELAND_ENERGY_COLLECTOR = new NecronomiconInfusionRitual("ecolAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_energy_collector), new ItemStack(ACBlocks.overworld_energy_collector), awoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_ENERGY_COLLECTOR = new NecronomiconInfusionRitual("ecolDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_energy_collector), new ItemStack(ACBlocks.abyssal_wasteland_energy_collector), dloffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.OMOTHOL_ENERGY_COLLECTOR = new NecronomiconInfusionRitual("ecolOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_energy_collector), new ItemStack(ACBlocks.dreadlands_energy_collector), omtoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.OVERWORLD_ENERGY_RELAY = new NecronomiconInfusionRitual("erOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_energy_relay), ACBlocks.energy_relay, owoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.ABYSSAL_WASTELAND_ENERGY_RELAY = new NecronomiconInfusionRitual("erAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_energy_relay), new ItemStack(ACBlocks.overworld_energy_relay), awoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_ENERGY_RELAY = new NecronomiconInfusionRitual("erDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_energy_relay), new ItemStack(ACBlocks.abyssal_wasteland_energy_relay), dloffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.OMOTHOL_ENERGY_RELAY = new NecronomiconInfusionRitual("erOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_energy_relay), new ItemStack(ACBlocks.dreadlands_energy_relay), omtoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.OVERWORLD_ENERGY_CONTAINER = new NecronomiconInfusionRitual("econOWupgrade", 0, 400F, new ItemStack(ACBlocks.overworld_energy_container), ACBlocks.energy_container, owoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.ABYSSAL_WASTELAND_ENERGY_CONTAINER = new NecronomiconInfusionRitual("econAWupgrade", 1, 800F, new ItemStack(ACBlocks.abyssal_wasteland_energy_container), new ItemStack(ACBlocks.overworld_energy_container), awoffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_ENERGY_CONTAINER = new NecronomiconInfusionRitual("econDLupgrade", 2, 1200F, new ItemStack(ACBlocks.dreadlands_energy_container), new ItemStack(ACBlocks.abyssal_wasteland_energy_container), dloffers).setTags("PotEnergy"));
-		RitualRegistry.instance().registerRitual(Rituals.OMOTHOL_ENERGY_CONTAINER = new NecronomiconInfusionRitual("econOMTupgrade", 3, 1600F, new ItemStack(ACBlocks.omothol_energy_container), new ItemStack(ACBlocks.dreadlands_energy_container), omtoffers).setTags("PotEnergy"));
+		RitualRegistry.instance().registerRitual(Rituals.OVERWORLD_RING = new NecronomiconInfusionRitual("overworld_ring", 0, 400F, new ItemStack(ACItems.ring_overworld), ACItems.ring, owoffers));
+		RitualRegistry.instance().registerRitual(Rituals.ABYSSAL_WASTELAND_RING = new NecronomiconInfusionRitual("abyssal_wasteland_ring", 1, 400F, new ItemStack(ACItems.ring_abyssal_wasteland), new ItemStack[] {new ItemStack(ACItems.ring), new ItemStack(ACItems.ring_overworld)}, awoffers));
+		RitualRegistry.instance().registerRitual(Rituals.DREADLANDS_RING = new NecronomiconInfusionRitual("dreadlands_ring", 2, 400F, new ItemStack(ACItems.ring_dreadlands), new ItemStack[] {new ItemStack(ACItems.ring), new ItemStack(ACItems.ring_overworld), new ItemStack(ACItems.ring_abyssal_wasteland)}, dloffers));
+		RitualRegistry.instance().registerRitual(Rituals.OMOTHOL_RING = new NecronomiconInfusionRitual("omothol_ring", 3, 400F, new ItemStack(ACItems.ring_omothol), new ItemStack[] {new ItemStack(ACItems.ring), new ItemStack(ACItems.ring_overworld), new ItemStack(ACItems.ring_abyssal_wasteland), new ItemStack(ACItems.ring_dreadlands)}, omtoffers));
 
 		//Staff of Rending
 		String[] tags = {"energyShadow", "energyAbyssal", "energyDread", "energyOmothol", "ench"};
@@ -659,6 +643,37 @@ public class AbyssalCrafting {
 		addForgingsFor(new ItemStack(ACItems.nyarlathotep_charm), new ItemStack(ACItems.range_nyarlathotep_charm), new ItemStack(ACItems.power_nyarlathotep_charm), new ItemStack(ACItems.duration_nyarlathotep_charm));
 		addForgingsFor(new ItemStack(ACItems.yog_sothoth_charm), new ItemStack(ACItems.range_yog_sothoth_charm), new ItemStack(ACItems.power_yog_sothoth_charm), new ItemStack(ACItems.duration_yog_sothoth_charm));
 		addForgingsFor(new ItemStack(ACItems.shub_niggurath_charm), new ItemStack(ACItems.range_shub_niggurath_charm), new ItemStack(ACItems.power_shub_niggurath_charm), new ItemStack(ACItems.duration_shub_niggurath_charm));
+
+		// PE blocks
+		ItemStack ow_ring = new ItemStack(ACItems.ring_overworld);
+		ItemStack aw_ring = new ItemStack(ACItems.ring_abyssal_wasteland);
+		ItemStack dl_ring = new ItemStack(ACItems.ring_dreadlands);
+		ItemStack omt_ring = new ItemStack(ACItems.ring_omothol);
+
+		ItemStack[] base_blocks = {new ItemStack(ACBlocks.energy_pedestal), new ItemStack(ACBlocks.energy_collector), new ItemStack(ACBlocks.energy_container), new ItemStack(ACBlocks.energy_relay), new ItemStack(ACBlocks.sacrificial_altar)};
+		ItemStack[] ow_blocks = {new ItemStack(ACBlocks.overworld_energy_pedestal), new ItemStack(ACBlocks.overworld_energy_collector), new ItemStack(ACBlocks.overworld_energy_container), new ItemStack(ACBlocks.overworld_energy_relay), new ItemStack(ACBlocks.overworld_sacrificial_altar)};
+		ItemStack[] aw_blocks = {new ItemStack(ACBlocks.abyssal_wasteland_energy_pedestal), new ItemStack(ACBlocks.abyssal_wasteland_energy_collector), new ItemStack(ACBlocks.abyssal_wasteland_energy_container), new ItemStack(ACBlocks.abyssal_wasteland_energy_relay), new ItemStack(ACBlocks.abyssal_wasteland_sacrificial_altar)};
+		ItemStack[] dl_blocks = {new ItemStack(ACBlocks.dreadlands_energy_pedestal), new ItemStack(ACBlocks.dreadlands_energy_collector), new ItemStack(ACBlocks.dreadlands_energy_container), new ItemStack(ACBlocks.dreadlands_energy_relay), new ItemStack(ACBlocks.dreadlands_sacrificial_altar)};
+		ItemStack[] omt_blocks = {new ItemStack(ACBlocks.omothol_energy_pedestal), new ItemStack(ACBlocks.omothol_energy_collector), new ItemStack(ACBlocks.omothol_energy_container), new ItemStack(ACBlocks.omothol_energy_relay), new ItemStack(ACBlocks.omothol_sacrificial_altar)};
+
+		for(int i = 0; i < base_blocks.length; i++) {
+			ItemStack base = base_blocks[i];
+			ItemStack ow = ow_blocks[i];
+			ItemStack aw = aw_blocks[i];
+			ItemStack dl = dl_blocks[i];
+			ItemStack omt = omt_blocks[i];
+
+			AnvilForgingRecipes.instance().forge(new AnvilForging(base, ow_ring, ow));
+			AnvilForgingRecipes.instance().forge(new AnvilForging(base, aw_ring, aw));
+			AnvilForgingRecipes.instance().forge(new AnvilForging(base, dl_ring, dl));
+			AnvilForgingRecipes.instance().forge(new AnvilForging(base, omt_ring, omt));
+			AnvilForgingRecipes.instance().forge(new AnvilForging(ow, aw_ring, aw));
+			AnvilForgingRecipes.instance().forge(new AnvilForging(ow, dl_ring, dl));
+			AnvilForgingRecipes.instance().forge(new AnvilForging(ow, omt_ring, omt));
+			AnvilForgingRecipes.instance().forge(new AnvilForging(aw, dl_ring, dl));
+			AnvilForgingRecipes.instance().forge(new AnvilForging(aw, omt_ring, omt));
+			AnvilForgingRecipes.instance().forge(new AnvilForging(dl, omt_ring, omt));
+		}
 	}
 
 	private static void addForgingsFor(ItemStack base_charm, ItemStack range_charm, ItemStack power_charm, ItemStack duration_charm) {

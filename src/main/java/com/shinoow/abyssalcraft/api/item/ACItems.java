@@ -42,6 +42,11 @@ public class ACItems {
 	public static Item spirit_tablet_shard_3;
 	public static Item lost_page;
 	public static Item scriptures_of_omniscience;
+	public static Item ring;
+	public static Item ring_overworld;
+	public static Item ring_abyssal_wasteland;
+	public static Item ring_dreadlands;
+	public static Item ring_omothol;
 
 	// Tools/Weapons
 	public static Item abyssalnite_pickaxe;

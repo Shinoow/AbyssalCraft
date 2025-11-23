@@ -107,6 +107,11 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.lost_page = new ItemPage();
 		ACItems.scriptures_of_omniscience = new ItemScriptures();
 		ACItems.sealing_key = new ItemACBasic("sealing_key").setCreativeTab(ACTabs.tabTools);
+		ACItems.ring = new ItemACBasic("ring");
+		ACItems.ring_overworld = new ItemACBasic("ring_overworld");
+		ACItems.ring_abyssal_wasteland = new ItemACBasic("ring_abyssal_wasteland");
+		ACItems.ring_dreadlands = new ItemACBasic("ring_dreadlands");
+		ACItems.ring_omothol = new ItemACBasic("ring_omothol");
 
 		//Coins
 		ACItems.coin = new ItemCoin("blankcoin");
@@ -625,6 +630,11 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.omothol_ghoul_flesh, "omotholflesh");
 		registerItem(ACItems.shadow_ghoul_flesh, "shadow_ghoul_flesh");
 		registerItem(ACItems.anti_ghoul_flesh, "anti_ghoul_flesh");
+		registerItem(ACItems.ring, "ring");
+		registerItem(ACItems.ring_overworld, "ring_overworld");
+		registerItem(ACItems.ring_abyssal_wasteland, "ring_abyssal_wasteland");
+		registerItem(ACItems.ring_dreadlands, "ring_dreadlands");
+		registerItem(ACItems.ring_omothol, "ring_omothol");
 
 		ResearchRegistry.instance().addOffering(KnowledgeType.BASE, new ItemStack(ACItems.ghoul_flesh));
 		ResearchRegistry.instance().addOffering(KnowledgeType.BASE, new ItemStack(Items.ROTTEN_FLESH));

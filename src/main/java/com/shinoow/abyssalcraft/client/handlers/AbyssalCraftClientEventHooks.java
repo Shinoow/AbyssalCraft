@@ -698,6 +698,11 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.omothol_ghoul_flesh, 0);
 		registerItemRender(ACItems.shadow_ghoul_flesh, 0);
 		registerItemRender(ACItems.anti_ghoul_flesh, 0);
+		registerItemRender(ACItems.ring);
+		registerItemRender(ACItems.ring_overworld);
+		registerItemRender(ACItems.ring_abyssal_wasteland);
+		registerItemRender(ACItems.ring_dreadlands);
+		registerItemRender(ACItems.ring_omothol);
 
 		registerItemRender(ACBlocks.darkstone, 0, "darkstone");
 		registerItemRender(ACBlocks.abyssal_stone, 0, "abystone");
@@ -986,6 +991,10 @@ public class AbyssalCraftClientEventHooks {
 
 	protected void registerItemRender(Item item, int meta){
 		registerItemRender(item, meta, item.getRegistryName().getPath());
+	}
+
+	protected void registerItemRender(Item item){
+		registerItemRender(item, 0, item.getRegistryName().getPath());
 	}
 
 	protected void registerItemRenders(Item item, int metas){

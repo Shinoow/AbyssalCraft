@@ -1,0 +1,6 @@
+{
+    "parent": "abyssalcraft:item/ring_model",
+    "textures": {
+        "1": "abyssalcraft:blocks/as"
+    }
+}
