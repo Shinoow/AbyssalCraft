@@ -71,7 +71,8 @@ public class InitHandler implements ILifeCycleHandler {
 	public static Configuration cfg;
 
 	private static String[] interdimensionalCageBlacklist, dreadPlagueImmunityList, dreadPlagueCarrierList,
-	coraliumPlagueImmunityList, coraliumPlagueCarrierList, itemTransportBlacklist, mobItemPickupBlacklist;
+	coraliumPlagueImmunityList, coraliumPlagueCarrierList, itemTransportBlacklist, mobItemPickupBlacklist,
+	transformationList;
 
 	public static int[] coraliumOreGeneration;
 	private static int[] blackHoleBlacklist, oreGenDimBlacklist, structureGenDimBlacklist;
@@ -160,6 +161,7 @@ public class InitHandler implements ILifeCycleHandler {
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
 		constructBlacklists();
+		constructMobLists();
 		DimensionType[] dims = DimensionManager.getRegisteredDimensions().keySet().toArray(new DimensionType[0]);
 		blackHoleDimlist = new int[dims.length];
 		for(int i = 0; i < dims.length; i++)
@@ -410,6 +412,7 @@ public class InitHandler implements ILifeCycleHandler {
 		generateAntimatterLake = cfg.get("worldgen", "Liquid Antimatter Lakes", true, "Toggles whether or not to generate Liquid Antimatter Lakes in Coralium Infested Swamps.").getBoolean();
 		generateCoraliumLake = cfg.get("worldgen", "Liquid Coralium Lakes", true, "Toggles whether or not to generate Liquid Coralium Lakes in the Abyssal Wasteland.").getBoolean();
 		generateDreadlandsStalagmite = cfg.get("worldgen", "Dreadlands Stalagmites", true, "Toggles whether or not to generate Stalagmites in Dreadlands and Purified Dreadlands biomes.").getBoolean();
+		generateOmotholStructures = cfg.get("worldgen", "Generate Omothol City", true, "Toggles whether or not to generate the 'Temple City of Omothol' (Except the Temple of J'zahar).").getBoolean();
 
 		generateCoraliumOre = cfg.get("worldgen", "Coralium Ore", true, "Toggles whether or not to generate Coralium Ore in the Overworld.").getBoolean();
 		generateNitreOre = cfg.get("worldgen", "Nitre Ore", true, "Toggles whether or not to generate Nitre Ore in the Overworld.").getBoolean();
@@ -483,7 +486,7 @@ public class InitHandler implements ILifeCycleHandler {
 		no_black_holes = cfg.get("wet_noodle", "Disable Black Holes", false, "Toggles whether or not J'zahar can use his attack that creates a black hole.").getBoolean();
 		no_odb_explosions = cfg.get("wet_noodle", "Disable ODB Explosions", false, "Toggles whether or not Oblivion Deathbombs (or ODB Cores) can explode.").getBoolean();
 
-		String[] transformations = cfg.getStringList("Demon Animal Transformations", Configuration.CATEGORY_GENERAL, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
+		transformationList = cfg.getStringList("Demon Animal Transformations", Configuration.CATEGORY_GENERAL, new String[0], "Mobs added to this list will have a chance of spawning a Demon Animal of choice on death."
 				+ "\nFormat: entityid;demonanimal;chance \nwhere entityid is the String used in the /summon command\n demonanimal is a Integer representing the Demon Animal to spawn (0 = Demon Pig, 1 = Demon Cow, 2 = Demon Chicken, 3 = Demon Sheep)"
 				+ "\nchance is a decimal number representing the chance (optional, can be left out) of the Demon Animal being spawned (0.2 would mean a 20% chance, defaults to 100% if not set");
 
@@ -542,27 +545,6 @@ public class InitHandler implements ILifeCycleHandler {
 		sacthothHealingPace = MathHelper.clamp(sacthothHealingPace, 20, 1200);
 		sacthothHealingAmount = MathHelper.clamp(sacthothHealingAmount, 0, 100);
 
-		demon_transformations.clear();
-
-		for(String str : transformations)
-			if(str.length() > 0){
-				String[] stuff = str.split(";");
-				if(stuff.length >= 2)
-					demon_transformations.put(new ResourceLocation(stuff[0]), new Tuple(Integer.valueOf(stuff[1]), stuff.length == 3 ? Float.valueOf(stuff[2]) : 1));
-				else ACLogger.severe("Invalid Demon Animal Transformation: {}", str);
-			}
-
-		clearImmunityLists();
-
-		for(String str : dreadPlagueImmunityList)
-			addDreadPlagueImmunity(str);
-		for(String str : dreadPlagueCarrierList)
-			addDreadPlagueCarrier(str);
-		for(String str : coraliumPlagueImmunityList)
-			addCoraliumPlagueImmunity(str);
-		for(String str : coraliumPlagueCarrierList)
-			addCoraliumPlagueCarrier(str);
-
 		RitualRegistry.instance().wipeConfig();
 
 		for(String str : dimensionMappings)
@@ -595,6 +577,30 @@ public class InitHandler implements ILifeCycleHandler {
 		};
 
 		construct.accept(mobItemPickupBlacklist, mob_pickup_blacklist);
+	}
+
+	private void constructMobLists() {
+
+		for(String str : transformationList)
+			if(str.length() > 0){
+				String[] stuff = str.split(";");
+				if(stuff.length >= 2) {
+					ResourceLocation mob = new ResourceLocation(stuff[0]);
+					if(EntityList.isRegistered(mob))
+						demon_transformations.put(mob, new Tuple(Integer.valueOf(stuff[1]), stuff.length == 3 ? Float.valueOf(stuff[2]) : 1));
+					else ACLogger.severe("[Demon Animal Transforrmation] Invalid Mob: {}", stuff[0]);
+				}
+				else ACLogger.severe("Invalid Demon Animal Transformation: {}", str);
+			}
+
+		for(String str : dreadPlagueImmunityList)
+			addDreadPlagueImmunity(str);
+		for(String str : dreadPlagueCarrierList)
+			addDreadPlagueCarrier(str);
+		for(String str : coraliumPlagueImmunityList)
+			addCoraliumPlagueImmunity(str);
+		for(String str : coraliumPlagueCarrierList)
+			addCoraliumPlagueCarrier(str);
 	}
 
 	/**
@@ -677,6 +683,7 @@ public class InitHandler implements ILifeCycleHandler {
 	private static void addDreadPlagueImmunity(String entity) {
 		if(EntityList.isRegistered(new ResourceLocation(entity)))
 			dread_immunity.add(entity);
+		else ACLogger.severe("[Dread Plague Immunity] invalid Mob: {}", entity);
 	}
 
 	/**
@@ -685,9 +692,11 @@ public class InitHandler implements ILifeCycleHandler {
 	 * @param entity Entity ID string
 	 */
 	private static void addDreadPlagueCarrier(String entity) {
-		addDreadPlagueImmunity(entity);
-		if(EntityList.isRegistered(new ResourceLocation(entity)))
+		if(EntityList.isRegistered(new ResourceLocation(entity))) {
+			addDreadPlagueImmunity(entity);
 			dread_carriers.add(entity);
+		}
+		else ACLogger.severe("[Dread Plague Carrier] invalid Mob: {}", entity);
 	}
 
 	/**
@@ -697,6 +706,7 @@ public class InitHandler implements ILifeCycleHandler {
 	private static void addCoraliumPlagueImmunity(String entity) {
 		if(EntityList.isRegistered(new ResourceLocation(entity)))
 			coralium_immunity.add(entity);
+		else ACLogger.severe("[Coralium Plague Immunity] invalid Mob: {}", entity);
 	}
 
 	/**
@@ -705,16 +715,11 @@ public class InitHandler implements ILifeCycleHandler {
 	 * @param entity Entity ID string
 	 */
 	private static void addCoraliumPlagueCarrier(String entity) {
-		addCoraliumPlagueImmunity(entity);
-		if(EntityList.isRegistered(new ResourceLocation(entity)))
+		if(EntityList.isRegistered(new ResourceLocation(entity))) {
+			addCoraliumPlagueImmunity(entity);
 			coralium_carriers.add(entity);
-	}
-
-	private static void clearImmunityLists() {
-		dread_immunity.clear();
-		dread_carriers.clear();
-		coralium_immunity.clear();
-		coralium_carriers.clear();
+		}
+		else ACLogger.severe("[Coralium Plague Carrier] invalid Mob: {}", entity);
 	}
 
 	public boolean isImmuneOrCarrier(String entity, int list) {

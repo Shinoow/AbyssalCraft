@@ -11,9 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks;
 
-import java.util.List;
-
-import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityStatue;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
@@ -117,14 +114,6 @@ public class BlockStatue extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
-	{
-		BlockUtil.dropTileEntityAsItemWithExtra(world, pos, state, this);
-
-		super.breakBlock(world, pos, state);
-	}
-
-	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		TileEntity tile = worldIn.getTileEntity(pos);
@@ -133,18 +122,10 @@ public class BlockStatue extends BlockContainer {
 			if(stack.hasTagCompound()){
 				NBTTagCompound data = new NBTTagCompound();
 				tile.writeToNBT(data);
-				data.setInteger("Timer", stack.getTagCompound().getInteger("Timer"));
-				data.setInteger("Tolerance", stack.getTagCompound().getInteger("Tolerance") + 10);
+				data.setInteger("Tolerance", 10);
 				tile.readFromNBT(data);
-				PEUtils.readManipulatorNBT((TileEntityStatue)tile, stack.getTagCompound());
 			}
 		}
-	}
-
-	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-	{
-		return new java.util.ArrayList<>();
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockACStone;
 import com.shinoow.abyssalcraft.common.blocks.BlockACStone.EnumStoneType;
 import com.shinoow.abyssalcraft.common.structures.StructureShoggothPit;
 import com.shinoow.abyssalcraft.common.structures.omothol.*;
+import com.shinoow.abyssalcraft.lib.ACConfig;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -307,39 +308,40 @@ public class ChunkProviderOmothol implements IChunkGenerator
 				shoggothLair.generate(worldObj, rand, pos1);
 		}
 
-		if((x > -2 || x < 2) && (z > 6 || z < -1)) {
+		if(ACConfig.generateOmotholStructures)
+			if((x > -2 || x < 2) && (z > 6 || z < -1)) {
 
-			BlockPos pos2 = worldObj.getHeight(new BlockPos(k, 0, l));
+				BlockPos pos2 = worldObj.getHeight(new BlockPos(k, 0, l));
 
-			//adding RNG to the coords to give a more accurate picture of the actual position
-			if(!cityGen.tooClose(pos2.add(rand.nextInt(8) + 8, 0, rand.nextInt(8) + 8)))
-				cityGen.generate(worldObj, rand, pos2);
+				//adding RNG to the coords to give a more accurate picture of the actual position
+				if(!cityGen.tooClose(pos2.add(rand.nextInt(8) + 8, 0, rand.nextInt(8) + 8)))
+					cityGen.generate(worldObj, rand, pos2);
 
-			int randX = k + rand.nextInt(2) + 1;
-			int randZ = l + rand.nextInt(2) + 1;
+				int randX = k + rand.nextInt(2) + 1;
+				int randZ = l + rand.nextInt(2) + 1;
 
-			pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
+				pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
 
-			if(rand.nextBoolean() && !templeGen.tooClose(pos2) && !cityGen.tooClose(pos2))
-				templeGen.generate(worldObj, rand, pos2);
+				if(rand.nextBoolean() && !templeGen.tooClose(pos2) && !cityGen.tooClose(pos2))
+					templeGen.generate(worldObj, rand, pos2);
 
 
-			randX = k + rand.nextInt(8) + 8;
-			randZ = l + rand.nextInt(8) + 8;
+				randX = k + rand.nextInt(8) + 8;
+				randZ = l + rand.nextInt(8) + 8;
 
-			pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
+				pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
 
-			if(rand.nextBoolean() && !towerGen.tooClose(pos2) && !cityGen.tooClose(pos2))
-				towerGen.generate(worldObj, rand, pos2);
+				if(rand.nextBoolean() && !towerGen.tooClose(pos2) && !cityGen.tooClose(pos2))
+					towerGen.generate(worldObj, rand, pos2);
 
-			randX = k + rand.nextInt(7) + 7;
-			randZ = l + rand.nextInt(7) + 7;
+				randX = k + rand.nextInt(7) + 7;
+				randZ = l + rand.nextInt(7) + 7;
 
-			pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
+				pos2 = worldObj.getHeight(new BlockPos(randX, 0, randZ));
 
-			if(rand.nextBoolean() && !storageGen.tooClose(pos2) && !cityGen.tooClose(pos2))
-				storageGen.generate(worldObj, rand, pos2);
-		}
+				if(rand.nextBoolean() && !storageGen.tooClose(pos2) && !cityGen.tooClose(pos2))
+					storageGen.generate(worldObj, rand, pos2);
+			}
 
 		Biome.decorate(worldObj, worldObj.rand, new BlockPos(k, 0, l));
 

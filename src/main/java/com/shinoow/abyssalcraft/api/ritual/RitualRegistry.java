@@ -135,8 +135,11 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public boolean canPerformAction(int dim, int bookType){
-		if(!dimToBookType.containsKey(dim) && !configDimToBookType.containsKey(dim)) return false;
-		return bookType >= dimToBookType.get(dim) || bookType >= configDimToBookType.get(dim);
+		if(dimToBookType.containsKey(dim))
+			return bookType >= dimToBookType.get(dim);
+		else if(configDimToBookType.containsKey(dim))
+			return bookType >= configDimToBookType.get(dim);
+		return false;
 	}
 
 	/**
@@ -148,8 +151,11 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public boolean sameBookType(int dim, int bookType){
-		if(!dimToBookType.containsKey(dim) && !configDimToBookType.containsKey(dim)) return false;
-		return bookType == dimToBookType.get(dim) || bookType == configDimToBookType.get(dim);
+		if(dimToBookType.containsKey(dim))
+			return bookType == dimToBookType.get(dim);
+		else if(configDimToBookType.containsKey(dim))
+			return bookType == configDimToBookType.get(dim);
+		return false;
 	}
 
 	/**

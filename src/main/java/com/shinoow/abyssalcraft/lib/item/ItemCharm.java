@@ -77,10 +77,20 @@ public class ItemCharm extends ItemMetadata implements IAmplifierCharm {
 		ItemStack stack = player.getHeldItem(hand);
 		TileEntity tile = world.getTileEntity(pos);
 		if(tile instanceof IEnergyManipulator){
-			if((!((IEnergyManipulator) tile).isActive() || ((IEnergyManipulator) tile).isActive() && getAmplifier(stack) == null) && !world.isRemote) {
-				((IEnergyManipulator) tile).setActive(getAmplifier(stack), getDeity(stack));
-				stack.shrink(1);
-				world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
+			IEnergyManipulator manipulator = (IEnergyManipulator) tile;
+			if(!world.isRemote) {
+				boolean success = false;
+				if(!manipulator.isActive() && getAmplifier(stack) != null) {
+					manipulator.setActive(getAmplifier(stack), getDeity(stack));
+					stack.shrink(1);
+					success = true;
+				} else if(manipulator.isActive() && getAmplifier(stack) == null) {
+					manipulator.setActiveAmplifier(null);
+					manipulator.setActiveDeity(null);
+					success = true;
+				}
+				if(success)
+					world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, world.rand.nextFloat() - world.rand.nextFloat() * 0.2F + 1);
 			}
 			return EnumActionResult.SUCCESS;
 		}
