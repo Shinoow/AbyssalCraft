@@ -960,6 +960,7 @@ tooltip.staff.2=You can create temporarily portals by
 tooltip.staff.3=Right-clicking on the ground
 tooltip.staff.4=Shift Right-click to cycle between
 tooltip.staff.5=available dimensions
+tooltip.tiereditem.tier=Tier %s
 
 #Creative Tabs
 itemGroup.acblocks=AbyssalCraft Blocks
@@ -1405,6 +1406,11 @@ item.abyssal_ghoul_flesh.name=Abyssal Ghoul Flesh
 item.dreaded_ghoul_flesh.name=Dreaded Ghoul Flesh
 item.shadow_ghoul_flesh.name=Shadow Ghoul Flesh
 item.anti_ghoul_flesh.name=Ghoul Anti-Flesh
+item.ring.name=Ring
+item.ring_overworld.name=Overworld-Embossed Ring
+item.ring_abyssal_wasteland.name=Abyssal Wasteland-Embossed Ring
+item.ring_dreadlands.name=Dreadlands-Embossed Ring
+item.ring_omothol.name=Omothol-Embossed Ring
 
 #Entities
 entity.abyssalcraft.depthsghoul.name=Depths Ghoul

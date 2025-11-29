@@ -21,6 +21,7 @@ import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.server.StaffOfRendingMessage;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 import com.shinoow.abyssalcraft.lib.util.items.IStaffOfRending;
 
 import net.minecraft.client.resources.I18n;
@@ -108,6 +109,7 @@ public class ItemStaffOfRending extends ItemACBasic implements IStaffOfRending {
 
 	@Override
 	public void addInformation(ItemStack is, World player, List l, ITooltipFlag B){
+		l.add(TranslationUtil.toLocalFormatted("tooltip.tiereditem.tier", tier));
 		l.addAll(RendingRegistry.instance().getRendings().stream()
 				.map(r -> String.format("%s: %d/%d", I18n.format(r.getTooltip()), getEnergy(is, r.getName()), r.getMaxEnergy()))
 				.collect(Collectors.toList()));

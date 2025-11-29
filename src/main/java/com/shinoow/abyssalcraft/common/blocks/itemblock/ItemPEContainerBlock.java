@@ -17,6 +17,8 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.energy.IEnergyBlock;
 import com.shinoow.abyssalcraft.api.energy.IEnergyContainerItem;
 import com.shinoow.abyssalcraft.api.energy.IEnergyRelayBlock;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
+import com.shinoow.abyssalcraft.lib.util.blocks.ITieredBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -34,7 +36,6 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
 		if(isInCreativeTab(par2CreativeTab)){
 			par3List.add(new ItemStack(this));
@@ -47,6 +48,8 @@ public class ItemPEContainerBlock extends ItemBlockAC implements IEnergyContaine
 	@Override
 	public void addInformation(ItemStack is, World player, List<String> l, ITooltipFlag B){
 		Block block = Block.getBlockFromItem(is.getItem());
+		if(block instanceof ITieredBlock)
+			l.add(TranslationUtil.toLocalFormatted("tooltip.tiereditem.tier", ((ITieredBlock) block).getTier()));
 		if(block instanceof IEnergyRelayBlock)
 			l.add(String.format("Range: %d Blocks", ((IEnergyRelayBlock) block).getRange()));
 		if(block == ACBlocks.idol_of_fading) {

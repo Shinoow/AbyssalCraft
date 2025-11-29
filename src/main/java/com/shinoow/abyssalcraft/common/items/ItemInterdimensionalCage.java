@@ -33,8 +33,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyContainerItem {
 
@@ -47,7 +45,6 @@ public class ItemInterdimensionalCage extends ItemACBasic implements IEnergyCont
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
 		if(isInCreativeTab(par2CreativeTab)){
 			par3List.add(new ItemStack(this));

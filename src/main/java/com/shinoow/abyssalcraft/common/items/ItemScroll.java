@@ -11,20 +11,22 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
+import java.util.List;
+
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.spell.*;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemScroll extends ItemACBasic implements IScroll {
 
@@ -70,7 +72,11 @@ public class ItemScroll extends ItemACBasic implements IScroll {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add(TranslationUtil.toLocalFormatted("tooltip.tiereditem.tier", type.getQuality()));
+	}
+
+	@Override
 	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
 		super.getSubItems(par2CreativeTab, par3List);
 		if(this == ACItems.greater_scroll && par2CreativeTab == ACTabs.tabSpells) {

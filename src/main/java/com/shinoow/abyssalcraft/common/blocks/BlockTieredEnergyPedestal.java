@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.api.energy.PEUtils;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredEnergyPedestal;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.block.BlockTiltablePedestal;
+import com.shinoow.abyssalcraft.lib.util.blocks.ITieredBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -37,7 +38,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockTieredEnergyPedestal extends BlockTiltablePedestal implements IEnergyBlock {
+public class BlockTieredEnergyPedestal extends BlockTiltablePedestal implements IEnergyBlock, ITieredBlock {
 
 	public static final Map<EnumDimType, Block> VARIANTS = new HashMap<>();
 
@@ -102,6 +103,12 @@ public class BlockTieredEnergyPedestal extends BlockTiltablePedestal implements 
 		return (int) (base * (1.5 + 0.5 * TYPE.getMeta()));
 	}
 
+	@Override
+	public int getTier() {
+
+		return TYPE.getTier();
+	}
+
 	public enum EnumDimType implements IStringSerializable {
 		OVERWORLD(0, "overworld"),
 		ABYSSAL_WASTELAND(1, "abyssal_wasteland"),
@@ -135,6 +142,10 @@ public class BlockTieredEnergyPedestal extends BlockTiltablePedestal implements 
 			return meta;
 		}
 
+		public int getTier() {
+			return meta + 1;
+		}
+		
 		@Override
 		public String toString() {
 			return getName();

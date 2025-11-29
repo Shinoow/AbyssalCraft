@@ -39,7 +39,6 @@ public class ItemStoneTablet extends ItemACBasic {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List){
 		if(isInCreativeTab(par2CreativeTab)){
 			par3List.add(new ItemStack(this));

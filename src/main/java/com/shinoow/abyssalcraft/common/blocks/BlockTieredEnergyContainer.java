@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredEnergyContain
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
+import com.shinoow.abyssalcraft.lib.util.blocks.ITieredBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -41,7 +42,7 @@ import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockTieredEnergyContainer extends BlockContainer implements IEnergyBlock {
+public class BlockTieredEnergyContainer extends BlockContainer implements IEnergyBlock, ITieredBlock {
 
 	public static final Map<EnumDimType, Block> VARIANTS = new HashMap<>();
 
@@ -139,5 +140,11 @@ public class BlockTieredEnergyContainer extends BlockContainer implements IEnerg
 		default:
 			return base;
 		}
+	}
+
+	@Override
+	public int getTier() {
+
+		return TYPE.getTier();
 	}
 }

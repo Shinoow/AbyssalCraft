@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.items;
 
+import java.util.List;
+
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.IRitualAltar;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
@@ -23,7 +25,9 @@ import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -32,8 +36,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterItem {
 
@@ -46,7 +48,6 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs par2CreativeTab, NonNullList<ItemStack> par3List) {
 		if (isInCreativeTab(par2CreativeTab)) {
 			par3List.add(new ItemStack(this));
@@ -56,6 +57,11 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 		}
 	}
 
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add(TranslationUtil.toLocalFormatted("tooltip.tiereditem.tier", bookType));
+	}
+	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand) {
 		ItemStack stack = par3EntityPlayer.getHeldItem(hand);

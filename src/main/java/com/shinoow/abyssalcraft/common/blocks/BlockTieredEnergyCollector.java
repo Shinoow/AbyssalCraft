@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyPedestal.EnumDimT
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTieredEnergyCollector;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
+import com.shinoow.abyssalcraft.lib.util.blocks.ITieredBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -38,7 +39,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockTieredEnergyCollector extends BlockContainer implements IEnergyBlock {
+public class BlockTieredEnergyCollector extends BlockContainer implements IEnergyBlock, ITieredBlock {
 
 	public static final Map<EnumDimType, Block> VARIANTS = new HashMap<>();
 
@@ -119,5 +120,11 @@ public class BlockTieredEnergyCollector extends BlockContainer implements IEnerg
 		int base = 1000;
 
 		return (int) (base * (1.5 + 0.5 * TYPE.getMeta()));
+	}
+
+	@Override
+	public int getTier() {
+
+		return TYPE.getTier();
 	}
 }

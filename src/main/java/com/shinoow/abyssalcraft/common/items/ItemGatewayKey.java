@@ -23,6 +23,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
 import com.shinoow.abyssalcraft.common.entity.EntityPortal;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
+import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -75,6 +76,7 @@ public class ItemGatewayKey extends ItemACBasic {
 
 	@Override
 	public void addInformation(ItemStack par1ItemStack, World world, List<String> list, ITooltipFlag is){
+		list.add(TranslationUtil.toLocalFormatted("tooltip.tiereditem.tier", key));
 		list.add(I18n.format("tooltip.portalplacer.1"));
 		list.add(I18n.format("tooltip.portalplacer.2"));
 		if(!par1ItemStack.hasTagCompound())

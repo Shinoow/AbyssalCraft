@@ -107,11 +107,11 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.lost_page = new ItemPage();
 		ACItems.scriptures_of_omniscience = new ItemScriptures();
 		ACItems.sealing_key = new ItemACBasic("sealing_key").setCreativeTab(ACTabs.tabTools);
-		ACItems.ring = new ItemACBasic("ring");
-		ACItems.ring_overworld = new ItemACBasic("ring_overworld");
-		ACItems.ring_abyssal_wasteland = new ItemACBasic("ring_abyssal_wasteland");
-		ACItems.ring_dreadlands = new ItemACBasic("ring_dreadlands");
-		ACItems.ring_omothol = new ItemACBasic("ring_omothol");
+		ACItems.ring = new ItemEmbossedRing("ring", 0);
+		ACItems.ring_overworld = new ItemEmbossedRing("ring_overworld", 1);
+		ACItems.ring_abyssal_wasteland = new ItemEmbossedRing("ring_abyssal_wasteland", 2);
+		ACItems.ring_dreadlands = new ItemEmbossedRing("ring_dreadlands", 3);
+		ACItems.ring_omothol = new ItemEmbossedRing("ring_omothol", 4);
 
 		//Coins
 		ACItems.coin = new ItemCoin("blankcoin");
