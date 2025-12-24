@@ -11,6 +11,8 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.ritual;
 
+import javax.annotation.Nullable;
+
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchable;
@@ -18,6 +20,7 @@ import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -41,6 +44,7 @@ public abstract class NecronomiconRitual implements IResearchable<NecronomiconRi
 	private boolean requiresSacrifice, nbtSensitive, nbtSensitiveSacrifice;
 	private IResearchItem condition = ResearchItems.DEFAULT;
 	private EnumRitualParticle particle = EnumRitualParticle.ITEM;
+	private SoundEvent chant;
 
 	/**
 	 * A Necronomicon Ritual
@@ -109,6 +113,14 @@ public abstract class NecronomiconRitual implements IResearchable<NecronomiconRi
 	 */
 	public NecronomiconRitual setRitualParticle(EnumRitualParticle particle) {
 		this.particle = particle;
+		return this;
+	}
+
+	/**
+	 * Sets a custom sound to play instead of the default ones
+	 */
+	public NecronomiconRitual setChant(SoundEvent chant) {
+		this.chant = chant;
 		return this;
 	}
 
@@ -218,6 +230,14 @@ public abstract class NecronomiconRitual implements IResearchable<NecronomiconRi
 	 */
 	public EnumRitualParticle getRitualParticle() {
 		return particle;
+	}
+
+	/**
+	 * Returns a custom sound (or null if not set)
+	 */
+	@Nullable
+	public SoundEvent getChant() {
+		return chant;
 	}
 
 	/**
