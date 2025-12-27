@@ -20,4 +20,5 @@ public class ACRecipeBackgrounds {
 	public static final ResourceLocation MATERIALIZER = new ResourceLocation("abyssalcraft", "textures/gui/container/materializer_nei.png");
 	public static final ResourceLocation CRYSTALLIZER = new ResourceLocation("abyssalcraft", "textures/gui/container/crystallizer_nei.png");
 	public static final ResourceLocation TRANSMUTATOR = new ResourceLocation("abyssalcraft", "textures/gui/container/transmutator_nei.png");
+	public static final ResourceLocation ANVIL = new ResourceLocation("textures/gui/container/anvil.png");
 }

@@ -245,10 +245,12 @@ container.abyssalcraft.creationrituals.nei=Creation Ritual
 container.abyssalcraft.rending.nei=Staff of Rending
 container.abyssalcraft.spells.nei=Spells
 container.abyssalcraft.transformationrituals.jei=Transformation Ritual
+container.abyssalcraft.anvil.jei=Anvil Forging
 
 #JEI Integration
 gui.acjei.category.fuel.transmutator=Transmutator Fuel
 gui.acjei.category.fuel.crystallizer=Crystallizer Fuel
+gui.acjei.anvil.cost=Forging Cost: %1$s
 
 #Necronomicon Labels
 necronomicon.index=Index

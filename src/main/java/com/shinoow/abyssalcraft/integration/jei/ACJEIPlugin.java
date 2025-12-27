@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.common.inventory.ContainerMaterializer;
 import com.shinoow.abyssalcraft.common.inventory.ContainerTransmutator;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
+import com.shinoow.abyssalcraft.integration.jei.anvil.AnvilForgingRecipeCategory;
 import com.shinoow.abyssalcraft.integration.jei.crystallizer.CrystallizationCategory;
 import com.shinoow.abyssalcraft.integration.jei.crystallizer.CrystallizerFuelCategory;
 import com.shinoow.abyssalcraft.integration.jei.materializer.MaterializationRecipeCategory;
@@ -37,6 +38,7 @@ import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
@@ -74,16 +76,14 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipeCatalyst(new ItemStack(ACItems.abyssal_wasteland_staff_of_rending), ACRecipeCategoryUid.RENDING);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.dreadlands_staff_of_rending), ACRecipeCategoryUid.RENDING);
 		registry.addRecipeCatalyst(new ItemStack(ACItems.omothol_staff_of_rending), ACRecipeCategoryUid.RENDING);
-		//		registry.addRecipeCatalyst(new ItemStack(ACItems.staff_of_the_gatekeeper), ACRecipeCategoryUid.RENDING);
 		registry.addRecipeCatalyst(new ItemStack(ACBlocks.materializer), ACRecipeCategoryUid.MATERIALIZATION);
+		registry.addRecipeCatalyst(new ItemStack(Blocks.ANVIL), ACRecipeCategoryUid.ANVIL);
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.basic_scroll), ACRecipeCategoryUid.SPELL);
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.lesser_scroll), ACRecipeCategoryUid.SPELL);
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.moderate_scroll), ACRecipeCategoryUid.SPELL);
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.greater_scroll), ACRecipeCategoryUid.SPELL);
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.antimatter_scroll), ACRecipeCategoryUid.SPELL);
 		//		registry.addRecipeCatalyst(new ItemStack(ACItems.oblivion_scroll), ACRecipeCategoryUid.SPELL);
-
-		//TODO create category for Anvil Forging recipes
 
 		registry.addRecipeClickArea(GuiTransmutator.class, 78, 32, 28, 23, ACRecipeCategoryUid.TRANSMUTATION, ACRecipeCategoryUid.FUEL_TRANSMUTATION);
 		registry.addRecipeClickArea(GuiCrystallizer.class, 78, 32, 28, 23, ACRecipeCategoryUid.CRYSTALLIZATION, ACRecipeCategoryUid.FUEL_CRYSTALLIZATION);
@@ -105,6 +105,7 @@ public class ACJEIPlugin implements IModPlugin {
 		registry.addRecipes(ACRecipeMaker.getRending(), ACRecipeCategoryUid.RENDING);
 		registry.addRecipes(ACRecipeMaker.getMaterializerRecipes(), ACRecipeCategoryUid.MATERIALIZATION);
 		registry.addRecipes(ACRecipeMaker.getTransformationRituals(), ACRecipeCategoryUid.TRANSFORMATION_RITUAL);
+		registry.addRecipes(ACRecipeMaker.getAnvilForgings(), ACRecipeCategoryUid.ANVIL);
 		//		registry.addRecipes(ACRecipeMaker.getSpells(), ACRecipeCategoryUid.SPELL);
 	}
 
@@ -128,6 +129,7 @@ public class ACJEIPlugin implements IModPlugin {
 				new RitualRecipeCategory(guiHelper),
 				new RendingRecipeCategory(guiHelper),
 				new MaterializationRecipeCategory(guiHelper),
-				new TransformationRitualRecipeCategory(guiHelper));
+				new TransformationRitualRecipeCategory(guiHelper),
+				new AnvilForgingRecipeCategory(guiHelper));
 	}
 }

@@ -27,4 +27,5 @@ public class ACRecipeCategoryUid {
 	public static final String MATERIALIZATION = "abyssalcraft.materialization";
 	public static final String SPELL = "abyssalcraft.spell";
 	public static final String TRANSFORMATION_RITUAL = "abyssalcraft.transformationritual";
+	public static final String ANVIL = "abyssalcraft.anvil";
 }

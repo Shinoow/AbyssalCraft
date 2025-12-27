@@ -22,6 +22,7 @@ import com.shinoow.abyssalcraft.api.ritual.*;
 import com.shinoow.abyssalcraft.api.spell.SpellRegistry;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTransmutator;
+import com.shinoow.abyssalcraft.integration.jei.anvil.AnvilForgingRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.crystallizer.CrystallizationRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.crystallizer.CrystallizerFuelRecipeWrapper;
 import com.shinoow.abyssalcraft.integration.jei.materializer.MaterializationRecipeWrapper;
@@ -179,6 +180,13 @@ public class ACRecipeMaker {
 	public static List<SpellRecipeWrapper> getSpells(){
 		return SpellRegistry.instance().getSpells().stream()
 				.map(SpellRecipeWrapper::new)
+				.collect(Collectors.toList());
+	}
+
+	@Nonnull
+	public static List<AnvilForgingRecipeWrapper> getAnvilForgings(){
+		return AnvilForgingRecipes.instance().getForgingList().stream()
+				.map(AnvilForgingRecipeWrapper::new)
 				.collect(Collectors.toList());
 	}
 
