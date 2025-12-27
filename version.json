@@ -1,7 +1,7 @@
 {
 	"homepage": "https://shinoow.github.io/AbyssalCraft/",
 	"promos": {
-		"1.12.2-latest": "2.0.0-BETA-5",
+		"1.12.2-latest": "2.0.0-BETA-6",
 		"1.12.2-recommended": "1.11.3",
 		"1.12-latest": "1.9.4-pre-4",
 		"1.12-recommended": "1.9.4-pre-4",
@@ -21,6 +21,7 @@
 		"1.8.9-recommended": "1.9.3.10-FINAL"
 	},
 	"1.12.2": {
+		"2.0.0-BETA-6": "- Fixed a crash when trying to create an altar with the wrong block\n- Added dimension-embossed rings\n- Added anvil recipes for upgrading tiered PE blocks\n- Removed rituals for upgrading tiered PE blocks\n- Tiered Items/Blocks now include their tier in the tooltip\n- You can add custom chants to rituals\n- Anvil recipes are displayed in JEI",
 		"1.11.3": "- A Ritual Charm without an amplifier will remove any active ones\n- Statues no longer keeps active amplifiers when broken\n- Added a config option for generating the city in Omothol\n- Demon Transformation and Plague Immunity config lists actually works\n- Fixed a crash when trying to create an altar with the wrong block",
 		"2.0.0-BETA-5": "- Updated the various Cobblestone textures with new ones\n- A Ritual Charm without an amplifier will remove any active ones\n- Statues no longer keeps active amplifiers when broken\n- Replaced particles with displaying charm symbols on amplified Statues\n- Started adding content to the new Necronomicon sections\n- Added a config option for generating the city in Omothol\n- Demon Transformation and Plague Immunity config lists actually works\n- Ritual Charms (except the base one) are now created though the Anvil\n- Removed all rituals for creating Ritual Charms (except base to deity-specific base)\n- Added a page listing all recipes for Anvil Forging\n- Re-modeled the tiered energy blocks, and ajusted some of the non-tiered\n- Added section about Ritual Charms, providing an explanation for them\n- Updated the tooltip of the Oblivion Catalyst",
 		"1.11.2": "- Fixed a bug with Hoppers not working correctly with Materializers\n- Materializers now really supports Items being extracted from the bottom\n- You can't place Items with an inventory in relevant slots\n- Re-textured Liquid Antimatter (inverted Lava instead of white Lava)\n- Changed some crystal colors to differentiate them better\n- Added a config option for specifying dimension where you can perform rituals\n- Monolith Building doesn't require Shoggoth Ooze",
