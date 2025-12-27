@@ -70,6 +70,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.SPELL_MATERIALS = new Chapter("materials", NecronomiconText.LABEL_INFORMATION_MATERIALS, 0);
 		Chapters.MACHINES = new Chapter("machines", NecronomiconText.LABEL_INFORMATION_MACHINES, 0);
 		Chapters.RITUAL_CHARMS_INFO = new Chapter("ritualcharminfo", NecronomiconText.LABEL_INFORMATION_RITUAL_CHARMS, 0);
+		Chapters.PE_UPGRADING = new Chapter("upgrading", NecronomiconText.LABEL_UPGRADING_PE, 0);
 
 		Chapters.PATRONS = new Chapter("patrons", NecronomiconText.LABEL_PATRONS, 0);
 		Chapters.ABYSSALCRAFT_INFO = new Chapter("acinfo", NecronomiconText.LABEL_INFORMATION_ABYSSALCRAFT, 0);
@@ -127,7 +128,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 				Chapters.OUTER_GODS, Chapters.GREAT_OLD_ONES));
 		internalNecroData.add(new NecroData("rituals", NecronomiconText.LABEL_INFORMATION, 0, Chapters.RITUAL_GETTING_STARTED, Chapters.RITUAL_MATERIALS));
 		NecroData placesOfPower = new NecroData("placesofpower", NecronomiconText.LABEL_PLACES_OF_POWER, 0, NecronomiconText.PLACES_OF_POWER_INFO, Chapters.PLACES_OF_POWER_INFO, new GuiInstanceBase(0, NecronomiconText.LABEL_STRUCTURES, "structures", 0));
-		internalNecroData.add(new NecroData("potentialenergy", NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, Chapters.PE_INFO, Chapters.PE_MATERIALS, Chapters.PE_CRAFTING, placesOfPower, Chapters.IDOLS, Chapters.RITUAL_CHARMS_INFO, new GuiInstanceBase(0, NecronomiconText.LABEL_INFORMATION_CRAFTING_RITUAL_CHARMS, "crafingritualcharms", 7)));
+		internalNecroData.add(new NecroData("potentialenergy", NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, Chapters.PE_INFO, Chapters.PE_MATERIALS, Chapters.PE_CRAFTING, placesOfPower, Chapters.IDOLS, Chapters.RITUAL_CHARMS_INFO, new GuiInstanceBase(0, NecronomiconText.LABEL_INFORMATION_CRAFTING_RITUAL_CHARMS, "crafingritualcharms", 7), Chapters.PE_UPGRADING));
 		internalNecroData.add(new NecroData("miscinfo", NecronomiconText.LABEL_MISC_INFORMATION, 0, NecronomiconText.MISC_INFORMATION, Chapters.MISC_CRAFTING,
 				Chapters.MISC_ENCHANTMENTS, Chapters.MISC_STATUES, Chapters.ITEM_TRANSPORT_SYSTEM, Chapters.ABYSSAL_WASTELAND_PLAGUE, Chapters.DREADLANDS_PLAGUE));
 		internalNecroData.add(new NecroData("spells", NecronomiconText.LABEL_INFORMATION, 0, Chapters.SPELL_GETTING_STARTED, Chapters.SPELL_CASTING, Chapters.SPELL_MATERIALS));
@@ -558,8 +559,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.PE_TUT_16 = new Page(16, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_12, NecronomiconText.PE_TUT_16);
 		Pages.PE_TUT_17 = new Page(17, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_13, NecronomiconText.PE_TUT_17);
 		Pages.PE_TUT_18 = new Page(18, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_14, NecronomiconText.PE_TUT_18);
-		Pages.PE_TUT_19 = new Page(19, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconResources.PE_TUT_15, NecronomiconText.PE_TUT_19);
-		Pages.PE_TUT_20 = new Page(20, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconText.PE_TUT_20);
+		Pages.PE_TUT_19 = new Page(19, NecronomiconText.LABEL_POTENTIAL_ENERGY, 0, NecronomiconText.PE_TUT_19);
 
 		Pages.PLACES_OF_POWER_INFO_1 = new Page(1, NecronomiconText.LABEL_INFORMATION, 0, NecronomiconText.PLACES_OF_POWER_INFO_1);
 		Pages.PLACES_OF_POWER_INFO_2 = new Page(2, NecronomiconText.LABEL_INFORMATION, 0, NecronomiconText.PLACES_OF_POWER_INFO_2);
@@ -627,6 +627,10 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.INFORMATION_RITUAL_CHARMS_1 = new Page(1, NecronomiconText.LABEL_INFORMATION_RITUAL_CHARMS, 0, NecronomiconText.RITUAL_CHARMS_INFO_1);
 		Pages.INFORMATION_RITUAL_CHARMS_2 = new Page(2, NecronomiconText.LABEL_INFORMATION_RITUAL_CHARMS, 0, NecronomiconResources.RITUAL_CHARMS_1, NecronomiconText.RITUAL_CHARMS_INFO_2);
 
+		Pages.PE_UPGRADING_1 = new Page(1, NecronomiconText.LABEL_UPGRADING_PE, 0, NecronomiconResources.PE_UPGRADES_1, NecronomiconText.PE_UPGRADING_INFO_1);
+		Pages.PE_UPGRADING_2 = new Page(2, NecronomiconText.LABEL_UPGRADING_PE, 0, new CraftingStack(ACItems.ring), NecronomiconText.PE_UPGRADING_INFO_2);
+		Pages.PE_UPGRADING_3 = new Page(3, NecronomiconText.LABEL_UPGRADING_PE, 0, NecronomiconResources.PE_UPGRADES_2, NecronomiconText.PE_UPGRADING_INFO_3);
+		
 		Pages.PROGRESSION_OVERWORLD_1.setReference(Pages.CRAFTING_GATEWAY_KEY);
 		Pages.PROGRESSION_OVERWORLD_2.setReference(Pages.CRAFTING_STAFF_OF_RENDING_1, Pages.CRAFTING_STAFF_OF_RENDING_2);
 		Pages.PROGRESSION_OVERWORLD_3.setReference(Pages.CRAFTING_SHARD_OF_OBLIVION);
@@ -637,7 +641,8 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.PROGRESSION_DREADLANDS_1.setReference(Pages.CRAFTING_TRANSMUTATOR_1, Pages.CRAFTING_TRANSMUTATOR_2);
 		Pages.PROGRESSION_DREADLANDS_3.setReference(Pages.CRAFTING_SKIN_OF_OMOTHOL);
 		Pages.PROGRESSION_OMOTHOL_2.setReference(Pages.CRAFTING_ABYSSALNOMICON_1, Pages.CRAFTING_ABYSSALNOMICON_2);
-		Pages.INFORMATION_RITUAL_CHARMS_1.setReference(Pages.CRAFTING_RITUAL_CHARM, Pages.PE_TUT_20);
+		Pages.INFORMATION_RITUAL_CHARMS_1.setReference(Pages.CRAFTING_RITUAL_CHARM, Pages.PE_TUT_19);
+		Pages.PE_UPGRADING_1.setReference(Pages.INFORMATION_MACHINE_1);
 		//TODO set all of the other references here
 
 		Chapters.OUTER_GODS.addPages(Pages.AZATHOTH_1, Pages.AZATHOTH_2, Pages.NYARLATHOTEP_1, Pages.NYARLATHOTEP_2, Pages.YOG_SOTHOTH_1, Pages.YOG_SOTHOTH_2, Pages.SHUB_NIGGURATH_1, Pages.SHUB_NIGGURATH_2);
@@ -687,7 +692,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.RITUAL_MATERIALS.addPages(Pages.MATERIAL_RITUAL_ALTAR, Pages.MATERIAL_RITUAL_PEDESTAL, Pages.MATERIAL_MONOLITH_STONE_1);
 		Chapters.PE_MATERIALS.addPage(Pages.MATERIAL_MONOLITH_STONE_2);
 		Chapters.PE_CRAFTING.addPages(Pages.CRAFTING_ENERGY_PEDESTAL_1, Pages.CRAFTING_ENERGY_PEDESTAL_2, Pages.CRAFTING_MONOLITH_PILLAR, Pages.CRAFTING_RITUAL_CHARM, Pages.CRAFTING_SACRIFICIAL_ALTAR_1, Pages.CRAFTING_SACRIFICIAL_ALTAR_2, Pages.CRAFTING_ENERGY_COLLECTOR, Pages.CRAFTING_ENERGY_RELAY, Pages.CRAFTING_RENDING_PEDESTAL, Pages.CRAFTING_STONE_TABLET, Pages.CRAFTING_STATE_TRANSFORMER_1, Pages.CRAFTING_STATE_TRANSFORMER_2, Pages.CRAFTING_ENERGY_DEPOSITIONER_1, Pages.CRAFTING_ENERGY_DEPOSITIONER_2);
-		Chapters.PE_INFO.addPages(Pages.PE_TUT_1, Pages.PE_TUT_2, Pages.PE_TUT_3, Pages.PE_TUT_4, Pages.PE_TUT_5, Pages.PE_TUT_6, Pages.PE_TUT_7, Pages.PE_TUT_8, Pages.PE_TUT_9, Pages.PE_TUT_10, Pages.PE_TUT_11, Pages.PE_TUT_12, Pages.PE_TUT_13, Pages.PE_TUT_14, Pages.PE_TUT_15, Pages.PE_TUT_16, Pages.PE_TUT_17, Pages.PE_TUT_18, Pages.PE_TUT_19, Pages.PE_TUT_20);
+		Chapters.PE_INFO.addPages(Pages.PE_TUT_1, Pages.PE_TUT_2, Pages.PE_TUT_3, Pages.PE_TUT_4, Pages.PE_TUT_5, Pages.PE_TUT_6, Pages.PE_TUT_7, Pages.PE_TUT_8, Pages.PE_TUT_9, Pages.PE_TUT_10, Pages.PE_TUT_11, Pages.PE_TUT_12, Pages.PE_TUT_13, Pages.PE_TUT_14, Pages.PE_TUT_15, Pages.PE_TUT_16, Pages.PE_TUT_17, Pages.PE_TUT_18, Pages.PE_TUT_19);
 		Chapters.PLACES_OF_POWER_INFO.addPages(Pages.PLACES_OF_POWER_INFO_1, Pages.PLACES_OF_POWER_INFO_2);
 		Chapters.IDOLS.addPages(Pages.IDOLS_INFO, Pages.MATERIAL_IDOL_OF_FADING);
 		Chapters.MISC_CRAFTING.addPages(Pages.CRAFTING_ODB_CORE, Pages.CRAFTING_ODB, Pages.CRAFTING_CARBON_CLUSTER, Pages.CRAFTING_DENSE_CARBON_CLUSTER, Pages.CRAFTING_CRATE);
@@ -702,6 +707,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Chapters.KNOWLEDGE_INFO.addPages(Pages.INFORMATION_KNOWLEDGE_PAGE_1, Pages.INFORMATION_KNOWLEDGE_PAGE_2, Pages.INFORMATION_KNOWLEDGE_PAGE_3, Pages.INFORMATION_KNOWLEDGE_PAGE_4);
 		Chapters.MACHINES.addPages(Pages.INFORMATION_MACHINE_1, Pages.INFORMATION_MACHINE_2, Pages.INFORMATION_MACHINE_3, Pages.INFORMATION_MACHINE_4);
 		Chapters.RITUAL_CHARMS_INFO.addPages(Pages.INFORMATION_RITUAL_CHARMS_1, Pages.INFORMATION_RITUAL_CHARMS_2);
+		Chapters.PE_UPGRADING.addPages(Pages.PE_UPGRADING_1, Pages.PE_UPGRADING_2, Pages.PE_UPGRADING_3);
 
 		setupPatreonData();
 	}

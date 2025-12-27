@@ -504,10 +504,10 @@ public class AbyssalCrafting {
 		//Tiered PE blocks (and rings)
 		Object[] owoffers = {ACItems.shadow_shard, Blocks.COBBLESTONE, ACItems.coralium_gem, Blocks.COBBLESTONE, ACItems.shadow_shard, Blocks.COBBLESTONE,
 				ACItems.coralium_gem, Blocks.COBBLESTONE};
-		Object[] awoffers = {ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.abyssal_stone_brick, 1, 0),
-				ACItems.coralium_gem, new ItemStack(ACBlocks.coralium_stone_brick, 1, 0)};
-		Object[] dloffers = {ACItems.shadow_shard, ACBlocks.dreadstone_brick, ACItems.coralium_gem, new ItemStack(ACBlocks.elysian_stone_brick, 1, 0), ACItems.shadow_shard, new ItemStack(ACBlocks.dreadstone_brick, 1, 0),
-				ACItems.coralium_gem, new ItemStack(ACBlocks.elysian_stone_brick, 1, 0)};
+		Object[] awoffers = {ACItems.shadow_shard, ACBlocks.abyssal_cobblestone, ACItems.coralium_gem, ACBlocks.coralium_cobblestone, ACItems.shadow_shard, ACBlocks.abyssal_cobblestone,
+				ACItems.coralium_gem, ACBlocks.coralium_cobblestone};
+		Object[] dloffers = {ACItems.shadow_shard, ACBlocks.dreadstone_cobblestone, ACItems.coralium_gem, ACBlocks.elysian_cobblestone, ACItems.shadow_shard, ACBlocks.dreadstone_cobblestone,
+				ACItems.coralium_gem, ACBlocks.elysian_cobblestone};
 		Object[] omtoffers = {ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0),
 				ACItems.shadow_shard, new ItemStack(ACBlocks.ethaxium_brick, 1, 0), ACItems.coralium_gem, new ItemStack(ACBlocks.dark_ethaxium_brick, 1, 0)};
 		Object[] containerofferings = {ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector, ACItems.shadow_shard, ACBlocks.energy_collector,

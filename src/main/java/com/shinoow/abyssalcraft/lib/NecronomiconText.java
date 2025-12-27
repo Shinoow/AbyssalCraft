@@ -312,7 +312,6 @@ public class NecronomiconText {
 	public static String PE_TUT_17 = "necronomicon.text.pe.17";
 	public static String PE_TUT_18 = "necronomicon.text.pe.18";
 	public static String PE_TUT_19 = "necronomicon.text.pe.19";
-	public static String PE_TUT_20 = "necronomicon.text.pe.20";
 
 	public static String MACHINES_INFO = "necronomicon.text.machines.info";
 
@@ -358,6 +357,10 @@ public class NecronomiconText {
 	public static String RITUAL_CHARMS_INFO_1 = "necronomicon.text.ritualcharms.1";
 	public static String RITUAL_CHARMS_INFO_2 = "necronomicon.text.ritualcharms.2";
 
+	public static String PE_UPGRADING_INFO_1 = "necronomicon.text.peupgrading.1";
+	public static String PE_UPGRADING_INFO_2 = "necronomicon.text.peupgrading.2";
+	public static String PE_UPGRADING_INFO_3 = "necronomicon.text.peupgrading.3";
+	
 	public static String WIP = "necronomicon.text.wip";
 
 	/** Text limit */
@@ -432,6 +435,7 @@ public class NecronomiconText {
 	public static String LABEL_INFORMATION_BIOMES = "necronomicon.information.biomes";
 	public static String LABEL_INFORMATION_RITUAL_CHARMS = "necronomicon.information.ritualcharms";
 	public static String LABEL_INFORMATION_CRAFTING_RITUAL_CHARMS = "necronomicon.information.craftingritualcharms";
+	public static String LABEL_UPGRADING_PE = "necronomicon.information.upgradingpe";
 
 	// Alternating texts to display for locked pages
 	// Lyric snippets of songs from the following bands (not in order):

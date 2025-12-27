@@ -138,13 +138,15 @@ public class NecronomiconResources {
 	public static final ResourceLocation PE_TUT_12 = res("pe/energy_relay");
 	public static final ResourceLocation PE_TUT_13 = res("pe/relays");
 	public static final ResourceLocation PE_TUT_14 = res("pe/energy_container");
-	public static final ResourceLocation PE_TUT_15 = res("pe/tiers");
 
 	public static final ResourceLocation ITEM_TRANSPORT_TUT_1 = res("transport/transport_1");
 	public static final ResourceLocation ITEM_TRANSPORT_TUT_2 = res("transport/transport_2");
 	public static final ResourceLocation ITEM_TRANSPORT_TUT_3 = res("transport/transport_3");
 
 	public static final ResourceLocation RITUAL_CHARMS_1 = res("pe/amplified_statues");
+
+	public static final ResourceLocation PE_UPGRADES_1 = res("pe/rings");
+	public static final ResourceLocation PE_UPGRADES_2 = res("pe/tiers");
 
 	//Transmutation grid
 	public static final ResourceLocation TRANSMUTATION = res("transmutation");

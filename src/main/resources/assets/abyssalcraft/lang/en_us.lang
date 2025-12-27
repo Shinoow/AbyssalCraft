@@ -318,6 +318,7 @@ necronomicon.information.biomes=Biomes
 necronomicon.reference=Page Reference
 necronomicon.information.ritualcharms=Ritual Charms
 necronomicon.information.craftingritualcharms=Crafting Ritual Charms
+necronomicon.information.upgradingpe=Upgrading PE Blocks
 
 #Necronomicon Text
 #Note: the maximum amount of letters per string is 368
@@ -608,8 +609,7 @@ necronomicon.text.pe.15=Another way to collect PE from manipulators is with an E
 necronomicon.text.pe.16=Energy Relays are used to transfer PE, and can do so in any direction (but it can't transport it through solid blocks, except glass).
 necronomicon.text.pe.17=Building networks with Energy Relays allows you to transport PE over larger distances. Energy Relays can drain PE from PE Collector placed next to it.
 necronomicon.text.pe.18=In order to store greater amounts of PE, you can create an Energy Container. They allow insertion through Energy Relays or interaction with the block.
-necronomicon.text.pe.19=If the PE production still is too slow, you can also upgrade the various PE handling blocks through infusion rituals to boost stats.
-necronomicon.text.pe.20=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
+necronomicon.text.pe.19=Upon reaching Omothol, you will be able to create deity-specific Ritual Charms (with an Abyssalnomicon), or buy them from Remnant Priests. Those charms will give an additional boost if used on manipulators associated with the same deity as the one displayed on the charm.
 
 necronomicon.text.machines.info=Check the information section for information regarding the different machines, or the other sections for all recipes for the specified machine. The recipes aren't sorted in any way.
 
@@ -654,6 +654,10 @@ necronomicon.text.idols.info=Idols utilize PE to perform specific actions reliab
 
 necronomicon.text.ritualcharms.1=With Ritual Charms, you can temporarily apply boosts to certain stats on Potential Energy Manipulators. The base charm can clear existing amplifiers from an amplified manipulator (or you can break the block). Adding an amplifier (of any type) increases the base PE generation of the manipulator (and the power amplifier increases it further).
 necronomicon.text.ritualcharms.2=When a Statue is amplified, a symbol representing the amplifier (same one that's on the charm) is displayed on the plinth.
+
+necronomicon.text.peupgrading.1=If PE production is still too slow, you can upgrade the various PE handling blocks through an anvil using Dimensional Rings to boost their stats.
+necronomicon.text.peupgrading.2=The base ring is crafted with Gold Ingots and Blaze Powder, which can be upgraded for each tier through rituals.
+necronomicon.text.peupgrading.3=For each upgraded block, the ring representing the tier is displayed on it.
 
 necronomicon.text.wip=This section is incomplete.
 
@@ -820,6 +824,14 @@ ac.ritual.ethaxium=Ethaxium
 ac.ritual.ethaxium.desc=Through the Eldritch powers within Omothol, you tear out the souls of the Soul Sand, shaping them into Ethaxium.
 ac.ritual.unchainedPortalAnchor=Unchained Portal Anchor
 ac.ritual.unchainedPortalAnchor.desc=By infusing a Portal Anchor with Ethaxium, you break the ethereal chains forcing it to only open portals between connected dimensions. Now it can open portals to any dimension with the Silver Key.
+ac.ritual.overworld_ring=Overworld-Embossed Ring
+ac.ritual.overworld_ring.desc=By infusing a Ring with Coralium Gems, Shadow Gem Shards and Cobblestone, it becomes embossed with the essence of the Overworld.
+ac.ritual.abyssal_wasteland_ring=Abyssal Wasteland-Embossed Ring
+ac.ritual.abyssal_wasteland_ring.desc=By infusing a Ring with Coralium Gems, Shadow Gem Shards, Abyssal Cobblestone and Coralium Cobblestone, it becomes embossed with the essence of the Abyssal Wasteland.
+ac.ritual.dreadlands_ring=Dreadlands-Embossed Ring
+ac.ritual.dreadlands_ring.desc=By infusing a Ring with Coralium Gems, Shadow Gem Shards, Dreadlands Cobblestone, and Elyssian Cobblestone, it becomes embossed with the essence of the Dreadlands.
+ac.ritual.omothol_ring=Omothol-Embossed Ring
+ac.ritual.omothol_ring.desc=By infusing a Ring with Coralium Gems, Shadow Gem Shards, Ethaxium Bricks, and Dark Ethaxium Bricks, it becomes embossed with the essence of Omothol.
 
 #Spells
 ac.spell.lifedrain=Life Drain

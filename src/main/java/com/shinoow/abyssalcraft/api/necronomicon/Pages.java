@@ -346,7 +346,6 @@ public class Pages {
 	public static Page PE_TUT_17;
 	public static Page PE_TUT_18;
 	public static Page PE_TUT_19;
-	public static Page PE_TUT_20;
 
 	public static Page PLACES_OF_POWER_INFO_1;
 	public static Page PLACES_OF_POWER_INFO_2;
@@ -396,6 +395,10 @@ public class Pages {
 
 	public static Page INFORMATION_RITUAL_CHARMS_1;
 	public static Page INFORMATION_RITUAL_CHARMS_2;
+
+	public static Page PE_UPGRADING_1;
+	public static Page PE_UPGRADING_2;
+	public static Page PE_UPGRADING_3;
 
 	//Spells
 
