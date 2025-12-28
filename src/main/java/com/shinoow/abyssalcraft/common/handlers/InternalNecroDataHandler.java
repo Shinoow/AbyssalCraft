@@ -630,7 +630,7 @@ public class InternalNecroDataHandler extends DummyNecroDataHandler {
 		Pages.PE_UPGRADING_1 = new Page(1, NecronomiconText.LABEL_UPGRADING_PE, 0, NecronomiconResources.PE_UPGRADES_1, NecronomiconText.PE_UPGRADING_INFO_1);
 		Pages.PE_UPGRADING_2 = new Page(2, NecronomiconText.LABEL_UPGRADING_PE, 0, new CraftingStack(ACItems.ring), NecronomiconText.PE_UPGRADING_INFO_2);
 		Pages.PE_UPGRADING_3 = new Page(3, NecronomiconText.LABEL_UPGRADING_PE, 0, NecronomiconResources.PE_UPGRADES_2, NecronomiconText.PE_UPGRADING_INFO_3);
-		
+
 		Pages.PROGRESSION_OVERWORLD_1.setReference(Pages.CRAFTING_GATEWAY_KEY);
 		Pages.PROGRESSION_OVERWORLD_2.setReference(Pages.CRAFTING_STAFF_OF_RENDING_1, Pages.CRAFTING_STAFF_OF_RENDING_2);
 		Pages.PROGRESSION_OVERWORLD_3.setReference(Pages.CRAFTING_SHARD_OF_OBLIVION);

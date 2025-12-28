@@ -145,7 +145,7 @@ public class BlockTieredEnergyPedestal extends BlockTiltablePedestal implements 
 		public int getTier() {
 			return meta + 1;
 		}
-		
+
 		@Override
 		public String toString() {
 			return getName();

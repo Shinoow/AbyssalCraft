@@ -360,7 +360,7 @@ public class NecronomiconText {
 	public static String PE_UPGRADING_INFO_1 = "necronomicon.text.peupgrading.1";
 	public static String PE_UPGRADING_INFO_2 = "necronomicon.text.peupgrading.2";
 	public static String PE_UPGRADING_INFO_3 = "necronomicon.text.peupgrading.3";
-	
+
 	public static String WIP = "necronomicon.text.wip";
 
 	/** Text limit */

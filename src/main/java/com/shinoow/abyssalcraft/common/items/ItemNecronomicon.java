@@ -61,7 +61,7 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add(TranslationUtil.toLocalFormatted("tooltip.tiereditem.tier", bookType));
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand) {
 		ItemStack stack = par3EntityPlayer.getHeldItem(hand);
