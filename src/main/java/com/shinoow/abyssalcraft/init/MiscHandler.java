@@ -32,10 +32,14 @@ import com.shinoow.abyssalcraft.api.knowledge.condition.ConditionProcessorRegist
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.INecroDataCapability;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapability;
 import com.shinoow.abyssalcraft.api.knowledge.condition.caps.NecroDataCapabilityStorage;
+import com.shinoow.abyssalcraft.api.necronomicon.NecronomiconActionRegistry;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapabilityStorage;
 import com.shinoow.abyssalcraft.common.AbyssalCrafting;
+import com.shinoow.abyssalcraft.common.actions.CreateAltarAction;
+import com.shinoow.abyssalcraft.common.actions.CreatePlaceOfPowerAction;
+import com.shinoow.abyssalcraft.common.actions.PerformRitualAction;
 import com.shinoow.abyssalcraft.common.blocks.BlockCrystalCluster;
 import com.shinoow.abyssalcraft.common.datafix.BlockFlatteningDefinitions;
 import com.shinoow.abyssalcraft.common.enchantments.*;
@@ -339,6 +343,11 @@ public class MiscHandler implements ILifeCycleHandler {
 		StructureHandler.instance().registerStructure(new BasicStructure());
 		StructureHandler.instance().registerStructure(new TotemPoleStructure());
 		StructureHandler.instance().registerStructure(new ArchwayStructure());
+
+		NecronomiconActionRegistry.instance().addAction(new CreateAltarAction());
+		NecronomiconActionRegistry.instance().addAction(new CreatePlaceOfPowerAction());
+		NecronomiconActionRegistry.instance().addAction(new PerformRitualAction());
+
 		// Update getFixVersion in BlockFlattening too!!!
 		ModFixs modFixs = FMLCommonHandler.instance().getDataFixer().init(modid, 5);
 		modFixs.registerFix(FixTypes.CHUNK, BlockFlatteningDefinitions.createBlockFlattening());

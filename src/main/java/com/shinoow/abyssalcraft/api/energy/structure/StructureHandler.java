@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.api.energy.structure;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -76,21 +77,34 @@ public class StructureHandler {
 	}
 
 	/**
-	 * Attempts to form a Place of Power
+	 * Checks if a Place of Power can be constructed
 	 * @param world Current World
 	 * @param pos Current position
-	 * @param booktype Book Type used
+	 * @param bookType Book Type used
 	 * @param player Player trying to form the structure
 	 * @return True if it succeeded, otherwise false
 	 */
-	public boolean tryFormStructure(World world, BlockPos pos, int booktype, EntityPlayer player) {
+	public boolean canFormStructure(World world, BlockPos pos, int bookType, EntityPlayer player) {
 
-		for(IPlaceOfPower place : structures)
-			if(booktype >= place.getBookType() && place.canConstruct(world, pos, player)) {
-				if(!world.isRemote)
-					place.construct(world, pos);
-				return true;
-			}
-		return false;
+		return structures.stream()
+				.filter(s -> bookType >= s.getBookType())
+				.anyMatch(s -> s.canConstruct(world, pos, player));
+	}
+
+	/**
+	 * Attempts to form a Place of Power
+	 * @param world Current World
+	 * @param pos Current position
+	 * @param bookType Book Type used
+	 * @param player Player trying to form the structure
+	 * @return True if it succeeded, otherwise false
+	 */
+	public void formStructure(World world, BlockPos pos, int bookType, EntityPlayer player) {
+
+		Optional<IPlaceOfPower> place = structures.stream()
+				.filter(s -> bookType >= s.getBookType() && s.canConstruct(world, pos, player))
+				.findFirst();
+		if(place.isPresent() && !world.isRemote)
+			place.get().construct(world, pos);
 	}
 }

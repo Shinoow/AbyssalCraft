@@ -93,7 +93,7 @@ public class RitualUtil {
 	 * @param bookType Level of the current Necronomicon held
 	 * @return True if a Ritual Altar can be constructed, otherwise false
 	 */
-	public static boolean tryAltar(World world, BlockPos pos, int bookType, EntityPlayer player){
+	public static boolean canCreateAltar(World world, BlockPos pos, int bookType, EntityPlayer player){
 		IBlockState ritualBlock = world.getBlockState(pos);
 
 		Optional<Integer> book = bookTypeMappings.entrySet().stream()
@@ -112,8 +112,6 @@ public class RitualUtil {
 					}))
 						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), book.get()))
 							if(sameChunk(world, pos, player)) {
-								if(!world.isRemote)
-									createAltar(world, pos);
 								return true;
 							}
 		return false;
@@ -124,7 +122,9 @@ public class RitualUtil {
 	 * @param world World object
 	 * @param pos Block Position
 	 */
-	private static void createAltar(World world, BlockPos pos){
+	public static void createAltar(World world, BlockPos pos){
+
+		if(world.isRemote) return;
 
 		IBlockState altar = world.getBlockState(pos);
 		world.destroyBlock(pos, false);

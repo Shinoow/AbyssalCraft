@@ -14,17 +14,15 @@ package com.shinoow.abyssalcraft.common.items;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.block.IRitualAltar;
 import com.shinoow.abyssalcraft.api.energy.IEnergyTransporterItem;
-import com.shinoow.abyssalcraft.api.energy.structure.StructureHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.api.necronomicon.INecronomiconAction;
+import com.shinoow.abyssalcraft.api.necronomicon.NecronomiconActionRegistry;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.ShouldSyncMessage;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
-import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
-import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 import com.shinoow.abyssalcraft.lib.util.TranslationUtil;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -79,22 +77,15 @@ public class ItemNecronomicon extends ItemACBasic implements IEnergyTransporterI
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World w, BlockPos pos, EnumHand hand, EnumFacing side,
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side,
 			float hitX, float hitY, float hitZ) {
-		player.getHeldItem(hand);
-		if (player.isSneaking())
-			if (!(w.getTileEntity(pos) instanceof IRitualAltar)) {
-				if (RitualUtil.tryAltar(w, pos, bookType, player)
-						|| StructureHandler.instance().tryFormStructure(w, pos, bookType, player)) {
-					w.playSound(player, pos, ACSounds.remnant_scream, player.getSoundCategory(), 3F, 1F);
-					// player.addStat(ACAchievements.ritual_altar, 1);
-					return EnumActionResult.SUCCESS;
-				}
-			} else {
-				IRitualAltar altar = (IRitualAltar) w.getTileEntity(pos);
-				altar.performRitual(w, pos, player);
-				return EnumActionResult.SUCCESS;
+		if (player.isSneaking()) {
+			INecronomiconAction action = NecronomiconActionRegistry.instance().getActionFor(player, world, pos, bookType);
+
+			if(action != null) {
+				return action.executeAction(player, world, pos, bookType);
 			}
+		}
 		return EnumActionResult.PASS;
 	}
 
