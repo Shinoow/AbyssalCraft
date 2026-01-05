@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2025 Shinoow.
+ * Copyright (c) 2012 - 2026 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -40,6 +40,9 @@ public class RitualRegistry {
 	private final Map<Integer, Integer> configDimToBookType = new HashMap<>();
 
 	private final Logger logger = LogManager.getLogger("RitualRegistry");
+
+	// 4 is the highest book type, so nothing can be 5
+	private final int NO_BOOKTYPE = 5;
 
 	private static final RitualRegistry instance = new RitualRegistry();
 
@@ -115,11 +118,10 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public boolean canPerformAction(int dim, int bookType){
-		if(dimToBookType.containsKey(dim))
-			return bookType >= dimToBookType.get(dim);
-		else if(configDimToBookType.containsKey(dim))
-			return bookType >= configDimToBookType.get(dim);
-		return false;
+		int ret = dimToBookType.getOrDefault(dim, NO_BOOKTYPE);
+		if(ret == NO_BOOKTYPE)
+			ret = configDimToBookType.getOrDefault(dim, NO_BOOKTYPE);
+		return bookType >= ret;
 	}
 
 	/**
@@ -131,11 +133,10 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public boolean sameBookType(int dim, int bookType){
-		if(dimToBookType.containsKey(dim))
-			return bookType == dimToBookType.get(dim);
-		else if(configDimToBookType.containsKey(dim))
-			return bookType == configDimToBookType.get(dim);
-		return false;
+		int ret = dimToBookType.getOrDefault(dim, NO_BOOKTYPE);
+		if(ret == NO_BOOKTYPE)
+			ret = configDimToBookType.getOrDefault(dim, NO_BOOKTYPE);
+		return bookType == ret;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2025 Shinoow.
+ * Copyright (c) 2012 - 2026 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -111,9 +111,8 @@ public class RitualUtil {
 						return true;
 					}))
 						if(RitualRegistry.instance().sameBookType(world.provider.getDimension(), book.get()))
-							if(sameChunk(world, pos, player)) {
+							if(sameChunk(world, pos, player))
 								return true;
-							}
 		return false;
 	}
 
