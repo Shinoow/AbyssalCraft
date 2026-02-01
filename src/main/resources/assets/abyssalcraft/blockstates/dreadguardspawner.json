@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "abyssalcraft:dreadguardspawner" }
+		"normal": { "model": "abyssalcraft:none" }
 	}
 }

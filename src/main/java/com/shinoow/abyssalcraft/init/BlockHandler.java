@@ -47,7 +47,7 @@ public class BlockHandler implements ILifeCycleHandler {
 	public static Block Darkbrickslab2, Darkcobbleslab2, abyslab2, Darkstoneslab2, DLTslab2,
 	Altar, dreadbrickslab2, elysianbrickslab2, cstonebrickslab2, ethaxiumslab2, house,
 	darkethaxiumslab2, abycobbleslab2, dreadcobbleslab2, elysiancobbleslab2, cstonecobbleslab2,
-	dreadwoodslab2;
+	dreadwoodslab2, summoning_statue_bottom, summoning_statue_top;
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
@@ -322,6 +322,9 @@ public class BlockHandler implements ILifeCycleHandler {
 		ACBlocks.tombstone_omothol_stone = new BlockTombstone("omothol_stone");
 		ACBlocks.spirit_altar = new BlockSpiritAltar();
 		ACBlocks.unchained_portal_anchor = new BlockUnchainedPortalAnchor();
+		ACBlocks.summoning_statue = new BlockSummoningStatueBase();
+		summoning_statue_bottom = new BlockSummoningStatue(false);
+		summoning_statue_top = new BlockSummoningStatue(true);
 
 		SoftDepUtil.declareBlocks();
 
@@ -638,6 +641,9 @@ public class BlockHandler implements ILifeCycleHandler {
 		registerBlock(ACBlocks.tombstone_omothol_stone, "tombstone_omothol_stone");
 		registerBlock(ACBlocks.spirit_altar, "spirit_altar");
 		registerBlock(ACBlocks.unchained_portal_anchor, "unchained_portal_anchor");
+		registerBlock(ACBlocks.summoning_statue, "summoning_statue");
+		registerBlock(summoning_statue_bottom, "summoning_statue_bottom");
+		registerBlock(summoning_statue_top, "summoning_statue_top");
 
 		Blocks.FIRE.setFireInfo(ACBlocks.darklands_oak_planks, 5, 20);
 		Blocks.FIRE.setFireInfo(DLTslab2, 5, 20);

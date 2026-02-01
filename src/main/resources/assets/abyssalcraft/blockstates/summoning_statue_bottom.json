@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": { "model": "abyssalcraft:summoning_statue/statue" },
+		"facing=south": { "model": "abyssalcraft:summoning_statue/statue", "y": 180 },
+		"facing=west":  { "model": "abyssalcraft:summoning_statue/statue", "y": 270 },
+		"facing=east":  { "model": "abyssalcraft:summoning_statue/statue", "y": 90 }
+	}
+}

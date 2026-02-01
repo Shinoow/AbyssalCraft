@@ -960,6 +960,9 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACBlocks.tombstone_omothol_stone, 0);
 		registerItemRender(ACBlocks.spirit_altar, 0);
 		registerItemRender(ACBlocks.unchained_portal_anchor, 0);
+		registerItemRender(ACBlocks.summoning_statue, 0);
+		registerItemRender(BlockHandler.summoning_statue_bottom, 0);
+		registerItemRender(BlockHandler.summoning_statue_top, 0);
 	}
 
 	@SubscribeEvent

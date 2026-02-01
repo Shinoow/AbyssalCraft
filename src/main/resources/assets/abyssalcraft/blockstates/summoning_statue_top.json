@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": { "model": "abyssalcraft:cstone" },
+		"facing=south": { "model": "abyssalcraft:cstone" },
+		"facing=west":  { "model": "abyssalcraft:cstone" },
+		"facing=east":  { "model": "abyssalcraft:cstone" }
+	}
+}

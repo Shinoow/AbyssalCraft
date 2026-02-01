@@ -60,6 +60,8 @@ public class ACJEIPlugin implements IModPlugin {
 		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(BlockHandler.house));
 		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(BlockHandler.Altar));
 		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(ACBlocks.multi_block));
+		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(BlockHandler.summoning_statue_bottom));
+		jeiHelpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(BlockHandler.summoning_statue_top));
 
 		String[] rituals = {ACRecipeCategoryUid.CREATION_RITUAL, ACRecipeCategoryUid.RITUAL, ACRecipeCategoryUid.TRANSFORMATION_RITUAL};
 

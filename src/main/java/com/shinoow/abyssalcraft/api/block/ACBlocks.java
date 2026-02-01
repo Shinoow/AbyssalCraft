@@ -280,4 +280,5 @@ public class ACBlocks {
 	public static Block tombstone_omothol_stone;
 	public static Block spirit_altar;
 	public static Block unchained_portal_anchor;
+	public static Block summoning_statue;
 }

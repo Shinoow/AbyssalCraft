@@ -1,5 +1,5 @@
 {
 	"variants": {
-		"normal": { "model": "abyssalcraft:chagarothspawner" }
+		"normal": { "model": "abyssalcraft:none" }
 	}
 }

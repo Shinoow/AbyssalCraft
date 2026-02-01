@@ -34,7 +34,6 @@ import net.minecraftforge.oredict.OreDictionary;
 public class RitualRegistry {
 
 	private final Map<Integer, Integer> dimToBookType = new HashMap<>();
-	private final Map<NecronomiconRitual, Integer> ritualToBookType = new HashMap<>();
 	private final List<NecronomiconRitual> rituals = new ArrayList<>();
 
 	private final Map<Integer, Integer> configDimToBookType = new HashMap<>();
@@ -60,14 +59,13 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public void addDimensionToBookType(int dim, int bookType){
-		if(bookType <= 4 && bookType >= 0)
+
+		if(validBookType(bookType))
 			if(dim != OreDictionary.WILDCARD_VALUE)
 				dimToBookType.put(dim, bookType);
 			else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: {}", dim);
 		else logger.log(Level.ERROR, "Necronomicon book type does not exist: {}", bookType);
 	}
-
-
 
 	/**
 	 * Maps a dimension to a book type, in order to specify dimensions where a ritual of that book type can be performed,<br>
@@ -87,7 +85,8 @@ public class RitualRegistry {
 	 * Temporary config version, gets wiped
 	 */
 	public void addDimensionToBookTypeConfig(int dim, int bookType) {
-		if(bookType <= 4 && bookType >= 0)
+
+		if(validBookType(bookType))
 			if(dim != OreDictionary.WILDCARD_VALUE)
 				configDimToBookType.put(dim, bookType);
 			else logger.log(Level.ERROR, "You're not allowed to register that Dimension ID: {}", dim);
@@ -106,6 +105,7 @@ public class RitualRegistry {
 	 * Clears the temporary list
 	 */
 	public void wipeConfig() {
+
 		configDimToBookType.clear();
 	}
 
@@ -118,9 +118,12 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public boolean canPerformAction(int dim, int bookType){
+
+		if(!validBookType(bookType)) return false;
 		int ret = dimToBookType.getOrDefault(dim, NO_BOOKTYPE);
 		if(ret == NO_BOOKTYPE)
 			ret = configDimToBookType.getOrDefault(dim, NO_BOOKTYPE);
+
 		return bookType >= ret;
 	}
 
@@ -133,10 +136,23 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public boolean sameBookType(int dim, int bookType){
+
+		if(!validBookType(bookType)) return false;
 		int ret = dimToBookType.getOrDefault(dim, NO_BOOKTYPE);
 		if(ret == NO_BOOKTYPE)
 			ret = configDimToBookType.getOrDefault(dim, NO_BOOKTYPE);
+
 		return bookType == ret;
+	}
+
+	/**
+	 * Checks if a book type is within the valid range
+	 * 
+	 * @since 2.0
+	 */
+	private boolean validBookType(int bookType) {
+
+		return bookType <= 4 && bookType >= 0;
 	}
 
 	/**
@@ -146,14 +162,18 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public void registerRitual(NecronomiconRitual ritual){
-		if(ritual.getBookType() <= 4 && ritual.getBookType() >= 0){
-			for(NecronomiconRitual entry : rituals)
-				if(ritual.getID().equals(entry.getID())){
-					logger.log(Level.ERROR, "Necronomicon Ritual already registered: {}", ritual.getID());
-					return;
-				}
-			rituals.add(ritual);
-		} else logger.log(Level.ERROR, "Necronomicon book type does not exist: {}", ritual.getBookType());
+
+		if(!validBookType(ritual.getBookType())) {
+			logger.log(Level.ERROR, "Necronomicon book type does not exist: {}", ritual.getBookType());
+			return;
+		}
+
+		if(rituals.stream().map(x -> x.getID()).anyMatch(x -> x.equals(ritual.getID()))) {
+			logger.log(Level.ERROR, "Necronomicon Ritual already registered: {}", ritual.getID());
+			return;
+		}
+
+		rituals.add(ritual);
 	}
 
 	/**
@@ -163,6 +183,7 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	public List<NecronomiconRitual> getRituals(){
+
 		return rituals;
 	}
 
@@ -173,6 +194,7 @@ public class RitualRegistry {
 	 */
 	@Nullable
 	public NecronomiconRitual getRitualById(String id) {
+
 		return rituals.stream().filter(r -> r.getID().equals(id)).findFirst().orElse(null);
 	}
 
@@ -203,13 +225,23 @@ public class RitualRegistry {
 	 * @since 1.4
 	 */
 	private boolean areRitualsSame(NecronomiconRitual ritual, int dimension, int bookType, ItemStack[] offerings, ItemStack sacrifice){
-		if(ritual.getDimension() == dimension || ritual.getDimension() == OreDictionary.WILDCARD_VALUE)
-			if(ritual.getBookType() <= bookType)
-				if(ritual.getOfferings() != null && offerings != null)
-					if(APIUtils.areItemStackArraysEqual(ritual.getOfferings(), offerings, ritual.isNBTSensitive()))
-						if(ritual.requiresItemSacrifice() || ritual.getSacrifice() == null && sacrifice.isEmpty() ||
-						APIUtils.areObjectsEqual(sacrifice, ritual.getSacrifice(), ritual.isSacrificeNBTSensitive()))
-							return true;
+
+		if(ritual.getDimension() != dimension && ritual.getDimension() != OreDictionary.WILDCARD_VALUE)
+			return false;
+
+		if(ritual.getBookType() > bookType)
+			return false;
+
+		if(ritual.getOfferings() == null || offerings == null)
+			return false;
+
+		if(!APIUtils.areItemStackArraysEqual(ritual.getOfferings(), offerings, ritual.isNBTSensitive()))
+			return false;
+
+		if(ritual.requiresItemSacrifice() || ritual.getSacrifice() == null && sacrifice.isEmpty() ||
+				APIUtils.areObjectsEqual(sacrifice, ritual.getSacrifice(), ritual.isSacrificeNBTSensitive()))
+			return true;
+
 		return false;
 	}
 }
