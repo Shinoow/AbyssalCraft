@@ -1,0 +1,32 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "abyssalcraft:blocks/cstone",
+		"particle": "abyssalcraft:blocks/cstone"
+	},
+	"elements": [
+		{
+			"name": "body_lower",
+			"from": [1, 0, 6],
+			"to": [15, 16, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 6]},
+			"faces": {
+				"north": {"uv": [0, 0, 14, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 4, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 14, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 4, 16], "texture": "#1"},
+				"up": {"uv": [0, 0, 14, 4], "texture": "#1"},
+				"down": {"uv": [0, 0, 14, 4], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "statue",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0]
+		}
+	]
+}

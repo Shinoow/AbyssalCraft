@@ -10,7 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -27,6 +26,7 @@ public class BlockSummoningStatue extends BlockACHorizontal {
 		mipp();
 		isTop = top;
 		setTranslationKey(top ? "summoning_statue_top" :  "summoning_statue_bottom");
+		setCreativeTab(null);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class BlockSummoningStatue extends BlockACHorizontal {
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		return false;
 	}
-	
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -67,12 +67,12 @@ public class BlockSummoningStatue extends BlockACHorizontal {
 		switch(facing) {
 		case EAST:
 		case WEST:
-			return new AxisAlignedBB(0.35F, 0.0F, 0.05F, 0.65F, yMax, 0.95F);
+			return new AxisAlignedBB(0.375F, 0.0F, 0.05F, 0.625F, yMax, 0.95F);
 		case NORTH:
 		case SOUTH:
-			return new AxisAlignedBB(0.1F, 0.0F, 0.3F, 0.9F, yMax, 0.7F);
+			return new AxisAlignedBB(0.05F, 0.0F, 0.375F, 0.95F, yMax, 0.625F);
 		default:
-			return new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, yMax, 0.2F);
+			return new AxisAlignedBB(0.05F, 0.0F, 0.375F, 0.95F, yMax, 0.625F);
 		}
 	}
 
@@ -91,12 +91,5 @@ public class BlockSummoningStatue extends BlockACHorizontal {
 	@Override
 	public EnumPushReaction getPushReaction(IBlockState state) {
 		return EnumPushReaction.BLOCK;
-	}
-
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
-	{
-		// The top block is invisible
-		return isTop ? EnumBlockRenderType.INVISIBLE : EnumBlockRenderType.MODEL;
 	}
 }

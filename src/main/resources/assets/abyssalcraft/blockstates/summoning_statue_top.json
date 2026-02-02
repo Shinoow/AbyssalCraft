@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"facing=north": { "model": "abyssalcraft:cstone" },
-		"facing=south": { "model": "abyssalcraft:cstone" },
-		"facing=west":  { "model": "abyssalcraft:cstone" },
-		"facing=east":  { "model": "abyssalcraft:cstone" }
+		"facing=north": { "model": "abyssalcraft:summoning_statue/statue_top" },
+		"facing=south": { "model": "abyssalcraft:summoning_statue/statue_top", "y": 180 },
+		"facing=west":  { "model": "abyssalcraft:summoning_statue/statue_top", "y": 270 },
+		"facing=east":  { "model": "abyssalcraft:summoning_statue/statue_top", "y": 90 }
 	}
 }
