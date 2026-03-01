@@ -27,7 +27,7 @@ public class BlockSummoningStatueBase extends BlockACBasic {
 	public boolean isOpaqueCube(IBlockState state){
 		return false;
 	}
-	
+
 	@Override
 	public EnumPushReaction getPushReaction(IBlockState state) {
 		return EnumPushReaction.BLOCK;
@@ -53,7 +53,7 @@ public class BlockSummoningStatueBase extends BlockACBasic {
 		worldIn.destroyBlock(pos.up(), false);
 		worldIn.destroyBlock(pos.up(2), false);
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 			ItemStack stack) {

@@ -2,8 +2,9 @@
 	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "abyssalcraft:blocks/coralium_bricks/bricks_base",
 		"1": "abyssalcraft:blocks/cstone",
+		"4": "abyssalcraft:blocks/summoning_statue/masonry",
+		"6": "abyssalcraft:blocks/summoning_statue/misc",
 		"particle": "abyssalcraft:blocks/coralium_bricks/bricks_base"
 	},
 	"elements": [
@@ -13,12 +14,12 @@
 			"to": [16, 2, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
 			"faces": {
-				"north": {"uv": [0, 0, 16, 2], "texture": "#0"},
-				"east": {"uv": [0, 0, 16, 2], "texture": "#0"},
-				"south": {"uv": [0, 0, 16, 2], "texture": "#0"},
-				"west": {"uv": [0, 0, 16, 2], "texture": "#0"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+				"north": {"uv": [0, 0, 2, 16], "rotation": 90, "texture": "#4"},
+				"east": {"uv": [0, 0, 2, 16], "rotation": 90, "texture": "#4"},
+				"south": {"uv": [0, 0, 2, 16], "rotation": 90, "texture": "#4"},
+				"west": {"uv": [0, 0, 2, 16], "rotation": 90, "texture": "#4"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#4"}
 			}
 		},
 		{
@@ -27,11 +28,11 @@
 			"to": [15, 3, 15],
 			"rotation": {"angle": 0, "axis": "y", "origin": [1, 2, 1]},
 			"faces": {
-				"north": {"uv": [0, 0, 14, 1], "texture": "#0"},
-				"east": {"uv": [0, 0, 14, 1], "texture": "#0"},
-				"south": {"uv": [0, 0, 14, 1], "texture": "#0"},
-				"west": {"uv": [0, 0, 14, 1], "texture": "#0"},
-				"up": {"uv": [0, 1, 14, 15], "texture": "#0"}
+				"north": {"uv": [1, 1, 15, 2], "texture": "#6"},
+				"east": {"uv": [1, 1, 2, 15], "rotation": 90, "texture": "#6"},
+				"south": {"uv": [1, 14, 15, 15], "texture": "#6"},
+				"west": {"uv": [14, 1, 15, 15], "rotation": 90, "texture": "#6"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#6"}
 			}
 		},
 		{
@@ -40,10 +41,10 @@
 			"to": [14, 13, 14],
 			"rotation": {"angle": 0, "axis": "y", "origin": [2, 3, 2]},
 			"faces": {
-				"north": {"uv": [0, 0, 12, 10], "texture": "#0"},
-				"east": {"uv": [0, 0, 12, 10], "texture": "#0"},
-				"south": {"uv": [0, 0, 12, 10], "texture": "#0"},
-				"west": {"uv": [0, 0, 12, 10], "texture": "#0"}
+				"north": {"uv": [2, 2, 14, 12], "texture": "#6"},
+				"east": {"uv": [2, 2, 14, 12], "texture": "#6"},
+				"south": {"uv": [2, 2, 14, 12], "texture": "#6"},
+				"west": {"uv": [2, 2, 14, 12], "texture": "#6"}
 			}
 		},
 		{
@@ -56,8 +57,7 @@
 				"east": {"uv": [0, 0, 14, 1], "texture": "#1"},
 				"south": {"uv": [0, 0, 14, 1], "texture": "#1"},
 				"west": {"uv": [0, 0, 14, 1], "texture": "#1"},
-				"up": {"uv": [0, 0, 14, 14], "texture": "#1"},
-				"down": {"uv": [0, 0, 14, 14], "texture": "#1"}
+				"down": {"uv": [1, 1, 15, 15], "texture": "#6"}
 			}
 		},
 		{

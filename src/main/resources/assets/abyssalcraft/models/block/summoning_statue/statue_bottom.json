@@ -3,6 +3,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"1": "abyssalcraft:blocks/cstone",
+		"2": "abyssalcraft:blocks/summoning_statue/robe_front",
+		"3": "abyssalcraft:blocks/summoning_statue/robe_sides",
 		"particle": "abyssalcraft:blocks/cstone"
 	},
 	"elements": [
@@ -12,10 +14,10 @@
 			"to": [15, 16, 10],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 6]},
 			"faces": {
-				"north": {"uv": [0, 0, 14, 16], "texture": "#1"},
-				"east": {"uv": [0, 0, 4, 16], "texture": "#1"},
-				"south": {"uv": [0, 0, 14, 16], "texture": "#1"},
-				"west": {"uv": [0, 0, 4, 16], "texture": "#1"},
+				"north": {"uv": [1, 0, 15, 16], "texture": "#2"},
+				"east": {"uv": [10, 0, 6, 16], "texture": "#3"},
+				"south": {"uv": [1, 0, 15, 16], "texture": "#3"},
+				"west": {"uv": [6, 0, 10, 16], "texture": "#3"},
 				"up": {"uv": [0, 0, 14, 4], "texture": "#1"},
 				"down": {"uv": [0, 0, 14, 4], "texture": "#1"}
 			}
