@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.baseblocks;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
@@ -26,10 +25,10 @@ import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockACStairs extends BlockStairs {
+
+	private boolean isMipped = false;
 
 	public BlockACStairs(Block par1Block, String tooltype, int harvestlevel){
 		super(par1Block.getDefaultState());
@@ -52,24 +51,14 @@ public class BlockACStairs extends BlockStairs {
 	}
 
 	public BlockACStairs mipp() {
-
-		// Too much? Maybe, but fuck it
-		AbyssalCraft.proxy.setRenderLayer(this);
+		isMipped = true;
 
 		return this;
 	}
 
-	@SideOnly(Side.CLIENT)
-	private BlockRenderLayer layer = super.getRenderLayer();
-
-	@SideOnly(Side.CLIENT)
-	public void setRenderLayer() {
-		layer = BlockRenderLayer.CUTOUT_MIPPED;
-	}
-
 	@Override
 	public BlockRenderLayer getRenderLayer() {
-		return layer;
+		return isMipped ? BlockRenderLayer.CUTOUT_MIPPED : super.getRenderLayer();
 	}
 
 	@Override

@@ -11,7 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.baseblocks;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 
 import net.minecraft.block.Block;
@@ -19,11 +18,10 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.IStringSerializable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockACBasic extends Block {
+
+	private boolean isMipped = false;
 
 	/**
 	 * Ultra-generic AbyssalCraft block
@@ -87,23 +85,13 @@ public class BlockACBasic extends Block {
 	}
 
 	public BlockACBasic mipp() {
-
-		// Too much? Maybe, but fuck it
-		AbyssalCraft.proxy.setRenderLayer(this);
+		isMipped = true;
 
 		return this;
 	}
 
-	@SideOnly(Side.CLIENT)
-	private BlockRenderLayer layer = super.getRenderLayer();
-
-	@SideOnly(Side.CLIENT)
-	public void setRenderLayer() {
-		layer = BlockRenderLayer.CUTOUT_MIPPED;
-	}
-
 	@Override
 	public BlockRenderLayer getRenderLayer() {
-		return layer;
+		return isMipped ? BlockRenderLayer.CUTOUT_MIPPED : super.getRenderLayer();
 	}
 }

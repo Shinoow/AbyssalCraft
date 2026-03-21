@@ -13,7 +13,6 @@ package com.shinoow.abyssalcraft.common.blocks.baseblocks;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.init.BlockHandler;
 import com.shinoow.abyssalcraft.lib.ACTabs;
@@ -45,6 +44,7 @@ public abstract class BlockACSlab extends BlockSlab {
 
 	private Block singleSlab;
 	private MapColor mapColor;
+	private boolean isMipped = false;
 
 	private static final int HALF_META_BIT = 8;
 
@@ -97,24 +97,14 @@ public abstract class BlockACSlab extends BlockSlab {
 	}
 
 	public BlockACSlab mipp() {
-
-		// Too much? Maybe, but fuck it
-		AbyssalCraft.proxy.setRenderLayer(this);
+		isMipped = true;
 
 		return this;
 	}
 
-	@SideOnly(Side.CLIENT)
-	private BlockRenderLayer layer = super.getRenderLayer();
-
-	@SideOnly(Side.CLIENT)
-	public void setRenderLayer() {
-		layer = BlockRenderLayer.CUTOUT_MIPPED;
-	}
-
 	@Override
 	public BlockRenderLayer getRenderLayer() {
-		return layer;
+		return isMipped ? BlockRenderLayer.CUTOUT_MIPPED : super.getRenderLayer();
 	}
 
 	@Override

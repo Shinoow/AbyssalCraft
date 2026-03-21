@@ -38,9 +38,6 @@ import com.shinoow.abyssalcraft.common.CommonProxy;
 import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualPedestal;
-import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACBasic;
-import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACSlab;
-import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACStairs;
 import com.shinoow.abyssalcraft.common.blocks.tile.*;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
@@ -440,15 +437,5 @@ public class ClientProxy extends CommonProxy {
 	public RayTraceResult rayTraceEntity(float dist) {
 		RayTraceResult r = AbyssalCraftClientEventHooks.getMouseOverExtended(dist);
 		return r != null && r.entityHit instanceof EntityLivingBase ? r : null;
-	}
-
-	@Override
-	public void setRenderLayer(Block block) {
-		if(block instanceof BlockACBasic)
-			((BlockACBasic) block).setRenderLayer();
-		if(block instanceof BlockACStairs)
-			((BlockACStairs) block).setRenderLayer();
-		if(block instanceof BlockACSlab)
-			((BlockACSlab) block).setRenderLayer();
 	}
 }
