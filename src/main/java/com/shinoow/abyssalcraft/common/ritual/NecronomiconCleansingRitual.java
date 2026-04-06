@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.ritual;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.CommonReferences;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.biome.IDarklandsBiome;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
@@ -35,9 +36,10 @@ import net.minecraft.world.biome.Biome;
 
 public class NecronomiconCleansingRitual extends NecronomiconRitual {
 
+	//TODO: code cleanup, block replacement registry (Tuple<Predicate<IBlockState>, Function<>> Something)
+
 	public NecronomiconCleansingRitual() {
-		super("cleansing", 4, 0, 100000F, true, new Object[]{APIUtils.getAllStatues(), APIUtils.getAllStatues(), APIUtils.getAllStatues(),
-				APIUtils.getAllStatues(), APIUtils.getAllStatues(), APIUtils.getAllStatues(), APIUtils.getAllStatues(), APIUtils.getAllStatues()});
+		super("cleansing", 1, 0, CommonReferences.AW_NECRONOMICON_MAX_ENERGY, true, APIUtils.makeArrayOf(APIUtils.getAllDecorativeStatues(), 8));
 	}
 
 	@Override

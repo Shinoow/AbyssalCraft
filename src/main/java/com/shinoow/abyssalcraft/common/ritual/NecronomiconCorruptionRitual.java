@@ -12,6 +12,7 @@
 package com.shinoow.abyssalcraft.common.ritual;
 
 import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.CommonReferences;
 import com.shinoow.abyssalcraft.api.biome.ACBiomes;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
@@ -35,9 +36,11 @@ import net.minecraft.world.biome.*;
 
 public class NecronomiconCorruptionRitual extends NecronomiconRitual {
 
+	//TODO: code cleanup, block replacement registry (Tuple<Predicate<IBlockState>, Function<>> Something)
+
 	public NecronomiconCorruptionRitual() {
-		super("corruption", 3, 0, 10000F, true, new Object[]{APIUtils.getAllStatues(), ACBlocks.darkstone, APIUtils.getAllStatues(),
-				ACBlocks.darkstone, APIUtils.getAllStatues(), ACBlocks.darkstone, APIUtils.getAllStatues(), ACBlocks.darkstone});
+		super("corruption", 1, 0, CommonReferences.AW_NECRONOMICON_MAX_ENERGY, true, new Object[]{APIUtils.getAllDecorativeStatues(), ACBlocks.darkstone, APIUtils.getAllDecorativeStatues(),
+				ACBlocks.darkstone, APIUtils.getAllDecorativeStatues(), ACBlocks.darkstone, APIUtils.getAllDecorativeStatues(), ACBlocks.darkstone});
 		setRitualParticle(EnumRitualParticle.PE_STREAM);
 	}
 
