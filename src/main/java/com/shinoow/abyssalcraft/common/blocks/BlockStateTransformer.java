@@ -196,12 +196,7 @@ public class BlockStateTransformer extends BlockACBasic {
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing enumfacing = EnumFacing.byIndex(meta);
-
-		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-			enumfacing = EnumFacing.NORTH;
-
-		return getDefaultState().withProperty(FACING, enumfacing);
+		return getDefaultState().withProperty(FACING, BlockUtil.getHorizontalFacing(meta));
 	}
 
 	@Override

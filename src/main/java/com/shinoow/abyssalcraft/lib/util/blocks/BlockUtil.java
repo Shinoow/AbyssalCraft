@@ -25,6 +25,7 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
@@ -98,5 +99,17 @@ public class BlockUtil {
 			item.motionZ = (float)rand.nextGaussian() * f3;
 			world.spawnEntity(item);
 		}
+	}
+
+	/**
+	 * Shorthand for getting a horizontal facing (converting verticals)
+	 */
+	public static EnumFacing getHorizontalFacing(int index) {
+		EnumFacing enumfacing = EnumFacing.byIndex(index);
+
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+			enumfacing = EnumFacing.NORTH;
+
+		return enumfacing;
 	}
 }

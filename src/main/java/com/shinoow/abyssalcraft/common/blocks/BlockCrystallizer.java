@@ -19,6 +19,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityCrystallizer;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -236,12 +237,7 @@ public class BlockCrystallizer extends BlockContainer
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing enumfacing = EnumFacing.byIndex(meta);
-
-		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-			enumfacing = EnumFacing.NORTH;
-
-		return getDefaultState().withProperty(FACING, enumfacing);
+		return getDefaultState().withProperty(FACING, BlockUtil.getHorizontalFacing(meta));
 	}
 
 	/**

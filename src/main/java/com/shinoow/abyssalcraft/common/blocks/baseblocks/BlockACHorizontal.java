@@ -1,5 +1,7 @@
 package com.shinoow.abyssalcraft.common.blocks.baseblocks;
 
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -45,7 +47,7 @@ public class BlockACHorizontal extends BlockACBasic {
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
+		return getDefaultState().withProperty(FACING, BlockUtil.getHorizontalFacing(meta));
 	}
 
 	@Override

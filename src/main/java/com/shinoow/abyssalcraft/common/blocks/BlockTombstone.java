@@ -15,6 +15,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityTombstone;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -118,7 +119,7 @@ public class BlockTombstone extends BlockContainer {
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
+		return getDefaultState().withProperty(FACING, BlockUtil.getHorizontalFacing(meta));
 	}
 
 	@Override

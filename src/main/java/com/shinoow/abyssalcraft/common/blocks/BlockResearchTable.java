@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityResearchTable;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACTabs;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -154,7 +155,7 @@ public class BlockResearchTable extends BlockContainer {
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
+		return getDefaultState().withProperty(FACING, BlockUtil.getHorizontalFacing(meta));
 	}
 
 	@Override
