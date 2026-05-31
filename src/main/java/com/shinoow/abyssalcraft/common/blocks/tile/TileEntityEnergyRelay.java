@@ -94,7 +94,7 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 			if(container != null)
 				if(container.canAcceptPE()){
 					addEnergy(container.addEnergy(consumeEnergy(energy)));
-					AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, container.getContainerTile().getPos(), world.provider.getDimension());
+					AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, ((TileEntity) container).getPos(), world.provider.getDimension());
 				}
 		}
 	}
@@ -109,12 +109,6 @@ public class TileEntityEnergyRelay extends TileEntity implements IEnergyTranspor
 	public int getMaxEnergy() {
 
 		return 500;
-	}
-
-	@Override
-	public TileEntity getContainerTile() {
-
-		return this;
 	}
 
 	protected int getRange(){

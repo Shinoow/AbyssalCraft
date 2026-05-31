@@ -11,9 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import com.shinoow.abyssalcraft.common.blocks.BlockTieredSacrificialAltar;
-
-import net.minecraft.tileentity.TileEntity;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 public class TileEntityTieredSacrificialAltar extends TileEntitySacrificialAltar {
 
@@ -21,18 +19,18 @@ public class TileEntityTieredSacrificialAltar extends TileEntitySacrificialAltar
 	public int getMaxEnergy() {
 		int base = 5000;
 
-		return (int) (base * (1.5 + 0.5 * ((BlockTieredSacrificialAltar)getBlockType()).TYPE.getMeta()));
+		return (int) (base * (1.5 + 0.5 * (BlockUtil.getTier(getBlockType()) - 1)));
 	}
 
 	@Override
 	protected int getCooldownStartNumber() {
 		int base = 1200;
-		return base - 200 * (((BlockTieredSacrificialAltar)getBlockType()).TYPE.getMeta() + 1);
+		return base - 200 * BlockUtil.getTier(getBlockType());
 	}
-
+	
 	@Override
-	public TileEntity getContainerTile() {
-
-		return this;
+	protected int getMaxTargets() {
+		// One more target per tier
+		return super.getMaxTargets() + BlockUtil.getTier(getBlockType());
 	}
 }

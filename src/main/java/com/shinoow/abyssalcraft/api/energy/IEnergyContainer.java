@@ -11,8 +11,6 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.energy;
 
-import net.minecraft.tileentity.TileEntity;
-
 /**
  * Interface to use on tile entities that can hold Potential Energy
  *
@@ -71,9 +69,4 @@ public interface IEnergyContainer {
 	default boolean canTransferPE() {
 		return getContainedEnergy() > 0;
 	}
-
-	/**
-	 * Returns the TileEntity this interface is bound to
-	 */
-	TileEntity getContainerTile();
 }

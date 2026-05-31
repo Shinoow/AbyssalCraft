@@ -11,6 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -19,10 +20,8 @@ import com.shinoow.abyssalcraft.api.block.ISingletonInventory;
 import com.shinoow.abyssalcraft.api.energy.IEnergyCollector;
 import com.shinoow.abyssalcraft.api.energy.PEUtils;
 
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.item.EntityArmorStand;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,7 +37,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 	private ItemStack item = ItemStack.EMPTY;
 	private float energy;
 	Random rand = new Random();
-	EntityLivingBase entity;
+	private List<EntityLiving> targets = new ArrayList<>();
 	private int collectionLimit;
 	private int coolDown;
 	private boolean isDirty;
@@ -98,40 +97,47 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 			coolDown--;
 
 		if(!world.isRemote)
+		{
 			PEUtils.transferPEFromContainer(item, this, 20);
 
-		if(entity == null){
-			List<EntityLivingBase> mobs = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(8, 3, 8));
+			if(targets.isEmpty() || targets.size() < getMaxTargets()){
+				List<EntityLiving> mobs = world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(pos).grow(8, 3, 8));
 
-			for(EntityLivingBase mob : mobs)
-				if(!(mob instanceof EntityPlayer) && !(mob instanceof EntityArmorStand))
+				for(EntityLiving mob : mobs)
 					if(mob.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && mob.getCreatureAttribute() != AbyssalCraftAPI.SHADOW)
 						if(mob.isEntityAlive())
-							if(!mob.isChild()){
-								entity = mob;
-								break;
+							if(!mob.isChild() && !targets.contains(mob)){
+								if(targets.size() == getMaxTargets())
+									break;
+								if(targets.size() < getMaxTargets())
+									targets.add(mob);
 							}
-		}
-
-		if(entity != null){
-			if(getContainedEnergy() < getMaxEnergy())
-				entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 20, 0, false, false));
-			if(!entity.isEntityAlive()){
-				if(entity.getLastDamageSource() != null && !isCoolingDown() && getContainedEnergy() < getMaxEnergy()){
-					float num = entity.getMaxHealth();
-					addEnergy(num);
-					collectionLimit += num;
-				}
-				entity = null;
 			}
-		}
-		if(collectionLimit >= getMaxEnergy() / 5){
-			collectionLimit = 0;
-			coolDown = getCooldownStartNumber();
+			if(!targets.isEmpty()){
+				for(int i = 0; i < targets.size(); i++) {
+					EntityLiving entity = targets.get(i);
+					if(getContainedEnergy() < getMaxEnergy())
+						entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 20, 0, false, false));
+					if(!entity.isEntityAlive()){
+						if(entity.getLastDamageSource() != null && !isCoolingDown() && getContainedEnergy() < getMaxEnergy()){
+							float num = entity.getMaxHealth();
+							addEnergy(num);
+							collectionLimit += num;
+							targets.remove(i);
+						}
+					}
+				}
+			}
+			if(collectionLimit >= getMaxEnergy() / 5){
+				isDirty = true;
+				collectionLimit = 0;
+				coolDown = getCooldownStartNumber();
+			}
+
+			if(getContainedEnergy() > getMaxEnergy())
+				energy = getMaxEnergy();
 		}
 
-		if(getContainedEnergy() > getMaxEnergy())
-			energy = getMaxEnergy();
 	}
 
 	@Override
@@ -157,6 +163,10 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 		return 1200;
 	}
 
+	protected int getMaxTargets() {
+		return 1;
+	}
+
 	@Override
 	public float getContainedEnergy() {
 
@@ -172,12 +182,6 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 	@Override
 	public boolean canAcceptPE() {
 		return false;
-	}
-
-	@Override
-	public TileEntity getContainerTile() {
-
-		return this;
 	}
 
 	@Override

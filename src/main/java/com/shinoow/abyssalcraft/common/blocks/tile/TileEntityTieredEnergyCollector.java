@@ -11,9 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyCollector;
-
-import net.minecraft.tileentity.TileEntity;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 public class TileEntityTieredEnergyCollector extends TileEntityEnergyCollector {
 
@@ -21,12 +19,6 @@ public class TileEntityTieredEnergyCollector extends TileEntityEnergyCollector {
 	public int getMaxEnergy() {
 		int base = 1000;
 
-		return (int) (base * (1.5 + 0.5 * ((BlockTieredEnergyCollector)getBlockType()).TYPE.getMeta()));
-	}
-
-	@Override
-	public TileEntity getContainerTile() {
-
-		return this;
+		return (int) (base * (1.5 + 0.5 * (BlockUtil.getTier(getBlockType()) - 1)));
 	}
 }

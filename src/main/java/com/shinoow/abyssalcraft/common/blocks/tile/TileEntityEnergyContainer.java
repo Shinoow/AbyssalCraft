@@ -98,12 +98,6 @@ public class TileEntityEnergyContainer extends TileEntity implements IEnergyCont
 	}
 
 	@Override
-	public TileEntity getContainerTile() {
-
-		return this;
-	}
-
-	@Override
 	public String getName() {
 
 		return "container.abyssalcraft.energycontainer";

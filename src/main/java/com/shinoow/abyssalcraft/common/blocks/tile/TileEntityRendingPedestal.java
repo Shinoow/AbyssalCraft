@@ -162,12 +162,6 @@ public class TileEntityRendingPedestal extends TileEntity implements IEnergyCont
 		return false;
 	}
 
-	@Override
-	public TileEntity getContainerTile() {
-
-		return this;
-	}
-
 	public int getEnergy(int type){
 		switch(type){
 		case 0:

@@ -112,4 +112,11 @@ public class BlockUtil {
 
 		return enumfacing;
 	}
+
+	/**
+	 * Shorthand for getting the tier of a block (if it is tiered)
+	 */
+	public static int getTier(Block block) {
+		return block instanceof ITieredBlock ? ((ITieredBlock) block).getTier() : 0;
+	}
 }

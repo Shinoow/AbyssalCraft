@@ -104,12 +104,6 @@ public abstract class TileEntityIdolBase extends TileEntity implements ITickable
 	}
 
 	@Override
-	public TileEntity getContainerTile() {
-
-		return this;
-	}
-
-	@Override
 	public void setEnergy(float energy) {
 
 		this.energy = energy;

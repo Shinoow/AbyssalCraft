@@ -11,11 +11,10 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.common.blocks.tile;
 
-import com.shinoow.abyssalcraft.common.blocks.BlockTieredEnergyRelay;
+import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 
@@ -26,19 +25,12 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 		super.onDataPacket(net, packet);
 	}
 
-
-	@Override
-	public TileEntity getContainerTile() {
-
-		return this;
-	}
-
 	@Override
 	public int getMaxEnergy() {
 
 		int base = 600;
 
-		return base + 100 * ((BlockTieredEnergyRelay)getBlockType()).TYPE.getMeta();
+		return base + 100 * (BlockUtil.getTier(getBlockType()) - 1);
 	}
 
 	@Override
@@ -46,20 +38,20 @@ public class TileEntityTieredEnergyRelay extends TileEntityEnergyRelay {
 
 		int base = 6;
 
-		return base + 2 * ((BlockTieredEnergyRelay)getBlockType()).TYPE.getMeta();
+		return base + 2 * (BlockUtil.getTier(getBlockType()) - 1);
 	}
 
 	@Override
 	protected float getDrainQuanta(){
 		int base = 20;
 
-		return base + 10 * ((BlockTieredEnergyRelay)getBlockType()).TYPE.getMeta();
+		return base + 10 * (BlockUtil.getTier(getBlockType()) - 1);
 	}
 
 	@Override
 	protected float getTransferQuanta(){
 		int base = 30;
 
-		return base + 10 * ((BlockTieredEnergyRelay)getBlockType()).TYPE.getMeta();
+		return base + 10 * (BlockUtil.getTier(getBlockType()) - 1);
 	}
 }

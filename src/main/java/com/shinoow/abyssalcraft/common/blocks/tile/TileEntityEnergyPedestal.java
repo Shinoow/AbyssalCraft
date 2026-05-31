@@ -103,12 +103,6 @@ public class TileEntityEnergyPedestal extends TileEntity implements IEnergyColle
 	}
 
 	@Override
-	public TileEntity getContainerTile() {
-
-		return this;
-	}
-
-	@Override
 	public void setEnergy(float energy) {
 
 		this.energy = energy;
