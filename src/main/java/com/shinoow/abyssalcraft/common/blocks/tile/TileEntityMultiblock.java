@@ -72,11 +72,15 @@ public class TileEntityMultiblock extends TileEntity implements ITickable, IStru
 	public void update() {
 		++ticksExisted;
 
-		if(ticksExisted % 100 == 0 && place != null)
-			place.validate(world, pos);
+		if(place != null) {
+			if(ticksExisted % 100 == 0)
+				place.validate(world, pos);
 
-		if(place != null && ticksExisted % place.getAmbientEffectCooldown() == 0)
-			place.triggermAmbientEffect(getWorld(), getPos());
+			// If cooldown is 0, assume no ambient effect (instead of dividing by zero)
+			if(place.getAmbientEffectCooldown() > 0)
+				if(ticksExisted % place.getAmbientEffectCooldown() == 0)
+					place.triggermAmbientEffect(getWorld(), getPos());
+		}
 	}
 
 	@Override

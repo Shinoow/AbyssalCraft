@@ -96,8 +96,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 		if(isCoolingDown())
 			coolDown--;
 
-		if(!world.isRemote)
-		{
+		if(!world.isRemote){
 			PEUtils.transferPEFromContainer(item, this, 20);
 
 			if(targets.isEmpty() || targets.size() < getMaxTargets()){
@@ -133,11 +132,7 @@ public class TileEntitySacrificialAltar extends TileEntity implements IEnergyCol
 				collectionLimit = 0;
 				coolDown = getCooldownStartNumber();
 			}
-
-			if(getContainedEnergy() > getMaxEnergy())
-				energy = getMaxEnergy();
 		}
-
 	}
 
 	@Override
