@@ -17,6 +17,7 @@ import java.util.UUID;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -26,7 +27,6 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
@@ -36,7 +36,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public class EntityGatekeeperMinion extends EntityMob implements IOmotholEntity, IEliteEntity {
+public class EntityGatekeeperMinion extends EntityMobBase implements IOmotholEntity, IEliteEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 5.0D, 0);
@@ -78,9 +78,6 @@ public class EntityGatekeeperMinion extends EntityMob implements IOmotholEntity,
 		swingArm(EnumHand.MAIN_HAND);
 		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
-
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 3 * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}

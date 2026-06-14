@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.api.ritual.EnumRitualParticle;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
-import com.shinoow.abyssalcraft.common.entity.EntityPortal;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityPortal;
 import com.shinoow.abyssalcraft.common.items.ItemGatewayKey;
 
 import net.minecraft.entity.player.EntityPlayer;

@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.spells;
 
 import com.shinoow.abyssalcraft.api.spell.Spell;
 import com.shinoow.abyssalcraft.api.spell.SpellEnum.ScrollType;
-import com.shinoow.abyssalcraft.common.entity.EntityCompassTentacle;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityCompassTentacle;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 

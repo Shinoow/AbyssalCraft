@@ -16,6 +16,7 @@ import java.util.UUID;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -26,7 +27,6 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,7 +40,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class EntityGhoulBase extends EntityMob {
+public abstract class EntityGhoulBase extends EntityMobBase {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static AttributeModifier ghoulHDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 3.0D, 0);
@@ -83,9 +83,6 @@ public abstract class EntityGhoulBase extends EntityMob {
 
 		if(flag)
 			onAttacking(par1Entity);
-
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), getBonusDamage() * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}

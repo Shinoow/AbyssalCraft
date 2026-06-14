@@ -20,7 +20,7 @@ import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
-import com.shinoow.abyssalcraft.common.entity.EntityPortal;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityPortal;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 import com.shinoow.abyssalcraft.lib.util.TranslationUtil;

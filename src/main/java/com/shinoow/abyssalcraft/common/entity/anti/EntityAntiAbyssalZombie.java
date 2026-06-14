@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.EntityAbyssalZombie;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
@@ -30,7 +31,6 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -47,7 +47,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
-public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
+public class EntityAntiAbyssalZombie extends EntityMobBase implements IAntiEntity {
 
 	private static final DataParameter<Boolean> CHILD = EntityDataManager.createKey(EntityAntiAbyssalZombie.class, DataSerializers.BOOLEAN);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
@@ -89,15 +89,6 @@ public class EntityAntiAbyssalZombie extends EntityMob implements IAntiEntity {
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
 		}
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
-
-		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

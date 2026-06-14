@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.pathfinding.PatchedPathNavigateGround;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -29,6 +30,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -47,6 +49,12 @@ public class EntityAntiCow extends EntityAnimal implements IAntiEntity {
 		tasks.addTask(5, new EntityAIWander(this, 1.0D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(7, new EntityAILookIdle(this));
+	}
+
+	@Override
+	protected PathNavigate createNavigator(World worldIn)
+	{
+		return new PatchedPathNavigateGround(this, worldIn);
 	}
 
 	@Override

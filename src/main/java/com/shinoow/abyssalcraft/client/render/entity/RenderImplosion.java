@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.common.entity.EntityImplosion;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityImplosion;
 import com.shinoow.abyssalcraft.lib.ACClientVars;
 
 import net.minecraft.client.renderer.*;

@@ -19,6 +19,7 @@ import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.entity.base.EntityClimbingMobBase;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -33,18 +34,12 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -56,9 +51,8 @@ import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntitySacthoth extends EntityMob implements IOmotholEntity {
+public class EntitySacthoth extends EntityClimbingMobBase implements IOmotholEntity {
 
-	private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(EntitySacthoth.class, DataSerializers.BYTE);
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 8D, 0);
 	public int deathTicks, shadowFlameShootTimer;
@@ -79,37 +73,15 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	}
 
 	@Override
-	protected PathNavigate createNavigator(World worldIn)
-	{
-		return new PathNavigateClimber(this, worldIn);
-	}
-
-	@Override
 	public boolean canBreatheUnderwater()
 	{
 		return true;
 	}
 
 	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-		dataManager.register(CLIMBING, new Byte((byte)0));
-	}
-
-	@Override
 	public String getName()
 	{
 		return TextFormatting.DARK_RED + super.getName();
-	}
-
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-
-		if (!world.isRemote)
-			setBesideClimbableBlock(collidedHorizontally);
 	}
 
 	@Override
@@ -174,12 +146,6 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	}
 
 	@Override
-	public boolean isOnLadder()
-	{
-		return isBesideClimbableBlock();
-	}
-
-	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
 
 		boolean flag = super.attackEntityAsMob(par1Entity);
@@ -187,9 +153,6 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 		if(flag)
 			if(par1Entity instanceof EntityLivingBase)
 				((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 60));
-
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 4.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}
@@ -199,9 +162,6 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	{
 		return rand.nextFloat() - rand.nextFloat() * 0.2F + 0.6F;
 	}
-
-	@Override
-	public void fall(float distance, float damageMultiplier) {}
 
 	@Override
 	protected SoundEvent getAmbientSound()
@@ -243,31 +203,6 @@ public class EntitySacthoth extends EntityMob implements IOmotholEntity {
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return AbyssalCraftAPI.SHADOW;
-	}
-
-	/**
-	 * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns false. The WatchableObject is updated using
-	 * setBesideClimableBlock.
-	 */
-	public boolean isBesideClimbableBlock()
-	{
-		return (dataManager.get(CLIMBING) & 1) != 0;
-	}
-
-	/**
-	 * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is
-	 * false.
-	 */
-	public void setBesideClimbableBlock(boolean par1)
-	{
-		byte b0 = dataManager.get(CLIMBING);
-
-		if (par1)
-			b0 = (byte)(b0 | 1);
-		else
-			b0 &= -2;
-
-		dataManager.set(CLIMBING, b0);
 	}
 
 	@Override

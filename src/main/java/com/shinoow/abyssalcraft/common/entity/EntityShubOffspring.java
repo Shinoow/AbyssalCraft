@@ -13,14 +13,13 @@ package com.shinoow.abyssalcraft.common.entity;
 
 import com.shinoow.abyssalcraft.api.dimension.IAbyssalWorldProvider;
 import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
@@ -29,7 +28,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityShubOffspring extends EntityMob implements IEliteEntity {
+public class EntityShubOffspring extends EntityMobBase implements IEliteEntity {
 
 	public EntityShubOffspring(World worldIn) {
 		super(worldIn);
@@ -50,15 +49,6 @@ public class EntityShubOffspring extends EntityMob implements IEliteEntity {
 
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 80.0D : 40.0D);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ACConfig.hardcoreMode ? 8.0D : 4.0D);
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
-
-		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

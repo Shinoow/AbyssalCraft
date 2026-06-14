@@ -19,6 +19,10 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualPedestal;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityBlackHole;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityGatekeeperEssence;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityImplosion;
 import com.shinoow.abyssalcraft.common.handlers.AbyssalCraftEventHooks;
 import com.shinoow.abyssalcraft.lib.*;
 import com.shinoow.abyssalcraft.lib.util.SpecialTextUtil;
@@ -34,7 +38,6 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityWitherSkull;
@@ -58,7 +61,7 @@ import net.minecraft.world.BossInfo.Color;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotholEntity {
+public class EntityJzahar extends EntityMobBase implements IRangedAttackMob, IOmotholEntity {
 
 	private static final UUID attackDamageBoostUUID = UUID.fromString("648D7064-6A60-4F59-8ABE-C2C23A6DD7A9");
 	private static final AttributeModifier attackDamageBoost = new AttributeModifier(attackDamageBoostUUID, "Halloween Attack Damage Boost", 10.0D, 0);
@@ -266,9 +269,6 @@ public class EntityJzahar extends EntityMob implements IRangedAttackMob, IOmotho
 	{
 		swingArm(EnumHand.MAIN_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
-
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 4.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}

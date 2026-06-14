@@ -15,14 +15,16 @@ import java.util.Calendar;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 
-import net.minecraft.entity.*;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
@@ -35,7 +37,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public class EntityShadowCreature extends EntityMob implements IOmotholEntity {
+public class EntityShadowCreature extends EntityMobBase implements IOmotholEntity {
 
 	public EntityShadowCreature(World par1World) {
 		super(par1World);
@@ -69,15 +71,6 @@ public class EntityShadowCreature extends EntityMob implements IOmotholEntity {
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D);
 		} else getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity par1Entity) {
-
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
-
-		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

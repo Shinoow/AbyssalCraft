@@ -17,6 +17,7 @@ import java.util.UUID;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -25,7 +26,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +46,7 @@ import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityAntiZombie extends EntityMob implements IAntiEntity {
+public class EntityAntiZombie extends EntityMobBase implements IAntiEntity {
 
 	private static final DataParameter<Boolean> CHILD = EntityDataManager.createKey(EntityAntiZombie.class, DataSerializers.BOOLEAN);
 	protected static final IAttribute spawnReinforcementsAttribute = new RangedAttribute((IAttribute)null, "zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D).setDescription("Spawn Reinforcements Chance");
@@ -159,9 +159,6 @@ public class EntityAntiZombie extends EntityMob implements IAntiEntity {
 			if (getHeldItemMainhand().isEmpty() && isBurning() && rand.nextFloat() < i * 0.3F)
 				par1Entity.setFire(2 * i);
 		}
-
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}

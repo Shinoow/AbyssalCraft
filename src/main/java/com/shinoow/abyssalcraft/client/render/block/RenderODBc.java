@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.client.render.block;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityODBcPrimed;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;

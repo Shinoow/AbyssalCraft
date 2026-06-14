@@ -27,7 +27,7 @@ public class TileEntityTieredSacrificialAltar extends TileEntitySacrificialAltar
 		int base = 1200;
 		return base - 200 * BlockUtil.getTier(getBlockType());
 	}
-	
+
 	@Override
 	protected int getMaxTargets() {
 		// One more target per tier

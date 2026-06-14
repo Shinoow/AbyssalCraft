@@ -15,6 +15,7 @@ import java.util.Random;
 
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.entity.base.EntityClimbingMobBase;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -23,18 +24,12 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -45,9 +40,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class EntityAntiSpider extends EntityMob implements IAntiEntity {
-
-	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityAntiSpider.class, DataSerializers.BYTE);
+public class EntityAntiSpider extends EntityClimbingMobBase implements IAntiEntity {
 
 	public EntityAntiSpider(World par1World)
 	{
@@ -63,6 +56,7 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 		targetTasks.addTask(2, new AIAntiSpiderTarget(this, EntitySpider.class));
 		targetTasks.addTask(3, new AIAntiSpiderTarget(this, EntityPlayer.class));
 		targetTasks.addTask(4, new AIAntiSpiderTarget(this, EntityIronGolem.class));
+		takeFallDamage = true;
 	}
 
 	@Override
@@ -72,43 +66,12 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	protected PathNavigate createNavigator(World worldIn)
-	{
-		return new PathNavigateClimber(this, worldIn);
-	}
-
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-		dataManager.register(CLIMBING, new Byte((byte)0));
-	}
-
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-
-		if (!world.isRemote)
-			setBesideClimbableBlock(collidedHorizontally);
-	}
-
-	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ACConfig.hardcoreMode ? 48.0D : 24.0D);
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
-
-		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override
@@ -151,12 +114,6 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 	}
 
 	@Override
-	public boolean isOnLadder()
-	{
-		return isBesideClimbableBlock();
-	}
-
-	@Override
 	public void setInWeb() {}
 
 	@Override
@@ -187,31 +144,6 @@ public class EntityAntiSpider extends EntityMob implements IAntiEntity {
 			setDead();
 		}
 		else par1Entity.applyEntityCollision(this);
-	}
-
-	/**
-	 * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns false. The WatchableObject is updated using
-	 * setBesideClimableBlock.
-	 */
-	public boolean isBesideClimbableBlock()
-	{
-		return (dataManager.get(CLIMBING) & 1) != 0;
-	}
-
-	/**
-	 * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is
-	 * false.
-	 */
-	public void setBesideClimbableBlock(boolean par1)
-	{
-		byte b0 = dataManager.get(CLIMBING);
-
-		if (par1)
-			b0 = (byte)(b0 | 1);
-		else
-			b0 &= -2;
-
-		dataManager.set(CLIMBING, b0);
 	}
 
 	@Override

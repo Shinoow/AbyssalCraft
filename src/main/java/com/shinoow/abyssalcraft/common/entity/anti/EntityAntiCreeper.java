@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAntiCreeperSwell;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -23,7 +24,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -39,7 +39,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityAntiCreeper extends EntityMob implements IAntiEntity {
+public class EntityAntiCreeper extends EntityMobBase implements IAntiEntity {
 
 	private static final DataParameter<Integer> STATE = EntityDataManager.<Integer>createKey(EntityAntiCreeper.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> POWERED = EntityDataManager.<Boolean>createKey(EntityAntiCreeper.class, DataSerializers.BOOLEAN);

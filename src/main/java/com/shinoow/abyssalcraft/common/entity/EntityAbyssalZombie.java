@@ -18,6 +18,7 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.ICoraliumEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.common.entity.ghoul.EntityDepthsGhoul;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.*;
@@ -28,7 +29,6 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityVillager;
@@ -49,7 +49,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
 
-public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
+public class EntityAbyssalZombie extends EntityMobBase implements ICoraliumEntity {
 
 	private static final DataParameter<Boolean> CHILD = EntityDataManager.createKey(EntityAbyssalZombie.class, DataSerializers.BOOLEAN);
 	private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
@@ -164,9 +164,6 @@ public class EntityAbyssalZombie extends EntityMob implements ICoraliumEntity {
 			if(getHeldItemMainhand().isEmpty() && isBurning() && rand.nextFloat() < world.getDifficulty().getId() * 0.3F)
 				par1Entity.setFire(2 * world.getDifficulty().getId());
 		}
-
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}

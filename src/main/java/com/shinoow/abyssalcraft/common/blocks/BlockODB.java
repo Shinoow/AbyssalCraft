@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.common.blocks;
 
 import java.util.Random;
 
-import com.shinoow.abyssalcraft.common.entity.EntityODBPrimed;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityODBPrimed;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.util.SoundUtil;

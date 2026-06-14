@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.client.render.entity;
 
 import com.shinoow.abyssalcraft.client.model.entity.ModelDreadTentacles;
-import com.shinoow.abyssalcraft.common.entity.EntityCompassTentacle;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityCompassTentacle;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;

@@ -147,7 +147,7 @@ public class RitualRegistry {
 
 	/**
 	 * Checks if a book type is within the valid range
-	 * 
+	 *
 	 * @since 2.0
 	 */
 	private boolean validBookType(int bookType) {
@@ -168,7 +168,7 @@ public class RitualRegistry {
 			return;
 		}
 
-		if(rituals.stream().map(x -> x.getID()).anyMatch(x -> x.equals(ritual.getID()))) {
+		if(rituals.stream().map(NecronomiconRitual::getID).anyMatch(x -> x.equals(ritual.getID()))) {
 			logger.log(Level.ERROR, "Necronomicon Ritual already registered: {}", ritual.getID());
 			return;
 		}

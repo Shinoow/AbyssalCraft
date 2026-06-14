@@ -16,7 +16,7 @@ import java.util.List;
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
 import com.shinoow.abyssalcraft.api.dimension.DimensionDataRegistry;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
-import com.shinoow.abyssalcraft.common.entity.EntitySinglePortal;
+import com.shinoow.abyssalcraft.common.entity.misc.EntitySinglePortal;
 import com.shinoow.abyssalcraft.lib.ACTabs;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 

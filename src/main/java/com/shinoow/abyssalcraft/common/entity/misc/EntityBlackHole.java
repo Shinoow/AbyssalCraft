@@ -9,11 +9,12 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.entity;
+package com.shinoow.abyssalcraft.common.entity.misc;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualAltar;
 import com.shinoow.abyssalcraft.common.blocks.BlockRitualPedestal;
+import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLib;

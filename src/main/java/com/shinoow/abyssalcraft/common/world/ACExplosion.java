@@ -15,8 +15,8 @@ import java.util.*;
 
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.EntityODBPrimed;
-import com.shinoow.abyssalcraft.common.entity.EntityODBcPrimed;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityODBPrimed;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityODBcPrimed;
 import com.shinoow.abyssalcraft.lib.util.ScheduledProcess;
 import com.shinoow.abyssalcraft.lib.util.Scheduler;
 import com.shinoow.abyssalcraft.lib.util.SoundUtil;

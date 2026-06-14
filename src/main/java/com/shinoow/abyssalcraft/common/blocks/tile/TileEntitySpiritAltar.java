@@ -19,7 +19,7 @@ import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.transfer.ItemTransferConfiguration;
 import com.shinoow.abyssalcraft.api.transfer.caps.IItemTransferCapability;
 import com.shinoow.abyssalcraft.api.transfer.caps.ItemTransferCapability;
-import com.shinoow.abyssalcraft.common.entity.EntitySpiritItem;
+import com.shinoow.abyssalcraft.common.entity.misc.EntitySpiritItem;
 import com.shinoow.abyssalcraft.common.network.PacketDispatcher;
 import com.shinoow.abyssalcraft.common.network.client.DisplayRoutesMessage;
 import com.shinoow.abyssalcraft.lib.util.SpiritItemUtil;

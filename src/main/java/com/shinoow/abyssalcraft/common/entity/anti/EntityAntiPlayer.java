@@ -13,6 +13,7 @@ package com.shinoow.abyssalcraft.common.entity.anti;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -21,7 +22,6 @@ import com.shinoow.abyssalcraft.lib.ACSounds;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +33,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
+public class EntityAntiPlayer extends EntityMobBase implements IAntiEntity {
 
 	public EntityAntiPlayer(World par1World) {
 		super(par1World);
@@ -59,15 +59,6 @@ public class EntityAntiPlayer extends EntityMob implements IAntiEntity {
 			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
 		} else
 			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
-
-		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

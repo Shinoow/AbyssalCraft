@@ -14,12 +14,12 @@ package com.shinoow.abyssalcraft.common.entity;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
@@ -29,7 +29,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class EntityRemnantTrader extends EntityMob implements IOmotholEntity {
+public class EntityRemnantTrader extends EntityMobBase implements IOmotholEntity {
 
 	public int timer;
 

@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.common.items.ItemCoin;
 import com.shinoow.abyssalcraft.common.items.ItemNecronomicon;
 import com.shinoow.abyssalcraft.common.items.ItemStaffOfRending;
@@ -31,7 +32,6 @@ import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.*;
 import net.minecraft.item.*;
@@ -53,7 +53,7 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntity, IShearable {
+public class EntityRemnant extends EntityMobBase implements IMerchant, IOmotholEntity, IShearable {
 
 	private static final DataParameter<Integer> PROFESSION = EntityDataManager.<Integer>createKey(EntityRemnant.class, DataSerializers.VARINT);
 	private EntityPlayer tradingPlayer;
@@ -107,9 +107,6 @@ public class EntityRemnant extends EntityMob implements IMerchant, IOmotholEntit
 		swingArm(EnumHand.MAIN_HAND);
 		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
-
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 3 * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}

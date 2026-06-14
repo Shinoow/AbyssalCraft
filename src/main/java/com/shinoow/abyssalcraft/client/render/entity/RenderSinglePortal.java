@@ -14,7 +14,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 import org.lwjgl.opengl.GL11;
 
 import com.shinoow.abyssalcraft.api.dimension.DimensionData;
-import com.shinoow.abyssalcraft.common.entity.EntitySinglePortal;
+import com.shinoow.abyssalcraft.common.entity.misc.EntitySinglePortal;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

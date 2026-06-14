@@ -15,6 +15,7 @@ import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.entity.IAntiEntity;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIAttackRangedBowAnti;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.common.util.ExplosionUtil;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
@@ -23,7 +24,6 @@ import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -47,7 +47,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityAntiSkeleton extends EntityMob implements IRangedAttackMob, IAntiEntity {
+public class EntityAntiSkeleton extends EntityMobBase implements IRangedAttackMob, IAntiEntity {
 
 	private static final DataParameter<Boolean> field_184728_b = EntityDataManager.<Boolean>createKey(EntityAntiSkeleton.class, DataSerializers.BOOLEAN);
 	private EntityAIAttackRangedBowAnti aiArrowAttack = new EntityAIAttackRangedBowAnti(this, 1.0D, 20, 15.0F);

@@ -43,6 +43,7 @@ import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.anti.*;
 import com.shinoow.abyssalcraft.common.entity.demon.*;
 import com.shinoow.abyssalcraft.common.entity.ghoul.*;
+import com.shinoow.abyssalcraft.common.entity.misc.*;
 import com.shinoow.abyssalcraft.common.entity.projectile.*;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;

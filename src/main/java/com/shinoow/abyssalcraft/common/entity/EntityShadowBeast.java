@@ -18,6 +18,7 @@ import com.google.common.base.Predicates;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.IEliteEntity;
 import com.shinoow.abyssalcraft.api.entity.IOmotholEntity;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACLoot;
 import com.shinoow.abyssalcraft.lib.ACSounds;
@@ -25,7 +26,6 @@ import com.shinoow.abyssalcraft.lib.util.ParticleUtil;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
@@ -41,7 +41,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityShadowBeast extends EntityMob implements IOmotholEntity, IEliteEntity {
+public class EntityShadowBeast extends EntityMobBase implements IOmotholEntity, IEliteEntity {
 
 	private int shadowFlameShootTimer;
 
@@ -83,9 +83,6 @@ public class EntityShadowBeast extends EntityMob implements IOmotholEntity, IEli
 		swingArm(EnumHand.MAIN_HAND);
 		swingArm(EnumHand.OFF_HAND);
 		boolean flag = super.attackEntityAsMob(par1Entity);
-
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 3 * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
 
 		return flag;
 	}

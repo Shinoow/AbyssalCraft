@@ -13,7 +13,7 @@ package com.shinoow.abyssalcraft.client.render.entity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.shinoow.abyssalcraft.common.entity.EntityBlackHole;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityBlackHole;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

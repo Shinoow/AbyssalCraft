@@ -9,11 +9,12 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.entity;
+package com.shinoow.abyssalcraft.common.entity.misc;
 
 import java.util.List;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.common.entity.EntityJzahar;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 import com.shinoow.abyssalcraft.lib.ACSounds;
 

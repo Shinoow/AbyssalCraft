@@ -9,7 +9,7 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.common.entity;
+package com.shinoow.abyssalcraft.common.entity.misc;
 
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.ACConfig;

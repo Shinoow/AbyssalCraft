@@ -12,7 +12,7 @@
 package com.shinoow.abyssalcraft.common.items;
 
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
-import com.shinoow.abyssalcraft.common.entity.EntityPSDLTracker;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityPSDLTracker;
 import com.shinoow.abyssalcraft.lib.ACLib;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 import com.shinoow.abyssalcraft.lib.util.SoundUtil;

@@ -16,7 +16,7 @@ import java.util.Random;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.common.blocks.BlockPortalAnchor;
 import com.shinoow.abyssalcraft.common.blocks.tile.TileEntityPortalAnchor;
-import com.shinoow.abyssalcraft.common.entity.EntityPortal;
+import com.shinoow.abyssalcraft.common.entity.misc.EntityPortal;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;

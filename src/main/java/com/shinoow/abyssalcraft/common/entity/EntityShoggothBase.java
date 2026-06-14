@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.common.blocks.BlockShoggothOoze;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothAttackMelee;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIShoggothBuildMonolith;
 import com.shinoow.abyssalcraft.common.entity.ai.EntityAIWorship;
+import com.shinoow.abyssalcraft.common.entity.base.EntityClimbingMobBase;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityDemonAnimal;
 import com.shinoow.abyssalcraft.common.entity.ghoul.EntityGhoulBase;
 import com.shinoow.abyssalcraft.common.entity.projectile.EntityAcidProjectile;
@@ -36,7 +37,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.EntityZombieVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
@@ -46,8 +49,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -58,9 +59,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class EntityShoggothBase extends EntityMob implements IShoggothEntity, IEntityMultiPart, IEliteEntity {
+public abstract class EntityShoggothBase extends EntityClimbingMobBase implements IShoggothEntity, IEntityMultiPart, IEliteEntity {
 
-	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityShoggothBase.class, DataSerializers.BYTE);
 	private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityShoggothBase.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> FOOD = EntityDataManager.createKey(EntityShoggothBase.class, DataSerializers.VARINT);
 
@@ -113,32 +113,16 @@ public abstract class EntityShoggothBase extends EntityMob implements IShoggothE
 	}
 
 	@Override
-	protected PathNavigate createNavigator(World worldIn)
-	{
-		return new PathNavigateClimber(this, worldIn);
-	}
-
-	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
 		dataManager.register(TYPE, 0);
 		dataManager.register(FOOD, 0);
-		dataManager.register(CLIMBING, (byte)0);
 	}
 
 	@Override
 	public boolean canBreatheUnderwater() {
 		return true;
-	}
-
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-
-		if (!world.isRemote)
-			setBesideClimbableBlock(collidedHorizontally);
 	}
 
 	public int getShoggothType() {
@@ -173,12 +157,6 @@ public abstract class EntityShoggothBase extends EntityMob implements IShoggothE
 		for(float sizeNum = size; sizeNum > 0; sizeNum-=0.25)
 			food++;
 		return food;
-	}
-
-	@Override
-	public boolean isOnLadder()
-	{
-		return isBesideClimbableBlock();
 	}
 
 	//TODO move this to an actual AI class, or data object?
@@ -270,31 +248,6 @@ public abstract class EntityShoggothBase extends EntityMob implements IShoggothE
 			}
 	}
 
-	/**
-	 * Returns true if the WatchableObject (Byte) is 0x01 otherwise returns false. The WatchableObject is updated using
-	 * setBesideClimableBlock.
-	 */
-	public boolean isBesideClimbableBlock()
-	{
-		return (dataManager.get(CLIMBING) & 1) != 0;
-	}
-
-	/**
-	 * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is
-	 * false.
-	 */
-	public void setBesideClimbableBlock(boolean par1)
-	{
-		byte b0 = dataManager.get(CLIMBING);
-
-		if (par1)
-			b0 = (byte)(b0 | 1);
-		else
-			b0 &= -2;
-
-		dataManager.set(CLIMBING, b0);
-	}
-
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
@@ -343,9 +296,6 @@ public abstract class EntityShoggothBase extends EntityMob implements IShoggothE
 
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
-
-	@Override
-	public void fall(float par1, float par2) {}
 
 	@Override
 	protected SoundEvent getAmbientSound()

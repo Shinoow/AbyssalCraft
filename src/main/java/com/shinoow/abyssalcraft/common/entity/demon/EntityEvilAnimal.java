@@ -15,12 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shinoow.abyssalcraft.common.entity.EntityShoggothBase;
+import com.shinoow.abyssalcraft.common.entity.base.EntityMobBase;
 import com.shinoow.abyssalcraft.lib.ACConfig;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -31,7 +30,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
-public abstract class EntityEvilAnimal extends EntityMob implements IShearable {
+public abstract class EntityEvilAnimal extends EntityMobBase implements IShearable {
 
 	public EntityEvilAnimal(World worldIn) {
 		super(worldIn);
@@ -40,15 +39,6 @@ public abstract class EntityEvilAnimal extends EntityMob implements IShearable {
 		tasks.addTask(2, new EntityAIAttackMelee(this, 0.35D, true));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
-		if(ACConfig.hardcoreMode && par1Entity instanceof EntityPlayer)
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this).setDamageBypassesArmor().setDamageIsAbsolute(), 1.5F * (float)(ACConfig.damageAmpl > 1.0D ? ACConfig.damageAmpl : 1));
-
-		return super.attackEntityAsMob(par1Entity);
 	}
 
 	@Override

@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * AbyssalCraft
+ * Copyright (c) 2012 - 2026 Shinoow.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl-3.0.txt
+ *
+ * Contributors:
+ *     Shinoow -  implementation
+ ******************************************************************************/
 package com.shinoow.abyssalcraft.api;
 
 /**
@@ -14,7 +25,7 @@ public class CommonReferences {
 	public static final float DL_NECRONOMICON_MAX_ENERGY = 20000F;
 	public static final float OMT_NECRONOMICON_MAX_ENERGY = 40000F;
 	public static final float ABYSSALNOMICON_MAX_ENERGY = 100000F;
-	
+
 	public static final int BOOKTYPE_DEFAULT = 0;
 	public static final int BOOKTYPE_AW = 1;
 	public static final int BOOKTYPE_DL = 2;
