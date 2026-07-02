@@ -15,8 +15,8 @@ import com.shinoow.abyssalcraft.client.model.block.ModelJzaharSpawner;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
@@ -29,13 +29,15 @@ public class TileEntityJzaharSpawnerRenderer extends TileEntitySpecialRenderer {
 	public void render(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 
 		GlStateManager.pushMatrix();
-		GlStateManager.translate((float) x + 0.675F, (float) y + 0.9F, (float) z + 0.5F);
+		GlStateManager.translate((float) x + 0.5F, (float) y + 0.35F, (float) z + 1.456F);
 		GlStateManager.pushMatrix();
 		GlStateManager.rotate(180F, 0.0F, 0.0F, 1.0F);
 		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 
+		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
+
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		model.render((Entity)null, 0.0F, 0.0F, 8.0F, 0.0F, 0.0F, 0.0625F);
+		model.render(null, 0.0F, 0.0F, 8.0F, rm.playerViewY, -rm.playerViewX, 0.0625F);
 
 		GlStateManager.popMatrix();
 		GlStateManager.popMatrix();

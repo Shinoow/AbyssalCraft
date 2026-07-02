@@ -30,7 +30,7 @@ public class RenderJzahar extends RenderLiving<EntityJzahar> {
 
 	public RenderJzahar(RenderManager manager)
 	{
-		super(manager, new ModelJzahar(true), 1.0F);
+		super(manager, new ModelJzahar(), 1.0F);
 		addLayer(new LayerJzaharDeath());
 		addLayer(new LayerEyes(this, new ResourceLocation("abyssalcraft", "textures/model/boss/j'zahar_eyes.png")));
 	}
