@@ -72,7 +72,7 @@ public class ModelJzahar extends ModelBase {
 	public ModelRenderer foot7;
 	public ModelRenderer tentacle82;
 	public ModelRenderer tentacle83;
-	public ModelRenderer foot6_1;
+	public ModelRenderer foot8;
 	public ModelRenderer staff2;
 	public ModelRenderer staff3;
 	public ModelRenderer staff4;
@@ -96,9 +96,9 @@ public class ModelJzahar extends ModelBase {
 		fT33 = new ModelRenderer(this, 116, 4);
 		fT33.setRotationPoint(0.0F, 2.0F, 0.0F);
 		fT33.addBox(-1.0F, 0.0F, -1.0F, 2, 2, 2, 0.0F);
-		foot6_1 = new ModelRenderer(this, 0, 42);
-		foot6_1.setRotationPoint(0.01F, 8.0F, -0.01F);
-		foot6_1.addBox(-1.5F, 0.0F, -1.5F, 3, 3, 3, 0.0F);
+		foot8 = new ModelRenderer(this, 0, 42);
+		foot8.setRotationPoint(0.01F, 8.0F, -0.01F);
+		foot8.addBox(-1.5F, 0.0F, -1.5F, 3, 3, 3, 0.0F);
 		fT12 = new ModelRenderer(this, 116, 2);
 		fT12.setRotationPoint(0.0F, 2.0F, 0.0F);
 		fT12.addBox(-1.0F, 0.0F, -1.0F, 2, 2, 2, 0.0F);
@@ -281,7 +281,7 @@ public class ModelJzahar extends ModelBase {
 		body.addChild(tentacle7);
 		body.addChild(robeRightOuter);
 		fT32.addChild(fT33);
-		tentacle83.addChild(foot6_1);
+		tentacle83.addChild(foot8);
 		fT1.addChild(fT12);
 		fT12.addChild(fT13);
 		staff1.addChild(staff6);
@@ -354,6 +354,35 @@ public class ModelJzahar extends ModelBase {
 	private boolean passedMax = false;
 	private float reverseNum = 0;
 
+	private void animateTentacle(Entity entityIn, ModelRenderer part1, ModelRenderer part2, ModelRenderer part3, ModelRenderer part4, boolean reverse) {
+
+		float swing = MathHelper.sin(entityIn.ticksExisted * 0.12f) * 40.5F * (float)Math.PI / 180.0F;
+		float swingX = Math.max(swing, 0.08726646259971647F);
+		float swingX0 = Math.max(swing, -0.08726646259971647F);
+		float swingX1 = swingX0 < 0.08F ? 0.08f : swing;
+
+		if(swing >= 0.69301057f && !passedMax) {
+			passedMax = true;
+			reverseNum = swing;
+		}
+		if(swingX0 < 0.0F)
+			passedMax = false;
+		if(passedMax && reverseNum > -0.11F)
+			reverseNum-= 0.02f;
+
+		if(reverse) {
+			part1.rotateAngleX = swingX;
+			part2.rotateAngleX = passedMax ? -reverseNum : -swingX1;
+			part3.rotateAngleX = passedMax ? -reverseNum : -swingX1;
+			part4.rotateAngleX = passedMax ? -reverseNum : -swingX1;
+		} else {
+			part1.rotateAngleX = -swingX;
+			part2.rotateAngleX = passedMax ? reverseNum : swingX1;
+			part3.rotateAngleX = passedMax ? reverseNum : swingX1;
+			part4.rotateAngleX = passedMax ? reverseNum : swingX1;
+		}
+	}
+
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
 	{
@@ -383,60 +412,14 @@ public class ModelJzahar extends ModelBase {
 		for(int i = 0; i < 4; i++)
 			staff1.rotationPointY = 6F + MathHelper.cos((i * 2 + ageInTicks) * 0.25F);
 
-		float swing1 = MathHelper.sin(entityIn.ticksExisted * 0.12f) * 40.5F * (float)Math.PI / 180.0F;
-
-		float swingX = Math.max(swing1, 0.08726646259971647F);
-		float swingX0 = Math.max(swing1, -0.08726646259971647F);
-		if(swing1 >= 0.69301057f && !passedMax) {
-			passedMax = true;
-			reverseNum = swing1;
-		}
-		if(swingX0 < 0.0F)
-			passedMax = false;
-		if(passedMax && reverseNum > -0.11F)
-			reverseNum-= 0.02f;
-
-		float swingX1 = swingX0 < 0.0F ? 0.0f : swing1;
-
-		tentacle1.rotateAngleX = -swingX;
-		tentacle12.rotateAngleX = passedMax ? reverseNum : swingX1;
-		tentacle13.rotateAngleX = passedMax ? reverseNum : swingX1;
-		foot1.rotateAngleX = passedMax ? reverseNum : swingX1;
-
-		tentacle2.rotateAngleX = -swingX;
-		tentacle22.rotateAngleX = passedMax ? reverseNum : swingX1;
-		tentacle23.rotateAngleX = passedMax ? reverseNum : swingX1;
-		foot2.rotateAngleX = passedMax ? reverseNum : swingX1;
-
-		tentacle3.rotateAngleX = -swingX;
-		tentacle32.rotateAngleX = passedMax ? reverseNum : swingX1;
-		tentacle33.rotateAngleX = passedMax ? reverseNum : swingX1;
-		foot3.rotateAngleX = passedMax ? reverseNum : swingX1;
-
-		tentacle4.rotateAngleX = -swingX;
-		tentacle42.rotateAngleX = passedMax ? reverseNum : swingX1;
-		tentacle43.rotateAngleX = passedMax ? reverseNum : swingX1;
-		foot4.rotateAngleX = passedMax ? reverseNum : swingX1;
-
-		tentacle5.rotateAngleX = swingX;
-		tentacle52.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-		tentacle53.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-		foot5.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-
-		tentacle6.rotateAngleX = swingX;
-		tentacle62.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-		tentacle63.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-		foot6.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-
-		tentacle7.rotateAngleX = swingX;
-		tentacle72.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-		tentacle73.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-		foot7.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-
-		tentacle8.rotateAngleX = swingX;
-		tentacle82.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-		tentacle83.rotateAngleX = passedMax ? -reverseNum : -swingX1;
-		foot6.rotateAngleX = passedMax ? -reverseNum : -swingX1;
+		animateTentacle(entityIn, tentacle1, tentacle12, tentacle13, foot1, false);
+		animateTentacle(entityIn, tentacle2, tentacle22, tentacle23, foot2, false);
+		animateTentacle(entityIn, tentacle3, tentacle32, tentacle33, foot3, false);
+		animateTentacle(entityIn, tentacle4, tentacle42, tentacle43, foot4, false);
+		animateTentacle(entityIn, tentacle5, tentacle52, tentacle53, foot5, true);
+		animateTentacle(entityIn, tentacle6, tentacle62, tentacle63, foot6, true);
+		animateTentacle(entityIn, tentacle7, tentacle72, tentacle73, foot7, true);
+		animateTentacle(entityIn, tentacle8, tentacle82, tentacle83, foot8, true);
 
 		setRotateAngle(staff1, 0, 0, 0);
 		float f6;
@@ -473,6 +456,7 @@ public class ModelJzahar extends ModelBase {
 			tentacle5.isHidden = true;
 			tentacle6.isHidden = true;
 			tentacle7.isHidden = true;
+			tentacle8.isHidden = true;
 			foot1.isHidden = true;
 			foot2.isHidden = true;
 			foot3.isHidden = true;
@@ -498,6 +482,7 @@ public class ModelJzahar extends ModelBase {
 			tentacle5.isHidden = false;
 			tentacle6.isHidden = false;
 			tentacle7.isHidden = false;
+			tentacle8.isHidden = false;
 			foot1.isHidden = false;
 			foot2.isHidden = false;
 			foot3.isHidden = false;
