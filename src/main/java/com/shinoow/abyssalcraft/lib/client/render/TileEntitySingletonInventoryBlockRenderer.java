@@ -12,12 +12,11 @@
 package com.shinoow.abyssalcraft.lib.client.render;
 
 import com.shinoow.abyssalcraft.api.block.ISingletonInventory;
+import com.shinoow.abyssalcraft.lib.ItemPoses;
+import com.shinoow.abyssalcraft.lib.client.render.data.ItemRenderingPose;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,7 +28,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  *
  */
 @SideOnly(Side.CLIENT)
-public class TileEntityPedestalBlockRenderer extends TileEntitySpecialRenderer {
+public class TileEntitySingletonInventoryBlockRenderer extends TileEntitySpecialRenderer {
+
+	private ItemRenderingPose pose;
+
+	public TileEntitySingletonInventoryBlockRenderer() {
+		this(ItemPoses.DEFAULT);
+	}
+
+	public TileEntitySingletonInventoryBlockRenderer(ItemRenderingPose poseIn) {
+		pose = poseIn;
+	}
 
 	@Override
 	public void render(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -41,21 +50,14 @@ public class TileEntityPedestalBlockRenderer extends TileEntitySpecialRenderer {
 
 		ISingletonInventory ped = (ISingletonInventory)te;
 
-		if (ped != null && !ped.getItem().isEmpty()){
-			GlStateManager.pushMatrix();
-
-			boolean flag = ped.getItem().getItem() instanceof ItemBlock;
-
-			GlStateManager.rotate(180F, 1F, 0F, 0F);
-			GlStateManager.translate(0.0F, flag ? -0.56F : -0.37F, 0F);
-			GlStateManager.rotate(ped.shouldItemRotate() ? getWorld().getWorldTime() : 0, 0F, 1F, 0F);
-
-			Minecraft.getMinecraft().getRenderItem().renderItem(ped.getItem(), ItemCameraTransforms.TransformType.GROUND);
-
-			GlStateManager.popMatrix();
-		}
+		if (ped != null && !ped.getItem().isEmpty() && pose != null)
+			pose.applyPose(this, ped);
 
 		GlStateManager.popMatrix();
 		GlStateManager.popMatrix();
+	}
+
+	public long getWorldTime() {
+		return getWorld().getWorldTime();
 	}
 }

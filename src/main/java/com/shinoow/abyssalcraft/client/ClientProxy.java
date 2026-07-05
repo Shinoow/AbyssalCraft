@@ -48,11 +48,11 @@ import com.shinoow.abyssalcraft.common.entity.projectile.*;
 import com.shinoow.abyssalcraft.init.InitHandler;
 import com.shinoow.abyssalcraft.init.ItemHandler;
 import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.lib.ItemPoses;
 import com.shinoow.abyssalcraft.lib.NecronomiconText;
 import com.shinoow.abyssalcraft.lib.client.LovecraftFont;
-import com.shinoow.abyssalcraft.lib.client.render.TileEntityAltarBlockRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.TileEntityDirectionalRenderer;
-import com.shinoow.abyssalcraft.lib.client.render.TileEntityPedestalBlockRenderer;
+import com.shinoow.abyssalcraft.lib.client.render.TileEntitySingletonInventoryBlockRenderer;
 import com.shinoow.abyssalcraft.lib.client.render.entity.layers.LayerOuterBipedArmor;
 import com.shinoow.abyssalcraft.lib.util.blocks.BlockUtil;
 
@@ -188,14 +188,14 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/ghoul/depths_ghoul_pete.png"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/ghoul/depths_ghoul_wilson.png"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOhead.class, new TileEntityDirectionalRenderer(new ModelDGhead(), "abyssalcraft:textures/model/ghoul/depths_ghoul_orange.png"));
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRitualAltar.class, new TileEntityAltarBlockRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRitualPedestal.class, new TileEntityPedestalBlockRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyPedestal.class, new TileEntityPedestalBlockRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySacrificialAltar.class, new TileEntityAltarBlockRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredEnergyPedestal.class, new TileEntityPedestalBlockRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredSacrificialAltar.class, new TileEntityAltarBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRitualAltar.class, new TileEntitySingletonInventoryBlockRenderer(ItemPoses.ALTAR));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRitualPedestal.class, new TileEntitySingletonInventoryBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyPedestal.class, new TileEntitySingletonInventoryBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySacrificialAltar.class, new TileEntitySingletonInventoryBlockRenderer(ItemPoses.ALTAR));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredEnergyPedestal.class, new TileEntitySingletonInventoryBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTieredSacrificialAltar.class, new TileEntitySingletonInventoryBlockRenderer(ItemPoses.ALTAR));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJzaharSpawner.class, new TileEntityJzaharSpawnerRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRendingPedestal.class, new TileEntityPedestalBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRendingPedestal.class, new TileEntitySingletonInventoryBlockRenderer(ItemPoses.RENDING_PEDESTAL));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityResearchTable.class, new TileEntityResearchTableRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityUnlockedSealingLock.class, new TileEntityUnlockedSealingLockRenderer());
 
