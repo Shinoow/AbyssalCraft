@@ -516,8 +516,8 @@ public class MiscHandler implements ILifeCycleHandler {
 
 		IForgeRegistry<IRecipe> reg = event.getRegistry();
 
-		addShapedFluidContainerRecipe(reg, rl("oblivion_deathbomb_0"), null, new ItemStack(ACBlocks.oblivion_deathbomb), "#%%", "&$%", "£%%", '#', ACItems.liquid_antimatter_bucket_stack, '£', ACItems.liquid_coralium_bucket_stack, '%', Blocks.OBSIDIAN, '&', ACItems.oblivion_catalyst, '$', ACBlocks.odb_core);
-		addShapedFluidContainerRecipe(reg, rl("oblivion_deathbomb_1"), null, new ItemStack(ACBlocks.oblivion_deathbomb), "#%%", "&$%", "£%%", '#', ACItems.liquid_coralium_bucket_stack, '£', ACItems.liquid_antimatter_bucket_stack, '%', Blocks.OBSIDIAN, '&', ACItems.oblivion_catalyst, '$', ACBlocks.odb_core);
+		addShapedFluidContainerRecipe(reg, rl("oblivion_deathbomb_0"), null, new ItemStack(ACBlocks.oblivion_deathbomb), "#%%", "&$%", "@%%", '#', ACItems.liquid_antimatter_bucket_stack, '@', ACItems.liquid_coralium_bucket_stack, '%', Blocks.OBSIDIAN, '&', ACItems.oblivion_catalyst, '$', ACBlocks.odb_core);
+		addShapedFluidContainerRecipe(reg, rl("oblivion_deathbomb_1"), null, new ItemStack(ACBlocks.oblivion_deathbomb), "#%%", "&$%", "@%%", '#', ACItems.liquid_coralium_bucket_stack, '@', ACItems.liquid_antimatter_bucket_stack, '%', Blocks.OBSIDIAN, '&', ACItems.oblivion_catalyst, '$', ACBlocks.odb_core);
 		addShapedFluidContainerRecipe(reg, rl("transmutator"), null, new ItemStack(ACBlocks.transmutator_idle, 1), "###", "#%#", "&$&", '#', ACItems.coralium_brick, '%', new ItemStack(ACItems.transmutation_gem, 1, OreDictionary.WILDCARD_VALUE), '&', new ItemStack(ACBlocks.block_of_refined_coralium), '$', ACItems.liquid_coralium_bucket_stack);
 		addShapedFluidContainerRecipe(reg, rl("materializer"), null, new ItemStack(ACBlocks.materializer), "###", "#%#", "&$&", '#', ACItems.ethaxium_brick, '%', Blocks.OBSIDIAN, '&', new ItemStack(ACBlocks.block_of_ethaxium), '$', ACItems.liquid_antimatter_bucket_stack);
 	}
@@ -707,10 +707,7 @@ public class MiscHandler implements ILifeCycleHandler {
 		addCondition(ACItems.skin_of_omothol, ResearchItems.OMOTHOL);
 		addCondition(ACItems.essence_of_the_gatekeeper, ResearchItems.OMOTHOL);
 		addCondition(ACItems.interdimensional_cage, ResearchItems.DREADLANDS);
-		addCondition(ACItems.spirit_tablet_shard_0, ResearchItems.ABYSSAL_WASTELAND);
-		addCondition(ACItems.spirit_tablet_shard_1, ResearchItems.ABYSSAL_WASTELAND);
-		addCondition(ACItems.spirit_tablet_shard_2, ResearchItems.ABYSSAL_WASTELAND);
-		addCondition(ACItems.spirit_tablet_shard_3, ResearchItems.ABYSSAL_WASTELAND);
+		addCondition(ACItems.spirit_tablet_shard, ResearchItems.ABYSSAL_WASTELAND);
 		addCondition(ACItems.silver_key, ResearchItems.OMOTHOL);
 		addCondition(ACItems.coralium_plague_antidote, ResearchItems.CORALIUM_PLAGUE);
 		addCondition(ACItems.dread_plague_antidote, ResearchItems.DREAD_PLAGUE);

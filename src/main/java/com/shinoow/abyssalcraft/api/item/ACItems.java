@@ -36,10 +36,7 @@ public class ACItems {
 	public static Item dreadlands_door;
 	public static Item coin;
 	public static Item token_of_jzahar;
-	public static Item spirit_tablet_shard_0;
-	public static Item spirit_tablet_shard_1;
-	public static Item spirit_tablet_shard_2;
-	public static Item spirit_tablet_shard_3;
+	public static Item spirit_tablet_shard;
 	public static Item lost_page;
 	public static Item scriptures_of_omniscience;
 	public static Item ring;

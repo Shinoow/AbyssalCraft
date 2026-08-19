@@ -136,7 +136,7 @@ public class StructureGraveyard extends WorldGenerator {
 
 							int num = rand.nextInt(((TileEntityChest) tile).getSizeInventory());
 
-							((TileEntityChest) tile).setInventorySlotContents(num, getRandomShard(rand));
+							((TileEntityChest) tile).setInventorySlotContents(num, new ItemStack(ACItems.spirit_tablet_shard));
 
 						} else {
 							boolean anyLoot = false;
@@ -150,7 +150,7 @@ public class StructureGraveyard extends WorldGenerator {
 							List<ItemStack> loot = getLoot(worldIn.provider.getDimension());
 
 							if(rand.nextBoolean() && worldIn.provider.getDimension() == ACLib.abyssal_wasteland_id)
-								loot.add(getRandomShard(rand));
+								loot.add(new ItemStack(ACItems.spirit_tablet_shard));
 
 							for(Tuple<Integer, Integer> t : randList) { // inventory slot, quantity
 								ItemStack stack = loot.get(rand.nextInt(loot.size()));
@@ -170,22 +170,6 @@ public class StructureGraveyard extends WorldGenerator {
 		return true;
 	}
 
-	private ItemStack getRandomShard(Random rand) {
-
-		switch(rand.nextInt(4)) {
-		case 0:
-			return new ItemStack(ACItems.spirit_tablet_shard_0);
-		case 1:
-			return new ItemStack(ACItems.spirit_tablet_shard_1);
-		case 2:
-			return new ItemStack(ACItems.spirit_tablet_shard_2);
-		case 3:
-			return new ItemStack(ACItems.spirit_tablet_shard_3);
-		default:
-			return new ItemStack(ACItems.spirit_tablet_shard_0);
-		}
-	}
-
 	private boolean isSkin(ItemStack stack) {
 		return stack.getItem() == ACItems.skin_of_the_abyssal_wasteland
 				|| stack.getItem() == ACItems.skin_of_the_dreadlands
@@ -193,8 +177,7 @@ public class StructureGraveyard extends WorldGenerator {
 	}
 
 	private static boolean isSpiritTabletShard(ItemStack stack) {
-		return stack.getItem() == ACItems.spirit_tablet_shard_0 || stack.getItem() == ACItems.spirit_tablet_shard_1
-				|| stack.getItem() == ACItems.spirit_tablet_shard_2 || stack.getItem() == ACItems.spirit_tablet_shard_3;
+		return stack.getItem() == ACItems.spirit_tablet_shard;
 	}
 
 	private List<ItemStack> getLoot(int dim) {

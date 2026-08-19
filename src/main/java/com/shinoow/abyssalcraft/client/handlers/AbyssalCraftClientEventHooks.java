@@ -681,10 +681,7 @@ public class AbyssalCraftClientEventHooks {
 		registerItemRender(ACItems.dreadlands_door, 0);
 		registerItemRender(ACItems.charcoal, 0);
 		registerItemRender(ACItems.spirit_tablet, 0);
-		registerItemRender(ACItems.spirit_tablet_shard_0, 0);
-		registerItemRender(ACItems.spirit_tablet_shard_1, 0);
-		registerItemRender(ACItems.spirit_tablet_shard_2, 0);
-		registerItemRender(ACItems.spirit_tablet_shard_3, 0);
+		registerItemRender(ACItems.spirit_tablet_shard, 0);
 		registerItemRender(ACItems.silver_key, 0);
 		registerItemRender(ACItems.book_of_many_faces, 0);
 		registerItemRender(ACItems.generic_meat, 0);

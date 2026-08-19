@@ -98,10 +98,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		ACItems.dread_plague_antidote = new ItemAntidote("antidote.dread");
 		ACItems.darklands_oak_door = new ItemDoor(ACBlocks.darklands_oak_door).setTranslationKey("door_dlt");
 		ACItems.dreadlands_door = new ItemDoor(ACBlocks.dreadwood_door).setTranslationKey("door_drt");
-		ACItems.spirit_tablet_shard_0 = new ItemACBasic("configurator_shard_0");
-		ACItems.spirit_tablet_shard_1 = new ItemACBasic("configurator_shard_1");
-		ACItems.spirit_tablet_shard_2 = new ItemACBasic("configurator_shard_2");
-		ACItems.spirit_tablet_shard_3 = new ItemACBasic("configurator_shard_3");
+		ACItems.spirit_tablet_shard = new ItemACBasic("configurator_shard");
 		ACItems.silver_key = new ItemGatewayKey(3, "silver_key");
 		ACItems.book_of_many_faces = new ItemFaceBook("face_book");
 		ACItems.lost_page = new ItemPage();
@@ -613,10 +610,7 @@ public class ItemHandler implements ILifeCycleHandler {
 		registerItem(ACItems.dreadlands_door, "door_drt");
 		registerItem(ACItems.charcoal, "charcoal");
 		registerItem(ACItems.spirit_tablet, "spirit_tablet");
-		registerItem(ACItems.spirit_tablet_shard_0, "spirit_tablet_shard_0");
-		registerItem(ACItems.spirit_tablet_shard_1, "spirit_tablet_shard_1");
-		registerItem(ACItems.spirit_tablet_shard_2, "spirit_tablet_shard_2");
-		registerItem(ACItems.spirit_tablet_shard_3, "spirit_tablet_shard_3");
+		registerItem(ACItems.spirit_tablet_shard, "spirit_tablet_shard");
 		registerItem(ACItems.silver_key, "silver_key");
 		registerItem(ACItems.book_of_many_faces, "face_book");
 		registerItem(ACItems.generic_meat, "generic_meat");

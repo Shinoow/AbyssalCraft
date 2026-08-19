@@ -56,6 +56,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -254,26 +255,14 @@ public class InitHandler implements ILifeCycleHandler {
 		event.getRegistry().registerAll(SOUND_EVENTS.toArray(new SoundEvent[0]));
 	}
 
-	//	@SubscribeEvent
-	//	public void remapBlocks(RegistryEvent.MissingMappings<Block> event) {
-	//		for(Mapping<Block> mapping : event.getMappings()) {
-	//			if(mapping.key.toString().equals("abyssalcraft:stone")) {
-	//				mapping.remap(ACBlocks.darkstone);
-	//			}
-	//			if(mapping.key.toString().equals("abyssalcraft:cobblestone")) {
-	//				mapping.remap(ACBlocks.darkstone_cobblestone);
-	//			}
-	//			if(mapping.key.toString().equals("abyssalcraft:decorativestatue")) {
-	//				mapping.remap(ACBlocks.decorative_cthulhu_statue);
-	//			}
-	//			if(mapping.key.toString().equals("abyssalcraft:statue")) {
-	//				mapping.remap(ACBlocks.cthulhu_statue);
-	//			}
-	//			if(mapping.key.toString().equals("abyssalcraft:ingotblock")) {
-	//				mapping.remap(ACBlocks.block_of_abyssalnite);
-	//			}
-	//		}
-	//	}
+	@SubscribeEvent
+	public void remapItems(RegistryEvent.MissingMappings<Item> event) {
+		for(Mapping<Item> mapping: event.getMappings()) {
+			if(mapping.key.toString().startsWith("abyssalcraft:spirit_tablet_shard")) {
+				mapping.remap(ACItems.spirit_tablet_shard);
+			}
+		}
+	}
 
 	private static void syncConfig(){
 
@@ -455,7 +444,7 @@ public class InitHandler implements ILifeCycleHandler {
 		invisibility_spell = cfg.get(CATEGORY_SPELLS, "Hide from the Eye", true, "Set to false to disable the Hide from the Eye spell.").getBoolean();
 		detachment_spell = cfg.get(CATEGORY_SPELLS, "Detachment", true, "Set to false to disable the Detachment spell.").getBoolean();
 		steal_vigor_spell = cfg.get(CATEGORY_SPELLS, "Steal Vigor", true, "Set to false to disable the Steal Vigor spell.").getBoolean();
-		sirens_song_spell = cfg.get(CATEGORY_SPELLS, "Siren's Song§", true, "Set to false to disable the Siren's Song spell.").getBoolean();
+		sirens_song_spell = cfg.get(CATEGORY_SPELLS, "Siren's Song", true, "Set to false to disable the Siren's Song spell.").getBoolean();
 		undeath_to_dust_spell = cfg.get(CATEGORY_SPELLS, "Undeath to Dust", true, "Set to false to disable the Undeath to Dust spell.").getBoolean();
 		ooze_removal_spell = cfg.get(CATEGORY_SPELLS, "Ooze Removal", true, "Set to false to disable the Ooze Removal spell.").getBoolean();
 		teleport_hostile_spell = cfg.get(CATEGORY_SPELLS, "Sacrificial Interdiction", true, "Set to false to disable the Sacrificial Interdiction spell.").getBoolean();

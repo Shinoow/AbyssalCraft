@@ -440,10 +440,7 @@ public class AbyssalCrafting {
 		RitualRegistry.instance().registerRitual(Rituals.WEATHER = new NecronomiconWeatherRitual());
 
 		//Spirit Items
-		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack[] {new ItemStack(ACItems.spirit_tablet_shard_0), new ItemStack(ACItems.spirit_tablet_shard_1), new ItemStack(ACItems.spirit_tablet_shard_2), new ItemStack(ACItems.spirit_tablet_shard_3)}, null,
-				new ItemStack[] {new ItemStack(ACItems.spirit_tablet_shard_0), new ItemStack(ACItems.spirit_tablet_shard_1), new ItemStack(ACItems.spirit_tablet_shard_2), new ItemStack(ACItems.spirit_tablet_shard_3)},
-				null, new ItemStack[] {new ItemStack(ACItems.spirit_tablet_shard_0), new ItemStack(ACItems.spirit_tablet_shard_1), new ItemStack(ACItems.spirit_tablet_shard_2), new ItemStack(ACItems.spirit_tablet_shard_3)}, null,
-				new ItemStack[] {new ItemStack(ACItems.spirit_tablet_shard_0), new ItemStack(ACItems.spirit_tablet_shard_1), new ItemStack(ACItems.spirit_tablet_shard_2), new ItemStack(ACItems.spirit_tablet_shard_3)}};
+		Object[] spiritTabletOfferings = new Object[] {null, new ItemStack(ACItems.spirit_tablet_shard), null, new ItemStack(ACItems.spirit_tablet_shard), null, new ItemStack(ACItems.spirit_tablet_shard), null, new ItemStack(ACItems.spirit_tablet_shard)};
 		RitualRegistry.instance().registerRitual(Rituals.SPIRIT_TABLET = new NecronomiconInfusionRitual("spiritTablet", 1, OreDictionary.WILDCARD_VALUE, 5000F, new ItemStack(ACItems.spirit_tablet), new ItemStack(ACItems.shadow_gem), spiritTabletOfferings));
 		Object[] spiritAltarOfferings= new Object[] {Items.GOLD_INGOT, Items.GOLD_INGOT, Items.GOLD_INGOT, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone, ACBlocks.darkstone_cobblestone};
 		RitualRegistry.instance().registerRitual(Rituals.SPIRIT_ALTAR = new NecronomiconInfusionRitual("spiritAltar", 1, OreDictionary.WILDCARD_VALUE, 1000F, true, new ItemStack(ACBlocks.spirit_altar), new ItemStack(ACItems.shadow_gem), spiritAltarOfferings));

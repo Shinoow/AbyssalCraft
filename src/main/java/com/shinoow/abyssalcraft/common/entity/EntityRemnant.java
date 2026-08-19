@@ -527,11 +527,7 @@ public class EntityRemnant extends EntityMobBase implements IMerchant, IOmotholE
 				addCoinTrade(list, ACItems.ethaxium_chestplate, rand, adjustProbability(0.1F));
 				addCoinTrade(list, ACItems.ethaxium_leggings, rand, adjustProbability(0.1F));
 				//				addCoinTrade(list, ACItems.blank_engraving, rand, adjustProbability(0.2F));
-				addCoinTrade(list, ACItems.spirit_tablet_shard_0, rand, adjustProbability(0.2F));
-				addCoinTrade(list, ACItems.spirit_tablet_shard_1, rand, adjustProbability(0.2F));
-				addCoinTrade(list, ACItems.spirit_tablet_shard_2, rand, adjustProbability(0.2F));
-				addCoinTrade(list, ACItems.spirit_tablet_shard_3, rand, adjustProbability(0.2F));
-				break;
+				addCoinTrade(list, ACItems.spirit_tablet_shard, rand, adjustProbability(0.2F));
 			case 4:
 				addItemTrade(list, Items.COAL, rand, adjustProbability(0.7F));
 				addItemTrade(list, Items.PORKCHOP, rand, adjustProbability(0.5F));
@@ -580,10 +576,7 @@ public class EntityRemnant extends EntityMobBase implements IMerchant, IOmotholE
 				addCoinTrade(list, ACItems.ethaxium_helmet, rand, adjustProbability(0.1F));
 				addCoinTrade(list, ACItems.ethaxium_chestplate, rand, adjustProbability(0.1F));
 				addCoinTrade(list, ACItems.ethaxium_leggings, rand, adjustProbability(0.1F));
-				addCoinTrade(list, ACItems.spirit_tablet_shard_0, rand, adjustProbability(0.2F));
-				addCoinTrade(list, ACItems.spirit_tablet_shard_1, rand, adjustProbability(0.2F));
-				addCoinTrade(list, ACItems.spirit_tablet_shard_2, rand, adjustProbability(0.2F));
-				addCoinTrade(list, ACItems.spirit_tablet_shard_3, rand, adjustProbability(0.2F));
+				addCoinTrade(list, ACItems.spirit_tablet_shard, rand, adjustProbability(0.2F));
 			}
 
 		if (list.isEmpty())
@@ -865,10 +858,7 @@ public class EntityRemnant extends EntityMobBase implements IMerchant, IOmotholE
 		coinSellingList.put(ACItems.plated_coralium_leggings, new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
 		coinSellingList.put(ACItems.dreadium_samurai_leggings, new Tuple(Integer.valueOf(11), Integer.valueOf(14)));
 		coinSellingList.put(ACItems.staff_of_rending, new Tuple(Integer.valueOf(20), Integer.valueOf(25)));
-		coinSellingList.put(ACItems.spirit_tablet_shard_0, new Tuple(Integer.valueOf(64), Integer.valueOf(64)));
-		coinSellingList.put(ACItems.spirit_tablet_shard_1, new Tuple(Integer.valueOf(64), Integer.valueOf(64)));
-		coinSellingList.put(ACItems.spirit_tablet_shard_2, new Tuple(Integer.valueOf(64), Integer.valueOf(64)));
-		coinSellingList.put(ACItems.spirit_tablet_shard_3, new Tuple(Integer.valueOf(64), Integer.valueOf(64)));
+		coinSellingList.put(ACItems.spirit_tablet_shard, new Tuple(Integer.valueOf(64), Integer.valueOf(64)));
 	}
 
 	public void applyRandomTrade(Random rand){
@@ -877,7 +867,6 @@ public class EntityRemnant extends EntityMobBase implements IMerchant, IOmotholE
 	}
 
 	private static boolean isSpiritTabletShard(ItemStack stack) {
-		return stack.getItem() == ACItems.spirit_tablet_shard_0 || stack.getItem() == ACItems.spirit_tablet_shard_1
-				|| stack.getItem() == ACItems.spirit_tablet_shard_2 || stack.getItem() == ACItems.spirit_tablet_shard_3;
+		return stack.getItem() == ACItems.spirit_tablet_shard;
 	}
 }
