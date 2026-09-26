@@ -76,6 +76,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class AbyssalCraftEventHooks {
 
@@ -539,7 +540,10 @@ public class AbyssalCraftEventHooks {
 
 	@SubscribeEvent
 	public void fuelBurnTime(FuelBurnTimeEvent event) {
-
+		NonNullList<ItemStack> ores = OreDictionary.getOres("oreAbyssalnite");
+		if(OreDictionary.containsMatch(false, ores, event.getItemStack())) {
+			event.setBurnTime(12800);
+		}
 	}
 
 	@SubscribeEvent

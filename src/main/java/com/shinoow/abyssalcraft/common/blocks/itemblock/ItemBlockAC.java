@@ -20,6 +20,7 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchItem;
 import com.shinoow.abyssalcraft.api.knowledge.IResearchableItem;
 import com.shinoow.abyssalcraft.api.knowledge.ResearchItems;
+import com.shinoow.abyssalcraft.common.blocks.baseblocks.BlockACOre;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -55,6 +56,20 @@ public class ItemBlockAC extends ItemBlock implements IResearchableItem {
 	public IResearchItem getResearchItem(ItemStack stack) {
 
 		return condition;
+	}
+
+	@Override
+	public int getItemBurnTime(ItemStack itemStack) {
+		Block block = Block.getBlockFromItem(itemStack.getItem());
+
+		if(block instanceof BlockACOre) {
+			if(block == ACBlocks.abyssalnite_ore
+					|| block == ACBlocks.abyssal_abyssalnite_ore
+					|| block == ACBlocks.dreadlands_abyssalnite_ore) {
+				return 12800;
+			}
+		}
+		return super.getItemBurnTime(itemStack);
 	}
 
 	@Override
